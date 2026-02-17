@@ -272,6 +272,11 @@
     const enableBtn = widget.querySelector('[data-push-enable]')
     const testBtn = widget.querySelector('[data-push-test]')
     const closeBtn = widget.querySelector('[data-push-close]')
+    const pushEndpoint =
+      window.PUSH_ENDPOINT ||
+      (location.hostname.includes('vercel.app') || location.hostname.includes('vercel')
+        ? '/api/send-push'
+        : '/.netlify/functions/send-push')
 
     function setStatus(message, isError) {
       if (!statusEl) return
@@ -310,7 +315,7 @@
         body: 'Test notification received.',
         url: '/'
       }
-      const res = await fetch('/.netlify/functions/send-push', {
+      const res = await fetch(pushEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ subscription, payload })

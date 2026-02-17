@@ -1,4 +1,4 @@
-<!doctype html>
+﻿﻿﻿﻿﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -110,7 +110,7 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
             node.parentElement
           )
         }
-        function pruneOnce(root) {
+        function isSectionView(){var btns=document.querySelectorAll('button');for(var i=0;i<btns.length;i++){var t=(btns[i].textContent||'').trim();if(t==='Back to Library' || t.indexOf('Back to ')===0)return true}return false}\nfunction pruneOnce(root){if(isSectionView())return;
           var candidates = Array.from(
             root.querySelectorAll('div.rounded-xl, div.rounded-2xl, li.rounded-xl, li.rounded-2xl')
           )
@@ -151,7 +151,7 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
             node.parentElement
           )
         }
-        function removeLockedPerGrid() {
+        function removeLockedPerGrid(){if(document.querySelector("button")&&isSectionView&&isSectionView())return;
           var lockedCards = Array.from(document.querySelectorAll('.cursor-not-allowed.opacity-75'))
           if (!lockedCards.length) return
           var counts = new Map()
@@ -348,7 +348,174 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
         window.addEventListener('scroll', update, { passive: true })
       })()
     </script>
-  </head>
+    <style>
+      :root {
+        --sc-surface: rgba(255, 255, 255, 0.86);
+        --sc-border: rgba(148, 163, 184, 0.25);
+        --sc-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+        --sc-glow: 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      }
+      body {
+        background: radial-gradient(1200px 600px at -10% -10%, rgba(56, 189, 248, 0.12), transparent 60%),
+          radial-gradient(900px 520px at 110% -5%, rgba(34, 197, 94, 0.12), transparent 60%),
+          linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+      }
+      .bg-gradient-to-r.from-slate-900.via-slate-800.to-slate-900 {
+        box-shadow: 0 30px 80px rgba(2, 6, 23, 0.35);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+      }
+      .bg-white.rounded-xl.overflow-hidden.cursor-pointer {
+        background: var(--sc-surface);
+        border: 1px solid var(--sc-border);
+        box-shadow: var(--sc-shadow);
+        backdrop-filter: blur(10px);
+      }
+      .bg-white.rounded-xl.overflow-hidden.cursor-pointer:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 28px 60px rgba(15, 23, 42, 0.18);
+      }
+      .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4,
+      .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-3 {
+        background: transparent;
+      }
+      .rounded-xl {
+        box-shadow: var(--sc-glow);
+      }
+      .shadow-2xl {
+        box-shadow: 0 30px 70px rgba(15, 23, 42, 0.2) !important;
+      }
+      .border-2 {
+        border-color: var(--sc-border) !important;
+      }
+      input[type="text"] {
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+      }
+      button,
+      .btn {
+        box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      button:hover,
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
+      }
+      .max-w-6xl.mx-auto.p-4.md\:p-6 {
+        position: relative;
+      }
+      .max-w-6xl.mx-auto.p-4.md\:p-6::before {
+        content: "";
+        position: absolute;
+        inset: -24px;
+        border-radius: 32px;
+        background: linear-gradient(120deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.08));
+        filter: blur(30px);
+        z-index: -1;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bg-white.rounded-xl.overflow-hidden.cursor-pointer,
+        button,
+        .btn {
+          transition: none;
+        }
+      }
+    </style>
+  <style>/* analytics-dashboard */
+.analytics-strip{margin:0 0 18px;padding:16px;border-radius:18px;background:rgba(255,255,255,.86);border:1px solid rgba(148,163,184,.28);box-shadow:0 20px 50px rgba(15,23,42,.12);backdrop-filter:blur(10px)}
+.analytics-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.analytics-title{font-weight:800;font-size:1rem;color:#0f172a}
+.analytics-sub{font-size:.78rem;color:#64748b}
+.analytics-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.analytics-card{background:rgba(15,23,42,.04);border:1px solid rgba(148,163,184,.22);border-radius:14px;padding:12px;display:grid;gap:6px}
+.analytics-value{font-size:1.4rem;font-weight:800;color:#0f172a}
+.analytics-label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.12em}
+.analytics-trend{font-size:.75rem;color:#16a34a;font-weight:700}
+.analytics-chip{padding:6px 10px;border-radius:999px;background:rgba(59,130,246,.12);color:#1d4ed8;font-size:.72rem;font-weight:700}
+@media (max-width: 900px){.analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style><script>
+(function(){
+  function animate(el){
+    var target = Number(el.getAttribute('data-ana')||0);
+    var isPercent = el.getAttribute('data-suffix') === '%';
+    var start = 0; var duration = 900; var t0 = performance.now();
+    function tick(t){
+      var p = Math.min((t - t0)/duration,1);
+      var v = Math.floor(target * p);
+      el.textContent = v + (isPercent ? '%' : '');
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  function insert(){
+    if(document.querySelector('.analytics-strip')) return;
+    var root = document.querySelector('.max-w-6xl.mx-auto.p-4.md\\:p-6');
+    if(!root) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'analytics-strip';
+    wrap.innerHTML =
+      '<div class="analytics-header">'+
+        '<div>'+\
+          '<div class="analytics-title">Library Analytics</div>'+\
+          '<div class="analytics-sub">Live snapshot of your study momentum</div>'+\
+        '</div>'+\
+        '<div class="analytics-chip">Updated today</div>'+\
+      '</div>'+\
+      '<div class="analytics-grid">'+\
+        '<div class="analytics-card"><div class="analytics-label">Completion</div><div class="analytics-value" data-ana="42" data-suffix="%">0%</div><div class="analytics-trend">↑ steady</div></div>'+\
+        '<div class="analytics-card"><div class="analytics-label">Sessions</div><div class="analytics-value" data-ana="18">0</div><div class="analytics-trend">+2 this week</div></div>'+\
+        '<div class="analytics-card"><div class="analytics-label">Focus Minutes</div><div class="analytics-value" data-ana="320">0</div><div class="analytics-trend">↑ improving</div></div>'+\
+        '<div class="analytics-card"><div class="analytics-label">Streak</div><div class="analytics-value" data-ana="6">0</div><div class="analytics-trend">days</div></div>'+\
+      '</div>';
+    root.insertBefore(wrap, root.firstChild);
+    wrap.querySelectorAll('[data-ana]').forEach(animate);
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', insert);
+  } else {
+    insert();
+  }
+  var obs = new MutationObserver(insert);
+  obs.observe(document.body,{childList:true,subtree:true});
+})();
+</script><style>/* advanced-ui */
+/* Advanced UI polish */
+.bg-white.rounded-xl.overflow-hidden.cursor-pointer{position:relative;overflow:hidden}
+.bg-white.rounded-xl.overflow-hidden.cursor-pointer::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.45),transparent 60%);opacity:0;transition:opacity .35s ease;pointer-events:none;pointer-events:none;}
+.bg-white.rounded-xl.overflow-hidden.cursor-pointer:hover::after{opacity:.65}
+
+/* Gradient header pill glow */
+.flex.items-center.gap-2.px-4.py-2.bg-gradient-to-r{box-shadow:0 14px 30px rgba(15,23,42,.18)}
+
+/* Search bar focus polish */
+input[type="text"]:focus{box-shadow:0 0 0 1px rgba(59,130,246,.2),0 18px 36px rgba(15,23,42,.12)}
+
+/* Analytics strip glow */
+.analytics-strip{position:relative;overflow:hidden}
+.analytics-strip::after{content:"";position:absolute;inset:0;background:radial-gradient(240px 180px at 15% 20%,rgba(59,130,246,.18),transparent 60%),radial-gradient(240px 180px at 85% 10%,rgba(16,185,129,.18),transparent 60%);opacity:.7;pointer-events:none}
+
+/* Floating highlight for quick actions */
+button, .btn{transform:translateZ(0)}
+
+@media (prefers-reduced-motion: reduce){
+  .bg-white.rounded-xl.overflow-hidden.cursor-pointer::after{transition:none;pointer-events:none;}
+}
+</style><style>/* glassy-ui */
+:root{--glass-surface:rgba(255,255,255,.72);--glass-border:rgba(148,163,184,.25);--glass-shadow:0 24px 60px rgba(15,23,42,.16)}
+body{background:radial-gradient(1200px 600px at -10% -10%,rgba(59,130,246,.12),transparent 60%),radial-gradient(900px 520px at 110% -5%,rgba(16,185,129,.12),transparent 60%),linear-gradient(180deg,#f8fafc 0%,#eef2f7 100%)}
+.bg-gradient-to-r.from-slate-900.via-slate-800.to-slate-900{box-shadow:0 30px 80px rgba(2,6,23,.35);border:1px solid rgba(148,163,184,.25)}
+.bg-white.rounded-xl.overflow-hidden.cursor-pointer{background:var(--glass-surface);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);backdrop-filter:blur(14px)}
+.bg-white.rounded-xl.overflow-hidden.cursor-pointer:hover{transform:translateY(-4px);box-shadow:0 28px 60px rgba(15,23,42,.2)}
+.rounded-xl{box-shadow:0 0 0 1px rgba(255,255,255,.7) inset}
+.shadow-2xl{box-shadow:0 30px 70px rgba(15,23,42,.2)!important}
+.border-2{border-color:var(--glass-border)!important}
+input[type="text"]{background:rgba(255,255,255,.92);box-shadow:0 12px 28px rgba(15,23,42,.08)}
+button,.btn{box-shadow:0 14px 28px rgba(15,23,42,.12);transition:transform .25s ease,box-shadow .25s ease}
+button:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(15,23,42,.18)}
+.max-w-6xl.mx-auto.p-4.md\\:p-6{position:relative}
+.max-w-6xl.mx-auto.p-4.md\\:p-6::before{content:"";position:absolute;inset:-24px;border-radius:32px;background:linear-gradient(120deg,rgba(59,130,246,.08),rgba(16,185,129,.08));filter:blur(30px);z-index:-1}
+@media (prefers-reduced-motion: reduce){.bg-white.rounded-xl.overflow-hidden.cursor-pointer,button,.btn{transition:none}}
+</style></head>
   <body>
     <div id="root"></div>
     <script>
