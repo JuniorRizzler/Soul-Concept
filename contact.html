@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Feedback | Soul Concept</title>
+    <meta name="description" content="Submit feedback, ideas, or contributions for the Soul Concept study tools." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+      <link rel="manifest" href="/manifest.json" />
+      <link rel="icon" href="/icons/icon.svg?v=2" type="image/svg+xml" />
+      <link rel="icon" href="/icons/icon-192.png?v=2" sizes="192x192" type="image/png" />
+      <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2" />
+      <meta name="theme-color" content="#0b0d10" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <link rel="stylesheet" href="styles.css" />
+    </head>
+  <body>
+    <div class="site-wrap">
+      <header class="topbar">
+        <div class="container topbar-inner">
+          <a class="brand" href="index.html">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-name">Soul Concept</span>
+          </a>
+          <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+          <nav class="nav-menu" data-nav-menu aria-label="Primary">
+            <a href="index.html" data-nav-link>Home</a>
+            <a href="services.html" data-nav-link>Tools</a>
+            <a href="work.html" data-nav-link>Library</a>
+            <a href="subjects.html" data-nav-link>Subjects</a>
+            <a href="about.html" data-nav-link>About</a>
+            <a href="contact.html" data-nav-link>Feedback</a>
+            <button class="btn btn-secondary install-btn" type="button" data-install-btn>Install App</button>
+            <span class="install-hint" data-install-hint>iOS: Share -> Add to Home Screen</span>
+            <a class="btn btn-primary nav-cta" href="contact.html">Submit Feedback</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="page-banner contact-hero">
+          <div class="container contact-hero-grid reveal">
+            <div>
+              <p class="eyebrow">Feedback + Contribute</p>
+              <h1>Help shape the next tools.</h1>
+              <p>
+                We are building a study tool ecosystem for students, starting with the Grade 9 science library. Your
+                feedback helps us decide what to build next.
+              </p>
+              <div class="pill-row">
+                <span class="pill">Science library available</span>
+                <span class="pill">Future tools in one spot</span>
+                <span class="pill">Education first</span>
+              </div>
+            </div>
+            <div class="contact-panel">
+              <p class="eyebrow">What to Share</p>
+              <h3>Give us direction.</h3>
+              <ul class="list-clean">
+                <li>Which subject or grade you want next</li>
+                <li>What tool would save you the most time</li>
+                <li>Anything confusing or missing</li>
+              </ul>
+              <div class="contact-panel-actions">
+                <a class="btn btn-primary" href="#feedback-form">Submit feedback</a>
+                <a class="btn btn-secondary" href="mailto:deanconcepcion8@gmail.com">Email directly</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container contact-grid">
+            <article class="card reveal" id="feedback-form">
+              <h3>Feedback Form</h3>
+              <p class="section-lead" style="margin-bottom: 16px">
+                Tell us what to improve, add, or build next.
+              </p>
+              <form data-contact-form novalidate>
+                <div class="choice-row" data-feedback-choice>
+                  <button class="choice-btn active" type="button" data-feedback-type="feedback">Feedback</button>
+                  <button class="choice-btn" type="button" data-feedback-type="request">Request a Tool</button>
+                  <button class="choice-btn" type="button" data-feedback-type="contribute">Contribute</button>
+                </div>
+                <input type="hidden" name="feedback_type" value="feedback" />
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" autocomplete="name" required />
+                  </div>
+                  <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required />
+                  </div>
+                  <div class="field">
+                    <label for="org">School or Group</label>
+                    <input id="org" name="organization" type="text" autocomplete="organization" />
+                  </div>
+                  <div class="field">
+                    <label for="service">Area</label>
+                    <select id="service" name="service">
+                      <option value="">Select one</option>
+                      <option>Grade 9 Science Study Library</option>
+                      <option>New Subject Libraries</option>
+                      <option>Parent or School Use</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field col-span-2">
+                    <label for="message">Your Feedback</label>
+                    <textarea id="message" name="message" placeholder="What should we build or improve?"></textarea>
+                  </div>
+                </div>
+                <p class="form-note">We use feedback to guide what we build next.</p>
+                <div style="margin-top: 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+                  <button class="btn btn-primary" type="submit">Submit Feedback</button>
+                  <p class="form-status" data-form-status></p>
+                </div>
+              </form>
+            </article>
+
+            <aside class="stack reveal">
+              <article class="card">
+                <p class="eyebrow">Direct Email</p>
+                <h3>deanconcepcion8@gmail.com</h3>
+                <p>Send ideas, corrections, or collaborations.</p>
+                <a class="btn btn-secondary" href="mailto:deanconcepcion8@gmail.com">Open Email</a>
+              </article>
+              <article class="card">
+                <p class="eyebrow">Current Focus</p>
+                <ul class="list-clean">
+                  <li>Grade 9 science study library</li>
+                  <li>Future subject libraries</li>
+                  <li>Study routines and focus tools</li>
+                </ul>
+              </article>
+              <article class="card">
+                <p class="eyebrow">Vision</p>
+                <p>
+                  Education comes first, with plans to expand into other sectors over time. We are building toward a
+                  live PWA experience today, with a native mobile app coming next.
+                </p>
+              </article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section">
+  <div class="container">
+    <div class="callout reveal">
+      <p class="eyebrow">Future Plan</p>
+      <h2 class="section-title">What we are building next</h2>
+      <div class="roadmap" data-roadmap>
+        <div class="roadmap-tabs" role="tablist" aria-label="Roadmap phases">
+          <button class="roadmap-btn active" type="button" role="tab" aria-selected="true" data-roadmap-tab="phase-1">Phase 1</button>
+          <button class="roadmap-btn" type="button" role="tab" aria-selected="false" data-roadmap-tab="phase-2">Phase 2</button>
+          <button class="roadmap-btn" type="button" role="tab" aria-selected="false" data-roadmap-tab="phase-3">Phase 3</button>
+          <button class="roadmap-btn" type="button" role="tab" aria-selected="false" data-roadmap-tab="phase-4">Phase 4</button>
+        </div>
+        <div class="roadmap-panels">
+          <article class="roadmap-panel active" role="tabpanel" data-roadmap-panel="phase-1">
+            <p class="eyebrow">Now</p>
+            <h3>Science library launch</h3>
+            <p>Our science study library is live and distributed to over 200 Appleby College students in Oakville.</p>
+          </article>
+          <article class="roadmap-panel" role="tabpanel" data-roadmap-panel="phase-2">
+            <p class="eyebrow">Next</p>
+            <h3>More grades and subjects</h3>
+            <p>Expanding into higher grades and new subjects.</p>
+          </article>
+          <article class="roadmap-panel" role="tabpanel" data-roadmap-panel="phase-3">
+            <p class="eyebrow">Growth</p>
+            <h3>PWA and mobile app</h3>
+            <p>A polished PWA today, with a native mobile app planned next.</p>
+          </article>
+          <article class="roadmap-panel" role="tabpanel" data-roadmap-panel="phase-4">
+            <p class="eyebrow">Expansion</p>
+            <h3>More schools, more tools</h3>
+            <p>Broader school partnerships and more tools.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <section class="section">
+          <div class="container">
+            <div class="reveal">
+              <p class="eyebrow">FAQ</p>
+              <h2 class="section-title">A few quick answers</h2>
+            </div>
+            <div class="stack" style="margin-top: 18px">
+              <div class="faq-item reveal">
+                <button class="faq-trigger" type="button">Is this for parents or schools?</button>
+                <div class="faq-content">
+                  <p>
+                    Both. Parents use Soul Concept at home. Schools use the same tools for consistent study routines.
+                  </p>
+                </div>
+              </div>
+              <div class="faq-item reveal">
+                <button class="faq-trigger" type="button">What do parents see at home?</button>
+                <div class="faq-content">
+                  <p>
+                    A clear daily plan, focus blocks, and short check-ins.
+                  </p>
+                </div>
+              </div>
+              <div class="faq-item reveal">
+                <button class="faq-trigger" type="button">How does this fit inside a school schedule?</button>
+                <div class="faq-content">
+                  <p>
+                    We work around your existing curriculum and calendar without changing what you teach.
+                  </p>
+                </div>
+              </div>
+              <div class="faq-item reveal">
+                <button class="faq-trigger" type="button">Where are you currently active?</button>
+                <div class="faq-content">
+                  <p>
+                    We are active at Appleby College in Oakville and expanding carefully.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-grid">
+          <div>
+            <a class="brand" href="index.html">
+              <span class="brand-mark" aria-hidden="true"></span>
+              <span class="brand-name">Soul Concept</span>
+            </a>
+            <p>Study tools that make learning clearer, faster, and less stressful.</p>
+          </div>
+          <div>
+            <h4>Site</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="services.html">Tools</a></li>
+              <li><a href="work.html">Library</a></li>
+              <li><a href="subjects.html">Subjects</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <ul class="footer-links">
+              <li><a href="mailto:deanconcepcion8@gmail.com">deanconcepcion8@gmail.com</a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
