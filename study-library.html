@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿<!doctype html>
+﻿﻿﻿﻿﻿﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -110,7 +110,8 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
             node.parentElement
           )
         }
-        function isSectionView(){var btns=document.querySelectorAll('button');for(var i=0;i<btns.length;i++){var t=(btns[i].textContent||'').trim();if(t==='Back to Library' || t.indexOf('Back to ')===0)return true}return false}\nfunction pruneOnce(root){if(isSectionView())return;
+        function isSectionView(){var btns=document.querySelectorAll('button');for(var i=0;i<btns.length;i++){var t=(btns[i].textContent||'').trim();if(t==='Back to Library' || t.indexOf('Back to ')===0)return true}return false}
+function pruneOnce(root){if(isSectionView())return;
           var candidates = Array.from(
             root.querySelectorAll('div.rounded-xl, div.rounded-2xl, li.rounded-xl, li.rounded-2xl')
           )
@@ -482,7 +483,7 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
 /* Advanced UI polish */
 .bg-white.rounded-xl.overflow-hidden.cursor-pointer{position:relative;overflow:hidden}
 .bg-white.rounded-xl.overflow-hidden.cursor-pointer::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.45),transparent 60%);opacity:0;transition:opacity .35s ease;pointer-events:none;pointer-events:none;}
-.bg-white.rounded-xl.overflow-hidden.cursor-pointer:hover::after{opacity:.65}
+.bg-white.rounded-xl.overflow-hidden.cursor-pointer:hover::after{opacity:.28}
 
 /* Gradient header pill glow */
 .flex.items-center.gap-2.px-4.py-2.bg-gradient-to-r{box-shadow:0 14px 30px rgba(15,23,42,.18)}
