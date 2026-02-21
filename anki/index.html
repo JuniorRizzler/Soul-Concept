@@ -1,0 +1,646 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Concept Cards | Soul Concept</title>
+  <style>
+    :root {
+      --bg: #f5f4f0;
+      --surface: #ffffff;
+      --ink: #1c1c20;
+      --muted: #5a5863;
+      --line: #e4ded3;
+      --accent: #f97316;
+      --accent-2: #1d4ed8;
+      --shadow: 0 18px 40px rgba(18, 17, 14, 0.12);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f8f3eb 0%, #f4efe6 100%);
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 22px; }
+    header {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      padding: 8px 0 18px;
+    }
+    .brand { font-weight: 900; letter-spacing: 0.02em; }
+    .pill { font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; background: #fff3e0; color: #b45309; font-weight: 700; }
+
+    .grid { display: grid; gap: 18px; grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+    @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
+    .card.tight { padding: 16px; }
+    .card h2 { margin: 0 0 10px; font-size: 1.15rem; }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+
+    label { display: block; font-weight: 800; margin: 10px 0 6px; }
+    input, textarea {
+      width: 100%; padding: 10px; border-radius: 12px; border: 1px solid var(--line);
+      font: inherit; background: #fff;
+    }
+    textarea { min-height: 90px; resize: vertical; }
+
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .row.stretch { justify-content: space-between; align-items: center; }
+    .btn {
+      border: 1px solid transparent; border-radius: 999px; padding: 10px 16px;
+      font-weight: 800; cursor: pointer;
+    }
+    .btn.primary { background: linear-gradient(120deg, var(--accent-2), var(--accent)); color: #fff; }
+    .btn.ghost { background: #fff; border-color: var(--line); }
+
+    .study-area { text-align: center; }
+    .study-area.fullscreen {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      border-radius: 0;
+      margin: 0;
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .study-area.fullscreen .flashcard { min-height: 240px; font-size: 1.3rem; }
+    .study-area.fullscreen .stars { max-width: 560px; margin-left: auto; margin-right: auto; }
+    .study-area.fullscreen .intervals,
+    .study-area.fullscreen .row.stretch { max-width: 560px; margin-left: auto; margin-right: auto; width: 100%; }
+    .flashcard-wrap { perspective: 1200px; }
+    .flashcard {
+      border-radius: 18px; border: 1px solid var(--line);
+      padding: 26px; min-height: 180px; display: grid; place-items: center;
+      background: #fffaf4; font-size: 1.15rem; box-shadow: var(--shadow);
+      transition: transform 0.45s ease, box-shadow 0.45s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      user-select: none;
+    }
+    .flashcard.flipped { transform: rotateY(180deg); box-shadow: 0 22px 44px rgba(18,17,14,0.14); }
+    .flashcard-face { backface-visibility: hidden; }
+    .flashcard-back { transform: rotateY(180deg); }
+
+    .stars { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .star-btn { border: 1px solid var(--line); background: #fff; border-radius: 12px; padding: 10px; font-weight: 800; cursor: pointer; }
+    .star-btn:hover { background: #fff7ed; }
+
+    .stat { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--muted); }
+    .list { max-height: 340px; overflow: auto; border-top: 1px dashed var(--line); margin-top: 12px; padding-top: 12px; }
+    .list-item { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px dashed #eee; }
+    .tag { font-size: 0.78rem; padding: 3px 8px; border-radius: 999px; background: #eff6ff; color: #1d4ed8; font-weight: 700; }
+
+    .intervals { font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
+
+    .deck-dropdown { position: relative; display: inline-flex; }
+    .deck-dropdown { z-index: 10; }
+    .deck-dropdown .btn { position: relative; z-index: 11; pointer-events: auto; }
+    .deck-menu {
+      display: none; position: absolute; top: calc(100% + 6px); left: 0;
+      min-width: 220px; background: #fff; border: 1px solid var(--line);
+      border-radius: 12px; box-shadow: var(--shadow); padding: 8px; z-index: 50;
+    }
+    .deck-item { display: flex; justify-content: space-between; align-items: center; gap: 8px;
+      padding: 8px 10px; border-radius: 10px; font-weight: 700; cursor: pointer;
+    }
+    .deck-item:hover { background: #fff7ed; }
+    .deck-item.add { border: 1px solid #d1fae5; background: #ecfdf5; }
+    .deck-item.add:hover { background: #d1fae5; }
+    .deck-item.remove { border: 1px solid #fee2e2; background: #fef2f2; }
+    .deck-item.remove:hover { background: #fee2e2; }
+    .deck-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; background: #eff6ff; color: #1d4ed8; }
+    .deck-dropdown:hover .deck-menu,
+    .deck-dropdown:focus-within .deck-menu,
+    .deck-dropdown.open .deck-menu { display: block; }
+    .deck-item[data-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+    .deck-item[data-disabled="true"]:hover { background: transparent; }
+    .section-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .section-title small { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+
+    @media (max-width: 680px) {
+      .wrap { padding: 16px; }
+      header { flex-direction: column; align-items: flex-start; }
+      .card { padding: 16px; }
+      .flashcard { min-height: 150px; font-size: 1.05rem; }
+      .stars { grid-template-columns: 1fr 1fr; }
+      .stars .star-btn:last-child { grid-column: span 2; }
+      .list { max-height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">Concept Cards · Soul Concept</div>
+      <span class="pill">Local-only</span>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="section-title">
+          <h2>Create Flashcards</h2>
+          <small id="deck-status">0 cards</small>
+        </div>
+        <p class="muted">Cards are stored in your browser (local data). Click a card below to delete it.</p>
+        <p class="muted">Why this works: spaced repetition and active recall strengthen memory traces by timing reviews near the point of forgetting and forcing your brain to retrieve the answer. Rating difficulty adjusts the next interval so hard cards return sooner, which improves long-term retention.</p>
+        <p class="muted" id="deck-msg" style="margin-top:4px;"></p>
+        <label>Front</label>
+        <textarea id="front"></textarea>
+        <label>Back</label>
+        <textarea id="back"></textarea>
+        <div class="row" style="margin-top:10px">
+          <button class="btn primary" id="add">Add Card</button>
+          <button class="btn ghost" id="clear">Clear All</button>
+          <div class="deck-dropdown" id="deck-dropdown">
+            <button class="btn ghost" type="button" id="deck-toggle">Add/Remove Decks</button>
+            <div class="deck-menu" aria-label="Deck menu">
+              <div class="deck-item add" data-deck-add="geo_unit1">Add Geo Unit 1 <span class="deck-tag">U1</span></div>
+              <div class="deck-item remove" data-deck-remove="geo_unit1">Remove Geo Unit 1 <span class="deck-tag">U1</span></div>
+              <div class="deck-item add" data-deck-add="geo_unit2">Add Geo Unit 2 <span class="deck-tag">U2</span></div>
+              <div class="deck-item remove" data-deck-remove="geo_unit2">Remove Geo Unit 2 <span class="deck-tag">U2</span></div>
+              <div class="deck-item add" data-deck-add="geo_unit3">Add Geo Unit 3 <span class="deck-tag">U3</span></div>
+              <div class="deck-item remove" data-deck-remove="geo_unit3">Remove Geo Unit 3 <span class="deck-tag">U3</span></div>
+              <div class="deck-item add" data-deck-add="math9" data-disabled="true">Add Math 9 <span class="deck-tag">TBD</span></div>
+              <div class="deck-item add" data-deck-add="sci9" data-disabled="true">Add Science 9 <span class="deck-tag">TBD</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="list" id="list"></div>
+      </section>
+
+      <section class="card study-area tight">
+        <div class="section-title">
+          <h2>Study (Spaced Repetition)</h2>
+          <small><span id="due">0</span> due · <span id="total">0</span> total</small>
+        </div>
+        <p class="muted">Flip the card, then rate difficulty from 1–5 stars. The next interval is scheduled automatically.</p>
+        <div class="row" style="justify-content:center; margin:6px 0 12px;">
+          <button class="btn ghost" id="fullscreen-toggle">Fullscreen</button>
+        </div>
+
+        <div class="flashcard-wrap">
+          <div class="flashcard" id="card">
+            <div class="flashcard-face" id="card-front">No cards due yet.</div>
+            <div class="flashcard-face flashcard-back" id="card-back"></div>
+          </div>
+        </div>
+
+        <div class="stars">
+          <button class="star-btn" data-score="1">★ 1 (Hard)</button>
+          <button class="star-btn" data-score="2">★★ 2</button>
+          <button class="star-btn" data-score="3">★★★ 3</button>
+          <button class="star-btn" data-score="4">★★★★ 4</button>
+          <button class="star-btn" data-score="5">★★★★★ 5 (Easy)</button>
+        </div>
+
+        <div class="intervals" id="intervals"></div>
+
+        <div class="row stretch" style="margin-top:12px;">
+          <div class="stat">Tap the card to flip</div>
+          <div class="stat">Intervals: <span id="intervals-short"></span></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+<script>
+
+
+const STORAGE = 'anki_web_cards_v1';
+const STORAGE_DECKS = 'anki_web_decks_v1';
+
+const GEO_UNIT1 = [
+  {front: 'Cenozoic, Mesozoic, Paleozoic, Precambrian', back: 'Four main geologic eras from earliest life to age of mammals.'},
+  {front: 'Continental Drift', back: 'Wegener theory: continents were once joined (Pangea) and drifted apart.'},
+  {front: 'Tectonic Plates', back: 'Large slabs of Earth\'s lithosphere that move and interact.'},
+  {front: 'Plate Tectonics', back: 'Modern theory explaining crust movement incl. seafloor spreading/subduction.'},
+  {front: 'Convergent Boundary', back: 'Plates move toward each other; subduction or mountain building.'},
+  {front: 'Divergent Boundary', back: 'Plates move apart; mid-ocean ridges or rift valleys.'},
+  {front: 'Transform Boundary', back: 'Plates slide past each other; earthquakes (San Andreas).'},
+  {front: 'Tsunami', back: 'Powerful sea wave caused by underwater quake or volcano.'},
+
+  {front: 'Igneous Rock', back: 'Rock formed by cooling/solidification of magma or lava.'},
+  {front: 'Intrusive Igneous', back: 'Magma cools slowly below surface (granite).'},
+  {front: 'Extrusive Igneous', back: 'Lava cools quickly on surface (basalt).'},
+  {front: 'Sedimentary Rock', back: 'Formed by accumulation/compression of sediments.'},
+  {front: 'Metamorphic Rock', back: 'Transformed by heat/pressure without melting.'},
+  {front: 'Weathering', back: 'Breaking down rocks into smaller pieces.'},
+  {front: 'Erosion', back: 'Transport of weathered materials by water/wind/ice.'},
+  {front: 'Deposition', back: 'Eroded material dropped in a new location.'},
+
+  {front: 'Alpine Glacier', back: 'Small glacier in high mountain valleys.'},
+  {front: 'Continental Glacier', back: 'Massive ice sheet covering large parts of a continent.'},
+  {front: 'Glacial Erosion', back: 'Ice scraping land (striations, U-shaped valleys).'},
+  {front: 'Glacial Deposition', back: 'Ice leaving debris (moraines, erratics, drumlins).'},
+
+  {front: 'Weather', back: 'Short-term state of the atmosphere.'},
+  {front: 'Climate', back: 'Long-term average of weather patterns (30+ years).'},
+  {front: 'LOWERN', back: 'Latitude, Ocean currents, Winds/Air masses, Elevation, Relief, Nearness to water.'},
+  {front: 'Maritime Climate', back: 'Ocean-influenced; mild temps, high precipitation.'},
+  {front: 'Continental Climate', back: 'Landlocked; extreme temps, lower precipitation.'},
+  {front: 'Climate Graph', back: 'Shows monthly temperature (line) and precipitation (bar).'},
+
+  {front: 'Statistics', back: 'Science of collecting/analyzing numerical data to show patterns.'},
+  {front: 'Latitude', back: 'Horizontal lines measure distance N/S of Equator.'},
+  {front: 'Longitude', back: 'Vertical lines measure distance E/W of Prime Meridian.'},
+  {front: 'Map Scale', back: 'Relationship between map distance and real-world distance.'}
+];
+
+const GEO_UNIT2 = [
+  {front: 'Colonization', back: 'Policy of political control, settlers take land/resources, remove original inhabitants.'},
+  {front: 'Indigenous', back: 'Collective name for original peoples; groups: First Nations, Metis, Inuit.'},
+  {front: 'First Nations', back: 'Indigenous peoples not Metis or Inuit; 634 groups, 50+ languages.'},
+  {front: 'Metis', back: 'Post-contact Indigenous group of Indigenous + French origins; Red River.'},
+  {front: 'Inuit', back: 'Indigenous peoples of Arctic; Inuktitut means "the people".'},
+
+  {front: 'Survey System', back: 'Grid system to locate/identify land parcels and roads.'},
+  {front: 'Dispersed Population', back: 'Evenly spread; common in agricultural areas.'},
+  {front: 'Concentrated Population', back: 'Focused in patches around resources (mines, paper mills).'},
+  {front: 'Linear Population', back: 'Settled along a line (coastline, river, highway).'},
+  {front: 'Natural Resources', back: 'Air, sunlight, water, land, vegetation, animals, geological resources.'},
+
+  {front: 'Pattern', back: 'Spatial observation that is part of a larger system.'},
+  {front: 'Isodemographic Map', back: 'Map resized based on population size.'},
+  {front: 'Urban', back: 'High population density; built environment (cities, towns).'},
+  {front: 'Rural', back: 'Outside cities; low density; features spread out.'},
+  {front: 'CMA', back: 'Urban area >100,000, centered on a city, extends beyond it.'},
+  {front: 'Ecumene', back: 'Permanently inhabited portion of Earth.'},
+  {front: 'Continuous Ecumene', back: 'Continuous permanent settlement.'},
+  {front: 'Discontinuous Ecumene', back: 'Patches of settlement.'},
+  {front: 'Push Factor', back: 'Reason people move away.'},
+  {front: 'Pull Factor', back: 'Reason a location is attractive.'},
+
+  {front: 'Population Density', back: 'Population divided by area.'},
+  {front: 'Community', back: 'Group sharing characteristics/history/culture or space.'},
+
+  {front: 'Demography', back: 'Study of human populations.'},
+  {front: 'Birth Rate', back: 'Births per 1000 per year.'},
+  {front: 'Death Rate', back: 'Deaths per 1000 per year.'},
+  {front: 'Natural Increase Rate', back: 'Birth rate minus death rate.'},
+  {front: 'Immigrant', back: 'Moves into a country.'},
+  {front: 'Emigrant', back: 'Leaves a country.'},
+  {front: 'Immigration Rate', back: 'Immigrants per 1000 per year.'},
+  {front: 'Emigration Rate', back: 'Emigrants per 1000 per year.'},
+  {front: 'Net Migration Rate', back: 'Immigration rate minus emigration rate.'},
+  {front: 'Population Growth Rate', back: 'Natural increase rate + net migration rate.'},
+  {front: 'Doubling Time', back: 'Time for population to double at current growth rate.'},
+  {front: 'Rule of 70', back: '70 / population growth rate.'},
+
+  {front: 'Population Pyramid', back: 'Graph of population distribution by age/sex.'},
+  {front: 'Dependency Ratio', back: 'Percent non-working (under 15, over 65).'},
+
+  {front: 'Demographic Transition Model', back: 'Model of high birth/death to low birth/death.'},
+  {front: 'Model', back: 'Simplified description of a complex system.'},
+  {front: 'Subsistence Farming', back: 'Farming to feed family, not for income.'},
+
+  {front: 'Demographic Trap', back: 'Growth too high to allow development.'},
+  {front: 'Fragile State', back: 'Poor country unable to respond to crises.'},
+  {front: 'Total Fertility Rate (TFR)', back: 'Average children born per woman.'},
+  {front: 'Replacement Rate', back: 'TFR for stable population (about 2.1).'},
+  {front: 'Population Implosion', back: 'Dramatic decline in population.'}
+];
+
+const GEO_UNIT3 = [
+  {front: 'Total Stock', back: 'Everything in the environment (Energy, Living, Non-living).'},
+  {front: 'Resource', back: 'Any part of Total Stock that becomes useful to humans.'},
+  {front: 'Natural Resources', back: 'Resources found in the natural environment.'},
+  {front: 'Renewable Resource', back: 'Regenerates if used carefully (fish, forests).'},
+  {front: 'Non-Renewable Resource', back: 'Limited and cannot be replaced (fossil fuels, minerals).'},
+  {front: 'Flow Resource', back: 'Replaced by natural actions; used when and where they occur (wind, solar, running water).'},
+  {front: 'Other Resources', back: 'Do not fit other categories (Rocky Mountain scenery for tourism).'},
+  {front: 'Mining the Resource', back: 'Exploiting a renewable resource until it is gone (unsustainable).'},
+  {front: 'Maximum Sustainable Yield', back: 'Harvesting only the amount nature replaces annually.'},
+  {front: 'R/P Ratio', back: 'Reserves / Production = Years Left.'},
+  {front: 'Landfill impacts', back: 'Leachate (toxic liquid) and methane (burned for power).'},
+  {front: 'Recycling in Canada', back: 'Only 9% of plastic recycled in 2023; often downcycled.'},
+  {front: 'Best waste option', back: 'Reducing: items never produced, saves most resources.'},
+  {front: 'Circular Economy', back: 'Waste designed out; materials kept in use.'},
+
+  {front: 'GDDs (Growing Degree Days)', back: 'Commercial farming needs 1100 GDDs; higher GDDs = more crops.'},
+  {front: 'Aridity Index', back: 'Measures rain supply vs demand; below 0.65 = dry.'},
+  {front: 'CLI Classes 1-3', back: 'Good for commercial crops.'},
+  {front: 'CLI Class 4', back: 'Marginal / break-even.'},
+  {front: 'CLI Class 7', back: 'No capability for agriculture.'},
+  {front: 'Intensive Agriculture', back: 'Small land, high labor, near cities (dairy, eggs, produce).'},
+  {front: 'Extensive Agriculture', back: 'Huge land, low labor, far from cities (wheat for export).'},
+
+  {front: 'Old Growth Forest', back: 'Never logged; cleared in 1800s for farming and exports.'},
+  {front: 'Second Growth', back: 'Most current forests.'},
+  {front: 'Softwood share', back: '66% (coniferous).'},
+  {front: 'Hardwood share', back: '12% (deciduous).'},
+  {front: 'Mixed forest share', back: '22% (both).'},
+  {front: 'Clear Cutting', back: 'Fast/cheap; removes all trees; erosion risk.'},
+  {front: 'Shelterwood', back: 'Leaves parent trees for seeds and shelter.'},
+  {front: 'Selective Cutting', back: 'Only mature trees; best for biodiversity; most expensive.'},
+  {front: 'FSC Certification', back: 'Proves wood is ecologically certified.'},
+  {front: 'Wildlife Corridor', back: 'Habitat hallway for movement and genetic diversity.'},
+
+  {front: 'Groundfish', back: 'Bottom fish (cod).'},
+  {front: 'Pelagic Fish', back: 'Surface/open water (salmon).'},
+  {front: 'Shellfish', back: 'Lobster and shrimp.'},
+  {front: 'Grand Banks Recipe', back: 'Shallow water (<200m) + Labrador Current + Gulf Stream = plankton + fish.'},
+  {front: '1992 Cod Collapse', back: 'Overfishing, sonar technology, factory trawlers.'},
+  {front: 'Inshore Fishery', back: '85% workers; small boats; way of life.'},
+  {front: 'Offshore Fishery', back: '15% workers; large trawlers; 90% of total catch.'},
+  {front: 'Climate Change (Oceans)', back: 'Warmer water less productive; fish migrate toward poles.'},
+
+  {front: 'Fresh Water Distribution', back: 'Only 3% of world water is fresh.'},
+  {front: 'Water Cycle', back: 'Moves water between ground and atmosphere; stored in glaciers/groundwater.'},
+  {front: 'Tap vs Bottled Water', back: 'Ontario tap $1.38/1000L vs bottled $200/1000L.'},
+  {front: 'Neskantaga First Nation', back: 'Boil-water advisory since 1995.'},
+  {front: 'Blue Triton (Nestle)', back: 'Pumps 1.1 million L/day in Hillsburg, ON despite cease-and-desist.'},
+  {front: 'Water as Flow Resource', back: 'Must be used where it occurs.'},
+
+  {front: 'Primary Energy', back: 'Energy in nature (fossil fuels, solar).'},
+  {front: 'Petajoule', back: 'Enough energy for 27.7 million LED bulbs.'},
+  {front: 'Energy Supply 2021', back: '76% fossil fuels, 16.6% renewables.'},
+  {front: 'Bioenergy', back: 'Electricity from biomass or biogas.'},
+  {front: 'Canada energy use: Industry', back: 'High demand (aluminum etc).'},
+  {front: 'Canada energy use: Heating', back: 'Avg temp 1.6 C; 41% homes use electric heat.'},
+  {front: 'Canada energy use: Affordability', back: 'Low prices + large houses = high demand.'},
+
+  {front: 'Metallic minerals', back: 'Gold/Copper; igneous/metamorphic rocks (The Shield).'},
+  {front: 'Non-metallic minerals', back: 'Potash/Salt/Diamonds; sedimentary rock.'},
+  {front: 'Surface Mining', back: 'Strip overburden; open pit/strip mining.'},
+  {front: 'Subsurface Mining', back: 'Deep tunnels; more dangerous, smaller footprint.'},
+  {front: 'Kimberlite pipes', back: 'Where diamonds are found.'},
+  {front: 'Diamond profitability', back: '1 carat (0.2g) per 1000 tonnes.'},
+  {front: 'Lac de Gras Mine', back: 'Cost $1.5B, produced $8B value.'},
+  {front: 'Reclamation', back: 'Restore land plan made before mining begins.'},
+
+  {front: 'Primary Industry', back: 'Extracting natural resources (mining, farming, fishing).'},
+  {front: 'Secondary Industry', back: 'Making things (manufacturing, construction).'},
+  {front: 'Tertiary Industry', back: 'Services (teaching, sales).'},
+  {front: 'Quaternary Industry', back: 'Knowledge/information.'},
+  {front: 'JIT Customers', back: 'Factories near customers to minimize lag.'},
+  {front: 'Location Factors', back: 'Customers, raw materials, water/power, labour, transportation, political, circumstance.'},
+  {front: 'Circumstance (Wild Card)', back: 'Personal/historical reasons (Tilley Hats in Toronto).'},
+
+  {front: 'Service Sector', back: 'Tertiary = services, dominant in modern economy.'},
+  {front: 'Quaternary Sector', back: 'Knowledge work (research, IT, AI).'},
+  {front: 'Tertiary Employment', back: 'About 80% of Canadians in 2023 (16M+).'},
+  {front: 'GDP Leader', back: 'Real estate, rental, leasing largest contribution.'},
+  {front: 'Fastest Growth', back: 'Computer systems design and AI.'},
+  {front: 'Tertiary supports others', back: 'Mining company needs accountant.'},
+
+  {front: 'Basic Job', back: 'Brings new money into local economy from outside.'},
+  {front: 'Non-Basic Job', back: 'Circulates money already in community.'},
+  {front: 'Multiplier Effect', back: 'Increase in wealth when new money injected.'},
+  {front: '3:1 Ratio', back: '1 Basic Job creates ~3 Non-Basic Jobs.'}
+];
+let cards = JSON.parse(localStorage.getItem(STORAGE) || '[]');
+let queue = [];
+let current = null;
+let flipped = false;
+
+function save() { localStorage.setItem(STORAGE, JSON.stringify(cards)); }
+function now() { return Date.now(); }
+
+function formatDue(ms) {
+  const mins = Math.max(1, Math.round(ms / 60000));
+  if (mins < 60) return mins + 'm';
+  const hours = Math.round(mins / 60);
+  return hours + 'h';
+}
+
+function refreshList() {
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  cards.forEach((c, i) => {
+    const row = document.createElement('div');
+    row.className = 'list-item';
+    const ms = Math.max(0, c.due - now());
+    row.innerHTML = `<div>${c.front.slice(0,40)}${c.front.length>40?'...':''}</div><span class="tag">${c.deck || 'Custom'} · ${formatDue(ms)}</span>`;
+    row.onclick = () => { cards.splice(i,1); save(); init(); };
+    list.appendChild(row);
+  });
+}
+
+function dueCards() { return cards.filter(c => c.due <= now()); }
+
+function updateStats() {
+  document.getElementById('due').textContent = queue.length;
+  document.getElementById('total').textContent = cards.length;
+  const status = document.getElementById('deck-status');
+  if (status) status.textContent = cards.length + ' cards';
+}
+
+function nextCard() {
+  queue = dueCards();
+  current = queue.shift() || null;
+  flipped = false;
+  renderCard();
+  updateStats();
+}
+
+function renderCard() {
+  const card = document.getElementById('card');
+  const frontEl = document.getElementById('card-front');
+  const backEl = document.getElementById('card-back');
+  if (!current) {
+    frontEl.textContent = 'No cards due yet.';
+    backEl.textContent = '';
+    card.classList.remove('flipped');
+    return;
+  }
+  frontEl.textContent = current.front;
+  backEl.textContent = current.back;
+  if (flipped) card.classList.add('flipped');
+  else card.classList.remove('flipped');
+}
+
+function schedule(score) {
+  if (!current) return;
+  if (!current.ease) current.ease = 2.5;
+  if (!current.interval) current.interval = 0; // minutes
+  if (!current.reps) current.reps = 0;
+
+  // Map 1-5 to difficulty (short intervals: minutes)
+  if (score === 1) {
+    current.reps = 0;
+    current.interval = 1; // 1 minute
+    current.ease = Math.max(1.3, current.ease - 0.3);
+  } else {
+    current.reps += 1;
+    if (current.reps === 1) current.interval = 5;      // 5 minutes
+    else if (current.reps === 2) current.interval = 15; // 15 minutes
+    else current.interval = Math.round(current.interval * current.ease);
+
+    const delta = score === 5 ? 0.2 : score === 4 ? 0.1 : score === 3 ? 0.0 : -0.15;
+    current.ease = Math.max(1.3, current.ease + delta);
+  }
+
+  current.due = now() + current.interval * 60 * 1000;
+  save();
+  nextCard();
+}
+
+function addCard(front, back) {
+  cards.push({ front, back, due: now(), ease: 2.5, interval: 0, reps: 0 });
+  save();
+  init();
+}
+
+function init() {
+  refreshList();
+  nextCard();
+}
+
+// events
+
+function addDeck(deckId) {
+  const decks = JSON.parse(localStorage.getItem(STORAGE_DECKS) || '{}');
+  const msg = document.getElementById('deck-msg');
+  let deckCards = [];
+  let deckName = '';
+  if (deckId === 'geo_unit1') { deckCards = GEO_UNIT1; deckName = 'Geo Unit 1'; }
+  if (deckId === 'geo_unit2') { deckCards = GEO_UNIT2; deckName = 'Geo Unit 2'; }
+  if (deckId === 'geo_unit3') { deckCards = GEO_UNIT3; deckName = 'Geo Unit 3'; }
+  if (!deckCards.length || !deckName) {
+    if (msg) msg.textContent = 'Deck not found: ' + deckId;
+    return;
+  }
+  const already = cards.some(c => c.deck === deckName);
+  if (already) {
+    if (msg) msg.textContent = deckName + ' already added.';
+    return;
+  }
+  deckCards.forEach(c => {
+    cards.push({ ...c, deck: deckName, due: now(), ease: 2.5, interval: 0, reps: 0 });
+  });
+  decks[deckId] = true;
+  localStorage.setItem(STORAGE_DECKS, JSON.stringify(decks));
+  save();
+  init();
+  if (msg) msg.textContent = 'Added ' + deckName + ' (' + deckCards.length + ' cards).';
+}
+
+function removeDeck(deckId) {
+  const deckName = deckId === 'geo_unit1' ? 'Geo Unit 1' : deckId === 'geo_unit2' ? 'Geo Unit 2' : 'Geo Unit 3';
+  const msg = document.getElementById('deck-msg');
+  cards = cards.filter(c => c.deck !== deckName);
+  const decks = JSON.parse(localStorage.getItem(STORAGE_DECKS) || '{}');
+  delete decks[deckId];
+  localStorage.setItem(STORAGE_DECKS, JSON.stringify(decks));
+  save();
+  init();
+  if (msg) msg.textContent = 'Removed ' + deckName + '.';
+}
+
+const deckMenu = document.querySelector('.deck-menu');
+if (deckMenu) {
+  deckMenu.addEventListener('click', (e) => {
+    const item = e.target.closest('.deck-item');
+    if (!item) return;
+    if (item.getAttribute('data-disabled') === 'true') return;
+    const addId = item.getAttribute('data-deck-add');
+    const removeId = item.getAttribute('data-deck-remove');
+    if (addId) addDeck(addId);
+    if (removeId) removeDeck(removeId);
+    if (deckDropdown) deckDropdown.classList.remove('open');
+  });
+}
+
+const deckToggle = document.getElementById('deck-toggle');
+const deckDropdown = document.getElementById('deck-dropdown');
+if (deckToggle && deckDropdown) {
+  deckToggle.onclick = (e) => {
+    e.stopPropagation();
+    deckDropdown.classList.toggle('open');
+    const msg = document.getElementById('deck-msg');
+    if (msg) msg.textContent = deckDropdown.classList.contains('open') ? 'Deck menu opened.' : '';
+  };
+  document.addEventListener('click', (e) => {
+    if (!deckDropdown.contains(e.target)) {
+      deckDropdown.classList.remove('open');
+    }
+  });
+}
+
+const fullscreenToggle = document.getElementById('fullscreen-toggle');
+const studyArea = document.querySelector('.study-area');
+if (fullscreenToggle && studyArea) {
+  fullscreenToggle.onclick = async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await studyArea.requestFullscreen();
+        studyArea.classList.add('fullscreen');
+        fullscreenToggle.textContent = 'Exit Fullscreen';
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (e) {
+      // Fallback: toggle CSS only
+      studyArea.classList.toggle('fullscreen');
+      fullscreenToggle.textContent = studyArea.classList.contains('fullscreen') ? 'Exit Fullscreen' : 'Fullscreen';
+    }
+  };
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      studyArea.classList.remove('fullscreen');
+      fullscreenToggle.textContent = 'Fullscreen';
+    }
+  });
+}
+
+document.getElementById('add').onclick = () => {
+  const front = document.getElementById('front').value.trim();
+  const back = document.getElementById('back').value.trim();
+  if (!front || !back) return;
+  document.getElementById('front').value = '';
+  document.getElementById('back').value = '';
+  addCard(front, back);
+};
+
+document.getElementById('clear').onclick = () => {
+  if (!confirm('Clear all cards?')) return;
+  cards = [];
+  save();
+  init();
+};
+
+document.getElementById('card').onclick = () => {
+  if (!current) return;
+  flipped = !flipped;
+  renderCard();
+};
+
+document.querySelectorAll('[data-score]').forEach(btn => {
+  btn.onclick = () => schedule(Number(btn.dataset.score));
+});
+
+// show interval hints
+const intervalHints = [
+  '1 star: 1 min',
+  '2 stars: 5 min',
+  '3 stars: 15 min',
+  '4 stars: faster growth',
+  '5 stars: fastest growth'
+];
+
+document.getElementById('intervals').textContent = intervalHints.join(' · ');
+document.getElementById('intervals-short').textContent = '1m · 5m · 15m · growth';
+
+init();
+const readyMsg = document.getElementById('deck-msg');
+if (readyMsg) readyMsg.textContent = 'Ready.';
+
+// auto-refresh due queue every 20 seconds
+setInterval(() => {
+  refreshList();
+  if (!current) {
+    nextCard();
+  } else {
+    updateStats();
+  }
+}, 20000);
+</script>
+</body>
+</html>
