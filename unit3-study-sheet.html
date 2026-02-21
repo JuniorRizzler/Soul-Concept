@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3: Resources & Economy</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f0f2f5;
+    font-family: 'Nunito Sans', sans-serif;
+    min-height: 100vh;
+    padding: 30px 20px 60px;
+    color: #222;
+  }
+  .unit-header { display: flex; align-items: center; gap: 16px; margin-bottom: 6px; }
+  .unit-badge {
+    background: #f97316; color: white;
+    font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 22px;
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .unit-title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 26px; color: #1a1a1a; }
+  .unit-meta { color: #888; font-size: 14px; margin-bottom: 10px; margin-left: 60px; }
+  .progress-bar-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .progress-label { font-size: 14px; color: #555; min-width: 60px; }
+  .progress-track { flex: 1; height: 8px; background: #dde1e7; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: #f97316; border-radius: 99px; }
+  .progress-pct { font-size: 14px; color: #555; font-weight: 700; }
+
+  .lesson-block { display: flex; flex-direction: column; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: white;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(249,115,22,0.18); }
+
+  .card-header {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    padding: 20px 18px 18px; min-height: 88px;
+    display: flex; align-items: flex-end;
+  }
+  .card-header h2 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; color: white; line-height: 1.3; }
+
+  .card-footer {
+    padding: 14px 18px; border-top: 1px solid #f3f4f6;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topics-label { display: flex; align-items: center; gap: 6px; color: #7c3aed; font-size: 13px; font-weight: 700; }
+  .topics-label svg { width: 15px; height: 15px; }
+  .not-started { color: #aaa; font-size: 13px; }
+  .chevron { color: #ccc; font-size: 18px; }
+
+  .diagram-panel {
+    background: white;
+    border-radius: 0 0 16px 16px;
+    border-top: 2px dashed #ffe4ca;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    padding: 12px 12px 14px;
+  }
+  .diagram-panel svg { width: 100%; height: auto; display: block; }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45); z-index: 100;
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: white; border-radius: 20px;
+    max-width: 640px; width: 100%; max-height: 85vh;
+    overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  }
+  .modal-header {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    padding: 22px 24px; border-radius: 20px 20px 0 0;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 12px; position: sticky; top: 0;
+  }
+  .modal-header h2 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 17px; color: white; line-height: 1.3; }
+  .close-btn {
+    background: rgba(255,255,255,0.25); border: none; color: white; font-size: 18px;
+    width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .close-btn:hover { background: rgba(255,255,255,0.4); }
+  .modal-body { padding: 22px 24px 28px; }
+  .note-section { margin-bottom: 18px; }
+  .note-section h3 {
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+    color: #f97316; text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 8px; border-bottom: 2px solid #fff7ed; padding-bottom: 4px;
+  }
+  .note-section p, .note-section li { font-size: 14px; line-height: 1.65; color: #374151; }
+  .note-section ul { list-style: none; padding: 0; }
+  .note-section ul li { padding: 3px 0 3px 16px; position: relative; }
+  .note-section ul li::before { content: "▸"; position: absolute; left: 0; color: #f97316; font-size: 12px; top: 5px; }
+  .note-section .highlight {
+    background: #fff7ed; border-left: 3px solid #f97316;
+    padding: 8px 12px; border-radius: 0 8px 8px 0; margin-top: 6px;
+    font-size: 13.5px; color: #374151;
+  }
+</style>
+</head>
+<body>
+
+<div class="unit-header">
+  <div class="unit-badge">3</div>
+  <div class="unit-title">Unit 3: Resources &amp; Economy (Lessons 20–29)</div>
+</div>
+<div class="unit-meta">10 sections &bull; 0 completed</div>
+<div class="progress-bar-wrap">
+  <span class="progress-label">Progress</span>
+  <div class="progress-track"><div class="progress-fill"></div></div>
+  <span class="progress-pct">0%</span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="modal-overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2 id="modal-title"></h2>
+      <button class="close-btn" onclick="closeModalDirect()">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const diagrams = [
+
+// L20 – Resource categories + waste hierarchy
+`<svg viewBox="0 0 340 178" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Four Resource Categories</text>
+  <rect x="110" y="20" width="120" height="26" rx="8" fill="#f97316"/>
+  <text x="170" y="37" text-anchor="middle" font-size="11" font-weight="700" fill="white">Total Stock</text>
+  <line x1="170" y1="46" x2="170" y2="56" stroke="#f97316" stroke-width="2"/>
+  <line x1="30" y1="56" x2="310" y2="56" stroke="#f97316" stroke-width="2"/>
+  <line x1="30" y1="56" x2="30" y2="66" stroke="#f97316" stroke-width="2"/>
+  <line x1="117" y1="56" x2="117" y2="66" stroke="#f97316" stroke-width="2"/>
+  <line x1="205" y1="56" x2="205" y2="66" stroke="#f97316" stroke-width="2"/>
+  <line x1="310" y1="56" x2="310" y2="66" stroke="#f97316" stroke-width="2"/>
+  <rect x="2" y="66" width="56" height="34" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="30" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">Renewable</text>
+  <text x="30" y="93" text-anchor="middle" font-size="9" fill="#374151">Fish, Forest</text>
+  <rect x="88" y="66" width="58" height="34" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="117" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">Non-Renew.</text>
+  <text x="117" y="93" text-anchor="middle" font-size="9" fill="#374151">Oil, Minerals</text>
+  <rect x="175" y="66" width="60" height="34" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="205" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">Flow</text>
+  <text x="205" y="93" text-anchor="middle" font-size="9" fill="#374151">Wind, Solar</text>
+  <rect x="282" y="66" width="56" height="34" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="310" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">Other</text>
+  <text x="310" y="93" text-anchor="middle" font-size="9" fill="#374151">Scenery</text>
+  <text x="170" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="#374151">Waste Hierarchy (Best to Worst)</text>
+  <rect x="8" y="128" width="72" height="22" rx="5" fill="#16a34a"/>
+  <text x="44" y="143" text-anchor="middle" font-size="10" font-weight="700" fill="white">&#9660; Reduce</text>
+  <rect x="86" y="128" width="72" height="22" rx="5" fill="#f97316"/>
+  <text x="122" y="143" text-anchor="middle" font-size="10" font-weight="700" fill="white">Recycle (9%)</text>
+  <rect x="164" y="128" width="72" height="22" rx="5" fill="#ef4444"/>
+  <text x="200" y="143" text-anchor="middle" font-size="10" font-weight="700" fill="white">Landfill</text>
+  <rect x="242" y="128" width="90" height="22" rx="5" fill="#6b7280"/>
+  <text x="287" y="143" text-anchor="middle" font-size="10" font-weight="700" fill="white">Circular &#9855;</text>
+  <text x="81" y="143" font-size="11" fill="#888">&#62;</text>
+  <text x="159" y="143" font-size="11" fill="#888">&#62;</text>
+  <text x="237" y="143" font-size="11" fill="#888">&#62;</text>
+  <text x="170" y="168" text-anchor="middle" font-size="9" fill="#6b7280">R/P Ratio = Reserves / Production = Years Left</text>
+</svg>`,
+
+// L21 – Agriculture factor wheel
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Four Factors of Agriculture</text>
+  <circle cx="170" cy="98" r="30" fill="#f97316"/>
+  <text x="170" y="94" text-anchor="middle" font-size="10" font-weight="800" fill="white">AGRI-</text>
+  <text x="170" y="107" text-anchor="middle" font-size="10" font-weight="800" fill="white">CULTURE</text>
+  <line x1="170" y1="68" x2="170" y2="34" stroke="#f97316" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="170" y1="128" x2="170" y2="162" stroke="#f97316" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="140" y1="98" x2="68" y2="98" stroke="#f97316" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="200" y1="98" x2="272" y2="98" stroke="#f97316" stroke-width="2" stroke-dasharray="3,2"/>
+  <rect x="110" y="20" width="120" height="30" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="170" y="32" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">Temperature (GDDs)</text>
+  <text x="170" y="44" text-anchor="middle" font-size="9" fill="#374151">Need 1,100+ GDDs</text>
+  <rect x="110" y="148" width="120" height="30" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="170" y="160" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">Precipitation</text>
+  <text x="170" y="172" text-anchor="middle" font-size="9" fill="#374151">Aridity Index &lt;0.65=dry</text>
+  <rect x="2" y="83" width="100" height="30" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="52" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">Land (CLI)</text>
+  <text x="52" y="108" text-anchor="middle" font-size="9" fill="#374151">Class 1-3 good</text>
+  <rect x="238" y="83" width="100" height="30" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="288" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">Location</text>
+  <text x="288" y="108" text-anchor="middle" font-size="9" fill="#374151">Intensive vs Extensive</text>
+</svg>`,
+
+// L22 – Forest types bar + harvesting method comparison
+`<svg viewBox="0 0 340 172" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Forest Types &amp; Harvesting Methods</text>
+  <rect x="8" y="22" width="96" height="14" rx="3" fill="#15803d"/>
+  <rect x="104" y="22" width="32" height="14" rx="3" fill="#4ade80"/>
+  <rect x="136" y="22" width="18" height="14" rx="3" fill="#bbf7d0"/>
+  <text x="56" y="33" text-anchor="middle" font-size="9" font-weight="700" fill="white">Softwood 66%</text>
+  <text x="120" y="33" text-anchor="middle" font-size="9" fill="#166534">Mix 22%</text>
+  <text x="165" y="33" text-anchor="middle" font-size="9" fill="#166534">Hard 12%</text>
+  <rect x="2" y="44" width="100" height="82" rx="9" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="52" y="60" text-anchor="middle" font-size="10" font-weight="800" fill="#dc2626">Clear Cut</text>
+  <path d="M15,95 L25,72 L80,72 L90,95 Z" fill="#d97706" opacity="0.35"/>
+  <path d="M20,95 L30,78 L75,78 L85,95" fill="none" stroke="#d97706" stroke-width="1.5"/>
+  <text x="52" y="115" text-anchor="middle" font-size="8" fill="#374151">All trees removed</text>
+  <text x="52" y="126" text-anchor="middle" font-size="8" fill="#dc2626">Fast, cheap, erosion risk</text>
+  <rect x="120" y="44" width="100" height="82" rx="9" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="170" y="60" text-anchor="middle" font-size="10" font-weight="800" fill="#b45309">Shelterwood</text>
+  <text x="150" y="82" font-size="18">&#127794;</text>
+  <text x="180" y="86" font-size="12">&#127795;</text>
+  <text x="170" y="107" text-anchor="middle" font-size="8" fill="#374151">Keeps parent trees</text>
+  <text x="170" y="118" text-anchor="middle" font-size="8" fill="#374151">Seeds + shelter remain</text>
+  <text x="170" y="126" text-anchor="middle" font-size="8" fill="#b45309">Medium cost</text>
+  <rect x="238" y="44" width="100" height="82" rx="9" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="288" y="60" text-anchor="middle" font-size="10" font-weight="800" fill="#15803d">Selective</text>
+  <text x="262" y="86" font-size="18">&#127794;</text>
+  <text x="290" y="78" font-size="14">&#127795;</text>
+  <text x="310" y="90" font-size="10">&#128269;</text>
+  <text x="288" y="107" text-anchor="middle" font-size="8" fill="#374151">Mature trees only</text>
+  <text x="288" y="118" text-anchor="middle" font-size="8" fill="#374151">Best biodiversity</text>
+  <text x="288" y="126" text-anchor="middle" font-size="8" fill="#15803d">Most expensive</text>
+  <rect x="2" y="135" width="336" height="26" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="170" y="145" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8">Wildlife Corridor</text>
+  <text x="170" y="156" text-anchor="middle" font-size="9" fill="#374151">Habitat hallway — lets animals move, escape, and interbreed</text>
+</svg>`,
+
+// L23 – Grand Banks cross-section + 1992 collapse
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Grand Banks &amp; Ocean Resources</text>
+  <rect x="8" y="20" width="196" height="88" rx="8" fill="#bfdbfe"/>
+  <rect x="8" y="20" width="72" height="88" rx="8" fill="#93c5fd"/>
+  <text x="44" y="36" text-anchor="middle" font-size="9" font-weight="700" fill="#1e40af">Shallow &lt;200m</text>
+  <text x="44" y="48" text-anchor="middle" font-size="9" fill="#1e40af">Sunlight reaches</text>
+  <text x="44" y="60" text-anchor="middle" font-size="9" fill="#1e40af">bottom = Plankton</text>
+  <text x="135" y="38" text-anchor="middle" font-size="12">&#128031;</text>
+  <text x="135" y="52" text-anchor="middle" font-size="8" fill="#1e3a8a">Pelagic (Salmon)</text>
+  <text x="135" y="84" text-anchor="middle" font-size="12">&#128032;</text>
+  <text x="135" y="98" text-anchor="middle" font-size="8" fill="#1e3a8a">Groundfish (Cod)</text>
+  <path d="M8,108 Q60,100 120,108" stroke="#1d4ed8" stroke-width="1.5" fill="none"/>
+  <text x="60" y="122" text-anchor="middle" font-size="8" fill="#1d4ed8">Cold Labrador Current</text>
+  <path d="M84,108 Q140,116 204,108" stroke="#dc2626" stroke-width="1.5" fill="none"/>
+  <text x="152" y="122" text-anchor="middle" font-size="8" fill="#dc2626">Warm Gulf Stream</text>
+  <rect x="212" y="20" width="124" height="88" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="274" y="36" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">Inshore vs Offshore</text>
+  <text x="274" y="50" text-anchor="middle" font-size="9" fill="#374151">Inshore: 85% workers</text>
+  <text x="274" y="62" text-anchor="middle" font-size="9" fill="#374151">Small boats, way of life</text>
+  <line x1="220" y1="70" x2="328" y2="70" stroke="#fed7aa" stroke-width="1"/>
+  <text x="274" y="82" text-anchor="middle" font-size="9" fill="#374151">Offshore: 15% workers</text>
+  <text x="274" y="94" text-anchor="middle" font-size="9" fill="#374151">90% of total catch</text>
+  <rect x="8" y="132" width="328" height="44" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="170" y="146" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">1992 Cod Collapse — Three Causes:</text>
+  <text x="60" y="160" text-anchor="middle" font-size="12">&#128225;</text>
+  <text x="100" y="160" text-anchor="middle" font-size="8" fill="#374151">Sonar Tech</text>
+  <text x="170" y="160" text-anchor="middle" font-size="12">&#127981;</text>
+  <text x="210" y="160" text-anchor="middle" font-size="8" fill="#374151">Factory Trawlers</text>
+  <text x="280" y="160" text-anchor="middle" font-size="12">&#127907;</text>
+  <text x="310" y="162" text-anchor="middle" font-size="8" fill="#374151">Overfishing</text>
+  <text x="170" y="173" text-anchor="middle" font-size="8" fill="#6b7280">Climate change: warmer water = less productive; fish migrate poleward</text>
+</svg>`,
+
+// L24 – Water pie + water cycle + cost bars
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Fresh Water Resources</text>
+  <circle cx="58" cy="82" r="52" fill="#bfdbfe"/>
+  <path d="M58,82 L58,30 A52,52 0 0,1 77.6,33.6 Z" fill="#1d4ed8"/>
+  <text x="58" y="148" text-anchor="middle" font-size="9" fill="#1e3a8a" font-weight="700">97% Salt Water</text>
+  <text x="58" y="160" text-anchor="middle" font-size="9" fill="#1d4ed8">3% Fresh (wedge &#8593;)</text>
+  <rect x="122" y="20" width="210" height="118" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="227" y="36" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">The Water Cycle</text>
+  <text x="310" y="54" text-anchor="middle" font-size="15">&#9728;</text>
+  <text x="145" y="54" text-anchor="middle" font-size="15">&#9928;</text>
+  <path d="M158,50 Q200,38 298,52" stroke="#3b82f6" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+  <text x="228" y="46" text-anchor="middle" font-size="8" fill="#3b82f6">Evaporation</text>
+  <text x="195" y="110" text-anchor="middle" font-size="18">&#9968;</text>
+  <text x="290" y="112" text-anchor="middle" font-size="12">&#127754;</text>
+  <path d="M152,62 Q155,90 192,108" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+  <text x="143" y="90" text-anchor="middle" font-size="8" fill="#3b82f6">Precip.</text>
+  <path d="M210,118 Q250,122 278,114" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+  <text x="248" y="134" text-anchor="middle" font-size="8" fill="#3b82f6">Runoff</text>
+  <rect x="8" y="170" width="324" height="14" rx="4" fill="#e5e7eb"/>
+  <rect x="8" y="170" width="4" height="14" rx="2" fill="#16a34a"/>
+  <text x="16" y="181" font-size="8" fill="#16a34a">Tap $1.38/1000L</text>
+  <rect x="100" y="170" width="130" height="14" rx="2" fill="#ef4444"/>
+  <text x="235" y="181" font-size="8" fill="#ef4444"> Bottled $200/1000L</text>
+</svg>`,
+
+// L25 – Energy donut + reasons chart
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Canada's Energy Supply (2021)</text>
+  <circle cx="80" cy="88" r="58" fill="#f3f4f6"/>
+  <circle cx="80" cy="88" r="40" fill="none" stroke="#6b7280" stroke-width="22"
+    stroke-dasharray="189 251" stroke-dashoffset="0" transform="rotate(-90 80 88)"/>
+  <circle cx="80" cy="88" r="40" fill="none" stroke="#16a34a" stroke-width="22"
+    stroke-dasharray="41 399" stroke-dashoffset="-189" transform="rotate(-90 80 88)"/>
+  <circle cx="80" cy="88" r="40" fill="none" stroke="#f97316" stroke-width="22"
+    stroke-dasharray="19 421" stroke-dashoffset="-230" transform="rotate(-90 80 88)"/>
+  <circle cx="80" cy="88" r="24" fill="white"/>
+  <text x="80" y="85" text-anchor="middle" font-size="9" font-weight="700" fill="#374151">Energy</text>
+  <text x="80" y="97" text-anchor="middle" font-size="9" font-weight="700" fill="#374151">Mix</text>
+  <rect x="8" y="150" width="11" height="11" rx="2" fill="#6b7280"/>
+  <text x="23" y="160" font-size="9" fill="#374151">Fossil Fuels 76%</text>
+  <rect x="98" y="150" width="11" height="11" rx="2" fill="#16a34a"/>
+  <text x="113" y="160" font-size="9" fill="#374151">Renewables 16.6%</text>
+  <rect x="8" y="166" width="11" height="11" rx="2" fill="#f97316"/>
+  <text x="23" y="176" font-size="9" fill="#374151">Other 7.4%</text>
+  <rect x="158" y="20" width="174" height="128" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="245" y="36" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">Why Canada Uses So Much</text>
+  <text x="172" y="58" font-size="12">&#127981;</text>
+  <text x="188" y="60" font-size="9" fill="#374151">Industry demand (aluminum)</text>
+  <text x="172" y="80" font-size="12">&#127970;</text>
+  <text x="188" y="82" font-size="9" fill="#374151">Avg temp 1.6°C</text>
+  <text x="188" y="94" font-size="9" fill="#374151">41% homes use electric heat</text>
+  <text x="172" y="116" font-size="12">&#128178;</text>
+  <text x="188" y="118" font-size="9" fill="#374151">Low prices + large houses</text>
+  <text x="188" y="130" font-size="9" fill="#374151">= very high demand</text>
+  <text x="245" y="158" text-anchor="middle" font-size="8" fill="#6b7280">Bioenergy = biomass/biogas burning</text>
+</svg>`,
+
+// L26 – Rock layers + mining methods
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Mineral Resources &amp; Mining</text>
+  <rect x="8" y="20" width="156" height="28" rx="6" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+  <text x="86" y="38" text-anchor="middle" font-size="9" font-weight="700" fill="#92400e">Sedimentary Rock</text>
+  <rect x="8" y="52" width="156" height="28" rx="6" fill="#e9d5ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="86" y="70" text-anchor="middle" font-size="9" font-weight="700" fill="#4c1d95">Igneous/Metamorphic (Shield)</text>
+  <line x1="168" y1="34" x2="190" y2="34" stroke="#d97706" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="194" y="28" font-size="8" fill="#92400e" font-weight="700">Non-Metallic:</text>
+  <text x="194" y="40" font-size="8" fill="#374151">Potash, Salt, Diamonds</text>
+  <line x1="168" y1="66" x2="190" y2="66" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="194" y="60" font-size="8" fill="#4c1d95" font-weight="700">Metallic:</text>
+  <text x="194" y="72" font-size="8" fill="#374151">Gold, Copper</text>
+  <rect x="2" y="94" width="100" height="78" rx="9" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="52" y="110" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">Surface Mining</text>
+  <path d="M14,158 L24,128 L82,128 L92,158 Z" fill="#d97706" opacity="0.35"/>
+  <path d="M18,158 L28,135 L78,135 L88,158" fill="none" stroke="#d97706" stroke-width="1.5"/>
+  <text x="52" y="170" text-anchor="middle" font-size="8" fill="#374151">Open Pit / Strip</text>
+  <rect x="120" y="94" width="100" height="78" rx="9" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="170" y="110" text-anchor="middle" font-size="9" font-weight="700" fill="#15803d">Subsurface Mining</text>
+  <rect x="140" y="120" width="10" height="36" rx="3" fill="#6b7280"/>
+  <rect x="158" y="126" width="10" height="30" rx="3" fill="#6b7280"/>
+  <rect x="176" y="132" width="10" height="24" rx="3" fill="#6b7280"/>
+  <path d="M134,156 L200,156" stroke="#374151" stroke-width="1.5"/>
+  <text x="170" y="168" text-anchor="middle" font-size="8" fill="#374151">Deep tunnels</text>
+  <rect x="237" y="94" width="100" height="78" rx="9" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="287" y="110" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8">Diamonds</text>
+  <text x="287" y="122" text-anchor="middle" font-size="9" fill="#374151">Kimberlite Pipes</text>
+  <text x="287" y="134" text-anchor="middle" font-size="9" fill="#374151">1 carat / 1,000t</text>
+  <text x="287" y="148" text-anchor="middle" font-size="8" fill="#dc2626">Cost: $1.5 Billion</text>
+  <text x="287" y="160" text-anchor="middle" font-size="8" fill="#16a34a">Value: $8 Billion</text>
+  <text x="287" y="170" text-anchor="middle" font-size="8" fill="#6b7280">Reclaim before mining</text>
+</svg>`,
+
+// L27 – Economic sectors pyramid + 7 factors grid
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Economic Sectors &amp; 7 Location Factors</text>
+  <polygon points="80,90 28,148 132,148" fill="#ef4444" opacity="0.85"/>
+  <text x="80" y="136" text-anchor="middle" font-size="9" font-weight="700" fill="white">Primary</text>
+  <text x="80" y="162" text-anchor="middle" font-size="8" fill="#374151">Extract</text>
+  <polygon points="80,60 48,92 112,92" fill="#f97316" opacity="0.85"/>
+  <text x="80" y="82" text-anchor="middle" font-size="9" font-weight="700" fill="white">Secondary</text>
+  <polygon points="80,36 56,62 104,62" fill="#eab308" opacity="0.85"/>
+  <text x="80" y="54" text-anchor="middle" font-size="9" font-weight="700" fill="white">Tertiary</text>
+  <polygon points="80,20 64,38 96,38" fill="#16a34a" opacity="0.85"/>
+  <text x="80" y="33" text-anchor="middle" font-size="7" font-weight="700" fill="white">Quat.</text>
+  <rect x="164" y="20" width="70" height="20" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+  <text x="199" y="33" text-anchor="middle" font-size="9" fill="#374151">Raw Materials</text>
+  <rect x="240" y="20" width="96" height="20" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+  <text x="288" y="33" text-anchor="middle" font-size="9" fill="#374151">Customers (JIT)</text>
+  <rect x="164" y="46" width="70" height="20" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+  <text x="199" y="59" text-anchor="middle" font-size="9" fill="#374151">Water / Power</text>
+  <rect x="240" y="46" width="96" height="20" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+  <text x="288" y="59" text-anchor="middle" font-size="9" fill="#374151">Labour (skilled)</text>
+  <rect x="164" y="72" width="70" height="20" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+  <text x="199" y="85" text-anchor="middle" font-size="9" fill="#374151">Transportation</text>
+  <rect x="240" y="72" width="96" height="20" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+  <text x="288" y="85" text-anchor="middle" font-size="9" fill="#374151">Political (subsidies)</text>
+  <rect x="164" y="98" width="172" height="20" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="250" y="111" text-anchor="middle" font-size="9" fill="#1d4ed8">Circumstance — Wild Card (Tilley Hats)</text>
+  <rect x="2" y="132" width="336" height="44" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="170" y="148" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">7 Location Factors influence WHERE factories are built</text>
+  <text x="170" y="162" text-anchor="middle" font-size="9" fill="#374151">JIT = Just-In-Time delivery. Factories need to be near customers to minimize lag.</text>
+  <text x="170" y="174" text-anchor="middle" font-size="8" fill="#6b7280">Circumstance = personal/historical reasons with no economic logic</text>
+</svg>`,
+
+// L28 – Employment bar chart + quaternary bubble
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">Canada's Tertiary Industries (2023)</text>
+  <text x="8" y="30" font-size="9" fill="#374151" font-weight="700">Employment by Sector</text>
+  <rect x="8" y="36" width="222" height="20" rx="5" fill="#f97316"/>
+  <text x="119" y="50" text-anchor="middle" font-size="9" font-weight="700" fill="white">Tertiary + Quaternary ~80% (16M+ Canadians)</text>
+  <rect x="8" y="62" width="55" height="20" rx="5" fill="#6b7280"/>
+  <text x="35" y="76" text-anchor="middle" font-size="9" fill="white">Secondary 14%</text>
+  <rect x="8" y="88" width="22" height="20" rx="5" fill="#9ca3af"/>
+  <text x="35" y="102" font-size="9" fill="#374151">Primary ~6%</text>
+  <rect x="240" y="30" width="96" height="82" rx="9" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="288" y="46" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">GDP Leaders</text>
+  <text x="288" y="60" text-anchor="middle" font-size="9" fill="#374151">#1 Real Estate</text>
+  <text x="288" y="72" text-anchor="middle" font-size="9" fill="#374151">#2 Finance</text>
+  <text x="288" y="84" text-anchor="middle" font-size="9" fill="#374151">#3 Manufacturing</text>
+  <text x="288" y="100" text-anchor="middle" font-size="8" fill="#16a34a">AI = fastest growing</text>
+  <rect x="8" y="122" width="328" height="54" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="170" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">Quaternary = Knowledge Economy</text>
+  <text x="170" y="152" text-anchor="middle" font-size="9" fill="#374151">Research, IT, AI — creates high-skill, high-wage jobs</text>
+  <text x="170" y="168" text-anchor="middle" font-size="9" fill="#374151">Tertiary supports Primary: Mining (Primary) needs Accountant (Tertiary)</text>
+</svg>`,
+
+// L29 – Multiplier effect chain diagram
+`<svg viewBox="0 0 340 185" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#f97316"/>
+    </marker>
+  </defs>
+  <text x="170" y="13" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">The Multiplier Effect — 3:1 Ratio</text>
+  <rect x="4" y="22" width="80" height="38" rx="9" fill="#1d4ed8"/>
+  <text x="44" y="37" text-anchor="middle" font-size="9" font-weight="700" fill="white">BASIC JOB</text>
+  <text x="44" y="50" text-anchor="middle" font-size="8" fill="#bfdbfe">Paper Mill Worker</text>
+  <text x="44" y="72" text-anchor="middle" font-size="8" fill="#6b7280">Money comes IN</text>
+  <text x="44" y="82" text-anchor="middle" font-size="8" fill="#6b7280">from outside town</text>
+  <path d="M84,41 L104,41" stroke="#f97316" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="104" y="22" width="72" height="38" rx="9" fill="#f97316"/>
+  <text x="140" y="37" text-anchor="middle" font-size="9" font-weight="700" fill="white">Non-Basic #1</text>
+  <text x="140" y="50" text-anchor="middle" font-size="8" fill="white">Grocery Store</text>
+  <path d="M140,60 L140,80" stroke="#f97316" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="104" y="80" width="72" height="38" rx="9" fill="#fb923c"/>
+  <text x="140" y="95" text-anchor="middle" font-size="9" font-weight="700" fill="white">Non-Basic #2</text>
+  <text x="140" y="108" text-anchor="middle" font-size="8" fill="white">Barber / Cafe</text>
+  <path d="M176,99 L196,99" stroke="#f97316" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="196" y="80" width="72" height="38" rx="9" fill="#fdba74"/>
+  <text x="232" y="95" text-anchor="middle" font-size="9" font-weight="700" fill="#7c2d12">Non-Basic #3</text>
+  <text x="232" y="108" text-anchor="middle" font-size="8" fill="#7c2d12">Hardware Store</text>
+  <path d="M268,99 L288,99" stroke="#f97316" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="312" y="103" text-anchor="middle" font-size="16" fill="#f97316">&#8230;</text>
+  <rect x="4" y="132" width="158" height="46" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="83" y="150" text-anchor="middle" font-size="12" font-weight="800" fill="#c2410c">3 : 1 Ratio</text>
+  <text x="83" y="164" text-anchor="middle" font-size="9" fill="#374151">1 Basic Job creates</text>
+  <text x="83" y="176" text-anchor="middle" font-size="9" fill="#374151">~3 Non-Basic Jobs</text>
+  <rect x="170" y="132" width="166" height="46" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="253" y="148" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8">Basic = new money from outside</text>
+  <text x="253" y="161" text-anchor="middle" font-size="8" fill="#374151">e.g. Paper Mill exporting to NY</text>
+  <text x="253" y="174" text-anchor="middle" font-size="8" fill="#374151">Non-Basic = money already in town</text>
+</svg>`,
+];
+
+const lessons = [
+  {
+    title: "Lesson 20: Resources – Types, Consumption, and Disposal",
+    topics: 5,
+    notes: [
+      { heading: "Total Stock vs. Resource", content: `<ul><li><strong>Total Stock:</strong> Everything in the environment (Energy, Living, Non-living)</li><li><strong>Resource:</strong> Any part of Total Stock that becomes useful to humans</li><li><strong>Natural Resources:</strong> Resources found in the natural environment</li></ul>` },
+      { heading: "Value Evolution Examples", content: `<ul><li><strong>Flint:</strong> Vital in Stone Age → critical for flintlock firearms (17th–19th c.) → virtually no value today</li><li><strong>Oil:</strong> Dug in 1858 at Oil Springs, ON for lamp oil → global power resource only after cars were invented</li></ul>` },
+      { heading: "Four Categories of Resources", content: `<ul><li><strong>Renewable:</strong> Regenerates if used carefully (fish, forests)</li><li><strong>Non-Renewable:</strong> Limited, cannot be replaced (fossil fuels, minerals)</li><li><strong>Flow:</strong> Replaced by natural actions; used when/where they occur (wind, solar, running water)</li><li><strong>Other:</strong> Items that don't fit elsewhere (e.g., Rocky Mountain scenery for tourism)</li></ul>` },
+      { heading: "Management Terms", content: `<ul><li><strong>Mining the Resource:</strong> Exploiting a renewable resource until it is gone (unsustainable)</li><li><strong>Maximum Sustainable Yield:</strong> Harvesting only what nature replaces annually</li><li><strong>R/P Ratio:</strong> Reserves ÷ Production = Years Left</li></ul>` },
+      { heading: "Waste Management", content: `<ul><li><strong>Landfills:</strong> Produce Leachate (toxic liquid) and Methane (burned for power)</li><li><strong>Recycling:</strong> Only 9% of Canadian plastic recycled in 2023; often "downcycled"</li><li><strong>Reducing:</strong> The best option — items never produced, saves the most resources</li><li><strong>Circular Economy:</strong> Waste is designed out; materials kept in use</li></ul>` },
+    ]
+  },
+  {
+    title: "Lesson 21: Canada's Agricultural Resources",
+    topics: 7,
+    notes: [
+      { heading: "Four Factors of Agriculture", content: `<ul><li><strong>Temperature (GDDs):</strong> Commercial farming needs 1,100 Growing Degree Days. Higher GDDs = wider variety (tobacco, peaches)</li><li><strong>Precipitation:</strong> Aridity Index measures rain supply vs. demand. Below 0.65 is "dry"</li><li><strong>Land Quality (CLI):</strong> Classes 1–3 = good; Class 4 = marginal; Class 7 = no agriculture</li><li><strong>Location:</strong> Intensive (small land, high labor, near cities) vs. Extensive (huge land, low labor, wheat)</li></ul>` },
+      { heading: "Economic Factors", content: `<ul><li><strong>Land Cost:</strong> High prices near cities force farmers into high-profit products</li><li><strong>Competition:</strong> Oversupply causes price drops</li><li><strong>Sustainability:</strong> Agriculture contributes to greenhouse gases; must manage soil fertility and erosion</li></ul>` },
+    ]
+  },
+  {
+    title: "Lesson 22: Canada's Forest Resources",
+    topics: 4,
+    notes: [
+      { heading: "Historical Context", content: `<p>Old Growth (never logged) was cleared in the 1800s for farming and UK exports. Most current forests are <strong>Second Growth</strong>.</p>` },
+      { heading: "Forest Types", content: `<ul><li><strong>Softwood (66%):</strong> Coniferous</li><li><strong>Hardwood (12%):</strong> Deciduous</li><li><strong>Mixed (22%):</strong> Both</li></ul>` },
+      { heading: "Harvesting Methods", content: `<ul><li><strong>Clear Cutting:</strong> Fast/cheap; removes all trees. Causes erosion</li><li><strong>Shelterwood:</strong> Leaves "parent trees" for seeds and shelter</li><li><strong>Selective:</strong> Only mature trees; most expensive but best for biodiversity</li></ul>` },
+      { heading: "Sustainable Forestry", content: `<ul><li><strong>FSC Certification:</strong> Proves wood is "ecologically certified"</li><li><strong>Wildlife Corridor:</strong> A "habitat hallway" allowing animals to move, escape, and interbreed</li></ul>` },
+    ]
+  },
+  {
+    title: "Lesson 23: Canada's Ocean Resources",
+    topics: 5,
+    notes: [
+      { heading: "Fish Classifications", content: `<ul><li><strong>Groundfish (bottom):</strong> Cod</li><li><strong>Pelagic (surface):</strong> Salmon</li><li><strong>Shellfish:</strong> Lobster, Shrimp</li></ul>` },
+      { heading: "Grand Banks Recipe", content: `<p>Shallow water (&lt;200m) allows sunlight to grow plankton. The cold Labrador Current meets the warm Gulf Stream, stirring nutrients.</p>` },
+      { heading: "The 1992 Collapse", content: `<p>Caused by overfishing, sonar technology, and factory trawlers depleting cod stocks faster than they could recover.</p>` },
+      { heading: "Inshore vs. Offshore", content: `<ul><li><strong>Inshore:</strong> 85% of workers; small boats; "way of life"</li><li><strong>Offshore:</strong> 15% of workers; large corporate trawlers; 90% of total catch</li></ul>` },
+      { heading: "Climate Change Impact", content: `<p>Warmer water is less productive; fish migrate toward the poles as oceans heat up.</p>` },
+    ]
+  },
+  {
+    title: "Lesson 24: Canada's Fresh Water Resources",
+    topics: 5,
+    notes: [
+      { heading: "Key Facts", content: `<ul><li>Only <strong>3%</strong> of world water is fresh</li><li>Water is a <strong>Flow Resource</strong> — must be used where it occurs</li><li>Stored as glaciers or groundwater; moved by the water cycle</li></ul>` },
+      { heading: "Cost Comparison", content: `<div class="highlight">Tap water in Ontario: <strong>$1.38 / 1,000L</strong><br>Bottled water: <strong>$200 / 1,000L</strong></div>` },
+      { heading: "Inequality &amp; Conflict", content: `<ul><li><strong>Neskantaga First Nation:</strong> Boil-water advisory since 1995</li><li><strong>Blue Triton (Nestlé):</strong> Pumps 1.1 million L/day in Hillsburg, ON despite a Haudenosaunee cease-and-desist order</li></ul>` },
+    ]
+  },
+  {
+    title: "Lesson 25: Canada's Energy Resources",
+    topics: 4,
+    notes: [
+      { heading: "Basics", content: `<ul><li><strong>Primary Energy:</strong> Energy in nature (fossil fuels, solar)</li><li><strong>Petajoule:</strong> Enough energy for 27.7 million LED bulbs</li><li><strong>Energy Supply (2021):</strong> 76% Fossil Fuels, 16.6% Renewables</li></ul>` },
+      { heading: "Bioenergy", content: `<p>Electricity from burning <strong>biomass</strong> (wood/garbage) or <strong>biogas</strong> (from landfills).</p>` },
+      { heading: "Why Canada Consumes So Much", content: `<ul><li><strong>Industry:</strong> Massive demand for sectors like aluminum</li><li><strong>Heating:</strong> Avg temp is 1.6°C; 41% of homes use electricity for heat</li><li><strong>Affordability:</strong> Low prices and large houses lead to high demand</li></ul>` },
+    ]
+  },
+  {
+    title: "Lesson 26: Canada's Mineral Resources",
+    topics: 4,
+    notes: [
+      { heading: "Metallic vs. Non-Metallic", content: `<ul><li><strong>Metallic (Gold/Copper):</strong> Found in Igneous/Metamorphic rock (The Shield)</li><li><strong>Non-Metallic (Potash/Salt/Diamonds):</strong> Found in Sedimentary rock</li></ul>` },
+      { heading: "Mining Methods", content: `<ul><li><strong>Surface:</strong> Stripping overburden (soil/rock). Includes Open Pit and Strip mining</li><li><strong>Subsurface:</strong> Deep tunnels; more dangerous but smaller surface footprint</li></ul>` },
+      { heading: "Diamonds", content: `<p>Found in <strong>Kimberlite Pipes</strong>. Profitable only if there is 1 carat (0.2g) per 1,000 tonnes of rock.</p><div class="highlight">Lac de Gras, NT mine: Cost $1.5 billion to build → Produced $8 billion in value</div>` },
+      { heading: "Reclamation", content: `<p>Plans to restore land must be made <em>before</em> the mine begins operations.</p>` },
+    ]
+  },
+  {
+    title: "Lesson 27: Manufacturing Industry",
+    topics: 2,
+    notes: [
+      { heading: "Economic Sectors", content: `<ul><li><strong>Primary:</strong> Extracting (Miner/Farmer)</li><li><strong>Secondary:</strong> Making (Factory/Construction)</li><li><strong>Tertiary:</strong> Selling (Teacher/Sales)</li><li><strong>Quaternary:</strong> Knowledge/Information</li></ul>` },
+      { heading: "The 7 Location Factors", content: `<ul><li><strong>Customers:</strong> For Just-in-Time (JIT) delivery</li><li><strong>Raw Materials:</strong> Near source if heavy or perishable</li><li><strong>Water/Power:</strong> Essential for processes like steel or aluminum</li><li><strong>Labour:</strong> Near skilled workers</li><li><strong>Transportation:</strong> Near highways, rail, or ports</li><li><strong>Political:</strong> Government subsidies or strict laws</li><li><strong>Circumstance (Wild Card):</strong> e.g., Tilley Hats in Toronto — started there because the founder lived there</li></ul>` },
+    ]
+  },
+  {
+    title: "Lesson 28: Canada's Tertiary Industries",
+    topics: 3,
+    notes: [
+      { heading: "Definition", content: `<p>The "Service Sector" — providing services rather than extracting or making physical goods. Often called the "everything else" sector.</p>` },
+      { heading: "The Quaternary Industry", content: `<p>A subset of tertiary involving creation and distribution of knowledge (specialized research, IT, AI).</p>` },
+      { heading: "Economic Impact", content: `<ul><li><strong>Employment:</strong> ~80% of Canadians (16+ million) work in this sector (2023)</li><li><strong>GDP:</strong> Real Estate, Rental &amp; Leasing makes the largest contribution</li><li><strong>Growth:</strong> Computer systems design and AI are the fastest-growing areas</li><li><strong>Connection:</strong> Tertiary supports others — e.g., a mining company needs an accountant</li></ul>` },
+    ]
+  },
+  {
+    title: "Lesson 29: Basic vs Non-Basic Jobs & The Multiplier Effect",
+    topics: 3,
+    notes: [
+      { heading: "Basic vs. Non-Basic Jobs", content: `<ul><li><strong>Basic Jobs:</strong> Bring new money into the local economy from outside (e.g., paper mill worker exporting to New York)</li><li><strong>Non-Basic Jobs:</strong> Circulate money already within the community (e.g., local restaurant cook)</li></ul>` },
+      { heading: "The Multiplier Effect", content: `<p>The increase in total wealth when new money is "injected" through a basic job.</p><div class="highlight"><strong>The 3:1 Ratio:</strong> For every 1 Basic Job created, approximately 3 Non-Basic Jobs are created.</div>` },
+      { heading: "How It Works", content: `<ul><li>A worker gets paid (Basic Job)</li><li>They spend money at a local grocery store or barber</li><li>That spending becomes income for the store owner (Non-Basic Job)</li><li>The store owner then spends it elsewhere in town — and so on</li></ul>` },
+    ]
+  },
+];
+
+const grid = document.getElementById('grid');
+
+lessons.forEach((lesson, i) => {
+  const block = document.createElement('div');
+  block.className = 'lesson-block';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-header"><h2>${lesson.title}</h2></div>
+    <div class="card-footer">
+      <span class="topics-label">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="7" height="5" rx="1" fill="currentColor" opacity="0.7"/>
+          <rect x="11" y="4" width="7" height="5" rx="1" fill="currentColor"/>
+          <rect x="2" y="11" width="7" height="5" rx="1" fill="currentColor"/>
+          <rect x="11" y="11" width="7" height="5" rx="1" fill="currentColor" opacity="0.7"/>
+        </svg>
+        ${lesson.topics} topics
+      </span>
+      <span class="not-started">Not started</span>
+      <span class="chevron">&#8250;</span>
+    </div>`;
+  card.onclick = () => openModal(i);
+
+  const dp = document.createElement('div');
+  dp.className = 'diagram-panel';
+  dp.innerHTML = diagrams[i];
+
+  block.appendChild(card);
+  block.appendChild(dp);
+  grid.appendChild(block);
+});
+
+function openModal(i) {
+  const lesson = lessons[i];
+  document.getElementById('modal-title').textContent = lesson.title;
+  document.getElementById('modal-body').innerHTML = lesson.notes.map(n =>
+    `<div class="note-section"><h3>${n.heading}</h3>${n.content}</div>`
+  ).join('');
+  document.getElementById('overlay').classList.add('active');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('overlay'))
+    document.getElementById('overlay').classList.remove('active');
+}
+
+function closeModalDirect() {
+  document.getElementById('overlay').classList.remove('active');
+}
+</script>
+</body>
+</html>

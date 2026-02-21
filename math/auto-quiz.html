@@ -1,0 +1,514 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auto Generating Quiz | Math Study Library</title>
+    <meta name="description" content="Auto-generating math quiz across Algebra, Geometry, Trig, and Probability." />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      :root {
+        --sim-ink: #0b1221;
+        --sim-muted: #4b5563;
+        --sim-accent: #ffb020;
+        --sim-accent-2: #ff6a3d;
+        --sim-panel: rgba(255, 255, 255, 0.92);
+        --sim-line: rgba(15, 23, 42, 0.12);
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(1100px 420px at 5% 10%, rgba(255, 176, 32, 0.15), transparent 60%),
+          radial-gradient(900px 520px at 90% 0%, rgba(255, 106, 61, 0.14), transparent 60%),
+          linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+        color: var(--sim-ink);
+        font-family: "Manrope", system-ui, -apple-system, Segoe UI, sans-serif;
+      }
+
+      .sim-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 28px 20px 60px;
+      }
+
+      .sim-hero {
+        background: linear-gradient(135deg, #0f172a 0%, #1f2937 55%, #111827 100%);
+        color: #fff;
+        border-radius: 24px;
+        padding: 28px;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.28);
+      }
+
+      .sim-hero h1 {
+        margin: 0 0 6px 0;
+        font-size: clamp(1.7rem, 2.8vw, 2.5rem);
+      }
+
+      .sim-hero p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .sim-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 20px;
+      }
+
+      @media (max-width: 900px) {
+        .sim-shell {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .sim-card {
+        background: var(--sim-panel);
+        border-radius: 20px;
+        border: 1px solid var(--sim-line);
+        padding: 20px;
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .sim-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin: 12px 0 16px;
+      }
+
+      .sim-stat {
+        border-radius: 14px;
+        padding: 10px;
+        background: rgba(15, 23, 42, 0.05);
+      }
+
+      .sim-stat span {
+        display: block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--sim-muted);
+      }
+
+      .sim-stat strong {
+        font-size: 1.3rem;
+      }
+
+      .sim-question {
+        font-size: clamp(1.05rem, 2vw, 1.4rem);
+        padding: 16px;
+        border-radius: 14px;
+        background: rgba(15, 23, 42, 0.06);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        min-height: 100px;
+      }
+
+      .sim-note {
+        color: var(--sim-muted);
+        margin-top: 8px;
+      }
+
+      .sim-input-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .sim-input-row input {
+        flex: 1;
+        min-width: 160px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--sim-line);
+      }
+
+      .sim-btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--sim-accent), var(--sim-accent-2));
+        color: #1b1b1b;
+      }
+
+      .sim-btn.ghost {
+        background: transparent;
+        color: var(--sim-ink);
+        border: 1px solid var(--sim-line);
+      }
+
+      .sim-log {
+        max-height: 320px;
+        overflow-y: auto;
+        display: grid;
+        gap: 6px;
+        padding: 12px;
+        border-radius: 14px;
+        border: 1px solid var(--sim-line);
+        background: rgba(15, 23, 42, 0.04);
+      }
+
+      .sim-log-item {
+        font-size: 0.92rem;
+        color: var(--sim-muted);
+      }
+
+      .sim-log-item strong { color: var(--sim-ink); }
+
+      .sim-start { display: grid; gap: 10px; text-align: center; }
+      .sim-hidden { display: none; }
+
+      .sim-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.08);
+        font-size: 0.75rem;
+        color: var(--sim-muted);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 12px;
+        color: #0f172a;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sim-wrap">
+      <div class="sim-hero">
+        <p class="eyebrow" style="color: rgba(255, 255, 255, 0.7);">Math Study Library</p>
+        <h1>Auto Generating Quiz</h1>
+        <p>Auto-generated Algebra, Geometry, Trig, and Probability questions. Timed practice with scores.</p>
+        <a class="back-link" href="index.html" style="color:#fff;">← Back to Math Library</a>
+      </div>
+
+      <div class="sim-shell">
+        <div class="sim-card">
+          <div class="sim-start" id="startScreen">
+            <div class="sim-question">Ready to start the quiz?</div>
+            <p class="sim-note">Choose a subject and hit start. Mixed mode rotates all math subjects.</p>
+            <div style="display:grid;gap:10px;">
+              <label for="subject" style="font-weight:700;color:var(--sim-muted);">Subject Focus</label>
+              <select id="subject" style="padding:10px 12px;border-radius:10px;border:1px solid var(--sim-line);">
+                <option value="mixed">Mixed (All Subjects)</option>
+                <option value="algebra">Algebra</option>
+                <option value="geometry">Geometry</option>
+                <option value="trigonometry">Trigonometry</option>
+                <option value="probability">Probability</option>
+              </select>
+              <button class="sim-btn" id="startBtn">Start Quiz</button>
+            </div>
+          </div>
+
+          <div id="gameArea" class="sim-hidden">
+            <div class="sim-stat-grid">
+              <div class="sim-stat"><span>Time</span><strong id="time">90</strong></div>
+              <div class="sim-stat"><span>Score</span><strong id="score">0</strong></div>
+              <div class="sim-stat"><span>Level</span><strong id="level">1</strong></div>
+            </div>
+
+            <div class="sim-question" id="question">Solve for x...</div>
+            <div class="sim-note" id="note">Answer format details will appear here.</div>
+
+            <div class="sim-input-row">
+              <input id="answer" type="number" inputmode="decimal" placeholder="Enter your answer" />
+              <button class="sim-btn" id="submit">Submit</button>
+              <button class="sim-btn ghost" id="skip">Skip</button>
+            </div>
+            <div class="sim-note" id="feedback"></div>
+          </div>
+        </div>
+
+        <div class="sim-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <div>
+              <h2 style="margin:0;">Activity Log</h2>
+              <p class="sim-note" style="margin-top:4px;">Review what you solved and where to improve.</p>
+            </div>
+            <span class="sim-badge" id="subjectBadge">Subject: Mixed</span>
+          </div>
+          <div class="sim-log" id="log"></div>
+          <div class="sim-input-row" style="margin-top:14px;">
+            <button class="sim-btn ghost" id="restart">Restart</button>
+            <button class="sim-btn ghost" id="end">End Quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const startScreen = document.getElementById('startScreen');
+      const gameArea = document.getElementById('gameArea');
+      const questionEl = document.getElementById('question');
+      const noteEl = document.getElementById('note');
+      const answerEl = document.getElementById('answer');
+      const submitBtn = document.getElementById('submit');
+      const skipBtn = document.getElementById('skip');
+      const timeEl = document.getElementById('time');
+      const scoreEl = document.getElementById('score');
+      const levelEl = document.getElementById('level');
+      const feedbackEl = document.getElementById('feedback');
+      const logEl = document.getElementById('log');
+      const subjectSelect = document.getElementById('subject');
+      const subjectBadge = document.getElementById('subjectBadge');
+      const startBtn = document.getElementById('startBtn');
+      const restartBtn = document.getElementById('restart');
+      const endBtn = document.getElementById('end');
+
+      let currentSubject = 'mixed';
+      let timeLeft = 90;
+      let score = 0;
+      let level = 1;
+      let correctInLevel = 0;
+      let currentAnswer = 0;
+      let currentTolerance = 0.1;
+      let currentAnswerDisplay = '';
+      let timerId = null;
+
+      function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function pick(arr) {
+        return arr[randInt(0, arr.length - 1)];
+      }
+
+      function roundTo(value, decimals) {
+        const factor = Math.pow(10, decimals);
+        return Math.round(value * factor) / factor;
+      }
+
+      function degToRad(deg) {
+        return (deg * Math.PI) / 180;
+      }
+
+      function makeAlgebraQuestion() {
+        const variants = [
+          () => {
+            const a = randInt(2, 8);
+            const x = randInt(2, 12);
+            const b = randInt(1, 12);
+            const c = a * x + b;
+            return { text: `Solve for x: ${a}x + ${b} = ${c}`, answer: x, tolerance: 0, answerDisplay: `${x}`, note: 'Answer as a whole number.' };
+          },
+          () => {
+            const a = randInt(2, 6);
+            const x = randInt(2, 10);
+            const b = randInt(2, 8);
+            const c = a * (x - b);
+            return { text: `Solve for x: ${a}(x - ${b}) = ${c}`, answer: x, tolerance: 0, answerDisplay: `${x}`, note: 'Answer as a whole number.' };
+          },
+          () => {
+            const base = randInt(5, 12);
+            const rate = randInt(2, 6);
+            const visits = randInt(4, 12);
+            const total = base + rate * visits;
+            return { text: `A gym charges $${base} plus $${rate} per visit. Your bill is $${total}. How many visits did you make?`, answer: visits, tolerance: 0, answerDisplay: `${visits}`, note: 'Answer as a whole number.' };
+          }
+        ];
+        return pick(variants)();
+      }
+
+      function makeGeometryQuestion() {
+        const variants = [
+          () => {
+            const length = randInt(6, 20);
+            const width = randInt(4, 16);
+            const area = length * width;
+            return { text: `A rectangle is ${length} cm by ${width} cm. What is its area?`, answer: area, tolerance: 0, answerDisplay: `${area}`, note: 'Answer in square centimeters.' };
+          },
+          () => {
+            const base = randInt(6, 18);
+            const height = randInt(4, 14);
+            const area = roundTo(0.5 * base * height, 1);
+            return { text: `A triangle has base ${base} m and height ${height} m. What is its area? Round to the nearest tenth.`, answer: area, tolerance: 0.1, answerDisplay: `${area}`, note: 'Round to the nearest tenth.' };
+          },
+          () => {
+            const a = randInt(3, 9);
+            const b = randInt(4, 12);
+            const c = Math.sqrt(a * a + b * b);
+            const hyp = roundTo(c, 1);
+            return { text: `A right triangle has legs ${a} cm and ${b} cm. Find the hypotenuse. Round to the nearest tenth.`, answer: hyp, tolerance: 0.1, answerDisplay: `${hyp}`, note: 'Round to the nearest tenth.' };
+          },
+          () => {
+            const r = randInt(3, 12);
+            const circumference = roundTo(2 * 3.14 * r, 1);
+            return { text: `A circle has radius ${r} m. Using π = 3.14, find the circumference. Round to the nearest tenth.`, answer: circumference, tolerance: 0.1, answerDisplay: `${circumference}`, note: 'Use π = 3.14 and round to the nearest tenth.' };
+          }
+        ];
+        return pick(variants)();
+      }
+
+      function makeTrigQuestion() {
+        const angle = randInt(25, 65);
+        const dist = randInt(10, 40);
+        const height = randInt(6, 25);
+        const variants = [
+          () => {
+            const h = roundTo(dist * Math.tan(degToRad(angle)), 1);
+            return { text: `A lookout tower is ${dist} m away. The angle of elevation to the top is ${angle}°. How tall is the tower?`, answer: h, tolerance: 0.1, answerDisplay: `${h}`, note: 'Round to the nearest tenth.' };
+          },
+          () => {
+            const run = roundTo(height / Math.tan(degToRad(angle)), 1);
+            return { text: `A hill rises ${height} m with an angle of elevation of ${angle}°. What is the horizontal run?`, answer: run, tolerance: 0.1, answerDisplay: `${run}`, note: 'Round to the nearest tenth.' };
+          },
+          () => {
+            const hyp = roundTo(height / Math.sin(degToRad(angle)), 1);
+            return { text: `A drone is ${height} m above the ground. The angle of elevation is ${angle}°. How far away is the drone?`, answer: hyp, tolerance: 0.1, answerDisplay: `${hyp}`, note: 'Round to the nearest tenth.' };
+          }
+        ];
+        return pick(variants)();
+      }
+
+      function makeProbabilityQuestion() {
+        const variants = [
+          () => {
+            const red = randInt(2, 8);
+            const blue = randInt(2, 8);
+            const green = randInt(2, 8);
+            const total = red + blue + green;
+            const prob = roundTo(red / total, 2);
+            return { text: `A bag has ${red} red, ${blue} blue, and ${green} green marbles. What is the probability of drawing red?`, answer: prob, tolerance: 0.01, answerDisplay: `${prob}`, note: 'Answer as a decimal rounded to the nearest hundredth.' };
+          },
+          () => {
+            const prob = roundTo(1 / 12, 2);
+            return { text: `You flip a coin and roll a standard die. What is the probability of heads and a 6?`, answer: prob, tolerance: 0.01, answerDisplay: `${prob}`, note: 'Answer as a decimal rounded to the nearest hundredth.' };
+          },
+          () => {
+            const total = 10;
+            const even = 5;
+            const prob = roundTo(even / total, 2);
+            return { text: `A card numbered 1-10 is chosen. What is the probability of an even number?`, answer: prob, tolerance: 0.01, answerDisplay: `${prob}`, note: 'Answer as a decimal rounded to the nearest hundredth.' };
+          }
+        ];
+        return pick(variants)();
+      }
+
+      const SUBJECTS = {
+        mixed: { label: 'Mixed', make: () => pick([makeAlgebraQuestion, makeGeometryQuestion, makeTrigQuestion, makeProbabilityQuestion])() },
+        algebra: { label: 'Algebra', make: makeAlgebraQuestion },
+        geometry: { label: 'Geometry', make: makeGeometryQuestion },
+        trigonometry: { label: 'Trigonometry', make: makeTrigQuestion },
+        probability: { label: 'Probability', make: makeProbabilityQuestion }
+      };
+
+      function updateStats() {
+        timeEl.textContent = timeLeft;
+        scoreEl.textContent = score;
+        levelEl.textContent = level;
+      }
+
+      function log(msg) {
+        const item = document.createElement('div');
+        item.className = 'sim-log-item';
+        item.innerHTML = msg;
+        logEl.prepend(item);
+      }
+
+      function makeQuestion() {
+        const subject = SUBJECTS[currentSubject];
+        const q = subject.make();
+        currentAnswer = q.answer;
+        currentTolerance = q.tolerance;
+        currentAnswerDisplay = q.answerDisplay;
+        questionEl.textContent = q.text;
+        noteEl.textContent = q.note || '';
+        answerEl.value = '';
+        answerEl.focus();
+      }
+
+      function tick() {
+        timeLeft -= 1;
+        updateStats();
+        if (timeLeft <= 0) endGame();
+      }
+
+      function startGame() {
+        currentSubject = subjectSelect.value;
+        const label = SUBJECTS[currentSubject].label;
+        subjectBadge.textContent = `Subject: ${label}`;
+
+        timeLeft = 90;
+        score = 0;
+        level = 1;
+        correctInLevel = 0;
+        logEl.innerHTML = '';
+        feedbackEl.textContent = '';
+
+        startScreen.classList.add('sim-hidden');
+        gameArea.classList.remove('sim-hidden');
+
+        updateStats();
+        makeQuestion();
+
+        if (timerId) clearInterval(timerId);
+        timerId = setInterval(tick, 1000);
+        log(`Quiz started in <strong>${label}</strong> mode.`);
+      }
+
+      function submitAnswer() {
+        const value = answerEl.value.trim();
+        if (value === '') return;
+        const num = Number(value);
+        if (Number.isNaN(num)) return;
+
+        if (Math.abs(num - currentAnswer) <= currentTolerance) {
+          score += 10;
+          correctInLevel += 1;
+          feedbackEl.textContent = 'Correct! +10 points';
+          log(`Correct: <strong>${questionEl.textContent}</strong> = ${currentAnswerDisplay}`);
+        } else {
+          score = Math.max(0, score - 5);
+          feedbackEl.textContent = `Not quite. The answer was ${currentAnswerDisplay}. -5 points`;
+          log(`Missed: <strong>${questionEl.textContent}</strong> = ${currentAnswerDisplay}`);
+        }
+
+        if (correctInLevel >= 5) {
+          level += 1;
+          correctInLevel = 0;
+          timeLeft += 6;
+          feedbackEl.textContent += ' | Level up! +6 seconds';
+          log(`Level up! New level: <strong>${level}</strong>`);
+        }
+
+        updateStats();
+        makeQuestion();
+      }
+
+      function skipQuestion() {
+        score = Math.max(0, score - 2);
+        feedbackEl.textContent = 'Skipped. -2 points';
+        log(`Skipped: <strong>${questionEl.textContent}</strong>`);
+        updateStats();
+        makeQuestion();
+      }
+
+      function endGame() {
+        if (timerId) clearInterval(timerId);
+        timerId = null;
+        feedbackEl.textContent = `Time's up! Final score: ${score}`;
+        log(`Quiz over. Final score: <strong>${score}</strong> at level ${level}.`);
+        startScreen.classList.remove('sim-hidden');
+        gameArea.classList.add('sim-hidden');
+      }
+
+      startBtn.addEventListener('click', startGame);
+      submitBtn.addEventListener('click', submitAnswer);
+      answerEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitAnswer(); });
+      skipBtn.addEventListener('click', skipQuestion);
+      restartBtn.addEventListener('click', startGame);
+      endBtn.addEventListener('click', endGame);
+    </script>
+  </body>
+</html>

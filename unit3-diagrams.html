@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 Diagrams | Geography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#0f2240; --teal:#1a7a8a; --gold:#e8b84b; --cream:#faf7f0; --charcoal:#2c3e50; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Source Sans 3',sans-serif; background:var(--cream); color:var(--charcoal); }
+  h1.page-title { font-family:'Playfair Display',serif; text-align:center; font-size:2.2rem; color:var(--navy); padding:2.5rem 1rem 0.4rem; }
+  .subtitle { text-align:center; color:#888; font-size:0.9rem; margin-bottom:2rem; }
+  .section { max-width:1000px; margin:0 auto 3.5rem; padding:0 1.5rem; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--navy); border-left:5px solid var(--gold); padding-left:0.75rem; margin-bottom:1.5rem; }
+
+  .fish-table { width:100%; border-collapse:separate; border-spacing:0; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.1); }
+  .fish-table thead th { background:var(--navy); color:var(--gold); font-family:'Playfair Display',serif; padding:1rem 1.5rem; text-align:left; }
+  .fish-table tbody tr { background:#fff; transition:background .2s; }
+  .fish-table tbody tr:nth-child(even) { background:#f4f8fb; }
+  .fish-table tbody tr:hover { background:#e8f4fa; }
+  .fish-table td { padding:1rem 1.5rem; border-bottom:1px solid #e0e8ef; vertical-align:middle; font-size:0.95rem; }
+  .fish-table td:first-child { font-weight:600; color:var(--teal); min-width:140px; }
+  .tag { display:inline-block; background:#e8f5f7; color:var(--teal); border-radius:20px; padding:2px 10px; margin:2px; font-size:0.82rem; }
+
+  .card-outer { background:#fff; border-radius:16px; padding:1.5rem 2rem; box-shadow:0 4px 20px rgba(0,0,0,.09); }
+  .chart-wrap { display:flex; align-items:center; gap:2.5rem; flex-wrap:wrap; }
+  .pie-legend { flex:1; min-width:180px; }
+  .pie-legend-item { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.85rem; }
+  .pie-dot { width:18px; height:18px; border-radius:4px; flex-shrink:0; }
+  .pie-label { font-size:0.9rem; }
+  .pie-pct { font-weight:700; font-size:0.95rem; margin-left:auto; }
+
+  .causes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1rem; }
+  .cause-card { border-radius:14px; padding:1.4rem 1rem 1.2rem; color:#fff; box-shadow:0 3px 14px rgba(0,0,0,.13); transition:transform .2s; }
+  .cause-card:hover { transform:translateY(-4px); }
+  .cause-card.c1 { background:linear-gradient(135deg,#e05c4b,#c0392b); }
+  .cause-card.c2 { background:linear-gradient(135deg,#2980b9,#1a5276); }
+  .cause-card.c3 { background:linear-gradient(135deg,#8e44ad,#6c3483); }
+  .cause-card.c4 { background:linear-gradient(135deg,#d35400,#a04000); }
+  .cause-card.c5 { background:linear-gradient(135deg,#27ae60,#1e8449); }
+  .cause-card .icon { font-size:1.8rem; margin-bottom:0.5rem; }
+  .cause-card h3 { font-size:0.9rem; font-weight:700; margin-bottom:0.5rem; line-height:1.3; }
+  .cause-card p { font-size:0.78rem; opacity:.93; line-height:1.4; }
+
+  .drain-key { display:flex; gap:1.2rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+  .key-item { display:flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:600; }
+  .key-box { width:16px; height:12px; border-radius:3px; }
+
+  .card-outer svg { max-width: 100%; height: auto; }
+  .section svg { max-width: 100%; height: auto; }
+
+  @media (max-width: 820px) {
+    .section { padding: 0 1.1rem; }
+    .card-outer { padding: 1.1rem 1.2rem; }
+    .chart-wrap { gap: 1.2rem; }
+  }
+
+  @media (max-width: 680px) {
+    h1.page-title { font-size: 1.7rem; padding-top: 1.7rem; }
+    .subtitle { font-size: 0.8rem; margin-bottom: 1.4rem; padding: 0 1rem; }
+    .section { margin-bottom: 2.4rem; padding: 0 1rem; }
+    .section-title { font-size: 1.15rem; margin-bottom: 1rem; }
+    .card-outer { padding: 1rem; border-radius: 14px; }
+    .chart-wrap { flex-direction: column; align-items: flex-start; }
+    .pie-legend { min-width: 0; width: 100%; }
+    .fish-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .fish-table thead, .fish-table tbody { display: table; width: 100%; }
+    .fish-table td, .fish-table th { padding: 0.75rem 0.85rem; }
+    .causes-grid { grid-template-columns: 1fr; }
+    .cause-card { padding: 1rem; }
+    .drain-key { gap: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div style="max-width:1000px;margin:12px auto 0;padding:0 1.5rem;">
+    <a href="geography-library.html" style="display:inline-block;margin-bottom:18px;text-decoration:none;color:#0f2240;font-weight:700;border:1px solid #e0e8ef;padding:8px 12px;border-radius:999px;background:#fff;">Back to Geography Library</a>
+  </div>
+
+<h1 class="page-title">Unit 3: Resources & Economy Diagrams</h1>
+<p class="subtitle">Atlantic Canada Fisheries  Energy  Water Systems</p>
+
+<!-- ===== 1. FISH CATEGORIES ===== -->
+<div class="section">
+  <h2 class="section-title">1. Categories of Fish</h2>
+  <table class="fish-table">
+    <thead><tr><th>Category</th><th>Description</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr>
+        <td> Groundfish</td>
+        <td>Fish that feed and are caught near the ocean floor</td>
+        <td><span class="tag">Cod</span><span class="tag">Pollock</span><span class="tag">Haddock</span><span class="tag">Halibut</span><span class="tag">Redfish</span></td>
+      </tr>
+      <tr>
+        <td> Pelagic Fish</td>
+        <td>Fish that feed and are caught near the surface</td>
+        <td><span class="tag">Salmon</span><span class="tag">Herring</span><span class="tag">Mackerel</span><span class="tag">Tuna</span><span class="tag">Capelin</span></td>
+      </tr>
+      <tr>
+        <td> Shellfish</td>
+        <td>Animals without backbones but with hard, protective shells</td>
+        <td><span class="tag">Shrimp</span><span class="tag">Lobster</span><span class="tag">Oysters</span><span class="tag">Scallops</span><span class="tag">Mussels</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== 2. ATLANTIC CANADA FISHING BANKS MAP ===== -->
+<div class="section">
+  <h2 class="section-title">2. Atlantic Canada Fishing Banks</h2>
+  <div class="card-outer" style="padding:1.2rem;">
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.8rem;font-size:0.82rem;font-weight:600;">
+      <span><span style="display:inline-block;width:18px;height:12px;background:#e8a042;border-radius:2px;vertical-align:middle;"></span> Fishing Banks (&lt;200m deep)</span>
+      <span><span style="display:inline-block;width:18px;height:4px;background:#7b5ea7;border-radius:2px;vertical-align:middle;border:1px dashed #7b5ea7;"></span> 200 nautical mile limit</span>
+      <span><span style="display:inline-block;width:18px;height:4px;background:#1a6bbf;border-radius:2px;vertical-align:middle;"></span> Labrador Current (cold)</span>
+      <span><span style="display:inline-block;width:18px;height:4px;background:#5ab0d4;border-radius:2px;vertical-align:middle;"></span> Gulf Stream (warm)</span>
+      <span><span style="display:inline-block;width:18px;height:4px;background:#c85000;border-radius:2px;vertical-align:middle;"></span> Fresh water</span>
+    </div>
+    <svg viewBox="0 0 740 510" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg" font-family="Source Sans 3">
+      <!-- Ocean -->
+      <rect width="740" height="420" fill="#b8d9ee"/>
+      <!-- Cross-section strip -->
+      <rect y="420" width="740" height="90" fill="#dce8f5"/>
+
+      <!-- Land masses (simplified outlines) -->
+      <!-- United States / New England -->
+      <polygon points="0,300 70,270 100,250 115,310 95,370 50,410 0,420" fill="#c8d8b0" stroke="#9aaa80" stroke-width="1"/>
+      <!-- New Brunswick -->
+      <polygon points="70,170 155,148 185,195 195,255 158,275 108,265 75,235" fill="#c8d8b0" stroke="#9aaa80" stroke-width="1"/>
+      <!-- Nova Scotia (peninsula shape) -->
+      <polygon points="155,238 230,215 305,225 325,255 295,298 230,305 178,285 155,258" fill="#c8d8b0" stroke="#9aaa80" stroke-width="1"/>
+      <!-- PEI (small island) -->
+      <polygon points="218,182 260,175 275,192 248,202 218,197" fill="#c8d8b0" stroke="#9aaa80" stroke-width="1"/>
+      <!-- Quebec / Labrador coast -->
+      <polygon points="0,90 95,70 155,92 198,138 200,178 138,165 75,172 0,150" fill="#c8d8b0" stroke="#9aaa80" stroke-width="1"/>
+      <!-- Newfoundland -->
+      <polygon points="315,93 415,72 460,90 480,135 460,178 428,198 390,205 350,185 308,155 302,122" fill="#c8d8b0" stroke="#9aaa80" stroke-width="1"/>
+      <!-- Labrador -->
+      <polygon points="275,0 400,0 428,55 388,72 318,74 275,55" fill="#c8d8b0" stroke="#9aaa80" stroke-width="1"/>
+
+      <!-- FISHING BANKS -->
+      <!-- Grand Banks (large, east of Newfoundland) -->
+      <ellipse cx="555" cy="225" rx="105" ry="85" fill="#e8a042" opacity="0.62"/>
+      <!-- St. Pierre Bank -->
+      <ellipse cx="445" cy="248" rx="32" ry="22" fill="#e8a042" opacity="0.68"/>
+      <!-- Banquereau Bank -->
+      <ellipse cx="345" cy="278" rx="38" ry="20" fill="#e8a042" opacity="0.68"/>
+      <!-- Sable Island Bank -->
+      <ellipse cx="268" cy="308" rx="42" ry="19" fill="#e8a042" opacity="0.68"/>
+      <!-- Georges Bank (near US border) -->
+      <ellipse cx="118" cy="348" rx="48" ry="22" fill="#e8a042" opacity="0.62"/>
+
+      <!-- 200 NM limit (dashed purple) -->
+      <path d="M40,420 Q180,450 370,415 Q510,385 635,285 Q695,228 700,148" fill="none" stroke="#7b5ea7" stroke-width="2.5" stroke-dasharray="9,5"/>
+
+      <!-- LABRADOR CURRENT (dark blue arrows, south along NF east coast) -->
+      <path d="M510,15 C515,70 530,130 525,190 S510,230 505,260" fill="none" stroke="#1a6bbf" stroke-width="3"/>
+      <polygon points="505,260 499,244 511,244" fill="#1a6bbf"/>
+      <path d="M485,30 C490,85 502,145 498,200 S485,240 480,268" fill="none" stroke="#1a6bbf" stroke-width="2.5"/>
+      <polygon points="480,268 474,252 486,252" fill="#1a6bbf"/>
+      <path d="M460,55 C464,110 473,165 469,212 S458,252 454,278" fill="none" stroke="#1a6bbf" stroke-width="2"/>
+      <polygon points="454,278 448,262 460,262" fill="#1a6bbf"/>
+      <text x="520" y="42" font-size="11" fill="#1a6bbf" font-weight="700">Labrador Current</text>
+
+      <!-- GULF STREAM (warm, light blue, sweeping NE) -->
+      <path d="M0,415 Q120,375 255,355 Q390,340 520,295 Q620,260 700,195" fill="none" stroke="#5ab0d4" stroke-width="3"/>
+      <polygon points="700,195 684,206 688,192" fill="#5ab0d4"/>
+      <text x="310" y="374" font-size="11" fill="#1a6a99" font-weight="700">Gulf Stream</text>
+
+      <!-- FRESH WATER (orange dashed) -->
+      <!-- From Quebec rivers -->
+      <path d="M115,90 Q140,120 162,148 Q178,172 185,195" fill="none" stroke="#c85000" stroke-width="2.5" stroke-dasharray="5,3"/>
+      <polygon points="185,195 179,180 191,180" fill="#c85000"/>
+      <text x="72" y="100" font-size="10" fill="#c85000" font-weight="700">fresh water</text>
+      <!-- From Nova Scotia rivers -->
+      <path d="M240,285 Q258,290 275,290" fill="none" stroke="#c85000" stroke-width="2.5" stroke-dasharray="5,3"/>
+      <polygon points="275,290 263,285 263,295" fill="#c85000"/>
+      <text x="192" y="285" font-size="10" fill="#c85000" font-weight="700">fresh water</text>
+
+      <!-- LAND LABELS -->
+      <text x="8" y="180" font-size="11" fill="#2c3e50" font-weight="700">QUBEC</text>
+      <text x="82" y="222" font-size="10" fill="#2c3e50" font-weight="600">NEW</text>
+      <text x="78" y="234" font-size="10" fill="#2c3e50" font-weight="600">BRUNSWICK</text>
+      <text x="200" y="252" font-size="10" fill="#2c3e50" font-weight="700">NOVA</text>
+      <text x="196" y="264" font-size="10" fill="#2c3e50" font-weight="700">SCOTIA</text>
+      <text x="224" y="192" font-size="9" fill="#2c3e50">PEI</text>
+      <text x="338" y="142" font-size="12" fill="#2c3e50" font-weight="700">NEWFOUNDLAND</text>
+      <text x="296" y="28" font-size="11" fill="#2c3e50" font-weight="700">LABRADOR</text>
+      <text x="8" y="345" font-size="10" fill="#2c3e50">UNITED</text>
+      <text x="4" y="357" font-size="10" fill="#2c3e50">STATES</text>
+      <text x="288" y="388" font-size="13" fill="#4a7fa0" font-weight="700">ATLANTIC OCEAN</text>
+
+      <!-- BANK LABELS -->
+      <text x="500" y="212" font-size="11" fill="#6b3a00" font-weight="700">Grand Banks</text>
+      <text x="418" y="244" font-size="9" fill="#6b3a00" font-weight="700">St. Pierre</text>
+      <text x="421" y="254" font-size="9" fill="#6b3a00" font-weight="700">Bank</text>
+      <text x="312" y="272" font-size="9" fill="#6b3a00" font-weight="700">Banquereau</text>
+      <text x="318" y="282" font-size="9" fill="#6b3a00" font-weight="700">Bank</text>
+      <text x="235" y="303" font-size="9" fill="#6b3a00" font-weight="700">Sable Island</text>
+      <text x="242" y="313" font-size="9" fill="#6b3a00" font-weight="700">Bank</text>
+      <text x="86" y="344" font-size="9" fill="#6b3a00" font-weight="700">Georges</text>
+      <text x="90" y="354" font-size="9" fill="#6b3a00" font-weight="700">Bank</text>
+
+      <!-- Cross-section indicator -->
+      <rect x="495" y="180" width="130" height="72" fill="none" stroke="#333" stroke-width="1.5"/>
+      <line x1="495" y1="252" x2="420" y2="420" stroke="#333" stroke-width="1"/>
+      <line x1="625" y1="252" x2="700" y2="420" stroke="#333" stroke-width="1"/>
+
+      <!-- CROSS-SECTION (bottom strip) -->
+      <rect x="0" y="420" width="740" height="90" fill="#dce8f5"/>
+      <!-- Sky in cross-section -->
+      <rect x="420" y="420" width="320" height="28" fill="#c8e6f0"/>
+      <circle cx="560" cy="433" r="13" fill="#f5c842"/>
+      <!-- Clouds -->
+      <ellipse cx="640" cy="430" rx="18" ry="10" fill="#e8f4fb" opacity="0.9"/>
+      <ellipse cx="655" cy="426" rx="14" ry="9" fill="#e8f4fb" opacity="0.9"/>
+      <!-- Water surface line -->
+      <line x1="420" y1="448" x2="740" y2="448" stroke="#5ab0d4" stroke-width="1.5"/>
+      <!-- Sea floor profile: NF shelf  slope -->
+      <polygon points="420,448 420,510 540,510 540,480 680,480 680,465 740,465 740,510 420,510" fill="#c4a46a"/>
+      <!-- NF land in cross-section -->
+      <polygon points="420,448 420,510 540,510 540,478" fill="#c8d8b0"/>
+      <!-- Water fill -->
+      <polygon points="540,448 540,480 680,480 680,465 740,465 740,448" fill="#7bbcdb" opacity="0.6"/>
+      <!-- Cross-section text -->
+      <text x="425" y="465" font-size="10" fill="#2c3e50" font-weight="700">NEWFOUNDLAND</text>
+      <text x="462" y="492" font-size="9" fill="#2c3e50"> 200m</text>
+      <text x="570" y="476" font-size="9" fill="#2c3e50"> 100150m</text>
+      <text x="580" y="462" font-size="10" fill="#6b3a00" font-weight="700">Grand Banks</text>
+      <text x="700" y="460" font-size="9" fill="#444">continental</text>
+      <text x="700" y="470" font-size="9" fill="#444">slope </text>
+      <text x="488" y="506" font-size="10" fill="#444"> continental shelf </text>
+    </svg>
+  </div>
+</div>
+
+<!-- ===== 3. COD COLLAPSE CAUSES ===== -->
+<div class="section">
+  <h2 class="section-title">3. Causes of the Cod Collapse</h2>
+  <div class="causes-grid">
+    <div class="cause-card c1">
+      <div class="icon"></div>
+      <h3>Overfishing</h3>
+      <p>Government &amp; scientists overestimated the number of fish available each year. Not enough fish reached maturity to reproduce.</p>
+    </div>
+    <div class="cause-card c2">
+      <div class="icon"></div>
+      <h3>Improved Fishing Technology</h3>
+      <p>Sonar, radar &amp; satellite navigation, plus larger, more powerful boats, meant dramatically more fish were caught.</p>
+    </div>
+    <div class="cause-card c3">
+      <div class="icon"></div>
+      <h3>Uncontrolled Foreign Fishing</h3>
+      <p>Trawlers from Russia and Japan caught more than was sustainable. Changed after 1977, but Canada continued to overfish.</p>
+    </div>
+    <div class="cause-card c4">
+      <div class="icon"></div>
+      <h3>Destructive Fishing Practices</h3>
+      <p>Unwanted fish (bycatch) were thrown overboard dead. Only intended fish were reported, hiding the true scale of catch.</p>
+    </div>
+    <div class="cause-card c5">
+      <div class="icon"></div>
+      <h3>Changes in Natural Conditions</h3>
+      <p>Ocean temperatures and salinity levels changed. Fish may have altered migratory patterns to avoid unfavourable areas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 4. ELECTRICITY PIE CHART ===== -->
+<!--
+  Accurate pie chart math (cx=130, cy=130, r=110):
+  Start at top = angle -90 = 270
+  
+  Industrial 43%  154.8  end angle = 270+154.8 = 424.8 = 64.8
+    start: (130+110*cos(270), 130+110*sin(270)) = (130, 20)
+    end:   cos(64.8)=0.4258, sin(64.8)=0.9048
+           = (130+46.8, 130+99.5) = (176.8, 229.5)
+    large-arc = 1 (154.8 > 180? No, 154.8 < 180, so large-arc = 0)
+    
+  Wait  154.8 < 180, so large-arc-flag = 0 for industrial.
+  
+  Residential 30%  108  end angle = 64.8+108 = 172.8
+    start: (176.8, 229.5)
+    end:   cos(172.8)=-0.9914, sin(172.8)=0.1305
+           = (130-109.1, 130+14.4) = (20.9, 144.4)
+    large-arc = 0
+    
+  Commercial 27%  97.2  end = 172.8+97.2 = 270 = start
+    start: (20.9, 144.4)
+    end: (130, 20)
+    large-arc = 0
+-->
+<div class="section">
+  <h2 class="section-title">4. Electricity Consumption by Sector</h2>
+  <div class="card-outer">
+    <div class="chart-wrap">
+      <div style="flex-shrink:0;">
+        <svg width="260" height="260" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- Industrial 43%: from top (130,20)  (176.8, 229.5), large-arc=0 (154.8 < 180) -->
+          <path d="M130,130 L130,20 A110,110 0 0,1 176.8,229.5 Z" fill="#4caf50"/>
+          <!-- Residential 30%: from (176.8,229.5)  (20.9,144.4), large-arc=0 -->
+          <path d="M130,130 L176.8,229.5 A110,110 0 0,1 20.9,144.4 Z" fill="#5ab0d4"/>
+          <!-- Commercial 27%: from (20.9,144.4)  (130,20), large-arc=0 -->
+          <path d="M130,130 L20.9,144.4 A110,110 0 0,1 130,20 Z" fill="#e8b84b"/>
+          <!-- Dividers -->
+          <line x1="130" y1="130" x2="130" y2="20" stroke="#fff" stroke-width="2.5"/>
+          <line x1="130" y1="130" x2="176.8" y2="229.5" stroke="#fff" stroke-width="2.5"/>
+          <line x1="130" y1="130" x2="20.9" y2="144.4" stroke="#fff" stroke-width="2.5"/>
+          <!-- Slice labels -->
+          <!-- Industrial centroid: angle = 270+77.4 = 347.4  cos=-0.129, sin=-0.992 (wrong  measured from 0)
+               Actually centroid angle from 270 going +77.4 = 270+77.4 = 347.4
+               cos(347.4)=cos(-12.6)=0.976, sin(347.4)=-0.218
+               Point at r=70: (130+68.3, 130-15.3) = (198, 115) -->
+          <text x="198" y="118" font-size="13" fill="#fff" font-weight="700" font-family="Source Sans 3" text-anchor="middle">43%</text>
+          <!-- Residential centroid: 64.8+54 = 118.8 from 0
+               cos(118.8)=-0.481, sin(118.8)=0.877
+               r=70: (130-33.7, 130+61.4) = (96.3, 191.4) -->
+          <text x="88" y="198" font-size="13" fill="#fff" font-weight="700" font-family="Source Sans 3" text-anchor="middle">30%</text>
+          <!-- Commercial centroid: 172.8+48.6 = 221.4 from 0
+               cos(221.4)=-0.751, sin(221.4)=-0.660
+               r=70: (130-52.6, 130-46.2) = (77.4, 83.8) -->
+          <text x="70" y="88" font-size="13" fill="#fff" font-weight="700" font-family="Source Sans 3" text-anchor="middle">27%</text>
+        </svg>
+      </div>
+      <div class="pie-legend">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:1rem;">Electricity Consumption<br>by Sector</h3>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#4caf50;"></div><span class="pie-label">Industrial</span><span class="pie-pct" style="color:#4caf50;">43%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#5ab0d4;"></div><span class="pie-label">Residential</span><span class="pie-pct" style="color:#5ab0d4;">30%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#e8b84b;"></div><span class="pie-label">Commercial</span><span class="pie-pct" style="color:#e8b84b;">27%</span></div>
+        <p style="margin-top:1rem;font-size:0.82rem;color:#888;line-height:1.5;">Industry is the dominant consumer, using nearly as much electricity as the residential and commercial sectors combined.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 5. ENERGY MIX DONUT ===== -->
+<!--
+  Donut: cx=130, cy=130, outer r=110, inner r=65
+  Start at top (270 = -90), go clockwise (sweep-flag=1)
+  
+  Segments:
+  Natural Gas 40% = 144   cum_end = 270+144 = 414 = 54
+  Oil 32% = 115.2          cum_end = 54+115.2 = 169.2
+  Nuclear 8% = 28.8        cum_end = 169.2+28.8 = 198
+  Hydro 11% = 39.6         cum_end = 198+39.6 = 237.6
+  Biofuels 4% = 14.4       cum_end = 237.6+14.4 = 252
+  Coal 4% = 14.4           cum_end = 252+14.4 = 266.4
+  Other 1% = 3.6           cum_end = 266.4+3.6 = 270 
+
+  Points outer (r=110): x=130+110*cos(a), y=130+110*sin(a)
+  Points inner (r=65):  x=130+65*cos(a), y=130+65*sin(a)
+
+  Angles & coords:
+  a=270: cos=-0, sin=-1  outer(130,20), inner(130,65)
+  a=54:  cos=0.5878,sin=0.8090  outer(194.66,219.0), inner(168.22,182.59)
+  a=169.2: cos=-0.9823,sin=0.1874  outer(21.95,150.61), inner(66.10,142.18)
+  a=198: cos=-0.9511,sin=-0.3090  outer(25.38,95.99), inner(68.18,109.92)
+  a=237.6: cos=-0.5358,sin=-0.8443  outer(71.06,37.13), inner(95.17,75.12)
+  a=252: cos=-0.3090,sin=-0.9511  outer(95.99,25.38), inner(109.92,68.18)
+  a=266.4: cos=-0.0628,sin=-0.9980  outer(123.09,20.22), inner(125.92,65.13)
+  a=270: back to outer(130,20), inner(130,65)
+
+  Each segment path (donut arc):
+  M outer_start A110,110 0 large outer_end L inner_end A65,65 0 large_reverse inner_start Z
+  large-arc: segment > 180 = 1, else 0
+-->
+<div class="section">
+  <h2 class="section-title">5. Canada's Energy Mix  Total: 12,326 PJ</h2>
+  <div class="card-outer">
+    <div class="chart-wrap">
+      <div style="flex-shrink:0;">
+        <svg width="260" height="260" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" font-family="Source Sans 3">
+          <!-- Natural Gas 40%: 27054, 144 sweep, large-arc=0 -->
+          <path d="M130,20 A110,110 0 1,1 194.66,219.0 L168.22,182.59 A65,65 0 1,0 130,65 Z" fill="#4dd0e1"/>
+          <!-- Oil 32%: 54169.2, 115.2 sweep, large-arc=0 -->
+          <path d="M194.66,219.0 A110,110 0 0,1 21.95,150.61 L66.10,142.18 A65,65 0 0,0 168.22,182.59 Z" fill="#8d6e63"/>
+          <!-- Nuclear 8%: 169.2198, 28.8 sweep, large-arc=0 -->
+          <path d="M21.95,150.61 A110,110 0 0,1 25.38,95.99 L68.18,109.92 A65,65 0 0,0 66.10,142.18 Z" fill="#5d4037"/>
+          <!-- Hydro 11%: 198237.6, 39.6 sweep, large-arc=0 -->
+          <path d="M25.38,95.99 A110,110 0 0,1 71.06,37.13 L95.17,75.12 A65,65 0 0,0 68.18,109.92 Z" fill="#1565c0"/>
+          <!-- Biofuels 4%: 237.6252, 14.4 sweep, large-arc=0 -->
+          <path d="M71.06,37.13 A110,110 0 0,1 95.99,25.38 L109.92,68.18 A65,65 0 0,0 95.17,75.12 Z" fill="#90a4ae"/>
+          <!-- Coal 4%: 252266.4, 14.4 sweep, large-arc=0 -->
+          <path d="M95.99,25.38 A110,110 0 0,1 123.09,20.22 L125.92,65.13 A65,65 0 0,0 109.92,68.18 Z" fill="#546e7a"/>
+          <!-- Other Renewables 1%: 266.4270, 3.6 sweep, large-arc=0 -->
+          <path d="M123.09,20.22 A110,110 0 0,1 130,20 L130,65 A65,65 0 0,0 125.92,65.13 Z" fill="#80cbc4"/>
+          <!-- Center circle (hole) -->
+          <circle cx="130" cy="130" r="64" fill="#fff"/>
+          <!-- Center text -->
+          <text x="130" y="119" text-anchor="middle" font-size="9" fill="#888">TOTAL</text>
+          <text x="130" y="135" text-anchor="middle" font-size="15" fill="#0f2240" font-weight="700">12,326</text>
+          <text x="130" y="148" text-anchor="middle" font-size="9" fill="#888">PJ</text>
+        </svg>
+      </div>
+      <div class="pie-legend">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:1rem;">Energy Sources</h3>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#4dd0e1;"></div><span class="pie-label">Natural Gas</span><span class="pie-pct" style="color:#4dd0e1;">40%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#8d6e63;"></div><span class="pie-label">Oil</span><span class="pie-pct" style="color:#8d6e63;">32%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#1565c0;"></div><span class="pie-label">Hydro</span><span class="pie-pct" style="color:#1565c0;">11%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#5d4037;"></div><span class="pie-label">Nuclear</span><span class="pie-pct">8%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#90a4ae;"></div><span class="pie-label">Biofuels &amp; Waste</span><span class="pie-pct">4%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#546e7a;"></div><span class="pie-label">Coal</span><span class="pie-pct">4%</span></div>
+        <div class="pie-legend-item"><div class="pie-dot" style="background:#80cbc4;"></div><span class="pie-label">Other Renewables**</span><span class="pie-pct">1%</span></div>
+        <p style="margin-top:0.75rem;font-size:0.78rem;color:#888;line-height:1.5;">**Wind, solar, geothermal.<br>Fossil fuels = ~76% of total primary energy.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 6. DRAINAGE BASIN SYSTEM ===== -->
+<!--
+  Layout faithful to source image:
+  - LEFT COLUMN: vertical sequence with soil/rock layers
+    Precipitation  Interception  Surface Storage  Infiltration  Soil Moisture  Percolation  Groundwater
+  - MIDDLE/RIGHT: flows going right to River Channel
+    Surface Runoff, Throughflow, Groundwater Flow  River Channel
+  - Outputs going UP from Interception: Transpiration, Evaporation (2 from interception, once from river)
+-->
+<div class="section">
+  <h2 class="section-title">6. How the Drainage Basin Works as a System</h2>
+  <div class="card-outer">
+    <div class="drain-key">
+      <div class="key-item"><div class="key-box" style="background:#388e3c;"></div>INPUT</div>
+      <div class="key-item"><div class="key-box" style="background:#f57c00;"></div>STORAGE</div>
+      <div class="key-item"><div class="key-box" style="background:#1565c0;"></div>FLOW</div>
+      <div class="key-item"><div class="key-box" style="background:#6d1f1f;"></div>OUTPUT</div>
+    </div>
+    <svg viewBox="0 0 840 520" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg" font-family="Source Sans 3">
+      <defs>
+        <marker id="ra" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 9 3.5, 0 7" fill="#b71c1c"/>
+        </marker>
+      </defs>
+
+      <!-- Background layers (land cross-section feel) -->
+      <!-- Sky / vegetation layer -->
+      <rect width="840" height="175" fill="#c8e6c9" rx="0"/>
+      <!-- Soil layer -->
+      <rect y="175" width="840" height="105" fill="#d7a87a"/>
+      <!-- Rock layer -->
+      <rect y="280" width="840" height="240" fill="#a07850"/>
+      <!-- Water table line -->
+      <line x1="60" y1="280" x2="840" y2="280" stroke="#5ab0d4" stroke-width="1.5" stroke-dasharray="7,4"/>
+      <text x="62" y="277" font-size="10" fill="#1565c0" font-style="italic">Water table</text>
+      <!-- Saturated rock label -->
+      <text x="62" y="330" font-size="10" fill="#e8d5b0">Saturated rock</text>
+
+      <!-- Soil / Rock bracket labels -->
+      <text x="4" y="222" font-size="12" fill="#4a2000" font-weight="700">Soil</text>
+      <line x1="48" y1="175" x2="48" y2="280" stroke="#4a2000" stroke-width="2"/>
+      <line x1="44" y1="175" x2="52" y2="175" stroke="#4a2000" stroke-width="2"/>
+      <line x1="44" y1="280" x2="52" y2="280" stroke="#4a2000" stroke-width="2"/>
+      <text x="4" y="380" font-size="12" fill="#f5e6d0" font-weight="700">Rock</text>
+      <line x1="48" y1="290" x2="48" y2="490" stroke="#f5e6d0" stroke-width="2"/>
+      <line x1="44" y1="290" x2="52" y2="290" stroke="#f5e6d0" stroke-width="2"/>
+      <line x1="44" y1="490" x2="52" y2="490" stroke="#f5e6d0" stroke-width="2"/>
+
+      <!-- Tree -->
+      <rect x="148" y="128" width="10" height="30" fill="#795548"/>
+      <ellipse cx="153" cy="110" rx="28" ry="22" fill="#388e3c" opacity="0.85"/>
+
+      <!-- Cloud + rain -->
+      <ellipse cx="115" cy="30" rx="25" ry="16" fill="#e3f2fd" opacity="0.9"/>
+      <ellipse cx="135" cy="22" rx="20" ry="14" fill="#e3f2fd" opacity="0.9"/>
+      <ellipse cx="150" cy="32" rx="16" ry="12" fill="#e3f2fd" opacity="0.9"/>
+      <line x1="118" y1="46" x2="116" y2="56" stroke="#1565c0" stroke-width="1.5"/>
+      <line x1="130" y1="48" x2="128" y2="58" stroke="#1565c0" stroke-width="1.5"/>
+      <line x1="142" y1="46" x2="140" y2="56" stroke="#1565c0" stroke-width="1.5"/>
+
+      <!-- River Channel (right side) -->
+      <rect x="715" y="80" width="85" height="400" rx="8" fill="#5ab0d4" opacity="0.25"/>
+      <rect x="715" y="80" width="85" height="400" rx="8" fill="none" stroke="#1565c0" stroke-width="2"/>
+      <text x="757" y="74" text-anchor="middle" font-size="11" fill="#0f2240" font-weight="700">River</text>
+      <text x="757" y="87" text-anchor="middle" font-size="11" fill="#0f2240" font-weight="700">Channel</text>
+
+      <!-- ====== NODE BOXES ====== -->
+      <!-- Helper: rect + centered text via position -->
+
+      <!-- INPUT: Precipitation (green) -->
+      <rect x="78" y="14" width="155" height="34" rx="7" fill="#388e3c"/>
+      <text x="155" y="35" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Precipitation</text>
+
+      <!-- STORAGE: Interception (orange) -->
+      <rect x="78" y="80" width="145" height="34" rx="7" fill="#f57c00"/>
+      <text x="150" y="101" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Interception</text>
+
+      <!-- OUTPUT: Transpiration (dark red) -->
+      <rect x="295" y="40" width="140" height="34" rx="7" fill="#6d1f1f"/>
+      <text x="365" y="61" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Transpiration</text>
+
+      <!-- OUTPUT: Evaporation from interception/land (dark red) -->
+      <rect x="450" y="40" width="130" height="34" rx="7" fill="#6d1f1f"/>
+      <text x="515" y="61" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Evaporation</text>
+
+      <!-- OUTPUT: Evaporation from river channel (dark red) -->
+      <rect x="540" y="96" width="130" height="34" rx="7" fill="#6d1f1f"/>
+      <text x="605" y="117" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Evaporation</text>
+
+      <!-- STORAGE: Surface Storage (orange) -->
+      <rect x="78" y="178" width="150" height="34" rx="7" fill="#f57c00"/>
+      <text x="153" y="199" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Surface Storage</text>
+
+      <!-- FLOW: Surface Runoff (blue) -->
+      <rect x="290" y="155" width="185" height="50" rx="7" fill="#1565c0"/>
+      <text x="382" y="176" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Surface Runoff /</text>
+      <text x="382" y="193" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Overland Flow</text>
+
+      <!-- FLOW: Infiltration (blue) -->
+      <rect x="78" y="130" width="122" height="34" rx="7" fill="#1565c0"/>
+      <text x="139" y="151" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Infiltration</text>
+
+      <!-- STORAGE: Soil Moisture (orange) -->
+      <rect x="78" y="240" width="148" height="34" rx="7" fill="#f57c00"/>
+      <text x="152" y="261" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Soil Moisture</text>
+
+      <!-- FLOW: Throughflow (blue) -->
+      <rect x="290" y="240" width="148" height="34" rx="7" fill="#1565c0"/>
+      <text x="364" y="261" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Throughflow</text>
+
+      <!-- FLOW: Percolation (blue) -->
+      <rect x="78" y="298" width="128" height="34" rx="7" fill="#1565c0"/>
+      <text x="142" y="319" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Percolation</text>
+
+      <!-- STORAGE: Groundwater (orange) -->
+      <rect x="78" y="375" width="145" height="34" rx="7" fill="#f57c00"/>
+      <text x="150" y="396" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Groundwater</text>
+
+      <!-- FLOW: Groundwater Flow (blue) -->
+      <rect x="290" y="375" width="178" height="34" rx="7" fill="#1565c0"/>
+      <text x="379" y="396" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Groundwater Flow</text>
+
+      <!-- ====== ARROWS ====== -->
+      <!-- Precipitation  Interception -->
+      <line x1="155" y1="48" x2="150" y2="78" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Interception  Transpiration -->
+      <line x1="223" y1="92" x2="293" y2="57" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+      <!-- Interception  Evaporation (land) -->
+      <line x1="223" y1="85" x2="448" y2="57" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+      <!-- Interception  Infiltration (down) -->
+      <line x1="145" y1="114" x2="138" y2="128" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+      <!-- Interception  Surface Storage (down along left path) -->
+      <line x1="155" y1="114" x2="155" y2="176" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Surface Storage  Surface Runoff (right) -->
+      <line x1="228" y1="195" x2="288" y2="180" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+      <!-- Surface Storage  Infiltration (up arrow  in source, infiltration receives from surface) -->
+
+      <!-- Surface Runoff  River Channel -->
+      <line x1="475" y1="180" x2="713" y2="200" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Evaporation (river)  arrow from River Channel up to box -->
+      <line x1="715" y1="113" x2="672" y2="113" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Infiltration  Soil Moisture -->
+      <line x1="139" y1="164" x2="148" y2="238" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Soil Moisture  Throughflow (right) -->
+      <line x1="226" y1="257" x2="288" y2="257" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+      <!-- Throughflow  River Channel -->
+      <line x1="438" y1="257" x2="713" y2="290" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Soil Moisture  Percolation -->
+      <line x1="148" y1="274" x2="140" y2="296" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Percolation  Groundwater -->
+      <line x1="140" y1="332" x2="148" y2="373" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Groundwater  Groundwater Flow (right) -->
+      <line x1="223" y1="392" x2="288" y2="392" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+      <!-- Groundwater Flow  River Channel -->
+      <line x1="468" y1="392" x2="713" y2="380" stroke="#b71c1c" stroke-width="2" marker-end="url(#ra)"/>
+
+      <!-- Evaporation arrow from Surface Runoff / River (up from river) -->
+      <line x1="757" y1="80" x2="757" y2="60" stroke="#b71c1c" stroke-width="1.5"/>
+      <line x1="757" y1="60" x2="672" y2="60" stroke="#b71c1c" stroke-width="1.5"/>
+      <line x1="672" y1="60" x2="583" y2="75" stroke="#b71c1c" stroke-width="1.5" marker-end="url(#ra)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ===== 7. TYPES OF NATURAL RESOURCES ===== -->
+<div class="section">
+  <h2 class="section-title">7. Types of Natural Resources</h2>
+  <p style="font-size:0.88rem;color:#666;margin-bottom:1rem;"><strong>Natural resources:</strong> things found in the total stock that people find useful.</p>
+  <div class="card-outer" style="padding:1.5rem;">
+    <!-- 2x2 grid of quadrants with centre circle -->
+    <div style="position:relative; max-width:680px; margin:0 auto;">
+      <!-- Grid -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0;">
+
+        <!-- TOP-LEFT: Other Resources (blue) -->
+        <div style="background:#5b9bd5; border-radius:60% 0 0 0; padding:2.2rem 1.5rem 2rem 2rem; color:#fff; min-height:200px; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem;">Other<br>Resources</div>
+          <div style="font-size:0.78rem; opacity:0.92; line-height:1.4; margin-bottom:0.6rem;">Resources that do not fit into the other three categories. These are resources because they attract tourism.</div>
+          <div style="background:rgba(255,255,255,0.22); border-radius:6px; padding:0.4rem 0.7rem; font-size:0.8rem; line-height:1.5;">Rocky Mountains<br>Aurora Borealis<br>Niagara Falls</div>
+        </div>
+
+        <!-- TOP-RIGHT: Renewable Resources (teal) -->
+        <div style="background:#2eaaa0; border-radius:0 60% 0 0; padding:2.2rem 2rem 2rem 1.5rem; color:#fff; min-height:200px; display:flex; flex-direction:column; justify-content:center; align-items:flex-end; text-align:right;">
+          <div style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem;">Renewable<br>Resources</div>
+          <div style="font-size:0.78rem; opacity:0.92; line-height:1.4; margin-bottom:0.6rem;">Can be regenerated if used carefully. Replenished by nature but must be consumed slower than replenishment rate.</div>
+          <div style="background:rgba(255,255,255,0.22); border-radius:6px; padding:0.4rem 0.7rem; font-size:0.8rem; line-height:1.5;">Forests<br>Fish<br>Agriculture Products</div>
+        </div>
+
+        <!-- BOTTOM-LEFT: Flow Resources (green) -->
+        <div style="background:#70ad47; border-radius:0 0 0 60%; padding:2rem 1.5rem 2.2rem 2rem; color:#fff; min-height:200px; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem;">Flow<br>Resources</div>
+          <div style="font-size:0.78rem; opacity:0.92; line-height:1.4; margin-bottom:0.6rem;">Replaced by natural actions; must be used when and where they occur or be lost. Constantly produced by nature.</div>
+          <div style="background:rgba(255,255,255,0.22); border-radius:6px; padding:0.4rem 0.7rem; font-size:0.8rem; line-height:1.5;">Sunlight<br>Wind<br>Water Currents</div>
+        </div>
+
+        <!-- BOTTOM-RIGHT: Non-Renewable (dark green) -->
+        <div style="background:#375623; border-radius:0 0 60% 0; padding:2rem 2rem 2.2rem 1.5rem; color:#fff; min-height:200px; display:flex; flex-direction:column; justify-content:center; align-items:flex-end; text-align:right;">
+          <div style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem;">Non-Renewable<br>Resources</div>
+          <div style="font-size:0.78rem; opacity:0.92; line-height:1.4; margin-bottom:0.6rem;">Limited and cannot be replaced once used. Created by nature over millions of years  the current stock is all that will exist.</div>
+          <div style="background:rgba(255,255,255,0.22); border-radius:6px; padding:0.4rem 0.7rem; font-size:0.8rem; line-height:1.5;">Fossil Fuels<br>Minerals<br>Soil</div>
+        </div>
+      </div>
+
+      <!-- Centre circle overlay -->
+      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:80px; height:80px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 4px #ccc; z-index:2;">
+        <svg width="44" height="44" viewBox="0 0 44 44">
+          <!-- Two circular arrows suggesting renewal/cycle -->
+          <path d="M22 8 A14 14 0 0 1 36 22" fill="none" stroke="#5b9bd5" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="36,22 30,18 34,26" fill="#5b9bd5"/>
+          <path d="M22 36 A14 14 0 0 1 8 22" fill="none" stroke="#70ad47" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="8,22 14,26 10,18" fill="#70ad47"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 8. CIRCULAR ECONOMY ===== -->
+<div class="section">
+  <h2 class="section-title">8. The Circular Economy</h2>
+  <div class="card-outer" style="padding:1.5rem;">
+    <svg viewBox="0 0 820 560" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg" font-family="Source Sans 3">
+      <defs>
+        <marker id="ag" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#388e3c"/></marker>
+        <marker id="ab" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#0277bd"/></marker>
+        <marker id="ag2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#5d8a1f"/></marker>
+        <marker id="apr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#7b1fa2"/></marker>
+      </defs>
+
+      <!-- ====== CENTRE COLUMN: linear production chain ====== -->
+      <!-- mining/materials manufacturing (top centre) -->
+      <circle cx="420" cy="48" r="26" fill="#b5944a"/>
+      <text x="420" y="43" text-anchor="middle" font-size="10" fill="#fff"></text>
+      <text x="420" y="55" text-anchor="middle" font-size="9" fill="#fff">mining</text>
+      <text x="470" y="44" font-size="10" fill="#555">mining / materials</text>
+      <text x="470" y="56" font-size="10" fill="#555">manufacturing</text>
+
+      <!-- Arrow mining  parts manufacturer -->
+      <line x1="420" y1="74" x2="420" y2="102" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+
+      <!-- Parts Manufacturer -->
+      <rect x="330" y="103" width="180" height="34" rx="5" fill="none" stroke="#333" stroke-width="1.5"/>
+      <text x="420" y="124" text-anchor="middle" font-size="12" fill="#222">parts manufacturer</text>
+      <!-- Arrow parts  product -->
+      <line x1="420" y1="137" x2="420" y2="163" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+
+      <!-- Product Manufacturer -->
+      <rect x="330" y="164" width="180" height="34" rx="5" fill="none" stroke="#333" stroke-width="1.5"/>
+      <text x="420" y="185" text-anchor="middle" font-size="12" fill="#222">product manufacturer</text>
+      <!-- Arrow product  service -->
+      <line x1="420" y1="198" x2="420" y2="224" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+
+      <!-- Service Provider -->
+      <rect x="330" y="225" width="180" height="34" rx="5" fill="none" stroke="#333" stroke-width="1.5"/>
+      <text x="420" y="245" text-anchor="middle" font-size="12" fill="#222">service provider</text>
+
+      <!-- Arrow service  consumer & user -->
+      <line x1="380" y1="259" x2="320" y2="298" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+      <line x1="460" y1="259" x2="520" y2="298" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+
+      <!-- Consumer (dark green circle) -->
+      <circle cx="300" cy="320" r="42" fill="#2e7d32"/>
+      <text x="300" y="316" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Consumer</text>
+      <text x="300" y="330" text-anchor="middle" font-size="18" fill="#fff"></text>
+
+      <!-- User (teal circle) -->
+      <circle cx="540" cy="320" r="42" fill="#0277bd"/>
+      <text x="540" y="316" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">User</text>
+      <text x="540" y="330" text-anchor="middle" font-size="18" fill="#fff"></text>
+
+      <!-- collection label -->
+      <text x="300" y="370" text-anchor="middle" font-size="10" fill="#555">collection</text>
+      <text x="540" y="370" text-anchor="middle" font-size="10" fill="#555">collection</text>
+      <!-- Arrows down to energy recovery -->
+      <line x1="300" y1="362" x2="360" y2="398" stroke="#388e3c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ag2)"/>
+      <line x1="540" y1="362" x2="480" y2="398" stroke="#0277bd" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ab)"/>
+
+      <!-- Energy Recovery -->
+      <rect x="330" y="400" width="180" height="34" rx="5" fill="none" stroke="#555" stroke-width="1.5"/>
+      <text x="420" y="421" text-anchor="middle" font-size="12" fill="#444">energy recovery</text>
+      <!-- fire icon + landfill -->
+      <circle cx="420" cy="470" r="18" fill="#7b1fa2"/>
+      <text x="420" y="476" text-anchor="middle" font-size="14"></text>
+      <line x1="420" y1="434" x2="420" y2="450" stroke="#7b1fa2" stroke-width="2" marker-end="url(#apr)"/>
+      <rect x="350" y="492" width="140" height="30" rx="5" fill="none" stroke="#555" stroke-width="1.5"/>
+      <text x="420" y="511" text-anchor="middle" font-size="12" fill="#444">landfill</text>
+      <line x1="420" y1="488" x2="420" y2="492" stroke="#7b1fa2" stroke-width="2"/>
+
+      <!-- ====== LEFT GREEN LOOP: Biologic nutrients ====== -->
+      <!-- Biosphere circle -->
+      <circle cx="105" cy="260" r="40" fill="#1b5e20"/>
+      <text x="105" y="255" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">bio-</text>
+      <text x="105" y="268" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">sphere</text>
+      <text x="105" y="280" text-anchor="middle" font-size="14"></text>
+
+      <!-- Biologic nutrients (leaf) -->
+      <circle cx="72" cy="100" r="28" fill="#388e3c"/>
+      <text x="72" y="95" text-anchor="middle" font-size="16"></text>
+      <text x="72" y="110" text-anchor="middle" font-size="9" fill="#fff">biologic</text>
+      <text x="72" y="120" text-anchor="middle" font-size="9" fill="#fff">nutrients</text>
+
+      <!-- farming/collection label -->
+      <text x="180" y="80" font-size="10" fill="#388e3c">farming / collection</text>
+      <!-- Arrow biologic  parts manufacturer -->
+      <path d="M95,72 Q200,40 328,120" fill="none" stroke="#388e3c" stroke-width="2" marker-end="url(#ag)"/>
+
+      <!-- Biogas -->
+      <circle cx="72" cy="390" r="28" fill="#4caf50"/>
+      <text x="72" y="385" text-anchor="middle" font-size="16"></text>
+      <text x="72" y="402" text-anchor="middle" font-size="9" fill="#fff">biogas</text>
+
+      <!-- Anaerobic digestion -->
+      <circle cx="168" cy="440" r="30" fill="#2e7d32"/>
+      <text x="168" y="434" text-anchor="middle" font-size="10" fill="#fff">anaerobic</text>
+      <text x="168" y="446" text-anchor="middle" font-size="10" fill="#fff">digestion/</text>
+      <text x="168" y="458" text-anchor="middle" font-size="10" fill="#fff">composting</text>
+
+      <!-- Extraction biochemic feedstock -->
+      <circle cx="260" cy="420" r="28" fill="#388e3c"/>
+      <text x="260" y="415" text-anchor="middle" font-size="9" fill="#fff">extraction</text>
+      <text x="260" y="427" text-anchor="middle" font-size="9" fill="#fff">biochem.</text>
+      <text x="260" y="439" text-anchor="middle" font-size="9" fill="#fff">feedstock</text>
+
+      <!-- biochemic feedstock label -->
+      <text x="148" y="230" font-size="10" fill="#388e3c">biochemic</text>
+      <text x="148" y="242" font-size="10" fill="#388e3c">feedstock</text>
+
+      <!-- restoration label -->
+      <text x="58" y="198" font-size="10" fill="#388e3c">restoration</text>
+
+      <!-- Green loops: biosphere  biologic nutrients (restoration) -->
+      <path d="M80,220 Q55,165 74,128" fill="none" stroke="#388e3c" stroke-width="2" marker-end="url(#ag)"/>
+      <!-- biosphere  biogas -->
+      <path d="M80,290 Q70,340 74,362" fill="none" stroke="#388e3c" stroke-width="2" marker-end="url(#ag)"/>
+      <!-- Consumer cascades  extraction -->
+      <path d="M258,320 Q262,360 262,392" fill="none" stroke="#388e3c" stroke-width="2" marker-end="url(#ag)"/>
+      <text x="240" y="358" font-size="10" fill="#388e3c">cascades</text>
+      <!-- extraction  anaerobic -->
+      <path d="M235,438 Q205,448 198,448" fill="none" stroke="#388e3c" stroke-width="2" marker-end="url(#ag)"/>
+      <!-- anaerobic  biogas -->
+      <path d="M143,430 Q110,415 98,418" fill="none" stroke="#388e3c" stroke-width="2" marker-end="url(#ag)"/>
+      <!-- biogas  biosphere -->
+      <path d="M72,362 Q72,320 82,300" fill="none" stroke="#388e3c" stroke-width="2" marker-end="url(#ag)"/>
+
+      <!-- ====== RIGHT BLUE LOOP: Technical nutrients ====== -->
+      <!-- Technical nutrients label -->
+      <circle cx="748" cy="140" r="30" fill="#0277bd"/>
+      <text x="748" y="132" text-anchor="middle" font-size="9" fill="#fff">technical</text>
+      <text x="748" y="144" text-anchor="middle" font-size="9" fill="#fff">nutrients</text>
+      <text x="748" y="156" text-anchor="middle" font-size="14"></text>
+
+      <!-- Recycle -->
+      <circle cx="720" cy="265" r="28" fill="#0288d1"/>
+      <text x="720" y="260" text-anchor="middle" font-size="14"></text>
+      <text x="720" y="276" text-anchor="middle" font-size="9" fill="#fff">recycle</text>
+
+      <!-- Refurbish/remanufacture -->
+      <circle cx="690" cy="338" r="28" fill="#0277bd"/>
+      <text x="690" y="333" text-anchor="middle" font-size="14"></text>
+      <text x="690" y="350" text-anchor="middle" font-size="9" fill="#fff">refurbish/</text>
+
+      <!-- Reuse/redistribute -->
+      <circle cx="645" cy="380" r="24" fill="#01579b"/>
+      <text x="645" y="375" text-anchor="middle" font-size="12"></text>
+      <text x="645" y="392" text-anchor="middle" font-size="9" fill="#fff">reuse</text>
+
+      <!-- Maintenance -->
+      <circle cx="608" cy="322" r="24" fill="#0277bd"/>
+      <text x="608" y="318" text-anchor="middle" font-size="12"></text>
+      <text x="608" y="334" text-anchor="middle" font-size="9" fill="#fff">maintenance</text>
+
+      <!-- Blue loop arrows: technical nutrients  parts manufacturer -->
+      <path d="M722,110 Q630,60 512,103" fill="none" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+      <!-- recycle  product manufacturer -->
+      <path d="M695,255 Q620,215 512,180" fill="none" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+      <!-- User  maintenance -->
+      <path d="M582,320 Q595,320 582,322" fill="none" stroke="#0277bd" stroke-width="1.5" marker-end="url(#ab)"/>
+      <path d="M560,340 Q580,338 582,322" fill="none" stroke="#0277bd" stroke-width="1.5" marker-end="url(#ab)"/>
+      <!-- User  reuse -->
+      <path d="M560,355 Q598,372 618,375" fill="none" stroke="#0277bd" stroke-width="1.5" marker-end="url(#ab)"/>
+      <!-- User  refurbish -->
+      <path d="M560,330 Q618,335 660,330" fill="none" stroke="#0277bd" stroke-width="1.5" marker-end="url(#ab)"/>
+      <!-- User  recycle -->
+      <path d="M562,308 Q630,290 690,270" fill="none" stroke="#0277bd" stroke-width="2" marker-end="url(#ab)"/>
+
+      <!-- Leakage label -->
+      <text x="580" y="448" font-size="10" fill="#888" font-style="italic">leakage to be minimized</text>
+    </svg>
+
+    <!-- Legend -->
+    <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:0.5rem;font-size:0.82rem;">
+      <span><span style="display:inline-block;width:16px;height:4px;background:#388e3c;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Biological cycle</span>
+      <span><span style="display:inline-block;width:16px;height:4px;background:#0277bd;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Technical cycle</span>
+      <span><span style="display:inline-block;width:16px;height:4px;background:#7b1fa2;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Waste / energy recovery</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 9. CANADA GROWING DEGREE-DAYS MAP ===== -->
+<div class="section">
+  <h2 class="section-title">9. Canada  Growing Degree-Days (GDDs) Above 6C</h2>
+  <p style="font-size:0.88rem;color:#666;margin-bottom:1rem;">Temperature and moisture are critical for agriculture. GDDs measure accumulated heat above 6C  crops need a minimum threshold to grow.</p>
+  <div class="card-outer" style="padding:1.2rem;">
+    <!-- Legend -->
+    <div style="display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:1rem;font-size:0.85rem;font-weight:600;align-items:center;">
+      <span style="color:#555;">Growing Degree-Days (GDDs) above 6C:</span>
+      <span><span style="display:inline-block;width:20px;height:14px;background:#e91e8c;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> 1925 (hottest)</span>
+      <span><span style="display:inline-block;width:20px;height:14px;background:#f57c00;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>1375</span>
+      <span><span style="display:inline-block;width:20px;height:14px;background:#f5e642;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>825</span>
+      <span><span style="display:inline-block;width:20px;height:14px;background:#8bc34a;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>550</span>
+      <span><span style="display:inline-block;width:20px;height:14px;background:#ce93d8;border-radius:2px;vertical-align:middle;margin-right:4px;"></span>&lt; 550 (too cold)</span>
+    </div>
+
+    <svg viewBox="0 0 760 560" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg" font-family="Source Sans 3">
+      <!-- Ocean background -->
+      <rect width="760" height="560" fill="#c5dff0"/>
+
+      <!-- ======= CANADA SIMPLIFIED ZONES (painted as bands from north to south) ======= -->
+      <!-- Each zone is a polygon approximating the band shape on the real map -->
+
+      <!-- PURPLE zone: < 550 GDD (arctic / far north)  top half of Canada, including Hudson Bay area -->
+      <!-- This is the large polar region -->
+      <polygon points="
+        0,0 760,0 760,130
+        680,120 620,110 560,115 510,125 460,120 400,110 340,105 280,100
+        220,108 160,118 100,125 50,130 0,135
+      " fill="#ce93d8"/>
+      <!-- Hudson Bay (white/light - water) -->
+      <ellipse cx="430" cy="230" rx="75" ry="100" fill="#b8d5ec"/>
+      <!-- More purple around Hudson Bay -->
+      <polygon points="
+        220,108 280,100 340,105 400,110 460,120 510,125 560,115 620,110 680,120 760,130
+        760,220 700,210 640,200 580,210 530,225 510,185 490,155 460,160 430,130 400,140 360,150 320,145 280,155 250,170 220,168 190,160 160,145 120,140 80,148 40,155 0,165
+        0,135 50,130 100,125 160,118 220,108
+      " fill="#ce93d8"/>
+
+      <!-- GREEN zone: 550 GDD  broad band -->
+      <polygon points="
+        0,165 40,155 80,148 120,140 160,145 190,160 220,168 250,170 280,155 320,145 360,150 400,140 430,130 460,160 490,155 510,185 530,225 490,240 460,248 440,330 430,335
+        400,320 360,310 320,300 280,305 250,310 220,305 190,295 160,285 130,278 100,272 70,268 40,262 0,260
+      " fill="#8bc34a"/>
+      <!-- More green on east coast (Maritimes / NF) -->
+      <polygon points="620,250 660,240 700,250 720,270 710,300 690,310 660,305 640,290 620,275" fill="#8bc34a"/>
+      <!-- NF island green -->
+      <polygon points="660,295 700,285 730,295 735,320 720,335 695,335 670,320" fill="#8bc34a"/>
+
+      <!-- YELLOW zone: 825 GDD -->
+      <polygon points="
+        0,260 40,262 70,268 100,272 130,278 160,285 190,295 220,305 250,310 280,305 320,300 360,310 400,320 430,335 440,330 460,320 480,340 460,370 430,375 400,370 360,365 320,362 280,358 250,358 220,352 190,345 160,338 130,332 100,325 70,318 40,310 0,305
+      " fill="#f5e642"/>
+      <!-- Yellow on Maritimes -->
+      <polygon points="580,320 620,310 650,320 660,345 645,360 618,358 598,345" fill="#f5e642"/>
+      <!-- Yellow on NF -->
+      <polygon points="695,335 720,330 740,345 738,368 718,375 698,368 688,355" fill="#f5e642"/>
+      <!-- Yellow southern Ontario / Quebec -->
+      <polygon points="430,360 460,355 490,360 510,375 500,395 480,400 455,398 432,388" fill="#f5e642"/>
+
+      <!-- ORANGE zone: 1375 GDD -->
+      <polygon points="
+        0,305 40,310 70,318 100,325 130,332 160,338 190,345 220,352 250,358 280,358 320,362 360,365 400,370 430,375 460,370 470,395 450,420 420,430 390,428 360,420 320,415 280,410 250,408 220,402 190,395 160,388 130,380 100,372 70,364 40,355 0,350
+      " fill="#f57c00"/>
+      <!-- Orange BC coast (west coast mountains) -->
+      <polygon points="0,165 30,155 55,165 65,195 58,225 45,250 30,265 15,268 0,265" fill="#f57c00"/>
+      <!-- Orange maritimes small area -->
+      <polygon points="598,345 618,340 640,348 642,368 628,375 608,370 598,358" fill="#f57c00"/>
+
+      <!-- PINK/MAGENTA zone:  1925 GDD (warmest  small areas southern BC, southern ON) -->
+      <!-- Southern BC interior -->
+      <polygon points="30,265 58,255 75,268 78,295 65,310 45,312 28,298" fill="#e91e8c"/>
+      <!-- Southern Ontario (Lake Erie / Windsor region) -->
+      <polygon points="450,395 478,390 492,405 490,420 472,428 452,425 440,412" fill="#e91e8c"/>
+
+      <!-- Hudson Bay (water) repainted on top -->
+      <ellipse cx="430" cy="230" rx="75" ry="100" fill="#b8d5ec"/>
+      <!-- Arctic Ocean / northern water bodies -->
+      <polygon points="520,0 760,0 760,60 700,50 640,45 580,48 540,52" fill="#b8d5ec"/>
+
+      <!-- Province border lines (simplified) -->
+      <!-- BC/Alberta border -->
+      <line x1="112" y1="140" x2="100" y2="470" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- Alberta/SK -->
+      <line x1="165" y1="135" x2="155" y2="470" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- SK/MB -->
+      <line x1="228" y1="125" x2="220" y2="470" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- MB/ON rough -->
+      <line x1="298" y1="115" x2="290" y2="440" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- ON/QC rough -->
+      <line x1="400" y1="290" x2="430" y2="450" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+
+      <!-- Province labels -->
+      <text x="48" y="380" font-size="11" fill="#333" font-weight="700">BC</text>
+      <text x="130" y="390" font-size="11" fill="#333" font-weight="700">AB</text>
+      <text x="190" y="390" font-size="11" fill="#333" font-weight="700">SK</text>
+      <text x="252" y="390" font-size="11" fill="#333" font-weight="700">MB</text>
+      <text x="340" y="370" font-size="11" fill="#333" font-weight="700">ON</text>
+      <text x="450" y="330" font-size="11" fill="#333" font-weight="700">QC</text>
+      <text x="620" y="280" font-size="10" fill="#333" font-weight="700">NF</text>
+      <text x="600" y="348" font-size="9" fill="#333" font-weight="700">NS</text>
+      <text x="640" y="348" font-size="9" fill="#333" font-weight="700">NB</text>
+      <text x="580" y="320" font-size="9" fill="#333">PEI</text>
+      <text x="330" y="190" font-size="11" fill="#6b3a9a">HUDSON BAY</text>
+      <text x="110" y="60" font-size="12" fill="#555" font-weight="700">CANADA</text>
+
+      <!-- Annotation arrow pointing to yellow zone (agricultural belt) -->
+      <line x1="560" y1="290" x2="430" y2="310" stroke="#e65100" stroke-width="2"/>
+      <polygon points="430,310 442,304 442,316" fill="#e65100"/>
+      <text x="562" y="284" font-size="10" fill="#e65100" font-weight="700">Main agricultural belt</text>
+      <text x="562" y="296" font-size="10" fill="#e65100">(Prairie provinces)</text>
+
+      <!-- Scale bar -->
+      <line x1="30" y1="530" x2="190" y2="530" stroke="#333" stroke-width="2"/>
+      <line x1="30" y1="525" x2="30" y2="535" stroke="#333" stroke-width="2"/>
+      <line x1="110" y1="525" x2="110" y2="535" stroke="#333" stroke-width="2"/>
+      <line x1="190" y1="525" x2="190" y2="535" stroke="#333" stroke-width="2"/>
+      <text x="30" y="545" font-size="10" fill="#333" text-anchor="middle">0</text>
+      <text x="110" y="545" font-size="10" fill="#333" text-anchor="middle">500</text>
+      <text x="190" y="545" font-size="10" fill="#333" text-anchor="middle">1000 km</text>
+    </svg>
+
+    <!-- Explanation table -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-top:1.2rem;">
+      <div style="background:#fce4ec;border-left:4px solid #e91e8c;border-radius:6px;padding:0.7rem 1rem;">
+        <div style="font-weight:700;color:#880e4f;font-size:0.88rem;"> 1925 GDD  Hottest</div>
+        <div style="font-size:0.8rem;color:#555;margin-top:0.3rem;">Southern BC interior, Windsor (ON). Best for corn, soybeans, tender fruits.</div>
+      </div>
+      <div style="background:#fff3e0;border-left:4px solid #f57c00;border-radius:6px;padding:0.7rem 1rem;">
+        <div style="font-weight:700;color:#e65100;font-size:0.88rem;">1375 GDD</div>
+        <div style="font-size:0.8rem;color:#555;margin-top:0.3rem;">BC coast, southern prairies, parts of Maritimes. Good for wheat, canola, vegetables.</div>
+      </div>
+      <div style="background:#fffde7;border-left:4px solid #f9a825;border-radius:6px;padding:0.7rem 1rem;">
+        <div style="font-weight:700;color:#f57f17;font-size:0.88rem;">825 GDD</div>
+        <div style="font-size:0.8rem;color:#555;margin-top:0.3rem;">Prairie belt, St. Lawrence valley. Main grain farming region of Canada.</div>
+      </div>
+      <div style="background:#f1f8e9;border-left:4px solid #7cb342;border-radius:6px;padding:0.7rem 1rem;">
+        <div style="font-weight:700;color:#33691e;font-size:0.88rem;">550 GDD  Marginal</div>
+        <div style="font-size:0.8rem;color:#555;margin-top:0.3rem;">Northern edges of agriculture. Short growing season; limited crop options.</div>
+      </div>
+      <div style="background:#f3e5f5;border-left:4px solid #9c27b0;border-radius:6px;padding:0.7rem 1rem;">
+        <div style="font-weight:700;color:#6a1b9a;font-size:0.88rem;">&lt; 550 GDD  Too Cold</div>
+        <div style="font-size:0.8rem;color:#555;margin-top:0.3rem;">Most of northern Canada, arctic. Agriculture not viable without greenhouses.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;color:#aaa;font-size:0.8rem;padding:1rem 0 2.5rem;">
+  Recreated from course materials  Atlantic Canada Fisheries, Energy &amp; Environmental Systems
+</div>
+</body>
+</html>

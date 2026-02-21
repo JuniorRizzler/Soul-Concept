@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v4";
+const CACHE_NAME = "soulconcept-v30";
 const ASSETS = [
   "/",
   "/index.html",
@@ -7,9 +7,12 @@ const ASSETS = [
   "/services.html",
   "/subjects.html",
   "/work.html",
+  "/geography-library.html",
   "/study-library.html",
   "/grade-10-math.html",
   "/math/index.html",
+  "/math-quiz-simulator.html",
+  "/math/auto-quiz.html",
   "/styles.css",
   "/app.js",
   "/manifest.json",
@@ -17,6 +20,12 @@ const ASSETS = [
   "/icons/icon-192.png",
   "/icons/icon-512.png",
   "/icons/apple-touch-icon.png",
+  "/images/geography/ocean-banks.png",
+  "/images/geography/fish-types.png",
+  "/images/geography/cod-collapse.png",
+  "/images/geography/drainage-basin.png",
+  "/images/geography/energy-mix.png",
+  "/images/geography/electricity-consumption.png",
   "/offline.html"
 ];
 
