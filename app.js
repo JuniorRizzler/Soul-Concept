@@ -362,7 +362,7 @@
 
   const TOUR_ACTIVE_KEY = 'sc_tour_active'
   const TOUR_STEP_KEY = 'sc_tour_step'
-  const TOUR_NEVER_KEY = 'sc_tour_never'
+  const TOUR_NEVER_KEY = 'sc_tour_never_v2'
 
   const TOUR_STEPS = [
     {
@@ -661,7 +661,7 @@
     }
   }
 
-  window.addEventListener('load', function () {
+  function scheduleTour() {
     setTimeout(function () {
       try {
         showTourPrompt()
@@ -670,5 +670,11 @@
         // ignore tour errors
       }
     }, 700)
-  })
+  }
+
+  if (document.readyState === 'complete') {
+    scheduleTour()
+  } else {
+    window.addEventListener('load', scheduleTour)
+  }
 })()
