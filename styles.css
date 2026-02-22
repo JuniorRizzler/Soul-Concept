@@ -66,9 +66,10 @@ img {
 .tour-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 12, 16, 0.4);
+  background: transparent;
   z-index: 1200;
   display: none;
+  pointer-events: none;
 }
 
 .tour-overlay.is-visible {
@@ -77,12 +78,12 @@ img {
 
 .tour-tooltip {
   position: absolute;
-  max-width: 320px;
+  max-width: 260px;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 14px;
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  box-shadow: var(--shadow-sm);
   pointer-events: auto;
 }
 

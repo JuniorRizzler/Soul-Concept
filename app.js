@@ -469,9 +469,9 @@
     const style = document.createElement('style')
     style.id = 'tour-style-inline'
     style.textContent =
-      '.tour-overlay{position:fixed;inset:0;background:rgba(10,12,16,.4);z-index:1200;display:none}' +
+      '.tour-overlay{position:fixed;inset:0;background:transparent;z-index:1200;display:none;pointer-events:none}' +
       '.tour-overlay.is-visible{display:block}' +
-      '.tour-tooltip{position:absolute;max-width:320px;background:#fff;border:1px solid #e2d8cb;border-radius:14px;padding:14px;box-shadow:0 16px 36px rgba(23,21,16,.12)}' +
+      '.tour-tooltip{position:absolute;max-width:260px;background:#fff;border:1px solid #e2d8cb;border-radius:12px;padding:12px;box-shadow:0 10px 24px rgba(23,21,16,.1);pointer-events:auto}' +
       '.tour-tooltip h4{margin:0 0 6px;font-size:1rem}' +
       '.tour-tooltip p{margin:0 0 12px;font-size:.92rem;color:#5a5863;line-height:1.4}' +
       '.tour-actions{display:flex;gap:8px}' +
@@ -532,7 +532,7 @@
     backBtn.disabled = stepIndex === 0
     const needsUserClick = step.next && step.next !== getPageName()
     nextBtn.textContent = step.finish ? 'Finish' : needsUserClick ? 'Click highlighted button' : 'Next'
-    nextBtn.disabled = needsUserClick
+    nextBtn.disabled = false
 
     const rect = target.getBoundingClientRect()
     const top = rect.bottom + window.scrollY + 12
