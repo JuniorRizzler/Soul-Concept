@@ -250,7 +250,9 @@
     } catch (err) {
       pushWidgetDismissed = false
     }
-    if (pushWidgetDismissed) return
+    if (pushWidgetDismissed) {
+      // continue with the rest of the app script
+    } else {
 
     const VAPID_PUBLIC_KEY = 'BO94JvzECtxvt1c7RrNferA88Uh-4NX8W-vaY2Tw5O6UiejKE-oaHAZCbpmfjcLqajG_1fDWxnEpRwbXaVWi2_c'
     const widget = document.createElement('div')
@@ -355,5 +357,318 @@
         setStatus(err.message || 'Failed to send test.', true)
       }
     })
+    }
   }
+
+  const TOUR_ACTIVE_KEY = 'sc_tour_active'
+  const TOUR_STEP_KEY = 'sc_tour_step'
+  const TOUR_NEVER_KEY = 'sc_tour_never'
+
+  const TOUR_STEPS = [
+    {
+      page: 'index.html',
+      selector: '[data-tour-id="home-science"]',
+      title: "Hi, I'm Dean",
+      text: 'Start with the Grade 9 Science library for guided notes and key terms.',
+      next: 'study-library.html'
+    },
+    {
+      page: 'study-library.html',
+      selector: '[data-tour-id="exit-home"]',
+      title: 'Quick Tip',
+      text: 'Use Exit to return home anytime.',
+      next: 'index.html'
+    },
+    {
+      page: 'study-library.html',
+      selector: 'body',
+      title: 'Split Screen',
+      text: 'Use split screen to keep questions and notes side by side.',
+      next: 'study-library.html',
+      noHighlight: true
+    },
+    {
+      page: 'study-library.html',
+      selector: 'body',
+      title: 'Chemistry Notes',
+      text: 'Open the Chemistry section to review key definitions and examples fast.',
+      next: 'index.html',
+      noHighlight: true
+    },
+    {
+      page: 'index.html',
+      selector: '[data-tour-id="home-geography"]',
+      title: 'Geography Library',
+      text: 'Open Geography for units, reviews, and concept check-ins.',
+      next: 'geography-library.html'
+    },
+    {
+      page: 'geography-library.html',
+      selector: '[data-tour-id="exit-home"]',
+      title: 'Return Home',
+      text: 'Exit back to the main hub when you finish.',
+      next: 'index.html'
+    },
+    {
+      page: 'index.html',
+      selector: '[data-tour-id="home-tools"]',
+      title: 'Study Tools',
+      text: 'Concept Cards use spaced repetition to lock in memory — it\'s a strategy even med students use.',
+      next: 'anki/index.html'
+    },
+    {
+      page: 'anki/index.html',
+      selector: '[data-tour-id="concept-study"]',
+      title: 'Concept Cards',
+      text: 'Add a deck, flip cards, and rate difficulty to schedule reviews.',
+      next: 'index.html',
+      finish: true
+    }
+  ]
+
+  function getPageName() {
+    const raw = (location.pathname.split('/').pop() || 'index.html').toLowerCase()
+    return raw
+  }
+
+  function setTourActive(value) {
+    try {
+      localStorage.setItem(TOUR_ACTIVE_KEY, value ? '1' : '0')
+    } catch (err) {
+      // ignore
+    }
+  }
+
+  function setTourStep(value) {
+    try {
+      localStorage.setItem(TOUR_STEP_KEY, String(value))
+    } catch (err) {
+      // ignore
+    }
+  }
+
+  function getTourStep() {
+    try {
+      const value = localStorage.getItem(TOUR_STEP_KEY)
+      return value ? Number(value) : 0
+    } catch (err) {
+      return 0
+    }
+  }
+
+  function isTourActive() {
+    try {
+      return localStorage.getItem(TOUR_ACTIVE_KEY) === '1'
+    } catch (err) {
+      return false
+    }
+  }
+
+  function ensureTourStyles() {
+    if (document.getElementById('tour-style-inline')) return
+    const style = document.createElement('style')
+    style.id = 'tour-style-inline'
+    style.textContent =
+      '.tour-overlay{position:fixed;inset:0;background:rgba(10,12,16,.4);z-index:1200;display:none}' +
+      '.tour-overlay.is-visible{display:block}' +
+      '.tour-tooltip{position:absolute;max-width:320px;background:#fff;border:1px solid #e2d8cb;border-radius:14px;padding:14px;box-shadow:0 16px 36px rgba(23,21,16,.12)}' +
+      '.tour-tooltip h4{margin:0 0 6px;font-size:1rem}' +
+      '.tour-tooltip p{margin:0 0 12px;font-size:.92rem;color:#5a5863;line-height:1.4}' +
+      '.tour-actions{display:flex;gap:8px}' +
+      '.tour-highlight{outline:3px solid rgba(243,106,61,.6);outline-offset:4px;border-radius:999px;position:relative;z-index:1201}'
+    document.head.appendChild(style)
+  }
+
+  function createTourOverlay() {
+    let overlay = document.querySelector('.tour-overlay')
+    if (!overlay) {
+      overlay = document.createElement('div')
+      overlay.className = 'tour-overlay'
+      overlay.innerHTML =
+        '<div class="tour-tooltip" role="dialog" aria-modal="true">' +
+        '<h4 class="tour-title"></h4>' +
+        '<p class="tour-body"></p>' +
+        '<div class="tour-actions">' +
+        '<button class="btn btn-secondary" type="button" data-tour-back>Back</button>' +
+        '<button class="btn btn-secondary" type="button" data-tour-skip>Skip</button>' +
+        '<button class="btn btn-primary" type="button" data-tour-next>Next</button>' +
+        '</div>' +
+        '</div>'
+      document.body.appendChild(overlay)
+    }
+    return overlay
+  }
+
+  function showTourStep() {
+    if (!isTourActive()) return
+    const stepIndex = getTourStep()
+    const step = TOUR_STEPS[stepIndex]
+    if (!step) {
+      setTourActive(false)
+      return
+    }
+    if (getPageName() !== step.page) return
+
+    ensureTourStyles()
+    const overlay = createTourOverlay()
+    const tooltip = overlay.querySelector('.tour-tooltip')
+    const titleEl = overlay.querySelector('.tour-title')
+    const bodyEl = overlay.querySelector('.tour-body')
+    const backBtn = overlay.querySelector('[data-tour-back]')
+    const skipBtn = overlay.querySelector('[data-tour-skip]')
+    const nextBtn = overlay.querySelector('[data-tour-next]')
+    const target = document.querySelector(step.selector)
+    if (!target || !tooltip || !titleEl || !bodyEl || !backBtn || !skipBtn || !nextBtn) return
+
+    document.querySelectorAll('.tour-highlight').forEach(function (node) {
+      node.classList.remove('tour-highlight')
+    })
+    if (!step.noHighlight) {
+      target.classList.add('tour-highlight')
+    }
+
+    titleEl.textContent = step.title
+    bodyEl.textContent = step.text
+    backBtn.disabled = stepIndex === 0
+    const needsUserClick = step.next && step.next !== getPageName()
+    nextBtn.textContent = step.finish ? 'Finish' : needsUserClick ? 'Click highlighted button' : 'Next'
+    nextBtn.disabled = needsUserClick
+
+    const rect = target.getBoundingClientRect()
+    const top = rect.bottom + window.scrollY + 12
+    const left = Math.min(window.innerWidth - 360, rect.left + window.scrollX)
+    tooltip.style.top = Math.max(16, top) + 'px'
+    tooltip.style.left = Math.max(16, left) + 'px'
+
+    overlay.classList.add('is-visible')
+
+    function cleanup() {
+      overlay.classList.remove('is-visible')
+      target.classList.remove('tour-highlight')
+    }
+
+    backBtn.onclick = function () {
+      if (stepIndex > 0) {
+        setTourStep(stepIndex - 1)
+        cleanup()
+        const prev = TOUR_STEPS[stepIndex - 1]
+        if (prev && prev.page && prev.page !== getPageName()) {
+          location.href = prev.page
+        } else {
+          showTourStep()
+        }
+      }
+    }
+
+    skipBtn.onclick = function () {
+      setTourActive(false)
+      try {
+        localStorage.setItem(TOUR_DECLINED_KEY, '1')
+      } catch (err) {
+        // ignore
+      }
+      cleanup()
+    }
+
+    nextBtn.onclick = function () {
+      if (step.finish) {
+        setTourActive(false)
+        cleanup()
+        return
+      }
+      const nextIndex = stepIndex + 1
+      setTourStep(nextIndex)
+      cleanup()
+      showTourStep()
+    }
+
+    if (step.next && step.next !== getPageName()) {
+      target.addEventListener(
+        'click',
+        function () {
+          const nextIndex = stepIndex + 1
+          setTourStep(nextIndex)
+        },
+        { once: true },
+      )
+    }
+
+    window.addEventListener('resize', showTourStep, { once: true })
+    window.addEventListener('scroll', showTourStep, { once: true })
+  }
+
+  function showTourPrompt() {
+    const page = getPageName()
+    if (page !== 'index.html') return
+    if (isTourActive()) return
+    try {
+      if (localStorage.getItem(TOUR_NEVER_KEY) === '1') return
+    } catch (err) {
+      // ignore
+    }
+
+    ensureTourStyles()
+    const overlay = createTourOverlay()
+    const tooltip = overlay.querySelector('.tour-tooltip')
+    const titleEl = overlay.querySelector('.tour-title')
+    const bodyEl = overlay.querySelector('.tour-body')
+    const backBtn = overlay.querySelector('[data-tour-back]')
+    const skipBtn = overlay.querySelector('[data-tour-skip]')
+    const nextBtn = overlay.querySelector('[data-tour-next]')
+    let neverBtn = overlay.querySelector('[data-tour-never]')
+    if (!tooltip || !titleEl || !bodyEl || !backBtn || !skipBtn || !nextBtn) return
+    if (!neverBtn) {
+      neverBtn = document.createElement('button')
+      neverBtn.className = 'btn btn-secondary'
+      neverBtn.type = 'button'
+      neverBtn.setAttribute('data-tour-never', '')
+      neverBtn.textContent = 'Never again'
+      const actions = overlay.querySelector('.tour-actions')
+      if (actions) actions.appendChild(neverBtn)
+    }
+
+    titleEl.textContent = "Hi, I'm Dean"
+    bodyEl.textContent = 'Want a quick tutorial to get started?'
+    backBtn.style.display = 'none'
+    skipBtn.textContent = 'Not now'
+    nextBtn.textContent = 'Yes'
+
+    tooltip.style.top = '20vh'
+    tooltip.style.left = '50%'
+    tooltip.style.transform = 'translateX(-50%)'
+    overlay.classList.add('is-visible')
+
+    skipBtn.onclick = function () {
+      overlay.classList.remove('is-visible')
+    }
+
+    if (neverBtn) {
+      neverBtn.onclick = function () {
+        overlay.classList.remove('is-visible')
+        try {
+          localStorage.setItem(TOUR_NEVER_KEY, '1')
+        } catch (err) {
+          // ignore
+        }
+      }
+    }
+
+    nextBtn.onclick = function () {
+      overlay.classList.remove('is-visible')
+      setTourActive(true)
+      setTourStep(0)
+      showTourStep()
+    }
+  }
+
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      try {
+        showTourPrompt()
+        showTourStep()
+      } catch (err) {
+        // ignore tour errors
+      }
+    }, 700)
+  })
 })()
