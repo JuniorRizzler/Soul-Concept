@@ -183,6 +183,176 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
     </script>
     <script src="/auto-quiz-block.js"></script>
 
+    <script>
+      (function () {
+        function injectStyles() {
+          if (document.getElementById('math-galaxy-banner-styles')) return
+          var style = document.createElement('style')
+          style.id = 'math-galaxy-banner-styles'
+          style.textContent =
+            '@keyframes mathGalaxyFloat{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-12px) translateX(8px)}}' +
+            '@keyframes mathGalaxyScan{0%{transform:translateX(-20%) translateY(-10%)}50%{transform:translateX(10%) translateY(5%)}100%{transform:translateX(-20%) translateY(-10%)}}' +
+            '@keyframes mathGalaxyShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}'
+          document.head.appendChild(style)
+        }
+
+        function findBanner() {
+          var headings = document.querySelectorAll('h1')
+          for (var i = 0; i < headings.length; i++) {
+            var text = (headings[i].textContent || '').trim()
+            if (
+              text === 'Mathematics Study Library' ||
+              text === 'Math Study Library' ||
+              text.indexOf('Math') !== -1
+            ) {
+              var node = headings[i]
+              while (node && node !== document.body) {
+                if (
+                  node.classList &&
+                  node.classList.contains('rounded-3xl') &&
+                  node.classList.contains('overflow-hidden')
+                ) {
+                  return node
+                }
+                node = node.parentElement
+              }
+            }
+          }
+          return null
+        }
+
+        function enhanceBanner(banner) {
+          if (!banner || banner.dataset.mathGalaxy === '1') return
+          banner.dataset.mathGalaxy = '1'
+          banner.classList.remove(
+            'bg-gradient-to-r',
+            'from-slate-900',
+            'via-slate-800',
+            'to-slate-900'
+          )
+          banner.classList.add(
+            'bg-gradient-to-br',
+            'from-slate-950',
+            'via-blue-950',
+            'to-purple-950',
+            'border',
+            'border-white/10',
+            'group'
+          )
+          banner.style.position = 'relative'
+          banner.style.overflow = 'hidden'
+
+          var grid = document.createElement('div')
+          grid.className = 'absolute inset-0 opacity-40'
+          grid.style.backgroundImage =
+            'linear-gradient(rgba(59,130,246,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.1) 1px, transparent 1px)'
+          grid.style.backgroundSize = '36px 36px'
+          grid.style.mixBlendMode = 'screen'
+          grid.style.pointerEvents = 'none'
+          grid.style.zIndex = '0'
+
+          var mesh = document.createElement('div')
+          mesh.className = 'absolute inset-0'
+          mesh.style.background =
+            'radial-gradient(circle at 20% 20%, rgba(56,189,248,0.25), transparent 45%), radial-gradient(circle at 75% 30%, rgba(168,85,247,0.25), transparent 40%), radial-gradient(circle at 50% 80%, rgba(236,72,153,0.2), transparent 45%)'
+          mesh.style.opacity = '0.9'
+          mesh.style.pointerEvents = 'none'
+          mesh.style.zIndex = '0'
+
+          var scan = document.createElement('div')
+          scan.className = 'absolute inset-0'
+          scan.style.background =
+            'linear-gradient(120deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 45%)'
+          scan.style.animation = 'mathGalaxyScan 6s ease-in-out infinite'
+          scan.style.mixBlendMode = 'screen'
+          scan.style.pointerEvents = 'none'
+          scan.style.zIndex = '0'
+
+          function orb(size, left, top, color, blur, duration, delay) {
+            var o = document.createElement('div')
+            o.className = 'absolute rounded-full'
+            o.style.width = size
+            o.style.height = size
+            o.style.left = left
+            o.style.top = top
+            o.style.background = color
+            o.style.filter = 'blur(' + blur + ')'
+            o.style.opacity = '0.7'
+            o.style.animation = 'mathGalaxyFloat ' + duration + ' ease-in-out infinite'
+            o.style.animationDelay = delay
+            o.style.mixBlendMode = 'screen'
+            o.style.pointerEvents = 'none'
+            o.style.zIndex = '0'
+            return o
+          }
+
+          var particles = document.createElement('div')
+          particles.className = 'absolute inset-0'
+          particles.style.pointerEvents = 'none'
+          particles.style.zIndex = '0'
+          for (var i = 0; i < 24; i++) {
+            var dot = document.createElement('div')
+            dot.className = 'absolute rounded-full'
+            var size = Math.random() * 2.5 + 1
+            dot.style.width = size.toFixed(2) + 'px'
+            dot.style.height = size.toFixed(2) + 'px'
+            dot.style.left = Math.floor(Math.random() * 100) + '%'
+            dot.style.top = Math.floor(Math.random() * 100) + '%'
+            dot.style.background = 'rgba(255,255,255,0.7)'
+            dot.style.boxShadow = '0 0 12px rgba(56,189,248,0.6)'
+            dot.style.opacity = (Math.random() * 0.6 + 0.2).toFixed(2)
+            dot.style.animation =
+              'mathGalaxyFloat ' +
+              (Math.random() * 8 + 6).toFixed(2) +
+              's ease-in-out infinite'
+            particles.appendChild(dot)
+          }
+
+          var heading = banner.querySelector('h1')
+          if (heading) {
+            heading.classList.add(
+              'drop-shadow-[0_10px_30px_rgba(15,23,42,0.6)]'
+            )
+            heading.style.backgroundImage =
+              'linear-gradient(90deg, rgba(255,255,255,0.95), rgba(191,219,254,0.9), rgba(216,180,254,0.85))'
+            heading.style.webkitBackgroundClip = 'text'
+            heading.style.color = 'transparent'
+            heading.style.animation = 'mathGalaxyShift 8s ease-in-out infinite'
+            heading.style.backgroundSize = '200% 200%'
+          }
+
+          banner.prepend(orb('180px', '-40px', '-30px', 'linear-gradient(135deg, rgba(59,130,246,0.9), rgba(14,165,233,0.1))', '12px', '10s', '-1s'))
+          banner.prepend(orb('220px', '60%', '-80px', 'linear-gradient(135deg, rgba(168,85,247,0.7), rgba(56,189,248,0.1))', '16px', '12s', '-3s'))
+          banner.prepend(orb('160px', '70%', '55%', 'linear-gradient(135deg, rgba(236,72,153,0.5), rgba(56,189,248,0.1))', '14px', '9s', '-2s'))
+          banner.prepend(particles)
+          banner.prepend(scan)
+          banner.prepend(mesh)
+          banner.prepend(grid)
+        }
+
+        function apply() {
+          injectStyles()
+          var banner = findBanner()
+          if (!banner) return
+          enhanceBanner(banner)
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', apply)
+        } else {
+          apply()
+        }
+
+        var root = document.getElementById('root')
+        if (root && window.MutationObserver) {
+          var observer = new MutationObserver(function () {
+            apply()
+          })
+          observer.observe(root, { childList: true, subtree: true })
+        }
+      })()
+    </script>
+
   <style>
     .exit-btn {
       position: fixed;
