@@ -1877,8 +1877,49 @@ const studyLibrary = {
         id: 'physics-flashcards',
         title: 'Physics Flashcards - Electricity Concepts',
         image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop',
-        locked: true,
-        flashcards: [],
+        flashcards: [
+          { front: 'What is static electricity?', back: 'Build-up of electric charge on the surface of objects. Charges don\'t move - they stay in one place. Caused by imbalance of electrons and protons.' },
+          { front: 'What is the Law of Electric Charges?', back: 'Like charges REPEL (push away): + and + OR - and -\nOpposite charges ATTRACT (pull together): + and -' },
+          { front: 'What are the three ways to charge objects?', back: 'FRICTION: Rubbing transfers electrons\nCONDUCTION: Direct contact transfers charge\nINDUCTION: Charged object nearby causes separation without touching' },
+          { front: 'What is current electricity?', back: 'Continuous flow of electrons through a conductor. Unlike static, charges are MOVING constantly. Requires a complete circuit (closed loop).' },
+          { front: 'What is voltage (V)?', back: 'Electrical pressure or "push" that moves electrons through a circuit. Measured in Volts (V). Think: the force that pushes water through a pipe.' },
+          { front: 'What is current (I)?', back: 'Rate of flow of electric charge (electrons). Measured in Amperes (A). Think: how much water flows through a pipe per second.' },
+          { front: 'What is resistance (R)?', back: 'Opposition to flow of current. Measured in Ohms (Ω). Think: friction that slows down water flow in a pipe.' },
+          { front: 'What is Ohm\'s Law?', back: 'V = I × R\nVoltage = Current × Resistance\nIf you know any 2 values, you can find the 3rd.' },
+          { front: 'How do you calculate current using Ohm\'s Law?', back: 'I = V / R\nCurrent = Voltage ÷ Resistance\nExample: 12V ÷ 4Ω = 3A' },
+          { front: 'How do you calculate resistance using Ohm\'s Law?', back: 'R = V / I\nResistance = Voltage ÷ Current\nExample: 12V ÷ 3A = 4Ω' },
+          { front: 'What is a series circuit?', back: 'ONE path for current to flow. Components connected end-to-end. Current is SAME everywhere. Voltage DIVIDES among components. If one breaks, ALL stop working.' },
+          { front: 'What is a parallel circuit?', back: 'MULTIPLE paths for current. Components connected across same two points. Voltage is SAME across all branches. Current DIVIDES among paths. If one breaks, others KEEP working.' },
+          { front: 'In a series circuit, what happens to current?', back: 'Current is the SAME at all points in the circuit.\nI₁ = I₂ = I₃\nElectrons have only one path to follow.' },
+          { front: 'In a series circuit, what happens to voltage?', back: 'Voltage DIVIDES among components.\nV_total = V₁ + V₂ + V₃\nEach component gets a portion of the total voltage.' },
+          { front: 'In a parallel circuit, what happens to voltage?', back: 'Voltage is the SAME across all branches.\nV₁ = V₂ = V₃\nEach path gets the full battery voltage.' },
+          { front: 'In a parallel circuit, what happens to current?', back: 'Current DIVIDES among branches.\nI_total = I₁ + I₂ + I₃\nMore paths = more total current drawn.' },
+          { front: 'What is electrical power (P)?', back: 'Rate at which electrical energy is used or produced. Measured in Watts (W). Higher wattage = more energy used per second. 1000W = 1 Kilowatt (kW).' },
+          { front: 'What is the power formula?', back: 'P = V × I\nPower = Voltage × Current\nExample: 120V × 0.5A = 60W' },
+          { front: 'What is the difference between energy and power?', back: 'POWER: How fast you use energy (Watts)\nENERGY: Total amount used over time (Joules or kWh)\nEnergy = Power × Time' },
+          { front: 'How do you calculate the cost of electricity?', back: 'Cost = (Power in kW) × (Time in hours) × (Rate per kWh)\nExample: 1.5 kW heater × 8 hours × $0.12/kWh = $1.44' },
+          { front: 'What is a conductor?', back: 'Material that allows electricity to flow easily. Examples: copper, metals, water with minerals. Low resistance to current flow.' },
+          { front: 'What is an insulator?', back: 'Material that resists flow of electricity. Examples: rubber, plastic, wood, glass. High resistance to current flow. Used for safety.' },
+          { front: 'What is a circuit breaker?', back: 'Safety switch that automatically opens (trips) when too much current flows. Prevents fires and electrocution. Can be reset after fixing the problem.' },
+          { front: 'What is a fuse?', back: 'Safety device with thin wire that melts if too much current flows. Breaks the circuit to prevent fires. Must be replaced after it "blows".' },
+          { front: 'What is grounding?', back: 'Third prong on plug connects to ground (Earth). Provides safe path for excess electricity. Prevents shocks if device has internal short. Metal appliances MUST be grounded.' },
+          { front: 'Why is electricity dangerous?', back: 'Electric current can disrupt your heart rhythm. As little as 0.1A (100mA) through heart can be fatal. High voltage causes severe burns. Electricity takes easiest path to ground - could be through YOU.' },
+          { front: 'What does an ammeter measure?', back: 'Measures electric current (I) in Amperes (A). Must be connected in SERIES with the component. Symbol: Circle with "A" inside.' },
+          { front: 'What does a voltmeter measure?', back: 'Measures voltage (V) in Volts. Must be connected in PARALLEL across the component. Symbol: Circle with "V" inside.' },
+          { front: 'What are the circuit symbol components?', back: 'Battery: Long line (+) and short line (-)\nWire: Straight line\nBulb/Resistor: Zigzag or circle with X\nSwitch: Break in line that can open/close\nAmmeter: Circle with A\nVoltmeter: Circle with V' },
+          { front: 'What happens when you add more bulbs in series?', back: 'More resistance, so dimmer light. Current decreases. Total resistance increases (R_total = R₁ + R₂ + R₃). Voltage divides among more bulbs.' },
+          { front: 'What happens when you add more branches in parallel?', back: 'Each bulb stays bright. More total current drawn. Each branch has same voltage. More paths = easier for current to flow (less total resistance).' },
+          { front: 'What factors affect resistance?', back: 'LENGTH: Longer wire = MORE resistance\nTHICKNESS: Thinner wire = MORE resistance\nMATERIAL: Copper (low) vs Rubber (high)\nTEMPERATURE: Hotter = MORE resistance (usually)' },
+          { front: 'If a 12V battery powers a 3Ω resistor, what is the current?', back: 'Use I = V / R\nI = 12V / 3Ω = 4A\nThe current is 4 Amperes.' },
+          { front: 'If 2A of current flows through a 6Ω resistor, what is the voltage?', back: 'Use V = I × R\nV = 2A × 6Ω = 12V\nThe voltage is 12 Volts.' },
+          { front: 'A 100W bulb runs for 10 hours. How much energy is used?', back: 'Energy = Power × Time\n= 100W × 10h = 1000 Wh = 1 kWh\nEnergy used is 1 kilowatt-hour.' },
+          { front: 'What is a load in a circuit?', back: 'Device that uses electrical energy. Examples: bulb, motor, resistor, heater. Converts electrical energy to light, motion, or heat.' },
+          { front: 'What makes a complete circuit?', back: 'Must have: Power source (battery), Wires (conductor), Load (bulb/resistor), Complete loop (closed path). If any part is broken, current stops flowing.' },
+          { front: 'Why do homes use parallel circuits?', back: 'Each outlet/appliance works independently. If one device breaks, others keep working. Each device gets full voltage (120V). Can control devices separately.' },
+          { front: 'What happens if a circuit is short-circuited?', back: 'Unintended path with very low resistance forms. HUGE current flows. Can cause: fires, melted wires, battery damage. Circuit breaker/fuse should stop it.' },
+          { front: 'How does a light switch work?', back: 'Opens or closes the circuit. OPEN: Gap in circuit, no current flows, light OFF. CLOSED: Complete path, current flows, light ON.' },
+          { front: 'What is the power of a device using 120V and 5A?', back: 'P = V × I\nP = 120V × 5A = 600W\nThe power is 600 Watts.' }
+        ],
         notes: []
       },
       {
@@ -2188,27 +2229,321 @@ const studyLibrary = {
         notes: []
       },
       {
-        id: 'physics-advanced-quiz',
-        title: 'Physics Advanced Quiz - Circuit Analysis & Power',
+        id: 'physics-practice-1',
+        title: 'Physics Practice Quiz 1 - Static & Current Electricity',
         image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop',
-        locked: true,
-        quiz: [],
+        quiz: [
+          {
+            question: 'What type of electricity is created when you rub a balloon on your hair?',
+            options: ['Current electricity', 'Static electricity', 'Magnetic electricity', 'Thermal electricity'],
+            correct: 1,
+            explanation: 'Static electricity is created by friction - rubbing transfers electrons from your hair to the balloon, creating a build-up of charge.'
+          },
+          {
+            question: 'Two objects both have positive charges. What will they do?',
+            options: ['Attract each other', 'Repel each other', 'Nothing', 'Create a spark'],
+            correct: 1,
+            explanation: 'Like charges repel. Both positive charges will push away from each other.'
+          },
+          {
+            question: 'What is voltage?',
+            options: ['Flow of electrons', 'Electrical pressure', 'Opposition to current', 'Energy used'],
+            correct: 1,
+            explanation: 'Voltage is the electrical pressure or "push" that moves electrons through a circuit, measured in Volts (V).'
+          },
+          {
+            question: 'What is current measured in?',
+            options: ['Volts', 'Ohms', 'Amperes', 'Watts'],
+            correct: 2,
+            explanation: 'Current (I) is measured in Amperes (A). It represents the rate of flow of electric charge.'
+          },
+          {
+            question: 'If V = 12V and R = 4Ω, what is I?',
+            options: ['3A', '8A', '16A', '48A'],
+            correct: 0,
+            explanation: 'Using Ohm\'s Law: I = V/R = 12V / 4Ω = 3A'
+          },
+          {
+            question: 'What does resistance measure?',
+            options: ['Energy', 'Opposition to current flow', 'Speed of electrons', 'Power'],
+            correct: 1,
+            explanation: 'Resistance (R) measures the opposition to the flow of electric current, measured in Ohms (Ω).'
+          },
+          {
+            question: 'Which material is a good conductor?',
+            options: ['Rubber', 'Plastic', 'Copper', 'Wood'],
+            correct: 2,
+            explanation: 'Copper is an excellent conductor - it allows electricity to flow easily through it. Rubber, plastic, and wood are insulators.'
+          },
+          {
+            question: 'If V = 24V and I = 3A, what is R?',
+            options: ['8Ω', '21Ω', '27Ω', '72Ω'],
+            correct: 0,
+            explanation: 'Using Ohm\'s Law: R = V/I = 24V / 3A = 8Ω'
+          },
+          {
+            question: 'What is the purpose of an insulator?',
+            options: ['Increase current', 'Prevent flow of electricity', 'Store charge', 'Generate voltage'],
+            correct: 1,
+            explanation: 'Insulators resist the flow of electricity and are used for safety to prevent shocks.'
+          },
+          {
+            question: 'If I = 5A and R = 6Ω, what is V?',
+            options: ['1.2V', '11V', '30V', '0.83V'],
+            correct: 2,
+            explanation: 'Using Ohm\'s Law: V = I × R = 5A × 6Ω = 30V'
+          }
+        ],
         notes: []
       },
       {
-        id: 'space-advanced-quiz',
-        title: 'Space Advanced Quiz - Planetary Science & Exploration',
-        image: 'https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=800&h=400&fit=crop',
-        locked: true,
-        quiz: [],
+        id: 'physics-practice-2',
+        title: 'Physics Practice Quiz 2 - Series & Parallel Circuits',
+        image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=400&fit=crop',
+        quiz: [
+          {
+            question: 'In a series circuit, how does current behave?',
+            options: ['Divides among components', 'Same everywhere', 'Increases at each bulb', 'Decreases at resistors'],
+            correct: 1,
+            explanation: 'In series circuits, current is the SAME at all points because there is only one path for electrons to flow.'
+          },
+          {
+            question: 'In a series circuit, how does voltage behave?',
+            options: ['Same everywhere', 'Divides among components', 'Only at battery', 'Increases'],
+            correct: 1,
+            explanation: 'In series circuits, voltage DIVIDES among components: V_total = V₁ + V₂ + V₃'
+          },
+          {
+            question: 'What happens if one bulb breaks in a series circuit?',
+            options: ['Others stay on', 'All go out', 'They get brighter', 'Battery explodes'],
+            correct: 1,
+            explanation: 'In series circuits, if one component breaks, the entire circuit is broken and ALL components stop working.'
+          },
+          {
+            question: 'In a parallel circuit, how does voltage behave?',
+            options: ['Divides among branches', 'Same across all branches', 'Only at battery', 'Decreases'],
+            correct: 1,
+            explanation: 'In parallel circuits, voltage is the SAME across all branches. Each path gets the full battery voltage.'
+          },
+          {
+            question: 'In a parallel circuit, how does current behave?',
+            options: ['Same everywhere', 'Divides among branches', 'Only in main wire', 'Zero'],
+            correct: 1,
+            explanation: 'In parallel circuits, current DIVIDES among branches: I_total = I₁ + I₂ + I₃'
+          },
+          {
+            question: 'What happens if one bulb breaks in a parallel circuit?',
+            options: ['All go out', 'Others stay on', 'They get dimmer', 'Battery dies'],
+            correct: 1,
+            explanation: 'In parallel circuits, if one branch fails, the other branches continue working independently.'
+          },
+          {
+            question: 'Why are home outlets wired in parallel?',
+            options: ['Cheaper', 'Each device works independently', 'Uses less power', 'Safer than series'],
+            correct: 1,
+            explanation: 'Parallel wiring allows each device to work independently and receive full voltage, even if others are turned off.'
+          },
+          {
+            question: 'What happens when you add more bulbs in series?',
+            options: ['Get brighter', 'Get dimmer', 'Stay same', 'Voltage increases'],
+            correct: 1,
+            explanation: 'Adding more bulbs in series increases total resistance, so current decreases and bulbs get dimmer.'
+          },
+          {
+            question: 'In parallel, what does each branch receive?',
+            options: ['Different voltages', 'Same voltage', 'No voltage', 'Half voltage'],
+            correct: 1,
+            explanation: 'Each parallel branch receives the full battery voltage. V₁ = V₂ = V₃ = V_battery'
+          },
+          {
+            question: 'A 12V battery powers 3 identical bulbs in series. Voltage across each bulb?',
+            options: ['12V', '6V', '4V', '3V'],
+            correct: 2,
+            explanation: 'Voltage divides equally in series: 12V ÷ 3 bulbs = 4V per bulb'
+          }
+        ],
         notes: []
       },
       {
-        id: 'biology-master-quiz',
-        title: 'Biology Master Quiz - Comprehensive Test Prep',
-        image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=400&fit=crop',
-        locked: true,
-        quiz: [],
+        id: 'physics-practice-3',
+        title: 'Physics Practice Quiz 3 - Power & Safety',
+        image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&h=400&fit=crop',
+        quiz: [
+          {
+            question: 'What is the formula for electrical power?',
+            options: ['P = V / I', 'P = V × I', 'P = I / V', 'P = V + I'],
+            correct: 1,
+            explanation: 'Power = Voltage × Current, or P = V × I, measured in Watts (W).'
+          },
+          {
+            question: 'A device uses 120V and 2A. What is its power?',
+            options: ['60W', '122W', '240W', '118W'],
+            correct: 2,
+            explanation: 'P = V × I = 120V × 2A = 240W'
+          },
+          {
+            question: 'What does a watt measure?',
+            options: ['Energy stored', 'Rate of energy use', 'Resistance', 'Charge'],
+            correct: 1,
+            explanation: 'A watt (W) measures power - the rate at which energy is used or produced per second.'
+          },
+          {
+            question: 'What is the purpose of a circuit breaker?',
+            options: ['Increase voltage', 'Stop overload current', 'Store energy', 'Measure power'],
+            correct: 1,
+            explanation: 'A circuit breaker automatically opens (trips) when too much current flows, preventing fires and damage.'
+          },
+          {
+            question: 'What does the third prong on a plug do?',
+            options: ['Increase power', 'Ground connection', 'Extra voltage', 'Nothing'],
+            correct: 1,
+            explanation: 'The third prong provides a ground connection - a safe path for excess electricity to prevent shocks.'
+          },
+          {
+            question: 'If a 100W bulb runs for 5 hours, how much energy is used?',
+            options: ['20 kWh', '0.5 kWh', '500 Wh', '100 kWh'],
+            correct: 1,
+            explanation: 'Energy = Power × Time = 100W × 5h = 500 Wh = 0.5 kWh'
+          },
+          {
+            question: 'What is a fuse?',
+            options: ['Wire that melts if overloaded', 'Energy storage', 'Voltage regulator', 'Power source'],
+            correct: 0,
+            explanation: 'A fuse contains a thin wire that melts and breaks the circuit if too much current flows, preventing fires.'
+          },
+          {
+            question: 'Why is electricity dangerous to humans?',
+            options: ['Makes you glow', 'Can disrupt heart rhythm', 'Makes you magnetic', 'Nothing'],
+            correct: 1,
+            explanation: 'Electric current can disrupt your heart rhythm. As little as 0.1A through the heart can be fatal.'
+          },
+          {
+            question: 'What should you NEVER do with electricity?',
+            options: ['Use near water', 'Turn off switches', 'Use insulators', 'Call electrician'],
+            correct: 0,
+            explanation: 'Never use electrical devices near water! Water conducts electricity and can cause deadly shocks.'
+          },
+          {
+            question: 'A heater uses 1500W for 4 hours. At $0.10/kWh, what is the cost?',
+            options: ['$0.60', '$6.00', '$0.15', '$1.50'],
+            correct: 0,
+            explanation: 'Energy = 1.5kW × 4h = 6 kWh. Cost = 6 kWh × $0.10 = $0.60'
+          }
+        ],
+        notes: []
+      },
+      {
+        id: 'physics-worksheet-1',
+        title: 'Physics Worksheet 1 - Ohm\'s Law Calculations',
+        image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop',
+        quiz: [
+          {
+            question: 'A circuit has a voltage of 24V and a resistance of 6Ω. Calculate the current.',
+            options: ['2A', '4A', '18A', '30A'],
+            correct: 1,
+            explanation: 'Use I = V/R. Current = 24V ÷ 6Ω = 4A. Remember: when voltage goes up or resistance goes down, current increases.'
+          },
+          {
+            question: 'A light bulb draws 0.5A from a 120V outlet. What is its resistance?',
+            options: ['60Ω', '120Ω', '240Ω', '119.5Ω'],
+            correct: 2,
+            explanation: 'Use R = V/I. Resistance = 120V ÷ 0.5A = 240Ω. Higher resistance means less current flows.'
+          },
+          {
+            question: 'A resistor has 3A flowing through it with a resistance of 8Ω. Find the voltage.',
+            options: ['2.67V', '11V', '24V', '5V'],
+            correct: 2,
+            explanation: 'Use V = I × R. Voltage = 3A × 8Ω = 24V. More current or more resistance means higher voltage needed.'
+          },
+          {
+            question: 'If you double the voltage and keep resistance constant, what happens to current?',
+            options: ['Stays same', 'Doubles', 'Halves', 'Quadruples'],
+            correct: 1,
+            explanation: 'Current doubles. I = V/R, so if V doubles and R stays constant, I must double too.'
+          },
+          {
+            question: 'A 9V battery powers a device drawing 0.03A. What is the resistance?',
+            options: ['0.27Ω', '3Ω', '27Ω', '300Ω'],
+            correct: 3,
+            explanation: 'Use R = V/I. Resistance = 9V ÷ 0.03A = 300Ω. Very high resistance means very little current flows.'
+          }
+        ],
+        notes: []
+      },
+      {
+        id: 'physics-worksheet-2',
+        title: 'Physics Worksheet 2 - Series & Parallel Circuits',
+        image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=400&fit=crop',
+        quiz: [
+          {
+            question: 'Three 4Ω resistors are connected in series to a 12V battery. What is the total resistance?',
+            options: ['4Ω', '8Ω', '12Ω', '1.33Ω'],
+            correct: 2,
+            explanation: 'In series: R_total = R₁ + R₂ + R₃ = 4Ω + 4Ω + 4Ω = 12Ω. Resistances add up in series.'
+          },
+          {
+            question: 'Using the circuit from Q1, what is the total current?',
+            options: ['0.5A', '1A', '3A', '4A'],
+            correct: 1,
+            explanation: 'Use I = V/R. Current = 12V ÷ 12Ω = 1A. This same current flows through all components in series.'
+          },
+          {
+            question: 'Using the circuit from Q1, what is the voltage drop across each resistor?',
+            options: ['12V', '6V', '4V', '3V'],
+            correct: 2,
+            explanation: 'Voltage divides equally: 12V ÷ 3 resistors = 4V per resistor. We can verify: V = I × R = 1A × 4Ω = 4V.'
+          },
+          {
+            question: 'Three identical bulbs are in parallel with a 12V battery. What voltage does each receive?',
+            options: ['4V', '6V', '12V', '36V'],
+            correct: 2,
+            explanation: 'In parallel, each branch receives the FULL battery voltage. All bulbs get 12V regardless of how many there are.'
+          },
+          {
+            question: 'In a parallel circuit, if Branch 1 has 2A and Branch 2 has 3A, what is total current?',
+            options: ['1A', '2.5A', '5A', '6A'],
+            correct: 2,
+            explanation: 'In parallel: I_total = I₁ + I₂ = 2A + 3A = 5A. Currents add up in parallel circuits.'
+          }
+        ],
+        notes: []
+      },
+      {
+        id: 'physics-worksheet-3',
+        title: 'Physics Worksheet 3 - Power & Energy Calculations',
+        image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&h=400&fit=crop',
+        quiz: [
+          {
+            question: 'A device operates at 120V and draws 5A. What is its power consumption?',
+            options: ['24W', '115W', '125W', '600W'],
+            correct: 3,
+            explanation: 'Use P = V × I. Power = 120V × 5A = 600W. This device uses 600 joules of energy per second.'
+          },
+          {
+            question: 'A 60W light bulb runs for 10 hours. How much energy does it use in kWh?',
+            options: ['0.06 kWh', '0.6 kWh', '6 kWh', '600 kWh'],
+            correct: 1,
+            explanation: 'Energy = Power × Time = 60W × 10h = 600 Wh = 0.6 kWh. Remember: 1000 Wh = 1 kWh.'
+          },
+          {
+            question: 'If electricity costs $0.12/kWh, what is the cost to run a 1500W heater for 8 hours?',
+            options: ['$0.96', '$1.44', '$14.40', '$9.60'],
+            correct: 1,
+            explanation: 'Energy = 1.5kW × 8h = 12 kWh. Cost = 12 kWh × $0.12 = $1.44. The heater costs about $1.44 for 8 hours.'
+          },
+          {
+            question: 'A laptop charger outputs 19V and 3A. What is its power output?',
+            options: ['6.33W', '16W', '22W', '57W'],
+            correct: 3,
+            explanation: 'Use P = V × I. Power = 19V × 3A = 57W. The charger delivers 57 watts to charge the laptop.'
+          },
+          {
+            question: 'Which uses more energy: 100W bulb for 5 hours OR 1000W microwave for 30 minutes?',
+            options: ['Bulb uses more', 'Same', 'Microwave uses more', 'Cannot determine'],
+            correct: 1,
+            explanation: 'Bulb: 100W × 5h = 500 Wh. Microwave: 1000W × 0.5h = 500 Wh. They use the SAME energy! Power × time matters, not just power.'
+          }
+        ],
         notes: []
       },
       {
@@ -8165,46 +8500,103 @@ Student question: ${userMessage}`
       
       <div className="max-w-6xl mx-auto p-4 md:p-6">
         <div className="mb-8">
-          <div className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 md:p-10 text-white shadow-2xl overflow-hidden">
-            {/* Animated background elements */}
-            <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 rounded-3xl p-8 md:p-10 text-white shadow-2xl overflow-hidden border border-white/10 group">
+            {/* Ultra-advanced animated background layers */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e520_1px,transparent_1px),linear-gradient(to_bottom,#4f46e520_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] animate-pulse"></div>
+            
+            {/* Animated gradient orbs with better physics */}
+            <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-emerald-500/30 to-teal-500/20 rounded-full blur-3xl animate-pulse" style={{ animation: 'float 8s ease-in-out infinite' }}></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-500/30 to-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animation: 'float 10s ease-in-out infinite reverse', animationDelay: '1s' }}></div>
+            <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-purple-500/30 to-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animation: 'float 12s ease-in-out infinite', animationDelay: '2s' }}></div>
+            
+            {/* Scanning line effect */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-blue-400 to-transparent top-0" style={{ animation: 'scan 3s ease-in-out infinite' }}></div>
+            </div>
+            
+            {/* Enhanced floating particles with trails */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(30)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animation: `float ${5 + Math.random() * 10}s ease-in-out infinite`,
+                    animationDelay: `${Math.random() * 5}s`
+                  }}
+                >
+                  <div className="w-1 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg shadow-blue-500/50"></div>
+                  <div className="absolute top-0 left-0 w-20 h-px bg-gradient-to-r from-blue-400/50 to-transparent -rotate-45"></div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Mesh gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 mix-blend-overlay"></div>
+            
+            {/* Noise texture */}
+            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")' }}></div>
             
             <div className="relative z-10">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl animate-pulse">
-                    <BookOpen className="w-10 h-10" />
+                  <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl group-hover:shadow-emerald-500/50 transition-all duration-500">
+                    {/* Rotating border effect */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"></div>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-2xl opacity-75 blur animate-pulse"></div>
+                    <div className="absolute inset-0 rounded-2xl border-2 border-white/20 group-hover:border-white/40 transition-colors duration-500"></div>
+                    
+                    {/* Icon with 3D effect */}
+                    <BookOpen className="w-10 h-10 relative z-10 drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style={{ filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.5))' }} />
+                    
+                    {/* Corner accents */}
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-emerald-400 rounded-tl-lg"></div>
+                    <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-blue-400 rounded-tr-lg"></div>
+                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-purple-400 rounded-bl-lg"></div>
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-pink-400 rounded-br-lg"></div>
                   </div>
                   <div>
-                    <h1 className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    <h1 className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-2xl animate-gradient" style={{ backgroundSize: '200% 200%' }}>
                       Science Study Library
                     </h1>
                     <div className="flex items-center gap-3 flex-wrap">
-                      <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-300 text-sm font-semibold backdrop-blur">
+                      <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
                         Grade 9
                       </span>
-                      <span className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold backdrop-blur">
+                      <span className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
                         Appleby College
                       </span>
                     </div>
                   </div>
                 </div>
                 
-                <div className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl font-bold flex items-center gap-2 shadow-lg">
-                  <Trophy className="w-5 h-5" />
-                  <span>Achievements</span>
-                  <span className="px-2 py-1 bg-white/20 rounded-full text-xs">
+                <button
+                  onClick={() => setShowAchievements(true)}
+                  className="relative px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl font-bold flex items-center gap-2 shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border border-yellow-400/50 overflow-hidden group/btn"
+                >
+                  {/* Animated shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                  
+                  {/* Rotating trophy */}
+                  <Trophy className="w-5 h-5 relative z-10 group-hover/btn:rotate-12 group-hover/btn:scale-110 transition-transform duration-300" />
+                  <span className="relative z-10">Achievements</span>
+                  <span className="relative z-10 px-2 py-1 bg-white/20 rounded-full text-xs backdrop-blur-xl border border-white/20">
                     {unlockedAchievements.size}/{achievements.length}
                   </span>
-                </div>
+                  
+                  {/* Glow pulse */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/50 to-orange-400/50 blur-xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                </button>
               </div>
               
               <div className="mb-6">
-                <div className="inline-block bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-2xl p-1 shadow-2xl">
-                  <div className="bg-slate-900/80 backdrop-blur rounded-xl px-6 py-3">
-                    <p className="text-white font-black text-xl md:text-2xl tracking-wide text-center">
+                <div className="inline-block bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-2xl p-1 shadow-2xl hover:shadow-emerald-500/50 transition-all group">
+                  <div className="bg-slate-900/80 backdrop-blur-xl rounded-xl px-6 py-3 group-hover:bg-slate-900/90 transition-all">
+                    <p className="text-white font-black text-xl md:text-2xl tracking-wide text-center bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text">
                       🔌 Plug In. 📚 Study Smart. 🚀 Succeed Fast.
                     </p>
                   </div>
@@ -8217,45 +8609,71 @@ Student question: ${userMessage}`
                 <span className="text-purple-400 font-bold"> interactive diagrams</span>
               </p>
               
-              <div className="flex items-center gap-6 mt-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
-                  <div>
-                    <p className="text-3xl font-bold text-white">{readSections.size}</p>
-                    <p className="text-xs text-slate-400">Sections Completed</p>
+              <div className="flex items-center gap-6 mt-6 flex-wrap">
+                <div className="flex items-center gap-2 group/stat cursor-pointer relative">
+                  <div className="relative">
+                    {/* Multi-layer pulse effect */}
+                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-green-400 animate-ping opacity-75"></div>
+                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-green-400 opacity-50 blur-sm"></div>
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 shadow-lg shadow-green-500/50 group-hover/stat:shadow-green-500/70 transition-shadow"></div>
                   </div>
+                  <div className="group-hover/stat:translate-x-1 transition-all duration-300">
+                    <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-green-400 transition-colors">{readSections.size}</p>
+                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Sections Completed</p>
+                  </div>
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 bg-green-500/0 group-hover/stat:bg-green-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
                 </div>
                 
-                <div className="w-px h-12 bg-slate-700"></div>
-                
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-yellow-400 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                  <div>
-                    <p className="text-3xl font-bold text-white">{unlockedAchievements.size}</p>
-                    <p className="text-xs text-slate-400">Achievements Unlocked</p>
-                  </div>
+                <div className="w-px h-12 bg-gradient-to-b from-transparent via-slate-600 to-transparent relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent blur-sm"></div>
                 </div>
                 
-                <div className="w-px h-12 bg-slate-700"></div>
-                
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <div>
-                    <p className="text-3xl font-bold text-white">{stats.quizCorrect}</p>
-                    <p className="text-xs text-slate-400">Quiz Questions Correct</p>
+                <div className="flex items-center gap-2 group/stat cursor-pointer relative">
+                  <div className="relative">
+                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-yellow-400 animate-ping opacity-75" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-yellow-400 opacity-50 blur-sm"></div>
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg shadow-yellow-500/50 group-hover/stat:shadow-yellow-500/70 transition-shadow"></div>
                   </div>
+                  <div className="group-hover/stat:translate-x-1 transition-all duration-300">
+                    <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-yellow-400 transition-colors">{unlockedAchievements.size}</p>
+                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Achievements Unlocked</p>
+                  </div>
+                  <div className="absolute inset-0 bg-yellow-500/0 group-hover/stat:bg-yellow-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
                 </div>
                 
-                <div className="w-px h-12 bg-slate-700"></div>
+                <div className="w-px h-12 bg-gradient-to-b from-transparent via-slate-600 to-transparent relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent blur-sm"></div>
+                </div>
+                
+                <div className="flex items-center gap-2 group/stat cursor-pointer relative">
+                  <div className="relative">
+                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-blue-400 animate-ping opacity-75" style={{ animationDelay: '1s' }}></div>
+                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-blue-400 opacity-50 blur-sm"></div>
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 shadow-lg shadow-blue-500/50 group-hover/stat:shadow-blue-500/70 transition-shadow"></div>
+                  </div>
+                  <div className="group-hover/stat:translate-x-1 transition-all duration-300">
+                    <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-blue-400 transition-colors">{stats.quizCorrect}</p>
+                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Quiz Questions Correct</p>
+                  </div>
+                  <div className="absolute inset-0 bg-blue-500/0 group-hover/stat:bg-blue-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
+                </div>
+                
+                <div className="w-px h-12 bg-gradient-to-b from-transparent via-slate-600 to-transparent relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent blur-sm"></div>
+                </div>
                 
                 <button
                   onClick={() => setShowStudyPlanner(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors backdrop-blur border border-white/20"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all backdrop-blur-xl border border-white/20 hover:border-white/40 group/planner relative overflow-hidden"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 -translate-x-full group-hover/planner:translate-x-full transition-transform duration-1000"></div>
+                  
+                  <svg className="w-5 h-5 group-hover/planner:rotate-12 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <div className="text-left">
+                  <div className="text-left relative z-10">
                     <p className="text-sm font-bold">Study Planner</p>
                     <p className="text-xs text-slate-300">{studyPlan.length} sessions</p>
                   </div>
