@@ -196,8 +196,9 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
           document.head.appendChild(style)
         }
 
-        function findBanner() {
+        function findBanners() {
           var headings = document.querySelectorAll('h1')
+          var banners = []
           for (var i = 0; i < headings.length; i++) {
             var text = (headings[i].textContent || '').trim()
             if (
@@ -212,17 +213,58 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
                   node.classList.contains('rounded-3xl') &&
                   node.classList.contains('overflow-hidden')
                 ) {
-                  return node
+                  if (banners.indexOf(node) === -1) banners.push(node)
+                  break
                 }
                 node = node.parentElement
               }
             }
           }
-          return null
+          return banners
+        }
+
+        function pickTopBanner(banners) {
+          if (!banners || banners.length === 0) return null
+          var best = banners[0]
+          var bestTop = best.getBoundingClientRect().top
+          for (var i = 1; i < banners.length; i++) {
+            var top = banners[i].getBoundingClientRect().top
+            if (top < bestTop) {
+              bestTop = top
+              best = banners[i]
+            }
+          }
+          return best
+        }
+
+        function restoreBanner(banner) {
+          if (!banner || banner.dataset.mathGalaxy !== '1') return
+          banner.dataset.mathGalaxy = '0'
+          if (banner.dataset.mathGalaxyOriginal) {
+            banner.className = banner.dataset.mathGalaxyOriginal
+          }
+          banner.style.position = ''
+          banner.style.overflow = ''
+          var layers = banner.querySelectorAll('.math-galaxy-layer')
+          for (var i = 0; i < layers.length; i++) {
+            layers[i].remove()
+          }
+          var heading = banner.querySelector('h1')
+          if (heading && heading.dataset.mathGalaxyHeadingOriginal) {
+            heading.className = heading.dataset.mathGalaxyHeadingOriginal
+            if (heading.dataset.mathGalaxyHeadingStyle) {
+              heading.setAttribute('style', heading.dataset.mathGalaxyHeadingStyle)
+            } else {
+              heading.removeAttribute('style')
+            }
+          }
         }
 
         function enhanceBanner(banner) {
           if (!banner || banner.dataset.mathGalaxy === '1') return
+          if (!banner.dataset.mathGalaxyOriginal) {
+            banner.dataset.mathGalaxyOriginal = banner.className
+          }
           banner.dataset.mathGalaxy = '1'
           banner.classList.remove(
             'bg-gradient-to-r',
@@ -243,7 +285,7 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
           banner.style.overflow = 'hidden'
 
           var grid = document.createElement('div')
-          grid.className = 'absolute inset-0 opacity-40'
+          grid.className = 'math-galaxy-layer absolute inset-0 opacity-40'
           grid.style.backgroundImage =
             'linear-gradient(rgba(59,130,246,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.1) 1px, transparent 1px)'
           grid.style.backgroundSize = '36px 36px'
@@ -252,7 +294,7 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
           grid.style.zIndex = '0'
 
           var mesh = document.createElement('div')
-          mesh.className = 'absolute inset-0'
+          mesh.className = 'math-galaxy-layer absolute inset-0'
           mesh.style.background =
             'radial-gradient(circle at 20% 20%, rgba(56,189,248,0.25), transparent 45%), radial-gradient(circle at 75% 30%, rgba(168,85,247,0.25), transparent 40%), radial-gradient(circle at 50% 80%, rgba(236,72,153,0.2), transparent 45%)'
           mesh.style.opacity = '0.9'
@@ -260,7 +302,7 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
           mesh.style.zIndex = '0'
 
           var scan = document.createElement('div')
-          scan.className = 'absolute inset-0'
+          scan.className = 'math-galaxy-layer absolute inset-0'
           scan.style.background =
             'linear-gradient(120deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 45%)'
           scan.style.animation = 'mathGalaxyScan 6s ease-in-out infinite'
@@ -270,7 +312,7 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
 
           function orb(size, left, top, color, blur, duration, delay) {
             var o = document.createElement('div')
-            o.className = 'absolute rounded-full'
+            o.className = 'math-galaxy-layer absolute rounded-full'
             o.style.width = size
             o.style.height = size
             o.style.left = left
@@ -287,12 +329,12 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
           }
 
           var particles = document.createElement('div')
-          particles.className = 'absolute inset-0'
+          particles.className = 'math-galaxy-layer absolute inset-0'
           particles.style.pointerEvents = 'none'
           particles.style.zIndex = '0'
           for (var i = 0; i < 24; i++) {
             var dot = document.createElement('div')
-            dot.className = 'absolute rounded-full'
+            dot.className = 'math-galaxy-layer absolute rounded-full'
             var size = Math.random() * 2.5 + 1
             dot.style.width = size.toFixed(2) + 'px'
             dot.style.height = size.toFixed(2) + 'px'
@@ -310,6 +352,11 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
 
           var heading = banner.querySelector('h1')
           if (heading) {
+            if (!heading.dataset.mathGalaxyHeadingOriginal) {
+              heading.dataset.mathGalaxyHeadingOriginal = heading.className
+              heading.dataset.mathGalaxyHeadingStyle =
+                heading.getAttribute('style') || ''
+            }
             heading.classList.add(
               'drop-shadow-[0_10px_30px_rgba(15,23,42,0.6)]'
             )
@@ -332,9 +379,16 @@ html.compact-mobile .bg-white.rounded-xl.overflow-hidden.cursor-pointer .p-4{pad
 
         function apply() {
           injectStyles()
-          var banner = findBanner()
-          if (!banner) return
-          enhanceBanner(banner)
+          var banners = findBanners()
+          if (!banners || banners.length === 0) return
+          var target = pickTopBanner(banners)
+          for (var i = 0; i < banners.length; i++) {
+            if (banners[i] === target) {
+              enhanceBanner(banners[i])
+            } else {
+              restoreBanner(banners[i])
+            }
+          }
         }
 
         if (document.readyState === 'loading') {
