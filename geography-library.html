@@ -102,83 +102,423 @@
   .modal-body {
     flex: 1;
     overflow-y: auto;
-    padding: 36px 40px 60px;
-    max-width: 900px;
+    padding: 24px 28px 80px;
+    max-width: 820px;
     width: 100%;
     margin: 0 auto;
+    background: #f8f7f5;
   }
   @media (max-width: 640px) {
     .modal-header { padding: 16px 20px; }
-    .modal-body { padding: 24px 20px 48px; }
+    .modal-body { padding: 16px 14px 72px; }
   }
-  .note-section h3 {
-    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
-    color: #f97316; text-transform: uppercase; letter-spacing: 0.05em;
-    margin-bottom: 8px; border-bottom: 2px solid #fff7ed; padding-bottom: 4px;
+
+  /* ── Note section card ── */
+  .note-section {
+    margin-bottom: 12px;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
   }
-  .note-section { margin-bottom: 18px; }
-  .note-section p, .note-section li { font-size: 14px; line-height: 1.65; color: #374151; }
-  .note-section ul { list-style: none; padding: 0; }
-  .note-section ul li { padding: 3px 0 3px 16px; position: relative; }
-  .note-section ul li::before { content: "▸"; position: absolute; left: 0; color: #f97316; font-size: 12px; top: 5px; }
+  .note-section-head {
+    padding: 12px 18px 11px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #f1ede8;
+    background: linear-gradient(135deg, #fffbf7 0%, #fff7f0 100%);
+  }
+  .note-section-head h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    color: #92400e;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+    flex: 1;
+  }
+  .note-section-icon {
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .note-section-badge {
+    background: #f97316;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 0.03em;
+  }
+  .note-section-body {
+    padding: 16px 18px;
+  }
+
+  /* ── Prose paragraphs ── */
+  .note-section-body p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #374151;
+    margin: 0;
+  }
+
+  /* ── Bullet list rows ── */
+  .note-section-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .note-section-body ul li {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #44403c;
+    padding: 10px 14px 10px 40px;
+    position: relative;
+    background: #fafaf9;
+    border-radius: 10px;
+    border: 1px solid #f0ece8;
+    transition: background 0.15s;
+  }
+  .note-section-body ul li:hover { background: #fff8f3; }
+
+  /* Numbered circle bullet */
+  .note-section-body ul li::before {
+    content: attr(data-n);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: #f97316;
+    color: white;
+    font-size: 10px;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    line-height: 22px;
+    text-align: center;
+  }
+
+  /* Strong labels inside bullets */
+  .note-section-body ul li strong {
+    color: #b45309;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+  }
+  .note-section-body ul li em {
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  /* ── Stat / highlight callout chips ── */
+  .note-section-body .highlight {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 1.5px solid #fdba74;
+    border-radius: 12px;
+    padding: 13px 16px;
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: #374151;
+    line-height: 1.7;
+    position: relative;
+    padding-left: 44px;
+  }
+  .note-section-body .highlight::before {
+    content: "💡";
+    position: absolute;
+    left: 14px;
+    top: 13px;
+    font-size: 16px;
+  }
+  .note-section-body .highlight strong { color: #c2410c; }
+
+  /* ── Key terms grid ── */
   .key-terms-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    margin-top: 4px;
   }
+  @media (max-width: 560px) { .key-terms-grid { grid-template-columns: 1fr; } }
   .key-term-card {
-    background: #fff7ed;
-    border-left: 3px solid #f97316;
-    border-radius: 0 8px 8px 0;
-    padding: 8px 12px;
+    background: #fffbf7;
+    border: 1.5px solid #fed7aa;
+    border-radius: 12px;
+    padding: 11px 14px;
+    transition: box-shadow 0.18s, transform 0.18s;
+    cursor: default;
+  }
+  .key-term-card:hover {
+    box-shadow: 0 4px 16px rgba(249,115,22,0.15);
+    transform: translateY(-1px);
   }
   .key-term-card .kt-term {
-    font-weight: 700;
-    font-size: 13px;
+    font-weight: 900;
+    font-size: 12px;
     color: #c2410c;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .key-term-card .kt-term::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f97316;
+    flex-shrink: 0;
   }
   .key-term-card .kt-def {
-    font-size: 13px;
-    color: #374151;
-    line-height: 1.5;
+    font-size: 12.5px;
+    color: #57534e;
+    line-height: 1.6;
   }
+
+  /* ── Diagram container ── */
   #modal-diagram-content svg { width: 100%; height: auto; display: block; }
+  .inline-diagram {
+    background: linear-gradient(135deg, #fafaf9 0%, #f5f4f2 100%);
+    border: 1px solid #e8e4df;
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .inline-diagram svg { width: 100%; height: auto; display: block; }
+
+  /* ── Modal scroll hint ── */
   .scroll-hint {
     position: fixed;
     bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
-    background: #f97316;
+    background: linear-gradient(135deg, #f97316, #ea6c0a);
     color: white;
     font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
+    font-weight: 800;
+    font-size: 12px;
     border: none;
     border-radius: 99px;
-    padding: 10px 20px;
+    padding: 11px 24px;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(249,115,22,0.4);
+    box-shadow: 0 6px 24px rgba(249,115,22,0.5);
     z-index: 200;
     transition: opacity 0.3s, transform 0.3s;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.02em;
   }
-  .scroll-hint:hover { background: #ea6c0a; transform: translateX(-50%) translateY(-2px); }
-  .scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(10px); }
-  .inline-diagram {
-    background: #fafafa;
-    border: 1px solid #f3f4f6;
-    border-radius: 12px;
-    padding: 14px;
+  .scroll-hint:hover { transform: translateX(-50%) translateY(-3px); box-shadow: 0 10px 30px rgba(249,115,22,0.55); }
+  .scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(14px); }
+
+  .note-section-body .highlight {
+    background: #fff7ed;
+    border-left: 3px solid #f97316;
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
     margin-top: 8px;
+    font-size: 13.5px;
+    color: #374151;
+    line-height: 1.6;
   }
-  .inline-diagram svg { width: 100%; height: auto; display: block; }
-  .note-section .highlight {
-    background: #fff7ed; border-left: 3px solid #f97316;
-    padding: 8px 12px; border-radius: 0 8px 8px 0; margin-top: 6px;
-    font-size: 13.5px; color: #374151;
+
+  /* Main page scroll-down indicator */
+  .page-scroll-hint {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 50;
+    pointer-events: none;
+    transition: opacity 0.4s, transform 0.4s;
   }
+  .page-scroll-hint.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  .page-scroll-hint-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .page-scroll-hint-arrow {
+    width: 36px;
+    height: 36px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce 1.5s infinite;
+  }
+  .page-scroll-hint-arrow svg {
+    width: 18px; height: 18px;
+    stroke: #f97316; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+  .objectives-card {
+    background: linear-gradient(135deg, #fff7ed 0%, #fef3e2 100%);
+    border: 1.5px solid #fed7aa;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 4px;
+  }
+  .objectives-card ol {
+    list-style: none;
+    padding: 0;
+    counter-reset: obj-counter;
+  }
+  .objectives-card ol li {
+    counter-increment: obj-counter;
+    padding: 5px 0 5px 30px;
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #374151;
+  }
+  .objectives-card ol li::before {
+    content: counter(obj-counter);
+    position: absolute;
+    left: 0;
+    top: 5px;
+    background: #f97316;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  /* Understand section */
+  .understand-section {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .understand-section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  /* Understand block — standalone card */
+  .understand-block {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .understand-header {
+    background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .understand-header h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: white;
+    line-height: 1.3;
+  }
+  .understand-header .understand-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .accordion-item {
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .accordion-item:last-child { border-bottom: none; }
+  .accordion-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .accordion-btn:hover { background: #faf5ff; }
+  .accordion-num {
+    background: #7c3aed;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .accordion-q {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 700;
+    color: #374151;
+    line-height: 1.45;
+  }
+  .accordion-chevron {
+    color: #9ca3af;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    margin-top: 2px;
+  }
+  .accordion-item.open .accordion-chevron { transform: rotate(90deg); }
+  .accordion-answer {
+    display: none;
+    padding: 0 16px 14px 46px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #374151;
+    background: #faf5ff;
+    border-top: 1px solid #ede9fe;
+  }
+  .accordion-answer strong { color: #6d28d9; }
+  .accordion-item.open .accordion-answer { display: block; }
 </style>
 
   <style>
@@ -220,6 +560,13 @@
 
 <div class="grid" id="grid"></div>
 
+<div class="understand-section" id="understand-section">
+  <div class="understand-section-title">
+    <span>🎯</span>
+    <span>What to Understand</span>
+  </div>
+</div>
+
 <div class="modal-overlay" id="overlay">
   <div class="modal" id="modal">
     <div class="modal-header">
@@ -227,7 +574,17 @@
       <button class="close-btn" onclick="closeModalDirect()">&#x2715;</button>
     </div>
     <div class="modal-body" id="modal-body"></div>
-    <button class="scroll-hint" id="scroll-hint" onclick="scrollToBottom()">Scroll for diagram ↓</button>
+    <button class="scroll-hint hidden" id="scroll-hint" onclick="scrollToBottom()">
+      <span>Scroll for diagram</span><span>↓</span>
+    </button>
+  </div>
+</div>
+
+<!-- Main page scroll indicator -->
+<div class="page-scroll-hint" id="page-scroll-hint">
+  <div class="page-scroll-hint-label">Scroll down</div>
+  <div class="page-scroll-hint-arrow">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 </div>
 
@@ -553,6 +910,12 @@ const lessons = [
   {
     title: "Lesson 20: Resources – Types, Consumption, and Disposal",
     topics: 5,
+    objectives: [
+      { q: "Define natural resources and classify them into four major categories.", a: "Natural resources are things found in the total stock that people find useful. The four categories are: <strong>Renewable</strong> (regenerates if used carefully — fish, forests), <strong>Non-Renewable</strong> (limited, cannot be replaced — fossil fuels, minerals), <strong>Flow</strong> (must be used when/where they occur — wind, solar, water), and <strong>Other</strong> (doesn't fit elsewhere — e.g., Rocky Mountain scenery)." },
+      { q: "Distinguish between mining the resource and maximum sustainable yield.", a: "<strong>Mining the resource</strong> means exploiting a renewable resource faster than it can regenerate — eventually destroying it. <strong>Maximum Sustainable Yield</strong> means harvesting only what nature replaces each year, keeping the resource stable long-term." },
+      { q: "Use the R/P Ratio to calculate the number of years left for a non-renewable resource.", a: "<strong>R/P Ratio = Reserves ÷ Production.</strong> For example, if a country has 500 million barrels in reserve and produces 25 million barrels per year, the R/P Ratio = 500 ÷ 25 = <strong>20 years</strong> remaining." },
+      { q: "Describe ways to use our resources more effectively.", a: "The best options in order: <strong>Reduce</strong> (don't produce the item at all — saves the most), <strong>Reuse</strong> (use items again without processing), <strong>Recycle</strong> (reprocess materials, though only 9% of Canadian plastic was recycled in 2023). A <strong>Circular Economy</strong> designs out waste and keeps materials in use." },
+    ],
     keyTerms: [
       { term: "Total Stock", def: "All parts of the natural environment including energy, living organisms, and non-living materials (e.g. sunlight, trees, water)." },
       { term: "Resource", def: "Anything that can be used to produce goods and services, such as raw materials, workers, money, and land." },
@@ -569,16 +932,22 @@ const lessons = [
       { term: "R/P Ratio", def: "The number of years that the reserves of a non-renewable resource will last at current rates of production." },
     ],
     notes: [
-      { heading: "Total Stock vs. Resource", content: `<ul><li><strong>Total Stock:</strong> Everything in the environment (Energy, Living, Non-living)</li><li><strong>Resource:</strong> Any part of Total Stock that becomes useful to humans</li><li><strong>Natural Resources:</strong> Resources found in the natural environment</li></ul>` },
-      { heading: "Value Evolution Examples", content: `<ul><li><strong>Flint:</strong> Vital in Stone Age → critical for flintlock firearms (17th–19th c.) → virtually no value today</li><li><strong>Oil:</strong> Dug in 1858 at Oil Springs, ON for lamp oil → global power resource only after cars were invented</li></ul>` },
-      { heading: "Four Categories of Resources", content: `<ul><li><strong>Renewable:</strong> Regenerates if used carefully (fish, forests)</li><li><strong>Non-Renewable:</strong> Limited, cannot be replaced (fossil fuels, minerals)</li><li><strong>Flow:</strong> Replaced by natural actions; used when/where they occur (wind, solar, running water)</li><li><strong>Other:</strong> Items that don't fit elsewhere (e.g., Rocky Mountain scenery for tourism)</li></ul>` },
-      { heading: "Management Terms", content: `<ul><li><strong>Mining the Resource:</strong> Exploiting a renewable resource until it is gone (unsustainable)</li><li><strong>Maximum Sustainable Yield:</strong> Harvesting only what nature replaces annually</li><li><strong>R/P Ratio:</strong> Reserves ÷ Production = Years Left</li></ul>` },
-      { heading: "Waste Management", content: `<ul><li><strong>Landfills:</strong> Produce Leachate (toxic liquid) and Methane (burned for power)</li><li><strong>Recycling:</strong> Only 9% of Canadian plastic recycled in 2023; often "downcycled"</li><li><strong>Reducing:</strong> The best option — items never produced, saves the most resources</li><li><strong>Circular Economy:</strong> Waste is designed out; materials kept in use</li></ul>` },
+      { heading: "Total Stock vs. Resource", content: `<ul><li><strong>Total Stock:</strong> Everything in the environment — Energy, Living organisms, and Non-living materials (e.g. sunlight, trees, water, minerals)</li><li><strong>Resource:</strong> Any part of Total Stock that becomes useful to humans (e.g., raw materials, workers, money, land)</li><li><strong>Natural Resources:</strong> Resources found specifically in the natural environment</li></ul>` },
+      { heading: "Four Categories of Resources", content: `<ul><li><strong>Renewable:</strong> Regenerates naturally if not overused — fish, forests. Can become non-renewable if "mined"</li><li><strong>Non-Renewable:</strong> Finite supply, cannot be replaced once used — fossil fuels, minerals</li><li><strong>Flow:</strong> Must be used exactly when and where they occur or the energy is lost — wind, solar, running water</li><li><strong>Other:</strong> Doesn't fit neatly elsewhere — e.g., Rocky Mountain scenery used for tourism</li></ul>` },
+      { heading: "Value Evolution — Resources Change Over Time", content: `<ul><li><strong>Flint:</strong> Crucial for tools/fire in the Stone Age → vital for flintlock firearms (17th–19th c.) → virtually worthless today</li><li><strong>Oil:</strong> First dug in 1858 at Oil Springs, ON — used only as lamp oil → became the world's most important resource after the automobile was invented</li><li>Key idea: a resource's value depends on <em>human needs and technology</em> at the time</li></ul>` },
+      { heading: "Management of Renewable Resources", content: `<ul><li><strong>Mining the Resource:</strong> Exploiting a renewable resource faster than it can regenerate — unsustainable; eventually destroys it (e.g., cod fishery collapse)</li><li><strong>Maximum Sustainable Yield:</strong> Harvesting only what nature replaces each year — keeps the resource stable forever</li><li><strong>R/P Ratio:</strong> Reserves ÷ Production = Years of supply remaining (for non-renewables)</li></ul>` },
+      { heading: "Waste Management Hierarchy", content: `<ul><li><strong>Reduce (Best):</strong> Item is never produced — saves the most energy and resources</li><li><strong>Reuse:</strong> Use the item again without processing</li><li><strong>Recycle:</strong> Reprocess material — but only 9% of Canadian plastic was recycled in 2023; often "downcycled" (lower quality)</li><li><strong>Landfill (Worst):</strong> Produces Leachate (toxic liquid that can poison groundwater) and Methane gas (which can be captured and burned for electricity)</li><li><strong>Circular Economy:</strong> A system where waste is designed out entirely — products are built to be reused or recycled indefinitely</li></ul>` },
     ]
   },
   {
     title: "Lesson 21: Canada's Agricultural Resources",
     topics: 7,
+    objectives: [
+      { q: "List four factors that impact Canadian agriculture.", a: "The four factors are: <strong>Temperature</strong> (Growing Degree Days — commercial farming needs 1,100+ GDDs), <strong>Precipitation</strong> (Aridity Index — below 0.65 is too dry), <strong>Land Quality</strong> (Canada Land Inventory CLI Classes 1–3 are good; Class 7 = no agriculture), and <strong>Location/Economics</strong> (intensive near cities vs. extensive wheat farming on large land)." },
+      { q: "Describe the importance of Climate Factors — Temperature and Moisture — as they relate to agriculture.", a: "<strong>Temperature (GDDs):</strong> The more heat units accumulated, the wider the variety of crops possible. Ontario's milder climate allows tobacco and peaches; the Prairies suit wheat. <strong>Moisture (Aridity Index):</strong> Compares precipitation to potential evaporation. A ratio below 0.65 means the land is too dry for most crops without irrigation." },
+      { q: "Categorize the Classes of farmland in Canada.", a: "The Canada Land Inventory (CLI) rates land Classes <strong>1–3</strong> as good farmland with few limitations. <strong>Class 4</strong> is marginal — usable but with significant challenges. <strong>Classes 5–6</strong> have severe limitations. <strong>Class 7</strong> has no agricultural capability at all." },
+      { q: "Identify the two major types of agriculture in Canada and where you would find them.", a: "<strong>Intensive Agriculture:</strong> Small plots, high labour, high output per hectare — found near major cities (e.g., greenhouses in the Niagara Peninsula or Lower Mainland). <strong>Extensive Agriculture:</strong> Huge land areas, low labour per hectare, mechanized — found on the Prairies (e.g., wheat and canola farming in Saskatchewan)." },
+    ],
     keyTerms: [
       { term: "Growing Degree Days (GDD)", def: "Heat units used to estimate the growth and development of certain crops and pests during the growing season." },
       { term: "Evapotranspiration", def: "The ratio of precipitation to potential evaporation and transpiration." },
@@ -586,28 +955,41 @@ const lessons = [
       { term: "Renewable Resources", def: "Resources that can be regenerated if used carefully." },
     ],
     notes: [
-      { heading: "Four Factors of Agriculture", content: `<ul><li><strong>Temperature (GDDs):</strong> Commercial farming needs 1,100 Growing Degree Days. Higher GDDs = wider variety (tobacco, peaches)</li><li><strong>Precipitation:</strong> Aridity Index measures rain supply vs. demand. Below 0.65 is "dry"</li><li><strong>Land Quality (CLI):</strong> Classes 1–3 = good; Class 4 = marginal; Class 7 = no agriculture</li><li><strong>Location:</strong> Intensive (small land, high labor, near cities) vs. Extensive (huge land, low labor, wheat)</li></ul>` },
-      { heading: "Economic Factors", content: `<ul><li><strong>Land Cost:</strong> High prices near cities force farmers into high-profit products</li><li><strong>Competition:</strong> Oversupply causes price drops</li><li><strong>Sustainability:</strong> Agriculture contributes to greenhouse gases; must manage soil fertility and erosion</li></ul>` },
+      { heading: "The Four Factors of Agriculture", content: `<ul><li><strong>1. Temperature (GDDs):</strong> Commercial farming requires at least 1,100 Growing Degree Days. Higher GDDs allow wider crop variety — tobacco and peaches in southern Ontario; wheat and canola on the Prairies</li><li><strong>2. Precipitation (Aridity Index):</strong> Measures rainfall supply vs. evaporation demand. A ratio below 0.65 = "dry" — too dry for most crops without irrigation</li><li><strong>3. Land Quality (CLI Classes 1–7):</strong> Class 1 has no limitations; Classes 1–4 are usable for commercial crops; Class 4 is marginal; Class 7 has no agricultural capability whatsoever</li><li><strong>4. Location/Economics:</strong> Near cities = intensive farming (small land, high labour, high-value crops). Far from cities = extensive farming (vast land, low labour, mechanized grain)</li></ul>` },
+      { heading: "Intensive vs. Extensive Agriculture", content: `<ul><li><strong>Intensive:</strong> Small plots of land, high labour input, high yield per hectare — found near major cities (e.g., dairy and egg farming in Ontario/Quebec, greenhouses in the Niagara Peninsula)</li><li><strong>Extensive:</strong> Huge land areas, very low labour per hectare, heavily mechanized — found on the Prairies far from cities (e.g., wheat and canola in Saskatchewan and Alberta)</li></ul>` },
+      { heading: "Economic Factors Affecting Farming", content: `<ul><li><strong>Land Cost:</strong> High land prices near cities force farmers toward high-value, high-profit products (e.g., flowers, vegetables, dairy) to justify the cost</li><li><strong>Competition:</strong> If too many farmers grow the same crop, oversupply causes prices to drop — profits fall</li><li><strong>Sustainability:</strong> Agriculture contributes to greenhouse gas emissions; farmers must also manage soil fertility, water use, and erosion to remain viable long-term</li></ul>` },
     ]
   },
   {
     title: "Lesson 22: Canada's Forest Resources",
     topics: 4,
+    objectives: [
+      { q: "Describe Canada's historical use of forests.", a: "In the 1800s, Canada's Old Growth forests (never previously logged) were cleared for farming and to supply timber to Britain. Most forests today are <strong>Second Growth</strong> — regrowing after that original clearing." },
+      { q: "Locate Canada's forest resources.", a: "Canada's forests are spread across the country: <strong>Softwood (66%)</strong> — coniferous, mainly in the Boreal and Pacific regions; <strong>Hardwood (12%)</strong> — deciduous, mainly in southern Ontario and Quebec; <strong>Mixed (22%)</strong> — both types, in transition zones." },
+      { q: "Compare ways to harvest trees.", a: "<strong>Clear Cutting:</strong> All trees removed — fast and cheap but causes erosion and habitat loss. <strong>Shelterwood:</strong> Leave 'parent trees' for seeds and shelter — a middle ground. <strong>Selective Cutting:</strong> Only mature trees are removed — most expensive but best for biodiversity and soil stability." },
+      { q: "Define sustainable forestry and explain how to identify it.", a: "<strong>Sustainable Forestry</strong> means managing forests so they can continue providing resources indefinitely. You can identify it by the <strong>FSC (Forest Stewardship Council) Certification</strong> on wood products. Another tool is the <strong>Wildlife Corridor</strong> — a strip of habitat connecting forests so animals can move, breed, and survive." },
+    ],
     keyTerms: [
       { term: "Old Growth Forest", def: "A forest that has never been logged." },
       { term: "Sustainable Forestry", def: "The use and management of forest ecosystems in an environmentally balanced and enduring way." },
       { term: "Wildlife Corridor", def: "A strip of natural habitat connecting populations of wildlife otherwise separated by cultivated land, roads, cut forests, etc." },
     ],
     notes: [
-      { heading: "Historical Context", content: `<p>Old Growth (never logged) was cleared in the 1800s for farming and UK exports. Most current forests are <strong>Second Growth</strong>.</p>` },
-      { heading: "Forest Types", content: `<ul><li><strong>Softwood (66%):</strong> Coniferous</li><li><strong>Hardwood (12%):</strong> Deciduous</li><li><strong>Mixed (22%):</strong> Both</li></ul>` },
-      { heading: "Harvesting Methods", content: `<ul><li><strong>Clear Cutting:</strong> Fast/cheap; removes all trees. Causes erosion</li><li><strong>Shelterwood:</strong> Leaves "parent trees" for seeds and shelter</li><li><strong>Selective:</strong> Only mature trees; most expensive but best for biodiversity</li></ul>` },
-      { heading: "Sustainable Forestry", content: `<ul><li><strong>FSC Certification:</strong> Proves wood is "ecologically certified"</li><li><strong>Wildlife Corridor:</strong> A "habitat hallway" allowing animals to move, escape, and interbreed</li></ul>` },
+      { heading: "Historical Context", content: `<ul><li><strong>Old Growth Forests</strong> (never previously logged) were cleared extensively in the 1800s — for farming and to supply raw timber to Britain</li><li>Most forests standing today are <strong>Second Growth</strong> — regrowing after the original clearing; they are younger, less diverse, and less complex than old growth</li></ul>` },
+      { heading: "Canada's Forest Composition", content: `<ul><li><strong>Softwood (66%):</strong> Coniferous trees (pine, spruce, fir) — mainly in the Boreal forest and Pacific coast. Used for lumber and pulp/paper</li><li><strong>Hardwood (12%):</strong> Deciduous trees (maple, oak, birch) — mainly in southern Ontario and Quebec. Used for furniture and flooring</li><li><strong>Mixed (22%):</strong> Combination of both types — found in transition zones between boreal and deciduous regions</li></ul>` },
+      { heading: "Harvesting Methods — Compared", content: `<ul><li><strong>Clear Cutting:</strong> All trees in an area are removed at once. Cheapest and fastest, but causes soil erosion, destroys habitat, and can damage watersheds</li><li><strong>Shelterwood Cutting:</strong> Removes most trees but leaves selected "parent trees" — they provide seeds and shelter for new growth. A middle-ground approach</li><li><strong>Selective Cutting:</strong> Only specific mature trees are harvested. Most expensive and labour-intensive, but best for biodiversity and long-term forest health</li></ul>` },
+      { heading: "Sustainable Forestry", content: `<ul><li><strong>FSC Certification (Forest Stewardship Council):</strong> An international label proving wood products come from ecologically managed forests — look for it on packaging</li><li><strong>Wildlife Corridors:</strong> Strips of natural habitat connecting otherwise isolated forest patches — act as "habitat hallways" allowing animals to move, breed with other populations, and avoid inbreeding</li><li>Without corridors, isolated animal populations can become genetically weak and eventually die out</li></ul>` },
     ]
   },
   {
     title: "Lesson 23: Canada's Ocean Resources",
     topics: 5,
+    objectives: [
+      { q: "Differentiate between ground fish, pelagic fish and shellfish.", a: "<strong>Groundfish</strong> live near the ocean bottom (e.g., Cod, Haddock). <strong>Pelagic fish</strong> live near the surface in open water (e.g., Salmon, Herring). <strong>Shellfish</strong> are invertebrates harvested from the ocean floor (e.g., Lobster, Shrimp, Crab)." },
+      { q: "Describe the importance of the Cod Fishery to Canada and explain the reasons for its collapse.", a: "The Grand Banks cod fishery was central to Atlantic Canada's economy and identity for centuries. It collapsed in <strong>1992</strong> due to: overfishing beyond sustainable yield, the introduction of <strong>sonar technology</strong> that located schools precisely, and massive <strong>factory trawlers</strong> that could catch and process fish at industrial scale, depleting stocks faster than they could reproduce." },
+      { q: "Explain how the inshore fishery is a way of life and the offshore fishery is a business.", a: "<strong>Inshore Fishery:</strong> ~85% of workers, small independently owned boats, fishes close to shore — it is a cultural identity and generational tradition, not just income. <strong>Offshore Fishery:</strong> ~15% of workers but accounts for ~90% of total catch — large corporate trawlers, profit-driven, industrial scale." },
+      { q: "Discuss Maximum Sustainable Yield as it relates to fishing.", a: "<strong>Maximum Sustainable Yield (MSY)</strong> is the largest catch that can be taken from a fish stock over an indefinite period without depleting it. In fishing, this means setting quotas so fish can reproduce fast enough to replace what is harvested. The 1992 Cod collapse is a case study in what happens when MSY is ignored — the fishery still hasn't fully recovered." },
+    ],
     keyTerms: [
       { term: "Inshore Fishery", def: "Commercial fishing carried out close to shore in small, independently owned boats." },
       { term: "Offshore Fishery", def: "Commercial fishing carried out farther from shore in larger company-owned boats." },
@@ -615,16 +997,22 @@ const lessons = [
       { term: "Banks", def: "Shallow parts of the continental shelf that are good for fishing." },
     ],
     notes: [
-      { heading: "Fish Classifications", content: `<ul><li><strong>Groundfish (bottom):</strong> Cod</li><li><strong>Pelagic (surface):</strong> Salmon</li><li><strong>Shellfish:</strong> Lobster, Shrimp</li></ul>` },
-      { heading: "Grand Banks Recipe", content: `<p>Shallow water (&lt;200m) allows sunlight to grow plankton. The cold Labrador Current meets the warm Gulf Stream, stirring nutrients.</p>` },
-      { heading: "The 1992 Collapse", content: `<p>Caused by overfishing, sonar technology, and factory trawlers depleting cod stocks faster than they could recover.</p>` },
-      { heading: "Inshore vs. Offshore", content: `<ul><li><strong>Inshore:</strong> 85% of workers; small boats; "way of life"</li><li><strong>Offshore:</strong> 15% of workers; large corporate trawlers; 90% of total catch</li></ul>` },
-      { heading: "Climate Change Impact", content: `<p>Warmer water is less productive; fish migrate toward the poles as oceans heat up.</p>` },
+      { heading: "Fish Classifications", content: `<ul><li><strong>Groundfish (bottom-dwellers):</strong> Live near the ocean floor — Cod, Haddock, Halibut. These were the primary target of the Grand Banks fishery</li><li><strong>Pelagic Fish (surface-swimmers):</strong> Live in open water near the surface — Salmon, Herring, Mackerel</li><li><strong>Shellfish:</strong> Invertebrates harvested from the ocean floor — Lobster, Shrimp, Crab, Scallops</li></ul>` },
+      { heading: "Why the Grand Banks Were So Productive", content: `<ul><li>The continental shelf is <strong>less than 200m deep</strong> — shallow enough for sunlight to reach the bottom and grow plankton (the base of the food chain)</li><li>The cold <strong>Labrador Current</strong> meets the warm <strong>Gulf Stream</strong>, causing upwelling that stirs nutrients from the ocean floor to the surface</li><li>This created one of the most productive fishing grounds on Earth — the cod fishery was central to Atlantic Canada's identity and economy for centuries</li></ul>` },
+      { heading: "The 1992 Cod Collapse", content: `<ul><li><strong>Cause 1 — Overfishing:</strong> Quotas were set too high; fish were harvested faster than they could reproduce</li><li><strong>Cause 2 — Sonar Technology:</strong> Allowed fishing boats to precisely locate schools of cod that were previously impossible to find</li><li><strong>Cause 3 — Factory Trawlers:</strong> Massive industrial ships that could catch, process, and freeze fish at sea — dragging huge nets across the ocean floor</li><li>Result: The Canadian government imposed a <strong>total moratorium</strong> on cod fishing in 1992. The fishery has still not fully recovered over 30 years later</li></ul>` },
+      { heading: "Inshore vs. Offshore Fishery", content: `<ul><li><strong>Inshore (Way of Life):</strong> ~85% of all fishing workers; small independently-owned boats; fishes close to shore; generational tradition and cultural identity — not just a job</li><li><strong>Offshore (Business):</strong> ~15% of workers but responsible for ~90% of total catch; large corporate trawlers; profit-driven and industrial in scale</li></ul>` },
+      { heading: "Climate Change Impact", content: `<ul><li>Warming ocean temperatures make water less productive — warmer water holds less oxygen and supports less plankton</li><li>Fish species are migrating toward the poles as oceans heat up, shifting where and what can be caught</li></ul>` },
     ]
   },
   {
     title: "Lesson 24: Canada's Fresh Water Resources",
     topics: 5,
+    objectives: [
+      { q: "Explain the distribution of water in the world.", a: "Only <strong>3%</strong> of the world's water is freshwater. Of that, most is locked in glaciers and ice caps. A small fraction is accessible as groundwater or surface water. The rest — <strong>97%</strong> — is saltwater in the oceans." },
+      { q: "Describe possible water sources.", a: "Water sources include: <strong>Precipitation</strong> (rain, snow, hail), <strong>Surface water</strong> (rivers, lakes), <strong>Groundwater</strong> (held underground in soil and rock), and <strong>Glaciers/Ice caps</strong>. Water moves between these stores through the water cycle." },
+      { q: "Describe the global water demand and contrast it to Canada's water resources.", a: "Globally, water demand is rising due to population growth and agriculture — many regions face severe scarcity. Canada, by contrast, holds about <strong>20% of the world's fresh surface water</strong>, making it one of the wealthiest nations in water. However, distribution is uneven — many Indigenous communities like <strong>Neskantaga First Nation</strong> have been under boil-water advisories for decades." },
+      { q: "Consider the issues surrounding the sale of Canada's water.", a: "Key issues include: <strong>Corporate extraction</strong> (e.g., Blue Triton/Nestlé pumping 1.1 million L/day in Hillsburg, ON despite Indigenous opposition), the <strong>low cost of extraction permits</strong> vs. the high retail price of bottled water ($1.38/1,000L tap vs. $200/1,000L bottled), and the debate over whether water is a <strong>commodity</strong> to be sold or a <strong>human right</strong> that should be protected." },
+    ],
     keyTerms: [
       { term: "Precipitation", def: "Water from the atmosphere that falls to Earth, including rain, snow, hail, and sleet." },
       { term: "Stores", def: "Places in the world where water is stored." },
@@ -636,14 +1024,21 @@ const lessons = [
       { term: "Bulk Water Exports", def: "Water exports in quantities larger than 20-litre containers." },
     ],
     notes: [
-      { heading: "Key Facts", content: `<ul><li>Only <strong>3%</strong> of world water is fresh</li><li>Water is a <strong>Flow Resource</strong> — must be used where it occurs</li><li>Stored as glaciers or groundwater; moved by the water cycle</li></ul>` },
-      { heading: "Cost Comparison", content: `<div class="highlight">Tap water in Ontario: <strong>$1.38 / 1,000L</strong><br>Bottled water: <strong>$200 / 1,000L</strong></div>` },
-      { heading: "Inequality &amp; Conflict", content: `<ul><li><strong>Neskantaga First Nation:</strong> Boil-water advisory since 1995</li><li><strong>Blue Triton (Nestlé):</strong> Pumps 1.1 million L/day in Hillsburg, ON despite a Haudenosaunee cease-and-desist order</li></ul>` },
+      { heading: "Global Water Distribution", content: `<ul><li><strong>97%</strong> of all water on Earth is saltwater (oceans) — not drinkable or usable for farming without costly treatment</li><li>Only <strong>3%</strong> is freshwater — and most of that is locked in glaciers and polar ice caps</li><li>Less than 1% of all Earth's water is accessible fresh surface water (rivers, lakes, groundwater)</li><li>Water is a <strong>Flow Resource</strong> — it must be used where and when it naturally occurs</li></ul>` },
+      { heading: "Water Sources & the Water Cycle", content: `<ul><li><strong>Precipitation:</strong> Rain, snow, hail, sleet — replenishes surface water and groundwater</li><li><strong>Surface Water:</strong> Rivers, lakes, wetlands — Canada has ~20% of the world's fresh surface water</li><li><strong>Groundwater:</strong> Stored underground in tiny pores in soil and rock (aquifers) — recharged slowly by precipitation</li><li><strong>Extraction vs. Consumption:</strong> Extraction = water is returned after use (e.g., cooling a power plant). Consumption = water is NOT returned (e.g., irrigation — it evaporates or is absorbed by crops)</li></ul>` },
+      { heading: "The Cost of Water", content: `<div class="highlight"><strong>Tap water in Ontario:</strong> $1.38 per 1,000 litres<br><strong>Bottled water:</strong> ~$200 per 1,000 litres<br>That's a <strong>14,000% markup</strong> — yet the plastic bottle often ends up in a landfill</div>` },
+      { heading: "Inequality &amp; Water Conflict in Canada", content: `<ul><li><strong>Neskantaga First Nation (Ontario):</strong> Under a boil-water advisory since 1995 — over 25 years of unsafe tap water on their reserve</li><li><strong>Blue Triton (formerly Nestlé):</strong> Pumps 1.1 million litres per day from a spring in Hillsburg, ON — continuing despite a formal Haudenosaunee cease-and-desist order and widespread community opposition</li><li>The core debate: Is water a <strong>commodity</strong> to be bought and sold, or a <strong>human right</strong> that must be protected?</li></ul>` },
     ]
   },
   {
     title: "Lesson 25: Canada's Energy Resources",
     topics: 4,
+    objectives: [
+      { q: "Define Primary Energy and list some of Canada's main sources.", a: "<strong>Primary Energy</strong> is energy found in nature before any processing or conversion. Canada's main sources include: <strong>Oil and natural gas</strong> (fossil fuels), <strong>Hydroelectricity</strong> (major renewable), <strong>Nuclear</strong>, <strong>Wind</strong>, <strong>Solar</strong>, and <strong>Bioenergy</strong> (burning biomass or biogas from landfills). In 2021, Canada's supply was ~76% fossil fuels and ~16.6% renewables." },
+      { q: "Discuss Canada's role in energy production in the world and provide some trade statistics.", a: "Canada is one of the world's largest energy producers and exporters. It is a top exporter of <strong>crude oil, natural gas, and hydroelectricity</strong> — primarily to the United States. Canada's energy exports are a major part of its GDP and trade balance." },
+      { q: "List Canada's sources of electrical production and compare these across provinces and territories over time.", a: "Electricity sources vary by province: <strong>Quebec and BC</strong> rely heavily on hydroelectricity. <strong>Alberta and Saskatchewan</strong> have traditionally relied on coal and natural gas (transitioning to renewables). <strong>Ontario</strong> uses a mix of nuclear, hydro, wind, and gas. Overall, Canada is shifting away from coal toward renewables and natural gas." },
+      { q: "List reasons why Canada is one of the largest consumers of energy in the world.", a: "Three main reasons: <strong>Industry</strong> — energy-intensive sectors like aluminum smelting and oil sands production demand massive amounts. <strong>Heating</strong> — Canada's average temperature is 1.6°C, and 41% of homes use electricity for heat. <strong>Affordability & Lifestyle</strong> — low energy prices and large homes encourage high consumption." },
+    ],
     keyTerms: [
       { term: "Primary Energy", def: "Energy that is found in nature before any processing or conversion." },
       { term: "Import", def: "Bringing goods or services into a country from abroad for sale." },
@@ -651,14 +1046,23 @@ const lessons = [
       { term: "Bioenergy", def: "Electricity from burning biomass (wood, plant products, or garbage) or biogas (produced in landfills and sewage treatment plants)." },
     ],
     notes: [
-      { heading: "Basics", content: `<ul><li><strong>Primary Energy:</strong> Energy in nature (fossil fuels, solar)</li><li><strong>Petajoule:</strong> Enough energy for 27.7 million LED bulbs</li><li><strong>Energy Supply (2021):</strong> 76% Fossil Fuels, 16.6% Renewables</li></ul>` },
-      { heading: "Bioenergy", content: `<p>Electricity from burning <strong>biomass</strong> (wood/garbage) or <strong>biogas</strong> (from landfills).</p>` },
-      { heading: "Why Canada Consumes So Much", content: `<ul><li><strong>Industry:</strong> Massive demand for sectors like aluminum</li><li><strong>Heating:</strong> Avg temp is 1.6°C; 41% of homes use electricity for heat</li><li><strong>Affordability:</strong> Low prices and large houses lead to high demand</li></ul>` },
+      { heading: "Primary Energy — The Basics", content: `<ul><li><strong>Primary Energy:</strong> Energy found in nature before any human processing or conversion (e.g., crude oil, sunlight, wind, uranium)</li><li><strong>Petajoule (PJ):</strong> A unit of energy — one petajoule is enough to power <strong>27.7 million LED light bulbs</strong> for a year</li><li><strong>Canada's Energy Supply (2021):</strong> ~76% Fossil Fuels, ~16.6% Renewables, ~7.4% Other (nuclear included)</li></ul>` },
+      { heading: "Bioenergy", content: `<ul><li>Electricity generated from burning <strong>biomass</strong> — wood, agricultural waste, or garbage</li><li>Or from <strong>biogas</strong> — methane produced naturally in landfills and sewage treatment plants, captured and burned for electricity</li><li>Considered "renewable" because the carbon released was recently absorbed by the plants — but still releases emissions</li></ul>` },
+      { heading: "Why Canada Consumes So Much Energy", content: `<ul><li><strong>Cold Climate:</strong> Canada's average temperature is just 1.6°C — heating homes and buildings is essential and energy-intensive. About 41% of Canadian homes use electricity as their primary heat source</li><li><strong>Energy-Intensive Industry:</strong> Sectors like aluminum smelting, oil sands extraction, and pulp and paper manufacturing require enormous amounts of electricity and heat</li><li><strong>Affordability:</strong> Canada has historically had low electricity prices, large homes, and long driving distances — all of which drive up per-capita consumption</li></ul>` },
     ]
   },
   {
     title: "Lesson 26: Canada's Mineral Resources",
     topics: 4,
+    objectives: [
+      { q: "Contrast Fossil Fuels and Minerals.", a: "<strong>Fossil Fuels</strong> (oil, natural gas, coal) are formed from ancient organic matter and are burned for energy — they are non-renewable. <strong>Minerals</strong> are naturally occurring inorganic elements or compounds found in Earth's crust, used for their physical properties (metals, construction, industry) — also non-renewable but not burned." },
+      { q: "Differentiate between Metallic and Non-Metallic Minerals.", a: "<strong>Metallic Minerals</strong> yield a metal when processed (e.g., gold, copper, iron, uranium) and are found in <strong>igneous and metamorphic rocks</strong> like the Canadian Shield. <strong>Non-Metallic Minerals</strong> do not produce a metal (e.g., potash, salt, diamonds, limestone) and are most commonly found in <strong>sedimentary rocks</strong>." },
+      { q: "List leading Canadian minerals and their contribution to Gross Domestic Product.", a: "Canada's top minerals include <strong>gold, copper, potash, coal, iron ore, diamonds, and uranium</strong>. The mining sector contributes tens of billions of dollars annually to Canada's GDP and is especially important in provinces like Ontario, Quebec, BC, and territories like the NWT." },
+      { q: "Explain the value of Ore and how geologists find it.", a: "<strong>Ore</strong> is rock containing enough valuable mineral to make mining profitable. <strong>High-Grade Ore</strong> has large mineral content; <strong>Low-Grade Ore</strong> has lesser amounts. Geologists use methods like rock sampling, aerial surveys, and geophysical tests to locate deposits." },
+      { q: "Differentiate between surface and subsurface mining.", a: "<strong>Surface Mining</strong> removes the overburden (soil/rock) above a deposit — includes Open Pit and Strip mining. Cheaper but creates spoil banks and large land disturbance. <strong>Subsurface Mining</strong> uses deep tunnels to reach deposits underground — more dangerous and expensive, but smaller surface footprint." },
+      { q: "Explain the conditions needed to find diamonds.", a: "Diamonds are found in <strong>Kimberlite Pipes</strong> — ancient volcanic formations that bring diamonds from deep in the Earth to the surface. A deposit is only profitable if it yields at least <strong>1 carat (0.2g) per 1,000 tonnes</strong> of rock. Example: the Lac de Gras, NT mine cost $1.5 billion to build but produced $8 billion in diamonds." },
+      { q: "Describe the mine reclamation process.", a: "<strong>Reclamation</strong> is the process of restoring land disturbed by mining to a usable or natural state. Critically, reclamation plans must be submitted and approved <em>before</em> a mine begins operations — ensuring companies are accountable for cleanup from the start." },
+    ],
     keyTerms: [
       { term: "Minerals", def: "Elements or compounds of elements that occur naturally in Earth's crust." },
       { term: "Metallic Mineral", def: "A mineral that yields a metal (iron, gold, copper, uranium, etc.) when melted. Comes from igneous and metamorphic rocks." },
@@ -672,15 +1076,23 @@ const lessons = [
       { term: "Spoil Bank", def: "A hill of loose rock created when overburden from a new trench is placed in the already excavated trench during strip mining." },
     ],
     notes: [
-      { heading: "Metallic vs. Non-Metallic", content: `<ul><li><strong>Metallic (Gold/Copper):</strong> Found in Igneous/Metamorphic rock (The Shield)</li><li><strong>Non-Metallic (Potash/Salt/Diamonds):</strong> Found in Sedimentary rock</li></ul>` },
-      { heading: "Mining Methods", content: `<ul><li><strong>Surface:</strong> Stripping overburden (soil/rock). Includes Open Pit and Strip mining</li><li><strong>Subsurface:</strong> Deep tunnels; more dangerous but smaller surface footprint</li></ul>` },
-      { heading: "Diamonds", content: `<p>Found in <strong>Kimberlite Pipes</strong>. Profitable only if there is 1 carat (0.2g) per 1,000 tonnes of rock.</p><div class="highlight">Lac de Gras, NT mine: Cost $1.5 billion to build → Produced $8 billion in value</div>` },
-      { heading: "Reclamation", content: `<p>Plans to restore land must be made <em>before</em> the mine begins operations.</p>` },
+      { heading: "Fossil Fuels vs. Minerals — Key Difference", content: `<ul><li><strong>Fossil Fuels</strong> (oil, natural gas, coal): Formed from ancient organic matter. They are <em>burned</em> for energy — once used, they're gone and they release CO₂</li><li><strong>Minerals</strong> (gold, copper, potash, diamonds): Inorganic compounds. They are <em>not burned</em> — used for their physical/chemical properties. Unlike fossil fuels, most minerals can be recycled and reused</li></ul>` },
+      { heading: "Metallic vs. Non-Metallic Minerals", content: `<ul><li><strong>Metallic Minerals:</strong> Yield a metal when melted/processed — Gold, Copper, Iron, Nickel, Uranium. Found in <strong>Igneous and Metamorphic rocks</strong> (e.g., the Canadian Shield)</li><li><strong>Non-Metallic Minerals:</strong> Do NOT produce a metal — Potash, Salt, Diamonds, Sand, Limestone. Most commonly found in <strong>Sedimentary rocks</strong></li></ul>` },
+      { heading: "Canada's Leading Minerals &amp; Economic Stats", content: `<ul><li>Canada produces over <strong>60 different minerals and metals</strong></li><li><strong>Top minerals:</strong> Potash, Iron Ore, Gold, Copper, and Nickel</li><li><strong>GDP:</strong> Mining accounts for <strong>54% of the value</strong> of the entire minerals sector</li><li><strong>Exports:</strong> Minerals make up <strong>22% of Canada's total exports</strong>. Main destinations: USA, UK, and China</li><li>Finding ore: Geologists use <strong>indicator rocks</strong> (surface rocks suggesting what's below) and <strong>magnetic/geophysical sensors</strong> to locate buried deposits</li></ul>` },
+      { heading: "Mining Methods", content: `<ul><li><strong>Surface Mining:</strong> Removes the overburden (soil and rock above the deposit). Includes <strong>Open Pit</strong> (digging a large pit) and <strong>Strip Mining</strong> (removing long strips of overburden). Creates Spoil Banks — hills of loose rock waste. Cheaper but large surface footprint</li><li><strong>Subsurface Mining:</strong> Sinks deep shafts and tunnels to reach deposits far underground. More expensive and dangerous, but much smaller surface impact</li></ul>` },
+      { heading: "Diamonds — Finding &amp; Mining", content: `<ul><li>Diamonds form deep in the Earth and are brought to the surface by ancient volcanic activity — they are found in cone-shaped rock formations called <strong>Kimberlite Pipes</strong></li><li>A deposit is only profitable to mine if it yields at least <strong>1 carat (0.2 grams) per 1,000 tonnes</strong> of rock processed</li><li><div class="highlight"><strong>Lac de Gras Mine (Northwest Territories):</strong> Cost $1.5 billion to build → Produced $8 billion worth of diamonds — a massive return on investment</div></li></ul>` },
+      { heading: "Mine Reclamation", content: `<ul><li><strong>Reclamation</strong> means restoring the land to its original (or a usable) natural state after mining ends</li><li>By law, companies must submit and have approved a <strong>detailed reclamation plan before mining begins</strong> — they are held financially accountable for cleanup from day one</li><li>Prevents abandoned mines from becoming toxic wastelands leaching heavy metals into surrounding ecosystems</li></ul>` },
     ]
   },
   {
     title: "Lesson 27: Manufacturing Industry",
     topics: 2,
+    objectives: [
+      { q: "Describe the Sectors of the Economy.", a: "There are four sectors: <strong>Primary</strong> — extracting natural resources (mining, farming, fishing, forestry). <strong>Secondary</strong> — manufacturing and construction (turning raw materials into products). <strong>Tertiary</strong> — service industries (retail, education, healthcare). <strong>Quaternary</strong> — knowledge/information industries (research, IT, AI)." },
+      { q: "Define manufacturing.", a: "<strong>Manufacturing</strong> is the creation or production of goods using equipment, labour, machines, tools, and chemical or biological processing. It transforms raw materials (primary products) into finished goods (secondary products)." },
+      { q: "Estimate the contribution of manufacturing to Canadian GDP and describe Canada's role in world manufacturing.", a: "Manufacturing contributes significantly to Canada's GDP, though its share has declined relative to the service sector. Canada produces <strong>durable goods</strong> (cars, machinery — last 3+ years) and <strong>non-durable goods</strong> (food, clothing — last under 3 years). Canada participates in global supply chains, especially with the US auto industry." },
+      { q: "Name and explain the seven factors that determine the location of a manufacturing factory.", a: "The 7 Location Factors: <strong>1. Customers</strong> — proximity for JIT delivery. <strong>2. Raw Materials</strong> — close to source if heavy or perishable. <strong>3. Water/Power</strong> — essential for industries like steel or aluminum. <strong>4. Labour</strong> — near a skilled workforce. <strong>5. Transportation</strong> — access to highways, rail, or ports. <strong>6. Political</strong> — government subsidies or regulatory environment. <strong>7. Circumstance (Wild Card)</strong> — e.g., Tilley Hats located in Toronto simply because the founder lived there." },
+    ],
     keyTerms: [
       { term: "Primary Industry", def: "An industry that focuses on producing or extracting natural resources (forestry, agriculture, mining, fishing)." },
       { term: "Secondary Industry", def: "An industry that focuses on making things using products of primary industries (manufacturing, construction, utilities)." },
@@ -694,13 +1106,21 @@ const lessons = [
       { term: "Non-Durable Goods", def: "Products that expire more quickly (last less than 3 years)." },
     ],
     notes: [
-      { heading: "Economic Sectors", content: `<ul><li><strong>Primary:</strong> Extracting (Miner/Farmer)</li><li><strong>Secondary:</strong> Making (Factory/Construction)</li><li><strong>Tertiary:</strong> Selling (Teacher/Sales)</li><li><strong>Quaternary:</strong> Knowledge/Information</li></ul>` },
-      { heading: "The 7 Location Factors", content: `<ul><li><strong>Customers:</strong> For Just-in-Time (JIT) delivery</li><li><strong>Raw Materials:</strong> Near source if heavy or perishable</li><li><strong>Water/Power:</strong> Essential for processes like steel or aluminum</li><li><strong>Labour:</strong> Near skilled workers</li><li><strong>Transportation:</strong> Near highways, rail, or ports</li><li><strong>Political:</strong> Government subsidies or strict laws</li><li><strong>Circumstance (Wild Card):</strong> e.g., Tilley Hats in Toronto — started there because the founder lived there</li></ul>` },
+      { heading: "The Four Sectors of the Economy", content: `<ul><li><strong>Primary:</strong> Extracting raw natural resources directly from the Earth — Mining, Farming, Fishing, Forestry</li><li><strong>Secondary:</strong> Turning raw materials into finished products — Manufacturing, Construction, Utilities</li><li><strong>Tertiary:</strong> Providing services to people and businesses — Teachers, Doctors, Retail, Banking</li><li><strong>Quaternary:</strong> Creating and distributing knowledge — Research, IT, AI, Consulting</li></ul>` },
+      { heading: "Manufacturing — Definition &amp; GDP", content: `<ul><li><strong>Manufacturing:</strong> The creation of goods using equipment, labour, machines, and chemical or biological processing — transforms raw materials (primary) into finished products (secondary)</li><li>Manufacturing contributes approximately <strong>10% to Canada's GDP</strong></li><li>Products are either <strong>Durable Goods</strong> (last 3+ years — cars, appliances, machinery) or <strong>Non-Durable Goods</strong> (last under 3 years — food, clothing, paper)</li></ul>` },
+      { heading: "The 7 Factors of Industrial Location", content: `<ul><li><strong>1. Customers:</strong> Be close to buyers, especially for Just-in-Time (JIT) delivery — parts arrive exactly when needed, reducing storage costs</li><li><strong>2. Raw Materials:</strong> Locate near the source if materials are heavy, bulky, or perishable (e.g., a cannery near a fishing port)</li><li><strong>3. Water &amp; Power:</strong> Essential for energy-intensive industries like steel mills or aluminum smelters, which need massive amounts of electricity</li><li><strong>4. Labour Supply:</strong> Locate near a pool of workers with the right skills — high-tech industries cluster near universities</li><li><strong>5. Transportation:</strong> Access to highways, rail lines, ports, or airports to move materials in and products out efficiently</li><li><strong>6. Political Factors:</strong> Government subsidies, tax breaks, or grants can attract factories; strict environmental laws can push them away</li><li><strong>7. Circumstance (Wild Card):</strong> Sometimes location is pure chance — e.g., <em>Alex Tilley</em> started Tilley Hats in Toronto simply because that's where he lived</li></ul>` },
     ]
   },
   {
     title: "Lesson 28: Canada's Tertiary Industries",
     topics: 3,
+    objectives: [
+      { q: "Define Tertiary Industry and provide examples of both service and knowledge industries found within it.", a: "<strong>Tertiary Industry</strong> is the service sector — everything not included in primary or secondary. <strong>Service examples:</strong> retail, healthcare, education, transportation, banking. <strong>Knowledge (Quaternary) examples:</strong> AI development, specialized research, IT consulting, data analytics." },
+      { q: "Explain the connection the Tertiary Industry has to both Primary and Secondary Industries.", a: "Tertiary industries support and enable the others. For example, a mining company (Primary) needs <strong>accountants, lawyers, and IT workers</strong> (Tertiary). A factory (Secondary) needs <strong>shipping companies, advertisers, and financial services</strong> (Tertiary). Without the service sector, primary and secondary industries could not function efficiently." },
+      { q: "Relate the role of Tertiary industries to a country's level of development.", a: "As countries develop economically, a greater proportion of workers move into the Tertiary sector. Highly developed countries like Canada have ~80% of workers in services. Less developed countries tend to have more workers in Primary industries. A large, thriving Tertiary sector is a sign of economic maturity and diversification." },
+      { q: "List strengths and drawbacks inherent in the Tertiary Industry.", a: "<strong>Strengths:</strong> Highly diverse and resilient, large employer, drives innovation (quaternary), supports other sectors. <strong>Drawbacks:</strong> Many service jobs can be lower-wage or precarious, some are vulnerable to automation, and the sector can be dependent on the health of primary/secondary industries for its demand." },
+      { q: "Describe the impact of the Tertiary Industry on Canada's labour market and GDP.", a: "Approximately <strong>80% of Canadians (16+ million people)</strong> work in the Tertiary sector (2023). <strong>Real Estate, Rental & Leasing</strong> makes the largest GDP contribution of any tertiary subsector. The fastest-growing areas are <strong>computer systems design and AI</strong>. The sector is the backbone of Canada's modern economy." },
+    ],
     keyTerms: [
       { term: "Primary Industry", def: "An industry that focuses on producing or extracting natural resources (forestry, agriculture, mining, fishing)." },
       { term: "Secondary Industry", def: "An industry that focuses on making things using products of primary industries (manufacturing, construction, utilities)." },
@@ -709,33 +1129,37 @@ const lessons = [
       { term: "GDP (Gross Domestic Product)", def: "The final value of the goods and services produced within the geographic boundaries of a country." },
     ],
     notes: [
-      { heading: "Definition", content: `<p>The "Service Sector" — providing services rather than extracting or making physical goods. Often called the "everything else" sector.</p>` },
-      { heading: "The Quaternary Industry", content: `<p>A subset of tertiary involving creation and distribution of knowledge (specialized research, IT, AI).</p>` },
-      { heading: "Economic Impact", content: `<ul><li><strong>Employment:</strong> ~80% of Canadians (16+ million) work in this sector (2023)</li><li><strong>GDP:</strong> Real Estate, Rental &amp; Leasing makes the largest contribution</li><li><strong>Growth:</strong> Computer systems design and AI are the fastest-growing areas</li><li><strong>Connection:</strong> Tertiary supports others — e.g., a mining company needs an accountant</li></ul>` },
+      { heading: "Definition — The Service Sector", content: `<ul><li>The Tertiary Industry provides <strong>services</strong> rather than extracting or manufacturing physical goods — often called the "everything else" sector</li><li><strong>Service examples:</strong> Retail, healthcare, education, banking, transportation, hospitality</li><li><strong>Quaternary (knowledge) examples:</strong> AI development, specialized research, IT consulting, data analytics — a subset of tertiary focused on information and ideas</li></ul>` },
+      { heading: "Connection to Other Industries", content: `<ul><li>Tertiary doesn't stand alone — it <em>enables</em> primary and secondary industries to function</li><li>A <strong>mining company (Primary)</strong> needs accountants, lawyers, IT support, and insurance (all Tertiary)</li><li>A <strong>factory (Secondary)</strong> needs shipping companies, advertisers, financiers, and HR services (all Tertiary)</li><li>Without the service sector, the other sectors could not operate efficiently</li></ul>` },
+      { heading: "Tertiary Industry &amp; Level of Development", content: `<ul><li>In <strong>highly developed countries</strong> (like Canada), the vast majority of workers are in the Tertiary sector — it's a sign of economic maturity and diversification</li><li>In <strong>less developed countries</strong>, a greater proportion of workers remain in the Primary sector (farming, fishing, mining for subsistence)</li><li>As countries industrialize, workers gradually shift: Primary → Secondary → Tertiary</li></ul>` },
+      { heading: "Economic Impact on Canada", content: `<ul><li><strong>Employment:</strong> ~80% of Canadians (over 16 million people) work in the Tertiary sector (2023 data)</li><li><strong>GDP:</strong> Real Estate, Rental &amp; Leasing makes the single largest contribution to GDP within this sector</li><li><strong>Fastest-Growing Areas:</strong> Computer systems design and artificial intelligence</li><li><strong>Strengths:</strong> Highly diverse, resilient, and employs the most people</li><li><strong>Drawbacks:</strong> Many service jobs are lower-wage or precarious; vulnerable to automation; dependent on the health of primary/secondary industries</li></ul>` },
     ]
   },
   {
     title: "Lesson 29: Basic vs Non-Basic Jobs & The Multiplier Effect",
     topics: 3,
+    objectives: [
+      { q: "Differentiate between Basic and Non-Basic Jobs.", a: "<strong>Basic Jobs</strong> bring <em>new money into</em> the local economy from outside — e.g., a paper mill worker whose products are sold to buyers in New York. The money earned comes from outside the community. <strong>Non-Basic Jobs</strong> circulate money <em>already within</em> the community — e.g., a local restaurant cook or barber. Their income comes from local residents spending locally." },
+      { q: "Describe how the Multiplier Effect works.", a: "The <strong>Multiplier Effect</strong> is the chain reaction of wealth created when a basic job injects new money into a community. The <strong>3:1 ratio</strong> means every 1 Basic Job created generates approximately 3 Non-Basic Jobs. Example: A new factory worker (Basic) spends at the grocery store → the grocery owner (Non-Basic #1) hires a cashier → the cashier spends at a local café (Non-Basic #2) → and so on, multiplying the original income through the local economy." },
+    ],
     keyTerms: [
       { term: "Basic Job", def: "A job that brings money into an economy from somewhere else." },
       { term: "Non-Basic Job", def: "A job that circulates money within an economy." },
       { term: "Multiplier Effect", def: "The increase in total wealth or income that occurs when new money is injected into an economy." },
     ],
     notes: [
-      { heading: "Basic vs. Non-Basic Jobs", content: `<ul><li><strong>Basic Jobs:</strong> Bring new money into the local economy from outside (e.g., paper mill worker exporting to New York)</li><li><strong>Non-Basic Jobs:</strong> Circulate money already within the community (e.g., local restaurant cook)</li></ul>` },
-      { heading: "The Multiplier Effect", content: `<p>The increase in total wealth when new money is "injected" through a basic job.</p><div class="highlight"><strong>The 3:1 Ratio:</strong> For every 1 Basic Job created, approximately 3 Non-Basic Jobs are created.</div>` },
-      { heading: "How It Works", content: `<ul><li>A worker gets paid (Basic Job)</li><li>They spend money at a local grocery store or barber</li><li>That spending becomes income for the store owner (Non-Basic Job)</li><li>The store owner then spends it elsewhere in town — and so on</li></ul>` },
+      { heading: "Basic vs. Non-Basic Jobs", content: `<ul><li><strong>Basic Jobs:</strong> Bring <em>new money into</em> the local economy from outside. The payment comes from somewhere else — e.g., a paper mill worker in a small Ontario town whose paper is sold to buyers in New York. New York's money enters the local community</li><li><strong>Non-Basic Jobs:</strong> Circulate money <em>already within</em> the community. No new money enters — e.g., a local barber, restaurant cook, or grocery cashier. They get paid by people who already live there</li><li><strong>Key test:</strong> Does the money come from outside the community? If yes → Basic. If no → Non-Basic</li></ul>` },
+      { heading: "The Multiplier Effect", content: `<ul><li>The <strong>Multiplier Effect</strong> is the chain reaction of wealth created when a single basic job injects new money into a local economy</li><li><div class="highlight"><strong>The 3:1 Ratio:</strong> For every 1 Basic Job created, approximately 3 Non-Basic Jobs are generated</div></li><li>The money keeps circulating — each time it's spent locally, it creates income for someone else in the community</li></ul>` },
+      { heading: "How It Works — Step by Step", content: `<ul><li>A new <strong>factory opens</strong> (Basic Job) — workers are paid with money from outside the town</li><li>Workers spend at the <strong>local grocery store</strong> → the store owner earns income (Non-Basic Job #1)</li><li>The store owner hires a <strong>cashier</strong>, spends at the <strong>local café</strong> (Non-Basic Job #2)</li><li>The café owner pays a <strong>local supplier</strong> (Non-Basic Job #3)</li><li>And so on — the original injection of money multiplies through the community, creating jobs and wealth far beyond the original factory</li></ul>` },
     ]
   },
 ];
 
 const grid = document.getElementById('grid');
+const understandSection = document.getElementById('understand-section');
 
 lessons.forEach((lesson, i) => {
-  const block = document.createElement('div');
-  block.className = 'lesson-block';
-
+  // Lesson card
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
@@ -754,36 +1178,107 @@ lessons.forEach((lesson, i) => {
       <span class="chevron">&#8250;</span>
     </div>`;
   card.onclick = () => openModal(i);
+  grid.appendChild(card);
 
-  block.appendChild(card);
-  grid.appendChild(block);
+  // Understand block — appended to separate section
+  if (lesson.objectives && lesson.objectives.length) {
+    const uBlock = document.createElement('div');
+    uBlock.className = 'understand-block';
+    const lessonLabel = lesson.title.replace(/^Lesson \d+:\s*/, '');
+    const accordionItems = lesson.objectives.map((obj, j) => `
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span class="accordion-num">${j + 1}</span>
+          <span class="accordion-q">${obj.q}</span>
+          <span class="accordion-chevron">›</span>
+        </button>
+        <div class="accordion-answer">${obj.a}</div>
+      </div>`).join('');
+    uBlock.innerHTML = `
+      <div class="understand-header">
+        <span class="understand-icon">📖</span>
+        <h3>${lesson.title.split(':')[0]} — ${lessonLabel}</h3>
+      </div>
+      ${accordionItems}`;
+    understandSection.appendChild(uBlock);
+  }
 });
+
+// Section icons mapped by heading keywords
+const sectionIcons = {
+  'total stock': '🌍', 'resource': '🌍', 'category': '📦', 'categor': '📦',
+  'value': '💰', 'evolution': '💰', 'management': '⚖️', 'yield': '⚖️',
+  'waste': '♻️', 'hierarchy': '♻️', 'disposal': '♻️',
+  'factor': '🌱', 'agriculture': '🌱', 'climate': '🌦️', 'temperature': '🌡️',
+  'intensive': '🚜', 'extensive': '🚜', 'economic': '💼',
+  'histor': '📜', 'composition': '🌲', 'forest': '🌲', 'harvest': '🪓', 'sustainab': '♻️',
+  'fish': '🐟', 'grand bank': '🌊', 'collapse': '⚠️', 'inshore': '⛵', 'offshore': '🚢',
+  'climate change': '🌡️', 'impact': '🌡️',
+  'distribution': '💧', 'global water': '💧', 'water source': '💧', 'cost': '💰',
+  'inequal': '⚖️', 'conflict': '⚖️', 'water cycle': '🔄',
+  'primary energy': '⚡', 'basic': '⚡', 'bioenergy': '🌿', 'consume': '🔥',
+  'fossil': '⛽', 'metallic': '💎', 'mineral': '⛏️', 'mining method': '⛏️', 'diamond': '💎',
+  'reclam': '🌱', 'sector': '🏭', 'manufactur': '🏭', 'location': '📍', '7 factor': '📍',
+  'definition': '📖', 'service': '🛎️', 'connection': '🔗', 'development': '📈',
+  'non-basic': '🔄', 'multiplier': '✨', 'how it works': '✨', 'step': '✨',
+  'key': '🗝️', 'visual': '📊',
+};
+
+function getIcon(heading) {
+  const h = heading.toLowerCase();
+  for (const [k, v] of Object.entries(sectionIcons)) {
+    if (h.includes(k)) return v;
+  }
+  return '📌';
+}
+
+function numberListItems(html) {
+  let n = 0;
+  return html.replace(/<li>/g, () => `<li data-n="${++n}">`);
+}
 
 function openModal(i) {
   const lesson = lessons[i];
   document.getElementById('modal-title').textContent = lesson.title;
 
   const notesHtml = lesson.notes.map(n =>
-    `<div class="note-section"><h3>${n.heading}</h3>${n.content}</div>`
+    `<div class="note-section">
+      <div class="note-section-head">
+        <span class="note-section-icon">${getIcon(n.heading)}</span>
+        <h3>${n.heading}</h3>
+      </div>
+      <div class="note-section-body">${numberListItems(n.content)}</div>
+    </div>`
   ).join('');
 
   const keyTermsHtml = lesson.keyTerms && lesson.keyTerms.length
     ? `<div class="note-section">
-        <h3>&#128218; Key Terms</h3>
-        <div class="key-terms-grid">
-          ${lesson.keyTerms.map(kt =>
-            `<div class="key-term-card">
-              <div class="kt-term">${kt.term}</div>
-              <div class="kt-def">${kt.def}</div>
-            </div>`
-          ).join('')}
+        <div class="note-section-head">
+          <span class="note-section-icon">🗝️</span>
+          <h3>Key Terms</h3>
+          <span class="note-section-badge">${lesson.keyTerms.length}</span>
+        </div>
+        <div class="note-section-body">
+          <div class="key-terms-grid">
+            ${lesson.keyTerms.map(kt =>
+              `<div class="key-term-card">
+                <div class="kt-term">${kt.term}</div>
+                <div class="kt-def">${kt.def}</div>
+              </div>`
+            ).join('')}
+          </div>
         </div>
       </div>`
     : '';
 
   const diagramHtml = `<div class="note-section">
-    <h3>&#128202; Visual Diagram</h3>
-    <div class="inline-diagram">${diagrams[i]}</div>
+    <div class="note-section-head">
+      <span class="note-section-icon">📊</span>
+      <h3>Visual Diagram</h3>
+    </div>
+    <div class="note-section-body">
+      <div class="inline-diagram">${diagrams[i]}</div>
+    </div>
   </div>`;
 
   document.getElementById('modal-body').innerHTML = notesHtml + keyTermsHtml + diagramHtml;
@@ -791,13 +1286,33 @@ function openModal(i) {
   const body = document.getElementById('modal-body');
   body.scrollTop = 0;
 
-  // Show scroll hint, hide when near bottom
   const hint = document.getElementById('scroll-hint');
   hint.classList.remove('hidden');
   body.onscroll = () => {
     const nearBottom = body.scrollTop + body.clientHeight >= body.scrollHeight - 80;
     hint.classList.toggle('hidden', nearBottom);
   };
+}
+
+// Main page scroll indicator
+(function() {
+  const hint = document.getElementById('page-scroll-hint');
+  function checkScroll() {
+    const scrolled = window.scrollY || document.documentElement.scrollTop;
+    const nearBottom = (scrolled + window.innerHeight) >= document.body.scrollHeight - 100;
+    hint.classList.toggle('hidden', scrolled > 80 || nearBottom);
+  }
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  // Small delay so page has time to render before first check
+  setTimeout(checkScroll, 200);
+})();
+
+function toggleAccordion(btn) {
+  const item = btn.closest('.accordion-item');
+  const isOpen = item.classList.contains('open');
+  // Close all in same block
+  item.closest('.understand-block').querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
 }
 
 function scrollToBottom() {
