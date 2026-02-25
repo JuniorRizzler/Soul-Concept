@@ -1576,6 +1576,9 @@ lessons.forEach((lesson, i) => {
   }
 });
 
+const sectionIcons = {'total stock':'🌍','resource':'🌍','four categor':'📦','categor':'📦','value':'💰','management':'⚖️','waste':'♻️','hierarchy':'♻️','four factor':'🌱','intensive':'🚜','economic':'💼','histor':'📜','composition':'🌲','harvest':'🪓','sustainab':'♻️','fish':'🐟','grand bank':'🌊','collapse':'⚠️','inshore':'⛵','climate change':'🌡️','impact':'🌡️','global water':'💧','water source':'💧','water cycle':'🔄','cost':'💰','inequal':'⚖️','primary energy':'⚡','bioenergy':'🌿','consume':'🔥','fossil':'⛽','metallic':'💎','leading':'📊','mining method':'⛏️','mineral':'⛏️','diamond':'💎','reclam':'🌱','sector':'🏭','manufactur':'🏭','location':'📍','definition':'📖','connection':'🔗','development':'📈','basic vs':'🔄','multiplier':'✨','how it works':'✨'};
+function getIcon(h){const l=h.toLowerCase();for(const[k,v]of Object.entries(sectionIcons))if(l.includes(k))return v;return'📌';}
+
 function openModal(i) {
   const lesson = lessons[i];
   document.getElementById('modal-title').textContent = lesson.title;
