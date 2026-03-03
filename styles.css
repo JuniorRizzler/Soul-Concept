@@ -511,27 +511,6 @@ details.dropdown > summary:hover + .dropdown-menu {
   font-weight: 800;
 }
 
-.auth-google {
-  width: 100%;
-}
-
-.auth-divider {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0;
-  color: var(--text-muted);
-  font-size: 0.82rem;
-}
-
-.auth-divider::before,
-.auth-divider::after {
-  content: '';
-  height: 1px;
-  background: var(--line);
-  flex: 1;
-}
-
 .auth-label {
   display: block;
   margin-bottom: 6px;
@@ -552,7 +531,7 @@ details.dropdown > summary:hover + .dropdown-menu {
 .auth-actions {
   display: grid;
   gap: 8px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .auth-actions .btn {

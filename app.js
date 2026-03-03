@@ -56,17 +56,11 @@
       '<div class="auth-modal-card" role="dialog" aria-modal="true" aria-label="Sign in">' +
       '<button type="button" class="auth-close" data-auth-close aria-label="Close">x</button>' +
       '<h3>Sign in</h3>' +
-      '<p class="auth-sub">Use Google or email to continue.</p>' +
-      '<button type="button" class="btn btn-primary auth-google" data-auth-google>Continue with Google</button>' +
-      '<div class="auth-divider"><span>or</span></div>' +
+      '<p class="auth-sub">Use your email to continue.</p>' +
       '<label class="auth-label" for="auth-email">Email</label>' +
       '<input id="auth-email" class="auth-input" type="email" placeholder="you@example.com" />' +
-      '<label class="auth-label" for="auth-password">Password (optional)</label>' +
-      '<input id="auth-password" class="auth-input" type="password" placeholder="For password sign-in / sign-up" />' +
       '<div class="auth-actions">' +
       '<button type="button" class="btn btn-secondary" data-auth-magic>Send Magic Link</button>' +
-      '<button type="button" class="btn btn-secondary" data-auth-password>Sign in with Password</button>' +
-      '<button type="button" class="btn btn-secondary" data-auth-signup>Create Account</button>' +
       '</div>' +
       '<div class="auth-user" data-auth-user hidden></div>' +
       '<button type="button" class="btn btn-secondary auth-signout" data-auth-signout hidden>Sign out</button>' +
@@ -119,6 +113,8 @@
     return true
   }
 
+  const AUTH_EMAIL_KEY = 'sc_auth_email'
+
   function setupAuthUI(navMenu) {
     if (!navMenu) return
 
@@ -142,15 +138,11 @@
     const modal = createAuthModal()
     const gate = createAuthGate()
     const closeBtn = modal.querySelector('[data-auth-close]')
-    const googleBtn = modal.querySelector('[data-auth-google]')
     const magicBtn = modal.querySelector('[data-auth-magic]')
-    const passwordBtn = modal.querySelector('[data-auth-password]')
-    const signupBtn = modal.querySelector('[data-auth-signup]')
     const signoutBtn = modal.querySelector('[data-auth-signout]')
     const statusEl = modal.querySelector('[data-auth-status]')
     const userEl = modal.querySelector('[data-auth-user]')
     const emailEl = modal.querySelector('#auth-email')
-    const passwordEl = modal.querySelector('#auth-password')
 
     let supabaseClient = null
     let ready = false
@@ -162,9 +154,34 @@
       statusEl.className = isError ? 'auth-status err' : 'auth-status ok'
     }
 
+    function persistEmail(email) {
+      const value = (email || '').trim().toLowerCase()
+      if (!value) return
+      try {
+        localStorage.setItem(AUTH_EMAIL_KEY, value)
+      } catch (_err) {}
+    }
+
+    function restoreEmail() {
+      try {
+        return (localStorage.getItem(AUTH_EMAIL_KEY) || '').trim().toLowerCase()
+      } catch (_err) {
+        return ''
+      }
+    }
+
+    const rememberedEmail = restoreEmail()
+    if (emailEl && rememberedEmail) emailEl.value = rememberedEmail
+    if (emailEl) {
+      emailEl.addEventListener('input', function () {
+        persistEmail(emailEl.value || '')
+      })
+    }
+
     function setUser(user) {
       if (!authBtn || !signoutBtn || !userEl) return
       if (user && user.email) {
+        persistEmail(user.email)
         authBtn.textContent = user.email
         userEl.hidden = false
         userEl.textContent = 'Signed in as ' + user.email
@@ -219,18 +236,6 @@
       return true
     }
 
-    googleBtn.addEventListener('click', async function () {
-      if (!requireReady()) return
-      setStatus('Redirecting to Google...', false)
-      const result = await supabaseClient.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: location.origin + location.pathname,
-        },
-      })
-      if (result.error) setStatus(result.error.message || 'Google sign-in failed.', true)
-    })
-
     magicBtn.addEventListener('click', async function () {
       if (!requireReady()) return
       const email = (emailEl.value || '').trim()
@@ -238,6 +243,7 @@
         setStatus('Enter your email first.', true)
         return
       }
+      persistEmail(email)
       const result = await supabaseClient.auth.signInWithOtp({
         email,
         options: { emailRedirectTo: location.origin + location.pathname },
@@ -246,42 +252,6 @@
         setStatus(result.error.message || 'Failed to send magic link.', true)
       } else {
         setStatus('Magic link sent. Check your email.', false)
-      }
-    })
-
-    passwordBtn.addEventListener('click', async function () {
-      if (!requireReady()) return
-      const email = (emailEl.value || '').trim()
-      const password = passwordEl.value || ''
-      if (!email || !password) {
-        setStatus('Enter email and password.', true)
-        return
-      }
-      const result = await supabaseClient.auth.signInWithPassword({ email, password })
-      if (result.error) {
-        setStatus(result.error.message || 'Email sign-in failed.', true)
-      } else {
-        setStatus('Signed in successfully.', false)
-      }
-    })
-
-    signupBtn.addEventListener('click', async function () {
-      if (!requireReady()) return
-      const email = (emailEl.value || '').trim()
-      const password = passwordEl.value || ''
-      if (!email || !password) {
-        setStatus('Enter email and password to create account.', true)
-        return
-      }
-      const result = await supabaseClient.auth.signUp({
-        email,
-        password,
-        options: { emailRedirectTo: location.origin + location.pathname },
-      })
-      if (result.error) {
-        setStatus(result.error.message || 'Account creation failed.', true)
-      } else {
-        setStatus('Account created. Confirm your email if prompted.', false)
       }
     })
 
