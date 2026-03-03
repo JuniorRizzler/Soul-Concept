@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
     return
   }
 
-  const model = String(source.model || process.env.FREE_LLM_MODEL || 'gpt-4o-mini')
+  const model = String(process.env.FREE_LLM_MODEL || source.model || 'gpt-4o-mini')
   const baseUrl = String(process.env.FREE_LLM_BASE_URL || 'https://api.apifreellm.com/v1').replace(/\/$/, '')
   const chatUrl = process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
   const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
