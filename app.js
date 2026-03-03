@@ -76,6 +76,19 @@
     return modal
   }
 
+  function createAuthGate() {
+    const gate = document.createElement('div')
+    gate.className = 'auth-gate'
+    gate.innerHTML =
+      '<div class="auth-gate-card">' +
+      '<h3>Sign in required</h3>' +
+      '<p>Create an account or sign in to access Soul Concept.</p>' +
+      '<button type="button" class="btn btn-primary" data-auth-gate-open>Sign in / Create account</button>' +
+      '</div>'
+    document.body.appendChild(gate)
+    return gate
+  }
+
   function openAuthModal(modal) {
     modal.classList.add('is-open')
     modal.setAttribute('aria-hidden', 'false')
@@ -127,6 +140,7 @@
       }
     }
     const modal = createAuthModal()
+    const gate = createAuthGate()
     const closeBtn = modal.querySelector('[data-auth-close]')
     const googleBtn = modal.querySelector('[data-auth-google]')
     const magicBtn = modal.querySelector('[data-auth-magic]')
@@ -140,7 +154,7 @@
 
     let supabaseClient = null
     let ready = false
-    const AUTH_PROMPT_SESSION_KEY = 'sc_auth_prompt_shown'
+    let authLocked = true
 
     function setStatus(msg, isError) {
       if (!statusEl) return
@@ -155,36 +169,20 @@
         userEl.hidden = false
         userEl.textContent = 'Signed in as ' + user.email
         signoutBtn.hidden = false
+        authLocked = false
+        document.documentElement.classList.remove('auth-locked')
+        gate.classList.remove('is-visible')
+        closeAuthModal(modal)
       } else {
         authBtn.textContent = 'Sign in'
         userEl.hidden = true
         userEl.textContent = ''
         signoutBtn.hidden = true
-      }
-    }
-
-    function shouldPromptOnEntry() {
-      try {
-        return sessionStorage.getItem(AUTH_PROMPT_SESSION_KEY) !== '1'
-      } catch (err) {
-        return true
-      }
-    }
-
-    function markPromptShown() {
-      try {
-        sessionStorage.setItem(AUTH_PROMPT_SESSION_KEY, '1')
-      } catch (err) {
-        // ignore storage issues
-      }
-    }
-
-    function promptAuthOnEntry() {
-      if (!shouldPromptOnEntry()) return
-      markPromptShown()
-      setTimeout(function () {
+        authLocked = true
+        document.documentElement.classList.add('auth-locked')
+        gate.classList.add('is-visible')
         openAuthModal(modal)
-      }, 250)
+      }
     }
 
     function handleOpenAuth() {
@@ -192,6 +190,7 @@
     }
 
     authBtn.addEventListener('click', handleOpenAuth)
+    gate.querySelector('[data-auth-gate-open]').addEventListener('click', handleOpenAuth)
 
     // Safety binding: if another matching button exists, open the same modal.
     navMenu.querySelectorAll('[data-auth-open]').forEach(function (node) {
@@ -201,11 +200,12 @@
     })
 
     closeBtn.addEventListener('click', function () {
+      if (authLocked) return
       closeAuthModal(modal)
     })
 
     modal.addEventListener('click', function (event) {
-      if (event.target === modal) closeAuthModal(modal)
+      if (event.target === modal && !authLocked) closeAuthModal(modal)
     })
 
     function requireReady() {
@@ -303,7 +303,6 @@
           true,
         )
         setUser(null)
-        promptAuthOnEntry()
         return
       }
 
@@ -336,18 +335,17 @@
 
         setStatus('', false)
 
-        // Prompt on first entry if visitor is not signed in.
         if (!sessionData.data || !sessionData.data.session || !sessionData.data.session.user) {
-          promptAuthOnEntry()
+          setUser(null)
         }
       } catch (err) {
         setStatus('Failed to initialize Supabase auth.', true)
-        promptAuthOnEntry()
+        setUser(null)
       }
     })()
   }
 
-  if (!isLibraryContext && navMenu) {
+  if (navMenu) {
     setupAuthUI(navMenu)
   }
 
