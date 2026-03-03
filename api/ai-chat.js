@@ -1,0 +1,125 @@
+function json(res, status, payload) {
+  res.status(status).setHeader('Content-Type', 'application/json').send(JSON.stringify(payload))
+}
+
+function normalizeMessageContent(content) {
+  if (typeof content === 'string') return content
+  if (Array.isArray(content)) {
+    return content
+      .map(function (part) {
+        if (!part) return ''
+        if (typeof part === 'string') return part
+        if (typeof part.text === 'string') return part.text
+        return ''
+      })
+      .filter(Boolean)
+      .join('\n')
+  }
+  if (content && typeof content.text === 'string') return content.text
+  return ''
+}
+
+module.exports = async (req, res) => {
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('')
+    return
+  }
+  if (req.method !== 'POST') {
+    json(res, 405, { error: 'Method Not Allowed' })
+    return
+  }
+
+  const apiKey = process.env.FREE_LLM_API_KEY
+  if (!apiKey) {
+    json(res, 500, { error: 'Missing FREE_LLM_API_KEY env var.' })
+    return
+  }
+
+  let body = req.body
+  if (!body || typeof body !== 'object') {
+    try {
+      body = JSON.parse(req.body || '{}')
+    } catch (_err) {
+      json(res, 400, { error: 'Invalid JSON body.' })
+      return
+    }
+  }
+
+  const source = body.request && typeof body.request === 'object' ? body.request : body
+  const system = typeof source.system === 'string' ? source.system : ''
+  const prompt = typeof source.prompt === 'string' ? source.prompt : ''
+  const incomingMessages = Array.isArray(source.messages) ? source.messages : []
+
+  const messages = []
+  if (system.trim()) messages.push({ role: 'system', content: system.trim() })
+  for (const msg of incomingMessages) {
+    const role = msg && typeof msg.role === 'string' ? msg.role : 'user'
+    const content = normalizeMessageContent(msg ? msg.content : '')
+    if (!content) continue
+    messages.push({ role, content })
+  }
+  if (!messages.length && prompt.trim()) {
+    messages.push({ role: 'user', content: prompt.trim() })
+  }
+  if (!messages.length) {
+    json(res, 400, { error: 'No messages provided.' })
+    return
+  }
+
+  const model = String(source.model || process.env.FREE_LLM_MODEL || 'gpt-4o-mini')
+  const baseUrl = String(process.env.FREE_LLM_BASE_URL || 'https://api.apifreellm.com/v1').replace(/\/$/, '')
+  const chatUrl = process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
+  const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
+  const temperature = typeof source.temperature === 'number' ? source.temperature : 0.4
+
+  try {
+    const upstreamRes = await fetch(chatUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model,
+        messages,
+        max_tokens: Number.isFinite(maxTokens) ? maxTokens : 1200,
+        temperature,
+      }),
+    })
+
+    const rawText = await upstreamRes.text()
+    let parsed = null
+    try {
+      parsed = JSON.parse(rawText)
+    } catch (_err) {}
+
+    if (!upstreamRes.ok) {
+      json(res, upstreamRes.status, {
+        error:
+          (parsed && (parsed.error && parsed.error.message ? parsed.error.message : parsed.error)) ||
+          rawText ||
+          'AI upstream error.',
+      })
+      return
+    }
+
+    let text = ''
+    if (parsed && Array.isArray(parsed.choices) && parsed.choices[0] && parsed.choices[0].message) {
+      text = normalizeMessageContent(parsed.choices[0].message.content || '')
+    } else if (parsed && Array.isArray(parsed.content)) {
+      text = normalizeMessageContent(parsed.content)
+    } else if (parsed && typeof parsed.output_text === 'string') {
+      text = parsed.output_text
+    } else if (typeof rawText === 'string') {
+      text = rawText
+    }
+
+    json(res, 200, {
+      ok: true,
+      text: text || '',
+      providerResponse: parsed || null,
+    })
+  } catch (err) {
+    json(res, 500, { error: err && err.message ? err.message : 'AI request failed.' })
+  }
+}
