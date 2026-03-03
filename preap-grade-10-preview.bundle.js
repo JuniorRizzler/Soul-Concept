@@ -1,28 +1,10 @@
-"use strict";
 (() => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
-  var __defProps = Object.defineProperties;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
   var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __propIsEnum = Object.prototype.propertyIsEnumerable;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __spreadValues = (a, b) => {
-    for (var prop in b || (b = {}))
-      if (__hasOwnProp.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    if (__getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(b)) {
-        if (__propIsEnum.call(b, prop))
-          __defNormalProp(a, prop, b[prop]);
-      }
-    return a;
-  };
-  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -43,9 +25,9 @@
     mod
   ));
 
-  // acelabs/node_modules/react/cjs/react.development.js
+  // ../acelabs/grade9-science-vite/node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
-    "acelabs/node_modules/react/cjs/react.development.js"(exports, module) {
+    "../acelabs/grade9-science-vite/node_modules/react/cjs/react.development.js"(exports, module) {
       "use strict";
       (function() {
         function defineDeprecationWarning(methodName, info) {
@@ -420,10 +402,10 @@
           }
           if (1 === payload._status)
             return ioInfo = payload._result, void 0 === ioInfo && console.error(
-              "lazy: Expected the result of a dynamic import() call. Instead received: %s\\n\\nYour code should look like: \\n  const MyComponent = lazy(() => import('./MyComponent'))\\n\\nDid you accidentally put curly braces around the import?",
+              "lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))\n\nDid you accidentally put curly braces around the import?",
               ioInfo
             ), "default" in ioInfo || console.error(
-              "lazy: Expected the result of a dynamic import() call. Instead received: %s\\n\\nYour code should look like: \\n  const MyComponent = lazy(() => import('./MyComponent'))",
+              "lazy: Expected the result of a dynamic import() call. Instead received: %s\n\nYour code should look like: \n  const MyComponent = lazy(() => import('./MyComponent'))",
               ioInfo
             ), ioInfo.default;
           throw payload._result;
@@ -431,7 +413,7 @@
         function resolveDispatcher() {
           var dispatcher = ReactSharedInternals.H;
           null === dispatcher && console.error(
-            "Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\\n1. You might have mismatching versions of React and the renderer (such as React DOM)\\n2. You might be breaking the Rules of Hooks\\n3. You might have more than one copy of React in the same app\\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem."
+            "Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem."
           );
           return dispatcher;
         }
@@ -708,7 +690,7 @@
           popActScope(prevActQueue, prevActScopeDepth);
           0 === prevActScopeDepth && (flushActQueue(queue), 0 !== queue.length && queueSeveralMicrotasks(function() {
             didAwaitActCall || didWarnNoAwaitAct || (didWarnNoAwaitAct = true, console.error(
-              "A component suspended inside an `act` scope, but the `act` call was not awaited. When testing React components that depend on asynchronous data, you must await the result:\\n\\nawait act(() => ...)"
+              "A component suspended inside an `act` scope, but the `act` call was not awaited. When testing React components that depend on asynchronous data, you must await the result:\n\nawait act(() => ...)"
             ));
           }), ReactSharedInternals.actQueue = null);
           if (0 < ReactSharedInternals.thrownErrors.length)
@@ -1015,9 +997,9 @@
     }
   });
 
-  // acelabs/node_modules/react/index.js
+  // ../acelabs/grade9-science-vite/node_modules/react/index.js
   var require_react = __commonJS({
-    "acelabs/node_modules/react/index.js"(exports, module) {
+    "../acelabs/grade9-science-vite/node_modules/react/index.js"(exports, module) {
       "use strict";
       if (false) {
         module.exports = null;
@@ -1027,9 +1009,9 @@
     }
   });
 
-  // acelabs/node_modules/scheduler/cjs/scheduler.development.js
+  // ../acelabs/grade9-science-vite/node_modules/scheduler/cjs/scheduler.development.js
   var require_scheduler_development = __commonJS({
-    "acelabs/node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+    "../acelabs/grade9-science-vite/node_modules/scheduler/cjs/scheduler.development.js"(exports) {
       "use strict";
       (function() {
         function performWorkUntilDeadline() {
@@ -1286,9 +1268,9 @@
     }
   });
 
-  // acelabs/node_modules/scheduler/index.js
+  // ../acelabs/grade9-science-vite/node_modules/scheduler/index.js
   var require_scheduler = __commonJS({
-    "acelabs/node_modules/scheduler/index.js"(exports, module) {
+    "../acelabs/grade9-science-vite/node_modules/scheduler/index.js"(exports, module) {
       "use strict";
       if (false) {
         module.exports = null;
@@ -1298,9 +1280,9 @@
     }
   });
 
-  // acelabs/node_modules/react-dom/cjs/react-dom.development.js
+  // ../acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom.development.js
   var require_react_dom_development = __commonJS({
-    "acelabs/node_modules/react-dom/cjs/react-dom.development.js"(exports) {
+    "../acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom.development.js"(exports) {
       "use strict";
       (function() {
         function noop() {
@@ -1342,12 +1324,12 @@
         function resolveDispatcher() {
           var dispatcher = ReactSharedInternals.H;
           null === dispatcher && console.error(
-            "Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\\n1. You might have mismatching versions of React and the renderer (such as React DOM)\\n2. You might be breaking the Rules of Hooks\\n3. You might have more than one copy of React in the same app\\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem."
+            "Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem."
           );
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React2 = require_react(), Internals = {
+        var React3 = require_react(), Internals = {
           d: {
             f: noop,
             r: function() {
@@ -1365,7 +1347,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React2.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -1542,9 +1524,9 @@
     }
   });
 
-  // acelabs/node_modules/react-dom/index.js
+  // ../acelabs/grade9-science-vite/node_modules/react-dom/index.js
   var require_react_dom = __commonJS({
-    "acelabs/node_modules/react-dom/index.js"(exports, module) {
+    "../acelabs/grade9-science-vite/node_modules/react-dom/index.js"(exports, module) {
       "use strict";
       if (false) {
         checkDCE();
@@ -1555,9 +1537,9 @@
     }
   });
 
-  // acelabs/node_modules/react-dom/cjs/react-dom-client.development.js
+  // ../acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom-client.development.js
   var require_react_dom_client_development = __commonJS({
-    "acelabs/node_modules/react-dom/cjs/react-dom-client.development.js"(exports) {
+    "../acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom-client.development.js"(exports) {
       "use strict";
       (function() {
         function findHook(fiber, id) {
@@ -1632,16 +1614,16 @@
         function createFiber(tag, pendingProps, key, mode) {
           return new FiberNode(tag, pendingProps, key, mode);
         }
-        function scheduleRoot(root2, element) {
-          root2.context === emptyContextObject && (updateContainerImpl(root2.current, 2, element, root2, null, null), flushSyncWork$1());
+        function scheduleRoot(root3, element) {
+          root3.context === emptyContextObject && (updateContainerImpl(root3.current, 2, element, root3, null, null), flushSyncWork$1());
         }
-        function scheduleRefresh(root2, update) {
+        function scheduleRefresh(root3, update) {
           if (null !== resolveFamily) {
             var staleFamilies = update.staleFamilies;
             update = update.updatedFamilies;
             flushPendingEffects();
             scheduleFibersWithFamiliesRecursively(
-              root2.current,
+              root3.current,
               update,
               staleFamilies
             );
@@ -2017,12 +1999,12 @@
           Error.prepareStackTrace = void 0;
           error = error.stack;
           Error.prepareStackTrace = prevPrepareStackTrace;
-          error.startsWith("Error: react-stack-top-frame\\n") && (error = error.slice(29));
-          prevPrepareStackTrace = error.indexOf("\\n");
+          error.startsWith("Error: react-stack-top-frame\n") && (error = error.slice(29));
+          prevPrepareStackTrace = error.indexOf("\n");
           -1 !== prevPrepareStackTrace && (error = error.slice(prevPrepareStackTrace + 1));
           prevPrepareStackTrace = error.indexOf("react_stack_bottom_frame");
           -1 !== prevPrepareStackTrace && (prevPrepareStackTrace = error.lastIndexOf(
-            "\\n",
+            "\n",
             prevPrepareStackTrace
           ));
           if (-1 !== prevPrepareStackTrace)
@@ -2035,11 +2017,11 @@
             try {
               throw Error();
             } catch (x) {
-              var match = x.stack.trim().match(/\\n( *(at )?)/);
+              var match = x.stack.trim().match(/\n( *(at )?)/);
               prefix = match && match[1] || "";
-              suffix = -1 < x.stack.indexOf("\\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
+              suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
             }
-          return "\\n" + prefix + name + suffix;
+          return "\n" + prefix + name + suffix;
         }
         function describeNativeComponentFrame(fn, construct) {
           if (!fn || reentry) return "";
@@ -2108,7 +2090,7 @@
             );
             var _RunInRootFrame$Deter = RunInRootFrame.DetermineComponentFrameRoot(), sampleStack = _RunInRootFrame$Deter[0], controlStack = _RunInRootFrame$Deter[1];
             if (sampleStack && controlStack) {
-              var sampleLines = sampleStack.split("\\n"), controlLines = controlStack.split("\\n");
+              var sampleLines = sampleStack.split("\n"), controlLines = controlStack.split("\n");
               for (_RunInRootFrame$Deter = namePropDescriptor = 0; namePropDescriptor < sampleLines.length && !sampleLines[namePropDescriptor].includes(
                 "DetermineComponentFrameRoot"
               ); )
@@ -2125,7 +2107,7 @@
                   if (1 !== namePropDescriptor || 1 !== _RunInRootFrame$Deter) {
                     do
                       if (namePropDescriptor--, _RunInRootFrame$Deter--, 0 > _RunInRootFrame$Deter || sampleLines[namePropDescriptor] !== controlLines[_RunInRootFrame$Deter]) {
-                        var _frame = "\\n" + sampleLines[namePropDescriptor].replace(
+                        var _frame = "\n" + sampleLines[namePropDescriptor].replace(
                           " at new ",
                           " at "
                         );
@@ -2184,9 +2166,9 @@
                     a: {
                       var name = entry.name, env = entry.env, location = entry.debugLocation;
                       if (null != location) {
-                        var childStack = formatOwnerStack(location), idx = childStack.lastIndexOf("\\n"), lastLine = -1 === idx ? childStack : childStack.slice(idx + 1);
+                        var childStack = formatOwnerStack(location), idx = childStack.lastIndexOf("\n"), lastLine = -1 === idx ? childStack : childStack.slice(idx + 1);
                         if (-1 !== lastLine.indexOf(name)) {
-                          var JSCompiler_inline_result = "\\n" + lastLine;
+                          var JSCompiler_inline_result = "\n" + lastLine;
                           break a;
                         }
                       }
@@ -2202,7 +2184,7 @@
             } while (workInProgress2);
             return info;
           } catch (x) {
-            return "\\nError generating stack: " + x.message + "\\n" + x.stack;
+            return "\nError generating stack: " + x.message + "\n" + x.stack;
           }
         }
         function describeFunctionComponentFrameWithoutLineNumber(fn) {
@@ -2254,15 +2236,15 @@
                 var debugStack = fiber._debugStack;
                 if (workInProgress2 && debugStack) {
                   var formattedStack = formatOwnerStack(debugStack);
-                  "" !== formattedStack && (info += "\\n" + formattedStack);
+                  "" !== formattedStack && (info += "\n" + formattedStack);
                 }
               } else if (null != workInProgress2.debugStack) {
                 var ownerStack = workInProgress2.debugStack;
-                (workInProgress2 = workInProgress2.owner) && ownerStack && (info += "\\n" + formatOwnerStack(ownerStack));
+                (workInProgress2 = workInProgress2.owner) && ownerStack && (info += "\n" + formatOwnerStack(ownerStack));
               } else break;
             var JSCompiler_inline_result = info;
           } catch (x) {
-            JSCompiler_inline_result = "\\nError generating stack: " + x.message + "\\n" + x.stack;
+            JSCompiler_inline_result = "\nError generating stack: " + x.message + "\n" + x.stack;
           }
           return JSCompiler_inline_result;
         }
@@ -2409,17 +2391,17 @@
               ), lanes;
           }
         }
-        function getNextLanes(root2, wipLanes, rootHasPendingCommit) {
-          var pendingLanes = root2.pendingLanes;
+        function getNextLanes(root3, wipLanes, rootHasPendingCommit) {
+          var pendingLanes = root3.pendingLanes;
           if (0 === pendingLanes) return 0;
-          var nextLanes = 0, suspendedLanes = root2.suspendedLanes, pingedLanes = root2.pingedLanes;
-          root2 = root2.warmLanes;
+          var nextLanes = 0, suspendedLanes = root3.suspendedLanes, pingedLanes = root3.pingedLanes;
+          root3 = root3.warmLanes;
           var nonIdlePendingLanes = pendingLanes & 134217727;
-          0 !== nonIdlePendingLanes ? (pendingLanes = nonIdlePendingLanes & ~suspendedLanes, 0 !== pendingLanes ? nextLanes = getHighestPriorityLanes(pendingLanes) : (pingedLanes &= nonIdlePendingLanes, 0 !== pingedLanes ? nextLanes = getHighestPriorityLanes(pingedLanes) : rootHasPendingCommit || (rootHasPendingCommit = nonIdlePendingLanes & ~root2, 0 !== rootHasPendingCommit && (nextLanes = getHighestPriorityLanes(rootHasPendingCommit))))) : (nonIdlePendingLanes = pendingLanes & ~suspendedLanes, 0 !== nonIdlePendingLanes ? nextLanes = getHighestPriorityLanes(nonIdlePendingLanes) : 0 !== pingedLanes ? nextLanes = getHighestPriorityLanes(pingedLanes) : rootHasPendingCommit || (rootHasPendingCommit = pendingLanes & ~root2, 0 !== rootHasPendingCommit && (nextLanes = getHighestPriorityLanes(rootHasPendingCommit))));
+          0 !== nonIdlePendingLanes ? (pendingLanes = nonIdlePendingLanes & ~suspendedLanes, 0 !== pendingLanes ? nextLanes = getHighestPriorityLanes(pendingLanes) : (pingedLanes &= nonIdlePendingLanes, 0 !== pingedLanes ? nextLanes = getHighestPriorityLanes(pingedLanes) : rootHasPendingCommit || (rootHasPendingCommit = nonIdlePendingLanes & ~root3, 0 !== rootHasPendingCommit && (nextLanes = getHighestPriorityLanes(rootHasPendingCommit))))) : (nonIdlePendingLanes = pendingLanes & ~suspendedLanes, 0 !== nonIdlePendingLanes ? nextLanes = getHighestPriorityLanes(nonIdlePendingLanes) : 0 !== pingedLanes ? nextLanes = getHighestPriorityLanes(pingedLanes) : rootHasPendingCommit || (rootHasPendingCommit = pendingLanes & ~root3, 0 !== rootHasPendingCommit && (nextLanes = getHighestPriorityLanes(rootHasPendingCommit))));
           return 0 === nextLanes ? 0 : 0 !== wipLanes && wipLanes !== nextLanes && 0 === (wipLanes & suspendedLanes) && (suspendedLanes = nextLanes & -nextLanes, rootHasPendingCommit = wipLanes & -wipLanes, suspendedLanes >= rootHasPendingCommit || 32 === suspendedLanes && 0 !== (rootHasPendingCommit & 4194048)) ? wipLanes : nextLanes;
         }
-        function checkIfRootIsPrerendering(root2, renderLanes2) {
-          return 0 === (root2.pendingLanes & ~(root2.suspendedLanes & ~root2.pingedLanes) & renderLanes2);
+        function checkIfRootIsPrerendering(root3, renderLanes2) {
+          return 0 === (root3.pendingLanes & ~(root3.suspendedLanes & ~root3.pingedLanes) & renderLanes2);
         }
         function computeExpirationTime(lane, currentTime) {
           switch (lane) {
@@ -2474,21 +2456,21 @@
           for (var laneMap = [], i = 0; 31 > i; i++) laneMap.push(initial);
           return laneMap;
         }
-        function markRootUpdated$1(root2, updateLane) {
-          root2.pendingLanes |= updateLane;
-          268435456 !== updateLane && (root2.suspendedLanes = 0, root2.pingedLanes = 0, root2.warmLanes = 0);
+        function markRootUpdated$1(root3, updateLane) {
+          root3.pendingLanes |= updateLane;
+          268435456 !== updateLane && (root3.suspendedLanes = 0, root3.pingedLanes = 0, root3.warmLanes = 0);
         }
-        function markRootFinished(root2, finishedLanes, remainingLanes, spawnedLane, updatedLanes, suspendedRetryLanes) {
-          var previouslyPendingLanes = root2.pendingLanes;
-          root2.pendingLanes = remainingLanes;
-          root2.suspendedLanes = 0;
-          root2.pingedLanes = 0;
-          root2.warmLanes = 0;
-          root2.expiredLanes &= remainingLanes;
-          root2.entangledLanes &= remainingLanes;
-          root2.errorRecoveryDisabledLanes &= remainingLanes;
-          root2.shellSuspendCounter = 0;
-          var entanglements = root2.entanglements, expirationTimes = root2.expirationTimes, hiddenUpdates = root2.hiddenUpdates;
+        function markRootFinished(root3, finishedLanes, remainingLanes, spawnedLane, updatedLanes, suspendedRetryLanes) {
+          var previouslyPendingLanes = root3.pendingLanes;
+          root3.pendingLanes = remainingLanes;
+          root3.suspendedLanes = 0;
+          root3.pingedLanes = 0;
+          root3.warmLanes = 0;
+          root3.expiredLanes &= remainingLanes;
+          root3.entangledLanes &= remainingLanes;
+          root3.errorRecoveryDisabledLanes &= remainingLanes;
+          root3.shellSuspendCounter = 0;
+          var entanglements = root3.entanglements, expirationTimes = root3.expirationTimes, hiddenUpdates = root3.hiddenUpdates;
           for (remainingLanes = previouslyPendingLanes & ~remainingLanes; 0 < remainingLanes; ) {
             var index = 31 - clz32(remainingLanes), lane = 1 << index;
             entanglements[index] = 0;
@@ -2501,28 +2483,28 @@
               }
             remainingLanes &= ~lane;
           }
-          0 !== spawnedLane && markSpawnedDeferredLane(root2, spawnedLane, 0);
-          0 !== suspendedRetryLanes && 0 === updatedLanes && 0 !== root2.tag && (root2.suspendedLanes |= suspendedRetryLanes & ~(previouslyPendingLanes & ~finishedLanes));
+          0 !== spawnedLane && markSpawnedDeferredLane(root3, spawnedLane, 0);
+          0 !== suspendedRetryLanes && 0 === updatedLanes && 0 !== root3.tag && (root3.suspendedLanes |= suspendedRetryLanes & ~(previouslyPendingLanes & ~finishedLanes));
         }
-        function markSpawnedDeferredLane(root2, spawnedLane, entangledLanes) {
-          root2.pendingLanes |= spawnedLane;
-          root2.suspendedLanes &= ~spawnedLane;
+        function markSpawnedDeferredLane(root3, spawnedLane, entangledLanes) {
+          root3.pendingLanes |= spawnedLane;
+          root3.suspendedLanes &= ~spawnedLane;
           var spawnedLaneIndex = 31 - clz32(spawnedLane);
-          root2.entangledLanes |= spawnedLane;
-          root2.entanglements[spawnedLaneIndex] = root2.entanglements[spawnedLaneIndex] | 1073741824 | entangledLanes & 261930;
+          root3.entangledLanes |= spawnedLane;
+          root3.entanglements[spawnedLaneIndex] = root3.entanglements[spawnedLaneIndex] | 1073741824 | entangledLanes & 261930;
         }
-        function markRootEntangled(root2, entangledLanes) {
-          var rootEntangledLanes = root2.entangledLanes |= entangledLanes;
-          for (root2 = root2.entanglements; rootEntangledLanes; ) {
+        function markRootEntangled(root3, entangledLanes) {
+          var rootEntangledLanes = root3.entangledLanes |= entangledLanes;
+          for (root3 = root3.entanglements; rootEntangledLanes; ) {
             var index = 31 - clz32(rootEntangledLanes), lane = 1 << index;
-            lane & entangledLanes | root2[index] & entangledLanes && (root2[index] |= entangledLanes);
+            lane & entangledLanes | root3[index] & entangledLanes && (root3[index] |= entangledLanes);
             rootEntangledLanes &= ~lane;
           }
         }
-        function getBumpedLaneForHydration(root2, renderLanes2) {
+        function getBumpedLaneForHydration(root3, renderLanes2) {
           var renderLane = renderLanes2 & -renderLanes2;
           renderLane = 0 !== (renderLane & 42) ? 1 : getBumpedLaneForHydrationByLane(renderLane);
-          return 0 !== (renderLane & (root2.suspendedLanes | renderLanes2)) ? 0 : renderLane;
+          return 0 !== (renderLane & (root3.suspendedLanes | renderLanes2)) ? 0 : renderLane;
         }
         function getBumpedLaneForHydrationByLane(lane) {
           switch (lane) {
@@ -2563,25 +2545,25 @@
           }
           return lane;
         }
-        function addFiberToLanesMap(root2, fiber, lanes) {
+        function addFiberToLanesMap(root3, fiber, lanes) {
           if (isDevToolsPresent)
-            for (root2 = root2.pendingUpdatersLaneMap; 0 < lanes; ) {
+            for (root3 = root3.pendingUpdatersLaneMap; 0 < lanes; ) {
               var index = 31 - clz32(lanes), lane = 1 << index;
-              root2[index].add(fiber);
+              root3[index].add(fiber);
               lanes &= ~lane;
             }
         }
-        function movePendingFibersToMemoized(root2, lanes) {
+        function movePendingFibersToMemoized(root3, lanes) {
           if (isDevToolsPresent)
-            for (var pendingUpdatersLaneMap = root2.pendingUpdatersLaneMap, memoizedUpdaters = root2.memoizedUpdaters; 0 < lanes; ) {
+            for (var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap, memoizedUpdaters = root3.memoizedUpdaters; 0 < lanes; ) {
               var index = 31 - clz32(lanes);
-              root2 = 1 << index;
+              root3 = 1 << index;
               index = pendingUpdatersLaneMap[index];
               0 < index.size && (index.forEach(function(fiber) {
                 var alternate = fiber.alternate;
                 null !== alternate && memoizedUpdaters.has(alternate) || memoizedUpdaters.add(fiber);
               }), index.clear());
-              lanes &= ~root2;
+              lanes &= ~root3;
             }
         }
         function lanesToEventPriority(lanes) {
@@ -2642,9 +2624,9 @@
             return inst.stateNode;
           throw Error("getNodeFromInstance: Invalid argument.");
         }
-        function getResourcesFromRoot(root2) {
-          var resources = root2[internalRootNodeResourcesKey];
-          resources || (resources = root2[internalRootNodeResourcesKey] = { hoistableStyles: /* @__PURE__ */ new Map(), hoistableScripts: /* @__PURE__ */ new Map() });
+        function getResourcesFromRoot(root3) {
+          var resources = root3[internalRootNodeResourcesKey];
+          resources || (resources = root3[internalRootNodeResourcesKey] = { hoistableStyles: /* @__PURE__ */ new Map(), hoistableScripts: /* @__PURE__ */ new Map() });
           return resources;
         }
         function markNodeAsHoistable(node) {
@@ -2900,7 +2882,7 @@
           "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React2.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React3.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -2913,7 +2895,7 @@
         }
         function getDeclarationErrorAddendum() {
           var ownerName = getCurrentFiberOwnerNameInDevOrNull();
-          return ownerName ? "\\n\\nCheck the render method of `" + ownerName + "`." : "";
+          return ownerName ? "\n\nCheck the render method of `" + ownerName + "`." : "";
         }
         function updateOptions(node, multiple, propValue, setDefaultSelected) {
           node = node.options;
@@ -3039,13 +3021,13 @@
         function describeTextDiff(clientText, serverProps, indent) {
           var maxLength = 120 - 2 * indent;
           if (null === serverProps)
-            return added(indent) + describeTextNode(clientText, maxLength) + "\\n";
+            return added(indent) + describeTextNode(clientText, maxLength) + "\n";
           if ("string" === typeof serverProps) {
             for (var firstDiff = 0; firstDiff < serverProps.length && firstDiff < clientText.length && serverProps.charCodeAt(firstDiff) === clientText.charCodeAt(firstDiff); firstDiff++) ;
             firstDiff > maxLength - 8 && 10 < firstDiff && (clientText = "..." + clientText.slice(firstDiff - 8), serverProps = "..." + serverProps.slice(firstDiff - 8));
-            return added(indent) + describeTextNode(clientText, maxLength) + "\\n" + removed(indent) + describeTextNode(serverProps, maxLength) + "\\n";
+            return added(indent) + describeTextNode(clientText, maxLength) + "\n" + removed(indent) + describeTextNode(serverProps, maxLength) + "\n";
           }
-          return indentation(indent) + describeTextNode(clientText, maxLength) + "\\n";
+          return indentation(indent) + describeTextNode(clientText, maxLength) + "\n";
         }
         function objectName(object) {
           return Object.prototype.toString.call(object).replace(/^\[object (.*)\]$/, function(m, p0) {
@@ -3104,7 +3086,7 @@
               remainingRowLength -= propName.length + propValue.length + 2;
               properties.push(propName + "=" + propValue);
             }
-          return 0 === properties.length ? rowPrefix + "<" + type + ">\\n" : 0 < remainingRowLength ? rowPrefix + "<" + type + " " + properties.join(" ") + ">\\n" : rowPrefix + "<" + type + "\\n" + rowPrefix + "  " + properties.join("\\n" + rowPrefix + "  ") + "\\n" + rowPrefix + ">\\n";
+          return 0 === properties.length ? rowPrefix + "<" + type + ">\n" : 0 < remainingRowLength ? rowPrefix + "<" + type + " " + properties.join(" ") + ">\n" : rowPrefix + "<" + type + "\n" + rowPrefix + "  " + properties.join("\n" + rowPrefix + "  ") + "\n" + rowPrefix + ">\n";
         }
         function describePropertiesDiff(clientObject, serverObject, indent) {
           var properties = "", remainingServerProperties = assign({}, serverObject), propName;
@@ -3112,13 +3094,13 @@
             if (clientObject.hasOwnProperty(propName)) {
               delete remainingServerProperties[propName];
               var maxLength = 120 - 2 * indent - propName.length - 2, clientPropValue = describeValue(clientObject[propName], maxLength);
-              serverObject.hasOwnProperty(propName) ? (maxLength = describeValue(serverObject[propName], maxLength), properties += added(indent) + propName + ": " + clientPropValue + "\\n", properties += removed(indent) + propName + ": " + maxLength + "\\n") : properties += added(indent) + propName + ": " + clientPropValue + "\\n";
+              serverObject.hasOwnProperty(propName) ? (maxLength = describeValue(serverObject[propName], maxLength), properties += added(indent) + propName + ": " + clientPropValue + "\n", properties += removed(indent) + propName + ": " + maxLength + "\n") : properties += added(indent) + propName + ": " + clientPropValue + "\n";
             }
           for (var _propName in remainingServerProperties)
             remainingServerProperties.hasOwnProperty(_propName) && (clientObject = describeValue(
               remainingServerProperties[_propName],
               120 - 2 * indent - _propName.length - 2
-            ), properties += removed(indent) + _propName + ": " + clientObject + "\\n");
+            ), properties += removed(indent) + _propName + ": " + clientObject + "\n");
           return properties;
         }
         function describeElementDiff(type, clientProps, serverProps, indent) {
@@ -3150,21 +3132,21 @@
                     serverPropName,
                     maxLength$jscomp$0
                   );
-                  "object" === typeof propName$jscomp$0 && null !== propName$jscomp$0 && "object" === typeof serverPropName && null !== serverPropName && "Object" === objectName(propName$jscomp$0) && "Object" === objectName(serverPropName) && (2 < Object.keys(propName$jscomp$0).length || 2 < Object.keys(serverPropName).length || -1 < clientPropValue.indexOf("...") || -1 < maxLength$jscomp$0.indexOf("...")) ? content += indentation(indent + 1) + _propName2 + "={{\\n" + describePropertiesDiff(
+                  "object" === typeof propName$jscomp$0 && null !== propName$jscomp$0 && "object" === typeof serverPropName && null !== serverPropName && "Object" === objectName(propName$jscomp$0) && "Object" === objectName(serverPropName) && (2 < Object.keys(propName$jscomp$0).length || 2 < Object.keys(serverPropName).length || -1 < clientPropValue.indexOf("...") || -1 < maxLength$jscomp$0.indexOf("...")) ? content += indentation(indent + 1) + _propName2 + "={{\n" + describePropertiesDiff(
                     propName$jscomp$0,
                     serverPropName,
                     indent + 2
-                  ) + indentation(indent + 1) + "}}\\n" : (content += added(indent + 1) + _propName2 + "=" + clientPropValue + "\\n", content += removed(indent + 1) + _propName2 + "=" + maxLength$jscomp$0 + "\\n");
+                  ) + indentation(indent + 1) + "}}\n" : (content += added(indent + 1) + _propName2 + "=" + clientPropValue + "\n", content += removed(indent + 1) + _propName2 + "=" + maxLength$jscomp$0 + "\n");
                 } else
-                  content += indentation(indent + 1) + _propName2 + "=" + describePropValue(clientProps[_propName2], maxLength$jscomp$0) + "\\n";
+                  content += indentation(indent + 1) + _propName2 + "=" + describePropValue(clientProps[_propName2], maxLength$jscomp$0) + "\n";
               }
             serverPropNames.forEach(function(propName) {
               if ("children" !== propName) {
                 var maxLength = 120 - 2 * (indent + 1) - propName.length - 1;
-                content += removed(indent + 1) + propName + "=" + describePropValue(serverProps[propName], maxLength) + "\\n";
+                content += removed(indent + 1) + propName + "=" + describePropValue(serverProps[propName], maxLength) + "\n";
               }
             });
-            content = "" === content ? indentation(indent) + "<" + type + ">\\n" : indentation(indent) + "<" + type + "\\n" + content + indentation(indent) + ">\\n";
+            content = "" === content ? indentation(indent) + "<" + type + ">\n" : indentation(indent) + "<" + type + "\n" + content + indentation(indent) + ">\n";
           }
           type = serverProps.children;
           clientProps = clientProps.children;
@@ -3185,18 +3167,18 @@
               type += describeSiblingFiber(fiber, indent), fiber = fiber.sibling;
             return type;
           }
-          return indentation(indent) + "<" + type + ">\\n";
+          return indentation(indent) + "<" + type + ">\n";
         }
         function describeNode(node, indent) {
           var skipToNode = findNotableNode(node, indent);
           if (skipToNode !== node && (1 !== node.children.length || node.children[0] !== skipToNode))
-            return indentation(indent) + "...\\n" + describeNode(skipToNode, indent + 1);
+            return indentation(indent) + "...\n" + describeNode(skipToNode, indent + 1);
           skipToNode = "";
           var debugInfo = node.fiber._debugInfo;
           if (debugInfo)
             for (var i = 0; i < debugInfo.length; i++) {
               var serverComponentName = debugInfo[i].name;
-              "string" === typeof serverComponentName && (skipToNode += indentation(indent) + "<" + serverComponentName + ">\\n", indent++);
+              "string" === typeof serverComponentName && (skipToNode += indentation(indent) + "<" + serverComponentName + ">\n", indent++);
             }
           debugInfo = "";
           i = node.fiber.pendingProps;
@@ -3216,7 +3198,7 @@
                   }
                   content += " " + propName + "=" + propValue;
                 }
-              debugInfo = indentation(debugInfo) + "<" + serverComponentName + content + ">\\n";
+              debugInfo = indentation(debugInfo) + "<" + serverComponentName + content + ">\n";
               indent++;
             } else
               null === node.serverProps ? (debugInfo = describeExpandedElement(
@@ -3235,11 +3217,11 @@
           i = node.fiber.child;
           for (serverComponentName = 0; i && serverComponentName < node.children.length; )
             maxLength = node.children[serverComponentName], maxLength.fiber === i ? (propName += describeNode(maxLength, indent), serverComponentName++) : propName += describeSiblingFiber(i, indent), i = i.sibling;
-          i && 0 < node.children.length && (propName += indentation(indent) + "...\\n");
+          i && 0 < node.children.length && (propName += indentation(indent) + "...\n");
           i = node.serverTail;
           null === node.serverProps && indent--;
           for (node = 0; node < i.length; node++)
-            serverComponentName = i[node], propName = "string" === typeof serverComponentName ? propName + (removed(indent) + describeTextNode(serverComponentName, 120 - 2 * indent) + "\\n") : propName + describeExpandedElement(
+            serverComponentName = i[node], propName = "string" === typeof serverComponentName ? propName + (removed(indent) + describeTextNode(serverComponentName, 120 - 2 * indent) + "\n") : propName + describeExpandedElement(
               serverComponentName.type,
               serverComponentName.props,
               removed(indent)
@@ -3248,7 +3230,7 @@
         }
         function describeDiff(rootNode) {
           try {
-            return "\\n\\n" + describeNode(rootNode, 0);
+            return "\n\n" + describeNode(rootNode, 0);
           } catch (x) {
             return "";
           }
@@ -3424,20 +3406,20 @@
           didWarn[ancestorInfo] = true;
           var ancestor = (ancestorInfo = current) ? findAncestor(ancestorInfo.return, ancestorTag) : null, ancestorDescription = null !== ancestorInfo && null !== ancestor ? describeAncestors(ancestor, ancestorInfo, null) : "", tagDisplayName = "<" + childTag + ">";
           parentInfo ? (parentInfo = "", "table" === ancestorTag && "tr" === childTag && (parentInfo += " Add a <tbody>, <thead> or <tfoot> to your code to match the DOM tree generated by the browser."), console.error(
-            "In HTML, %s cannot be a child of <%s>.%s\\nThis will cause a hydration error.%s",
+            "In HTML, %s cannot be a child of <%s>.%s\nThis will cause a hydration error.%s",
             tagDisplayName,
             ancestorTag,
             parentInfo,
             ancestorDescription
           )) : console.error(
-            "In HTML, %s cannot be a descendant of <%s>.\\nThis will cause a hydration error.%s",
+            "In HTML, %s cannot be a descendant of <%s>.\nThis will cause a hydration error.%s",
             tagDisplayName,
             ancestorTag,
             ancestorDescription
           );
           ancestorInfo && (childTag = ancestorInfo.return, null === ancestor || null === childTag || ancestor === childTag && childTag._debugOwner === ancestorInfo._debugOwner || runWithFiberInDEV(ancestor, function() {
             console.error(
-              "<%s> cannot contain a nested %s.\\nSee this log for the ancestor stack trace.",
+              "<%s> cannot contain a nested %s.\nSee this log for the ancestor stack trace.",
               ancestorTag,
               tagDisplayName
             );
@@ -3457,11 +3439,11 @@
             6 !== implicitRootScope.tag ? { children: null } : null
           ) : "";
           /\S/.test(childText) ? console.error(
-            "In HTML, text nodes cannot be a child of <%s>.\\nThis will cause a hydration error.%s",
+            "In HTML, text nodes cannot be a child of <%s>.\nThis will cause a hydration error.%s",
             parentTag,
             implicitRootScope
           ) : console.error(
-            "In HTML, whitespace text nodes cannot be a child of <%s>. Make sure you don't have any extra whitespace between tags on each line of your source code.\\nThis will cause a hydration error.%s",
+            "In HTML, whitespace text nodes cannot be a child of <%s>. Make sure you don't have any extra whitespace between tags on each line of your source code.\nThis will cause a hydration error.%s",
             parentTag,
             implicitRootScope
           );
@@ -3743,14 +3725,14 @@
                   if ("data-" === lowerCasedName || "aria-" === lowerCasedName)
                     return true;
                   value ? console.error(
-                    'Received `%s` for a non-boolean attribute `%s`.\\n\\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.',
+                    'Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.',
                     value,
                     name,
                     name,
                     value,
                     name
                   ) : console.error(
-                    'Received `%s` for a non-boolean attribute `%s`.\\n\\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.\\n\\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.',
+                    'Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.\n\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.',
                     value,
                     name,
                     name,
@@ -3941,7 +3923,7 @@
         }
         function getData() {
           if (fallbackText) return fallbackText;
-          var start, startValue = startText, startLength = startValue.length, end, endValue = "value" in root ? root.value : root.textContent, endLength = endValue.length;
+          var start, startValue = startText, startLength = startValue.length, end, endValue = "value" in root2 ? root2.value : root2.textContent, endLength = endValue.length;
           for (start = 0; start < startLength && startValue[start] === endValue[start]; start++) ;
           var minEnd = startLength - start;
           for (end = 1; end <= minEnd && startValue[startLength - end] === endValue[endLength - end]; end++) ;
@@ -4030,7 +4012,7 @@
         }
         function getFallbackBeforeInputChars(domEventName, nativeEvent) {
           if (isComposing)
-            return "compositionend" === domEventName || !canUseCompositionEvent && isFallbackCompositionEnd(domEventName, nativeEvent) ? (domEventName = getData(), fallbackText = startText = root = null, isComposing = false, domEventName) : null;
+            return "compositionend" === domEventName || !canUseCompositionEvent && isFallbackCompositionEnd(domEventName, nativeEvent) ? (domEventName = getData(), fallbackText = startText = root2 = null, isComposing = false, domEventName) : null;
           switch (domEventName) {
             case "paste":
               return null;
@@ -4129,15 +4111,15 @@
           for (; node && node.firstChild; ) node = node.firstChild;
           return node;
         }
-        function getNodeForCharacterOffset(root2, offset) {
-          var node = getLeafNode(root2);
-          root2 = 0;
+        function getNodeForCharacterOffset(root3, offset) {
+          var node = getLeafNode(root3);
+          root3 = 0;
           for (var nodeEnd; node; ) {
             if (3 === node.nodeType) {
-              nodeEnd = root2 + node.textContent.length;
-              if (root2 <= offset && nodeEnd >= offset)
-                return { node, offset: offset - root2 };
-              root2 = nodeEnd;
+              nodeEnd = root3 + node.textContent.length;
+              if (root3 <= offset && nodeEnd >= offset)
+                return { node, offset: offset - root3 };
+              root3 = nodeEnd;
             }
             a: {
               for (; node; ) {
@@ -5012,7 +4994,7 @@
                 if (void 0 === type || "object" === typeof type && null !== type && 0 === Object.keys(type).length)
                   resolvedType += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
                 null === type ? pendingProps = "null" : isArrayImpl(type) ? pendingProps = "array" : void 0 !== type && type.$$typeof === REACT_ELEMENT_TYPE ? (pendingProps = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />", resolvedType = " Did you accidentally export a JSX literal instead of a component?") : pendingProps = typeof type;
-                (fiberTag = owner ? getComponentNameFromOwner(owner) : null) && (resolvedType += "\\n\\nCheck the render method of `" + fiberTag + "`.");
+                (fiberTag = owner ? getComponentNameFromOwner(owner) : null) && (resolvedType += "\n\nCheck the render method of `" + fiberTag + "`.");
                 fiberTag = 29;
                 pendingProps = Error(
                   "Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: " + (pendingProps + "." + resolvedType)
@@ -5194,7 +5176,7 @@
           queueHydrationError(
             createCapturedValueAtFiber(
               Error(
-                "Hydration failed because the server rendered " + (fromText ? "text" : "HTML") + " didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\nhttps://react.dev/link/hydration-mismatch" + diff
+                "Hydration failed because the server rendered " + (fromText ? "text" : "HTML") + " didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch" + diff
               ),
               fiber
             )
@@ -5347,7 +5329,7 @@
               diffRoot = diffRoot.children[0];
             runWithFiberInDEV(diffRoot.fiber, function() {
               console.error(
-                "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\n%s%s",
+                "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s",
                 "https://react.dev/link/hydration-mismatch",
                 diff
               );
@@ -5868,7 +5850,7 @@
         function throwOnInvalidObjectTypeImpl(returnFiber, newChild) {
           if (newChild.$$typeof === REACT_LEGACY_ELEMENT_TYPE)
             throw Error(
-              'A React Element from an older version of React was rendered. This is not supported. It can happen if:\\n- Multiple copies of the "react" package is used.\\n- A library pre-bundled an old copy of "react" or "react/jsx-runtime".\\n- A compiler tries to "inline" JSX instead of using the runtime.'
+              'A React Element from an older version of React was rendered. This is not supported. It can happen if:\n- Multiple copies of the "react" package is used.\n- A library pre-bundled an old copy of "react" or "react/jsx-runtime".\n- A compiler tries to "inline" JSX instead of using the runtime.'
             );
           returnFiber = Object.prototype.toString.call(newChild);
           throw Error(
@@ -5884,12 +5866,12 @@
         function warnOnFunctionTypeImpl(returnFiber, invalidChild) {
           var parentName = getComponentNameFromFiber(returnFiber) || "Component";
           ownerHasFunctionTypeWarning[parentName] || (ownerHasFunctionTypeWarning[parentName] = true, invalidChild = invalidChild.displayName || invalidChild.name || "Component", 3 === returnFiber.tag ? console.error(
-            "Functions are not valid as a React child. This may happen if you return %s instead of <%s /> from render. Or maybe you meant to call this function rather than return it.\\n  root.render(%s)",
+            "Functions are not valid as a React child. This may happen if you return %s instead of <%s /> from render. Or maybe you meant to call this function rather than return it.\n  root.render(%s)",
             invalidChild,
             invalidChild,
             invalidChild
           ) : console.error(
-            "Functions are not valid as a React child. This may happen if you return %s instead of <%s /> from render. Or maybe you meant to call this function rather than return it.\\n  <%s>{%s}</%s>",
+            "Functions are not valid as a React child. This may happen if you return %s instead of <%s /> from render. Or maybe you meant to call this function rather than return it.\n  <%s>{%s}</%s>",
             invalidChild,
             invalidChild,
             parentName,
@@ -5906,10 +5888,10 @@
         function warnOnSymbolTypeImpl(returnFiber, invalidChild) {
           var parentName = getComponentNameFromFiber(returnFiber) || "Component";
           ownerHasSymbolTypeWarning[parentName] || (ownerHasSymbolTypeWarning[parentName] = true, invalidChild = String(invalidChild), 3 === returnFiber.tag ? console.error(
-            "Symbols are not valid as a React child.\\n  root.render(%s)",
+            "Symbols are not valid as a React child.\n  root.render(%s)",
             invalidChild
           ) : console.error(
-            "Symbols are not valid as a React child.\\n  <%s>%s</%s>",
+            "Symbols are not valid as a React child.\n  <%s>%s</%s>",
             parentName,
             invalidChild,
             parentName
@@ -6585,7 +6567,7 @@
           if (currentlyProcessingQueue === updateQueue && !didWarnUpdateInsideUpdate) {
             var componentName2 = getComponentNameFromFiber(fiber);
             console.error(
-              "An update (setState, replaceState, or forceUpdate) was scheduled from inside an update function. Update functions should be pure, with zero side-effects. Consider using componentDidUpdate or a callback.\\n\\nPlease update the following component: %s",
+              "An update (setState, replaceState, or forceUpdate) was scheduled from inside an update function. Update functions should be pure, with zero side-effects. Consider using componentDidUpdate or a callback.\n\nPlease update the following component: %s",
               componentName2
             );
             didWarnUpdateInsideUpdate = true;
@@ -6595,14 +6577,14 @@
           enqueueUpdate$1(fiber, updateQueue, update, lane);
           return getRootForUpdatedFiber(fiber);
         }
-        function entangleTransitions(root2, fiber, lane) {
+        function entangleTransitions(root3, fiber, lane) {
           fiber = fiber.updateQueue;
           if (null !== fiber && (fiber = fiber.shared, 0 !== (lane & 4194048))) {
             var queueLanes = fiber.lanes;
-            queueLanes &= root2.pendingLanes;
+            queueLanes &= root3.pendingLanes;
             lane |= queueLanes;
             fiber.lanes = lane;
-            markRootEntangled(root2, lane);
+            markRootEntangled(root3, lane);
           }
         }
         function enqueueCapturedUpdate(workInProgress2, capturedUpdate) {
@@ -6864,11 +6846,11 @@
                 var oldHookName = hookTypesDev[i], newHookName = i === hookTypesUpdateIndexDev ? hookName : oldHookName;
                 for (oldHookName = i + 1 + ". " + oldHookName; 30 > oldHookName.length; )
                   oldHookName += " ";
-                oldHookName += newHookName + "\\n";
+                oldHookName += newHookName + "\n";
                 table += oldHookName;
               }
               console.error(
-                "React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks\\n\\n   Previous render            Next render\\n   ------------------------------------------------------\\n%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n",
+                "React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks\n\n   Previous render            Next render\n   ------------------------------------------------------\n%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
                 componentName2,
                 table
               );
@@ -6891,7 +6873,7 @@
         }
         function throwInvalidHookError() {
           throw Error(
-            "Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\\n1. You might have mismatching versions of React and the renderer (such as React DOM)\\n2. You might be breaking the Rules of Hooks\\n3. You might have more than one copy of React in the same app\\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem."
+            "Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem."
           );
         }
         function areHookInputsEqual(nextDeps, prevDeps) {
@@ -6902,7 +6884,7 @@
               currentHookNameInDev
             ), false;
           nextDeps.length !== prevDeps.length && console.error(
-            "The final argument passed to %s changed size between renders. The order and size of this array must remain constant.\\n\\nPrevious: %s\\nIncoming: %s",
+            "The final argument passed to %s changed size between renders. The order and size of this array must remain constant.\n\nPrevious: %s\nIncoming: %s",
             currentHookNameInDev,
             "[" + prevDeps.join(", ") + "]",
             "[" + nextDeps.join(", ") + "]"
@@ -7377,8 +7359,8 @@
           }
         }
         function forceStoreRerender(fiber) {
-          var root2 = enqueueConcurrentRenderForLane(fiber, 2);
-          null !== root2 && scheduleUpdateOnFiber(root2, fiber, 2);
+          var root3 = enqueueConcurrentRenderForLane(fiber, 2);
+          null !== root3 && scheduleUpdateOnFiber(root3, fiber, 2);
         }
         function mountStateImpl(initialState) {
           var hook = mountWorkInProgressHook();
@@ -8041,10 +8023,10 @@
             switch (provider.tag) {
               case 24:
               case 3:
-                var lane = requestUpdateLane(provider), refreshUpdate = createUpdate(lane), root2 = enqueueUpdate(provider, refreshUpdate, lane);
-                null !== root2 && (startUpdateTimerByLane(lane, "refresh()", fiber), scheduleUpdateOnFiber(root2, provider, lane), entangleTransitions(root2, provider, lane));
+                var lane = requestUpdateLane(provider), refreshUpdate = createUpdate(lane), root3 = enqueueUpdate(provider, refreshUpdate, lane);
+                null !== root3 && (startUpdateTimerByLane(lane, "refresh()", fiber), scheduleUpdateOnFiber(root3, provider, lane), entangleTransitions(root3, provider, lane));
                 fiber = createCache();
-                null !== seedKey && void 0 !== seedKey && null !== root2 && console.error(
+                null !== seedKey && void 0 !== seedKey && null !== root3 && console.error(
                   "The seed argument is not enabled outside experimental channels."
                 );
                 refreshUpdate.payload = { cache: fiber };
@@ -8146,13 +8128,13 @@
           null === pending ? update.next = update : (update.next = pending.next, pending.next = update);
           queue.pending = update;
         }
-        function entangleTransitionUpdate(root2, queue, lane) {
+        function entangleTransitionUpdate(root3, queue, lane) {
           if (0 !== (lane & 4194048)) {
             var queueLanes = queue.lanes;
-            queueLanes &= root2.pendingLanes;
+            queueLanes &= root3.pendingLanes;
             lane |= queueLanes;
             queue.lanes = lane;
-            markRootEntangled(root2, lane);
+            markRootEntangled(root3, lane);
           }
         }
         function warnOnInvalidCallback(callback) {
@@ -8240,9 +8222,9 @@
         function defaultOnUncaughtError(error) {
           reportGlobalError(error);
           console.warn(
-            "%s\\n\\n%s\\n",
+            "%s\n\n%s\n",
             componentName ? "An error occurred in the <" + componentName + "> component." : "An error occurred in one of your React components.",
-            "Consider adding an error boundary to your tree to customize error handling behavior.\\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries."
+            "Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries."
           );
         }
         function defaultOnCaughtError(error) {
@@ -8250,7 +8232,7 @@
           if ("object" === typeof error && null !== error && "string" === typeof error.environmentName) {
             var JSCompiler_inline_result = error.environmentName;
             error = [
-              "%o\\n\\n%s\\n\\n%s\\n",
+              "%o\n\n%s\n\n%s\n",
               error,
               componentNameMessage,
               recreateMessage
@@ -8275,7 +8257,7 @@
             JSCompiler_inline_result();
           } else
             console.error(
-              "%o\\n\\n%s\\n\\n%s\\n",
+              "%o\n\n%s\n\n%s\n",
               error,
               componentNameMessage,
               recreateMessage
@@ -8284,7 +8266,7 @@
         function defaultOnRecoverableError(error) {
           reportGlobalError(error);
         }
-        function logUncaughtError(root2, errorInfo) {
+        function logUncaughtError(root3, errorInfo) {
           try {
             componentName = errorInfo.source ? getComponentNameFromFiber(errorInfo.source) : null;
             errorBoundaryName = null;
@@ -8292,7 +8274,7 @@
             if (null !== ReactSharedInternals.actQueue)
               ReactSharedInternals.thrownErrors.push(error);
             else {
-              var onUncaughtError = root2.onUncaughtError;
+              var onUncaughtError = root3.onUncaughtError;
               onUncaughtError(error, { componentStack: errorInfo.stack });
             }
           } catch (e$5) {
@@ -8301,11 +8283,11 @@
             });
           }
         }
-        function logCaughtError(root2, boundary, errorInfo) {
+        function logCaughtError(root3, boundary, errorInfo) {
           try {
             componentName = errorInfo.source ? getComponentNameFromFiber(errorInfo.source) : null;
             errorBoundaryName = getComponentNameFromFiber(boundary);
-            var onCaughtError = root2.onCaughtError;
+            var onCaughtError = root3.onCaughtError;
             onCaughtError(errorInfo.value, {
               componentStack: errorInfo.stack,
               errorBoundary: 1 === boundary.tag ? boundary.stateNode : null
@@ -8316,12 +8298,12 @@
             });
           }
         }
-        function createRootErrorUpdate(root2, errorInfo, lane) {
+        function createRootErrorUpdate(root3, errorInfo, lane) {
           lane = createUpdate(lane);
           lane.tag = CaptureUpdate;
           lane.payload = { element: null };
           lane.callback = function() {
-            runWithFiberInDEV(errorInfo.source, logUncaughtError, root2, errorInfo);
+            runWithFiberInDEV(errorInfo.source, logUncaughtError, root3, errorInfo);
           };
           return lane;
         }
@@ -8330,7 +8312,7 @@
           lane.tag = CaptureUpdate;
           return lane;
         }
-        function initializeClassErrorUpdate(update, root2, fiber, errorInfo) {
+        function initializeClassErrorUpdate(update, root3, fiber, errorInfo) {
           var getDerivedStateFromError = fiber.type.getDerivedStateFromError;
           if ("function" === typeof getDerivedStateFromError) {
             var error = errorInfo.value;
@@ -8342,7 +8324,7 @@
               runWithFiberInDEV(
                 errorInfo.source,
                 logCaughtError,
-                root2,
+                root3,
                 fiber,
                 errorInfo
               );
@@ -8354,7 +8336,7 @@
             runWithFiberInDEV(
               errorInfo.source,
               logCaughtError,
-              root2,
+              root3,
               fiber,
               errorInfo
             );
@@ -8366,9 +8348,9 @@
             );
           });
         }
-        function throwException(root2, returnFiber, sourceFiber, value, rootRenderLanes) {
+        function throwException(root3, returnFiber, sourceFiber, value, rootRenderLanes) {
           sourceFiber.flags |= 32768;
-          isDevToolsPresent && restorePendingUpdaters(root2, rootRenderLanes);
+          isDevToolsPresent && restorePendingUpdaters(root3, rootRenderLanes);
           if (null !== value && "object" === typeof value && "function" === typeof value.then) {
             returnFiber = sourceFiber.alternate;
             null !== returnFiber && propagateParentContextChanges(
@@ -8383,19 +8365,19 @@
               switch (sourceFiber.tag) {
                 case 31:
                 case 13:
-                  return null === shellBoundary ? renderDidSuspendDelayIfPossible() : null === sourceFiber.alternate && workInProgressRootExitStatus === RootInProgress && (workInProgressRootExitStatus = RootSuspended), sourceFiber.flags &= -257, sourceFiber.flags |= 65536, sourceFiber.lanes = rootRenderLanes, value === noopSuspenseyCommitThenable ? sourceFiber.flags |= 16384 : (returnFiber = sourceFiber.updateQueue, null === returnFiber ? sourceFiber.updateQueue = /* @__PURE__ */ new Set([value]) : returnFiber.add(value), attachPingListener(root2, value, rootRenderLanes)), false;
+                  return null === shellBoundary ? renderDidSuspendDelayIfPossible() : null === sourceFiber.alternate && workInProgressRootExitStatus === RootInProgress && (workInProgressRootExitStatus = RootSuspended), sourceFiber.flags &= -257, sourceFiber.flags |= 65536, sourceFiber.lanes = rootRenderLanes, value === noopSuspenseyCommitThenable ? sourceFiber.flags |= 16384 : (returnFiber = sourceFiber.updateQueue, null === returnFiber ? sourceFiber.updateQueue = /* @__PURE__ */ new Set([value]) : returnFiber.add(value), attachPingListener(root3, value, rootRenderLanes)), false;
                 case 22:
                   return sourceFiber.flags |= 65536, value === noopSuspenseyCommitThenable ? sourceFiber.flags |= 16384 : (returnFiber = sourceFiber.updateQueue, null === returnFiber ? (returnFiber = {
                     transitions: null,
                     markerInstances: null,
                     retryQueue: /* @__PURE__ */ new Set([value])
-                  }, sourceFiber.updateQueue = returnFiber) : (sourceFiber = returnFiber.retryQueue, null === sourceFiber ? returnFiber.retryQueue = /* @__PURE__ */ new Set([value]) : sourceFiber.add(value)), attachPingListener(root2, value, rootRenderLanes)), false;
+                  }, sourceFiber.updateQueue = returnFiber) : (sourceFiber = returnFiber.retryQueue, null === sourceFiber ? returnFiber.retryQueue = /* @__PURE__ */ new Set([value]) : sourceFiber.add(value)), attachPingListener(root3, value, rootRenderLanes)), false;
               }
               throw Error(
                 "Unexpected Suspense handler tag (" + sourceFiber.tag + "). This is a bug in React."
               );
             }
-            attachPingListener(root2, value, rootRenderLanes);
+            attachPingListener(root3, value, rootRenderLanes);
             renderDidSuspendDelayIfPossible();
             return false;
           }
@@ -8416,11 +8398,11 @@
                 ),
                 sourceFiber
               )
-            ), root2 = root2.current.alternate, root2.flags |= 65536, rootRenderLanes &= -rootRenderLanes, root2.lanes |= rootRenderLanes, value = createCapturedValueAtFiber(value, sourceFiber), rootRenderLanes = createRootErrorUpdate(
-              root2.stateNode,
+            ), root3 = root3.current.alternate, root3.flags |= 65536, rootRenderLanes &= -rootRenderLanes, root3.lanes |= rootRenderLanes, value = createCapturedValueAtFiber(value, sourceFiber), rootRenderLanes = createRootErrorUpdate(
+              root3.stateNode,
               value,
               rootRenderLanes
-            ), enqueueCapturedUpdate(root2, rootRenderLanes), workInProgressRootExitStatus !== RootSuspendedWithDelay && (workInProgressRootExitStatus = RootErrored)), false;
+            ), enqueueCapturedUpdate(root3, rootRenderLanes), workInProgressRootExitStatus !== RootSuspendedWithDelay && (workInProgressRootExitStatus = RootErrored)), false;
           var error = createCapturedValueAtFiber(
             Error(
               "There was an error during concurrent rendering but React was able to recover by instead synchronously rendering the entire root.",
@@ -8436,16 +8418,16 @@
           do {
             switch (sourceFiber.tag) {
               case 3:
-                return sourceFiber.flags |= 65536, root2 = rootRenderLanes & -rootRenderLanes, sourceFiber.lanes |= root2, root2 = createRootErrorUpdate(
+                return sourceFiber.flags |= 65536, root3 = rootRenderLanes & -rootRenderLanes, sourceFiber.lanes |= root3, root3 = createRootErrorUpdate(
                   sourceFiber.stateNode,
                   value,
-                  root2
-                ), enqueueCapturedUpdate(sourceFiber, root2), false;
+                  root3
+                ), enqueueCapturedUpdate(sourceFiber, root3), false;
               case 1:
                 if (returnFiber = sourceFiber.type, error = sourceFiber.stateNode, 0 === (sourceFiber.flags & 128) && ("function" === typeof returnFiber.getDerivedStateFromError || null !== error && "function" === typeof error.componentDidCatch && (null === legacyErrorBoundariesThatAlreadyFailed || !legacyErrorBoundariesThatAlreadyFailed.has(error))))
                   return sourceFiber.flags |= 65536, rootRenderLanes &= -rootRenderLanes, sourceFiber.lanes |= rootRenderLanes, rootRenderLanes = createClassErrorUpdate(rootRenderLanes), initializeClassErrorUpdate(
                     rootRenderLanes,
-                    root2,
+                    root3,
                     sourceFiber,
                     value
                   ), enqueueCapturedUpdate(sourceFiber, rootRenderLanes), false;
@@ -8852,12 +8834,12 @@
                 _instance = getComponentNameFromType(Component) || "Component";
                 var newApiName = "function" === typeof Component.getDerivedStateFromProps ? "getDerivedStateFromProps()" : "getSnapshotBeforeUpdate()";
                 didWarnAboutLegacyLifecyclesAndDerivedState.has(_instance) || (didWarnAboutLegacyLifecyclesAndDerivedState.add(_instance), console.error(
-                  "Unsafe legacy lifecycles will not be called for components using new component APIs.\\n\\n%s uses %s but also contains the following legacy lifecycles:%s%s%s\\n\\nThe above lifecycles should be removed. Learn more about this warning here:\\nhttps://react.dev/link/unsafe-component-lifecycles",
+                  "Unsafe legacy lifecycles will not be called for components using new component APIs.\n\n%s uses %s but also contains the following legacy lifecycles:%s%s%s\n\nThe above lifecycles should be removed. Learn more about this warning here:\nhttps://react.dev/link/unsafe-component-lifecycles",
                   _instance,
                   newApiName,
-                  null !== state ? "\\n  " + state : "",
-                  null !== lane ? "\\n  " + lane : "",
-                  null !== foundWillUpdateName ? "\\n  " + foundWillUpdateName : ""
+                  null !== state ? "\n  " + state : "",
+                  null !== lane ? "\n  " + lane : "",
+                  null !== foundWillUpdateName ? "\n  " + foundWillUpdateName : ""
                 ));
               }
             }
@@ -9115,7 +9097,7 @@
         }
         function validateFunctionComponentInDev(workInProgress2, Component) {
           Component && Component.childContextTypes && console.error(
-            "childContextTypes cannot be defined on a function component.\\n  %s.childContextTypes = ...",
+            "childContextTypes cannot be defined on a function component.\n  %s.childContextTypes = ...",
             Component.displayName || Component.name || "Component"
           );
           "function" === typeof Component.getDerivedStateFromProps && (workInProgress2 = getComponentNameFromType(Component) || "Unknown", didWarnAboutGetDerivedStateOnFunctionComponent[workInProgress2] || (console.error(
@@ -10692,7 +10674,7 @@
                   var hookName = void 0;
                   hookName = 0 !== (updateQueue.tag & Layout) ? "useLayoutEffect" : 0 !== (updateQueue.tag & Insertion) ? "useInsertionEffect" : "useEffect";
                   var addendum = void 0;
-                  addendum = null === lastEffect ? " You returned null. If your effect does not require clean up, return undefined (or nothing)." : "function" === typeof lastEffect.then ? "\\n\\nIt looks like you wrote " + hookName + "(async () => ...) or returned a Promise. Instead, write the async function inside your effect and call it immediately:\\n\\n" + hookName + "(() => {\\n  async function fetchData() {\\n    // You can await here\\n    const response = await MyAPI.getData(someId);\\n    // ...\\n  }\\n  fetchData();\\n}, [someId]); // Or [] if effect doesn't need props or state\\n\\nLearn more about data fetching with Hooks: https://react.dev/link/hooks-data-fetching" : " You returned: " + lastEffect;
+                  addendum = null === lastEffect ? " You returned null. If your effect does not require clean up, return undefined (or nothing)." : "function" === typeof lastEffect.then ? "\n\nIt looks like you wrote " + hookName + "(async () => ...) or returned a Promise. Instead, write the async function inside your effect and call it immediately:\n\n" + hookName + "(() => {\n  async function fetchData() {\n    // You can await here\n    const response = await MyAPI.getData(someId);\n    // ...\n  }\n  fetchData();\n}, [someId]); // Or [] if effect doesn't need props or state\n\nLearn more about data fetching with Hooks: https://react.dev/link/hooks-data-fetching" : " You returned: " + lastEffect;
                   runWithFiberInDEV(
                     finishedWork,
                     function(n, a) {
@@ -11058,19 +11040,19 @@
         function isHydratingParent(current2, finishedWork) {
           return 31 === finishedWork.tag ? (finishedWork = finishedWork.memoizedState, null !== current2.memoizedState && null === finishedWork) : 13 === finishedWork.tag ? (current2 = current2.memoizedState, finishedWork = finishedWork.memoizedState, null !== current2 && null !== current2.dehydrated && (null === finishedWork || null === finishedWork.dehydrated)) : 3 === finishedWork.tag ? current2.memoizedState.isDehydrated && 0 === (finishedWork.flags & 256) : false;
         }
-        function commitBeforeMutationEffects(root2, firstChild) {
-          root2 = root2.containerInfo;
+        function commitBeforeMutationEffects(root3, firstChild) {
+          root3 = root3.containerInfo;
           eventsEnabled = _enabled;
-          root2 = getActiveElementDeep(root2);
-          if (hasSelectionCapabilities(root2)) {
-            if ("selectionStart" in root2)
+          root3 = getActiveElementDeep(root3);
+          if (hasSelectionCapabilities(root3)) {
+            if ("selectionStart" in root3)
               var JSCompiler_temp = {
-                start: root2.selectionStart,
-                end: root2.selectionEnd
+                start: root3.selectionStart,
+                end: root3.selectionEnd
               };
             else
               a: {
-                JSCompiler_temp = (JSCompiler_temp = root2.ownerDocument) && JSCompiler_temp.defaultView || window;
+                JSCompiler_temp = (JSCompiler_temp = root3.ownerDocument) && JSCompiler_temp.defaultView || window;
                 var selection = JSCompiler_temp.getSelection && JSCompiler_temp.getSelection();
                 if (selection && 0 !== selection.rangeCount) {
                   JSCompiler_temp = selection.anchorNode;
@@ -11082,7 +11064,7 @@
                     JSCompiler_temp = null;
                     break a;
                   }
-                  var length = 0, start = -1, end = -1, indexWithinAnchor = 0, indexWithinFocus = 0, node = root2, parentNode = null;
+                  var length = 0, start = -1, end = -1, indexWithinAnchor = 0, indexWithinFocus = 0, node = root3, parentNode = null;
                   b: for (; ; ) {
                     for (var next; ; ) {
                       node !== JSCompiler_temp || 0 !== anchorOffset && 3 !== node.nodeType || (start = length + anchorOffset);
@@ -11093,7 +11075,7 @@
                       node = next;
                     }
                     for (; ; ) {
-                      if (node === root2) break b;
+                      if (node === root3) break b;
                       parentNode === JSCompiler_temp && ++indexWithinAnchor === anchorOffset && (start = length);
                       parentNode === focusNode && ++indexWithinFocus === selection && (end = length);
                       if (null !== (next = node.nextSibling)) break;
@@ -11108,43 +11090,43 @@
             JSCompiler_temp = JSCompiler_temp || { start: 0, end: 0 };
           } else JSCompiler_temp = null;
           selectionInformation = {
-            focusedElem: root2,
+            focusedElem: root3,
             selectionRange: JSCompiler_temp
           };
           _enabled = false;
           for (nextEffect = firstChild; null !== nextEffect; )
-            if (firstChild = nextEffect, root2 = firstChild.child, 0 !== (firstChild.subtreeFlags & 1028) && null !== root2)
-              root2.return = firstChild, nextEffect = root2;
+            if (firstChild = nextEffect, root3 = firstChild.child, 0 !== (firstChild.subtreeFlags & 1028) && null !== root3)
+              root3.return = firstChild, nextEffect = root3;
             else
               for (; null !== nextEffect; ) {
-                root2 = firstChild = nextEffect;
-                JSCompiler_temp = root2.alternate;
-                anchorOffset = root2.flags;
-                switch (root2.tag) {
+                root3 = firstChild = nextEffect;
+                JSCompiler_temp = root3.alternate;
+                anchorOffset = root3.flags;
+                switch (root3.tag) {
                   case 0:
-                    if (0 !== (anchorOffset & 4) && (root2 = root2.updateQueue, root2 = null !== root2 ? root2.events : null, null !== root2))
-                      for (JSCompiler_temp = 0; JSCompiler_temp < root2.length; JSCompiler_temp++)
-                        anchorOffset = root2[JSCompiler_temp], anchorOffset.ref.impl = anchorOffset.nextImpl;
+                    if (0 !== (anchorOffset & 4) && (root3 = root3.updateQueue, root3 = null !== root3 ? root3.events : null, null !== root3))
+                      for (JSCompiler_temp = 0; JSCompiler_temp < root3.length; JSCompiler_temp++)
+                        anchorOffset = root3[JSCompiler_temp], anchorOffset.ref.impl = anchorOffset.nextImpl;
                     break;
                   case 11:
                   case 15:
                     break;
                   case 1:
-                    0 !== (anchorOffset & 1024) && null !== JSCompiler_temp && commitClassSnapshot(root2, JSCompiler_temp);
+                    0 !== (anchorOffset & 1024) && null !== JSCompiler_temp && commitClassSnapshot(root3, JSCompiler_temp);
                     break;
                   case 3:
                     if (0 !== (anchorOffset & 1024)) {
-                      if (root2 = root2.stateNode.containerInfo, JSCompiler_temp = root2.nodeType, 9 === JSCompiler_temp)
-                        clearContainerSparingly(root2);
+                      if (root3 = root3.stateNode.containerInfo, JSCompiler_temp = root3.nodeType, 9 === JSCompiler_temp)
+                        clearContainerSparingly(root3);
                       else if (1 === JSCompiler_temp)
-                        switch (root2.nodeName) {
+                        switch (root3.nodeName) {
                           case "HEAD":
                           case "HTML":
                           case "BODY":
-                            clearContainerSparingly(root2);
+                            clearContainerSparingly(root3);
                             break;
                           default:
-                            root2.textContent = "";
+                            root3.textContent = "";
                         }
                     }
                     break;
@@ -11161,10 +11143,10 @@
                         "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue."
                       );
                 }
-                root2 = firstChild.sibling;
-                if (null !== root2) {
-                  root2.return = firstChild.return;
-                  nextEffect = root2;
+                root3 = firstChild.sibling;
+                if (null !== root3) {
+                  root3.return = firstChild.return;
+                  nextEffect = root3;
                   break;
                 }
                 nextEffect = firstChild.return;
@@ -11626,7 +11608,7 @@
           var deletions = parentFiber.deletions;
           if (null !== deletions)
             for (var i = 0; i < deletions.length; i++) {
-              var root2 = root$jscomp$0, returnFiber = parentFiber, deletedFiber = deletions[i], prevEffectStart = pushComponentEffectStart(), parent = returnFiber;
+              var root3 = root$jscomp$0, returnFiber = parentFiber, deletedFiber = deletions[i], prevEffectStart = pushComponentEffectStart(), parent = returnFiber;
               a: for (; null !== parent; ) {
                 switch (parent.tag) {
                   case 27:
@@ -11652,7 +11634,7 @@
                 throw Error(
                   "Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."
                 );
-              commitDeletionEffectsOnFiber(root2, returnFiber, deletedFiber);
+              commitDeletionEffectsOnFiber(root3, returnFiber, deletedFiber);
               hostParent = null;
               hostParentIsContainer = false;
               (deletedFiber.mode & ProfileMode) !== NoMode && 0 <= componentEffectStartTime && 0 <= componentEffectEndTime && 0.05 < componentEffectEndTime - componentEffectStartTime && logComponentTrigger(
@@ -11662,23 +11644,23 @@
                 "Unmount"
               );
               popComponentEffectStart(prevEffectStart);
-              root2 = deletedFiber;
-              returnFiber = root2.alternate;
+              root3 = deletedFiber;
+              returnFiber = root3.alternate;
               null !== returnFiber && (returnFiber.return = null);
-              root2.return = null;
+              root3.return = null;
             }
           if (parentFiber.subtreeFlags & 13886)
             for (parentFiber = parentFiber.child; null !== parentFiber; )
               commitMutationEffectsOnFiber(parentFiber, root$jscomp$0), parentFiber = parentFiber.sibling;
         }
-        function commitMutationEffectsOnFiber(finishedWork, root2) {
+        function commitMutationEffectsOnFiber(finishedWork, root3) {
           var prevEffectStart = pushComponentEffectStart(), prevEffectDuration = pushComponentEffectDuration(), prevEffectErrors = pushComponentEffectErrors(), prevEffectDidSpawnUpdate = pushComponentEffectDidSpawnUpdate(), current2 = finishedWork.alternate, flags = finishedWork.flags;
           switch (finishedWork.tag) {
             case 0:
             case 11:
             case 14:
             case 15:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               flags & 4 && (commitHookEffectListUnmount(
                 Insertion | HasEffect,
@@ -11691,7 +11673,7 @@
               ));
               break;
             case 1:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               flags & 512 && (offscreenSubtreeWasHidden || null === current2 || safelyDetachRef(current2, current2.return));
               if (flags & 64 && offscreenSubtreeIsHidden && (flags = finishedWork.updateQueue, null !== flags && (current2 = flags.callbacks, null !== current2))) {
@@ -11701,7 +11683,7 @@
               break;
             case 26:
               existingHiddenCallbacks = currentHoistableRoot;
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               flags & 512 && (offscreenSubtreeWasHidden || null === current2 || safelyDetachRef(current2, current2.return));
               if (flags & 4) {
@@ -11810,7 +11792,7 @@
               }
               break;
             case 27:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               flags & 512 && (offscreenSubtreeWasHidden || null === current2 || safelyDetachRef(current2, current2.return));
               null !== current2 && flags & 4 && commitHostUpdate(
@@ -11820,7 +11802,7 @@
               );
               break;
             case 5:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               flags & 512 && (offscreenSubtreeWasHidden || null === current2 || safelyDetachRef(current2, current2.return));
               if (finishedWork.flags & 32) {
@@ -11845,7 +11827,7 @@
               ));
               break;
             case 6:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               if (flags & 4) {
                 if (null === finishedWork.stateNode)
@@ -11872,8 +11854,8 @@
               existingHiddenCallbacks = pushNestedEffectDurations();
               tagCaches = null;
               currentResource = currentHoistableRoot;
-              currentHoistableRoot = getHoistableRoot(root2.containerInfo);
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              currentHoistableRoot = getHoistableRoot(root3.containerInfo);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               currentHoistableRoot = currentResource;
               commitReconciliationEffects(finishedWork);
               if (flags & 4 && null !== current2 && current2.memoizedState.isDehydrated)
@@ -11881,13 +11863,13 @@
                   runWithFiberInDEV(
                     finishedWork,
                     commitHydratedContainer,
-                    root2.containerInfo
+                    root3.containerInfo
                   );
                 } catch (error) {
                   captureCommitPhaseError(finishedWork, finishedWork.return, error);
                 }
               needsFormReset && (needsFormReset = false, recursivelyResetForms(finishedWork));
-              root2.effectDuration += popNestedEffectDurations(
+              root3.effectDuration += popNestedEffectDurations(
                 existingHiddenCallbacks
               );
               break;
@@ -11896,23 +11878,23 @@
               currentHoistableRoot = getHoistableRoot(
                 finishedWork.stateNode.containerInfo
               );
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               currentHoistableRoot = flags;
               break;
             case 12:
               flags = pushNestedEffectDurations();
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               finishedWork.stateNode.effectDuration += bubbleNestedEffectDurations(flags);
               break;
             case 31:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               flags & 4 && (flags = finishedWork.updateQueue, null !== flags && (finishedWork.updateQueue = null, attachSuspenseRetryListeners(finishedWork, flags)));
               break;
             case 13:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               finishedWork.child.flags & 8192 && null !== finishedWork.memoizedState !== (null !== current2 && null !== current2.memoizedState) && (globalMostRecentFallbackTime = now$1());
               flags & 4 && (flags = finishedWork.updateQueue, null !== flags && (finishedWork.updateQueue = null, attachSuspenseRetryListeners(finishedWork, flags)));
@@ -11922,7 +11904,7 @@
               var wasHidden = null !== current2 && null !== current2.memoizedState, prevOffscreenSubtreeIsHidden = offscreenSubtreeIsHidden, prevOffscreenSubtreeWasHidden = offscreenSubtreeWasHidden;
               offscreenSubtreeIsHidden = prevOffscreenSubtreeIsHidden || existingHiddenCallbacks;
               offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden || wasHidden;
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
               offscreenSubtreeIsHidden = prevOffscreenSubtreeIsHidden;
               wasHidden && !existingHiddenCallbacks && !prevOffscreenSubtreeIsHidden && !prevOffscreenSubtreeWasHidden && (finishedWork.mode & ProfileMode) !== NoMode && 0 <= componentEffectStartTime && 0 <= componentEffectEndTime && 0.05 < componentEffectEndTime - componentEffectStartTime && logComponentReappeared(
@@ -11932,15 +11914,15 @@
               );
               commitReconciliationEffects(finishedWork);
               if (flags & 8192)
-                a: for (root2 = finishedWork.stateNode, root2._visibility = existingHiddenCallbacks ? root2._visibility & ~OffscreenVisible : root2._visibility | OffscreenVisible, !existingHiddenCallbacks || null === current2 || wasHidden || offscreenSubtreeIsHidden || offscreenSubtreeWasHidden || (recursivelyTraverseDisappearLayoutEffects(finishedWork), (finishedWork.mode & ProfileMode) !== NoMode && 0 <= componentEffectStartTime && 0 <= componentEffectEndTime && 0.05 < componentEffectEndTime - componentEffectStartTime && logComponentTrigger(
+                a: for (root3 = finishedWork.stateNode, root3._visibility = existingHiddenCallbacks ? root3._visibility & ~OffscreenVisible : root3._visibility | OffscreenVisible, !existingHiddenCallbacks || null === current2 || wasHidden || offscreenSubtreeIsHidden || offscreenSubtreeWasHidden || (recursivelyTraverseDisappearLayoutEffects(finishedWork), (finishedWork.mode & ProfileMode) !== NoMode && 0 <= componentEffectStartTime && 0 <= componentEffectEndTime && 0.05 < componentEffectEndTime - componentEffectStartTime && logComponentTrigger(
                   finishedWork,
                   componentEffectStartTime,
                   componentEffectEndTime,
                   "Disconnect"
-                )), current2 = null, root2 = finishedWork; ; ) {
-                  if (5 === root2.tag || 26 === root2.tag) {
+                )), current2 = null, root3 = finishedWork; ; ) {
+                  if (5 === root3.tag || 26 === root3.tag) {
                     if (null === current2) {
-                      wasHidden = current2 = root2;
+                      wasHidden = current2 = root3;
                       try {
                         currentResource = wasHidden.stateNode, existingHiddenCallbacks ? runWithFiberInDEV(
                           wasHidden,
@@ -11956,9 +11938,9 @@
                         captureCommitPhaseError(wasHidden, wasHidden.return, error);
                       }
                     }
-                  } else if (6 === root2.tag) {
+                  } else if (6 === root3.tag) {
                     if (null === current2) {
-                      wasHidden = root2;
+                      wasHidden = root3;
                       try {
                         maybeNodes = wasHidden.stateNode, existingHiddenCallbacks ? runWithFiberInDEV(
                           wasHidden,
@@ -11974,9 +11956,9 @@
                         captureCommitPhaseError(wasHidden, wasHidden.return, error);
                       }
                     }
-                  } else if (18 === root2.tag) {
+                  } else if (18 === root3.tag) {
                     if (null === current2) {
-                      wasHidden = root2;
+                      wasHidden = root3;
                       try {
                         i = wasHidden.stateNode, existingHiddenCallbacks ? runWithFiberInDEV(
                           wasHidden,
@@ -11991,26 +11973,26 @@
                         captureCommitPhaseError(wasHidden, wasHidden.return, error);
                       }
                     }
-                  } else if ((22 !== root2.tag && 23 !== root2.tag || null === root2.memoizedState || root2 === finishedWork) && null !== root2.child) {
-                    root2.child.return = root2;
-                    root2 = root2.child;
+                  } else if ((22 !== root3.tag && 23 !== root3.tag || null === root3.memoizedState || root3 === finishedWork) && null !== root3.child) {
+                    root3.child.return = root3;
+                    root3 = root3.child;
                     continue;
                   }
-                  if (root2 === finishedWork) break a;
-                  for (; null === root2.sibling; ) {
-                    if (null === root2.return || root2.return === finishedWork)
+                  if (root3 === finishedWork) break a;
+                  for (; null === root3.sibling; ) {
+                    if (null === root3.return || root3.return === finishedWork)
                       break a;
-                    current2 === root2 && (current2 = null);
-                    root2 = root2.return;
+                    current2 === root3 && (current2 = null);
+                    root3 = root3.return;
                   }
-                  current2 === root2 && (current2 = null);
-                  root2.sibling.return = root2.return;
-                  root2 = root2.sibling;
+                  current2 === root3 && (current2 = null);
+                  root3.sibling.return = root3.return;
+                  root3 = root3.sibling;
                 }
               flags & 4 && (flags = finishedWork.updateQueue, null !== flags && (current2 = flags.retryQueue, null !== current2 && (flags.retryQueue = null, attachSuspenseRetryListeners(finishedWork, current2))));
               break;
             case 19:
-              recursivelyTraverseMutationEffects(root2, finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork);
               commitReconciliationEffects(finishedWork);
               flags & 4 && (flags = finishedWork.updateQueue, null !== flags && (finishedWork.updateQueue = null, attachSuspenseRetryListeners(finishedWork, flags)));
               break;
@@ -12019,7 +12001,7 @@
             case 21:
               break;
             default:
-              recursivelyTraverseMutationEffects(root2, finishedWork), commitReconciliationEffects(finishedWork);
+              recursivelyTraverseMutationEffects(root3, finishedWork), commitReconciliationEffects(finishedWork);
           }
           (finishedWork.mode & ProfileMode) !== NoMode && 0 <= componentEffectStartTime && 0 <= componentEffectEndTime && ((componentEffectSpawnedUpdate || 0.05 < componentEffectDuration) && logComponentEffect(
             finishedWork,
@@ -12062,10 +12044,10 @@
               parentFiber = parentFiber.sibling;
             }
         }
-        function recursivelyTraverseLayoutEffects(root2, parentFiber) {
+        function recursivelyTraverseLayoutEffects(root3, parentFiber) {
           if (parentFiber.subtreeFlags & 8772)
             for (parentFiber = parentFiber.child; null !== parentFiber; )
-              commitLayoutEffectOnFiber(root2, parentFiber.alternate, parentFiber), parentFiber = parentFiber.sibling;
+              commitLayoutEffectOnFiber(root3, parentFiber.alternate, parentFiber), parentFiber = parentFiber.sibling;
         }
         function disappearLayoutEffects(finishedWork) {
           var prevEffectStart = pushComponentEffectStart(), prevEffectDuration = pushComponentEffectDuration(), prevEffectErrors = pushComponentEffectErrors(), prevEffectDidSpawnUpdate = pushComponentEffectDidSpawnUpdate();
@@ -12279,12 +12261,12 @@
           finishedWork = finishedWork.memoizedState.cache;
           finishedWork !== current2 && (retainCache(finishedWork), null != current2 && releaseCache(current2));
         }
-        function recursivelyTraversePassiveMountEffects(root2, parentFiber, committedLanes, committedTransitions, endTime) {
+        function recursivelyTraversePassiveMountEffects(root3, parentFiber, committedLanes, committedTransitions, endTime) {
           if (parentFiber.subtreeFlags & 10256 || 0 !== parentFiber.actualDuration && (null === parentFiber.alternate || parentFiber.alternate.child !== parentFiber.child))
             for (parentFiber = parentFiber.child; null !== parentFiber; ) {
               var nextSibling = parentFiber.sibling;
               commitPassiveMountOnFiber(
-                root2,
+                root3,
                 parentFiber,
                 committedLanes,
                 committedTransitions,
@@ -12941,29 +12923,29 @@
           null !== lane && (lane.flags |= 32);
           return workInProgressDeferredLane;
         }
-        function scheduleUpdateOnFiber(root2, fiber, lane) {
+        function scheduleUpdateOnFiber(root3, fiber, lane) {
           isRunningInsertionEffect && console.error("useInsertionEffect must not schedule updates.");
           isFlushingPassiveEffects && (didScheduleUpdateDuringPassiveEffects = true);
-          if (root2 === workInProgressRoot && (workInProgressSuspendedReason === SuspendedOnData || workInProgressSuspendedReason === SuspendedOnAction) || null !== root2.cancelPendingCommit)
-            prepareFreshStack(root2, 0), markRootSuspended(
-              root2,
+          if (root3 === workInProgressRoot && (workInProgressSuspendedReason === SuspendedOnData || workInProgressSuspendedReason === SuspendedOnAction) || null !== root3.cancelPendingCommit)
+            prepareFreshStack(root3, 0), markRootSuspended(
+              root3,
               workInProgressRootRenderLanes,
               workInProgressDeferredLane,
               false
             );
-          markRootUpdated$1(root2, lane);
-          if ((executionContext & RenderContext) !== NoContext && root2 === workInProgressRoot) {
+          markRootUpdated$1(root3, lane);
+          if ((executionContext & RenderContext) !== NoContext && root3 === workInProgressRoot) {
             if (isRendering)
               switch (fiber.tag) {
                 case 0:
                 case 11:
                 case 15:
-                  root2 = workInProgress && getComponentNameFromFiber(workInProgress) || "Unknown";
-                  didWarnAboutUpdateInRenderForAnotherComponent.has(root2) || (didWarnAboutUpdateInRenderForAnotherComponent.add(root2), fiber = getComponentNameFromFiber(fiber) || "Unknown", console.error(
+                  root3 = workInProgress && getComponentNameFromFiber(workInProgress) || "Unknown";
+                  didWarnAboutUpdateInRenderForAnotherComponent.has(root3) || (didWarnAboutUpdateInRenderForAnotherComponent.add(root3), fiber = getComponentNameFromFiber(fiber) || "Unknown", console.error(
                     "Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render",
                     fiber,
-                    root2,
-                    root2
+                    root3,
+                    root3
                   ));
                   break;
                 case 1:
@@ -12972,14 +12954,14 @@
                   ), didWarnAboutUpdateInRender = true);
               }
           } else
-            isDevToolsPresent && addFiberToLanesMap(root2, fiber, lane), warnIfUpdatesNotWrappedWithActDEV(fiber), root2 === workInProgressRoot && ((executionContext & RenderContext) === NoContext && (workInProgressRootInterleavedUpdatedLanes |= lane), workInProgressRootExitStatus === RootSuspendedWithDelay && markRootSuspended(
-              root2,
+            isDevToolsPresent && addFiberToLanesMap(root3, fiber, lane), warnIfUpdatesNotWrappedWithActDEV(fiber), root3 === workInProgressRoot && ((executionContext & RenderContext) === NoContext && (workInProgressRootInterleavedUpdatedLanes |= lane), workInProgressRootExitStatus === RootSuspendedWithDelay && markRootSuspended(
+              root3,
               workInProgressRootRenderLanes,
               workInProgressDeferredLane,
               false
-            )), ensureRootIsScheduled(root2);
+            )), ensureRootIsScheduled(root3);
         }
-        function performWorkOnRoot(root2, lanes, forceSync) {
+        function performWorkOnRoot(root3, lanes, forceSync) {
           if ((executionContext & (RenderContext | CommitContext)) !== NoContext)
             throw Error("Should not already be working.");
           if (0 !== workInProgressRootRenderLanes && null !== workInProgress) {
@@ -13039,18 +13021,18 @@
                 ));
             }
           }
-          startTime = (forceSync = !forceSync && 0 === (lanes & 127) && 0 === (lanes & root2.expiredLanes) || checkIfRootIsPrerendering(root2, lanes)) ? renderRootConcurrent(root2, lanes) : renderRootSync(root2, lanes, true);
+          startTime = (forceSync = !forceSync && 0 === (lanes & 127) && 0 === (lanes & root3.expiredLanes) || checkIfRootIsPrerendering(root3, lanes)) ? renderRootConcurrent(root3, lanes) : renderRootSync(root3, lanes, true);
           var renderWasConcurrent = forceSync;
           do {
             if (startTime === RootInProgress) {
-              workInProgressRootIsPrerendering && !forceSync && markRootSuspended(root2, lanes, 0, false);
+              workInProgressRootIsPrerendering && !forceSync && markRootSuspended(root3, lanes, 0, false);
               lanes = workInProgressSuspendedReason;
               yieldStartTime = now();
               yieldReason = lanes;
               break;
             } else {
               yieldedFiber = now$1();
-              yieldEndTime = root2.current.alternate;
+              yieldEndTime = root3.current.alternate;
               if (renderWasConcurrent && !isRenderConsistentWithExternalStores(yieldEndTime)) {
                 setCurrentTrackFromLanes(lanes);
                 yieldEndTime = renderStartTime;
@@ -13074,16 +13056,16 @@
                   "error"
                 ));
                 finalizeRender(lanes, yieldedFiber);
-                startTime = renderRootSync(root2, lanes, false);
+                startTime = renderRootSync(root3, lanes, false);
                 renderWasConcurrent = false;
                 continue;
               }
               if (startTime === RootErrored) {
                 renderWasConcurrent = lanes;
-                if (root2.errorRecoveryDisabledLanes & renderWasConcurrent)
+                if (root3.errorRecoveryDisabledLanes & renderWasConcurrent)
                   var errorRetryLanes = 0;
                 else
-                  errorRetryLanes = root2.pendingLanes & -536870913, errorRetryLanes = 0 !== errorRetryLanes ? errorRetryLanes : errorRetryLanes & 536870912 ? 536870912 : 0;
+                  errorRetryLanes = root3.pendingLanes & -536870913, errorRetryLanes = 0 !== errorRetryLanes ? errorRetryLanes : errorRetryLanes & 536870912 ? 536870912 : 0;
                 if (0 !== errorRetryLanes) {
                   setCurrentTrackFromLanes(lanes);
                   logErroredRenderPhase(
@@ -13095,7 +13077,7 @@
                   finalizeRender(lanes, yieldedFiber);
                   lanes = errorRetryLanes;
                   a: {
-                    yieldedFiber = root2;
+                    yieldedFiber = root3;
                     startTime = renderWasConcurrent;
                     renderWasConcurrent = workInProgressRootConcurrentErrors;
                     var wasRootDehydrated = yieldedFiber.current.memoizedState.isDehydrated;
@@ -13135,12 +13117,12 @@
                   workInProgressUpdateTask
                 );
                 finalizeRender(lanes, yieldedFiber);
-                prepareFreshStack(root2, 0);
-                markRootSuspended(root2, lanes, 0, true);
+                prepareFreshStack(root3, 0);
+                markRootSuspended(root3, lanes, 0, true);
                 break;
               }
               a: {
-                forceSync = root2;
+                forceSync = root3;
                 switch (startTime) {
                   case RootInProgress:
                   case RootFatalErrored:
@@ -13244,10 +13226,10 @@
             }
             break;
           } while (1);
-          ensureRootIsScheduled(root2);
+          ensureRootIsScheduled(root3);
         }
-        function commitRootWhenReady(root2, finishedWork, recoverableErrors, transitions, didIncludeRenderPhaseUpdate, lanes, spawnedLane, updatedLanes, suspendedRetryLanes, didSkipSuspendedSiblings, exitStatus, suspendedCommitReason, completedRenderStartTime, completedRenderEndTime) {
-          root2.timeoutHandle = noTimeout;
+        function commitRootWhenReady(root3, finishedWork, recoverableErrors, transitions, didIncludeRenderPhaseUpdate, lanes, spawnedLane, updatedLanes, suspendedRetryLanes, didSkipSuspendedSiblings, exitStatus, suspendedCommitReason, completedRenderStartTime, completedRenderEndTime) {
+          root3.timeoutHandle = noTimeout;
           var subtreeFlags = finishedWork.subtreeFlags, suspendedState = null;
           if (subtreeFlags & 8192 || 16785408 === (subtreeFlags & 16785408)) {
             if (suspendedState = {
@@ -13261,10 +13243,10 @@
               unsuspend: noop$1
             }, accumulateSuspenseyCommitOnFiber(finishedWork, lanes, suspendedState), subtreeFlags = (lanes & 62914560) === lanes ? globalMostRecentFallbackTime - now$1() : (lanes & 4194048) === lanes ? globalMostRecentTransitionTime - now$1() : 0, subtreeFlags = waitForCommitToBeReady(suspendedState, subtreeFlags), null !== subtreeFlags) {
               pendingEffectsLanes = lanes;
-              root2.cancelPendingCommit = subtreeFlags(
+              root3.cancelPendingCommit = subtreeFlags(
                 commitRoot.bind(
                   null,
-                  root2,
+                  root3,
                   finishedWork,
                   lanes,
                   recoverableErrors,
@@ -13281,7 +13263,7 @@
                 )
               );
               markRootSuspended(
-                root2,
+                root3,
                 lanes,
                 spawnedLane,
                 !didSkipSuspendedSiblings
@@ -13290,7 +13272,7 @@
             }
           }
           commitRoot(
-            root2,
+            root3,
             finishedWork,
             lanes,
             recoverableErrors,
@@ -13334,19 +13316,19 @@
           }
           return true;
         }
-        function markRootSuspended(root2, suspendedLanes, spawnedLane, didAttemptEntireTree) {
+        function markRootSuspended(root3, suspendedLanes, spawnedLane, didAttemptEntireTree) {
           suspendedLanes &= ~workInProgressRootPingedLanes;
           suspendedLanes &= ~workInProgressRootInterleavedUpdatedLanes;
-          root2.suspendedLanes |= suspendedLanes;
-          root2.pingedLanes &= ~suspendedLanes;
-          didAttemptEntireTree && (root2.warmLanes |= suspendedLanes);
-          didAttemptEntireTree = root2.expirationTimes;
+          root3.suspendedLanes |= suspendedLanes;
+          root3.pingedLanes &= ~suspendedLanes;
+          didAttemptEntireTree && (root3.warmLanes |= suspendedLanes);
+          didAttemptEntireTree = root3.expirationTimes;
           for (var lanes = suspendedLanes; 0 < lanes; ) {
             var index = 31 - clz32(lanes), lane = 1 << index;
             didAttemptEntireTree[index] = -1;
             lanes &= ~lane;
           }
-          0 !== spawnedLane && markSpawnedDeferredLane(root2, spawnedLane, suspendedLanes);
+          0 !== spawnedLane && markSpawnedDeferredLane(root3, spawnedLane, suspendedLanes);
         }
         function flushSyncWork$1() {
           return (executionContext & (RenderContext | CommitContext)) === NoContext ? (flushSyncWorkAcrossRoots_impl(0, false), false) : true;
@@ -13368,7 +13350,7 @@
           0 !== (lanes & 62914560) && (retryClampTime = finalizationTime);
           0 !== (lanes & 2080374784) && (idleClampTime = finalizationTime);
         }
-        function prepareFreshStack(root2, lanes) {
+        function prepareFreshStack(root3, lanes) {
           supportsUserTiming && (console.timeStamp(
             "Blocking Track",
             3e-3,
@@ -13565,40 +13547,40 @@
           ) : performance.measure(debugTask, previousRenderStartTime))), transitionUpdateTime = transitionStartTime = -1.1, transitionUpdateType = 0, transitionSuspendedTime = -1.1, transitionEventRepeatTime = transitionEventTime, transitionEventTime = -1.1, transitionClampTime = now());
           0 !== (lanes & 62914560) && 0 !== (animatingLanes & 62914560) && (setCurrentTrackFromLanes(4194304), logAnimatingPhase(retryClampTime, renderStartTime, animatingTask));
           0 !== (lanes & 2080374784) && 0 !== (animatingLanes & 2080374784) && (setCurrentTrackFromLanes(268435456), logAnimatingPhase(idleClampTime, renderStartTime, animatingTask));
-          previousRenderStartTime = root2.timeoutHandle;
-          previousRenderStartTime !== noTimeout && (root2.timeoutHandle = noTimeout, cancelTimeout(previousRenderStartTime));
-          previousRenderStartTime = root2.cancelPendingCommit;
-          null !== previousRenderStartTime && (root2.cancelPendingCommit = null, previousRenderStartTime());
+          previousRenderStartTime = root3.timeoutHandle;
+          previousRenderStartTime !== noTimeout && (root3.timeoutHandle = noTimeout, cancelTimeout(previousRenderStartTime));
+          previousRenderStartTime = root3.cancelPendingCommit;
+          null !== previousRenderStartTime && (root3.cancelPendingCommit = null, previousRenderStartTime());
           pendingEffectsLanes = 0;
           resetWorkInProgressStack();
-          workInProgressRoot = root2;
+          workInProgressRoot = root3;
           workInProgress = previousRenderStartTime = createWorkInProgress(
-            root2.current,
+            root3.current,
             null
           );
           workInProgressRootRenderLanes = lanes;
           workInProgressSuspendedReason = NotSuspended;
           workInProgressThrownValue = null;
           workInProgressRootDidSkipSuspendedSiblings = false;
-          workInProgressRootIsPrerendering = checkIfRootIsPrerendering(root2, lanes);
+          workInProgressRootIsPrerendering = checkIfRootIsPrerendering(root3, lanes);
           workInProgressRootDidAttachPingListener = false;
           workInProgressRootExitStatus = RootInProgress;
           workInProgressSuspendedRetryLanes = workInProgressDeferredLane = workInProgressRootPingedLanes = workInProgressRootInterleavedUpdatedLanes = workInProgressRootSkippedLanes = 0;
           workInProgressRootRecoverableErrors = workInProgressRootConcurrentErrors = null;
           workInProgressRootDidIncludeRecursiveRenderUpdate = false;
           0 !== (lanes & 8) && (lanes |= lanes & 32);
-          endTime = root2.entangledLanes;
+          endTime = root3.entangledLanes;
           if (0 !== endTime)
-            for (root2 = root2.entanglements, endTime &= lanes; 0 < endTime; )
-              debugTask = 31 - clz32(endTime), color = 1 << debugTask, lanes |= root2[debugTask], endTime &= ~color;
+            for (root3 = root3.entanglements, endTime &= lanes; 0 < endTime; )
+              debugTask = 31 - clz32(endTime), color = 1 << debugTask, lanes |= root3[debugTask], endTime &= ~color;
           entangledRenderLanes = lanes;
           finishQueueingConcurrentUpdates();
-          root2 = getCurrentTime();
-          1e3 < root2 - lastResetTime && (ReactSharedInternals.recentlyCreatedOwnerStacks = 0, lastResetTime = root2);
+          root3 = getCurrentTime();
+          1e3 < root3 - lastResetTime && (ReactSharedInternals.recentlyCreatedOwnerStacks = 0, lastResetTime = root3);
           ReactStrictModeWarnings.discardPendingWarnings();
           return previousRenderStartTime;
         }
-        function handleThrow(root2, thrownValue) {
+        function handleThrow(root3, thrownValue) {
           currentlyRenderingFiber = null;
           ReactSharedInternals.H = ContextOnlyDispatcher;
           ReactSharedInternals.getCurrentStack = null;
@@ -13608,8 +13590,8 @@
           workInProgressThrownValue = thrownValue;
           var erroredWork = workInProgress;
           null === erroredWork ? (workInProgressRootExitStatus = RootFatalErrored, logUncaughtError(
-            root2,
-            createCapturedValueAtFiber(thrownValue, root2.current)
+            root3,
+            createCapturedValueAtFiber(thrownValue, root3.current)
           )) : erroredWork.mode & ProfileMode && stopProfilerTimerIfRunningAndRecordDuration(erroredWork);
         }
         function shouldRemainOnPreviousScreen() {
@@ -13639,18 +13621,18 @@
             false
           );
         }
-        function renderRootSync(root2, lanes, shouldYieldForPrerendering) {
+        function renderRootSync(root3, lanes, shouldYieldForPrerendering) {
           var prevExecutionContext = executionContext;
           executionContext |= RenderContext;
           var prevDispatcher = pushDispatcher(), prevAsyncDispatcher = pushAsyncDispatcher();
-          if (workInProgressRoot !== root2 || workInProgressRootRenderLanes !== lanes) {
+          if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
             if (isDevToolsPresent) {
-              var memoizedUpdaters = root2.memoizedUpdaters;
-              0 < memoizedUpdaters.size && (restorePendingUpdaters(root2, workInProgressRootRenderLanes), memoizedUpdaters.clear());
-              movePendingFibersToMemoized(root2, lanes);
+              var memoizedUpdaters = root3.memoizedUpdaters;
+              0 < memoizedUpdaters.size && (restorePendingUpdaters(root3, workInProgressRootRenderLanes), memoizedUpdaters.clear());
+              movePendingFibersToMemoized(root3, lanes);
             }
             workInProgressTransitions = null;
-            prepareFreshStack(root2, lanes);
+            prepareFreshStack(root3, lanes);
           }
           lanes = false;
           memoizedUpdaters = workInProgressRootExitStatus;
@@ -13671,24 +13653,24 @@
                     var reason = workInProgressSuspendedReason;
                     workInProgressSuspendedReason = NotSuspended;
                     workInProgressThrownValue = null;
-                    throwAndUnwindWorkLoop(root2, unitOfWork, thrownValue, reason);
+                    throwAndUnwindWorkLoop(root3, unitOfWork, thrownValue, reason);
                     if (shouldYieldForPrerendering && workInProgressRootIsPrerendering) {
                       memoizedUpdaters = RootInProgress;
                       break a;
                     }
                     break;
                   default:
-                    reason = workInProgressSuspendedReason, workInProgressSuspendedReason = NotSuspended, workInProgressThrownValue = null, throwAndUnwindWorkLoop(root2, unitOfWork, thrownValue, reason);
+                    reason = workInProgressSuspendedReason, workInProgressSuspendedReason = NotSuspended, workInProgressThrownValue = null, throwAndUnwindWorkLoop(root3, unitOfWork, thrownValue, reason);
                 }
               }
               workLoopSync();
               memoizedUpdaters = workInProgressRootExitStatus;
               break;
             } catch (thrownValue$8) {
-              handleThrow(root2, thrownValue$8);
+              handleThrow(root3, thrownValue$8);
             }
           while (1);
-          lanes && root2.shellSuspendCounter++;
+          lanes && root3.shellSuspendCounter++;
           resetContextDependencies();
           executionContext = prevExecutionContext;
           ReactSharedInternals.H = prevDispatcher;
@@ -13699,22 +13681,22 @@
         function workLoopSync() {
           for (; null !== workInProgress; ) performUnitOfWork(workInProgress);
         }
-        function renderRootConcurrent(root2, lanes) {
+        function renderRootConcurrent(root3, lanes) {
           var prevExecutionContext = executionContext;
           executionContext |= RenderContext;
           var prevDispatcher = pushDispatcher(), prevAsyncDispatcher = pushAsyncDispatcher();
-          if (workInProgressRoot !== root2 || workInProgressRootRenderLanes !== lanes) {
+          if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
             if (isDevToolsPresent) {
-              var memoizedUpdaters = root2.memoizedUpdaters;
-              0 < memoizedUpdaters.size && (restorePendingUpdaters(root2, workInProgressRootRenderLanes), memoizedUpdaters.clear());
-              movePendingFibersToMemoized(root2, lanes);
+              var memoizedUpdaters = root3.memoizedUpdaters;
+              0 < memoizedUpdaters.size && (restorePendingUpdaters(root3, workInProgressRootRenderLanes), memoizedUpdaters.clear());
+              movePendingFibersToMemoized(root3, lanes);
             }
             workInProgressTransitions = null;
             workInProgressRootRenderTargetTime = now$1() + RENDER_TIMEOUT_MS;
-            prepareFreshStack(root2, lanes);
+            prepareFreshStack(root3, lanes);
           } else
             workInProgressRootIsPrerendering = checkIfRootIsPrerendering(
-              root2,
+              root3,
               lanes
             );
           a: do
@@ -13725,7 +13707,7 @@
                     workInProgressSuspendedReason = NotSuspended;
                     workInProgressThrownValue = null;
                     throwAndUnwindWorkLoop(
-                      root2,
+                      root3,
                       lanes,
                       memoizedUpdaters,
                       SuspendedOnError
@@ -13740,8 +13722,8 @@
                       break;
                     }
                     lanes = function() {
-                      workInProgressSuspendedReason !== SuspendedOnData && workInProgressSuspendedReason !== SuspendedOnAction || workInProgressRoot !== root2 || (workInProgressSuspendedReason = SuspendedAndReadyToContinue);
-                      ensureRootIsScheduled(root2);
+                      workInProgressSuspendedReason !== SuspendedOnData && workInProgressSuspendedReason !== SuspendedOnAction || workInProgressRoot !== root3 || (workInProgressSuspendedReason = SuspendedAndReadyToContinue);
+                      ensureRootIsScheduled(root3);
                     };
                     memoizedUpdaters.then(lanes, lanes);
                     break a;
@@ -13753,7 +13735,7 @@
                     break a;
                   case SuspendedAndReadyToContinue:
                     isThenableResolved(memoizedUpdaters) ? (workInProgressSuspendedReason = NotSuspended, workInProgressThrownValue = null, replaySuspendedUnitOfWork(lanes)) : (workInProgressSuspendedReason = NotSuspended, workInProgressThrownValue = null, throwAndUnwindWorkLoop(
-                      root2,
+                      root3,
                       lanes,
                       memoizedUpdaters,
                       SuspendedAndReadyToContinue
@@ -13787,7 +13769,7 @@
                     workInProgressSuspendedReason = NotSuspended;
                     workInProgressThrownValue = null;
                     throwAndUnwindWorkLoop(
-                      root2,
+                      root3,
                       lanes,
                       memoizedUpdaters,
                       SuspendedOnInstanceAndReadyToContinue
@@ -13797,7 +13779,7 @@
                     workInProgressSuspendedReason = NotSuspended;
                     workInProgressThrownValue = null;
                     throwAndUnwindWorkLoop(
-                      root2,
+                      root3,
                       lanes,
                       memoizedUpdaters,
                       SuspendedOnDeprecatedThrowPromise
@@ -13815,7 +13797,7 @@
               null !== ReactSharedInternals.actQueue ? workLoopSync() : workLoopConcurrentByScheduler();
               break;
             } catch (thrownValue$9) {
-              handleThrow(root2, thrownValue$9);
+              handleThrow(root3, thrownValue$9);
             }
           while (1);
           resetContextDependencies();
@@ -13888,7 +13870,7 @@
           isProfilingMode && stopProfilerTimerIfRunningAndRecordDuration(unitOfWork);
           return current2;
         }
-        function throwAndUnwindWorkLoop(root2, unitOfWork, thrownValue, suspendedReason) {
+        function throwAndUnwindWorkLoop(root3, unitOfWork, thrownValue, suspendedReason) {
           resetContextDependencies();
           resetHooksOnUnwind(unitOfWork);
           thenableState$1 = null;
@@ -13896,7 +13878,7 @@
           var returnFiber = unitOfWork.return;
           try {
             if (throwException(
-              root2,
+              root3,
               returnFiber,
               unitOfWork,
               thrownValue,
@@ -13904,8 +13886,8 @@
             )) {
               workInProgressRootExitStatus = RootFatalErrored;
               logUncaughtError(
-                root2,
-                createCapturedValueAtFiber(thrownValue, root2.current)
+                root3,
+                createCapturedValueAtFiber(thrownValue, root3.current)
               );
               workInProgress = null;
               return;
@@ -13914,19 +13896,19 @@
             if (null !== returnFiber) throw workInProgress = returnFiber, error;
             workInProgressRootExitStatus = RootFatalErrored;
             logUncaughtError(
-              root2,
-              createCapturedValueAtFiber(thrownValue, root2.current)
+              root3,
+              createCapturedValueAtFiber(thrownValue, root3.current)
             );
             workInProgress = null;
             return;
           }
           if (unitOfWork.flags & 32768) {
-            if (isHydrating || suspendedReason === SuspendedOnError) root2 = true;
+            if (isHydrating || suspendedReason === SuspendedOnError) root3 = true;
             else if (workInProgressRootIsPrerendering || 0 !== (workInProgressRootRenderLanes & 536870912))
-              root2 = false;
-            else if (workInProgressRootDidSkipSuspendedSiblings = root2 = true, suspendedReason === SuspendedOnData || suspendedReason === SuspendedOnAction || suspendedReason === SuspendedOnImmediate || suspendedReason === SuspendedOnDeprecatedThrowPromise)
+              root3 = false;
+            else if (workInProgressRootDidSkipSuspendedSiblings = root3 = true, suspendedReason === SuspendedOnData || suspendedReason === SuspendedOnAction || suspendedReason === SuspendedOnImmediate || suspendedReason === SuspendedOnDeprecatedThrowPromise)
               suspendedReason = suspenseHandlerStackCursor.current, null !== suspendedReason && 13 === suspendedReason.tag && (suspendedReason.flags |= 16384);
-            unwindUnitOfWork(unitOfWork, root2);
+            unwindUnitOfWork(unitOfWork, root3);
           } else completeUnitOfWork(unitOfWork);
         }
         function completeUnitOfWork(unitOfWork) {
@@ -13989,8 +13971,8 @@
           workInProgressRootExitStatus = RootSuspendedAtTheShell;
           workInProgress = null;
         }
-        function commitRoot(root2, finishedWork, lanes, recoverableErrors, transitions, didIncludeRenderPhaseUpdate, spawnedLane, updatedLanes, suspendedRetryLanes, exitStatus, suspendedState, suspendedCommitReason, completedRenderStartTime, completedRenderEndTime) {
-          root2.cancelPendingCommit = null;
+        function commitRoot(root3, finishedWork, lanes, recoverableErrors, transitions, didIncludeRenderPhaseUpdate, spawnedLane, updatedLanes, suspendedRetryLanes, exitStatus, suspendedState, suspendedCommitReason, completedRenderStartTime, completedRenderEndTime) {
+          root3.cancelPendingCommit = null;
           do
             flushPendingEffects();
           while (pendingEffectsStatus !== NO_PENDING_EFFECTS);
@@ -14021,23 +14003,23 @@
             0 === lanes && console.error(
               "finishedLanes should not be empty during a commit. This is a bug in React."
             );
-            if (finishedWork === root2.current)
+            if (finishedWork === root3.current)
               throw Error(
                 "Cannot commit the same tree as before. This error is likely caused by a bug in React. Please file an issue."
               );
             didIncludeRenderPhaseUpdate = finishedWork.lanes | finishedWork.childLanes;
             didIncludeRenderPhaseUpdate |= concurrentlyUpdatedLanes;
             markRootFinished(
-              root2,
+              root3,
               lanes,
               didIncludeRenderPhaseUpdate,
               spawnedLane,
               updatedLanes,
               suspendedRetryLanes
             );
-            root2 === workInProgressRoot && (workInProgress = workInProgressRoot = null, workInProgressRootRenderLanes = 0);
+            root3 === workInProgressRoot && (workInProgress = workInProgressRoot = null, workInProgressRootRenderLanes = 0);
             pendingFinishedWork = finishedWork;
-            pendingEffectsRoot = root2;
+            pendingEffectsRoot = root3;
             pendingEffectsLanes = lanes;
             pendingEffectsRemainingLanes = didIncludeRenderPhaseUpdate;
             pendingPassiveTransitions = transitions;
@@ -14046,12 +14028,12 @@
             pendingSuspendedCommitReason = suspendedCommitReason;
             pendingDelayedCommitReason = IMMEDIATE_COMMIT;
             pendingSuspendedViewTransitionReason = null;
-            0 !== finishedWork.actualDuration || 0 !== (finishedWork.subtreeFlags & 10256) || 0 !== (finishedWork.flags & 10256) ? (root2.callbackNode = null, root2.callbackPriority = 0, scheduleCallback$1(NormalPriority$1, function() {
+            0 !== finishedWork.actualDuration || 0 !== (finishedWork.subtreeFlags & 10256) || 0 !== (finishedWork.flags & 10256) ? (root3.callbackNode = null, root3.callbackPriority = 0, scheduleCallback$1(NormalPriority$1, function() {
               schedulerEvent = window.event;
               pendingDelayedCommitReason === IMMEDIATE_COMMIT && (pendingDelayedCommitReason = DELAYED_PASSIVE_COMMIT);
               flushPassiveEffects();
               return null;
-            })) : (root2.callbackNode = null, root2.callbackPriority = 0);
+            })) : (root3.callbackNode = null, root3.callbackPriority = 0);
             commitErrors = null;
             commitStartTime = now();
             null !== suspendedCommitReason && logSuspendedCommitPhase(
@@ -14069,7 +14051,7 @@
               spawnedLane = executionContext;
               executionContext |= CommitContext;
               try {
-                commitBeforeMutationEffects(root2, finishedWork, lanes);
+                commitBeforeMutationEffects(root3, finishedWork, lanes);
               } finally {
                 executionContext = spawnedLane, ReactDOMSharedInternals.p = transitions, ReactSharedInternals.T = recoverableErrors;
               }
@@ -14083,7 +14065,7 @@
         function flushMutationEffects() {
           if (pendingEffectsStatus === PENDING_MUTATION_PHASE) {
             pendingEffectsStatus = NO_PENDING_EFFECTS;
-            var root2 = pendingEffectsRoot, finishedWork = pendingFinishedWork, lanes = pendingEffectsLanes, rootMutationHasEffect = 0 !== (finishedWork.flags & 13878);
+            var root3 = pendingEffectsRoot, finishedWork = pendingFinishedWork, lanes = pendingEffectsLanes, rootMutationHasEffect = 0 !== (finishedWork.flags & 13878);
             if (0 !== (finishedWork.subtreeFlags & 13878) || rootMutationHasEffect) {
               rootMutationHasEffect = ReactSharedInternals.T;
               ReactSharedInternals.T = null;
@@ -14093,12 +14075,12 @@
               executionContext |= CommitContext;
               try {
                 inProgressLanes = lanes;
-                inProgressRoot = root2;
+                inProgressRoot = root3;
                 resetComponentEffectTimers();
-                commitMutationEffectsOnFiber(finishedWork, root2);
+                commitMutationEffectsOnFiber(finishedWork, root3);
                 inProgressRoot = inProgressLanes = null;
                 lanes = selectionInformation;
-                var curFocusedElem = getActiveElementDeep(root2.containerInfo), priorFocusedElem = lanes.focusedElem, priorSelectionRange = lanes.selectionRange;
+                var curFocusedElem = getActiveElementDeep(root3.containerInfo), priorFocusedElem = lanes.focusedElem, priorSelectionRange = lanes.selectionRange;
                 if (curFocusedElem !== priorFocusedElem && priorFocusedElem && priorFocusedElem.ownerDocument && containsNode(
                   priorFocusedElem.ownerDocument.documentElement,
                   priorFocusedElem
@@ -14155,7 +14137,7 @@
                 executionContext = prevExecutionContext, ReactDOMSharedInternals.p = previousPriority, ReactSharedInternals.T = rootMutationHasEffect;
               }
             }
-            root2.current = finishedWork;
+            root3.current = finishedWork;
             pendingEffectsStatus = PENDING_LAYOUT_PHASE;
           }
         }
@@ -14354,8 +14336,8 @@
           });
           return componentStack;
         }
-        function releaseRootPooledCache(root2, remainingLanes) {
-          0 === (root2.pooledCacheLanes &= remainingLanes) && (remainingLanes = root2.pooledCache, null != remainingLanes && (root2.pooledCache = null, releaseCache(remainingLanes)));
+        function releaseRootPooledCache(root3, remainingLanes) {
+          0 === (root3.pooledCacheLanes &= remainingLanes) && (remainingLanes = root3.pooledCache, null != remainingLanes && (root3.pooledCache = null, releaseCache(remainingLanes)));
         }
         function flushPendingEffects() {
           flushMutationEffects();
@@ -14365,7 +14347,7 @@
         }
         function flushPassiveEffects() {
           if (pendingEffectsStatus !== PENDING_PASSIVE_PHASE) return false;
-          var root2 = pendingEffectsRoot, remainingLanes = pendingEffectsRemainingLanes;
+          var root3 = pendingEffectsRoot, remainingLanes = pendingEffectsRemainingLanes;
           pendingEffectsRemainingLanes = 0;
           var renderPriority = lanesToEventPriority(pendingEffectsLanes), priority = 0 === DefaultEventPriority || DefaultEventPriority > renderPriority ? DefaultEventPriority : renderPriority;
           renderPriority = ReactSharedInternals.T;
@@ -14477,7 +14459,7 @@
             stateNode.passiveEffectDuration = 0;
             return true;
           } finally {
-            ReactDOMSharedInternals.p = previousPriority, ReactSharedInternals.T = renderPriority, releaseRootPooledCache(root2, remainingLanes);
+            ReactDOMSharedInternals.p = previousPriority, ReactSharedInternals.T = renderPriority, releaseRootPooledCache(root3, remainingLanes);
           }
         }
         function captureCommitPhaseErrorOnRoot(rootFiber, sourceFiber, error) {
@@ -14520,32 +14502,32 @@
               nearestMountedAncestor = nearestMountedAncestor.return;
             }
             console.error(
-              "Internal React error: Attempted to capture a commit phase error inside a detached tree. This indicates a bug in React. Potential causes include deleting the same fiber more than once, committing an already-finished tree, or an inconsistent return pointer.\\n\\nError message:\\n\\n%s",
+              "Internal React error: Attempted to capture a commit phase error inside a detached tree. This indicates a bug in React. Potential causes include deleting the same fiber more than once, committing an already-finished tree, or an inconsistent return pointer.\n\nError message:\n\n%s",
               error
             );
           }
         }
-        function attachPingListener(root2, wakeable, lanes) {
-          var pingCache = root2.pingCache;
+        function attachPingListener(root3, wakeable, lanes) {
+          var pingCache = root3.pingCache;
           if (null === pingCache) {
-            pingCache = root2.pingCache = new PossiblyWeakMap();
+            pingCache = root3.pingCache = new PossiblyWeakMap();
             var threadIDs = /* @__PURE__ */ new Set();
             pingCache.set(wakeable, threadIDs);
           } else
             threadIDs = pingCache.get(wakeable), void 0 === threadIDs && (threadIDs = /* @__PURE__ */ new Set(), pingCache.set(wakeable, threadIDs));
-          threadIDs.has(lanes) || (workInProgressRootDidAttachPingListener = true, threadIDs.add(lanes), pingCache = pingSuspendedRoot.bind(null, root2, wakeable, lanes), isDevToolsPresent && restorePendingUpdaters(root2, lanes), wakeable.then(pingCache, pingCache));
+          threadIDs.has(lanes) || (workInProgressRootDidAttachPingListener = true, threadIDs.add(lanes), pingCache = pingSuspendedRoot.bind(null, root3, wakeable, lanes), isDevToolsPresent && restorePendingUpdaters(root3, lanes), wakeable.then(pingCache, pingCache));
         }
-        function pingSuspendedRoot(root2, wakeable, pingedLanes) {
-          var pingCache = root2.pingCache;
+        function pingSuspendedRoot(root3, wakeable, pingedLanes) {
+          var pingCache = root3.pingCache;
           null !== pingCache && pingCache.delete(wakeable);
-          root2.pingedLanes |= root2.suspendedLanes & pingedLanes;
-          root2.warmLanes &= ~pingedLanes;
+          root3.pingedLanes |= root3.suspendedLanes & pingedLanes;
+          root3.warmLanes &= ~pingedLanes;
           0 !== (pingedLanes & 127) ? 0 > blockingUpdateTime && (blockingClampTime = blockingUpdateTime = now(), blockingUpdateTask = createTask("Promise Resolved"), blockingUpdateType = PINGED_UPDATE) : 0 !== (pingedLanes & 4194048) && 0 > transitionUpdateTime && (transitionClampTime = transitionUpdateTime = now(), transitionUpdateTask = createTask("Promise Resolved"), transitionUpdateType = PINGED_UPDATE);
           isConcurrentActEnvironment() && null === ReactSharedInternals.actQueue && console.error(
-            "A suspended resource finished loading inside a test, but the event was not wrapped in act(...).\\n\\nWhen testing, code that resolves suspended data should be wrapped into act(...):\\n\\nact(() => {\\n  /* finish loading suspended data */\\n});\\n/* assert on the output */\\n\\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act"
+            "A suspended resource finished loading inside a test, but the event was not wrapped in act(...).\n\nWhen testing, code that resolves suspended data should be wrapped into act(...):\n\nact(() => {\n  /* finish loading suspended data */\n});\n/* assert on the output */\n\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act"
           );
-          workInProgressRoot === root2 && (workInProgressRootRenderLanes & pingedLanes) === pingedLanes && (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && (workInProgressRootRenderLanes & 62914560) === workInProgressRootRenderLanes && now$1() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS ? (executionContext & RenderContext) === NoContext && prepareFreshStack(root2, 0) : workInProgressRootPingedLanes |= pingedLanes, workInProgressSuspendedRetryLanes === workInProgressRootRenderLanes && (workInProgressSuspendedRetryLanes = 0));
-          ensureRootIsScheduled(root2);
+          workInProgressRoot === root3 && (workInProgressRootRenderLanes & pingedLanes) === pingedLanes && (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && (workInProgressRootRenderLanes & 62914560) === workInProgressRootRenderLanes && now$1() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS ? (executionContext & RenderContext) === NoContext && prepareFreshStack(root3, 0) : workInProgressRootPingedLanes |= pingedLanes, workInProgressSuspendedRetryLanes === workInProgressRootRenderLanes && (workInProgressSuspendedRetryLanes = 0));
+          ensureRootIsScheduled(root3);
         }
         function retryTimedOutBoundary(boundaryFiber, retryLane) {
           0 === retryLane && (retryLane = claimNextRetryLane());
@@ -14583,46 +14565,46 @@
         function recursivelyTraverseAndDoubleInvokeEffectsInDEV(root$jscomp$0, parentFiber, isInStrictMode) {
           if (0 !== (parentFiber.subtreeFlags & 67117056))
             for (parentFiber = parentFiber.child; null !== parentFiber; ) {
-              var root2 = root$jscomp$0, fiber = parentFiber, isStrictModeFiber = fiber.type === REACT_STRICT_MODE_TYPE;
+              var root3 = root$jscomp$0, fiber = parentFiber, isStrictModeFiber = fiber.type === REACT_STRICT_MODE_TYPE;
               isStrictModeFiber = isInStrictMode || isStrictModeFiber;
               22 !== fiber.tag ? fiber.flags & 67108864 ? isStrictModeFiber && runWithFiberInDEV(
                 fiber,
                 doubleInvokeEffectsOnFiber,
-                root2,
+                root3,
                 fiber
               ) : recursivelyTraverseAndDoubleInvokeEffectsInDEV(
-                root2,
+                root3,
                 fiber,
                 isStrictModeFiber
               ) : null === fiber.memoizedState && (isStrictModeFiber && fiber.flags & 8192 ? runWithFiberInDEV(
                 fiber,
                 doubleInvokeEffectsOnFiber,
-                root2,
+                root3,
                 fiber
               ) : fiber.subtreeFlags & 67108864 && runWithFiberInDEV(
                 fiber,
                 recursivelyTraverseAndDoubleInvokeEffectsInDEV,
-                root2,
+                root3,
                 fiber,
                 isStrictModeFiber
               ));
               parentFiber = parentFiber.sibling;
             }
         }
-        function doubleInvokeEffectsOnFiber(root2, fiber) {
+        function doubleInvokeEffectsOnFiber(root3, fiber) {
           setIsStrictModeForDevtools(true);
           try {
-            disappearLayoutEffects(fiber), disconnectPassiveEffect(fiber), reappearLayoutEffects(root2, fiber.alternate, fiber, false), reconnectPassiveEffects(root2, fiber, 0, null, false, 0);
+            disappearLayoutEffects(fiber), disconnectPassiveEffect(fiber), reappearLayoutEffects(root3, fiber.alternate, fiber, false), reconnectPassiveEffects(root3, fiber, 0, null, false, 0);
           } finally {
             setIsStrictModeForDevtools(false);
           }
         }
-        function commitDoubleInvokeEffectsInDEV(root2) {
+        function commitDoubleInvokeEffectsInDEV(root3) {
           var doubleInvokeEffects = true;
-          root2.current.mode & (StrictLegacyMode | StrictEffectsMode) || (doubleInvokeEffects = false);
+          root3.current.mode & (StrictLegacyMode | StrictEffectsMode) || (doubleInvokeEffects = false);
           recursivelyTraverseAndDoubleInvokeEffectsInDEV(
-            root2,
-            root2.current,
+            root3,
+            root3.current,
             doubleInvokeEffects
           );
         }
@@ -14643,9 +14625,9 @@
             }
           }
         }
-        function restorePendingUpdaters(root2, lanes) {
-          isDevToolsPresent && root2.memoizedUpdaters.forEach(function(schedulingFiber) {
-            addFiberToLanesMap(root2, schedulingFiber, lanes);
+        function restorePendingUpdaters(root3, lanes) {
+          isDevToolsPresent && root3.memoizedUpdaters.forEach(function(schedulingFiber) {
+            addFiberToLanesMap(root3, schedulingFiber, lanes);
           });
         }
         function scheduleCallback$1(priorityLevel, callback) {
@@ -14655,13 +14637,13 @@
         function warnIfUpdatesNotWrappedWithActDEV(fiber) {
           isConcurrentActEnvironment() && null === ReactSharedInternals.actQueue && runWithFiberInDEV(fiber, function() {
             console.error(
-              "An update to %s inside a test was not wrapped in act(...).\\n\\nWhen testing, code that causes React state updates should be wrapped into act(...):\\n\\nact(() => {\\n  /* fire events that update state */\\n});\\n/* assert on the output */\\n\\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act",
+              "An update to %s inside a test was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(() => {\n  /* fire events that update state */\n});\n/* assert on the output */\n\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act",
               getComponentNameFromFiber(fiber)
             );
           });
         }
-        function ensureRootIsScheduled(root2) {
-          root2 !== lastScheduledRoot && null === root2.next && (null === lastScheduledRoot ? firstScheduledRoot = lastScheduledRoot = root2 : lastScheduledRoot = lastScheduledRoot.next = root2);
+        function ensureRootIsScheduled(root3) {
+          root3 !== lastScheduledRoot && null === root3.next && (null === lastScheduledRoot ? firstScheduledRoot = lastScheduledRoot = root3 : lastScheduledRoot = lastScheduledRoot.next = root3);
           mightHavePendingSyncWork = true;
           null !== ReactSharedInternals.actQueue ? didScheduleMicrotask_act || (didScheduleMicrotask_act = true, scheduleImmediateRootScheduleTask()) : didScheduleMicrotask || (didScheduleMicrotask = true, scheduleImmediateRootScheduleTask());
         }
@@ -14670,25 +14652,25 @@
             isFlushingWork = true;
             do {
               var didPerformSomeWork = false;
-              for (var root2 = firstScheduledRoot; null !== root2; ) {
+              for (var root3 = firstScheduledRoot; null !== root3; ) {
                 if (!onlyLegacy)
                   if (0 !== syncTransitionLanes) {
-                    var pendingLanes = root2.pendingLanes;
+                    var pendingLanes = root3.pendingLanes;
                     if (0 === pendingLanes) var nextLanes = 0;
                     else {
-                      var suspendedLanes = root2.suspendedLanes, pingedLanes = root2.pingedLanes;
+                      var suspendedLanes = root3.suspendedLanes, pingedLanes = root3.pingedLanes;
                       nextLanes = (1 << 31 - clz32(42 | syncTransitionLanes) + 1) - 1;
                       nextLanes &= pendingLanes & ~(suspendedLanes & ~pingedLanes);
                       nextLanes = nextLanes & 201326741 ? nextLanes & 201326741 | 1 : nextLanes ? nextLanes | 2 : 0;
                     }
-                    0 !== nextLanes && (didPerformSomeWork = true, performSyncWorkOnRoot(root2, nextLanes));
+                    0 !== nextLanes && (didPerformSomeWork = true, performSyncWorkOnRoot(root3, nextLanes));
                   } else
                     nextLanes = workInProgressRootRenderLanes, nextLanes = getNextLanes(
-                      root2,
-                      root2 === workInProgressRoot ? nextLanes : 0,
-                      null !== root2.cancelPendingCommit || root2.timeoutHandle !== noTimeout
-                    ), 0 === (nextLanes & 3) || checkIfRootIsPrerendering(root2, nextLanes) || (didPerformSomeWork = true, performSyncWorkOnRoot(root2, nextLanes));
-                root2 = root2.next;
+                      root3,
+                      root3 === workInProgressRoot ? nextLanes : 0,
+                      null !== root3.cancelPendingCommit || root3.timeoutHandle !== noTimeout
+                    ), 0 === (nextLanes & 3) || checkIfRootIsPrerendering(root3, nextLanes) || (didPerformSomeWork = true, performSyncWorkOnRoot(root3, nextLanes));
+                root3 = root3.next;
               }
             } while (didPerformSomeWork);
             isFlushingWork = false;
@@ -14702,39 +14684,39 @@
           mightHavePendingSyncWork = didScheduleMicrotask_act = didScheduleMicrotask = false;
           var syncTransitionLanes = 0;
           0 !== currentEventTransitionLane && shouldAttemptEagerTransition() && (syncTransitionLanes = currentEventTransitionLane);
-          for (var currentTime = now$1(), prev = null, root2 = firstScheduledRoot; null !== root2; ) {
-            var next = root2.next, nextLanes = scheduleTaskForRootDuringMicrotask(root2, currentTime);
+          for (var currentTime = now$1(), prev = null, root3 = firstScheduledRoot; null !== root3; ) {
+            var next = root3.next, nextLanes = scheduleTaskForRootDuringMicrotask(root3, currentTime);
             if (0 === nextLanes)
-              root2.next = null, null === prev ? firstScheduledRoot = next : prev.next = next, null === next && (lastScheduledRoot = prev);
-            else if (prev = root2, 0 !== syncTransitionLanes || 0 !== (nextLanes & 3))
+              root3.next = null, null === prev ? firstScheduledRoot = next : prev.next = next, null === next && (lastScheduledRoot = prev);
+            else if (prev = root3, 0 !== syncTransitionLanes || 0 !== (nextLanes & 3))
               mightHavePendingSyncWork = true;
-            root2 = next;
+            root3 = next;
           }
           pendingEffectsStatus !== NO_PENDING_EFFECTS && pendingEffectsStatus !== PENDING_PASSIVE_PHASE || flushSyncWorkAcrossRoots_impl(syncTransitionLanes, false);
           0 !== currentEventTransitionLane && (currentEventTransitionLane = 0);
         }
-        function scheduleTaskForRootDuringMicrotask(root2, currentTime) {
-          for (var suspendedLanes = root2.suspendedLanes, pingedLanes = root2.pingedLanes, expirationTimes = root2.expirationTimes, lanes = root2.pendingLanes & -62914561; 0 < lanes; ) {
+        function scheduleTaskForRootDuringMicrotask(root3, currentTime) {
+          for (var suspendedLanes = root3.suspendedLanes, pingedLanes = root3.pingedLanes, expirationTimes = root3.expirationTimes, lanes = root3.pendingLanes & -62914561; 0 < lanes; ) {
             var index = 31 - clz32(lanes), lane = 1 << index, expirationTime = expirationTimes[index];
             if (-1 === expirationTime) {
               if (0 === (lane & suspendedLanes) || 0 !== (lane & pingedLanes))
                 expirationTimes[index] = computeExpirationTime(lane, currentTime);
-            } else expirationTime <= currentTime && (root2.expiredLanes |= lane);
+            } else expirationTime <= currentTime && (root3.expiredLanes |= lane);
             lanes &= ~lane;
           }
           currentTime = workInProgressRoot;
           suspendedLanes = workInProgressRootRenderLanes;
           suspendedLanes = getNextLanes(
-            root2,
-            root2 === currentTime ? suspendedLanes : 0,
-            null !== root2.cancelPendingCommit || root2.timeoutHandle !== noTimeout
+            root3,
+            root3 === currentTime ? suspendedLanes : 0,
+            null !== root3.cancelPendingCommit || root3.timeoutHandle !== noTimeout
           );
-          pingedLanes = root2.callbackNode;
-          if (0 === suspendedLanes || root2 === currentTime && (workInProgressSuspendedReason === SuspendedOnData || workInProgressSuspendedReason === SuspendedOnAction) || null !== root2.cancelPendingCommit)
-            return null !== pingedLanes && cancelCallback(pingedLanes), root2.callbackNode = null, root2.callbackPriority = 0;
-          if (0 === (suspendedLanes & 3) || checkIfRootIsPrerendering(root2, suspendedLanes)) {
+          pingedLanes = root3.callbackNode;
+          if (0 === suspendedLanes || root3 === currentTime && (workInProgressSuspendedReason === SuspendedOnData || workInProgressSuspendedReason === SuspendedOnAction) || null !== root3.cancelPendingCommit)
+            return null !== pingedLanes && cancelCallback(pingedLanes), root3.callbackNode = null, root3.callbackPriority = 0;
+          if (0 === (suspendedLanes & 3) || checkIfRootIsPrerendering(root3, suspendedLanes)) {
             currentTime = suspendedLanes & -suspendedLanes;
-            if (currentTime !== root2.callbackPriority || null !== ReactSharedInternals.actQueue && pingedLanes !== fakeActCallbackNode)
+            if (currentTime !== root3.callbackPriority || null !== ReactSharedInternals.actQueue && pingedLanes !== fakeActCallbackNode)
               cancelCallback(pingedLanes);
             else return currentTime;
             switch (lanesToEventPriority(suspendedLanes)) {
@@ -14751,46 +14733,46 @@
               default:
                 suspendedLanes = NormalPriority$1;
             }
-            pingedLanes = performWorkOnRootViaSchedulerTask.bind(null, root2);
+            pingedLanes = performWorkOnRootViaSchedulerTask.bind(null, root3);
             null !== ReactSharedInternals.actQueue ? (ReactSharedInternals.actQueue.push(pingedLanes), suspendedLanes = fakeActCallbackNode) : suspendedLanes = scheduleCallback$3(suspendedLanes, pingedLanes);
-            root2.callbackPriority = currentTime;
-            root2.callbackNode = suspendedLanes;
+            root3.callbackPriority = currentTime;
+            root3.callbackNode = suspendedLanes;
             return currentTime;
           }
           null !== pingedLanes && cancelCallback(pingedLanes);
-          root2.callbackPriority = 2;
-          root2.callbackNode = null;
+          root3.callbackPriority = 2;
+          root3.callbackNode = null;
           return 2;
         }
-        function performWorkOnRootViaSchedulerTask(root2, didTimeout) {
+        function performWorkOnRootViaSchedulerTask(root3, didTimeout) {
           nestedUpdateScheduled = currentUpdateIsNested = false;
           schedulerEvent = window.event;
           if (pendingEffectsStatus !== NO_PENDING_EFFECTS && pendingEffectsStatus !== PENDING_PASSIVE_PHASE)
-            return root2.callbackNode = null, root2.callbackPriority = 0, null;
-          var originalCallbackNode = root2.callbackNode;
+            return root3.callbackNode = null, root3.callbackPriority = 0, null;
+          var originalCallbackNode = root3.callbackNode;
           pendingDelayedCommitReason === IMMEDIATE_COMMIT && (pendingDelayedCommitReason = DELAYED_PASSIVE_COMMIT);
-          if (flushPendingEffects() && root2.callbackNode !== originalCallbackNode)
+          if (flushPendingEffects() && root3.callbackNode !== originalCallbackNode)
             return null;
           var workInProgressRootRenderLanes$jscomp$0 = workInProgressRootRenderLanes;
           workInProgressRootRenderLanes$jscomp$0 = getNextLanes(
-            root2,
-            root2 === workInProgressRoot ? workInProgressRootRenderLanes$jscomp$0 : 0,
-            null !== root2.cancelPendingCommit || root2.timeoutHandle !== noTimeout
+            root3,
+            root3 === workInProgressRoot ? workInProgressRootRenderLanes$jscomp$0 : 0,
+            null !== root3.cancelPendingCommit || root3.timeoutHandle !== noTimeout
           );
           if (0 === workInProgressRootRenderLanes$jscomp$0) return null;
           performWorkOnRoot(
-            root2,
+            root3,
             workInProgressRootRenderLanes$jscomp$0,
             didTimeout
           );
-          scheduleTaskForRootDuringMicrotask(root2, now$1());
-          return null != root2.callbackNode && root2.callbackNode === originalCallbackNode ? performWorkOnRootViaSchedulerTask.bind(null, root2) : null;
+          scheduleTaskForRootDuringMicrotask(root3, now$1());
+          return null != root3.callbackNode && root3.callbackNode === originalCallbackNode ? performWorkOnRootViaSchedulerTask.bind(null, root3) : null;
         }
-        function performSyncWorkOnRoot(root2, lanes) {
+        function performSyncWorkOnRoot(root3, lanes) {
           if (flushPendingEffects()) return null;
           currentUpdateIsNested = nestedUpdateScheduled;
           nestedUpdateScheduled = false;
-          performWorkOnRoot(root2, lanes, true);
+          performWorkOnRoot(root3, lanes, true);
         }
         function cancelCallback(callbackNode) {
           callbackNode !== fakeActCallbackNode && null !== callbackNode && cancelCallback$1(callbackNode);
@@ -15309,7 +15291,7 @@
                 }
               else
                 isComposing ? isFallbackCompositionEnd(domEventName, nativeEvent) && (eventType = "onCompositionEnd") : "keydown" === domEventName && nativeEvent.keyCode === START_KEYCODE && (eventType = "onCompositionStart");
-              eventType && (useFallbackCompositionData && "ko" !== nativeEvent.locale && (isComposing || "onCompositionStart" !== eventType ? "onCompositionEnd" === eventType && isComposing && (fallbackData = getData()) : (root = nativeEventTarget, startText = "value" in root ? root.value : root.textContent, isComposing = true)), handleEventFunc = accumulateTwoPhaseListeners(
+              eventType && (useFallbackCompositionData && "ko" !== nativeEvent.locale && (isComposing || "onCompositionStart" !== eventType ? "onCompositionEnd" === eventType && isComposing && (fallbackData = getData()) : (root2 = nativeEventTarget, startText = "value" in root2 ? root2.value : root2.textContent, isComposing = true)), handleEventFunc = accumulateTwoPhaseListeners(
                 targetInst,
                 eventType
               ), 0 < handleEventFunc.length && (eventType = new SyntheticCompositionEvent(
@@ -15417,7 +15399,7 @@
         }
         function warnForInvalidEventListener(registrationName, listener) {
           false === listener ? console.error(
-            "Expected `%s` listener to be a function, instead got `false`.\\n\\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.",
+            "Expected `%s` listener to be a function, instead got `false`.\n\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.",
             registrationName,
             registrationName,
             registrationName
@@ -15440,7 +15422,7 @@
             "The provided HTML markup uses a value of unsupported type %s. This value must be coerced to a string before using it here.",
             typeName(markup)
           ), testStringCoercion(markup));
-          return ("string" === typeof markup ? markup : "" + markup).replace(NORMALIZE_NEWLINES_REGEX, "\\n").replace(NORMALIZE_NULL_AND_REPLACEMENT_REGEX, "");
+          return ("string" === typeof markup ? markup : "" + markup).replace(NORMALIZE_NEWLINES_REGEX, "\n").replace(NORMALIZE_NULL_AND_REPLACEMENT_REGEX, "");
         }
         function checkForUnmatchedText(serverText, clientText) {
           clientText = normalizeMarkupForTextOrAttribute(clientText);
@@ -17557,13 +17539,13 @@
                   );
                 }
                 if (currentProps && null === currentResource)
-                  throw pendingProps = "\\n\\n  - " + describeLinkForResourceErrorDEV(currentProps) + "\\n  + " + describeLinkForResourceErrorDEV(pendingProps), Error(
+                  throw pendingProps = "\n\n  - " + describeLinkForResourceErrorDEV(currentProps) + "\n  + " + describeLinkForResourceErrorDEV(pendingProps), Error(
                     "Expected <link> not to update to be updated to a stylesheet with precedence. Check the `rel`, `href`, and `precedence` props of this component. Alternatively, check whether two different <link> components render in the same slot or share the same key." + pendingProps
                   );
                 return _resource;
               }
               if (currentProps && null !== currentResource)
-                throw pendingProps = "\\n\\n  - " + describeLinkForResourceErrorDEV(currentProps) + "\\n  + " + describeLinkForResourceErrorDEV(pendingProps), Error(
+                throw pendingProps = "\n\n  - " + describeLinkForResourceErrorDEV(currentProps) + "\n  + " + describeLinkForResourceErrorDEV(pendingProps), Error(
                   "Expected stylesheet with precedence to not be updated to a different kind of <link>. Check the `rel`, `href`, and `precedence` props of this component. Alternatively, check whether two different <link> components render in the same slot or share the same key." + pendingProps
                 );
               return null;
@@ -17682,15 +17664,15 @@
             "stylesheet" === resource.type && (resource.state.loading & Inserted) === NotLoaded && (instance = resource.instance, resource.state.loading |= Inserted, insertStylesheet(instance, props.precedence, hoistableRoot));
           return resource.instance;
         }
-        function insertStylesheet(instance, precedence, root2) {
-          for (var nodes = root2.querySelectorAll(
+        function insertStylesheet(instance, precedence, root3) {
+          for (var nodes = root3.querySelectorAll(
             'link[rel="stylesheet"][data-precedence],style[data-precedence]'
           ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i = 0; i < nodes.length; i++) {
             var node = nodes[i];
             if (node.dataset.precedence === precedence) prior = node;
             else if (prior !== last) break;
           }
-          prior ? prior.parentNode.insertBefore(instance, prior.nextSibling) : (precedence = 9 === root2.nodeType ? root2.head : root2, precedence.insertBefore(instance, precedence.firstChild));
+          prior ? prior.parentNode.insertBefore(instance, prior.nextSibling) : (precedence = 9 === root3.nodeType ? root3.head : root3, precedence.insertBefore(instance, precedence.firstChild));
         }
         function adoptPreloadPropsForStylesheet(stylesheetProps, preloadProps) {
           null == stylesheetProps.crossOrigin && (stylesheetProps.crossOrigin = preloadProps.crossOrigin);
@@ -17888,14 +17870,14 @@
           state.stylesheets = null;
           null !== state.unsuspend && (state.count++, precedencesByRoot = /* @__PURE__ */ new Map(), resources.forEach(insertStylesheetIntoRoot, state), precedencesByRoot = null, onUnsuspend.call(state));
         }
-        function insertStylesheetIntoRoot(root2, resource) {
+        function insertStylesheetIntoRoot(root3, resource) {
           if (!(resource.state.loading & Inserted)) {
-            var precedences = precedencesByRoot.get(root2);
+            var precedences = precedencesByRoot.get(root3);
             if (precedences) var last = precedences.get(LAST_PRECEDENCE);
             else {
               precedences = /* @__PURE__ */ new Map();
-              precedencesByRoot.set(root2, precedences);
-              for (var nodes = root2.querySelectorAll(
+              precedencesByRoot.set(root3, precedences);
+              for (var nodes = root3.querySelectorAll(
                 "link[data-precedence],style[data-precedence]"
               ), i = 0; i < nodes.length; i++) {
                 var node = nodes[i];
@@ -17913,7 +17895,7 @@
             last = onUnsuspend.bind(this);
             nodes.addEventListener("load", last);
             nodes.addEventListener("error", last);
-            i ? i.parentNode.insertBefore(nodes, i.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
+            i ? i.parentNode.insertBefore(nodes, i.nextSibling) : (root3 = 9 === root3.nodeType ? root3.head : root3, root3.insertBefore(nodes, root3.firstChild));
             resource.state.loading |= Inserted;
           }
         }
@@ -17990,7 +17972,7 @@
           parentComponent = getContextForSubtree(parentComponent);
           null === container.context ? container.context = parentComponent : container.pendingContext = parentComponent;
           isRendering && null !== current && !didWarnAboutNestedUpdates && (didWarnAboutNestedUpdates = true, console.error(
-            "Render methods should be a pure function of props and state; triggering nested component updates from render is not allowed. If necessary, trigger nested updates in componentDidUpdate.\\n\\nCheck the render method of %s.",
+            "Render methods should be a pure function of props and state; triggering nested component updates from render is not allowed. If necessary, trigger nested updates in componentDidUpdate.\n\nCheck the render method of %s.",
             getComponentNameFromFiber(current) || "Unknown"
           ));
           container = createUpdate(lane);
@@ -18016,8 +17998,8 @@
         }
         function attemptContinuousHydration(fiber) {
           if (13 === fiber.tag || 31 === fiber.tag) {
-            var root2 = enqueueConcurrentRenderForLane(fiber, 67108864);
-            null !== root2 && scheduleUpdateOnFiber(root2, fiber, 67108864);
+            var root3 = enqueueConcurrentRenderForLane(fiber, 67108864);
+            null !== root3 && scheduleUpdateOnFiber(root3, fiber, 67108864);
             markRetryLaneIfNotHydrated(fiber, 67108864);
           }
         }
@@ -18025,8 +18007,8 @@
           if (13 === fiber.tag || 31 === fiber.tag) {
             var lane = requestUpdateLane(fiber);
             lane = getBumpedLaneForHydrationByLane(lane);
-            var root2 = enqueueConcurrentRenderForLane(fiber, lane);
-            null !== root2 && scheduleUpdateOnFiber(root2, fiber, lane);
+            var root3 = enqueueConcurrentRenderForLane(fiber, lane);
+            null !== root3 && scheduleUpdateOnFiber(root3, fiber, lane);
             markRetryLaneIfNotHydrated(fiber, lane);
           }
         }
@@ -18082,11 +18064,11 @@
                       if (fiber.current.memoizedState.isDehydrated) {
                         var lanes = getHighestPriorityLanes(fiber.pendingLanes);
                         if (0 !== lanes) {
-                          var root2 = fiber;
-                          root2.pendingLanes |= 2;
-                          for (root2.entangledLanes |= 2; lanes; ) {
+                          var root3 = fiber;
+                          root3.pendingLanes |= 2;
+                          for (root3.entangledLanes |= 2; lanes; ) {
                             var lane = 1 << 31 - clz32(lanes);
-                            root2.entanglements[1] |= lane;
+                            root3.entanglements[1] |= lane;
                             lanes &= ~lane;
                           }
                           ensureRootIsScheduled(fiber);
@@ -18096,7 +18078,7 @@
                       break;
                     case 31:
                     case 13:
-                      root2 = enqueueConcurrentRenderForLane(fiber, 2), null !== root2 && scheduleUpdateOnFiber(root2, fiber, 2), flushSyncWork$1(), markRetryLaneIfNotHydrated(fiber, 2);
+                      root3 = enqueueConcurrentRenderForLane(fiber, 2), null !== root3 && scheduleUpdateOnFiber(root3, fiber, 2), flushSyncWork$1(), markRetryLaneIfNotHydrated(fiber, 2);
                   }
                 fiber = findInstanceBlockingEvent(nativeEvent);
                 null === fiber && dispatchEventForPluginEventSystem(
@@ -18532,14 +18514,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React2 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React3 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React2.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -18560,9 +18542,9 @@
           submit: true
         }, VALID_ATTRIBUTE_NAME_REGEX = RegExp(
           "^[:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD][:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$"
-        ), illegalAttributeNameCache = {}, validatedAttributeNameCache = {}, escapeSelectorAttributeValueInsideDoubleQuotesRegex = /[\\n"\\]/g, didWarnValueDefaultValue$1 = false, didWarnCheckedDefaultChecked = false, didWarnSelectedSetOnOption = false, didWarnInvalidChild = false, didWarnInvalidInnerHTML = false;
+        ), illegalAttributeNameCache = {}, validatedAttributeNameCache = {}, escapeSelectorAttributeValueInsideDoubleQuotesRegex = /[\n"\\]/g, didWarnValueDefaultValue$1 = false, didWarnCheckedDefaultChecked = false, didWarnSelectedSetOnOption = false, didWarnInvalidChild = false, didWarnInvalidInnerHTML = false;
         var didWarnValueDefaultValue = false;
-        var valuePropNames = ["value", "defaultValue"], didWarnValDefaultVal = false, needsEscaping = /["'&<>\\n\t]|^\s|\s$/, specialTags = "address applet area article aside base basefont bgsound blockquote body br button caption center col colgroup dd details dir div dl dt embed fieldset figcaption figure footer form frame frameset h1 h2 h3 h4 h5 h6 head header hgroup hr html iframe img input isindex li link listing main marquee menu menuitem meta nav noembed noframes noscript object ol p param plaintext pre script section select source style summary table tbody td template textarea tfoot th thead title tr track ul wbr xmp".split(
+        var valuePropNames = ["value", "defaultValue"], didWarnValDefaultVal = false, needsEscaping = /["'&<>\n\t]|^\s|\s$/, specialTags = "address applet area article aside base basefont bgsound blockquote body br button caption center col colgroup dd details dir div dl dt embed fieldset figcaption figure footer form frame frameset h1 h2 h3 h4 h5 h6 head header hgroup hr html iframe img input isindex li link listing main marquee menu menuitem meta nav noembed noframes noscript object ol p param plaintext pre script section select source style summary table tbody td template textarea tfoot th thead title tr track ul wbr xmp".split(
           " "
         ), inScopeTags = "applet caption html table td th marquee object template foreignObject desc title".split(
           " "
@@ -19345,7 +19327,7 @@
           "^(aria)-[:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$"
         ), rARIACamel = RegExp(
           "^(aria)[A-Z][:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$"
-        ), isJavaScriptProtocol = /^[\u0000-\u001F ]*j[\r\\n\t]*a[\r\\n\t]*v[\r\\n\t]*a[\r\\n\t]*s[\r\\n\t]*c[\r\\n\t]*r[\r\\n\t]*i[\r\\n\t]*p[\r\\n\t]*t[\r\\n\t]*:/i, currentReplayingEvent = null, restoreTarget = null, restoreQueue = null, isInsideEventHandler = false, canUseDOM = !("undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement), passiveBrowserEventsSupported = false;
+        ), isJavaScriptProtocol = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*:/i, currentReplayingEvent = null, restoreTarget = null, restoreQueue = null, isInsideEventHandler = false, canUseDOM = !("undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement), passiveBrowserEventsSupported = false;
         if (canUseDOM)
           try {
             var options$jscomp$0 = {};
@@ -19359,7 +19341,7 @@
           } catch (e) {
             passiveBrowserEventsSupported = false;
           }
-        var root = null, startText = null, fallbackText = null, EventInterface = {
+        var root2 = null, startText = null, fallbackText = null, EventInterface = {
           eventPhase: 0,
           bubbles: 0,
           cancelable: 0,
@@ -19710,34 +19692,34 @@
               UNSAFE_componentWillMountUniqueNames
             );
             console.error(
-              "Using UNSAFE_componentWillMount in strict mode is not recommended and may indicate bugs in your code. See https://react.dev/link/unsafe-component-lifecycles for details.\\n\\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\\n\\nPlease update the following components: %s",
+              "Using UNSAFE_componentWillMount in strict mode is not recommended and may indicate bugs in your code. See https://react.dev/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n\nPlease update the following components: %s",
               sortedNames
             );
           }
           0 < UNSAFE_componentWillReceivePropsUniqueNames.size && (sortedNames = setToSortedString(
             UNSAFE_componentWillReceivePropsUniqueNames
           ), console.error(
-            "Using UNSAFE_componentWillReceiveProps in strict mode is not recommended and may indicate bugs in your code. See https://react.dev/link/unsafe-component-lifecycles for details.\\n\\n* Move data fetching code or side effects to componentDidUpdate.\\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://react.dev/link/derived-state\\n\\nPlease update the following components: %s",
+            "Using UNSAFE_componentWillReceiveProps in strict mode is not recommended and may indicate bugs in your code. See https://react.dev/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://react.dev/link/derived-state\n\nPlease update the following components: %s",
             sortedNames
           ));
           0 < UNSAFE_componentWillUpdateUniqueNames.size && (sortedNames = setToSortedString(
             UNSAFE_componentWillUpdateUniqueNames
           ), console.error(
-            "Using UNSAFE_componentWillUpdate in strict mode is not recommended and may indicate bugs in your code. See https://react.dev/link/unsafe-component-lifecycles for details.\\n\\n* Move data fetching code or side effects to componentDidUpdate.\\n\\nPlease update the following components: %s",
+            "Using UNSAFE_componentWillUpdate in strict mode is not recommended and may indicate bugs in your code. See https://react.dev/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n\nPlease update the following components: %s",
             sortedNames
           ));
           0 < componentWillMountUniqueNames.size && (sortedNames = setToSortedString(componentWillMountUniqueNames), console.warn(
-            "componentWillMount has been renamed, and is not recommended for use. See https://react.dev/link/unsafe-component-lifecycles for details.\\n\\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\\n* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.\\n\\nPlease update the following components: %s",
+            "componentWillMount has been renamed, and is not recommended for use. See https://react.dev/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.\n\nPlease update the following components: %s",
             sortedNames
           ));
           0 < componentWillReceivePropsUniqueNames.size && (sortedNames = setToSortedString(
             componentWillReceivePropsUniqueNames
           ), console.warn(
-            "componentWillReceiveProps has been renamed, and is not recommended for use. See https://react.dev/link/unsafe-component-lifecycles for details.\\n\\n* Move data fetching code or side effects to componentDidUpdate.\\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://react.dev/link/derived-state\\n* Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.\\n\\nPlease update the following components: %s",
+            "componentWillReceiveProps has been renamed, and is not recommended for use. See https://react.dev/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://react.dev/link/derived-state\n* Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.\n\nPlease update the following components: %s",
             sortedNames
           ));
           0 < componentWillUpdateUniqueNames.size && (sortedNames = setToSortedString(componentWillUpdateUniqueNames), console.warn(
-            "componentWillUpdate has been renamed, and is not recommended for use. See https://react.dev/link/unsafe-component-lifecycles for details.\\n\\n* Move data fetching code or side effects to componentDidUpdate.\\n* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.\\n\\nPlease update the following components: %s",
+            "componentWillUpdate has been renamed, and is not recommended for use. See https://react.dev/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.\n\nPlease update the following components: %s",
             sortedNames
           ));
         };
@@ -19761,7 +19743,7 @@
               var sortedNames = setToSortedString(uniqueNames);
               runWithFiberInDEV(firstFiber, function() {
                 console.error(
-                  "Legacy context API has been detected within a strict-mode tree.\\n\\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\\n\\nPlease update the following components: %s\\n\\nLearn more about this warning here: https://react.dev/link/legacy-context",
+                  "Legacy context API has been detected within a strict-mode tree.\n\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\n\nPlease update the following components: %s\n\nLearn more about this warning here: https://react.dev/link/legacy-context",
                   sortedNames
                 );
               });
@@ -19857,11 +19839,11 @@
             return init(lazy._payload);
           }
         }, callLazyInitInDEV = callLazyInit.react_stack_bottom_frame.bind(callLazyInit), SuspenseException = Error(
-          "Suspense Exception: This is not a real error! It's an implementation detail of `use` to interrupt the current render. You must either rethrow it immediately, or move the `use` call outside of the `try/catch` block. Capturing without rethrowing will lead to unexpected behavior.\\n\\nTo handle async errors, wrap your component in an error boundary, or call the promise's `.catch` method and pass the result to `use`."
+          "Suspense Exception: This is not a real error! It's an implementation detail of `use` to interrupt the current render. You must either rethrow it immediately, or move the `use` call outside of the `try/catch` block. Capturing without rethrowing will lead to unexpected behavior.\n\nTo handle async errors, wrap your component in an error boundary, or call the promise's `.catch` method and pass the result to `use`."
         ), SuspenseyCommitException = Error(
           "Suspense Exception: This is not a real error, and should not leak into userspace. If you're seeing this, it's likely a bug in React."
         ), SuspenseActionException = Error(
-          "Suspense Exception: This is not a real error! It's an implementation detail of `useActionState` to interrupt the current render. You must either rethrow it immediately, or move the `useActionState` call outside of the `try/catch` block. Capturing without rethrowing will lead to unexpected behavior.\\n\\nTo handle async errors, wrap your component in an error boundary."
+          "Suspense Exception: This is not a real error! It's an implementation detail of `useActionState` to interrupt the current render. You must either rethrow it immediately, or move the `useActionState` call outside of the `try/catch` block. Capturing without rethrowing will lead to unexpected behavior.\n\nTo handle async errors, wrap your component in an error boundary."
         ), noopSuspenseyCommitThenable = {
           then: function() {
             console.error(
@@ -19886,8 +19868,8 @@
               child = child._owner;
               returnFiber = returnFiber._debugOwner;
               var currentComponentErrorInfo = "";
-              returnFiber && "number" === typeof returnFiber.tag && (componentKey = getComponentNameFromFiber(returnFiber)) && (currentComponentErrorInfo = "\\n\\nCheck the render method of `" + componentKey + "`.");
-              currentComponentErrorInfo || componentName2 && (currentComponentErrorInfo = "\\n\\nCheck the top-level render call using <" + componentName2 + ">.");
+              returnFiber && "number" === typeof returnFiber.tag && (componentKey = getComponentNameFromFiber(returnFiber)) && (currentComponentErrorInfo = "\n\nCheck the render method of `" + componentKey + "`.");
+              currentComponentErrorInfo || componentName2 && (currentComponentErrorInfo = "\n\nCheck the top-level render call using <" + componentName2 + ">.");
               var childOwnerAppendix = "";
               null != child && returnFiber !== child && (componentName2 = null, "number" === typeof child.tag ? componentName2 = getComponentNameFromFiber(child) : "string" === typeof child.name && (componentName2 = child.name), componentName2 && (childOwnerAppendix = " It was passed a child from " + componentName2 + "."));
               runWithFiberInDEV(workInProgress2, function() {
@@ -21062,7 +21044,7 @@
           "beforetoggle cancel close invalid load scroll scrollend toggle".split(" ").concat(mediaEventTypes)
         ), listeningMarker = "_reactListening" + Math.random().toString(36).slice(2), didWarnControlledToUncontrolled = false, didWarnUncontrolledToControlled = false, didWarnFormActionType = false, didWarnFormActionName = false, didWarnFormActionTarget = false, didWarnFormActionMethod = false, didWarnPopoverTargetObject = false;
         var didWarnForNewBooleanPropsWithEmptyValue = {};
-        var NORMALIZE_NEWLINES_REGEX = /\r\\n?/g, NORMALIZE_NULL_AND_REPLACEMENT_REGEX = /\u0000|\uFFFD/g, xlinkNamespace = "http://www.w3.org/1999/xlink", xmlNamespace = "http://www.w3.org/XML/1998/namespace", EXPECTED_FORM_ACTION_URL = "javascript:throw new Error('React form unexpectedly submitted.')", SUPPRESS_HYDRATION_WARNING = "suppressHydrationWarning", ACTIVITY_START_DATA = "&", ACTIVITY_END_DATA = "/&", SUSPENSE_START_DATA = "$", SUSPENSE_END_DATA = "/$", SUSPENSE_PENDING_START_DATA = "$?", SUSPENSE_QUEUED_START_DATA = "$~", SUSPENSE_FALLBACK_START_DATA = "$!", PREAMBLE_CONTRIBUTION_HTML = "html", PREAMBLE_CONTRIBUTION_BODY = "body", PREAMBLE_CONTRIBUTION_HEAD = "head", FORM_STATE_IS_MATCHING = "F!", FORM_STATE_IS_NOT_MATCHING = "F", DOCUMENT_READY_STATE_LOADING = "loading", STYLE = "style", HostContextNamespaceNone = 0, HostContextNamespaceSvg = 1, HostContextNamespaceMath = 2, eventsEnabled = null, selectionInformation = null, warnedUnknownTags = { dialog: true, webview: true }, currentPopstateTransitionEvent = null, schedulerEvent = void 0, scheduleTimeout = "function" === typeof setTimeout ? setTimeout : void 0, cancelTimeout = "function" === typeof clearTimeout ? clearTimeout : void 0, noTimeout = -1, localPromise = "function" === typeof Promise ? Promise : void 0, scheduleMicrotask = "function" === typeof queueMicrotask ? queueMicrotask : "undefined" !== typeof localPromise ? function(callback) {
+        var NORMALIZE_NEWLINES_REGEX = /\r\n?/g, NORMALIZE_NULL_AND_REPLACEMENT_REGEX = /\u0000|\uFFFD/g, xlinkNamespace = "http://www.w3.org/1999/xlink", xmlNamespace = "http://www.w3.org/XML/1998/namespace", EXPECTED_FORM_ACTION_URL = "javascript:throw new Error('React form unexpectedly submitted.')", SUPPRESS_HYDRATION_WARNING = "suppressHydrationWarning", ACTIVITY_START_DATA = "&", ACTIVITY_END_DATA = "/&", SUSPENSE_START_DATA = "$", SUSPENSE_END_DATA = "/$", SUSPENSE_PENDING_START_DATA = "$?", SUSPENSE_QUEUED_START_DATA = "$~", SUSPENSE_FALLBACK_START_DATA = "$!", PREAMBLE_CONTRIBUTION_HTML = "html", PREAMBLE_CONTRIBUTION_BODY = "body", PREAMBLE_CONTRIBUTION_HEAD = "head", FORM_STATE_IS_MATCHING = "F!", FORM_STATE_IS_NOT_MATCHING = "F", DOCUMENT_READY_STATE_LOADING = "loading", STYLE = "style", HostContextNamespaceNone = 0, HostContextNamespaceSvg = 1, HostContextNamespaceMath = 2, eventsEnabled = null, selectionInformation = null, warnedUnknownTags = { dialog: true, webview: true }, currentPopstateTransitionEvent = null, schedulerEvent = void 0, scheduleTimeout = "function" === typeof setTimeout ? setTimeout : void 0, cancelTimeout = "function" === typeof clearTimeout ? clearTimeout : void 0, noTimeout = -1, localPromise = "function" === typeof Promise ? Promise : void 0, scheduleMicrotask = "function" === typeof queueMicrotask ? queueMicrotask : "undefined" !== typeof localPromise ? function(callback) {
           return localPromise.resolve(null).then(callback).catch(handleErrorInNextTick);
         } : scheduleTimeout, previousHydratableOnEnteringScopedSingleton = null, NotLoaded = 0, Loaded = 1, Errored = 2, Settled = 3, Inserted = 4, preloadPropsMap = /* @__PURE__ */ new Map(), preconnectsSet = /* @__PURE__ */ new Set(), previousDispatcher = ReactDOMSharedInternals.d;
         ReactDOMSharedInternals.d = {
@@ -21269,12 +21251,12 @@
           null !== oldPath && scheduleUpdateOnFiber(oldPath, fiber, 2);
         };
         scheduleUpdate = function(fiber) {
-          var root2 = enqueueConcurrentRenderForLane(fiber, 2);
-          null !== root2 && scheduleUpdateOnFiber(root2, fiber, 2);
+          var root3 = enqueueConcurrentRenderForLane(fiber, 2);
+          null !== root3 && scheduleUpdateOnFiber(root3, fiber, 2);
         };
         scheduleRetry = function(fiber) {
-          var lane = claimNextRetryLane(), root2 = enqueueConcurrentRenderForLane(fiber, lane);
-          null !== root2 && scheduleUpdateOnFiber(root2, fiber, lane);
+          var lane = claimNextRetryLane(), root3 = enqueueConcurrentRenderForLane(fiber, lane);
+          null !== root3 && scheduleUpdateOnFiber(root3, fiber, lane);
         };
         setErrorHandler = function(newShouldErrorImpl) {
           shouldErrorImpl = newShouldErrorImpl;
@@ -21286,8 +21268,8 @@
           " "
         ), lastScheduledReplayQueue = null;
         ReactDOMHydrationRoot.prototype.render = ReactDOMRoot.prototype.render = function(children) {
-          var root2 = this._internalRoot;
-          if (null === root2) throw Error("Cannot update an unmounted root.");
+          var root3 = this._internalRoot;
+          if (null === root3) throw Error("Cannot update an unmounted root.");
           var args = arguments;
           "function" === typeof args[1] ? console.error(
             "does not support the second callback argument. To execute a side effect after rendering, declare it in a component body with useEffect()."
@@ -21297,8 +21279,8 @@
             "You passed a second argument to root.render(...) but it only accepts one argument."
           );
           args = children;
-          var current2 = root2.current, lane = requestUpdateLane(current2);
-          updateContainerImpl(current2, lane, args, root2, null, null);
+          var current2 = root3.current, lane = requestUpdateLane(current2);
+          updateContainerImpl(current2, lane, args, root3, null, null);
         };
         ReactDOMHydrationRoot.prototype.unmount = ReactDOMRoot.prototype.unmount = function() {
           var args = arguments;
@@ -21327,10 +21309,10 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React2.version;
+          var isomorphicReactPackageVersion = React3.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
-              'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\\n  - react:      ' + (isomorphicReactPackageVersion + "\\n  - react-dom:  19.2.4\\nLearn more: https://react.dev/warnings/version-mismatch")
+              'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
             );
         })();
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
@@ -21377,7 +21359,7 @@
         })() && canUseDOM && window.top === window.self && (-1 < navigator.userAgent.indexOf("Chrome") && -1 === navigator.userAgent.indexOf("Edge") || -1 < navigator.userAgent.indexOf("Firefox"))) {
           var protocol = window.location.protocol;
           /^(https?|file):$/.test(protocol) && console.info(
-            "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools" + ("file:" === protocol ? "\\nYou might need to use a local HTTP server (instead of file://): https://react.dev/link/react-devtools-faq" : ""),
+            "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools" + ("file:" === protocol ? "\nYou might need to use a local HTTP server (instead of file://): https://react.dev/link/react-devtools-faq" : ""),
             "font-weight:bold"
           );
         }
@@ -21389,7 +21371,7 @@
           null !== options && void 0 !== options && (options.hydrate ? console.warn(
             "hydrate through createRoot is deprecated. Use ReactDOMClient.hydrateRoot(container, <App />) instead."
           ) : "object" === typeof options && null !== options && options.$$typeof === REACT_ELEMENT_TYPE && console.error(
-            "You passed a JSX element to createRoot. You probably meant to call root.render instead. Example usage:\\n\\n  let root = createRoot(domContainer);\\n  root.render(<App />);"
+            "You passed a JSX element to createRoot. You probably meant to call root.render instead. Example usage:\n\n  let root = createRoot(domContainer);\n  root.render(<App />);"
           ), true === options.unstable_strictMode && (isStrictMode = true), void 0 !== options.identifierPrefix && (identifierPrefix = options.identifierPrefix), void 0 !== options.onUncaughtError && (onUncaughtError = options.onUncaughtError), void 0 !== options.onCaughtError && (onCaughtError = options.onCaughtError), void 0 !== options.onRecoverableError && (onRecoverableError = options.onRecoverableError));
           options = createFiberRoot(
             container,
@@ -21454,9 +21436,9 @@
     }
   });
 
-  // acelabs/node_modules/react-dom/client.js
+  // ../acelabs/grade9-science-vite/node_modules/react-dom/client.js
   var require_client = __commonJS({
-    "acelabs/node_modules/react-dom/client.js"(exports, module) {
+    "../acelabs/grade9-science-vite/node_modules/react-dom/client.js"(exports, module) {
       "use strict";
       if (false) {
         checkDCE();
@@ -21467,6035 +21449,292 @@
     }
   });
 
-  // acelabs/remixed-1982a94c-entry.jsx
-  var import_react = __toESM(require_react());
+  // main-preap.tsx
+  var import_react2 = __toESM(require_react());
   var import_client = __toESM(require_client());
-  var IconBase = ({ children, className = "" }) => /* @__PURE__ */ import_react.default.createElement(
-    "svg",
-    {
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "currentColor",
-      strokeWidth: "2",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      className,
-      "aria-hidden": "true"
-    },
-    children
-  );
-  var BookOpen = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M2 3h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H2z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M22 3h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z" }));
-  var Search = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "11", cy: "11", r: "8" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "21", y1: "21", x2: "16.65", y2: "16.65" }));
-  var ArrowLeft = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("line", { x1: "19", y1: "12", x2: "5", y2: "12" }), /* @__PURE__ */ import_react.default.createElement("polyline", { points: "12 19 5 12 12 5" }));
-  var CheckCircle = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "10" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "m9 12 2 2 4-4" }));
-  var Circle = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "10" }));
-  var Leaf = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M11 20c4-2 7-6 7-10V4h-6C7 4 4 7 4 12c0 3 2 6 7 8z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 14c3-1 6-3 8-6" }));
-  var Beaker = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 2h12" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 2v5l-5 9a3 3 0 0 0 2.6 4.5h10.8A3 3 0 0 0 20 16l-5-9V2" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M7 14h10" }));
-  var Zap = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "13 2 3 14 11 14 9 22 21 10 13 10 13 2" }));
-  var Globe = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "10" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M2 12h20" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" }));
-  var ChevronRight = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("polyline", { points: "9 18 15 12 9 6" }));
-  var FileText = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M14 2v6h6" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "16", y1: "13", x2: "8", y2: "13" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "16", y1: "17", x2: "8", y2: "17" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "9", x2: "8", y2: "9" }));
-  var Lightbulb = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 18h6" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M10 22h4" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M12 2a7 7 0 0 0-4 12c.5.5 1 1.5 1 3h6c0-1.5.5-2.5 1-3a7 7 0 0 0-4-12z" }));
-  var Target = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "10" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "2" }));
-  var X = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }));
-  var ClipboardList = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("rect", { x: "8", y: "2", width: "8", height: "4", rx: "1" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 4H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "9", y1: "10", x2: "15", y2: "10" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "9", y1: "14", x2: "15", y2: "14" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "9", y1: "18", x2: "13", y2: "18" }));
-  var Trophy = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 4h8v3a4 4 0 0 1-8 0V4z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 4H4a2 2 0 0 0 2 2" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M18 4h2a2 2 0 0 1-2 2" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 20h8" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M10 20v-3h4v3" }));
-  var Star = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9" }));
-  var Flame = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M12 2c2 3 4 4 4 7a4 4 0 0 1-8 0c0-3 2-4 4-7z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 14a4 4 0 0 0 8 0" }));
-  var Brain = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 4a3 3 0 0 0-3 3v1a3 3 0 0 0 0 6v1a3 3 0 0 0 3 3" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M16 4a3 3 0 0 1 3 3v1a3 3 0 0 1 0 6v1a3 3 0 0 1-3 3" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 4h3a2 2 0 0 1 2 2v12" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M16 4h-3a2 2 0 0 0-2 2v12" }));
-  var Sparkles = (props) => /* @__PURE__ */ import_react.default.createElement(IconBase, __spreadValues({}, props), /* @__PURE__ */ import_react.default.createElement("path", { d: "M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M19 3l.7 2.1L22 6l-2.3.9L19 9l-.7-2.1L16 6l2.3-.9L19 3z" }));
-  var LewisDotDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Lewis Dot Diagram Examples"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-around items-center flex-wrap gap-8" }, [
-    { symbol: "H", dots: 1, name: "Hydrogen", group: 1 },
-    { symbol: "C", dots: 4, name: "Carbon", group: 14 },
-    { symbol: "N", dots: 5, name: "Nitrogen", group: 15 },
-    { symbol: "O", dots: 6, name: "Oxygen", group: 16 },
-    { symbol: "F", dots: 7, name: "Fluorine", group: 17 },
-    { symbol: "Ne", dots: 8, name: "Neon", group: 18 }
-  ].map((element) => /* @__PURE__ */ import_react.default.createElement("div", { key: element.symbol, className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "relative w-24 h-24 mx-auto mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-white border-4 border-blue-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl font-bold text-gray-800" }, element.symbol))), Array.from({ length: element.dots }).map((_, i) => {
-    const angle = i * 360 / 8 + 45;
-    const rad = angle * Math.PI / 180;
-    const x = 50 + 35 * Math.cos(rad);
-    const y = 50 + 35 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement(
-      "div",
-      {
-        key: i,
-        className: "absolute w-3 h-3 bg-red-500 rounded-full",
-        style: { left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }
-      }
-    );
-  })), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-medium text-gray-600" }, element.name), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-500" }, element.dots, " valence e\u207B"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-600 font-semibold" }, "Group ", element.group)))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-blue-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Key Point:"), " The number of dots = number of valence electrons = group number (for main groups)")));
-  var PhotosynthesisDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Photosynthesis Equation"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center gap-4 flex-wrap" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-blue-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold" }, "6CO\u2082"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Carbon Dioxide"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "From Air")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-gray-400" }, "+"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold" }, "6H\u2082O"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Water"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "From Soil")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-24 h-24 rounded-full bg-yellow-400 flex items-center justify-center shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white text-2xl" }, "\u2600\uFE0F")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-1" }, "Sunlight Energy")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-green-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-2xl font-bold" }, "C\u2086H\u2081\u2082O\u2086"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Glucose"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Sugar (Food)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-gray-400" }, "+"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold" }, "6O\u2082"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Oxygen"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Released to Air"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-green-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-green-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Key Point:"), " Plants use sunlight energy to convert CO\u2082 and water into glucose (their food) and oxygen (which we breathe)!")));
-  var CellRespirationDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Cellular Respiration Equation"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center gap-4 flex-wrap" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-2xl font-bold" }, "C\u2086H\u2081\u2082O\u2086"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Glucose"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Food")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-gray-400" }, "+"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold" }, "6O\u2082"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Oxygen"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "From Air")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-red-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-blue-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold" }, "6CO\u2082"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Carbon Dioxide"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Released to Air")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-gray-400" }, "+"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold" }, "6H\u2082O"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Water"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Released")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-gray-400" }, "+"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-yellow-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold" }, "ATP"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "Energy"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "For Life!"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-red-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-red-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Key Point:"), " Opposite of photosynthesis! Organisms break down glucose with oxygen to release energy (ATP) for living.")));
-  var FoodChainDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Terrestrial Food Chain Example"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center gap-3 mb-6 flex-wrap" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-green-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F33E}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-green-800" }, "Grass"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Producer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-600 font-bold mt-1" }, "10,000 kcal")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-3xl text-gray-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-yellow-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F997}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-yellow-800" }, "Grasshopper"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Primary Consumer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-yellow-600 font-bold mt-1" }, "1,000 kcal")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-3xl text-gray-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F42D}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-orange-800" }, "Mouse"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Secondary Consumer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-600 font-bold mt-1" }, "100 kcal")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-3xl text-gray-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-red-500 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F40D}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-red-800" }, "Snake"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Tertiary Consumer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-600 font-bold mt-1" }, "10 kcal"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-amber-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-amber-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Energy Flow:"), " Notice how only 10% of energy transfers to each level (10,000 \u2192 1,000 \u2192 100 \u2192 10)")));
-  var AquaticFoodChainDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Aquatic Food Chain Example"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center gap-3 mb-6 flex-wrap" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-green-400 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F9A0}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-green-800" }, "Phytoplankton"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Producer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-600 font-bold mt-1" }, "50,000 kcal")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-3xl text-blue-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-yellow-400 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F420}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-yellow-800" }, "Small Fish"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Primary Consumer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-yellow-600 font-bold mt-1" }, "5,000 kcal")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-3xl text-blue-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-orange-400 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F41F}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-orange-800" }, "Medium Fish"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Secondary Consumer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-600 font-bold mt-1" }, "500 kcal")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-3xl text-blue-600" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-32 h-32 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-6xl" }, "\u{1F988}")), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-blue-100" }, "Shark"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-200" }, "Tertiary Consumer"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-100 font-bold mt-1" }, "50 kcal"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Ocean Food Chain:"), " Starts with microscopic phytoplankton that use sunlight to make food through photosynthesis")));
-  var NitrogenCycleDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "The Nitrogen Cycle"), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-96" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 500 400", className: "w-full h-full" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "200", y: "10", width: "100", height: "60", rx: "10", fill: "#93C5FD", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "35", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#1E40AF" }, "Atmosphere"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "55", textAnchor: "middle", fontSize: "12", fill: "#1E40AF" }, "N\u2082 Gas (78%)"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "50", y: "150", width: "100", height: "60", rx: "10", fill: "#86EFAC", stroke: "#22C55E", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "175", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#15803D" }, "Plants"), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "195", textAnchor: "middle", fontSize: "11", fill: "#15803D" }, "Proteins"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "200", y: "200", width: "100", height: "60", rx: "10", fill: "#D97706", stroke: "#92400E", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "220", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#78350F" }, "Soil"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "235", textAnchor: "middle", fontSize: "11", fill: "#78350F" }, "NH\u2083, NO\u2083\u207B"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "250", textAnchor: "middle", fontSize: "10", fill: "#78350F" }, "(Bacteria)"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "350", y: "150", width: "100", height: "60", rx: "10", fill: "#FCD34D", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "400", y: "175", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#92400E" }, "Animals"), /* @__PURE__ */ import_react.default.createElement("text", { x: "400", y: "195", textAnchor: "middle", fontSize: "11", fill: "#92400E" }, "Proteins"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "200", y: "320", width: "100", height: "60", rx: "10", fill: "#A78BFA", stroke: "#7C3AED", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "345", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#5B21B6" }, "Decomposers"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "365", textAnchor: "middle", fontSize: "10", fill: "#5B21B6" }, "(Bacteria/Fungi)"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowhead1", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#22C55E" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowhead2", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#3B82F6" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowhead3", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#F59E0B" }))), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 230 70 L 230 200", stroke: "#22C55E", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowhead1)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "190", y: "130", fontSize: "11", fill: "#15803D", fontWeight: "bold" }, "Fixation"), /* @__PURE__ */ import_react.default.createElement("text", { x: "180", y: "145", fontSize: "9", fill: "#15803D" }, "(Lightning/"), /* @__PURE__ */ import_react.default.createElement("text", { x: "180", y: "157", fontSize: "9", fill: "#15803D" }, "Bacteria)"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 200 230 L 150 210", stroke: "#22C55E", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowhead1)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "225", fontSize: "10", fill: "#15803D", fontWeight: "bold" }, "Assimilation"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 150 180 L 350 180", stroke: "#F59E0B", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowhead3)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "230", y: "170", fontSize: "11", fill: "#92400E", fontWeight: "bold" }, "Eaten"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 400 210 L 300 320", stroke: "#7C3AED", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowhead1)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "340", y: "270", fontSize: "10", fill: "#5B21B6", fontWeight: "bold" }, "Death/Waste"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 100 210 L 200 320", stroke: "#7C3AED", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowhead1)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "140", y: "280", fontSize: "10", fill: "#5B21B6", fontWeight: "bold" }, "Death/Waste"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 250 320 L 250 260", stroke: "#D97706", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowhead1)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "260", y: "295", fontSize: "10", fill: "#92400E", fontWeight: "bold" }, "Ammonification"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 270 200 L 270 70", stroke: "#3B82F6", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowhead2)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "280", y: "130", fontSize: "10", fill: "#1E40AF", fontWeight: "bold" }, "Denitrification"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-4 grid grid-cols-2 gap-3 text-xs" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-green-100 rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-green-800" }, "Fixation:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-green-700" }, "N\u2082 \u2192 NH\u2083 (bacteria/lightning)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-orange-100 rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-orange-800" }, "Nitrification:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-orange-700" }, "NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (bacteria)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-100 rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-purple-800" }, "Ammonification:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-purple-700" }, "Dead matter \u2192 NH\u2084\u207A")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-100 rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-800" }, "Denitrification:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-blue-700" }, "NO\u2083\u207B \u2192 N\u2082 (back to air)"))));
-  var DensityComparisonDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Density Comparison - Floating vs Sinking"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-blue-800 mb-4" }, "Object Floats \u2B06\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-1/3 left-1/2 -translate-x-1/2 w-20 h-20 bg-yellow-400 rounded-lg border-2 border-yellow-600 flex items-center justify-center shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold" }, "Wood"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "0.6 g/cm\xB3"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-4 right-4 text-blue-800 font-bold text-sm" }, "Water: 1.0 g/cm\xB3")), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-3 bg-green-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-green-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "0.6 < 1.0"), /* @__PURE__ */ import_react.default.createElement("br", null), "Object density < Water density", /* @__PURE__ */ import_react.default.createElement("br", null), "= FLOATS! \u{1F388}"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-red-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-red-800 mb-4" }, "Object Sinks \u2B07\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-8 left-1/2 -translate-x-1/2 w-20 h-20 bg-gray-600 rounded-lg border-2 border-gray-800 flex items-center justify-center shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold" }, "Rock"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs" }, "2.5 g/cm\xB3"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-4 right-4 text-blue-800 font-bold text-sm" }, "Water: 1.0 g/cm\xB3")), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-3 bg-red-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-red-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "2.5 > 1.0"), /* @__PURE__ */ import_react.default.createElement("br", null), "Object density > Water density", /* @__PURE__ */ import_react.default.createElement("br", null), "= SINKS! \u2693")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-indigo-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-indigo-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Rule:"), " If object density is less than liquid density \u2192 floats. If greater \u2192 sinks!")));
-  var IonDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Ion Formation Examples"), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-8 bg-white rounded-xl p-6 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-lg font-bold text-gray-800 mb-4 text-center" }, "Cation (Positive Ion) - Sodium"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center gap-8 flex-wrap" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-semibold text-gray-600 mb-3" }, "Neutral Sodium (Na)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "11p\u207A"), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "12n\u2070"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "25", fill: "none", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "85", cy: "60", r: "3", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "35", cy: "60", r: "3", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "40", fill: "none", stroke: "#10B981", strokeWidth: "2" }), [0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 60 + 40 * Math.cos(rad);
-    const y = 60 + 40 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: x, cy: y, r: "3", fill: "#10B981" });
-  }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "55", fill: "none", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "115", cy: "60", r: "3", fill: "#F59E0B" })), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-2" }, "11 protons, 11 electrons"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Charge: 0 (neutral)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-red-500" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-600 font-bold mt-1" }, "Loses 1e\u207B")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-semibold text-gray-600 mb-3" }, "Sodium Ion (Na\u207A)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "11p\u207A"), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "12n\u2070"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "25", fill: "none", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "85", cy: "60", r: "3", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "35", cy: "60", r: "3", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "40", fill: "none", stroke: "#10B981", strokeWidth: "2" }), [0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 60 + 40 * Math.cos(rad);
-    const y = 60 + 40 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: x, cy: y, r: "3", fill: "#10B981" });
-  })), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-2" }, "11 protons, 10 electrons"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-red-600" }, "Charge: +1 (cation)"), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-2 inline-block bg-red-100 px-3 py-1 rounded-full" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-700 font-bold" }, "11p\u207A - 10e\u207B = +1"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-lg font-bold text-gray-800 mb-4 text-center" }, "Anion (Negative Ion) - Chlorine"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center gap-8 flex-wrap" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-semibold text-gray-600 mb-3" }, "Neutral Chlorine (Cl)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "17p\u207A"), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "18n\u2070"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "20", fill: "none", stroke: "#3B82F6", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "80", cy: "60", r: "2.5", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "60", r: "2.5", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "35", fill: "none", stroke: "#10B981", strokeWidth: "1.5" }), [0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 60 + 35 * Math.cos(rad);
-    const y = 60 + 35 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: x, cy: y, r: "2.5", fill: "#10B981" });
-  }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "50", fill: "none", stroke: "#F59E0B", strokeWidth: "1.5" }), [0, 51.4, 102.8, 154.3, 205.7, 257.1, 308.6].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 60 + 50 * Math.cos(rad);
-    const y = 60 + 50 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: x, cy: y, r: "2.5", fill: "#F59E0B" });
-  })), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-2" }, "17 protons, 17 electrons"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Charge: 0 (neutral)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-4xl text-green-500" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-600 font-bold mt-1" }, "Gains 1e\u207B")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-semibold text-gray-600 mb-3" }, "Chloride Ion (Cl\u207B)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "17p\u207A"), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold" }, "18n\u2070"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "20", fill: "none", stroke: "#3B82F6", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "80", cy: "60", r: "2.5", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "60", r: "2.5", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "35", fill: "none", stroke: "#10B981", strokeWidth: "1.5" }), [0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 60 + 35 * Math.cos(rad);
-    const y = 60 + 35 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: x, cy: y, r: "2.5", fill: "#10B981" });
-  }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "60", cy: "60", r: "50", fill: "none", stroke: "#F59E0B", strokeWidth: "1.5" }), [0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 60 + 50 * Math.cos(rad);
-    const y = 60 + 50 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: x, cy: y, r: "2.5", fill: "#F59E0B" });
-  })), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-2" }, "17 protons, 18 electrons"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-green-600" }, "Charge: -1 (anion)"), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-2 inline-block bg-green-100 px-3 py-1 rounded-full" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-700 font-bold" }, "17p\u207A - 18e\u207B = -1"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-purple-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2 text-sm text-purple-800" }, /* @__PURE__ */ import_react.default.createElement("p", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Cations (+):"), " Form when atoms LOSE electrons. More protons than electrons. Metals form cations."), /* @__PURE__ */ import_react.default.createElement("p", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Anions (-):"), " Form when atoms GAIN electrons. More electrons than protons. Non-metals form anions."), /* @__PURE__ */ import_react.default.createElement("p", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Why?"), " Atoms want a full outer shell (8 electrons = stable). Easier to lose 1-2 electrons or gain 1-2 electrons than move 5-6!"))));
-  var BohrDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Bohr Diagram - Oxygen (8 protons, 8 neutrons, 8 electrons)"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "relative w-80 h-80" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gradient-to-br from-red-400 to-orange-400 flex items-center justify-center shadow-lg z-10" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center text-white" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs font-bold" }, "8p\u207A"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs font-bold" }, "8n\u2070"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-3 border-blue-300" }), [0, 180].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 50 + 20 * Math.cos(rad);
-    const y = 50 + 20 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement(
-      "div",
-      {
-        key: `shell1-${i}`,
-        className: "absolute w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-md",
-        style: { left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }
-      }
-    );
-  }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full border-3 border-green-300" }), [0, 60, 120, 180, 240, 300].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x = 50 + 35 * Math.cos(rad);
-    const y = 50 + 35 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement(
-      "div",
-      {
-        key: `shell2-${i}`,
-        className: "absolute w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-md",
-        style: { left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }
-      }
-    );
-  }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -right-12 top-1/3 text-xs font-semibold text-blue-600" }, "Shell 1: 2e\u207B"), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -right-12 bottom-1/4 text-xs font-semibold text-green-600" }, "Shell 2: 6e\u207B"))));
-  var EnergyPyramid = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Energy Pyramid (10% Energy Transfer)"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex flex-col items-center gap-3" }, [
-    { level: "Tertiary Consumers", energy: "54.7 kcal", width: "w-32", color: "from-red-400 to-red-500" },
-    { level: "Secondary Consumers", energy: "547 kcal", width: "w-48", color: "from-orange-400 to-orange-500" },
-    { level: "Primary Consumers", energy: "5,467 kcal", width: "w-64", color: "from-yellow-400 to-yellow-500" },
-    { level: "Producers", energy: "54,670 kcal", width: "w-80", color: "from-green-400 to-green-500" }
-  ].map((tier, i) => /* @__PURE__ */ import_react.default.createElement("div", { key: i, className: `${tier.width} h-16 bg-gradient-to-r ${tier.color} rounded-lg shadow-lg flex items-center justify-center text-white flex-col` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "font-bold text-sm" }, tier.level), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs" }, tier.energy)))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "inline-block bg-blue-100 rounded-lg px-4 py-2" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-semibold text-blue-800" }, "\u26A1 Only 10% of energy passes to the next level"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-600 mt-1" }, "90% lost as heat, movement, and waste"))));
-  var CarbonCycle = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "The Carbon Cycle"), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-80" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 400 300", className: "w-full h-full" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "200", cy: "60", r: "40", fill: "#93C5FD", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "60", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#1E40AF" }, "Atmosphere"), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "75", textAnchor: "middle", fontSize: "10", fill: "#1E40AF" }, "CO\u2082"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "80", cy: "150", r: "40", fill: "#86EFAC", stroke: "#22C55E", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "80", y: "150", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#15803D" }, "Plants"), /* @__PURE__ */ import_react.default.createElement("text", { x: "80", y: "165", textAnchor: "middle", fontSize: "10", fill: "#15803D" }, "(Producers)"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "320", cy: "150", r: "40", fill: "#FCD34D", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "320", y: "150", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#92400E" }, "Animals"), /* @__PURE__ */ import_react.default.createElement("text", { x: "320", y: "165", textAnchor: "middle", fontSize: "10", fill: "#92400E" }, "(Consumers)"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "200", cy: "240", r: "40", fill: "#A78BFA", stroke: "#7C3AED", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "240", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#5B21B6" }, "Soil"), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "255", textAnchor: "middle", fontSize: "10", fill: "#5B21B6" }, "Decomposers"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 180 90 L 100 130", stroke: "#22C55E", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowgreen)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "130", y: "105", fontSize: "9", fill: "#15803D", fontWeight: "bold" }, "Photosynthesis"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 100 110 L 180 70", stroke: "#3B82F6", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowblue)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "120", y: "85", fontSize: "9", fill: "#1E40AF", fontWeight: "bold" }, "Respiration"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 120 150 L 280 150", stroke: "#F59E0B", strokeWidth: "2", fill: "none", markerEnd: "url(#arroworange)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "190", y: "145", fontSize: "9", fill: "#92400E", fontWeight: "bold" }, "Eaten"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 300 110 L 220 70", stroke: "#3B82F6", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowblue)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "85", fontSize: "9", fill: "#1E40AF", fontWeight: "bold" }, "Respiration"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 310 190 L 220 220", stroke: "#7C3AED", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowpurple)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "270", y: "210", fontSize: "9", fill: "#5B21B6", fontWeight: "bold" }, "Death/Waste"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 180 220 L 180 100", stroke: "#3B82F6", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowblue)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "160", fontSize: "9", fill: "#1E40AF", fontWeight: "bold" }, "Decomposition"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowgreen", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto", markerUnits: "strokeWidth" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#22C55E" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowblue", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto", markerUnits: "strokeWidth" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#3B82F6" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arroworange", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto", markerUnits: "strokeWidth" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#F59E0B" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowpurple", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto", markerUnits: "strokeWidth" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#7C3AED" }))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-4 grid grid-cols-2 gap-3 text-xs" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-green-100 rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-green-800" }, "Photosynthesis:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-green-700" }, "CO\u2082 + H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + O\u2082")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-100 rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-800" }, "Respiration:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-blue-700" }, "C\u2086H\u2081\u2082O\u2086 + O\u2082 \u2192 CO\u2082 + H\u2082O"))));
-  var CircuitSymbolsDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Circuit Symbols Reference"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 md:grid-cols-3 gap-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "25", y2: "20", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "25", y1: "10", x2: "25", y2: "30", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "35", y1: "15", x2: "35", y2: "25", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "45", y1: "10", x2: "45", y2: "30", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "55", y1: "15", x2: "55", y2: "25", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "55", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "20", y: "8", fontSize: "10", fill: "#DC2626", fontWeight: "bold" }, "+"), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "8", fontSize: "10", fill: "#1F2937", fontWeight: "bold" }, "\u2212"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Battery"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Power source")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Wire"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Conductor")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "30", y2: "20", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "30", cy: "20", r: "2", fill: "#1F2937" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "30", y1: "20", x2: "50", y2: "10", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "20", r: "2", fill: "#1F2937" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Switch (Open)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Breaks circuit")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "25", y2: "20", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "20", r: "12", fill: "none", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "35", y1: "15", x2: "45", y2: "25", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "35", y1: "25", x2: "45", y2: "15", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "55", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Light Bulb"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Load/Output")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "20", y2: "20", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 20 20 L 25 15 L 30 25 L 35 15 L 40 25 L 45 15 L 50 25 L 55 15 L 60 20", fill: "none", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "60", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Resistor"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Opposes current")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "25", y2: "20", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "20", r: "12", fill: "none", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "25", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#DC2626" }, "A"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "55", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Ammeter"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Measures current")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "20", r: "12", fill: "none", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "25", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#2563EB" }, "V"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "40", y1: "8", x2: "40", y2: "3", stroke: "#1F2937", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "40", y1: "32", x2: "40", y2: "37", stroke: "#1F2937", strokeWidth: "1.5" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Voltmeter"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Measures voltage")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 mb-2 border-2 border-amber-200 h-24 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 80 40", className: "w-full h-16" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "25", y2: "20", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "20", r: "12", fill: "none", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "25", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#7C3AED" }, "M"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "55", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-gray-800" }, "Motor"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Electrical \u2192 Motion"))));
-  var SeriesCircuitDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Series Circuit"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-4" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 400 250", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "50", y: "50", width: "300", height: "150", fill: "none", stroke: "#3B82F6", strokeWidth: "3", rx: "10" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "125", x2: "70", y2: "125", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "70", y1: "110", x2: "70", y2: "140", stroke: "#1F2937", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "80", y1: "115", x2: "80", y2: "135", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "105", fontSize: "12", fill: "#DC2626", fontWeight: "bold" }, "+"), /* @__PURE__ */ import_react.default.createElement("text", { x: "75", y: "165", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "6V"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "170", cy: "60", r: "15", fill: "none", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "165", y1: "55", x2: "175", y2: "65", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "165", y1: "65", x2: "175", y2: "55", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "155", y: "95", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Bulb 1"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "270", cy: "125", r: "15", fill: "none", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "265", y1: "120", x2: "275", y2: "130", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "265", y1: "130", x2: "275", y2: "120", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "255", y: "160", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Bulb 2"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "170", cy: "190", r: "15", fill: "none", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "165", y1: "185", x2: "175", y2: "195", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "165", y1: "195", x2: "175", y2: "185", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "155", y: "220", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Bulb 3"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowcurrent", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#DC2626" }))), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 120 50 L 135 50", stroke: "#DC2626", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowcurrent)" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 320 90 L 320 105", stroke: "#DC2626", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowcurrent)" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 220 200 L 205 200", stroke: "#DC2626", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowcurrent)" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 80 165 L 80 180", stroke: "#DC2626", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowcurrent)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "110", y: "40", fontSize: "10", fill: "#DC2626", fontWeight: "bold" }, "I = 0.5A"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-blue-800 mb-1" }, "\u2713 Current"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-700" }, "Same everywhere (0.5A)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-purple-800 mb-1" }, "\u2713 Voltage"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700" }, "Divides: 6V = 2V + 2V + 2V")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-orange-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-orange-800 mb-1" }, "\u2713 Path"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700" }, "One route only")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-red-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-red-800 mb-1" }, "\u2717 One Fails"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-700" }, "All stop working"))));
-  var ParallelCircuitDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Parallel Circuit"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-4" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 400 280", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "140", x2: "70", y2: "140", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "70", y1: "125", x2: "70", y2: "155", stroke: "#1F2937", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "80", y1: "130", x2: "80", y2: "150", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "120", fontSize: "12", fill: "#DC2626", fontWeight: "bold" }, "+"), /* @__PURE__ */ import_react.default.createElement("text", { x: "55", y: "180", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "12V"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "80", y1: "140", x2: "120", y2: "140", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "120", y1: "60", x2: "120", y2: "220", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "280", y1: "60", x2: "280", y2: "220", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "280", y1: "140", x2: "320", y2: "140", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "320", y1: "140", x2: "350", y2: "140", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "350", y1: "140", x2: "350", y2: "220", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "220", x2: "350", y2: "220", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "140", x2: "50", y2: "220", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "120", y1: "70", x2: "160", y2: "70", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "200", cy: "70", r: "15", fill: "none", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "195", y1: "65", x2: "205", y2: "75", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "195", y1: "75", x2: "205", y2: "65", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "240", y1: "70", x2: "280", y2: "70", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "210", y: "65", fontSize: "10", fill: "#1F2937", fontWeight: "bold" }, "B1"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "120", y1: "140", x2: "160", y2: "140", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "200", cy: "140", r: "15", fill: "none", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "195", y1: "135", x2: "205", y2: "145", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "195", y1: "145", x2: "205", y2: "135", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "240", y1: "140", x2: "280", y2: "140", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "210", y: "135", fontSize: "10", fill: "#1F2937", fontWeight: "bold" }, "B2"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "120", y1: "210", x2: "160", y2: "210", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "200", cy: "210", r: "15", fill: "none", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "195", y1: "205", x2: "205", y2: "215", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "195", y1: "215", x2: "205", y2: "205", stroke: "#F59E0B", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "240", y1: "210", x2: "280", y2: "210", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "210", y: "205", fontSize: "10", fill: "#1F2937", fontWeight: "bold" }, "B3"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowcurrent2", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#DC2626" }))), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 100 140 L 115 140", stroke: "#DC2626", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowcurrent2)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "95", y: "130", fontSize: "10", fill: "#DC2626", fontWeight: "bold" }, "I=3A"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 130 70 L 145 70", stroke: "#DC2626", strokeWidth: "1.5", fill: "none", markerEnd: "url(#arrowcurrent2)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "130", y: "60", fontSize: "9", fill: "#DC2626" }, "1A"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 130 140 L 145 140", stroke: "#DC2626", strokeWidth: "1.5", fill: "none", markerEnd: "url(#arrowcurrent2)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "130", y: "130", fontSize: "9", fill: "#DC2626" }, "1A"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 130 210 L 145 210", stroke: "#DC2626", strokeWidth: "1.5", fill: "none", markerEnd: "url(#arrowcurrent2)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "130", y: "200", fontSize: "9", fill: "#DC2626" }, "1A"), /* @__PURE__ */ import_react.default.createElement("text", { x: "165", y: "250", fontSize: "10", fill: "#2563EB", fontWeight: "bold" }, "V = 12V on each branch"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-green-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-green-800 mb-1" }, "\u2713 Voltage"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-700" }, "Same across all (12V)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-purple-800 mb-1" }, "\u2713 Current"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700" }, "Divides: 3A = 1A + 1A + 1A")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-orange-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-orange-800 mb-1" }, "\u2713 Paths"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700" }, "Multiple routes")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-green-100 rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-green-800 mb-1" }, "\u2713 One Fails"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-700" }, "Others keep working!"))));
-  var OhmsLawTriangle = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Ohm's Law Triangle"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-center mb-6" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 200", className: "w-64 h-64" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 100 20 L 180 180 L 20 180 Z", fill: "#8B5CF6", stroke: "#6D28D9", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "20", y1: "100", x2: "180", y2: "100", stroke: "#6D28D9", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "70", textAnchor: "middle", fontSize: "36", fontWeight: "bold", fill: "white" }, "V"), /* @__PURE__ */ import_react.default.createElement("text", { x: "65", y: "150", textAnchor: "middle", fontSize: "36", fontWeight: "bold", fill: "white" }, "I"), /* @__PURE__ */ import_react.default.createElement("text", { x: "135", y: "150", textAnchor: "middle", fontSize: "36", fontWeight: "bold", fill: "white" }, "R"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-3 gap-4 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-100 rounded-xl p-4 text-center border-2 border-purple-300" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-purple-800 mb-2" }, "Find Voltage"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-2xl font-bold text-purple-900 mb-1" }, "V = I \xD7 R"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700" }, "Cover V")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-pink-100 rounded-xl p-4 text-center border-2 border-pink-300" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-pink-800 mb-2" }, "Find Current"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-2xl font-bold text-pink-900 mb-1" }, "I = V \xF7 R"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-pink-700" }, "Cover I")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-indigo-100 rounded-xl p-4 text-center border-2 border-indigo-300" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-indigo-800 mb-2" }, "Find Resistance"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-2xl font-bold text-indigo-900 mb-1" }, "R = V \xF7 I"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-indigo-700" }, "Cover R"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-4 text-white" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold mb-2" }, "Example Problem:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm mb-2" }, "A circuit has 12V battery and 4\u03A9 resistor. Find current."), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-mono bg-white/20 rounded p-2" }, "I = V \xF7 R = 12V \xF7 4\u03A9 = 3A")));
-  var CircuitDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Complete Circuit Components"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-4" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 500 300", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "50", y: "50", width: "400", height: "200", fill: "none", stroke: "#3B82F6", strokeWidth: "4", rx: "20" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "150", x2: "80", y2: "150", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "80", y1: "130", x2: "80", y2: "170", stroke: "#1F2937", strokeWidth: "5" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "95", y1: "135", x2: "95", y2: "165", stroke: "#1F2937", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "60", y: "120", fontSize: "12", fill: "#DC2626", fontWeight: "bold" }, "+"), /* @__PURE__ */ import_react.default.createElement("text", { x: "90", y: "120", fontSize: "12", fill: "#1F2937", fontWeight: "bold" }, "\u2212"), /* @__PURE__ */ import_react.default.createElement("text", { x: "55", y: "200", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Battery"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "200", y1: "50", x2: "220", y2: "50", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "220", cy: "50", r: "3", fill: "#1F2937" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "220", y1: "50", x2: "240", y2: "50", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "240", cy: "50", r: "3", fill: "#1F2937" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "240", y1: "50", x2: "260", y2: "50", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "210", y: "35", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Switch"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "350", cy: "100", r: "20", fill: "none", stroke: "#1F2937", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "340", y1: "90", x2: "360", y2: "110", stroke: "#F59E0B", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "340", y1: "110", x2: "360", y2: "90", stroke: "#F59E0B", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "330", y: "140", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Bulb"), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 350 200 L 355 195 L 360 205 L 365 195 L 370 205 L 375 195 L 380 205 L 385 195 L 390 200",
-      fill: "none",
-      stroke: "#1F2937",
-      strokeWidth: "3"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "345", y: "225", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Resistor"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "150", cy: "150", r: "15", fill: "none", stroke: "#DC2626", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "155", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#DC2626" }, "A"), /* @__PURE__ */ import_react.default.createElement("text", { x: "140", y: "185", fontSize: "11", fill: "#1F2937", fontWeight: "bold" }, "Ammeter"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowred", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#DC2626" }))), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 100 50 L 120 50", stroke: "#DC2626", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowred)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "105", y: "40", fontSize: "10", fill: "#DC2626", fontWeight: "bold" }, "Current flow"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Complete Circuit:"), " All components connected in a closed loop allowing current to flow")));
-  var StaticElectricityDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Static Electricity - Charge Interactions"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-6 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-red-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-red-800 mb-4" }, "Like Charges REPEL"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-center items-center gap-8 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-red-400 border-4 border-red-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-3xl font-bold text-white" }, "+")), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -right-3 top-1/2 -translate-y-1/2" }, /* @__PURE__ */ import_react.default.createElement("svg", { width: "30", height: "30" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 5 15 L 20 15", stroke: "#DC2626", strokeWidth: "3", markerEnd: "url(#arrowrepel1)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowrepel1", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#DC2626" })))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-red-400 border-4 border-red-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-3xl font-bold text-white" }, "+")), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -left-3 top-1/2 -translate-y-1/2" }, /* @__PURE__ */ import_react.default.createElement("svg", { width: "30", height: "30" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 25 15 L 10 15", stroke: "#DC2626", strokeWidth: "3", markerEnd: "url(#arrowrepel2)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowrepel2", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#DC2626" }))))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-center items-center gap-8 mt-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-3xl font-bold text-white" }, "\u2212")), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -right-3 top-1/2 -translate-y-1/2" }, /* @__PURE__ */ import_react.default.createElement("svg", { width: "30", height: "30" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 5 15 L 20 15", stroke: "#2563EB", strokeWidth: "3", markerEnd: "url(#arrowrepel3)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowrepel3", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#2563EB" })))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-3xl font-bold text-white" }, "\u2212")), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -left-3 top-1/2 -translate-y-1/2" }, /* @__PURE__ */ import_react.default.createElement("svg", { width: "30", height: "30" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 25 15 L 10 15", stroke: "#2563EB", strokeWidth: "3", markerEnd: "url(#arrowrepel4)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowrepel4", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#2563EB" }))))))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-center text-sm text-red-700 font-semibold mt-4" }, "+ repels + | \u2212 repels \u2212")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-green-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-green-800 mb-4" }, "Opposite Charges ATTRACT"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-center items-center gap-8 mb-8 mt-12" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-red-400 border-4 border-red-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-3xl font-bold text-white" }, "+")), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -right-3 top-1/2 -translate-y-1/2" }, /* @__PURE__ */ import_react.default.createElement("svg", { width: "30", height: "30" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 5 15 L 20 15", stroke: "#22C55E", strokeWidth: "3", markerStart: "url(#arrowattract1)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowattract1", markerWidth: "10", markerHeight: "10", refX: "1", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9,0 L9,6 L0,3 z", fill: "#22C55E" })))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-3xl font-bold text-white" }, "\u2212")), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -left-3 top-1/2 -translate-y-1/2" }, /* @__PURE__ */ import_react.default.createElement("svg", { width: "30", height: "30" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 25 15 L 10 15", stroke: "#22C55E", strokeWidth: "3", markerStart: "url(#arrowattract2)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowattract2", markerWidth: "10", markerHeight: "10", refX: "1", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9,0 L9,6 L0,3 z", fill: "#22C55E" }))))))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-center text-sm text-green-700 font-semibold mt-12" }, "+ attracts \u2212 | \u2212 attracts +"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-amber-100 rounded-xl p-4 border-2 border-amber-300" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: "w-6 h-6 text-amber-600 flex-shrink-0 mt-1" }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-amber-800 mb-1" }, "Remember:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-amber-700" }, "Only ELECTRONS move in static electricity! Protons stay in the nucleus. When you rub a balloon on your hair, electrons transfer from your hair to the balloon.")))));
-  var ContinentalDriftDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Continental Drift Theory - Evidence & Timeline"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-indigo-800 mb-4" }, "Theory Development Timeline"), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute left-1/2 top-0 bottom-0 w-1 bg-indigo-300 -translate-x-1/2" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative mb-8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-500 text-white px-4 py-2 rounded-full font-bold shadow-lg z-10" }, "1915")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-50 border-2 border-blue-300 rounded-xl p-4 max-w-md mx-auto" }, /* @__PURE__ */ import_react.default.createElement("h6", { className: "font-bold text-blue-800 mb-1" }, "Alfred Wegener"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-700" }, "Proposed Continental Drift Theory - continents were once joined and have moved apart"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-500 text-white px-4 py-2 rounded-full font-bold shadow-lg z-10" }, "1960s")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-50 border-2 border-purple-300 rounded-xl p-4 max-w-md mx-auto" }, /* @__PURE__ */ import_react.default.createElement("h6", { className: "font-bold text-purple-800 mb-1" }, "J. Tuzo Wilson (Canadian!)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-purple-700" }, "Developed Plate Tectonics - Earth's crust is broken into plates that move on molten rock"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-indigo-800 mb-6" }, "Wegener's Four Proofs"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-5" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-2xl" }, "\u{1F9E9}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h6", { className: "font-bold text-green-900" }, "1. Jigsaw Fit"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-700" }, "Continental shapes"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-32 bg-white rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 120", className: "w-full h-full" }, /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 60,30 L 70,25 L 75,35 L 78,50 L 75,70 L 70,85 L 60,90 L 55,80 L 52,60 L 55,40 Z",
-      fill: "#22C55E",
-      stroke: "#15803D",
-      strokeWidth: "2"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "65", y: "60", fontSize: "10", fontWeight: "bold", fill: "white" }, "S. America"), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 125,35 L 135,30 L 145,35 L 148,50 L 145,70 L 140,85 L 130,88 L 122,75 L 120,55 L 122,40 Z",
-      fill: "#F59E0B",
-      stroke: "#D97706",
-      strokeWidth: "2"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "132", y: "60", fontSize: "10", fontWeight: "bold", fill: "white" }, "Africa"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 85,60 L 115,60", stroke: "#DC2626", strokeWidth: "3", markerEnd: "url(#arrow-fit)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrow-fit", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#DC2626" }))))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-800 mt-2 font-semibold" }, "Continents fit together like puzzle pieces!")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300 rounded-xl p-5" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-2xl" }, "\u{1F9B4}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h6", { className: "font-bold text-amber-900" }, "2. Identical Fossils"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-amber-700" }, "Same species, different continents"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 bg-white rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-lg" }, "\u{1F98E}"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-gray-800" }, "Mesosaurus"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Found in South America & Africa"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 bg-white rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-lg" }, "\u{1F33F}"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-gray-800" }, "Glossopteris"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Plant found on multiple continents")))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-amber-800 mt-2 font-semibold" }, "How did they cross the ocean?")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-300 rounded-xl p-5" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-2xl" }, "\u26F0\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h6", { className: "font-bold text-blue-900" }, "3. Similar Mountains"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-700" }, "Same age & rock types"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-24 bg-white rounded-lg p-2" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 80", className: "w-full h-full" }, /* @__PURE__ */ import_react.default.createElement("polygon", { points: "40,60 50,30 60,60", fill: "#8B7355", stroke: "#654321", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "55,60 65,35 75,60", fill: "#8B7355", stroke: "#654321", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "57", y: "75", fontSize: "8", textAnchor: "middle", fill: "#654321", fontWeight: "bold" }, "Appalachians"), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "125,60 135,30 145,60", fill: "#8B7355", stroke: "#654321", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "140,60 150,35 160,60", fill: "#8B7355", stroke: "#654321", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "142", y: "75", fontSize: "8", textAnchor: "middle", fill: "#654321", fontWeight: "bold" }, "Scottish Highlands"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "80", y1: "40", x2: "120", y2: "40", stroke: "#22C55E", strokeWidth: "2", strokeDasharray: "4,2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "35", fontSize: "9", textAnchor: "middle", fill: "#22C55E", fontWeight: "bold" }, "Same!"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-800 mt-2 font-semibold" }, "Once part of the same mountain chain!")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-300 rounded-xl p-5" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-2xl" }, "\u2744\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h6", { className: "font-bold text-purple-900" }, "4. Glacial Evidence"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700" }, "Ice sheet patterns"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-800 mb-2" }, "Scratches in rocks show ice flow direction"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-12 bg-gradient-to-r from-blue-200 to-blue-400 rounded flex items-center justify-center transform -rotate-12" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs text-blue-800 font-bold" }, "\u2192\u2192\u2192")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-12 bg-gradient-to-r from-blue-200 to-blue-400 rounded flex items-center justify-center transform rotate-12" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs text-blue-800 font-bold" }, "\u2192\u2192\u2192"))))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-800 mt-2 font-semibold" }, "Patterns match when continents joined!")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-6 text-white" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-2xl mb-4" }, "Pangaea - The Supercontinent"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/10 backdrop-blur rounded-xl p-4 mb-4" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 400 200", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "200", cy: "100", rx: "140", ry: "80", fill: "#4ADE80", stroke: "#22C55E", strokeWidth: "3", opacity: "0.9" }), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 120,80 Q 150,60 180,80 Q 200,90 220,85 Q 250,80 280,95 Q 270,120 250,130 Q 220,140 190,135 Q 160,130 140,120 Q 110,105 120,80",
-      fill: "none",
-      stroke: "white",
-      strokeWidth: "2",
-      strokeDasharray: "5,3"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "105", textAnchor: "middle", fontSize: "24", fontWeight: "bold", fill: "white" }, "PANGAEA"), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "125", textAnchor: "middle", fontSize: "12", fill: "white/90" }, "~300 million years ago"))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-center text-white/90 text-sm" }, "All continents were once joined together in one massive landmass called Pangaea. Over millions of years, they drifted apart to their current positions.")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-400 rounded-xl p-5" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, "\u{1F4A1}")), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h6", { className: "font-bold text-green-900 text-lg mb-2" }, "Why This Matters"), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-green-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-green-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Canada's mountains"), " formed from plate collisions millions of years ago")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-green-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Oil and gas"), " deposits formed when Canadian plates were in tropical climates")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-green-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Earthquakes and volcanoes"), " occur where plates meet today"))))))));
-  var PlateTectonicsDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Plate Tectonics - Types of Plate Boundaries"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-blue-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-blue-800 mb-4" }, "Divergent Boundary (Plates Moving Apart)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 500 180", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "20", y: "80", width: "200", height: "70", fill: "#6B7280", stroke: "#374151", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "120", y: "120", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "white" }, "Oceanic Plate"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "280", y: "80", width: "200", height: "70", fill: "#6B7280", stroke: "#374151", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "380", y: "120", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "white" }, "Oceanic Plate"), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "230,150 250,90 270,150", fill: "#EF4444", opacity: "0.9" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "125", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#1F2937", stroke: "#FFF", strokeWidth: "3", paintOrder: "stroke" }, "Magma"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "140", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#1F2937", stroke: "#FFF", strokeWidth: "3", paintOrder: "stroke" }, "Rising"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowdiv", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#DC2626" }))), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 200 60 L 140 60", stroke: "#DC2626", strokeWidth: "4", markerEnd: "url(#arrowdiv)" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 300 60 L 360 60", stroke: "#DC2626", strokeWidth: "4", markerEnd: "url(#arrowdiv)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "120", y: "50", fontSize: "16", fontWeight: "bold", fill: "#DC2626" }, "\u2190"), /* @__PURE__ */ import_react.default.createElement("text", { x: "380", y: "50", fontSize: "16", fontWeight: "bold", fill: "#DC2626" }, "\u2192"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "30", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#1F2937" }, "New Crust Forms Here")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center mt-4" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Example:"), " Mid-Atlantic Ridge \u2022 Creates new crust \u2022 Forms underwater mountains")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-red-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-red-800 mb-4" }, "Convergent Boundary (Subduction Zone)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 500 200", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 20,100 L 180,100 L 220,140 L 240,160 L 250,175",
-      fill: "#3B82F6",
-      stroke: "#1E40AF",
-      strokeWidth: "3"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "90", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#1E40AF" }, "Oceanic Plate"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 250,175 L 260,185", stroke: "#1E40AF", strokeWidth: "3", strokeDasharray: "5,5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "270", y: "195", fontSize: "14", fontWeight: "bold", fill: "#1E40AF" }, "Continues"), /* @__PURE__ */ import_react.default.createElement("text", { x: "270", y: "210", fontSize: "14", fontWeight: "bold", fill: "#1E40AF" }, "sinking \u2193"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "220", y: "70", width: "260", height: "60", fill: "#92400E", stroke: "#78350F", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "350", y: "105", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "white" }, "Continental Plate"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 80 80 L 140 80", stroke: "#DC2626", strokeWidth: "4", markerEnd: "url(#arrowdiv)" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 190 110 L 215 135", stroke: "#DC2626", strokeWidth: "4", markerEnd: "url(#arrowdiv)" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "65", fontSize: "14", fontWeight: "bold", fill: "#DC2626" }, "Plate moves \u2192"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "125", fontSize: "13", fontWeight: "bold", fill: "#DC2626" }, "\u2193 Sinks"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "165", y: "150", width: "140", height: "25", fill: "white", opacity: "0.9", rx: "5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "235", y: "167", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#1F2937" }, "Subduction Zone"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "30", textAnchor: "middle", fontSize: "13", fill: "#1F2937" }, "Denser oceanic plate dives beneath lighter continental plate"), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "48", textAnchor: "middle", fontSize: "13", fill: "#DC2626", fontWeight: "bold" }, "Causes: Earthquakes, Volcanoes, Tsunamis")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center mt-4" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Example:"), " Pacific Ring of Fire \u2022 Where oceanic plates subduct beneath continental plates")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-yellow-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-yellow-800 mb-4" }, "Transform Boundary (Plates Sliding Past Each Other)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 500 200", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "30", textAnchor: "middle", fontSize: "13", fill: "#1F2937" }, "View from above - Plates sliding horizontally"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "20", y: "60", width: "460", height: "50", fill: "#D97706", stroke: "#92400E", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "90", textAnchor: "middle", fontSize: "20", fontWeight: "bold", fill: "white" }, "Plate A"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "20", y: "120", width: "460", height: "50", fill: "#92400E", stroke: "#78350F", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "150", textAnchor: "middle", fontSize: "20", fontWeight: "bold", fill: "white" }, "Plate B"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "20", y1: "110", x2: "480", y2: "110", stroke: "#DC2626", strokeWidth: "5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "107", textAnchor: "middle", fontSize: "15", fontWeight: "bold", fill: "#DC2626", stroke: "white", strokeWidth: "4", paintOrder: "stroke" }, "\u2190 FAULT LINE \u2192"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 350 75 L 420 75", stroke: "#DC2626", strokeWidth: "5", markerEnd: "url(#arrowdiv)" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "320", y: "52", width: "140", height: "22", fill: "white", opacity: "0.95", rx: "5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "390", y: "67", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#DC2626" }, "Moving RIGHT \u2192"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 150 135 L 80 135", stroke: "#DC2626", strokeWidth: "5", markerEnd: "url(#arrowdiv)" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "40", y: "145", width: "140", height: "22", fill: "white", opacity: "0.95", rx: "5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "110", y: "160", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#DC2626" }, "\u2190 Moving LEFT"), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(100, 110)" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M -8,-8 L -3,0 L -8,8 M 0,-8 L 0,8 M 8,-8 L 3,0 L 8,8", stroke: "#DC2626", strokeWidth: "3" })), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(250, 110)" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M -8,-8 L -3,0 L -8,8 M 0,-8 L 0,8 M 8,-8 L 3,0 L 8,8", stroke: "#DC2626", strokeWidth: "3" })), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(400, 110)" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M -8,-8 L -3,0 L -8,8 M 0,-8 L 0,8 M 8,-8 L 3,0 L 8,8", stroke: "#DC2626", strokeWidth: "3" })), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "192", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#1F2937" }, "Plates grind past each other = EARTHQUAKES \u26A0\uFE0F")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center mt-4" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Example:"), " San Andreas Fault in California \u2022 Plates slide horizontally \u2022 No new crust created or destroyed"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-blue-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Key Point:"), " Convection currents in Earth's molten mantle cause tectonic plates to move, creating these three types of boundaries")));
-  var RockCycleDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "The Rock Cycle"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 600 550", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "300", cy: "80", r: "60", fill: "#DC2626", stroke: "#991B1B", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "75", textAnchor: "middle", fontSize: "18", fontWeight: "bold", fill: "white" }, "IGNEOUS"), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "95", textAnchor: "middle", fontSize: "11", fill: "white" }, "Cooled magma/lava"), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "108", textAnchor: "middle", fontSize: "9", fill: "white", fontStyle: "italic" }, "Granite, Basalt"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "150", cy: "400", r: "60", fill: "#F59E0B", stroke: "#D97706", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "390", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "white" }, "SEDIMENTARY"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "408", textAnchor: "middle", fontSize: "11", fill: "white" }, "Layers & fossils"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "421", textAnchor: "middle", fontSize: "9", fill: "white", fontStyle: "italic" }, "Sandstone, Limestone"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "450", cy: "400", r: "60", fill: "#7C3AED", stroke: "#5B21B6", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "450", y: "390", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "white" }, "METAMORPHIC"), /* @__PURE__ */ import_react.default.createElement("text", { x: "450", y: "408", textAnchor: "middle", fontSize: "11", fill: "white" }, "Heat & pressure"), /* @__PURE__ */ import_react.default.createElement("text", { x: "450", y: "421", textAnchor: "middle", fontSize: "9", fill: "white", fontStyle: "italic" }, "Marble, Slate, Gneiss"), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "300", cy: "270", rx: "80", ry: "50", fill: "#FF4500", stroke: "#DC2626", strokeWidth: "3", opacity: "0.9" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "268", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "white" }, "MAGMA"), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "285", textAnchor: "middle", fontSize: "10", fill: "white" }, "Molten rock"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowrock", markerWidth: "12", markerHeight: "12", refX: "10", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#1F2937" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowdashed", markerWidth: "12", markerHeight: "12", refX: "10", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#6B7280" }))), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 255 125 Q 180 230 160 340", stroke: "#1F2937", strokeWidth: "4", fill: "none", markerEnd: "url(#arrowrock)" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "165", y: "215", width: "110", height: "40", fill: "white", opacity: "0.95", rx: "8" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "220", y: "230", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#DC2626" }, "WEATHERING"), /* @__PURE__ */ import_react.default.createElement("text", { x: "220", y: "247", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#DC2626" }, "& EROSION"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 210 400 L 390 400", stroke: "#1F2937", strokeWidth: "4", fill: "none", markerEnd: "url(#arrowrock)" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "245", y: "365", width: "110", height: "40", fill: "white", opacity: "0.95", rx: "8" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "380", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#7C3AED" }, "HEAT &"), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "397", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#7C3AED" }, "PRESSURE"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 420 355 Q 370 310 340 290", stroke: "#1F2937", strokeWidth: "4", fill: "none", markerEnd: "url(#arrowrock)" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "355", y: "305", width: "85", height: "25", fill: "white", opacity: "0.95", rx: "8" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "397", y: "323", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#FF4500" }, "MELTING"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 300 220 L 300 140", stroke: "#1F2937", strokeWidth: "4", fill: "none", markerEnd: "url(#arrowrock)" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "310", y: "165", width: "95", height: "25", fill: "white", opacity: "0.95", rx: "8" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "357", y: "183", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#DC2626" }, "COOLING"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 345 125 Q 420 230 445 340", stroke: "#6B7280", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowdashed)", strokeDasharray: "8,4" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "390", y: "215", width: "90", height: "40", fill: "white", opacity: "0.9", rx: "6" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "435", y: "230", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#7C3AED" }, "Heat &"), /* @__PURE__ */ import_react.default.createElement("text", { x: "435", y: "245", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#7C3AED" }, "Pressure"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 180 355 Q 230 310 260 290", stroke: "#6B7280", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowdashed)", strokeDasharray: "8,4" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "180", y: "305", width: "70", height: "25", fill: "white", opacity: "0.9", rx: "6" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "215", y: "323", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#FF4500" }, "Melting"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 270 140 Q 260 200 270 220", stroke: "#6B7280", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowdashed)", strokeDasharray: "8,4" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "215", y: "165", width: "70", height: "25", fill: "white", opacity: "0.9", rx: "6" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "250", y: "183", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#FF4500" }, "Melting"), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 405 445 Q 300 465 195 445", stroke: "#6B7280", strokeWidth: "3", fill: "none", markerEnd: "url(#arrowdashed)", strokeDasharray: "8,4" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "245", y: "455", width: "110", height: "25", fill: "white", opacity: "0.9", rx: "6" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "300", y: "473", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#DC2626" }, "Weathering/Erosion")), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 grid grid-cols-3 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-red-100 rounded-xl p-4 border-3 border-red-300 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-6 h-6 rounded-full bg-red-600" }), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-red-900 text-base" }, "IGNEOUS")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-800 mb-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Forms from:"), " Cooling magma/lava"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-800 mb-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Types:"), " Intrusive (granite) or Extrusive (basalt)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Examples:"), " Granite, Basalt, Obsidian, Pumice")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-orange-100 rounded-xl p-4 border-3 border-orange-300 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-6 h-6 rounded-full bg-orange-600" }), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-orange-900 text-base" }, "SEDIMENTARY")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-800 mb-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Forms from:"), " Compaction & cementation"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-800 mb-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Features:"), " Layers, fossils, sediments"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Examples:"), " Sandstone, Limestone, Shale")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-100 rounded-xl p-4 border-3 border-purple-300 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-6 h-6 rounded-full bg-purple-600" }), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-purple-900 text-base" }, "METAMORPHIC")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-800 mb-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Forms from:"), " Heat & pressure changing rocks"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-800 mb-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Features:"), " Foliated or non-foliated"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Examples:"), " Marble, Slate, Gneiss, Quartzite"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-gradient-to-r from-amber-400 to-orange-500 rounded-xl p-5 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xl" }, "\u267B\uFE0F")), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white font-bold text-lg mb-1" }, "No Beginning or End!"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/95 text-sm" }, "The rock cycle is continuous - any rock type can transform into any other type through different processes. Solid arrows show main pathways, dashed arrows show alternative routes.")))));
-  var CanadianLandformsDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Major Landform Regions of Canada"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-6 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 800 500", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("text", { x: "400", y: "25", textAnchor: "middle", fontSize: "18", fontWeight: "bold", fill: "#1F2937" }, "Canada's 7 Major Landform Regions"), /* @__PURE__ */ import_react.default.createElement("g", { opacity: "0.15" }, /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 150,120 L 180,100 L 220,95 L 260,90 L 300,85 L 350,80 L 400,75 L 450,80 L 500,85 L 550,90 L 600,95 L 650,100 L 680,110 \\n                   L 700,130 L 710,160 L 715,190 L 710,220 L 700,250 L 690,280 L 680,310 L 670,340 L 650,360 L 620,375 L 580,385 L 540,390 \\n                   L 500,385 L 460,380 L 420,375 L 380,370 L 340,365 L 300,355 L 260,345 L 220,330 L 190,310 L 170,280 L 160,250 L 155,220 \\n                   L 152,190 L 150,160 L 150,120 Z",
-      fill: "none",
-      stroke: "#1F2937",
-      strokeWidth: "2",
-      strokeDasharray: "8,4"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "450", cy: "180", rx: "70", ry: "50", fill: "none", stroke: "#1F2937", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "580", cy: "370", rx: "60", ry: "30", fill: "none", stroke: "#1F2937", strokeWidth: "1.5" })), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "400", cy: "80", rx: "180", ry: "35", fill: "#E0FFFF", stroke: "#87CEEB", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "400", y: "82", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#1E40AF" }, "1. Arctic Lowlands"), /* @__PURE__ */ import_react.default.createElement("text", { x: "400", y: "98", textAnchor: "middle", fontSize: "11", fill: "#1E40AF" }, "Flat, permafrost, tundra"), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 80,150 L 100,120 L 120,140 L 140,110 L 160,130 L 180,100 L 200,150 L 180,200 L 160,180 L 140,210 L 120,190 L 100,220 Z",
-      fill: "#A8A8A8",
-      stroke: "#505050",
-      strokeWidth: "3"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "140", y: "165", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "white" }, "2. Western"), /* @__PURE__ */ import_react.default.createElement("text", { x: "140", y: "182", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "white" }, "Cordillera"), /* @__PURE__ */ import_react.default.createElement("text", { x: "140", y: "198", textAnchor: "middle", fontSize: "10", fill: "white" }, "Rocky Mountains"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "210", y: "150", width: "130", height: "150", fill: "#F4A460", stroke: "#D2691E", strokeWidth: "3", rx: "8" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "275", y: "210", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "white" }, "3. Interior"), /* @__PURE__ */ import_react.default.createElement("text", { x: "275", y: "228", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "white" }, "Plains"), /* @__PURE__ */ import_react.default.createElement("text", { x: "275", y: "246", textAnchor: "middle", fontSize: "10", fill: "white" }, "Prairies, flat"), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 350,140 L 700,140 L 720,200 L 700,260 L 680,300 L 640,320 L 580,330 L 520,325 L 460,315 L 400,295 L 360,260 L 350,200 Z",
-      fill: "#8B4513",
-      stroke: "#654321",
-      strokeWidth: "3"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "530", y: "220", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "white" }, "4. Canadian Shield"), /* @__PURE__ */ import_react.default.createElement("text", { x: "530", y: "240", textAnchor: "middle", fontSize: "12", fill: "white" }, "Ancient rock, minerals, lakes"), /* @__PURE__ */ import_react.default.createElement("text", { x: "530", y: "255", textAnchor: "middle", fontSize: "11", fill: "white", fontStyle: "italic" }, "(Largest region - almost half of Canada!)"), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "450", cy: "170", rx: "80", ry: "25", fill: "#B4D4E1", stroke: "#6BA3C4", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "450", y: "173", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#1E40AF" }, "5. Hudson Bay"), /* @__PURE__ */ import_react.default.createElement("text", { x: "450", y: "185", textAnchor: "middle", fontSize: "9", fill: "#1E40AF" }, "Lowlands (swampy)"), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "580", cy: "370", rx: "90", ry: "45", fill: "#90EE90", stroke: "#228B22", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "580", y: "365", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#006400" }, "6. Great Lakes-"), /* @__PURE__ */ import_react.default.createElement("text", { x: "580", y: "380", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "#006400" }, "St. Lawrence"), /* @__PURE__ */ import_react.default.createElement("text", { x: "580", y: "395", textAnchor: "middle", fontSize: "10", fill: "#006400" }, "Flat, fertile, populated"), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 700,300 L 720,280 L 740,300 L 750,320 L 740,350 L 720,370 L 700,360 Z",
-      fill: "#B8860B",
-      stroke: "#8B6914",
-      strokeWidth: "3"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "720", y: "330", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "white" }, "7. App-"), /* @__PURE__ */ import_react.default.createElement("text", { x: "720", y: "345", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "white" }, "alachian"), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(750, 80)" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "0", cy: "0", r: "25", fill: "white", stroke: "#1F2937", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "0", y: "-15", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#DC2626" }, "N"), /* @__PURE__ */ import_react.default.createElement("text", { x: "0", y: "20", textAnchor: "middle", fontSize: "10", fill: "#666" }, "S"), /* @__PURE__ */ import_react.default.createElement("text", { x: "18", y: "5", textAnchor: "middle", fontSize: "10", fill: "#666" }, "E"), /* @__PURE__ */ import_react.default.createElement("text", { x: "-18", y: "5", textAnchor: "middle", fontSize: "10", fill: "#666" }, "W"), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "0,-18 -3,-3 0,-6 3,-3", fill: "#DC2626" })), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "160", fontSize: "12", fontWeight: "bold", fill: "#505050" }, "WEST \u2190"), /* @__PURE__ */ import_react.default.createElement("text", { x: "730", y: "390", fontSize: "12", fontWeight: "bold", fill: "#8B6914" }, "\u2192 EAST"), /* @__PURE__ */ import_react.default.createElement("text", { x: "400", y: "470", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#1F2937" }, "Most Canadians live in the SOUTH (along US border)"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-4 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-4 border-2 border-cyan-300 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center text-2xl" }, "\u2744\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-cyan-900 text-lg" }, "1. Arctic Lowlands"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-cyan-700" }, "Far North - Islands"))), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-cyan-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-cyan-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Location:"), " Northern islands, Arctic Ocean")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-cyan-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Features:"), " Flat, permafrost (frozen ground), tundra vegetation")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-cyan-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Resources:"), " Few people, some mining")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-4 border-2 border-gray-400 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center text-2xl" }, "\u26F0\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-gray-900 text-lg" }, "2. Western Cordillera"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-700" }, "West Coast - BC"))), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-gray-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Location:"), " British Columbia, Yukon")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Features:"), " YOUNG mountains (Rocky Mountains), volcanoes, earthquakes")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Resources:"), " Forestry, mining, tourism, hydroelectricity")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-4 border-2 border-amber-300 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-2xl" }, "\u{1F33E}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-amber-900 text-lg" }, "3. Interior Plains"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-amber-700" }, "Prairies - AB, SK, MB"))), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-amber-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-amber-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Location:"), " Alberta, Saskatchewan, Manitoba")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-amber-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Features:"), " Flat prairies, sedimentary rock layers")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-amber-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Resources:"), " Farming (wheat!), oil & gas deposits")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 border-2 border-orange-400 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-orange-700 rounded-full flex items-center justify-center text-2xl" }, "\u{1F48E}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-orange-900 text-lg" }, "4. Canadian Shield \u2B50"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700" }, "LARGEST - Almost half of Canada!"))), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-orange-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-orange-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Location:"), " Wraps around Hudson Bay - ON, QC, MB, SK, NWT, NU")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-orange-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Features:"), " ANCIENT rock (oldest in world!), thousands of lakes from glaciers")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-orange-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Resources:"), " Rich in minerals (gold, nickel, copper, diamonds)")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border-2 border-blue-300 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-2xl" }, "\u{1F30A}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-blue-900 text-lg" }, "5. Hudson Bay Lowlands"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-700" }, "Around Hudson Bay"))), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-blue-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-blue-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Location:"), " Surrounds Hudson Bay - ON, MB")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-blue-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Features:"), " Flat, swampy, poor drainage")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-blue-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Resources:"), " Few people, some fur trading posts")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 border-2 border-green-400 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-2xl" }, "\u{1F3D9}\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-green-900 text-lg" }, "6. Great Lakes Lowlands \u2B50"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-700" }, "MOST POPULATED!"))), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-green-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-green-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Location:"), " Southern Ontario & Quebec")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-green-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Features:"), " Flat, fertile soil, best farmland")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-green-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Resources:"), " Toronto, Montreal, Ottawa - 50%+ of Canadians live here!")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-4 border-2 border-yellow-400 shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-2xl" }, "\u{1F5FB}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-yellow-900 text-lg" }, "7. Appalachian Region"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-yellow-700" }, "East Coast - Atlantic Provinces"))), /* @__PURE__ */ import_react.default.createElement("ul", { className: "space-y-1 text-sm text-yellow-800" }, /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-yellow-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Location:"), " New Brunswick, Nova Scotia, PEI, Newfoundland")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-yellow-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Features:"), " OLD eroded mountains, rolling hills")), /* @__PURE__ */ import_react.default.createElement("li", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-yellow-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Resources:"), " Fishing, forestry, coal (depleted)"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-5 text-white shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-xl mb-3 text-center" }, "\u{1F3AF} Key Facts to Remember"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-3 gap-3 text-sm" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/10 backdrop-blur rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold mb-1" }, "\u2B50 Largest Region:"), /* @__PURE__ */ import_react.default.createElement("p", null, "Canadian Shield (almost 50% of Canada!)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/10 backdrop-blur rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold mb-1" }, "\u{1F465} Most Populated:"), /* @__PURE__ */ import_react.default.createElement("p", null, "Great Lakes-St. Lawrence Lowlands (Toronto, Montreal)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/10 backdrop-blur rounded-lg p-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold mb-1" }, "\u{1F3D4}\uFE0F Youngest Mountains:"), /* @__PURE__ */ import_react.default.createElement("p", null, "Western Cordillera (still has earthquakes & volcanoes!)")))));
-  var SurveySystemsDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Three Canadian Survey Systems"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-purple-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-purple-800 mb-4" }, "Long Lots System (Southern Quebec)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 400 200", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "0", y: "150", width: "400", height: "50", fill: "#4682B4", opacity: "0.6" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "180", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "white" }, "St. Lawrence River"), [40, 90, 140, 190, 240, 290, 340].map((x, i) => /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement(
-    "rect",
-    {
-      x,
-      y: "30",
-      width: "40",
-      height: "120",
-      fill: i % 2 === 0 ? "#90EE90" : "#98FB98",
-      stroke: "#228B22",
-      strokeWidth: "2"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("rect", { x: x + 15, y: "140", width: "10", height: "10", fill: "#8B4513" }))), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "20", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#228B22" }, "Narrow strips extending back from river")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-purple-700 text-center mt-4" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Purpose:"), " Equal access to river transportation \u2022 Created linear villages along water")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-blue-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-blue-800 mb-4" }, "Concession System (Southern Ontario)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 400 200", className: "w-full" }, [0, 1, 2, 3].map((row) => [0, 1, 2, 3, 4, 5].map((col) => /* @__PURE__ */ import_react.default.createElement("g", { key: `${row}-${col}` }, /* @__PURE__ */ import_react.default.createElement(
-    "rect",
-    {
-      x: 50 + col * 50,
-      y: 30 + row * 40,
-      width: "45",
-      height: "35",
-      fill: (row + col) % 2 === 0 ? "#F4A460" : "#DEB887",
-      stroke: "#8B4513",
-      strokeWidth: "2"
-    }
-  ), (row + col) % 3 === 0 && /* @__PURE__ */ import_react.default.createElement("rect", { x: 60 + col * 50, y: 50 + row * 40, width: "8", height: "8", fill: "#654321" })))), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "25", x2: "350", y2: "25", stroke: "#505050", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "20", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#505050" }, "Road"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "190", x2: "350", y2: "190", stroke: "#505050", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "200", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#505050" }, "Road")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-700 text-center mt-4" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Purpose:"), " Equal rectangular lots \u2022 Farmhouses at road intersections")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-green-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-green-800 mb-4" }, "Section System (Southern Prairies)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 400 220", className: "w-full" }, [0, 1, 2, 3, 4, 5].map((row) => [0, 1, 2, 3, 4, 5].map((col) => {
-    const sectionNum = (5 - row) * 6 + col + 1;
-    return /* @__PURE__ */ import_react.default.createElement("g", { key: `${row}-${col}` }, /* @__PURE__ */ import_react.default.createElement(
-      "rect",
-      {
-        x: 50 + col * 50,
-        y: 20 + row * 30,
-        width: "45",
-        height: "25",
-        fill: sectionNum === 1 ? "#FFD700" : "#F0E68C",
-        stroke: "#DAA520",
-        strokeWidth: "2"
-      }
-    ), /* @__PURE__ */ import_react.default.createElement(
-      "text",
-      {
-        x: 72.5 + col * 50,
-        y: 35 + row * 30,
-        textAnchor: "middle",
-        fontSize: "10",
-        fontWeight: "bold",
-        fill: "#8B4513"
-      },
-      sectionNum
-    ));
-  })), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "205", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#228B22" }, "Township = 36 sections (each 1 square mile)")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-green-700 text-center mt-4" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Purpose:"), " Square townships divided into 36 sections \u2022 Systematic settlement of prairies"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-purple-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-purple-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Key Difference:"), " Survey systems created different settlement patterns based on geography and transportation")));
-  var PopulationDistributionDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Population Distribution in Canada"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-blue-800 mb-3" }, "Land Area Map"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 300 200", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "30", y: "40", width: "240", height: "120", fill: "#90EE90", stroke: "#228B22", strokeWidth: "2", rx: "10" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "100", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#006400" }, "Canada"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "120", textAnchor: "middle", fontSize: "11", fill: "#006400" }, "9.98 million km\xB2"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "200", cy: "140", r: "5", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "200", y: "155", textAnchor: "middle", fontSize: "9", fill: "#DC2626" }, "Toronto")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 text-center mt-2" }, "Shows actual land area")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-red-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-red-800 mb-3" }, "Isodemographic Map"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 300 200", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "180", cy: "140", rx: "80", ry: "50", fill: "#DC2626", stroke: "#991B1B", strokeWidth: "2", opacity: "0.8" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "180", y: "140", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "white" }, "Greater"), /* @__PURE__ */ import_react.default.createElement("text", { x: "180", y: "155", textAnchor: "middle", fontSize: "13", fontWeight: "bold", fill: "white" }, "Toronto"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "80", cy: "60", r: "15", fill: "#90EE90", stroke: "#228B22", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "80", y: "80", textAnchor: "middle", fontSize: "8", fill: "#228B22" }, "Nunavut"), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "120", cy: "80", r: "10", fill: "#90EE90", stroke: "#228B22", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "120", y: "95", textAnchor: "middle", fontSize: "7", fill: "#228B22" }, "NWT")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 text-center mt-2" }, "Size = population, not land"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 border-2 border-green-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-green-800 mb-4" }, "Continuous vs Discontinuous Ecumene"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 100", className: "w-full mb-2" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "10", y: "40", width: "180", height: "30", fill: "#228B22", stroke: "#006400", strokeWidth: "2", rx: "5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "60", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "white" }, "Continuous"), [20, 40, 60, 80, 100, 120, 140, 160, 180].map((x, i) => /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: x, cy: "55", r: "3", fill: "#FFD700" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-green-800" }, "Continuous Ecumene"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Unbroken settlement (Windsor-Quebec corridor)")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 100", className: "w-full mb-2" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "55", r: "15", fill: "#228B22", stroke: "#006400", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "40", cy: "55", r: "3", fill: "#FFD700" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "100", cy: "55", r: "12", fill: "#228B22", stroke: "#006400", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "100", cy: "55", r: "3", fill: "#FFD700" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "160", cy: "55", r: "10", fill: "#228B22", stroke: "#006400", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "160", cy: "55", r: "3", fill: "#FFD700" })), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-green-800" }, "Discontinuous Ecumene"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600" }, "Scattered patches (Yellowknife, Iqaluit)"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-orange-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-orange-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Key Fact:"), " 82% of Canadians live in cities, mostly in the continuous ecumene along the US border")));
-  var DemographicTransitionModel = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Demographic Transition Model (DTM)"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-6 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 800 400", className: "w-full" }, /* @__PURE__ */ import_react.default.createElement("line", { x1: "60", y1: "50", x2: "60", y2: "350", stroke: "#94A3B8", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "60", y1: "350", x2: "760", y2: "350", stroke: "#94A3B8", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "30", y: "200", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#475569", transform: "rotate(-90 30 200)" }, "Birth/Death Rate (per 1000)"), /* @__PURE__ */ import_react.default.createElement("text", { x: "410", y: "385", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#475569" }, "Time / Development \u2192"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "200", y1: "50", x2: "200", y2: "350", stroke: "#CBD5E1", strokeWidth: "1", strokeDasharray: "5,5" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "340", y1: "50", x2: "340", y2: "350", stroke: "#CBD5E1", strokeWidth: "1", strokeDasharray: "5,5" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "480", y1: "50", x2: "480", y2: "350", stroke: "#CBD5E1", strokeWidth: "1", strokeDasharray: "5,5" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "620", y1: "50", x2: "620", y2: "350", stroke: "#CBD5E1", strokeWidth: "1", strokeDasharray: "5,5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "130", y: "30", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#7C3AED" }, "Stage 1"), /* @__PURE__ */ import_react.default.createElement("text", { x: "270", y: "30", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#DC2626" }, "Stage 2"), /* @__PURE__ */ import_react.default.createElement("text", { x: "410", y: "30", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#F59E0B" }, "Stage 3"), /* @__PURE__ */ import_react.default.createElement("text", { x: "550", y: "30", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#10B981" }, "Stage 4"), /* @__PURE__ */ import_react.default.createElement("text", { x: "690", y: "30", textAnchor: "middle", fontSize: "16", fontWeight: "bold", fill: "#3B82F6" }, "Stage 5"), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 60,80 L 200,80 L 340,100 L 480,200 L 620,220 L 760,250",
-      stroke: "#DC2626",
-      strokeWidth: "4",
-      fill: "none"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 60,70 L 200,70 L 340,250 L 480,240 L 620,220 L 760,210",
-      stroke: "#3B82F6",
-      strokeWidth: "4",
-      fill: "none"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 60,80 L 200,80 L 340,100 L 480,200 L 620,220 L 760,250 L 760,210 L 620,220 L 480,240 L 340,250 L 200,70 L 60,70 Z",
-      fill: "#10B981",
-      opacity: "0.2"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(620, 80)" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "0", y: "0", width: "120", height: "70", fill: "white", stroke: "#CBD5E1", strokeWidth: "1", rx: "4" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "20", x2: "35", y2: "20", stroke: "#DC2626", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "24", fontSize: "12", fill: "#475569" }, "Birth Rate"), /* @__PURE__ */ import_react.default.createElement("line", { x1: "10", y1: "45", x2: "35", y2: "45", stroke: "#3B82F6", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "49", fontSize: "12", fill: "#475569" }, "Death Rate")), /* @__PURE__ */ import_react.default.createElement("text", { x: "130", y: "140", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#7C3AED" }, "Low Growth"), /* @__PURE__ */ import_react.default.createElement("text", { x: "270", y: "140", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#DC2626" }, "RAPID"), /* @__PURE__ */ import_react.default.createElement("text", { x: "270", y: "155", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#DC2626" }, "Growth"), /* @__PURE__ */ import_react.default.createElement("text", { x: "410", y: "180", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#F59E0B" }, "Slowing"), /* @__PURE__ */ import_react.default.createElement("text", { x: "410", y: "195", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#F59E0B" }, "Growth"), /* @__PURE__ */ import_react.default.createElement("text", { x: "550", y: "240", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#10B981" }, "Low Growth"), /* @__PURE__ */ import_react.default.createElement("text", { x: "690", y: "270", textAnchor: "middle", fontSize: "11", fontWeight: "bold", fill: "#3B82F6" }, "Decline?"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-5 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-100 rounded-xl p-4 border-2 border-purple-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-purple-900 mb-2 text-center" }, "Stage 1"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-800" }, "Pre-Transition"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700 mt-2" }, "High birth & death rates. Stable population. Hunter-gatherer societies."), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-purple-900 mt-2" }, "No countries today")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-red-100 rounded-xl p-4 border-2 border-red-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-red-900 mb-2 text-center" }, "Stage 2"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-800" }, "Early Transition"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-700 mt-2" }, "Death rate drops. Birth rate high. Population explosion!"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-red-900 mt-2" }, "Afghanistan, Niger")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-orange-100 rounded-xl p-4 border-2 border-orange-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-orange-900 mb-2 text-center" }, "Stage 3"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-800" }, "Late Transition"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700 mt-2" }, "Birth rate drops. Growth slows. Urbanization."), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-orange-900 mt-2" }, "Mexico, India")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-green-100 rounded-xl p-4 border-2 border-green-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-green-900 mb-2 text-center" }, "Stage 4"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-800" }, "Post-Transition"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-700 mt-2" }, "Both rates low. Stable population. Most developed nations."), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-green-900 mt-2" }, "Canada, USA, China")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-100 rounded-xl p-4 border-2 border-blue-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-blue-900 mb-2 text-center" }, "Stage 5"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-800" }, "Declining?"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-700 mt-2" }, "Birth rate below death rate. Aging population."), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold text-blue-900 mt-2" }, "Japan, Germany"))));
-  var PopulationPyramids = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Population Pyramids by Stage"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-300 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-purple-900 mb-3 text-center" }, "Stage 1: Pre-Transition"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 250", className: "w-full" }, [
-    { age: "65+", male: 8, female: 8, y: 20 },
-    { age: "60-64", male: 10, female: 10, y: 40 },
-    { age: "55-59", male: 12, female: 12, y: 60 },
-    { age: "50-54", male: 15, female: 15, y: 80 },
-    { age: "45-49", male: 18, female: 18, y: 100 },
-    { age: "40-44", male: 22, female: 22, y: 120 },
-    { age: "35-39", male: 26, female: 26, y: 140 },
-    { age: "30-34", male: 30, female: 30, y: 160 },
-    { age: "25-29", male: 34, female: 34, y: 180 },
-    { age: "20-24", male: 38, female: 38, y: 200 },
-    { age: "15-19", male: 42, female: 42, y: 220 },
-    { age: "10-14", male: 46, female: 46, y: 240 },
-    { age: "5-9", male: 48, female: 48, y: 260 },
-    { age: "0-4", male: 50, female: 50, y: 280 }
-  ].reverse().map((data, i) => /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", { x: 100 - data.male, y: data.y, width: data.male, height: 16, fill: "#60A5FA" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: 100, y: data.y, width: data.female, height: 16, fill: "#F472B6" }), i % 2 === 0 && /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: data.y + 12, textAnchor: "middle", fontSize: "8", fill: "#475569" }, data.age))), /* @__PURE__ */ import_react.default.createElement("line", { x1: "100", y1: "20", x2: "100", y2: "280", stroke: "#94A3B8", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "50", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Male"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#EC4899" }, "Female")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700 text-center mt-2" }, "Wide base, high death rates at all ages")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-red-300 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-red-900 mb-3 text-center" }, "Stage 2: Early Transition"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 250", className: "w-full" }, [
-    { age: "65+", male: 10, female: 10, y: 20 },
-    { age: "60-64", male: 12, female: 12, y: 40 },
-    { age: "55-59", male: 15, female: 15, y: 60 },
-    { age: "50-54", male: 18, female: 18, y: 80 },
-    { age: "45-49", male: 22, female: 22, y: 100 },
-    { age: "40-44", male: 26, female: 26, y: 120 },
-    { age: "35-39", male: 30, female: 30, y: 140 },
-    { age: "30-34", male: 35, female: 35, y: 160 },
-    { age: "25-29", male: 40, female: 40, y: 180 },
-    { age: "20-24", male: 44, female: 44, y: 200 },
-    { age: "15-19", male: 48, female: 48, y: 220 },
-    { age: "10-14", male: 52, female: 52, y: 240 },
-    { age: "5-9", male: 55, female: 55, y: 260 },
-    { age: "0-4", male: 58, female: 58, y: 280 }
-  ].reverse().map((data, i) => /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", { x: 100 - data.male, y: data.y, width: data.male, height: 16, fill: "#60A5FA" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: 100, y: data.y, width: data.female, height: 16, fill: "#F472B6" }), i % 2 === 0 && /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: data.y + 12, textAnchor: "middle", fontSize: "8", fill: "#475569" }, data.age))), /* @__PURE__ */ import_react.default.createElement("line", { x1: "100", y1: "20", x2: "100", y2: "280", stroke: "#94A3B8", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "50", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Male"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#EC4899" }, "Female")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-700 text-center mt-2" }, "Very wide base, children survive more")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-orange-300 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-orange-900 mb-3 text-center" }, "Stage 3: Late Transition"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 250", className: "w-full" }, [
-    { age: "65+", male: 15, female: 15, y: 20 },
-    { age: "60-64", male: 18, female: 18, y: 40 },
-    { age: "55-59", male: 22, female: 22, y: 60 },
-    { age: "50-54", male: 26, female: 26, y: 80 },
-    { age: "45-49", male: 30, female: 30, y: 100 },
-    { age: "40-44", male: 34, female: 34, y: 120 },
-    { age: "35-39", male: 38, female: 38, y: 140 },
-    { age: "30-34", male: 42, female: 42, y: 160 },
-    { age: "25-29", male: 45, female: 45, y: 180 },
-    { age: "20-24", male: 48, female: 48, y: 200 },
-    { age: "15-19", male: 50, female: 50, y: 220 },
-    { age: "10-14", male: 48, female: 48, y: 240 },
-    { age: "5-9", male: 46, female: 46, y: 260 },
-    { age: "0-4", male: 44, female: 44, y: 280 }
-  ].reverse().map((data, i) => /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", { x: 100 - data.male, y: data.y, width: data.male, height: 16, fill: "#60A5FA" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: 100, y: data.y, width: data.female, height: 16, fill: "#F472B6" }), i % 2 === 0 && /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: data.y + 12, textAnchor: "middle", fontSize: "8", fill: "#475569" }, data.age))), /* @__PURE__ */ import_react.default.createElement("line", { x1: "100", y1: "20", x2: "100", y2: "280", stroke: "#94A3B8", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "50", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Male"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#EC4899" }, "Female")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700 text-center mt-2" }, "Base narrowing, birth rates declining")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-green-300 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-green-900 mb-3 text-center" }, "Stage 4: Post-Transition"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 250", className: "w-full" }, [
-    { age: "65+", male: 28, female: 32, y: 20 },
-    { age: "60-64", male: 30, female: 32, y: 40 },
-    { age: "55-59", male: 32, female: 34, y: 60 },
-    { age: "50-54", male: 34, female: 36, y: 80 },
-    { age: "45-49", male: 36, female: 38, y: 100 },
-    { age: "40-44", male: 38, female: 40, y: 120 },
-    { age: "35-39", male: 40, female: 42, y: 140 },
-    { age: "30-34", male: 40, female: 42, y: 160 },
-    { age: "25-29", male: 40, female: 42, y: 180 },
-    { age: "20-24", male: 38, female: 40, y: 200 },
-    { age: "15-19", male: 36, female: 38, y: 220 },
-    { age: "10-14", male: 34, female: 36, y: 240 },
-    { age: "5-9", male: 32, female: 34, y: 260 },
-    { age: "0-4", male: 30, female: 32, y: 280 }
-  ].reverse().map((data, i) => /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", { x: 100 - data.male, y: data.y, width: data.male, height: 16, fill: "#60A5FA" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: 100, y: data.y, width: data.female, height: 16, fill: "#F472B6" }), i % 2 === 0 && /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: data.y + 12, textAnchor: "middle", fontSize: "8", fill: "#475569" }, data.age))), /* @__PURE__ */ import_react.default.createElement("line", { x1: "100", y1: "20", x2: "100", y2: "280", stroke: "#94A3B8", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "50", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Male"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#EC4899" }, "Female")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-700 text-center mt-2" }, "Column shape, aging population visible")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-300 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-blue-900 mb-3 text-center" }, "Stage 5: Declining"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 250", className: "w-full" }, [
-    { age: "65+", male: 38, female: 42, y: 20 },
-    { age: "60-64", male: 40, female: 44, y: 40 },
-    { age: "55-59", male: 42, female: 46, y: 60 },
-    { age: "50-54", male: 44, female: 46, y: 80 },
-    { age: "45-49", male: 44, female: 46, y: 100 },
-    { age: "40-44", male: 42, female: 44, y: 120 },
-    { age: "35-39", male: 40, female: 42, y: 140 },
-    { age: "30-34", male: 38, female: 40, y: 160 },
-    { age: "25-29", male: 35, female: 37, y: 180 },
-    { age: "20-24", male: 32, female: 34, y: 200 },
-    { age: "15-19", male: 28, female: 30, y: 220 },
-    { age: "10-14", male: 25, female: 27, y: 240 },
-    { age: "5-9", male: 22, female: 24, y: 260 },
-    { age: "0-4", male: 20, female: 22, y: 280 }
-  ].reverse().map((data, i) => /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", { x: 100 - data.male, y: data.y, width: data.male, height: 16, fill: "#60A5FA" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: 100, y: data.y, width: data.female, height: 16, fill: "#F472B6" }), i % 2 === 0 && /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: data.y + 12, textAnchor: "middle", fontSize: "8", fill: "#475569" }, data.age))), /* @__PURE__ */ import_react.default.createElement("line", { x1: "100", y1: "20", x2: "100", y2: "280", stroke: "#94A3B8", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "50", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Male"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#EC4899" }, "Female")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-700 text-center mt-2" }, "Narrow base, top-heavy, declining population")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-indigo-300 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-indigo-900 mb-3 text-center" }, "Canada 2021 (Stage 4)"), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 250", className: "w-full" }, [
-    { age: "65+", male: 32, female: 36, y: 20 },
-    { age: "60-64", male: 34, female: 36, y: 40 },
-    { age: "55-59", male: 38, female: 40, y: 60 },
-    { age: "50-54", male: 40, female: 42, y: 80 },
-    { age: "45-49", male: 38, female: 40, y: 100 },
-    { age: "40-44", male: 36, female: 38, y: 120 },
-    { age: "35-39", male: 38, female: 40, y: 140 },
-    { age: "30-34", male: 40, female: 42, y: 160 },
-    { age: "25-29", male: 38, female: 40, y: 180 },
-    { age: "20-24", male: 34, female: 36, y: 200 },
-    { age: "15-19", male: 30, female: 32, y: 220 },
-    { age: "10-14", male: 28, female: 30, y: 240 },
-    { age: "5-9", male: 30, female: 32, y: 260 },
-    { age: "0-4", male: 28, female: 30, y: 280 }
-  ].reverse().map((data, i) => /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", { x: 100 - data.male, y: data.y, width: data.male, height: 16, fill: "#60A5FA" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: 100, y: data.y, width: data.female, height: 16, fill: "#F472B6" }), i % 2 === 0 && /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: data.y + 12, textAnchor: "middle", fontSize: "8", fill: "#475569" }, data.age))), /* @__PURE__ */ import_react.default.createElement("line", { x1: "100", y1: "20", x2: "100", y2: "280", stroke: "#94A3B8", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "50", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Male"), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "15", textAnchor: "middle", fontSize: "10", fontWeight: "bold", fill: "#EC4899" }, "Female")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-indigo-700 text-center mt-2" }, "Aging population, immigration sustains growth"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-indigo-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-indigo-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Key Pattern:"), " Shape changes from pyramid \u2192 column \u2192 inverted pyramid as countries develop")));
-  var PopulationDensityDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Population Density in Canada"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-6 border-2 border-blue-200" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-center font-bold text-blue-800 mb-4" }, "Density Formula"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-4xl font-bold text-blue-600 mb-2" }, "D = P \xF7 A"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 mb-4" }, "Density = Population \xF7 Area (in km\xB2)"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-blue-50 rounded-lg p-4 max-w-md mx-auto" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-blue-800 mb-2" }, "Example: Canada Overall"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700" }, "Population: 37,000,000"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700" }, "Area: 8,800,000 km\xB2"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-lg font-bold text-blue-600 mt-2" }, "D = 37M \xF7 8.8M = 4.2 people/km\xB2")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-3 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-red-100 to-red-200 rounded-xl p-6 border-2 border-red-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-red-900 text-center mb-3" }, "\u{1F3D9}\uFE0F Toronto"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-lg p-4 mb-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-red-600 text-center" }, "~4,300"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 text-center" }, "people/km\xB2")), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-10 gap-0.5" }, [...Array(100)].map((_, i) => /* @__PURE__ */ import_react.default.createElement("div", { key: i, className: "w-full aspect-square bg-red-500 rounded-sm" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-800 text-center mt-2 font-semibold" }, "Very Dense Urban")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl p-6 border-2 border-yellow-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-yellow-900 text-center mb-3" }, "\u{1F33E} Saskatchewan"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-lg p-4 mb-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-yellow-600 text-center" }, "~2"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 text-center" }, "people/km\xB2")), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-10 gap-0.5" }, [...Array(10)].map((_, i) => /* @__PURE__ */ import_react.default.createElement("div", { key: i, className: "w-full aspect-square bg-yellow-500 rounded-sm" }))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-yellow-800 text-center mt-2 font-semibold" }, "Low Density Rural")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl p-6 border-2 border-blue-300" }, /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-blue-900 text-center mb-3" }, "\u2744\uFE0F Nunavut"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-lg p-4 mb-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-blue-600 text-center" }, "0.02"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 text-center" }, "people/km\xB2")), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-10 gap-0.5 h-24" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full aspect-square bg-blue-500 rounded-sm" })), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-800 text-center mt-2 font-semibold" }, "Nearly Empty"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-cyan-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-cyan-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Remember:"), " Canada's overall low density (4.2/km\xB2) is misleading - most Canadians live in high-density cities!")));
-  var ClimateFactorsDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Six Factors Affecting Climate"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md border-2 border-orange-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, "\u{1F30D}")), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-gray-800 text-lg" }, "Latitude")), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 200", className: "w-full mb-4" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "100", cy: "100", r: "80", fill: "#4299E1", opacity: "0.3", stroke: "#2B6CB0", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "20", y1: "100", x2: "180", y2: "100", stroke: "#2B6CB0", strokeWidth: "2", strokeDasharray: "5,5" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "20", y1: "60", x2: "180", y2: "60", stroke: "#2B6CB0", strokeWidth: "1", strokeDasharray: "3,3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "20", y1: "140", x2: "180", y2: "140", stroke: "#2B6CB0", strokeWidth: "1", strokeDasharray: "3,3" }), /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("line", { x1: "190", y1: "40", x2: "140", y2: "60", stroke: "#F59E0B", strokeWidth: "3" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "190", y1: "100", x2: "180", y2: "100", stroke: "#F59E0B", strokeWidth: "4" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "190", y1: "160", x2: "140", y2: "140", stroke: "#F59E0B", strokeWidth: "3" })), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "50", textAnchor: "middle", fontSize: "10", fill: "#DC2626", fontWeight: "bold" }, "Cold"), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "95", textAnchor: "middle", fontSize: "10", fill: "#F59E0B", fontWeight: "bold" }, "Hot"), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "150", textAnchor: "middle", fontSize: "10", fill: "#DC2626", fontWeight: "bold" }, "Cold")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Closer to equator = HOTTER"), /* @__PURE__ */ import_react.default.createElement("br", null), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs" }, "Farther from equator = COLDER"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md border-2 border-purple-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, "\u26F0\uFE0F")), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-gray-800 text-lg" }, "Elevation")), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 200", className: "w-full mb-4" }, /* @__PURE__ */ import_react.default.createElement("polygon", { points: "100,40 180,180 20,180", fill: "#8B7355", stroke: "#654321", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "100,40 140,120 60,120", fill: "#FFFFFF", opacity: "0.7" }), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(95, 50)" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "0", y: "0", width: "10", height: "30", rx: "2", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "5", cy: "35", r: "6", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "20", y: "20", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Cold")), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(150, 150)" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "0", y: "0", width: "10", height: "30", rx: "2", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "0", y: "20", width: "10", height: "10", rx: "2", fill: "#EF4444" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "5", cy: "35", r: "6", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "-25", y: "20", fontSize: "10", fontWeight: "bold", fill: "#DC2626" }, "Warm")), /* @__PURE__ */ import_react.default.createElement("line", { x1: "100", y1: "70", x2: "100", y2: "170", stroke: "#6B7280", strokeWidth: "2", markerEnd: "url(#arrowdown)" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowdown", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L9,3 z", fill: "#6B7280" })))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Higher elevation = COLDER"), /* @__PURE__ */ import_react.default.createElement("br", null), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs" }, "Temperature drops 1\xB0C per 100m"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md border-2 border-blue-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, "\u{1F30A}")), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-gray-800 text-lg" }, "Ocean Currents")), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 200", className: "w-full mb-4" }, /* @__PURE__ */ import_react.default.createElement("rect", { x: "20", y: "60", width: "160", height: "100", fill: "#60A5FA", opacity: "0.3", rx: "5" }), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 30 120 Q 70 100 100 120 T 170 120",
-      stroke: "#DC2626",
-      strokeWidth: "4",
-      fill: "none",
-      markerEnd: "url(#arrowred)"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "90", y: "110", fontSize: "10", fontWeight: "bold", fill: "#DC2626" }, "Warm"), /* @__PURE__ */ import_react.default.createElement(
-    "path",
-    {
-      d: "M 170 140 Q 130 160 100 140 T 30 140",
-      stroke: "#3B82F6",
-      strokeWidth: "4",
-      fill: "none",
-      markerEnd: "url(#arrowblue)"
-    }
-  ), /* @__PURE__ */ import_react.default.createElement("text", { x: "90", y: "165", fontSize: "10", fontWeight: "bold", fill: "#3B82F6" }, "Cold"), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "30", cy: "100", rx: "15", ry: "40", fill: "#86EFAC" }), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "170", cy: "100", rx: "15", ry: "40", fill: "#86EFAC" }), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowred", markerWidth: "8", markerHeight: "8", refX: "7", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L7,3 z", fill: "#DC2626" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowblue", markerWidth: "8", markerHeight: "8", refX: "7", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L7,3 z", fill: "#3B82F6" })))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Warm currents = WARMER coast"), /* @__PURE__ */ import_react.default.createElement("br", null), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs" }, "Cold currents = COOLER coast"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md border-2 border-teal-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, "\u{1F4A8}")), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-gray-800 text-lg" }, "Prevailing Winds")), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 200", className: "w-full mb-4" }, /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "40", cy: "80", rx: "25", ry: "15", fill: "#94A3B8" }), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "50", cy: "75", rx: "20", ry: "12", fill: "#94A3B8" }), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "60", cy: "80", rx: "25", ry: "15", fill: "#94A3B8" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 70 80 L 120 80", stroke: "#0EA5E9", strokeWidth: "3", markerEnd: "url(#arrowwind)" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 70 95 L 110 95", stroke: "#0EA5E9", strokeWidth: "2", markerEnd: "url(#arrowwind)" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 70 110 L 115 110", stroke: "#0EA5E9", strokeWidth: "2", markerEnd: "url(#arrowwind)" }), /* @__PURE__ */ import_react.default.createElement("rect", { x: "130", y: "60", width: "50", height: "100", fill: "#86EFAC", rx: "5" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "155", y: "115", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#15803D" }, "Land"), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowwind", markerWidth: "8", markerHeight: "8", refX: "7", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L7,3 z", fill: "#0EA5E9" }))), /* @__PURE__ */ import_react.default.createElement("text", { x: "95", y: "70", fontSize: "10", fontWeight: "bold", fill: "#0369A1" }, "Wind direction")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Brings weather from origin"), /* @__PURE__ */ import_react.default.createElement("br", null), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs" }, "Wind from ocean = wet, from land = dry"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md border-2 border-green-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, "\u{1F3D4}\uFE0F")), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-gray-800 text-lg" }, "Mountains")), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 200", className: "w-full mb-4" }, /* @__PURE__ */ import_react.default.createElement("polygon", { points: "100,50 150,150 50,150", fill: "#8B7355", stroke: "#654321", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("polygon", { points: "100,50 125,100 75,100", fill: "#FFFFFF", opacity: "0.6" }), /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "40", cy: "90", rx: "15", ry: "10", fill: "#60A5FA", opacity: "0.6" }), /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "50", cy: "85", rx: "12", ry: "8", fill: "#60A5FA", opacity: "0.6" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M 50 95 L 75 110", stroke: "#0EA5E9", strokeWidth: "2", markerEnd: "url(#arrowup)" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "30", y1: "115", x2: "30", y2: "125", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "40", y1: "115", x2: "40", y2: "125", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "50", y1: "115", x2: "50", y2: "125", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "145", fontSize: "9", fontWeight: "bold", fill: "#0369A1", textAnchor: "middle" }, "WET"), /* @__PURE__ */ import_react.default.createElement("text", { x: "40", y: "155", fontSize: "8", fill: "#0369A1", textAnchor: "middle" }, "Windward")), /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("path", { d: "M 125 90 L 150 110", stroke: "#F59E0B", strokeWidth: "2", markerEnd: "url(#arrowdown2)" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "155", cy: "120", r: "3", fill: "#FCD34D" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "148", cy: "125", r: "2", fill: "#FCD34D" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "162", cy: "125", r: "2", fill: "#FCD34D" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "155", y: "145", fontSize: "9", fontWeight: "bold", fill: "#D97706", textAnchor: "middle" }, "DRY"), /* @__PURE__ */ import_react.default.createElement("text", { x: "155", y: "155", fontSize: "8", fill: "#D97706", textAnchor: "middle" }, "Leeward")), /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowup", markerWidth: "8", markerHeight: "8", refX: "7", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L7,3 z", fill: "#0EA5E9" })), /* @__PURE__ */ import_react.default.createElement("marker", { id: "arrowdown2", markerWidth: "8", markerHeight: "8", refX: "7", refY: "3", orient: "auto" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M0,0 L0,6 L7,3 z", fill: "#F59E0B" })))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Windward = WET"), /* @__PURE__ */ import_react.default.createElement("br", null), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs" }, "Leeward = DRY (rain shadow)"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md border-2 border-indigo-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-blue-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, "\u{1F3D6}\uFE0F")), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-gray-800 text-lg" }, "Bodies of Water")), /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 200 200", className: "w-full mb-4" }, /* @__PURE__ */ import_react.default.createElement("ellipse", { cx: "100", cy: "120", rx: "70", ry: "40", fill: "#60A5FA", opacity: "0.4" }), /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "15", fill: "#F59E0B" }), [0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-    const rad = angle * Math.PI / 180;
-    const x1 = 50 + 20 * Math.cos(rad);
-    const y1 = 50 + 20 * Math.sin(rad);
-    const x2 = 50 + 28 * Math.cos(rad);
-    const y2 = 50 + 28 * Math.sin(rad);
-    return /* @__PURE__ */ import_react.default.createElement("line", { key: i, x1, y1, x2, y2, stroke: "#F59E0B", strokeWidth: "2" });
-  }), /* @__PURE__ */ import_react.default.createElement("text", { x: "50", y: "85", fontSize: "9", fontWeight: "bold", fill: "#D97706", textAnchor: "middle" }, "Summer")), /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("line", { x1: "150", y1: "40", x2: "150", y2: "60", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "140", y1: "50", x2: "160", y2: "50", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "143", y1: "43", x2: "157", y2: "57", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("line", { x1: "143", y1: "57", x2: "157", y2: "43", stroke: "#3B82F6", strokeWidth: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "150", y: "85", fontSize: "9", fontWeight: "bold", fill: "#1E40AF", textAnchor: "middle" }, "Winter")), /* @__PURE__ */ import_react.default.createElement("text", { x: "100", y: "110", fontSize: "11", fontWeight: "bold", fill: "#0369A1", textAnchor: "middle" }, "Moderate Temps"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "70", y: "165", width: "20", height: "8", fill: "#F59E0B", rx: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "95", y: "172", fontSize: "8", fill: "#666" }, "Cooler summer"), /* @__PURE__ */ import_react.default.createElement("rect", { x: "120", y: "165", width: "20", height: "8", fill: "#3B82F6", rx: "2" }), /* @__PURE__ */ import_react.default.createElement("text", { x: "145", y: "172", fontSize: "8", fill: "#666" }, "Warmer winter")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Water moderates temperature"), /* @__PURE__ */ import_react.default.createElement("br", null), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs" }, "Cooler summers, warmer winters")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-sky-100 to-blue-100 rounded-xl p-4 border-2 border-blue-300" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-white font-bold" }, "\u{1F4A1}")), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-blue-900 mb-2 text-lg" }, "Remember: LOWERNEARWATER"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-blue-800" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-600" }, "L"), "atitude"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-600" }, "O"), "cean currents"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-600" }, "W"), "ind (prevailing)"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-600" }, "E"), "levation"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-600" }, "R"), "elief (mountains)"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-600" }, "NEARWATER"), " (bodies of water)")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-700 mt-2 italic" }, "All six factors work together to determine a region's climate!")))));
-  var IndigenousPeoplesDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Indigenous Peoples of Canada"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-6 border-2 border-orange-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-3 gap-4 text-center" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-4xl font-bold text-orange-600" }, "1.8M"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "People (2021)")), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-4xl font-bold text-orange-600" }, "5%"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "of Canada's Population")), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-4xl font-bold text-orange-600" }, "15,000+"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Years in Canada")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-red-100 to-red-200 rounded-xl p-6 border-2 border-red-300" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-4 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-3xl" }, "\u{1FAB6}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-2xl font-bold text-red-900" }, "First Nations"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-red-700" }, "Original inhabitants of Canada"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-red-800" }, "634 distinct nations"), " across Canada"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-red-800" }, "50+ languages"), " spoken"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-red-800" }, "Examples:"), " Mohawk, Cree, Ojibwe, Mi'kmaq, Haida, Blackfoot"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-blue-100 to-blue-200 rounded-xl p-6 border-2 border-blue-300" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-4 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center text-3xl" }, "\u{1F3BB}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-2xl font-bold text-blue-900" }, "M\xE9tis"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-700" }, "Mixed Indigenous-European heritage"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-800" }, "Red River region"), " (Manitoba) during fur trade era"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-800" }, "Unique culture:"), " Blend of Indigenous and French traditions"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-blue-800" }, "Language:"), " Michif (mix of Cree and French)"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-cyan-100 to-cyan-200 rounded-xl p-6 border-2 border-cyan-300" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-4 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center text-3xl" }, "\u{1F6F7}"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h5", { className: "text-2xl font-bold text-cyan-900" }, "Inuit"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-cyan-700" }, "Arctic peoples of Canada"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-cyan-800" }, '"Inuit"'), ' means "the people" in Inuktitut'), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-cyan-800" }, "Location:"), " Arctic regions (Nunavut, NWT, Northern Quebec, Labrador)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-cyan-800" }, "Culture:"), " Adapted to Arctic environment for thousands of years")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-orange-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-2xl" }, "\u26A0\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-orange-800 mb-1" }, "Important Terminology"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-orange-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Use:"), " Indigenous Peoples, First Nations, M\xE9tis, Inuit"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-orange-700" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Avoid:"), ' "Indian" (outdated/offensive), "Native", "Aboriginal" (means "not original")'), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-orange-700 mt-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Remember:"), ' All Canadians are "treaty people" - we all live on treaty or unceded Indigenous land')))));
-  var PowerFormulaDiagram = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-6" }, "Electrical Power Formulas"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 mb-6 border-2 border-orange-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center mb-6" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-4xl font-bold text-orange-600 mb-2" }, "P = V \xD7 I"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600" }, "Power = Voltage \xD7 Current")), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-3 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-orange-100 rounded-lg p-4 text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-orange-800 mb-2" }, "Power (P)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700" }, "Measured in Watts (W)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-600 mt-2" }, "How fast energy is used")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-red-100 rounded-lg p-4 text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-red-800 mb-2" }, "Voltage (V)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-700" }, "Measured in Volts (V)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-600 mt-2" }, 'Electrical "pressure"')), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-yellow-100 rounded-lg p-4 text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-yellow-800 mb-2" }, "Current (I)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-yellow-700" }, "Measured in Amperes (A)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-yellow-600 mt-2" }, "Flow of electrons")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-4 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-orange-100 to-red-100 rounded-xl p-4 border-2 border-orange-300" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-orange-800 mb-3" }, "Example 1: Light Bulb"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2 text-sm" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700" }, "Given: V = 120V, I = 0.5A"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700" }, "Find: P = ?"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded p-3 mt-2" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-mono text-orange-700" }, "P = V \xD7 I"), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-mono text-orange-700" }, "P = 120V \xD7 0.5A"), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-mono font-bold text-orange-900" }, "P = 60W")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-red-100 to-pink-100 rounded-xl p-4 border-2 border-red-300" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-red-800 mb-3" }, "Example 2: Heater"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2 text-sm" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700" }, "Given: P = 1500W, V = 120V"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700" }, "Find: I = ?"), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded p-3 mt-2" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-mono text-red-700" }, "I = P \xF7 V"), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-mono text-red-700" }, "I = 1500W \xF7 120V"), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-mono font-bold text-red-900" }, "I = 12.5A"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-4 text-white" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement(Zap, { className: "w-6 h-6 flex-shrink-0 mt-1" }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold mb-2" }, "Common Appliance Power:"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 gap-2 text-sm" }, /* @__PURE__ */ import_react.default.createElement("p", null, "\u2022 LED bulb: 10W"), /* @__PURE__ */ import_react.default.createElement("p", null, "\u2022 Laptop: 50W"), /* @__PURE__ */ import_react.default.createElement("p", null, "\u2022 Microwave: 1000W"), /* @__PURE__ */ import_react.default.createElement("p", null, "\u2022 Hair dryer: 1800W"))))));
-  var AtomicModels = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-8" }, "Evolution of Atomic Models"), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md mb-3" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 100 100", className: "w-full h-24" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "35", fill: "#9333EA", opacity: "0.8" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "35", fill: "none", stroke: "#7C3AED", strokeWidth: "2" }))), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-purple-900 mb-1" }, "Dalton (1803)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-purple-700" }, "Solid Sphere"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-1" }, "Indivisible ball")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md mb-3" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 100 100", className: "w-full h-24" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "35", fill: "#F59E0B", opacity: "0.3" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "35", fill: "none", stroke: "#F59E0B", strokeWidth: "2" }), [
-    { x: 35, y: 35 },
-    { x: 65, y: 35 },
-    { x: 35, y: 50 },
-    { x: 65, y: 50 },
-    { x: 35, y: 65 },
-    { x: 65, y: 65 },
-    { x: 50, y: 42 },
-    { x: 50, y: 58 }
-  ].map((pos, i) => /* @__PURE__ */ import_react.default.createElement("circle", { key: i, cx: pos.x, cy: pos.y, r: "3", fill: "#DC2626" })))), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-orange-900 mb-1" }, "Thomson (1897)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-orange-700" }, "Plum Pudding"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-1" }, "Electrons in positive")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md mb-3" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 100 100", className: "w-full h-24" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "8", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "8", fill: "none", stroke: "#991B1B", strokeWidth: "1" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "30", fill: "none", stroke: "#3B82F6", strokeWidth: "1", strokeDasharray: "2,2" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "80", cy: "50", r: "3", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "20", cy: "50", r: "3", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "20", r: "3", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "80", r: "3", fill: "#3B82F6" }))), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-red-900 mb-1" }, "Rutherford (1911)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-red-700" }, "Nuclear Model"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-1" }, "Dense nucleus")), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-6 shadow-md mb-3" }, /* @__PURE__ */ import_react.default.createElement("svg", { viewBox: "0 0 100 100", className: "w-full h-24" }, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "6", fill: "#DC2626" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "15", fill: "none", stroke: "#3B82F6", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "65", cy: "50", r: "2.5", fill: "#3B82F6" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "50", cy: "50", r: "28", fill: "none", stroke: "#10B981", strokeWidth: "1.5" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "78", cy: "50", r: "2.5", fill: "#10B981" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "22", cy: "50", r: "2.5", fill: "#10B981" }))), /* @__PURE__ */ import_react.default.createElement("h5", { className: "font-bold text-blue-900 mb-1" }, "Bohr (1913)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-blue-700" }, "Planetary Model"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-600 mt-1" }, "Energy levels"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 bg-blue-100 rounded-lg p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-blue-800 text-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold" }, "Evolution:"), " From solid ball \u2192 embedded electrons \u2192 nuclear center \u2192 specific orbits")));
-  var PeriodicTableDiagram = () => {
-    const elements = [
-      // Period 1
-      { num: 1, sym: "H", name: "Hydrogen", type: "nonmetal", group: 1, period: 1 },
-      { num: 2, sym: "He", name: "Helium", type: "noble", group: 18, period: 1 },
-      // Period 2
-      { num: 3, sym: "Li", name: "Lithium", type: "alkali", group: 1, period: 2 },
-      { num: 4, sym: "Be", name: "Beryllium", type: "alkaline", group: 2, period: 2 },
-      { num: 5, sym: "B", name: "Boron", type: "metalloid", group: 13, period: 2 },
-      { num: 6, sym: "C", name: "Carbon", type: "nonmetal", group: 14, period: 2 },
-      { num: 7, sym: "N", name: "Nitrogen", type: "nonmetal", group: 15, period: 2 },
-      { num: 8, sym: "O", name: "Oxygen", type: "nonmetal", group: 16, period: 2 },
-      { num: 9, sym: "F", name: "Fluorine", type: "halogen", group: 17, period: 2 },
-      { num: 10, sym: "Ne", name: "Neon", type: "noble", group: 18, period: 2 },
-      // Period 3
-      { num: 11, sym: "Na", name: "Sodium", type: "alkali", group: 1, period: 3 },
-      { num: 12, sym: "Mg", name: "Magnesium", type: "alkaline", group: 2, period: 3 },
-      { num: 13, sym: "Al", name: "Aluminum", type: "metal", group: 13, period: 3 },
-      { num: 14, sym: "Si", name: "Silicon", type: "metalloid", group: 14, period: 3 },
-      { num: 15, sym: "P", name: "Phosphorus", type: "nonmetal", group: 15, period: 3 },
-      { num: 16, sym: "S", name: "Sulfur", type: "nonmetal", group: 16, period: 3 },
-      { num: 17, sym: "Cl", name: "Chlorine", type: "halogen", group: 17, period: 3 },
-      { num: 18, sym: "Ar", name: "Argon", type: "noble", group: 18, period: 3 },
-      // Period 4
-      { num: 19, sym: "K", name: "Potassium", type: "alkali", group: 1, period: 4 },
-      { num: 20, sym: "Ca", name: "Calcium", type: "alkaline", group: 2, period: 4 },
-      { num: 21, sym: "Sc", name: "Scandium", type: "transition", group: 3, period: 4 },
-      { num: 22, sym: "Ti", name: "Titanium", type: "transition", group: 4, period: 4 },
-      { num: 23, sym: "V", name: "Vanadium", type: "transition", group: 5, period: 4 },
-      { num: 24, sym: "Cr", name: "Chromium", type: "transition", group: 6, period: 4 },
-      { num: 25, sym: "Mn", name: "Manganese", type: "transition", group: 7, period: 4 },
-      { num: 26, sym: "Fe", name: "Iron", type: "transition", group: 8, period: 4 },
-      { num: 27, sym: "Co", name: "Cobalt", type: "transition", group: 9, period: 4 },
-      { num: 28, sym: "Ni", name: "Nickel", type: "transition", group: 10, period: 4 },
-      { num: 29, sym: "Cu", name: "Copper", type: "transition", group: 11, period: 4 },
-      { num: 30, sym: "Zn", name: "Zinc", type: "transition", group: 12, period: 4 },
-      { num: 31, sym: "Ga", name: "Gallium", type: "metal", group: 13, period: 4 },
-      { num: 32, sym: "Ge", name: "Germanium", type: "metalloid", group: 14, period: 4 },
-      { num: 33, sym: "As", name: "Arsenic", type: "metalloid", group: 15, period: 4 },
-      { num: 34, sym: "Se", name: "Selenium", type: "nonmetal", group: 16, period: 4 },
-      { num: 35, sym: "Br", name: "Bromine", type: "halogen", group: 17, period: 4 },
-      { num: 36, sym: "Kr", name: "Krypton", type: "noble", group: 18, period: 4 },
-      // Period 5
-      { num: 37, sym: "Rb", name: "Rubidium", type: "alkali", group: 1, period: 5 },
-      { num: 38, sym: "Sr", name: "Strontium", type: "alkaline", group: 2, period: 5 },
-      { num: 39, sym: "Y", name: "Yttrium", type: "transition", group: 3, period: 5 },
-      { num: 40, sym: "Zr", name: "Zirconium", type: "transition", group: 4, period: 5 },
-      { num: 41, sym: "Nb", name: "Niobium", type: "transition", group: 5, period: 5 },
-      { num: 42, sym: "Mo", name: "Molybdenum", type: "transition", group: 6, period: 5 },
-      { num: 43, sym: "Tc", name: "Technetium", type: "transition", group: 7, period: 5 },
-      { num: 44, sym: "Ru", name: "Ruthenium", type: "transition", group: 8, period: 5 },
-      { num: 45, sym: "Rh", name: "Rhodium", type: "transition", group: 9, period: 5 },
-      { num: 46, sym: "Pd", name: "Palladium", type: "transition", group: 10, period: 5 },
-      { num: 47, sym: "Ag", name: "Silver", type: "transition", group: 11, period: 5 },
-      { num: 48, sym: "Cd", name: "Cadmium", type: "transition", group: 12, period: 5 },
-      { num: 49, sym: "In", name: "Indium", type: "metal", group: 13, period: 5 },
-      { num: 50, sym: "Sn", name: "Tin", type: "metal", group: 14, period: 5 },
-      { num: 51, sym: "Sb", name: "Antimony", type: "metalloid", group: 15, period: 5 },
-      { num: 52, sym: "Te", name: "Tellurium", type: "metalloid", group: 16, period: 5 },
-      { num: 53, sym: "I", name: "Iodine", type: "halogen", group: 17, period: 5 },
-      { num: 54, sym: "Xe", name: "Xenon", type: "noble", group: 18, period: 5 },
-      // Period 6
-      { num: 55, sym: "Cs", name: "Cesium", type: "alkali", group: 1, period: 6 },
-      { num: 56, sym: "Ba", name: "Barium", type: "alkaline", group: 2, period: 6 },
-      { num: 57, sym: "La", name: "Lanthanum", type: "lanthanide", group: 3, period: 6 },
-      { num: 72, sym: "Hf", name: "Hafnium", type: "transition", group: 4, period: 6 },
-      { num: 73, sym: "Ta", name: "Tantalum", type: "transition", group: 5, period: 6 },
-      { num: 74, sym: "W", name: "Tungsten", type: "transition", group: 6, period: 6 },
-      { num: 75, sym: "Re", name: "Rhenium", type: "transition", group: 7, period: 6 },
-      { num: 76, sym: "Os", name: "Osmium", type: "transition", group: 8, period: 6 },
-      { num: 77, sym: "Ir", name: "Iridium", type: "transition", group: 9, period: 6 },
-      { num: 78, sym: "Pt", name: "Platinum", type: "transition", group: 10, period: 6 },
-      { num: 79, sym: "Au", name: "Gold", type: "transition", group: 11, period: 6 },
-      { num: 80, sym: "Hg", name: "Mercury", type: "transition", group: 12, period: 6 },
-      { num: 81, sym: "Tl", name: "Thallium", type: "metal", group: 13, period: 6 },
-      { num: 82, sym: "Pb", name: "Lead", type: "metal", group: 14, period: 6 },
-      { num: 83, sym: "Bi", name: "Bismuth", type: "metal", group: 15, period: 6 },
-      { num: 84, sym: "Po", name: "Polonium", type: "metalloid", group: 16, period: 6 },
-      { num: 85, sym: "At", name: "Astatine", type: "halogen", group: 17, period: 6 },
-      { num: 86, sym: "Rn", name: "Radon", type: "noble", group: 18, period: 6 },
-      // Period 7
-      { num: 87, sym: "Fr", name: "Francium", type: "alkali", group: 1, period: 7 },
-      { num: 88, sym: "Ra", name: "Radium", type: "alkaline", group: 2, period: 7 },
-      { num: 89, sym: "Ac", name: "Actinium", type: "actinide", group: 3, period: 7 },
-      { num: 104, sym: "Rf", name: "Rutherfordium", type: "transition", group: 4, period: 7 },
-      { num: 105, sym: "Db", name: "Dubnium", type: "transition", group: 5, period: 7 },
-      { num: 106, sym: "Sg", name: "Seaborgium", type: "transition", group: 6, period: 7 },
-      { num: 107, sym: "Bh", name: "Bohrium", type: "transition", group: 7, period: 7 },
-      { num: 108, sym: "Hs", name: "Hassium", type: "transition", group: 8, period: 7 },
-      { num: 109, sym: "Mt", name: "Meitnerium", type: "transition", group: 9, period: 7 },
-      { num: 110, sym: "Ds", name: "Darmstadtium", type: "transition", group: 10, period: 7 },
-      { num: 111, sym: "Rg", name: "Roentgenium", type: "transition", group: 11, period: 7 },
-      { num: 112, sym: "Cn", name: "Copernicium", type: "transition", group: 12, period: 7 },
-      { num: 113, sym: "Nh", name: "Nihonium", type: "metal", group: 13, period: 7 },
-      { num: 114, sym: "Fl", name: "Flerovium", type: "metal", group: 14, period: 7 },
-      { num: 115, sym: "Mc", name: "Moscovium", type: "metal", group: 15, period: 7 },
-      { num: 116, sym: "Lv", name: "Livermorium", type: "metal", group: 16, period: 7 },
-      { num: 117, sym: "Ts", name: "Tennessine", type: "halogen", group: 17, period: 7 },
-      { num: 118, sym: "Og", name: "Oganesson", type: "noble", group: 18, period: 7 },
-      // Lanthanides
-      { num: 58, sym: "Ce", name: "Cerium", type: "lanthanide" },
-      { num: 59, sym: "Pr", name: "Praseodymium", type: "lanthanide" },
-      { num: 60, sym: "Nd", name: "Neodymium", type: "lanthanide" },
-      { num: 61, sym: "Pm", name: "Promethium", type: "lanthanide" },
-      { num: 62, sym: "Sm", name: "Samarium", type: "lanthanide" },
-      { num: 63, sym: "Eu", name: "Europium", type: "lanthanide" },
-      { num: 64, sym: "Gd", name: "Gadolinium", type: "lanthanide" },
-      { num: 65, sym: "Tb", name: "Terbium", type: "lanthanide" },
-      { num: 66, sym: "Dy", name: "Dysprosium", type: "lanthanide" },
-      { num: 67, sym: "Ho", name: "Holmium", type: "lanthanide" },
-      { num: 68, sym: "Er", name: "Erbium", type: "lanthanide" },
-      { num: 69, sym: "Tm", name: "Thulium", type: "lanthanide" },
-      { num: 70, sym: "Yb", name: "Ytterbium", type: "lanthanide" },
-      { num: 71, sym: "Lu", name: "Lutetium", type: "lanthanide" },
-      // Actinides
-      { num: 90, sym: "Th", name: "Thorium", type: "actinide" },
-      { num: 91, sym: "Pa", name: "Protactinium", type: "actinide" },
-      { num: 92, sym: "U", name: "Uranium", type: "actinide" },
-      { num: 93, sym: "Np", name: "Neptunium", type: "actinide" },
-      { num: 94, sym: "Pu", name: "Plutonium", type: "actinide" },
-      { num: 95, sym: "Am", name: "Americium", type: "actinide" },
-      { num: 96, sym: "Cm", name: "Curium", type: "actinide" },
-      { num: 97, sym: "Bk", name: "Berkelium", type: "actinide" },
-      { num: 98, sym: "Cf", name: "Californium", type: "actinide" },
-      { num: 99, sym: "Es", name: "Einsteinium", type: "actinide" },
-      { num: 100, sym: "Fm", name: "Fermium", type: "actinide" },
-      { num: 101, sym: "Md", name: "Mendelevium", type: "actinide" },
-      { num: 102, sym: "No", name: "Nobelium", type: "actinide" },
-      { num: 103, sym: "Lr", name: "Lawrencium", type: "actinide" }
-    ];
-    const getColor = (type) => {
-      const colors = {
-        alkali: "bg-red-400 border-red-500",
-        alkaline: "bg-orange-400 border-orange-500",
-        transition: "bg-yellow-300 border-yellow-400",
-        metal: "bg-gray-400 border-gray-500",
-        metalloid: "bg-teal-400 border-teal-500",
-        nonmetal: "bg-blue-400 border-blue-500",
-        halogen: "bg-green-400 border-green-500",
-        noble: "bg-purple-400 border-purple-500",
-        lanthanide: "bg-pink-300 border-pink-400",
-        actinide: "bg-rose-300 border-rose-400"
-      };
-      return colors[type] || "bg-gray-300 border-gray-400";
-    };
-    const renderElement = (el, size = "normal") => {
-      const sizeClasses = size === "small" ? "p-1" : "p-2";
-      const textSize = size === "small" ? "text-xs" : "text-xs";
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: `${getColor(el.type)} border-2 rounded ${sizeClasses} text-center flex flex-col justify-center hover:shadow-lg transition-shadow cursor-pointer min-h-[70px]` }, /* @__PURE__ */ import_react.default.createElement("div", { className: `${textSize} font-bold text-gray-800 text-[10px]` }, el.num), /* @__PURE__ */ import_react.default.createElement("div", { className: `${size === "small" ? "text-sm" : "text-lg"} font-bold text-gray-900` }, el.sym), size !== "small" && /* @__PURE__ */ import_react.default.createElement("div", { className: "text-[9px] text-gray-700 leading-tight px-0.5" }, el.name));
-    };
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl p-4" }, /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-center font-semibold text-gray-700 mb-4" }, "Complete Periodic Table of Elements"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex flex-wrap justify-center gap-2 mb-4 text-xs" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-red-400 border border-red-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Alkali")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-orange-400 border border-orange-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Alkaline Earth")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-yellow-300 border border-yellow-400" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Transition")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-gray-400 border border-gray-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Post-transition")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-teal-400 border border-teal-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Metalloid")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-blue-400 border border-blue-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Nonmetal")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-green-400 border border-green-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Halogen")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-purple-400 border border-purple-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Noble Gas")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-pink-300 border border-pink-400" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Lanthanide")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 rounded bg-rose-300 border border-rose-400" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, "Actinide"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "overflow-x-auto mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(18, minmax(50px, 1fr))", gap: "2px", minWidth: "900px" } }, renderElement(elements.find((e) => e.num === 1)), /* @__PURE__ */ import_react.default.createElement("div", { style: { gridColumn: "span 16" } }), renderElement(elements.find((e) => e.num === 2)), renderElement(elements.find((e) => e.num === 3)), renderElement(elements.find((e) => e.num === 4)), /* @__PURE__ */ import_react.default.createElement("div", { style: { gridColumn: "span 10" } }), [5, 6, 7, 8, 9, 10].map((n) => renderElement(elements.find((e) => e.num === n))), renderElement(elements.find((e) => e.num === 11)), renderElement(elements.find((e) => e.num === 12)), /* @__PURE__ */ import_react.default.createElement("div", { style: { gridColumn: "span 10" } }), [13, 14, 15, 16, 17, 18].map((n) => renderElement(elements.find((e) => e.num === n))), [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36].map(
-      (n) => renderElement(elements.find((e) => e.num === n))
-    ), [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54].map(
-      (n) => renderElement(elements.find((e) => e.num === n))
-    ), renderElement(elements.find((e) => e.num === 55)), renderElement(elements.find((e) => e.num === 56)), renderElement(elements.find((e) => e.num === 57)), [72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86].map(
-      (n) => renderElement(elements.find((e) => e.num === n))
-    ), renderElement(elements.find((e) => e.num === 87)), renderElement(elements.find((e) => e.num === 88)), renderElement(elements.find((e) => e.num === 89)), [104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118].map(
-      (n) => renderElement(elements.find((e) => e.num === n))
-    ))), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(15, minmax(40px, 1fr))", gap: "2px", minWidth: "600px" } }, [58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71].map(
-      (n) => renderElement(elements.find((e) => e.num === n), "small")
-    )), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(15, minmax(40px, 1fr))", gap: "2px", minWidth: "600px" } }, [90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103].map(
-      (n) => renderElement(elements.find((e) => e.num === n), "small")
-    ))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-4 grid grid-cols-2 gap-2 text-xs" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-red-50 rounded-lg p-2 border border-red-200" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-red-800 mb-1" }, "Group 1: Alkali Metals"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-red-700" }, "Soft, highly reactive, 1 valence e\u207B")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-purple-50 rounded-lg p-2 border border-purple-200" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold text-purple-800 mb-1" }, "Group 18: Noble Gases"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-purple-700" }, "Unreactive, full outer shell"))));
-  };
-  var studyLibrary = {
-    flashcards: {
-      id: "flashcards",
-      name: "Flashcard Review",
-      description: "70+ interactive flashcards across Biology & Chemistry for quick review",
-      icon: Brain,
-      color: "cyan",
-      gradient: "from-cyan-500 to-blue-600",
-      image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "biology-flashcards",
-          title: "Biology Flashcards",
-          image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&h=400&fit=crop",
-          flashcards: [
-            { front: "What are the three types of biodiversity?", back: "Genetic diversity (variation within species), Species diversity (variety of species), and Ecosystem diversity (variety of ecosystems)" },
-            { front: "What does H.I.P.P.O.C stand for?", back: "H - Habitat destruction\\nI - Invasive species\\nP - Pollution\\nP - Population (human)\\nO - Overharvesting\\nC - Climate change" },
-            { front: "What is a biotic factor?", back: "A living component of an ecosystem (plants, animals, bacteria, fungi)" },
-            { front: "What is an abiotic factor?", back: "A non-living component of an ecosystem (sunlight, water, soil, temperature)" },
-            { front: "What is the 10% rule in energy transfer?", back: "Only 10% of energy passes to the next trophic level. 90% is lost as heat, movement, and waste." },
-            { front: "What is bioaccumulation?", back: "The build-up of a substance (like a toxin) in a single organism over time" },
-            { front: "What is biomagnification?", back: "The increase in concentration of a substance as you move up the food chain" },
-            { front: "What is photosynthesis?", back: "The process where plants use CO\u2082 and water to make glucose and oxygen using sunlight\\n6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082" },
-            { front: "What is cellular respiration?", back: "The process where organisms break down glucose with oxygen to release energy\\nC\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + ATP" },
-            { front: "What is nitrogen fixation?", back: "The conversion of atmospheric nitrogen (N\u2082) into ammonia (NH\u2083) by bacteria or lightning" },
-            { front: "What makes a species invasive?", back: "A non-native species that causes harm by: rapid reproduction, outcompeting natives, lacking natural predators, and disrupting ecosystems" },
-            { front: "What is reforestation?", back: "Planting trees in areas where they were previously cut down to restore ecosystems" },
-            { front: "What is bioremediation?", back: "Adding organisms (like bacteria) that break down waste and improve soil/water quality" },
-            { front: "What are the 4 spheres of Earth?", back: "Biosphere (living things), Atmosphere (air), Hydrosphere (water), Lithosphere (rocks/soil)" },
-            { front: "What is a sustainable ecosystem?", back: "An ecosystem that can maintain itself over time with resources regenerating as fast as they are used" },
-            { front: "What is a producer?", back: "An organism that makes its own food through photosynthesis (plants, algae)" },
-            { front: "What is a primary consumer?", back: "An herbivore that eats producers (rabbits, deer, caterpillars)" },
-            { front: "What is a secondary consumer?", back: "A carnivore that eats primary consumers (snakes, frogs, small birds)" },
-            { front: "What is a tertiary consumer?", back: "A top predator that eats secondary consumers (eagles, sharks, wolves)" },
-            { front: "What is a decomposer?", back: "An organism that breaks down dead matter and returns nutrients to soil (bacteria, fungi, worms)" },
-            { front: "What is mutualism?", back: "A symbiotic relationship where both species benefit (bee and flower, clownfish and anemone)" },
-            { front: "What is commensalism?", back: "A relationship where one benefits and the other is unaffected (bird nesting in tree)" },
-            { front: "What is parasitism?", back: "A relationship where one benefits and the other is harmed (tick on dog, tapeworm in human)" },
-            { front: "What is an example of genetic diversity?", back: "Different dog breeds - all are the same species (Canis familiaris) but have genetic variation" },
-            { front: "What is an example of species diversity?", back: "A coral reef with many different fish species, corals, and marine life" },
-            { front: "What is an example of ecosystem diversity?", back: "A region with forests, wetlands, grasslands, and lakes" },
-            { front: "Why is biodiversity important?", back: "More diverse ecosystems are more stable, resilient to change, and provide essential services (clean air, water, food)" },
-            { front: "What is bioaugmentation?", back: "Using bacteria or fungi to neutralize toxins and clean up pollution (like oil spills)" },
-            { front: "What is nitrification?", back: "The conversion of ammonia (NH\u2083) to nitrite (NO\u2082\u207B) and then to nitrate (NO\u2083\u207B) by bacteria" },
-            { front: "What is denitrification?", back: "The conversion of nitrate (NO\u2083\u207B) back into nitrogen gas (N\u2082) that returns to the atmosphere" }
-          ],
-          notes: []
-        },
-        {
-          id: "chemistry-flashcards",
-          title: "Chemistry Flashcards",
-          image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
-          flashcards: [
-            { front: "What are the three subatomic particles?", back: "Protons (+1 charge, in nucleus)\\nNeutrons (0 charge, in nucleus)\\nElectrons (-1 charge, in shells)" },
-            { front: "What is a pure substance?", back: "Matter with uniform composition - either an element (one type of atom) or compound (bonded elements)" },
-            { front: "What is a homogeneous mixture?", back: "A mixture that is uniform throughout - you cannot see the individual parts (solution)" },
-            { front: "What is a heterogeneous mixture?", back: "A mixture where you can see different parts (mechanical mixture, suspension)" },
-            { front: "What is density?", back: "Mass per unit volume\\nD = m/V\\nMeasured in g/cm\xB3 or g/mL" },
-            { front: "What is a physical property?", back: "A characteristic you can observe WITHOUT changing the substance (color, mass, density, melting point)" },
-            { front: "What is a chemical property?", back: "How a substance reacts with OTHER substances (combustibility, reactivity, stability)" },
-            { front: "What are 5 signs of a chemical change?", back: "Color change, gas production, temperature change, light production, precipitate forms" },
-            { front: "Who proposed the plum pudding model?", back: "J.J. Thomson - discovered electrons and proposed positive material with embedded electrons" },
-            { front: "Who discovered the nucleus?", back: "Ernest Rutherford - found dense positive nucleus with electrons orbiting around it" },
-            { front: "What did Bohr contribute?", back: "Niels Bohr proposed that electrons orbit in specific energy levels/shells (planetary model)" },
-            { front: "How do you find the number of neutrons?", back: "Neutrons = Mass number - Atomic number" },
-            { front: "What are valence electrons?", back: "Electrons in the outermost shell that determine chemical behavior" },
-            { front: "What is an ion?", back: "An atom with unequal protons and electrons\\nCation = positive (lost electrons)\\nAnion = negative (gained electrons)" },
-            { front: "What are isotopes?", back: "Atoms of the same element with different numbers of neutrons (same protons, different mass)" },
-            { front: "What are alkali metals?", back: "Group 1 elements: soft, highly reactive, shiny, 1 valence electron" },
-            { front: "What are halogens?", back: "Group 17 elements: reactive non-metals, diatomic, gain 1 electron, form salts" },
-            { front: "What are noble gases?", back: "Group 18 elements: unreactive, full valence shell (8 electrons), stable" },
-            { front: "What is the formula for density?", back: "D = m/V\\nWhere D = density, m = mass, V = volume" },
-            { front: "Will an object float or sink?", back: "Float if object density < liquid density\\nSink if object density > liquid density" },
-            { front: "What is the atomic number?", back: "The number of protons in an atom - this identifies the element" },
-            { front: "What is the mass number?", back: "The total number of protons + neutrons in the nucleus" },
-            { front: "What is John Dalton known for?", back: "Proposed atoms are indivisible solid spheres (Solid Sphere Model - 1803)" },
-            { front: "What is an element?", back: "A pure substance made of only one type of atom (e.g., gold, oxygen, carbon)" },
-            { front: "What is a compound?", back: "A pure substance made of two or more elements chemically bonded (e.g., H\u2082O, CO\u2082, NaCl)" },
-            { front: "What is a cation?", back: "A positively charged ion formed when an atom LOSES electrons (e.g., Na\u207A, Ca\xB2\u207A, Al\xB3\u207A)" },
-            { front: "What is an anion?", back: "A negatively charged ion formed when an atom GAINS electrons (e.g., Cl\u207B, O\xB2\u207B, N\xB3\u207B)" },
-            { front: "How many electrons fit in shell 1?", back: "2 electrons maximum" },
-            { front: "How many electrons fit in shell 2?", back: "8 electrons maximum" },
-            { front: "How many electrons fit in shell 3?", back: "8 electrons maximum (for first 20 elements)" },
-            { front: "What are metalloids?", back: "Elements with properties between metals and non-metals (semiconductors like Silicon, Boron)" },
-            { front: "What are transition metals?", back: "Metals in the middle of periodic table (Groups 3-12) - can form multiple ion charges" },
-            { front: "What is filtration?", back: "Separation method that uses a filter to separate solids from liquids" },
-            { front: "What is distillation?", back: "Separation method using different boiling points to separate liquids" },
-            { front: "What is evaporation?", back: "Separation method where liquid evaporates leaving dissolved solid behind" },
-            { front: "Why do atoms form ions?", back: "To achieve a stable electron configuration with a full outer shell (8 valence electrons)" },
-            { front: "What is a qualitative property?", back: "A property described with words (color, texture, odor, luster)" },
-            { front: "What is a quantitative property?", back: "A property measured with numbers (mass, volume, density, temperature)" },
-            { front: "What happens in a physical change?", back: "Substance changes form but remains the same substance (melting, cutting, dissolving)" },
-            { front: "What happens in a chemical change?", back: "New substance forms with different properties (burning, rusting, cooking)" }
-          ],
-          notes: []
-        }
-      ]
-    },
-    testReview: {
-      id: "testReview",
-      name: "Test Review Guide",
-      description: "10 comprehensive study guides covering everything for your tests",
-      icon: Target,
-      color: "rose",
-      gradient: "from-rose-500 to-pink-600",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "biology-review",
-          title: "Biology Test - What You Need to Know",
-          image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Lesson 1: Biodiversity Types",
-              emoji: "\u{1F33F}",
-              points: [
-                "What are the three types of biodiversity? Provide an example of each",
-                "Genetic, species, and ecosystem diversity"
-              ]
-            },
-            {
-              subtitle: "Lesson 2: H.I.P.P.O.C Threats",
-              emoji: "\u26A0\uFE0F",
-              points: [
-                "Explain what each letter of H.I.P.P.O.C stands for",
-                "Provide an example of each threat",
-                "Describe one solution to address each threat"
-              ]
-            },
-            {
-              subtitle: "Lesson 3: Ecosystem Factors",
-              emoji: "\u{1F30D}",
-              points: [
-                "Differentiate between biotic and abiotic factors",
-                "Name 6 examples of each type",
-                "Explain sustainable vs non-sustainable ecosystems",
-                "Name and describe each of the 4 spheres",
-                "Provide examples of interactions between spheres"
-              ]
-            },
-            {
-              subtitle: "Lesson 4: Ecosystem Services & Types",
-              emoji: "\u{1F3AF}",
-              points: [
-                "Explain what an ecosystem service is",
-                "Give two examples of ecosystem services",
-                "Difference between natural and artificial ecosystems",
-                "Provide examples of each"
-              ]
-            },
-            {
-              subtitle: "Lesson 5: Symbiosis & Relationships",
-              emoji: "\u{1F91D}",
-              points: [
-                "What is symbiosis?",
-                "Different types of symbiotic relationships (mutualism, commensalism, parasitism)",
-                "Give examples of each type"
-              ]
-            },
-            {
-              subtitle: "Lesson 6: Food Chains & Energy",
-              emoji: "\u{1F517}",
-              points: [
-                "What is a food chain?",
-                "Practice aquatic and terrestrial food chains",
-                "Include trophic levels and arrows for energy flow",
-                "How much energy passes between levels? (10%)",
-                "What happens to the other 90%?"
-              ]
-            },
-            {
-              subtitle: "Lesson 7: Energy Pyramids",
-              emoji: "\u{1F53A}",
-              points: [
-                "Draw an energy pyramid for a food chain",
-                "If producers have 54,670 kcal, calculate each level",
-                "Explain bioaccumulation vs biomagnification",
-                "Provide examples for each"
-              ]
-            },
-            {
-              subtitle: "Lesson 8: Nutrient Cycles",
-              emoji: "\u267B\uFE0F",
-              points: [
-                "What are nutrients? Why are they important?",
-                "Examples of reservoirs and transfer processes",
-                "Outline Carbon cycle with flow diagram (reservoirs + processes)",
-                "Know photosynthesis and cellular respiration (reactants + products)",
-                "How do human activities affect these processes?",
-                "Outline Nitrogen cycle with flow diagram"
-              ]
-            },
-            {
-              subtitle: "Lesson 9: Invasive Species",
-              emoji: "\u{1F99F}",
-              points: [
-                "What are invasive species? What criteria defines them?",
-                "Examples of invasive species",
-                "For one species: origin, location where invasive, harm caused",
-                "Describe strategies to control/manage invasive species"
-              ]
-            },
-            {
-              subtitle: "Lesson 10: Climate Change & Restoration",
-              emoji: "\u{1F321}\uFE0F",
-              points: [
-                "What is climate change? Evidence that climate is changing?",
-                "Worldwide impacts of climate change",
-                "How to fix damaged ecosystems:",
-                "Describe reforestation, bioaugmentation, and bioremediation"
-              ]
-            }
-          ]
-        },
-        {
-          id: "chemistry-review",
-          title: "Chemistry Test - What You Need to Know",
-          image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Lesson 1: Safety + Lab Equipment",
-              emoji: "\u{1F97D}",
-              points: [
-                "Be familiar with WHMIS safety labels on chemical containers",
-                "Know all lab safety rules",
-                "Identify common lab equipment"
-              ]
-            },
-            {
-              subtitle: "Lesson 2: Types of Matter",
-              emoji: "\u{1F9EA}",
-              points: [
-                "Distinguish between pure substances and mixtures",
-                "Heterogeneous mixtures: mechanical mixtures, suspensions, emulsions",
-                "Homogeneous mixtures: solutions and alloys",
-                "Be able to classify examples of each type"
-              ]
-            },
-            {
-              subtitle: "Lesson 3: Properties of Matter",
-              emoji: "\u2696\uFE0F",
-              points: [
-                "Distinguish chemical vs physical properties (with examples)",
-                "Distinguish quantitative vs qualitative properties (with examples)",
-                "Know how to solve density problems",
-                "Describe how density changes when mass/volume increases or decreases",
-                "Draw (plot) a line graph by hand from supplied data",
-                "Use a mass vs volume graph to find density of an object"
-              ]
-            },
-            {
-              subtitle: "Lesson 4: Physical/Chemical Changes",
-              emoji: "\u{1F52C}",
-              points: [
-                "Explain the meaning of physical change vs chemical change",
-                "List evidence to look for when checking for chemical change",
-                "Color change, gas production, temperature change, energy production, precipitate"
-              ]
-            },
-            {
-              subtitle: "Lesson 5: Organization of Periodic Table",
-              emoji: "\u{1F4CB}",
-              points: [
-                "Identify properties and location of families: alkali metals, alkaline earth metals, halogens, noble gases",
-                "List name and symbols for first 20 elements",
-                "State properties of metals and non-metals",
-                "Identify metals, non-metals, metalloids using Periodic Table"
-              ]
-            },
-            {
-              subtitle: "Lesson 6: Models of the Atom",
-              emoji: "\u{1F52D}",
-              points: [
-                "Outline contributions of Dalton, Thomson, Rutherford, and Bohr",
-                "Know the names of each scientist's atomic model",
-                "Dalton: solid sphere, Thomson: plum pudding, Rutherford: nuclear, Bohr: planetary"
-              ]
-            },
-            {
-              subtitle: "Lesson 7: Subatomic Particles + Bohr-Rutherford Diagrams",
-              emoji: "\u269B\uFE0F",
-              points: [
-                "Explain electrons, protons, neutrons (charge and mass)",
-                "Use periodic table to determine # of protons, neutrons, electrons",
-                "Draw Bohr-Rutherford diagrams for first 20 elements",
-                "Explain what an isotope is",
-                "Recognize isotopes in a series of diagrams"
-              ]
-            },
-            {
-              subtitle: "Lesson 8: Valence Electrons & Ions",
-              emoji: "\u{1F4AB}",
-              points: [
-                "Explain what valence electrons are",
-                "Explain and draw Lewis dot diagrams for different elements",
-                "Use periodic table to calculate protons, neutrons, electrons for ions",
-                "Understand cations (positive) and anions (negative)"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    practiceQuestions: {
-      id: "practiceQuestions",
-      name: "Practice Questions",
-      description: "7 quizzes with 80+ questions and instant feedback",
-      icon: FileText,
-      color: "indigo",
-      gradient: "from-indigo-500 to-purple-600",
-      image: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "biology-practice-1",
-          title: "Biology Practice Quiz 1 - Biodiversity & Threats",
-          image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=400&fit=crop",
-          quiz: [
-            {
-              question: "What are the three types of biodiversity?",
-              options: ["Genetic, species, ecosystem", "Plant, animal, microbe", "Land, water, air", "Producer, consumer, decomposer"],
-              correct: 0,
-              explanation: "The three types are genetic diversity (variation within species), species diversity (variety of species), and ecosystem diversity (variety of ecosystems)."
-            },
-            {
-              question: 'In H.I.P.P.O.C., what does the "H" stand for?',
-              options: ["Human population", "Habitat destruction", "Hunting", "Hazardous waste"],
-              correct: 1,
-              explanation: "H stands for Habitat Destruction - the removal of living spaces that species need to survive."
-            },
-            {
-              question: "Which is an example of a biotic factor?",
-              options: ["Sunlight", "Water", "Bacteria", "Temperature"],
-              correct: 2,
-              explanation: "Bacteria are living organisms, making them biotic factors. Sunlight, water, and temperature are abiotic (non-living) factors."
-            },
-            {
-              question: 'What does the "C" in H.I.P.P.O.C. represent?',
-              options: ["Chemicals", "Climate change", "Conservation", "Carbon emissions"],
-              correct: 1,
-              explanation: "C stands for Climate Change - alterations in global weather patterns that threaten ecosystems."
-            },
-            {
-              question: "Which is an example of genetic diversity?",
-              options: ["Different fish species in a reef", "Different dog breeds", "Different ecosystems in a region", "Different trees in a forest"],
-              correct: 1,
-              explanation: "Different dog breeds are an example of genetic diversity - variation within a single species (dogs)."
-            },
-            {
-              question: 'What does "I" stand for in H.I.P.P.O.C.?',
-              options: ["Insects", "Invasive species", "Industrial waste", "Ice melting"],
-              correct: 1,
-              explanation: "I stands for Invasive Species - non-native organisms that cause harm to native ecosystems."
-            },
-            {
-              question: "Which is an example of species diversity?",
-              options: ["Different dog breeds", "Different types of fish in a coral reef", "Forests and grasslands", "Tall and short oak trees"],
-              correct: 1,
-              explanation: "Different types of fish in a coral reef is species diversity - variety of different species in one habitat."
-            },
-            {
-              question: 'What does "P" (first one) stand for in H.I.P.P.O.C.?',
-              options: ["Plants", "Pollution", "Pesticides", "Plastics"],
-              correct: 1,
-              explanation: "The first P stands for Pollution - toxic chemicals, waste, and contaminants that harm organisms."
-            },
-            {
-              question: "Which is an abiotic factor?",
-              options: ["Mushrooms", "Temperature", "Bacteria", "Grass"],
-              correct: 1,
-              explanation: "Temperature is abiotic (non-living). Mushrooms, bacteria, and grass are all living (biotic)."
-            },
-            {
-              question: 'What does "O" stand for in H.I.P.P.O.C.?',
-              options: ["Oil spills", "Overharvesting", "Oxygen depletion", "Ocean acidification"],
-              correct: 1,
-              explanation: "O stands for Overharvesting - taking too many organisms (fishing, hunting, logging) faster than they can reproduce."
-            },
-            {
-              question: "Which is an example of ecosystem diversity?",
-              options: ["Different breeds of cats", "Variety of birds in a forest", "Forests, wetlands, and grasslands in a region", "Different colored flowers"],
-              correct: 2,
-              explanation: "Forests, wetlands, and grasslands represent ecosystem diversity - variety of different ecosystems in an area."
-            },
-            {
-              question: "What is a sustainable ecosystem?",
-              options: ["One with no predators", "One that can maintain itself over time", "One with only plants", "One without humans"],
-              correct: 1,
-              explanation: "A sustainable ecosystem can maintain itself over time with resources regenerating as fast as they are used."
-            }
-          ],
-          notes: []
-        },
-        {
-          id: "biology-practice-2",
-          title: "Biology Practice Quiz 2 - Energy & Food Chains",
-          image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop",
-          quiz: [
-            {
-              question: "How much energy is transferred between trophic levels?",
-              options: ["50%", "25%", "10%", "90%"],
-              correct: 2,
-              explanation: "Only about 10% of energy passes to the next trophic level. The remaining 90% is lost as heat, movement, and waste."
-            },
-            {
-              question: "If producers have 50,000 kcal, how much energy do primary consumers get?",
-              options: ["50,000 kcal", "25,000 kcal", "5,000 kcal", "500 kcal"],
-              correct: 2,
-              explanation: "Primary consumers receive 10% of the producer energy: 50,000 \xD7 0.10 = 5,000 kcal."
-            },
-            {
-              question: "What is bioaccumulation?",
-              options: ["Increase up food chain", "Build-up in one organism", "Energy transfer", "Nutrient cycling"],
-              correct: 1,
-              explanation: "Bioaccumulation is the build-up of a substance within a single organism over time, like mercury accumulating in a fish."
-            },
-            {
-              question: "What process removes CO\u2082 from the atmosphere?",
-              options: ["Respiration", "Photosynthesis", "Combustion", "Decomposition"],
-              correct: 1,
-              explanation: "Photosynthesis removes CO\u2082 from the atmosphere as plants convert it into glucose using sunlight."
-            },
-            {
-              question: "In the nitrogen cycle, what converts N\u2082 into ammonia?",
-              options: ["Photosynthesis", "Respiration", "Nitrogen fixation", "Denitrification"],
-              correct: 2,
-              explanation: "Nitrogen fixation (by bacteria or lightning) converts atmospheric N\u2082 into ammonia (NH\u2083) that plants can use."
-            },
-            {
-              question: "What is biomagnification?",
-              options: ["Energy loss between levels", "Toxin concentration increases up food chain", "Population growth", "Nutrient absorption"],
-              correct: 1,
-              explanation: "Biomagnification is when toxin concentration increases as you move up the food chain. Top predators have the highest concentrations."
-            },
-            {
-              question: "If primary consumers have 10,000 kcal, how much do secondary consumers get?",
-              options: ["10,000 kcal", "5,000 kcal", "1,000 kcal", "100 kcal"],
-              correct: 2,
-              explanation: "Secondary consumers get 10% of primary consumer energy: 10,000 \xD7 0.10 = 1,000 kcal."
-            },
-            {
-              question: "What is the correct order of a food chain?",
-              options: ["Consumer \u2192 Producer \u2192 Decomposer", "Producer \u2192 Consumer \u2192 Decomposer", "Decomposer \u2192 Producer \u2192 Consumer", "Consumer \u2192 Decomposer \u2192 Producer"],
-              correct: 1,
-              explanation: "Food chains always start with producers (plants), then consumers (animals), and decomposers break down dead matter."
-            },
-            {
-              question: "Which organism is a primary consumer?",
-              options: ["Grass", "Rabbit", "Fox", "Mushroom"],
-              correct: 1,
-              explanation: "A rabbit is a primary consumer (herbivore) that eats producers (plants). Fox is secondary, mushroom is decomposer."
-            },
-            {
-              question: "Where does energy in food chains originally come from?",
-              options: ["Soil", "Water", "Sun", "Air"],
-              correct: 2,
-              explanation: "All energy in food chains originally comes from the sun. Plants capture solar energy through photosynthesis."
-            },
-            {
-              question: "What happens to the 90% of energy that doesn't transfer?",
-              options: ["It disappears", "Lost as heat and waste", "Stored in soil", "Goes to decomposers"],
-              correct: 1,
-              explanation: "The 90% is lost as heat from movement and metabolism, and through waste products. Only 10% is stored in body tissues."
-            },
-            {
-              question: "Which has the most energy in an energy pyramid?",
-              options: ["Top predators", "Secondary consumers", "Primary consumers", "Producers"],
-              correct: 3,
-              explanation: "Producers at the bottom of the pyramid have the most energy. Energy decreases as you move up each level."
-            }
-          ],
-          notes: []
-        },
-        {
-          id: "biology-practice-3",
-          title: "Biology Practice Quiz 3 - Cycles & Restoration",
-          image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=400&fit=crop",
-          quiz: [
-            {
-              question: "Which is NOT a characteristic of invasive species?",
-              options: ["Native to the area", "Rapid reproduction", "Outcompete natives", "Disrupt ecosystems"],
-              correct: 0,
-              explanation: "Invasive species are NOT native to the area - they are introduced from elsewhere and cause harm to native ecosystems."
-            },
-            {
-              question: "What is bioremediation?",
-              options: ["Planting trees", "Adding helpful organisms", "Using bacteria to break down toxins", "Reducing pollution"],
-              correct: 1,
-              explanation: "Bioremediation involves adding species that break down waste and improve soil/water quality to restore ecosystems."
-            },
-            {
-              question: "What is the photosynthesis equation (simplified)?",
-              options: ["CO\u2082 + H\u2082O \u2192 Glucose + O\u2082", "Glucose + O\u2082 \u2192 CO\u2082 + H\u2082O", "N\u2082 \u2192 NH\u2083", "CH\u2084 + O\u2082 \u2192 CO\u2082"],
-              correct: 0,
-              explanation: "Photosynthesis: CO\u2082 + H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + O\u2082. Plants use carbon dioxide and water to make glucose and oxygen."
-            },
-            {
-              question: "What does reforestation mean?",
-              options: ["Removing forests", "Planting trees where cut down", "Creating new forests", "Protecting old forests"],
-              correct: 1,
-              explanation: "Reforestation is planting trees in areas where they were previously cut down to restore ecosystems."
-            },
-            {
-              question: "Which sphere contains all living organisms?",
-              options: ["Atmosphere", "Biosphere", "Hydrosphere", "Lithosphere"],
-              correct: 1,
-              explanation: "The biosphere contains all living organisms on Earth - plants, animals, bacteria, and fungi."
-            },
-            {
-              question: "What is cellular respiration?",
-              options: ["Making oxygen", "Breaking down glucose for energy", "Fixing nitrogen", "Absorbing sunlight"],
-              correct: 1,
-              explanation: "Cellular respiration breaks down glucose with oxygen to release energy (ATP) that organisms need to survive."
-            },
-            {
-              question: "What is the atmosphere?",
-              options: ["All water on Earth", "Layer of gases around Earth", "All living things", "Earth's crust"],
-              correct: 1,
-              explanation: "The atmosphere is the layer of gases surrounding Earth, including oxygen, nitrogen, and carbon dioxide."
-            },
-            {
-              question: "What is bioaugmentation?",
-              options: ["Adding trees", "Using bacteria/fungi to neutralize toxins", "Removing invasive species", "Filtering water"],
-              correct: 1,
-              explanation: "Bioaugmentation uses bacteria or fungi to neutralize toxins and pollutants, like in the BP oil spill cleanup."
-            },
-            {
-              question: "What do decomposers do?",
-              options: ["Make food from sunlight", "Eat plants", "Break down dead organisms", "Hunt other animals"],
-              correct: 2,
-              explanation: "Decomposers break down dead plants and animals, returning nutrients to the soil for producers to use."
-            },
-            {
-              question: "What is nitrification?",
-              options: ["N\u2082 to NH\u2083", "NH\u2083 to NO\u2083\u207B", "NO\u2083\u207B to N\u2082", "N\u2082 to protein"],
-              correct: 1,
-              explanation: "Nitrification is when bacteria convert ammonia (NH\u2083) to nitrite (NO\u2082\u207B) and then to nitrate (NO\u2083\u207B) that plants can use."
-            },
-            {
-              question: "Which is an example of an invasive species in North America?",
-              options: ["White-tailed deer", "Bald eagle", "Zebra mussels", "Oak trees"],
-              correct: 2,
-              explanation: "Zebra mussels are invasive in North American lakes. They came from Europe and outcompete native mussels."
-            },
-            {
-              question: "What is denitrification?",
-              options: ["Adding nitrogen to soil", "Converting nitrate back to N\u2082 gas", "Plants absorbing nitrogen", "Bacteria dying"],
-              correct: 1,
-              explanation: "Denitrification is when bacteria convert nitrate (NO\u2083\u207B) back into nitrogen gas (N\u2082) that returns to the atmosphere."
-            }
-          ],
-          notes: []
-        },
-        {
-          id: "chemistry-practice-1",
-          title: "Chemistry Practice Quiz 1 - Safety & Matter",
-          image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
-          quiz: [
-            {
-              question: "Which WHMIS symbol indicates a flammable substance?",
-              options: ["Skull and crossbones", "Flame", "Exclamation mark", "Test tube"],
-              correct: 1,
-              explanation: "The flame symbol indicates flammable substances that catch fire easily from heat, sparks, or flames."
-            },
-            {
-              question: "What type of mixture is salt water?",
-              options: ["Heterogeneous", "Homogeneous", "Suspension", "Mechanical"],
-              correct: 1,
-              explanation: "Salt water is a homogeneous mixture (solution) - it is uniform throughout and you cannot see the individual parts."
-            },
-            {
-              question: "Which is a chemical property?",
-              options: ["Color", "Density", "Combustibility", "Melting point"],
-              correct: 2,
-              explanation: "Combustibility (ability to burn) is a chemical property because it describes how a substance reacts with other substances."
-            },
-            {
-              question: "What is the difference between an element and a compound?",
-              options: ["Elements are pure, compounds are mixed", "Elements have one atom type, compounds have bonded elements", "No difference", "Compounds are always solid"],
-              correct: 1,
-              explanation: "Elements contain only one type of atom (like oxygen), while compounds contain two or more elements chemically bonded together (like H\u2082O)."
-            },
-            {
-              question: "Which is evidence of a chemical change?",
-              options: ["Melting", "Breaking", "Color change", "Dissolving"],
-              correct: 2,
-              explanation: "Color change is evidence of a chemical change. Melting, breaking, and dissolving are typically physical changes."
-            },
-            {
-              question: "What does the skull and crossbones WHMIS symbol mean?",
-              options: ["Flammable", "Poisonous/toxic", "Corrosive", "Explosive"],
-              correct: 1,
-              explanation: "The skull and crossbones indicates poisonous or toxic substances that can cause death or serious injury if swallowed or inhaled."
-            },
-            {
-              question: "Which is a pure substance?",
-              options: ["Salt water", "Air", "Gold", "Trail mix"],
-              correct: 2,
-              explanation: "Gold is a pure substance (element). Salt water, air, and trail mix are all mixtures."
-            },
-            {
-              question: "What type of mixture is sand and water?",
-              options: ["Solution", "Homogeneous", "Heterogeneous", "Compound"],
-              correct: 2,
-              explanation: "Sand and water is a heterogeneous mixture because you can see the different parts (sand particles in water)."
-            },
-            {
-              question: "Which is a physical property?",
-              options: ["Flammability", "Reactivity with acid", "Melting point", "Combustibility"],
-              correct: 2,
-              explanation: "Melting point is a physical property - it can be observed without changing the substance. The others are chemical properties."
-            },
-            {
-              question: "What is a quantitative property?",
-              options: ["Color", "Texture", "Mass", "Odor"],
-              correct: 2,
-              explanation: "Mass is quantitative (measured with numbers). Color, texture, and odor are qualitative (descriptive)."
-            },
-            {
-              question: "Which safety rule is most important in the lab?",
-              options: ["Wear safety goggles", "All of them", "Wash hands", "Clean up spills"],
-              correct: 1,
-              explanation: "All safety rules are important! They work together to keep you safe. Never skip any safety procedures."
-            },
-            {
-              question: "What does H\u2082O represent?",
-              options: ["Element", "Mixture", "Compound", "Solution"],
-              correct: 2,
-              explanation: "H\u2082O (water) is a compound - two or more elements (hydrogen and oxygen) chemically bonded together."
-            }
-          ],
-          notes: []
-        },
-        {
-          id: "chemistry-practice-2",
-          title: "Chemistry Practice Quiz 2 - Density & Properties",
-          image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&h=400&fit=crop",
-          quiz: [
-            {
-              question: "A substance has mass of 80g and volume of 20cm\xB3. What is its density?",
-              options: ["2 g/cm\xB3", "4 g/cm\xB3", "60 g/cm\xB3", "100 g/cm\xB3"],
-              correct: 1,
-              explanation: "D = m/V = 80g / 20cm\xB3 = 4 g/cm\xB3"
-            },
-            {
-              question: "Will an object with density 1.5 g/cm\xB3 float or sink in water (1.0 g/cm\xB3)?",
-              options: ["Float", "Sink", "Stay suspended", "Depends on size"],
-              correct: 1,
-              explanation: "The object will sink because its density (1.5 g/cm\xB3) is greater than water's density (1.0 g/cm\xB3)."
-            },
-            {
-              question: "Which is a qualitative property?",
-              options: ["Mass", "Color", "Volume", "Density"],
-              correct: 1,
-              explanation: "Color is qualitative (descriptive). Mass, volume, and density are quantitative (measured with numbers)."
-            },
-            {
-              question: "What is the density formula?",
-              options: ["D = m \xD7 V", "D = m / V", "D = V / m", "D = m + V"],
-              correct: 1,
-              explanation: "Density = mass / volume (D = m/V). This tells us how much mass is in a given volume."
-            },
-            {
-              question: "Which separation method would you use to separate sand from water?",
-              options: ["Evaporation", "Filtration", "Distillation", "Magnetism"],
-              correct: 1,
-              explanation: "Filtration separates solids from liquids. The filter paper catches sand while water passes through."
-            },
-            {
-              question: "An object has density 0.8 g/cm\xB3. Will it float in water (1.0 g/cm\xB3)?",
-              options: ["Yes, float", "No, sink", "Cannot tell", "Depends on shape"],
-              correct: 0,
-              explanation: "It will float because its density (0.8) is less than water's density (1.0). Objects less dense than the liquid float."
-            },
-            {
-              question: "If mass increases and volume stays the same, what happens to density?",
-              options: ["Increases", "Decreases", "Stays the same", "Becomes zero"],
-              correct: 0,
-              explanation: "Density increases. Since D = m/V, if mass goes up and volume stays the same, density must increase."
-            },
-            {
-              question: "Which method separates liquids with different boiling points?",
-              options: ["Filtration", "Magnetism", "Distillation", "Chromatography"],
-              correct: 2,
-              explanation: "Distillation separates liquids based on different boiling points. The liquid with lower boiling point evaporates first."
-            },
-            {
-              question: "What is the mass of an object with density 2 g/cm\xB3 and volume 30 cm\xB3?",
-              options: ["15g", "32g", "60g", "28g"],
-              correct: 2,
-              explanation: "Rearrange D = m/V to m = D \xD7 V. So m = 2 g/cm\xB3 \xD7 30 cm\xB3 = 60g"
-            },
-            {
-              question: "Which tool would you use to measure liquid volume?",
-              options: ["Electronic balance", "Graduated cylinder", "Ruler", "Thermometer"],
-              correct: 1,
-              explanation: "A graduated cylinder measures liquid volume accurately. A balance measures mass, not volume."
-            },
-            {
-              question: "What is evaporation used for?",
-              options: ["Separating mixtures", "Getting dissolved solid from liquid", "Measuring density", "Creating compounds"],
-              correct: 1,
-              explanation: "Evaporation separates a dissolved solid from a liquid. The liquid evaporates and leaves the solid behind (like getting salt from salt water)."
-            },
-            {
-              question: "If volume increases and mass stays the same, density will:",
-              options: ["Increase", "Decrease", "Stay the same", "Double"],
-              correct: 1,
-              explanation: "Density decreases. Since D = m/V, if volume increases while mass stays constant, density must decrease."
-            }
-          ],
-          notes: []
-        },
-        {
-          id: "chemistry-practice-3",
-          title: "Chemistry Practice Quiz 3 - Atoms & Periodic Table",
-          image: "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&h=400&fit=crop",
-          quiz: [
-            {
-              question: "What is the symbol for potassium?",
-              options: ["P", "Po", "K", "Pt"],
-              correct: 2,
-              explanation: "Potassium has the symbol K (from its Latin name Kalium). It is element #19."
-            },
-            {
-              question: "Which scientist proposed the plum pudding model?",
-              options: ["Dalton", "Thomson", "Rutherford", "Bohr"],
-              correct: 1,
-              explanation: "J.J. Thomson proposed the plum pudding model after discovering electrons - positive material with embedded electrons."
-            },
-            {
-              question: "An atom has 6 protons, 6 neutrons, and 6 electrons. What element is it?",
-              options: ["Nitrogen", "Carbon", "Oxygen", "Boron"],
-              correct: 1,
-              explanation: "The number of protons determines the element. 6 protons = Carbon (C)."
-            },
-            {
-              question: "How many electrons can the second shell hold?",
-              options: ["2", "4", "8", "18"],
-              correct: 2,
-              explanation: "The second electron shell can hold a maximum of 8 electrons."
-            },
-            {
-              question: "What is an ion with more electrons than protons called?",
-              options: ["Cation", "Anion", "Isotope", "Neutral"],
-              correct: 1,
-              explanation: "An anion is a negatively charged ion that has gained electrons (more electrons than protons)."
-            },
-            {
-              question: "What is the symbol for sodium?",
-              options: ["S", "So", "Na", "Sd"],
-              correct: 2,
-              explanation: "Sodium has the symbol Na (from its Latin name Natrium). It is element #11."
-            },
-            {
-              question: "How many electrons can the first shell hold?",
-              options: ["1", "2", "8", "18"],
-              correct: 1,
-              explanation: "The first electron shell can hold a maximum of 2 electrons."
-            },
-            {
-              question: "Which scientist discovered that atoms are mostly empty space?",
-              options: ["Dalton", "Thomson", "Rutherford", "Bohr"],
-              correct: 2,
-              explanation: "Rutherford discovered atoms are mostly empty space with a dense nucleus through his gold foil experiment."
-            },
-            {
-              question: "What determines the identity of an element?",
-              options: ["Number of neutrons", "Number of protons", "Number of electrons", "Atomic mass"],
-              correct: 1,
-              explanation: "The number of protons (atomic number) determines which element it is. This never changes."
-            },
-            {
-              question: "What are valence electrons?",
-              options: ["Electrons in the nucleus", "Electrons in the innermost shell", "Electrons in the outermost shell", "All electrons"],
-              correct: 2,
-              explanation: "Valence electrons are in the outermost shell and determine how atoms bond and react."
-            },
-            {
-              question: "An atom has 8 protons and 10 neutrons. What is its mass number?",
-              options: ["8", "10", "18", "2"],
-              correct: 2,
-              explanation: "Mass number = protons + neutrons = 8 + 10 = 18"
-            },
-            {
-              question: "Which group contains the most unreactive elements?",
-              options: ["Group 1", "Group 2", "Group 17", "Group 18"],
-              correct: 3,
-              explanation: "Group 18 (Noble Gases) are the most unreactive because they have full outer electron shells."
-            }
-          ],
-          notes: []
-        },
-        {
-          id: "chemistry-practice-4",
-          title: "Chemistry Practice Quiz 4 - Advanced Concepts",
-          image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
-          quiz: [
-            {
-              question: "Which group on the periodic table is most reactive?",
-              options: ["Noble gases", "Alkali metals", "Halogens", "Transition metals"],
-              correct: 1,
-              explanation: "Alkali metals (Group 1) are the most reactive metals because they easily lose their single valence electron."
-            },
-            {
-              question: "What are isotopes?",
-              options: ["Same element, different electrons", "Same element, different neutrons", "Different elements, same mass", "Charged atoms"],
-              correct: 1,
-              explanation: "Isotopes are atoms of the same element with different numbers of neutrons (same protons, different mass)."
-            },
-            {
-              question: "How many valence electrons do noble gases have?",
-              options: ["1", "4", "7", "8"],
-              correct: 3,
-              explanation: "Noble gases have 8 valence electrons (except helium with 2), making them stable and unreactive."
-            },
-            {
-              question: "What charge does a cation have?",
-              options: ["Positive", "Negative", "Neutral", "Variable"],
-              correct: 0,
-              explanation: "A cation has a positive charge because it has lost electrons (more protons than electrons)."
-            },
-            {
-              question: "Which atomic model showed that atoms are mostly empty space?",
-              options: ["Dalton", "Thomson", "Rutherford", "Bohr"],
-              correct: 2,
-              explanation: "Rutherford's nuclear model showed that atoms are mostly empty space with a dense nucleus at the center."
-            },
-            {
-              question: "How many valence electrons do halogens have?",
-              options: ["1", "5", "7", "8"],
-              correct: 2,
-              explanation: "Halogens (Group 17) have 7 valence electrons. They need to gain 1 electron to have a full outer shell."
-            },
-            {
-              question: "What is the difference between mass number and atomic mass?",
-              options: ["They are the same", "Mass number is rounded, atomic mass is precise", "Mass number includes electrons", "No difference"],
-              correct: 1,
-              explanation: "Mass number is the total protons + neutrons (whole number). Atomic mass is the average mass of all isotopes (decimal)."
-            },
-            {
-              question: "Which particles are in the nucleus?",
-              options: ["Protons only", "Protons and electrons", "Protons and neutrons", "Neutrons and electrons"],
-              correct: 2,
-              explanation: "The nucleus contains protons (positive) and neutrons (neutral). Electrons orbit outside the nucleus."
-            },
-            {
-              question: "How do you calculate the number of neutrons?",
-              options: ["Atomic number - mass number", "Mass number - atomic number", "Protons + electrons", "Atomic mass \xD7 2"],
-              correct: 1,
-              explanation: "Neutrons = Mass number - Atomic number (or Mass number - Protons)"
-            },
-            {
-              question: "What happens when an atom gains electrons?",
-              options: ["Becomes a cation", "Becomes an anion", "Becomes neutral", "Changes element"],
-              correct: 1,
-              explanation: "When an atom gains electrons, it becomes negatively charged and is called an anion."
-            },
-            {
-              question: "Which scientist proposed electrons orbit in specific energy levels?",
-              options: ["Dalton", "Thomson", "Rutherford", "Bohr"],
-              correct: 3,
-              explanation: "Niels Bohr proposed that electrons orbit the nucleus in specific energy levels or shells (planetary model)."
-            },
-            {
-              question: "What is the atomic number?",
-              options: ["Number of neutrons", "Number of protons", "Number of electrons in outer shell", "Total particles"],
-              correct: 1,
-              explanation: "Atomic number is the number of protons in an atom. This identifies which element it is."
-            }
-          ],
-          notes: []
-        }
-      ]
-    },
-    worksheets: {
-      id: "worksheets",
-      name: "Practice Worksheets",
-      description: "12 detailed worksheets with 60+ problems and step-by-step answers",
-      icon: ClipboardList,
-      color: "teal",
-      gradient: "from-teal-500 to-cyan-600",
-      image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "biology-worksheets",
-          title: "Biology Practice Worksheets",
-          image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Worksheet 1: Biodiversity & H.I.P.P.O.C",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Define the three types of biodiversity and give an example of each.",
-                "2. Create a diagram showing genetic diversity in dogs (3 different breeds).",
-                "3. List all letters of H.I.P.P.O.C with full names and one example for each.",
-                "4. Choose one H.I.P.P.O.C threat and propose 2 solutions to address it.",
-                "5. Explain which H.I.P.P.O.C threat you think is most serious and why."
-              ],
-              answers: [
-                "Genetic diversity: variation within a species (e.g., different dog breeds) \u2022 Species diversity: variety of species in a habitat (e.g., coral reef fish) \u2022 Ecosystem diversity: variety of ecosystems in a region (e.g., forests, wetlands, grasslands)",
-                "Draw three different dog breeds showing physical differences \u2022 Label traits like size, coat color, ear shape \u2022 Explain these are same species but different genes",
-                "H = Habitat Destruction (deforestation) \u2022 I = Invasive Species (zebra mussels) \u2022 P = Pollution (oil spills) \u2022 P = Population/Human (urban sprawl) \u2022 O = Overharvesting (overfishing cod) \u2022 C = Climate Change (coral bleaching)",
-                "Choose any threat \u2022 Example: Habitat Destruction \u2192 Solution 1: Protected areas/parks \u2022 Solution 2: Reforestation programs",
-                "Answers vary \u2022 Should explain reasoning \u2022 Example: Climate change affects all ecosystems globally \u2022 Discuss long-term impacts"
-              ]
-            },
-            {
-              subtitle: "Worksheet 2: Ecosystem Factors & Services",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. List 6 biotic factors and 6 abiotic factors in a forest ecosystem.",
-                "2. Explain the difference between sustainable and non-sustainable ecosystems.",
-                "3. Name the 4 spheres and give 2 examples for each.",
-                "4. Describe 3 interactions between different spheres.",
-                "5. Define ecosystem services and list one example from each category (provisioning, regulating, supporting, cultural).",
-                "6. Compare natural vs artificial ecosystems with examples."
-              ],
-              answers: [
-                "Biotic: trees, deer, birds, insects, fungi, bacteria \u2022 Abiotic: sunlight, water, soil, air, temperature, rocks",
-                "Sustainable: can maintain itself over time, resources regenerate, balanced ecosystem \u2022 Non-sustainable: resources depleted faster than replaced, imbalanced, eventually collapses",
-                "Biosphere (plants, animals) \u2022 Atmosphere (air, oxygen) \u2022 Hydrosphere (oceans, rivers) \u2022 Lithosphere (rocks, soil)",
-                "Example 1: Rain (atmosphere) waters plants (biosphere) \u2022 Example 2: Plants (biosphere) add oxygen to air (atmosphere) \u2022 Example 3: Rivers (hydrosphere) erode rocks (lithosphere)",
-                "Ecosystem services = benefits from nature \u2022 Provisioning: food/water \u2022 Regulating: climate control \u2022 Supporting: nutrient cycling \u2022 Cultural: recreation/parks",
-                "Natural: self-sustaining, biodiversity, no human maintenance (forest, coral reef) \u2022 Artificial: human-made, needs maintenance, limited diversity (farm, aquarium)"
-              ]
-            },
-            {
-              subtitle: "Worksheet 3: Food Chains & Energy",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Draw an aquatic food chain with 4 trophic levels. Label each level.",
-                "2. Draw a terrestrial food chain with 4 trophic levels. Label each level.",
-                "3. Add arrows to show energy flow direction in your food chains.",
-                "4. Calculate: If producers have 100,000 kcal, how much energy does each level receive?",
-                "5. Draw an energy pyramid for the calculation above.",
-                '6. Explain where the "missing" 90% of energy goes at each level.',
-                "7. Why can't food chains be infinitely long? Explain using energy transfer."
-              ],
-              answers: [
-                "Example: Phytoplankton \u2192 Small fish \u2192 Medium fish \u2192 Shark \u2022 Label: Producer \u2192 Primary consumer \u2192 Secondary consumer \u2192 Tertiary consumer",
-                "Example: Grass \u2192 Grasshopper \u2192 Mouse \u2192 Snake \u2022 Label: Producer \u2192 Primary consumer \u2192 Secondary consumer \u2192 Tertiary consumer",
-                'Arrows point from food source to consumer \u2022 Shows direction energy flows \u2022 Each arrow = "is eaten by"',
-                "Producers: 100,000 kcal \u2022 Primary consumers: 10,000 kcal (10%) \u2022 Secondary consumers: 1,000 kcal (10%) \u2022 Tertiary consumers: 100 kcal (10%)",
-                "Draw pyramid shape \u2022 Bottom largest (producers 100,000) \u2022 Each level smaller going up \u2022 Top smallest (tertiary 100)",
-                "90% lost as heat from movement/metabolism \u2022 Used for life processes (breathing, moving) \u2022 Released as waste \u2022 Only 10% stored in body tissues",
-                "Not enough energy left after several levels \u2022 By 4-5 levels, too little energy to support organisms \u2022 Would need massive producer base for tiny top predator population"
-              ]
-            },
-            {
-              subtitle: "Worksheet 4: Bioaccumulation & Nutrient Cycles",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Define bioaccumulation and biomagnification. Give an example of each.",
-                "2. Draw a simple food chain and show how mercury concentration increases at each level.",
-                "3. Draw the carbon cycle. Include: atmosphere, biosphere, lithosphere, hydrosphere.",
-                "4. Label these processes on your carbon cycle: photosynthesis, respiration, combustion, decomposition, ocean uptake.",
-                "5. Write the equation for photosynthesis (both word and chemical formula).",
-                "6. Write the equation for cellular respiration (both word and chemical formula).",
-                "7. How do humans affect the carbon cycle? List 3 ways."
-              ],
-              answers: [
-                "Bioaccumulation: toxin builds up in one organism over time (fish absorbs mercury from water) \u2022 Biomagnification: concentration increases up food chain (eagle has more mercury than fish it eats)",
-                "Example: Plankton (0.01 ppm) \u2192 Small fish (0.1 ppm) \u2192 Large fish (1 ppm) \u2192 Bird (10 ppm) \u2022 Show concentration multiplies at each level",
-                "Draw four reservoirs in boxes/circles \u2022 Atmosphere (CO\u2082 gas) \u2022 Biosphere (living things) \u2022 Lithosphere (fossil fuels, rocks) \u2022 Hydrosphere (dissolved CO\u2082 in water)",
-                "Photosynthesis: CO\u2082 from atmosphere to plants \u2022 Respiration: CO\u2082 from organisms to atmosphere \u2022 Combustion: CO\u2082 from burning to atmosphere \u2022 Decomposition: CO\u2082 from dead matter to atmosphere/soil \u2022 Ocean uptake: CO\u2082 from atmosphere to ocean",
-                "Word: Carbon dioxide + Water \u2192 Glucose + Oxygen \u2022 Chemical: 6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082",
-                "Word: Glucose + Oxygen \u2192 Carbon dioxide + Water + Energy \u2022 Chemical: C\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + ATP",
-                "Burning fossil fuels (releases stored carbon) \u2022 Deforestation (less CO\u2082 absorbed) \u2022 Agriculture/livestock (releases methane and CO\u2082)"
-              ]
-            },
-            {
-              subtitle: "Worksheet 5: Nitrogen Cycle & Restoration",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Draw the nitrogen cycle with reservoirs labeled (atmosphere, soil, organisms, water).",
-                "2. Label these processes: nitrogen fixation, nitrification, assimilation, ammonification, denitrification.",
-                "3. Explain the role of bacteria in the nitrogen cycle.",
-                "4. What are invasive species? List 3 characteristics.",
-                "5. Choose one invasive species. State: origin, where it's invasive, harm caused, control methods.",
-                "6. Define and give examples: reforestation, bioaugmentation, bioremediation.",
-                "7. How does climate change affect ecosystems? List 4 impacts."
-              ],
-              answers: [
-                "Draw cycle showing: Atmosphere (N\u2082 gas) \u2192 Soil (NH\u2083, NO\u2083\u207B) \u2192 Organisms (proteins) \u2192 back to atmosphere \u2022 Include arrows between reservoirs",
-                "Nitrogen fixation: N\u2082 \u2192 NH\u2083 (atmosphere to soil) \u2022 Nitrification: NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (in soil) \u2022 Assimilation: NO\u2083\u207B absorbed by plants \u2022 Ammonification: dead matter \u2192 NH\u2084\u207A \u2022 Denitrification: NO\u2083\u207B \u2192 N\u2082 (back to atmosphere)",
-                "Bacteria perform most conversions \u2022 Rhizobium fixes nitrogen in plant roots \u2022 Nitrosomonas/Nitrobacter do nitrification \u2022 Decomposers do ammonification \u2022 Denitrifying bacteria return N\u2082 to air",
-                "Invasive species: non-native organism that causes harm \u2022 Characteristics: rapid reproduction, outcompete natives, lack natural predators, disrupt food chains",
-                "Example: Zebra mussels \u2022 Origin: Eastern Europe/Russia \u2022 Invasive: Great Lakes, North America \u2022 Harm: clog water pipes, outcompete native mussels, disrupt food chain \u2022 Control: drain/clean boats, chemical treatments",
-                "Reforestation: planting trees where cut down (Amazon restoration) \u2022 Bioaugmentation: adding bacteria/organisms to break down toxins (oil spill cleanup) \u2022 Bioremediation: using organisms to improve soil/water quality (microbes filtering water)",
-                "Rising temperatures change habitats \u2022 Extreme weather destroys ecosystems \u2022 Sea level rise floods coastal areas \u2022 Species migration/extinction \u2022 Coral bleaching \u2022 Changes in precipitation patterns"
-              ]
-            }
-          ]
-        },
-        {
-          id: "chemistry-worksheets",
-          title: "Chemistry Practice Worksheets",
-          image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Worksheet 1: Lab Safety & Matter Classification",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Draw 5 WHMIS symbols and explain what each one means.",
-                "2. List 5 important lab safety rules.",
-                "3. Create a flow chart showing how matter is classified (pure substances, mixtures, etc.).",
-                "4. Classify these: salt water, gold, pizza, air, H\u2082O, trail mix, brass.",
-                "5. For each mixture above, identify if it's homogeneous or heterogeneous and explain why."
-              ],
-              answers: [
-                "Flame (flammable) \u2022 Skull/crossbones (poisonous) \u2022 Exclamation (irritant) \u2022 Test tube on hand (corrosive) \u2022 Circle with flame (oxidizer) \u2022 Draw symbols and explain hazards",
-                "Wear safety goggles \u2022 Tie back long hair \u2022 No eating/drinking \u2022 Report accidents immediately \u2022 Know location of safety equipment \u2022 Read labels before using chemicals",
-                "Matter \u2192 Pure substances (elements, compounds) and Mixtures (homogeneous, heterogeneous) \u2022 Show branching diagram",
-                "Salt water: homogeneous mixture \u2022 Gold: element \u2022 Pizza: heterogeneous mixture \u2022 Air: homogeneous mixture \u2022 H\u2082O: compound \u2022 Trail mix: heterogeneous mixture \u2022 Brass: homogeneous mixture (alloy)",
-                "Salt water: homogeneous, uniform throughout \u2022 Pizza: heterogeneous, see different parts \u2022 Air: homogeneous, uniform gas mixture \u2022 Trail mix: heterogeneous, see nuts/raisins \u2022 Brass: homogeneous, metal alloy is uniform"
-              ]
-            },
-            {
-              subtitle: "Worksheet 2: Properties & Density",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. List 4 qualitative physical properties and 4 quantitative physical properties.",
-                "2. List 3 chemical properties with examples.",
-                "3. Solve: A rock has mass 150g and volume 50cm\xB3. Find density.",
-                "4. Solve: An object has density 2.5 g/mL and mass 75g. Find volume.",
-                "5. Solve: A liquid has density 0.8 g/mL and volume 200mL. Find mass.",
-                "6. Will an object with density 1.5 g/cm\xB3 float or sink in water (1.0 g/cm\xB3)? Explain.",
-                "7. Describe how to find the volume of an irregular shaped object using water displacement."
-              ],
-              answers: [
-                "Qualitative: color, texture, odor, luster \u2022 Quantitative: mass, volume, density, melting point",
-                "Combustibility: paper burns \u2022 Reactivity with acid: metals produce hydrogen \u2022 Stability: iron rusts in oxygen",
-                "D = m/V = 150g / 50cm\xB3 = 3 g/cm\xB3",
-                "V = m/D = 75g / 2.5 g/mL = 30 mL",
-                "m = D \xD7 V = 0.8 g/mL \xD7 200mL = 160g",
-                "Sink \u2022 Object density (1.5) > water density (1.0) \u2022 Objects denser than liquid sink",
-                "Measure initial water level in graduated cylinder \u2022 Carefully place object in water \u2022 Measure new water level \u2022 Volume = final level - initial level"
-              ]
-            },
-            {
-              subtitle: "Worksheet 3: Physical & Chemical Changes",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Define physical change and chemical change.",
-                "2. List the 5 indicators of a chemical change.",
-                "3. Classify these as physical or chemical: ice melting, wood burning, cutting paper, rusting nail, dissolving sugar, cooking egg, breaking glass, baking cake.",
-                "4. For each chemical change above, state which indicator(s) you would observe.",
-                "5. Explain why dissolving salt in water is a physical change, not chemical.",
-                "6. Give 2 examples of chemical changes that produce gas.",
-                "7. Give 2 examples of chemical changes that produce heat."
-              ],
-              answers: [
-                "Physical: same substance, different form, usually reversible (ice \u2192 water) \u2022 Chemical: new substance forms, difficult to reverse (burning wood \u2192 ash)",
-                "Color change \u2022 Gas production/bubbles \u2022 Temperature change \u2022 Light production \u2022 Precipitate forms (solid in liquid)",
-                "Physical: ice melting, cutting paper, dissolving sugar, breaking glass \u2022 Chemical: wood burning, rusting nail, cooking egg, baking cake",
-                "Wood burning: light, heat, gas, color change \u2022 Rusting: color change \u2022 Cooking egg: color change, temperature \u2022 Baking cake: gas (bubbles), color, temperature",
-                "Salt molecules separate but don't change \u2022 Can evaporate water and get salt back \u2022 No new substance formed \u2022 Reversible process",
-                "Vinegar + baking soda \u2192 CO\u2082 bubbles \u2022 Antacid tablet in water \u2192 gas bubbles",
-                "Combustion (burning wood) \u2022 Hand warmer packets \u2022 Neutralization reactions"
-              ]
-            },
-            {
-              subtitle: "Worksheet 4: Periodic Table",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Fill in the table: Elements 1-20 with names and symbols.",
-                "2. Where are alkali metals located? List 3 properties.",
-                "3. Where are halogens located? List 3 properties.",
-                "4. Where are noble gases located? Why are they unreactive?",
-                "5. List 5 properties of metals and 5 properties of non-metals.",
-                "6. What are metalloids? Give 3 examples.",
-                "7. Using the periodic table, identify these as metal, non-metal, or metalloid: Fe, Cl, Si, Na, O, B, Cu."
-              ],
-              answers: [
-                "H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca \u2022 Should know names and symbols for all",
-                "Group 1, left side \u2022 Soft, highly reactive, shiny, low density, form +1 ions, react with water",
-                "Group 17, right side before noble gases \u2022 Reactive non-metals, diatomic molecules, form salts, gain 1 electron, poisonous/toxic",
-                "Group 18, far right column \u2022 Unreactive because full valence shell (8 electrons) \u2022 Stable, don't need to gain/lose electrons",
-                "Metals: shiny, conductive, malleable, ductile, lose electrons \u2022 Non-metals: dull, insulators, brittle, gain electrons, lower melting points",
-                "Metalloids: properties between metals and non-metals, semiconductors \u2022 Examples: Silicon (Si), Boron (B), Arsenic (As), Germanium (Ge)",
-                "Fe: metal \u2022 Cl: non-metal \u2022 Si: metalloid \u2022 Na: metal \u2022 O: non-metal \u2022 B: metalloid \u2022 Cu: metal"
-              ]
-            },
-            {
-              subtitle: "Worksheet 5: Atomic Structure",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. Draw and label the 4 atomic models: Dalton, Thomson, Rutherford, Bohr.",
-                "2. Describe the contribution of each scientist to atomic theory.",
-                "3. Complete the table for these atoms: C, O, Na, Mg, Cl (protons, neutrons, electrons).",
-                "4. Draw Bohr-Rutherford diagrams for: H, He, C, N, O, Na, Mg.",
-                "5. What are isotopes? Draw Bohr diagrams for Carbon-12 and Carbon-14.",
-                "6. An atom has 17 protons, 18 neutrons, 17 electrons. What element is it? Draw its Bohr diagram."
-              ],
-              answers: [
-                "Dalton: solid sphere \u2022 Thomson: plum pudding (positive with electrons) \u2022 Rutherford: nucleus with orbiting electrons \u2022 Bohr: electrons in specific shells",
-                "Dalton: atoms are indivisible spheres \u2022 Thomson: discovered electrons, positive material \u2022 Rutherford: discovered nucleus, mostly empty space \u2022 Bohr: electrons in energy levels/shells",
-                "C: 6p, 6n, 6e \u2022 O: 8p, 8n, 8e \u2022 Na: 11p, 12n, 11e \u2022 Mg: 12p, 12n, 12e \u2022 Cl: 17p, 18n, 17e",
-                "H: 1e in shell 1 \u2022 He: 2e in shell 1 \u2022 C: 2e in shell 1, 4e in shell 2 \u2022 N: 2e, 5e \u2022 O: 2e, 6e \u2022 Na: 2e, 8e, 1e \u2022 Mg: 2e, 8e, 2e",
-                "Isotopes: same element, different neutrons \u2022 C-12: 6p, 6n, 6e \u2022 C-14: 6p, 8n, 6e \u2022 Both have 2e in shell 1, 4e in shell 2",
-                "Chlorine (Cl) \u2022 17 protons = atomic number 17 \u2022 Draw: nucleus with 17p 18n, shell 1: 2e, shell 2: 8e, shell 3: 7e"
-              ]
-            },
-            {
-              subtitle: "Worksheet 6: Valence Electrons & Ions",
-              emoji: "\u{1F4DD}",
-              points: [
-                "1. What are valence electrons? Why are they important?",
-                "2. Draw Lewis dot diagrams for: H, C, N, O, F, Na, Mg, Al, Cl.",
-                "3. How many valence electrons does each group have? Groups 1, 2, 13-18.",
-                "4. Define cation and anion. Give 2 examples of each.",
-                "5. An ion has 11 protons, 12 neutrons, and 10 electrons. What is its charge? What element?",
-                "6. Complete the table for these ions: Na\u207A, Cl\u207B, Mg\xB2\u207A, O\xB2\u207B (protons, neutrons, electrons).",
-                "7. Why do atoms form ions? Explain using the concept of stability."
-              ],
-              answers: [
-                "Electrons in outermost shell \u2022 Determine how atoms bond and react \u2022 Atoms want full outer shell for stability",
-                "H: 1 dot \u2022 C: 4 dots \u2022 N: 5 dots \u2022 O: 6 dots \u2022 F: 7 dots \u2022 Na: 1 dot \u2022 Mg: 2 dots \u2022 Al: 3 dots \u2022 Cl: 7 dots",
-                "Group 1: 1 valence e\u207B \u2022 Group 2: 2 \u2022 Group 13: 3 \u2022 Group 14: 4 \u2022 Group 15: 5 \u2022 Group 16: 6 \u2022 Group 17: 7 \u2022 Group 18: 8",
-                "Cation: positive ion, lost electrons (Na\u207A, Ca\xB2\u207A) \u2022 Anion: negative ion, gained electrons (Cl\u207B, O\xB2\u207B)",
-                "Charge: +1 (11 protons - 10 electrons) \u2022 Element: Sodium (Na) because 11 protons",
-                "Na\u207A: 11p, 12n, 10e \u2022 Cl\u207B: 17p, 18n, 18e \u2022 Mg\xB2\u207A: 12p, 12n, 10e \u2022 O\xB2\u207B: 8p, 8n, 10e",
-                "Atoms form ions to achieve stable electron configuration (full outer shell) \u2022 Metals lose electrons to empty outer shell \u2022 Non-metals gain electrons to fill outer shell \u2022 Noble gas configuration is most stable"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    biology: {
-      id: "biology",
-      name: "Biology: Sustainable Ecosystems",
-      description: "9 detailed sections covering biodiversity, food chains, and ecosystem restoration",
-      icon: Leaf,
-      color: "emerald",
-      gradient: "from-emerald-500 to-teal-600",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "biology-definitions",
-          title: "Key Biology Definitions",
-          image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Biodiversity Terms",
-              emoji: "\u{1F33F}",
-              points: [
-                "BIODIVERSITY: Variety of life in an area (genetic, species, ecosystem)",
-                "GENETIC DIVERSITY: Variation of genes within a species",
-                "SPECIES DIVERSITY: Variety of different species in a habitat",
-                "ECOSYSTEM DIVERSITY: Variety of ecosystems in a region",
-                "SPECIES: Group of organisms that can reproduce and produce fertile offspring",
-                "POPULATION: All members of one species in an area",
-                "HABITAT: Natural home or environment of an organism"
-              ]
-            },
-            {
-              subtitle: "Ecosystem Terms",
-              emoji: "\u{1F30D}",
-              points: [
-                "ECOSYSTEM: Community of living things interacting with non-living environment",
-                "BIOTIC FACTOR: Living component of ecosystem (plants, animals, bacteria)",
-                "ABIOTIC FACTOR: Non-living component (sunlight, water, soil, temperature)",
-                "SUSTAINABLE ECOSYSTEM: Can maintain itself over time, resources regenerate",
-                "BIOSPHERE: All living things on Earth",
-                "ATMOSPHERE: Layer of gases surrounding Earth",
-                "HYDROSPHERE: All water on Earth",
-                "LITHOSPHERE: Earth's crust (rocks and soil)"
-              ]
-            },
-            {
-              subtitle: "Organism Roles",
-              emoji: "\u{1F517}",
-              points: [
-                "PRODUCER: Organism that makes own food through photosynthesis (plants)",
-                "CONSUMER: Organism that eats other organisms for energy",
-                "PRIMARY CONSUMER: Herbivore that eats producers (rabbit, deer)",
-                "SECONDARY CONSUMER: Carnivore that eats primary consumers (snake, fox)",
-                "TERTIARY CONSUMER: Top predator that eats secondary consumers (eagle, shark)",
-                "DECOMPOSER: Breaks down dead matter (bacteria, fungi, worms)",
-                "HERBIVORE: Eats only plants",
-                "CARNIVORE: Eats only animals",
-                "OMNIVORE: Eats both plants and animals"
-              ]
-            },
-            {
-              subtitle: "Energy Flow Terms",
-              emoji: "\u26A1",
-              points: [
-                "FOOD CHAIN: Linear sequence showing who eats whom",
-                "FOOD WEB: Interconnected food chains in ecosystem",
-                "TROPHIC LEVEL: Position in food chain (producer, primary consumer, etc.)",
-                "ENERGY PYRAMID: Diagram showing energy at each trophic level",
-                "10% RULE: Only 10% of energy passes to next level, 90% lost as heat",
-                "BIOMASS: Total mass of living organisms in an area",
-                "BIOACCUMULATION: Build-up of substance in single organism over time",
-                "BIOMAGNIFICATION: Increase in toxin concentration up food chain"
-              ]
-            },
-            {
-              subtitle: "Relationships",
-              emoji: "\u{1F91D}",
-              points: [
-                "SYMBIOSIS: Close relationship between two species",
-                "MUTUALISM: Both species benefit (bee and flower)",
-                "COMMENSALISM: One benefits, other unaffected (bird nesting in tree)",
-                "PARASITISM: One benefits, other harmed (tick on dog)",
-                "PREDATION: One organism hunts and eats another",
-                "COMPETITION: Organisms compete for same limited resources"
-              ]
-            },
-            {
-              subtitle: "Photosynthesis & Respiration",
-              emoji: "\u{1F331}",
-              points: [
-                "PHOTOSYNTHESIS: Plants use CO\u2082 + water + sunlight \u2192 glucose + oxygen",
-                "CELLULAR RESPIRATION: Organisms break down glucose + oxygen \u2192 CO\u2082 + water + ATP",
-                "ATP: Energy currency of cells",
-                "CHLOROPHYLL: Green pigment in plants that captures sunlight",
-                "CHLOROPLAST: Organelle where photosynthesis occurs",
-                "MITOCHONDRIA: Organelle where cellular respiration occurs"
-              ]
-            },
-            {
-              subtitle: "Nutrient Cycles",
-              emoji: "\u267B\uFE0F",
-              points: [
-                "CARBON CYCLE: Movement of carbon through atmosphere, organisms, soil, water",
-                "NITROGEN CYCLE: Movement of nitrogen through atmosphere, soil, organisms",
-                "NITROGEN FIXATION: Converting N\u2082 gas to ammonia (by bacteria or lightning)",
-                "NITRIFICATION: Converting ammonia to nitrite to nitrate (by bacteria)",
-                "DENITRIFICATION: Converting nitrate back to N\u2082 gas (returns to atmosphere)",
-                "AMMONIFICATION: Decomposers release ammonia from dead matter"
-              ]
-            },
-            {
-              subtitle: "Threats to Biodiversity",
-              emoji: "\u26A0\uFE0F",
-              points: [
-                "HABITAT DESTRUCTION: Removal of living spaces (deforestation)",
-                "INVASIVE SPECIES: Non-native species that cause harm",
-                "POLLUTION: Harmful substances in environment (oil spills, chemicals)",
-                "OVERHARVESTING: Taking organisms faster than they can reproduce",
-                "CLIMATE CHANGE: Long-term changes in temperature and weather patterns",
-                "EXTINCTION: Permanent loss of a species",
-                "ENDANGERED: Species at risk of extinction"
-              ]
-            },
-            {
-              subtitle: "Conservation & Restoration",
-              emoji: "\u{1F332}",
-              points: [
-                "REFORESTATION: Planting trees where they were cut down",
-                "BIOREMEDIATION: Using organisms to break down waste and improve environment",
-                "BIOAUGMENTATION: Adding bacteria/fungi to neutralize toxins",
-                "CONSERVATION: Protection and preservation of ecosystems",
-                "SUSTAINABILITY: Meeting current needs without harming future generations",
-                "BIODEGRADABLE: Can be broken down naturally by decomposers"
-              ]
-            }
-          ]
-        },
-        {
-          id: "biodiversity",
-          title: "Three Types of Biodiversity",
-          image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Genetic Diversity",
-              emoji: "\u{1F9EC}",
-              points: [
-                "Variation of genes within a species",
-                "Example: Different breeds of dogs",
-                "Why it matters: Helps species adapt and survive"
-              ]
-            },
-            {
-              subtitle: "Species Diversity",
-              emoji: "\u{1F420}",
-              points: [
-                "Variety of species within a habitat",
-                "Example: Variety of fish species in a coral reef",
-                "More species = More stable ecosystem"
-              ]
-            },
-            {
-              subtitle: "Ecosystem Diversity",
-              emoji: "\u{1F30D}",
-              points: [
-                "Variety of ecosystems in a region",
-                "Example: Forests, wetlands, grasslands in an area",
-                "Different ecosystems support different life forms"
-              ]
-            }
-          ]
-        },
-        {
-          id: "hippoc",
-          title: "H.I.P.P.O.C. - Threats to Biodiversity",
-          image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "H - Habitat Destruction",
-              emoji: "\u{1F3D7}\uFE0F",
-              points: [
-                "Removes living spaces for species",
-                "Example: Deforestation of Amazon rainforest",
-                "Species cannot survive without homes"
-              ]
-            },
-            {
-              subtitle: "I - Invasive Species",
-              emoji: "\u{1F99F}",
-              points: [
-                "Outsiders compete with native species",
-                "Example: Zebra mussels in North American lakes",
-                "Disrupts natural balance"
-              ]
-            },
-            {
-              subtitle: "P - Pollution",
-              emoji: "\u{1F3ED}",
-              points: [
-                "Toxic chemicals, waste, and noise",
-                "Example: Oil spills in oceans",
-                "Kills or harms organisms"
-              ]
-            },
-            {
-              subtitle: "P - Population (Human)",
-              emoji: "\u{1F465}",
-              points: [
-                "Too many people = more resources used",
-                "Example: Urban sprawl reduces wildlife space",
-                "Less room for native animals"
-              ]
-            },
-            {
-              subtitle: "O - Overharvesting",
-              emoji: "\u{1F3A3}",
-              points: [
-                "Taking too much (fishing/hunting/logging)",
-                "Example: Overfishing of Atlantic cod",
-                "Depletes species faster than recovery"
-              ]
-            },
-            {
-              subtitle: "C - Climate Change",
-              emoji: "\u{1F321}\uFE0F",
-              points: [
-                "Alters habitats and weather patterns",
-                "Example: Coral bleaching from warming seas",
-                "Species struggle to adapt"
-              ]
-            }
-          ]
-        },
-        {
-          id: "factors",
-          title: "Biotic vs Abiotic Factors",
-          image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Biotic Factors (Living)",
-              emoji: "\u{1F331}",
-              points: [
-                "Plants, animals, bacteria, fungi",
-                "Algae, insects, microorganisms",
-                "Note: Dying/decaying things are still biotic (e.g., decaying logs)"
-              ]
-            },
-            {
-              subtitle: "Abiotic Factors (Non-living)",
-              emoji: "\u2600\uFE0F",
-              points: [
-                "Sunlight, temperature, water",
-                "Soil, air, pH levels",
-                "Physical and chemical components"
-              ]
-            }
-          ]
-        },
-        {
-          id: "food-chains",
-          title: "Food Chains & Energy Transfer",
-          image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Terrestrial Food Chain",
-              emoji: "\u{1F33E}",
-              points: [
-                "Example: Grass \u2192 Grasshopper \u2192 Mouse \u2192 Snake",
-                "Starts with plants (producers)",
-                "Energy flows one direction",
-                "Each level is called a trophic level"
-              ],
-              diagram: "food-chain"
-            },
-            {
-              subtitle: "Aquatic Food Chain",
-              emoji: "\u{1F30A}",
-              points: [
-                "Example: Phytoplankton \u2192 Small fish \u2192 Medium fish \u2192 Shark",
-                "Starts with microscopic organisms",
-                "Same 10% energy transfer rule",
-                "Top predators get very little energy"
-              ],
-              diagram: "aquatic-food-chain"
-            },
-            {
-              subtitle: "The 10% Rule",
-              emoji: "\u26A1",
-              points: [
-                "Only 10% of energy passes to next level",
-                "90% lost as heat, movement, waste",
-                "That is why food chains are limited in length!"
-              ],
-              diagram: "energy-pyramid"
-            },
-            {
-              subtitle: "Energy Pyramid Example",
-              emoji: "\u{1F53A}",
-              points: [
-                "Producers: 54,670 kcal",
-                "Primary consumers: 5,467 kcal (10%)",
-                "Secondary consumers: 547 kcal (10%)",
-                "Tertiary consumers: 54.7 kcal (10%)"
-              ]
-            },
-            {
-              subtitle: "Key Points",
-              emoji: "\u{1F4CC}",
-              points: [
-                "Decomposers not included in energy pyramid",
-                "Ecosystems can survive without consumers",
-                "Producers are essential (initial energy source)",
-                "Humans not included (can be anywhere in chain)"
-              ]
-            }
-          ]
-        },
-        {
-          id: "bioaccumulation",
-          title: "Bioaccumulation & Biomagnification",
-          image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Bioaccumulation",
-              emoji: "\u{1F41F}",
-              points: [
-                "Build-up of substance in organism over time",
-                "Example: Mercury in fish",
-                "Individual organism absorbs toxins"
-              ]
-            },
-            {
-              subtitle: "Biomagnification",
-              emoji: "\u{1F985}",
-              points: [
-                "Concentration increases up food chain",
-                "Example: DDT in birds of prey",
-                "Top predators affected most",
-                "Small fish eat plankton \u2192 bigger fish eat small fish \u2192 concentration increases"
-              ]
-            }
-          ]
-        },
-        {
-          id: "restoration",
-          title: "Restoration Techniques",
-          image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Bio-Augmentation (Fixes)",
-              emoji: "\u{1F9A0}",
-              points: [
-                "Uses bacteria/fungi to neutralize toxins",
-                "Example: 2010 BP oil spill cleanup",
-                "Breaks down contaminants naturally"
-              ]
-            },
-            {
-              subtitle: "Bio-Remediation (Adds)",
-              emoji: "\u{1F33F}",
-              points: [
-                "Adding species that break down waste",
-                "Improves soil quality and cleans water",
-                "Example: Microbes as natural water filtration"
-              ]
-            },
-            {
-              subtitle: "Reforestation",
-              emoji: "\u{1F332}",
-              points: [
-                "Planting trees where they were cut",
-                "Prevents soil erosion",
-                "Provides food, shelter, shade for wildlife"
-              ]
-            }
-          ]
-        },
-        {
-          id: "carbon-cycle",
-          title: "Carbon Cycle",
-          image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Reservoirs",
-              emoji: "\u{1F4A8}",
-              points: [
-                "Atmosphere: CO\u2082 gas",
-                "Biosphere: Living organisms",
-                "Lithosphere: Fossil fuels, carbonate rocks",
-                "Hydrosphere: Dissolved CO\u2082 in water"
-              ]
-            },
-            {
-              subtitle: "Photosynthesis vs Respiration",
-              emoji: "\u{1F504}",
-              points: [
-                "Photosynthesis: Plants absorb CO\u2082 \u2192 glucose",
-                "Respiration: Organisms release CO\u2082",
-                "Combustion: Burning fuels releases CO\u2082",
-                "Decomposition: Dead matter releases CO\u2082",
-                "Ocean uptake: Oceans absorb atmospheric CO\u2082"
-              ],
-              diagram: "carbon-cycle"
-            },
-            {
-              subtitle: "Photosynthesis Equation",
-              emoji: "\u{1F331}",
-              points: [
-                "6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082",
-                "Uses sunlight energy",
-                "Produces glucose (sugar) and oxygen",
-                "Only happens in plants and some bacteria"
-              ],
-              diagram: "photosynthesis"
-            },
-            {
-              subtitle: "Cellular Respiration Equation",
-              emoji: "\u{1F4A8}",
-              points: [
-                "C\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + ATP",
-                "Breaks down glucose with oxygen",
-                "Releases energy (ATP) for life",
-                "Happens in ALL living organisms"
-              ],
-              diagram: "respiration"
-            }
-          ]
-        },
-        {
-          id: "nitrogen-cycle",
-          title: "Nitrogen Cycle",
-          image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Complete Nitrogen Cycle",
-              emoji: "\u267B\uFE0F",
-              points: [
-                "Nitrogen moves between atmosphere, soil, and organisms",
-                "Essential for proteins and DNA",
-                "Bacteria do most of the work!",
-                "78% of air is nitrogen gas (N\u2082)"
-              ],
-              diagram: "nitrogen-cycle"
-            },
-            {
-              subtitle: "Nitrogen Fixation",
-              emoji: "\u26A1",
-              points: [
-                "N\u2082 \u2192 ammonia (NH\u2083)",
-                "Done by bacteria (Rhizobium) or lightning",
-                "Makes nitrogen usable for plants"
-              ]
-            },
-            {
-              subtitle: "Nitrification",
-              emoji: "\u{1F52C}",
-              points: [
-                "Ammonia \u2192 nitrite (NO\u2082\u207B) by Nitrosomonas",
-                "Nitrite \u2192 nitrate (NO\u2083\u207B) by Nitrobacter",
-                "Two-step bacterial process"
-              ]
-            },
-            {
-              subtitle: "Assimilation & Ammonification",
-              emoji: "\u{1F331}",
-              points: [
-                "Assimilation: Plants absorb nitrate from soil",
-                "Ammonification: Decomposers release ammonium",
-                "Returns nitrogen to soil"
-              ]
-            },
-            {
-              subtitle: "Denitrification",
-              emoji: "\u{1F4A8}",
-              points: [
-                "Nitrate \u2192 N\u2082 gas",
-                "By denitrifying bacteria",
-                "Returns nitrogen to atmosphere"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    chemistry: {
-      id: "chemistry",
-      name: "Chemistry: Matter & Changes",
-      description: "10 comprehensive sections on atoms, periodic table, and chemical properties",
-      icon: Beaker,
-      color: "blue",
-      gradient: "from-blue-500 to-indigo-600",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "chemistry-definitions",
-          title: "Key Chemistry Definitions",
-          image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Matter & Classification",
-              emoji: "\u{1F9EA}",
-              points: [
-                "MATTER: Anything that has mass and takes up space",
-                "PURE SUBSTANCE: Uniform composition - element or compound",
-                "ELEMENT: Pure substance made of one type of atom (gold, oxygen)",
-                "COMPOUND: Two or more elements chemically bonded (H\u2082O, CO\u2082)",
-                "MIXTURE: Two or more substances physically combined (not bonded)",
-                "HOMOGENEOUS MIXTURE: Uniform throughout, can't see parts (salt water)",
-                "HETEROGENEOUS MIXTURE: Can see different parts (sand and water)",
-                "SOLUTION: Type of homogeneous mixture (dissolved)",
-                "SUSPENSION: Heterogeneous mixture where particles settle",
-                "ALLOY: Mixture of metals (brass, steel)"
-              ]
-            },
-            {
-              subtitle: "Properties of Matter",
-              emoji: "\u2696\uFE0F",
-              points: [
-                "PHYSICAL PROPERTY: Observable without changing substance (color, density)",
-                "CHEMICAL PROPERTY: How substance reacts with others (flammability)",
-                "QUALITATIVE: Descriptive property (color, texture, odor)",
-                "QUANTITATIVE: Measurable property with numbers (mass, volume, temperature)",
-                "DENSITY: Mass per unit volume (D = m/V), measured in g/cm\xB3 or g/mL",
-                "MASS: Amount of matter in object, measured in grams (g)",
-                "VOLUME: Space object occupies, measured in cm\xB3 or mL",
-                "MELTING POINT: Temperature solid becomes liquid",
-                "BOILING POINT: Temperature liquid becomes gas",
-                "SOLUBILITY: How much solute dissolves in solvent"
-              ]
-            },
-            {
-              subtitle: "Changes in Matter",
-              emoji: "\u{1F52C}",
-              points: [
-                "PHYSICAL CHANGE: Same substance, different form (melting ice)",
-                "CHEMICAL CHANGE: New substance forms (burning wood)",
-                "INDICATORS OF CHEMICAL CHANGE: Color change, gas production, temperature change, light, precipitate",
-                "PRECIPITATE: Solid that forms in liquid during chemical reaction",
-                "COMBUSTION: Burning - reaction with oxygen producing heat and light",
-                "OXIDATION: Reaction with oxygen (rusting)",
-                "REACTANTS: Substances you start with in chemical reaction",
-                "PRODUCTS: New substances formed in chemical reaction"
-              ]
-            },
-            {
-              subtitle: "Atomic Structure",
-              emoji: "\u269B\uFE0F",
-              points: [
-                "ATOM: Smallest unit of element that keeps its properties",
-                "NUCLEUS: Dense center of atom containing protons and neutrons",
-                "PROTON: Positively charged particle in nucleus (+1 charge)",
-                "NEUTRON: Neutral particle in nucleus (0 charge)",
-                "ELECTRON: Negatively charged particle orbiting nucleus (-1 charge)",
-                "ATOMIC NUMBER: Number of protons (identifies element)",
-                "MASS NUMBER: Total protons + neutrons",
-                "ISOTOPE: Same element with different number of neutrons",
-                "ELECTRON SHELL: Energy level where electrons orbit",
-                "VALENCE ELECTRONS: Electrons in outermost shell (determine bonding)"
-              ]
-            },
-            {
-              subtitle: "Ions & Bonding",
-              emoji: "\u26A1",
-              points: [
-                "ION: Atom with unequal protons and electrons (charged)",
-                "CATION: Positive ion (lost electrons), metals form cations",
-                "ANION: Negative ion (gained electrons), non-metals form anions",
-                "IONIC BOND: Transfer of electrons between atoms",
-                "OCTET RULE: Atoms want 8 valence electrons for stability",
-                "CHARGE: Number of protons minus number of electrons"
-              ]
-            },
-            {
-              subtitle: "Periodic Table Terms",
-              emoji: "\u{1F4CA}",
-              points: [
-                "PERIODIC TABLE: Chart organizing elements by properties",
-                "PERIOD: Horizontal row on periodic table",
-                "GROUP/FAMILY: Vertical column with similar properties",
-                "ALKALI METALS (Group 1): Soft, highly reactive, 1 valence electron",
-                "ALKALINE EARTH METALS (Group 2): Form +2 ions, 2 valence electrons",
-                "HALOGENS (Group 17): Reactive non-metals, 7 valence electrons",
-                "NOBLE GASES (Group 18): Unreactive, 8 valence electrons (stable)",
-                "TRANSITION METALS: Groups 3-12, can form multiple ion charges",
-                "METAL: Shiny, conductive, malleable, loses electrons",
-                "NON-METAL: Dull, poor conductor, brittle, gains electrons",
-                "METALLOID: Properties between metals and non-metals (silicon)"
-              ]
-            },
-            {
-              subtitle: "Atomic Models",
-              emoji: "\u{1F52D}",
-              points: [
-                "DALTON MODEL (1803): Solid sphere, indivisible atoms",
-                "THOMSON MODEL (1897): Plum pudding - positive with embedded electrons",
-                "RUTHERFORD MODEL (1911): Nuclear model - dense nucleus with orbiting electrons",
-                "BOHR MODEL (1913): Planetary model - electrons in specific energy levels/shells"
-              ]
-            },
-            {
-              subtitle: "Separation Methods",
-              emoji: "\u{1F527}",
-              points: [
-                "FILTRATION: Separating solid from liquid using filter",
-                "DISTILLATION: Separating liquids by different boiling points",
-                "EVAPORATION: Liquid evaporates leaving dissolved solid behind",
-                "CHROMATOGRAPHY: Separating dissolved substances by movement rate",
-                "MAGNETISM: Separating magnetic from non-magnetic materials"
-              ]
-            },
-            {
-              subtitle: "Important Formulas",
-              emoji: "\u{1F4D0}",
-              points: [
-                "DENSITY: D = m/V (Density = mass \xF7 volume)",
-                "MASS: m = D \xD7 V (Mass = density \xD7 volume)",
-                "VOLUME: V = m/D (Volume = mass \xF7 density)",
-                "NEUTRONS: N = Mass number - Atomic number",
-                "CHARGE: Charge = Protons - Electrons",
-                "Floating: Object floats if density < liquid density",
-                "Sinking: Object sinks if density > liquid density"
-              ]
-            },
-            {
-              subtitle: "Units & Conversions",
-              emoji: "\u{1F522}",
-              points: [
-                "Mass: grams (g), kilograms (kg), 1 kg = 1000 g",
-                "Volume: milliliters (mL), liters (L), cubic centimeters (cm\xB3)",
-                "1 mL = 1 cm\xB3",
-                "Density: g/cm\xB3 or g/mL",
-                "Temperature: Celsius (\xB0C), Kelvin (K), \xB0C + 273 = K",
-                "AMU (atomic mass unit): Unit for atomic mass, 1 amu \u2248 mass of proton/neutron"
-              ]
-            }
-          ]
-        },
-        {
-          id: "chemistry-definitions-2",
-          title: "More Essential Chemistry Terms",
-          image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "States of Matter",
-              emoji: "\u{1F4A7}",
-              points: [
-                "SOLID: Definite shape and volume, particles tightly packed",
-                "LIQUID: Definite volume but no shape, particles close but can move",
-                "GAS: No definite shape or volume, particles far apart and moving fast",
-                "PLASMA: Super-heated gas with charged particles (found in stars)",
-                "MELTING: Solid to liquid (ice \u2192 water)",
-                "FREEZING: Liquid to solid (water \u2192 ice)",
-                "EVAPORATION: Liquid to gas (water \u2192 steam)",
-                "CONDENSATION: Gas to liquid (steam \u2192 water)",
-                "SUBLIMATION: Solid directly to gas (dry ice)",
-                "DEPOSITION: Gas directly to solid (frost forming)"
-              ]
-            },
-            {
-              subtitle: "Lab Safety",
-              emoji: "\u{1F97D}",
-              points: [
-                "SAFETY GOGGLES: Protect eyes from chemicals and broken glass",
-                "LAB COAT/APRON: Protect clothing and skin",
-                "FIRE EXTINGUISHER: Put out fires (know location)",
-                "EYEWASH STATION: Rinse eyes if chemicals splash",
-                "SAFETY SHOWER: Rinse body if large chemical spill",
-                "FUME HOOD: Ventilated area for handling toxic fumes",
-                "MSDS (Material Safety Data Sheet): Information about chemical hazards",
-                "WHMIS: Workplace Hazardous Materials Information System (Canadian)",
-                "Never eat/drink in lab, tie back long hair, report all accidents"
-              ]
-            },
-            {
-              subtitle: "WHMIS Symbols",
-              emoji: "\u26A0\uFE0F",
-              points: [
-                "FLAME: Flammable materials that catch fire easily",
-                "FLAME OVER CIRCLE: Oxidizers that make fires burn stronger",
-                "GAS CYLINDER: Compressed gases under pressure",
-                "CORROSION: Acids/bases that burn skin and eyes",
-                "SKULL & CROSSBONES: Poisonous/toxic materials",
-                "EXCLAMATION MARK: Irritants causing skin/eye irritation",
-                "HEALTH HAZARD: Long-term health effects (cancer, breathing problems)",
-                "EXPLODING BOMB: Explosives",
-                "BIOHAZARD: Infectious materials",
-                "ENVIRONMENT: Toxic to aquatic life and ecosystems"
-              ]
-            },
-            {
-              subtitle: "Chemical Reactions",
-              emoji: "\u2697\uFE0F",
-              points: [
-                "CHEMICAL REACTION: Process where substances change into new substances",
-                "SYNTHESIS: Two or more substances combine (A + B \u2192 AB)",
-                "DECOMPOSITION: Compound breaks down (AB \u2192 A + B)",
-                "SINGLE REPLACEMENT: One element replaces another (A + BC \u2192 AC + B)",
-                "DOUBLE REPLACEMENT: Two compounds swap parts (AB + CD \u2192 AD + CB)",
-                "EXOTHERMIC: Releases energy/heat (combustion, hand warmers)",
-                "ENDOTHERMIC: Absorbs energy/heat (photosynthesis, cold packs)",
-                "CATALYST: Speeds up reaction without being used up",
-                "ACTIVATION ENERGY: Minimum energy needed to start reaction"
-              ]
-            },
-            {
-              subtitle: "Solutions & Concentration",
-              emoji: "\u{1F9EC}",
-              points: [
-                "SOLVENT: Substance doing the dissolving (usually water)",
-                "SOLUTE: Substance being dissolved (sugar, salt)",
-                "CONCENTRATED: Solution with lots of solute",
-                "DILUTE: Solution with little solute",
-                "SATURATED: Maximum amount of solute dissolved at given temperature",
-                "UNSATURATED: Can dissolve more solute",
-                "SUPERSATURATED: More solute than normally possible (unstable)",
-                "SOLUBLE: Able to dissolve",
-                "INSOLUBLE: Unable to dissolve",
-                "AQUEOUS: Dissolved in water (symbol: aq)"
-              ]
-            },
-            {
-              subtitle: "Acids & Bases",
-              emoji: "\u{1F9EA}",
-              points: [
-                "ACID: Substance with pH less than 7, tastes sour, donates H\u207A ions",
-                "BASE: Substance with pH greater than 7, tastes bitter, accepts H\u207A ions",
-                "NEUTRAL: pH of exactly 7 (pure water)",
-                "pH SCALE: Measures acidity/basicity from 0 (very acidic) to 14 (very basic)",
-                "INDICATOR: Substance that changes color in acids vs bases (litmus paper)",
-                "NEUTRALIZATION: Acid + Base \u2192 Salt + Water",
-                "CORROSIVE: Strong acid or base that burns/damages materials",
-                "Examples of acids: HCl (hydrochloric), H\u2082SO\u2084 (sulfuric), vinegar",
-                "Examples of bases: NaOH (sodium hydroxide), ammonia, soap"
-              ]
-            },
-            {
-              subtitle: "Chemical Nomenclature",
-              emoji: "\u{1F4DD}",
-              points: [
-                "CHEMICAL FORMULA: Symbols showing what's in compound (H\u2082O)",
-                "SUBSCRIPT: Small number showing how many atoms (H\u2082O has 2 hydrogen)",
-                "COEFFICIENT: Number before formula showing how many molecules (2H\u2082O)",
-                "DIATOMIC MOLECULES: Elements existing as pairs (H\u2082, O\u2082, N\u2082, F\u2082, Cl\u2082, Br\u2082, I\u2082)",
-                "BINARY COMPOUND: Compound made of two elements (NaCl)",
-                "POLYATOMIC ION: Group of atoms with charge (SO\u2084\xB2\u207B, NO\u2083\u207B)",
-                "MOLECULAR FORMULA: Shows actual number of atoms in molecule",
-                "EMPIRICAL FORMULA: Shows simplest whole number ratio"
-              ]
-            },
-            {
-              subtitle: "Energy in Chemistry",
-              emoji: "\u{1F525}",
-              points: [
-                "CHEMICAL ENERGY: Energy stored in chemical bonds",
-                "THERMAL ENERGY: Heat energy from particle motion",
-                "KINETIC ENERGY: Energy of motion",
-                "POTENTIAL ENERGY: Stored energy",
-                "LAW OF CONSERVATION OF ENERGY: Energy cannot be created or destroyed",
-                "LAW OF CONSERVATION OF MASS: Matter cannot be created or destroyed in chemical reactions",
-                "TEMPERATURE: Measure of average kinetic energy of particles",
-                "HEAT: Transfer of thermal energy from hot to cold"
-              ]
-            },
-            {
-              subtitle: "Advanced Atomic Concepts",
-              emoji: "\u{1F31F}",
-              points: [
-                "ORBITAL: Region where electron is likely to be found",
-                "QUANTUM: Smallest discrete amount of energy",
-                "GROUND STATE: Lowest energy state of atom",
-                "EXCITED STATE: Higher energy state when electron absorbs energy",
-                "EMISSION SPECTRUM: Light given off when excited electrons return to ground state",
-                "ATOMIC MASS: Weighted average mass of all isotopes",
-                "RELATIVE ATOMIC MASS: Atomic mass compared to carbon-12",
-                "ELECTRON CONFIGURATION: Arrangement of electrons in shells/orbitals"
-              ]
-            },
-            {
-              subtitle: "Scientific Method & Measurement",
-              emoji: "\u{1F52C}",
-              points: [
-                "HYPOTHESIS: Testable prediction based on observations",
-                "EXPERIMENT: Test to check if hypothesis is correct",
-                "VARIABLE: Factor that can change in experiment",
-                "CONTROL: Part of experiment that stays the same for comparison",
-                "INDEPENDENT VARIABLE: What you change on purpose",
-                "DEPENDENT VARIABLE: What you measure (depends on independent variable)",
-                "PRECISION: How close measurements are to each other (consistency)",
-                "ACCURACY: How close measurement is to true value (correctness)",
-                "SIGNIFICANT FIGURES: Digits in measurement that are certain plus one estimated digit"
-              ]
-            }
-          ]
-        },
-        {
-          id: "lab-equipment",
-          title: "Lab Equipment & Tools",
-          image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Measuring & Transferring",
-              emoji: "\u{1F4CF}",
-              points: [
-                "Graduated Cylinder: Measures liquid volume accurately",
-                "Beaker: Holds and mixes liquids (less accurate measurements)",
-                "Erlenmeyer Flask: For mixing, heating, and storing liquids",
-                "Funnel: Transfers liquids or powders into containers"
-              ]
-            },
-            {
-              subtitle: "Heating Equipment",
-              emoji: "\u{1F525}",
-              points: [
-                "Portable Bunsen Burner: Heats substances with controlled flame",
-                "Lighter: Ignites Bunsen burner"
-              ]
-            },
-            {
-              subtitle: "Handling & Mixing",
-              emoji: "\u{1F944}",
-              points: [
-                "Scoopula/Spatula: Scoops and transfers solid chemicals",
-                "Stirring Rod: Stirs and mixes liquids without contamination",
-                "Test Tubes: Holds small amounts of liquid for experiments"
-              ]
-            },
-            {
-              subtitle: "Measuring & Observation",
-              emoji: "\u2696\uFE0F",
-              points: [
-                "Electronic Balance/Scale: Measures mass of objects accurately",
-                "Overflow Can: Measures volume by water displacement",
-                "Dimple Tile: Holds small samples for mixing or observation"
-              ]
-            }
-          ]
-        },
-        {
-          id: "lab-safety",
-          title: "Lab Safety & WHMIS Symbols",
-          image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "General Safety Rules",
-              emoji: "\u26A0\uFE0F",
-              points: [
-                "Wear safety goggles when required",
-                "Tie back long hair",
-                "NO eating or drinking in lab",
-                "Report all accidents immediately",
-                "Know where safety equipment is located"
-              ]
-            },
-            {
-              subtitle: "Key WHMIS Symbols to Know",
-              emoji: "\u{1F536}",
-              points: [
-                "Explosive: Risk of exploding",
-                "Flammable: Catches fire easily",
-                "Corrosive: Burns skin and eyes",
-                "Health Hazard: May cause serious health issues",
-                "Environmental Hazard: Toxic to aquatic life"
-              ]
-            }
-          ]
-        },
-        {
-          id: "matter",
-          title: "Classification of Matter",
-          image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Pure Substances",
-              emoji: "\u2728",
-              points: [
-                "Elements: One type of atom (e.g., Gold, Oxygen)",
-                "Compounds: Two+ elements bonded (e.g., H\u2082O, NaCl)",
-                "Uniform composition throughout"
-              ]
-            },
-            {
-              subtitle: "Homogeneous Mixtures",
-              emoji: "\u{1F964}",
-              points: [
-                "Uniform throughout - cannot see parts",
-                "Examples: Salt water, air, brass",
-                "Also called solutions"
-              ]
-            },
-            {
-              subtitle: "Heterogeneous Mixtures",
-              emoji: "\u{1F957}",
-              points: [
-                "Can see different parts",
-                "Suspensions: Particles settle (muddy water)",
-                "Mechanical: Parts clearly visible (trail mix)"
-              ]
-            }
-          ]
-        },
-        {
-          id: "separation",
-          title: "Separation Methods",
-          image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Common Methods",
-              emoji: "\u{1F52C}",
-              points: [
-                "Filtration: Solid from liquid (sand from water)",
-                "Distillation: Different boiling points (water from salt)",
-                "Evaporation: Dissolved solid from liquid (get salt)",
-                "Magnetism: Magnetic from non-magnetic (iron from sand)",
-                "Chromatography: Dissolved substances (separate dyes)"
-              ]
-            }
-          ]
-        },
-        {
-          id: "changes",
-          title: "Physical vs Chemical Changes",
-          image: "https://images.unsplash.com/photo-1628863353691-0071c8c1874c?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Physical Changes",
-              emoji: "\u2744\uFE0F",
-              points: [
-                "Same substance, different appearance",
-                "Usually reversible",
-                "Examples: Ice melting, cutting paper, dissolving sugar"
-              ]
-            },
-            {
-              subtitle: "Chemical Changes - Look For",
-              emoji: "\u{1F525}",
-              points: [
-                "Color change (iron rusting)",
-                "Gas production/bubbles (vinegar + baking soda)",
-                "Temperature change (hand warmers)",
-                "Light production (fireworks)",
-                "Precipitate forms (solid in liquid)",
-                "Difficult/impossible to reverse"
-              ]
-            }
-          ]
-        },
-        {
-          id: "density",
-          title: "Density Calculations",
-          image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "The Formula",
-              emoji: "\u{1F4D0}",
-              points: [
-                "D = m/V",
-                "D = Density (g/cm\xB3 or g/mL)",
-                "m = Mass (grams)",
-                "V = Volume (cm\xB3 or mL)"
-              ]
-            },
-            {
-              subtitle: "Triangle Trick",
-              emoji: "\u{1F53A}",
-              points: [
-                "Top: m (mass)",
-                "Bottom left: D (density)",
-                "Bottom right: V (volume)",
-                "Cover what you are solving for!"
-              ]
-            },
-            {
-              subtitle: "Floating Rule",
-              emoji: "\u{1F6DF}",
-              points: [
-                "Object floats if density < liquid density",
-                "Object sinks if density > liquid density",
-                "Example: Ice (0.92) floats on water (1.0)"
-              ],
-              diagram: "density"
-            }
-          ]
-        },
-        {
-          id: "properties",
-          title: "Physical & Chemical Properties",
-          image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Physical Properties",
-              emoji: "\u{1F441}\uFE0F",
-              points: [
-                "Qualitative: Color, texture, odor, state, luster, malleability, ductility",
-                "Quantitative: Mass, volume, density, melting/boiling point, solubility",
-                "Observable WITHOUT changing the substance"
-              ]
-            },
-            {
-              subtitle: "Chemical Properties",
-              emoji: "\u2697\uFE0F",
-              points: [
-                "Combustibility: Ability to burn",
-                "Reactivity with acids (metals produce hydrogen gas)",
-                "Stability: Reactivity with oxygen (e.g., iron rusting)",
-                "How substance reacts with OTHER substances"
-              ]
-            }
-          ]
-        },
-        {
-          id: "periodic-table",
-          title: "Periodic Table Organization",
-          image: "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Element Families",
-              emoji: "\u{1F468}\u200D\u{1F469}\u200D\u{1F467}\u200D\u{1F466}",
-              points: [
-                "Alkali Metals (Group 1): Soft, highly reactive, form basic solutions",
-                "Alkaline-Earth Metals (Group 2): Form +2 ions, basic oxides",
-                "Halogens (Group 17): Reactive non-metals, diatomic, form salts",
-                "Noble Gases (Group 18): Full valence shells, almost unreactive"
-              ],
-              diagram: "periodic-table"
-            },
-            {
-              subtitle: "Metals vs Non-metals",
-              emoji: "\u{1F527}",
-              points: [
-                "Metals: Shiny, conductive, malleable, lose electrons (Na, Fe, Cu)",
-                "Non-metals: Dull, poor conductors, brittle, gain electrons (O, S, Cl)",
-                "Metalloids: Between metals/non-metals, semiconductors (Si, B, As)"
-              ]
-            }
-          ]
-        },
-        {
-          id: "atomic-models",
-          title: "Atomic Models Through History",
-          image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "John Dalton (1766-1844) - The Atomic Model",
-              emoji: "\u26AA",
-              points: [
-                "Matter is made of small indivisible atoms",
-                "Atoms can't be subdivided, created or destroyed",
-                "Atoms of the same element have the same properties",
-                "Atoms of different elements have different properties",
-                "Atoms of different elements can form compounds"
-              ],
-              diagram: "atomic-models"
-            },
-            {
-              subtitle: "J.J. Thomson (1856-1940) - Plum Pudding Model",
-              emoji: "\u{1F36E}",
-              points: [
-                "An atom is electrically neutral (no net charge)",
-                "Positive and negative charges are equal in an atom",
-                "Atom is a sphere of positive charge with negative electrons embedded in it",
-                "Discovered the electron"
-              ]
-            },
-            {
-              subtitle: "Ernest Rutherford (1871-1937) - Nuclear Model",
-              emoji: "\u{1F3AF}",
-              points: [
-                "Atoms are mostly empty space",
-                "Most of the mass is concentrated in the center (nucleus)",
-                "The nucleus is tiny, dense, and positively charged",
-                "Electrons are located outside the nucleus"
-              ]
-            },
-            {
-              subtitle: "Niels Bohr (1885-1962) - Planetary Model",
-              emoji: "\u{1FA90}",
-              points: [
-                "Electrons orbit the nucleus in specific energy levels (shells)",
-                "The energy of an orbit is related to its size",
-                "The lowest energy is found in the smallest orbit",
-                "Electrons move between shells when gaining or losing energy",
-                "Gaining energy \u2192 electrons move to farther orbits",
-                "Losing energy \u2192 electrons move to closer orbits"
-              ]
-            }
-          ]
-        },
-        {
-          id: "subatomic",
-          title: "Subatomic Particles & Bohr Diagrams",
-          image: "https://images.unsplash.com/photo-1635070041409-e5e34c1a6ff9?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "The Three Particles",
-              emoji: "\u269B\uFE0F",
-              points: [
-                "Protons: Positive (+1), mass \u2248 1 amu, in nucleus",
-                "Neutrons: Neutral (0), mass \u2248 1 amu, in nucleus",
-                "Electrons: Negative (-1), negligible mass, in shells"
-              ]
-            },
-            {
-              subtitle: "Using the Periodic Table",
-              emoji: "\u{1F4CA}",
-              points: [
-                "Atomic number = # protons = # electrons (neutral atom)",
-                "Mass number \u2248 atomic mass (rounded)",
-                "Neutrons = Mass number - Atomic number"
-              ]
-            },
-            {
-              subtitle: "Bohr-Rutherford Diagrams",
-              emoji: "\u{1F3A8}",
-              points: [
-                "Nucleus in center (protons + neutrons)",
-                "1st shell: max 2 electrons",
-                "2nd shell: max 8 electrons",
-                "3rd shell: max 8 electrons (for first 20 elements)"
-              ],
-              diagram: "bohr"
-            },
-            {
-              subtitle: "Isotopes",
-              emoji: "\u{1F504}",
-              points: [
-                "Same element, different neutron count",
-                "Same protons, different mass numbers",
-                "Example: Carbon-12 vs Carbon-14"
-              ]
-            }
-          ]
-        },
-        {
-          id: "valence-ions",
-          title: "Valence Electrons & Ions",
-          image: "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Valence Electrons",
-              emoji: "\u{1F31F}",
-              points: [
-                "Electrons in outermost shell",
-                "Determine chemical behavior",
-                "Shown in Lewis dot diagrams",
-                "Group number = number of valence electrons"
-              ],
-              diagram: "lewis"
-            },
-            {
-              subtitle: "Ions - Charged Atoms",
-              emoji: "\u26A1",
-              points: [
-                "Cations: Positive (lost electrons), protons > electrons",
-                "Anions: Negative (gained electrons), electrons > protons",
-                "Protons NEVER change (determines element)",
-                "Electrons = protons - charge",
-                "Atoms form ions to get a full outer shell (stable)"
-              ],
-              diagram: "ions"
-            },
-            {
-              subtitle: "Why Atoms Form Ions",
-              emoji: "\u{1F3AF}",
-              points: [
-                "Atoms want 8 valence electrons (octet rule)",
-                "Metals (Groups 1-3): Easier to LOSE 1-3 electrons \u2192 form cations (+)",
-                "Non-metals (Groups 15-17): Easier to GAIN 1-3 electrons \u2192 form anions (-)",
-                "Noble gases already have 8 (or 2 for He) \u2192 don't form ions",
-                "Example: Na loses 1e\u207B \u2192 Na\u207A | Cl gains 1e\u207B \u2192 Cl\u207B"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    physics: {
-      id: "physics",
-      name: "Physics: Electricity",
-      description: "6 comprehensive sections exploring static electricity, circuits, and electrical power",
-      icon: Zap,
-      color: "amber",
-      gradient: "from-amber-500 to-orange-600",
-      image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "definitions",
-          title: "Key Electricity Definitions",
-          image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Fundamental Concepts",
-              emoji: "\u{1F4DA}",
-              points: [
-                "ELECTRICITY: Flow of electric charge through a conductor",
-                "CHARGE: Property of matter that causes electrical force (positive or negative)",
-                "ELECTRON: Negatively charged particle that moves in electric current",
-                "PROTON: Positively charged particle in nucleus (doesn't move)",
-                "NEUTRAL: Object with equal positive and negative charges (no net charge)",
-                "ION: Atom with unequal protons and electrons (charged atom)"
-              ]
-            },
-            {
-              subtitle: "Static Electricity Terms",
-              emoji: "\u26A1",
-              points: [
-                "STATIC ELECTRICITY: Build-up of electric charge on surface of objects",
-                "FRICTION: Charging by rubbing two objects together (transfers electrons)",
-                "CONDUCTION: Charging by direct contact with charged object",
-                "INDUCTION: Charging without direct contact (nearby charged object)",
-                "ELECTROSCOPE: Device used to detect electric charge",
-                "GROUNDING: Connecting object to Earth to remove excess charge"
-              ]
-            },
-            {
-              subtitle: "Current Electricity Terms",
-              emoji: "\u{1F50B}",
-              points: [
-                "CURRENT (I): Rate of flow of electric charge, measured in Amperes (A)",
-                'VOLTAGE (V): Electric potential difference, electrical "pressure", measured in Volts (V)',
-                "RESISTANCE (R): Opposition to flow of current, measured in Ohms (\u03A9)",
-                "CONDUCTOR: Material that allows electricity to flow easily (copper, metals)",
-                "INSULATOR: Material that resists flow of electricity (rubber, plastic, wood)",
-                "AMMETER: Device that measures electric current (connected in series)",
-                "VOLTMETER: Device that measures voltage (connected in parallel)"
-              ]
-            },
-            {
-              subtitle: "Circuit Terms",
-              emoji: "\u{1F50C}",
-              points: [
-                "CIRCUIT: Complete path that allows electricity to flow",
-                "CLOSED CIRCUIT: Complete loop allowing current to flow",
-                "OPEN CIRCUIT: Broken path preventing current flow",
-                "SHORT CIRCUIT: Unintended path with very low resistance (dangerous)",
-                "LOAD: Device in circuit that uses electrical energy (bulb, motor, resistor)",
-                "POWER SOURCE: Provides energy to circuit (battery, generator)",
-                "SWITCH: Device to open or close a circuit"
-              ]
-            },
-            {
-              subtitle: "Series Circuit Definitions",
-              emoji: "\u27A1\uFE0F",
-              points: [
-                "SERIES CIRCUIT: Circuit with single path for current",
-                "In series: Components connected end-to-end",
-                "Current is SAME at all points in series circuit",
-                "Voltage DIVIDES among components (V_total = V\u2081 + V\u2082 + V\u2083)",
-                "Total resistance INCREASES (R_total = R\u2081 + R\u2082 + R\u2083)",
-                "If one component fails, entire circuit stops working"
-              ]
-            },
-            {
-              subtitle: "Parallel Circuit Definitions",
-              emoji: "\u{1F500}",
-              points: [
-                "PARALLEL CIRCUIT: Circuit with multiple paths for current",
-                "In parallel: Components connected across same two points",
-                "Voltage is SAME across all branches",
-                "Current DIVIDES among paths (I_total = I\u2081 + I\u2082 + I\u2083)",
-                "Total resistance DECREASES (more paths = easier flow)",
-                "If one branch fails, other branches continue working"
-              ]
-            },
-            {
-              subtitle: "Power & Energy Terms",
-              emoji: "\u{1F4A1}",
-              points: [
-                "POWER (P): Rate of using electrical energy, measured in Watts (W)",
-                "WATT: Unit of power (1 W = 1 Joule per second)",
-                "KILOWATT: 1000 Watts (kW)",
-                "ENERGY: Total amount of electrical work done, measured in Joules (J)",
-                "KILOWATT-HOUR (kWh): Amount of energy used by 1 kW device in 1 hour",
-                "ELECTRICAL EFFICIENCY: Ratio of useful energy output to total energy input"
-              ]
-            },
-            {
-              subtitle: "Safety Terms",
-              emoji: "\u26A0\uFE0F",
-              points: [
-                "FUSE: Safety device with thin wire that melts when overloaded",
-                "CIRCUIT BREAKER: Safety switch that trips/opens when too much current flows",
-                "GFCI (Ground Fault Circuit Interrupter): Device that detects shorts and cuts power",
-                "GROUND: Connection to Earth providing safe path for excess electricity",
-                "SHOCK: Effect of electric current passing through body",
-                "OVERLOAD: Too much current drawn from circuit (can cause fire)"
-              ]
-            },
-            {
-              subtitle: "Important Formulas",
-              emoji: "\u{1F4D0}",
-              points: [
-                "OHM'S LAW: V = I \xD7 R (Voltage = Current \xD7 Resistance)",
-                "POWER: P = V \xD7 I (Power = Voltage \xD7 Current)",
-                "POWER: P = I\xB2R (alternate formula using resistance)",
-                "POWER: P = V\xB2/R (alternate formula)",
-                "ENERGY: E = P \xD7 t (Energy = Power \xD7 time)",
-                "COST: Cost = Energy (kWh) \xD7 Rate ($/kWh)"
-              ]
-            },
-            {
-              subtitle: "Unit Conversions",
-              emoji: "\u{1F522}",
-              points: [
-                "1 Ampere (A) = 1 Coulomb per second",
-                "1 Kilowatt (kW) = 1000 Watts (W)",
-                "1 Megawatt (MW) = 1,000,000 Watts",
-                "1 Milliampere (mA) = 0.001 Amperes",
-                "1 Kilohm (k\u03A9) = 1000 Ohms",
-                "1 Megohm (M\u03A9) = 1,000,000 Ohms",
-                "1 Kilowatt-hour = 3,600,000 Joules"
-              ]
-            }
-          ]
-        },
-        {
-          id: "static",
-          title: "Static Electricity",
-          image: "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "What is Static Electricity?",
-              emoji: "\u26A1",
-              points: [
-                "Build-up of electric charge on the surface of objects",
-                "Caused by imbalance of electrons (negative) and protons (positive)",
-                `Called "static" because charges don't move - they stay in one place`,
-                "Creates a shock when you touch something metal"
-              ]
-            },
-            {
-              subtitle: "The Law of Electric Charges",
-              emoji: "\u{1F9F2}",
-              points: [
-                "Like charges REPEL (push away): + and + OR - and -",
-                "Opposite charges ATTRACT (pull together): + and -",
-                "Neutral objects have equal positive and negative charges",
-                "Charged objects have more of one type of charge"
-              ],
-              diagram: "static-electricity"
-            },
-            {
-              subtitle: "Three Ways to Charge Objects",
-              emoji: "\u{1F504}",
-              points: [
-                "FRICTION: Rubbing objects transfers electrons (balloon on hair)",
-                "CONDUCTION: Direct contact transfers charge (touching a charged rod)",
-                "INDUCTION: Charged object nearby causes separation without touching",
-                "Only ELECTRONS move - protons stay in the nucleus"
-              ]
-            },
-            {
-              subtitle: "Electroscope",
-              emoji: "\u{1F52C}",
-              points: [
-                "Device that detects electric charge",
-                "Metal leaves spread apart when charged (same charge repels)",
-                "If leaves collapse, object is neutral or opposite charge",
-                "Used in labs to test if objects are charged"
-              ]
-            },
-            {
-              subtitle: "Real-World Examples",
-              emoji: "\u{1F31F}",
-              points: [
-                "Lightning: Massive static discharge between clouds and ground",
-                "Balloon sticking to wall after rubbing on hair",
-                "Shock when touching doorknob after walking on carpet",
-                "Clothes clinging together from dryer (static cling)"
-              ]
-            }
-          ]
-        },
-        {
-          id: "current",
-          title: "Current Electricity & Ohm's Law",
-          image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Current Electricity Basics",
-              emoji: "\u{1F50B}",
-              points: [
-                "Continuous flow of electrons through a conductor",
-                "Unlike static, charges are MOVING constantly",
-                "Requires a complete circuit (closed loop)",
-                "Power source (battery) pushes electrons through wires"
-              ],
-              diagram: "complete-circuit"
-            },
-            {
-              subtitle: "Three Key Terms",
-              emoji: "\u{1F4CA}",
-              points: [
-                "CURRENT (I): Flow of electrons, measured in Amperes (A)",
-                "VOLTAGE (V): Electrical pressure/push, measured in Volts (V)",
-                "RESISTANCE (R): Opposition to flow, measured in Ohms (\u03A9)",
-                "Think: Voltage pushes, Current flows, Resistance slows"
-              ]
-            },
-            {
-              subtitle: "Ohm's Law",
-              emoji: "\u{1F4D0}",
-              points: [
-                "Formula: V = I \xD7 R",
-                "Voltage = Current \xD7 Resistance",
-                "If you know any 2 values, you can find the 3rd",
-                "Example: V = 12V, R = 4\u03A9 \u2192 I = V/R = 12/4 = 3A"
-              ],
-              diagram: "ohms-law"
-            },
-            {
-              subtitle: "Calculating with Ohm's Law",
-              emoji: "\u{1F9EE}",
-              points: [
-                "To find Current: I = V / R",
-                "To find Voltage: V = I \xD7 R",
-                "To find Resistance: R = V / I",
-                "Always include units in your answer!"
-              ]
-            },
-            {
-              subtitle: "What Affects Resistance?",
-              emoji: "\u{1F50C}",
-              points: [
-                "LENGTH: Longer wire = MORE resistance",
-                "THICKNESS: Thinner wire = MORE resistance",
-                "MATERIAL: Copper (low) vs Rubber (high)",
-                "TEMPERATURE: Hotter = MORE resistance (usually)"
-              ]
-            }
-          ]
-        },
-        {
-          id: "circuits",
-          title: "Electric Circuits",
-          image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Circuit Components",
-              emoji: "\u{1F527}",
-              points: [
-                "BATTERY/CELL: Provides voltage (energy source)",
-                "WIRES: Conduct electricity (usually copper)",
-                "LOAD: Device that uses electricity (bulb, motor, resistor)",
-                "SWITCH: Opens/closes circuit to control flow",
-                "Must form a COMPLETE LOOP for current to flow"
-              ],
-              diagram: "circuit-symbols"
-            },
-            {
-              subtitle: "Series Circuits",
-              emoji: "\u27A1\uFE0F",
-              points: [
-                "ONE path for current to flow",
-                "Components connected end-to-end in a line",
-                "Current is SAME everywhere: I\u2081 = I\u2082 = I\u2083",
-                "Voltage DIVIDES among components: V_total = V\u2081 + V\u2082 + V\u2083",
-                "If one bulb breaks, ALL go out (like old Christmas lights)",
-                "More bulbs = dimmer light (resistance adds up)"
-              ],
-              diagram: "series-circuit"
-            },
-            {
-              subtitle: "Parallel Circuits",
-              emoji: "\u{1F500}",
-              points: [
-                "MULTIPLE paths for current to flow",
-                "Components connected across same two points",
-                "Voltage is SAME across all branches: V\u2081 = V\u2082 = V\u2083",
-                "Current DIVIDES among branches: I_total = I\u2081 + I\u2082 + I\u2083",
-                "If one bulb breaks, others STAY ON (home wiring)",
-                "More paths = MORE total current drawn"
-              ],
-              diagram: "parallel-circuit"
-            },
-            {
-              subtitle: "Series vs Parallel Summary",
-              emoji: "\u2696\uFE0F",
-              points: [
-                "Series: Same current, voltage divides, one path",
-                "Parallel: Same voltage, current divides, multiple paths",
-                "Series: One break stops everything",
-                "Parallel: One break doesn't affect others",
-                "Real homes use PARALLEL so outlets work independently"
-              ]
-            },
-            {
-              subtitle: "Circuit Diagrams",
-              emoji: "\u{1F4CB}",
-              points: [
-                "Battery: Long line (+) and short line (-)",
-                "Wire: Straight line",
-                "Bulb/Resistor: Zigzag line or circle with X",
-                "Switch: Break in line that can open/close",
-                "Learn to read and draw simple circuit diagrams"
-              ]
-            }
-          ]
-        },
-        {
-          id: "power",
-          title: "Electrical Energy & Power",
-          image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "What is Electrical Power?",
-              emoji: "\u{1F4A1}",
-              points: [
-                "Rate at which electrical energy is used or produced",
-                "Measured in Watts (W)",
-                "Higher wattage = more energy used per second",
-                "1000 Watts = 1 Kilowatt (kW)"
-              ]
-            },
-            {
-              subtitle: "Power Formula",
-              emoji: "\u26A1",
-              points: [
-                "Formula: P = V \xD7 I",
-                "Power = Voltage \xD7 Current",
-                "Example: 120V outlet, 0.5A current \u2192 P = 120 \xD7 0.5 = 60W",
-                "Can also use: P = I\xB2R or P = V\xB2/R (using Ohm's Law)"
-              ],
-              diagram: "power-formula"
-            },
-            {
-              subtitle: "Energy vs Power",
-              emoji: "\u{1F50B}",
-              points: [
-                "POWER: How fast you use energy (Watts)",
-                "ENERGY: Total amount used over time (Joules or kWh)",
-                "Energy = Power \xD7 Time",
-                "Example: 100W bulb for 10 hours = 1000 Wh = 1 kWh",
-                "Electric bill charges for ENERGY (kWh), not power"
-              ]
-            },
-            {
-              subtitle: "Cost of Electricity",
-              emoji: "\u{1F4B0}",
-              points: [
-                "Power companies charge per kilowatt-hour (kWh)",
-                "To find cost: (Power in kW) \xD7 (Time in hours) \xD7 (Rate per kWh)",
-                "Example: 1.5 kW heater, 8 hours, $0.12/kWh \u2192 1.5 \xD7 8 \xD7 0.12 = $1.44",
-                "Leaving devices on 24/7 wastes energy and money"
-              ]
-            },
-            {
-              subtitle: "Appliance Wattage Examples",
-              emoji: "\u{1F3E0}",
-              points: [
-                "LED bulb: 10W",
-                "Laptop: 50W",
-                "Desktop computer: 200W",
-                "Microwave: 1000W (1 kW)",
-                "Electric heater: 1500W (1.5 kW)",
-                "Hair dryer: 1800W (1.8 kW)"
-              ]
-            }
-          ]
-        },
-        {
-          id: "safety",
-          title: "Electrical Safety",
-          image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Why Electricity is Dangerous",
-              emoji: "\u26A0\uFE0F",
-              points: [
-                "Electric current can disrupt your heart rhythm",
-                "As little as 0.1A (100mA) through heart can be fatal",
-                "High voltage can cause severe burns",
-                "Electricity always takes easiest path to ground - could be through YOU"
-              ]
-            },
-            {
-              subtitle: "Circuit Protection Devices",
-              emoji: "\u{1F6E1}\uFE0F",
-              points: [
-                "FUSE: Thin wire that melts if too much current flows",
-                "CIRCUIT BREAKER: Switch that trips/opens if overloaded",
-                "GFCI (Ground Fault): Detects shorts, shuts off in 0.025 seconds",
-                "All prevent fires and electrocution from overloaded circuits"
-              ]
-            },
-            {
-              subtitle: "Grounding",
-              emoji: "\u26A1",
-              points: [
-                "Third prong on plug connects to ground (Earth)",
-                "Provides safe path for excess electricity",
-                "Prevents shocks if device has internal short",
-                "Metal appliances (fridges, washers) MUST be grounded"
-              ]
-            },
-            {
-              subtitle: "Safety Rules",
-              emoji: "\u{1F6AB}",
-              points: [
-                "NEVER use electrical devices near water",
-                "NEVER touch outlets or switches with wet hands",
-                "NEVER overload outlets with too many devices",
-                "NEVER touch downed power lines - call 911",
-                "Replace damaged cords immediately",
-                "Pull plug by the plug, not the cord"
-              ]
-            },
-            {
-              subtitle: "What to Do in Emergencies",
-              emoji: "\u{1F198}",
-              points: [
-                "If someone is being shocked: DON'T TOUCH THEM",
-                "Turn off power source or use non-conductive object (wood)",
-                "Call 911 immediately",
-                "If you see sparks or smell burning: unplug and stop using",
-                "Electrical fire: NEVER use water - use fire extinguisher"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    space: {
-      id: "space",
-      name: "Space: Exploration",
-      description: "4 engaging sections on the solar system, space technology, and the universe",
-      icon: Globe,
-      color: "purple",
-      gradient: "from-purple-500 to-violet-600",
-      image: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=1200&h=600&fit=crop",
-      sections: [
-        {
-          id: "space-definitions",
-          title: "Key Space Science Definitions",
-          image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Solar System Basics",
-              emoji: "\u2600\uFE0F",
-              points: [
-                "SOLAR SYSTEM: Sun and all objects that orbit it",
-                "SUN: Star at center of our solar system, provides light and heat",
-                "PLANET: Large celestial body orbiting a star",
-                "DWARF PLANET: Smaller celestial body that hasn't cleared its orbit (Pluto)",
-                "MOON: Natural satellite orbiting a planet",
-                "ASTEROID: Rocky object smaller than planet, mostly in asteroid belt",
-                "COMET: Icy object with tail when near Sun",
-                "METEOROID: Small rocky/metallic object in space",
-                "METEOR: Meteoroid burning up in Earth's atmosphere (shooting star)",
-                "METEORITE: Meteoroid that reaches Earth's surface"
-              ]
-            },
-            {
-              subtitle: "Planetary Classifications",
-              emoji: "\u{1FA90}",
-              points: [
-                "INNER/TERRESTRIAL PLANETS: Mercury, Venus, Earth, Mars - rocky surfaces",
-                "OUTER/GAS GIANTS: Jupiter, Saturn - made mostly of gas",
-                "ICE GIANTS: Uranus, Neptune - made of ice and gas",
-                "ORBIT: Path object takes around another object",
-                "ROTATION: Spinning on axis (Earth rotates in 24 hours = 1 day)",
-                "REVOLUTION: Orbiting around Sun (Earth revolves in 365 days = 1 year)",
-                "AXIS: Imaginary line through planet's center (Earth tilts 23.5\xB0)"
-              ]
-            },
-            {
-              subtitle: "Stars & Galaxies",
-              emoji: "\u2B50",
-              points: [
-                "STAR: Massive ball of gas producing light and heat through fusion",
-                "GALAXY: Massive system of billions of stars, gas, and dust",
-                "MILKY WAY: Our galaxy containing 200-400 billion stars",
-                "CONSTELLATION: Pattern of stars as seen from Earth",
-                "LIGHT-YEAR: Distance light travels in one year (9.46 trillion km)",
-                "NEBULA: Cloud of gas and dust where stars are born",
-                "SUPERNOVA: Massive explosion of dying star",
-                "BLACK HOLE: Region with gravity so strong light can't escape"
-              ]
-            },
-            {
-              subtitle: "Space Exploration",
-              emoji: "\u{1F680}",
-              points: [
-                "SATELLITE: Object orbiting planet (natural like Moon or artificial)",
-                "SPACE STATION: Large spacecraft where astronauts live and work (ISS)",
-                "ROCKET: Vehicle that launches spacecraft into space",
-                "SPACECRAFT: Vehicle designed for travel in space",
-                "ROVER: Vehicle designed to explore surface of planets/moons",
-                "TELESCOPE: Instrument to observe distant objects (Hubble)",
-                "ASTRONAUT: Person trained for space travel",
-                "GRAVITY: Force attracting objects toward each other"
-              ]
-            },
-            {
-              subtitle: "Earth & Moon",
-              emoji: "\u{1F30D}",
-              points: [
-                "ATMOSPHERE: Layer of gases surrounding Earth",
-                "PHASES OF MOON: Different shapes we see as Moon orbits Earth",
-                "NEW MOON: Moon between Earth and Sun (can't see it)",
-                "FULL MOON: Earth between Sun and Moon (fully lit)",
-                "ECLIPSE: When one celestial body blocks light from another",
-                "SOLAR ECLIPSE: Moon blocks Sun's light (Moon between Earth and Sun)",
-                "LUNAR ECLIPSE: Earth blocks Sun's light to Moon (Earth's shadow on Moon)",
-                "TIDES: Rise and fall of ocean caused by Moon's gravity"
-              ]
-            },
-            {
-              subtitle: "The Universe",
-              emoji: "\u{1F30C}",
-              points: [
-                "UNIVERSE: Everything that exists - all matter, energy, space, and time",
-                "BIG BANG THEORY: Theory that universe began from single point 13.8 billion years ago",
-                "EXPANSION: Universe is still growing/expanding",
-                "COSMIC BACKGROUND RADIATION: Leftover energy from Big Bang",
-                "DARK MATTER: Invisible matter detected by gravitational effects",
-                "DARK ENERGY: Mysterious force causing universe to expand faster"
-              ]
-            },
-            {
-              subtitle: "Space Technology",
-              emoji: "\u{1F6F0}\uFE0F",
-              points: [
-                "SPACE PROBE: Unmanned spacecraft exploring space",
-                "LANDER: Spacecraft that lands on celestial body",
-                "ORBITER: Spacecraft that orbits a planet/moon",
-                "GPS (Global Positioning System): Satellites for location on Earth",
-                "COMMUNICATION SATELLITE: Relays signals for phones, TV, internet",
-                "SPACE SHUTTLE: Reusable spacecraft (retired 2011)",
-                "LAUNCH PAD: Platform where rockets take off"
-              ]
-            },
-            {
-              subtitle: "Important Missions",
-              emoji: "\u{1F3C6}",
-              points: [
-                "SPUTNIK 1 (1957): First artificial satellite (USSR)",
-                "APOLLO 11 (1969): First humans on Moon (USA)",
-                "VOYAGER 1 & 2 (1977): Exploring outer solar system and beyond",
-                "HUBBLE SPACE TELESCOPE (1990): Orbiting telescope with deep space images",
-                "MARS ROVERS: Spirit, Opportunity, Curiosity, Perseverance",
-                "ISS (1998-present): International Space Station orbiting Earth"
-              ]
-            },
-            {
-              subtitle: "Distances & Measurements",
-              emoji: "\u{1F4CF}",
-              points: [
-                "AU (Astronomical Unit): Earth-Sun distance = 150 million km",
-                "Light-year: 9.46 trillion km",
-                "Parsec: 3.26 light-years",
-                "Earth to Moon: 384,400 km",
-                "Sun's diameter: 1.4 million km (109 times Earth's diameter)",
-                "Speed of light: 300,000 km/second",
-                "Age of universe: About 13.8 billion years"
-              ]
-            }
-          ]
-        },
-        {
-          id: "solar-system",
-          title: "The Solar System",
-          image: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Inner Planets (Rocky)",
-              emoji: "\u{1FAA8}",
-              points: [
-                "Mercury - Closest to Sun, extreme temperatures",
-                "Venus - Hottest planet, thick atmosphere",
-                "Earth - Our home, only known life",
-                "Mars - Red planet, has polar ice caps"
-              ]
-            },
-            {
-              subtitle: "Outer Planets (Gas Giants)",
-              emoji: "\u{1F32A}\uFE0F",
-              points: [
-                "Jupiter - Largest planet, Great Red Spot",
-                "Saturn - Famous rings",
-                "Uranus - Tilted on its side",
-                "Neptune - Coldest planet, strong winds"
-              ]
-            }
-          ]
-        },
-        {
-          id: "space-tech",
-          title: "Space Technology",
-          image: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Key Milestones",
-              emoji: "\u{1F680}",
-              points: [
-                "Sputnik 1 - First artificial satellite (1957)",
-                "Apollo 11 - First moon landing (1969)",
-                "Hubble Telescope - Deep space observations",
-                "ISS - International Space Station"
-              ]
-            }
-          ]
-        },
-        {
-          id: "universe",
-          title: "The Universe",
-          image: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=400&fit=crop",
-          notes: [
-            {
-              subtitle: "Big Stuff",
-              emoji: "\u{1F30C}",
-              points: [
-                "Our galaxy: Milky Way",
-                "Contains billions of stars",
-                "Big Bang Theory - Universe origin",
-                "Universe still expanding"
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  };
-  var achievements = [
-    {
-      id: "first-steps",
-      name: "First Steps",
-      description: "Complete your first section",
-      icon: Star,
-      color: "from-blue-400 to-blue-600",
-      requirement: (stats) => stats.sectionsCompleted >= 1
-    },
-    {
-      id: "knowledge-seeker",
-      name: "Knowledge Seeker",
-      description: "Complete 5 sections",
-      icon: BookOpen,
-      color: "from-green-400 to-green-600",
-      requirement: (stats) => stats.sectionsCompleted >= 5
-    },
-    {
-      id: "scholar",
-      name: "Scholar",
-      description: "Complete 10 sections",
-      icon: Brain,
-      color: "from-purple-400 to-purple-600",
-      requirement: (stats) => stats.sectionsCompleted >= 10
-    },
-    {
-      id: "master",
-      name: "Master Student",
-      description: "Complete all sections",
-      icon: Trophy,
-      color: "from-yellow-400 to-yellow-600",
-      requirement: (stats) => stats.totalSections > 0 && stats.sectionsCompleted >= stats.totalSections
-    },
-    {
-      id: "quiz-ace",
-      name: "Quiz Ace",
-      description: "Get 5 quiz questions correct",
-      icon: Target,
-      color: "from-pink-400 to-pink-600",
-      requirement: (stats) => stats.quizCorrect >= 5
-    },
-    {
-      id: "perfect-score",
-      name: "Perfect Score",
-      description: "Complete a quiz with 100% accuracy",
-      icon: Sparkles,
-      color: "from-amber-400 to-amber-600",
-      requirement: (stats) => stats.perfectQuizzes >= 1
-    },
-    {
-      id: "dedicated",
-      name: "Dedicated Learner",
-      description: "Complete 3 quizzes",
-      icon: Flame,
-      color: "from-orange-400 to-orange-600",
-      requirement: (stats) => stats.quizzesCompleted >= 3
-    },
-    {
-      id: "explorer",
-      name: "Explorer",
-      description: "View all subjects",
-      icon: Globe,
-      color: "from-teal-400 to-teal-600",
-      requirement: (stats) => stats.subjectsViewed >= stats.totalSubjects
-    },
-    {
-      id: "worksheet-warrior",
-      name: "Worksheet Warrior",
-      description: "Reveal 20 worksheet answers",
-      icon: ClipboardList,
-      color: "from-indigo-400 to-indigo-600",
-      requirement: (stats) => stats.worksheetAnswersRevealed >= 20
-    },
-    {
-      id: "search-expert",
-      name: "Search Expert",
-      description: "Use search 10 times",
-      icon: Search,
-      color: "from-cyan-400 to-cyan-600",
-      requirement: (stats) => stats.searchesPerformed >= 10
-    }
+
+  // AppPre.tsx
+  var import_react = __toESM(require_react());
+  var FONT_LINK = "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap";
+  var SUBJECTS = [
+    { id: "polynomials", name: "Polynomial Functions", icon: "\u{1F4C8}", gradient: "from-blue-500 to-indigo-600", topics: ["Characteristics & End Behaviour", "Dividing Polynomials", "Factor & Remainder Theorems", "Factoring Higher Degree", "Graphing Polynomials"] },
+    { id: "explog", name: "Exponential & Logarithms", icon: "\u{1F522}", gradient: "from-purple-500 to-fuchsia-600", topics: ["Exponential Functions", "Solving Exponential Equations", "Introduction to Logarithms", "Logarithm Laws", "Applications & Modelling"] },
+    { id: "trig", name: "Trigonometric Functions", icon: "\u3030\uFE0F", gradient: "from-emerald-500 to-teal-600", topics: ["Radian Measure & Unit Circle", "CAST Rule & Exact Values", "Graphing Trig Functions", "Trig Identities", "Solving Trig Equations"] },
+    { id: "sequences", name: "Sequences & Series", icon: "\u2211", gradient: "from-amber-500 to-orange-600", topics: ["Arithmetic Sequences", "Arithmetic Series", "Geometric Sequences", "Geometric Series", "Sigma Notation & Convergence"] }
   ];
-  function App() {
-    const [showIntro, setShowIntro] = (0, import_react.useState)(true);
-    const [showSubjectPicker, setShowSubjectPicker] = (0, import_react.useState)(false);
-    const [showGeography, setShowGeography] = (0, import_react.useState)(false);
-    const [selectedSubject, setSelectedSubject] = (0, import_react.useState)(null);
-    const [selectedSection, setSelectedSection] = (0, import_react.useState)(null);
-    const [searchTerm, setSearchTerm] = (0, import_react.useState)("");
-    const [readSections, setReadSections] = (0, import_react.useState)(/* @__PURE__ */ new Set());
-    const [currentQuiz, setCurrentQuiz] = (0, import_react.useState)(null);
-    const [currentQuestion, setCurrentQuestion] = (0, import_react.useState)(0);
-    const [selectedAnswer, setSelectedAnswer] = (0, import_react.useState)(null);
-    const [showExplanation, setShowExplanation] = (0, import_react.useState)(false);
-    const [quizScore, setQuizScore] = (0, import_react.useState)({ correct: 0, total: 0 });
-    const [answeredQuestions, setAnsweredQuestions] = (0, import_react.useState)([]);
-    const [showSearchDropdown, setShowSearchDropdown] = (0, import_react.useState)(false);
-    const [searchResults, setSearchResults] = (0, import_react.useState)([]);
-    const [revealedAnswers, setRevealedAnswers] = (0, import_react.useState)(/* @__PURE__ */ new Set());
-    const [splitScreenMode, setSplitScreenMode] = (0, import_react.useState)(false);
-    const [leftPanel, setLeftPanel] = (0, import_react.useState)(null);
-    const [rightPanel, setRightPanel] = (0, import_react.useState)(null);
-    const [leftQuizState, setLeftQuizState] = (0, import_react.useState)({
-      currentQuestion: 0,
-      selectedAnswer: null,
-      showExplanation: false,
-      score: { correct: 0, total: 0 }
-    });
-    const [rightQuizState, setRightQuizState] = (0, import_react.useState)({
-      currentQuestion: 0,
-      selectedAnswer: null,
-      showExplanation: false,
-      score: { correct: 0, total: 0 }
-    });
-    const [expandedDefinitionNotes, setExpandedDefinitionNotes] = (0, import_react.useState)(/* @__PURE__ */ new Set());
-    const [expandedGeographyNotes, setExpandedGeographyNotes] = (0, import_react.useState)(/* @__PURE__ */ new Set());
-    const [currentFlashcard, setCurrentFlashcard] = (0, import_react.useState)(0);
-    const [isFlipped, setIsFlipped] = (0, import_react.useState)(false);
-    const [flashcardStats, setFlashcardStats] = (0, import_react.useState)({ known: 0, learning: 0 });
-    const [showFeatureHighlights, setShowFeatureHighlights] = (0, import_react.useState)(true);
-    const [unlockedAchievements, setUnlockedAchievements] = (0, import_react.useState)(/* @__PURE__ */ new Set());
-    const [newAchievement, setNewAchievement] = (0, import_react.useState)(null);
-    const [showAchievements, setShowAchievements] = (0, import_react.useState)(false);
-    const [stats, setStats] = (0, import_react.useState)({
-      sectionsCompleted: 0,
-      totalSections: 0,
-      quizCorrect: 0,
-      quizzesCompleted: 0,
-      perfectQuizzes: 0,
-      subjectsViewed: /* @__PURE__ */ new Set(),
-      totalSubjects: Object.keys(studyLibrary).length,
-      worksheetAnswersRevealed: 0,
-      searchesPerformed: 0
-    });
-    const [showAIAssistant, setShowAIAssistant] = (0, import_react.useState)(false);
-    const [aiMessages, setAiMessages] = (0, import_react.useState)([
-      { role: "assistant", content: "Hello! I'm L.Y.N.E (Logical Yield Neural Engine), your AI study companion. Ask me anything about your science topics - I can explain concepts, create practice questions, or help you understand difficult material!" }
-    ]);
-    const [aiInput, setAiInput] = (0, import_react.useState)("");
-    const [isAiThinking, setIsAiThinking] = (0, import_react.useState)(false);
-    (0, import_react.useEffect)(() => {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const playNote = (frequency, startTime, duration) => {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        oscillator.frequency.value = frequency;
-        oscillator.type = "sine";
-        gainNode.gain.setValueAtTime(0, startTime);
-        gainNode.gain.linearRampToValueAtTime(0.3, startTime + 0.01);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-        oscillator.start(startTime);
-        oscillator.stop(startTime + duration);
-      };
-      const now = audioContext.currentTime;
-      playNote(523.25, now, 0.15);
-      playNote(659.25, now + 0.1, 0.15);
-      playNote(783.99, now + 0.2, 0.15);
-      playNote(1046.5, now + 0.3, 0.3);
-      return () => {
-        audioContext.close();
-      };
-    }, []);
-    (0, import_react.useEffect)(() => {
-      const total = Object.values(studyLibrary).reduce((sum, subject) => sum + subject.sections.length, 0);
-      setStats((prev) => __spreadProps(__spreadValues({}, prev), { totalSections: total }));
-    }, []);
-    (0, import_react.useEffect)(() => {
-      achievements.forEach((achievement) => {
-        if (!unlockedAchievements.has(achievement.id) && achievement.requirement(stats)) {
-          setUnlockedAchievements((prev) => /* @__PURE__ */ new Set([...prev, achievement.id]));
-          setNewAchievement(achievement);
-          setTimeout(() => setNewAchievement(null), 5e3);
-        }
-      });
-    }, [stats, unlockedAchievements]);
-    const handleAISubmit = async (e) => {
-      e.preventDefault();
-      if (!aiInput.trim() || isAiThinking) return;
-      const userMessage = aiInput.trim();
-      setAiInput("");
-      setAiMessages((prev) => [...prev, { role: "user", content: userMessage }]);
-      setIsAiThinking(true);
-      try {
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: "claude-sonnet-4-20250514",
-            max_tokens: 1e3,
-            messages: [
-              {
-                role: "user",
-                content: `You are a helpful Grade 9 science tutor for Appleby College students. The student is studying Biology (biodiversity, ecosystems, food chains), Chemistry (matter, atoms, periodic table), Physics (electricity, circuits), and Space. 
+  var MODES = [
+    { id: "notes", label: "Study Notes", icon: "\u{1F4D6}" },
+    { id: "flashcards", label: "Flashcards", icon: "\u{1F0CF}" },
+    { id: "quiz", label: "Practice Quiz", icon: "\u270F\uFE0F" },
+    { id: "worksheet", label: "Worksheet", icon: "\u{1F4DD}" }
+  ];
+  var SYSTEM_PROMPT = `You are an expert AP-level Grade 10 math tutor. You always respond with ONLY valid JSON \u2014 no markdown, no explanation outside the JSON.
 
-Be encouraging, clear, and concise. Use analogies when helpful. If asked for practice questions, create them. If explaining concepts, break them down simply.
+For NOTES mode, return:
+{"sections":[{"title":"...","emoji":"...","points":["...","..."]}]}
+3-5 sections, 5-8 detailed AP-level bullet points each. Include formulas, proofs, worked examples.
 
-Student question: ${userMessage}`
-              }
-            ]
-          })
-        });
-        const data = await response.json();
-        const assistantMessage = data.content[0].text;
-        setAiMessages((prev) => [...prev, { role: "assistant", content: assistantMessage }]);
-      } catch (error) {
-        setAiMessages((prev) => [...prev, {
-          role: "assistant",
-          content: "Sorry, I encountered an error. Please try asking your question again!"
-        }]);
-      } finally {
-        setIsAiThinking(false);
+For FLASHCARDS mode, return:
+{"cards":[{"front":"...","back":"..."}]}
+8-12 cards. Front: question or term. Back: precise AP-level answer with formula or example.
+
+For QUIZ mode, return:
+{"questions":[{"question":"...","options":["A","B","C","D"],"correct":0,"explanation":"..."}]}
+5 multiple-choice questions. AP difficulty. Full explanation for correct answer.
+
+For WORKSHEET mode, return:
+{"problems":[{"question":"...","hint":"...","solution":"..."}]}
+5 problems. Include hint and full step-by-step solution.`;
+  async function fetchContent(subject, topic, mode) {
+    var _a;
+    const prompt = `Generate AP Grade 10 math content.
+Subject: ${subject}
+Topic: ${topic}
+Mode: ${mode.toUpperCase()}
+Make it genuinely AP-level \u2014 rigorous, precise, with real worked examples and proper mathematical notation.`;
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1e3,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await res.json();
+    const text = ((_a = data.content) == null ? void 0 : _a.map((b) => b.text || "").join("")) || "{}";
+    const clean = text.replace(/```json|```/g, "").trim();
+    return JSON.parse(clean);
+  }
+  function Badge({ children, color = "indigo" }) {
+    const colors = { indigo: "bg-indigo-50 text-indigo-700 border-indigo-200", emerald: "bg-emerald-50 text-emerald-700 border-emerald-200", amber: "bg-amber-50 text-amber-700 border-amber-200" };
+    return /* @__PURE__ */ React.createElement("span", { className: `text-xs font-semibold px-2.5 py-1 rounded-full border ${colors[color]}` }, children);
+  }
+  function Spinner() {
+    return /* @__PURE__ */ React.createElement("div", { className: "flex flex-col items-center justify-center py-20 gap-4" }, /* @__PURE__ */ React.createElement("div", { className: "w-10 h-10 rounded-full border-2 border-indigo-200 border-t-indigo-600 animate-spin" }), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "var(--muted)", fontSize: 14 } }, "Generating AP content\u2026"));
+  }
+  function NotesView({ data }) {
+    if (!(data == null ? void 0 : data.sections)) return null;
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 20 } }, data.sections.map((sec, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { background: "#fff", borderRadius: 20, border: "1px solid rgba(0,0,0,0.07)", overflow: "hidden", boxShadow: "0 2px 12px rgba(15,23,42,0.06)" } }, /* @__PURE__ */ React.createElement("div", { style: { padding: "14px 20px", background: "linear-gradient(135deg,#f8faff,#f0f4ff)", borderBottom: "1px solid rgba(99,102,241,0.1)", display: "flex", alignItems: "center", gap: 10 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 22 } }, sec.emoji), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 15, color: "#1e1b4b" } }, sec.title)), /* @__PURE__ */ React.createElement("div", { style: { padding: "16px 20px" } }, /* @__PURE__ */ React.createElement("ul", { style: { listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 10 } }, sec.points.map((pt, j) => {
+      const hasColon = /^([A-Z][A-Z\s/&]+):/.test(pt);
+      const colonIdx = pt.indexOf(":");
+      const key = hasColon ? pt.slice(0, colonIdx) : null;
+      const rest = hasColon ? pt.slice(colonIdx + 1).trim() : pt;
+      return /* @__PURE__ */ React.createElement(
+        "li",
+        {
+          key: j,
+          style: { display: "flex", gap: 12, alignItems: "flex-start", padding: "8px 12px", borderRadius: 10, background: "transparent", transition: "background 0.15s" },
+          onMouseEnter: (e) => e.currentTarget.style.background = "rgba(99,102,241,0.04)",
+          onMouseLeave: (e) => e.currentTarget.style.background = "transparent"
+        },
+        /* @__PURE__ */ React.createElement("span", { style: { width: 6, height: 6, borderRadius: "50%", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", flexShrink: 0, marginTop: 7 } }),
+        /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 14, lineHeight: 1.7, color: "rgba(15,23,42,0.65)", margin: 0 } }, key ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("strong", { style: { color: "#0f172a", fontWeight: 600 } }, key, ":"), " ", rest) : pt)
+      );
+    }))))));
+  }
+  function FlashcardsView({ data }) {
+    const [idx, setIdx] = (0, import_react.useState)(0);
+    const [flipped, setFlipped] = (0, import_react.useState)(false);
+    const [known, setKnown] = (0, import_react.useState)(0);
+    const [learning, setLearning] = (0, import_react.useState)(0);
+    const cards = (data == null ? void 0 : data.cards) || [];
+    if (!cards.length) return null;
+    const card = cards[idx];
+    const next = (wasKnown) => {
+      if (wasKnown) setKnown((k) => k + 1);
+      else setLearning((l) => l + 1);
+      setFlipped(false);
+      setTimeout(() => setIdx((i) => Math.min(i + 1, cards.length - 1)), 200);
+    };
+    return /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 560, margin: "0 auto" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 4, marginBottom: 20 } }, cards.map((_, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { flex: 1, height: 4, borderRadius: 99, background: i < idx ? "#10b981" : i === idx ? "#6366f1" : "rgba(99,102,241,0.12)", transition: "background 0.3s" } }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: 16 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--muted)" } }, idx + 1, " / ", cards.length), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 600, color: "#059669" } }, "\u2713 ", known), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 600, color: "#d97706" } }, "\u21BA ", learning))), /* @__PURE__ */ React.createElement("div", { onClick: () => setFlipped((f) => !f), style: { perspective: 1200, cursor: "pointer", marginBottom: 20 } }, /* @__PURE__ */ React.createElement("div", { style: { position: "relative", minHeight: 220, transition: "transform 0.5s cubic-bezier(0.4,0,0.2,1)", transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", borderRadius: 24, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", padding: 32, boxShadow: "0 8px 32px rgba(99,102,241,0.25)" } }, /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "rgba(255,255,255,0.5)", fontSize: 11, textTransform: "uppercase", letterSpacing: 2, marginBottom: 16 } }, "Question"), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-display)", color: "#fff", fontSize: 20, fontWeight: 700, lineHeight: 1.4, margin: 0 } }, card.front), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-mono)", color: "rgba(255,255,255,0.35)", fontSize: 11, marginTop: 20 } }, "tap to reveal"))), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)", borderRadius: 24, background: "#fff", border: "2px solid rgba(99,102,241,0.2)", display: "flex", alignItems: "center", justifyContent: "center", padding: 32, boxShadow: "0 8px 32px rgba(15,23,42,0.08)" } }, /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "var(--muted)", fontSize: 11, textTransform: "uppercase", letterSpacing: 2, marginBottom: 16 } }, "Answer"), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "#0f172a", fontSize: 16, lineHeight: 1.6, margin: 0, whiteSpace: "pre-line" } }, card.back))))), flipped ? /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 12 } }, /* @__PURE__ */ React.createElement("button", { onClick: () => next(false), style: { flex: 1, padding: "12px", borderRadius: 14, border: "1.5px solid rgba(217,119,6,0.3)", background: "rgba(245,158,11,0.06)", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 13, color: "#b45309", cursor: "pointer" } }, "\u21BA Still Learning"), /* @__PURE__ */ React.createElement("button", { onClick: () => next(true), style: { flex: 1, padding: "12px", borderRadius: 14, border: "1.5px solid rgba(16,185,129,0.3)", background: "rgba(16,185,129,0.06)", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 13, color: "#059669", cursor: "pointer" } }, "\u2713 Got It")) : /* @__PURE__ */ React.createElement("button", { onClick: () => setIdx((i) => Math.max(i - 1, 0)), disabled: idx === 0, style: { width: "100%", padding: "12px", borderRadius: 14, border: "1px solid rgba(0,0,0,0.08)", background: "#fff", fontFamily: "var(--font-body)", fontSize: 13, color: "var(--muted)", cursor: idx === 0 ? "not-allowed" : "pointer", opacity: idx === 0 ? 0.4 : 1 } }, "\u2190 Previous"));
+  }
+  function QuizView({ data }) {
+    const [qIdx, setQIdx] = (0, import_react.useState)(0);
+    const [selected, setSelected] = (0, import_react.useState)(null);
+    const [revealed, setRevealed] = (0, import_react.useState)(false);
+    const [score, setScore] = (0, import_react.useState)(0);
+    const [done, setDone] = (0, import_react.useState)(false);
+    const questions = (data == null ? void 0 : data.questions) || [];
+    if (!questions.length) return null;
+    const q = questions[qIdx];
+    const check = () => {
+      if (selected === null) return;
+      setRevealed(true);
+      if (selected === q.correct) setScore((s) => s + 1);
+    };
+    const next = () => {
+      if (qIdx < questions.length - 1) {
+        setQIdx((i) => i + 1);
+        setSelected(null);
+        setRevealed(false);
+      } else setDone(true);
+    };
+    if (done) return /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", padding: "40px 20px" } }, /* @__PURE__ */ React.createElement("div", { style: { width: 80, height: 80, borderRadius: 24, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px", fontSize: 36, boxShadow: "0 8px 24px rgba(99,102,241,0.3)" } }, "\u{1F3C6}"), /* @__PURE__ */ React.createElement("h2", { style: { fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 800, color: "#0f172a", margin: "0 0 8px", letterSpacing: "-0.03em" } }, score, "/", questions.length), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "var(--muted)", marginBottom: 24 } }, score === questions.length ? "Perfect score! \u{1F389}" : score >= questions.length * 0.8 ? "Great work!" : "Keep practising!"), /* @__PURE__ */ React.createElement("button", { onClick: () => {
+      setQIdx(0);
+      setSelected(null);
+      setRevealed(false);
+      setScore(0);
+      setDone(false);
+    }, style: { padding: "12px 28px", borderRadius: 14, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", border: "none", color: "#fff", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 14, cursor: "pointer" } }, "Retry Quiz"));
+    return /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 600, margin: "0 auto" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 4, marginBottom: 20 } }, questions.map((_, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { flex: 1, height: 4, borderRadius: 99, background: i < qIdx ? "#10b981" : i === qIdx ? "#6366f1" : "rgba(99,102,241,0.12)" } }))), /* @__PURE__ */ React.createElement("div", { style: { background: "#fff", borderRadius: 20, padding: 24, marginBottom: 16, border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 12px rgba(15,23,42,0.06)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 20 } }, /* @__PURE__ */ React.createElement("div", { style: { width: 32, height: 32, borderRadius: 10, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", color: "#fff", fontWeight: 700, fontSize: 13 } }, qIdx + 1)), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 600, color: "#0f172a", lineHeight: 1.5, margin: 0 } }, q.question)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, q.options.map((opt, i) => {
+      let bg = "rgba(15,23,42,0.03)", border = "rgba(15,23,42,0.1)", color = "rgba(15,23,42,0.65)";
+      if (!revealed && selected === i) {
+        bg = "rgba(99,102,241,0.08)";
+        border = "rgba(99,102,241,0.5)";
+        color = "#3730a3";
       }
-    };
-    const toggleDefinitionNote = (sectionId, noteIndex) => {
-      const key = `${sectionId}-${noteIndex}`;
-      const newExpanded = new Set(expandedDefinitionNotes);
-      if (newExpanded.has(key)) {
-        newExpanded.delete(key);
-      } else {
-        newExpanded.add(key);
+      if (revealed && i === q.correct) {
+        bg = "rgba(16,185,129,0.08)";
+        border = "rgba(16,185,129,0.5)";
+        color = "#065f46";
       }
-      setExpandedDefinitionNotes(newExpanded);
-    };
-    const toggleGeographyNote = (sectionId, noteIndex) => {
-      const key = `${sectionId}-${noteIndex}`;
-      const newExpanded = new Set(expandedGeographyNotes);
-      if (newExpanded.has(key)) {
-        newExpanded.delete(key);
-      } else {
-        newExpanded.add(key);
+      if (revealed && selected === i && i !== q.correct) {
+        bg = "rgba(239,68,68,0.08)";
+        border = "rgba(239,68,68,0.4)";
+        color = "#991b1b";
       }
-      setExpandedGeographyNotes(newExpanded);
-    };
-    const toggleRead = (sectionId) => {
-      const newRead = new Set(readSections);
-      if (newRead.has(sectionId)) {
-        newRead.delete(sectionId);
-        setStats((prev) => __spreadProps(__spreadValues({}, prev), { sectionsCompleted: prev.sectionsCompleted - 1 }));
-      } else {
-        newRead.add(sectionId);
-        setStats((prev) => __spreadProps(__spreadValues({}, prev), { sectionsCompleted: prev.sectionsCompleted + 1 }));
-      }
-      setReadSections(newRead);
-    };
-    const toggleAnswer = (noteIndex, pointIndex) => {
-      const key = `${noteIndex}-${pointIndex}`;
-      const newRevealed = new Set(revealedAnswers);
-      if (newRevealed.has(key)) {
-        newRevealed.delete(key);
-        setStats((prev) => __spreadProps(__spreadValues({}, prev), { worksheetAnswersRevealed: Math.max(0, prev.worksheetAnswersRevealed - 1) }));
-      } else {
-        newRevealed.add(key);
-        setStats((prev) => __spreadProps(__spreadValues({}, prev), { worksheetAnswersRevealed: prev.worksheetAnswersRevealed + 1 }));
-      }
-      setRevealedAnswers(newRevealed);
-    };
-    const startQuiz = (section) => {
-      setCurrentQuiz(section);
-      setCurrentQuestion(0);
-      setSelectedAnswer(null);
-      setShowExplanation(false);
-      setQuizScore({ correct: 0, total: 0 });
-      setAnsweredQuestions([]);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-    const handleAnswerSelect = (answerIndex) => {
-      if (!showExplanation) {
-        setSelectedAnswer(answerIndex);
-      }
-    };
-    const handleCheckAnswer = () => {
-      const isCorrect = selectedAnswer === currentQuiz.quiz[currentQuestion].correct;
-      setShowExplanation(true);
-      setAnsweredQuestions([...answeredQuestions, {
-        questionIndex: currentQuestion,
-        selectedAnswer,
-        isCorrect
-      }]);
-      if (isCorrect) {
-        setQuizScore(__spreadProps(__spreadValues({}, quizScore), { correct: quizScore.correct + 1, total: quizScore.total + 1 }));
-        setStats((prev) => __spreadProps(__spreadValues({}, prev), { quizCorrect: prev.quizCorrect + 1 }));
-      } else {
-        setQuizScore(__spreadProps(__spreadValues({}, quizScore), { total: quizScore.total + 1 }));
-      }
-    };
-    const handleNextQuestion = () => {
-      if (currentQuestion < currentQuiz.quiz.length - 1) {
-        setCurrentQuestion(currentQuestion + 1);
-        setSelectedAnswer(null);
-        setShowExplanation(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        const isPerfect = quizScore.correct + 1 === currentQuiz.quiz.length;
-        setStats((prev) => __spreadProps(__spreadValues({}, prev), {
-          quizzesCompleted: prev.quizzesCompleted + 1,
-          perfectQuizzes: isPerfect ? prev.perfectQuizzes + 1 : prev.perfectQuizzes
-        }));
-        setCurrentQuiz(null);
-        setSelectedSection(null);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    };
-    const handleSearchChange = (value) => {
-      setSearchTerm(value);
-      if (value.trim().length > 0) {
-        setStats((prev) => __spreadProps(__spreadValues({}, prev), { searchesPerformed: prev.searchesPerformed + 1 }));
-        const results = [];
-        const searchLower = value.toLowerCase();
-        Object.values(studyLibrary).forEach((subject) => {
-          subject.sections.forEach((section) => {
-            if (section.title.toLowerCase().includes(searchLower)) {
-              results.push({
-                type: "section",
-                subject,
-                section,
-                title: section.title,
-                match: "Section Title",
-                relevance: section.title.toLowerCase().indexOf(searchLower) === 0 ? 3 : 2
-              });
-            }
-            section.notes.forEach((note) => {
-              if (note.subtitle.toLowerCase().includes(searchLower)) {
-                results.push({
-                  type: "note",
-                  subject,
-                  section,
-                  title: `${section.title} - ${note.subtitle}`,
-                  match: "Topic",
-                  relevance: note.subtitle.toLowerCase().indexOf(searchLower) === 0 ? 3 : 2
-                });
-              }
-              note.points.forEach((point) => {
-                if (point.toLowerCase().includes(searchLower)) {
-                  results.push({
-                    type: "content",
-                    subject,
-                    section,
-                    title: `${section.title} - ${note.subtitle}`,
-                    preview: point.substring(0, 80) + (point.length > 80 ? "..." : ""),
-                    match: "Content",
-                    relevance: 1
-                  });
-                }
-              });
-            });
-          });
-        });
-        const uniqueResults = [];
-        const seen = /* @__PURE__ */ new Set();
-        results.sort((a, b) => b.relevance - a.relevance).forEach((result) => {
-          const key = `${result.section.id}-${result.type}`;
-          if (!seen.has(key)) {
-            seen.add(key);
-            uniqueResults.push(result);
-          }
-        });
-        setSearchResults(uniqueResults.slice(0, 8));
-        setShowSearchDropdown(uniqueResults.length > 0);
-      } else {
-        setSearchResults([]);
-        setShowSearchDropdown(false);
-      }
-    };
-    const handleSearchResultClick = (result) => {
-      if (splitScreenMode && !leftPanel) {
-        setLeftPanel({ subject: result.subject, section: result.section, type: "notes" });
-      } else if (splitScreenMode && !rightPanel) {
-        setRightPanel({ subject: result.subject, section: result.section, type: "notes" });
-      } else {
-        setSelectedSubject(result.subject);
-        setSelectedSection(result.section);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-      setSearchTerm("");
-      setShowSearchDropdown(false);
-      setStats((prev) => __spreadProps(__spreadValues({}, prev), {
-        subjectsViewed: /* @__PURE__ */ new Set([...prev.subjectsViewed, result.subject.id])
-      }));
-    };
-    const openInSplitScreen = (subject, section, type = "notes") => {
-      setSplitScreenMode(true);
-      if (!leftPanel) {
-        setLeftPanel({ subject, section, type });
-      } else if (!rightPanel) {
-        setRightPanel({ subject, section, type });
-      }
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-    const closeSplitScreen = () => {
-      setSplitScreenMode(false);
-      setLeftPanel(null);
-      setRightPanel(null);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-    const handleFlashcardKnown = () => {
-      setFlashcardStats((prev) => __spreadProps(__spreadValues({}, prev), { known: prev.known + 1 }));
-      handleNextFlashcard();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-    const handleFlashcardLearning = () => {
-      setFlashcardStats((prev) => __spreadProps(__spreadValues({}, prev), { learning: prev.learning + 1 }));
-      handleNextFlashcard();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-    const handleNextFlashcard = () => {
-      if (currentFlashcard < selectedSection.flashcards.length - 1) {
-        setCurrentFlashcard(currentFlashcard + 1);
-        setIsFlipped(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        setCurrentFlashcard(0);
-        setIsFlipped(false);
-        setSelectedSection(null);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    };
-    const handlePreviousFlashcard = () => {
-      if (currentFlashcard > 0) {
-        setCurrentFlashcard(currentFlashcard - 1);
-        setIsFlipped(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    };
-    const AchievementPopup = ({ achievement }) => {
-      if (!achievement) return null;
-      const Icon = achievement.icon;
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "fixed top-4 right-4 z-50 animate-bounce" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `bg-gradient-to-r ${achievement.color} rounded-2xl shadow-2xl p-6 text-white max-w-sm border-4 border-white` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(Icon, { className: "w-8 h-8" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-1" }, /* @__PURE__ */ import_react.default.createElement(Trophy, { className: "w-4 h-4" }), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs font-bold uppercase tracking-wider" }, "Achievement Unlocked!")), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-bold" }, achievement.name), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-sm" }, achievement.description)))));
-    };
-    const AchievementsModal = () => {
-      if (!showAchievements) return null;
-      const unlockedCount = unlockedAchievements.size;
-      const totalCount = achievements.length;
-      const progress = unlockedCount / totalCount * 100;
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-yellow-500 to-orange-600 p-6 text-white" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement(Trophy, { className: "w-8 h-8" }), /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-3xl font-bold" }, "Achievements")), /* @__PURE__ */ import_react.default.createElement(
+      return /* @__PURE__ */ React.createElement(
         "button",
-        {
-          onClick: () => setShowAchievements(false),
-          className: "w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(X, { className: "w-6 h-6" })
-      )), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-2" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90" }, "Progress: ", unlockedCount, " of ", totalCount), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-bold" }, Math.round(progress), "%")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-white/20 rounded-full h-3 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: "bg-white h-full transition-all duration-500 rounded-full",
-          style: { width: `${progress}%` }
-        }
-      )))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-6 overflow-y-auto max-h-[calc(90vh-200px)]" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, achievements.map((achievement) => {
-        const isUnlocked = unlockedAchievements.has(achievement.id);
-        const Icon = achievement.icon;
-        return /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            key: achievement.id,
-            className: `rounded-xl p-6 border-2 transition-all ${isUnlocked ? "bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-300 shadow-md" : "bg-gray-50 border-gray-200 opacity-60"}`
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 ${isUnlocked ? `bg-gradient-to-r ${achievement.color}` : "bg-gray-300"}` }, /* @__PURE__ */ import_react.default.createElement(Icon, { className: `w-8 h-8 ${isUnlocked ? "text-white" : "text-gray-500"}` })), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-1" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: `text-lg font-bold ${isUnlocked ? "text-gray-800" : "text-gray-500"}` }, achievement.name), isUnlocked && /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-5 h-5 text-green-500" })), /* @__PURE__ */ import_react.default.createElement("p", { className: `text-sm ${isUnlocked ? "text-gray-600" : "text-gray-400"}` }, achievement.description), !isUnlocked && /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-gray-400 mt-2" }, "\u{1F512} Locked")))
-        );
-      })))));
-    };
-    const renderPanelContent = (panel, panelSide) => {
-      if (!panel) {
-        return /* @__PURE__ */ import_react.default.createElement("div", { className: "h-full flex items-center justify-center text-gray-400" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-16 h-16 mx-auto mb-4 opacity-50" }), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-semibold" }, "Select content to view here"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm mt-2" }, "Click any section or quiz to open")));
-      }
-      const { subject, section, type } = panel;
-      const quizState = panelSide === "left" ? leftQuizState : rightQuizState;
-      const setQuizState = panelSide === "left" ? setLeftQuizState : setRightQuizState;
-      const closePanel = () => {
-        if (panelSide === "left") {
-          setLeftPanel(null);
-          setLeftQuizState({ currentQuestion: 0, selectedAnswer: null, showExplanation: false, score: { correct: 0, total: 0 } });
-        } else {
-          setRightPanel(null);
-          setRightQuizState({ currentQuestion: 0, selectedAnswer: null, showExplanation: false, score: { correct: 0, total: 0 } });
-        }
-        if (panelSide === "left" && !rightPanel || panelSide === "right" && !leftPanel) {
-          setSplitScreenMode(false);
-        }
-      };
-      if (type === "quiz" && section.quiz) {
-        const question = section.quiz[quizState.currentQuestion];
-        const quizProgress = (quizState.currentQuestion + 1) / section.quiz.length * 100;
-        return /* @__PURE__ */ import_react.default.createElement("div", { className: "h-full overflow-y-auto p-6 bg-white" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-bold text-gray-800" }, section.title), /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: closePanel,
-            className: "w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-          },
-          /* @__PURE__ */ import_react.default.createElement(X, { className: "w-5 h-5" })
-        )), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-2" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Question ", quizState.currentQuestion + 1, " of ", section.quiz.length), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-bold text-gray-800" }, quizState.score.correct, "/", quizState.score.total)), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-2" }, /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            className: `bg-gradient-to-r ${subject.gradient} h-2 rounded-full transition-all`,
-            style: { width: `${quizProgress}%` }
-          }
-        ))), /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-lg font-semibold text-gray-800 mb-4" }, question.question), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2 mb-4" }, question.options.map((option, idx) => {
-          let buttonStyle = "border-gray-200 bg-white hover:border-gray-400";
-          if (quizState.showExplanation) {
-            if (idx === question.correct) {
-              buttonStyle = "border-green-500 bg-green-50";
-            } else if (idx === quizState.selectedAnswer) {
-              buttonStyle = "border-red-500 bg-red-50";
-            }
-          } else if (quizState.selectedAnswer === idx) {
-            buttonStyle = "border-blue-500 bg-blue-50";
-          }
-          return /* @__PURE__ */ import_react.default.createElement(
-            "button",
-            {
-              key: idx,
-              onClick: () => {
-                if (!quizState.showExplanation) {
-                  setQuizState(__spreadProps(__spreadValues({}, quizState), { selectedAnswer: idx }));
-                }
-              },
-              disabled: quizState.showExplanation,
-              className: `w-full p-3 text-left text-sm rounded-lg border-2 transition-all ${buttonStyle}`
-            },
-            option
-          );
-        })), quizState.showExplanation && /* @__PURE__ */ import_react.default.createElement("div", { className: "p-3 rounded-lg mb-4 bg-blue-50 border-2 border-blue-200" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-semibold text-blue-800 mb-1" }, quizState.selectedAnswer === question.correct ? "\u2713 Correct!" : "Explanation:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700" }, question.explanation)), !quizState.showExplanation ? /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => {
-              const isCorrect = quizState.selectedAnswer === question.correct;
-              setQuizState(__spreadProps(__spreadValues({}, quizState), {
-                showExplanation: true,
-                score: {
-                  correct: isCorrect ? quizState.score.correct + 1 : quizState.score.correct,
-                  total: quizState.score.total + 1
-                }
-              }));
-              if (isCorrect) {
-                setStats((prev) => __spreadProps(__spreadValues({}, prev), { quizCorrect: prev.quizCorrect + 1 }));
-              }
-            },
-            disabled: quizState.selectedAnswer === null,
-            className: `w-full py-2 bg-gradient-to-r ${subject.gradient} text-white rounded-lg font-semibold text-sm disabled:opacity-50`
-          },
-          "Check Answer"
-        ) : /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => {
-              if (quizState.currentQuestion < section.quiz.length - 1) {
-                setQuizState(__spreadProps(__spreadValues({}, quizState), {
-                  currentQuestion: quizState.currentQuestion + 1,
-                  selectedAnswer: null,
-                  showExplanation: false
-                }));
-              } else {
-                const isPerfect = quizState.score.correct + 1 === section.quiz.length;
-                setStats((prev) => __spreadProps(__spreadValues({}, prev), {
-                  quizzesCompleted: prev.quizzesCompleted + 1,
-                  perfectQuizzes: isPerfect ? prev.perfectQuizzes + 1 : prev.perfectQuizzes
-                }));
-                closePanel();
-              }
-            },
-            className: `w-full py-2 bg-gradient-to-r ${subject.gradient} text-white rounded-lg font-semibold text-sm`
-          },
-          quizState.currentQuestion < section.quiz.length - 1 ? "Next \u2192" : "Finish"
-        ));
-      }
-      const isWorksheet = subject.id === "worksheets";
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "h-full overflow-y-auto p-6 bg-gradient-to-br from-slate-50 to-slate-100" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-bold text-gray-800" }, section.title), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: closePanel,
-          className: "w-8 h-8 rounded-lg bg-white hover:bg-gray-100 flex items-center justify-center shadow-sm"
-        },
-        /* @__PURE__ */ import_react.default.createElement(X, { className: "w-5 h-5" })
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-4" }, section.notes.map((note, idx) => /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: "bg-white rounded-xl shadow-md overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `bg-gradient-to-r ${subject.gradient} p-3` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, note.emoji), /* @__PURE__ */ import_react.default.createElement("h4", { className: "text-lg font-bold text-white" }, note.subtitle))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2" }, note.points.map((point, pointIdx) => /* @__PURE__ */ import_react.default.createElement("div", { key: pointIdx }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-r ${subject.gradient} flex-shrink-0` }), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 leading-relaxed" }, point)), isWorksheet && note.answers && note.answers[pointIdx] && /* @__PURE__ */ import_react.default.createElement("div", { className: "ml-4 mt-1" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => toggleAnswer(idx, pointIdx),
-          className: "text-xs font-semibold text-teal-600 hover:text-teal-700"
-        },
-        revealedAnswers.has(`${idx}-${pointIdx}`) ? "\u25BC Hide" : "\u25B6 Answer"
-      ), revealedAnswers.has(`${idx}-${pointIdx}`) && /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-1 p-2 bg-teal-50 border-l-2 border-teal-500 rounded-r text-xs" }, note.answers[pointIdx].split(" \u2022 ").map((item, i) => /* @__PURE__ */ import_react.default.createElement("div", { key: i, className: "flex items-start gap-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-teal-600" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, item)))))))), note.diagram && /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-4 text-xs" }, note.diagram === "lewis" && /* @__PURE__ */ import_react.default.createElement(LewisDotDiagram, null), note.diagram === "bohr" && /* @__PURE__ */ import_react.default.createElement(BohrDiagram, null), note.diagram === "energy-pyramid" && /* @__PURE__ */ import_react.default.createElement(EnergyPyramid, null), note.diagram === "carbon-cycle" && /* @__PURE__ */ import_react.default.createElement(CarbonCycle, null), note.diagram === "atomic-models" && /* @__PURE__ */ import_react.default.createElement(AtomicModels, null), note.diagram === "periodic-table" && /* @__PURE__ */ import_react.default.createElement(PeriodicTableDiagram, null), note.diagram === "ions" && /* @__PURE__ */ import_react.default.createElement(IonDiagram, null), note.diagram === "circuit-symbols" && /* @__PURE__ */ import_react.default.createElement(CircuitSymbolsDiagram, null), note.diagram === "series-circuit" && /* @__PURE__ */ import_react.default.createElement(SeriesCircuitDiagram, null), note.diagram === "parallel-circuit" && /* @__PURE__ */ import_react.default.createElement(ParallelCircuitDiagram, null), note.diagram === "ohms-law" && /* @__PURE__ */ import_react.default.createElement(OhmsLawTriangle, null), note.diagram === "static-electricity" && /* @__PURE__ */ import_react.default.createElement(StaticElectricityDiagram, null), note.diagram === "power-formula" && /* @__PURE__ */ import_react.default.createElement(PowerFormulaDiagram, null), note.diagram === "complete-circuit" && /* @__PURE__ */ import_react.default.createElement(CircuitDiagram, null)))))));
-    };
-    if (splitScreenMode) {
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "h-screen flex flex-col bg-gradient-to-br from-slate-50 to-slate-100" }, /* @__PURE__ */ import_react.default.createElement(AchievementPopup, { achievement: newAchievement }), /* @__PURE__ */ import_react.default.createElement(AchievementsModal, null), showAIAssistant && /* @__PURE__ */ import_react.default.createElement("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-5 h-5" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-lg" }, "L.Y.N.E"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/90 font-semibold" }, "Logical Yield Neural Engine"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/70" }, "Your AI Study Companion"))), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setShowAIAssistant(false),
-          className: "w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4" })
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 overflow-y-auto p-4 space-y-3" }, aiMessages.map((msg, idx) => /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: `flex ${msg.role === "user" ? "justify-end" : "justify-start"}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: `max-w-[80%] rounded-2xl p-3 ${msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"}` }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm leading-relaxed whitespace-pre-wrap" }, msg.content)))), isAiThinking && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-start" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-100 rounded-2xl p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.2s" } }))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-4 border-t border-gray-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ import_react.default.createElement(
-        "input",
-        {
-          type: "text",
-          value: aiInput,
-          onChange: (e) => setAiInput(e.target.value),
-          onKeyDown: (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleAISubmit(e);
-            }
-          },
-          placeholder: "Ask a question...",
-          className: "flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm",
-          disabled: isAiThinking
-        }
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleAISubmit,
-          disabled: !aiInput.trim() || isAiThinking,
-          className: "px-4 py-2 bg-blue-500 text-white rounded-xl font-semibold disabled:opacity-50 hover:bg-blue-600 transition-colors flex items-center gap-2"
-        },
-        isAiThinking ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" })) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, "Send")
-      )))), !showAIAssistant && /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setShowAIAssistant(true),
-          className: "fixed bottom-6 right-6 group z-50"
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-6 h-6" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl" }, "Chat with L.Y.N.E", /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" }))))
-      ), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 text-white shadow-lg" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-7xl mx-auto flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-5 h-5" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-xl font-bold" }, "Split Screen Study Mode"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-slate-300" }, "View notes and quizzes side by side"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setSplitScreenMode(false);
-            setLeftPanel(null);
-            setRightPanel(null);
-            setSelectedSubject(null);
-            setSelectedSection(null);
-          },
-          className: "px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex items-center gap-2"
-        },
-        /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-4 h-4" }),
-        "Library"
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: closeSplitScreen,
-          className: "px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex items-center gap-2"
-        },
-        /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4" }),
-        "Exit Split View"
-      )))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 flex overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-80 bg-white border-r-2 border-gray-300 overflow-y-auto p-4" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-lg font-bold text-gray-800 mb-4" }, "Browse Content"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-4" }, Object.values(studyLibrary).map((subject) => /* @__PURE__ */ import_react.default.createElement("div", { key: subject.id, className: "border-2 border-gray-200 rounded-xl overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `bg-gradient-to-r ${subject.gradient} p-3` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement(subject.icon, { className: "w-5 h-5 text-white" }), /* @__PURE__ */ import_react.default.createElement("h4", { className: "font-bold text-white text-sm" }, subject.name))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-2 space-y-1" }, subject.sections.map((section) => /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          key: section.id,
-          onClick: () => {
-            if (section.flashcards && section.flashcards.length > 0) {
-              return;
-            }
-            const panelData = { subject, section, type: section.quiz ? "quiz" : "notes" };
-            if (!leftPanel) {
-              setLeftPanel(panelData);
-              setLeftQuizState({ currentQuestion: 0, selectedAnswer: null, showExplanation: false, score: { correct: 0, total: 0 } });
-            } else if (!rightPanel) {
-              setRightPanel(panelData);
-              setRightQuizState({ currentQuestion: 0, selectedAnswer: null, showExplanation: false, score: { correct: 0, total: 0 } });
-            } else {
-              setRightPanel(panelData);
-              setRightQuizState({ currentQuestion: 0, selectedAnswer: null, showExplanation: false, score: { correct: 0, total: 0 } });
-            }
-          },
-          disabled: section.flashcards && section.flashcards.length > 0,
-          className: `w-full text-left p-2 text-sm rounded-lg transition-colors ${section.flashcards && section.flashcards.length > 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2" }, section.quiz ? /* @__PURE__ */ import_react.default.createElement(FileText, { className: "w-4 h-4 text-indigo-500" }) : section.flashcards && section.flashcards.length > 0 ? /* @__PURE__ */ import_react.default.createElement(Brain, { className: "w-4 h-4 text-cyan-500" }) : /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-4 h-4 text-emerald-500" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700 text-xs" }, section.title), section.flashcards && section.flashcards.length > 0 && /* @__PURE__ */ import_react.default.createElement("span", { className: "ml-auto text-xs text-gray-400" }, "(Full screen only)"))
-      ))))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 flex overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 border-r-2 border-gray-300 overflow-hidden" }, renderPanelContent(leftPanel, "left")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 overflow-hidden" }, renderPanelContent(rightPanel, "right")))));
-    }
-    if (selectedSection && selectedSection.flashcards && selectedSection.flashcards.length > 0) {
-      const flashcard = selectedSection.flashcards[currentFlashcard];
-      const progress = (currentFlashcard + 1) / selectedSection.flashcards.length * 100;
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, showAIAssistant && /* @__PURE__ */ import_react.default.createElement("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-5 h-5" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-lg" }, "L.Y.N.E"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/90 font-semibold" }, "Logical Yield Neural Engine"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/70" }, "Your AI Study Companion"))), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setShowAIAssistant(false),
-          className: "w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4" })
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 overflow-y-auto p-4 space-y-3" }, aiMessages.map((msg, idx) => /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: `flex ${msg.role === "user" ? "justify-end" : "justify-start"}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: `max-w-[80%] rounded-2xl p-3 ${msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"}` }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm leading-relaxed whitespace-pre-wrap" }, msg.content)))), isAiThinking && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-start" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-100 rounded-2xl p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.2s" } }))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-4 border-t border-gray-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ import_react.default.createElement(
-        "input",
-        {
-          type: "text",
-          value: aiInput,
-          onChange: (e) => setAiInput(e.target.value),
-          onKeyDown: (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleAISubmit(e);
-            }
-          },
-          placeholder: "Ask a question...",
-          className: "flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm",
-          disabled: isAiThinking
-        }
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleAISubmit,
-          disabled: !aiInput.trim() || isAiThinking,
-          className: "px-4 py-2 bg-blue-500 text-white rounded-xl font-semibold disabled:opacity-50 hover:bg-blue-600 transition-colors flex items-center gap-2"
-        },
-        isAiThinking ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" })) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, "Send")
-      )))), !showAIAssistant && /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setShowAIAssistant(true),
-          className: "fixed bottom-6 right-6 group z-50"
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-6 h-6" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl" }, "Chat with L.Y.N.E", /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" }))))
-      ), /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-4xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setSelectedSection(null);
-            setCurrentFlashcard(0);
-            setIsFlipped(false);
-            setFlashcardStats({ known: 0, learning: 0 });
-          },
-          className: "flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-        "Exit Flashcards"
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-2xl shadow-lg p-6 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-2xl font-bold text-gray-800" }, selectedSection.title), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600" }, "Card ", currentFlashcard + 1, " of ", selectedSection.flashcards.length)), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-right" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-500" }, "Progress"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-green-600" }, "Known: ", flashcardStats.known), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-yellow-600" }, "Learning: ", flashcardStats.learning))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-2 mb-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: `bg-gradient-to-r ${selectedSubject.gradient} h-2 rounded-full transition-all`,
-          style: { width: `${progress}%` }
-        }
-      )), /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          onClick: () => setIsFlipped(!isFlipped),
-          className: "relative w-full h-96 cursor-pointer perspective-1000 mb-6",
-          style: { perspective: "1000px" }
-        },
-        /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            className: `relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? "rotate-y-180" : ""}`,
-            style: {
-              transformStyle: "preserve-3d",
-              transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"
-            }
-          },
-          /* @__PURE__ */ import_react.default.createElement(
-            "div",
-            {
-              className: `absolute w-full h-full bg-gradient-to-br ${selectedSubject.gradient} rounded-2xl shadow-2xl flex items-center justify-center p-8 backface-hidden`,
-              style: { backfaceVisibility: "hidden" }
-            },
-            /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-white/80 mb-4 font-semibold uppercase tracking-wide" }, "Question"), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-3xl font-bold text-white leading-relaxed" }, flashcard.front), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/70 mt-6 text-sm" }, "Click to reveal answer"))
-          ),
-          /* @__PURE__ */ import_react.default.createElement(
-            "div",
-            {
-              className: "absolute w-full h-full bg-white rounded-2xl shadow-2xl flex items-center justify-center p-8 backface-hidden border-4 border-gray-200",
-              style: {
-                backfaceVisibility: "hidden",
-                transform: "rotateY(180deg)"
-              }
-            },
-            /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-500 mb-4 font-semibold uppercase tracking-wide" }, "Answer"), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-2xl font-semibold text-gray-800 leading-relaxed whitespace-pre-line" }, flashcard.back), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-400 mt-6 text-sm" }, "Click to flip back"))
-          )
-        )
-      ), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between gap-4" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handlePreviousFlashcard,
-          disabled: currentFlashcard === 0,
-          className: "px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 transition-all"
-        },
-        "\u2190 Previous"
-      ), isFlipped && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-3" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleFlashcardLearning,
-          className: "px-6 py-3 bg-yellow-500 text-white rounded-xl font-semibold hover:bg-yellow-600 transition-all"
-        },
-        "Still Learning"
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleFlashcardKnown,
-          className: "px-6 py-3 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition-all"
-        },
-        "I Know This!"
-      )), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleNextFlashcard,
-          disabled: currentFlashcard === selectedSection.flashcards.length - 1,
-          className: "px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 transition-all"
-        },
-        "Next \u2192"
-      ))), /* @__PURE__ */ import_react.default.createElement("div", { className: `bg-gradient-to-r ${selectedSubject.gradient} rounded-2xl p-6 text-white` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: "w-6 h-6" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-bold" }, "Study Tip")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90" }, 'Flashcards work best with spaced repetition. Review cards you marked "Still Learning" more frequently!'))));
-    }
-    if (currentQuiz) {
-      const question = currentQuiz.quiz[currentQuestion];
-      const isCorrect = selectedAnswer === question.correct;
-      const progress = (currentQuestion + 1) / currentQuiz.quiz.length * 100;
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, showAIAssistant && /* @__PURE__ */ import_react.default.createElement("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-5 h-5" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-lg" }, "L.Y.N.E"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/90 font-semibold" }, "Logical Yield Neural Engine"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/70" }, "Your AI Study Companion"))), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setShowAIAssistant(false),
-          className: "w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4" })
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 overflow-y-auto p-4 space-y-3" }, aiMessages.map((msg, idx) => /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: `flex ${msg.role === "user" ? "justify-end" : "justify-start"}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: `max-w-[80%] rounded-2xl p-3 ${msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"}` }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm leading-relaxed whitespace-pre-wrap" }, msg.content)))), isAiThinking && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-start" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-100 rounded-2xl p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.2s" } }))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-4 border-t border-gray-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ import_react.default.createElement(
-        "input",
-        {
-          type: "text",
-          value: aiInput,
-          onChange: (e) => setAiInput(e.target.value),
-          onKeyDown: (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleAISubmit(e);
-            }
-          },
-          placeholder: "Ask a question...",
-          className: "flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm",
-          disabled: isAiThinking
-        }
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleAISubmit,
-          disabled: !aiInput.trim() || isAiThinking,
-          className: "px-4 py-2 bg-blue-500 text-white rounded-xl font-semibold disabled:opacity-50 hover:bg-blue-600 transition-colors flex items-center gap-2"
-        },
-        isAiThinking ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" })) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, "Send")
-      )))), !showAIAssistant && /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setShowAIAssistant(true),
-          className: "fixed bottom-6 right-6 group z-50"
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-6 h-6" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl" }, "Chat with L.Y.N.E", /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" }))))
-      ), /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-4xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setCurrentQuiz(null);
-            setSelectedSection(null);
-          },
-          className: "flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-        "Exit Quiz"
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => openInSplitScreen(selectedSubject, selectedSection, "quiz"),
-          className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-white rounded-sm" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-white rounded-sm" })),
-        "Open Split View"
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-2xl shadow-lg p-6 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-2xl font-bold text-gray-800" }, currentQuiz.title), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600" }, "Question ", currentQuestion + 1, " of ", currentQuiz.quiz.length)), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-right" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-500" }, "Score"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-2xl font-bold text-gray-800" }, quizScore.correct, "/", quizScore.total))), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-2 mb-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: `bg-gradient-to-r ${selectedSubject.gradient} h-2 rounded-full transition-all`,
-          style: { width: `${progress}%` }
-        }
-      )), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-semibold text-gray-800 mb-6" }, question.question), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-3 mb-6" }, question.options.map((option, idx) => {
-        let buttonStyle = "border-gray-200 bg-white hover:border-gray-400";
-        if (showExplanation) {
-          if (idx === question.correct) {
-            buttonStyle = "border-green-500 bg-green-50";
-          } else if (idx === selectedAnswer) {
-            buttonStyle = "border-red-500 bg-red-50";
-          }
-        } else if (selectedAnswer === idx) {
-          buttonStyle = "border-blue-500 bg-blue-50";
-        }
-        return /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            key: idx,
-            onClick: () => handleAnswerSelect(idx),
-            disabled: showExplanation,
-            className: `w-full p-4 text-left rounded-xl border-2 transition-all ${buttonStyle} ${showExplanation ? "cursor-default" : "cursor-pointer"}`
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${showExplanation && idx === question.correct ? "border-green-500 bg-green-500" : showExplanation && idx === selectedAnswer ? "border-red-500 bg-red-500" : selectedAnswer === idx ? "border-blue-500 bg-blue-500" : "border-gray-300"}` }, (showExplanation && idx === question.correct || !showExplanation && selectedAnswer === idx) && /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-4 h-4 text-white" }), showExplanation && idx === selectedAnswer && idx !== question.correct && /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4 text-white" })), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-700" }, option))
-        );
-      })), showExplanation && /* @__PURE__ */ import_react.default.createElement("div", { className: `p-4 rounded-xl mb-6 ${isCorrect ? "bg-green-50 border-2 border-green-200" : "bg-blue-50 border-2 border-blue-200"}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: `w-6 h-6 flex-shrink-0 ${isCorrect ? "text-green-600" : "text-blue-600"}` }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: `font-semibold mb-1 ${isCorrect ? "text-green-800" : "text-blue-800"}` }, isCorrect ? "\u2713 Correct!" : "Explanation:"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700" }, question.explanation)))), !showExplanation ? /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleCheckAnswer,
-          disabled: selectedAnswer === null,
-          className: `w-full py-3 bg-gradient-to-r ${selectedSubject.gradient} text-white rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-all`
-        },
-        "Check Answer"
-      ) : /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: handleNextQuestion,
-          className: `w-full py-3 bg-gradient-to-r ${selectedSubject.gradient} text-white rounded-xl font-semibold hover:shadow-lg transition-all`
-        },
-        currentQuestion < currentQuiz.quiz.length - 1 ? "Next Question \u2192" : "Finish Quiz"
-      ))));
-    }
-    if (selectedSection && selectedSubject) {
-      const section = selectedSection;
-      const isRead = readSections.has(section.id);
-      const hasQuiz = section.quiz && section.quiz.length > 0;
-      const isWorksheet = selectedSubject.id === "worksheets";
-      if (hasQuiz && !currentQuiz) {
-        return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, showAIAssistant && /* @__PURE__ */ import_react.default.createElement("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-5 h-5" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-lg" }, "L.Y.N.E"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/90 font-semibold" }, "Logical Yield Neural Engine"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/70" }, "Your AI Study Companion"))), /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => setShowAIAssistant(false),
-            className: "w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-          },
-          /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4" })
-        )), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 overflow-y-auto p-4 space-y-3" }, aiMessages.map((msg, idx) => /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: `flex ${msg.role === "user" ? "justify-end" : "justify-start"}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: `max-w-[80%] rounded-2xl p-3 ${msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"}` }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm leading-relaxed whitespace-pre-wrap" }, msg.content)))), isAiThinking && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-start" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-100 rounded-2xl p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.2s" } }))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-4 border-t border-gray-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ import_react.default.createElement(
-          "input",
-          {
-            type: "text",
-            value: aiInput,
-            onChange: (e) => setAiInput(e.target.value),
-            onKeyDown: (e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleAISubmit(e);
-              }
-            },
-            placeholder: "Ask a question...",
-            className: "flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm",
-            disabled: isAiThinking
-          }
-        ), /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: handleAISubmit,
-            disabled: !aiInput.trim() || isAiThinking,
-            className: "px-4 py-2 bg-blue-500 text-white rounded-xl font-semibold disabled:opacity-50 hover:bg-blue-600 transition-colors flex items-center gap-2"
-          },
-          isAiThinking ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" })) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, "Send")
-        )))), !showAIAssistant && /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => setShowAIAssistant(true),
-            className: "fixed bottom-6 right-6 group z-50"
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-6 h-6" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl" }, "Chat with L.Y.N.E", /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" }))))
-        ), /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-5xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-6" }, /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => setSelectedSection(null),
-            className: "flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-          },
-          /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-          "Back to ",
-          selectedSubject.name
-        ), /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => openInSplitScreen(selectedSubject, selectedSection, "quiz"),
-            className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-white rounded-sm" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-white rounded-sm" })),
-          "Open Split View"
-        )), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-64 rounded-2xl overflow-hidden mb-6 shadow-xl" }, /* @__PURE__ */ import_react.default.createElement(
-          "img",
-          {
-            src: section.image,
-            alt: section.title,
-            className: "w-full h-full object-cover"
-          }
-        ), /* @__PURE__ */ import_react.default.createElement("div", { className: `absolute inset-0 bg-gradient-to-t ${selectedSubject.gradient} opacity-60` }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-6 left-6 right-6" }, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-4xl font-bold text-white mb-2" }, section.title), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-lg" }, section.quiz.length, " practice questions"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-2xl shadow-lg p-8 text-center" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-2xl mx-auto" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(FileText, { className: "w-10 h-10 text-white" })), /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-4" }, "Ready to Practice?"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600 mb-8" }, "Test your knowledge with ", section.quiz.length, " practice questions. Each question includes detailed explanations to help you learn!"), /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => startQuiz(section),
-            className: `px-8 py-4 bg-gradient-to-r ${selectedSubject.gradient} text-white rounded-xl font-semibold text-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5`
-          },
-          "Start Practice Quiz"
-        )))));
-      }
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-5xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setSelectedSection(null),
-          className: "flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-        "Back to ",
-        selectedSubject.name
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => openInSplitScreen(selectedSubject, selectedSection, "notes"),
-          className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-white rounded-sm" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-white rounded-sm" })),
-        "Open Split View"
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: `relative rounded-xl overflow-hidden mb-6 bg-gradient-to-br ${selectedSubject.gradient} border-2 border-gray-200` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 p-6 flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-3xl font-bold text-white mb-1" }, section.title), section.quiz && section.quiz.length > 0 && /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-sm" }, section.quiz.length, " practice questions"), section.flashcards && section.flashcards.length > 0 && /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-sm" }, section.flashcards.length, " flashcards"), section.notes && section.notes.length > 0 && !section.quiz && !section.flashcards && /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-sm" }, section.notes.length, " topics to review")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(selectedSubject.icon, { className: "w-8 h-8 text-white" })))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-6 flex justify-end" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => toggleRead(section.id),
-          className: `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${isRead ? "bg-green-100 text-green-700 hover:bg-green-200" : "bg-white text-gray-600 hover:bg-gray-100 border-2 border-gray-200"}`
-        },
-        isRead ? /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-5 h-5" }) : /* @__PURE__ */ import_react.default.createElement(Circle, { className: "w-5 h-5" }),
-        isRead ? "Completed" : "Mark as Complete"
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-8" }, section.notes.map((note, idx) => {
-        const isDefinitionSection = section.id === "biology-definitions" || section.id === "chemistry-definitions" || section.id === "chemistry-definitions-2" || section.id === "space-definitions";
-        const isElectricitySection = (selectedSubject == null ? void 0 : selectedSubject.id) === "physics" && section.id !== "definitions";
-        const isCollapsible = isDefinitionSection || isElectricitySection;
-        const noteKey = `${section.id}-${idx}`;
-        const isExpanded = expandedDefinitionNotes.has(noteKey);
-        return /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: `bg-white rounded-2xl shadow-lg overflow-hidden transition-all border-2 ${isExpanded ? "border-blue-200 shadow-xl" : "border-gray-100 hover:border-gray-200"}` }, /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            className: `bg-gradient-to-r ${selectedSubject.gradient} p-5 relative overflow-hidden ${isCollapsible ? "cursor-pointer hover:opacity-95" : ""} transition-all`,
-            onClick: () => isCollapsible && toggleDefinitionNote(section.id, idx)
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl" }),
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" }),
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between relative z-10" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-lg border border-white/30" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-3xl" }, note.emoji)), /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-xl font-bold text-white drop-shadow-lg" }, note.subtitle)), isCollapsible && /* @__PURE__ */ import_react.default.createElement("div", { className: `w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center transition-all ${isExpanded ? "bg-white/30" : ""}` }, /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: `w-5 h-5 text-white transition-transform duration-300 ${isExpanded ? "rotate-90" : ""}` }))),
-          isCollapsible && !isExpanded && /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-2 relative z-10" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/80 text-sm" }, "Click to expand \u2022 ", note.points.length, " ", note.points.length === 1 ? "term" : "terms"))
-        ), (!isCollapsible || isExpanded) && /* @__PURE__ */ import_react.default.createElement("div", { className: "p-6 bg-gradient-to-b from-white to-gray-50" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-3" }, note.points.map((point, pointIdx) => /* @__PURE__ */ import_react.default.createElement("div", { key: pointIdx }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3 group p-3 rounded-lg hover:bg-white transition-all" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `mt-1.5 w-2 h-2 rounded-full bg-gradient-to-r ${selectedSubject.gradient} flex-shrink-0 shadow-sm` }), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 leading-relaxed text-sm group-hover:text-gray-900 transition-colors" }, point)), isWorksheet && note.answers && note.answers[pointIdx] && /* @__PURE__ */ import_react.default.createElement("div", { className: "ml-5 mt-2" }, /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => toggleAnswer(idx, pointIdx),
-            className: "text-xs font-bold text-teal-600 hover:text-teal-700 transition-all flex items-center gap-2 px-3 py-1.5 bg-teal-50 hover:bg-teal-100 rounded-lg shadow-sm"
-          },
-          revealedAnswers.has(`${idx}-${pointIdx}`) ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-sm" }, "\u25BC"), "Hide Answer") : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-sm" }, "\u25B6"), "Reveal Answer")
-        ), revealedAnswers.has(`${idx}-${pointIdx}`) && /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-2 p-4 bg-gradient-to-br from-teal-50 to-emerald-50 border-l-4 border-teal-500 rounded-r-xl shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2" }, note.answers[pointIdx].split(" \u2022 ").map((item, i) => /* @__PURE__ */ import_react.default.createElement("div", { key: i, className: "flex items-start gap-2 p-2 bg-white/60 rounded-lg" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-teal-600 font-bold" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-800 text-sm leading-relaxed" }, item))))))))), note.diagram && /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 p-4 bg-gradient-to-br from-slate-50 to-gray-100 rounded-xl border-2 border-gray-200 shadow-inner" }, note.diagram === "lewis" && /* @__PURE__ */ import_react.default.createElement(LewisDotDiagram, null), note.diagram === "bohr" && /* @__PURE__ */ import_react.default.createElement(BohrDiagram, null), note.diagram === "energy-pyramid" && /* @__PURE__ */ import_react.default.createElement(EnergyPyramid, null), note.diagram === "carbon-cycle" && /* @__PURE__ */ import_react.default.createElement(CarbonCycle, null), note.diagram === "atomic-models" && /* @__PURE__ */ import_react.default.createElement(AtomicModels, null), note.diagram === "periodic-table" && /* @__PURE__ */ import_react.default.createElement(PeriodicTableDiagram, null), note.diagram === "ions" && /* @__PURE__ */ import_react.default.createElement(IonDiagram, null), note.diagram === "photosynthesis" && /* @__PURE__ */ import_react.default.createElement(PhotosynthesisDiagram, null), note.diagram === "respiration" && /* @__PURE__ */ import_react.default.createElement(CellRespirationDiagram, null), note.diagram === "food-chain" && /* @__PURE__ */ import_react.default.createElement(FoodChainDiagram, null), note.diagram === "aquatic-food-chain" && /* @__PURE__ */ import_react.default.createElement(AquaticFoodChainDiagram, null), note.diagram === "nitrogen-cycle" && /* @__PURE__ */ import_react.default.createElement(NitrogenCycleDiagram, null), note.diagram === "density" && /* @__PURE__ */ import_react.default.createElement(DensityComparisonDiagram, null), note.diagram === "circuit-symbols" && /* @__PURE__ */ import_react.default.createElement(CircuitSymbolsDiagram, null), note.diagram === "series-circuit" && /* @__PURE__ */ import_react.default.createElement(SeriesCircuitDiagram, null), note.diagram === "parallel-circuit" && /* @__PURE__ */ import_react.default.createElement(ParallelCircuitDiagram, null), note.diagram === "ohms-law" && /* @__PURE__ */ import_react.default.createElement(OhmsLawTriangle, null), note.diagram === "static-electricity" && /* @__PURE__ */ import_react.default.createElement(StaticElectricityDiagram, null), note.diagram === "power-formula" && /* @__PURE__ */ import_react.default.createElement(PowerFormulaDiagram, null), note.diagram === "complete-circuit" && /* @__PURE__ */ import_react.default.createElement(CircuitDiagram, null))));
-      })), /* @__PURE__ */ import_react.default.createElement("div", { className: `mt-8 bg-gradient-to-r ${selectedSubject.gradient} rounded-2xl p-6 text-white` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: "w-6 h-6" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-bold" }, "Study Tip")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90" }, "Try explaining these concepts to someone else or writing them out from memory. This helps solidify your understanding!"))));
-    }
-    if (selectedSubject) {
-      const subject = selectedSubject;
-      const completedCount = subject.sections.filter((s) => readSections.has(s.id)).length;
-      const progress = completedCount / subject.sections.length * 100;
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-5xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => setSelectedSubject(null),
-          className: "mb-6 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-        "Back to Library"
-      ), /* @__PURE__ */ import_react.default.createElement("div", { className: `relative rounded-xl overflow-hidden mb-6 bg-gradient-to-br ${subject.gradient} border-2 border-gray-200` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 p-6 flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-3xl font-bold text-white mb-1" }, subject.name), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-sm" }, subject.sections.length, " sections \u2022 ", completedCount, " completed")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(subject.icon, { className: "w-8 h-8 text-white" }))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 px-6 pb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/20 backdrop-blur rounded-full h-2 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: "bg-white h-full transition-all duration-500 rounded-full",
-          style: { width: `${progress}%` }
-        }
-      )))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-4" }, subject.sections.map((section) => {
-        const isRead = readSections.has(section.id);
-        const hasQuiz = section.quiz && section.quiz.length > 0;
-        const hasFlashcards = section.flashcards && section.flashcards.length > 0;
-        return /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            key: section.id,
-            onClick: () => setSelectedSection(section),
-            className: "bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-lg transition-all border-2 border-gray-100 hover:border-gray-300"
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: `relative h-24 bg-gradient-to-br ${subject.gradient} p-4 overflow-hidden` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-2 -left-2 w-12 h-12 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 flex items-start justify-between h-full" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-sm font-bold text-white pr-2 line-clamp-2 leading-tight" }, section.title), isRead && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-4 h-4 text-white" })))),
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, hasQuiz && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1 px-2 py-1 bg-indigo-50 rounded-md" }, /* @__PURE__ */ import_react.default.createElement(FileText, { className: "w-3 h-3 text-indigo-600" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs font-medium text-indigo-700" }, section.quiz.length, " questions")), hasFlashcards && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1 px-2 py-1 bg-cyan-50 rounded-md" }, /* @__PURE__ */ import_react.default.createElement(Brain, { className: "w-3 h-3 text-cyan-600" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs font-medium text-cyan-700" }, section.flashcards.length, " cards")), !hasQuiz && !hasFlashcards && section.notes && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1 px-2 py-1 bg-emerald-50 rounded-md" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-3 h-3 text-emerald-600" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs font-medium text-emerald-700" }, section.notes.length, " topics"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between text-xs text-gray-500" }, /* @__PURE__ */ import_react.default.createElement("span", null, isRead ? "Completed" : "Not started"), /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: "w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" })))
-        );
-      }))));
-    }
-    if (showIntro) {
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-3xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden animate-fadeIn" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-8 text-white relative overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-0 right-0 opacity-20" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1 items-end h-16" }, [...Array(8)].map((_, i) => /* @__PURE__ */ import_react.default.createElement(
-        "div",
         {
           key: i,
-          className: "w-2 bg-gradient-to-t from-emerald-400 to-blue-500 rounded-t animate-pulse",
-          style: {
-            height: `${30 + Math.random() * 40}px`,
-            animationDelay: `${i * 0.1}s`,
-            animationDuration: "1s"
-          }
-        }
-      )))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-4 mb-4 relative z-10" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center animate-bounce" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-8 h-8" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-3xl font-bold" }, "Welcome to Your Study Library!"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-slate-300" }, "Grade 9 Science \u2022 Appleby College"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-slate-400 text-sm mt-1" }, "Created by Dean Concepcion")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-8" }, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: "w-6 h-6 text-yellow-500" }), "Why This Was Made"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 leading-relaxed mb-4" }, "This interactive study library was created by ", /* @__PURE__ */ import_react.default.createElement("span", { className: "font-semibold" }, "Dean Concepcion"), " specifically to help Grade 9 students at Appleby College prepare for their Science tests more effectively. Instead of scattered notes across different pages, everything is organized in one place with clear sections, visual aids, and practice questions tailored to the Appleby curriculum."), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 leading-relaxed" }, "Whether you're reviewing for Biology's ecosystem concepts, Chemistry's atomic structure, or tackling practice questions, this tool makes studying more organized and less overwhelming\u2014designed with Appleby Grade 9 students in mind.")), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-8" }, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement(Target, { className: "w-6 h-6 text-blue-500" }), "How to Use This Library"), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3 p-4 bg-blue-50 rounded-xl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold flex-shrink-0" }, "1"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-semibold text-gray-800 mb-1" }, "Browse Subjects"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 text-sm" }, "Click on any subject card (Biology, Chemistry, etc.) to view all the topics inside."))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3 p-4 bg-green-50 rounded-xl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold flex-shrink-0" }, "2"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-semibold text-gray-800 mb-1" }, "Study Sections"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 text-sm" }, "Each section has visual notes with key points. Mark sections as complete to track your progress!"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3 p-4 bg-purple-50 rounded-xl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold flex-shrink-0" }, "3"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-semibold text-gray-800 mb-1" }, "Practice & Review"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 text-sm" }, "Try the Test Review Guide and Practice Questions sections to test your knowledge with instant feedback."))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3 p-4 bg-amber-50 rounded-xl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold flex-shrink-0" }, "4"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-semibold text-gray-800 mb-1" }, "Search Anything"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 text-sm" }, "Use the search bar to quickly find specific topics, concepts, or keywords across all subjects."))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3 p-4 bg-teal-50 rounded-xl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold flex-shrink-0" }, "5"), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-semibold text-gray-800 mb-1" }, "Complete Worksheets"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-700 text-sm" }, "Work through practice worksheets with questions designed to reinforce your understanding of each topic."))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-emerald-500 to-blue-500 rounded-xl p-6 text-white mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: "w-6 h-6 flex-shrink-0 mt-1" }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold mb-2" }, "Pro Tip"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-sm" }, "Start with the Test Review Guide to see what you need to know, then dive into specific topics. Use the practice questions to test yourself before the actual test!")))), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setShowIntro(false);
-            setShowGeography(true);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          },
-          className: "w-full py-4 bg-gradient-to-r from-slate-900 to-slate-700 text-white rounded-xl font-semibold text-lg hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+          disabled: revealed,
+          onClick: () => setSelected(i),
+          style: { display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", borderRadius: 14, border: `1.5px solid ${border}`, background: bg, cursor: revealed ? "default" : "pointer", textAlign: "left", transition: "all 0.15s" }
         },
-        "Let's Get Started! \u{1F680}"
-      ))));
-    }
-    if (showSubjectPicker) {
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-4xl w-full" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center mb-12" }, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent" }, "Choose Your Subject"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600 text-lg" }, "Select which subject you'd like to study")), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 gap-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setShowSubjectPicker(false);
-            setShowGeography(true);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          },
-          className: "group relative bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all border-2 border-gray-100 hover:border-green-300 transform hover:-translate-y-2"
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 bg-gradient-to-br from-green-500 to-teal-600 opacity-0 group-hover:opacity-10 transition-opacity" }),
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "p-8 relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-400 to-teal-600 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform" }, /* @__PURE__ */ import_react.default.createElement(Globe, { className: "w-10 h-10 text-white" })), /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-3 group-hover:text-green-600 transition-colors" }, "Geography"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600 mb-6" }, "World regions, climate, physical features, and human geography"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex flex-wrap gap-2 justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold" }, "Physical Geography"), /* @__PURE__ */ import_react.default.createElement("span", { className: "px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold" }, "Human Geography")), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 flex items-center justify-center gap-2 text-green-600 font-semibold group-hover:gap-3 transition-all" }, /* @__PURE__ */ import_react.default.createElement("span", null, "Enter Geography Library"), /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: "w-5 h-5" })))
-      )), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-8 text-center" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setShowSubjectPicker(false);
-            setShowIntro(true);
-          },
-          className: "text-gray-600 hover:text-gray-900 flex items-center gap-2 mx-auto transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-        "Back to Introduction"
-      ))));
-    }
-    if (showGeography) {
-      const geographyLibrary = {
-        id: "geography",
-        name: "Geography: Canada & Physical Geography",
-        description: "Comprehensive study materials for Grade 9 Geography",
-        icon: Globe,
-        color: "green",
-        gradient: "from-green-500 to-teal-600",
-        sections: [
-          {
-            id: "geo-definitions",
-            title: "Key Geography Definitions",
-            image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Physical Geography Terms",
-                emoji: "\u{1F30D}",
-                points: [
-                  "CONTINENTAL DRIFT: Theory that continents were once joined and have moved apart over time",
-                  "PLATE TECTONICS: Theory that Earth's crust is broken into plates that move on molten rock",
-                  "TECTONIC PLATE: Large piece of Earth's crust that floats on the mantle",
-                  "CONVECTION CURRENT: Circular movement of molten rock in Earth's mantle that moves plates",
-                  "PANGAEA: Supercontinent that existed 300 million years ago containing all landmasses",
-                  "DIVERGENT BOUNDARY: Where plates move apart, creating new crust",
-                  "CONVERGENT BOUNDARY: Where plates collide, one often sinks beneath the other",
-                  "TRANSFORM BOUNDARY: Where plates slide past each other horizontally",
-                  "SUBDUCTION: When one tectonic plate sinks beneath another",
-                  "EARTHQUAKE: Shaking of Earth's surface caused by sudden movement of tectonic plates",
-                  "VOLCANO: Opening in Earth's crust where molten rock reaches the surface",
-                  "MAGMA: Molten rock beneath Earth's surface",
-                  "LAVA: Molten rock that reaches Earth's surface"
-                ]
-              },
-              {
-                subtitle: "Rock Cycle Terms",
-                emoji: "\u{1FAA8}",
-                points: [
-                  "IGNEOUS ROCK: Forms from cooling magma or lava (granite, basalt)",
-                  "SEDIMENTARY ROCK: Forms from compacted sediments (sandstone, limestone)",
-                  "METAMORPHIC ROCK: Rock changed by heat and pressure (marble, slate)",
-                  "INTRUSIVE IGNEOUS: Igneous rock that cools slowly underground (large crystals)",
-                  "EXTRUSIVE IGNEOUS: Igneous rock that cools quickly on surface (small crystals)",
-                  "WEATHERING: Breaking down of rocks into smaller pieces",
-                  "EROSION: Transportation of weathered rock by wind, water, or ice",
-                  "DEPOSITION: Dropping of sediments in a new location",
-                  "COMPACTION: Pressing together of sediments under pressure",
-                  "CEMENTATION: Sediments glued together by minerals to form rock",
-                  "MINERAL: Natural solid substance with specific chemical composition",
-                  "ORE: Rock containing valuable minerals in high concentration"
-                ]
-              },
-              {
-                subtitle: "Landform Terms",
-                emoji: "\u26F0\uFE0F",
-                points: [
-                  "LANDFORM: Natural feature of Earth's surface (mountain, valley, plain)",
-                  "CANADIAN SHIELD: Largest landform region in Canada, ancient rock rich in minerals",
-                  "APPALACHIAN REGION: Old eroded mountains in Atlantic Canada",
-                  "INTERIOR PLAINS: Flat prairie region with sedimentary rock",
-                  "WESTERN CORDILLERA: Young mountain region including Rocky Mountains",
-                  "GLACIATION: Shaping of land by movement of ice sheets",
-                  "PERMAFROST: Permanently frozen ground in Arctic regions",
-                  "TUNDRA: Treeless Arctic region with low vegetation",
-                  "PRAIRIE: Flat or rolling grassland with few trees",
-                  "PLATEAU: Flat elevated land higher than surrounding area",
-                  "VALLEY: Low area between hills or mountains",
-                  "DELTA: Triangular deposit of sediment at river mouth"
-                ]
-              },
-              {
-                subtitle: "Climate & Weather Terms",
-                emoji: "\u{1F321}\uFE0F",
-                points: [
-                  "CLIMATE: Average weather conditions over long period (30+ years)",
-                  "WEATHER: Atmospheric conditions at specific time and place",
-                  "LATITUDE: Distance north or south of equator (affects temperature)",
-                  "ELEVATION: Height above sea level (higher = colder)",
-                  "OCEAN CURRENT: Stream of moving water in ocean (affects coastal climate)",
-                  "PREVAILING WIND: Wind that blows most frequently from one direction",
-                  "RAIN SHADOW: Dry area on leeward side of mountain",
-                  "WINDWARD: Side of mountain facing prevailing wind (wet)",
-                  "LEEWARD: Side of mountain away from prevailing wind (dry)",
-                  "MARITIME CLIMATE: Moderate climate influenced by nearby ocean",
-                  "CONTINENTAL CLIMATE: Climate with extreme temperature changes (hot/cold)",
-                  "PRECIPITATION: Water falling from sky (rain, snow, sleet, hail)"
-                ]
-              },
-              {
-                subtitle: "Natural Resources Terms",
-                emoji: "\u{1F48E}",
-                points: [
-                  "NATURAL RESOURCE: Material from Earth used by humans",
-                  "RENEWABLE RESOURCE: Can be replaced naturally (forests, water, wind)",
-                  "NON-RENEWABLE RESOURCE: Limited supply, cannot be replaced (oil, minerals)",
-                  "FLOW RESOURCE: Inexhaustible resource (wind, solar, tides)",
-                  "SUSTAINABLE USE: Using resources without depleting them for future",
-                  "FOSSIL FUEL: Energy resource formed from ancient organisms (oil, gas, coal)",
-                  "HYDROELECTRICITY: Electricity generated by flowing water",
-                  "MINERAL DEPOSIT: Concentration of valuable minerals in rock",
-                  "POTASH: Mineral used in fertilizer, found in Saskatchewan",
-                  "SOFTWOOD: Wood from coniferous trees (pine, spruce)",
-                  "PULP: Wood fibers used to make paper",
-                  "FRESH WATER: Water with low salt content (rivers, lakes)"
-                ]
-              },
-              {
-                subtitle: "Indigenous Terms",
-                emoji: "\u{1FAB6}",
-                points: [
-                  "INDIGENOUS PEOPLES: Original inhabitants of a region",
-                  "FIRST NATIONS: Indigenous peoples in Canada (not Inuit or M\xE9tis)",
-                  "M\xC9TIS: People of mixed Indigenous-European ancestry",
-                  "INUIT: Indigenous peoples of Arctic Canada",
-                  "INUKTITUT: Language spoken by Inuit people",
-                  "TREATY: Formal agreement between Indigenous nations and Crown",
-                  "RESERVE: Land set aside for Indigenous peoples by government",
-                  "COLONIZATION: Taking control of Indigenous lands and peoples",
-                  "UNCEDED LAND: Indigenous land never given up by treaty",
-                  "SELF-GOVERNMENT: Indigenous communities governing themselves",
-                  "RECONCILIATION: Process of addressing historical wrongs",
-                  "TREATY PEOPLE: All Canadians living on treaty or unceded land"
-                ]
-              },
-              {
-                subtitle: "Settlement Terms",
-                emoji: "\u{1F3D8}\uFE0F",
-                points: [
-                  "SETTLEMENT PATTERN: Way people are distributed across land",
-                  "LONG LOTS: Narrow strips extending back from river (Quebec)",
-                  "CONCESSION SYSTEM: Grid dividing land into rectangular lots (Ontario)",
-                  "SECTION SYSTEM: Square townships of 36 sections (Prairies)",
-                  "DISPERSED POPULATION: People spread evenly across area",
-                  "CONCENTRATED POPULATION: People clustered in specific locations",
-                  "LINEAR POPULATION: Settlements along transportation routes",
-                  "SURVEY SYSTEM: Method of dividing and organizing land",
-                  "HOMESTEAD: Farmland granted to settlers",
-                  "TOWNSHIP: Unit of land division (36 square miles on prairies)",
-                  "CONCESSION: Strip of land in concession system",
-                  "RESOURCE TOWN: Settlement built around extracting resources"
-                ]
-              },
-              {
-                subtitle: "Population Terms",
-                emoji: "\u{1F465}",
-                points: [
-                  "POPULATION DISTRIBUTION: Where people live across an area",
-                  "POPULATION DENSITY: Number of people per square kilometer (D = P \xF7 A)",
-                  "URBANIZATION: Movement of people from rural to urban areas",
-                  "RURAL: Countryside area with low population density",
-                  "URBAN: City or town area with high population density",
-                  "CENSUS METROPOLITAN AREA (CMA): Urban area with 100,000+ people",
-                  "ECUMENE: Permanently inhabited land",
-                  "CONTINUOUS ECUMENE: Unbroken settlement area",
-                  "DISCONTINUOUS ECUMENE: Scattered patches of settlement",
-                  "MIGRATION: Movement of people from one place to another",
-                  "PUSH FACTOR: Reason making people leave an area",
-                  "PULL FACTOR: Reason attracting people to an area",
-                  "COMMUNITY: Group sharing geographic space or cultural ties",
-                  "ISODEMOGRAPHIC MAP: Map where size shows population, not land area"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-physical",
-            title: "Physical Geography of Canada",
-            image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Continental Drift & Plate Tectonics",
-                emoji: "\u{1F30D}",
-                points: [
-                  "Earth is over 4.6 billion years old, divided into four geological eras",
-                  "Alfred Wegener (1915) proposed Continental Drift theory - continents move",
-                  "Four proofs: jigsaw fit of continents, identical fossils, similar mountains, ice evidence",
-                  "J. Tuzo Wilson (1960s) developed Plate Tectonics - crust broken into plates",
-                  "7 major, 8 secondary, 60+ minor tectonic plates floating on molten rock",
-                  "Convection currents in Earth's core cause plate movement",
-                  "Plate collisions formed Canada's coastal mountains",
-                  "Oil and gas formed when plates were in warmer climates"
-                ],
-                diagram: "continental-drift"
-              },
-              {
-                subtitle: "Types of Plate Movement",
-                emoji: "\u26F0\uFE0F",
-                points: [
-                  "Divergent (\u2190\u2192): Plates move apart, creating new crust (Mid-Atlantic Ridge)",
-                  "Convergent (\u2192\u2190): Plates collide - oceanic sinks under continental (subduction)",
-                  "Subduction causes earthquakes, tsunamis, and volcanoes",
-                  "Continental collision creates mountain ranges (Himalayas still rising)",
-                  "Transform (\u2191\u2193): Plates slide past each other, causing earthquakes",
-                  "Hot spots: Volcanoes form when magma forces up from beneath surface"
-                ],
-                diagram: "plate-tectonics"
-              },
-              {
-                subtitle: "The Rock Cycle",
-                emoji: "\u{1FAA8}",
-                points: [
-                  "Three rock types: Igneous, Sedimentary, Metamorphic - no beginning or end",
-                  "Igneous: Forms from cooling magma/lava (granite, obsidian)",
-                  "Intrusive igneous: cools slowly underground \u2192 large crystals",
-                  "Extrusive igneous: cools quickly on surface \u2192 small crystals",
-                  "Weathering BREAKS rocks, Erosion TAKES them, Deposition DROPS them",
-                  "Sedimentary: Formed by compaction and cementation over millions of years",
-                  "Most sedimentary rocks form at ocean bottom, contain oil and gas",
-                  "Metamorphic: Changed by heat and pressure, concentrates valuable ores"
-                ],
-                diagram: "rock-cycle"
-              }
-            ]
-          },
-          {
-            id: "geo-landforms",
-            title: "Canadian Landform Regions",
-            image: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Major Landform Regions",
-                emoji: "\u{1F3D4}\uFE0F",
-                points: [
-                  "Canadian Shield: Ancient rock, rich in minerals, lakes from glaciers",
-                  "Appalachian Region: Old eroded mountains in Atlantic provinces",
-                  "Great Lakes-St. Lawrence Lowlands: Flat, fertile, most populated",
-                  "Interior Plains: Prairies with sedimentary rock, oil and gas deposits",
-                  "Western Cordillera: Young mountains (Rockies), earthquakes and volcanoes",
-                  "Arctic Lowlands: Permafrost, tundra vegetation",
-                  "Hudson Bay Lowlands: Flat, swampy, few people"
-                ],
-                diagram: "canadian-landforms"
-              },
-              {
-                subtitle: "Forces Shaping Landforms",
-                emoji: "\u{1F30B}",
-                points: [
-                  "Internal forces: Plate tectonics, earthquakes, volcanoes build up land",
-                  "External forces: Weathering, erosion, deposition wear down land",
-                  "Glaciation: Ice sheets carved valleys, created Great Lakes",
-                  "Water erosion: Rivers cut canyons, create deltas",
-                  "Wind erosion: Creates sand dunes, wears down rock",
-                  "Mass wasting: Gravity moves material downslope (landslides)"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-climate",
-            title: "Climate & Weather",
-            image: "https://images.unsplash.com/photo-1601134467661-3d775b999c8b?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Climate Factors",
-                emoji: "\u2600\uFE0F",
-                points: [
-                  "Latitude: Distance from equator - farther = colder temperatures",
-                  "Elevation: Higher altitude = colder (drops 1\xB0C per 100m)",
-                  "Ocean currents: Warm currents raise temps, cold currents lower them",
-                  "Prevailing winds: Bring weather from direction they blow from",
-                  "Mountains: Windward side wet, leeward side dry (rain shadow)",
-                  "Bodies of water: Moderate temperature - cooler summers, warmer winters"
-                ],
-                diagram: "climate-factors"
-              },
-              {
-                subtitle: "Canadian Climate Regions",
-                emoji: "\u{1F321}\uFE0F",
-                points: [
-                  "Arctic: Very cold, dry, permafrost, little vegetation",
-                  "Subarctic: Cold winters, cool summers, boreal forest",
-                  "West Coast Maritime: Mild, wet year-round from Pacific Ocean",
-                  "Prairie: Hot summers, cold winters, low precipitation",
-                  "Southeastern: Humid continental, four distinct seasons",
-                  "Atlantic Maritime: Moderate, influenced by Atlantic Ocean"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-resources",
-            title: "Natural Resources",
-            image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Types of Natural Resources",
-                emoji: "\u{1F48E}",
-                points: [
-                  "Renewable: Can be replaced (forests, water, wind, solar)",
-                  "Non-renewable: Limited supply (oil, gas, coal, minerals)",
-                  "Flow resources: Inexhaustible (wind, solar, tides)",
-                  "Sustainable use: Using resources without depleting them for future"
-                ]
-              },
-              {
-                subtitle: "Canada's Major Resources",
-                emoji: "\u26CF\uFE0F",
-                points: [
-                  "Energy: Oil (Alberta), natural gas (BC, Alberta), hydroelectricity (Quebec)",
-                  "Minerals: Gold, nickel, copper (Canadian Shield), potash (Saskatchewan)",
-                  "Forests: Softwood lumber, pulp and paper (BC, Quebec, Ontario)",
-                  "Agriculture: Wheat (Prairies), dairy (Ontario, Quebec)",
-                  "Fishing: Atlantic cod, Pacific salmon, shellfish",
-                  "Fresh water: Great Lakes contain 20% of world's fresh water"
-                ]
-              }
-            ]
-          },
-                            {
-            id: "geo-lesson-20",
-            title: "Lesson 20: Resources - Types, Consumption, and Disposal",
-            image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Total Stock vs Resource",
-                emoji: "TS",
-                points: [
-                  "Total Stock: everything in the environment (energy, living, non-living)",
-                  "Resource: any part of total stock that becomes useful to humans",
-                  "Natural resources: resources found in the natural environment"
-                ]
-              },
-              {
-                subtitle: "Value Evolution",
-                emoji: "VE",
-                points: [
-                  "Flint: vital in the Stone Age for tools and fire",
-                  "Flint: critical for flintlock firearms in the 17th-19th centuries",
-                  "Flint today: virtually no economic value",
-                  "Oil: dug in 1858 at Oil Springs, ON for lamp oil (replacing whale oil)",
-                  "Oil became a global power resource after the invention of cars"
-                ]
-              },
-              {
-                subtitle: "Four Resource Categories",
-                emoji: "4",
-                points: [
-                  "Renewable: regenerates if used carefully (fish, forests)",
-                  "Non-renewable: limited and cannot be replaced (fossil fuels, minerals)",
-                  "Flow: replaced by natural actions; must be used where/when it occurs (wind, solar, running water)",
-                  "Other: items that do not fit elsewhere (Rocky Mountain scenery for tourism)"
-                ]
-              },
-              {
-                subtitle: "Management Terms",
-                emoji: "MT",
-                points: [
-                  "Mining the resource: exploiting a renewable resource until it is gone (unsustainable)",
-                  "Maximum Sustainable Yield: harvest only the amount nature replaces annually",
-                  "R/P Ratio: reserves divided by production equals years left"
-                ]
-              },
-              {
-                subtitle: "Waste and Circular Economy",
-                emoji: "WE",
-                points: [
-                  "Landfills produce leachate (toxic liquid) and methane (burned for power)",
-                  "Recycling: only 9% of Canadian plastic was recycled in 2023",
-                  "Recycling is often downcycled into lower-quality items",
-                  "Reducing is the best option because items are never produced",
-                  "Circular economy: waste is designed out and materials are kept in use"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-21",
-            title: "Lesson 21: Canada’s Agricultural Resources",
-            image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Four Factors of Agriculture",
-                emoji: "4F",
-                points: [
-                  "Temperature (GDDs)",
-                  "Precipitation (Aridity Index)",
-                  "Land Quality (CLI)",
-                  "Location"
-                ]
-              },
-              {
-                subtitle: "Temperature (GDDs)",
-                emoji: "T",
-                points: [
-                  "Commercial farming needs 1100 Growing Degree Days",
-                  "Higher GDDs allow wider crop variety (tobacco, peaches)"
-                ]
-              },
-              {
-                subtitle: "Precipitation",
-                emoji: "P",
-                points: [
-                  "Aridity Index measures rain supply vs demand",
-                  "Below 0.65 is considered dry"
-                ]
-              },
-              {
-                subtitle: "Land Quality (CLI)",
-                emoji: "LQ",
-                points: [
-                  "Classes 1-3: good for commercial crops",
-                  "Class 4: break-even, marginal",
-                  "Class 7: no capability for agriculture"
-                ]
-              },
-              {
-                subtitle: "Location",
-                emoji: "L",
-                points: [
-                  "Intensive: small land, high labor, near cities (dairy, eggs, produce)",
-                  "Extensive: huge land, low labor, far from cities (wheat for export)"
-                ]
-              },
-              {
-                subtitle: "Economic Factors",
-                emoji: "E",
-                points: [
-                  "Land cost: high prices near cities force high-profit products",
-                  "Competition: oversupply causes price drops"
-                ]
-              },
-              {
-                subtitle: "Sustainability",
-                emoji: "S",
-                points: [
-                  "Agriculture contributes to greenhouse gases",
-                  "Soil fertility and erosion must be managed"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-22",
-            title: "Lesson 22: Canada’s Forest Resources",
-            image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Historical Context",
-                emoji: "H",
-                points: [
-                  "Old growth (never logged) was cleared in the 1800s for farming and UK exports",
-                  "Most current forests are second growth"
-                ]
-              },
-              {
-                subtitle: "Forest Types",
-                emoji: "FT",
-                points: [
-                  "Softwood (66%): coniferous",
-                  "Hardwood (12%): deciduous",
-                  "Mixed (22%): both"
-                ]
-              },
-              {
-                subtitle: "Harvesting Methods",
-                emoji: "HM",
-                points: [
-                  "Clear cutting: fast/cheap, removes all trees, causes erosion",
-                  "Shelterwood: leaves parent trees for seeds and shelter",
-                  "Selective: only mature trees, most expensive, best for biodiversity"
-                ]
-              },
-              {
-                subtitle: "Sustainable Forestry",
-                emoji: "SF",
-                points: [
-                  "FSC Certification proves wood is ecologically certified",
-                  "Wildlife corridor: habitat hallway that allows animals to move and interbreed"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-23",
-            title: "Lesson 23: Canada’s Ocean Resources",
-            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Fish Classifications",
-                emoji: "F",
-                points: [
-                  "Groundfish: bottom (cod)",
-                  "Pelagic: surface (salmon)",
-                  "Shellfish: lobster and shrimp"
-                ]
-              },
-              {
-                subtitle: "Grand Banks Recipe",
-                emoji: "GB",
-                points: [
-                  "Shallow water (less than 200m) allows sunlight for plankton",
-                  "Cold Labrador Current meets warm Gulf Stream",
-                  "Currents stir nutrients and boost productivity"
-                ]
-              },
-              {
-                subtitle: "1992 Collapse",
-                emoji: "92",
-                points: [
-                  "Overfishing",
-                  "Sonar technology",
-                  "Factory trawlers"
-                ]
-              },
-              {
-                subtitle: "Inshore vs Offshore",
-                emoji: "IO",
-                points: [
-                  "Inshore: 85% of workers, small boats, way of life",
-                  "Offshore: 15% of workers, large corporate trawlers",
-                  "Offshore catches 90% of the total catch"
-                ]
-              },
-              {
-                subtitle: "Climate Change",
-                emoji: "CC",
-                points: [
-                  "Warmer water is less productive",
-                  "Fish migrate toward the poles"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-24",
-            title: "Lesson 24: Canada’s Fresh Water Resources",
-            image: "https://images.unsplash.com/photo-1502767089025-6572583495b4?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Distribution and Cycle",
-                emoji: "W",
-                points: [
-                  "Only 3% of world water is fresh",
-                  "Water cycle moves water between ground and atmosphere",
-                  "Stored as glaciers or groundwater"
-                ]
-              },
-              {
-                subtitle: "Cost Gap",
-                emoji: "$",
-                points: [
-                  "Tap water in Ontario: $1.38 per 1000L",
-                  "Bottled water: about $200 per 1000L"
-                ]
-              },
-              {
-                subtitle: "Inequality",
-                emoji: "I",
-                points: [
-                  "Neskantaga First Nation has a boil-water advisory since 1995"
-                ]
-              },
-              {
-                subtitle: "Conflict",
-                emoji: "C",
-                points: [
-                  "Blue Triton (Nestlé) pumps 1.1 million liters per day in Hillsburg, ON",
-                  "Haudenosaunee issued a cease-and-desist order"
-                ]
-              },
-              {
-                subtitle: "Flow Resource",
-                emoji: "FR",
-                points: [
-                  "Water must be used where it occurs"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-25",
-            title: "Lesson 25: Canada’s Energy Resources",
-            image: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Primary Energy",
-                emoji: "PE",
-                points: [
-                  "Energy in nature (fossil fuels, solar)",
-                  "Petajoule = enough energy for 27.7 million LED bulbs"
-                ]
-              },
-              {
-                subtitle: "Energy Supply (2021)",
-                emoji: "ES",
-                points: [
-                  "76% fossil fuels",
-                  "16.6% renewables"
-                ]
-              },
-              {
-                subtitle: "Bioenergy",
-                emoji: "BE",
-                points: [
-                  "Electricity from burning biomass (wood/garbage)",
-                  "Biogas from landfills"
-                ]
-              },
-              {
-                subtitle: "Why Canada Consumes So Much",
-                emoji: "WC",
-                points: [
-                  "Industry demand (aluminum and other sectors)",
-                  "Heating: average temp 1.6°C; 41% of homes use electricity for heat",
-                  "Affordability: low prices and large houses increase demand"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-26",
-            title: "Lesson 26: Canada’s Mineral Resources",
-            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Metallic vs Non-Metallic",
-                emoji: "MN",
-                points: [
-                  "Metallic (gold, copper): in igneous/metamorphic rock (The Shield)",
-                  "Non-metallic (potash, salt, diamonds): in sedimentary rock"
-                ]
-              },
-              {
-                subtitle: "Mining Methods",
-                emoji: "MM",
-                points: [
-                  "Surface: strip overburden (open pit and strip mining)",
-                  "Subsurface: deep tunnels, more dangerous, smaller surface footprint"
-                ]
-              },
-              {
-                subtitle: "Diamonds",
-                emoji: "D",
-                points: [
-                  "Found in kimberlite pipes",
-                  "Profitable if 1 carat (0.2g) per 1000 tonnes of rock",
-                  "Lac de Gras, NT: cost $1.5B to build, produced $8B"
-                ]
-              },
-              {
-                subtitle: "Reclamation",
-                emoji: "R",
-                points: [
-                  "Plans to restore land must be made before the mine begins"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-27",
-            title: "Lesson 27: Manufacturing Industry",
-            image: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Economic Sectors",
-                emoji: "ES",
-                points: [
-                  "Primary: extracting (miner, farmer)",
-                  "Secondary: making (factory, construction)",
-                  "Tertiary: selling (teacher, sales)",
-                  "Quaternary: knowledge and information"
-                ]
-              },
-              {
-                subtitle: "The 7 Location Factors",
-                emoji: "7",
-                points: [
-                  "Customers: for Just-in-Time (JIT) delivery",
-                  "Raw materials: near source if heavy or perishable",
-                  "Water/power: essential for steel or aluminum",
-                  "Labour: near skilled workers",
-                  "Transportation: near highways, rail, or ports",
-                  "Political: subsidies or strict environmental/labor laws",
-                  "Circumstance (wild card): Tilley Hats started in Toronto because Alex Tilley lived there"
-                ]
-              }
-            ]
-          },{
-            id: "geo-lesson-28",
-            title: "Lesson 28: Canada’s Tertiary Industries",
-            image: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Definition and Sectors",
-                emoji: "D",
-                points: [
-                  "Tertiary industry = service sector (provides services, not goods)",
-                  "Often called the everything else sector",
-                  "Quaternary industry is a subset focused on knowledge (research, IT, AI)"
-                ]
-              },
-              {
-                subtitle: "Economic Impact",
-                emoji: "EI",
-                points: [
-                  "In 2023, nearly 80% of Canadians (16M+) worked in services",
-                  "Real estate, rental, and leasing contribute the most to GDP",
-                  "Computer systems design and AI are fastest-growing areas"
-                ]
-              },
-              {
-                subtitle: "Connection to Other Sectors",
-                emoji: "CS",
-                points: [
-                  "Tertiary sector supports primary and secondary sectors",
-                  "Example: a mining company needs accountants and IT support"
-                ]
-              }
-            ]
-          },          {
-            id: "geo-lesson-29",
-            title: "Lesson 29: Basic vs Non-Basic Jobs and the Multiplier Effect",
-            image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Basic vs Non-Basic Jobs",
-                emoji: "B",
-                points: [
-                  "Basic jobs bring new money into the local economy from outside",
-                  "Example: a paper mill worker exporting paper to New York",
-                  "Non-basic jobs circulate money within the community",
-                  "Example: a local restaurant cook paid by residents"
-                ]
-              },
-              {
-                subtitle: "Multiplier Effect",
-                emoji: "M",
-                points: [
-                  "New money injected by basic jobs creates additional local spending",
-                  "Rule of thumb: 1 basic job can create about 3 non-basic jobs",
-                  "How it works: wages are spent locally, creating more income for others"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-indigenous",
-            title: "Indigenous Peoples of Canada",
-            image: "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Indigenous Peoples Overview",
-                emoji: "\u{1FAB6}",
-                points: [
-                  "Canada's original inhabitants (15,000+ years), fastest-growing population",
-                  "5% of Canada's population, 1.8 million people in 2021",
-                  "Accepted term: Indigenous Peoples (avoid: Indian, Native, Aboriginal)",
-                  '"Aboriginal" means "not original" - incorrect and offensive',
-                  'All Canadians are "treaty people" - living on treated or unceded land'
-                ]
-              },
-              {
-                subtitle: "Three Indigenous Groups",
-                emoji: "\u{1F31F}",
-                points: [
-                  "First Nations: 634 distinct nations (Mohawk, Cree, Ojibwe, Mi'kmaq, Haida)",
-                  "First Nations speak 50+ languages across different nations",
-                  "M\xE9tis: Mixed Indigenous-French heritage from Red River region during fur trade",
-                  'Inuit: Arctic peoples; "Inuit" means "the people" in Inuktitut language',
-                  "Each group has unique cultures, languages, and histories"
-                ],
-                diagram: "indigenous-peoples"
-              },
-              {
-                subtitle: "Colonization & Treaties",
-                emoji: "\u{1F4DC}",
-                points: [
-                  "Colonization: British Crown/Canadian government negotiated control of Indigenous lands",
-                  "Treaty-making occurred from 1700s-1900s across Canada",
-                  "Treaties: Formal land agreements between Crown and Indigenous nations",
-                  "Reserves: Small land parcels set aside for Indigenous people",
-                  "Reserves often remote with poor soil quality",
-                  "Communities split into separate reserves to reduce political power"
-                ]
-              },
-              {
-                subtitle: "Current Issues & Progress",
-                emoji: "\u2696\uFE0F",
-                points: [
-                  "Education gap: 48% high school completion on-reserve vs 75% off-reserve",
-                  "25 self-government agreements as of 2022",
-                  "Indigenous peoples negotiating greater autonomy and rights",
-                  "Truth and Reconciliation Commission addressing historical wrongs",
-                  "Growing recognition of Indigenous land rights and sovereignty"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-settlement",
-            title: "Rural Settlement Patterns",
-            image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Factors Shaping Settlement",
-                emoji: "\u{1F3D8}\uFE0F",
-                points: [
-                  "Three main factors: Resources, Transportation, Government surveys",
-                  "Pre-1800: Settlement followed water routes (rivers, lakes)",
-                  "Post-1800: Roads and railways became primary transportation",
-                  "Resources determined settlement type: agriculture, forestry, or mining",
-                  "Government survey systems organized how agricultural land was divided"
-                ]
-              },
-              {
-                subtitle: "Three Survey Systems",
-                emoji: "\u{1F4D0}",
-                points: [
-                  "Long Lots (Southern Quebec): Narrow strips extending back from river",
-                  "Long lots created linear villages along St. Lawrence River",
-                  "Concession System (Southern Ontario): Grid dividing land into equal lots",
-                  "Concession creates farmhouses at road intersections",
-                  "Section System (Southern Prairies): Square townships of 36 square miles",
-                  "Each township divided into 36 one-mile sections on prairies"
-                ],
-                diagram: "survey-systems"
-              },
-              {
-                subtitle: "Settlement Pattern Types",
-                emoji: "\u{1F5FA}\uFE0F",
-                points: [
-                  "Dispersed Population: People spread evenly across farmland",
-                  "Example: Prairie homesteads kilometers apart from each other",
-                  "Concentrated Population: People clustered near resource sites",
-                  "Example: Mining towns like Sudbury, Ontario",
-                  "Linear Population: Settlements along transportation routes",
-                  "Example: Communities along St. Lawrence River or Trans-Canada Highway",
-                  "Modern linear: Highway service stations (auto-based settlement)"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-distribution",
-            title: "Population Distribution Today",
-            image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Current Population Patterns",
-                emoji: "\u{1F3D9}\uFE0F",
-                points: [
-                  "82% of Canadians live in cities (urban areas)",
-                  "Similar urbanization to USA/China but much smaller total population",
-                  "Canada: 9x smaller population than USA, 40x smaller than China",
-                  "Population distribution affected by environment and human factors",
-                  "Water sources, hills, railways, and resources shape where people live"
-                ]
-              },
-              {
-                subtitle: "Understanding Distribution Maps",
-                emoji: "\u{1F5FE}",
-                points: [
-                  "Isodemographic Map: Size shows population, not land area",
-                  "Example: Southern Ontario appears huge; Northern territories tiny",
-                  "Toronto appears massive while Nunavut shrinks despite being geographically larger",
-                  "These maps reveal where Canadians actually live vs. land size",
-                  "Most useful for understanding population concentration"
-                ],
-                diagram: "population-distribution"
-              },
-              {
-                subtitle: "Ecumene & Settlement Types",
-                emoji: "\u{1F3D8}\uFE0F",
-                points: [
-                  "Ecumene: Permanently inhabited land in Canada",
-                  "Continuous ecumene: Unbroken settlement (Windsor to Quebec City corridor)",
-                  "Most Canadians live in the continuous ecumene along US border",
-                  "Discontinuous ecumene: Scattered settlement patches",
-                  "Examples: Yellowknife, Iqaluit, northern resource towns",
-                  "Census Metropolitan Areas (CMAs): Urban areas with 100,000+ people",
-                  "CMAs extend beyond city limits (e.g., Greater Toronto Area)"
-                ]
-              },
-              {
-                subtitle: "Urbanization & Migration",
-                emoji: "\u{1F69C}\u27A1\uFE0F\u{1F3E2}",
-                points: [
-                  "150-year shift from rural to urban living (now 82% urban)",
-                  "Push factors: Farm/forestry/mining mechanization = fewer rural jobs",
-                  "Push factors: Unemployment, natural disasters, lack of services in rural areas",
-                  "Pull factors: Urban job opportunities, wealth creation",
-                  "Pull factors: Better schools, safety, services in cities",
-                  "Immigrant preference: Most new Canadians settle in major cities"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-density",
-            title: "Population Density",
-            image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Understanding Population Density",
-                emoji: "\u{1F4CA}",
-                points: [
-                  "Population Density: Number of people per square kilometer",
-                  "Measures how crowded places are, not where they are located",
-                  "Formula: Population \xF7 Area (in km\xB2)",
-                  "Canada average: 4.2 people/km\xB2 (2021: 37M people \xF7 8.8M km\xB2)",
-                  "Low average is misleading - doesn't show actual crowding"
-                ],
-                diagram: "population-density"
-              },
-              {
-                subtitle: "Density Examples Across Canada",
-                emoji: "\u{1F522}",
-                points: [
-                  "Toronto: ~4,300 people/km\xB2 (very dense urban center)",
-                  "Nunavut: 0.02 people/km\xB2 (nearly empty territory)",
-                  "Most Canadians live in dense urban areas despite low national average",
-                  "82% live in cities with high density",
-                  "Vast northern regions are nearly empty, lowering the average",
-                  "Southern Ontario corridor: Extremely high density",
-                  "Prairie cities: Medium density with surrounding low-density farmland"
-                ]
-              },
-              {
-                subtitle: "Community & Density",
-                emoji: "\u{1F3D8}\uFE0F",
-                points: [
-                  "Community: Group sharing geographic space or cultural ties",
-                  "Urban communities: High density, diverse populations",
-                  "Rural communities: Low density, often agriculture-based",
-                  "Density affects services: Schools, hospitals, transit need population",
-                  "High density = more services; Low density = fewer services",
-                  "Farming communities have cultural ties despite physical distance"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-demographics",
-            title: "Demographic Rates of Change",
-            image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Population Growth Components",
-                emoji: "\u{1F4CA}",
-                points: [
-                  "Natural Increase: Births minus deaths in a population",
-                  "Net Migration: Immigration minus emigration",
-                  "Total Growth: Natural increase + Net migration",
-                  "Canada 2021 example: 1,010 births/day, 886 deaths/day = 125 natural increase",
-                  "Canada 2021 migration: 1,351 immigrants/day, 136 emigrants/day = 1,214 net migration",
-                  "Total daily increase in 2021: 125 + 1,214 = 1,339 people/day"
-                ]
-              },
-              {
-                subtitle: "Demographic Rate Formulas",
-                emoji: "\u{1F522}",
-                points: [
-                  "Birth Rate = (Births per year \xF7 Population) \xD7 1,000",
-                  "Death Rate = (Deaths per year \xF7 Population) \xD7 1,000",
-                  "Natural Increase Rate = Birth Rate - Death Rate (per 1,000)",
-                  "Net Migration Rate = Immigration Rate - Emigration Rate (per 1,000)",
-                  "Population Growth Rate = Natural Increase Rate + Net Migration Rate",
-                  "All rates expressed per 1,000 people for easy comparison"
-                ]
-              },
-              {
-                subtitle: "Country Comparison (2021 Data)",
-                emoji: "\u{1F30D}",
-                points: [
-                  "Canada: Birth rate 9.60, Death rate 8.41, Natural increase 1.19",
-                  "Canada: Net migration 11.53, Total growth rate 12.72 per 1,000",
-                  "Japan: Birth rate 6.76, Death rate 11.64, Natural increase -4.89 (declining)",
-                  "Japan: Net migration 0.53, Total growth rate -4.36 (shrinking population)",
-                  "Togo: Birth rate 32.04, Death rate 8.08, Natural increase 23.96",
-                  "Togo: Net migration -0.24, Total growth rate 23.72 per 1,000"
-                ]
-              },
-              {
-                subtitle: "Doubling Time & Rule of 70",
-                emoji: "\u23F1\uFE0F",
-                points: [
-                  "Doubling Time \u2248 70 \xF7 Population Growth Rate (%)",
-                  "Convert per 1,000 to %: (rate per 1,000 \xF7 1,000) \xD7 100",
-                  "Canada (1.272%): Doubling time = 70 \xF7 1.272 \u2248 55 years",
-                  "Togo (2.372%): Doubling time = 70 \xF7 2.372 \u2248 29.5 years",
-                  "Japan (-0.436%): Negative rate = decreasing population",
-                  "Exponential growth: 1, 2, 4, 8, 16... (doubles each time)",
-                  "Canada grew from 3 million (1867) to 40 million (2023)"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-pyramids",
-            title: "Population Pyramids & Dependency",
-            image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "Reading Population Pyramids",
-                emoji: "\u{1F4CA}",
-                points: [
-                  "Population pyramids show age and sex distribution",
-                  "Males on LEFT side, Females on RIGHT side",
-                  "Each bar = percentage of population in 5-year age group",
-                  "Wide base = young population, Narrow base = aging population",
-                  "Shape reveals country's demographic stage and future trends",
-                  "Canada's pyramid has changed dramatically over the last century"
-                ]
-              },
-              {
-                subtitle: "Indigenous vs Non-Indigenous Canada (2021)",
-                emoji: "\u{1FAB6}",
-                points: [
-                  "Indigenous populations have higher proportion of children",
-                  "Children form larger share of Indigenous population than non-Indigenous",
-                  "Indigenous pyramids show younger age structure overall",
-                  "Wider base indicates higher birth rates and younger population",
-                  "Future growth pressure as large youth cohorts enter working age",
-                  "M\xE9tis, Inuit, and First Nations each have distinct pyramid shapes"
-                ]
-              },
-              {
-                subtitle: "Age Groups & Dependency",
-                emoji: "\u{1F465}",
-                points: [
-                  "Three standard age categories used by demographers:",
-                  "Children: 0-14 years (need education, healthcare, housing)",
-                  "Working Adults: 15-64 years (support economy and dependents)",
-                  "Older Adults: 65+ years (need pensions, healthcare, seniors' homes)",
-                  "Dependency Ratio = (Children + Older Adults) \xF7 Working Adults \xD7 100",
-                  "High dependency ratio = pressure on working population",
-                  "Society must provide for both young and old dependents"
-                ]
-              },
-              {
-                subtitle: "Dependency Ratio Examples (2021)",
-                emoji: "\u2696\uFE0F",
-                points: [
-                  "Togo: 71% children, 5.5% older adults \u2192 76.5% dependency ratio",
-                  "High youth dependency - needs schools, future job creation",
-                  "Japan: 20.1% children, 51% older adults \u2192 71.1% dependency ratio",
-                  "High elderly dependency - needs healthcare, pensions, care facilities",
-                  "Canada: 23.9% children, 28.2% older adults \u2192 52.1% dependency ratio",
-                  "Balanced dependency - moderate pressure on working population",
-                  "Low dependency ratio = stronger economy and more resources per capita"
-                ]
-              }
-            ]
-          },
-          {
-            id: "geo-dtm",
-            title: "Demographic Transition Model",
-            image: "https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&h=400&fit=crop",
-            notes: [
-              {
-                subtitle: "What is the DTM?",
-                emoji: "\u{1F4C8}",
-                points: [
-                  "Demographic Transition Model (DTM): describes change from high to low birth/death rates",
-                  "Based on historical trends: agriculture \u2192 industry \u2192 services",
-                  "Factors driving transition: disease prevention, urbanization, women's roles",
-                  "Model simplified version of complex real-world changes",
-                  "Each country unique but generally follows this pattern",
-                  "Tied to economic development and societal changes"
-                ]
-              },
-              {
-                subtitle: "Stage 1: Pre-Transition",
-                emoji: "\u{1F3D5}\uFE0F",
-                points: [
-                  "VERY HIGH birth rates (6-10 children per woman)",
-                  "VERY HIGH death rates (many children die young)",
-                  "Population stable or grows very slowly",
-                  "Hunting/gathering \u2192 subsistence farming societies",
-                  "Life harsh: disease, poor nutrition, contaminated water, wars",
-                  "Canada: up to early 19th century",
-                  "NO COUNTRIES currently in Stage 1"
-                ],
-                diagram: "pyramids"
-              },
-              {
-                subtitle: "Stage 2: Early Transition",
-                emoji: "\u{1F4A5}",
-                points: [
-                  "Birth rate REMAINS HIGH (still many children)",
-                  "Death rate DROPS SHARPLY (more children survive)",
-                  "Population EXPLOSION - rapid growth",
-                  "Better sanitation reduces disease",
-                  "Improved food storage increases food security",
-                  "People move from farms to cities",
-                  "Examples today: Afghanistan, Bolivia, Niger, Uganda, Yemen"
-                ]
-              },
-              {
-                subtitle: "Stage 3: Late Transition",
-                emoji: "\u{1F3D9}\uFE0F",
-                points: [
-                  "Birth rate DROPS QUICKLY (large families expensive in cities)",
-                  "Death rate DROPS below 10 per 1,000",
-                  "Natural increase rate FALLS",
-                  "Agricultural mechanization needs fewer workers",
-                  "Increased urbanization",
-                  "Changing role of women (education, careers)",
-                  "Changing attitudes toward family size",
-                  "Examples today: Costa Rica, Mexico, Colombia, India, Indonesia"
-                ]
-              },
-              {
-                subtitle: "Stage 4: Post-Transition",
-                emoji: "\u{1F3E2}",
-                points: [
-                  "Birth and death rates BOTH LOW (about 10 per 1,000)",
-                  "Population growth rate SLOWS",
-                  "Urbanization levels off around 80%",
-                  "Many women work full-time careers outside home",
-                  "Fewer children overall, more older adults",
-                  "Canada entered Stage 4 after 1960s",
-                  "Examples today: Canada, USA, Australia, most of Europe, Brazil, China"
-                ]
-              },
-              {
-                subtitle: "Stage 5: Declining Populations?",
-                emoji: "\u{1F4C9}",
-                points: [
-                  "Some demographers argue Stage 5 now exists",
-                  "Birth rate FALLS BELOW death rate",
-                  "Natural increase becomes NEGATIVE (population decline)",
-                  "Requires immigration to maintain population",
-                  "Aging population creates economic challenges",
-                  "Governments may offer incentives to raise birth rates",
-                  "Examples: Germany, Russia, Italy, Japan",
-                  "Question: Is this sustainable long-term?"
-                ],
-                diagram: "dtm"
-              }
-            ]
-          }
-        ]
-      };
-      if (selectedSection) {
-        const subject2 = geographyLibrary;
-        const section = selectedSection;
-        const isRead = readSections.has(section.id);
-        return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-5xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => setSelectedSection(null),
-            className: "mb-6 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-          },
-          /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-          "Back to Geography"
-        ), /* @__PURE__ */ import_react.default.createElement("div", { className: `relative rounded-xl overflow-hidden mb-6 bg-gradient-to-br ${subject2.gradient} border-2 border-gray-200` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 p-6 flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-3xl font-bold text-white mb-1" }, section.title), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-sm" }, section.notes.length, " topics to review")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-16 h-16 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(subject2.icon, { className: "w-8 h-8 text-white" })))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-6 flex justify-end" }, /* @__PURE__ */ import_react.default.createElement(
-          "button",
-          {
-            onClick: () => toggleRead(section.id),
-            className: `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${isRead ? "bg-green-100 text-green-700 hover:bg-green-200" : "bg-white text-gray-600 hover:bg-gray-100 border-2 border-gray-200"}`
-          },
-          isRead ? /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-5 h-5" }) : /* @__PURE__ */ import_react.default.createElement(Circle, { className: "w-5 h-5" }),
-          isRead ? "Completed" : "Mark as Complete"
-        )), /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-4" }, section.notes.map((note, idx) => {
-          const noteKey = `${section.id}-${idx}`;
-          const isExpanded = expandedGeographyNotes.has(noteKey);
-          const isDefinitionSection = section.id === "geo-definitions";
-          return /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: `bg-white rounded-xl shadow-md overflow-hidden border-2 transition-all ${isExpanded ? "border-green-300 shadow-lg" : "border-gray-200 hover:border-gray-300"}` }, /* @__PURE__ */ import_react.default.createElement(
-            "div",
-            {
-              className: `bg-gradient-to-r ${subject2.gradient} p-4 cursor-pointer hover:opacity-95 transition-all`,
-              onClick: () => toggleGeographyNote(section.id, idx)
-            },
-            /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 flex-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-lg bg-white/30 backdrop-blur-sm flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-2xl" }, note.emoji)), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-lg font-bold text-white" }, note.subtitle), !isExpanded && /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/80 text-xs mt-0.5" }, note.points.length, " ", isDefinitionSection ? "terms" : "points", note.diagram && " \u2022 Includes diagram"))), /* @__PURE__ */ import_react.default.createElement("div", { className: `w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center transition-transform ${isExpanded ? "rotate-90" : ""}` }, /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: "w-5 h-5 text-white" })))
-          ), isExpanded && /* @__PURE__ */ import_react.default.createElement("div", { className: "p-5" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "space-y-2.5" }, note.points.map((point, pointIdx) => /* @__PURE__ */ import_react.default.createElement("div", { key: pointIdx, className: "flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-r ${subject2.gradient} flex-shrink-0` }), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-700 leading-relaxed group-hover:text-gray-900" }, point)))), note.diagram && /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-6 p-4 bg-gradient-to-br from-slate-50 to-gray-100 rounded-xl border-2 border-gray-200" }, note.diagram === "continental-drift" && /* @__PURE__ */ import_react.default.createElement(ContinentalDriftDiagram, null), note.diagram === "plate-tectonics" && /* @__PURE__ */ import_react.default.createElement(PlateTectonicsDiagram, null), note.diagram === "rock-cycle" && /* @__PURE__ */ import_react.default.createElement(RockCycleDiagram, null), note.diagram === "canadian-landforms" && /* @__PURE__ */ import_react.default.createElement(CanadianLandformsDiagram, null), note.diagram === "climate-factors" && /* @__PURE__ */ import_react.default.createElement(ClimateFactorsDiagram, null), note.diagram === "survey-systems" && /* @__PURE__ */ import_react.default.createElement(SurveySystemsDiagram, null), note.diagram === "population-distribution" && /* @__PURE__ */ import_react.default.createElement(PopulationDistributionDiagram, null), note.diagram === "population-density" && /* @__PURE__ */ import_react.default.createElement(PopulationDensityDiagram, null), note.diagram === "indigenous-peoples" && /* @__PURE__ */ import_react.default.createElement(IndigenousPeoplesDiagram, null), note.diagram === "dtm" && /* @__PURE__ */ import_react.default.createElement(DemographicTransitionModel, null), note.diagram === "pyramids" && /* @__PURE__ */ import_react.default.createElement(PopulationPyramids, null))));
-        })), /* @__PURE__ */ import_react.default.createElement("div", { className: `mt-8 bg-gradient-to-r ${subject2.gradient} rounded-2xl p-6 text-white` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: "w-6 h-6" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-bold" }, "Study Tip")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90" }, "Focus on understanding the connections between plate tectonics, landforms, climate factors, and how they shape Canada's geography and resources!"))));
-      }
-      const subject = geographyLibrary;
-      const unit1Ids = ["geo-definitions","geo-physical-geography","geo-landforms","geo-climate-factors"];
-const unit3Ids = ["geo-lesson-20","geo-lesson-21","geo-lesson-22","geo-lesson-23","geo-lesson-24","geo-lesson-25","geo-lesson-26","geo-lesson-27","geo-lesson-28","geo-lesson-29"];
-const unit1Sections = subject.sections.filter((s) => unit1Ids.includes(s.id));
-const unit3Sections = subject.sections.filter((s) => unit3Ids.includes(s.id));
-const unit2Sections = subject.sections.filter((s) => !unit1Ids.includes(s.id) && !unit3Ids.includes(s.id));
-      const unit1CompletedCount = unit1Sections.filter((s) => readSections.has(s.id)).length;
-      const unit1Progress = unit1Sections.length > 0 ? unit1CompletedCount / unit1Sections.length * 100 : 0;
-      const unit2CompletedCount = unit2Sections.filter((s) => readSections.has(s.id)).length;
-      const unit2Progress = unit2Sections.length > 0 ? unit2CompletedCount / unit2Sections.length * 100 : 0;
-      const unit3CompletedCount = unit3Sections.filter((s) => readSections.has(s.id)).length;
-      const unit3Progress = unit3Sections.length > 0 ? unit3CompletedCount / unit3Sections.length * 100 : 0;
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-5xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setShowGeography(false);
-            setShowGeography(false); setShowIntro(true); setShowSubjectPicker(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          },
-          className: "mb-6 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-        },
-        /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-        "Back to Subject Selection"
-      ), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative rounded-2xl overflow-hidden mb-8 bg-gradient-to-br from-green-500 to-teal-600 border-2 border-green-300" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-6 -right-6 w-32 h-32 bg-white/10 rounded-full blur-2xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-4 -left-4 w-24 h-24 bg-white/10 rounded-full blur-2xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 p-8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-20 h-20 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center shadow-xl" }, /* @__PURE__ */ import_react.default.createElement(Globe, { className: "w-10 h-10 text-white" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-4xl font-bold text-white mb-2" }, "Geography Study Library"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-lg" }, "Grade 9 Canadian Geography")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid grid-cols-2 gap-4 mt-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/80 text-sm mb-1" }, "Unit 1: Physical Geography"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-white" }, unit1CompletedCount, "/", unit1Sections.length), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/70 text-xs" }, "sections completed")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/80 text-sm mb-1" }, "Unit 2: Human Geography"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-white" }, unit2CompletedCount, "/", unit2Sections.length), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/70 text-xs" }, "sections completed")), unit3Sections.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 col-span-2" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/80 text-sm mb-1" }, "Unit 3: Resources & Economy (Lessons 20-29)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-white" }, unit3CompletedCount, "/", unit3Sections.length), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/70 text-xs" }, "sections completed"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-2xl font-bold text-gray-800 flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center text-white font-bold text-sm" }, "1"), "Unit 1: Physical Geography of Canada"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600 text-sm mt-1" }, unit1Sections.length, " sections \u2022 ", unit1CompletedCount, " completed"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-2 text-sm" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-600" }, "Progress"), /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-gray-800" }, Math.round(unit1Progress), "%")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-3 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: "bg-gradient-to-r from-green-500 to-teal-600 h-full transition-all duration-500 rounded-full",
-          style: { width: `${unit1Progress}%` }
-        }
-      ))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-4" }, unit1Sections.map((section) => {
-        const isRead = readSections.has(section.id);
-        return /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            key: section.id,
-            onClick: () => setSelectedSection(section),
-            className: "bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-lg transition-all border-2 border-gray-100 hover:border-gray-300"
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-24 bg-gradient-to-br from-green-500 to-teal-600 p-4 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-2 -left-2 w-12 h-12 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 flex items-start justify-between h-full" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-sm font-bold text-white pr-2 line-clamp-2 leading-tight" }, section.title), isRead && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-4 h-4 text-white" })))),
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1 px-2 py-1 bg-green-50 rounded-md" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-3 h-3 text-green-600" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs font-medium text-green-700" }, section.notes.length, " topics"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between text-xs text-gray-500" }, /* @__PURE__ */ import_react.default.createElement("span", null, isRead ? "Completed" : "Not started"), /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: "w-4 h-4 text-gray-400 group-hover:text-green-600 transition-colors" })))
-        );
-      }))), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-2xl font-bold text-gray-800 flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm" }, "2"), "Unit 2: Human Geography & Population"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600 text-sm mt-1" }, unit2Sections.length, " sections \u2022 ", unit2CompletedCount, " completed"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-2 text-sm" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-600" }, "Progress"), /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-gray-800" }, Math.round(unit2Progress), "%")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-3 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: "bg-gradient-to-r from-blue-500 to-indigo-600 h-full transition-all duration-500 rounded-full",
-          style: { width: `${unit2Progress}%` }
-        }
-      ))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-4" }, unit2Sections.map((section) => {
-        const isRead = readSections.has(section.id);
-        return /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            key: section.id,
-            onClick: () => setSelectedSection(section),
-            className: "bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-lg transition-all border-2 border-gray-100 hover:border-gray-300"
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-24 bg-gradient-to-br from-blue-500 to-indigo-600 p-4 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-2 -left-2 w-12 h-12 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 flex items-start justify-between h-full" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-sm font-bold text-white pr-2 line-clamp-2 leading-tight" }, section.title), isRead && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-4 h-4 text-white" })))),
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1 px-2 py-1 bg-blue-50 rounded-md" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-3 h-3 text-blue-600" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs font-medium text-blue-700" }, section.notes.length, " topics"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between text-xs text-gray-500" }, /* @__PURE__ */ import_react.default.createElement("span", null, isRead ? "Completed" : "Not started"), /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: "w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" })))
-        );
-      }))), unit3Sections.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-2xl font-bold text-gray-800 flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-sm" }, "3"), "Unit 3: Resources & Economy (Lessons 20-29)"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600 text-sm mt-1" }, unit3Sections.length, " sections \u2022 ", unit3CompletedCount, " completed"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between mb-2 text-sm" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-gray-600" }, "Progress"), /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-gray-800" }, Math.round(unit3Progress), "%")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-3 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: "bg-gradient-to-r from-amber-500 to-orange-600 h-full transition-all duration-500 rounded-full",
-          style: { width: `${unit3Progress}%` }
-        }
-      ))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-4" }, unit3Sections.map((section) => {
-        const isRead = readSections.has(section.id);
-        return /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            key: section.id,
-            onClick: () => setSelectedSection(section),
-            className: "bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-lg transition-all border-2 border-gray-100 hover:border-gray-300"
-          },
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "relative h-24 bg-gradient-to-br from-amber-500 to-orange-600 p-4 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-2 -left-2 w-12 h-12 bg-white/10 rounded-full blur-lg" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 flex items-start justify-between h-full" }, /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-sm font-bold text-white pr-2 line-clamp-2 leading-tight" }, section.title), isRead && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-4 h-4 text-white" })))),
-          /* @__PURE__ */ import_react.default.createElement("div", { className: "p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-1 px-2 py-1 bg-purple-50 rounded-md" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-3 h-3 text-purple-600" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs font-medium text-purple-700" }, section.notes.length, " topics"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between text-xs text-gray-500" }, /* @__PURE__ */ import_react.default.createElement("span", null, isRead ? "Completed" : "Not started"), /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: "w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" })))
-        );
-      })))));
-    }
-    const subjects = Object.values(studyLibrary);
-    const filteredSubjects = subjects.filter((subject) => {
-      if (!searchTerm) return true;
-      const searchLower = searchTerm.toLowerCase();
-      if (subject.name.toLowerCase().includes(searchLower)) return true;
-      const hasMatchingSection = subject.sections.some(
-        (section) => section.title.toLowerCase().includes(searchLower)
+        /* @__PURE__ */ React.createElement("span", { style: { width: 26, height: 26, borderRadius: 8, background: `${border}40`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 600, color, flexShrink: 0 } }, ["A", "B", "C", "D"][i]),
+        /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-body)", fontSize: 14, color } }, opt),
+        revealed && i === q.correct && /* @__PURE__ */ React.createElement("span", { style: { marginLeft: "auto" } }, "\u2713"),
+        revealed && selected === i && i !== q.correct && /* @__PURE__ */ React.createElement("span", { style: { marginLeft: "auto" } }, "\u2717")
       );
-      if (hasMatchingSection) return true;
-      const hasMatchingContent = subject.sections.some(
-        (section) => section.notes.some(
-          (note) => note.subtitle.toLowerCase().includes(searchLower) || note.points.some((point) => point.toLowerCase().includes(searchLower))
-        )
-      );
-      if (hasMatchingContent) return true;
-      return false;
+    }))), revealed && /* @__PURE__ */ React.createElement("div", { style: { background: selected === q.correct ? "rgba(16,185,129,0.06)" : "rgba(99,102,241,0.06)", border: `1.5px solid ${selected === q.correct ? "rgba(16,185,129,0.25)" : "rgba(99,102,241,0.25)"}`, borderRadius: 16, padding: 16, marginBottom: 16 } }, /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 13, color: selected === q.correct ? "#059669" : "#4f46e5", marginBottom: 6 } }, selected === q.correct ? "\u2713 Correct!" : "Here's why:"), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 13, color: "var(--muted)", lineHeight: 1.6, margin: 0 } }, q.explanation)), !revealed ? /* @__PURE__ */ React.createElement("button", { onClick: check, disabled: selected === null, style: { width: "100%", padding: 14, borderRadius: 14, background: selected !== null ? "linear-gradient(135deg,#6366f1,#8b5cf6)" : "rgba(99,102,241,0.1)", border: "none", color: selected !== null ? "#fff" : "rgba(99,102,241,0.4)", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 14, cursor: selected !== null ? "pointer" : "not-allowed", transition: "all 0.2s" } }, "Check Answer") : /* @__PURE__ */ React.createElement("button", { onClick: next, style: { width: "100%", padding: 14, borderRadius: 14, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", border: "none", color: "#fff", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 14, cursor: "pointer" } }, qIdx < questions.length - 1 ? "Next Question \u2192" : "Finish Quiz \u2713"));
+  }
+  function WorksheetView({ data }) {
+    const [revealed, setRevealed] = (0, import_react.useState)(/* @__PURE__ */ new Set());
+    const problems = (data == null ? void 0 : data.problems) || [];
+    if (!problems.length) return null;
+    const toggle = (i) => setRevealed((s) => {
+      const n = new Set(s);
+      n.has(i) ? n.delete(i) : n.add(i);
+      return n;
     });
-    const handleBackToSubjectSelection = () => {
-      setSelectedSubject(null);
-      setSelectedSection(null);
-      setShowGeography(false); setShowIntro(true); setShowSubjectPicker(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 16 } }, problems.map((p, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { background: "#fff", borderRadius: 20, border: "1px solid rgba(0,0,0,0.07)", overflow: "hidden", boxShadow: "0 2px 12px rgba(15,23,42,0.06)" } }, /* @__PURE__ */ React.createElement("div", { style: { padding: "16px 20px", borderBottom: "1px solid rgba(0,0,0,0.06)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 12, alignItems: "flex-start" } }, /* @__PURE__ */ React.createElement("div", { style: { width: 28, height: 28, borderRadius: 9, background: "linear-gradient(135deg,#0ea5e9,#6366f1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-mono)", color: "#fff", fontWeight: 600, fontSize: 12 } }, i + 1)), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 500, color: "#0f172a", lineHeight: 1.6, margin: 0 } }, p.question)), p.hint && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10, marginLeft: 40, padding: "8px 12px", borderRadius: 10, background: "rgba(245,158,11,0.07)", border: "1px solid rgba(245,158,11,0.2)" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-body)", fontSize: 12, color: "#92400e" } }, "\u{1F4A1} Hint: ", p.hint))), /* @__PURE__ */ React.createElement("div", { style: { padding: "12px 20px" } }, /* @__PURE__ */ React.createElement("button", { onClick: () => toggle(i), style: { display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 700, color: "#0d9488" } }, revealed.has(i) ? "\u25BE Hide Solution" : "\u25B8 Show Solution"), revealed.has(i) && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12, padding: "14px 16px", borderRadius: 12, background: "rgba(16,185,129,0.05)", borderLeft: "3px solid rgba(16,185,129,0.4)" } }, /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-mono)", fontSize: 13, color: "#064e3b", lineHeight: 1.8, margin: 0, whiteSpace: "pre-line" } }, p.solution))))));
+  }
+  function APMathStudy() {
+    const [subject, setSubject] = (0, import_react.useState)(null);
+    const [topic, setTopic] = (0, import_react.useState)(null);
+    const [mode, setMode] = (0, import_react.useState)("notes");
+    const [loading, setLoading] = (0, import_react.useState)(false);
+    const [content, setContent] = (0, import_react.useState)(null);
+    const [error, setError] = (0, import_react.useState)(null);
+    const [completed, setCompleted] = (0, import_react.useState)(/* @__PURE__ */ new Set());
+    const [intro, setIntro] = (0, import_react.useState)(true);
+    (0, import_react.useEffect)(() => {
+      const styleId = "ap-math-styles";
+      if (!document.getElementById(styleId)) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = FONT_LINK;
+        document.head.appendChild(link);
+        const style = document.createElement("style");
+        style.id = styleId;
+        style.textContent = `
+        :root {
+          --bg: #f6f7fb; --font-display: 'Syne', sans-serif;
+          --font-body: 'DM Sans', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+          --muted: rgba(15,23,42,0.52); --dim: rgba(15,23,42,0.35);
+        }
+        body { background: var(--bg); margin: 0; }
+        * { box-sizing: border-box; }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+        .fade-up { animation: fadeUp 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .animate-spin { animation: spin 0.8s linear infinite; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); border-radius: 99px; }
+      `;
+        document.head.appendChild(style);
+      }
+    }, []);
+    const load = (0, import_react.useCallback)(async (subjectObj, topicName, modeName) => {
+      setLoading(true);
+      setContent(null);
+      setError(null);
+      try {
+        const data = await fetchContent(subjectObj.name, topicName, modeName);
+        setContent(data);
+        if (modeName === "notes") setCompleted((s) => /* @__PURE__ */ new Set([...s, `${subjectObj.id}::${topicName}`]));
+      } catch (e) {
+        setError("Failed to load content. Please try again.");
+      }
+      setLoading(false);
+    }, []);
+    const selectTopic = (subjectObj, topicName) => {
+      setSubject(subjectObj);
+      setTopic(topicName);
+      setMode("notes");
+      setContent(null);
+      load(subjectObj, topicName, "notes");
     };
-    const FeatureHighlights = () => /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 relative" }, /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => setShowFeatureHighlights(false),
-        className: "absolute top-4 right-4 w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-colors shadow-sm border border-gray-200",
-        title: "Close guide"
-      },
-      /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4 text-gray-600" })
-    ), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-5 h-5 text-white" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-xl font-bold text-gray-800" }, "Quick Start Guide"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600" }, "Learn about the powerful features available"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-3 gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-100 hover:border-blue-300 transition-all hover:shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-0.5" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-blue-500 rounded-sm" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 bg-blue-500 rounded-sm" })), /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-gray-800" }, "Split Screen Mode")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 mb-2" }, "View quizzes and notes side by side for efficient studying"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs text-blue-600 font-semibold" }, '\u2192 Click "Open Split View" on any quiz or notes section')), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-green-100 hover:border-green-300 transition-all hover:shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement(CheckCircle, { className: "w-5 h-5 text-green-500" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-gray-800" }, "Mark as Complete")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 mb-2" }, "Track which sections you've read with checkmarks"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs text-green-600 font-semibold" }, "\u2192 Click the circle button at the top of any section")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-yellow-100 hover:border-yellow-300 transition-all hover:shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement(Trophy, { className: "w-5 h-5 text-yellow-500" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-gray-800" }, "Unlock Achievements")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 mb-2" }, "Earn badges as you complete sections and quizzes"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs text-yellow-600 font-semibold" }, "\u2192 Study to unlock all 10 achievements!")), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-100 hover:border-purple-300 transition-all hover:shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement(Search, { className: "w-5 h-5 text-purple-500" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-gray-800" }, "Smart Search")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 mb-2" }, "Find topics instantly across all subjects"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs text-purple-600 font-semibold" }, '\u2192 Type keywords like "density" or "biodiversity"')), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-cyan-100 hover:border-cyan-300 transition-all hover:shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement(Brain, { className: "w-5 h-5 text-cyan-500" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-gray-800" }, "Interactive Flashcards")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 mb-2" }, "70+ cards with flip animation for memorization"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs text-cyan-600 font-semibold" }, '\u2192 Click to flip, mark as "Known" or "Learning"')), /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-white rounded-xl p-4 border-2 border-teal-100 hover:border-teal-300 transition-all hover:shadow-md" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react.default.createElement(ClipboardList, { className: "w-5 h-5 text-teal-500" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-gray-800" }, "Reveal Answers")), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 mb-2" }, "Try problems first, then reveal step-by-step solutions"), /* @__PURE__ */ import_react.default.createElement("div", { className: "text-xs text-teal-600 font-semibold" }, '\u2192 Click "Reveal Answer" to see detailed solutions'))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl p-4 text-white" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement(Lightbulb, { className: "w-5 h-5 flex-shrink-0 mt-0.5" }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "font-semibold mb-1" }, "Pro Study Tip"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-white/90" }, "Use split screen to take a quiz while referencing your notes. Mark sections complete as you master them. Aim to unlock all achievements for comprehensive coverage!")))));
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-50 to-slate-100" }, /* @__PURE__ */ import_react.default.createElement(AchievementPopup, { achievement: newAchievement }), /* @__PURE__ */ import_react.default.createElement(AchievementsModal, null), showAIAssistant && /* @__PURE__ */ import_react.default.createElement("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-5 h-5" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h3", { className: "font-bold text-lg" }, "L.Y.N.E"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/90 font-semibold" }, "Logical Yield Neural Engine"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-white/70" }, "Your AI Study Companion"))), /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => setShowAIAssistant(false),
-        className: "w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
-      },
-      /* @__PURE__ */ import_react.default.createElement(X, { className: "w-4 h-4" })
-    )), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 overflow-y-auto p-4 space-y-3" }, aiMessages.map((msg, idx) => /* @__PURE__ */ import_react.default.createElement("div", { key: idx, className: `flex ${msg.role === "user" ? "justify-end" : "justify-start"}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: `max-w-[80%] rounded-2xl p-3 ${msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"}` }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm leading-relaxed whitespace-pre-wrap" }, msg.content)))), isAiThinking && /* @__PURE__ */ import_react.default.createElement("div", { className: "flex justify-start" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-100 rounded-2xl p-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-1" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: { animationDelay: "0.2s" } }))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p-4 border-t border-gray-200" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ import_react.default.createElement(
-      "input",
-      {
-        type: "text",
-        value: aiInput,
-        onChange: (e) => setAiInput(e.target.value),
-        onKeyDown: (e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            handleAISubmit(e);
-          }
-        },
-        placeholder: "Ask a question...",
-        className: "flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm",
-        disabled: isAiThinking
-      }
-    ), /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: handleAISubmit,
-        disabled: !aiInput.trim() || isAiThinking,
-        className: "px-4 py-2 bg-blue-500 text-white rounded-xl font-semibold disabled:opacity-50 hover:bg-blue-600 transition-colors flex items-center gap-2"
-      },
-      isAiThinking ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" })) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, "Send")
-    )))), !showAIAssistant && /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => setShowAIAssistant(true),
-        className: "fixed bottom-6 right-6 group z-50"
-      },
-      /* @__PURE__ */ import_react.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform" }, /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-6 h-6" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl" }, "Chat with L.Y.N.E", /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" }))))
-    ), /* @__PURE__ */ import_react.default.createElement("div", { className: "max-w-6xl mx-auto p-4 md:p-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-8" }, /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: handleBackToSubjectSelection,
-        className: "mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors px-4 py-2 bg-white rounded-xl shadow-sm hover:shadow-md"
-      },
-      /* @__PURE__ */ import_react.default.createElement(ArrowLeft, { className: "w-5 h-5" }),
-      /* @__PURE__ */ import_react.default.createElement("span", { className: "font-medium" }, "Back to Subject Selection")
-    ), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 md:p-10 text-white shadow-2xl overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-0 right-0 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse", style: { animationDelay: "1s" } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse", style: { animationDelay: "2s" } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-4" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl animate-pulse" }, /* @__PURE__ */ import_react.default.createElement(BookOpen, { className: "w-10 h-10" })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent" }, "Science Study Library"), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-3 flex-wrap" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-300 text-sm font-semibold backdrop-blur" }, "Grade 9"), /* @__PURE__ */ import_react.default.createElement("span", { className: "px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold backdrop-blur" }, "Appleby College")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl font-bold flex items-center gap-2 shadow-lg" }, /* @__PURE__ */ import_react.default.createElement(Trophy, { className: "w-5 h-5" }), /* @__PURE__ */ import_react.default.createElement("span", null, "Achievements"), /* @__PURE__ */ import_react.default.createElement("span", { className: "px-2 py-1 bg-white/20 rounded-full text-xs" }, unlockedAchievements.size, "/", achievements.length))), /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "inline-block bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-2xl p-1 shadow-2xl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "bg-slate-900/80 backdrop-blur rounded-xl px-6 py-3" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white font-black text-xl md:text-2xl tracking-wide text-center" }, "\u{1F50C} Plug In. \u{1F4DA} Study Smart. \u{1F680} Succeed Fast.")))), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-slate-300 text-lg max-w-3xl" }, "Your complete science companion with ", /* @__PURE__ */ import_react.default.createElement("span", { className: "text-emerald-400 font-bold" }, "70+ flashcards"), ",", /* @__PURE__ */ import_react.default.createElement("span", { className: "text-blue-400 font-bold" }, " 80+ quiz questions"), ", and", /* @__PURE__ */ import_react.default.createElement("span", { className: "text-purple-400 font-bold" }, " interactive diagrams")), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-6 mt-6" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 rounded-full bg-green-400 animate-pulse" }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-white" }, readSections.size), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-slate-400" }, "Sections Completed"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-px h-12 bg-slate-700" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 rounded-full bg-yellow-400 animate-pulse", style: { animationDelay: "0.5s" } }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-white" }, unlockedAchievements.size), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-slate-400" }, "Achievements Unlocked"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-px h-12 bg-slate-700" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "w-3 h-3 rounded-full bg-blue-400 animate-pulse", style: { animationDelay: "1s" } }), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-3xl font-bold text-white" }, stats.quizCorrect), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-xs text-slate-400" }, "Quiz Questions Correct"))))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative mb-8" }, /* @__PURE__ */ import_react.default.createElement(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" }), /* @__PURE__ */ import_react.default.createElement(
-      "input",
-      {
-        type: "text",
-        placeholder: "Search topics, concepts, keywords...",
-        value: searchTerm,
-        onChange: (e) => handleSearchChange(e.target.value),
-        onFocus: () => searchTerm && setShowSearchDropdown(true),
-        className: "w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-gray-800 bg-white shadow-sm"
-      }
-    ), searchTerm && /* @__PURE__ */ import_react.default.createElement(
+    const switchMode = (m) => {
+      setMode(m);
+      load(subject, topic, m);
+    };
+    const totalTopics = SUBJECTS.reduce((s, sub) => s + sub.topics.length, 0);
+    if (intro) return /* @__PURE__ */ React.createElement("div", { style: { minHeight: "100vh", background: "radial-gradient(ellipse at 20% 40%, rgba(99,102,241,0.07) 0%, transparent 60%), radial-gradient(ellipse at 80% 10%, rgba(139,92,246,0.06) 0%, transparent 55%), var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.07) 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" } }, /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 520, width: "100%" }, className: "fade-up" }, /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", marginBottom: 40 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.18)", borderRadius: 99, padding: "6px 16px", marginBottom: 24 } }, /* @__PURE__ */ React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: "#6366f1" } }), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 700, color: "#4f46e5", textTransform: "uppercase", letterSpacing: 2 } }, "AP Grade 10")), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: "var(--font-display)", fontSize: 44, fontWeight: 800, color: "#0f172a", margin: "0 0 12px", lineHeight: 1.05, letterSpacing: "-0.04em" } }, "Your complete", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { background: "linear-gradient(135deg,#4f46e5,#7c3aed,#0891b2)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" } }, "AP math system")), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "var(--muted)", fontSize: 15, lineHeight: 1.6 } }, "Notes, flashcards, quizzes & worksheets \u2014 AI-generated for every AP topic.")), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 28 } }, SUBJECTS.map((sub) => /* @__PURE__ */ React.createElement("div", { key: sub.id, style: { background: "#fff", borderRadius: 18, padding: 16, border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 8px rgba(15,23,42,0.05)" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 26, marginBottom: 6 } }, sub.icon), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 700, color: "#0f172a", margin: "0 0 4px" } }, sub.name), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 11, color: "var(--muted)", margin: 0 } }, sub.topics.length, " topics")))), /* @__PURE__ */ React.createElement("div", { style: { background: "#fff", borderRadius: 20, padding: 20, marginBottom: 20, border: "1px solid rgba(0,0,0,0.07)" } }, [["01", "Browse AP topics", "Select a subject area and dive into any topic."], ["02", "Choose your mode", "Study notes, flashcards, quiz, or worksheet."], ["03", "AI-generated content", "Every section is generated fresh at AP difficulty."]].map(([n, title, body]) => /* @__PURE__ */ React.createElement("div", { key: n, style: { display: "flex", gap: 14, marginBottom: 14 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "rgba(99,102,241,0.6)", minWidth: 24 } }, n), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 13, color: "#0f172a", margin: "0 0 2px" } }, title), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 12, color: "var(--muted)", margin: 0 } }, body))))), /* @__PURE__ */ React.createElement("button", { onClick: () => setIntro(false), style: { width: "100%", padding: "15px", borderRadius: 16, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", border: "none", color: "#fff", fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 15, cursor: "pointer", boxShadow: "0 4px 20px rgba(99,102,241,0.35)", letterSpacing: "-0.01em" } }, "Open Library \u2192")));
+    if (subject && topic) return /* @__PURE__ */ React.createElement("div", { style: { minHeight: "100vh", background: "var(--bg)", backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.06) 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "sticky", top: 0, zIndex: 40, background: "rgba(255,255,255,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(0,0,0,0.07)", padding: "0 20px" } }, /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 720, margin: "0 auto", height: 54, display: "flex", alignItems: "center", gap: 8 } }, /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: () => {
-          setSearchTerm("");
-          setShowSearchDropdown(false);
+          setSubject(null);
+          setTopic(null);
+          setContent(null);
         },
-        className: "absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+        style: { display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", cursor: "pointer", fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 600, color: "var(--muted)", padding: 0 },
+        onMouseEnter: (e) => e.currentTarget.style.color = "#0f172a",
+        onMouseLeave: (e) => e.currentTarget.style.color = "var(--muted)"
       },
-      /* @__PURE__ */ import_react.default.createElement(X, { className: "w-5 h-5" })
-    ), showSearchDropdown && searchResults.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute w-full mt-2 bg-white rounded-xl shadow-2xl border-2 border-gray-200 overflow-hidden z-50 max-h-96 overflow-y-auto" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "p-3 bg-gray-50 border-b border-gray-200" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm font-semibold text-gray-600" }, "Found ", searchResults.length, " result", searchResults.length !== 1 ? "s" : "")), searchResults.map((result, idx) => /* @__PURE__ */ import_react.default.createElement(
+      "\u2190 Library"
+    ), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--dim)" } }, "\u203A"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-body)", fontSize: 13, color: "var(--muted)" } }, subject.name), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--dim)" } }, "\u203A"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-body)", fontSize: 13, color: "#0f172a", fontWeight: 500 } }, topic))), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 720, margin: "0 auto", padding: "28px 20px" } }, /* @__PURE__ */ React.createElement("div", { style: { borderRadius: 24, padding: 28, marginBottom: 24, background: `linear-gradient(135deg, #6366f1, #8b5cf6)`, position: "relative", overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "radial-gradient(circle at 80% 50%, rgba(255,255,255,0.18) 0%, transparent 60%)" } }), /* @__PURE__ */ React.createElement("div", { style: { position: "relative" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 36 } }, subject.icon), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 800, color: "#fff", margin: "8px 0 4px", letterSpacing: "-0.03em" } }, topic), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "rgba(255,255,255,0.7)", fontSize: 13, margin: 0 } }, subject.name))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 8, marginBottom: 24, flexWrap: "wrap" } }, MODES.map((m) => /* @__PURE__ */ React.createElement(
       "button",
       {
-        key: idx,
-        onClick: () => handleSearchResultClick(result),
-        className: "w-full p-4 text-left hover:bg-blue-50 border-b border-gray-100 transition-colors group"
+        key: m.id,
+        onClick: () => switchMode(m.id),
+        style: { display: "flex", alignItems: "center", gap: 7, padding: "9px 16px", borderRadius: 12, border: mode === m.id ? "2px solid rgba(99,102,241,0.4)" : "1.5px solid rgba(0,0,0,0.08)", background: mode === m.id ? "rgba(99,102,241,0.08)" : "#fff", fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 700, color: mode === m.id ? "#4f46e5" : "var(--muted)", cursor: "pointer", transition: "all 0.15s", boxShadow: mode === m.id ? "none" : "0 1px 4px rgba(15,23,42,0.05)" }
       },
-      /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react.default.createElement("div", { className: `w-10 h-10 rounded-lg bg-gradient-to-r ${result.subject.gradient} flex items-center justify-center flex-shrink-0` }, /* @__PURE__ */ import_react.default.createElement(result.subject.icon, { className: "w-5 h-5 text-white" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1 min-w-0" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center gap-2 mb-1" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs font-semibold text-gray-500 uppercase" }, result.match), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs text-gray-400" }, "\u2022"), /* @__PURE__ */ import_react.default.createElement("span", { className: "text-xs text-gray-500" }, result.subject.name)), /* @__PURE__ */ import_react.default.createElement("p", { className: "font-semibold text-gray-800 group-hover:text-blue-600 transition-colors mb-1" }, result.title), result.preview && /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 line-clamp-2" }, result.preview)), /* @__PURE__ */ import_react.default.createElement(ChevronRight, { className: "w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors flex-shrink-0 mt-1" }))
-    )))), showFeatureHighlights ? /* @__PURE__ */ import_react.default.createElement(FeatureHighlights, null) : /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => setShowFeatureHighlights(true),
-        className: "mb-8 w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-xl p-4 flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
-      },
-      /* @__PURE__ */ import_react.default.createElement(Sparkles, { className: "w-5 h-5" }),
-      /* @__PURE__ */ import_react.default.createElement("span", { className: "font-semibold" }, "Show Quick Start Guide")
-    ), searchTerm && /* @__PURE__ */ import_react.default.createElement("div", { className: "mb-6 bg-blue-50 border-2 border-blue-200 rounded-xl p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-blue-800" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-semibold" }, "Found ", filteredSubjects.length, " subject(s)"), ' matching "', searchTerm, '"')), filteredSubjects.length === 0 ? /* @__PURE__ */ import_react.default.createElement("div", { className: "text-center py-12" }, /* @__PURE__ */ import_react.default.createElement(Search, { className: "w-16 h-16 text-gray-300 mx-auto mb-4" }), /* @__PURE__ */ import_react.default.createElement("h3", { className: "text-xl font-semibold text-gray-600 mb-2" }, "No results found"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-500" }, 'Try searching for different keywords like "biodiversity", "density", or "atoms"'), /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => setSearchTerm(""),
-        className: "mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-      },
-      "Clear Search"
-    )) : /* @__PURE__ */ import_react.default.createElement("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-6" }, filteredSubjects.map((subject) => {
-      const completedCount = subject.sections.filter((s) => readSections.has(s.id)).length;
-      const progress = completedCount / subject.sections.length * 100;
-      return /* @__PURE__ */ import_react.default.createElement(
-        "div",
+      /* @__PURE__ */ React.createElement("span", null, m.icon),
+      " ",
+      m.label
+    ))), /* @__PURE__ */ React.createElement("div", { className: "fade-up", key: `${topic}-${mode}` }, loading && /* @__PURE__ */ React.createElement(Spinner, null), error && /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", padding: 40, color: "#dc2626", fontFamily: "var(--font-body)", fontSize: 14 } }, error), !loading && !error && content && /* @__PURE__ */ React.createElement(React.Fragment, null, mode === "notes" && /* @__PURE__ */ React.createElement(NotesView, { data: content }), mode === "flashcards" && /* @__PURE__ */ React.createElement(FlashcardsView, { data: content }), mode === "quiz" && /* @__PURE__ */ React.createElement(QuizView, { data: content }), mode === "worksheet" && /* @__PURE__ */ React.createElement(WorksheetView, { data: content })))));
+    return /* @__PURE__ */ React.createElement("div", { style: { minHeight: "100vh", background: "var(--bg)", backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.07) 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "sticky", top: 0, zIndex: 40, background: "rgba(255,255,255,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(0,0,0,0.07)", padding: "0 20px" } }, /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 900, margin: "0 auto", height: 54, display: "flex", alignItems: "center", justifyContent: "space-between" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10 } }, /* @__PURE__ */ React.createElement("div", { style: { width: 28, height: 28, borderRadius: 9, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "#fff", fontSize: 13 } }, "\u2211")), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 14, color: "#0f172a" } }, "MathLib"), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--dim)" } }, "\xB7"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--muted)" } }, "AP Grade 10")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, background: "#fff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 10, padding: "5px 12px" } }, /* @__PURE__ */ React.createElement("div", { style: { width: 7, height: 7, borderRadius: "50%", background: "#10b981", boxShadow: "0 0 6px rgba(16,185,129,0.6)" } }), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 700, color: "var(--muted)" } }, completed.size, " completed")))), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 900, margin: "0 auto", padding: "36px 20px" } }, /* @__PURE__ */ React.createElement("div", { style: { borderRadius: 28, padding: "36px 40px", marginBottom: 40, background: "linear-gradient(135deg,#eef2ff 0%,#f0fdf4 60%,#faf5ff 100%)", border: "1px solid rgba(99,102,241,0.1)", position: "relative", overflow: "hidden" }, className: "fade-up" }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", top: 0, right: 0, width: 280, height: 280, borderRadius: "50%", background: "rgba(99,102,241,0.1)", filter: "blur(60px)", transform: "translate(30%, -30%)" } }), /* @__PURE__ */ React.createElement("div", { style: { position: "relative" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.18)", borderRadius: 99, padding: "5px 14px", marginBottom: 16 } }, /* @__PURE__ */ React.createElement("span", { style: { width: 6, height: 6, borderRadius: "50%", background: "#6366f1", display: "inline-block" } }), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 700, color: "#4f46e5", textTransform: "uppercase", letterSpacing: 2 } }, "Interactive Study Library")), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: "var(--font-display)", fontSize: 42, fontWeight: 800, color: "#0f172a", margin: "0 0 10px", lineHeight: 1.05, letterSpacing: "-0.04em" } }, "AP Grade 10 Math"), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", color: "var(--muted)", fontSize: 15, maxWidth: 480, lineHeight: 1.6, margin: "0 0 24px" } }, "AI-powered notes, flashcards, AP-style quizzes, and worksheets across all four units."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 32 } }, [{ val: totalTopics, label: "Topics" }, { val: SUBJECTS.length, label: "Units" }, { val: completed.size, label: "Completed" }].map(({ val, label }) => /* @__PURE__ */ React.createElement("div", { key: label }, /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 800, color: "#0f172a", margin: 0, lineHeight: 1 } }, val), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 11, color: "var(--dim)", margin: "4px 0 0" } }, label)))))), SUBJECTS.map((sub, si) => /* @__PURE__ */ React.createElement("div", { key: sub.id, style: { marginBottom: 32, animation: `fadeUp 0.35s ${si * 0.08}s cubic-bezier(0.22,1,0.36,1) both` } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12, marginBottom: 14 } }, /* @__PURE__ */ React.createElement("div", { style: { width: 4, height: 18, borderRadius: 99, background: "linear-gradient(to bottom,#6366f1,#8b5cf6)" } }), /* @__PURE__ */ React.createElement("h2", { style: { fontFamily: "var(--font-display)", fontSize: 16, fontWeight: 800, color: "#0f172a", margin: 0 } }, sub.name), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, height: 1, background: "rgba(0,0,0,0.06)" } }), /* @__PURE__ */ React.createElement(Badge, { color: "indigo" }, sub.topics.filter((t) => completed.has(`${sub.id}::${t}`)).length, "/", sub.topics.length)), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 12 } }, sub.topics.map((t, ti) => {
+      const isDone = completed.has(`${sub.id}::${t}`);
+      return /* @__PURE__ */ React.createElement(
+        "button",
         {
-          key: subject.id,
-          onClick: () => {
-            setSelectedSubject(subject);
-            setStats((prev) => __spreadProps(__spreadValues({}, prev), {
-              subjectsViewed: /* @__PURE__ */ new Set([...prev.subjectsViewed, subject.id])
-            }));
+          key: ti,
+          onClick: () => selectTopic(sub, t),
+          style: { display: "flex", alignItems: "flex-start", gap: 12, padding: "14px 16px", borderRadius: 16, background: isDone ? "rgba(16,185,129,0.04)" : "#fff", border: isDone ? "1.5px solid rgba(16,185,129,0.3)" : "1.5px solid rgba(0,0,0,0.08)", cursor: "pointer", textAlign: "left", transition: "all 0.15s", boxShadow: "0 2px 8px rgba(15,23,42,0.05)" },
+          onMouseEnter: (e) => {
+            e.currentTarget.style.boxShadow = "0 6px 24px rgba(99,102,241,0.12)";
+            e.currentTarget.style.transform = "translateY(-2px)";
           },
-          className: "bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all border-2 border-gray-100 hover:border-gray-300"
-        },
-        /* @__PURE__ */ import_react.default.createElement("div", { className: `relative h-32 bg-gradient-to-br ${subject.gradient} p-5 overflow-hidden` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "relative z-10 flex items-start justify-between h-full" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-xl font-bold text-white mb-1" }, subject.name), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-white/90 text-xs" }, subject.sections.length, " sections")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-12 h-12 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center group-hover:scale-110 transition-transform" }, /* @__PURE__ */ import_react.default.createElement(subject.icon, { className: "w-6 h-6 text-white" })))),
-        /* @__PURE__ */ import_react.default.createElement("div", { className: "p-4" }, /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm text-gray-600 mb-3 line-clamp-2" }, subject.description), /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-between text-xs text-gray-500 mb-2" }, /* @__PURE__ */ import_react.default.createElement("span", null, completedCount, "/", subject.sections.length, " complete"), /* @__PURE__ */ import_react.default.createElement("span", { className: "font-bold text-gray-700" }, Math.round(progress), "%")), /* @__PURE__ */ import_react.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-2 overflow-hidden" }, /* @__PURE__ */ import_react.default.createElement(
-          "div",
-          {
-            className: `bg-gradient-to-r ${subject.gradient} h-full transition-all duration-500`,
-            style: { width: `${progress}%` }
+          onMouseLeave: (e) => {
+            e.currentTarget.style.boxShadow = "0 2px 8px rgba(15,23,42,0.05)";
+            e.currentTarget.style.transform = "translateY(0)";
           }
-        )))
+        },
+        /* @__PURE__ */ React.createElement("div", { style: { width: 32, height: 32, borderRadius: 10, flexShrink: 0, background: isDone ? "rgba(16,185,129,0.12)" : `linear-gradient(135deg, rgba(99,102,241,0.12), rgba(139,92,246,0.12))`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 } }, isDone ? "\u2713" : sub.icon),
+        /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 700, color: isDone ? "#065f46" : "#0f172a", margin: "0 0 3px", lineHeight: 1.3 } }, t), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-body)", fontSize: 11, color: "var(--muted)", margin: 0 } }, "Notes \xB7 Cards \xB7 Quiz \xB7 Sheet"))
       );
-    }))));
+    }))))));
   }
-  (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ import_react.default.createElement(App, null));
+
+  // main-preap.tsx
+  var rootEl = document.getElementById("root");
+  if (!rootEl) throw new Error("Root element not found");
+  var root = (0, import_client.createRoot)(rootEl);
+  root.render(import_react2.default.createElement(APMathStudy));
 })();
 /*! Bundled license information:
 

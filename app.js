@@ -11,6 +11,13 @@
   }
 
   const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase()
+  const pathName = location.pathname.toLowerCase()
+  const isLibraryContext =
+    pathName.includes('study-library.html') ||
+    pathName.includes('geography-library.html') ||
+    pathName.includes('grade-10-math.html') ||
+    pathName.includes('math-quiz-simulator.html') ||
+    pathName.includes('/math/')
   document.querySelectorAll('[data-nav-link]').forEach(function (link) {
     const target = (link.getAttribute('href') || '').toLowerCase()
     if (target === currentPage) {
@@ -326,7 +333,7 @@
     })
   }
 
-  if ('serviceWorker' in navigator && 'PushManager' in window) {
+  if ('serviceWorker' in navigator && 'PushManager' in window && !isLibraryContext) {
     let pushWidgetDismissed = false
     try {
       pushWidgetDismissed = localStorage.getItem('sc_push_widget_dismissed') === '1'
@@ -745,6 +752,7 @@
   }
 
   function scheduleTour() {
+    if (isLibraryContext) return
     setTimeout(function () {
       try {
         showTourPrompt()
