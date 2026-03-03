@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v35";
+const CACHE_NAME = "soulconcept-v36";
 const ASSETS = [
   "/",
   "/index.html",
@@ -55,6 +55,20 @@ self.addEventListener("fetch", (event) => {
   const isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
 
   if (isHTML) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          return res;
+        })
+        .catch(() => caches.match(req).then((cached) => cached || caches.match("/offline.html")))
+    );
+    return;
+  }
+
+  // Always try network first for frequently updated app bundles.
+  if (isSameOrigin && (url.pathname === "/math/math.bundle.js" || url.pathname === "/study-library.bundle.js")) {
     event.respondWith(
       fetch(req)
         .then((res) => {
