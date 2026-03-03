@@ -109,13 +109,23 @@
   function setupAuthUI(navMenu) {
     if (!navMenu) return
 
-    const authWrap = document.createElement('div')
-    authWrap.className = 'auth-wrap'
-    authWrap.innerHTML =
-      '<button type="button" class="btn btn-secondary auth-open" data-auth-open>Sign in</button>'
-    navMenu.appendChild(authWrap)
-
-    const authBtn = authWrap.querySelector('[data-auth-open]')
+    let authBtn = navMenu.querySelector('[data-auth-open]')
+    if (!authBtn) {
+      const authWrap = document.createElement('div')
+      authWrap.className = 'auth-wrap'
+      authWrap.innerHTML =
+        '<button type="button" class="btn btn-secondary auth-open" data-auth-open>Sign in</button>'
+      navMenu.appendChild(authWrap)
+      authBtn = authWrap.querySelector('[data-auth-open]')
+    } else {
+      const parent = authBtn.parentElement
+      if (parent && !parent.classList.contains('auth-wrap')) {
+        const wrap = document.createElement('div')
+        wrap.className = 'auth-wrap'
+        parent.insertBefore(wrap, authBtn)
+        wrap.appendChild(authBtn)
+      }
+    }
     const modal = createAuthModal()
     const closeBtn = modal.querySelector('[data-auth-close]')
     const googleBtn = modal.querySelector('[data-auth-google]')
