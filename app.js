@@ -315,9 +315,7 @@
     })()
   }
 
-  if (navMenu) {
-    setupAuthUI(navMenu)
-  }
+  // Auth UI disabled by request.
 
   const reveals = Array.from(document.querySelectorAll('.reveal'))
   if (reveals.length) {
