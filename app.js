@@ -497,7 +497,8 @@
         }
         const subscription = await getSubscription()
         await saveSubscription(subscription)
-        setStatus('Notifications enabled.', false)
+        await sendTemplate('streak')
+        setStatus('Notifications enabled. Streak reminders are now active.', false)
       } catch (err) {
         setStatus(err.message || 'Failed to enable notifications.', true)
       }

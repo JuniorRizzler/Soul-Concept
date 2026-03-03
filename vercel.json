@@ -13,6 +13,10 @@
     {
       "path": "/api/cron/daily-study-reminder",
       "schedule": "0 20 * * *"
+    },
+    {
+      "path": "/api/cron/daily-streak-reminder",
+      "schedule": "0 22 * * *"
     }
   ]
 }
