@@ -525,6 +525,70 @@ main {
   margin-top: 26px;
 }
 
+.grade10-spotlight {
+  position: relative;
+  margin-top: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: linear-gradient(130deg, rgba(37, 99, 235, 0.08), rgba(16, 185, 129, 0.08), rgba(249, 115, 22, 0.08));
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.12);
+  padding: 14px 12px 12px;
+}
+
+.grade10-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(59,130,246,0.7), rgba(16,185,129,0.7), rgba(249,115,22,0.7));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.grade10-floater {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.grade10-spotlight-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.grade10-spotlight-title {
+  margin: 0;
+  font-family: var(--title);
+  font-size: 0.98rem;
+  color: #0f172a;
+}
+
+.grade10-spotlight-copy {
+  margin: 3px 0 0;
+  font-size: 0.84rem;
+  color: #475569;
+}
+
+.grade10-spotlight-btn {
+  flex-shrink: 0;
+}
+
 .hero-visual {
   display: grid;
   gap: 16px;
@@ -1433,6 +1497,15 @@ main {
 
   .hero-copy p {
     font-size: 0.98rem;
+  }
+
+  .grade10-spotlight-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .grade10-spotlight-btn {
+    width: 100%;
   }
 
   .section-tight {
