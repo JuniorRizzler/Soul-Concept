@@ -415,8 +415,13 @@
       })
       if (!res.ok) {
         const text = await res.text()
+        // Allow local/device notifications to work even if server persistence is unavailable.
+        if ((text || '').indexOf('Missing Supabase server env vars') !== -1) {
+          return { persisted: false, reason: 'supabase_not_configured' }
+        }
         throw new Error(text || 'Failed to register reminder subscription.')
       }
+      return { persisted: true }
     }
 
     async function sendPushPayload(subscription, payload) {
@@ -529,10 +534,17 @@
           return
         }
         const subscription = await getSubscription()
-        await saveSubscription(subscription)
+        const saveResult = await saveSubscription(subscription)
         await showInstantLocalNotification('streak')
         await sendTemplate('streak')
-        setStatus('Notifications enabled. Streak reminders are now active.', false)
+        if (saveResult && saveResult.persisted === false) {
+          setStatus(
+            'Notifications enabled on this device. Server streak reminders need Supabase env vars.',
+            false,
+          )
+        } else {
+          setStatus('Notifications enabled. Streak reminders are now active.', false)
+        }
       } catch (err) {
         setStatus(err.message || 'Failed to enable notifications.', true)
       }
