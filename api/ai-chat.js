@@ -29,12 +29,6 @@ module.exports = async (req, res) => {
     return
   }
 
-  const apiKey = process.env.FREE_LLM_API_KEY
-  if (!apiKey) {
-    json(res, 500, { error: 'Missing FREE_LLM_API_KEY env var.' })
-    return
-  }
-
   let body = req.body
   if (!body || typeof body !== 'object') {
     try {
@@ -63,6 +57,49 @@ module.exports = async (req, res) => {
   }
   if (!messages.length) {
     json(res, 400, { error: 'No messages provided.' })
+    return
+  }
+
+  // Preferred path: self-hosted Free-GPT4-WEB-API.
+  // Expected format: GET {FREE_GPT4_WEB_API_URL}/?text=...
+  const freeGptWebApiUrl = String(process.env.FREE_GPT4_WEB_API_URL || '').trim()
+  if (freeGptWebApiUrl) {
+    const keyword = String(process.env.FREE_GPT4_WEB_API_KEYWORD || 'text')
+    const mergedPrompt = messages
+      .map(function (m) {
+        return String(m.role || 'user') + ': ' + String(m.content || '')
+      })
+      .join('\n')
+      .trim()
+    const base = freeGptWebApiUrl.replace(/\/$/, '')
+    const target = new URL(base + '/')
+    target.searchParams.set(keyword, mergedPrompt)
+
+    try {
+      const upstreamRes = await fetch(target.toString(), { method: 'GET' })
+      const rawText = await upstreamRes.text()
+      if (!upstreamRes.ok) {
+        json(res, upstreamRes.status, { error: rawText || 'Self-hosted AI upstream error.' })
+        return
+      }
+      json(res, 200, {
+        ok: true,
+        text: String(rawText || '').trim(),
+        provider: 'free-gpt4-web-api',
+      })
+      return
+    } catch (err) {
+      json(res, 500, { error: err && err.message ? err.message : 'Self-hosted AI request failed.' })
+      return
+    }
+  }
+
+  // Fallback path: APIFreeLLM-compatible OpenAI chat endpoint.
+  const apiKey = process.env.FREE_LLM_API_KEY
+  if (!apiKey) {
+    json(res, 500, {
+      error: 'Missing FREE_GPT4_WEB_API_URL or FREE_LLM_API_KEY env var.',
+    })
     return
   }
 
