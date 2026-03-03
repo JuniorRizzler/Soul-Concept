@@ -27,6 +27,7 @@
 
   const STREAK_KEY = 'sc_daily_streak_v1'
   const USAGE_KEY = 'sc_usage_stats_v1'
+  const PUSH_ENABLED_KEY = 'sc_push_enabled'
 
   function getLocalDateStamp(date) {
     const d = date instanceof Date ? date : new Date()
@@ -153,10 +154,12 @@
       wrapper.setAttribute('data-stats-wrap', '1')
       wrapper.innerHTML =
         '<button class="btn btn-secondary stats-btn" type="button" data-stats-toggle aria-expanded="false">Statistics</button>' +
-        '<div class="stats-panel" data-stats-panel hidden>' +
+        '<div class="stats-panel" data-stats-panel>' +
+        '<div class="stats-panel-title">Your stats</div>' +
         '<div class="stats-row"><span>Streak</span><strong data-stats-streak>0 days</strong></div>' +
         '<div class="stats-row"><span>Time spent</span><strong data-stats-spent>0s</strong></div>' +
         '<div class="stats-row"><span>Time logged in</span><strong data-stats-session>0s</strong></div>' +
+        '<div class="stats-row"><span>Notifications</span><strong data-stats-notifs>Unavailable</strong></div>' +
         '</div>'
       const navToggleBtn = topbarInner.querySelector('[data-nav-toggle]')
       if (navToggleBtn) {
@@ -171,6 +174,7 @@
     const streakEl = wrapper.querySelector('[data-stats-streak]')
     const spentEl = wrapper.querySelector('[data-stats-spent]')
     const sessionEl = wrapper.querySelector('[data-stats-session]')
+    const notifsEl = wrapper.querySelector('[data-stats-notifs]')
 
     const usage = readUsageData()
     const sessionStartedAt = Date.now()
@@ -194,33 +198,55 @@
       return activeStartedAt ? Date.now() - activeStartedAt : 0
     }
 
+    function getNotificationStatus() {
+      const pushSupported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
+      if (!pushSupported) return 'Not supported'
+      if (Notification.permission === 'granted') return 'Enabled'
+      const stored = localStorage.getItem(PUSH_ENABLED_KEY) === '1'
+      return stored ? 'Enabled' : 'Available'
+    }
+
     function updateStatsUI() {
       const streak = Math.max(0, Number((streakData && streakData.streak) || 0))
       if (streakEl) streakEl.textContent = streak + (streak === 1 ? ' day' : ' days')
       if (spentEl) spentEl.textContent = formatDuration(usage.totalMs + pendingVisibleMs + getLiveVisibleMs())
       if (sessionEl) sessionEl.textContent = formatDuration(Date.now() - sessionStartedAt)
+      if (notifsEl) notifsEl.textContent = getNotificationStatus()
+    }
+
+    function setPanelOpen(open) {
+      if (!panel || !toggleBtn) return
+      panel.classList.toggle('open', !!open)
+      toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false')
     }
 
     if (toggleBtn && panel) {
       toggleBtn.addEventListener('click', function () {
-        const isOpen = !panel.hidden
-        panel.hidden = isOpen
-        toggleBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true')
+        const isOpen = panel.classList.contains('open')
+        setPanelOpen(!isOpen)
         if (!isOpen) updateStatsUI()
       })
     }
 
+    if (window.matchMedia('(hover: hover)').matches && panel) {
+      wrapper.addEventListener('mouseenter', function () {
+        setPanelOpen(true)
+        updateStatsUI()
+      })
+      wrapper.addEventListener('mouseleave', function () {
+        setPanelOpen(false)
+      })
+    }
+
     document.addEventListener('click', function (event) {
-      if (!panel || panel.hidden) return
+      if (!panel || !panel.classList.contains('open')) return
       if (wrapper.contains(event.target)) return
-      panel.hidden = true
-      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false')
+      setPanelOpen(false)
     })
 
     document.addEventListener('keydown', function (event) {
-      if (event.key !== 'Escape' || !panel || panel.hidden) return
-      panel.hidden = true
-      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false')
+      if (event.key !== 'Escape' || !panel || !panel.classList.contains('open')) return
+      setPanelOpen(false)
     })
 
     document.addEventListener('visibilitychange', function () {
@@ -238,6 +264,7 @@
       persistUsage()
     })
 
+    document.addEventListener('sc:push-state-changed', updateStatsUI)
     setInterval(updateStatsUI, 1000)
     updateStatsUI()
   }
@@ -558,55 +585,75 @@
 
   {
     const canUsePush = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
-    const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
-    const widget = document.createElement('div')
-    widget.className = 'push-widget'
-    widget.innerHTML =
-      '<div class="push-header">' +
-      '<div class="push-title">Sign up for notifications</div>' +
-      '</div>' +
-      '<p class="push-text">Get study reminders and update alerts.</p>' +
-      '<div class="push-actions">' +
-      '<button class="btn btn-secondary" type="button" data-push-enable>Enable</button>' +
-      '</div>' +
-      '<p class="push-status" data-push-status></p>'
-    document.body.appendChild(widget)
-
-    const statusEl = widget.querySelector('[data-push-status]')
-    const enableBtn = widget.querySelector('[data-push-enable]')
-
-    function setStatus(message, isError) {
-      if (!statusEl) return
-      statusEl.textContent = message
-      statusEl.className = isError ? 'push-status err' : 'push-status ok'
-    }
-
-    function urlBase64ToUint8Array(base64String) {
-      const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-      const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
-      const rawData = window.atob(base64)
-      const outputArray = new Uint8Array(rawData.length)
-      for (let i = 0; i < rawData.length; ++i) {
-        outputArray[i] = rawData.charCodeAt(i)
+    const pushAlreadyEnabled = (function () {
+      try {
+        return Notification.permission === 'granted' || localStorage.getItem(PUSH_ENABLED_KEY) === '1'
+      } catch (err) {
+        return Notification.permission === 'granted'
       }
-      return outputArray
-    }
-
-    async function getSubscription() {
-      const registration = await navigator.serviceWorker.ready
-      let subscription = await registration.pushManager.getSubscription()
-      if (!subscription) {
-        const key = urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-        subscription = await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: key
-        })
+    })()
+    if (pushAlreadyEnabled) {
+      try {
+        localStorage.setItem(PUSH_ENABLED_KEY, '1')
+      } catch (err) {
+        // ignore storage errors
       }
-      localStorage.setItem('sc_push_subscription', JSON.stringify(subscription))
-      return subscription
+      document.dispatchEvent(new Event('sc:push-state-changed'))
     }
 
-    async function saveSubscription(subscription) {
+    const shouldShowWidget = !pushAlreadyEnabled
+    if (!shouldShowWidget) {
+      // do not show repeated widget once push has already been enabled
+    } else {
+      const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
+      const widget = document.createElement('div')
+      widget.className = 'push-widget'
+      widget.innerHTML =
+        '<div class="push-header">' +
+        '<div class="push-title">Sign up for notifications</div>' +
+        '</div>' +
+        '<p class="push-text">Get study reminders and update alerts.</p>' +
+        '<div class="push-actions">' +
+        '<button class="btn btn-secondary" type="button" data-push-enable>Enable</button>' +
+        '</div>' +
+        '<p class="push-status" data-push-status></p>'
+      document.body.appendChild(widget)
+
+      const statusEl = widget.querySelector('[data-push-status]')
+      const enableBtn = widget.querySelector('[data-push-enable]')
+
+      function setStatus(message, isError) {
+        if (!statusEl) return
+        statusEl.textContent = message
+        statusEl.className = isError ? 'push-status err' : 'push-status ok'
+      }
+
+      function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+        const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
+        const rawData = window.atob(base64)
+        const outputArray = new Uint8Array(rawData.length)
+        for (let i = 0; i < rawData.length; ++i) {
+          outputArray[i] = rawData.charCodeAt(i)
+        }
+        return outputArray
+      }
+
+      async function getSubscription() {
+        const registration = await navigator.serviceWorker.ready
+        let subscription = await registration.pushManager.getSubscription()
+        if (!subscription) {
+          const key = urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+          subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: key
+          })
+        }
+        localStorage.setItem('sc_push_subscription', JSON.stringify(subscription))
+        return subscription
+      }
+
+      async function saveSubscription(subscription) {
       const res = await fetch('/api/push-subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -624,9 +671,9 @@
         throw new Error(text || 'Failed to register reminder subscription.')
       }
       return { persisted: true }
-    }
+      }
 
-    async function sendPushPayload(subscription, payload) {
+      async function sendPushPayload(subscription, payload) {
       const endpoints = ['/api/send-push', '/api/send-push.js', '/.netlify/functions/send-push']
       let lastError = 'Failed to send notification.'
       for (let i = 0; i < endpoints.length; i += 1) {
@@ -650,9 +697,9 @@
         if (text) lastError = text
       }
       throw new Error(lastError)
-    }
+      }
 
-    async function sendTemplate(templateKey) {
+      async function sendTemplate(templateKey) {
       const templates = {
         test: {
           title: 'Soul Concept',
@@ -678,9 +725,9 @@
       const payload = templates[templateKey] || templates.test
       const subscription = await getSubscription()
       await sendPushPayload(subscription, payload)
-    }
+      }
 
-    async function showInstantLocalNotification(templateKey) {
+      async function showInstantLocalNotification(templateKey) {
       const templates = {
         test: {
           title: 'Soul Concept',
@@ -711,36 +758,46 @@
         badge: '/icons/icon-192.png',
         data: { url: payload.url || '/' }
       })
-    }
+      }
 
-    if (!canUsePush) {
-      if (enableBtn) enableBtn.disabled = true
-      setStatus('Push notifications are not supported in this browser.', true)
-    } else {
-      enableBtn.addEventListener('click', async function () {
-        try {
-          if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
-            setStatus('On iPhone/iPad, add this site to Home Screen first, then enable notifications from the installed app.', true)
-            return
+      if (!canUsePush) {
+        if (enableBtn) enableBtn.disabled = true
+        setStatus('Push notifications are not supported in this browser.', true)
+      } else {
+        enableBtn.addEventListener('click', async function () {
+          try {
+            if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
+              setStatus('On iPhone/iPad, add this site to Home Screen first, then enable notifications from the installed app.', true)
+              return
+            }
+            const permission = await Notification.requestPermission()
+            if (permission !== 'granted') {
+              setStatus('Permission denied.', true)
+              return
+            }
+            try {
+              localStorage.setItem(PUSH_ENABLED_KEY, '1')
+            } catch (err) {
+              // ignore storage errors
+            }
+            document.dispatchEvent(new Event('sc:push-state-changed'))
+            const subscription = await getSubscription()
+            const saveResult = await saveSubscription(subscription)
+            await showInstantLocalNotification('streak')
+            await sendTemplate('streak')
+            if (saveResult && saveResult.persisted === false) {
+              setStatus('Enabled on this device. Server reminders need Supabase env vars.', false)
+            } else {
+              setStatus('Notifications enabled.', false)
+            }
+            setTimeout(function () {
+              widget.remove()
+            }, 900)
+          } catch (err) {
+            setStatus(err.message || 'Failed to enable notifications.', true)
           }
-          const permission = await Notification.requestPermission()
-          if (permission !== 'granted') {
-            setStatus('Permission denied.', true)
-            return
-          }
-          const subscription = await getSubscription()
-          const saveResult = await saveSubscription(subscription)
-          await showInstantLocalNotification('streak')
-          await sendTemplate('streak')
-          if (saveResult && saveResult.persisted === false) {
-            setStatus('Enabled on this device. Server reminders need Supabase env vars.', false)
-          } else {
-            setStatus('Notifications enabled.', false)
-          }
-        } catch (err) {
-          setStatus(err.message || 'Failed to enable notifications.', true)
-        }
-      })
+        })
+      }
     }
   }
 
