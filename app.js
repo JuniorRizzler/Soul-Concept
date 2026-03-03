@@ -568,14 +568,12 @@
       '<p class="push-text">Get study reminders and update alerts.</p>' +
       '<div class="push-actions">' +
       '<button class="btn btn-secondary" type="button" data-push-enable>Enable</button>' +
-      '<button class="btn btn-primary" type="button" data-push-test>Send test</button>' +
       '</div>' +
       '<p class="push-status" data-push-status></p>'
     document.body.appendChild(widget)
 
     const statusEl = widget.querySelector('[data-push-status]')
     const enableBtn = widget.querySelector('[data-push-enable]')
-    const testBtn = widget.querySelector('[data-push-test]')
 
     function setStatus(message, isError) {
       if (!statusEl) return
@@ -717,7 +715,6 @@
 
     if (!canUsePush) {
       if (enableBtn) enableBtn.disabled = true
-      if (testBtn) testBtn.disabled = true
       setStatus('Push notifications are not supported in this browser.', true)
     } else {
       enableBtn.addEventListener('click', async function () {
@@ -742,17 +739,6 @@
           }
         } catch (err) {
           setStatus(err.message || 'Failed to enable notifications.', true)
-        }
-      })
-
-      testBtn.addEventListener('click', async function () {
-        try {
-          const subscription = await getSubscription()
-          await saveSubscription(subscription)
-          await sendTemplate('test')
-          setStatus('Test sent. Check your notifications.', false)
-        } catch (err) {
-          setStatus(err.message || 'Failed to send test.', true)
         }
       })
     }
