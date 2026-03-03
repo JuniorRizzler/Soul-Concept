@@ -644,7 +644,7 @@
       '<div class="push-title">Notifications</div>' +
       '<button class="push-close" type="button" aria-label="Close notifications panel" data-push-close>x</button>' +
       '</div>' +
-      '<p class="push-text">Enable push notifications for updates (desktop + mobile supported browsers).</p>' +
+      '<p class="push-text">Enable push notifications for updates and daily study reminders.</p>' +
       '<div class="push-actions">' +
       '<button class="btn btn-secondary" type="button" data-push-enable>Enable</button>' +
       '<button class="btn btn-primary" type="button" data-push-test>Send test</button>' +
@@ -692,6 +692,21 @@
       }
       localStorage.setItem('sc_push_subscription', JSON.stringify(subscription))
       return subscription
+    }
+
+    async function saveSubscription(subscription) {
+      const res = await fetch('/api/push-subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subscription,
+          userAgent: navigator.userAgent || ''
+        })
+      })
+      if (!res.ok) {
+        const text = await res.text()
+        throw new Error(text || 'Failed to register reminder subscription.')
+      }
     }
 
     async function sendPushPayload(subscription, payload) {
@@ -770,7 +785,8 @@
           setStatus('Permission denied.', true)
           return
         }
-        await getSubscription()
+        const subscription = await getSubscription()
+        await saveSubscription(subscription)
         setStatus('Notifications enabled.', false)
       } catch (err) {
         setStatus(err.message || 'Failed to enable notifications.', true)
@@ -779,6 +795,8 @@
 
     testBtn.addEventListener('click', async function () {
       try {
+        const subscription = await getSubscription()
+        await saveSubscription(subscription)
         await sendTemplate('test')
         setStatus('Test sent. Check your notifications.', false)
       } catch (err) {
@@ -789,6 +807,8 @@
     if (updateBtn) {
       updateBtn.addEventListener('click', async function () {
         try {
+          const subscription = await getSubscription()
+          await saveSubscription(subscription)
           await sendTemplate('update')
           setStatus('Update notification sent.', false)
         } catch (err) {
@@ -800,6 +820,8 @@
     if (reminderBtn) {
       reminderBtn.addEventListener('click', async function () {
         try {
+          const subscription = await getSubscription()
+          await saveSubscription(subscription)
           await sendTemplate('reminder')
           setStatus('Reminder notification sent.', false)
         } catch (err) {
@@ -811,6 +833,8 @@
     if (streakBtn) {
       streakBtn.addEventListener('click', async function () {
         try {
+          const subscription = await getSubscription()
+          await saveSubscription(subscription)
           await sendTemplate('streak')
           setStatus('Streak notification sent.', false)
         } catch (err) {

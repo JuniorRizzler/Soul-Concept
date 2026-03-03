@@ -8,5 +8,11 @@
       "source": "/.netlify/functions/send-push",
       "destination": "/api/send-push"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/daily-study-reminder",
+      "schedule": "0 20 * * *"
+    }
   ]
 }
