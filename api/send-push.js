@@ -1,21 +1,35 @@
 const webpush = require('web-push')
 
-const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY
-const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY
-const VAPID_SUBJECT = process.env.VAPID_SUBJECT || 'mailto:admin@example.com'
-
-if (VAPID_PUBLIC_KEY && VAPID_PRIVATE_KEY) {
-  webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY)
-}
-
 module.exports = async (req, res) => {
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('')
+    return
+  }
+
   if (req.method !== 'POST') {
     res.status(405).send('Method Not Allowed')
     return
   }
 
+  const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY
+  const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY
+  const VAPID_SUBJECT = process.env.VAPID_SUBJECT || 'mailto:admin@example.com'
+
   if (!VAPID_PUBLIC_KEY || !VAPID_PRIVATE_KEY) {
     res.status(500).send('Missing VAPID keys on server.')
+    return
+  }
+
+  const subject = String(VAPID_SUBJECT || '').trim()
+  if (!/^mailto:.+@.+\..+/i.test(subject) && !/^https?:\/\//i.test(subject)) {
+    res.status(500).send('Invalid VAPID_SUBJECT. Use mailto:you@example.com or https://your-site.')
+    return
+  }
+
+  try {
+    webpush.setVapidDetails(subject, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY)
+  } catch (err) {
+    res.status(500).send(err.message || 'Invalid VAPID configuration.')
     return
   }
 

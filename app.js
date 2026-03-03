@@ -636,7 +636,7 @@
       // continue with the rest of the app script
     } else {
 
-    const VAPID_PUBLIC_KEY = 'BO94JvzECtxvt1c7RrNferA88Uh-4NX8W-vaY2Tw5O6UiejKE-oaHAZCbpmfjcLqajG_1fDWxnEpRwbXaVWi2_c'
+    const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
     const widget = document.createElement('div')
     widget.className = 'push-widget'
     widget.innerHTML =
