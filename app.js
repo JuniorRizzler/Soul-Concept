@@ -26,6 +26,7 @@
   })
 
   const STREAK_KEY = 'sc_daily_streak_v1'
+  const USAGE_KEY = 'sc_usage_stats_v1'
 
   function getLocalDateStamp(date) {
     const d = date instanceof Date ? date : new Date()
@@ -84,9 +85,9 @@
     return data
   }
 
-  function mountStreakPill() {
+  function mountStreakPill(streakData) {
     const topbarInner = document.querySelector('.topbar-inner')
-    if (!topbarInner) return
+    if (!topbarInner) return null
 
     let pill = topbarInner.querySelector('[data-streak-pill]')
     if (!pill) {
@@ -106,12 +107,144 @@
     }
 
     const valueEl = pill.querySelector('[data-streak-value]')
-    const data = updateDailyStreak()
+    const data = streakData || readStreakData()
     if (valueEl) valueEl.textContent = String(Math.max(0, Number(data.streak || 0)))
     pill.title = 'Best streak: ' + String(Math.max(0, Number(data.bestStreak || 0))) + ' days'
+    return pill
   }
 
-  mountStreakPill()
+  function readUsageData() {
+    try {
+      const raw = localStorage.getItem(USAGE_KEY)
+      if (!raw) return { totalMs: 0 }
+      const parsed = JSON.parse(raw)
+      return { totalMs: Math.max(0, Number(parsed.totalMs || 0)) }
+    } catch (err) {
+      return { totalMs: 0 }
+    }
+  }
+
+  function saveUsageData(data) {
+    try {
+      localStorage.setItem(USAGE_KEY, JSON.stringify(data))
+    } catch (err) {
+      // ignore storage errors
+    }
+  }
+
+  function formatDuration(ms) {
+    const totalSeconds = Math.max(0, Math.floor(ms / 1000))
+    const hours = Math.floor(totalSeconds / 3600)
+    const minutes = Math.floor((totalSeconds % 3600) / 60)
+    const seconds = totalSeconds % 60
+    if (hours > 0) return hours + 'h ' + minutes + 'm'
+    if (minutes > 0) return minutes + 'm ' + seconds + 's'
+    return seconds + 's'
+  }
+
+  function mountStatsButton(streakData) {
+    const topbarInner = document.querySelector('.topbar-inner')
+    if (!topbarInner) return
+
+    let wrapper = topbarInner.querySelector('[data-stats-wrap]')
+    if (!wrapper) {
+      wrapper = document.createElement('div')
+      wrapper.className = 'stats-wrap'
+      wrapper.setAttribute('data-stats-wrap', '1')
+      wrapper.innerHTML =
+        '<button class="btn btn-secondary stats-btn" type="button" data-stats-toggle aria-expanded="false">Statistics</button>' +
+        '<div class="stats-panel" data-stats-panel hidden>' +
+        '<div class="stats-row"><span>Streak</span><strong data-stats-streak>0 days</strong></div>' +
+        '<div class="stats-row"><span>Time spent</span><strong data-stats-spent>0s</strong></div>' +
+        '<div class="stats-row"><span>Time logged in</span><strong data-stats-session>0s</strong></div>' +
+        '</div>'
+      const navToggleBtn = topbarInner.querySelector('[data-nav-toggle]')
+      if (navToggleBtn) {
+        topbarInner.insertBefore(wrapper, navToggleBtn)
+      } else {
+        topbarInner.appendChild(wrapper)
+      }
+    }
+
+    const toggleBtn = wrapper.querySelector('[data-stats-toggle]')
+    const panel = wrapper.querySelector('[data-stats-panel]')
+    const streakEl = wrapper.querySelector('[data-stats-streak]')
+    const spentEl = wrapper.querySelector('[data-stats-spent]')
+    const sessionEl = wrapper.querySelector('[data-stats-session]')
+
+    const usage = readUsageData()
+    const sessionStartedAt = Date.now()
+    let pendingVisibleMs = 0
+    let activeStartedAt = document.visibilityState === 'visible' ? Date.now() : 0
+
+    function flushActiveTime() {
+      if (!activeStartedAt) return
+      pendingVisibleMs += Date.now() - activeStartedAt
+      activeStartedAt = 0
+    }
+
+    function persistUsage() {
+      if (pendingVisibleMs <= 0) return
+      usage.totalMs += pendingVisibleMs
+      pendingVisibleMs = 0
+      saveUsageData(usage)
+    }
+
+    function getLiveVisibleMs() {
+      return activeStartedAt ? Date.now() - activeStartedAt : 0
+    }
+
+    function updateStatsUI() {
+      const streak = Math.max(0, Number((streakData && streakData.streak) || 0))
+      if (streakEl) streakEl.textContent = streak + (streak === 1 ? ' day' : ' days')
+      if (spentEl) spentEl.textContent = formatDuration(usage.totalMs + pendingVisibleMs + getLiveVisibleMs())
+      if (sessionEl) sessionEl.textContent = formatDuration(Date.now() - sessionStartedAt)
+    }
+
+    if (toggleBtn && panel) {
+      toggleBtn.addEventListener('click', function () {
+        const isOpen = !panel.hidden
+        panel.hidden = isOpen
+        toggleBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true')
+        if (!isOpen) updateStatsUI()
+      })
+    }
+
+    document.addEventListener('click', function (event) {
+      if (!panel || panel.hidden) return
+      if (wrapper.contains(event.target)) return
+      panel.hidden = true
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false')
+    })
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape' || !panel || panel.hidden) return
+      panel.hidden = true
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false')
+    })
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') {
+        flushActiveTime()
+        persistUsage()
+      } else if (!activeStartedAt) {
+        activeStartedAt = Date.now()
+      }
+      updateStatsUI()
+    })
+
+    window.addEventListener('pagehide', function () {
+      flushActiveTime()
+      persistUsage()
+    })
+
+    setInterval(updateStatsUI, 1000)
+    updateStatsUI()
+  }
+
+  const streakData = updateDailyStreak()
+  mountStreakPill(streakData)
+  mountStatsButton(streakData)
 
   // Sign-in feature removed by request.
 

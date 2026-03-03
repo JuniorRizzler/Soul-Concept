@@ -216,6 +216,46 @@ img {
   line-height: 1;
 }
 
+.stats-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.stats-btn {
+  white-space: nowrap;
+}
+
+.stats-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(280px, 84vw);
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  gap: 8px;
+  z-index: 120;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.stats-row strong {
+  color: var(--text);
+  font-family: var(--title);
+  font-size: 0.92rem;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -1466,9 +1506,19 @@ main {
 
   .streak-pill {
     margin-left: auto;
-    margin-right: 6px;
+    margin-right: 0;
     padding: 6px 10px;
     gap: 6px;
+  }
+
+  .stats-wrap {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .stats-btn {
+    padding: 8px 10px;
+    font-size: 0.84rem;
   }
 
   .nav-menu {
@@ -1577,6 +1627,15 @@ main {
 
   .streak-pill-label {
     display: none;
+  }
+
+  .stats-btn {
+    padding: 8px 10px;
+  }
+
+  .stats-panel {
+    right: -40px;
+    width: min(260px, 88vw);
   }
 
   .btn {
