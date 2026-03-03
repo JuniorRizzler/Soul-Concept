@@ -201,7 +201,73 @@
   const installBtn = document.querySelector('[data-install-btn]')
   const installHint = document.querySelector('[data-install-hint]')
   const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
+  const isSafari = /safari/i.test(navigator.userAgent) && !/crios|fxios|edgios|opr\//i.test(navigator.userAgent)
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
+
+  function ensureIosInstallStyles() {
+    if (document.getElementById('ios-install-style')) return
+    const style = document.createElement('style')
+    style.id = 'ios-install-style'
+    style.textContent =
+      '.ios-install-overlay{position:fixed;inset:0;background:rgba(2,6,23,.7);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:16px}' +
+      '.ios-install-card{width:min(520px,100%);background:#fff;border-radius:16px;padding:16px 16px 14px;box-shadow:0 20px 40px rgba(0,0,0,.24);font-family:Inter,system-ui,sans-serif}' +
+      '.ios-install-card h3{margin:0 0 8px;font-size:1.05rem;color:#0f172a}' +
+      '.ios-install-card p{margin:0 0 8px;color:#334155;font-size:.95rem}' +
+      '.ios-install-card ol{margin:8px 0 12px 20px;padding:0;color:#1e293b;font-size:.92rem;line-height:1.45}' +
+      '.ios-install-actions{display:flex;gap:8px;justify-content:flex-end}' +
+      '.ios-install-actions button{border:0;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}' +
+      '.ios-install-actions .secondary{background:#e2e8f0;color:#0f172a}' +
+      '.ios-install-actions .primary{background:#0f172a;color:#fff}'
+    document.head.appendChild(style)
+  }
+
+  function showIosInstallGuide() {
+    ensureIosInstallStyles()
+    const existing = document.querySelector('.ios-install-overlay')
+    if (existing) existing.remove()
+
+    const overlay = document.createElement('div')
+    overlay.className = 'ios-install-overlay'
+    overlay.innerHTML =
+      '<div class="ios-install-card" role="dialog" aria-modal="true" aria-label="Install app on iPhone">' +
+      '<h3>Install on iPhone/iPad</h3>' +
+      '<p>Apple does not allow automatic Home Screen install. Use these quick steps:</p>' +
+      '<ol>' +
+      '<li>Tap the Share icon in Safari.</li>' +
+      '<li>Tap <strong>Add to Home Screen</strong>.</li>' +
+      '<li>Tap <strong>Add</strong>.</li>' +
+      '</ol>' +
+      '<div class="ios-install-actions">' +
+      '<button type="button" class="secondary" data-ios-close>Close</button>' +
+      '<button type="button" class="primary" data-ios-share>Open Share</button>' +
+      '</div>' +
+      '</div>'
+
+    function closeGuide() {
+      overlay.remove()
+    }
+
+    overlay.addEventListener('click', function (event) {
+      if (event.target === overlay) closeGuide()
+    })
+
+    overlay.querySelector('[data-ios-close]').addEventListener('click', closeGuide)
+    overlay.querySelector('[data-ios-share]').addEventListener('click', function () {
+      if (navigator.share) {
+        navigator
+          .share({
+            title: document.title || 'Soul Concept',
+            text: 'Install Soul Concept on your Home Screen',
+            url: location.href,
+          })
+          .finally(closeGuide)
+      } else {
+        closeGuide()
+      }
+    })
+
+    document.body.appendChild(overlay)
+  }
 
   if (installBtn) {
     installBtn.addEventListener('click', function () {
@@ -215,6 +281,23 @@
 
       if (isIos && !isStandalone) {
         if (installHint) installHint.classList.add('is-visible')
+        if (!isSafari) {
+          alert('For iPhone/iPad install, open this page in Safari, then use Share -> Add to Home Screen.')
+          return
+        }
+        if (navigator.share) {
+          navigator
+            .share({
+              title: document.title || 'Soul Concept',
+              text: 'Install Soul Concept on your Home Screen',
+              url: location.href,
+            })
+            .catch(function () {
+              showIosInstallGuide()
+            })
+          return
+        }
+        showIosInstallGuide()
         return
       }
 
