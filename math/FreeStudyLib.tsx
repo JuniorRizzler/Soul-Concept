@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { BookOpen, ArrowLeft, CheckCircle, Circle, Calculator, TrendingUp, Shapes, Grid3x3, ChevronRight, FileText, Lightbulb, Target, X, ClipboardList, Brain, Sparkles, BookMarked } from "lucide-react";
 
 const GLOBAL_STYLE = `
@@ -41,7 +41,7 @@ function InjectStyles() {
   return null;
 }
 
-// ── DIAGRAMS ──────────────────────────────────────────────────────────────────
+// â”€â”€ DIAGRAMS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function DiagramCard({ title, children, color = "slate" }) {
   const borders = { purple:"border-purple-200",blue:"border-blue-200",teal:"border-teal-200",amber:"border-amber-200",green:"border-green-200",slate:"border-slate-200",indigo:"border-indigo-200",rose:"border-rose-200" };
@@ -288,7 +288,7 @@ function SlopeExplorer() {
   return (
     <div className="bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5">
       <div className="flex items-center gap-2 mb-3 flex-wrap">
-        <span className="text-2xl">📈</span>
+        <span className="text-2xl">ðŸ“ˆ</span>
         <h3 className="text-lg font-bold text-indigo-800">Slope-Intercept Explorer</h3>
         <span className="ml-auto text-sm font-mono bg-indigo-50 px-3 py-1 rounded-full text-indigo-700">
           y = {m}x {b>=0?`+ ${b}`:`- ${Math.abs(b)}`}
@@ -336,7 +336,7 @@ function LinearSystemsVisualizer() {
   const intPt=intersection?toSvg(intersection.x,intersection.y):null;
   return (
     <div className="bg-white rounded-2xl border-2 border-blue-200 shadow-lg p-5">
-      <div className="flex items-center gap-2 mb-3"><span className="text-2xl">📊</span><h3 className="text-lg font-bold text-blue-800">Linear Systems Explorer</h3></div>
+      <div className="flex items-center gap-2 mb-3"><span className="text-2xl">{"\u{1F4CA}"}</span><h3 className="text-lg font-bold text-blue-800">Linear Systems Explorer</h3></div>
       <div className="flex gap-3 mb-3 text-sm flex-wrap">
         <div className="flex items-center gap-1.5"><div className="w-4 h-1 rounded bg-blue-500"/><span className="font-mono text-blue-700">y={m1}x{b1>=0?`+${b1}`:b1}</span></div>
         <div className="flex items-center gap-1.5"><div className="w-4 h-1 rounded bg-rose-500"/><span className="font-mono text-rose-700">y={m2}x{b2>=0?`+${b2}`:b2}</span></div>
@@ -384,13 +384,13 @@ function SubstitutionStepper() {
   const brs=["border-gray-300","border-blue-400","border-indigo-400","border-purple-400","border-violet-400","border-green-500"];
   return (
     <div className="bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5">
-      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">🔄</span><h3 className="text-lg font-bold text-indigo-800">Substitution: Step by Step</h3></div>
+      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">{"\u{1F504}"}</span><h3 className="text-lg font-bold text-indigo-800">Substitution: Step by Step</h3></div>
       <div className="flex gap-1.5 mb-4">{steps.map((_,i)=><button key={i} onClick={()=>setStep(i)} className={`flex-1 h-2 rounded-full transition-all ${i<=step?"bg-indigo-500":"bg-gray-200"}`}/>)}</div>
       <div className={`rounded-xl border-2 ${bgs[step]} ${brs[step]} p-4 mb-4`}>
         <p className="text-sm font-bold text-gray-600 mb-2 uppercase tracking-wide">{s.title}</p>
         <pre className="text-base font-mono text-gray-800 whitespace-pre-wrap leading-relaxed">{s.content}</pre>
       </div>
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">💡</span><p className="text-sm text-yellow-800">{s.hint}</p></div>
+      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">{"\u{1F4A1}"}</span><p className="text-sm text-yellow-800">{s.hint}</p></div>
       <div className="flex justify-between">
         <button onClick={()=>setStep(Math.max(0,step-1))} disabled={step===0} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm">Back</button>
         <span className="text-sm text-gray-500 self-center">Step {step+1}/{steps.length}</span>
@@ -413,7 +413,7 @@ function EliminationStepper() {
   const s=steps[step];
   return (
     <div className="bg-white rounded-2xl border-2 border-teal-200 shadow-lg p-5">
-      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">➕</span><h3 className="text-lg font-bold text-teal-800">Elimination: Step by Step</h3></div>
+      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">{"\u2795"}</span><h3 className="text-lg font-bold text-teal-800">Elimination: Step by Step</h3></div>
       <div className="flex gap-1.5 mb-4">{steps.map((_,i)=><button key={i} onClick={()=>setStep(i)} className={`flex-1 h-2 rounded-full transition-all ${i<=step?"bg-teal-500":"bg-gray-200"}`}/>)}</div>
       <div className="bg-teal-50 border-2 border-teal-300 rounded-xl p-4 mb-3">
         <p className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-3">{s.title}</p>
@@ -423,7 +423,7 @@ function EliminationStepper() {
           {s.result&&<><div className="border-t-2 border-teal-400 mt-1 mb-1"/><p className="text-base font-bold text-teal-800 bg-teal-100 rounded-lg px-3 py-1.5">{s.result}</p></>}
         </div>
       </div>
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">💡</span><p className="text-sm text-yellow-800">{s.note}</p></div>
+      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">{"\u{1F4A1}"}</span><p className="text-sm text-yellow-800">{s.note}</p></div>
       <div className="flex justify-between">
         <button onClick={()=>setStep(Math.max(0,step-1))} disabled={step===0} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm">Back</button>
         <span className="text-sm text-gray-500 self-center">Step {step+1}/{steps.length}</span>
@@ -448,7 +448,26 @@ const NOTE_DIAGRAMS = {
   "measurement-pythagorean-0": <PythagoreanDiagram />,
 };
 
-// ── DATA ──────────────────────────────────────────────────────────────────────
+function normalizeEmoji(value = "") {
+  if (!value) return value;
+  if (value === "?" || value === "??") return "\u2728";
+  // Recover mojibake where UTF-8 bytes were interpreted as latin-1.
+  if (
+    value.includes("\u00F0") ||
+    value.includes("\u00E2") ||
+    value.includes("\u00C2") ||
+    value.includes("\u00C3")
+  ) {
+    try {
+      return decodeURIComponent(escape(value));
+    } catch {
+      return value;
+    }
+  }
+  return value;
+}
+
+// â”€â”€ DATA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const studyLibrary = {
   flashcards: {
@@ -508,14 +527,14 @@ const studyLibrary = {
     icon:Target,color:"rose",gradient:"from-rose-500 to-pink-600",
     sections:[
       {id:"number-review",title:"Number Sense Test Review",notes:[
-        {subtitle:"Unit 1: Square Roots and Number Sets",emoji:"🔢",points:[
+        {subtitle:"Unit 1: Square Roots and Number Sets",emoji:"ðŸ”¢",points:[
           "Rational numbers can be written as p/q; irrational numbers cannot",
           "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - memorize these",
           "Estimate square roots: sqrt(20) is between sqrt(16)=4 and sqrt(25)=5, closer to 4.5",
           "Simplify radicals: sqrt(72) = sqrt(36 x 2) = 6*sqrt(2)",
           "BEDMAS order: Brackets, Exponents, Division/Multiplication, Addition/Subtraction",
         ]},
-        {subtitle:"Unit 2: Exponent Laws",emoji:"⚡",points:[
+        {subtitle:"Unit 2: Exponent Laws",emoji:"âš¡",points:[
           "Product: a^m * a^n = a^(m+n). Quotient: a^m / a^n = a^(m-n). Power: (a^m)^n = a^(mn)",
           "Zero exponent: a^0 = 1. Negative: a^(-n) = 1/a^n",
           "Fractional: a^(1/2) = sqrt(a), a^(1/3) = cube root of a, a^(m/n) = nth root of a^m",
@@ -524,13 +543,13 @@ const studyLibrary = {
         ]},
       ]},
       {id:"linear-review",title:"Linear Relations Test Review",notes:[
-        {subtitle:"Unit 1: Slope and Rate of Change",emoji:"📈",points:[
+        {subtitle:"Unit 1: Slope and Rate of Change",emoji:"ðŸ“ˆ",points:[
           "Slope formula: m = (y2-y1)/(x2-x1). Always reduce to lowest terms.",
           "Positive slope: rises. Negative: falls. Zero: horizontal. Undefined: vertical.",
           "Rate of change equals slope: how much y changes per 1 unit increase in x",
           "From a table: constant first differences means the relation is linear",
         ]},
-        {subtitle:"Unit 2: Forms of Linear Equations",emoji:"📝",points:[
+        {subtitle:"Unit 2: Forms of Linear Equations",emoji:"ðŸ“",points:[
           "Slope-intercept: y = mx + b (m=slope, b=y-intercept) - best for graphing",
           "Standard form: Ax + By = C - best for finding both intercepts",
           "Point-slope: y - y1 = m(x - x1) - use when you know a point and the slope",
@@ -539,7 +558,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-review",title:"Linear Systems Test Review",notes:[
-        {subtitle:"Methods: Graphing, Substitution, Elimination",emoji:"🎯",points:[
+        {subtitle:"Methods: Graphing, Substitution, Elimination",emoji:"ðŸŽ¯",points:[
           "Graphing: graph both lines, find intersection. Good for understanding, not exact decimals.",
           "Substitution: isolate one variable, substitute. Best when one variable is already isolated.",
           "Elimination: multiply and add/subtract to cancel a variable. Best when coefficients match easily.",
@@ -548,14 +567,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"measurement-review",title:"Measurement and Geometry Review",notes:[
-        {subtitle:"Pythagorean Theorem and Applications",emoji:"📐",points:[
+        {subtitle:"Pythagorean Theorem and Applications",emoji:"ðŸ“",points:[
           "a^2 + b^2 = c^2 where c is the hypotenuse (opposite the 90 degree angle)",
           "Find hypotenuse: c = sqrt(a^2 + b^2). Find a leg: a = sqrt(c^2 - b^2)",
           "Pythagorean triples (no calculator): 3-4-5, 5-12-13, 8-15-17",
           "Apply in 2D and 3D: find diagonals, heights, distances",
           "Check if right triangle: if a^2+b^2=c^2 then it is a right triangle",
         ]},
-        {subtitle:"Perimeter, Area, and Volume",emoji:"📦",points:[
+        {subtitle:"Perimeter, Area, and Volume",emoji:"ðŸ“¦",points:[
           "Composite figures: break into simpler shapes, add or subtract areas",
           "Surface area: sum of all face areas - always in square units",
           "Volume of prism: V = base area x height",
@@ -608,7 +627,7 @@ const studyLibrary = {
     icon:ClipboardList,color:"teal",gradient:"from-teal-500 to-cyan-600",
     sections:[
       {id:"number-worksheets",title:"Number Sense Worksheets",notes:[
-        {subtitle:"Worksheet 1: Exponent Laws",emoji:"📝",points:[
+        {subtitle:"Worksheet 1: Exponent Laws",emoji:"ðŸ“",points:[
           "1. Simplify: x^5 times x^3",
           "2. Simplify: (y^4)^3",
           "3. Simplify: 12a^6 divided by 4a^2",
@@ -621,7 +640,7 @@ const studyLibrary = {
           "(2^3*2^2)/2^4 = 2^5/2^4 = 2^1 = 2",
           "6.5 x 10^(-6)",
         ]},
-        {subtitle:"Worksheet 2: Square Roots and Radicals",emoji:"📝",points:[
+        {subtitle:"Worksheet 2: Square Roots and Radicals",emoji:"ðŸ“",points:[
           "1. Simplify: sqrt(72)",
           "2. Estimate sqrt(50) to one decimal place without a calculator.",
           "3. Is sqrt(144) rational or irrational? Explain.",
@@ -636,7 +655,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"linear-worksheets",title:"Linear Relations Worksheets",notes:[
-        {subtitle:"Worksheet 1: Slope and Equations",emoji:"📝",points:[
+        {subtitle:"Worksheet 1: Slope and Equations",emoji:"ðŸ“",points:[
           "1. Find the slope of the line through (-1, 4) and (3, -2).",
           "2. Write the equation of the line with slope 3 and y-intercept -5.",
           "3. Find the x- and y-intercepts of 3x - 2y = 12.",
@@ -651,7 +670,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-worksheets",title:"Linear Systems Worksheets",notes:[
-        {subtitle:"Worksheet 1: Solving Systems",emoji:"📝",points:[
+        {subtitle:"Worksheet 1: Solving Systems",emoji:"ðŸ“",points:[
           "1. Solve by substitution: y = x - 3 and 2x + y = 9",
           "2. Solve by elimination: 3x + 2y = 11 and 3x - y = 5",
           "3. Solve by elimination: 4x + 3y = 10 and 2x - y = 0",
@@ -666,7 +685,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"measurement-worksheets",title:"Measurement Worksheets",notes:[
-        {subtitle:"Worksheet 1: Pythagorean Theorem",emoji:"📝",points:[
+        {subtitle:"Worksheet 1: Pythagorean Theorem",emoji:"ðŸ“",points:[
           "1. Find the hypotenuse of a right triangle with legs 9 and 12.",
           "2. A 13 m ladder leans against a wall. Base is 5 m from wall. How high does it reach?",
           "3. Is a triangle with sides 11, 14, 17 a right triangle? Show work.",
@@ -687,7 +706,7 @@ const studyLibrary = {
     icon:Calculator,color:"blue",gradient:"from-blue-500 to-cyan-600",
     sections:[
       {id:"number-rational",title:"Rational and Irrational Numbers",notes:[
-        {subtitle:"The Real Number System",emoji:"🔢",points:[
+        {subtitle:"The Real Number System",emoji:"ðŸ”¢",points:[
           "NATURAL numbers: counting numbers - 1, 2, 3, 4, ...",
           "WHOLE numbers: natural numbers plus zero - 0, 1, 2, 3, ...",
           "INTEGERS: positive and negative whole numbers - ..., -2, -1, 0, 1, 2, ...",
@@ -697,7 +716,7 @@ const studyLibrary = {
           "Examples of irrational: pi, sqrt(2), sqrt(3), e",
           "REAL numbers: all rational AND irrational numbers together",
         ]},
-        {subtitle:"Square Roots and Estimating Radicals",emoji:"√",points:[
+        {subtitle:"Square Roots and Estimating Radicals",emoji:"âˆš",points:[
           "sqrt(a) is the non-negative number that when squared gives a",
           "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - give rational square roots",
           "Non-perfect square roots are IRRATIONAL: sqrt(2), sqrt(3), sqrt(5), sqrt(7), ...",
@@ -706,7 +725,7 @@ const studyLibrary = {
           "Rule: sqrt(a x b) = sqrt(a) x sqrt(b). Use this to simplify!",
           "Mixed radical: 3*sqrt(5) means 3 times sqrt(5)",
         ]},
-        {subtitle:"Comparing and Ordering Numbers",emoji:"📊",points:[
+        {subtitle:"Comparing and Ordering Numbers",emoji:"ðŸ“Š",points:[
           "Convert all numbers to decimals to compare: sqrt(7) is about 2.646, 8/3 is about 2.667",
           "Negative numbers: further from zero means smaller. So -5 is less than -3",
           "Absolute value |a| = distance from zero. |-4| = 4 and |3| = 3",
@@ -714,7 +733,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"number-exponents",title:"Exponent Laws",notes:[
-        {subtitle:"The Seven Exponent Laws",emoji:"⚡",points:[
+        {subtitle:"The Seven Exponent Laws",emoji:"âš¡",points:[
           "PRODUCT LAW: a^m times a^n = a^(m+n) - add exponents when multiplying same base",
           "QUOTIENT LAW: a^m divided by a^n = a^(m-n) - subtract exponents when dividing same base",
           "POWER OF A POWER: (a^m)^n = a^(mn) - multiply the exponents",
@@ -724,7 +743,7 @@ const studyLibrary = {
           "NEGATIVE EXPONENT: a^(-n) = 1/a^n",
           "All laws require the SAME base to combine exponents!",
         ]},
-        {subtitle:"Fractional Exponents and Radicals",emoji:"√",points:[
+        {subtitle:"Fractional Exponents and Radicals",emoji:"âˆš",points:[
           "a^(1/2) = sqrt(a) (square root)",
           "a^(1/3) = cube root of a",
           "a^(1/n) = nth root of a",
@@ -732,7 +751,7 @@ const studyLibrary = {
           "Example: 8^(2/3) = (cube root of 8)^2 = 2^2 = 4",
           "Tip: take the ROOT first when possible (smaller numbers to work with)",
         ]},
-        {subtitle:"Scientific Notation",emoji:"🔬",points:[
+        {subtitle:"Scientific Notation",emoji:"ðŸ”¬",points:[
           "Form: a x 10^n where a is between 1 (inclusive) and 10 (exclusive) and n is an integer",
           "Large numbers use positive exponents: 3,200,000 = 3.2 x 10^6",
           "Small numbers use negative exponents: 0.000045 = 4.5 x 10^(-5)",
@@ -748,7 +767,7 @@ const studyLibrary = {
     icon:TrendingUp,color:"purple",gradient:"from-violet-500 to-purple-600",
     sections:[
       {id:"linear-slopeintercept",title:"Slope and Slope-Intercept Form",notes:[
-        {subtitle:"Understanding Slope",emoji:"📐",points:[
+        {subtitle:"Understanding Slope",emoji:"ðŸ“",points:[
           "Slope measures STEEPNESS and DIRECTION of a line",
           "Formula: m = rise/run = (y2 - y1)/(x2 - x1)",
           "Positive slope: line rises from left to right",
@@ -757,14 +776,14 @@ const studyLibrary = {
           "Undefined slope: vertical line - x is constant (denominator = 0)",
           "Slope tells you: for every 1 unit right, y changes by m units",
         ]},
-        {subtitle:"Slope-Intercept Form: y = mx + b",emoji:"✏️",points:[
+        {subtitle:"Slope-Intercept Form: y = mx + b",emoji:"âœï¸",points:[
           "m = slope (rate of change)",
           "b = y-intercept (value of y when x = 0)",
           "To graph: plot the y-intercept (0, b), then use slope to find more points",
           "Example: y = 3x - 2. Plot (0, -2). Slope = 3/1 means go up 3 and right 1 to reach (1, 1)",
           "To find slope and y-intercept from an equation: rearrange into y = mx + b form",
         ]},
-        {subtitle:"Direct and Partial Variation",emoji:"🔗",points:[
+        {subtitle:"Direct and Partial Variation",emoji:"ðŸ”—",points:[
           "DIRECT VARIATION: y = kx - passes through origin. k is the constant of variation.",
           "If x doubles, y doubles. Constant ratio y/x = k for all points.",
           "PARTIAL VARIATION: y = mx + b where b is not 0 - does NOT pass through origin",
@@ -774,14 +793,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"linear-forms",title:"Forms of Linear Equations",notes:[
-        {subtitle:"Standard Form: Ax + By = C",emoji:"📝",points:[
+        {subtitle:"Standard Form: Ax + By = C",emoji:"ðŸ“",points:[
           "Standard form: Ax + By = C where A, B, C are integers and A is at least 0",
           "Finding x-intercept: set y = 0 and solve for x",
           "Finding y-intercept: set x = 0 and solve for y",
           "Example: 3x + 2y = 12. x-int: 3x=12 so x=4, giving (4,0). y-int: 2y=12 so y=6, giving (0,6)",
           "Converting to slope-intercept: isolate y. 2y = -3x + 12 gives y = (-3/2)x + 6",
         ]},
-        {subtitle:"Point-Slope Form and Writing Equations",emoji:"🖊️",points:[
+        {subtitle:"Point-Slope Form and Writing Equations",emoji:"ðŸ–Šï¸",points:[
           "Point-slope form: y - y1 = m(x - x1) - use when given a point and slope",
           "Step 1: Identify slope m and a point (x1, y1)",
           "Step 2: Substitute and simplify to y = mx + b",
@@ -789,7 +808,7 @@ const studyLibrary = {
           "Horizontal line through (a, b): equation is y = b",
           "Vertical line through (a, b): equation is x = a (undefined slope)",
         ]},
-        {subtitle:"Parallel and Perpendicular Lines",emoji:"⊥",points:[
+        {subtitle:"Parallel and Perpendicular Lines",emoji:"âŠ¥",points:[
           "PARALLEL lines: same slope, different y-intercept. They never intersect.",
           "Example: y = 2x + 3 and y = 2x - 5 are parallel (both slope 2)",
           "PERPENDICULAR lines: slopes are negative reciprocals. Their product equals -1.",
@@ -804,13 +823,13 @@ const studyLibrary = {
     icon:Grid3x3,color:"amber",gradient:"from-amber-500 to-orange-600",
     sections:[
       {id:"systems-graphing",title:"Graphing Systems",notes:[
-        {subtitle:"Understanding a Linear System",emoji:"🎯",points:[
+        {subtitle:"Understanding a Linear System",emoji:"ðŸŽ¯",points:[
           "A system of linear equations is two or more equations with the same variables",
           "The SOLUTION is the point (x, y) that makes BOTH equations true at the same time",
           "Graphically: the solution is the INTERSECTION POINT of the two lines",
           "Three outcomes: one solution (lines intersect), no solution (parallel), infinite solutions (same line)",
         ]},
-        {subtitle:"Graphing Method",emoji:"📉",points:[
+        {subtitle:"Graphing Method",emoji:"ðŸ“‰",points:[
           "Step 1: Rewrite each equation in slope-intercept form",
           "Step 2: Graph both lines on the same coordinate grid",
           "Step 3: Identify the intersection point",
@@ -820,7 +839,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-substitution",title:"Substitution Method",notes:[
-        {subtitle:"Substitution - Full Method",emoji:"🔄",points:[
+        {subtitle:"Substitution - Full Method",emoji:"ðŸ”„",points:[
           "Step 1: ISOLATE one variable in one equation (pick whichever is easiest)",
           "Step 2: SUBSTITUTE that expression into the other equation",
           "Step 3: SOLVE the resulting single-variable equation",
@@ -828,7 +847,7 @@ const studyLibrary = {
           "Step 5: VERIFY by substituting both values into both original equations",
           "BEST USED when: one variable is already isolated or has a coefficient of 1",
         ]},
-        {subtitle:"Common Mistakes to Avoid",emoji:"⚠️",points:[
+        {subtitle:"Common Mistakes to Avoid",emoji:"âš ï¸",points:[
           "Do NOT substitute into the SAME equation you isolated from - use the OTHER one",
           "Do NOT forget to find BOTH variables - one value alone is not a complete solution",
           "Do NOT skip verification - especially when numbers get messy",
@@ -837,7 +856,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-elimination",title:"Elimination Method",notes:[
-        {subtitle:"Elimination - Full Method",emoji:"➕",points:[
+        {subtitle:"Elimination - Full Method",emoji:"âž•",points:[
           "Step 1: ALIGN both equations with like terms in columns",
           "Step 2: If needed, MULTIPLY one or both equations so one variable has opposite coefficients",
           "Step 3: ADD the equations to ELIMINATE one variable",
@@ -846,7 +865,7 @@ const studyLibrary = {
           "Step 6: VERIFY in both original equations",
           "BEST USED when: coefficients of one variable are already opposites or easily made so",
         ]},
-        {subtitle:"When to Multiply First",emoji:"✖️",points:[
+        {subtitle:"When to Multiply First",emoji:"âœ–ï¸",points:[
           "If y-coefficients are 3 and 2: multiply first eq by 2 and second by 3 so both become 6",
           "Then subtract to eliminate y",
           "Sometimes only ONE equation needs to be multiplied",
@@ -855,14 +874,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-word-problems",title:"Systems Word Problems",notes:[
-        {subtitle:"Setting Up Systems from Word Problems",emoji:"📖",points:[
+        {subtitle:"Setting Up Systems from Word Problems",emoji:"ðŸ“–",points:[
           "Step 1: Define your VARIABLES clearly (e.g. let x = adults, y = children)",
           "Step 2: Write TWO equations from the information given",
           "Step 3: Solve using any method (substitution or elimination)",
           "Step 4: Answer the question with proper units",
           "Step 5: Verify your answer makes sense in context",
         ]},
-        {subtitle:"Common Types of Word Problems",emoji:"🗂️",points:[
+        {subtitle:"Common Types of Word Problems",emoji:"ðŸ—‚ï¸",points:[
           "MIXTURE: blend two types of something to get a mixture at a certain value",
           "RATE-TIME-DISTANCE: d = r*t. Set up equations for two different situations.",
           "NUMBER PROBLEMS: two numbers add to 50 and differ by 12. x+y=50 and x-y=12",
@@ -877,7 +896,7 @@ const studyLibrary = {
     icon:Shapes,color:"green",gradient:"from-emerald-500 to-teal-600",
     sections:[
       {id:"algebra-polynomials",title:"Introduction to Polynomials",notes:[
-        {subtitle:"Polynomial Vocabulary",emoji:"📚",points:[
+        {subtitle:"Polynomial Vocabulary",emoji:"ðŸ“š",points:[
           "TERM: a number, variable, or product of numbers and variables (e.g. 5x^2, -3x, 7)",
           "COEFFICIENT: the number multiplying the variable (in 4x^3 the coefficient is 4)",
           "DEGREE of a term: sum of exponents on the variables (3x^2*y has degree 3)",
@@ -886,7 +905,7 @@ const studyLibrary = {
           "LIKE TERMS: same variable AND same exponent. Only like terms can be combined!",
           "Examples: 3x^2 and -7x^2 are like terms. 3x^2 and 3x are NOT like terms.",
         ]},
-        {subtitle:"Adding and Subtracting Polynomials",emoji:"➕",points:[
+        {subtitle:"Adding and Subtracting Polynomials",emoji:"âž•",points:[
           "Combine LIKE TERMS only - same variable, same exponent",
           "Adding: simply combine like terms. (3x^2+2x-1)+(x^2-5x+4) = 4x^2-3x+3",
           "Subtracting: distribute the negative sign to ALL terms in the second polynomial",
@@ -895,20 +914,20 @@ const studyLibrary = {
         ]},
       ]},
       {id:"algebra-multiplying",title:"Multiplying Polynomials",notes:[
-        {subtitle:"Multiplying a Monomial by a Polynomial",emoji:"✖️",points:[
+        {subtitle:"Multiplying a Monomial by a Polynomial",emoji:"âœ–ï¸",points:[
           "Distribute the monomial to EVERY term inside the polynomial",
           "Multiply coefficients, add exponents for same-base variables",
           "Example: 3x(2x^2 - 5x + 1) = 6x^3 - 15x^2 + 3x",
           "Example: -2a^2(3a - 4) = -6a^3 + 8a^2  (be careful with signs!)",
         ]},
-        {subtitle:"FOIL: Multiplying Two Binomials",emoji:"🔠",points:[
+        {subtitle:"FOIL: Multiplying Two Binomials",emoji:"ðŸ” ",points:[
           "FOIL stands for: First, Outer, Inner, Last",
           "(a + b)(c + d) = ac + ad + bc + bd",
           "Example: (x + 3)(x + 5) = x^2 + 5x + 3x + 15 = x^2 + 8x + 15",
           "Example: (2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4",
           "Always collect like terms after FOILing!",
         ]},
-        {subtitle:"Special Products",emoji:"⭐",points:[
+        {subtitle:"Special Products",emoji:"â­",points:[
           "DIFFERENCE OF SQUARES: (a + b)(a - b) = a^2 - b^2",
           "Example: (x + 5)(x - 5) = x^2 - 25 (middle terms cancel)",
           "PERFECT SQUARE TRINOMIAL: (a + b)^2 = a^2 + 2ab + b^2",
@@ -919,14 +938,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"algebra-factoring",title:"Factoring Polynomials",notes:[
-        {subtitle:"Common Factoring (GCF)",emoji:"🔍",points:[
+        {subtitle:"Common Factoring (GCF)",emoji:"ðŸ”",points:[
           "ALWAYS look for a GCF (greatest common factor) FIRST before anything else",
           "Find the largest number and highest power that divides every term",
           "Example: 6x^3 + 9x^2 - 3x. GCF = 3x. Result: 3x(2x^2 + 3x - 1)",
           "Example: 4a^2*b + 8a*b^2 - 12ab. GCF = 4ab. Result: 4ab(a + 2b - 3)",
           "After factoring, verify by expanding back: does it match the original?",
         ]},
-        {subtitle:"Factoring Trinomials: x^2 + bx + c",emoji:"🧩",points:[
+        {subtitle:"Factoring Trinomials: x^2 + bx + c",emoji:"ðŸ§©",points:[
           "Find two integers that MULTIPLY to c and ADD to b",
           "Then factor as (x + p)(x + q) where p*q = c and p+q = b",
           "Example: x^2 + 5x + 6. Need: multiply to 6 and add to 5. That is 2 and 3. Answer: (x+2)(x+3)",
@@ -934,7 +953,7 @@ const studyLibrary = {
           "Example: x^2 + 2x - 15. Need: multiply to -15 and add to 2. That is 5 and -3. Answer: (x+5)(x-3)",
           "Positive product: both same sign. Negative product: opposite signs.",
         ]},
-        {subtitle:"Factoring: Difference of Squares",emoji:"□",points:[
+        {subtitle:"Factoring: Difference of Squares",emoji:"â–¡",points:[
           "Pattern: a^2 - b^2 = (a + b)(a - b)",
           "Both terms must be perfect squares separated by subtraction",
           "Example: x^2 - 16 = (x+4)(x-4)",
@@ -950,7 +969,7 @@ const studyLibrary = {
     icon:BookMarked,color:"rose",gradient:"from-rose-500 to-pink-600",
     sections:[
       {id:"measurement-pythagorean",title:"The Pythagorean Theorem",notes:[
-        {subtitle:"Understanding the Theorem",emoji:"📐",points:[
+        {subtitle:"Understanding the Theorem",emoji:"ðŸ“",points:[
           "In any right triangle: a^2 + b^2 = c^2, where c is the hypotenuse",
           "The hypotenuse is ALWAYS opposite the right angle and is the longest side",
           "To find hypotenuse: c = sqrt(a^2 + b^2)",
@@ -959,7 +978,7 @@ const studyLibrary = {
           "Multiples of triples also work: (6,8,10) is (3,4,5) scaled by 2",
           "Converse: if a^2+b^2=c^2, then the triangle IS a right triangle",
         ]},
-        {subtitle:"Applying the Pythagorean Theorem",emoji:"🏗️",points:[
+        {subtitle:"Applying the Pythagorean Theorem",emoji:"ðŸ—ï¸",points:[
           "Identify the hypotenuse FIRST (longest side, opposite 90 degrees)",
           "Draw a diagram and label sides a, b, c",
           "2D applications: diagonals of rectangles, height of isosceles triangles",
@@ -969,7 +988,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"measurement-formulas",title:"Perimeter, Area, and Volume",notes:[
-        {subtitle:"Perimeter and Area: 2D Shapes",emoji:"📏",points:[
+        {subtitle:"Perimeter and Area: 2D Shapes",emoji:"ðŸ“",points:[
           "Rectangle: A = l*w, P = 2(l+w)",
           "Triangle: A = (1/2)*b*h where h is perpendicular to base b. P = sum of all sides",
           "Trapezoid: A = (1/2)(a+b)h where a and b are the parallel sides",
@@ -977,7 +996,7 @@ const studyLibrary = {
           "Always use RADIUS (not diameter) in the circle area formula",
           "Composite figures: split into simpler shapes, add or subtract areas",
         ]},
-        {subtitle:"Surface Area: 3D Shapes",emoji:"📦",points:[
+        {subtitle:"Surface Area: 3D Shapes",emoji:"ðŸ“¦",points:[
           "Surface area = total area of ALL outer faces",
           "Rectangular prism: SA = 2(lw + lh + wh)",
           "Cylinder: SA = 2*pi*r^2 + 2*pi*r*h (two circles plus the curved rectangle)",
@@ -985,7 +1004,7 @@ const studyLibrary = {
           "Sphere: SA = 4*pi*r^2",
           "Always state units as SQUARE units: cm^2 or m^2",
         ]},
-        {subtitle:"Volume: 3D Shapes",emoji:"📐",points:[
+        {subtitle:"Volume: 3D Shapes",emoji:"ðŸ“",points:[
           "Volume = amount of space inside a 3D object",
           "Any prism: V = base area x height",
           "Rectangular prism: V = l*w*h",
@@ -1000,7 +1019,7 @@ const studyLibrary = {
   },
 };
 
-// ── MAIN COMPONENT ────────────────────────────────────────────────────────────
+// â”€â”€ MAIN COMPONENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export default function MathStudyG9() {
   const [showIntro,setShowIntro]=useState(true);
@@ -1194,7 +1213,7 @@ export default function MathStudyG9() {
               <button onClick={()=>setSelectedSection(null)} className="flex items-center gap-2 text-sm syne font-semibold" style={{color:"var(--muted)"}}>
                 <ArrowLeft className="w-4 h-4"/> {selectedSubject.name}
               </button>
-              <span style={{color:"var(--dim)"}}>›</span>
+              <span style={{color:"var(--dim)"}}>â€º</span>
               <span className="syne text-sm font-semibold truncate max-w-48" style={{color:"var(--dim)"}}>{sec.title}</span>
             </div>
             <button onClick={()=>toggleRead(sec.id)} className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs syne font-bold"
@@ -1218,7 +1237,7 @@ export default function MathStudyG9() {
               return (
                 <div key={idx} className={`glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx+1,4)}`}>
                   <div className={`bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`} style={{opacity:0.92}}>
-                    <span className="text-xl leading-none">{note.emoji}</span>
+                    <span className="text-xl leading-none">{normalizeEmoji(note.emoji)}</span>
                     <h2 className="syne font-bold text-sm text-white leading-snug">{note.subtitle}</h2>
                   </div>
                   <div className="px-6 py-5">
@@ -1285,7 +1304,7 @@ export default function MathStudyG9() {
             <button onClick={()=>setSelectedSubject(null)} className="flex items-center gap-2 text-sm syne font-semibold" style={{color:"var(--muted)"}}>
               <ArrowLeft className="w-4 h-4"/> Library
             </button>
-            <span style={{color:"var(--dim)"}}>›</span>
+            <span style={{color:"var(--dim)"}}>â€º</span>
             <span className="syne font-semibold text-sm" style={{color:"var(--muted)"}}>{sub.name}</span>
           </div>
         </div>
@@ -1407,7 +1426,7 @@ export default function MathStudyG9() {
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center"><Calculator className="w-3.5 h-3.5 text-white"/></div>
             <span className="syne font-black text-sm" style={{color:"var(--text)"}}>MathLib</span>
-            <span style={{color:"var(--dim)"}}>·</span>
+            <span style={{color:"var(--dim)"}}>&middot;</span>
             <span className="text-xs mono" style={{color:"var(--muted)"}}>Grade 9</span>
           </div>
           <div className="glass flex items-center gap-2 rounded-xl px-3 py-1.5">

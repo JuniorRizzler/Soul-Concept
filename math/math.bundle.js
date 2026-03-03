@@ -245,14 +245,14 @@
         function isValidElement(object) {
           return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
         }
-        function escape(key) {
+        function escape2(key) {
           var escaperLookup = { "=": "=0", ":": "=2" };
           return "$" + key.replace(/[=:]/g, function(match) {
             return escaperLookup[match];
           });
         }
         function getElementKey(element, index) {
-          return "object" === typeof element && null !== element && null != element.key ? (checkKeyStringCoercion(element.key), escape("" + element.key)) : index.toString(36);
+          return "object" === typeof element && null !== element && null != element.key ? (checkKeyStringCoercion(element.key), escape2("" + element.key)) : index.toString(36);
         }
         function resolveThenable(thenable) {
           switch (thenable.status) {
@@ -21841,7 +21841,7 @@
     const yInt = cy - b * sc;
     const xInt = m !== 0 ? cx + -b / m * sc : null;
     const slopeDesc = m > 0 ? "Rising" : "m<0" ? m < 0 ? "Falling" : "Horizontal" : "Horizontal";
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2 mb-3 flex-wrap" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "\u{1F4C8}"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "text-lg font-bold text-indigo-800" }, "Slope-Intercept Explorer"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "ml-auto text-sm font-mono bg-indigo-50 px-3 py-1 rounded-full text-indigo-700" }, "y = ", m, "x ", b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`)), /* @__PURE__ */ import_react3.default.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50 border border-slate-200" }, [-6, -4, -2, 0, 2, 4, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("g", { key: v }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx + v * sc, y1: 10, x2: cx + v * sc, y2: H - 10, stroke: "#e2e8f0", strokeWidth: "1" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy - v * sc, x2: W - 10, y2: cy - v * sc, stroke: "#e2e8f0", strokeWidth: "1" }))), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#94a3b8", strokeWidth: "2" }), [-6, -4, -2, 2, 4, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("text", { key: v, x: cx + v * sc, y: cy + 14, textAnchor: "middle", fontSize: "9", fill: "#94a3b8" }, v)), d && /* @__PURE__ */ import_react3.default.createElement("path", { d, fill: "none", stroke: "#6366f1", strokeWidth: "2.5", strokeLinecap: "round" }), yInt > 10 && yInt < H - 10 && /* @__PURE__ */ import_react3.default.createElement("circle", { cx, cy: yInt, r: "5", fill: "#0ea5e9", stroke: "white", strokeWidth: "2" }), xInt && xInt > 10 && xInt < W - 10 && /* @__PURE__ */ import_react3.default.createElement("circle", { cx: xInt, cy, r: "5", fill: "#10b981", stroke: "white", strokeWidth: "2" })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-3 grid grid-cols-2 gap-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-indigo-50 rounded-xl p-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "slope (m)"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm font-bold text-indigo-700" }, m)), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -4, max: 4, step: 0.5, value: m, onChange: (e) => setM(parseFloat(e.target.value)), className: "w-full accent-indigo-600" })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-blue-50 rounded-xl p-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "y-intercept (b)"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm font-bold text-blue-700" }, b)), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -5, max: 5, step: 1, value: b, onChange: (e) => setB(parseFloat(e.target.value)), className: "w-full accent-blue-600" }))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-2 grid grid-cols-3 gap-2 text-xs text-center" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-indigo-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-indigo-700" }, "Slope = ", m), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, m > 0 ? "Rising" : m < 0 ? "Falling" : "Horizontal")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-blue-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-blue-700" }, "y-int: (0,", b, ")"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, "Crosses y-axis here")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-green-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-green-700" }, "x-int"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, m !== 0 ? `(${(-b / m).toFixed(1)}, 0)` : "None (horiz.)"))));
+    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2 mb-3 flex-wrap" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "\xF0\u0178\u201C\u02C6"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "text-lg font-bold text-indigo-800" }, "Slope-Intercept Explorer"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "ml-auto text-sm font-mono bg-indigo-50 px-3 py-1 rounded-full text-indigo-700" }, "y = ", m, "x ", b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`)), /* @__PURE__ */ import_react3.default.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50 border border-slate-200" }, [-6, -4, -2, 0, 2, 4, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("g", { key: v }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx + v * sc, y1: 10, x2: cx + v * sc, y2: H - 10, stroke: "#e2e8f0", strokeWidth: "1" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy - v * sc, x2: W - 10, y2: cy - v * sc, stroke: "#e2e8f0", strokeWidth: "1" }))), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#94a3b8", strokeWidth: "2" }), [-6, -4, -2, 2, 4, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("text", { key: v, x: cx + v * sc, y: cy + 14, textAnchor: "middle", fontSize: "9", fill: "#94a3b8" }, v)), d && /* @__PURE__ */ import_react3.default.createElement("path", { d, fill: "none", stroke: "#6366f1", strokeWidth: "2.5", strokeLinecap: "round" }), yInt > 10 && yInt < H - 10 && /* @__PURE__ */ import_react3.default.createElement("circle", { cx, cy: yInt, r: "5", fill: "#0ea5e9", stroke: "white", strokeWidth: "2" }), xInt && xInt > 10 && xInt < W - 10 && /* @__PURE__ */ import_react3.default.createElement("circle", { cx: xInt, cy, r: "5", fill: "#10b981", stroke: "white", strokeWidth: "2" })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-3 grid grid-cols-2 gap-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-indigo-50 rounded-xl p-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "slope (m)"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm font-bold text-indigo-700" }, m)), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -4, max: 4, step: 0.5, value: m, onChange: (e) => setM(parseFloat(e.target.value)), className: "w-full accent-indigo-600" })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-blue-50 rounded-xl p-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "y-intercept (b)"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm font-bold text-blue-700" }, b)), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -5, max: 5, step: 1, value: b, onChange: (e) => setB(parseFloat(e.target.value)), className: "w-full accent-blue-600" }))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-2 grid grid-cols-3 gap-2 text-xs text-center" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-indigo-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-indigo-700" }, "Slope = ", m), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, m > 0 ? "Rising" : m < 0 ? "Falling" : "Horizontal")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-blue-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-blue-700" }, "y-int: (0,", b, ")"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, "Crosses y-axis here")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-green-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-green-700" }, "x-int"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, m !== 0 ? `(${(-b / m).toFixed(1)}, 0)` : "None (horiz.)"))));
   }
   function LinearSystemsVisualizer() {
     const [m1, setM1] = (0, import_react3.useState)(2);
@@ -21912,6 +21912,18 @@
     "measurement-formulas-0": /* @__PURE__ */ import_react3.default.createElement(MeasurementDiagram, null),
     "measurement-pythagorean-0": /* @__PURE__ */ import_react3.default.createElement(PythagoreanDiagram, null)
   };
+  function normalizeEmoji(value = "") {
+    if (!value) return value;
+    if (value === "?" || value === "??") return "\u2728";
+    if (value.includes("\xF0") || value.includes("\xE2") || value.includes("\xC2") || value.includes("\xC3")) {
+      try {
+        return decodeURIComponent(escape(value));
+      } catch (e) {
+        return value;
+      }
+    }
+    return value;
+  }
   var studyLibrary = {
     flashcards: {
       id: "flashcards",
@@ -21978,14 +21990,14 @@
       gradient: "from-rose-500 to-pink-600",
       sections: [
         { id: "number-review", title: "Number Sense Test Review", notes: [
-          { subtitle: "Unit 1: Square Roots and Number Sets", emoji: "\u{1F522}", points: [
+          { subtitle: "Unit 1: Square Roots and Number Sets", emoji: "\xF0\u0178\u201D\xA2", points: [
             "Rational numbers can be written as p/q; irrational numbers cannot",
             "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - memorize these",
             "Estimate square roots: sqrt(20) is between sqrt(16)=4 and sqrt(25)=5, closer to 4.5",
             "Simplify radicals: sqrt(72) = sqrt(36 x 2) = 6*sqrt(2)",
             "BEDMAS order: Brackets, Exponents, Division/Multiplication, Addition/Subtraction"
           ] },
-          { subtitle: "Unit 2: Exponent Laws", emoji: "\u26A1", points: [
+          { subtitle: "Unit 2: Exponent Laws", emoji: "\xE2\u0161\xA1", points: [
             "Product: a^m * a^n = a^(m+n). Quotient: a^m / a^n = a^(m-n). Power: (a^m)^n = a^(mn)",
             "Zero exponent: a^0 = 1. Negative: a^(-n) = 1/a^n",
             "Fractional: a^(1/2) = sqrt(a), a^(1/3) = cube root of a, a^(m/n) = nth root of a^m",
@@ -21994,13 +22006,13 @@
           ] }
         ] },
         { id: "linear-review", title: "Linear Relations Test Review", notes: [
-          { subtitle: "Unit 1: Slope and Rate of Change", emoji: "\u{1F4C8}", points: [
+          { subtitle: "Unit 1: Slope and Rate of Change", emoji: "\xF0\u0178\u201C\u02C6", points: [
             "Slope formula: m = (y2-y1)/(x2-x1). Always reduce to lowest terms.",
             "Positive slope: rises. Negative: falls. Zero: horizontal. Undefined: vertical.",
             "Rate of change equals slope: how much y changes per 1 unit increase in x",
             "From a table: constant first differences means the relation is linear"
           ] },
-          { subtitle: "Unit 2: Forms of Linear Equations", emoji: "\u{1F4DD}", points: [
+          { subtitle: "Unit 2: Forms of Linear Equations", emoji: "\xF0\u0178\u201C\x9D", points: [
             "Slope-intercept: y = mx + b (m=slope, b=y-intercept) - best for graphing",
             "Standard form: Ax + By = C - best for finding both intercepts",
             "Point-slope: y - y1 = m(x - x1) - use when you know a point and the slope",
@@ -22009,7 +22021,7 @@
           ] }
         ] },
         { id: "systems-review", title: "Linear Systems Test Review", notes: [
-          { subtitle: "Methods: Graphing, Substitution, Elimination", emoji: "\u{1F3AF}", points: [
+          { subtitle: "Methods: Graphing, Substitution, Elimination", emoji: "\xF0\u0178\u017D\xAF", points: [
             "Graphing: graph both lines, find intersection. Good for understanding, not exact decimals.",
             "Substitution: isolate one variable, substitute. Best when one variable is already isolated.",
             "Elimination: multiply and add/subtract to cancel a variable. Best when coefficients match easily.",
@@ -22018,14 +22030,14 @@
           ] }
         ] },
         { id: "measurement-review", title: "Measurement and Geometry Review", notes: [
-          { subtitle: "Pythagorean Theorem and Applications", emoji: "\u{1F4D0}", points: [
+          { subtitle: "Pythagorean Theorem and Applications", emoji: "\xF0\u0178\u201C\x90", points: [
             "a^2 + b^2 = c^2 where c is the hypotenuse (opposite the 90 degree angle)",
             "Find hypotenuse: c = sqrt(a^2 + b^2). Find a leg: a = sqrt(c^2 - b^2)",
             "Pythagorean triples (no calculator): 3-4-5, 5-12-13, 8-15-17",
             "Apply in 2D and 3D: find diagonals, heights, distances",
             "Check if right triangle: if a^2+b^2=c^2 then it is a right triangle"
           ] },
-          { subtitle: "Perimeter, Area, and Volume", emoji: "\u{1F4E6}", points: [
+          { subtitle: "Perimeter, Area, and Volume", emoji: "\xF0\u0178\u201C\xA6", points: [
             "Composite figures: break into simpler shapes, add or subtract areas",
             "Surface area: sum of all face areas - always in square units",
             "Volume of prism: V = base area x height",
@@ -22086,7 +22098,7 @@
       gradient: "from-teal-500 to-cyan-600",
       sections: [
         { id: "number-worksheets", title: "Number Sense Worksheets", notes: [
-          { subtitle: "Worksheet 1: Exponent Laws", emoji: "\u{1F4DD}", points: [
+          { subtitle: "Worksheet 1: Exponent Laws", emoji: "\xF0\u0178\u201C\x9D", points: [
             "1. Simplify: x^5 times x^3",
             "2. Simplify: (y^4)^3",
             "3. Simplify: 12a^6 divided by 4a^2",
@@ -22099,7 +22111,7 @@
             "(2^3*2^2)/2^4 = 2^5/2^4 = 2^1 = 2",
             "6.5 x 10^(-6)"
           ] },
-          { subtitle: "Worksheet 2: Square Roots and Radicals", emoji: "\u{1F4DD}", points: [
+          { subtitle: "Worksheet 2: Square Roots and Radicals", emoji: "\xF0\u0178\u201C\x9D", points: [
             "1. Simplify: sqrt(72)",
             "2. Estimate sqrt(50) to one decimal place without a calculator.",
             "3. Is sqrt(144) rational or irrational? Explain.",
@@ -22114,7 +22126,7 @@
           ] }
         ] },
         { id: "linear-worksheets", title: "Linear Relations Worksheets", notes: [
-          { subtitle: "Worksheet 1: Slope and Equations", emoji: "\u{1F4DD}", points: [
+          { subtitle: "Worksheet 1: Slope and Equations", emoji: "\xF0\u0178\u201C\x9D", points: [
             "1. Find the slope of the line through (-1, 4) and (3, -2).",
             "2. Write the equation of the line with slope 3 and y-intercept -5.",
             "3. Find the x- and y-intercepts of 3x - 2y = 12.",
@@ -22129,7 +22141,7 @@
           ] }
         ] },
         { id: "systems-worksheets", title: "Linear Systems Worksheets", notes: [
-          { subtitle: "Worksheet 1: Solving Systems", emoji: "\u{1F4DD}", points: [
+          { subtitle: "Worksheet 1: Solving Systems", emoji: "\xF0\u0178\u201C\x9D", points: [
             "1. Solve by substitution: y = x - 3 and 2x + y = 9",
             "2. Solve by elimination: 3x + 2y = 11 and 3x - y = 5",
             "3. Solve by elimination: 4x + 3y = 10 and 2x - y = 0",
@@ -22144,7 +22156,7 @@
           ] }
         ] },
         { id: "measurement-worksheets", title: "Measurement Worksheets", notes: [
-          { subtitle: "Worksheet 1: Pythagorean Theorem", emoji: "\u{1F4DD}", points: [
+          { subtitle: "Worksheet 1: Pythagorean Theorem", emoji: "\xF0\u0178\u201C\x9D", points: [
             "1. Find the hypotenuse of a right triangle with legs 9 and 12.",
             "2. A 13 m ladder leans against a wall. Base is 5 m from wall. How high does it reach?",
             "3. Is a triangle with sides 11, 14, 17 a right triangle? Show work.",
@@ -22169,7 +22181,7 @@
       gradient: "from-blue-500 to-cyan-600",
       sections: [
         { id: "number-rational", title: "Rational and Irrational Numbers", notes: [
-          { subtitle: "The Real Number System", emoji: "\u{1F522}", points: [
+          { subtitle: "The Real Number System", emoji: "\xF0\u0178\u201D\xA2", points: [
             "NATURAL numbers: counting numbers - 1, 2, 3, 4, ...",
             "WHOLE numbers: natural numbers plus zero - 0, 1, 2, 3, ...",
             "INTEGERS: positive and negative whole numbers - ..., -2, -1, 0, 1, 2, ...",
@@ -22179,7 +22191,7 @@
             "Examples of irrational: pi, sqrt(2), sqrt(3), e",
             "REAL numbers: all rational AND irrational numbers together"
           ] },
-          { subtitle: "Square Roots and Estimating Radicals", emoji: "\u221A", points: [
+          { subtitle: "Square Roots and Estimating Radicals", emoji: "\xE2\u02C6\u0161", points: [
             "sqrt(a) is the non-negative number that when squared gives a",
             "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - give rational square roots",
             "Non-perfect square roots are IRRATIONAL: sqrt(2), sqrt(3), sqrt(5), sqrt(7), ...",
@@ -22188,7 +22200,7 @@
             "Rule: sqrt(a x b) = sqrt(a) x sqrt(b). Use this to simplify!",
             "Mixed radical: 3*sqrt(5) means 3 times sqrt(5)"
           ] },
-          { subtitle: "Comparing and Ordering Numbers", emoji: "\u{1F4CA}", points: [
+          { subtitle: "Comparing and Ordering Numbers", emoji: "\xF0\u0178\u201C\u0160", points: [
             "Convert all numbers to decimals to compare: sqrt(7) is about 2.646, 8/3 is about 2.667",
             "Negative numbers: further from zero means smaller. So -5 is less than -3",
             "Absolute value |a| = distance from zero. |-4| = 4 and |3| = 3",
@@ -22196,7 +22208,7 @@
           ] }
         ] },
         { id: "number-exponents", title: "Exponent Laws", notes: [
-          { subtitle: "The Seven Exponent Laws", emoji: "\u26A1", points: [
+          { subtitle: "The Seven Exponent Laws", emoji: "\xE2\u0161\xA1", points: [
             "PRODUCT LAW: a^m times a^n = a^(m+n) - add exponents when multiplying same base",
             "QUOTIENT LAW: a^m divided by a^n = a^(m-n) - subtract exponents when dividing same base",
             "POWER OF A POWER: (a^m)^n = a^(mn) - multiply the exponents",
@@ -22206,7 +22218,7 @@
             "NEGATIVE EXPONENT: a^(-n) = 1/a^n",
             "All laws require the SAME base to combine exponents!"
           ] },
-          { subtitle: "Fractional Exponents and Radicals", emoji: "\u221A", points: [
+          { subtitle: "Fractional Exponents and Radicals", emoji: "\xE2\u02C6\u0161", points: [
             "a^(1/2) = sqrt(a) (square root)",
             "a^(1/3) = cube root of a",
             "a^(1/n) = nth root of a",
@@ -22214,7 +22226,7 @@
             "Example: 8^(2/3) = (cube root of 8)^2 = 2^2 = 4",
             "Tip: take the ROOT first when possible (smaller numbers to work with)"
           ] },
-          { subtitle: "Scientific Notation", emoji: "\u{1F52C}", points: [
+          { subtitle: "Scientific Notation", emoji: "\xF0\u0178\u201D\xAC", points: [
             "Form: a x 10^n where a is between 1 (inclusive) and 10 (exclusive) and n is an integer",
             "Large numbers use positive exponents: 3,200,000 = 3.2 x 10^6",
             "Small numbers use negative exponents: 0.000045 = 4.5 x 10^(-5)",
@@ -22234,7 +22246,7 @@
       gradient: "from-violet-500 to-purple-600",
       sections: [
         { id: "linear-slopeintercept", title: "Slope and Slope-Intercept Form", notes: [
-          { subtitle: "Understanding Slope", emoji: "\u{1F4D0}", points: [
+          { subtitle: "Understanding Slope", emoji: "\xF0\u0178\u201C\x90", points: [
             "Slope measures STEEPNESS and DIRECTION of a line",
             "Formula: m = rise/run = (y2 - y1)/(x2 - x1)",
             "Positive slope: line rises from left to right",
@@ -22243,14 +22255,14 @@
             "Undefined slope: vertical line - x is constant (denominator = 0)",
             "Slope tells you: for every 1 unit right, y changes by m units"
           ] },
-          { subtitle: "Slope-Intercept Form: y = mx + b", emoji: "\u270F\uFE0F", points: [
+          { subtitle: "Slope-Intercept Form: y = mx + b", emoji: "\xE2\u0153\x8F\xEF\xB8\x8F", points: [
             "m = slope (rate of change)",
             "b = y-intercept (value of y when x = 0)",
             "To graph: plot the y-intercept (0, b), then use slope to find more points",
             "Example: y = 3x - 2. Plot (0, -2). Slope = 3/1 means go up 3 and right 1 to reach (1, 1)",
             "To find slope and y-intercept from an equation: rearrange into y = mx + b form"
           ] },
-          { subtitle: "Direct and Partial Variation", emoji: "\u{1F517}", points: [
+          { subtitle: "Direct and Partial Variation", emoji: "\xF0\u0178\u201D\u2014", points: [
             "DIRECT VARIATION: y = kx - passes through origin. k is the constant of variation.",
             "If x doubles, y doubles. Constant ratio y/x = k for all points.",
             "PARTIAL VARIATION: y = mx + b where b is not 0 - does NOT pass through origin",
@@ -22260,14 +22272,14 @@
           ] }
         ] },
         { id: "linear-forms", title: "Forms of Linear Equations", notes: [
-          { subtitle: "Standard Form: Ax + By = C", emoji: "\u{1F4DD}", points: [
+          { subtitle: "Standard Form: Ax + By = C", emoji: "\xF0\u0178\u201C\x9D", points: [
             "Standard form: Ax + By = C where A, B, C are integers and A is at least 0",
             "Finding x-intercept: set y = 0 and solve for x",
             "Finding y-intercept: set x = 0 and solve for y",
             "Example: 3x + 2y = 12. x-int: 3x=12 so x=4, giving (4,0). y-int: 2y=12 so y=6, giving (0,6)",
             "Converting to slope-intercept: isolate y. 2y = -3x + 12 gives y = (-3/2)x + 6"
           ] },
-          { subtitle: "Point-Slope Form and Writing Equations", emoji: "\u{1F58A}\uFE0F", points: [
+          { subtitle: "Point-Slope Form and Writing Equations", emoji: "\xF0\u0178\u2013\u0160\xEF\xB8\x8F", points: [
             "Point-slope form: y - y1 = m(x - x1) - use when given a point and slope",
             "Step 1: Identify slope m and a point (x1, y1)",
             "Step 2: Substitute and simplify to y = mx + b",
@@ -22275,7 +22287,7 @@
             "Horizontal line through (a, b): equation is y = b",
             "Vertical line through (a, b): equation is x = a (undefined slope)"
           ] },
-          { subtitle: "Parallel and Perpendicular Lines", emoji: "\u22A5", points: [
+          { subtitle: "Parallel and Perpendicular Lines", emoji: "\xE2\u0160\xA5", points: [
             "PARALLEL lines: same slope, different y-intercept. They never intersect.",
             "Example: y = 2x + 3 and y = 2x - 5 are parallel (both slope 2)",
             "PERPENDICULAR lines: slopes are negative reciprocals. Their product equals -1.",
@@ -22294,13 +22306,13 @@
       gradient: "from-amber-500 to-orange-600",
       sections: [
         { id: "systems-graphing", title: "Graphing Systems", notes: [
-          { subtitle: "Understanding a Linear System", emoji: "\u{1F3AF}", points: [
+          { subtitle: "Understanding a Linear System", emoji: "\xF0\u0178\u017D\xAF", points: [
             "A system of linear equations is two or more equations with the same variables",
             "The SOLUTION is the point (x, y) that makes BOTH equations true at the same time",
             "Graphically: the solution is the INTERSECTION POINT of the two lines",
             "Three outcomes: one solution (lines intersect), no solution (parallel), infinite solutions (same line)"
           ] },
-          { subtitle: "Graphing Method", emoji: "\u{1F4C9}", points: [
+          { subtitle: "Graphing Method", emoji: "\xF0\u0178\u201C\u2030", points: [
             "Step 1: Rewrite each equation in slope-intercept form",
             "Step 2: Graph both lines on the same coordinate grid",
             "Step 3: Identify the intersection point",
@@ -22310,7 +22322,7 @@
           ] }
         ] },
         { id: "systems-substitution", title: "Substitution Method", notes: [
-          { subtitle: "Substitution - Full Method", emoji: "\u{1F504}", points: [
+          { subtitle: "Substitution - Full Method", emoji: "\xF0\u0178\u201D\u201E", points: [
             "Step 1: ISOLATE one variable in one equation (pick whichever is easiest)",
             "Step 2: SUBSTITUTE that expression into the other equation",
             "Step 3: SOLVE the resulting single-variable equation",
@@ -22318,7 +22330,7 @@
             "Step 5: VERIFY by substituting both values into both original equations",
             "BEST USED when: one variable is already isolated or has a coefficient of 1"
           ] },
-          { subtitle: "Common Mistakes to Avoid", emoji: "\u26A0\uFE0F", points: [
+          { subtitle: "Common Mistakes to Avoid", emoji: "\xE2\u0161\xA0\xEF\xB8\x8F", points: [
             "Do NOT substitute into the SAME equation you isolated from - use the OTHER one",
             "Do NOT forget to find BOTH variables - one value alone is not a complete solution",
             "Do NOT skip verification - especially when numbers get messy",
@@ -22327,7 +22339,7 @@
           ] }
         ] },
         { id: "systems-elimination", title: "Elimination Method", notes: [
-          { subtitle: "Elimination - Full Method", emoji: "\u2795", points: [
+          { subtitle: "Elimination - Full Method", emoji: "\xE2\u017E\u2022", points: [
             "Step 1: ALIGN both equations with like terms in columns",
             "Step 2: If needed, MULTIPLY one or both equations so one variable has opposite coefficients",
             "Step 3: ADD the equations to ELIMINATE one variable",
@@ -22336,7 +22348,7 @@
             "Step 6: VERIFY in both original equations",
             "BEST USED when: coefficients of one variable are already opposites or easily made so"
           ] },
-          { subtitle: "When to Multiply First", emoji: "\u2716\uFE0F", points: [
+          { subtitle: "When to Multiply First", emoji: "\xE2\u0153\u2013\xEF\xB8\x8F", points: [
             "If y-coefficients are 3 and 2: multiply first eq by 2 and second by 3 so both become 6",
             "Then subtract to eliminate y",
             "Sometimes only ONE equation needs to be multiplied",
@@ -22345,14 +22357,14 @@
           ] }
         ] },
         { id: "systems-word-problems", title: "Systems Word Problems", notes: [
-          { subtitle: "Setting Up Systems from Word Problems", emoji: "\u{1F4D6}", points: [
+          { subtitle: "Setting Up Systems from Word Problems", emoji: "\xF0\u0178\u201C\u2013", points: [
             "Step 1: Define your VARIABLES clearly (e.g. let x = adults, y = children)",
             "Step 2: Write TWO equations from the information given",
             "Step 3: Solve using any method (substitution or elimination)",
             "Step 4: Answer the question with proper units",
             "Step 5: Verify your answer makes sense in context"
           ] },
-          { subtitle: "Common Types of Word Problems", emoji: "\u{1F5C2}\uFE0F", points: [
+          { subtitle: "Common Types of Word Problems", emoji: "\xF0\u0178\u2014\u201A\xEF\xB8\x8F", points: [
             "MIXTURE: blend two types of something to get a mixture at a certain value",
             "RATE-TIME-DISTANCE: d = r*t. Set up equations for two different situations.",
             "NUMBER PROBLEMS: two numbers add to 50 and differ by 12. x+y=50 and x-y=12",
@@ -22371,7 +22383,7 @@
       gradient: "from-emerald-500 to-teal-600",
       sections: [
         { id: "algebra-polynomials", title: "Introduction to Polynomials", notes: [
-          { subtitle: "Polynomial Vocabulary", emoji: "\u{1F4DA}", points: [
+          { subtitle: "Polynomial Vocabulary", emoji: "\xF0\u0178\u201C\u0161", points: [
             "TERM: a number, variable, or product of numbers and variables (e.g. 5x^2, -3x, 7)",
             "COEFFICIENT: the number multiplying the variable (in 4x^3 the coefficient is 4)",
             "DEGREE of a term: sum of exponents on the variables (3x^2*y has degree 3)",
@@ -22380,7 +22392,7 @@
             "LIKE TERMS: same variable AND same exponent. Only like terms can be combined!",
             "Examples: 3x^2 and -7x^2 are like terms. 3x^2 and 3x are NOT like terms."
           ] },
-          { subtitle: "Adding and Subtracting Polynomials", emoji: "\u2795", points: [
+          { subtitle: "Adding and Subtracting Polynomials", emoji: "\xE2\u017E\u2022", points: [
             "Combine LIKE TERMS only - same variable, same exponent",
             "Adding: simply combine like terms. (3x^2+2x-1)+(x^2-5x+4) = 4x^2-3x+3",
             "Subtracting: distribute the negative sign to ALL terms in the second polynomial",
@@ -22389,20 +22401,20 @@
           ] }
         ] },
         { id: "algebra-multiplying", title: "Multiplying Polynomials", notes: [
-          { subtitle: "Multiplying a Monomial by a Polynomial", emoji: "\u2716\uFE0F", points: [
+          { subtitle: "Multiplying a Monomial by a Polynomial", emoji: "\xE2\u0153\u2013\xEF\xB8\x8F", points: [
             "Distribute the monomial to EVERY term inside the polynomial",
             "Multiply coefficients, add exponents for same-base variables",
             "Example: 3x(2x^2 - 5x + 1) = 6x^3 - 15x^2 + 3x",
             "Example: -2a^2(3a - 4) = -6a^3 + 8a^2  (be careful with signs!)"
           ] },
-          { subtitle: "FOIL: Multiplying Two Binomials", emoji: "\u{1F520}", points: [
+          { subtitle: "FOIL: Multiplying Two Binomials", emoji: "\xF0\u0178\u201D\xA0", points: [
             "FOIL stands for: First, Outer, Inner, Last",
             "(a + b)(c + d) = ac + ad + bc + bd",
             "Example: (x + 3)(x + 5) = x^2 + 5x + 3x + 15 = x^2 + 8x + 15",
             "Example: (2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4",
             "Always collect like terms after FOILing!"
           ] },
-          { subtitle: "Special Products", emoji: "\u2B50", points: [
+          { subtitle: "Special Products", emoji: "\xE2\xAD\x90", points: [
             "DIFFERENCE OF SQUARES: (a + b)(a - b) = a^2 - b^2",
             "Example: (x + 5)(x - 5) = x^2 - 25 (middle terms cancel)",
             "PERFECT SQUARE TRINOMIAL: (a + b)^2 = a^2 + 2ab + b^2",
@@ -22413,14 +22425,14 @@
           ] }
         ] },
         { id: "algebra-factoring", title: "Factoring Polynomials", notes: [
-          { subtitle: "Common Factoring (GCF)", emoji: "\u{1F50D}", points: [
+          { subtitle: "Common Factoring (GCF)", emoji: "\xF0\u0178\u201D\x8D", points: [
             "ALWAYS look for a GCF (greatest common factor) FIRST before anything else",
             "Find the largest number and highest power that divides every term",
             "Example: 6x^3 + 9x^2 - 3x. GCF = 3x. Result: 3x(2x^2 + 3x - 1)",
             "Example: 4a^2*b + 8a*b^2 - 12ab. GCF = 4ab. Result: 4ab(a + 2b - 3)",
             "After factoring, verify by expanding back: does it match the original?"
           ] },
-          { subtitle: "Factoring Trinomials: x^2 + bx + c", emoji: "\u{1F9E9}", points: [
+          { subtitle: "Factoring Trinomials: x^2 + bx + c", emoji: "\xF0\u0178\xA7\xA9", points: [
             "Find two integers that MULTIPLY to c and ADD to b",
             "Then factor as (x + p)(x + q) where p*q = c and p+q = b",
             "Example: x^2 + 5x + 6. Need: multiply to 6 and add to 5. That is 2 and 3. Answer: (x+2)(x+3)",
@@ -22428,7 +22440,7 @@
             "Example: x^2 + 2x - 15. Need: multiply to -15 and add to 2. That is 5 and -3. Answer: (x+5)(x-3)",
             "Positive product: both same sign. Negative product: opposite signs."
           ] },
-          { subtitle: "Factoring: Difference of Squares", emoji: "\u25A1", points: [
+          { subtitle: "Factoring: Difference of Squares", emoji: "\xE2\u2013\xA1", points: [
             "Pattern: a^2 - b^2 = (a + b)(a - b)",
             "Both terms must be perfect squares separated by subtraction",
             "Example: x^2 - 16 = (x+4)(x-4)",
@@ -22448,7 +22460,7 @@
       gradient: "from-rose-500 to-pink-600",
       sections: [
         { id: "measurement-pythagorean", title: "The Pythagorean Theorem", notes: [
-          { subtitle: "Understanding the Theorem", emoji: "\u{1F4D0}", points: [
+          { subtitle: "Understanding the Theorem", emoji: "\xF0\u0178\u201C\x90", points: [
             "In any right triangle: a^2 + b^2 = c^2, where c is the hypotenuse",
             "The hypotenuse is ALWAYS opposite the right angle and is the longest side",
             "To find hypotenuse: c = sqrt(a^2 + b^2)",
@@ -22457,7 +22469,7 @@
             "Multiples of triples also work: (6,8,10) is (3,4,5) scaled by 2",
             "Converse: if a^2+b^2=c^2, then the triangle IS a right triangle"
           ] },
-          { subtitle: "Applying the Pythagorean Theorem", emoji: "\u{1F3D7}\uFE0F", points: [
+          { subtitle: "Applying the Pythagorean Theorem", emoji: "\xF0\u0178\x8F\u2014\xEF\xB8\x8F", points: [
             "Identify the hypotenuse FIRST (longest side, opposite 90 degrees)",
             "Draw a diagram and label sides a, b, c",
             "2D applications: diagonals of rectangles, height of isosceles triangles",
@@ -22467,7 +22479,7 @@
           ] }
         ] },
         { id: "measurement-formulas", title: "Perimeter, Area, and Volume", notes: [
-          { subtitle: "Perimeter and Area: 2D Shapes", emoji: "\u{1F4CF}", points: [
+          { subtitle: "Perimeter and Area: 2D Shapes", emoji: "\xF0\u0178\u201C\x8F", points: [
             "Rectangle: A = l*w, P = 2(l+w)",
             "Triangle: A = (1/2)*b*h where h is perpendicular to base b. P = sum of all sides",
             "Trapezoid: A = (1/2)(a+b)h where a and b are the parallel sides",
@@ -22475,7 +22487,7 @@
             "Always use RADIUS (not diameter) in the circle area formula",
             "Composite figures: split into simpler shapes, add or subtract areas"
           ] },
-          { subtitle: "Surface Area: 3D Shapes", emoji: "\u{1F4E6}", points: [
+          { subtitle: "Surface Area: 3D Shapes", emoji: "\xF0\u0178\u201C\xA6", points: [
             "Surface area = total area of ALL outer faces",
             "Rectangular prism: SA = 2(lw + lh + wh)",
             "Cylinder: SA = 2*pi*r^2 + 2*pi*r*h (two circles plus the curved rectangle)",
@@ -22483,7 +22495,7 @@
             "Sphere: SA = 4*pi*r^2",
             "Always state units as SQUARE units: cm^2 or m^2"
           ] },
-          { subtitle: "Volume: 3D Shapes", emoji: "\u{1F4D0}", points: [
+          { subtitle: "Volume: 3D Shapes", emoji: "\xF0\u0178\u201C\x90", points: [
             "Volume = amount of space inside a 3D object",
             "Any prism: V = base area x height",
             "Rectangular prism: V = l*w*h",
@@ -22629,7 +22641,7 @@
       if (hasQuiz && !currentQuiz) {
         return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid flex items-center justify-center p-4", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-lg w-full text-center anim-up" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSection(null), className: "flex items-center gap-2 text-sm syne font-semibold mb-10 mx-auto", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " ", selectedSubject.name), /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br ${selectedSubject.gradient} flex items-center justify-center shadow-2xl` }, /* @__PURE__ */ import_react3.default.createElement(FileText, { className: "w-9 h-9 text-white" })), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-black mb-3", style: { fontSize: "2rem", color: "var(--text)" } }, "Ready to practice?"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base mb-8", style: { color: "var(--muted)" } }, sec.quiz.length, " questions with detailed explanations."), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => startQuiz(sec), className: `w-full py-4 bg-gradient-to-r ${selectedSubject.gradient} text-white rounded-2xl syne font-black text-sm shadow-lg` }, "Start Quiz")));
       }
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSection(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " ", selectedSubject.name), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" } }, "\u203A"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-sm font-semibold truncate max-w-48", style: { color: "var(--dim)" } }, sec.title)), /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSection(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " ", selectedSubject.name), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" } }, "\xE2\u20AC\xBA"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-sm font-semibold truncate max-w-48", style: { color: "var(--dim)" } }, sec.title)), /* @__PURE__ */ import_react3.default.createElement(
         "button",
         {
           onClick: () => toggleRead(sec.id),
@@ -22640,7 +22652,7 @@
         isRead ? "Completed" : "Mark complete"
       ))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-10" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "mb-8 anim-up" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `inline-block bg-gradient-to-r ${selectedSubject.gradient} rounded-2xl p-px` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "rounded-2xl px-5 py-3", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black text-xl", style: { color: "var(--text)" } }, sec.title)))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-5" }, sec.notes && sec.notes.map((note, idx) => {
         const diagramKey = `${sec.id}-${idx}`, diagram = NOTE_DIAGRAMS[diagramKey];
-        return /* @__PURE__ */ import_react3.default.createElement("div", { key: idx, className: `glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx + 1, 4)}` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`, style: { opacity: 0.92 } }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xl leading-none" }, note.emoji), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-bold text-sm text-white leading-snug" }, note.subtitle)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-6 py-5" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "space-y-1.5" }, note.points.map((pt, pi) => {
+        return /* @__PURE__ */ import_react3.default.createElement("div", { key: idx, className: `glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx + 1, 4)}` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`, style: { opacity: 0.92 } }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xl leading-none" }, normalizeEmoji(note.emoji)), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-bold text-sm text-white leading-snug" }, note.subtitle)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-6 py-5" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "space-y-1.5" }, note.points.map((pt, pi) => {
           var _a;
           const isStep = /^\d+\./.test(pt);
           const hasKey = /^([A-Z][A-Z\s/]+):/.test(pt);
@@ -22663,7 +22675,7 @@
     if (selectedSubject) {
       const sub = selectedSubject, completed = sub.sections.filter((s) => readSections.has(s.id)).length, prog = completed / sub.sections.length * 100;
       const SubIcon = sub.icon;
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSubject(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " Library"), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" } }, "\u203A"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne font-semibold text-sm", style: { color: "var(--muted)" } }, sub.name))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-12" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `relative bg-gradient-to-br ${sub.gradient} rounded-3xl p-8 mb-10 overflow-hidden anim-up` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute inset-0 opacity-20", style: { backgroundImage: "radial-gradient(circle at 85% 50%, white 0%, transparent 55%)" } }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative flex items-start justify-between flex-wrap gap-4" }, /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-14 h-14 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center mb-4 shadow-xl" }, /* @__PURE__ */ import_react3.default.createElement(SubIcon, { className: "w-7 h-7 text-white" })), /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black text-white mb-2", style: { fontSize: "clamp(1.6rem,4vw,2.2rem)" } }, sub.name), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/70 text-sm max-w-sm leading-relaxed" }, sub.description)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "text-right" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-black text-white", style: { fontSize: "3rem", lineHeight: 1 } }, Math.round(prog), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "%")), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/60 text-xs mt-1" }, completed, " of ", sub.sections.length, " done"))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative mt-6" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-2 rounded-full overflow-hidden", style: { background: "rgba(0,0,0,0.2)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-full bg-white/60 rounded-full shimmer", style: { width: `${prog}%` } })))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, sub.sections.map((sec, i) => {
+      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSubject(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " Library"), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" } }, "\xE2\u20AC\xBA"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne font-semibold text-sm", style: { color: "var(--muted)" } }, sub.name))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-12" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `relative bg-gradient-to-br ${sub.gradient} rounded-3xl p-8 mb-10 overflow-hidden anim-up` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute inset-0 opacity-20", style: { backgroundImage: "radial-gradient(circle at 85% 50%, white 0%, transparent 55%)" } }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative flex items-start justify-between flex-wrap gap-4" }, /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-14 h-14 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center mb-4 shadow-xl" }, /* @__PURE__ */ import_react3.default.createElement(SubIcon, { className: "w-7 h-7 text-white" })), /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black text-white mb-2", style: { fontSize: "clamp(1.6rem,4vw,2.2rem)" } }, sub.name), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/70 text-sm max-w-sm leading-relaxed" }, sub.description)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "text-right" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-black text-white", style: { fontSize: "3rem", lineHeight: 1 } }, Math.round(prog), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "%")), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/60 text-xs mt-1" }, completed, " of ", sub.sections.length, " done"))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative mt-6" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-2 rounded-full overflow-hidden", style: { background: "rgba(0,0,0,0.2)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-full bg-white/60 rounded-full shimmer", style: { width: `${prog}%` } })))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, sub.sections.map((sec, i) => {
         var _a, _b;
         const isR = readSections.has(sec.id);
         return /* @__PURE__ */ import_react3.default.createElement(
