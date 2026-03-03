@@ -335,32 +335,19 @@
     })
   }
 
-  if ('serviceWorker' in navigator && 'PushManager' in window) {
-    let pushWidgetDismissed = false
-    try {
-      pushWidgetDismissed = localStorage.getItem('sc_push_widget_dismissed') === '1'
-    } catch (err) {
-      pushWidgetDismissed = false
-    }
-    if (pushWidgetDismissed && Notification.permission === 'granted') {
-      // continue with the rest of the app script
-    } else {
-
+  {
+    const canUsePush = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
     const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
     const widget = document.createElement('div')
     widget.className = 'push-widget'
     widget.innerHTML =
       '<div class="push-header">' +
-      '<div class="push-title">Notifications</div>' +
-      '<button class="push-close" type="button" aria-label="Close notifications panel" data-push-close>x</button>' +
+      '<div class="push-title">Sign up for notifications</div>' +
       '</div>' +
-      '<p class="push-text">Enable push notifications for updates and daily study reminders.</p>' +
+      '<p class="push-text">Get study reminders and update alerts.</p>' +
       '<div class="push-actions">' +
       '<button class="btn btn-secondary" type="button" data-push-enable>Enable</button>' +
       '<button class="btn btn-primary" type="button" data-push-test>Send test</button>' +
-      '<button class="btn btn-secondary" type="button" data-push-update>Send update</button>' +
-      '<button class="btn btn-secondary" type="button" data-push-reminder>Study reminder</button>' +
-      '<button class="btn btn-secondary" type="button" data-push-streak>Streak nudge</button>' +
       '</div>' +
       '<p class="push-status" data-push-status></p>'
     document.body.appendChild(widget)
@@ -368,10 +355,6 @@
     const statusEl = widget.querySelector('[data-push-status]')
     const enableBtn = widget.querySelector('[data-push-enable]')
     const testBtn = widget.querySelector('[data-push-test]')
-    const updateBtn = widget.querySelector('[data-push-update]')
-    const reminderBtn = widget.querySelector('[data-push-reminder]')
-    const streakBtn = widget.querySelector('[data-push-streak]')
-    const closeBtn = widget.querySelector('[data-push-close]')
 
     function setStatus(message, isError) {
       if (!statusEl) return
@@ -511,94 +494,46 @@
       })
     }
 
-    if (closeBtn) {
-      closeBtn.addEventListener('click', function () {
+    if (!canUsePush) {
+      if (enableBtn) enableBtn.disabled = true
+      if (testBtn) testBtn.disabled = true
+      setStatus('Push notifications are not supported in this browser.', true)
+    } else {
+      enableBtn.addEventListener('click', async function () {
         try {
-          localStorage.setItem('sc_push_widget_dismissed', '1')
-        } catch (err) {
-          // ignore storage errors
-        }
-        widget.remove()
-      })
-    }
-
-    enableBtn.addEventListener('click', async function () {
-      try {
-        if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
-          setStatus('On iPhone/iPad, add this site to Home Screen first, then enable notifications from the installed app.', true)
-          return
-        }
-        const permission = await Notification.requestPermission()
-        if (permission !== 'granted') {
-          setStatus('Permission denied.', true)
-          return
-        }
-        const subscription = await getSubscription()
-        const saveResult = await saveSubscription(subscription)
-        await showInstantLocalNotification('streak')
-        await sendTemplate('streak')
-        if (saveResult && saveResult.persisted === false) {
-          setStatus(
-            'Notifications enabled on this device. Server streak reminders need Supabase env vars.',
-            false,
-          )
-        } else {
-          setStatus('Notifications enabled. Streak reminders are now active.', false)
-        }
-      } catch (err) {
-        setStatus(err.message || 'Failed to enable notifications.', true)
-      }
-    })
-
-    testBtn.addEventListener('click', async function () {
-      try {
-        const subscription = await getSubscription()
-        await saveSubscription(subscription)
-        await sendTemplate('test')
-        setStatus('Test sent. Check your notifications.', false)
-      } catch (err) {
-        setStatus(err.message || 'Failed to send test.', true)
-      }
-    })
-
-    if (updateBtn) {
-      updateBtn.addEventListener('click', async function () {
-        try {
+          if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
+            setStatus('On iPhone/iPad, add this site to Home Screen first, then enable notifications from the installed app.', true)
+            return
+          }
+          const permission = await Notification.requestPermission()
+          if (permission !== 'granted') {
+            setStatus('Permission denied.', true)
+            return
+          }
           const subscription = await getSubscription()
-          await saveSubscription(subscription)
-          await sendTemplate('update')
-          setStatus('Update notification sent.', false)
-        } catch (err) {
-          setStatus(err.message || 'Failed to send update notification.', true)
-        }
-      })
-    }
-
-    if (reminderBtn) {
-      reminderBtn.addEventListener('click', async function () {
-        try {
-          const subscription = await getSubscription()
-          await saveSubscription(subscription)
-          await sendTemplate('reminder')
-          setStatus('Reminder notification sent.', false)
-        } catch (err) {
-          setStatus(err.message || 'Failed to send reminder notification.', true)
-        }
-      })
-    }
-
-    if (streakBtn) {
-      streakBtn.addEventListener('click', async function () {
-        try {
-          const subscription = await getSubscription()
-          await saveSubscription(subscription)
+          const saveResult = await saveSubscription(subscription)
+          await showInstantLocalNotification('streak')
           await sendTemplate('streak')
-          setStatus('Streak notification sent.', false)
+          if (saveResult && saveResult.persisted === false) {
+            setStatus('Enabled on this device. Server reminders need Supabase env vars.', false)
+          } else {
+            setStatus('Notifications enabled.', false)
+          }
         } catch (err) {
-          setStatus(err.message || 'Failed to send streak notification.', true)
+          setStatus(err.message || 'Failed to enable notifications.', true)
         }
       })
-    }
+
+      testBtn.addEventListener('click', async function () {
+        try {
+          const subscription = await getSubscription()
+          await saveSubscription(subscription)
+          await sendTemplate('test')
+          setStatus('Test sent. Check your notifications.', false)
+        } catch (err) {
+          setStatus(err.message || 'Failed to send test.', true)
+        }
+      })
     }
   }
 
