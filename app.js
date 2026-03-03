@@ -140,6 +140,7 @@
 
     let supabaseClient = null
     let ready = false
+    const AUTH_PROMPT_SESSION_KEY = 'sc_auth_prompt_shown'
 
     function setStatus(msg, isError) {
       if (!statusEl) return
@@ -160,6 +161,30 @@
         userEl.textContent = ''
         signoutBtn.hidden = true
       }
+    }
+
+    function shouldPromptOnEntry() {
+      try {
+        return sessionStorage.getItem(AUTH_PROMPT_SESSION_KEY) !== '1'
+      } catch (err) {
+        return true
+      }
+    }
+
+    function markPromptShown() {
+      try {
+        sessionStorage.setItem(AUTH_PROMPT_SESSION_KEY, '1')
+      } catch (err) {
+        // ignore storage issues
+      }
+    }
+
+    function promptAuthOnEntry() {
+      if (!shouldPromptOnEntry()) return
+      markPromptShown()
+      setTimeout(function () {
+        openAuthModal(modal)
+      }, 250)
     }
 
     function handleOpenAuth() {
@@ -278,10 +303,7 @@
           true,
         )
         setUser(null)
-        // Requested behavior: show sign-in popup immediately on entry.
-        setTimeout(function () {
-          openAuthModal(modal)
-        }, 250)
+        promptAuthOnEntry()
         return
       }
 
@@ -314,17 +336,13 @@
 
         setStatus('', false)
 
-        // Requested behavior: show sign-in popup immediately for visitors not signed in.
+        // Prompt on first entry if visitor is not signed in.
         if (!sessionData.data || !sessionData.data.session || !sessionData.data.session.user) {
-          setTimeout(function () {
-            openAuthModal(modal)
-          }, 250)
+          promptAuthOnEntry()
         }
       } catch (err) {
         setStatus('Failed to initialize Supabase auth.', true)
-        setTimeout(function () {
-          openAuthModal(modal)
-        }, 250)
+        promptAuthOnEntry()
       }
     })()
   }
