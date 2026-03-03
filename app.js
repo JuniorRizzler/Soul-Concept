@@ -162,8 +162,17 @@
       }
     }
 
-    authBtn.addEventListener('click', function () {
+    function handleOpenAuth() {
       openAuthModal(modal)
+    }
+
+    authBtn.addEventListener('click', handleOpenAuth)
+
+    // Safety binding: if another matching button exists, open the same modal.
+    navMenu.querySelectorAll('[data-auth-open]').forEach(function (node) {
+      if (node !== authBtn) {
+        node.addEventListener('click', handleOpenAuth)
+      }
     })
 
     closeBtn.addEventListener('click', function () {
@@ -269,6 +278,10 @@
           true,
         )
         setUser(null)
+        // Requested behavior: show sign-in popup immediately on entry.
+        setTimeout(function () {
+          openAuthModal(modal)
+        }, 250)
         return
       }
 
@@ -300,8 +313,18 @@
         })
 
         setStatus('', false)
+
+        // Requested behavior: show sign-in popup immediately for visitors not signed in.
+        if (!sessionData.data || !sessionData.data.session || !sessionData.data.session.user) {
+          setTimeout(function () {
+            openAuthModal(modal)
+          }, 250)
+        }
       } catch (err) {
         setStatus('Failed to initialize Supabase auth.', true)
+        setTimeout(function () {
+          openAuthModal(modal)
+        }, 250)
       }
     })()
   }
