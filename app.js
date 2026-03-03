@@ -335,14 +335,14 @@
     })
   }
 
-  if ('serviceWorker' in navigator && 'PushManager' in window && !isLibraryContext) {
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
     let pushWidgetDismissed = false
     try {
       pushWidgetDismissed = localStorage.getItem('sc_push_widget_dismissed') === '1'
     } catch (err) {
       pushWidgetDismissed = false
     }
-    if (pushWidgetDismissed) {
+    if (pushWidgetDismissed && Notification.permission === 'granted') {
       // continue with the rest of the app script
     } else {
 
@@ -473,6 +473,39 @@
       await sendPushPayload(subscription, payload)
     }
 
+    async function showInstantLocalNotification(templateKey) {
+      const templates = {
+        test: {
+          title: 'Soul Concept',
+          body: 'Test notification received.',
+          url: '/'
+        },
+        update: {
+          title: 'New in Grade 10 Math',
+          body: 'Fresh UI updates are live. Tap to explore the newest library.',
+          url: '/grade-10-math.html'
+        },
+        reminder: {
+          title: 'Study Reminder',
+          body: 'Quick 15-minute review now can save you hours later.',
+          url: '/study-library.html'
+        },
+        streak: {
+          title: 'Keep Your Streak',
+          body: 'You are one focused session away from extending your streak.',
+          url: '/work.html'
+        }
+      }
+      const payload = templates[templateKey] || templates.test
+      const registration = await navigator.serviceWorker.ready
+      await registration.showNotification(payload.title, {
+        body: payload.body,
+        icon: '/icons/icon-192.png',
+        badge: '/icons/icon-192.png',
+        data: { url: payload.url || '/' }
+      })
+    }
+
     if (closeBtn) {
       closeBtn.addEventListener('click', function () {
         try {
@@ -497,6 +530,7 @@
         }
         const subscription = await getSubscription()
         await saveSubscription(subscription)
+        await showInstantLocalNotification('streak')
         await sendTemplate('streak')
         setStatus('Notifications enabled. Streak reminders are now active.', false)
       } catch (err) {
