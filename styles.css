@@ -245,6 +245,34 @@ img {
   margin-left: 4px;
 }
 
+.nav-cta.btn-primary {
+  background: linear-gradient(120deg, #f97316, #ef4444, #f59e0b);
+  background-size: 200% 200%;
+  animation: navCtaFlow 4.5s ease infinite;
+  border-color: #c2410c;
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(239, 68, 68, 0.28);
+}
+
+.nav-cta.btn-primary:hover {
+  background: linear-gradient(120deg, #fb923c, #f97316, #ef4444);
+  border-color: #9a3412;
+  filter: none;
+  transform: translateY(-1px);
+}
+
+@keyframes navCtaFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .btn {
   border: 1px solid transparent;
   border-radius: 999px;
