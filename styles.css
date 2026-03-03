@@ -1365,6 +1365,10 @@ main {
   flex-wrap: wrap;
 }
 
+.push-actions .btn {
+  flex: 1 1 136px;
+}
+
 .push-status {
   margin: 0;
   font-size: 0.86rem;

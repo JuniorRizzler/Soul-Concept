@@ -648,6 +648,9 @@
       '<div class="push-actions">' +
       '<button class="btn btn-secondary" type="button" data-push-enable>Enable</button>' +
       '<button class="btn btn-primary" type="button" data-push-test>Send test</button>' +
+      '<button class="btn btn-secondary" type="button" data-push-update>Send update</button>' +
+      '<button class="btn btn-secondary" type="button" data-push-reminder>Study reminder</button>' +
+      '<button class="btn btn-secondary" type="button" data-push-streak>Streak nudge</button>' +
       '</div>' +
       '<p class="push-status" data-push-status></p>'
     document.body.appendChild(widget)
@@ -655,6 +658,9 @@
     const statusEl = widget.querySelector('[data-push-status]')
     const enableBtn = widget.querySelector('[data-push-enable]')
     const testBtn = widget.querySelector('[data-push-test]')
+    const updateBtn = widget.querySelector('[data-push-update]')
+    const reminderBtn = widget.querySelector('[data-push-reminder]')
+    const streakBtn = widget.querySelector('[data-push-streak]')
     const closeBtn = widget.querySelector('[data-push-close]')
 
     function setStatus(message, isError) {
@@ -688,12 +694,7 @@
       return subscription
     }
 
-    async function sendTest(subscription) {
-      const payload = {
-        title: 'Soul Concept',
-        body: 'Test notification received.',
-        url: '/'
-      }
+    async function sendPushPayload(subscription, payload) {
       const endpoints = ['/api/send-push', '/api/send-push.js', '/.netlify/functions/send-push']
       let lastError = 'Failed to send notification.'
       for (let i = 0; i < endpoints.length; i += 1) {
@@ -717,6 +718,34 @@
         if (text) lastError = text
       }
       throw new Error(lastError)
+    }
+
+    async function sendTemplate(templateKey) {
+      const templates = {
+        test: {
+          title: 'Soul Concept',
+          body: 'Test notification received.',
+          url: '/'
+        },
+        update: {
+          title: 'New in Grade 10 Math',
+          body: 'Fresh UI updates are live. Tap to explore the newest library.',
+          url: '/grade-10-math.html'
+        },
+        reminder: {
+          title: 'Study Reminder',
+          body: 'Quick 15-minute review now can save you hours later.',
+          url: '/study-library.html'
+        },
+        streak: {
+          title: 'Keep Your Streak',
+          body: 'You are one focused session away from extending your streak.',
+          url: '/work.html'
+        }
+      }
+      const payload = templates[templateKey] || templates.test
+      const subscription = await getSubscription()
+      await sendPushPayload(subscription, payload)
     }
 
     if (closeBtn) {
@@ -750,13 +779,45 @@
 
     testBtn.addEventListener('click', async function () {
       try {
-        const subscription = await getSubscription()
-        await sendTest(subscription)
+        await sendTemplate('test')
         setStatus('Test sent. Check your notifications.', false)
       } catch (err) {
         setStatus(err.message || 'Failed to send test.', true)
       }
     })
+
+    if (updateBtn) {
+      updateBtn.addEventListener('click', async function () {
+        try {
+          await sendTemplate('update')
+          setStatus('Update notification sent.', false)
+        } catch (err) {
+          setStatus(err.message || 'Failed to send update notification.', true)
+        }
+      })
+    }
+
+    if (reminderBtn) {
+      reminderBtn.addEventListener('click', async function () {
+        try {
+          await sendTemplate('reminder')
+          setStatus('Reminder notification sent.', false)
+        } catch (err) {
+          setStatus(err.message || 'Failed to send reminder notification.', true)
+        }
+      })
+    }
+
+    if (streakBtn) {
+      streakBtn.addEventListener('click', async function () {
+        try {
+          await sendTemplate('streak')
+          setStatus('Streak notification sent.', false)
+        } catch (err) {
+          setStatus(err.message || 'Failed to send streak notification.', true)
+        }
+      })
+    }
     }
   }
 
