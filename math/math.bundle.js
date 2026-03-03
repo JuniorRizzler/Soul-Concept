@@ -21924,6 +21924,20 @@
     }
     return value;
   }
+  function conceptCardEmoji(note) {
+    const bySubtitle = {
+      "Unit 1: Square Roots and Number Sets": "\u{1F522}",
+      "Unit 2: Exponent Laws": "\u26A1",
+      "Unit 1: Slope and Rate of Change": "\u{1F4C8}",
+      "Unit 2: Forms of Linear Equations": "\u{1F4DD}",
+      "Methods: Graphing, Substitution, Elimination": "\u{1F3AF}",
+      "Pythagorean Theorem and Applications": "\u{1F4D0}",
+      "Perimeter, Area, and Volume": "\u{1F4E6}"
+    };
+    const normalized = normalizeEmoji((note == null ? void 0 : note.emoji) || "");
+    if (normalized && normalized !== "?" && normalized !== "??") return normalized;
+    return bySubtitle[note == null ? void 0 : note.subtitle] || "\u2728";
+  }
   var studyLibrary = {
     flashcards: {
       id: "flashcards",
@@ -22652,7 +22666,7 @@
         isRead ? "Completed" : "Mark complete"
       ))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-10" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "mb-8 anim-up" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `inline-block bg-gradient-to-r ${selectedSubject.gradient} rounded-2xl p-px` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "rounded-2xl px-5 py-3", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black text-xl", style: { color: "var(--text)" } }, sec.title)))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-5" }, sec.notes && sec.notes.map((note, idx) => {
         const diagramKey = `${sec.id}-${idx}`, diagram = NOTE_DIAGRAMS[diagramKey];
-        return /* @__PURE__ */ import_react3.default.createElement("div", { key: idx, className: `glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx + 1, 4)}` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`, style: { opacity: 0.92 } }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xl leading-none" }, normalizeEmoji(note.emoji)), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-bold text-sm text-white leading-snug" }, note.subtitle)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-6 py-5" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "space-y-1.5" }, note.points.map((pt, pi) => {
+        return /* @__PURE__ */ import_react3.default.createElement("div", { key: idx, className: `glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx + 1, 4)}` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`, style: { opacity: 0.92 } }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xl leading-none" }, conceptCardEmoji(note)), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-bold text-sm text-white leading-snug" }, note.subtitle)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-6 py-5" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "space-y-1.5" }, note.points.map((pt, pi) => {
           var _a;
           const isStep = /^\d+\./.test(pt);
           const hasKey = /^([A-Z][A-Z\s/]+):/.test(pt);

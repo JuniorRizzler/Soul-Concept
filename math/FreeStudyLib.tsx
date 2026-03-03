@@ -467,6 +467,21 @@ function normalizeEmoji(value = "") {
   return value;
 }
 
+function conceptCardEmoji(note) {
+  const bySubtitle = {
+    "Unit 1: Square Roots and Number Sets": "\u{1F522}",
+    "Unit 2: Exponent Laws": "\u26A1",
+    "Unit 1: Slope and Rate of Change": "\u{1F4C8}",
+    "Unit 2: Forms of Linear Equations": "\u{1F4DD}",
+    "Methods: Graphing, Substitution, Elimination": "\u{1F3AF}",
+    "Pythagorean Theorem and Applications": "\u{1F4D0}",
+    "Perimeter, Area, and Volume": "\u{1F4E6}",
+  };
+  const normalized = normalizeEmoji(note?.emoji || "");
+  if (normalized && normalized !== "?" && normalized !== "??") return normalized;
+  return bySubtitle[note?.subtitle] || "\u{2728}";
+}
+
 // â”€â”€ DATA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const studyLibrary = {
@@ -1237,7 +1252,7 @@ export default function MathStudyG9() {
               return (
                 <div key={idx} className={`glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx+1,4)}`}>
                   <div className={`bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`} style={{opacity:0.92}}>
-                    <span className="text-xl leading-none">{normalizeEmoji(note.emoji)}</span>
+                    <span className="text-xl leading-none">{conceptCardEmoji(note)}</span>
                     <h2 className="syne font-bold text-sm text-white leading-snug">{note.subtitle}</h2>
                   </div>
                   <div className="px-6 py-5">
