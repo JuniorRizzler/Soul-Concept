@@ -181,6 +181,41 @@ img {
   gap: 14px;
 }
 
+.streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(33, 92, 75, 0.25);
+  background: linear-gradient(135deg, rgba(33, 92, 75, 0.1), rgba(243, 106, 61, 0.12));
+  box-shadow: 0 8px 18px rgba(23, 21, 16, 0.08);
+  white-space: nowrap;
+}
+
+.streak-pill-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: #fff url('icons/soulconceptflame.png') center/contain no-repeat;
+  box-shadow: 0 3px 8px rgba(23, 21, 16, 0.15);
+}
+
+.streak-pill-label {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.streak-pill-value {
+  color: var(--text);
+  font-family: var(--title);
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -1429,6 +1464,13 @@ main {
     display: inline-flex;
   }
 
+  .streak-pill {
+    margin-left: auto;
+    margin-right: 6px;
+    padding: 6px 10px;
+    gap: 6px;
+  }
+
   .nav-menu {
     position: absolute;
     top: calc(100% + 8px);
@@ -1531,6 +1573,10 @@ main {
 
   .topbar-inner {
     min-height: 64px;
+  }
+
+  .streak-pill-label {
+    display: none;
   }
 
   .btn {

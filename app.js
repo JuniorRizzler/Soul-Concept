@@ -25,6 +25,94 @@
     }
   })
 
+  const STREAK_KEY = 'sc_daily_streak_v1'
+
+  function getLocalDateStamp(date) {
+    const d = date instanceof Date ? date : new Date()
+    const offset = d.getTimezoneOffset() * 60000
+    return new Date(d.getTime() - offset).toISOString().slice(0, 10)
+  }
+
+  function getYesterdayStamp() {
+    const d = new Date()
+    d.setHours(0, 0, 0, 0)
+    d.setDate(d.getDate() - 1)
+    return getLocalDateStamp(d)
+  }
+
+  function readStreakData() {
+    try {
+      const raw = localStorage.getItem(STREAK_KEY)
+      if (!raw) return { streak: 0, bestStreak: 0, lastCheckIn: '' }
+      const parsed = JSON.parse(raw)
+      return {
+        streak: Number(parsed.streak || 0),
+        bestStreak: Number(parsed.bestStreak || 0),
+        lastCheckIn: String(parsed.lastCheckIn || ''),
+      }
+    } catch (err) {
+      return { streak: 0, bestStreak: 0, lastCheckIn: '' }
+    }
+  }
+
+  function saveStreakData(data) {
+    try {
+      localStorage.setItem(STREAK_KEY, JSON.stringify(data))
+    } catch (err) {
+      // ignore storage errors
+    }
+  }
+
+  function updateDailyStreak() {
+    const today = getLocalDateStamp(new Date())
+    const yesterday = getYesterdayStamp()
+    const data = readStreakData()
+
+    if (data.lastCheckIn === today) {
+      return data
+    }
+
+    if (data.lastCheckIn === yesterday) {
+      data.streak = Math.max(1, data.streak + 1)
+    } else {
+      data.streak = 1
+    }
+
+    data.lastCheckIn = today
+    data.bestStreak = Math.max(Number(data.bestStreak || 0), data.streak)
+    saveStreakData(data)
+    return data
+  }
+
+  function mountStreakPill() {
+    const topbarInner = document.querySelector('.topbar-inner')
+    if (!topbarInner) return
+
+    let pill = topbarInner.querySelector('[data-streak-pill]')
+    if (!pill) {
+      pill = document.createElement('div')
+      pill.className = 'streak-pill'
+      pill.setAttribute('data-streak-pill', '1')
+      pill.innerHTML =
+        '<span class="streak-pill-icon" aria-hidden="true"></span>' +
+        '<span class="streak-pill-label">Streak</span>' +
+        '<strong class="streak-pill-value" data-streak-value>0</strong>'
+      const navToggle = topbarInner.querySelector('[data-nav-toggle]')
+      if (navToggle) {
+        topbarInner.insertBefore(pill, navToggle)
+      } else {
+        topbarInner.appendChild(pill)
+      }
+    }
+
+    const valueEl = pill.querySelector('[data-streak-value]')
+    const data = updateDailyStreak()
+    if (valueEl) valueEl.textContent = String(Math.max(0, Number(data.streak || 0)))
+    pill.title = 'Best streak: ' + String(Math.max(0, Number(data.bestStreak || 0))) + ' days'
+  }
+
+  mountStreakPill()
+
   // Sign-in feature removed by request.
 
   const reveals = Array.from(document.querySelectorAll('.reveal'))
