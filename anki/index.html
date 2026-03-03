@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Concept Cards | Soul Concept</title>
+  <title>Concept Cards - Soul Concept</title>
 <style>
     :root {
       --bg: #f5f4f0;
@@ -152,7 +152,7 @@
   <a class="exit-btn" href="../index.html" aria-label="Exit to Soul Concept">Exit</a>
   <div class="wrap">
     <header>
-      <div class="brand">Concept Cards · Soul Concept</div>
+      <div class="brand">Concept Cards - Soul Concept</div>
       <span class="pill">Local-only</span>
     </header>
 
@@ -193,9 +193,9 @@
       <section class="card study-area tight" data-tour-id="concept-study">
         <div class="section-title">
           <h2>Study (Spaced Repetition)</h2>
-          <small><span id="due">0</span> due · <span id="total">0</span> total</small>
+          <small><span id="due">0</span> due | <span id="total">0</span> total</small>
         </div>
-        <p class="muted">Flip the card, then rate difficulty from 1–5 stars. The next interval is scheduled automatically.</p>
+        <p class="muted">Flip the card, then rate difficulty from 1-5 stars. The next interval is scheduled automatically.</p>
         <div class="row" style="justify-content:center; margin:6px 0 12px;">
           <button class="btn ghost" id="fullscreen-toggle">Fullscreen</button>
         </div>
@@ -208,11 +208,11 @@
         </div>
 
         <div class="stars">
-          <button class="star-btn" data-score="1">? 1 (Hard)</button>
-          <button class="star-btn" data-score="2">?? 2</button>
-          <button class="star-btn" data-score="3">??? 3</button>
-          <button class="star-btn" data-score="4">???? 4</button>
-          <button class="star-btn" data-score="5">????? 5 (Easy)</button>
+          <button class="star-btn" data-score="1">&#9733; 1 (Hard)</button>
+          <button class="star-btn" data-score="2">&#9733;&#9733; 2</button>
+          <button class="star-btn" data-score="3">&#9733;&#9733;&#9733; 3</button>
+          <button class="star-btn" data-score="4">&#9733;&#9733;&#9733;&#9733; 4</button>
+          <button class="star-btn" data-score="5">&#9733;&#9733;&#9733;&#9733;&#9733; 5 (Easy)</button>
         </div>
 
         <div class="intervals" id="intervals"></div>
@@ -432,7 +432,7 @@ function refreshList() {
     const row = document.createElement('div');
     row.className = 'list-item';
     const ms = Math.max(0, c.due - now());
-    row.innerHTML = `<div>${c.front.slice(0,40)}${c.front.length>40?'...':''}</div><span class="tag">${c.deck || 'Custom'} · ${formatDue(ms)}</span>`;
+    row.innerHTML = `<div>${c.front.slice(0,40)}${c.front.length>40?'...':''}</div><span class="tag">${c.deck || 'Custom'} | ${formatDue(ms)}</span>`;
     row.onclick = () => { cards.splice(i,1); save(); init(); };
     list.appendChild(row);
   });
@@ -640,8 +640,8 @@ const intervalHints = [
   '5 stars: fastest growth'
 ];
 
-document.getElementById('intervals').textContent = intervalHints.join(' · ');
-document.getElementById('intervals-short').textContent = '1m · 5m · 15m · growth';
+document.getElementById('intervals').textContent = intervalHints.join(' | ');
+document.getElementById('intervals-short').textContent = '1m | 5m | 15m | growth';
 
 init();
 const readyMsg = document.getElementById('deck-msg');
