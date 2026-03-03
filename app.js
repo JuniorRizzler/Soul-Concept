@@ -644,7 +644,7 @@
       '<div class="push-title">Notifications</div>' +
       '<button class="push-close" type="button" aria-label="Close notifications panel" data-push-close>x</button>' +
       '</div>' +
-      '<p class="push-text">Enable push notifications for updates.</p>' +
+      '<p class="push-text">Enable push notifications for updates (desktop + mobile supported browsers).</p>' +
       '<div class="push-actions">' +
       '<button class="btn btn-secondary" type="button" data-push-enable>Enable</button>' +
       '<button class="btn btn-primary" type="button" data-push-test>Send test</button>' +
@@ -694,15 +694,29 @@
         body: 'Test notification received.',
         url: '/'
       }
-      const res = await fetch('/.netlify/functions/send-push', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subscription, payload })
-      })
-      if (!res.ok) {
+      const endpoints = ['/api/send-push', '/api/send-push.js', '/.netlify/functions/send-push']
+      let lastError = 'Failed to send notification.'
+      for (let i = 0; i < endpoints.length; i += 1) {
+        const endpoint = endpoints[i]
+        let res
+        try {
+          res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ subscription, payload })
+          })
+        } catch (err) {
+          lastError = err && err.message ? err.message : lastError
+          continue
+        }
+        if (res.ok) return
         const text = await res.text()
-        throw new Error(text || 'Failed to send notification.')
+        if (res.status !== 404) {
+          throw new Error(text || ('Push request failed (' + res.status + ').'))
+        }
+        if (text) lastError = text
       }
+      throw new Error(lastError)
     }
 
     if (closeBtn) {
@@ -718,6 +732,10 @@
 
     enableBtn.addEventListener('click', async function () {
       try {
+        if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
+          setStatus('On iPhone/iPad, add this site to Home Screen first, then enable notifications from the installed app.', true)
+          return
+        }
         const permission = await Notification.requestPermission()
         if (permission !== 'granted') {
           setStatus('Permission denied.', true)
