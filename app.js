@@ -25,6 +25,281 @@
     }
   })
 
+  function loadScript(src, id) {
+    return new Promise(function (resolve, reject) {
+      if (id) {
+        const existing = document.getElementById(id)
+        if (existing) {
+          resolve()
+          return
+        }
+      }
+      const script = document.createElement('script')
+      script.src = src
+      script.async = true
+      if (id) script.id = id
+      script.onload = function () {
+        resolve()
+      }
+      script.onerror = function () {
+        reject(new Error('Failed to load script: ' + src))
+      }
+      document.head.appendChild(script)
+    })
+  }
+
+  function createAuthModal() {
+    const modal = document.createElement('div')
+    modal.className = 'auth-modal'
+    modal.setAttribute('aria-hidden', 'true')
+    modal.innerHTML =
+      '<div class="auth-modal-card" role="dialog" aria-modal="true" aria-label="Sign in">' +
+      '<button type="button" class="auth-close" data-auth-close aria-label="Close">x</button>' +
+      '<h3>Sign in</h3>' +
+      '<p class="auth-sub">Use Google or email to continue.</p>' +
+      '<button type="button" class="btn btn-primary auth-google" data-auth-google>Continue with Google</button>' +
+      '<div class="auth-divider"><span>or</span></div>' +
+      '<label class="auth-label" for="auth-email">Email</label>' +
+      '<input id="auth-email" class="auth-input" type="email" placeholder="you@example.com" />' +
+      '<label class="auth-label" for="auth-password">Password (optional)</label>' +
+      '<input id="auth-password" class="auth-input" type="password" placeholder="For password sign-in / sign-up" />' +
+      '<div class="auth-actions">' +
+      '<button type="button" class="btn btn-secondary" data-auth-magic>Send Magic Link</button>' +
+      '<button type="button" class="btn btn-secondary" data-auth-password>Sign in with Password</button>' +
+      '<button type="button" class="btn btn-secondary" data-auth-signup>Create Account</button>' +
+      '</div>' +
+      '<div class="auth-user" data-auth-user hidden></div>' +
+      '<button type="button" class="btn btn-secondary auth-signout" data-auth-signout hidden>Sign out</button>' +
+      '<p class="auth-status" data-auth-status></p>' +
+      '</div>'
+    document.body.appendChild(modal)
+    return modal
+  }
+
+  function openAuthModal(modal) {
+    modal.classList.add('is-open')
+    modal.setAttribute('aria-hidden', 'false')
+  }
+
+  function closeAuthModal(modal) {
+    modal.classList.remove('is-open')
+    modal.setAttribute('aria-hidden', 'true')
+  }
+
+  async function loadSupabaseConfig() {
+    try {
+      const res = await fetch('/supabase-config.json?ts=' + Date.now(), { cache: 'no-store' })
+      if (!res.ok) return null
+      const cfg = await res.json()
+      if (!cfg || !cfg.url || !cfg.anonKey) return null
+      return cfg
+    } catch (err) {
+      return null
+    }
+  }
+
+  function isConfigured(cfg) {
+    if (!cfg) return false
+    if (!cfg.url || !cfg.anonKey) return false
+    if (String(cfg.url).indexOf('YOUR-') !== -1) return false
+    if (String(cfg.anonKey).indexOf('YOUR-') !== -1) return false
+    return true
+  }
+
+  function setupAuthUI(navMenu) {
+    if (!navMenu) return
+
+    const authWrap = document.createElement('div')
+    authWrap.className = 'auth-wrap'
+    authWrap.innerHTML =
+      '<button type="button" class="btn btn-secondary auth-open" data-auth-open>Sign in</button>'
+    navMenu.appendChild(authWrap)
+
+    const authBtn = authWrap.querySelector('[data-auth-open]')
+    const modal = createAuthModal()
+    const closeBtn = modal.querySelector('[data-auth-close]')
+    const googleBtn = modal.querySelector('[data-auth-google]')
+    const magicBtn = modal.querySelector('[data-auth-magic]')
+    const passwordBtn = modal.querySelector('[data-auth-password]')
+    const signupBtn = modal.querySelector('[data-auth-signup]')
+    const signoutBtn = modal.querySelector('[data-auth-signout]')
+    const statusEl = modal.querySelector('[data-auth-status]')
+    const userEl = modal.querySelector('[data-auth-user]')
+    const emailEl = modal.querySelector('#auth-email')
+    const passwordEl = modal.querySelector('#auth-password')
+
+    let supabaseClient = null
+    let ready = false
+
+    function setStatus(msg, isError) {
+      if (!statusEl) return
+      statusEl.textContent = msg || ''
+      statusEl.className = isError ? 'auth-status err' : 'auth-status ok'
+    }
+
+    function setUser(user) {
+      if (!authBtn || !signoutBtn || !userEl) return
+      if (user && user.email) {
+        authBtn.textContent = user.email
+        userEl.hidden = false
+        userEl.textContent = 'Signed in as ' + user.email
+        signoutBtn.hidden = false
+      } else {
+        authBtn.textContent = 'Sign in'
+        userEl.hidden = true
+        userEl.textContent = ''
+        signoutBtn.hidden = true
+      }
+    }
+
+    authBtn.addEventListener('click', function () {
+      openAuthModal(modal)
+    })
+
+    closeBtn.addEventListener('click', function () {
+      closeAuthModal(modal)
+    })
+
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) closeAuthModal(modal)
+    })
+
+    function requireReady() {
+      if (!ready || !supabaseClient) {
+        setStatus(
+          'Supabase not configured yet. Add project values in /supabase-config.json.',
+          true,
+        )
+        return false
+      }
+      return true
+    }
+
+    googleBtn.addEventListener('click', async function () {
+      if (!requireReady()) return
+      setStatus('Redirecting to Google...', false)
+      const result = await supabaseClient.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: location.origin + location.pathname,
+        },
+      })
+      if (result.error) setStatus(result.error.message || 'Google sign-in failed.', true)
+    })
+
+    magicBtn.addEventListener('click', async function () {
+      if (!requireReady()) return
+      const email = (emailEl.value || '').trim()
+      if (!email) {
+        setStatus('Enter your email first.', true)
+        return
+      }
+      const result = await supabaseClient.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: location.origin + location.pathname },
+      })
+      if (result.error) {
+        setStatus(result.error.message || 'Failed to send magic link.', true)
+      } else {
+        setStatus('Magic link sent. Check your email.', false)
+      }
+    })
+
+    passwordBtn.addEventListener('click', async function () {
+      if (!requireReady()) return
+      const email = (emailEl.value || '').trim()
+      const password = passwordEl.value || ''
+      if (!email || !password) {
+        setStatus('Enter email and password.', true)
+        return
+      }
+      const result = await supabaseClient.auth.signInWithPassword({ email, password })
+      if (result.error) {
+        setStatus(result.error.message || 'Email sign-in failed.', true)
+      } else {
+        setStatus('Signed in successfully.', false)
+      }
+    })
+
+    signupBtn.addEventListener('click', async function () {
+      if (!requireReady()) return
+      const email = (emailEl.value || '').trim()
+      const password = passwordEl.value || ''
+      if (!email || !password) {
+        setStatus('Enter email and password to create account.', true)
+        return
+      }
+      const result = await supabaseClient.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: location.origin + location.pathname },
+      })
+      if (result.error) {
+        setStatus(result.error.message || 'Account creation failed.', true)
+      } else {
+        setStatus('Account created. Confirm your email if prompted.', false)
+      }
+    })
+
+    signoutBtn.addEventListener('click', async function () {
+      if (!requireReady()) return
+      const result = await supabaseClient.auth.signOut()
+      if (result.error) {
+        setStatus(result.error.message || 'Sign out failed.', true)
+      } else {
+        setStatus('Signed out.', false)
+      }
+    })
+
+    ;(async function initAuth() {
+      const cfg = await loadSupabaseConfig()
+      if (!isConfigured(cfg)) {
+        setStatus(
+          'Supabase not configured yet. Add project values in /supabase-config.json.',
+          true,
+        )
+        setUser(null)
+        return
+      }
+
+      try {
+        await loadScript(
+          'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js',
+          'supabase-js-cdn',
+        )
+      } catch (err) {
+        setStatus('Failed to load auth library.', true)
+        return
+      }
+
+      try {
+        supabaseClient = window.supabase.createClient(cfg.url, cfg.anonKey, {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true,
+          },
+        })
+        ready = true
+
+        const sessionData = await supabaseClient.auth.getSession()
+        setUser(sessionData.data && sessionData.data.session ? sessionData.data.session.user : null)
+
+        supabaseClient.auth.onAuthStateChange(function (_event, session) {
+          setUser(session ? session.user : null)
+        })
+
+        setStatus('', false)
+      } catch (err) {
+        setStatus('Failed to initialize Supabase auth.', true)
+      }
+    })()
+  }
+
+  if (!isLibraryContext && navMenu) {
+    setupAuthUI(navMenu)
+  }
+
   const reveals = Array.from(document.querySelectorAll('.reveal'))
   if (reveals.length) {
     const revealObserver = new IntersectionObserver(

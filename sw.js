@@ -47,6 +47,10 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
 
   const url = new URL(req.url);
+  if (url.pathname === "/supabase-config.json") {
+    event.respondWith(fetch(req));
+    return;
+  }
   const isSameOrigin = url.origin === self.location.origin;
   const isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
 
