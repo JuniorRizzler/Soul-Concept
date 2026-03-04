@@ -1,8 +1,8 @@
 window.SC_AUTH_CONFIG = {
   enabled: true,
-  domain: "YOUR_AUTH0_DOMAIN",
+  domain: "dev-mxgd5ypqopqllz03.us.auth0.com",
   clientId: "YOUR_AUTH0_CLIENT_ID",
-  connection: "blackbaud",
+  connection: "blackbaud-k12",
   callbackPath: "/auth/callback.html",
   logoutReturnTo: "/index.html",
   requireOnPaths: [
