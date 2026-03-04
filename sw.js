@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v40";
+const CACHE_NAME = "soulconcept-v41";
 const ASSETS = [
   "/",
   "/index.html",
@@ -71,7 +71,15 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Always try network first for frequently updated app bundles.
-  if (isSameOrigin && (url.pathname === "/math/math.bundle.js" || url.pathname === "/study-library.bundle.js")) {
+  if (
+    isSameOrigin &&
+    (
+      url.pathname === "/math/math.bundle.js" ||
+      url.pathname === "/study-library.bundle.js" ||
+      url.pathname === "/auth-config.js" ||
+      url.pathname === "/auth-guard.js"
+    )
+  ) {
     event.respondWith(
       fetch(req)
         .then((res) => {

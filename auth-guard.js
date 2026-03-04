@@ -13,16 +13,6 @@
     return !!cfg.domain && !!cfg.clientId && cfg.domain !== "YOUR_AUTH0_DOMAIN" && cfg.clientId !== "YOUR_AUTH0_CLIENT_ID";
   }
 
-  function showConfigError() {
-    document.body.innerHTML =
-      '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#0b0d10;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">' +
-      '<div style="max-width:640px;background:#151922;border:1px solid #2a3142;border-radius:14px;padding:20px 22px;">' +
-      "<h2 style='margin:0 0 10px;font-size:1.2rem;'>Auth Setup Required</h2>" +
-      "<p style='margin:0 0 10px;line-height:1.5;color:#c6cfdd;'>Set <code>domain</code> and <code>clientId</code> in <code>auth-config.js</code> to enable Blackbaud sign in.</p>" +
-      "<p style='margin:0;line-height:1.5;color:#8ea0bd;'>Then redeploy and refresh this page.</p>" +
-      "</div></div>";
-  }
-
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
       var s = document.createElement("script");
@@ -56,10 +46,9 @@
   }
 
   async function run() {
-    if (!isConfigured()) {
-      showConfigError();
-      return;
-    }
+    // Fail open while auth is disabled or not fully configured.
+    // This prevents lockout due to stale cached config files.
+    if (!isConfigured()) return;
 
     await loadScript("https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.js");
 
