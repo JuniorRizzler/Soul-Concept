@@ -482,13 +482,27 @@
   const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
   const isSafari = /safari/i.test(navigator.userAgent) && !/crios|fxios|edgios|opr\//i.test(navigator.userAgent)
   const standaloneMql = window.matchMedia('(display-mode: standalone)')
+  const INSTALL_STATE_KEY = 'sc_app_installed'
 
   function isStandaloneMode() {
     return standaloneMql.matches || !!navigator.standalone
   }
 
   function isAppInstalled() {
-    return isStandaloneMode()
+    if (isStandaloneMode()) return true
+    try {
+      return localStorage.getItem(INSTALL_STATE_KEY) === '1'
+    } catch (err) {
+      return false
+    }
+  }
+
+  function setInstalledState(value) {
+    try {
+      localStorage.setItem(INSTALL_STATE_KEY, value ? '1' : '0')
+    } catch (err) {
+      // ignore storage errors
+    }
   }
 
   function updateInstallUiVisibility() {
@@ -577,9 +591,16 @@
 
       if (deferredPrompt) {
         deferredPrompt.prompt()
-        deferredPrompt.userChoice.finally(function () {
-          deferredPrompt = null
-        })
+        deferredPrompt.userChoice
+          .then(function (choice) {
+            if (choice && choice.outcome === 'accepted') {
+              setInstalledState(true)
+            }
+          })
+          .finally(function () {
+            deferredPrompt = null
+            updateInstallUiVisibility()
+          })
         return
       }
 
@@ -616,14 +637,19 @@
   })
 
   window.addEventListener('appinstalled', function () {
+    setInstalledState(true)
     deferredPrompt = null
     updateInstallUiVisibility()
   })
 
+  if (isStandaloneMode()) {
+    setInstalledState(true)
+  }
   updateInstallUiVisibility()
 
   if (standaloneMql && standaloneMql.addEventListener) {
     standaloneMql.addEventListener('change', function (event) {
+      if (event.matches) setInstalledState(true)
       updateInstallUiVisibility()
     })
   }
