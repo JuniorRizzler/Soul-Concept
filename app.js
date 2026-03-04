@@ -481,7 +481,6 @@
   const installHint = document.querySelector('[data-install-hint]')
   const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
   const isSafari = /safari/i.test(navigator.userAgent) && !/crios|fxios|edgios|opr\//i.test(navigator.userAgent)
-  const INSTALL_STATE_KEY = 'sc_app_installed'
   const standaloneMql = window.matchMedia('(display-mode: standalone)')
 
   function isStandaloneMode() {
@@ -489,20 +488,7 @@
   }
 
   function isAppInstalled() {
-    if (isStandaloneMode()) return true
-    try {
-      return localStorage.getItem(INSTALL_STATE_KEY) === '1'
-    } catch (err) {
-      return false
-    }
-  }
-
-  function setInstalledState(value) {
-    try {
-      localStorage.setItem(INSTALL_STATE_KEY, value ? '1' : '0')
-    } catch (err) {
-      // ignore storage errors
-    }
+    return isStandaloneMode()
   }
 
   function updateInstallUiVisibility() {
@@ -630,19 +616,14 @@
   })
 
   window.addEventListener('appinstalled', function () {
-    setInstalledState(true)
     deferredPrompt = null
     updateInstallUiVisibility()
   })
 
-  if (isStandaloneMode()) {
-    setInstalledState(true)
-  }
   updateInstallUiVisibility()
 
   if (standaloneMql && standaloneMql.addEventListener) {
     standaloneMql.addEventListener('change', function (event) {
-      if (event.matches) setInstalledState(true)
       updateInstallUiVisibility()
     })
   }

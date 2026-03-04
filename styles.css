@@ -1523,7 +1523,16 @@ main {
 
 @media (max-width: 840px) {
   .nav-toggle {
-    display: inline-flex;
+    display: none;
+  }
+
+  .topbar-inner {
+    min-height: 64px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .streak-pill {
@@ -1544,27 +1553,36 @@ main {
   }
 
   .nav-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 4vw;
-    left: 4vw;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    background: var(--surface-strong);
+    position: static;
+    order: 4;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    padding: 8px;
-  }
-
-  .nav-menu.open {
-    display: flex;
+    box-shadow: var(--shadow-sm);
+    padding: 8px 10px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
 
   .nav-menu a,
+  .install-btn,
+  .install-hint,
   .nav-cta {
     margin: 0;
+    flex: 0 0 auto;
+  }
+
+  .install-hint {
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(33, 92, 75, 0.08);
   }
 
   .auth-open {
