@@ -1,6 +1,10 @@
 {
   "name": "soul-concept-vercel",
   "private": true,
+  "scripts": {
+    "sync:once": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-downloads.ps1",
+    "sync:watch": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-downloads.ps1 -Watch"
+  },
   "dependencies": {
     "web-push": "^3.6.7"
   }
