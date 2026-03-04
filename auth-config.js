@@ -1,5 +1,5 @@
 window.SC_AUTH_CONFIG = {
-  enabled: true,
+  enabled: false,
   domain: "dev-mxgd5ypqopqllz03.us.auth0.com",
   clientId: "RsQoPHsBmBCAYbVDIYMLnDCR1zjB07fC",
   connection: "blackbaud-k12",
