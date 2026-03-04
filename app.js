@@ -481,7 +481,41 @@
   const installHint = document.querySelector('[data-install-hint]')
   const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
   const isSafari = /safari/i.test(navigator.userAgent) && !/crios|fxios|edgios|opr\//i.test(navigator.userAgent)
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
+  const INSTALL_STATE_KEY = 'sc_app_installed'
+  const standaloneMql = window.matchMedia('(display-mode: standalone)')
+
+  function isStandaloneMode() {
+    return standaloneMql.matches || !!navigator.standalone
+  }
+
+  function isAppInstalled() {
+    if (isStandaloneMode()) return true
+    try {
+      return localStorage.getItem(INSTALL_STATE_KEY) === '1'
+    } catch (err) {
+      return false
+    }
+  }
+
+  function setInstalledState(value) {
+    try {
+      localStorage.setItem(INSTALL_STATE_KEY, value ? '1' : '0')
+    } catch (err) {
+      // ignore storage errors
+    }
+  }
+
+  function updateInstallUiVisibility() {
+    const installed = isAppInstalled()
+    if (installBtn) {
+      installBtn.style.display = installed ? 'none' : ''
+      installBtn.setAttribute('aria-hidden', installed ? 'true' : 'false')
+    }
+    if (installHint) {
+      installHint.classList.toggle('is-visible', !installed && isIos && !isStandaloneMode())
+      installHint.style.display = installed ? 'none' : ''
+    }
+  }
 
   function ensureIosInstallStyles() {
     if (document.getElementById('ios-install-style')) return
@@ -550,6 +584,11 @@
 
   if (installBtn) {
     installBtn.addEventListener('click', function () {
+      if (isAppInstalled()) {
+        updateInstallUiVisibility()
+        return
+      }
+
       if (deferredPrompt) {
         deferredPrompt.prompt()
         deferredPrompt.userChoice.finally(function () {
@@ -558,7 +597,7 @@
         return
       }
 
-      if (isIos && !isStandalone) {
+      if (isIos && !isStandaloneMode()) {
         if (installHint) installHint.classList.add('is-visible')
         if (!isSafari) {
           alert('For iPhone/iPad install, open this page in Safari, then use Share -> Add to Home Screen.')
@@ -587,14 +626,25 @@
   window.addEventListener('beforeinstallprompt', function (event) {
     event.preventDefault()
     deferredPrompt = event
+    updateInstallUiVisibility()
   })
 
   window.addEventListener('appinstalled', function () {
+    setInstalledState(true)
     deferredPrompt = null
+    updateInstallUiVisibility()
   })
 
-  if (installHint && isIos && !isStandalone) {
-    installHint.classList.add('is-visible')
+  if (isStandaloneMode()) {
+    setInstalledState(true)
+  }
+  updateInstallUiVisibility()
+
+  if (standaloneMql && standaloneMql.addEventListener) {
+    standaloneMql.addEventListener('change', function (event) {
+      if (event.matches) setInstalledState(true)
+      updateInstallUiVisibility()
+    })
   }
 
   if ('serviceWorker' in navigator) {
