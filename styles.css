@@ -644,6 +644,26 @@ main {
   background: rgba(33, 92, 75, 0.12);
 }
 
+.jump-link.is-primary {
+  background: linear-gradient(120deg, var(--primary), var(--accent));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 10px 18px rgba(33, 92, 75, 0.22);
+}
+
+.jump-link.is-primary:hover {
+  filter: brightness(1.05);
+  background: linear-gradient(120deg, var(--primary), var(--accent));
+}
+
+.jump-link.is-soon {
+  color: #6b6358;
+  border-style: dashed;
+  background: rgba(255, 255, 255, 0.72);
+  cursor: default;
+  opacity: 0.92;
+}
+
 .quick-nav-section {
   padding-top: 38px;
 }
