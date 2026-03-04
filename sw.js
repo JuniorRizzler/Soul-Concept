@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v37";
+const CACHE_NAME = "soulconcept-v38";
 const ASSETS = [
   "/",
   "/index.html",
@@ -16,6 +16,9 @@ const ASSETS = [
   "/anki/index.html",
   "/styles.css",
   "/app.js",
+  "/auth-config.js",
+  "/auth-guard.js",
+  "/auth/callback.html",
   "/manifest.json",
   "/icons/icon.svg",
   "/icons/icon-192.png",
