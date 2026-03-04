@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1531,6 +1531,54 @@ const lessons = [
 const grid = document.getElementById('grid');
 const understandSection = document.getElementById('understand-section');
 
+const MOJIBAKE_RE = /(?:Ã.|Â.|â.|�)/;
+function decodeMojibakeString(input) {
+  if (typeof input !== 'string' || !input || !MOJIBAKE_RE.test(input)) return input;
+  let out = input;
+  for (let i = 0; i < 3; i += 1) {
+    try {
+      const bytes = new Uint8Array(Array.from(out, ch => ch.charCodeAt(0) & 0xff));
+      const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+      if (!decoded || decoded === out) break;
+      out = decoded;
+      if (!MOJIBAKE_RE.test(out)) break;
+    } catch (err) {
+      break;
+    }
+  }
+  return out;
+}
+
+function normalizeDeep(value) {
+  if (typeof value === 'string') return decodeMojibakeString(value);
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length; i += 1) value[i] = normalizeDeep(value[i]);
+    return value;
+  }
+  if (value && typeof value === 'object') {
+    Object.keys(value).forEach((key) => {
+      value[key] = normalizeDeep(value[key]);
+    });
+  }
+  return value;
+}
+
+function normalizeTextNodes(root) {
+  if (!root) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const pending = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const parentTag = node.parentElement ? node.parentElement.tagName : '';
+    if (parentTag === 'SCRIPT' || parentTag === 'STYLE') continue;
+    if (MOJIBAKE_RE.test(node.nodeValue || '')) pending.push(node);
+  }
+  pending.forEach((node) => {
+    node.nodeValue = decodeMojibakeString(node.nodeValue || '');
+  });
+}
+
+normalizeDeep(lessons);
 lessons.forEach((lesson, i) => {
   // Lesson card
   const card = document.createElement('div');
@@ -1577,9 +1625,58 @@ lessons.forEach((lesson, i) => {
   }
 });
 
-const sectionIcons = {'total stock':'Ã°Å¸Å’Â','resource':'Ã°Å¸Å’Â','four categor':'Ã°Å¸â€œÂ¦','categor':'Ã°Å¸â€œÂ¦','value':'Ã°Å¸â€™Â°','management':'Ã¢Å¡â€“Ã¯Â¸Â','waste':'Ã¢â„¢Â»Ã¯Â¸Â','hierarchy':'Ã¢â„¢Â»Ã¯Â¸Â','four factor':'Ã°Å¸Å’Â±','intensive':'Ã°Å¸Å¡Å“','economic':'Ã°Å¸â€™Â¼','histor':'Ã°Å¸â€œÅ“','composition':'Ã°Å¸Å’Â²','harvest':'Ã°Å¸Âªâ€œ','sustainab':'Ã¢â„¢Â»Ã¯Â¸Â','fish':'Ã°Å¸ÂÅ¸','grand bank':'Ã°Å¸Å’Å ','collapse':'Ã¢Å¡Â Ã¯Â¸Â','inshore':'Ã¢â€ºÂµ','climate change':'Ã°Å¸Å’Â¡Ã¯Â¸Â','impact':'Ã°Å¸Å’Â¡Ã¯Â¸Â','global water':'Ã°Å¸â€™Â§','water source':'Ã°Å¸â€™Â§','water cycle':'Ã°Å¸â€â€ž','cost':'Ã°Å¸â€™Â°','inequal':'Ã¢Å¡â€“Ã¯Â¸Â','primary energy':'Ã¢Å¡Â¡','bioenergy':'Ã°Å¸Å’Â¿','consume':'Ã°Å¸â€Â¥','fossil':'Ã¢â€ºÂ½','metallic':'Ã°Å¸â€™Å½','leading':'Ã°Å¸â€œÅ ','mining method':'Ã¢â€ºÂÃ¯Â¸Â','mineral':'Ã¢â€ºÂÃ¯Â¸Â','diamond':'Ã°Å¸â€™Å½','reclam':'Ã°Å¸Å’Â±','sector':'Ã°Å¸ÂÂ­','manufactur':'Ã°Å¸ÂÂ­','location':'Ã°Å¸â€œÂ','definition':'Ã°Å¸â€œâ€“','connection':'Ã°Å¸â€â€”','development':'Ã°Å¸â€œË†','basic vs':'Ã°Å¸â€â€ž','multiplier':'Ã¢Å“Â¨','how it works':'Ã¢Å“Â¨'};
-function getIcon(h){const l=h.toLowerCase();for(const[k,v]of Object.entries(sectionIcons))if(l.includes(k))return v;return'Ã°Å¸â€œÅ’';}
-
+const sectionIcons = {
+  'total stock': '🧭',
+  'resource': '🧭',
+  'four categor': '📚',
+  'categor': '📚',
+  'value': '💰',
+  'management': '⚖️',
+  'waste': '♻️',
+  'hierarchy': '♻️',
+  'four factor': '🌱',
+  'intensive': '🚜',
+  'economic': '📈',
+  'histor': '📜',
+  'composition': '🌲',
+  'harvest': '🪓',
+  'sustainab': '♻️',
+  'fish': '🐟',
+  'grand bank': '🗺️',
+  'collapse': '⚠️',
+  'inshore': '⛵',
+  'climate change': '🌡️',
+  'impact': '🌡️',
+  'global water': '💧',
+  'water source': '💧',
+  'water cycle': '🔄',
+  'cost': '💰',
+  'inequal': '⚖️',
+  'primary energy': '⚡',
+  'bioenergy': '🌿',
+  'consume': '🔥',
+  'fossil': '⛽',
+  'metallic': '💎',
+  'leading': '📊',
+  'mining method': '⛏️',
+  'mineral': '⛏️',
+  'diamond': '💎',
+  'reclam': '🌱',
+  'sector': '🏭',
+  'manufactur': '🏭',
+  'location': '📍',
+  'definition': '📖',
+  'connection': '🔗',
+  'development': '📈',
+  'basic vs': '🔄',
+  'multiplier': '✨',
+  'how it works': '✨'
+};
+function getIcon(h) {
+  const l = String(h || '').toLowerCase();
+  for (const [k, v] of Object.entries(sectionIcons)) if (l.includes(k)) return v;
+  return '📝';
+}
 function openModal(i) {
   const lesson = lessons[i];
   document.getElementById('modal-title').textContent = lesson.title;
@@ -1625,6 +1722,7 @@ function openModal(i) {
   </div>`;
 
   document.getElementById('modal-body').innerHTML = notesHtml + keyTermsHtml + diagramHtml;
+  normalizeTextNodes(document.getElementById('modal-body'));
   document.getElementById('overlay').classList.add('active');
   const body = document.getElementById('modal-body');
   body.scrollTop = 0;
@@ -1668,14 +1766,17 @@ function closeModalDirect() {
   document.getElementById('overlay').classList.remove('active');
   document.getElementById('scroll-hint').classList.add('hidden');
 }
+
+normalizeTextNodes(document.body);
 </script>
     <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
     <script src="auth-guard.js"></script>
 </body>
-<script src="app.js?v=20260323"></script>
+<script src="app.js?v=20260324"></script>
 </html>
+
 
 
 
