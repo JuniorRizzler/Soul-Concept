@@ -197,7 +197,7 @@ img {
   width: 18px;
   height: 18px;
   border-radius: 6px;
-  background: #fff url('icons/soulconceptflame.png') center/contain no-repeat;
+  background: transparent url('icons/soulconceptflame.png') center/contain no-repeat;
   box-shadow: 0 3px 8px rgba(23, 21, 16, 0.15);
 }
 

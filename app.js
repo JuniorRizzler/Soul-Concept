@@ -35,7 +35,7 @@
     style.id = 'sc-global-ui-styles'
     style.textContent =
       '.streak-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid rgba(33,92,75,.25);background:linear-gradient(135deg,rgba(33,92,75,.1),rgba(243,106,61,.12));box-shadow:0 8px 18px rgba(23,21,16,.08);white-space:nowrap}' +
-      '.streak-pill-icon{width:18px;height:18px;border-radius:6px;background:#fff url(\"icons/soulconceptflame.png\") center/contain no-repeat;box-shadow:0 3px 8px rgba(23,21,16,.15)}' +
+      '.streak-pill-icon{width:18px;height:18px;border-radius:6px;background:transparent url(\"icons/soulconceptflame.png\") center/contain no-repeat;box-shadow:0 3px 8px rgba(23,21,16,.15)}' +
       '.streak-pill-label{color:#5a5863;font-size:.78rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}' +
       '.streak-pill-value{color:#1b1b1f;font-size:1rem;line-height:1}' +
       '.stats-wrap{position:relative;display:inline-flex;align-items:center}' +
