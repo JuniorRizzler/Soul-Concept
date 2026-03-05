@@ -4662,6 +4662,24 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
   const [eraser, setEraserState] = useState(false);
   const [hasDrawing, setHasDrawing] = useState(false);
 
+  function getStorageApi() {
+    const custom = typeof window !== 'undefined' ? window.storage : null;
+    if (custom && typeof custom.get === 'function' && typeof custom.set === 'function' && typeof custom.delete === 'function') {
+      return custom;
+    }
+    return {
+      async get(key) {
+        try { return { value: localStorage.getItem(key) }; } catch (e) { return { value: null }; }
+      },
+      async set(key, value) {
+        try { localStorage.setItem(key, value); } catch (e) {}
+      },
+      async delete(key) {
+        try { localStorage.removeItem(key); } catch (e) {}
+      }
+    };
+  }
+
   const setEraser = (v) => { eraserRef.current = v; setEraserState(v); };
 
   const snapshot = useCallback(() => {
@@ -4675,7 +4693,7 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
   const saveToStorage = useCallback(async () => {
     if (!canvasRef.current) return;
     const data = canvasRef.current.toDataURL('image/png', 0.85);
-    try { await window.storage.set(`drawing:${pageKey}`, data); } catch(e) {}
+    try { await getStorageApi().set(`drawing:${pageKey}`, data); } catch(e) {}
   }, [pageKey]);
 
   useEffect(() => {
@@ -4692,7 +4710,7 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
     setHasDrawing(false);
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, W, H);
-    window.storage.get(`drawing:${pageKey}`).then(result => {
+    getStorageApi().get(`drawing:${pageKey}`).then(result => {
       if (result?.value) {
         const img = new Image();
         img.onload = () => { ctx.drawImage(img, 0, 0, W, H); setHasDrawing(true); snapshot(); };
@@ -4782,7 +4800,7 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
     const canvas = canvasRef.current;
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     setHasDrawing(false); historyRef.current = []; historyIdx.current = -1; snapshot();
-    try { await window.storage.delete(`drawing:${pageKey}`); } catch(e) {}
+    try { await getStorageApi().delete(`drawing:${pageKey}`); } catch(e) {}
   }, [pageKey, snapshot]);
 
   const canvasH = Math.max(document.documentElement.scrollHeight - NAV_H, window.innerHeight - NAV_H);

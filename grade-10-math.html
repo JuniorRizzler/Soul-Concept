@@ -25239,6 +25239,33 @@ The parabola doesn't cross the x-axis`));
     const historyIdx = (0, import_react3.useRef)(-1);
     const [eraser, setEraserState] = (0, import_react3.useState)(false);
     const [hasDrawing, setHasDrawing] = (0, import_react3.useState)(false);
+    function getStorageApi() {
+      const custom = typeof window !== "undefined" ? window.storage : null;
+      if (custom && typeof custom.get === "function" && typeof custom.set === "function" && typeof custom.delete === "function") {
+        return custom;
+      }
+      return {
+        async get(key) {
+          try {
+            return { value: localStorage.getItem(key) };
+          } catch (e) {
+            return { value: null };
+          }
+        },
+        async set(key, value) {
+          try {
+            localStorage.setItem(key, value);
+          } catch (e) {
+          }
+        },
+        async delete(key) {
+          try {
+            localStorage.removeItem(key);
+          } catch (e) {
+          }
+        }
+      };
+    }
     const setEraser = (v) => {
       eraserRef.current = v;
       setEraserState(v);
@@ -25254,7 +25281,7 @@ The parabola doesn't cross the x-axis`));
       if (!canvasRef.current) return;
       const data = canvasRef.current.toDataURL("image/png", 0.85);
       try {
-        await window.storage.set(`drawing:${pageKey}`, data);
+        await getStorageApi().set(`drawing:${pageKey}`, data);
       } catch (e) {
       }
     }, [pageKey]);
@@ -25272,7 +25299,7 @@ The parabola doesn't cross the x-axis`));
       setHasDrawing(false);
       const ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, W, H);
-      window.storage.get(`drawing:${pageKey}`).then((result) => {
+      getStorageApi().get(`drawing:${pageKey}`).then((result) => {
         if (result?.value) {
           const img = new Image();
           img.onload = () => {
@@ -25378,7 +25405,7 @@ The parabola doesn't cross the x-axis`));
       historyIdx.current = -1;
       snapshot();
       try {
-        await window.storage.delete(`drawing:${pageKey}`);
+        await getStorageApi().delete(`drawing:${pageKey}`);
       } catch (e) {
       }
     }, [pageKey, snapshot]);
