@@ -516,10 +516,13 @@
       } catch (err) {}
     }
 
-    function setPetPos(x, y, animated) {
+    function setPetPos(x, y, animated, durationMs) {
       petState.x = clampPetX(x);
       petState.y = clampPetY(y);
-      shell.style.transition = animated ? "left .46s cubic-bezier(.22,1,.36,1),top .46s cubic-bezier(.22,1,.36,1)" : "none";
+      var duration = Math.max(420, Number(durationMs) || 1100);
+      shell.style.transition = animated
+        ? "left " + duration + "ms cubic-bezier(.22,1,.36,1),top " + duration + "ms cubic-bezier(.22,1,.36,1)"
+        : "none";
       shell.style.left = petState.x + "px";
       shell.style.top = petState.y + "px";
     }
@@ -544,41 +547,76 @@
       return lines[Math.floor(Math.random() * lines.length)];
     }
 
-    function dashOnce() {
+    function distance(aX, aY, bX, bY) {
+      var dx = aX - bX;
+      var dy = aY - bY;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function getMeaningfulTargets() {
+      var targets = [
+        { x: 14, y: 86 },
+        { x: window.innerWidth - 78, y: 86 },
+        { x: 14, y: window.innerHeight - 116 },
+        { x: window.innerWidth - 78, y: window.innerHeight - 116 },
+        { x: window.innerWidth * 0.5 - 28, y: 90 }
+      ];
+      var heading = document.querySelector("#modal-title, .unit-title, h1.syne, h2.syne, h1, h2");
+      if (heading) {
+        var r = heading.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) {
+          targets.push({ x: r.right + 16, y: r.top + 6 });
+          targets.push({ x: r.left - 62, y: r.top + 6 });
+        }
+      }
+      var toolbarEl = document.querySelector(".lib-anno-toolbar");
+      if (toolbarEl) {
+        var t = toolbarEl.getBoundingClientRect();
+        targets.push({ x: t.left - 70, y: t.top - 12 });
+      }
+      return targets.map(function (p) {
+        return { x: clampPetX(p.x), y: clampPetY(p.y) };
+      });
+    }
+
+    function chooseNextTarget() {
+      var points = getMeaningfulTargets().filter(function (p) {
+        return distance(p.x, p.y, petState.x, petState.y) > 72;
+      });
+      if (!points.length) return { x: clampPetX(petState.x + 50), y: clampPetY(petState.y + 20) };
+      if (petState.lastTarget && points.length > 1) {
+        points = points.filter(function (p) {
+          return distance(p.x, p.y, petState.lastTarget.x, petState.lastTarget.y) > 24;
+        });
+      }
+      return points[Math.floor(Math.random() * points.length)];
+    }
+
+    function roamStep() {
       if (!petState.roaming || petState.dragging) return;
       if (Date.now() < petState.pauseUntil) return;
-      var x = 8 + Math.random() * Math.max(12, window.innerWidth - 80);
-      var y = 8 + Math.random() * Math.max(12, window.innerHeight - 120);
+      var target = chooseNextTarget();
+      petState.lastTarget = target;
+      var dist = distance(target.x, target.y, petState.x, petState.y);
+      var duration = Math.round(Math.max(900, Math.min(2200, dist * 7.5)));
       shell.classList.add("dashing");
-      setPetPos(x, y, true);
+      setPetPos(target.x, target.y, true, duration);
       window.setTimeout(function () {
         shell.classList.remove("dashing");
-      }, 520);
+      }, Math.min(700, duration));
+      savePetPos();
     }
 
-    function scheduleDash() {
-      window.clearInterval(petState.dashTimer);
+    function scheduleRoam() {
+      window.clearTimeout(petState.roamTimer);
       if (!petState.roaming) return;
-      petState.dashTimer = window.setInterval(function () {
-        dashOnce();
-      }, 2600 + Math.round(Math.random() * 1400));
-    }
-
-    function idleWanderOnce() {
-      if (!petState.roaming || petState.dragging) return;
-      if (Date.now() < petState.pauseUntil) return;
-      if (Math.random() < 0.55) return;
-      var jitterX = (Math.random() * 2 - 1) * 44;
-      var jitterY = (Math.random() * 2 - 1) * 28;
-      setPetPos(petState.x + jitterX, petState.y + jitterY, true);
-    }
-
-    function scheduleIdleWander() {
-      window.clearInterval(petState.idleTimer);
-      if (!petState.roaming) return;
-      petState.idleTimer = window.setInterval(function () {
-        idleWanderOnce();
-      }, 900);
+      var run = function () {
+        roamStep();
+        if (!petState.roaming) return;
+        var delay = 2600 + Math.round(Math.random() * 1800);
+        petState.roamTimer = window.setTimeout(run, delay);
+      };
+      run();
     }
 
     function setRoaming(next) {
@@ -587,9 +625,8 @@
       roamBtn.classList.toggle("active", petState.roaming);
       roamBtn.textContent = petState.roaming ? "Roam" : "Stay";
       try { localStorage.setItem(roamKey, petState.roaming ? "1" : "0"); } catch (err) {}
-      scheduleDash();
-      scheduleIdleWander();
-      if (petState.roaming) showSpeech("Dashing mode on.", 1400);
+      scheduleRoam();
+      if (petState.roaming) showSpeech("Roaming smoothly.", 1400);
     }
 
     var stored = loadPetPos();
@@ -604,8 +641,8 @@
       originX: 0,
       originY: 0,
       pauseUntil: 0,
-      dashTimer: null,
-      idleTimer: null,
+      roamTimer: null,
+      lastTarget: null,
       speechTimer: null
     };
     try {
