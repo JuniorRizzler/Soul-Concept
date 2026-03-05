@@ -47,11 +47,11 @@
 
     var style = document.createElement("style");
     style.textContent = [
-    ".lib-anno-toolbar{position:fixed;right:12px;bottom:12px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:7px 8px;border-radius:12px;background:rgba(15,23,42,.82);backdrop-filter:blur(12px);border:1px solid rgba(148,163,184,.2);box-shadow:0 10px 24px rgba(2,6,23,.32)}",
-    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.24);background:rgba(255,255,255,.96);color:#0f172a;border-radius:8px;padding:5px 7px;font:700 10px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
+    ".lib-anno-toolbar{position:fixed;right:12px;bottom:12px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:7px 8px;border-radius:12px;background:linear-gradient(135deg,rgba(30,24,17,.9),rgba(52,38,24,.88));backdrop-filter:blur(12px);border:1px solid rgba(228,199,160,.24);box-shadow:0 10px 24px rgba(20,12,7,.36)}",
+    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(207,167,118,.34);background:rgba(250,240,225,.96);color:#2d2015;border-radius:8px;padding:5px 7px;font:700 10px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
     ".lib-anno-toolbar .lib-anno-btn:hover{transform:translateY(-1px)}",
-    ".lib-anno-toolbar .lib-anno-btn.active{background:#dbeafe;border-color:#93c5fd;color:#1d4ed8}",
-    ".lib-anno-toolbar .lib-anno-scope{color:#e2e8f0;font:700 10px/1 Arial,sans-serif;max-width:132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 1px;opacity:.9}",
+    ".lib-anno-toolbar .lib-anno-btn.active{background:#f5d4a2;border-color:#d59644;color:#6b3a08}",
+    ".lib-anno-toolbar .lib-anno-scope{color:#f5e7d3;font:700 10px/1 Arial,sans-serif;max-width:132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 1px;opacity:.95}",
     ".lib-anno-color-row{display:flex;align-items:center;gap:4px}",
     ".lib-anno-swatch{width:18px;height:18px;border-radius:999px;border:2px solid rgba(255,255,255,.25);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}",
     ".lib-anno-swatch.active{outline:2px solid #fff;outline-offset:1px}",
@@ -467,6 +467,15 @@
     return true;
   }
 
+    function isStylusBackEraser(event) {
+    if (!event || event.pointerType !== "pen") return false;
+    return event.button === 5 || event.buttons === 32;
+  }
+
+    function isEraserInput(event) {
+    return erasing || isStylusBackEraser(event);
+  }
+
     function startStroke(event) {
     if (!canStartStroke(event)) return;
     updateContext();
@@ -477,9 +486,10 @@
     lastX = pt.x;
     lastY = pt.y;
 
-    ctx.globalCompositeOperation = erasing ? "destination-out" : "source-over";
+    var usingEraser = isEraserInput(event);
+    ctx.globalCompositeOperation = usingEraser ? "destination-out" : "source-over";
     ctx.strokeStyle = colorInput.value || "#e11d48";
-    ctx.lineWidth = erasing
+    ctx.lineWidth = usingEraser
       ? Math.max(12, Number(sizeInput.value || 4) * 2.5)
       : Number(sizeInput.value || 4);
 
@@ -490,6 +500,11 @@
     if (activePointerId === null || event.pointerId !== activePointerId) return;
     var pt = pointFromEvent(event);
 
+    var usingEraser = isEraserInput(event);
+    ctx.globalCompositeOperation = usingEraser ? "destination-out" : "source-over";
+    ctx.lineWidth = usingEraser
+      ? Math.max(12, Number(sizeInput.value || 4) * 2.5)
+      : Number(sizeInput.value || 4);
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(pt.x, pt.y);
