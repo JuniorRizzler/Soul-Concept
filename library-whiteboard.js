@@ -47,16 +47,17 @@
 
     var style = document.createElement("style");
     style.textContent = [
-    ".lib-anno-toolbar{position:fixed;right:14px;bottom:14px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px;border-radius:12px;background:rgba(15,23,42,.92);box-shadow:0 12px 28px rgba(2,6,23,.42)}",
-    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.45);background:#fff;color:#0f172a;border-radius:8px;padding:6px 9px;font:700 12px/1 Arial,sans-serif;cursor:pointer}",
-    ".lib-anno-toolbar .lib-anno-btn.active{background:#cbd5e1}",
-    ".lib-anno-toolbar .lib-anno-scope{color:#e2e8f0;font:700 11px/1 Arial,sans-serif;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    ".lib-anno-toolbar{position:fixed;right:16px;bottom:16px;z-index:2147483646;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;border-radius:16px;background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(30,41,59,.88));backdrop-filter:blur(14px);border:1px solid rgba(148,163,184,.28);box-shadow:0 16px 34px rgba(2,6,23,.42)}",
+    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.34);background:rgba(255,255,255,.95);color:#0f172a;border-radius:10px;padding:7px 10px;font:700 12px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
+    ".lib-anno-toolbar .lib-anno-btn:hover{transform:translateY(-1px)}",
+    ".lib-anno-toolbar .lib-anno-btn.active{background:#dbeafe;border-color:#93c5fd;color:#1d4ed8}",
+    ".lib-anno-toolbar .lib-anno-scope{color:#e2e8f0;font:700 11px/1 Arial,sans-serif;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}",
     ".lib-anno-color-row{display:flex;align-items:center;gap:4px}",
     ".lib-anno-swatch{width:20px;height:20px;border-radius:999px;border:2px solid rgba(255,255,255,.25);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}",
     ".lib-anno-swatch.active{outline:2px solid #fff;outline-offset:1px}",
     ".lib-anno-toolbar input[type='range']{width:90px;padding:0}",
     ".lib-anno-toolbar input[type='color']{padding:0;width:34px;height:30px}",
-    ".lib-anno-toolbar.minimized{padding:6px 8px;gap:6px}",
+    ".lib-anno-toolbar.minimized{padding:8px 9px;gap:7px}",
     ".lib-anno-toolbar.minimized .lib-anno-hide-when-min{display:none}",
     ".lib-anno-layer{position:absolute;left:0;top:0;z-index:2147483645;pointer-events:none;touch-action:none;cursor:crosshair}",
     "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
@@ -71,9 +72,9 @@
     var toolbar = document.createElement("div");
     toolbar.className = "lib-anno-toolbar";
     toolbar.innerHTML = [
-    '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Annotate: Off</button>',
-    '<button type="button" class="lib-anno-btn" id="lib-anno-minimize">Minimize</button>',
-    '<button type="button" class="lib-anno-btn lib-anno-hide-when-min" id="lib-anno-eraser">Eraser</button>',
+    '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Notes Off</button>',
+    '<button type="button" class="lib-anno-btn" id="lib-anno-minimize">Hide</button>',
+    '<button type="button" class="lib-anno-btn lib-anno-hide-when-min" id="lib-anno-eraser">Erase</button>',
     '<div class="lib-anno-color-row lib-anno-hide-when-min">',
       '<button type="button" class="lib-anno-swatch" data-color="#e11d48" style="background:#e11d48" aria-label="Pink pen"></button>',
       '<button type="button" class="lib-anno-swatch" data-color="#2563eb" style="background:#2563eb" aria-label="Blue pen"></button>',
@@ -133,43 +134,78 @@
     return text;
   }
 
+    function isGenericHeading(text) {
+    var t = (text || "").toLowerCase();
+    return (
+      t === "grade 10 math" ||
+      t === "math study library" ||
+      t === "notes" ||
+      t === "study tools" ||
+      t === "practice" ||
+      t === "general" ||
+      t.indexOf("welcome") !== -1
+    );
+  }
+
+    function firstVisibleText(selectors) {
+    for (var i = 0; i < selectors.length; i++) {
+      var el = document.querySelector(selectors[i]);
+      var text = getVisibleText(el);
+      if (text) return text;
+    }
+    return "";
+  }
+
     function detectSectionName() {
     var overlay = document.getElementById("overlay");
     var modalTitle = document.getElementById("modal-title");
     if (overlay && overlay.classList.contains("active")) {
       var modalText = getVisibleText(modalTitle);
-      if (modalText) return modalText;
+      if (modalText) return "overlay:" + modalText;
     }
 
-    var crumb = document.querySelector("span.syne.text-sm.font-semibold.truncate.max-w-48");
+    var crumb = document.querySelector("span.syne.text-sm.font-semibold.truncate.max-w-48, .breadcrumb .current, nav [aria-current='page']");
     var crumbText = getVisibleText(crumb);
-    if (crumbText) return crumbText;
+    if (crumbText) return "crumb:" + crumbText;
 
     var backButtons = Array.prototype.slice.call(document.querySelectorAll("button"));
+    var backLabel = "";
     var inSectionView = backButtons.some(function (btn) {
       var label = (btn.textContent || "").trim();
+      if (label.indexOf("Back to ") === 0) backLabel = label;
       return label === "Back to Library" || label.indexOf("Back to ") === 0;
     });
     if (inSectionView) {
-      var heads = Array.prototype.slice.call(document.querySelectorAll("h1,h2"));
+      var preferred = firstVisibleText(["#modal-title", "h1.syne", "h2.syne", "h1", "h2", "h3"]);
+      if (preferred && !isGenericHeading(preferred)) {
+        return "section:" + (backLabel || "Back") + "|" + preferred;
+      }
+      var heads = Array.prototype.slice.call(document.querySelectorAll("h1,h2,h3"));
       for (var i = 0; i < heads.length; i++) {
         var txt = getVisibleText(heads[i]);
         if (!txt) continue;
         if (txt.length < 4 || txt.length > 120) continue;
-        if (txt.toLowerCase().indexOf("ready to practice") !== -1) continue;
-        return txt;
+        if (txt.toLowerCase().indexOf("ready to practice") !== -1 || isGenericHeading(txt)) continue;
+        return "section:" + (backLabel || "Back") + "|" + txt;
       }
+      if (backLabel) return "section:" + backLabel;
     }
 
     var unit = document.querySelector(".unit-title");
     var unitText = getVisibleText(unit);
-    if (unitText) return unitText;
+    if (unitText) return "unit:" + unitText;
 
-    return (document.title || "General").trim();
+    var topHeads = Array.prototype.slice.call(document.querySelectorAll("h1,h2,h3"))
+      .map(getVisibleText)
+      .filter(function (txt) { return txt && !isGenericHeading(txt) && txt.length <= 120; })
+      .slice(0, 2);
+    if (topHeads.length) return "view:" + topHeads.join("|");
+
+    return "page:" + (document.title || "General").trim();
   }
 
     function storageKey(sectionName) {
-    return "lib-anno:" + window.location.pathname + ":" + normalize(sectionName);
+    return "lib-anno:v2:" + window.location.pathname + window.location.search + ":" + normalize(sectionName);
   }
 
     function setScopeLabel() {
@@ -189,14 +225,14 @@
     function setMinimized(nextState) {
     isMinimized = !!nextState;
     toolbar.classList.toggle("minimized", isMinimized);
-    minimizeBtn.textContent = isMinimized ? "Expand" : "Minimize";
+    minimizeBtn.textContent = isMinimized ? "Show" : "Hide";
     try { localStorage.setItem(prefMinKey, isMinimized ? "1" : "0"); } catch (err) {}
   }
 
     function setDrawingEnabled(enabled) {
     drawingEnabled = !!enabled;
     layer.style.pointerEvents = drawingEnabled ? "auto" : "none";
-    toggleBtn.textContent = drawingEnabled ? "Annotate: On" : "Annotate: Off";
+    toggleBtn.textContent = drawingEnabled ? "Notes On" : "Notes Off";
     toggleBtn.classList.toggle("active", drawingEnabled);
     if (!drawingEnabled) {
       activePointerId = null;
@@ -488,8 +524,9 @@
     function scheduleResizeAndSave() {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(function () {
+        saveNow();
         resizeLayerIfNeeded();
-        saveSoon();
+        loadForCurrentKey();
       }, 220);
     }
 
