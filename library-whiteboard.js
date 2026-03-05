@@ -60,6 +60,15 @@
     ".lib-anno-toolbar.minimized{padding:6px 7px;gap:5px}",
     ".lib-anno-toolbar.minimized .lib-anno-hide-when-min{display:none}",
     ".lib-anno-layer{position:absolute;left:0;top:0;z-index:2147483645;pointer-events:none;touch-action:none;cursor:crosshair}",
+    ".lib-voice-layer{position:absolute;left:0;top:0;z-index:2147483644;pointer-events:none}",
+    ".lib-voice-pin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;width:26px;height:26px;border-radius:999px;border:1px solid rgba(207,167,118,.7);background:linear-gradient(135deg,#f6d3a2,#d59644);color:#412307;font:700 13px/1 Arial,sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(20,12,7,.28);cursor:pointer}",
+    ".lib-voice-card{position:absolute;left:14px;top:-6px;min-width:220px;max-width:min(320px,72vw);background:rgba(30,24,17,.96);color:#f6ead9;border:1px solid rgba(228,199,160,.3);border-radius:10px;padding:10px;display:none;gap:8px;box-shadow:0 12px 24px rgba(20,12,7,.35);pointer-events:auto}",
+    ".lib-voice-card.open{display:grid}",
+    ".lib-voice-card audio{width:100%}",
+    ".lib-voice-card-head{display:flex;justify-content:space-between;gap:8px;align-items:center}",
+    ".lib-voice-card-title{font:700 11px/1 Arial,sans-serif;opacity:.92}",
+    ".lib-voice-card-actions{display:flex;gap:6px}",
+    ".lib-voice-card-btn{border:1px solid rgba(207,167,118,.4);background:rgba(250,240,225,.96);color:#2d2015;border-radius:7px;padding:4px 6px;font:700 10px/1 Arial,sans-serif;cursor:pointer}",
     "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
   ].join("");
     document.head.appendChild(style);
@@ -75,6 +84,7 @@
     '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Off</button>',
     '<button type="button" class="lib-anno-btn" id="lib-anno-minimize">-</button>',
     '<button type="button" class="lib-anno-btn lib-anno-hide-when-min" id="lib-anno-eraser">Erase</button>',
+    '<button type="button" class="lib-anno-btn lib-anno-hide-when-min" id="lib-anno-voice">Voice</button>',
     '<div class="lib-anno-color-row lib-anno-hide-when-min">',
       '<button type="button" class="lib-anno-swatch" data-color="#e11d48" style="background:#e11d48" aria-label="Pink pen"></button>',
       '<button type="button" class="lib-anno-swatch" data-color="#2563eb" style="background:#2563eb" aria-label="Blue pen"></button>',
@@ -88,6 +98,11 @@
   ].join("");
     document.body.appendChild(toolbar);
 
+    var voiceLayer = document.createElement("div");
+    voiceLayer.className = "lib-voice-layer";
+    voiceLayer.id = "lib-voice-layer";
+    document.body.appendChild(voiceLayer);
+
     var ctx = layer.getContext("2d", { alpha: true });
     if (!ctx) return;
     ctx.lineCap = "round";
@@ -96,6 +111,7 @@
     var toggleBtn = document.getElementById("lib-anno-toggle");
     var minimizeBtn = document.getElementById("lib-anno-minimize");
     var eraserBtn = document.getElementById("lib-anno-eraser");
+    var voiceBtn = document.getElementById("lib-anno-voice");
     var colorInput = document.getElementById("lib-anno-color");
     var sizeInput = document.getElementById("lib-anno-size");
     var clearBtn = document.getElementById("lib-anno-clear");
@@ -116,6 +132,12 @@
     var prefColorKey = "lib-anno:pref:color";
     var prefMinKey = "lib-anno:pref:minimized";
     var isMinimized = false;
+    var voiceNotes = [];
+    var mediaRecorder = null;
+    var mediaStream = null;
+    var mediaChunks = [];
+    var isVoiceRecording = false;
+    var recordingForKey = "";
 
     function normalize(text) {
     return (text || "general")
@@ -228,6 +250,174 @@
     scopeEl.title = label;
   }
 
+    function voiceStorageKeyFor(baseKey) {
+    if (!baseKey) return "";
+    return baseKey + ":voice:v1";
+  }
+
+    function saveVoiceNotesForKey(baseKey, notes) {
+    var key = voiceStorageKeyFor(baseKey);
+    if (!key) return;
+    try {
+      localStorage.setItem(key, JSON.stringify(Array.isArray(notes) ? notes : []));
+    } catch (err) {
+      // ignore storage failures
+    }
+  }
+
+    function loadVoiceNotesForKey(baseKey) {
+    var key = voiceStorageKeyFor(baseKey);
+    if (!key) return [];
+    try {
+      var raw = localStorage.getItem(key);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
+    function clamp01(num) {
+    if (num < 0) return 0;
+    if (num > 1) return 1;
+    return num;
+  }
+
+    function getDefaultVoiceAnchor() {
+    var size = getDocSize();
+    var xPx = Math.max(20, Math.min(size.width - 20, window.innerWidth - 36));
+    var yPx = Math.max(70, Math.min(size.height - 40, window.scrollY + Math.min(window.innerHeight * 0.45, 260)));
+    return {
+      xPct: clamp01(xPx / size.width),
+      yPct: clamp01(yPx / size.height)
+    };
+  }
+
+    function formatVoiceTime(value) {
+    if (!value) return "Voice note";
+    try {
+      var d = new Date(value);
+      return d.toLocaleString();
+    } catch (err) {
+      return "Voice note";
+    }
+  }
+
+    function renderVoiceNotes() {
+    var size = getDocSize();
+    voiceLayer.style.width = size.width + "px";
+    voiceLayer.style.height = size.height + "px";
+    voiceLayer.innerHTML = "";
+    if (!voiceNotes.length) return;
+
+    voiceNotes.forEach(function (note, index) {
+      if (!note || !note.audio) return;
+      var x = Math.round(clamp01(Number(note.xPct) || 0.5) * size.width);
+      var y = Math.round(clamp01(Number(note.yPct) || 0.5) * size.height);
+
+      var pin = document.createElement("button");
+      pin.type = "button";
+      pin.className = "lib-voice-pin";
+      pin.style.left = x + "px";
+      pin.style.top = y + "px";
+      pin.textContent = "♪";
+      pin.setAttribute("aria-label", "Open voice note");
+
+      var card = document.createElement("div");
+      card.className = "lib-voice-card";
+      var title = document.createElement("div");
+      title.className = "lib-voice-card-title";
+      title.textContent = formatVoiceTime(note.createdAt);
+
+      var closeBtn = document.createElement("button");
+      closeBtn.type = "button";
+      closeBtn.className = "lib-voice-card-btn";
+      closeBtn.textContent = "Close";
+
+      var deleteBtn = document.createElement("button");
+      deleteBtn.type = "button";
+      deleteBtn.className = "lib-voice-card-btn";
+      deleteBtn.textContent = "Delete";
+
+      var actions = document.createElement("div");
+      actions.className = "lib-voice-card-actions";
+      actions.appendChild(deleteBtn);
+      actions.appendChild(closeBtn);
+
+      var head = document.createElement("div");
+      head.className = "lib-voice-card-head";
+      head.appendChild(title);
+      head.appendChild(actions);
+
+      var audio = document.createElement("audio");
+      audio.controls = true;
+      audio.preload = "metadata";
+      audio.src = note.audio;
+
+      card.appendChild(head);
+      card.appendChild(audio);
+
+      closeBtn.addEventListener("click", function () {
+        card.classList.remove("open");
+      });
+
+      deleteBtn.addEventListener("click", function () {
+        voiceNotes.splice(index, 1);
+        saveVoiceNotesForKey(currentStorageKey, voiceNotes);
+        renderVoiceNotes();
+      });
+
+      pin.addEventListener("click", function () {
+        var open = card.classList.contains("open");
+        Array.prototype.slice.call(voiceLayer.querySelectorAll(".lib-voice-card.open")).forEach(function (el) {
+          el.classList.remove("open");
+        });
+        if (!open) card.classList.add("open");
+      });
+
+      pin.appendChild(card);
+      voiceLayer.appendChild(pin);
+    });
+  }
+
+    function loadVoiceNotesForCurrentKey() {
+    voiceNotes = loadVoiceNotesForKey(currentStorageKey);
+    renderVoiceNotes();
+  }
+
+    function setVoiceRecordingState(active) {
+    isVoiceRecording = !!active;
+    if (!voiceBtn) return;
+    voiceBtn.classList.toggle("active", isVoiceRecording);
+    voiceBtn.textContent = isVoiceRecording ? "Stop" : "Voice";
+  }
+
+    function stopMediaStream() {
+    if (!mediaStream) return;
+    try {
+      mediaStream.getTracks().forEach(function (t) { t.stop(); });
+    } catch (err) {}
+    mediaStream = null;
+  }
+
+    function addVoiceNoteFromData(audioData, targetKey) {
+    if (!audioData || !targetKey) return;
+    var anchor = getDefaultVoiceAnchor();
+    var notes = loadVoiceNotesForKey(targetKey);
+    notes.push({
+      id: "vn-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8),
+      xPct: anchor.xPct,
+      yPct: anchor.yPct,
+      audio: audioData,
+      createdAt: new Date().toISOString()
+    });
+    saveVoiceNotesForKey(targetKey, notes);
+    if (targetKey === currentStorageKey) {
+      voiceNotes = notes;
+      renderVoiceNotes();
+    }
+  }
+
     function setColor(color) {
     if (!color) return;
     colorInput.value = color;
@@ -263,6 +453,8 @@
     function getDocSize() {
     var prevDisplay = layer.style.display;
     layer.style.display = "none";
+    var prevVoiceDisplay = voiceLayer.style.display;
+    voiceLayer.style.display = "none";
     var doc = document.documentElement;
     var body = document.body;
     var width = Math.max(doc.clientWidth, body ? body.clientWidth : 0, window.innerWidth || 0, doc.scrollWidth, body ? body.scrollWidth : 0);
@@ -272,7 +464,7 @@
       var kids = Array.prototype.slice.call(body.children);
       for (var i = 0; i < kids.length; i++) {
         var el = kids[i];
-        if (el === layer || el === toolbar) continue;
+        if (el === layer || el === toolbar || el === voiceLayer) continue;
         var cs = window.getComputedStyle(el);
         if (cs.position === "fixed") continue;
         var rect = el.getBoundingClientRect();
@@ -282,6 +474,7 @@
     }
 
     layer.style.display = prevDisplay;
+    voiceLayer.style.display = prevVoiceDisplay;
     return { width: Math.max(1, width), height: Math.max(1, height) };
   }
 
@@ -421,7 +614,7 @@
     img.src = parsed.data;
   }
 
-    function loadForCurrentKey() {
+  function loadForCurrentKey() {
     resizeLayerIfNeeded();
     clearLayer();
     if (!currentStorageKey) return;
@@ -454,6 +647,7 @@
     currentStorageKey = nextKey;
     setScopeLabel();
     loadForCurrentKey();
+    loadVoiceNotesForCurrentKey();
   }
 
     function pointFromEvent(event) {
@@ -543,6 +737,51 @@
       setEraseMode(!erasing);
     });
 
+    voiceBtn.addEventListener("click", async function () {
+      if (isVoiceRecording && mediaRecorder) {
+        try {
+          mediaRecorder.stop();
+        } catch (err) {
+          setVoiceRecordingState(false);
+          stopMediaStream();
+        }
+        return;
+      }
+
+      if (!window.MediaRecorder || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("Voice recording is not supported in this browser.");
+        return;
+      }
+
+      try {
+        recordingForKey = currentStorageKey;
+        mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(mediaStream);
+        mediaChunks = [];
+        mediaRecorder.addEventListener("dataavailable", function (event) {
+          if (event.data && event.data.size > 0) mediaChunks.push(event.data);
+        });
+        mediaRecorder.addEventListener("stop", function () {
+          var blob = new Blob(mediaChunks, { type: mediaRecorder.mimeType || "audio/webm" });
+          var reader = new FileReader();
+          reader.onload = function () {
+            addVoiceNoteFromData(String(reader.result || ""), recordingForKey || currentStorageKey);
+          };
+          reader.readAsDataURL(blob);
+          setVoiceRecordingState(false);
+          stopMediaStream();
+          mediaRecorder = null;
+          mediaChunks = [];
+          recordingForKey = "";
+        });
+        mediaRecorder.start();
+        setVoiceRecordingState(true);
+      } catch (err) {
+        setVoiceRecordingState(false);
+        stopMediaStream();
+      }
+    });
+
     colorInput.addEventListener("input", function () {
       setColor(colorInput.value || "#e11d48");
     });
@@ -574,6 +813,7 @@
         saveNow();
         resizeLayerIfNeeded();
         loadForCurrentKey();
+        renderVoiceNotes();
       }, 220);
     }
 
@@ -601,6 +841,7 @@
     }
     setDrawingEnabled(false);
     setEraseMode(false);
+    setVoiceRecordingState(false);
     window.setInterval(updateContext, 900);
   }
 
