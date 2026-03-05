@@ -57,6 +57,13 @@ module.exports = async (req, res) => {
     title: 'Daily Study Reminder',
     body: 'Take 15 minutes today to review your notes and stay ahead.',
     url: '/study-library.html',
+    type: 'reminder',
+    tag: 'sc-reminder',
+    requireInteraction: true,
+    actions: [
+      { action: 'open', title: 'Open' },
+      { action: 'dismiss', title: 'Dismiss' },
+    ],
   })
 
   let rows = []

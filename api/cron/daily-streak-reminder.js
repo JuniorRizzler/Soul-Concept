@@ -57,6 +57,13 @@ module.exports = async (req, res) => {
     title: 'Keep Your Streak',
     body: 'Do a quick study session today to extend your streak.',
     url: '/work.html',
+    type: 'streak',
+    tag: 'sc-streak',
+    requireInteraction: true,
+    actions: [
+      { action: 'open', title: 'Open' },
+      { action: 'dismiss', title: 'Dismiss' },
+    ],
   })
 
   let rows = []

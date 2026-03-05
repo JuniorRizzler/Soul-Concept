@@ -664,6 +664,7 @@
 
   {
     const canUsePush = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
+    const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
     const pushAlreadyEnabled = (function () {
       try {
         return Notification.permission === 'granted' || localStorage.getItem(PUSH_ENABLED_KEY) === '1'
@@ -680,11 +681,52 @@
       document.dispatchEvent(new Event('sc:push-state-changed'))
     }
 
+    function urlBase64ToUint8Array(base64String) {
+      const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+      const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
+      const rawData = window.atob(base64)
+      const outputArray = new Uint8Array(rawData.length)
+      for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i)
+      }
+      return outputArray
+    }
+
+    async function ensurePushRegistration() {
+      if (!canUsePush || Notification.permission !== 'granted') return
+      try {
+        const registration = await navigator.serviceWorker.ready
+        let subscription = await registration.pushManager.getSubscription()
+        if (!subscription) {
+          const key = urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+          subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: key
+          })
+        }
+        await fetch('/api/push-subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subscription,
+            userAgent: navigator.userAgent || ''
+          })
+        }).catch(function () {
+          // best-effort sync only
+        })
+      } catch (err) {
+        // keep app usable even if push sync fails
+      }
+    }
+
+    if (pushAlreadyEnabled) {
+      ensurePushRegistration()
+    }
+
     const shouldShowWidget = !pushAlreadyEnabled
     if (!shouldShowWidget) {
       // do not show repeated widget once push has already been enabled
     } else {
-      const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
       const widget = document.createElement('div')
       widget.className = 'push-widget'
       widget.innerHTML =
@@ -705,17 +747,6 @@
         if (!statusEl) return
         statusEl.textContent = message
         statusEl.className = isError ? 'push-status err' : 'push-status ok'
-      }
-
-      function urlBase64ToUint8Array(base64String) {
-        const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-        const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
-        const rawData = window.atob(base64)
-        const outputArray = new Uint8Array(rawData.length)
-        for (let i = 0; i < rawData.length; ++i) {
-          outputArray[i] = rawData.charCodeAt(i)
-        }
-        return outputArray
       }
 
       async function getSubscription() {
@@ -783,22 +814,34 @@
         test: {
           title: 'Soul Concept',
           body: 'Test notification received.',
-          url: '/'
+          url: '/',
+          type: 'general',
+          tag: 'sc-test',
+          requireInteraction: false
         },
         update: {
           title: 'New in Grade 10 Math',
           body: 'Fresh UI updates are live. Tap to explore the newest library.',
-          url: '/grade-10-math.html'
+          url: '/grade-10-math.html',
+          type: 'update',
+          tag: 'sc-update',
+          requireInteraction: false
         },
         reminder: {
           title: 'Study Reminder',
           body: 'Quick 15-minute review now can save you hours later.',
-          url: '/study-library.html'
+          url: '/study-library.html',
+          type: 'reminder',
+          tag: 'sc-reminder',
+          requireInteraction: true
         },
         streak: {
           title: 'Keep Your Streak',
           body: 'You are one focused session away from extending your streak.',
-          url: '/work.html'
+          url: '/work.html',
+          type: 'streak',
+          tag: 'sc-streak',
+          requireInteraction: true
         }
       }
       const payload = templates[templateKey] || templates.test
@@ -811,22 +854,34 @@
         test: {
           title: 'Soul Concept',
           body: 'Test notification received.',
-          url: '/'
+          url: '/',
+          type: 'general',
+          tag: 'sc-test',
+          requireInteraction: false
         },
         update: {
           title: 'New in Grade 10 Math',
           body: 'Fresh UI updates are live. Tap to explore the newest library.',
-          url: '/grade-10-math.html'
+          url: '/grade-10-math.html',
+          type: 'update',
+          tag: 'sc-update',
+          requireInteraction: false
         },
         reminder: {
           title: 'Study Reminder',
           body: 'Quick 15-minute review now can save you hours later.',
-          url: '/study-library.html'
+          url: '/study-library.html',
+          type: 'reminder',
+          tag: 'sc-reminder',
+          requireInteraction: true
         },
         streak: {
           title: 'Keep Your Streak',
           body: 'You are one focused session away from extending your streak.',
-          url: '/work.html'
+          url: '/work.html',
+          type: 'streak',
+          tag: 'sc-streak',
+          requireInteraction: true
         }
       }
       const payload = templates[templateKey] || templates.test
@@ -835,7 +890,14 @@
         body: payload.body,
         icon: '/icons/icon-192.png',
         badge: '/icons/icon-192.png',
-        data: { url: payload.url || '/' }
+        tag: payload.tag || ('sc-' + (payload.type || 'general')),
+        renotify: true,
+        requireInteraction: !!payload.requireInteraction,
+        actions: [
+          { action: 'open', title: 'Open' },
+          { action: 'dismiss', title: 'Dismiss' }
+        ],
+        data: { url: payload.url || '/', type: payload.type || 'general' }
       })
       }
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v53";
+const CACHE_NAME = "soulconcept-v54";
 const ASSETS = [
   "/",
   "/index.html",
@@ -123,12 +123,31 @@ self.addEventListener("push", (event) => {
   }
 
   const title = data.title || "Soul Concept";
+  const type = data.type || "general";
+  const tag = data.tag || ("sc-" + type);
+  const requireInteraction =
+    typeof data.requireInteraction === "boolean"
+      ? data.requireInteraction
+      : type === "streak" || type === "reminder";
   const options = {
     body: data.body || "You have a new update.",
     icon: "/icons/icon-192.png",
     badge: "/icons/icon-192.png",
+    tag,
+    renotify: true,
+    requireInteraction,
+    vibrate: Array.isArray(data.vibrate) ? data.vibrate : [120, 50, 120],
+    timestamp: Date.now(),
+    actions: Array.isArray(data.actions) && data.actions.length
+      ? data.actions
+      : [
+          { action: "open", title: "Open" },
+          { action: "dismiss", title: "Dismiss" }
+        ],
     data: {
-      url: data.url || "/"
+      url: data.url || "/",
+      type,
+      sentAt: new Date().toISOString()
     }
   };
 
@@ -137,11 +156,13 @@ self.addEventListener("push", (event) => {
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
+  if (event.action === "dismiss") return;
+
   const targetUrl = (event.notification.data && event.notification.data.url) || "/";
   event.waitUntil(
     clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
       for (const client of clientList) {
-        if (client.url === targetUrl && "focus" in client) {
+        if (client.url && client.url.indexOf(targetUrl) !== -1 && "focus" in client) {
           return client.focus();
         }
       }

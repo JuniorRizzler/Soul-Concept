@@ -44,11 +44,21 @@ module.exports = async (req, res) => {
   }
 
   const subscription = body.subscription
-  const payload = body.payload || {}
+  const inputPayload = body.payload || {}
 
   if (!subscription) {
     res.status(400).send('Missing subscription.')
     return
+  }
+
+  const payload = {
+    title: String(inputPayload.title || 'Soul Concept'),
+    body: String(inputPayload.body || 'You have a new update.'),
+    url: String(inputPayload.url || '/'),
+    type: String(inputPayload.type || 'general'),
+    tag: String(inputPayload.tag || ''),
+    requireInteraction: !!inputPayload.requireInteraction,
+    actions: Array.isArray(inputPayload.actions) ? inputPayload.actions.slice(0, 2) : undefined,
   }
 
   try {
