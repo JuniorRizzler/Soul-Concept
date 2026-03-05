@@ -16,72 +16,55 @@
 
   var style = document.createElement("style");
   style.textContent = [
-    ".lib-wb-launch{position:fixed;right:16px;bottom:16px;z-index:2147483645;border:0;border-radius:999px;background:#0f172a;color:#fff;padding:10px 14px;font:700 12px/1.1 Arial,sans-serif;box-shadow:0 10px 25px rgba(2,6,23,.4);cursor:pointer}",
-    ".lib-wb-panel{position:fixed;right:16px;bottom:64px;z-index:2147483646;width:min(92vw,460px);height:min(62vh,520px);background:#fff;border:1px solid #cbd5e1;border-radius:14px;box-shadow:0 20px 45px rgba(2,6,23,.35);display:none;overflow:hidden}",
-    ".lib-wb-panel.open{display:flex;flex-direction:column}",
-    ".lib-wb-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0}",
-    ".lib-wb-title{font:700 13px/1.2 Arial,sans-serif;color:#0f172a;max-width:78%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
-    ".lib-wb-saved{font:600 11px/1 Arial,sans-serif;color:#334155}",
-    ".lib-wb-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid #e2e8f0;background:#fff}",
-    ".lib-wb-tools button,.lib-wb-tools input,.lib-wb-head button{font:600 12px/1 Arial,sans-serif;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#0f172a;padding:6px 9px;cursor:pointer}",
-    ".lib-wb-tools button.active{background:#e2e8f0}",
-    ".lib-wb-tools input[type='range']{padding:0;width:110px}",
-    ".lib-wb-tools input[type='color']{padding:0;border-radius:8px;height:30px;width:38px}",
-    ".lib-wb-body{padding:10px;background:#f8fafc;flex:1;min-height:0}",
-    ".lib-wb-canvas-wrap{height:100%;border:1px solid #cbd5e1;border-radius:10px;background:#fff;overflow:hidden}",
-    ".lib-wb-canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}",
-    "@media (max-width:760px){.lib-wb-launch{right:10px;bottom:10px}.lib-wb-panel{right:10px;bottom:56px;height:min(58vh,460px)}}"
+    ".lib-anno-toolbar{position:fixed;right:14px;bottom:14px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px;border-radius:12px;background:rgba(15,23,42,.92);box-shadow:0 12px 28px rgba(2,6,23,.42)}",
+    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.45);background:#fff;color:#0f172a;border-radius:8px;padding:6px 9px;font:700 12px/1 Arial,sans-serif;cursor:pointer}",
+    ".lib-anno-toolbar .lib-anno-btn.active{background:#cbd5e1}",
+    ".lib-anno-toolbar .lib-anno-scope{color:#e2e8f0;font:700 11px/1 Arial,sans-serif;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    ".lib-anno-toolbar input[type='range']{width:90px;padding:0}",
+    ".lib-anno-toolbar input[type='color']{padding:0;width:34px;height:30px}",
+    ".lib-anno-layer{position:absolute;left:0;top:0;z-index:2147483645;pointer-events:none;touch-action:none;cursor:crosshair}",
+    "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
   ].join("");
   document.head.appendChild(style);
 
-  var launchBtn = document.createElement("button");
-  launchBtn.className = "lib-wb-launch";
-  launchBtn.type = "button";
-  launchBtn.textContent = "Section Whiteboard";
+  var layer = document.createElement("canvas");
+  layer.className = "lib-anno-layer";
+  layer.id = "lib-anno-layer";
+  document.body.appendChild(layer);
 
-  var panel = document.createElement("div");
-  panel.className = "lib-wb-panel";
-  panel.innerHTML = [
-    '<div class="lib-wb-head">',
-    '  <div class="lib-wb-title" id="lib-wb-title">Whiteboard</div>',
-    '  <div class="lib-wb-saved" id="lib-wb-saved">Ready</div>',
-    '  <button type="button" id="lib-wb-close">Close</button>',
-    "</div>",
-    '<div class="lib-wb-tools">',
-    '  <button type="button" id="lib-wb-pen" class="active">Pen</button>',
-    '  <button type="button" id="lib-wb-eraser">Eraser</button>',
-    '  <input type="color" id="lib-wb-color" value="#0f172a" aria-label="Pen color">',
-    '  <input type="range" id="lib-wb-size" min="1" max="24" value="4" aria-label="Pen size">',
-    '  <button type="button" id="lib-wb-clear">Clear</button>',
-    "</div>",
-    '<div class="lib-wb-body">',
-    '  <div class="lib-wb-canvas-wrap">',
-    '    <canvas class="lib-wb-canvas" id="lib-wb-canvas"></canvas>',
-    "  </div>",
-    "</div>"
+  var toolbar = document.createElement("div");
+  toolbar.className = "lib-anno-toolbar";
+  toolbar.innerHTML = [
+    '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Annotate: Off</button>',
+    '<button type="button" class="lib-anno-btn" id="lib-anno-eraser">Eraser</button>',
+    '<input type="color" id="lib-anno-color" value="#e11d48" aria-label="Pen color">',
+    '<input type="range" id="lib-anno-size" min="1" max="28" value="4" aria-label="Pen size">',
+    '<button type="button" class="lib-anno-btn" id="lib-anno-clear">Clear</button>',
+    '<span class="lib-anno-scope" id="lib-anno-scope">Notes</span>'
   ].join("");
+  document.body.appendChild(toolbar);
 
-  document.body.appendChild(panel);
-  document.body.appendChild(launchBtn);
+  var ctx = layer.getContext("2d", { alpha: true });
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
 
-  var titleEl = document.getElementById("lib-wb-title");
-  var savedEl = document.getElementById("lib-wb-saved");
-  var closeBtn = document.getElementById("lib-wb-close");
-  var penBtn = document.getElementById("lib-wb-pen");
-  var eraserBtn = document.getElementById("lib-wb-eraser");
-  var colorInput = document.getElementById("lib-wb-color");
-  var sizeInput = document.getElementById("lib-wb-size");
-  var clearBtn = document.getElementById("lib-wb-clear");
-  var canvas = document.getElementById("lib-wb-canvas");
-  var ctx = canvas.getContext("2d", { alpha: false });
+  var toggleBtn = document.getElementById("lib-anno-toggle");
+  var eraserBtn = document.getElementById("lib-anno-eraser");
+  var colorInput = document.getElementById("lib-anno-color");
+  var sizeInput = document.getElementById("lib-anno-size");
+  var clearBtn = document.getElementById("lib-anno-clear");
+  var scopeEl = document.getElementById("lib-anno-scope");
 
-  var currentSectionKey = "";
-  var currentSectionName = "";
-  var isDrawing = false;
+  var drawingEnabled = false;
+  var erasing = false;
+  var activePointerId = null;
   var lastX = 0;
   var lastY = 0;
-  var erasing = false;
   var saveTimer = null;
+  var lastSizeW = 0;
+  var lastSizeH = 0;
+  var currentSectionName = "General";
+  var currentStorageKey = "";
 
   function normalize(text) {
     return (text || "general")
@@ -96,7 +79,7 @@
     var text = (el.textContent || "").trim();
     if (!text) return "";
     var rect = el.getBoundingClientRect();
-    if (rect.width === 0 || rect.height === 0) return "";
+    if (rect.width <= 0 || rect.height <= 0) return "";
     return text;
   }
 
@@ -104,8 +87,8 @@
     var overlay = document.getElementById("overlay");
     var modalTitle = document.getElementById("modal-title");
     if (overlay && overlay.classList.contains("active")) {
-      var overlayTitle = getVisibleText(modalTitle);
-      if (overlayTitle) return overlayTitle;
+      var modalText = getVisibleText(modalTitle);
+      if (modalText) return modalText;
     }
 
     var crumb = document.querySelector("span.syne.text-sm.font-semibold.truncate.max-w-48");
@@ -113,222 +96,252 @@
     if (crumbText) return crumbText;
 
     var backButtons = Array.prototype.slice.call(document.querySelectorAll("button"));
-    var hasSectionView = backButtons.some(function (btn) {
+    var inSectionView = backButtons.some(function (btn) {
       var label = (btn.textContent || "").trim();
       return label === "Back to Library" || label.indexOf("Back to ") === 0;
     });
-    if (hasSectionView) {
-      var headings = Array.prototype.slice.call(document.querySelectorAll("h1,h2"));
-      for (var i = 0; i < headings.length; i++) {
-        var hText = getVisibleText(headings[i]);
-        if (!hText) continue;
-        if (hText.length < 4 || hText.length > 120) continue;
-        if (hText.toLowerCase().indexOf("ready to practice") !== -1) continue;
-        return hText;
+    if (inSectionView) {
+      var heads = Array.prototype.slice.call(document.querySelectorAll("h1,h2"));
+      for (var i = 0; i < heads.length; i++) {
+        var txt = getVisibleText(heads[i]);
+        if (!txt) continue;
+        if (txt.length < 4 || txt.length > 120) continue;
+        if (txt.toLowerCase().indexOf("ready to practice") !== -1) continue;
+        return txt;
       }
     }
 
-    var geoUnit = document.querySelector(".unit-title");
-    var geoText = getVisibleText(geoUnit);
-    if (geoText) return geoText;
+    var unit = document.querySelector(".unit-title");
+    var unitText = getVisibleText(unit);
+    if (unitText) return unitText;
 
-    return document.title || "General";
+    return (document.title || "General").trim();
   }
 
   function storageKey(sectionName) {
-    return "lib-whiteboard:" + window.location.pathname + ":" + normalize(sectionName);
+    return "lib-anno:" + window.location.pathname + ":" + normalize(sectionName);
   }
 
-  function fitCanvas() {
-    var rect = canvas.getBoundingClientRect();
-    var dpr = window.devicePixelRatio || 1;
-    var width = Math.max(1, Math.floor(rect.width * dpr));
-    var height = Math.max(1, Math.floor(rect.height * dpr));
-    if (canvas.width === width && canvas.height === height) return;
+  function setScopeLabel() {
+    scopeEl.textContent = currentSectionName || "General";
+    scopeEl.title = currentSectionName || "General";
+  }
 
-    var snapshot = null;
-    try {
-      snapshot = canvas.toDataURL("image/png");
-    } catch (err) {
-      snapshot = null;
-    }
-
-    canvas.width = width;
-    canvas.height = height;
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-
-    if (snapshot) {
-      var img = new Image();
-      img.onload = function () {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      };
-      img.src = snapshot;
+  function setDrawingEnabled(enabled) {
+    drawingEnabled = !!enabled;
+    layer.style.pointerEvents = drawingEnabled ? "auto" : "none";
+    toggleBtn.textContent = drawingEnabled ? "Annotate: On" : "Annotate: Off";
+    toggleBtn.classList.toggle("active", drawingEnabled);
+    if (!drawingEnabled) {
+      activePointerId = null;
+      saveSoon();
     }
   }
 
-  function markSaved(text) {
-    savedEl.textContent = text;
-  }
-
-  function saveNow() {
-    if (!currentSectionKey) return;
-    try {
-      localStorage.setItem(currentSectionKey, canvas.toDataURL("image/png"));
-      markSaved("Saved");
-    } catch (err) {
-      markSaved("Save failed");
-    }
-  }
-
-  function scheduleSave() {
-    markSaved("Saving...");
-    window.clearTimeout(saveTimer);
-    saveTimer = window.setTimeout(saveNow, 320);
-  }
-
-  function loadSection() {
-    fitCanvas();
-    if (!currentSectionKey) return;
-    var dataUrl = localStorage.getItem(currentSectionKey);
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if (!dataUrl) {
-      markSaved("Ready");
-      return;
-    }
-    var img = new Image();
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      markSaved("Loaded");
-    };
-    img.onerror = function () {
-      markSaved("Ready");
-    };
-    img.src = dataUrl;
-  }
-
-  function updateSectionContext() {
-    var sectionName = detectSectionName();
-    var nextKey = storageKey(sectionName);
-    if (nextKey === currentSectionKey) return;
-    if (currentSectionKey && panel.classList.contains("open")) {
-      saveNow();
-    }
-    currentSectionName = sectionName;
-    currentSectionKey = nextKey;
-    titleEl.textContent = "Whiteboard: " + currentSectionName;
-    if (panel.classList.contains("open")) {
-      loadSection();
-    } else {
-      markSaved("Ready");
-    }
-  }
-
-  function setMode(isEraser) {
-    erasing = isEraser;
-    penBtn.classList.toggle("active", !erasing);
+  function setEraseMode(enabled) {
+    erasing = !!enabled;
     eraserBtn.classList.toggle("active", erasing);
   }
 
-  function getPoint(event) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-      x: (event.clientX - rect.left) * (canvas.width / rect.width),
-      y: (event.clientY - rect.top) * (canvas.height / rect.height)
-    };
+  function getDocSize() {
+    var doc = document.documentElement;
+    var body = document.body;
+    var width = Math.max(doc.scrollWidth, doc.clientWidth, body ? body.scrollWidth : 0, window.innerWidth || 0);
+    var height = Math.max(doc.scrollHeight, doc.clientHeight, body ? body.scrollHeight : 0, window.innerHeight || 0);
+    return { width: Math.max(1, width), height: Math.max(1, height) };
   }
 
-  function beginStroke(event) {
-    updateSectionContext();
-    isDrawing = true;
-    var pt = getPoint(event);
+  function resizeLayerIfNeeded() {
+    var size = getDocSize();
+    if (size.width === lastSizeW && size.height === lastSizeH) return;
+
+    var prev = document.createElement("canvas");
+    prev.width = layer.width;
+    prev.height = layer.height;
+    if (layer.width > 0 && layer.height > 0) {
+      prev.getContext("2d").drawImage(layer, 0, 0);
+    }
+
+    layer.width = size.width;
+    layer.height = size.height;
+    layer.style.width = size.width + "px";
+    layer.style.height = size.height + "px";
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, layer.width, layer.height);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    if (prev.width > 0 && prev.height > 0) {
+      ctx.drawImage(prev, 0, 0);
+    }
+
+    lastSizeW = size.width;
+    lastSizeH = size.height;
+  }
+
+  function saveNow() {
+    if (!currentStorageKey) return;
+    try {
+      var payload = JSON.stringify({
+        width: layer.width,
+        height: layer.height,
+        data: layer.toDataURL("image/png")
+      });
+      localStorage.setItem(currentStorageKey, payload);
+    } catch (err) {
+      // ignore quota/storage failures
+    }
+  }
+
+  function saveSoon() {
+    window.clearTimeout(saveTimer);
+    saveTimer = window.setTimeout(saveNow, 280);
+  }
+
+  function clearLayer() {
+    ctx.clearRect(0, 0, layer.width, layer.height);
+  }
+
+  function loadForCurrentKey() {
+    resizeLayerIfNeeded();
+    clearLayer();
+    if (!currentStorageKey) return;
+    var raw = localStorage.getItem(currentStorageKey);
+    if (!raw) return;
+
+    var parsed = null;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (err) {
+      return;
+    }
+    if (!parsed || !parsed.data) return;
+
+    var img = new Image();
+    img.onload = function () {
+      ctx.clearRect(0, 0, layer.width, layer.height);
+      ctx.drawImage(img, 0, 0);
+    };
+    img.src = parsed.data;
+  }
+
+  function updateContext() {
+    var nextSection = detectSectionName();
+    var nextKey = storageKey(nextSection);
+    if (nextKey === currentStorageKey) return;
+
+    if (currentStorageKey) saveNow();
+    currentSectionName = nextSection;
+    currentStorageKey = nextKey;
+    setScopeLabel();
+    loadForCurrentKey();
+  }
+
+  function pointFromEvent(event) {
+    return { x: event.pageX, y: event.pageY };
+  }
+
+  function canStartStroke(event) {
+    if (!drawingEnabled) return false;
+    if (event.target && event.target.closest && event.target.closest(".lib-anno-toolbar")) return false;
+    if (typeof event.button === "number" && event.button !== 0 && event.pointerType !== "pen") return false;
+    return true;
+  }
+
+  function startStroke(event) {
+    if (!canStartStroke(event)) return;
+    updateContext();
+    resizeLayerIfNeeded();
+
+    activePointerId = event.pointerId;
+    var pt = pointFromEvent(event);
     lastX = pt.x;
     lastY = pt.y;
-    canvas.setPointerCapture(event.pointerId);
+
+    ctx.globalCompositeOperation = erasing ? "destination-out" : "source-over";
+    ctx.strokeStyle = colorInput.value || "#e11d48";
+    ctx.lineWidth = erasing
+      ? Math.max(12, Number(sizeInput.value || 4) * 2.5)
+      : Number(sizeInput.value || 4);
+
+    event.preventDefault();
   }
 
-  function drawStroke(event) {
-    if (!isDrawing) return;
-    var pt = getPoint(event);
-    ctx.globalCompositeOperation = erasing ? "destination-out" : "source-over";
-    ctx.strokeStyle = colorInput.value || "#0f172a";
-    ctx.lineWidth = erasing ? Math.max(12, Number(sizeInput.value || 4) * 2.5) : Number(sizeInput.value || 4);
+  function moveStroke(event) {
+    if (activePointerId === null || event.pointerId !== activePointerId) return;
+    var pt = pointFromEvent(event);
+
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(pt.x, pt.y);
     ctx.stroke();
+
     lastX = pt.x;
     lastY = pt.y;
-    markSaved("Drawing...");
+    event.preventDefault();
   }
 
   function endStroke(event) {
-    if (!isDrawing) return;
-    isDrawing = false;
-    try {
-      canvas.releasePointerCapture(event.pointerId);
-    } catch (err) {}
-    scheduleSave();
+    if (activePointerId === null || event.pointerId !== activePointerId) return;
+    activePointerId = null;
+    saveSoon();
+    event.preventDefault();
   }
 
-  launchBtn.addEventListener("click", function () {
-    panel.classList.toggle("open");
-    if (panel.classList.contains("open")) {
-      updateSectionContext();
-      fitCanvas();
-      loadSection();
-    }
+  function onGlobalPointerDown(event) {
+    if (drawingEnabled) return;
+    if (event.pointerType !== "pen") return;
+    if (event.target && event.target.closest && event.target.closest(".lib-anno-toolbar")) return;
+
+    setDrawingEnabled(true);
+    startStroke(event);
+  }
+
+  toggleBtn.addEventListener("click", function () {
+    setDrawingEnabled(!drawingEnabled);
   });
 
-  closeBtn.addEventListener("click", function () {
-    panel.classList.remove("open");
-  });
-  penBtn.addEventListener("click", function () {
-    setMode(false);
-  });
   eraserBtn.addEventListener("click", function () {
-    setMode(true);
+    setEraseMode(!erasing);
   });
+
   clearBtn.addEventListener("click", function () {
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if (currentSectionKey) localStorage.removeItem(currentSectionKey);
-    markSaved("Cleared");
+    clearLayer();
+    if (currentStorageKey) localStorage.removeItem(currentStorageKey);
   });
 
-  canvas.addEventListener("pointerdown", beginStroke);
-  canvas.addEventListener("pointermove", drawStroke);
-  canvas.addEventListener("pointerup", endStroke);
-  canvas.addEventListener("pointercancel", endStroke);
-  canvas.addEventListener("lostpointercapture", function () {
-    isDrawing = false;
-  });
+  layer.addEventListener("pointerdown", startStroke);
+  window.addEventListener("pointermove", moveStroke, { passive: false });
+  window.addEventListener("pointerup", endStroke, { passive: false });
+  window.addEventListener("pointercancel", endStroke, { passive: false });
+  window.addEventListener("pointerdown", onGlobalPointerDown, { capture: true, passive: false });
 
-  window.addEventListener("resize", function () {
-    if (!panel.classList.contains("open")) return;
-    var data = null;
-    try {
-      data = canvas.toDataURL("image/png");
-    } catch (err) {}
-    fitCanvas();
-    if (data) {
-      var img = new Image();
-      img.onload = function () {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      };
-      img.src = data;
-    }
-  });
+  var resizeTimer = null;
+  function scheduleResizeAndSave() {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(function () {
+      resizeLayerIfNeeded();
+      saveSoon();
+    }, 220);
+  }
 
+  window.addEventListener("resize", scheduleResizeAndSave);
+  window.addEventListener("beforeunload", saveNow);
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) saveNow();
   });
-  window.addEventListener("beforeunload", saveNow);
 
-  updateSectionContext();
-  window.setInterval(updateSectionContext, 900);
+  var mutationObs = new MutationObserver(function () {
+    scheduleResizeAndSave();
+    updateContext();
+  });
+  mutationObs.observe(document.body, { childList: true, subtree: true });
+
+  resizeLayerIfNeeded();
+  updateContext();
+  setScopeLabel();
+  setDrawingEnabled(false);
+  setEraseMode(false);
+  window.setInterval(updateContext, 900);
 })();
