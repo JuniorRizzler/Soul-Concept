@@ -25281,7 +25281,7 @@ The parabola doesn't cross the x-axis`));
       if (!canvasRef.current) return;
       const data = canvasRef.current.toDataURL("image/png", 0.85);
       try {
-        await getStorageApi().set(`drawing:${pageKey}`, data);
+        await getStorageApi().set(`drawing:v2:${pageKey}`, data);
       } catch (e) {
       }
     }, [pageKey]);
@@ -25299,7 +25299,7 @@ The parabola doesn't cross the x-axis`));
       setHasDrawing(false);
       const ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, W, H);
-      getStorageApi().get(`drawing:${pageKey}`).then((result) => {
+      getStorageApi().get(`drawing:v2:${pageKey}`).then((result) => {
         if (result?.value) {
           const img = new Image();
           img.onload = () => {
@@ -25405,7 +25405,7 @@ The parabola doesn't cross the x-axis`));
       historyIdx.current = -1;
       snapshot();
       try {
-        await getStorageApi().delete(`drawing:${pageKey}`);
+        await getStorageApi().delete(`drawing:v2:${pageKey}`);
       } catch (e) {
       }
     }, [pageKey, snapshot]);
@@ -26086,7 +26086,7 @@ lucide-react/dist/esm/lucide-react.js:
 */
 
 </script>
-    <script src="library-whiteboard.js?v=20260305h"></script>
+    <script src="library-whiteboard.js?v=20260305i"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>

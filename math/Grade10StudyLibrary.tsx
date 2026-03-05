@@ -4693,7 +4693,7 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
   const saveToStorage = useCallback(async () => {
     if (!canvasRef.current) return;
     const data = canvasRef.current.toDataURL('image/png', 0.85);
-    try { await getStorageApi().set(`drawing:${pageKey}`, data); } catch(e) {}
+    try { await getStorageApi().set(`drawing:v2:${pageKey}`, data); } catch(e) {}
   }, [pageKey]);
 
   useEffect(() => {
@@ -4710,7 +4710,7 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
     setHasDrawing(false);
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, W, H);
-    getStorageApi().get(`drawing:${pageKey}`).then(result => {
+    getStorageApi().get(`drawing:v2:${pageKey}`).then(result => {
       if (result?.value) {
         const img = new Image();
         img.onload = () => { ctx.drawImage(img, 0, 0, W, H); setHasDrawing(true); snapshot(); };
@@ -4800,7 +4800,7 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
     const canvas = canvasRef.current;
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     setHasDrawing(false); historyRef.current = []; historyIdx.current = -1; snapshot();
-    try { await getStorageApi().delete(`drawing:${pageKey}`); } catch(e) {}
+    try { await getStorageApi().delete(`drawing:v2:${pageKey}`); } catch(e) {}
   }, [pageKey, snapshot]);
 
   const canvasH = Math.max(document.documentElement.scrollHeight - NAV_H, window.innerHeight - NAV_H);

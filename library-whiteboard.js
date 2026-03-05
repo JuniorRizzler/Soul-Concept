@@ -112,7 +112,7 @@
     var lastSizeH = 0;
     var currentSectionName = "General";
     var currentStorageKey = "";
-    var drawingCacheName = "soulconcept-drawings-v1";
+    var drawingCacheName = "soulconcept-drawings-v2";
     var prefColorKey = "lib-anno:pref:color";
     var prefMinKey = "lib-anno:pref:minimized";
     var isMinimized = false;
@@ -205,7 +205,7 @@
   }
 
     function storageKey(sectionName) {
-    return "lib-anno:v2:" + window.location.pathname + window.location.search + ":" + normalize(sectionName);
+    return "lib-anno:v3:" + window.location.pathname + window.location.search + ":" + normalize(sectionName);
   }
 
     function prettyScopeName(raw) {
