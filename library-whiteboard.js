@@ -51,8 +51,13 @@
     ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.45);background:#fff;color:#0f172a;border-radius:8px;padding:6px 9px;font:700 12px/1 Arial,sans-serif;cursor:pointer}",
     ".lib-anno-toolbar .lib-anno-btn.active{background:#cbd5e1}",
     ".lib-anno-toolbar .lib-anno-scope{color:#e2e8f0;font:700 11px/1 Arial,sans-serif;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    ".lib-anno-color-row{display:flex;align-items:center;gap:4px}",
+    ".lib-anno-swatch{width:20px;height:20px;border-radius:999px;border:2px solid rgba(255,255,255,.25);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}",
+    ".lib-anno-swatch.active{outline:2px solid #fff;outline-offset:1px}",
     ".lib-anno-toolbar input[type='range']{width:90px;padding:0}",
     ".lib-anno-toolbar input[type='color']{padding:0;width:34px;height:30px}",
+    ".lib-anno-toolbar.minimized{padding:6px 8px;gap:6px}",
+    ".lib-anno-toolbar.minimized .lib-anno-hide-when-min{display:none}",
     ".lib-anno-layer{position:absolute;left:0;top:0;z-index:2147483645;pointer-events:none;touch-action:none;cursor:crosshair}",
     "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
   ].join("");
@@ -67,11 +72,18 @@
     toolbar.className = "lib-anno-toolbar";
     toolbar.innerHTML = [
     '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Annotate: Off</button>',
-    '<button type="button" class="lib-anno-btn" id="lib-anno-eraser">Eraser</button>',
-    '<input type="color" id="lib-anno-color" value="#e11d48" aria-label="Pen color">',
-    '<input type="range" id="lib-anno-size" min="1" max="28" value="4" aria-label="Pen size">',
-    '<button type="button" class="lib-anno-btn" id="lib-anno-clear">Clear</button>',
-    '<span class="lib-anno-scope" id="lib-anno-scope">Notes</span>'
+    '<button type="button" class="lib-anno-btn" id="lib-anno-minimize">Minimize</button>',
+    '<button type="button" class="lib-anno-btn lib-anno-hide-when-min" id="lib-anno-eraser">Eraser</button>',
+    '<div class="lib-anno-color-row lib-anno-hide-when-min">',
+      '<button type="button" class="lib-anno-swatch" data-color="#e11d48" style="background:#e11d48" aria-label="Pink pen"></button>',
+      '<button type="button" class="lib-anno-swatch" data-color="#2563eb" style="background:#2563eb" aria-label="Blue pen"></button>',
+      '<button type="button" class="lib-anno-swatch" data-color="#16a34a" style="background:#16a34a" aria-label="Green pen"></button>',
+      '<button type="button" class="lib-anno-swatch" data-color="#1e1b4b" style="background:#1e1b4b" aria-label="Navy pen"></button>',
+      '<input type="color" id="lib-anno-color" value="#e11d48" aria-label="Pen color">',
+    '</div>',
+    '<input class="lib-anno-hide-when-min" type="range" id="lib-anno-size" min="1" max="28" value="4" aria-label="Pen size">',
+    '<button type="button" class="lib-anno-btn lib-anno-hide-when-min" id="lib-anno-clear">Clear</button>',
+    '<span class="lib-anno-scope lib-anno-hide-when-min" id="lib-anno-scope">Notes</span>'
   ].join("");
     document.body.appendChild(toolbar);
 
@@ -81,11 +93,13 @@
     ctx.lineJoin = "round";
 
     var toggleBtn = document.getElementById("lib-anno-toggle");
+    var minimizeBtn = document.getElementById("lib-anno-minimize");
     var eraserBtn = document.getElementById("lib-anno-eraser");
     var colorInput = document.getElementById("lib-anno-color");
     var sizeInput = document.getElementById("lib-anno-size");
     var clearBtn = document.getElementById("lib-anno-clear");
     var scopeEl = document.getElementById("lib-anno-scope");
+    var swatches = Array.prototype.slice.call(toolbar.querySelectorAll(".lib-anno-swatch"));
 
     var drawingEnabled = false;
     var erasing = false;
@@ -98,6 +112,9 @@
     var currentSectionName = "General";
     var currentStorageKey = "";
     var drawingCacheName = "soulconcept-drawings-v1";
+    var prefColorKey = "lib-anno:pref:color";
+    var prefMinKey = "lib-anno:pref:minimized";
+    var isMinimized = false;
 
     function normalize(text) {
     return (text || "general")
@@ -160,6 +177,22 @@
     scopeEl.title = currentSectionName || "General";
   }
 
+    function setColor(color) {
+    if (!color) return;
+    colorInput.value = color;
+    swatches.forEach(function (btn) {
+      btn.classList.toggle("active", (btn.getAttribute("data-color") || "").toLowerCase() === color.toLowerCase());
+    });
+    try { localStorage.setItem(prefColorKey, color); } catch (err) {}
+  }
+
+    function setMinimized(nextState) {
+    isMinimized = !!nextState;
+    toolbar.classList.toggle("minimized", isMinimized);
+    minimizeBtn.textContent = isMinimized ? "Expand" : "Minimize";
+    try { localStorage.setItem(prefMinKey, isMinimized ? "1" : "0"); } catch (err) {}
+  }
+
     function setDrawingEnabled(enabled) {
     drawingEnabled = !!enabled;
     layer.style.pointerEvents = drawingEnabled ? "auto" : "none";
@@ -206,7 +239,7 @@
     ctx.lineJoin = "round";
 
     if (prev.width > 0 && prev.height > 0) {
-      ctx.drawImage(prev, 0, 0);
+      ctx.drawImage(prev, 0, 0, prev.width, prev.height, 0, 0, layer.width, layer.height);
     }
 
     lastSizeW = size.width;
@@ -313,7 +346,9 @@
     var img = new Image();
     img.onload = function () {
       ctx.clearRect(0, 0, layer.width, layer.height);
-      ctx.drawImage(img, 0, 0);
+      var srcW = Number(parsed.width) || layer.width;
+      var srcH = Number(parsed.height) || layer.height;
+      ctx.drawImage(img, 0, 0, srcW, srcH, 0, 0, layer.width, layer.height);
     };
     img.src = parsed.data;
   }
@@ -417,8 +452,22 @@
       setDrawingEnabled(!drawingEnabled);
     });
 
+    minimizeBtn.addEventListener("click", function () {
+      setMinimized(!isMinimized);
+    });
+
     eraserBtn.addEventListener("click", function () {
       setEraseMode(!erasing);
+    });
+
+    colorInput.addEventListener("input", function () {
+      setColor(colorInput.value || "#e11d48");
+    });
+
+    swatches.forEach(function (swatch) {
+      swatch.addEventListener("click", function () {
+        setColor(swatch.getAttribute("data-color") || "#e11d48");
+      });
     });
 
     clearBtn.addEventListener("click", function () {
@@ -459,6 +508,13 @@
     resizeLayerIfNeeded();
     updateContext();
     setScopeLabel();
+    try {
+      setColor(localStorage.getItem(prefColorKey) || "#e11d48");
+      setMinimized(localStorage.getItem(prefMinKey) === "1");
+    } catch (err) {
+      setColor("#e11d48");
+      setMinimized(false);
+    }
     setDrawingEnabled(false);
     setEraseMode(false);
     window.setInterval(updateContext, 900);
