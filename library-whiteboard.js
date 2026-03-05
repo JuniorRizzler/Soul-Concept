@@ -69,6 +69,24 @@
     ".lib-voice-card-title{font:700 11px/1 Arial,sans-serif;opacity:.92}",
     ".lib-voice-card-actions{display:flex;gap:6px}",
     ".lib-voice-card-btn{border:1px solid rgba(207,167,118,.4);background:rgba(250,240,225,.96);color:#2d2015;border-radius:7px;padding:4px 6px;font:700 10px/1 Arial,sans-serif;cursor:pointer}",
+    ".lib-ai-pet-shell{position:fixed;left:calc(100vw - 92px);top:112px;z-index:2147483646;display:grid;gap:6px;touch-action:none;user-select:none}",
+    ".lib-ai-pet-shell.dashing .lib-ai-pet{box-shadow:0 14px 24px rgba(20,12,7,.35),0 0 0 2px rgba(228,199,160,.4)}",
+    ".lib-ai-pet{width:56px;height:56px;border-radius:18px;border:1px solid rgba(229,194,151,.48);background:linear-gradient(150deg,#ffe8c9,#f2bf78 55%,#c57a27);position:relative;display:flex;align-items:center;justify-content:center;cursor:grab;box-shadow:0 10px 20px rgba(20,12,7,.32);overflow:visible}",
+    ".lib-ai-pet:active{cursor:grabbing}",
+    ".lib-ai-pet-shell.roaming .lib-ai-pet{animation:lib-pet-bob 1.35s ease-in-out infinite}",
+    ".lib-ai-pet-face{width:36px;height:36px;border-radius:12px;background:linear-gradient(160deg,rgba(255,247,235,.92),rgba(255,229,194,.88));border:1px solid rgba(130,84,38,.28);position:relative}",
+    ".lib-ai-pet-face:before,.lib-ai-pet-face:after{content:'';position:absolute;top:-6px;width:10px;height:10px;border-radius:3px;background:#f2d1a1;border:1px solid rgba(130,84,38,.25)}",
+    ".lib-ai-pet-face:before{left:4px;transform:rotate(-20deg)}",
+    ".lib-ai-pet-face:after{right:4px;transform:rotate(20deg)}",
+    ".lib-ai-pet-eye{position:absolute;top:14px;width:5px;height:7px;border-radius:999px;background:#3f2a18}",
+    ".lib-ai-pet-eye.left{left:9px}",
+    ".lib-ai-pet-eye.right{right:9px}",
+    ".lib-ai-pet-mouth{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:12px;height:6px;border-bottom:2px solid #5e3a1d;border-radius:0 0 8px 8px}",
+    ".lib-ai-pet-controls{display:flex;gap:6px;justify-content:center}",
+    ".lib-ai-pet-btn{border:1px solid rgba(207,167,118,.42);background:rgba(30,24,17,.92);color:#f5e7d3;border-radius:999px;padding:3px 8px;font:700 10px/1 Arial,sans-serif;cursor:pointer;box-shadow:0 6px 14px rgba(20,12,7,.28)}",
+    ".lib-ai-pet-btn.active{background:#f3c682;color:#42250c;border-color:#d89a4b}",
+    ".lib-ai-pet-say{max-width:170px;background:rgba(30,24,17,.95);color:#f6ead9;border:1px solid rgba(228,199,160,.34);border-radius:10px;padding:6px 8px;font:700 10px/1.25 Arial,sans-serif;box-shadow:0 8px 18px rgba(20,12,7,.3)}",
+    "@keyframes lib-pet-bob{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-2px) rotate(-1deg)}100%{transform:translateY(0) rotate(0deg)}}",
     "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
   ].join("");
     document.head.appendChild(style);
@@ -138,6 +156,7 @@
     var mediaChunks = [];
     var isVoiceRecording = false;
     var recordingForKey = "";
+    var petState = null;
 
     function normalize(text) {
     return (text || "general")
@@ -321,7 +340,7 @@
       pin.style.left = x + "px";
       pin.style.top = y + "px";
       pin.textContent = "♪";
-      pin.setAttribute("aria-label", "Open voice note");
+      pin.setAttribute("aria-label", "Voice note marker. Drag to move.");
 
       var card = document.createElement("div");
       card.className = "lib-voice-card";
@@ -367,7 +386,60 @@
         renderVoiceNotes();
       });
 
-      pin.addEventListener("click", function () {
+      var drag = {
+        active: false,
+        moved: false,
+        pointerId: null,
+        startX: 0,
+        startY: 0,
+        originX: x,
+        originY: y
+      };
+
+      pin.addEventListener("pointerdown", function (event) {
+        if (event.button !== 0) return;
+        if (event.target && event.target.closest && event.target.closest(".lib-voice-card")) return;
+        drag.active = true;
+        drag.moved = false;
+        drag.pointerId = event.pointerId;
+        drag.startX = event.clientX;
+        drag.startY = event.clientY;
+        drag.originX = parseFloat(pin.style.left) || x;
+        drag.originY = parseFloat(pin.style.top) || y;
+        pin.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+
+      pin.addEventListener("pointermove", function (event) {
+        if (!drag.active || event.pointerId !== drag.pointerId) return;
+        var dx = event.clientX - drag.startX;
+        var dy = event.clientY - drag.startY;
+        if (!drag.moved && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) drag.moved = true;
+        if (!drag.moved) return;
+
+        var sizeNow = getDocSize();
+        var nextX = Math.max(14, Math.min(sizeNow.width - 14, drag.originX + dx));
+        var nextY = Math.max(62, Math.min(sizeNow.height - 14, drag.originY + dy));
+        pin.style.left = nextX + "px";
+        pin.style.top = nextY + "px";
+        event.preventDefault();
+      });
+
+      pin.addEventListener("pointerup", function (event) {
+        if (!drag.active || event.pointerId !== drag.pointerId) return;
+        pin.releasePointerCapture(event.pointerId);
+        drag.active = false;
+
+        if (drag.moved) {
+          var sizeNow = getDocSize();
+          note.xPct = clamp01((parseFloat(pin.style.left) || x) / sizeNow.width);
+          note.yPct = clamp01((parseFloat(pin.style.top) || y) / sizeNow.height);
+          voiceNotes[index] = note;
+          saveVoiceNotesForKey(currentStorageKey, voiceNotes);
+          event.preventDefault();
+          return;
+        }
+
         var open = card.classList.contains("open");
         Array.prototype.slice.call(voiceLayer.querySelectorAll(".lib-voice-card.open")).forEach(function (el) {
           el.classList.remove("open");
@@ -375,14 +447,220 @@
         if (!open) card.classList.add("open");
       });
 
+      pin.addEventListener("pointercancel", function (event) {
+        if (!drag.active || event.pointerId !== drag.pointerId) return;
+        drag.active = false;
+      });
+
       pin.appendChild(card);
       voiceLayer.appendChild(pin);
     });
   }
 
-    function loadVoiceNotesForCurrentKey() {
+  function loadVoiceNotesForCurrentKey() {
     voiceNotes = loadVoiceNotesForKey(currentStorageKey);
     renderVoiceNotes();
+  }
+
+  function createPetAssistant() {
+    var posKey = "lib-ai-pet:pos:v1";
+    var roamKey = "lib-ai-pet:roam:v1";
+    var shell = document.createElement("div");
+    shell.className = "lib-ai-pet-shell";
+    shell.innerHTML = [
+      '<div class="lib-ai-pet" role="button" tabindex="0" aria-label="AI pet assistant. Drag to move.">',
+      '<div class="lib-ai-pet-face">',
+      '<span class="lib-ai-pet-eye left"></span>',
+      '<span class="lib-ai-pet-eye right"></span>',
+      '<span class="lib-ai-pet-mouth"></span>',
+      "</div>",
+      "</div>",
+      '<div class="lib-ai-pet-controls">',
+      '<button type="button" class="lib-ai-pet-btn lib-ai-pet-roam active">Roam</button>',
+      '<button type="button" class="lib-ai-pet-btn lib-ai-pet-talk">Talk</button>',
+      "</div>",
+      '<div class="lib-ai-pet-say" hidden>Need help on this section?</div>'
+    ].join("");
+    document.body.appendChild(shell);
+
+    var pet = shell.querySelector(".lib-ai-pet");
+    var roamBtn = shell.querySelector(".lib-ai-pet-roam");
+    var talkBtn = shell.querySelector(".lib-ai-pet-talk");
+    var say = shell.querySelector(".lib-ai-pet-say");
+    if (!pet || !roamBtn || !talkBtn || !say) return;
+
+    function clampPetX(x) {
+      var max = Math.max(8, window.innerWidth - 64);
+      return Math.max(8, Math.min(max, x));
+    }
+    function clampPetY(y) {
+      var max = Math.max(8, window.innerHeight - 96);
+      return Math.max(8, Math.min(max, y));
+    }
+
+    function loadPetPos() {
+      try {
+        var raw = localStorage.getItem(posKey);
+        if (!raw) return null;
+        var parsed = JSON.parse(raw);
+        if (!parsed || typeof parsed.x !== "number" || typeof parsed.y !== "number") return null;
+        return { x: clampPetX(parsed.x), y: clampPetY(parsed.y) };
+      } catch (err) {
+        return null;
+      }
+    }
+
+    function savePetPos() {
+      try {
+        localStorage.setItem(posKey, JSON.stringify({ x: petState.x, y: petState.y }));
+      } catch (err) {}
+    }
+
+    function setPetPos(x, y, animated) {
+      petState.x = clampPetX(x);
+      petState.y = clampPetY(y);
+      shell.style.transition = animated ? "left .46s cubic-bezier(.22,1,.36,1),top .46s cubic-bezier(.22,1,.36,1)" : "none";
+      shell.style.left = petState.x + "px";
+      shell.style.top = petState.y + "px";
+    }
+
+    function showSpeech(text, duration) {
+      say.textContent = text || "Need help?";
+      say.hidden = false;
+      window.clearTimeout(petState.speechTimer);
+      petState.speechTimer = window.setTimeout(function () {
+        say.hidden = true;
+      }, duration || 2600);
+    }
+
+    function pickRandomSpeech() {
+      var section = prettyScopeName(currentSectionName || "this page");
+      var lines = [
+        "Want me to explain " + section + "?",
+        "Need a quick summary?",
+        "Tap Talk and ask anything.",
+        "I can guide you through this section."
+      ];
+      return lines[Math.floor(Math.random() * lines.length)];
+    }
+
+    function dashOnce() {
+      if (!petState.roaming || petState.dragging) return;
+      if (Date.now() < petState.pauseUntil) return;
+      var x = 8 + Math.random() * Math.max(12, window.innerWidth - 80);
+      var y = 8 + Math.random() * Math.max(12, window.innerHeight - 120);
+      shell.classList.add("dashing");
+      setPetPos(x, y, true);
+      window.setTimeout(function () {
+        shell.classList.remove("dashing");
+      }, 520);
+    }
+
+    function scheduleDash() {
+      window.clearInterval(petState.dashTimer);
+      if (!petState.roaming) return;
+      petState.dashTimer = window.setInterval(function () {
+        dashOnce();
+      }, 2600 + Math.round(Math.random() * 1400));
+    }
+
+    function idleWanderOnce() {
+      if (!petState.roaming || petState.dragging) return;
+      if (Date.now() < petState.pauseUntil) return;
+      if (Math.random() < 0.55) return;
+      var jitterX = (Math.random() * 2 - 1) * 44;
+      var jitterY = (Math.random() * 2 - 1) * 28;
+      setPetPos(petState.x + jitterX, petState.y + jitterY, true);
+    }
+
+    function scheduleIdleWander() {
+      window.clearInterval(petState.idleTimer);
+      if (!petState.roaming) return;
+      petState.idleTimer = window.setInterval(function () {
+        idleWanderOnce();
+      }, 900);
+    }
+
+    function setRoaming(next) {
+      petState.roaming = !!next;
+      shell.classList.toggle("roaming", petState.roaming);
+      roamBtn.classList.toggle("active", petState.roaming);
+      roamBtn.textContent = petState.roaming ? "Roam" : "Stay";
+      try { localStorage.setItem(roamKey, petState.roaming ? "1" : "0"); } catch (err) {}
+      scheduleDash();
+      scheduleIdleWander();
+      if (petState.roaming) showSpeech("Dashing mode on.", 1400);
+    }
+
+    var stored = loadPetPos();
+    petState = {
+      x: stored ? stored.x : clampPetX(window.innerWidth - 92),
+      y: stored ? stored.y : 112,
+      roaming: true,
+      dragging: false,
+      pointerId: null,
+      startX: 0,
+      startY: 0,
+      originX: 0,
+      originY: 0,
+      pauseUntil: 0,
+      dashTimer: null,
+      idleTimer: null,
+      speechTimer: null
+    };
+    try {
+      petState.roaming = localStorage.getItem(roamKey) !== "0";
+    } catch (err) {}
+    setPetPos(petState.x, petState.y, false);
+    setRoaming(petState.roaming);
+
+    pet.addEventListener("pointerdown", function (event) {
+      if (event.button !== 0) return;
+      petState.dragging = true;
+      petState.pointerId = event.pointerId;
+      petState.startX = event.clientX;
+      petState.startY = event.clientY;
+      petState.originX = petState.x;
+      petState.originY = petState.y;
+      pet.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+
+    pet.addEventListener("pointermove", function (event) {
+      if (!petState.dragging || event.pointerId !== petState.pointerId) return;
+      var dx = event.clientX - petState.startX;
+      var dy = event.clientY - petState.startY;
+      setPetPos(petState.originX + dx, petState.originY + dy, false);
+      event.preventDefault();
+    });
+
+    pet.addEventListener("pointerup", function (event) {
+      if (!petState.dragging || event.pointerId !== petState.pointerId) return;
+      petState.dragging = false;
+      petState.pauseUntil = Date.now() + 4200;
+      savePetPos();
+      try { pet.releasePointerCapture(event.pointerId); } catch (err) {}
+      event.preventDefault();
+    });
+
+    pet.addEventListener("pointercancel", function (event) {
+      if (!petState.dragging || event.pointerId !== petState.pointerId) return;
+      petState.dragging = false;
+      try { pet.releasePointerCapture(event.pointerId); } catch (err) {}
+    });
+
+    roamBtn.addEventListener("click", function () {
+      setRoaming(!petState.roaming);
+    });
+
+    talkBtn.addEventListener("click", function () {
+      showSpeech(pickRandomSpeech(), 3600);
+    });
+
+    window.addEventListener("resize", function () {
+      setPetPos(petState.x, petState.y, false);
+      savePetPos();
+    });
   }
 
     function setVoiceRecordingState(active) {
@@ -654,9 +932,14 @@
     return { x: event.pageX, y: event.pageY };
   }
 
+    function isOverlayUiTarget(target) {
+    if (!target || !target.closest) return false;
+    return !!target.closest(".lib-anno-toolbar, .lib-voice-layer, .lib-ai-pet-shell");
+  }
+
     function canStartStroke(event) {
     if (!drawingEnabled) return false;
-    if (event.target && event.target.closest && event.target.closest(".lib-anno-toolbar")) return false;
+    if (isOverlayUiTarget(event.target)) return false;
     if (typeof event.button === "number" && event.button !== 0 && event.pointerType !== "pen") return false;
     return true;
   }
@@ -716,10 +999,10 @@
     event.preventDefault();
   }
 
-    function onGlobalPointerDown(event) {
+  function onGlobalPointerDown(event) {
     if (drawingEnabled) return;
     if (event.pointerType !== "pen") return;
-    if (event.target && event.target.closest && event.target.closest(".lib-anno-toolbar")) return;
+    if (isOverlayUiTarget(event.target)) return;
 
     setDrawingEnabled(true);
     startStroke(event);
@@ -829,6 +1112,7 @@
     });
     mutationObs.observe(document.body, { childList: true, subtree: true });
 
+    createPetAssistant();
     resizeLayerIfNeeded();
     updateContext();
     setScopeLabel();
