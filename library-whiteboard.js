@@ -47,17 +47,17 @@
 
     var style = document.createElement("style");
     style.textContent = [
-    ".lib-anno-toolbar{position:fixed;right:12px;bottom:12px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px;border-radius:14px;background:linear-gradient(135deg,rgba(15,23,42,.9),rgba(30,41,59,.86));backdrop-filter:blur(14px);border:1px solid rgba(148,163,184,.24);box-shadow:0 14px 30px rgba(2,6,23,.42)}",
-    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.3);background:rgba(255,255,255,.95);color:#0f172a;border-radius:9px;padding:6px 8px;font:700 11px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
+    ".lib-anno-toolbar{position:fixed;right:12px;bottom:12px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:7px 8px;border-radius:12px;background:rgba(15,23,42,.82);backdrop-filter:blur(12px);border:1px solid rgba(148,163,184,.2);box-shadow:0 10px 24px rgba(2,6,23,.32)}",
+    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.24);background:rgba(255,255,255,.96);color:#0f172a;border-radius:8px;padding:5px 7px;font:700 10px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
     ".lib-anno-toolbar .lib-anno-btn:hover{transform:translateY(-1px)}",
     ".lib-anno-toolbar .lib-anno-btn.active{background:#dbeafe;border-color:#93c5fd;color:#1d4ed8}",
-    ".lib-anno-toolbar .lib-anno-scope{color:#e2e8f0;font:700 10px/1 Arial,sans-serif;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}",
+    ".lib-anno-toolbar .lib-anno-scope{color:#e2e8f0;font:700 10px/1 Arial,sans-serif;max-width:132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 1px;opacity:.9}",
     ".lib-anno-color-row{display:flex;align-items:center;gap:4px}",
     ".lib-anno-swatch{width:18px;height:18px;border-radius:999px;border:2px solid rgba(255,255,255,.25);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}",
     ".lib-anno-swatch.active{outline:2px solid #fff;outline-offset:1px}",
-    ".lib-anno-toolbar input[type='range']{width:76px;padding:0}",
+    ".lib-anno-toolbar input[type='range']{width:64px;padding:0}",
     ".lib-anno-toolbar input[type='color']{padding:0;width:28px;height:24px}",
-    ".lib-anno-toolbar.minimized{padding:7px 8px;gap:6px}",
+    ".lib-anno-toolbar.minimized{padding:6px 7px;gap:5px}",
     ".lib-anno-toolbar.minimized .lib-anno-hide-when-min{display:none}",
     ".lib-anno-layer{position:absolute;left:0;top:0;z-index:2147483645;pointer-events:none;touch-action:none;cursor:crosshair}",
     "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
@@ -72,8 +72,8 @@
     var toolbar = document.createElement("div");
     toolbar.className = "lib-anno-toolbar";
     toolbar.innerHTML = [
-    '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Notes Off</button>',
-    '<button type="button" class="lib-anno-btn" id="lib-anno-minimize">Hide</button>',
+    '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Off</button>',
+    '<button type="button" class="lib-anno-btn" id="lib-anno-minimize">-</button>',
     '<button type="button" class="lib-anno-btn lib-anno-hide-when-min" id="lib-anno-eraser">Erase</button>',
     '<div class="lib-anno-color-row lib-anno-hide-when-min">',
       '<button type="button" class="lib-anno-swatch" data-color="#e11d48" style="background:#e11d48" aria-label="Pink pen"></button>',
@@ -208,9 +208,24 @@
     return "lib-anno:v2:" + window.location.pathname + window.location.search + ":" + normalize(sectionName);
   }
 
+    function prettyScopeName(raw) {
+    var text = String(raw || "General").trim();
+    if (!text) return "General";
+    text = text.replace(/^(overlay|crumb|section|unit|view|page):/i, "");
+    if (text.indexOf("|") !== -1) {
+      var parts = text.split("|").map(function (s) { return (s || "").trim(); }).filter(Boolean);
+      if (parts.length > 1) text = parts[parts.length - 1];
+      else text = parts[0] || text;
+    }
+    text = text.replace(/\s+/g, " ").trim();
+    if (text.length > 42) text = text.slice(0, 41) + "…";
+    return text || "General";
+  }
+
     function setScopeLabel() {
-    scopeEl.textContent = currentSectionName || "General";
-    scopeEl.title = currentSectionName || "General";
+    var label = prettyScopeName(currentSectionName);
+    scopeEl.textContent = label;
+    scopeEl.title = label;
   }
 
     function setColor(color) {
@@ -225,14 +240,14 @@
     function setMinimized(nextState) {
     isMinimized = !!nextState;
     toolbar.classList.toggle("minimized", isMinimized);
-    minimizeBtn.textContent = isMinimized ? "Show" : "Hide";
+    minimizeBtn.textContent = isMinimized ? "+" : "−";
     try { localStorage.setItem(prefMinKey, isMinimized ? "1" : "0"); } catch (err) {}
   }
 
     function setDrawingEnabled(enabled) {
     drawingEnabled = !!enabled;
     layer.style.pointerEvents = drawingEnabled ? "auto" : "none";
-    toggleBtn.textContent = drawingEnabled ? "Notes On" : "Notes Off";
+    toggleBtn.textContent = drawingEnabled ? "On" : "Off";
     toggleBtn.classList.toggle("active", drawingEnabled);
     if (!drawingEnabled) {
       activePointerId = null;
