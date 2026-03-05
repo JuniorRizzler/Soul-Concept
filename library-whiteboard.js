@@ -1,21 +1,52 @@
 (function () {
   "use strict";
 
-  var supportedPages = [
-    "study-library.html",
-    "geography-library.html",
-    "grade-10-math.html",
-    "preap-grade-10-preview.html"
+  var supportedPageSlugs = [
+    "study-library",
+    "geography-library",
+    "grade-10-math",
+    "preap-grade-10-preview"
   ];
 
-  var currentPath = (window.location.pathname || "").toLowerCase();
-  var isSupported = supportedPages.some(function (page) {
-    return currentPath.indexOf(page) !== -1;
-  });
-  if (!isSupported) return;
+  function normalizePath(pathname) {
+    return (pathname || "")
+      .toLowerCase()
+      .replace(/\/+$/, "")
+      .replace(/\.html$/, "");
+  }
 
-  var style = document.createElement("style");
-  style.textContent = [
+  function isSupportedRoute() {
+    var currentPath = normalizePath(window.location.pathname || "");
+    var title = (document.title || "").toLowerCase();
+    var hasRoot = !!document.getElementById("root");
+
+    var byPath = supportedPageSlugs.some(function (slug) {
+      return (
+        currentPath === "/" + slug ||
+        currentPath.indexOf("/" + slug + "/") !== -1 ||
+        currentPath.indexOf(slug) !== -1
+      );
+    });
+
+    if (byPath) return true;
+    if (!hasRoot) return false;
+    return supportedPageSlugs.some(function (slug) {
+      return title.indexOf(slug.replace(/-/g, " ")) !== -1;
+    });
+  }
+
+  var hasBooted = false;
+
+  function boot() {
+    if (hasBooted) return;
+    hasBooted = true;
+    var isSupported = isSupportedRoute();
+    // If this file is included on a page, initialize anyway.
+    // Route detection is best-effort only.
+    if (!isSupported && !document.getElementById("root")) return;
+
+    var style = document.createElement("style");
+    style.textContent = [
     ".lib-anno-toolbar{position:fixed;right:14px;bottom:14px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px;border-radius:12px;background:rgba(15,23,42,.92);box-shadow:0 12px 28px rgba(2,6,23,.42)}",
     ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(148,163,184,.45);background:#fff;color:#0f172a;border-radius:8px;padding:6px 9px;font:700 12px/1 Arial,sans-serif;cursor:pointer}",
     ".lib-anno-toolbar .lib-anno-btn.active{background:#cbd5e1}",
@@ -25,16 +56,16 @@
     ".lib-anno-layer{position:absolute;left:0;top:0;z-index:2147483645;pointer-events:none;touch-action:none;cursor:crosshair}",
     "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
   ].join("");
-  document.head.appendChild(style);
+    document.head.appendChild(style);
 
-  var layer = document.createElement("canvas");
-  layer.className = "lib-anno-layer";
-  layer.id = "lib-anno-layer";
-  document.body.appendChild(layer);
+    var layer = document.createElement("canvas");
+    layer.className = "lib-anno-layer";
+    layer.id = "lib-anno-layer";
+    document.body.appendChild(layer);
 
-  var toolbar = document.createElement("div");
-  toolbar.className = "lib-anno-toolbar";
-  toolbar.innerHTML = [
+    var toolbar = document.createElement("div");
+    toolbar.className = "lib-anno-toolbar";
+    toolbar.innerHTML = [
     '<button type="button" class="lib-anno-btn" id="lib-anno-toggle">Annotate: Off</button>',
     '<button type="button" class="lib-anno-btn" id="lib-anno-eraser">Eraser</button>',
     '<input type="color" id="lib-anno-color" value="#e11d48" aria-label="Pen color">',
@@ -42,31 +73,33 @@
     '<button type="button" class="lib-anno-btn" id="lib-anno-clear">Clear</button>',
     '<span class="lib-anno-scope" id="lib-anno-scope">Notes</span>'
   ].join("");
-  document.body.appendChild(toolbar);
+    document.body.appendChild(toolbar);
 
-  var ctx = layer.getContext("2d", { alpha: true });
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
+    var ctx = layer.getContext("2d", { alpha: true });
+    if (!ctx) return;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 
-  var toggleBtn = document.getElementById("lib-anno-toggle");
-  var eraserBtn = document.getElementById("lib-anno-eraser");
-  var colorInput = document.getElementById("lib-anno-color");
-  var sizeInput = document.getElementById("lib-anno-size");
-  var clearBtn = document.getElementById("lib-anno-clear");
-  var scopeEl = document.getElementById("lib-anno-scope");
+    var toggleBtn = document.getElementById("lib-anno-toggle");
+    var eraserBtn = document.getElementById("lib-anno-eraser");
+    var colorInput = document.getElementById("lib-anno-color");
+    var sizeInput = document.getElementById("lib-anno-size");
+    var clearBtn = document.getElementById("lib-anno-clear");
+    var scopeEl = document.getElementById("lib-anno-scope");
 
-  var drawingEnabled = false;
-  var erasing = false;
-  var activePointerId = null;
-  var lastX = 0;
-  var lastY = 0;
-  var saveTimer = null;
-  var lastSizeW = 0;
-  var lastSizeH = 0;
-  var currentSectionName = "General";
-  var currentStorageKey = "";
+    var drawingEnabled = false;
+    var erasing = false;
+    var activePointerId = null;
+    var lastX = 0;
+    var lastY = 0;
+    var saveTimer = null;
+    var lastSizeW = 0;
+    var lastSizeH = 0;
+    var currentSectionName = "General";
+    var currentStorageKey = "";
+    var drawingCacheName = "soulconcept-drawings-v1";
 
-  function normalize(text) {
+    function normalize(text) {
     return (text || "general")
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
@@ -74,7 +107,7 @@
       .slice(0, 120) || "general";
   }
 
-  function getVisibleText(el) {
+    function getVisibleText(el) {
     if (!el) return "";
     var text = (el.textContent || "").trim();
     if (!text) return "";
@@ -83,7 +116,7 @@
     return text;
   }
 
-  function detectSectionName() {
+    function detectSectionName() {
     var overlay = document.getElementById("overlay");
     var modalTitle = document.getElementById("modal-title");
     if (overlay && overlay.classList.contains("active")) {
@@ -118,16 +151,16 @@
     return (document.title || "General").trim();
   }
 
-  function storageKey(sectionName) {
+    function storageKey(sectionName) {
     return "lib-anno:" + window.location.pathname + ":" + normalize(sectionName);
   }
 
-  function setScopeLabel() {
+    function setScopeLabel() {
     scopeEl.textContent = currentSectionName || "General";
     scopeEl.title = currentSectionName || "General";
   }
 
-  function setDrawingEnabled(enabled) {
+    function setDrawingEnabled(enabled) {
     drawingEnabled = !!enabled;
     layer.style.pointerEvents = drawingEnabled ? "auto" : "none";
     toggleBtn.textContent = drawingEnabled ? "Annotate: On" : "Annotate: Off";
@@ -138,12 +171,12 @@
     }
   }
 
-  function setEraseMode(enabled) {
+    function setEraseMode(enabled) {
     erasing = !!enabled;
     eraserBtn.classList.toggle("active", erasing);
   }
 
-  function getDocSize() {
+    function getDocSize() {
     var doc = document.documentElement;
     var body = document.body;
     var width = Math.max(doc.scrollWidth, doc.clientWidth, body ? body.scrollWidth : 0, window.innerWidth || 0);
@@ -151,7 +184,7 @@
     return { width: Math.max(1, width), height: Math.max(1, height) };
   }
 
-  function resizeLayerIfNeeded() {
+    function resizeLayerIfNeeded() {
     var size = getDocSize();
     if (size.width === lastSizeW && size.height === lastSizeH) return;
 
@@ -180,36 +213,95 @@
     lastSizeH = size.height;
   }
 
-  function saveNow() {
+    function canUseCacheStorage() {
+    return typeof window.caches !== "undefined";
+  }
+
+    function cacheRequestFromKey(key) {
+    return new Request("/__lib_anno__/" + encodeURIComponent(key), { method: "GET" });
+  }
+
+    function putCachePayload(key, payload) {
+    if (!key || !payload || !canUseCacheStorage()) return;
+    window.caches
+      .open(drawingCacheName)
+      .then(function (cache) {
+        return cache.put(
+          cacheRequestFromKey(key),
+          new Response(payload, {
+            headers: { "content-type": "application/json" }
+          })
+        );
+      })
+      .catch(function () {
+        // ignore cache failures
+      });
+  }
+
+    function removeCachePayload(key) {
+    if (!key || !canUseCacheStorage()) return;
+    window.caches
+      .open(drawingCacheName)
+      .then(function (cache) {
+        return cache.delete(cacheRequestFromKey(key));
+      })
+      .catch(function () {
+        // ignore cache failures
+      });
+  }
+
+    function readCachePayload(key, onDone) {
+    if (!key || !canUseCacheStorage()) {
+      if (onDone) onDone(null);
+      return;
+    }
+    window.caches
+      .open(drawingCacheName)
+      .then(function (cache) {
+        return cache.match(cacheRequestFromKey(key));
+      })
+      .then(function (response) {
+        if (!response) return null;
+        return response.text();
+      })
+      .then(function (text) {
+        if (onDone) onDone(text || null);
+      })
+      .catch(function () {
+        if (onDone) onDone(null);
+      });
+  }
+
+    function buildPayload() {
+    return JSON.stringify({
+      width: layer.width,
+      height: layer.height,
+      data: layer.toDataURL("image/png")
+    });
+  }
+
+    function saveNow() {
     if (!currentStorageKey) return;
     try {
-      var payload = JSON.stringify({
-        width: layer.width,
-        height: layer.height,
-        data: layer.toDataURL("image/png")
-      });
+      var payload = buildPayload();
       localStorage.setItem(currentStorageKey, payload);
+      putCachePayload(currentStorageKey, payload);
     } catch (err) {
       // ignore quota/storage failures
     }
   }
 
-  function saveSoon() {
+    function saveSoon() {
     window.clearTimeout(saveTimer);
     saveTimer = window.setTimeout(saveNow, 280);
   }
 
-  function clearLayer() {
+    function clearLayer() {
     ctx.clearRect(0, 0, layer.width, layer.height);
   }
 
-  function loadForCurrentKey() {
-    resizeLayerIfNeeded();
-    clearLayer();
-    if (!currentStorageKey) return;
-    var raw = localStorage.getItem(currentStorageKey);
+    function drawFromPayload(raw) {
     if (!raw) return;
-
     var parsed = null;
     try {
       parsed = JSON.parse(raw);
@@ -226,7 +318,30 @@
     img.src = parsed.data;
   }
 
-  function updateContext() {
+    function loadForCurrentKey() {
+    resizeLayerIfNeeded();
+    clearLayer();
+    if (!currentStorageKey) return;
+
+    var keyAtLoad = currentStorageKey;
+    var raw = localStorage.getItem(currentStorageKey);
+    if (raw) {
+      drawFromPayload(raw);
+      return;
+    }
+
+    readCachePayload(currentStorageKey, function (cachedRaw) {
+      if (!cachedRaw || keyAtLoad !== currentStorageKey) return;
+      try {
+        localStorage.setItem(keyAtLoad, cachedRaw);
+      } catch (err) {
+        // ignore storage failures
+      }
+      drawFromPayload(cachedRaw);
+    });
+  }
+
+    function updateContext() {
     var nextSection = detectSectionName();
     var nextKey = storageKey(nextSection);
     if (nextKey === currentStorageKey) return;
@@ -238,18 +353,18 @@
     loadForCurrentKey();
   }
 
-  function pointFromEvent(event) {
+    function pointFromEvent(event) {
     return { x: event.pageX, y: event.pageY };
   }
 
-  function canStartStroke(event) {
+    function canStartStroke(event) {
     if (!drawingEnabled) return false;
     if (event.target && event.target.closest && event.target.closest(".lib-anno-toolbar")) return false;
     if (typeof event.button === "number" && event.button !== 0 && event.pointerType !== "pen") return false;
     return true;
   }
 
-  function startStroke(event) {
+    function startStroke(event) {
     if (!canStartStroke(event)) return;
     updateContext();
     resizeLayerIfNeeded();
@@ -268,7 +383,7 @@
     event.preventDefault();
   }
 
-  function moveStroke(event) {
+    function moveStroke(event) {
     if (activePointerId === null || event.pointerId !== activePointerId) return;
     var pt = pointFromEvent(event);
 
@@ -282,14 +397,14 @@
     event.preventDefault();
   }
 
-  function endStroke(event) {
+    function endStroke(event) {
     if (activePointerId === null || event.pointerId !== activePointerId) return;
     activePointerId = null;
     saveSoon();
     event.preventDefault();
   }
 
-  function onGlobalPointerDown(event) {
+    function onGlobalPointerDown(event) {
     if (drawingEnabled) return;
     if (event.pointerType !== "pen") return;
     if (event.target && event.target.closest && event.target.closest(".lib-anno-toolbar")) return;
@@ -298,50 +413,60 @@
     startStroke(event);
   }
 
-  toggleBtn.addEventListener("click", function () {
-    setDrawingEnabled(!drawingEnabled);
-  });
+    toggleBtn.addEventListener("click", function () {
+      setDrawingEnabled(!drawingEnabled);
+    });
 
-  eraserBtn.addEventListener("click", function () {
-    setEraseMode(!erasing);
-  });
+    eraserBtn.addEventListener("click", function () {
+      setEraseMode(!erasing);
+    });
 
-  clearBtn.addEventListener("click", function () {
-    clearLayer();
-    if (currentStorageKey) localStorage.removeItem(currentStorageKey);
-  });
+    clearBtn.addEventListener("click", function () {
+      clearLayer();
+      if (currentStorageKey) {
+        localStorage.removeItem(currentStorageKey);
+        removeCachePayload(currentStorageKey);
+      }
+    });
 
-  layer.addEventListener("pointerdown", startStroke);
-  window.addEventListener("pointermove", moveStroke, { passive: false });
-  window.addEventListener("pointerup", endStroke, { passive: false });
-  window.addEventListener("pointercancel", endStroke, { passive: false });
-  window.addEventListener("pointerdown", onGlobalPointerDown, { capture: true, passive: false });
+    layer.addEventListener("pointerdown", startStroke);
+    window.addEventListener("pointermove", moveStroke, { passive: false });
+    window.addEventListener("pointerup", endStroke, { passive: false });
+    window.addEventListener("pointercancel", endStroke, { passive: false });
+    window.addEventListener("pointerdown", onGlobalPointerDown, { capture: true, passive: false });
 
-  var resizeTimer = null;
-  function scheduleResizeAndSave() {
-    window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(function () {
-      resizeLayerIfNeeded();
-      saveSoon();
-    }, 220);
+    var resizeTimer = null;
+    function scheduleResizeAndSave() {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function () {
+        resizeLayerIfNeeded();
+        saveSoon();
+      }, 220);
+    }
+
+    window.addEventListener("resize", scheduleResizeAndSave);
+    window.addEventListener("beforeunload", saveNow);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) saveNow();
+    });
+
+    var mutationObs = new MutationObserver(function () {
+      scheduleResizeAndSave();
+      updateContext();
+    });
+    mutationObs.observe(document.body, { childList: true, subtree: true });
+
+    resizeLayerIfNeeded();
+    updateContext();
+    setScopeLabel();
+    setDrawingEnabled(false);
+    setEraseMode(false);
+    window.setInterval(updateContext, 900);
   }
 
-  window.addEventListener("resize", scheduleResizeAndSave);
-  window.addEventListener("beforeunload", saveNow);
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden) saveNow();
-  });
-
-  var mutationObs = new MutationObserver(function () {
-    scheduleResizeAndSave();
-    updateContext();
-  });
-  mutationObs.observe(document.body, { childList: true, subtree: true });
-
-  resizeLayerIfNeeded();
-  updateContext();
-  setScopeLabel();
-  setDrawingEnabled(false);
-  setEraseMode(false);
-  window.setInterval(updateContext, 900);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
 })();

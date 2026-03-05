@@ -25227,57 +25227,134 @@ The parabola doesn't cross the x-axis`));
   ];
   function DrawingCanvas({ pageKey, isActive, onClose }) {
     const canvasRef = (0, import_react3.useRef)(null);
-    const overlayRef = (0, import_react3.useRef)(null);
-    const [isDrawing, setIsDrawing] = (0, import_react3.useState)(false);
-    const [tool, setTool] = (0, import_react3.useState)("pen");
-    const [color, setColor] = (0, import_react3.useState)("#6366f1");
-    const [size, setSize] = (0, import_react3.useState)(3);
-    const [hasDrawing, setHasDrawing] = (0, import_react3.useState)(false);
-    const lastPos = (0, import_react3.useRef)(null);
+    const NAV_H = 56;
+    const PEN_COLOR = "#1e1b4b";
+    const PEN_SIZE = 3;
+    const ERASER_SIZE = 24;
+    const eraserRef = (0, import_react3.useRef)(false);
+    const isPaintingRef = (0, import_react3.useRef)(false);
+    const lastPosRef = (0, import_react3.useRef)(null);
+    const pointsRef = (0, import_react3.useRef)([]);
     const historyRef = (0, import_react3.useRef)([]);
     const historyIdx = (0, import_react3.useRef)(-1);
-    const COLORS = ["#6366f1", "#ef4444", "#10b981", "#f59e0b", "#3b82f6", "#8b5cf6", "#ec4899", "#0f172a"];
-    (0, import_react3.useEffect)(() => {
-      if (!isActive || !canvasRef.current) return;
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      const load = async () => {
-        try {
-          const result = await window.storage.get(`drawing:${pageKey}`);
-          if (result && result.value) {
-            const img = new Image();
-            img.onload = () => {
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              ctx.drawImage(img, 0, 0);
-              setHasDrawing(true);
-              saveHistory();
-            };
-            img.src = result.value;
-          } else {
-            saveHistory();
-          }
-        } catch (e) {
-          saveHistory();
-        }
-      };
-      load();
-    }, [isActive, pageKey]);
-    (0, import_react3.useEffect)(() => {
-      if (!isActive || !canvasRef.current || !overlayRef.current) return;
-      const canvas = canvasRef.current;
-      const rect = overlayRef.current.getBoundingClientRect();
-      const imgData = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height);
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-      canvas.getContext("2d").putImageData(imgData, 0, 0);
-    }, [isActive]);
-    const saveHistory = (0, import_react3.useCallback)(() => {
+    const [eraser, setEraserState] = (0, import_react3.useState)(false);
+    const [hasDrawing, setHasDrawing] = (0, import_react3.useState)(false);
+    const setEraser = (v) => {
+      eraserRef.current = v;
+      setEraserState(v);
+    };
+    const snapshot = (0, import_react3.useCallback)(() => {
       if (!canvasRef.current) return;
       const data = canvasRef.current.toDataURL();
       historyRef.current = historyRef.current.slice(0, historyIdx.current + 1);
       historyRef.current.push(data);
       historyIdx.current = historyRef.current.length - 1;
     }, []);
+    const saveToStorage = (0, import_react3.useCallback)(async () => {
+      if (!canvasRef.current) return;
+      const data = canvasRef.current.toDataURL("image/png", 0.85);
+      try {
+        await window.storage.set(`drawing:${pageKey}`, data);
+      } catch (e) {
+      }
+    }, [pageKey]);
+    (0, import_react3.useEffect)(() => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const W = window.innerWidth;
+      const H = document.documentElement.scrollHeight - NAV_H;
+      canvas.width = W;
+      canvas.height = H;
+      historyRef.current = [];
+      historyIdx.current = -1;
+      isPaintingRef.current = false;
+      lastPosRef.current = null;
+      setHasDrawing(false);
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, W, H);
+      window.storage.get(`drawing:${pageKey}`).then((result) => {
+        if (result?.value) {
+          const img = new Image();
+          img.onload = () => {
+            ctx.drawImage(img, 0, 0, W, H);
+            setHasDrawing(true);
+            snapshot();
+          };
+          img.src = result.value;
+        } else {
+          snapshot();
+        }
+      }).catch(() => snapshot());
+    }, [pageKey, snapshot]);
+    const getPos = (e) => {
+      const src = e.touches ? e.touches[0] : e;
+      return { x: src.clientX, y: src.clientY - NAV_H + window.scrollY };
+    };
+    const isEraserInput = (e) => eraserRef.current || e.pointerType === "pen" && e.buttons === 32;
+    const startDraw = (0, import_react3.useCallback)((e) => {
+      e.preventDefault();
+      if (!canvasRef.current) return;
+      const pos = getPos(e);
+      lastPosRef.current = pos;
+      pointsRef.current = [pos];
+      isPaintingRef.current = true;
+      const ctx = canvasRef.current.getContext("2d");
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      if (isEraserInput(e)) {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, ERASER_SIZE / 2, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0,0,0,1)";
+        ctx.fill();
+      } else {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, PEN_SIZE / 2, 0, Math.PI * 2);
+        ctx.fillStyle = PEN_COLOR;
+        ctx.fill();
+      }
+    }, []);
+    const draw = (0, import_react3.useCallback)((e) => {
+      if (!isPaintingRef.current || !canvasRef.current) return;
+      e.preventDefault();
+      const ctx = canvasRef.current.getContext("2d");
+      const pos = getPos(e);
+      pointsRef.current.push(pos);
+      const pts = pointsRef.current;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      if (isEraserInput(e)) {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.strokeStyle = "rgba(0,0,0,1)";
+        ctx.lineWidth = ERASER_SIZE;
+      } else {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.strokeStyle = PEN_COLOR;
+        ctx.lineWidth = PEN_SIZE;
+      }
+      if (pts.length < 3) {
+        ctx.beginPath();
+        ctx.moveTo(lastPosRef.current.x, lastPosRef.current.y);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+      } else {
+        const p1 = pts[pts.length - 3], p2 = pts[pts.length - 2], p3 = pts[pts.length - 1];
+        ctx.beginPath();
+        ctx.moveTo((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+        ctx.quadraticCurveTo(p2.x, p2.y, (p2.x + p3.x) / 2, (p2.y + p3.y) / 2);
+        ctx.stroke();
+      }
+      lastPosRef.current = pos;
+      if (pts.length > 3) pointsRef.current = pts.slice(-3);
+      setHasDrawing(true);
+    }, []);
+    const endDraw = (0, import_react3.useCallback)(() => {
+      if (!isPaintingRef.current) return;
+      isPaintingRef.current = false;
+      snapshot();
+      saveToStorage();
+    }, [snapshot, saveToStorage]);
     const undo = (0, import_react3.useCallback)(() => {
       if (historyIdx.current <= 0 || !canvasRef.current) return;
       historyIdx.current--;
@@ -25287,191 +25364,117 @@ The parabola doesn't cross the x-axis`));
       img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
+        saveToStorage();
       };
       img.src = historyRef.current[historyIdx.current];
-    }, []);
-    const saveToStorage = (0, import_react3.useCallback)(async () => {
-      if (!canvasRef.current) return;
-      const data = canvasRef.current.toDataURL("image/png", 0.7);
-      try {
-        await window.storage.set(`drawing:${pageKey}`, data);
-      } catch (e) {
-      }
-    }, [pageKey]);
+      if (historyIdx.current === 0) setHasDrawing(false);
+    }, [saveToStorage]);
     const clearCanvas = (0, import_react3.useCallback)(async () => {
       if (!canvasRef.current) return;
       const canvas = canvasRef.current;
       canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
       setHasDrawing(false);
-      saveHistory();
+      historyRef.current = [];
+      historyIdx.current = -1;
+      snapshot();
       try {
         await window.storage.delete(`drawing:${pageKey}`);
       } catch (e) {
       }
-    }, [pageKey, saveHistory]);
-    const getPos = (e, canvas) => {
-      const rect = canvas.getBoundingClientRect();
-      const src = e.touches ? e.touches[0] : e;
-      return { x: src.clientX - rect.left, y: src.clientY - rect.top };
-    };
-    const startDraw = (0, import_react3.useCallback)((e) => {
-      e.preventDefault();
-      const canvas = canvasRef.current;
-      const pos = getPos(e, canvas);
-      lastPos.current = pos;
-      setIsDrawing(true);
-      const ctx = canvas.getContext("2d");
-      ctx.beginPath();
-      ctx.arc(pos.x, pos.y, (tool === "eraser" ? size * 4 : size) / 2, 0, Math.PI * 2);
-      ctx.fillStyle = tool === "eraser" ? "rgba(0,0,0,1)" : color;
-      if (tool !== "eraser") {
-        ctx.globalCompositeOperation = "source-over";
-        ctx.fill();
-      }
-    }, [tool, color, size]);
-    const draw = (0, import_react3.useCallback)((e) => {
-      if (!isDrawing || !canvasRef.current) return;
-      e.preventDefault();
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      const pos = getPos(e, canvas);
-      ctx.beginPath();
-      ctx.moveTo(lastPos.current.x, lastPos.current.y);
-      ctx.lineTo(pos.x, pos.y);
-      if (tool === "eraser") {
-        ctx.globalCompositeOperation = "destination-out";
-        ctx.strokeStyle = "rgba(0,0,0,1)";
-        ctx.lineWidth = size * 4;
-      } else if (tool === "highlighter") {
-        ctx.globalCompositeOperation = "source-over";
-        ctx.strokeStyle = color + "55";
-        ctx.lineWidth = size * 6;
-      } else {
-        ctx.globalCompositeOperation = "source-over";
-        ctx.strokeStyle = color;
-        ctx.lineWidth = size;
-      }
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.stroke();
-      lastPos.current = pos;
-      setHasDrawing(true);
-    }, [isDrawing, tool, color, size]);
-    const endDraw = (0, import_react3.useCallback)(() => {
-      if (!isDrawing) return;
-      setIsDrawing(false);
-      saveHistory();
-      saveToStorage();
-    }, [isDrawing, saveHistory, saveToStorage]);
-    if (!isActive) return null;
-    return /* @__PURE__ */ import_react3.default.createElement("div", { ref: overlayRef, className: "fixed inset-0 z-30 pointer-events-none", style: { top: "56px" } }, /* @__PURE__ */ import_react3.default.createElement(
+    }, [pageKey, snapshot]);
+    const canvasH = Math.max(document.documentElement.scrollHeight - NAV_H, window.innerHeight - NAV_H);
+    return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement(
       "canvas",
       {
         ref: canvasRef,
-        style: { position: "absolute", inset: 0, width: "100%", height: "100%", cursor: tool === "eraser" ? "cell" : "crosshair", touchAction: "none", pointerEvents: "all" },
-        onMouseDown: startDraw,
-        onMouseMove: draw,
-        onMouseUp: endDraw,
-        onMouseLeave: endDraw,
-        onTouchStart: startDraw,
-        onTouchMove: draw,
-        onTouchEnd: endDraw
+        style: {
+          position: "absolute",
+          top: NAV_H + "px",
+          left: 0,
+          width: window.innerWidth + "px",
+          height: canvasH + "px",
+          pointerEvents: isActive ? "all" : "none",
+          cursor: isActive ? eraser ? "cell" : "crosshair" : "default",
+          touchAction: "none",
+          zIndex: 28,
+          opacity: isActive ? 1 : 0.75
+        },
+        onMouseDown: isActive ? startDraw : void 0,
+        onMouseMove: isActive ? draw : void 0,
+        onMouseUp: isActive ? endDraw : void 0,
+        onMouseLeave: isActive ? endDraw : void 0,
+        onTouchStart: isActive ? startDraw : void 0,
+        onTouchMove: isActive ? draw : void 0,
+        onTouchEnd: isActive ? endDraw : void 0,
+        onPointerDown: isActive ? startDraw : void 0,
+        onPointerMove: isActive ? draw : void 0,
+        onPointerUp: isActive ? endDraw : void 0
       }
-    ), /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute left-1/2 bottom-6 pointer-events-all", style: { transform: "translateX(-50%)" } }, /* @__PURE__ */ import_react3.default.createElement(
-      "div",
+    ), isActive && /* @__PURE__ */ import_react3.default.createElement("div", { style: { position: "fixed", inset: 0, top: NAV_H, zIndex: 50, pointerEvents: "none" } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { position: "absolute", left: "50%", bottom: 24, transform: "translateX(-50%)", pointerEvents: "auto" } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 20, background: "rgba(255,255,255,0.97)", border: "1.5px solid rgba(99,102,241,0.15)", backdropFilter: "blur(20px)", boxShadow: "0 8px 32px rgba(0,0,0,0.12)" } }, /* @__PURE__ */ import_react3.default.createElement(
+      "button",
       {
-        className: "flex items-center gap-2 px-4 py-3 rounded-2xl shadow-2xl",
-        style: { background: "rgba(255,255,255,0.97)", border: "1px solid rgba(99,102,241,0.2)", backdropFilter: "blur(20px)", gap: "8px" }
-      },
-      [
-        { id: "pen", label: "\u270F\uFE0F", title: "Pen" },
-        { id: "highlighter", label: "\u{1F58A}\uFE0F", title: "Highlighter" },
-        { id: "eraser", label: "\u2B1C", title: "Eraser" }
-      ].map((t) => /* @__PURE__ */ import_react3.default.createElement(
-        "button",
-        {
-          key: t.id,
-          onClick: () => setTool(t.id),
-          title: t.title,
-          className: "w-8 h-8 rounded-xl text-sm flex items-center justify-center transition-all",
-          style: { background: tool === t.id ? "rgba(99,102,241,0.15)" : "transparent", border: tool === t.id ? "1.5px solid rgba(99,102,241,0.5)" : "1.5px solid transparent", fontSize: "16px" }
-        },
-        t.label
-      )),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: "1px", height: "24px", background: "rgba(0,0,0,0.1)" } }),
-      COLORS.map((c) => /* @__PURE__ */ import_react3.default.createElement(
-        "button",
-        {
-          key: c,
-          onClick: () => {
-            setColor(c);
-            setTool("pen");
-          },
-          className: "w-5 h-5 rounded-full transition-all",
-          style: { background: c, outline: color === c && tool !== "eraser" ? `2px solid ${c}` : "none", outlineOffset: "2px", transform: color === c && tool !== "eraser" ? "scale(1.25)" : "scale(1)" }
+        onClick: () => setEraser(false),
+        title: "Pen",
+        style: {
+          width: 38,
+          height: 38,
+          borderRadius: 10,
+          border: "none",
+          cursor: "pointer",
+          transition: "all 0.15s",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: !eraser ? "rgba(99,102,241,0.12)" : "transparent",
+          outline: !eraser ? "1.5px solid rgba(99,102,241,0.4)" : "1.5px solid transparent"
         }
-      )),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: "1px", height: "24px", background: "rgba(0,0,0,0.1)" } }),
-      /* @__PURE__ */ import_react3.default.createElement(
-        "button",
-        {
-          onClick: () => setSize((s) => Math.max(1, s - 1)),
-          className: "w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center transition-all hover:bg-slate-100",
-          style: { color: "var(--muted)" }
-        },
-        "\u2212"
-      ),
-      /* @__PURE__ */ import_react3.default.createElement("span", { className: "mono text-xs font-bold w-4 text-center", style: { color: "var(--muted)" } }, size),
-      /* @__PURE__ */ import_react3.default.createElement(
-        "button",
-        {
-          onClick: () => setSize((s) => Math.min(16, s + 1)),
-          className: "w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center transition-all hover:bg-slate-100",
-          style: { color: "var(--muted)" }
-        },
-        "+"
-      ),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: "1px", height: "24px", background: "rgba(0,0,0,0.1)" } }),
-      /* @__PURE__ */ import_react3.default.createElement(
-        "button",
-        {
-          onClick: undo,
-          title: "Undo",
-          className: "w-8 h-8 rounded-xl text-xs flex items-center justify-center transition-all hover:bg-slate-100",
-          style: { color: "var(--muted)", fontSize: "15px" }
-        },
-        "\u21A9"
-      ),
-      hasDrawing && /* @__PURE__ */ import_react3.default.createElement(
-        "button",
-        {
-          onClick: clearCanvas,
-          title: "Clear all",
-          className: "w-8 h-8 rounded-xl flex items-center justify-center transition-all hover:bg-red-50",
-          style: { color: "#ef4444" }
-        },
-        /* @__PURE__ */ import_react3.default.createElement(Trash2, { className: "w-3.5 h-3.5" })
-      ),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: "1px", height: "24px", background: "rgba(0,0,0,0.1)" } }),
-      /* @__PURE__ */ import_react3.default.createElement(
-        "button",
-        {
-          onClick: onClose,
-          title: "Close drawing mode",
-          className: "w-8 h-8 rounded-xl flex items-center justify-center transition-all",
-          style: { background: "rgba(99,102,241,0.1)", color: "#6366f1", border: "1px solid rgba(99,102,241,0.2)" }
-        },
-        /* @__PURE__ */ import_react3.default.createElement(X, { className: "w-3.5 h-3.5" })
-      )
-    )), /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute top-4 left-1/2 pointer-events-none", style: { transform: "translateX(-50%)" } }, /* @__PURE__ */ import_react3.default.createElement(
-      "div",
-      {
-        className: "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold syne",
-        style: { background: "rgba(99,102,241,0.12)", border: "1px solid rgba(99,102,241,0.3)", color: "#6366f1", backdropFilter: "blur(8px)" }
       },
-      /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-1.5 h-1.5 rounded-full bg-indigo-500 pulse-ring" }),
-      "Drawing mode active"
-    )));
+      /* @__PURE__ */ import_react3.default.createElement("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", style: { color: !eraser ? "#6366f1" : "#64748b" } }, /* @__PURE__ */ import_react3.default.createElement("path", { d: "M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" }))
+    ), /* @__PURE__ */ import_react3.default.createElement(
+      "button",
+      {
+        onClick: () => setEraser(true),
+        title: "Eraser",
+        style: {
+          width: 38,
+          height: 38,
+          borderRadius: 10,
+          border: "none",
+          cursor: "pointer",
+          transition: "all 0.15s",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: eraser ? "rgba(99,102,241,0.12)" : "transparent",
+          outline: eraser ? "1.5px solid rgba(99,102,241,0.4)" : "1.5px solid transparent"
+        }
+      },
+      /* @__PURE__ */ import_react3.default.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", style: { color: eraser ? "#6366f1" : "#64748b" } }, /* @__PURE__ */ import_react3.default.createElement("path", { d: "M20 20H7L3 16l10-10 7 7-2.5 2.5" }), /* @__PURE__ */ import_react3.default.createElement("path", { d: "M6.0001 10.0001 13 17" }))
+    ), /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: 1, height: 24, background: "rgba(0,0,0,0.09)" } }), /* @__PURE__ */ import_react3.default.createElement(
+      "button",
+      {
+        onClick: undo,
+        title: "Undo",
+        style: { width: 38, height: 38, borderRadius: 10, fontSize: 18, border: "none", background: "transparent", cursor: "pointer", color: "#64748b" }
+      },
+      "\u21A9"
+    ), hasDrawing && /* @__PURE__ */ import_react3.default.createElement(
+      "button",
+      {
+        onClick: clearCanvas,
+        title: "Clear all",
+        style: { width: 38, height: 38, borderRadius: 10, border: "none", background: "transparent", cursor: "pointer", color: "#ef4444", display: "flex", alignItems: "center", justifyContent: "center" }
+      },
+      /* @__PURE__ */ import_react3.default.createElement(Trash2, { size: 16 })
+    ), /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: 1, height: 24, background: "rgba(0,0,0,0.09)" } }), /* @__PURE__ */ import_react3.default.createElement(
+      "button",
+      {
+        onClick: onClose,
+        title: "Exit drawing mode",
+        style: { width: 38, height: 38, borderRadius: 10, border: "1.5px solid rgba(99,102,241,0.25)", background: "rgba(99,102,241,0.1)", cursor: "pointer", color: "#6366f1", display: "flex", alignItems: "center", justifyContent: "center" }
+      },
+      /* @__PURE__ */ import_react3.default.createElement(X, { size: 16 })
+    ))), /* @__PURE__ */ import_react3.default.createElement("div", { style: { position: "absolute", top: 16, left: "50%", transform: "translateX(-50%)", pointerEvents: "none" } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, padding: "5px 12px", borderRadius: 999, background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", color: "#6366f1", fontSize: 11, fontWeight: 700 } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: 5, height: 5, borderRadius: "50%", background: "#6366f1" }, className: "pulse-ring" }), eraser ? "Eraser" : "Drawing", " mode"))));
   }
   function MathStudyLibrary() {
     const [showIntro, setShowIntro] = (0, import_react3.useState)(true);
@@ -25664,7 +25667,7 @@ The parabola doesn't cross the x-axis`));
       const isCorrect = selectedAnswer === question.correct;
       const progress = (currentQuestion + 1) / currentQuiz.quiz.length * 100;
       const labels = ["A", "B", "C", "D"];
-      return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass px-5 h-14 flex items-center justify-between sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ import_react3.default.createElement("div", { style: { position: "relative" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass px-5 h-14 flex items-center justify-between sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement(
         "button",
         {
           onClick: () => {
@@ -25785,7 +25788,7 @@ The parabola doesn't cross the x-axis`));
           "Start Quiz \u2192"
         )));
       }
-      return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ import_react3.default.createElement("div", { style: { position: "relative" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement(
         "button",
         {
           onClick: () => setSelectedSection(null),
@@ -25815,45 +25818,71 @@ The parabola doesn't cross the x-axis`));
         },
         /* @__PURE__ */ import_react3.default.createElement(Pencil, { className: "w-3.5 h-3.5" }),
         " Draw"
-      ))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-10" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "mb-8 anim-up" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `inline-block bg-gradient-to-r ${selectedSubject.gradient} rounded-2xl p-px` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "rounded-2xl px-5 py-3", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black text-xl", style: { color: "var(--text)", letterSpacing: "-0.02em" } }, section.title)))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-5" }, section.notes && section.notes.map((note, idx) => {
+      ))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-3xl mx-auto px-4 md:px-6 py-10" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "mb-10 anim-up" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `rounded-3xl p-8 relative overflow-hidden`, style: { background: `linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.06) 100%)`, border: "1.5px solid rgba(99,102,241,0.13)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute top-0 right-0 text-8xl leading-none select-none pointer-events-none", style: { opacity: 0.07, transform: "translate(10%, -15%)" } }, section.notes?.[0]?.emoji || "\u{1F4DA}"), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react3.default.createElement(
+        "div",
+        {
+          className: `inline-flex items-center gap-1.5 rounded-full px-3 py-1 mb-4 text-xs font-bold syne uppercase tracking-wider`,
+          style: { background: "rgba(99,102,241,0.1)", color: "#6366f1", border: "1px solid rgba(99,102,241,0.2)" }
+        },
+        selectedSubject.name
+      ), /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black mb-2 leading-tight", style: { fontSize: "clamp(1.6rem,4vw,2.2rem)", letterSpacing: "-0.03em", color: "var(--text)" } }, section.title), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm", style: { color: "var(--muted)" } }, section.notes?.length || 0, " topics \xB7 ", section.notes?.reduce((s, n) => s + (n.points?.length || 0), 0) || 0, " key points")))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-8" }, section.notes && section.notes.map((note, idx) => {
         const diagramKey = `${section.id}-${idx}`;
         const diagram = NOTE_DIAGRAMS[diagramKey];
-        return /* @__PURE__ */ import_react3.default.createElement("div", { key: idx, className: `glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx + 1, 4)}`, style: { borderColor: "var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`, style: { opacity: 0.92 } }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xl leading-none" }, note.emoji), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-bold text-base text-white leading-snug tracking-wide" }, note.subtitle)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-6 py-6" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "space-y-3" }, note.points.map((point, pointIdx) => {
-          const isStep = /^\d+\./.test(point);
-          const hasKeyTerm = /^([A-Z][A-Z\s/]+):/.test(point);
-          const colonIdx = point.indexOf(":");
-          const keyTerm = hasKeyTerm && colonIdx > 0 ? point.slice(0, colonIdx) : null;
-          const rest = hasKeyTerm && colonIdx > 0 ? point.slice(colonIdx + 1).trim() : point;
-          return /* @__PURE__ */ import_react3.default.createElement("li", { key: pointIdx }, /* @__PURE__ */ import_react3.default.createElement(
+        const allPoints = note.points || [];
+        const stepPoints = allPoints.filter((p) => /^\d+\./.test(p));
+        const isStepByStep = stepPoints.length >= 3;
+        return /* @__PURE__ */ import_react3.default.createElement("div", { key: idx, className: `anim-up anim-up-${Math.min(idx + 1, 4)}` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-3 mb-4" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-10 h-10 rounded-2xl bg-gradient-to-br ${selectedSubject.gradient} flex items-center justify-center text-lg shadow-md flex-shrink-0` }, note.emoji), /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-black text-lg leading-tight", style: { color: "var(--text)", letterSpacing: "-0.02em" } }, note.subtitle), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs mt-0.5", style: { color: "var(--dim)" } }, allPoints.length, " key points"))), isStepByStep ? /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-2 pl-1" }, allPoints.map((point, pointIdx) => {
+          const stepMatch = point.match(/^(\d+)\.\s*(.*)/s);
+          if (!stepMatch) return null;
+          const [, num, text] = stepMatch;
+          const colonIdx = text.indexOf(":");
+          const hasLabel = colonIdx > 0 && colonIdx < 40;
+          const label = hasLabel ? text.slice(0, colonIdx) : null;
+          const body = hasLabel ? text.slice(colonIdx + 1).trim() : text;
+          return /* @__PURE__ */ import_react3.default.createElement(
             "div",
             {
-              className: `flex items-start gap-3.5 rounded-xl px-4 py-3 transition-colors`,
-              style: { background: "rgba(15,23,42,0.025)" },
-              onMouseOver: (e) => e.currentTarget.style.background = "rgba(99,102,241,0.06)",
-              onMouseOut: (e) => e.currentTarget.style.background = "rgba(15,23,42,0.025)"
+              key: pointIdx,
+              className: "flex gap-4 rounded-2xl p-4 transition-all",
+              style: { background: "white", border: "1.5px solid rgba(0,0,0,0.06)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }
             },
-            isStep ? /* @__PURE__ */ import_react3.default.createElement("span", { className: `flex-shrink-0 mt-0.5 w-6 h-6 rounded-lg bg-gradient-to-br ${selectedSubject.gradient} text-white text-xs font-bold flex items-center justify-center mono` }, point.match(/^(\d+)/)?.[1]) : /* @__PURE__ */ import_react3.default.createElement("span", { className: `flex-shrink-0 mt-2.5 w-2 h-2 rounded-full bg-gradient-to-br ${selectedSubject.gradient}` }),
-            /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base leading-relaxed", style: { color: "var(--text)", opacity: 0.85 } }, keyTerm ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("span", { className: "font-bold", style: { color: "var(--text)" } }, keyTerm, ":"), " ", rest) : isStep ? /* @__PURE__ */ import_react3.default.createElement("span", null, point.replace(/^\d+\.\s*/, "")) : point)
-          ), isWorksheet && note.answers && note.answers[pointIdx] && /* @__PURE__ */ import_react3.default.createElement("div", { className: "ml-8 mt-1" }, /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: () => toggleAnswer(idx, pointIdx),
-              className: "text-xs syne font-bold flex items-center gap-1 px-2 py-1 rounded-lg transition-colors",
-              style: { color: "rgba(13,148,136,0.8)" },
-              onMouseOver: (e) => e.currentTarget.style.color = "rgb(13,148,136)",
-              onMouseOut: (e) => e.currentTarget.style.color = "rgba(13,148,136,0.8)"
-            },
-            revealedAnswers.has(`${idx}-${pointIdx}`) ? "\u25BE Hide" : "\u25B8 Show Answer"
-          ), revealedAnswers.has(`${idx}-${pointIdx}`) && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-1.5 px-4 py-2.5 rounded-r-xl", style: { background: "rgba(16,185,129,0.07)", borderLeft: "2px solid rgba(16,185,129,0.35)" } }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm mono", style: { color: "rgba(6,78,59,0.9)" } }, note.answers[pointIdx]))));
-        })), diagram && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-5 pt-4", style: { borderTop: "1px solid var(--border)" } }, diagram)));
-      })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-8 glass rounded-2xl p-5 flex gap-3" }, /* @__PURE__ */ import_react3.default.createElement(Lightbulb, { className: "w-5 h-5 flex-shrink-0 mt-0.5", style: { color: "rgba(180,83,9,0.8)" } }), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: "var(--dim)" } }, "Work through problems yourself before checking answers. Active recall is the single most effective study strategy.")))), /* @__PURE__ */ import_react3.default.createElement(DrawingCanvas, { pageKey: drawingPageKey, isActive: drawingActive, onClose: () => setDrawingActive(false) }));
+            /* @__PURE__ */ import_react3.default.createElement("div", { className: `flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br ${selectedSubject.gradient} flex items-center justify-center text-white text-sm font-black mono shadow` }, num),
+            /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 min-w-0 pt-0.5" }, label && /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm font-black mb-0.5", style: { color: "var(--text)" } }, label), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: label ? "var(--muted)" : "var(--text)", opacity: label ? 1 : 0.88 } }, body))
+          );
+        })) : (
+          /* Key point cards */
+          /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-2 pl-1" }, allPoints.map((point, pointIdx) => {
+            const colonIdx = point.indexOf(":");
+            const hasKeyTerm = /^([A-Z][A-Za-z\s/()²³]+):/.test(point) && colonIdx > 0 && colonIdx < 50;
+            const keyTerm = hasKeyTerm ? point.slice(0, colonIdx) : null;
+            const body = hasKeyTerm ? point.slice(colonIdx + 1).trim() : point;
+            const hasFormula = /[=+\-×/^²³()]/.test(body) && body.length < 80;
+            return /* @__PURE__ */ import_react3.default.createElement("div", { key: pointIdx }, /* @__PURE__ */ import_react3.default.createElement(
+              "div",
+              {
+                className: "rounded-2xl p-4 transition-all",
+                style: { background: "white", border: "1.5px solid rgba(0,0,0,0.06)", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }
+              },
+              /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-start gap-3" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: `flex-shrink-0 mt-1.5 w-2 h-2 rounded-full bg-gradient-to-br ${selectedSubject.gradient}` }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 min-w-0" }, keyTerm ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm font-black mb-1", style: { color: "var(--text)" } }, keyTerm), hasFormula ? /* @__PURE__ */ import_react3.default.createElement("p", { className: "mono text-sm px-3 py-1.5 rounded-lg inline-block font-semibold", style: { background: "rgba(99,102,241,0.07)", color: "#4338ca", border: "1px solid rgba(99,102,241,0.12)" } }, body) : /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: "var(--muted)" } }, body)) : hasFormula ? /* @__PURE__ */ import_react3.default.createElement("p", { className: "mono text-sm font-semibold", style: { color: "#4338ca" } }, body) : /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: "var(--text)", opacity: 0.88 } }, point)))
+            ), isWorksheet && note.answers && note.answers[pointIdx] && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-1.5 ml-4" }, /* @__PURE__ */ import_react3.default.createElement(
+              "button",
+              {
+                onClick: () => toggleAnswer(idx, pointIdx),
+                className: "text-xs syne font-bold flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all",
+                style: { background: revealedAnswers.has(`${idx}-${pointIdx}`) ? "rgba(16,185,129,0.1)" : "rgba(16,185,129,0.06)", color: "#059669", border: "1px solid rgba(16,185,129,0.2)" }
+              },
+              revealedAnswers.has(`${idx}-${pointIdx}`) ? "\u25BE Hide answer" : "\u25B8 Show answer"
+            ), revealedAnswers.has(`${idx}-${pointIdx}`) && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-2 px-4 py-3 rounded-2xl", style: { background: "rgba(16,185,129,0.06)", border: "1.5px solid rgba(16,185,129,0.2)" } }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm mono font-semibold", style: { color: "rgba(6,78,59,0.9)" } }, note.answers[pointIdx]))));
+          }))
+        ), diagram && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-4 rounded-2xl overflow-hidden", style: { border: "1.5px solid rgba(0,0,0,0.06)" } }, diagram), idx < section.notes.length - 1 && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-8 flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 h-px", style: { background: "var(--border)" } }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs", style: { color: "var(--dim)" } }, "Topic ", idx + 2), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 h-px", style: { background: "var(--border)" } })));
+      })), section.notes?.length > 0 && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-10 rounded-2xl p-5 flex gap-3", style: { background: "rgba(245,158,11,0.06)", border: "1.5px solid rgba(245,158,11,0.18)" } }, /* @__PURE__ */ import_react3.default.createElement(Lightbulb, { className: "w-5 h-5 flex-shrink-0 mt-0.5 text-amber-500" }), /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm font-bold mb-0.5", style: { color: "#92400e" } }, "Study tip"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: "rgba(120,53,15,0.8)" } }, "Cover the details and try to recall each point from memory \u2014 active recall beats re-reading every time."))))), /* @__PURE__ */ import_react3.default.createElement(DrawingCanvas, { pageKey: drawingPageKey, isActive: drawingActive, onClose: () => setDrawingActive(false) }));
     }
     if (selectedSubject) {
       const subject = selectedSubject;
       const completedCount = subject.sections.filter((s) => readSections.has(s.id)).length;
       const progress = completedCount / subject.sections.length * 100;
       const SubjectIcon = subject.icon;
-      return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ import_react3.default.createElement("div", { style: { position: "relative" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement(
         "button",
         {
           onClick: () => setSelectedSubject(null),
@@ -26030,7 +26059,7 @@ lucide-react/dist/esm/lucide-react.js:
 */
 
 </script>
-    <script src="library-whiteboard.js?v=20260305b"></script>
+    <script src="library-whiteboard.js?v=20260305c"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
