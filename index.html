@@ -425,14 +425,12 @@
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
         var canSpeak = !!window.speechSynthesis;
-        var preferStableEnglishVoice = true;
         var allowBrowserFallback = true;
         var recognition = null;
         var active = false;
         var listening = false;
         var waiting = false;
         var messages = [];
-        var liveAudio = null;
         var preferredBrowserVoice = null;
 
         function setChat(text) {
@@ -481,26 +479,6 @@
         async function speak(text) {
           var phrase = String(text || '').trim();
           if (!phrase) return;
-          if (preferStableEnglishVoice && canSpeak) {
-            try {
-              window.speechSynthesis.cancel();
-              var fast = new SpeechSynthesisUtterance(phrase);
-              if (!preferredBrowserVoice) preferredBrowserVoice = pickPreferredVoice();
-              if (preferredBrowserVoice) fast.voice = preferredBrowserVoice;
-              fast.lang = preferredBrowserVoice && preferredBrowserVoice.lang ? preferredBrowserVoice.lang : 'en-US';
-              fast.rate = 0.94;
-              fast.pitch = 1.02;
-              fast.onstart = function () { meta.textContent = 'LYNE is speaking...'; };
-              fast.onend = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
-              fast.onerror = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
-              window.speechSynthesis.speak(fast);
-              return;
-            } catch (_err) {
-              meta.textContent = 'Could not start browser voice.';
-              return;
-            }
-          }
-          // Neural path disabled by default for stability on Edge.
           if (!allowBrowserFallback || !canSpeak) {
             meta.textContent = 'Voice unavailable in this browser.';
             return;
@@ -511,13 +489,14 @@
             if (!preferredBrowserVoice) preferredBrowserVoice = pickPreferredVoice();
             if (preferredBrowserVoice) u.voice = preferredBrowserVoice;
             u.lang = preferredBrowserVoice && preferredBrowserVoice.lang ? preferredBrowserVoice.lang : 'en-US';
-            u.rate = 0.96;
+            u.rate = 0.92;
             u.pitch = 1.0;
             u.onstart = function () { meta.textContent = 'LYNE is speaking...'; };
             u.onend = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
+            u.onerror = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
             window.speechSynthesis.speak(u);
           } catch (_err) {
-            meta.textContent = 'Neural voice unavailable. Check ElevenLabs key/settings.';
+            meta.textContent = 'Could not start voice playback.';
           }
         }
 
