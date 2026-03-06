@@ -424,7 +424,7 @@
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
         var canSpeak = !!window.speechSynthesis;
-        var allowBrowserFallback = false;
+        var allowBrowserFallback = true;
         var recognition = null;
         var active = false;
         var listening = false;
@@ -466,6 +466,18 @@
           try {
             window.speechSynthesis.cancel();
             var u = new SpeechSynthesisUtterance(phrase);
+            var voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+            var preferred = null;
+            for (var i = 0; i < voices.length; i++) {
+              var name = String(voices[i].name || '').toLowerCase();
+              if (name.indexOf('google us english') !== -1 || name.indexOf('natural') !== -1 || name.indexOf('samantha') !== -1) {
+                preferred = voices[i];
+                break;
+              }
+            }
+            if (preferred) u.voice = preferred;
+            u.rate = 0.96;
+            u.pitch = 1.0;
             u.onstart = function () { meta.textContent = 'LYNE is speaking...'; };
             u.onend = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
             window.speechSynthesis.speak(u);
