@@ -434,7 +434,9 @@
         var pendingListen = false;
         var messages = [];
         var preferredBrowserVoice = null;
-        var heardText = '';
+        var nextListenAt = 0;
+        var lastUserText = '';
+        var lastUserAt = 0;
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
@@ -502,6 +504,7 @@
               u.onend = function () {
                 speaking = false;
                 meta.textContent = active ? 'Listening...' : 'Idle.';
+                nextListenAt = Date.now() + 900;
                 if (active || pendingListen) {
                   pendingListen = false;
                   window.setTimeout(startListening, 120);
@@ -511,6 +514,7 @@
               u.onerror = function () {
                 speaking = false;
                 meta.textContent = active ? 'Listening...' : 'Idle.';
+                nextListenAt = Date.now() + 450;
                 if (active || pendingListen) {
                   pendingListen = false;
                   window.setTimeout(startListening, 120);
@@ -539,9 +543,14 @@
           return 'I am still here. Ask me where to go in the app, what to study next, or what concept you want explained.';
         }
 
-        function startListening() {
+        function startListening(forceInterrupt) {
           if (!recognition || waiting || listening) return;
+          if (Date.now() < nextListenAt) {
+            window.setTimeout(function () { startListening(!!forceInterrupt); }, Math.max(80, nextListenAt - Date.now()));
+            return;
+          }
           if (speaking) {
+            if (!forceInterrupt) return;
             pendingListen = true;
             try {
               if (window.speechSynthesis && window.speechSynthesis.speaking) {
@@ -558,6 +567,14 @@
         async function askLyne(userText) {
           var prompt = String(userText || '').trim();
           if (!prompt) return;
+          if (prompt.length < 2) return;
+          var now = Date.now();
+          if (lastUserText && prompt.toLowerCase() === lastUserText && now - lastUserAt < 4000) {
+            meta.textContent = active ? 'Listening...' : 'Idle.';
+            return;
+          }
+          lastUserText = prompt.toLowerCase();
+          lastUserAt = now;
           waiting = true;
           meta.textContent = 'Thinking...';
           setChat('You: ' + prompt + '\n\nLYNE: ...');
@@ -611,7 +628,7 @@
           preferredBrowserVoice = pickPreferredVoice();
           recognition = new SpeechRecognition();
           recognition.lang = 'en-US';
-          recognition.interimResults = true;
+          recognition.interimResults = false;
           recognition.continuous = false;
           recognition.maxAlternatives = 1;
           recognition.onstart = function () {
@@ -620,18 +637,12 @@
           };
           recognition.onresult = function (event) {
             var transcript = '';
-            var hasFinal = false;
             for (var i = event.resultIndex; i < event.results.length; i++) {
               transcript += event.results[i][0].transcript || '';
-              if (event.results[i].isFinal) hasFinal = true;
             }
             transcript = String(transcript || '').trim();
-            if (transcript) {
-              heardText = transcript;
-              meta.textContent = 'Heard: ' + transcript;
-            }
-            if (!hasFinal || !transcript) return;
-            heardText = '';
+            if (!transcript) return;
+            meta.textContent = 'Heard: ' + transcript;
             listening = false;
             askLyne(transcript);
           };
@@ -654,12 +665,6 @@
           };
           recognition.onend = function () {
             listening = false;
-            if (!waiting && heardText) {
-              var captured = heardText;
-              heardText = '';
-              askLyne(captured);
-              return;
-            }
             if (active && !waiting) startListening();
           };
         } else {
@@ -671,13 +676,12 @@
           if (!canListen) return;
           active = true;
           meta.textContent = 'Conversation started.';
-          startListening();
+          startListening(true);
         });
 
         stopBtn.addEventListener('click', function () {
           active = false;
           pendingListen = false;
-          heardText = '';
           if (recognition && listening) {
             try { recognition.stop(); } catch (_err) {}
           }
