@@ -446,6 +446,7 @@
         var captureInterimText = '';
         var captureTimer = null;
         var BARGE_IN_KEYWORDS = ['lyne stop', 'lyne wait', 'lyne pause', 'lyne listen', 'stop lyne', 'wait lyne', 'pause lyne'];
+        var ignoreMicUntil = 0;
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
@@ -464,6 +465,10 @@
           captureFinalText = '';
           captureInterimText = '';
           if (!transcript) return;
+          if (Date.now() < ignoreMicUntil) {
+            meta.textContent = active ? 'Listening...' : 'Idle.';
+            return;
+          }
           if (speaking && !isBargeInCommand(transcript)) {
             meta.textContent = 'LYNE is speaking. Say "LYNE stop" to interrupt.';
             return;
@@ -579,25 +584,32 @@
             await new Promise(function (resolve) {
               u.onstart = function () {
                 speaking = true;
+                ignoreMicUntil = Date.now() + 2200;
+                if (recognition && listening) {
+                  try { recognition.abort(); } catch (_err) {}
+                  listening = false;
+                }
                 meta.textContent = 'LYNE is speaking...';
               };
               u.onend = function () {
                 speaking = false;
                 meta.textContent = active ? 'Listening...' : 'Idle.';
+                ignoreMicUntil = Date.now() + 900;
                 nextListenAt = Date.now() + 900;
                 if (active || pendingListen) {
                   pendingListen = false;
-                  window.setTimeout(startListening, 120);
+                  window.setTimeout(startListening, 400);
                 }
                 resolve();
               };
               u.onerror = function () {
                 speaking = false;
                 meta.textContent = active ? 'Listening...' : 'Idle.';
+                ignoreMicUntil = Date.now() + 700;
                 nextListenAt = Date.now() + 450;
                 if (active || pendingListen) {
                   pendingListen = false;
-                  window.setTimeout(startListening, 120);
+                  window.setTimeout(startListening, 350);
                 }
                 resolve();
               };
@@ -646,6 +658,10 @@
 
         function startListening(forceInterrupt) {
           if (!recognition || waiting || listening) return;
+          if (Date.now() < ignoreMicUntil) {
+            window.setTimeout(function () { startListening(!!forceInterrupt); }, Math.max(120, ignoreMicUntil - Date.now()));
+            return;
+          }
           if (Date.now() < nextListenAt) {
             window.setTimeout(function () { startListening(!!forceInterrupt); }, Math.max(80, nextListenAt - Date.now()));
             return;
@@ -746,6 +762,7 @@
             meta.textContent = speaking ? 'Listening for interruption...' : 'Listening...';
           };
           recognition.onresult = function (event) {
+            if (Date.now() < ignoreMicUntil) return;
             var latest = '';
             for (var i = event.resultIndex; i < event.results.length; i++) {
               var chunk = String((event.results[i] && event.results[i][0] && event.results[i][0].transcript) || '').trim();

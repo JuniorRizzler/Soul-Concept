@@ -69,6 +69,14 @@
     ".lib-voice-card-title{font:700 11px/1 Arial,sans-serif;opacity:.92}",
     ".lib-voice-card-actions{display:flex;gap:6px}",
     ".lib-voice-card-btn{border:1px solid rgba(207,167,118,.4);background:rgba(250,240,225,.96);color:#2d2015;border-radius:7px;padding:4px 6px;font:700 10px/1 Arial,sans-serif;cursor:pointer}",
+    ".lib-lyne-shell{position:fixed;right:12px;bottom:64px;z-index:2147483646;width:min(280px,86vw);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(247,241,232,.97));border:1px solid rgba(207,167,118,.38);border-radius:14px;box-shadow:0 14px 28px rgba(20,12,7,.25);padding:10px;display:grid;gap:8px}",
+    ".lib-lyne-head{display:flex;align-items:center;justify-content:space-between;gap:8px}",
+    ".lib-lyne-title{font:800 12px/1 Arial,sans-serif;color:#2f2014;letter-spacing:.03em}",
+    ".lib-lyne-meta{margin:0;font:700 10px/1.3 Arial,sans-serif;color:#6b543f;min-height:13px}",
+    ".lib-lyne-chat{margin:0;background:#fff;border:1px solid rgba(214,181,143,.4);border-radius:10px;padding:8px;white-space:pre-wrap;min-height:52px;max-height:120px;overflow:auto;font:600 11px/1.35 Arial,sans-serif;color:#2d2015}",
+    ".lib-lyne-actions{display:flex;gap:6px;flex-wrap:wrap}",
+    ".lib-lyne-btn{border:1px solid rgba(207,167,118,.48);background:#fff;color:#2d2015;border-radius:8px;padding:5px 8px;font:800 10px/1 Arial,sans-serif;cursor:pointer}",
+    ".lib-lyne-btn.primary{background:linear-gradient(135deg,#f6d3a2,#d59644);border-color:#cc8b3d;color:#40240d}",
     ".lib-ai-pet-shell{position:fixed;left:calc(100vw - 92px);top:112px;z-index:2147483646;display:grid;gap:6px;touch-action:none;user-select:none}",
     ".lib-ai-pet-shell.dashing .lib-ai-pet{box-shadow:0 14px 24px rgba(20,12,7,.35),0 0 0 2px rgba(228,199,160,.4)}",
     ".lib-ai-pet{width:56px;height:56px;border-radius:18px;border:1px solid rgba(229,194,151,.48);background:linear-gradient(150deg,#ffe8c9,#f2bf78 55%,#c57a27);position:relative;display:flex;align-items:center;justify-content:center;cursor:grab;box-shadow:0 10px 20px rgba(20,12,7,.32);overflow:visible}",
@@ -461,6 +469,215 @@
   function loadVoiceNotesForCurrentKey() {
     voiceNotes = loadVoiceNotesForKey(currentStorageKey);
     renderVoiceNotes();
+  }
+
+  function createLibraryLyneWidget() {
+    if (document.getElementById("lib-lyne-widget")) return;
+    var shell = document.createElement("section");
+    shell.className = "lib-lyne-shell";
+    shell.id = "lib-lyne-widget";
+    shell.innerHTML = [
+      '<div class="lib-lyne-head"><span class="lib-lyne-title">LYNE</span><span class="lib-lyne-meta" id="lib-lyne-meta">Idle.</span></div>',
+      '<pre class="lib-lyne-chat" id="lib-lyne-chat">LYNE: Ready when you are.</pre>',
+      '<div class="lib-lyne-actions">',
+      '<button type="button" class="lib-lyne-btn primary" id="lib-lyne-start">Start</button>',
+      '<button type="button" class="lib-lyne-btn" id="lib-lyne-stop">Stop</button>',
+      "</div>"
+    ].join("");
+    document.body.appendChild(shell);
+
+    var startBtn = document.getElementById("lib-lyne-start");
+    var stopBtn = document.getElementById("lib-lyne-stop");
+    var meta = document.getElementById("lib-lyne-meta");
+    var chat = document.getElementById("lib-lyne-chat");
+    if (!startBtn || !stopBtn || !meta || !chat) return;
+
+    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (typeof SpeechRecognition !== "function") {
+      startBtn.disabled = true;
+      meta.textContent = "Voice unsupported.";
+      return;
+    }
+
+    var recognition = null;
+    var active = false;
+    var listening = false;
+    var waiting = false;
+    var speaking = false;
+    var ignoreMicUntil = 0;
+    var lastAssistantText = "";
+    var lastUserText = "";
+    var lastUserAt = 0;
+    var messages = [];
+
+    function setChat(text) {
+      chat.textContent = String(text || "").trim() || "LYNE: Ready when you are.";
+    }
+
+    function compactText(value) {
+      return String(value || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+    }
+
+    function looksLikeEcho(text) {
+      var u = compactText(text);
+      var a = compactText(lastAssistantText);
+      if (!u || !a) return false;
+      return u === a || (u.length > 20 && a.indexOf(u) !== -1) || (a.length > 20 && u.indexOf(a) !== -1);
+    }
+
+    function fallbackReply(prompt) {
+      var q = String(prompt || "").toLowerCase();
+      if (q.indexOf("trig") !== -1) return "Trig quick guide: identify opposite, adjacent, hypotenuse, then use SOH-CAH-TOA.";
+      if (q.indexOf("where") !== -1 || q.indexOf("go") !== -1) return "I can guide you by section. Tell me your subject and topic.";
+      return "Tell me the concept and I will explain it in short clear steps.";
+    }
+
+    function speak(text) {
+      return new Promise(function (resolve) {
+        var phrase = String(text || "").trim();
+        if (!phrase || !window.speechSynthesis) return resolve();
+        try {
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(phrase);
+          u.lang = "en-US";
+          u.rate = 0.94;
+          u.pitch = 1;
+          u.onstart = function () {
+            speaking = true;
+            ignoreMicUntil = Date.now() + 2200;
+            if (recognition && listening) {
+              try { recognition.abort(); } catch (err) {}
+              listening = false;
+            }
+            meta.textContent = "LYNE is speaking...";
+          };
+          u.onend = function () {
+            speaking = false;
+            ignoreMicUntil = Date.now() + 900;
+            meta.textContent = active ? "Listening..." : "Idle.";
+            if (active && !waiting) window.setTimeout(startListening, 450);
+            resolve();
+          };
+          u.onerror = function () {
+            speaking = false;
+            ignoreMicUntil = Date.now() + 700;
+            meta.textContent = active ? "Listening..." : "Idle.";
+            resolve();
+          };
+          window.speechSynthesis.speak(u);
+        } catch (err) {
+          resolve();
+        }
+      });
+    }
+
+    function startListening() {
+      if (!recognition || waiting || listening || speaking) return;
+      if (Date.now() < ignoreMicUntil) {
+        window.setTimeout(startListening, Math.max(120, ignoreMicUntil - Date.now()));
+        return;
+      }
+      try { recognition.start(); } catch (err) {}
+    }
+
+    function askLyne(userText) {
+      return new Promise(async function (resolve) {
+        var prompt = String(userText || "").trim();
+        if (!prompt || waiting || Date.now() < ignoreMicUntil || looksLikeEcho(prompt)) return resolve();
+        var now = Date.now();
+        if (prompt.toLowerCase() === lastUserText && now - lastUserAt < 3500) return resolve();
+        lastUserText = prompt.toLowerCase();
+        lastUserAt = now;
+        waiting = true;
+        meta.textContent = "Thinking...";
+        setChat("You: " + prompt + "\n\nLYNE: ...");
+        messages.push({ role: "user", content: prompt });
+        try {
+          var res = await fetch("/api/ai-chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              request: {
+                model: "Qwen/Qwen2.5-7B-Instruct",
+                messages: messages.slice(-16),
+                max_tokens: 320,
+                temperature: 0.62
+              }
+            })
+          });
+          var data = await res.json();
+          if (!res.ok) throw new Error((data && data.error) || "Request failed.");
+          var reply = String((data && data.text) || "").trim() || fallbackReply(prompt);
+          lastAssistantText = reply;
+          messages.push({ role: "assistant", content: reply });
+          setChat("You: " + prompt + "\n\nLYNE: " + reply);
+          await speak(reply);
+        } catch (err) {
+          var fallback = fallbackReply(prompt);
+          lastAssistantText = fallback;
+          setChat("You: " + prompt + "\n\nLYNE: " + fallback);
+          await speak(fallback);
+        } finally {
+          waiting = false;
+          if (active) startListening();
+          resolve();
+        }
+      });
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.continuous = false;
+    recognition.maxAlternatives = 1;
+    recognition.onstart = function () {
+      listening = true;
+      meta.textContent = "Listening...";
+    };
+    recognition.onresult = function (event) {
+      if (Date.now() < ignoreMicUntil) return;
+      var transcript = "";
+      for (var i = event.resultIndex; i < event.results.length; i++) {
+        transcript += (event.results[i] && event.results[i][0] && event.results[i][0].transcript) || "";
+      }
+      transcript = String(transcript || "").trim();
+      if (!transcript || looksLikeEcho(transcript)) return;
+      askLyne(transcript);
+    };
+    recognition.onerror = function () {
+      listening = false;
+      if (active && !waiting) window.setTimeout(startListening, 520);
+    };
+    recognition.onend = function () {
+      listening = false;
+      if (active && !waiting) startListening();
+    };
+
+    startBtn.addEventListener("click", function () {
+      active = true;
+      meta.textContent = "Conversation started.";
+      startListening();
+    });
+
+    stopBtn.addEventListener("click", function () {
+      active = false;
+      if (recognition && listening) {
+        try { recognition.stop(); } catch (err) {}
+      }
+      try {
+        if (window.speechSynthesis && window.speechSynthesis.speaking) {
+          window.speechSynthesis.cancel();
+        }
+      } catch (err) {}
+      speaking = false;
+      meta.textContent = "Conversation stopped.";
+    });
+
+    window.setTimeout(function () {
+      var greeting = "Hey, welcome to this library. I am LYNE. Ask me anything from this page.";
+      setChat("LYNE: " + greeting);
+      speak(greeting);
+    }, 500);
   }
 
   function createPetAssistant() {
@@ -1193,7 +1410,7 @@
     });
     mutationObs.observe(document.body, { childList: true, subtree: true });
 
-    createPetAssistant();
+    createLibraryLyneWidget();
     resizeLayerIfNeeded();
     updateContext();
     setScopeLabel();
