@@ -38,6 +38,50 @@ function messagesToPrompt(messages) {
     .trim()
 }
 
+async function tryHuggingFaceInferenceFallback(apiKey, model, messages, maxTokens, temperature) {
+  const hfModel = String(model || '').trim() || 'nvidia/personaplex-7b-v1'
+  const promptText = messagesToPrompt(messages)
+  if (!promptText) return { ok: false, text: '', response: null }
+
+  const endpoint = 'https://api-inference.huggingface.co/models/' + encodeURIComponent(hfModel)
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + apiKey,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      inputs: promptText,
+      parameters: {
+        max_new_tokens: Number.isFinite(maxTokens) ? maxTokens : 512,
+        temperature: typeof temperature === 'number' ? temperature : 0.4,
+        return_full_text: false,
+      },
+    }),
+  })
+
+  const raw = await res.text()
+  let parsed = null
+  try {
+    parsed = JSON.parse(raw)
+  } catch (_err) {}
+
+  if (!res.ok) {
+    return { ok: false, text: '', response: parsed || raw }
+  }
+
+  let text = ''
+  if (Array.isArray(parsed) && parsed[0] && typeof parsed[0].generated_text === 'string') {
+    text = parsed[0].generated_text.trim()
+  } else if (parsed && typeof parsed.generated_text === 'string') {
+    text = parsed.generated_text.trim()
+  } else if (typeof raw === 'string') {
+    text = raw.trim()
+  }
+
+  return { ok: true, text: text, response: parsed || raw }
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -225,6 +269,23 @@ module.exports = async (req, res) => {
           }
         } catch (_err) {
           // ignore completion fallback errors and return original upstream error below
+        }
+
+        try {
+          const hfFallback = await tryHuggingFaceInferenceFallback(apiKey, model, messages, maxTokens, temperature)
+          if (hfFallback.ok) {
+            json(res, 200, {
+              ok: true,
+              text: hfFallback.text || '',
+              provider: 'huggingface-inference',
+              model,
+              mode: 'hf-inference-fallback',
+              providerResponse: hfFallback.response || null,
+            })
+            return
+          }
+        } catch (_err) {
+          // ignore HF fallback errors and return original upstream error below
         }
       }
 
