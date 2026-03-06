@@ -424,6 +424,7 @@
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
         var canSpeak = !!window.speechSynthesis;
+        var preferStableEnglishVoice = true;
         var allowBrowserFallback = true;
         var recognition = null;
         var active = false;
@@ -431,14 +432,54 @@
         var waiting = false;
         var messages = [];
         var liveAudio = null;
+        var preferredBrowserVoice = null;
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
         }
 
+        function pickPreferredVoice() {
+          if (!canSpeak || !window.speechSynthesis || !window.speechSynthesis.getVoices) return null;
+          var voices = window.speechSynthesis.getVoices() || [];
+          if (!voices.length) return null;
+          var preferredNames = ['aria', 'jenny', 'google us english', 'samantha', 'natural'];
+          for (var p = 0; p < preferredNames.length; p++) {
+            for (var i = 0; i < voices.length; i++) {
+              var name = String(voices[i].name || '').toLowerCase();
+              var lang = String(voices[i].lang || '').toLowerCase();
+              if (name.indexOf(preferredNames[p]) !== -1 && (lang.indexOf('en') === 0 || lang.indexOf('en-') === 0)) {
+                return voices[i];
+              }
+            }
+          }
+          for (var j = 0; j < voices.length; j++) {
+            var l = String(voices[j].lang || '').toLowerCase();
+            if (l.indexOf('en') === 0 || l.indexOf('en-') === 0) return voices[j];
+          }
+          return null;
+        }
+
         async function speak(text) {
           var phrase = String(text || '').trim();
           if (!phrase) return;
+          if (preferStableEnglishVoice && canSpeak) {
+            try {
+              window.speechSynthesis.cancel();
+              var fast = new SpeechSynthesisUtterance(phrase);
+              if (!preferredBrowserVoice) preferredBrowserVoice = pickPreferredVoice();
+              if (preferredBrowserVoice) fast.voice = preferredBrowserVoice;
+              fast.lang = preferredBrowserVoice && preferredBrowserVoice.lang ? preferredBrowserVoice.lang : 'en-US';
+              fast.rate = 0.94;
+              fast.pitch = 1.02;
+              fast.onstart = function () { meta.textContent = 'LYNE is speaking...'; };
+              fast.onend = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
+              fast.onerror = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
+              window.speechSynthesis.speak(fast);
+              return;
+            } catch (_err) {
+              // continue to neural path below
+            }
+          }
           try {
             var ttsRes = await fetch('/api/tts', {
               method: 'POST',
@@ -472,16 +513,9 @@
           try {
             window.speechSynthesis.cancel();
             var u = new SpeechSynthesisUtterance(phrase);
-            var voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
-            var preferred = null;
-            for (var i = 0; i < voices.length; i++) {
-              var name = String(voices[i].name || '').toLowerCase();
-              if (name.indexOf('google us english') !== -1 || name.indexOf('natural') !== -1 || name.indexOf('samantha') !== -1) {
-                preferred = voices[i];
-                break;
-              }
-            }
-            if (preferred) u.voice = preferred;
+            if (!preferredBrowserVoice) preferredBrowserVoice = pickPreferredVoice();
+            if (preferredBrowserVoice) u.voice = preferredBrowserVoice;
+            u.lang = preferredBrowserVoice && preferredBrowserVoice.lang ? preferredBrowserVoice.lang : 'en-US';
             u.rate = 0.96;
             u.pitch = 1.0;
             u.onstart = function () { meta.textContent = 'LYNE is speaking...'; };
@@ -550,6 +584,12 @@
         }
 
         if (canListen) {
+          if (window.speechSynthesis && 'onvoiceschanged' in window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = function () {
+              preferredBrowserVoice = pickPreferredVoice();
+            };
+          }
+          preferredBrowserVoice = pickPreferredVoice();
           recognition = new SpeechRecognition();
           recognition.lang = 'en-US';
           recognition.interimResults = false;
