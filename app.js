@@ -318,8 +318,8 @@
       const pushSupported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
       if (!pushSupported) return 'Not supported'
       if (Notification.permission === 'granted') return 'Enabled'
-      const stored = localStorage.getItem(PUSH_ENABLED_KEY) === '1'
-      return stored ? 'Enabled' : 'Available'
+      if (Notification.permission === 'denied') return 'Blocked'
+      return 'Available'
     }
 
     function updateStatsUI() {
@@ -759,13 +759,14 @@
   {
     const canUsePush = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
     const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
-    const pushAlreadyEnabled = (function () {
+    const pushAlreadyEnabled = Notification.permission === 'granted'
+    if (Notification.permission !== 'granted') {
       try {
-        return Notification.permission === 'granted' || localStorage.getItem(PUSH_ENABLED_KEY) === '1'
+        localStorage.removeItem(PUSH_ENABLED_KEY)
       } catch (err) {
-        return Notification.permission === 'granted'
+        // ignore storage errors
       }
-    })()
+    }
     if (pushAlreadyEnabled) {
       try {
         localStorage.setItem(PUSH_ENABLED_KEY, '1')
@@ -999,6 +1000,9 @@
         if (enableBtn) enableBtn.disabled = true
         setStatus('Push notifications are not supported in this browser.', true)
       } else {
+        if (Notification.permission === 'denied') {
+          setStatus('Notifications are blocked in browser settings. Enable them in site permissions first.', true)
+        }
         enableBtn.addEventListener('click', async function () {
           try {
             if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
@@ -1007,6 +1011,12 @@
             }
             const permission = await Notification.requestPermission()
             if (permission !== 'granted') {
+              try {
+                localStorage.removeItem(PUSH_ENABLED_KEY)
+              } catch (err) {
+                // ignore storage errors
+              }
+              document.dispatchEvent(new Event('sc:push-state-changed'))
               setStatus('Permission denied.', true)
               return
             }
