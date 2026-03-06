@@ -298,17 +298,15 @@ module.exports = async (req, res) => {
   }
 
   const forcedPersonaModel = String(process.env.PERSONAPLEX_MODEL || '').trim()
+  const forcedDeepSeekModel = String(process.env.DEEPSEEK_MODEL || '').trim()
   const sourceModel = String(source.model || '').trim()
-  const requestedModel = String(
-    forcedPersonaModel ||
-      (deepSeekEnabled
-        ? normalizeDeepSeekModelName(
-            sourceModel && sourceModel.toLowerCase().indexOf('deepseek') !== -1
-              ? sourceModel
-              : String(process.env.DEEPSEEK_MODEL || DEFAULT_DEEPSEEK_MODEL)
-          )
-        : sourceModel || process.env.FREE_LLM_MODEL || 'nvidia/personaplex-7b-v1')
-  )
+  const requestedModel = deepSeekEnabled
+    ? normalizeDeepSeekModelName(
+        sourceModel && sourceModel.toLowerCase().indexOf('deepseek') !== -1
+          ? sourceModel
+          : forcedDeepSeekModel || DEFAULT_DEEPSEEK_MODEL
+      )
+    : String(forcedPersonaModel || sourceModel || process.env.FREE_LLM_MODEL || 'nvidia/personaplex-7b-v1')
   const allowPersonaPlex = String(process.env.ALLOW_PERSONAPLEX || '').trim() === '1'
   const model =
     !allowPersonaPlex && requestedModel.toLowerCase().indexOf('nvidia/personaplex-7b-v1') !== -1
@@ -320,16 +318,12 @@ module.exports = async (req, res) => {
       : process.env.PERSONAPLEX_BASE_URL || process.env.FREE_LLM_BASE_URL,
     deepSeekEnabled ? DEFAULT_DEEPSEEK_BASE_URL : 'https://router.huggingface.co/v1'
   )
-  const chatUrl =
-    (deepSeekEnabled ? process.env.DEEPSEEK_CHAT_URL : '') ||
-    process.env.PERSONAPLEX_CHAT_URL ||
-    process.env.FREE_LLM_CHAT_URL ||
-    baseUrl + '/chat/completions'
-  const completionUrl =
-    (deepSeekEnabled ? process.env.DEEPSEEK_COMPLETIONS_URL : '') ||
-    process.env.PERSONAPLEX_COMPLETIONS_URL ||
-    process.env.FREE_LLM_COMPLETIONS_URL ||
-    baseUrl + '/completions'
+  const chatUrl = deepSeekEnabled
+    ? String(process.env.DEEPSEEK_CHAT_URL || '').trim() || baseUrl + '/chat/completions'
+    : process.env.PERSONAPLEX_CHAT_URL || process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
+  const completionUrl = deepSeekEnabled
+    ? String(process.env.DEEPSEEK_COMPLETIONS_URL || '').trim() || baseUrl + '/completions'
+    : process.env.PERSONAPLEX_COMPLETIONS_URL || process.env.FREE_LLM_COMPLETIONS_URL || baseUrl + '/completions'
   const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
   const temperature = typeof source.temperature === 'number' ? source.temperature : 0.68
   const useDirectHfInference =
