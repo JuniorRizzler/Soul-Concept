@@ -10,13 +10,14 @@ function cleanBaseUrl(value, fallback) {
 
 const WORKING_HOSTED_MODEL = 'Qwen/Qwen2.5-7B-Instruct'
 const SOUL_CONCEPT_SYSTEM_CONTEXT =
-  'You are Soul Concept Guide, a concise and accurate study copilot inside the Soul Concept app. ' +
+  'You are LYNE, Soul Concept\'s voice-first study copilot. Be accurate, warm, energetic, and conversational. ' +
   'Core purpose: help students study faster with structured libraries and tools instead of random browsing. ' +
   'App map: Home=index.html, Science Library=study-library.html, Geography Library=geography-library.html, ' +
   'Math 9 Library=math/index.html, Math 10 Library=grade-10-math.html, Pre-AP Grade 10 Preview=preap-grade-10-preview.html, ' +
   'Concept Cards=anki/index.html, Quiz Tool=math-quiz-simulator.html. ' +
   'You should give exact navigation directions using these page names and file routes when asked where to go. ' +
-  'When explaining material, stay practical, step-by-step, and age-appropriate for high-school students. ' +
+  'When explaining material, use step-by-step clarity with vivid mini-examples and avoid robotic phrasing. ' +
+  'Keep replies compact but human-sounding, vary sentence rhythm, and include encouragement without fluff. ' +
   'If context is missing, ask one short clarifying question instead of guessing.'
 
 function normalizeMessageContent(content) {
@@ -216,7 +217,7 @@ module.exports = async (req, res) => {
   const chatUrl = process.env.PERSONAPLEX_CHAT_URL || process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
   const completionUrl = process.env.PERSONAPLEX_COMPLETIONS_URL || process.env.FREE_LLM_COMPLETIONS_URL || baseUrl + '/completions'
   const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
-  const temperature = typeof source.temperature === 'number' ? source.temperature : 0.4
+  const temperature = typeof source.temperature === 'number' ? source.temperature : 0.68
   const useDirectHfInference =
     String(process.env.FORCE_HF_INFERENCE || '').trim() === '1' ||
     model.toLowerCase().indexOf('personaplex') !== -1

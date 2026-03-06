@@ -26,6 +26,32 @@ function shapeNaturalPacing(input) {
   return text
 }
 
+function parseVoiceCandidates(source) {
+  var candidates = []
+  var primary = String(source.voice_id || process.env.ELEVENLABS_VOICE_ID || '').trim()
+  if (primary) candidates.push(primary)
+
+  var envList = String(process.env.ELEVENLABS_VOICE_IDS || '').trim()
+  if (envList) {
+    envList.split(',').forEach(function (id) {
+      var v = String(id || '').trim()
+      if (v) candidates.push(v)
+    })
+  }
+
+  // High-quality fallback voices commonly available in ElevenLabs.
+  candidates.push('21m00Tcm4TlvDq8ikWAM') // Rachel
+  candidates.push('EXAVITQu4vr4xnSDxMaL') // Bella
+  candidates.push('pNInz6obpgDQGcFmaJgB') // Adam
+
+  var seen = {}
+  return candidates.filter(function (id) {
+    if (seen[id]) return false
+    seen[id] = true
+    return true
+  })
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -59,52 +85,52 @@ module.exports = async (req, res) => {
     return
   }
 
-  const voiceId = String(
-    source.voice_id ||
-      process.env.ELEVENLABS_VOICE_ID ||
-      '21m00Tcm4TlvDq8ikWAM'
-  ).trim()
+  const voiceCandidates = parseVoiceCandidates(source)
   const modelId = String(
     source.model_id ||
       process.env.ELEVENLABS_MODEL_ID ||
-      'eleven_multilingual_v2'
+      'eleven_turbo_v2_5'
   ).trim()
 
-  const endpoint = 'https://api.elevenlabs.io/v1/text-to-speech/' + encodeURIComponent(voiceId)
-
   try {
-    const upstream = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'xi-api-key': apiKey,
-        'Content-Type': 'application/json',
-        Accept: 'audio/mpeg',
-      },
-      body: JSON.stringify({
-        text: text,
-        model_id: modelId,
-        output_format: String(process.env.ELEVENLABS_OUTPUT_FORMAT || 'mp3_44100_128'),
-        voice_settings: {
-          stability: typeof source.stability === 'number' ? source.stability : 0.32,
-          similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.92,
-          style: typeof source.style === 'number' ? source.style : 0.4,
-          use_speaker_boost: true,
+    var lastError = ''
+    for (var i = 0; i < voiceCandidates.length; i++) {
+      var voiceId = voiceCandidates[i]
+      var endpoint = 'https://api.elevenlabs.io/v1/text-to-speech/' + encodeURIComponent(voiceId)
+      var upstream = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'xi-api-key': apiKey,
+          'Content-Type': 'application/json',
+          Accept: 'audio/mpeg',
         },
-      }),
-    })
+        body: JSON.stringify({
+          text: text,
+          model_id: modelId,
+          output_format: String(process.env.ELEVENLABS_OUTPUT_FORMAT || 'mp3_44100_192'),
+          voice_settings: {
+            stability: typeof source.stability === 'number' ? source.stability : 0.28,
+            similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.96,
+            style: typeof source.style === 'number' ? source.style : 0.48,
+            use_speaker_boost: true,
+          },
+        }),
+      })
 
-    if (!upstream.ok) {
-      const raw = await upstream.text()
-      json(res, upstream.status, { error: raw || 'TTS upstream error.' })
+      if (!upstream.ok) {
+        lastError = await upstream.text()
+        continue
+      }
+
+      const arr = await upstream.arrayBuffer()
+      const buffer = Buffer.from(arr)
+      res.status(200)
+      res.setHeader('Content-Type', 'audio/mpeg')
+      res.setHeader('Cache-Control', 'no-store')
+      res.send(buffer)
       return
     }
-
-    const arr = await upstream.arrayBuffer()
-    const buffer = Buffer.from(arr)
-    res.status(200)
-    res.setHeader('Content-Type', 'audio/mpeg')
-    res.setHeader('Cache-Control', 'no-store')
-    res.send(buffer)
+    json(res, 502, { error: lastError || 'TTS upstream error.' })
   } catch (err) {
     json(res, 500, { error: err && err.message ? err.message : 'TTS request failed.' })
   }
