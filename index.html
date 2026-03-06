@@ -534,6 +534,13 @@
           ) {
             return localFallbackReply(userPrompt || '');
           }
+          if (
+            lower.indexOf('ask me any topic and i will explain') !== -1 ||
+            lower.indexOf('go to science at study-library') !== -1 ||
+            lower.indexOf('tell me your subject and i will pick one') !== -1
+          ) {
+            return localFallbackReply(userPrompt || '');
+          }
           if (compactText(raw) === compactText(DEFAULT_STILL_HERE)) {
             return localFallbackReply(userPrompt || '');
           }
@@ -636,7 +643,7 @@
           if (q.indexOf('explain') !== -1 || q.indexOf('what is') !== -1 || q.indexOf('how do i') !== -1 || q.indexOf('help me') !== -1) {
             return 'Absolutely. Say the concept and grade, and I will explain it in plain language with one quick example.';
           }
-          if (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('library') !== -1) {
+          if (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('library') !== -1 || q.indexOf('open') !== -1 || q.indexOf('which page') !== -1) {
             return 'Go to Science at study-library.html, Geography at geography-library.html, Math 9 at math/index.html, and Math 10 at grade-10-math.html. Tell me your subject and I will pick one.';
           }
           if (q.indexOf('why') !== -1 && q.indexOf('soul concept') !== -1) {
@@ -646,9 +653,9 @@
             return 'For math, open grade-10-math.html for Grade 10 content or math/index.html for Grade 9. I can walk you through linear equations step by step.';
           }
           var options = [
-            'Ask me any topic and I will explain it in clear steps with an example.',
-            'Tell me the subject and unit, and I will guide you to the exact page and what to study first.',
-            'I can help right now. Say a concept like trigonometry, linear equations, or geography mapping skills.'
+            'I can explain that directly. Tell me the exact concept or question.',
+            'Give me one question and I will answer it with short clear steps.',
+            'Tell me the topic and grade level, and I will break it down simply.'
           ];
           var pick = options[fallbackCycle % options.length];
           fallbackCycle += 1;
@@ -711,30 +718,42 @@
           setChat('You: ' + prompt + '\n\nLYNE: ...');
           messages.push({ role: 'user', content: prompt });
           try {
-            var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-            var timeout = null;
-            if (controller) {
-              timeout = window.setTimeout(function () {
-                try { controller.abort(); } catch (_err) {}
-              }, 9000);
+            var reply = '';
+            var lastErr = null;
+            for (var attempt = 0; attempt < 2 && !reply; attempt++) {
+              var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+              var timeout = null;
+              if (controller) {
+                timeout = window.setTimeout(function () {
+                  try { controller.abort(); } catch (_err) {}
+                }, attempt === 0 ? 15000 : 9000);
+              }
+              try {
+                var res = await fetch('/api/ai-chat', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  signal: controller ? controller.signal : undefined,
+                  body: JSON.stringify({
+                    request: {
+                      model: 'Qwen/Qwen2.5-7B-Instruct',
+                      system: 'Answer the latest user question directly. Avoid repeating prior lines. Only provide navigation when asked where to go.',
+                      messages: messages.slice(-20),
+                      max_tokens: 500,
+                      temperature: 0.58
+                    }
+                  })
+                });
+                if (timeout) window.clearTimeout(timeout);
+                var data = null;
+                try { data = await res.json(); } catch (_err) { data = null; }
+                if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
+                reply = normalizeAssistantText((data && data.text) || '', prompt);
+              } catch (errTry) {
+                if (timeout) window.clearTimeout(timeout);
+                lastErr = errTry;
+              }
             }
-            var res = await fetch('/api/ai-chat', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              signal: controller ? controller.signal : undefined,
-              body: JSON.stringify({
-                request: {
-                  model: 'Qwen/Qwen2.5-7B-Instruct',
-                  messages: messages.slice(-20),
-                  max_tokens: 500,
-                  temperature: 0.68
-                }
-              })
-            });
-            if (timeout) window.clearTimeout(timeout);
-            var data = await res.json();
-            if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
-            var reply = normalizeAssistantText((data && data.text) || '', prompt);
+            if (!reply) throw (lastErr || new Error('Request failed.'));
             lastAssistantText = reply;
             messages.push({ role: 'assistant', content: reply });
             setChat('You: ' + prompt + '\n\nLYNE: ' + reply);

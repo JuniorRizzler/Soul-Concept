@@ -540,6 +540,9 @@
       return (
         t.indexOf("i am still here ask me where to go") !== -1 ||
         t.indexOf("ask me where to go in the app") !== -1 ||
+        t.indexOf("ask me any topic and i will explain") !== -1 ||
+        t.indexOf("go to science at study library html") !== -1 ||
+        t.indexOf("tell me your subject and i will pick one") !== -1 ||
         t.indexOf("i hit an error") !== -1 ||
         t.indexOf("an error occurred") !== -1 ||
         t.indexOf("something went wrong") !== -1 ||
