@@ -18,6 +18,7 @@ const SOUL_CONCEPT_SYSTEM_CONTEXT =
   'You should give exact navigation directions using these page names and file routes when asked where to go. ' +
   'When explaining material, use step-by-step clarity with vivid mini-examples and avoid robotic phrasing. ' +
   'Keep replies compact but human-sounding, vary sentence rhythm, and include encouragement without fluff. ' +
+  'Do not repeat stock lines across turns; respond directly to the latest user question in natural conversational English. ' +
   'If context is missing, ask one short clarifying question instead of guessing.'
 
 function normalizeMessageContent(content) {

@@ -442,9 +442,49 @@
         var fallbackCycle = 0;
         var DEFAULT_STILL_HERE =
           'I am still here. Ask me where to go in the app, what to study next, or what concept you want explained.';
+        var captureFinalText = '';
+        var captureInterimText = '';
+        var captureTimer = null;
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
+        }
+
+        function clearCaptureTimer() {
+          if (captureTimer) {
+            window.clearTimeout(captureTimer);
+            captureTimer = null;
+          }
+        }
+
+        async function flushCapturedSpeech() {
+          clearCaptureTimer();
+          var transcript = (captureFinalText + ' ' + captureInterimText).replace(/\s+/g, ' ').trim();
+          captureFinalText = '';
+          captureInterimText = '';
+          if (!transcript) return;
+          if (looksLikeEcho(transcript)) {
+            meta.textContent = active ? 'Listening...' : 'Idle.';
+            return;
+          }
+          if (speaking) {
+            try {
+              if (window.speechSynthesis && window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+              }
+            } catch (_err) {}
+            speaking = false;
+            nextListenAt = Date.now() + 120;
+            meta.textContent = 'Interrupted. Listening...';
+          }
+          await askLyne(transcript);
+        }
+
+        function scheduleCaptureFlush(delayMs) {
+          clearCaptureTimer();
+          captureTimer = window.setTimeout(function () {
+            flushCapturedSpeech();
+          }, delayMs);
         }
 
         function pickPreferredVoice() {
@@ -597,16 +637,15 @@
             return;
           }
           if (speaking) {
-            if (!forceInterrupt) return;
-            pendingListen = true;
-            try {
-              if (window.speechSynthesis && window.speechSynthesis.speaking) {
-                window.speechSynthesis.cancel();
-              }
-            } catch (_err) {}
-            speaking = false;
-            window.setTimeout(startListening, 120);
-            return;
+            if (forceInterrupt) {
+              pendingListen = true;
+              try {
+                if (window.speechSynthesis && window.speechSynthesis.speaking) {
+                  window.speechSynthesis.cancel();
+                }
+              } catch (_err) {}
+              speaking = false;
+            }
           }
           try { recognition.start(); } catch (_err) {}
         }
@@ -614,6 +653,10 @@
         async function askLyne(userText) {
           var prompt = String(userText || '').trim();
           if (!prompt) return;
+          if (waiting) {
+            meta.textContent = 'One second, still finishing the previous response...';
+            return;
+          }
           if (looksLikeEcho(prompt)) {
             meta.textContent = active ? 'Listening...' : 'Idle.';
             return;
@@ -681,23 +724,40 @@
           preferredBrowserVoice = pickPreferredVoice();
           recognition = new SpeechRecognition();
           recognition.lang = 'en-US';
-          recognition.interimResults = false;
-          recognition.continuous = false;
+          recognition.interimResults = true;
+          recognition.continuous = true;
           recognition.maxAlternatives = 1;
           recognition.onstart = function () {
             listening = true;
-            meta.textContent = 'Listening...';
+            meta.textContent = speaking ? 'Listening for interruption...' : 'Listening...';
           };
           recognition.onresult = function (event) {
-            var transcript = '';
+            var latest = '';
             for (var i = event.resultIndex; i < event.results.length; i++) {
-              transcript += event.results[i][0].transcript || '';
+              var chunk = String((event.results[i] && event.results[i][0] && event.results[i][0].transcript) || '').trim();
+              if (!chunk) continue;
+              latest = chunk;
+              if (event.results[i].isFinal) {
+                captureFinalText = (captureFinalText ? captureFinalText + ' ' : '') + chunk;
+                captureInterimText = '';
+                meta.textContent = 'Heard: ' + captureFinalText;
+                scheduleCaptureFlush(380);
+              } else {
+                captureInterimText = chunk;
+                var liveText = (captureFinalText ? captureFinalText + ' ' : '') + captureInterimText;
+                meta.textContent = 'Hearing: ' + liveText.trim();
+                scheduleCaptureFlush(900);
+              }
             }
-            transcript = String(transcript || '').trim();
-            if (!transcript) return;
-            meta.textContent = 'Heard: ' + transcript;
-            listening = false;
-            askLyne(transcript);
+            if (speaking && latest.length > 6 && !looksLikeEcho(latest)) {
+              try {
+                if (window.speechSynthesis && window.speechSynthesis.speaking) {
+                  window.speechSynthesis.cancel();
+                }
+              } catch (_err) {}
+              speaking = false;
+              meta.textContent = 'Interrupted. Go ahead...';
+            }
           };
           recognition.onerror = function (event) {
             listening = false;
@@ -708,7 +768,7 @@
               return;
             }
             if (code === 'no-speech') {
-              meta.textContent = active ? 'No speech detected. Try speaking louder.' : 'Idle.';
+              meta.textContent = active ? 'Listening...' : 'Idle.';
             } else if (code === 'audio-capture') {
               meta.textContent = 'No microphone detected.';
             } else {
@@ -735,6 +795,9 @@
         stopBtn.addEventListener('click', function () {
           active = false;
           pendingListen = false;
+          clearCaptureTimer();
+          captureFinalText = '';
+          captureInterimText = '';
           if (recognition && listening) {
             try { recognition.stop(); } catch (_err) {}
           }
