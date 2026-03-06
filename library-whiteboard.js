@@ -47,17 +47,17 @@
 
     var style = document.createElement("style");
     style.textContent = [
-    ".lib-anno-toolbar{position:fixed;right:12px;bottom:12px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:7px 8px;border-radius:12px;background:linear-gradient(135deg,rgba(30,24,17,.9),rgba(52,38,24,.88));backdrop-filter:blur(12px);border:1px solid rgba(228,199,160,.24);box-shadow:0 10px 24px rgba(20,12,7,.36)}",
-    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(207,167,118,.34);background:rgba(250,240,225,.96);color:#2d2015;border-radius:8px;padding:5px 7px;font:700 10px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
+    ".lib-anno-toolbar{position:fixed;right:10px;bottom:10px;z-index:2147483646;display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:4px 5px;border-radius:10px;background:linear-gradient(135deg,rgba(30,24,17,.88),rgba(52,38,24,.86));backdrop-filter:blur(10px);border:1px solid rgba(228,199,160,.2);box-shadow:0 8px 18px rgba(20,12,7,.34)}",
+    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(207,167,118,.34);background:rgba(250,240,225,.96);color:#2d2015;border-radius:7px;padding:4px 6px;font:700 9px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
     ".lib-anno-toolbar .lib-anno-btn:hover{transform:translateY(-1px)}",
     ".lib-anno-toolbar .lib-anno-btn.active{background:#f5d4a2;border-color:#d59644;color:#6b3a08}",
-    ".lib-anno-toolbar .lib-anno-scope{color:#f5e7d3;font:700 10px/1 Arial,sans-serif;max-width:132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 1px;opacity:.95}",
+    ".lib-anno-toolbar .lib-anno-scope{color:#f5e7d3;font:700 9px/1 Arial,sans-serif;max-width:92px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 1px;opacity:.95}",
     ".lib-anno-color-row{display:flex;align-items:center;gap:4px}",
-    ".lib-anno-swatch{width:18px;height:18px;border-radius:999px;border:2px solid rgba(255,255,255,.25);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3)}",
+    ".lib-anno-swatch{width:14px;height:14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.3)}",
     ".lib-anno-swatch.active{outline:2px solid #fff;outline-offset:1px}",
-    ".lib-anno-toolbar input[type='range']{width:64px;padding:0}",
-    ".lib-anno-toolbar input[type='color']{padding:0;width:28px;height:24px}",
-    ".lib-anno-toolbar.minimized{padding:6px 7px;gap:5px}",
+    ".lib-anno-toolbar input[type='range']{width:44px;padding:0}",
+    ".lib-anno-toolbar input[type='color']{padding:0;width:22px;height:18px}",
+    ".lib-anno-toolbar.minimized{padding:4px 5px;gap:4px}",
     ".lib-anno-toolbar.minimized .lib-anno-hide-when-min{display:none}",
     ".lib-anno-layer{position:absolute;left:0;top:0;z-index:2147483645;pointer-events:none;touch-action:none;cursor:crosshair}",
     ".lib-voice-layer{position:absolute;left:0;top:0;z-index:2147483644;pointer-events:none}",
@@ -69,14 +69,16 @@
     ".lib-voice-card-title{font:700 11px/1 Arial,sans-serif;opacity:.92}",
     ".lib-voice-card-actions{display:flex;gap:6px}",
     ".lib-voice-card-btn{border:1px solid rgba(207,167,118,.4);background:rgba(250,240,225,.96);color:#2d2015;border-radius:7px;padding:4px 6px;font:700 10px/1 Arial,sans-serif;cursor:pointer}",
-    ".lib-lyne-shell{position:fixed;right:12px;bottom:64px;z-index:2147483646;width:min(280px,86vw);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(247,241,232,.97));border:1px solid rgba(207,167,118,.38);border-radius:14px;box-shadow:0 14px 28px rgba(20,12,7,.25);padding:10px;display:grid;gap:8px}",
+    ".lib-lyne-shell{position:fixed;right:10px;bottom:52px;z-index:2147483646;width:min(250px,82vw);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(247,241,232,.97));border:1px solid rgba(207,167,118,.38);border-radius:12px;box-shadow:0 12px 24px rgba(20,12,7,.24);padding:8px;display:grid;gap:6px}",
     ".lib-lyne-head{display:flex;align-items:center;justify-content:space-between;gap:8px}",
-    ".lib-lyne-title{font:800 12px/1 Arial,sans-serif;color:#2f2014;letter-spacing:.03em}",
+    ".lib-lyne-title{font:800 11px/1 Arial,sans-serif;color:#2f2014;letter-spacing:.03em}",
     ".lib-lyne-meta{margin:0;font:700 10px/1.3 Arial,sans-serif;color:#6b543f;min-height:13px}",
-    ".lib-lyne-chat{margin:0;background:#fff;border:1px solid rgba(214,181,143,.4);border-radius:10px;padding:8px;white-space:pre-wrap;min-height:52px;max-height:120px;overflow:auto;font:600 11px/1.35 Arial,sans-serif;color:#2d2015}",
+    ".lib-lyne-chat{margin:0;background:#fff;border:1px solid rgba(214,181,143,.4);border-radius:8px;padding:7px;white-space:pre-wrap;min-height:46px;max-height:110px;overflow:auto;font:600 10px/1.35 Arial,sans-serif;color:#2d2015}",
     ".lib-lyne-actions{display:flex;gap:6px;flex-wrap:wrap}",
-    ".lib-lyne-btn{border:1px solid rgba(207,167,118,.48);background:#fff;color:#2d2015;border-radius:8px;padding:5px 8px;font:800 10px/1 Arial,sans-serif;cursor:pointer}",
+    ".lib-lyne-btn{border:1px solid rgba(207,167,118,.48);background:#fff;color:#2d2015;border-radius:7px;padding:4px 7px;font:800 9px/1 Arial,sans-serif;cursor:pointer}",
     ".lib-lyne-btn.primary{background:linear-gradient(135deg,#f6d3a2,#d59644);border-color:#cc8b3d;color:#40240d}",
+    ".lib-lyne-shell.minimized{width:132px;gap:4px;padding:6px}",
+    ".lib-lyne-shell.minimized .lib-lyne-chat,.lib-lyne-shell.minimized .lib-lyne-actions{display:none}",
     ".lib-ai-pet-shell{position:fixed;left:calc(100vw - 92px);top:112px;z-index:2147483646;display:grid;gap:6px;touch-action:none;user-select:none}",
     ".lib-ai-pet-shell.dashing .lib-ai-pet{box-shadow:0 14px 24px rgba(20,12,7,.35),0 0 0 2px rgba(228,199,160,.4)}",
     ".lib-ai-pet{width:56px;height:56px;border-radius:18px;border:1px solid rgba(229,194,151,.48);background:linear-gradient(150deg,#ffe8c9,#f2bf78 55%,#c57a27);position:relative;display:flex;align-items:center;justify-content:center;cursor:grab;box-shadow:0 10px 20px rgba(20,12,7,.32);overflow:visible}",
@@ -96,7 +98,7 @@
     ".lib-ai-pet-btn.active{background:#f3c682;color:#42250c;border-color:#d89a4b}",
     ".lib-ai-pet-say{max-width:170px;background:rgba(30,24,17,.95);color:#f6ead9;border:1px solid rgba(228,199,160,.34);border-radius:10px;padding:6px 8px;font:700 10px/1.25 Arial,sans-serif;box-shadow:0 8px 18px rgba(20,12,7,.3)}",
     "@keyframes lib-pet-bob{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-2px) rotate(-1deg)}100%{transform:translateY(0) rotate(0deg)}}",
-    "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:120px}}"
+    "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:88px}.lib-lyne-shell{right:8px;bottom:48px}}"
   ].join("");
     document.head.appendChild(style);
 
@@ -477,7 +479,7 @@
     shell.className = "lib-lyne-shell";
     shell.id = "lib-lyne-widget";
     shell.innerHTML = [
-      '<div class="lib-lyne-head"><span class="lib-lyne-title">LYNE</span><span class="lib-lyne-meta" id="lib-lyne-meta">Idle.</span></div>',
+      '<div class="lib-lyne-head"><span class="lib-lyne-title">LYNE</span><button type="button" class="lib-lyne-btn" id="lib-lyne-min" aria-label="Minimize LYNE">-</button><span class="lib-lyne-meta" id="lib-lyne-meta">Idle.</span></div>',
       '<pre class="lib-lyne-chat" id="lib-lyne-chat">LYNE: Ready when you are.</pre>',
       '<div class="lib-lyne-actions">',
       '<button type="button" class="lib-lyne-btn primary" id="lib-lyne-start">Start</button>',
@@ -488,9 +490,10 @@
 
     var startBtn = document.getElementById("lib-lyne-start");
     var stopBtn = document.getElementById("lib-lyne-stop");
+    var minBtn = document.getElementById("lib-lyne-min");
     var meta = document.getElementById("lib-lyne-meta");
     var chat = document.getElementById("lib-lyne-chat");
-    if (!startBtn || !stopBtn || !meta || !chat) return;
+    if (!startBtn || !stopBtn || !minBtn || !meta || !chat) return;
 
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (typeof SpeechRecognition !== "function") {
@@ -513,6 +516,14 @@
     var inFlightPromptKey = "";
     var lastPromptKey = "";
     var messages = [];
+    var lyneMinKey = "lib-lyne:minimized";
+
+    function setLyneMinimized(next) {
+      shell.classList.toggle("minimized", !!next);
+      minBtn.textContent = next ? "+" : "-";
+      minBtn.setAttribute("aria-label", next ? "Expand LYNE" : "Minimize LYNE");
+      try { localStorage.setItem(lyneMinKey, next ? "1" : "0"); } catch (err) {}
+    }
 
     function setChat(text) {
       chat.textContent = String(text || "").trim() || "LYNE: Ready when you are.";
@@ -736,6 +747,15 @@
       speaking = false;
       meta.textContent = "Conversation stopped.";
     });
+    minBtn.addEventListener("click", function () {
+      setLyneMinimized(!shell.classList.contains("minimized"));
+    });
+
+    try {
+      setLyneMinimized(localStorage.getItem(lyneMinKey) === "1");
+    } catch (err) {
+      setLyneMinimized(false);
+    }
 
     window.setTimeout(function () {
       var greeting = "Hey, welcome to this library. I am LYNE. Ask me anything from this page.";
@@ -1294,9 +1314,9 @@
     return { x: event.pageX, y: event.pageY };
   }
 
-    function isOverlayUiTarget(target) {
+  function isOverlayUiTarget(target) {
     if (!target || !target.closest) return false;
-    return !!target.closest(".lib-anno-toolbar, .lib-voice-layer, .lib-ai-pet-shell");
+    return !!target.closest(".lib-anno-toolbar, .lib-voice-layer, .lib-ai-pet-shell, .lib-lyne-shell");
   }
 
     function canStartStroke(event) {
@@ -1480,10 +1500,11 @@
     setScopeLabel();
     try {
       setColor(localStorage.getItem(prefColorKey) || "#e11d48");
-      setMinimized(localStorage.getItem(prefMinKey) === "1");
+      var storedMin = localStorage.getItem(prefMinKey);
+      setMinimized(storedMin === null ? true : storedMin === "1");
     } catch (err) {
       setColor("#e11d48");
-      setMinimized(false);
+      setMinimized(true);
     }
     setDrawingEnabled(false);
     setEraseMode(false);
