@@ -509,6 +509,9 @@
     var lastAssistantText = "";
     var lastUserText = "";
     var lastUserAt = 0;
+    var fallbackCycle = 0;
+    var inFlightPromptKey = "";
+    var lastPromptKey = "";
     var messages = [];
 
     function setChat(text) {
@@ -531,11 +534,48 @@
       );
     }
 
+    function isLowValueReply(text) {
+      var t = compactText(text);
+      if (!t) return true;
+      return (
+        t.indexOf("i am still here ask me where to go") !== -1 ||
+        t.indexOf("ask me where to go in the app") !== -1 ||
+        t.indexOf("i hit an error") !== -1 ||
+        t.indexOf("an error occurred") !== -1 ||
+        t.indexOf("something went wrong") !== -1 ||
+        t.indexOf("tell me your subject and topic") !== -1
+      );
+    }
+
     function fallbackReply(prompt) {
       var q = String(prompt || "").toLowerCase();
-      if (q.indexOf("trig") !== -1) return "Trig quick guide: identify opposite, adjacent, hypotenuse, then use SOH-CAH-TOA.";
-      if (q.indexOf("where") !== -1 || q.indexOf("go") !== -1) return "I can guide you by section. Tell me your subject and topic.";
-      return "Tell me the concept and I will explain it in short clear steps.";
+      if (q.indexOf("trig") !== -1 || q.indexOf("sin") !== -1 || q.indexOf("cos") !== -1 || q.indexOf("tan") !== -1) {
+        return "Trigonometry in plain steps: 1) Label opposite, adjacent, hypotenuse. 2) Use SOH-CAH-TOA. 3) Substitute values and solve. Share one question and I will solve it with you.";
+      }
+      if (q.indexOf("linear") !== -1 || q.indexOf("equation") !== -1) {
+        return "For linear equations: simplify both sides, isolate x, then check by substitution. Send one equation and I will walk through it step by step.";
+      }
+      if (q.indexOf("where") !== -1 || q.indexOf("go") !== -1 || q.indexOf("section") !== -1 || q.indexOf("library") !== -1) {
+        return "Tell me your subject and unit name, and I will point you to the exact section and what to study first.";
+      }
+      var options = [
+        "I can explain that in short simple steps. Tell me the exact concept name.",
+        "I can help with this right now. Give me the topic and your grade level.",
+        "Ask your exact question and I will answer directly with a quick example."
+      ];
+      var pick = options[fallbackCycle % options.length];
+      fallbackCycle += 1;
+      return pick;
+    }
+
+    function normalizeAssistantText(raw, prompt) {
+      var text = String(raw || "").replace(/\s+/g, " ").trim();
+      if (!text || isLowValueReply(text)) return fallbackReply(prompt);
+      if (text.length > 700) text = text.slice(0, 700).trim();
+      if (compactText(text) === compactText(lastAssistantText) && compactText(prompt) !== lastPromptKey) {
+        return fallbackReply(prompt);
+      }
+      return text;
     }
 
     function speak(text) {
@@ -592,10 +632,15 @@
       return new Promise(async function (resolve) {
         var prompt = String(userText || "").trim();
         if (!prompt || waiting || Date.now() < ignoreMicUntil || looksLikeEcho(prompt)) return resolve();
+        var promptKey = compactText(prompt);
+        if (!promptKey) return resolve();
+        if (promptKey === inFlightPromptKey) return resolve();
         var now = Date.now();
-        if (prompt.toLowerCase() === lastUserText && now - lastUserAt < 3500) return resolve();
-        lastUserText = prompt.toLowerCase();
+        if (promptKey === lastUserText && now - lastUserAt < 3500) return resolve();
+        inFlightPromptKey = promptKey;
+        lastUserText = promptKey;
         lastUserAt = now;
+        lastPromptKey = promptKey;
         waiting = true;
         meta.textContent = "Thinking...";
         setChat("You: " + prompt + "\n\nLYNE: ...");
@@ -607,15 +652,18 @@
             body: JSON.stringify({
               request: {
                 model: "Qwen/Qwen2.5-7B-Instruct",
+                system: "Current library context: " + String(currentSectionName || "general section") + ". Answer the latest user question directly. Avoid repeating previous answers.",
                 messages: messages.slice(-16),
-                max_tokens: 320,
-                temperature: 0.62
+                max_tokens: 420,
+                temperature: 0.52
               }
             })
           });
-          var data = await res.json();
+          var data = null;
+          try { data = await res.json(); } catch (err) { data = null; }
           if (!res.ok) throw new Error((data && data.error) || "Request failed.");
-          var reply = String((data && data.text) || "").trim() || fallbackReply(prompt);
+          var reply = normalizeAssistantText((data && data.text) || "", prompt);
+          if (compactText(reply) === compactText(lastAssistantText)) reply = fallbackReply(prompt);
           lastAssistantText = reply;
           messages.push({ role: "assistant", content: reply });
           setChat("You: " + prompt + "\n\nLYNE: " + reply);
@@ -627,6 +675,7 @@
           await speak(fallback);
         } finally {
           waiting = false;
+          inFlightPromptKey = "";
           if (active) startListening();
           resolve();
         }
