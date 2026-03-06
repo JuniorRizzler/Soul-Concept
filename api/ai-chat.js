@@ -9,6 +9,8 @@ function cleanBaseUrl(value, fallback) {
 }
 
 const WORKING_HOSTED_MODEL = 'Qwen/Qwen2.5-7B-Instruct'
+const DEFAULT_DEEPSEEK_MODEL = 'deepseek-chat'
+const DEFAULT_DEEPSEEK_BASE_URL = 'https://api.deepseek.com/v1'
 const SOUL_CONCEPT_SYSTEM_CONTEXT =
   'You are LYNE, Soul Concept\'s voice-first study copilot. Be accurate, warm, energetic, and conversational. ' +
   'Core purpose: help students study faster with structured libraries and tools instead of random browsing. ' +
@@ -147,6 +149,10 @@ module.exports = async (req, res) => {
   }
 
   const hasPersonaConfig = Boolean(
+    String(process.env.DEEPSEEK_API_KEY || '').trim() ||
+    String(process.env.SCIETLY_API_KEY || '').trim() ||
+    String(process.env.DEEPSEEK_BASE_URL || '').trim() ||
+    String(process.env.DEEPSEEK_MODEL || '').trim() ||
     String(process.env.PERSONAPLEX_API_KEY || '').trim() ||
     String(process.env.HUGGINGFACE_API_KEY || '').trim() ||
     String(process.env.PERSONAPLEX_MODEL || '').trim() ||
@@ -190,24 +196,34 @@ module.exports = async (req, res) => {
   }
 
   // Fallback path: OpenAI-compatible chat endpoint (PersonaPlex supported).
+  const deepSeekApiKey = String(process.env.DEEPSEEK_API_KEY || process.env.SCIETLY_API_KEY || '').trim()
+  const deepSeekEnabled =
+    String(process.env.USE_DEEPSEEK || '').trim() === '1' ||
+    String(process.env.AI_PROVIDER || '').trim().toLowerCase() === 'deepseek' ||
+    !!deepSeekApiKey
+
   const apiKey =
+    deepSeekApiKey ||
     process.env.PERSONAPLEX_API_KEY ||
     process.env.HUGGINGFACE_API_KEY ||
     process.env.FREE_LLM_API_KEY
   if (!apiKey) {
     json(res, 500, {
       error:
-        'Missing AI key. Set PERSONAPLEX_API_KEY (or HUGGINGFACE_API_KEY / FREE_LLM_API_KEY).',
+        'Missing AI key. Set DEEPSEEK_API_KEY (or PERSONAPLEX_API_KEY / HUGGINGFACE_API_KEY / FREE_LLM_API_KEY).',
     })
     return
   }
 
   const forcedPersonaModel = String(process.env.PERSONAPLEX_MODEL || '').trim()
+  const sourceModel = String(source.model || '').trim()
   const requestedModel = String(
     forcedPersonaModel ||
-      source.model ||
-      process.env.FREE_LLM_MODEL ||
-      'nvidia/personaplex-7b-v1'
+      (deepSeekEnabled
+        ? (sourceModel && sourceModel.toLowerCase().indexOf('deepseek') !== -1
+            ? sourceModel
+            : String(process.env.DEEPSEEK_MODEL || DEFAULT_DEEPSEEK_MODEL))
+        : sourceModel || process.env.FREE_LLM_MODEL || 'nvidia/personaplex-7b-v1')
   )
   const allowPersonaPlex = String(process.env.ALLOW_PERSONAPLEX || '').trim() === '1'
   const model =
@@ -215,16 +231,26 @@ module.exports = async (req, res) => {
       ? WORKING_HOSTED_MODEL
       : requestedModel
   const baseUrl = cleanBaseUrl(
-    process.env.PERSONAPLEX_BASE_URL || process.env.FREE_LLM_BASE_URL,
-    'https://router.huggingface.co/v1'
+    deepSeekEnabled
+      ? process.env.DEEPSEEK_BASE_URL || DEFAULT_DEEPSEEK_BASE_URL
+      : process.env.PERSONAPLEX_BASE_URL || process.env.FREE_LLM_BASE_URL,
+    deepSeekEnabled ? DEFAULT_DEEPSEEK_BASE_URL : 'https://router.huggingface.co/v1'
   )
-  const chatUrl = process.env.PERSONAPLEX_CHAT_URL || process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
-  const completionUrl = process.env.PERSONAPLEX_COMPLETIONS_URL || process.env.FREE_LLM_COMPLETIONS_URL || baseUrl + '/completions'
+  const chatUrl =
+    (deepSeekEnabled ? process.env.DEEPSEEK_CHAT_URL : '') ||
+    process.env.PERSONAPLEX_CHAT_URL ||
+    process.env.FREE_LLM_CHAT_URL ||
+    baseUrl + '/chat/completions'
+  const completionUrl =
+    (deepSeekEnabled ? process.env.DEEPSEEK_COMPLETIONS_URL : '') ||
+    process.env.PERSONAPLEX_COMPLETIONS_URL ||
+    process.env.FREE_LLM_COMPLETIONS_URL ||
+    baseUrl + '/completions'
   const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
   const temperature = typeof source.temperature === 'number' ? source.temperature : 0.68
   const useDirectHfInference =
     String(process.env.FORCE_HF_INFERENCE || '').trim() === '1' ||
-    model.toLowerCase().indexOf('personaplex') !== -1
+    (!deepSeekEnabled && model.toLowerCase().indexOf('personaplex') !== -1)
 
   if (useDirectHfInference) {
     try {
