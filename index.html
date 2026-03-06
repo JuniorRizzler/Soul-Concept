@@ -123,6 +123,7 @@
                 <h3 style="margin:0">LYNE</h3>
                 <span style="font-size:.78rem;font-weight:700;color:#215c4b;background:rgba(33,92,75,.1);border:1px solid rgba(33,92,75,.24);padding:3px 8px;border-radius:999px">Voice Assistant</span>
               </div>
+              <p style="margin:0;color:#8a8a8a;font-size:.75rem">LYNE widget build: 2026-03-06-C</p>
               <p style="margin:0;color:#5a5863">Hey, welcome to Soul Concept. I can guide you through libraries, explain material, and help you decide where to go next.</p>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <button id="lyne-start" class="btn btn-primary" type="button">Start Conversation</button>
@@ -547,9 +548,17 @@
           setChat('You: ' + prompt + '\n\nLYNE: ...');
           messages.push({ role: 'user', content: prompt });
           try {
+            var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+            var timeout = null;
+            if (controller) {
+              timeout = window.setTimeout(function () {
+                try { controller.abort(); } catch (_err) {}
+              }, 9000);
+            }
             var res = await fetch('/api/ai-chat', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
+              signal: controller ? controller.signal : undefined,
               body: JSON.stringify({
                 request: {
                   model: 'Qwen/Qwen2.5-7B-Instruct',
@@ -559,6 +568,7 @@
                 }
               })
             });
+            if (timeout) window.clearTimeout(timeout);
             var data = await res.json();
             if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
             var reply = normalizeAssistantText((data && data.text) || '', prompt);
@@ -569,7 +579,7 @@
             var fallback = localFallbackReply(prompt);
             messages.push({ role: 'assistant', content: fallback });
             setChat('You: ' + prompt + '\n\nLYNE: ' + fallback);
-            meta.textContent = 'Using local fallback reply.';
+            meta.textContent = 'Using local fallback reply (network timeout/error).';
             await speak(fallback);
           } finally {
             waiting = false;
