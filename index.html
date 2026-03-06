@@ -128,6 +128,7 @@
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
                 <button id="pp-home-send" class="btn btn-primary" type="button">Test Hosted AI</button>
                 <button id="pp-home-voice" class="btn btn-secondary" type="button">Start Voice</button>
+                <button id="pp-home-open" class="btn btn-secondary" type="button">Open Conversation: Off</button>
                 <button id="pp-home-speak" class="btn btn-secondary" type="button">Speak Last Reply</button>
                 <a class="btn btn-secondary" href="study-library.html">Open Science Library</a>
               </div>
@@ -420,21 +421,29 @@
       (function () {
         var btn = document.getElementById('pp-home-send');
         var voiceBtn = document.getElementById('pp-home-voice');
+        var openBtn = document.getElementById('pp-home-open');
         var speakBtn = document.getElementById('pp-home-speak');
         var input = document.getElementById('pp-home-input');
         var out = document.getElementById('pp-home-out');
         var meta = document.getElementById('pp-home-meta');
-        if (!btn || !voiceBtn || !speakBtn || !input || !out || !meta) return;
+        if (!btn || !voiceBtn || !openBtn || !speakBtn || !input || !out || !meta) return;
+
         var lastReply = '';
         var recognition = null;
         var listening = false;
+        var waitingForReply = false;
+        var openConversation = false;
+        var conversationMessages = [];
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
         var canSpeak = !!window.speechSynthesis;
         var liveAudio = null;
+
         if (!canListen) {
           voiceBtn.disabled = true;
           voiceBtn.textContent = 'Voice N/A';
+          openBtn.disabled = true;
+          openBtn.textContent = 'Open Conversation: N/A';
         }
         if (!canSpeak) {
           speakBtn.disabled = true;
@@ -448,11 +457,7 @@
             var ttsRes = await fetch('/api/tts', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                request: {
-                  text: phrase
-                }
-              })
+              body: JSON.stringify({ request: { text: phrase } }),
             });
             if (ttsRes.ok) {
               var blob = await ttsRes.blob();
@@ -462,39 +467,66 @@
               }
               var url = URL.createObjectURL(blob);
               liveAudio = new Audio(url);
-              liveAudio.onplay = function () {
-                meta.textContent = 'Speaking...';
-              };
-              liveAudio.onended = function () {
-                meta.textContent = 'Done speaking.';
-              };
-              liveAudio.onerror = function () {
-                meta.textContent = 'Could not play neural voice.';
-              };
+              liveAudio.onplay = function () { meta.textContent = 'Speaking...'; };
+              liveAudio.onended = function () { meta.textContent = openConversation ? 'Listening...' : 'Done speaking.'; };
+              liveAudio.onerror = function () { meta.textContent = 'Could not play neural voice.'; };
               await liveAudio.play();
               return;
             }
-          } catch (_err) {
-            // fallback below
-          }
+          } catch (_err) {}
+
           if (!canSpeak) return;
           try {
             window.speechSynthesis.cancel();
             var u = new SpeechSynthesisUtterance(phrase);
             u.rate = 1.0;
             u.pitch = 1.0;
-            u.onstart = function () {
-              meta.textContent = 'Speaking...';
-            };
-            u.onend = function () {
-              meta.textContent = 'Done speaking.';
-            };
-            u.onerror = function () {
-              meta.textContent = 'Could not speak response.';
-            };
+            u.onstart = function () { meta.textContent = 'Speaking...'; };
+            u.onend = function () { meta.textContent = openConversation ? 'Listening...' : 'Done speaking.'; };
+            u.onerror = function () { meta.textContent = 'Could not speak response.'; };
             window.speechSynthesis.speak(u);
           } catch (_err) {
             meta.textContent = 'Could not speak response.';
+          }
+        }
+
+        async function sendPrompt(prompt) {
+          var text = String(prompt || '').trim();
+          if (!text) return;
+          btn.disabled = true;
+          waitingForReply = true;
+          meta.textContent = 'Contacting hosted model...';
+          out.textContent = 'Thinking...';
+          conversationMessages.push({ role: 'user', content: text });
+          try {
+            var res = await fetch('/api/ai-chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                request: {
+                  model: 'Qwen/Qwen2.5-7B-Instruct',
+                  messages: conversationMessages.slice(-20),
+                  max_tokens: 500,
+                  temperature: 0.4,
+                },
+              }),
+            });
+            var data = await res.json();
+            if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
+            lastReply = String((data && data.text) || '').trim() || '(No text returned.)';
+            conversationMessages.push({ role: 'assistant', content: lastReply });
+            out.textContent = lastReply;
+            meta.textContent = 'Connected. Model: ' + String((data && data.model) || 'Qwen/Qwen2.5-7B-Instruct');
+            speakText(lastReply);
+          } catch (err) {
+            out.textContent = 'Error: ' + (err && err.message ? err.message : 'Request failed.');
+            meta.textContent = 'Failed. Check Vercel function logs.';
+          } finally {
+            waitingForReply = false;
+            btn.disabled = false;
+            if (openConversation && recognition && !listening) {
+              try { recognition.start(); } catch (_err) {}
+            }
           }
         }
 
@@ -503,11 +535,13 @@
           recognition.lang = 'en-US';
           recognition.interimResults = true;
           recognition.continuous = false;
+
           recognition.onstart = function () {
             listening = true;
             voiceBtn.textContent = 'Listening...';
-            meta.textContent = 'Listening. Start talking.';
+            meta.textContent = openConversation ? 'Open conversation: listening...' : 'Listening. Start talking.';
           };
+
           recognition.onresult = function (event) {
             var transcript = '';
             for (var i = event.resultIndex; i < event.results.length; i++) {
@@ -515,54 +549,41 @@
             }
             input.value = transcript.trim();
           };
+
           recognition.onerror = function (event) {
             listening = false;
             voiceBtn.textContent = 'Start Voice';
             meta.textContent = 'Voice error: ' + String((event && event.error) || 'unknown');
+            if (openConversation && !waitingForReply) {
+              window.setTimeout(function () {
+                try { recognition.start(); } catch (_err) {}
+              }, 450);
+            }
           };
+
           recognition.onend = function () {
             listening = false;
-            voiceBtn.textContent = 'Start Voice';
-            if (String(input.value || '').trim()) {
+            voiceBtn.textContent = openConversation ? 'Listening...' : 'Start Voice';
+            if (waitingForReply) return;
+            var heard = String(input.value || '').trim();
+            if (heard) {
+              input.value = '';
               meta.textContent = 'Voice captured. Sending...';
-              btn.click();
+              sendPrompt(heard);
+            } else if (openConversation) {
+              meta.textContent = 'Listening...';
+              try { recognition.start(); } catch (_err) {}
             } else if (meta.textContent.indexOf('error') === -1) {
               meta.textContent = 'No speech captured.';
             }
           };
         }
 
-        btn.addEventListener('click', async function () {
+        btn.addEventListener('click', function () {
           var prompt = String(input.value || '').trim();
           if (!prompt) return;
-          btn.disabled = true;
-          meta.textContent = 'Contacting hosted model...';
-          out.textContent = 'Thinking...';
-          try {
-            var res = await fetch('/api/ai-chat', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                request: {
-                  model: 'Qwen/Qwen2.5-7B-Instruct',
-                  messages: [{ role: 'user', content: prompt }],
-                  max_tokens: 500,
-                  temperature: 0.4
-                }
-              })
-            });
-            var data = await res.json();
-            if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
-            lastReply = String((data && data.text) || '').trim() || '(No text returned.)';
-            out.textContent = lastReply;
-            meta.textContent = 'Connected. Model: ' + String((data && data.model) || 'Qwen/Qwen2.5-7B-Instruct');
-            speakText(lastReply);
-          } catch (err) {
-            out.textContent = 'Error: ' + (err && err.message ? err.message : 'Request failed.');
-            meta.textContent = 'Failed. Check Vercel function logs.';
-          } finally {
-            btn.disabled = false;
-          }
+          input.value = '';
+          sendPrompt(prompt);
         });
 
         voiceBtn.addEventListener('click', function () {
@@ -577,6 +598,22 @@
             recognition.start();
           } catch (_err) {
             meta.textContent = 'Could not start microphone.';
+          }
+        });
+
+        openBtn.addEventListener('click', function () {
+          if (!recognition) return;
+          openConversation = !openConversation;
+          openBtn.textContent = 'Open Conversation: ' + (openConversation ? 'On' : 'Off');
+          if (!openConversation) {
+            if (listening) recognition.stop();
+            meta.textContent = 'Open conversation stopped.';
+            return;
+          }
+          meta.textContent = 'Open conversation started.';
+          input.value = '';
+          if (!listening && !waitingForReply) {
+            try { recognition.start(); } catch (_err) {}
           }
         });
 

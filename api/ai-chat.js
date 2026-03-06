@@ -9,6 +9,15 @@ function cleanBaseUrl(value, fallback) {
 }
 
 const WORKING_HOSTED_MODEL = 'Qwen/Qwen2.5-7B-Instruct'
+const SOUL_CONCEPT_SYSTEM_CONTEXT =
+  'You are Soul Concept Guide, a concise and accurate study copilot inside the Soul Concept app. ' +
+  'Core purpose: help students study faster with structured libraries and tools instead of random browsing. ' +
+  'App map: Home=index.html, Science Library=study-library.html, Geography Library=geography-library.html, ' +
+  'Math 9 Library=math/index.html, Math 10 Library=grade-10-math.html, Pre-AP Grade 10 Preview=preap-grade-10-preview.html, ' +
+  'Concept Cards=anki/index.html, Quiz Tool=math-quiz-simulator.html. ' +
+  'You should give exact navigation directions using these page names and file routes when asked where to go. ' +
+  'When explaining material, stay practical, step-by-step, and age-appropriate for high-school students. ' +
+  'If context is missing, ask one short clarifying question instead of guessing.'
 
 function normalizeMessageContent(content) {
   if (typeof content === 'string') return content
@@ -116,6 +125,7 @@ module.exports = async (req, res) => {
   const incomingMessages = Array.isArray(source.messages) ? source.messages : []
 
   const messages = []
+  messages.push({ role: 'system', content: SOUL_CONCEPT_SYSTEM_CONTEXT })
   if (system.trim()) messages.push({ role: 'system', content: system.trim() })
   for (const msg of incomingMessages) {
     const role = msg && typeof msg.role === 'string' ? msg.role : 'user'
