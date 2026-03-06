@@ -11,6 +11,21 @@ function cleanSpeechText(input) {
     .trim()
 }
 
+function shapeNaturalPacing(input) {
+  var text = String(input || '').trim()
+  if (!text) return ''
+
+  // Add phrase pauses after sentence boundaries.
+  text = text.replace(/([.!?])\s+/g, '$1\n')
+
+  // Light pause before common contrast/conclusion connectors.
+  text = text.replace(/\s+(however|therefore|so|but|because|for example|in short)\s+/gi, ', $1, ')
+
+  // Keep speech payload bounded for stable latency/quality.
+  if (text.length > 1800) text = text.slice(0, 1797) + '...'
+  return text
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -32,7 +47,7 @@ module.exports = async (req, res) => {
   }
 
   const source = body.request && typeof body.request === 'object' ? body.request : body
-  const text = cleanSpeechText(source.text || '')
+  const text = shapeNaturalPacing(cleanSpeechText(source.text || ''))
   if (!text) {
     json(res, 400, { error: 'Missing text.' })
     return
@@ -70,9 +85,9 @@ module.exports = async (req, res) => {
         model_id: modelId,
         output_format: String(process.env.ELEVENLABS_OUTPUT_FORMAT || 'mp3_44100_128'),
         voice_settings: {
-          stability: typeof source.stability === 'number' ? source.stability : 0.35,
-          similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.9,
-          style: typeof source.style === 'number' ? source.style : 0.35,
+          stability: typeof source.stability === 'number' ? source.stability : 0.32,
+          similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.92,
+          style: typeof source.style === 'number' ? source.style : 0.4,
           use_speaker_boost: true,
         },
       }),
