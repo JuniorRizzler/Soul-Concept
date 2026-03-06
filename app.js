@@ -45,11 +45,103 @@
       '.stats-row{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#5a5863;font-size:.9rem}' +
       '.stats-row strong{color:#1b1b1f;font-size:.92rem}' +
       '.push-widget{position:fixed;bottom:18px;right:18px;z-index:60;width:min(320px,86vw);background:rgba(255,255,255,.95);border:1px solid #e2d8cb;border-radius:18px;box-shadow:0 16px 36px rgba(23,21,16,.12);padding:16px;display:grid;gap:8px}' +
-      '.push-title{font-size:1rem;font-weight:800;color:#1b1b1f}.push-text{margin:0;color:#5a5863;font-size:.9rem}.push-actions{display:flex;gap:8px;flex-wrap:wrap}.push-status{margin:0;font-size:.86rem;min-height:18px}.push-status.ok{color:#166534}.push-status.err{color:#b91c1c}'
+      '.push-title{font-size:1rem;font-weight:800;color:#1b1b1f}.push-text{margin:0;color:#5a5863;font-size:.9rem}.push-actions{display:flex;gap:8px;flex-wrap:wrap}.push-status{margin:0;font-size:.86rem;min-height:18px}.push-status.ok{color:#166534}.push-status.err{color:#b91c1c}' +
+      '.pp-demo-card{border:1px solid #e2d8cb;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(250,247,241,.96));padding:14px;display:grid;gap:10px}' +
+      '.pp-demo-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.pp-demo-chip{display:inline-flex;align-items:center;padding:4px 9px;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:rgba(33,92,75,.1);border:1px solid rgba(33,92,75,.24);color:#215c4b}' +
+      '.pp-demo-input{width:100%;min-height:78px;resize:vertical;border:1px solid #d9ccbc;border-radius:10px;padding:10px 11px;font:500 .93rem/1.45 Manrope,system-ui,sans-serif;color:#1b1b1f;background:#fff}' +
+      '.pp-demo-meta{font-size:.82rem;color:#5a5863}.pp-demo-answer{margin:0;white-space:pre-wrap;color:#1b1b1f;background:#fff;border:1px solid #eadfce;border-radius:10px;padding:10px 11px;min-height:52px}'
     document.head.appendChild(style)
   }
 
   ensureGlobalUiStyles()
+
+  function mountPersonaPlexHomeDemo() {
+    if (currentPage !== 'index.html') return
+    if (document.querySelector('[data-pp-demo]')) return
+
+    const librariesSection = document.getElementById('libraries')
+    if (!librariesSection || !librariesSection.parentNode) return
+
+    const section = document.createElement('section')
+    section.className = 'section-tight'
+    section.setAttribute('data-pp-demo', '1')
+    section.innerHTML =
+      '<div class="container reveal">' +
+      '<p class="eyebrow">Live AI Check</p>' +
+      '<h2 class="section-title">PersonaPlex on Home Page</h2>' +
+      '<p class="section-lead">Use this quick test box to verify PersonaPlex is responding before opening any library.</p>' +
+      '<div class="pp-demo-card">' +
+      '<div class="pp-demo-head">' +
+      '<strong>Ask PersonaPlex</strong>' +
+      '<span class="pp-demo-chip">Model: nvidia/personaplex-7b-v1</span>' +
+      '</div>' +
+      '<textarea class="pp-demo-input" data-pp-input spellcheck="false">Explain linear equations in 3 simple steps.</textarea>' +
+      '<div class="push-actions">' +
+      '<button class="btn btn-primary" type="button" data-pp-send>Test PersonaPlex</button>' +
+      '<a class="btn btn-secondary" href="study-library.html">Open Science Library</a>' +
+      '</div>' +
+      '<div class="pp-demo-meta" data-pp-meta>Idle.</div>' +
+      '<p class="pp-demo-answer" data-pp-answer>Response will appear here.</p>' +
+      '</div>' +
+      '</div>'
+
+    librariesSection.parentNode.insertBefore(section, librariesSection.nextSibling)
+
+    const input = section.querySelector('[data-pp-input]')
+    const sendBtn = section.querySelector('[data-pp-send]')
+    const answer = section.querySelector('[data-pp-answer]')
+    const meta = section.querySelector('[data-pp-meta]')
+    if (!input || !sendBtn || !answer || !meta) return
+
+    async function runPrompt() {
+      const prompt = String(input.value || '').trim()
+      if (!prompt) return
+      sendBtn.disabled = true
+      meta.textContent = 'Contacting PersonaPlex...'
+      answer.textContent = 'Thinking...'
+      try {
+        const res = await fetch('/api/ai-chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            request: {
+              model: 'nvidia/personaplex-7b-v1',
+              temperature: 0.4,
+              max_tokens: 500,
+              messages: [
+                {
+                  role: 'system',
+                  content: 'You are PersonaPlex, a concise and helpful study assistant for high school students.',
+                },
+                { role: 'user', content: prompt },
+              ],
+            },
+          }),
+        })
+        const data = await res.json()
+        if (!res.ok) {
+          throw new Error((data && data.error) || 'PersonaPlex request failed.')
+        }
+        answer.textContent = String((data && data.text) || '').trim() || '(No text returned.)'
+        const provider = data && data.provider ? String(data.provider) : 'openai-compatible'
+        const model = data && data.model ? String(data.model) : 'nvidia/personaplex-7b-v1'
+        meta.textContent = 'Connected. Provider: ' + provider + ' | Model: ' + model
+      } catch (err) {
+        answer.textContent = 'Error: ' + (err && err.message ? err.message : 'Request failed.')
+        meta.textContent = 'Failed. Check deployment env vars and function logs.'
+      } finally {
+        sendBtn.disabled = false
+      }
+    }
+
+    sendBtn.addEventListener('click', runPrompt)
+  }
+
+  if (document.readyState === 'complete') {
+    mountPersonaPlexHomeDemo()
+  } else {
+    window.addEventListener('load', mountPersonaPlexHomeDemo, { once: true })
+  }
 
   function getLocalDateStamp(date) {
     const d = date instanceof Date ? date : new Date()
