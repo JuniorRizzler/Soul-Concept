@@ -431,6 +431,7 @@
         var listening = false;
         var waiting = false;
         var speaking = false;
+        var pendingListen = false;
         var messages = [];
         var preferredBrowserVoice = null;
         var heardText = '';
@@ -501,11 +502,19 @@
               u.onend = function () {
                 speaking = false;
                 meta.textContent = active ? 'Listening...' : 'Idle.';
+                if (active || pendingListen) {
+                  pendingListen = false;
+                  window.setTimeout(startListening, 120);
+                }
                 resolve();
               };
               u.onerror = function () {
                 speaking = false;
                 meta.textContent = active ? 'Listening...' : 'Idle.';
+                if (active || pendingListen) {
+                  pendingListen = false;
+                  window.setTimeout(startListening, 120);
+                }
                 resolve();
               };
               window.speechSynthesis.speak(u);
@@ -531,7 +540,18 @@
         }
 
         function startListening() {
-          if (!recognition || waiting || listening || speaking) return;
+          if (!recognition || waiting || listening) return;
+          if (speaking) {
+            pendingListen = true;
+            try {
+              if (window.speechSynthesis && window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+              }
+            } catch (_err) {}
+            speaking = false;
+            window.setTimeout(startListening, 120);
+            return;
+          }
           try { recognition.start(); } catch (_err) {}
         }
 
@@ -591,7 +611,7 @@
           preferredBrowserVoice = pickPreferredVoice();
           recognition = new SpeechRecognition();
           recognition.lang = 'en-US';
-          recognition.interimResults = false;
+          recognition.interimResults = true;
           recognition.continuous = false;
           recognition.maxAlternatives = 1;
           recognition.onstart = function () {
@@ -600,11 +620,17 @@
           };
           recognition.onresult = function (event) {
             var transcript = '';
+            var hasFinal = false;
             for (var i = event.resultIndex; i < event.results.length; i++) {
               transcript += event.results[i][0].transcript || '';
+              if (event.results[i].isFinal) hasFinal = true;
             }
             transcript = String(transcript || '').trim();
-            if (!transcript) return;
+            if (transcript) {
+              heardText = transcript;
+              meta.textContent = 'Heard: ' + transcript;
+            }
+            if (!hasFinal || !transcript) return;
             heardText = '';
             listening = false;
             askLyne(transcript);
@@ -650,9 +676,17 @@
 
         stopBtn.addEventListener('click', function () {
           active = false;
+          pendingListen = false;
+          heardText = '';
           if (recognition && listening) {
             try { recognition.stop(); } catch (_err) {}
           }
+          try {
+            if (window.speechSynthesis && window.speechSynthesis.speaking) {
+              window.speechSynthesis.cancel();
+            }
+          } catch (_err) {}
+          speaking = false;
           meta.textContent = 'Conversation stopped.';
         });
 
