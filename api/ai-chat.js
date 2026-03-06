@@ -25,6 +25,19 @@ function normalizeMessageContent(content) {
   return ''
 }
 
+function messagesToPrompt(messages) {
+  return (Array.isArray(messages) ? messages : [])
+    .map(function (m) {
+      var role = String((m && m.role) || 'user').trim() || 'user'
+      var content = normalizeMessageContent(m ? m.content : '')
+      if (!content) return ''
+      return role + ': ' + content
+    })
+    .filter(Boolean)
+    .join('\n\n')
+    .trim()
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -134,6 +147,7 @@ module.exports = async (req, res) => {
     'https://router.huggingface.co/v1'
   )
   const chatUrl = process.env.PERSONAPLEX_CHAT_URL || process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
+  const completionUrl = process.env.PERSONAPLEX_COMPLETIONS_URL || process.env.FREE_LLM_COMPLETIONS_URL || baseUrl + '/completions'
   const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
   const temperature = typeof source.temperature === 'number' ? source.temperature : 0.4
 
@@ -159,11 +173,63 @@ module.exports = async (req, res) => {
     } catch (_err) {}
 
     if (!upstreamRes.ok) {
+      var upstreamErrorText =
+        (parsed && (parsed.error && parsed.error.message ? parsed.error.message : parsed.error)) ||
+        rawText ||
+        'AI upstream error.'
+
+      var canTryCompletionFallback =
+        typeof upstreamErrorText === 'string' &&
+        (upstreamErrorText.toLowerCase().indexOf('not a chat model') !== -1 ||
+          upstreamErrorText.toLowerCase().indexOf('chat model') !== -1)
+
+      if (canTryCompletionFallback) {
+        try {
+          const promptText = messagesToPrompt(messages)
+          const completionRes = await fetch(completionUrl, {
+            method: 'POST',
+            headers: {
+              Authorization: 'Bearer ' + apiKey,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              model,
+              prompt: promptText,
+              max_tokens: Number.isFinite(maxTokens) ? maxTokens : 1200,
+              temperature,
+            }),
+          })
+
+          const completionRaw = await completionRes.text()
+          let completionParsed = null
+          try {
+            completionParsed = JSON.parse(completionRaw)
+          } catch (_err) {}
+
+          if (completionRes.ok) {
+            let completionText = ''
+            if (completionParsed && Array.isArray(completionParsed.choices) && completionParsed.choices[0]) {
+              completionText = String(completionParsed.choices[0].text || '').trim()
+            } else {
+              completionText = String(completionRaw || '').trim()
+            }
+            json(res, 200, {
+              ok: true,
+              text: completionText,
+              provider: 'openai-compatible',
+              model,
+              mode: 'completions-fallback',
+              providerResponse: completionParsed || null,
+            })
+            return
+          }
+        } catch (_err) {
+          // ignore completion fallback errors and return original upstream error below
+        }
+      }
+
       json(res, upstreamRes.status, {
-        error:
-          (parsed && (parsed.error && parsed.error.message ? parsed.error.message : parsed.error)) ||
-          rawText ||
-          'AI upstream error.',
+        error: upstreamErrorText,
       })
       return
     }
