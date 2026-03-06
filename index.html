@@ -424,6 +424,7 @@
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
         var canSpeak = !!window.speechSynthesis;
+        var allowBrowserFallback = false;
         var recognition = null;
         var active = false;
         var listening = false;
@@ -458,14 +459,19 @@
               return;
             }
           } catch (_err) {}
-          if (!canSpeak) return;
+          if (!allowBrowserFallback || !canSpeak) {
+            meta.textContent = 'Neural voice unavailable. Check ElevenLabs key/settings.';
+            return;
+          }
           try {
             window.speechSynthesis.cancel();
             var u = new SpeechSynthesisUtterance(phrase);
             u.onstart = function () { meta.textContent = 'LYNE is speaking...'; };
             u.onend = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
             window.speechSynthesis.speak(u);
-          } catch (_err) {}
+          } catch (_err) {
+            meta.textContent = 'Neural voice unavailable. Check ElevenLabs key/settings.';
+          }
         }
 
         function startListening() {

@@ -89,7 +89,7 @@ module.exports = async (req, res) => {
   const modelId = String(
     source.model_id ||
       process.env.ELEVENLABS_MODEL_ID ||
-      'eleven_turbo_v2_5'
+      'eleven_multilingual_v2'
   ).trim()
 
   try {
@@ -109,9 +109,9 @@ module.exports = async (req, res) => {
           model_id: modelId,
           output_format: String(process.env.ELEVENLABS_OUTPUT_FORMAT || 'mp3_44100_192'),
           voice_settings: {
-            stability: typeof source.stability === 'number' ? source.stability : 0.28,
-            similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.96,
-            style: typeof source.style === 'number' ? source.style : 0.48,
+            stability: typeof source.stability === 'number' ? source.stability : 0.22,
+            similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.82,
+            style: typeof source.style === 'number' ? source.style : 0.62,
             use_speaker_boost: true,
           },
         }),
