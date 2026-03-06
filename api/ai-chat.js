@@ -43,7 +43,9 @@ async function tryHuggingFaceInferenceFallback(apiKey, model, messages, maxToken
   const promptText = messagesToPrompt(messages)
   if (!promptText) return { ok: false, text: '', response: null, error: 'No prompt text to send.' }
 
-  const endpoint = 'https://api-inference.huggingface.co/models/' + encodeURIComponent(hfModel)
+  const endpoint =
+    String(process.env.HF_INFERENCE_URL || '').trim() ||
+    ('https://router.huggingface.co/hf-inference/models/' + encodeURIComponent(hfModel))
   const res = await fetch(endpoint, {
     method: 'POST',
     headers: {
