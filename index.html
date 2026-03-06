@@ -445,6 +445,7 @@
         var captureFinalText = '';
         var captureInterimText = '';
         var captureTimer = null;
+        var BARGE_IN_KEYWORDS = ['lyne stop', 'lyne wait', 'lyne pause', 'lyne listen', 'stop lyne', 'wait lyne', 'pause lyne'];
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
@@ -463,6 +464,10 @@
           captureFinalText = '';
           captureInterimText = '';
           if (!transcript) return;
+          if (speaking && !isBargeInCommand(transcript)) {
+            meta.textContent = 'LYNE is speaking. Say "LYNE stop" to interrupt.';
+            return;
+          }
           if (looksLikeEcho(transcript)) {
             meta.textContent = active ? 'Listening...' : 'Idle.';
             return;
@@ -547,6 +552,15 @@
           return false;
         }
 
+        function isBargeInCommand(userText) {
+          var u = compactText(userText);
+          if (!u) return false;
+          for (var i = 0; i < BARGE_IN_KEYWORDS.length; i++) {
+            if (u.indexOf(BARGE_IN_KEYWORDS[i]) !== -1) return true;
+          }
+          return false;
+        }
+
         async function speak(text) {
           var phrase = String(text || '').trim();
           if (!phrase) return;
@@ -598,13 +612,13 @@
         function localFallbackReply(prompt) {
           var q = String(prompt || '').toLowerCase();
           if (q.indexOf('trig') !== -1 || q.indexOf('trigonometry') !== -1 || q.indexOf('sin') !== -1 || q.indexOf('cos') !== -1 || q.indexOf('tan') !== -1) {
-            return 'Trigonometry in 3 steps: 1) label the right triangle sides as opposite, adjacent, and hypotenuse. 2) Use SOH-CAH-TOA: sin equals opposite over hypotenuse, cos equals adjacent over hypotenuse, tan equals opposite over adjacent. 3) Plug values and solve, then check if the answer makes sense for the triangle.';
+            return 'Trig made simple: Step 1, name sides as opposite, adjacent, and hypotenuse. Step 2, use SOH-CAH-TOA. Step 3, plug in values and solve. If you want, I can do one full example with you now.';
           }
           if (q.indexOf('linear equation') !== -1 || q.indexOf('equation') !== -1) {
-            return 'For linear equations: move constants to one side, move x terms to the other, then divide to isolate x. Keep both sides balanced by doing the same operation on both sides.';
+            return 'Linear equations are simple: collect terms, isolate x, then check your answer. Tell me one equation and I will solve it step by step with you.';
           }
           if (q.indexOf('explain') !== -1 || q.indexOf('what is') !== -1 || q.indexOf('how do i') !== -1 || q.indexOf('help me') !== -1) {
-            return 'Yes. Give me the exact concept name and grade, and I will break it into short steps with one quick example and one practice question.';
+            return 'Absolutely. Say the concept and grade, and I will explain it in plain language with one quick example.';
           }
           if (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('library') !== -1) {
             return 'Go to Science at study-library.html, Geography at geography-library.html, Math 9 at math/index.html, and Math 10 at grade-10-math.html. Tell me your subject and I will pick one.';
@@ -750,13 +764,17 @@
               }
             }
             if (speaking && latest.length > 6 && !looksLikeEcho(latest)) {
-              try {
-                if (window.speechSynthesis && window.speechSynthesis.speaking) {
-                  window.speechSynthesis.cancel();
-                }
-              } catch (_err) {}
-              speaking = false;
-              meta.textContent = 'Interrupted. Go ahead...';
+              if (isBargeInCommand(latest)) {
+                try {
+                  if (window.speechSynthesis && window.speechSynthesis.speaking) {
+                    window.speechSynthesis.cancel();
+                  }
+                } catch (_err) {}
+                speaking = false;
+                meta.textContent = 'Interrupted. Go ahead...';
+              } else {
+                meta.textContent = 'LYNE is speaking. Say "LYNE stop" to interrupt.';
+              }
             }
           };
           recognition.onerror = function (event) {

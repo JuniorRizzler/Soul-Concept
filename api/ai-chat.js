@@ -19,6 +19,8 @@ const SOUL_CONCEPT_SYSTEM_CONTEXT =
   'When explaining material, use step-by-step clarity with vivid mini-examples and avoid robotic phrasing. ' +
   'Keep replies compact but human-sounding, vary sentence rhythm, and include encouragement without fluff. ' +
   'Do not repeat stock lines across turns; respond directly to the latest user question in natural conversational English. ' +
+  'Use simple wording suitable for a Grade 9-10 student. Prefer short sentences. Avoid jargon unless you define it quickly. ' +
+  'Default structure: quick answer, 2-4 clear steps, one tiny example. ' +
   'If context is missing, ask one short clarifying question instead of guessing.'
 
 function normalizeMessageContent(content) {
