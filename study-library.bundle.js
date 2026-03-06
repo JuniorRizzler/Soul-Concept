@@ -27157,7 +27157,7 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: "nvidia/personaplex-7b-v1",
+            model: "Qwen/Qwen2.5-7B-Instruct",
             max_tokens: 1e3,
             messages: [
               {

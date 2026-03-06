@@ -8,6 +8,8 @@ function cleanBaseUrl(value, fallback) {
   return raw.replace(/\/$/, '')
 }
 
+const WORKING_HOSTED_MODEL = 'Qwen/Qwen2.5-7B-Instruct'
+
 function normalizeMessageContent(content) {
   if (typeof content === 'string') return content
   if (Array.isArray(content)) {
@@ -186,12 +188,17 @@ module.exports = async (req, res) => {
   }
 
   const forcedPersonaModel = String(process.env.PERSONAPLEX_MODEL || '').trim()
-  const model = String(
+  const requestedModel = String(
     forcedPersonaModel ||
       source.model ||
       process.env.FREE_LLM_MODEL ||
       'nvidia/personaplex-7b-v1'
   )
+  const allowPersonaPlex = String(process.env.ALLOW_PERSONAPLEX || '').trim() === '1'
+  const model =
+    !allowPersonaPlex && requestedModel.toLowerCase().indexOf('nvidia/personaplex-7b-v1') !== -1
+      ? WORKING_HOSTED_MODEL
+      : requestedModel
   const baseUrl = cleanBaseUrl(
     process.env.PERSONAPLEX_BASE_URL || process.env.FREE_LLM_BASE_URL,
     'https://router.huggingface.co/v1'

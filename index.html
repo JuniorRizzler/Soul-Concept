@@ -122,11 +122,11 @@
               PERSONAPLEX BUILD CHECK ACTIVE - VERSION 2026-03-06-B
             </div>
             <div style="border:1px solid #e2d8cb;background:#ffffff;border-radius:12px;padding:14px">
-              <h3 style="margin:0 0 8px 0">PersonaPlex Home Test</h3>
-              <p style="margin:0 0 10px 0;color:#5a5863">This sends directly to <code>/api/ai-chat</code> with <code>nvidia/personaplex-7b-v1</code>.</p>
+              <h3 style="margin:0 0 8px 0">Hosted AI Home Test</h3>
+              <p style="margin:0 0 10px 0;color:#5a5863">This sends directly to <code>/api/ai-chat</code> with <code>Qwen/Qwen2.5-7B-Instruct</code>.</p>
               <textarea id="pp-home-input" style="width:100%;min-height:88px;border:1px solid #d9ccbc;border-radius:8px;padding:10px">Explain linear equations in 3 simple steps.</textarea>
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-                <button id="pp-home-send" class="btn btn-primary" type="button">Test PersonaPlex</button>
+                <button id="pp-home-send" class="btn btn-primary" type="button">Test Hosted AI</button>
                 <a class="btn btn-secondary" href="study-library.html">Open Science Library</a>
               </div>
               <p id="pp-home-meta" style="margin:10px 0 0 0;color:#5a5863;font-size:.9rem">Idle.</p>
@@ -425,7 +425,7 @@
           var prompt = String(input.value || '').trim();
           if (!prompt) return;
           btn.disabled = true;
-          meta.textContent = 'Contacting PersonaPlex...';
+          meta.textContent = 'Contacting hosted model...';
           out.textContent = 'Thinking...';
           try {
             var res = await fetch('/api/ai-chat', {
@@ -433,7 +433,7 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 request: {
-                  model: 'nvidia/personaplex-7b-v1',
+                  model: 'Qwen/Qwen2.5-7B-Instruct',
                   messages: [{ role: 'user', content: prompt }],
                   max_tokens: 500,
                   temperature: 0.4
@@ -443,7 +443,7 @@
             var data = await res.json();
             if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
             out.textContent = String((data && data.text) || '').trim() || '(No text returned.)';
-            meta.textContent = 'Connected. Model: ' + String((data && data.model) || 'nvidia/personaplex-7b-v1');
+            meta.textContent = 'Connected. Model: ' + String((data && data.model) || 'Qwen/Qwen2.5-7B-Instruct');
           } catch (err) {
             out.textContent = 'Error: ' + (err && err.message ? err.message : 'Request failed.');
             meta.textContent = 'Failed. Check Vercel function logs.';

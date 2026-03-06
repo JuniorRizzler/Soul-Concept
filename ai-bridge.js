@@ -54,7 +54,7 @@
       }
     } catch (_err) {}
     // Force a single assistant model across widgets unless the page overrides it.
-    var forcedModel = String(window.SC_AI_MODEL || 'nvidia/personaplex-7b-v1')
+    var forcedModel = String(window.SC_AI_MODEL || 'Qwen/Qwen2.5-7B-Instruct')
     if (!parsedBody || typeof parsedBody !== 'object') parsedBody = {}
     parsedBody.model = forcedModel
 
