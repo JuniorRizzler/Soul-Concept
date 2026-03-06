@@ -52,6 +52,42 @@ function parseVoiceCandidates(source) {
   })
 }
 
+async function tryKokoroTts(source, text) {
+  const kokoroUrl = String(process.env.KOKORO_TTS_URL || '').trim()
+  if (!kokoroUrl) return { ok: false, status: 0, error: '', buffer: null, contentType: '' }
+
+  const endpoint = kokoroUrl.replace(/\/$/, '')
+  const payload = {
+    text: text,
+    voice: String(source.kokoro_voice || process.env.KOKORO_VOICE || 'af_sarah').trim(),
+    format: String(source.kokoro_format || process.env.KOKORO_FORMAT || 'mp3').trim(),
+    speed: typeof source.kokoro_speed === 'number' ? source.kokoro_speed : Number(process.env.KOKORO_SPEED || 1.0),
+  }
+
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'audio/mpeg, audio/wav, application/octet-stream',
+  }
+
+  const kokoroKey = String(process.env.KOKORO_API_KEY || '').trim()
+  if (kokoroKey) headers.Authorization = 'Bearer ' + kokoroKey
+
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(payload),
+  })
+
+  if (!res.ok) {
+    const raw = await res.text()
+    return { ok: false, status: res.status, error: raw || 'Kokoro TTS upstream error.', buffer: null, contentType: '' }
+  }
+
+  const arr = await res.arrayBuffer()
+  const contentType = String(res.headers.get('content-type') || '').trim() || 'audio/mpeg'
+  return { ok: true, status: 200, error: '', buffer: Buffer.from(arr), contentType: contentType }
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -79,9 +115,23 @@ module.exports = async (req, res) => {
     return
   }
 
+  // Preferred path: self-hosted Kokoro endpoint (free/near-limitless if you run your own server).
+  try {
+    const kokoro = await tryKokoroTts(source, text)
+    if (kokoro.ok && kokoro.buffer) {
+      res.status(200)
+      res.setHeader('Content-Type', kokoro.contentType || 'audio/mpeg')
+      res.setHeader('Cache-Control', 'no-store')
+      res.send(kokoro.buffer)
+      return
+    }
+  } catch (_err) {
+    // fall through to ElevenLabs path
+  }
+
   const apiKey = String(process.env.ELEVENLABS_API_KEY || '').trim()
   if (!apiKey) {
-    json(res, 501, { error: 'Missing ELEVENLABS_API_KEY env var.' })
+    json(res, 501, { error: 'Missing KOKORO_TTS_URL and ELEVENLABS_API_KEY env vars.' })
     return
   }
 
