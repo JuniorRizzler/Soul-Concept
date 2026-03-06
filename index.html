@@ -424,7 +424,7 @@
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
         var canSpeak = !!window.speechSynthesis;
-        var preferStableEnglishVoice = true;
+        var preferStableEnglishVoice = false;
         var allowBrowserFallback = true;
         var recognition = null;
         var active = false;
@@ -442,21 +442,38 @@
           if (!canSpeak || !window.speechSynthesis || !window.speechSynthesis.getVoices) return null;
           var voices = window.speechSynthesis.getVoices() || [];
           if (!voices.length) return null;
-          var preferredNames = ['aria', 'jenny', 'google us english', 'samantha', 'natural'];
+          var preferredNames = ['microsoft aria online', 'microsoft jenny online', 'google us english', 'samantha', 'microsoft aria', 'microsoft jenny'];
           for (var p = 0; p < preferredNames.length; p++) {
             for (var i = 0; i < voices.length; i++) {
               var name = String(voices[i].name || '').toLowerCase();
               var lang = String(voices[i].lang || '').toLowerCase();
-              if (name.indexOf(preferredNames[p]) !== -1 && (lang.indexOf('en') === 0 || lang.indexOf('en-') === 0)) {
+              if (name.indexOf('multilingual') !== -1) continue;
+              if (name.indexOf(preferredNames[p]) !== -1 && (lang === 'en-us' || lang.indexOf('en-us') === 0)) {
                 return voices[i];
               }
             }
           }
           for (var j = 0; j < voices.length; j++) {
             var l = String(voices[j].lang || '').toLowerCase();
-            if (l.indexOf('en') === 0 || l.indexOf('en-') === 0) return voices[j];
+            var n = String(voices[j].name || '').toLowerCase();
+            if (n.indexOf('multilingual') !== -1) continue;
+            if (l === 'en-us' || l.indexOf('en-us') === 0) return voices[j];
           }
           return null;
+        }
+
+        function normalizeAssistantText(text, userPrompt) {
+          var raw = String(text || '').trim();
+          if (!raw) return localFallbackReply(userPrompt || '');
+          var lower = raw.toLowerCase();
+          if (
+            lower.indexOf('sorry, we have had an error') !== -1 ||
+            lower.indexOf('an error occurred') !== -1 ||
+            lower.indexOf('something went wrong') !== -1
+          ) {
+            return localFallbackReply(userPrompt || '');
+          }
+          return raw;
         }
 
         async function speak(text) {
@@ -567,7 +584,7 @@
             });
             var data = await res.json();
             if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
-            var reply = String((data && data.text) || '').trim() || '(No response.)';
+            var reply = normalizeAssistantText((data && data.text) || '', prompt);
             messages.push({ role: 'assistant', content: reply });
             setChat('You: ' + prompt + '\n\nLYNE: ' + reply);
             await speak(reply);
@@ -606,10 +623,16 @@
             listening = false;
             askLyne(transcript);
           };
-          recognition.onerror = function () {
+          recognition.onerror = function (event) {
             listening = false;
+            var code = String((event && event.error) || '').toLowerCase();
+            if (code === 'not-allowed' || code === 'service-not-allowed') {
+              active = false;
+              meta.textContent = 'Microphone permission blocked. Enable mic access and start again.';
+              return;
+            }
             meta.textContent = active ? 'Listening...' : 'Idle.';
-            if (active && !waiting) window.setTimeout(startListening, 400);
+            if (active && !waiting) window.setTimeout(startListening, 650);
           };
           recognition.onend = function () {
             listening = false;
