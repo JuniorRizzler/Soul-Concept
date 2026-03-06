@@ -553,9 +553,12 @@
     function fallbackReply(prompt) {
       var q = String(prompt || "").toLowerCase();
       var raw = String(prompt || "").trim();
-      if (!raw) return "Ask one exact question and I will answer with clear steps.";
+      if (!raw) return "I can help now. Try: Explain slope-intercept form with one example.";
       if (q.indexOf("trig") !== -1 || q.indexOf("sin") !== -1 || q.indexOf("cos") !== -1 || q.indexOf("tan") !== -1) {
         return "Trigonometry in plain steps: 1) Label opposite, adjacent, hypotenuse. 2) Use SOH-CAH-TOA. 3) Substitute values and solve. Share one question and I will solve it with you.";
+      }
+      if (q.indexOf("slope") !== -1 || q.indexOf("slope-intercept") !== -1 || q.indexOf("y=mx+b") !== -1 || q.indexOf("y = mx + b") !== -1) {
+        return "Slope-intercept form is y = mx + b. m is slope and b is y-intercept. Example: y = -3x + 5 has slope -3 and intercept 5.";
       }
       if (q.indexOf("linear") !== -1 || q.indexOf("equation") !== -1) {
         return "For linear equations: simplify both sides, isolate x, then check by substitution. Send one equation and I will walk through it step by step.";
@@ -569,7 +572,7 @@
       if (q.indexOf("explain") !== -1 || q.indexOf("how") !== -1 || q.indexOf("what") !== -1) {
         return "I can answer that now. I will give a short explanation, steps, and one quick example.";
       }
-      return "Ask one specific concept question and I will give a direct answer with steps.";
+      return "Quick answer: use 3 steps, solve one short example, then check your result. Send the exact problem and I will solve it fully.";
     }
 
     function normalizeAssistantText(raw, prompt) {

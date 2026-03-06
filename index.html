@@ -635,9 +635,12 @@
         function localFallbackReply(prompt) {
           var q = String(prompt || '').toLowerCase();
           var short = String(prompt || '').trim();
-          if (!short) return 'Say your exact question and I will answer it step by step.';
+          if (!short) return 'I can help right now. Try: "Explain slope-intercept form with one example."';
           if (q.indexOf('trig') !== -1 || q.indexOf('trigonometry') !== -1 || q.indexOf('sin') !== -1 || q.indexOf('cos') !== -1 || q.indexOf('tan') !== -1) {
             return 'Trig made simple: Step 1, name sides as opposite, adjacent, and hypotenuse. Step 2, use SOH-CAH-TOA. Step 3, plug in values and solve. If you want, I can do one full example with you now.';
+          }
+          if (q.indexOf('slope') !== -1 || q.indexOf('slope-intercept') !== -1 || q.indexOf('y=mx+b') !== -1 || q.indexOf('y = mx + b') !== -1) {
+            return 'Slope-intercept form is y = mx + b. m is slope (rise/run), b is y-intercept. Example: y = 2x + 3 has slope 2 and crosses y-axis at 3.';
           }
           if (q.indexOf('linear equation') !== -1 || q.indexOf('equation') !== -1) {
             return 'Linear equations are simple: collect terms, isolate x, then check your answer. Tell me one equation and I will solve it step by step with you.';
@@ -659,9 +662,10 @@
             return 'For math, open grade-10-math.html for Grade 10 content or math/index.html for Grade 9. I can walk you through linear equations step by step.';
           }
           if (q.indexOf('what is') !== -1 || q.indexOf('define') !== -1) {
-            return 'Short answer: it is a core concept in your unit. Ask me for one worked example and I will show the steps clearly.';
+            var t = short.replace(/^(what is|what's|define)\s+/i, '').replace(/\?+$/, '').trim();
+            if (t) return t + ' is a key concept in this unit. I can also give you a worked example right now.';
           }
-          return 'Here is a direct start: ask one specific question like "Explain slope-intercept form with one example" and I will answer it clearly.';
+          return 'Quick answer to your question: break it into 3 steps, solve one small example, then check the result by substitution or estimation. If you paste the exact problem, I will solve it fully.';
         }
 
         function startListening(forceInterrupt) {
