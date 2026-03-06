@@ -29174,8 +29174,12 @@ Student question: ${userMessage}`
             "button",
             {
               onClick: () => {
-                setShowIntro(false);
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.scrollTo({ top: 0, behavior: "auto" });
+                window.requestAnimationFrame(() => {
+                  window.setTimeout(() => {
+                    setShowIntro(false);
+                  }, 0);
+                });
               },
               className: "w-full py-4 bg-gradient-to-r from-slate-900 to-slate-700 text-white rounded-xl font-semibold text-lg hover:shadow-lg transition-all transform hover:-translate-y-0.5",
               children: "Let's Get Started! \u{1F680}"
