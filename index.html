@@ -634,6 +634,8 @@
 
         function localFallbackReply(prompt) {
           var q = String(prompt || '').toLowerCase();
+          var short = String(prompt || '').trim();
+          if (!short) return 'Say your exact question and I will answer it step by step.';
           if (q.indexOf('trig') !== -1 || q.indexOf('trigonometry') !== -1 || q.indexOf('sin') !== -1 || q.indexOf('cos') !== -1 || q.indexOf('tan') !== -1) {
             return 'Trig made simple: Step 1, name sides as opposite, adjacent, and hypotenuse. Step 2, use SOH-CAH-TOA. Step 3, plug in values and solve. If you want, I can do one full example with you now.';
           }
@@ -644,7 +646,11 @@
             return 'Absolutely. Say the concept and grade, and I will explain it in plain language with one quick example.';
           }
           if (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('library') !== -1 || q.indexOf('open') !== -1 || q.indexOf('which page') !== -1) {
-            return 'Go to Science at study-library.html, Geography at geography-library.html, Math 9 at math/index.html, and Math 10 at grade-10-math.html. Tell me your subject and I will pick one.';
+            if (q.indexOf('science') !== -1) return 'Open Science here: study-library.html. I can then guide you to the exact unit.';
+            if (q.indexOf('geography') !== -1) return 'Open Geography here: geography-library.html. I can point you to the exact unit next.';
+            if (q.indexOf('grade 10') !== -1 || q.indexOf('math 10') !== -1) return 'Open Grade 10 Math here: grade-10-math.html. Tell me the unit and I will guide you.';
+            if (q.indexOf('grade 9') !== -1 || q.indexOf('math 9') !== -1) return 'Open Grade 9 Math here: math/index.html. Tell me the unit and I will guide you.';
+            return 'Choose one: Science `study-library.html`, Geography `geography-library.html`, Math 9 `math/index.html`, or Math 10 `grade-10-math.html`.';
           }
           if (q.indexOf('why') !== -1 && q.indexOf('soul concept') !== -1) {
             return 'Soul Concept was built to make studying faster with structured libraries, clear notes, and focused tools instead of random searching.';
@@ -652,19 +658,10 @@
           if (q.indexOf('math') !== -1) {
             return 'For math, open grade-10-math.html for Grade 10 content or math/index.html for Grade 9. I can walk you through linear equations step by step.';
           }
-          var options = [
-            'I can explain that directly. Tell me the exact concept or question.',
-            'Give me one question and I will answer it with short clear steps.',
-            'Tell me the topic and grade level, and I will break it down simply.'
-          ];
-          var pick = options[fallbackCycle % options.length];
-          fallbackCycle += 1;
-          if (pick === lastFallbackText) {
-            pick = options[fallbackCycle % options.length];
-            fallbackCycle += 1;
+          if (q.indexOf('what is') !== -1 || q.indexOf('define') !== -1) {
+            return 'Short answer: it is a core concept in your unit. Ask me for one worked example and I will show the steps clearly.';
           }
-          lastFallbackText = pick;
-          return pick;
+          return 'Here is a direct start: ask one specific question like "Explain slope-intercept form with one example" and I will answer it clearly.';
         }
 
         function startListening(forceInterrupt) {

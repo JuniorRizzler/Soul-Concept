@@ -552,6 +552,8 @@
 
     function fallbackReply(prompt) {
       var q = String(prompt || "").toLowerCase();
+      var raw = String(prompt || "").trim();
+      if (!raw) return "Ask one exact question and I will answer with clear steps.";
       if (q.indexOf("trig") !== -1 || q.indexOf("sin") !== -1 || q.indexOf("cos") !== -1 || q.indexOf("tan") !== -1) {
         return "Trigonometry in plain steps: 1) Label opposite, adjacent, hypotenuse. 2) Use SOH-CAH-TOA. 3) Substitute values and solve. Share one question and I will solve it with you.";
       }
@@ -559,16 +561,15 @@
         return "For linear equations: simplify both sides, isolate x, then check by substitution. Send one equation and I will walk through it step by step.";
       }
       if (q.indexOf("where") !== -1 || q.indexOf("go") !== -1 || q.indexOf("section") !== -1 || q.indexOf("library") !== -1) {
-        return "Tell me your subject and unit name, and I will point you to the exact section and what to study first.";
+        if (q.indexOf("science") !== -1) return "You are in the Science library. Tell me the unit and I will guide your first step.";
+        if (q.indexOf("geography") !== -1) return "You are in the Geography library. Tell me the unit and I will guide your first step.";
+        if (q.indexOf("math") !== -1 || q.indexOf("grade 10") !== -1) return "You are in the Math library. Tell me the exact topic and I will guide what to open first.";
+        return "You are already in a study library. Tell me the topic name and I will point to the right section.";
       }
-      var options = [
-        "I can explain that in short simple steps. Tell me the exact concept name.",
-        "I can help with this right now. Give me the topic and your grade level.",
-        "Ask your exact question and I will answer directly with a quick example."
-      ];
-      var pick = options[fallbackCycle % options.length];
-      fallbackCycle += 1;
-      return pick;
+      if (q.indexOf("explain") !== -1 || q.indexOf("how") !== -1 || q.indexOf("what") !== -1) {
+        return "I can answer that now. I will give a short explanation, steps, and one quick example.";
+      }
+      return "Ask one specific concept question and I will give a direct answer with steps.";
     }
 
     function normalizeAssistantText(raw, prompt) {
