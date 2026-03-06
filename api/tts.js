@@ -2,6 +2,15 @@ function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json').send(JSON.stringify(payload))
 }
 
+function cleanSpeechText(input) {
+  return String(input || '')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -23,7 +32,7 @@ module.exports = async (req, res) => {
   }
 
   const source = body.request && typeof body.request === 'object' ? body.request : body
-  const text = String(source.text || '').trim()
+  const text = cleanSpeechText(source.text || '')
   if (!text) {
     json(res, 400, { error: 'Missing text.' })
     return
@@ -38,7 +47,7 @@ module.exports = async (req, res) => {
   const voiceId = String(
     source.voice_id ||
       process.env.ELEVENLABS_VOICE_ID ||
-      'EXAVITQu4vr4xnSDxMaL'
+      '21m00Tcm4TlvDq8ikWAM'
   ).trim()
   const modelId = String(
     source.model_id ||
@@ -59,10 +68,11 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         text: text,
         model_id: modelId,
+        output_format: String(process.env.ELEVENLABS_OUTPUT_FORMAT || 'mp3_44100_128'),
         voice_settings: {
-          stability: typeof source.stability === 'number' ? source.stability : 0.45,
-          similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.8,
-          style: typeof source.style === 'number' ? source.style : 0.2,
+          stability: typeof source.stability === 'number' ? source.stability : 0.35,
+          similarity_boost: typeof source.similarity_boost === 'number' ? source.similarity_boost : 0.9,
+          style: typeof source.style === 'number' ? source.style : 0.35,
           use_speaker_boost: true,
         },
       }),
@@ -84,4 +94,3 @@ module.exports = async (req, res) => {
     json(res, 500, { error: err && err.message ? err.message : 'TTS request failed.' })
   }
 }
-
