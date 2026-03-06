@@ -82,6 +82,7 @@
     ".lib-ai-pet-eye.left{left:9px}",
     ".lib-ai-pet-eye.right{right:9px}",
     ".lib-ai-pet-mouth{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:12px;height:6px;border-bottom:2px solid #5e3a1d;border-radius:0 0 8px 8px}",
+    ".lib-ai-pet-tag{justify-self:center;background:rgba(30,24,17,.93);color:#f5e7d3;border:1px solid rgba(228,199,160,.34);border-radius:999px;padding:3px 9px;font:700 10px/1 Arial,sans-serif;letter-spacing:.02em}",
     ".lib-ai-pet-controls{display:flex;gap:6px;justify-content:center}",
     ".lib-ai-pet-btn{border:1px solid rgba(207,167,118,.42);background:rgba(30,24,17,.92);color:#f5e7d3;border-radius:999px;padding:3px 8px;font:700 10px/1 Arial,sans-serif;cursor:pointer;box-shadow:0 6px 14px rgba(20,12,7,.28)}",
     ".lib-ai-pet-btn.active{background:#f3c682;color:#42250c;border-color:#d89a4b}",
@@ -468,16 +469,17 @@
     var shell = document.createElement("div");
     shell.className = "lib-ai-pet-shell";
     shell.innerHTML = [
-      '<div class="lib-ai-pet" role="button" tabindex="0" aria-label="AI pet assistant. Drag to move.">',
+      '<div class="lib-ai-pet" role="button" tabindex="0" aria-label="PersonaPlex assistant. Drag to move.">',
       '<div class="lib-ai-pet-face">',
       '<span class="lib-ai-pet-eye left"></span>',
       '<span class="lib-ai-pet-eye right"></span>',
       '<span class="lib-ai-pet-mouth"></span>',
       "</div>",
       "</div>",
+      '<div class="lib-ai-pet-tag">PersonaPlex</div>',
       '<div class="lib-ai-pet-controls">',
-      '<button type="button" class="lib-ai-pet-btn lib-ai-pet-roam active">Roam</button>',
-      '<button type="button" class="lib-ai-pet-btn lib-ai-pet-talk">Talk</button>',
+      '<button type="button" class="lib-ai-pet-btn lib-ai-pet-roam active">Pause</button>',
+      '<button type="button" class="lib-ai-pet-btn lib-ai-pet-talk">Chat</button>',
       "</div>",
       '<div class="lib-ai-pet-say" hidden>Need help on this section?</div>'
     ].join("");
@@ -541,10 +543,47 @@
       var lines = [
         "Want me to explain " + section + "?",
         "Need a quick summary?",
-        "Tap Talk and ask anything.",
+        "Tap Chat to open PersonaPlex.",
         "I can guide you through this section."
       ];
       return lines[Math.floor(Math.random() * lines.length)];
+    }
+
+    function openPersonaPlexChatPanel() {
+      var tooltip = Array.prototype.slice.call(document.querySelectorAll("div,span,p")).find(function (el) {
+        var text = (el.textContent || "").trim();
+        return text === "Chat with PersonaPlex" || text === "Chat with L.Y.N.E";
+      });
+      if (tooltip && tooltip.closest) {
+        var host = tooltip.closest(".group");
+        var hostBtn = host ? host.querySelector("button") : null;
+        if (hostBtn) {
+          hostBtn.click();
+          return true;
+        }
+      }
+
+      var candidates = Array.prototype.slice.call(document.querySelectorAll("button,[role='button']"));
+      for (var i = 0; i < candidates.length; i++) {
+        var node = candidates[i];
+        if (!node || typeof node.click !== "function") continue;
+        var label =
+          (node.getAttribute && (node.getAttribute("aria-label") || node.getAttribute("title"))) ||
+          "";
+        var cls = node.className && typeof node.className === "string" ? node.className : "";
+        var txt = (node.textContent || "").trim();
+        var probe = (label + " " + cls + " " + txt).toLowerCase();
+        if (
+          probe.indexOf("personaplex") !== -1 ||
+          probe.indexOf("ai assistant") !== -1 ||
+          probe.indexOf("sparkle") !== -1 ||
+          (probe.indexOf("fixed") !== -1 && probe.indexOf("bottom-6") !== -1 && probe.indexOf("right-6") !== -1)
+        ) {
+          node.click();
+          return true;
+        }
+      }
+      return false;
     }
 
     function distance(aX, aY, bX, bY) {
@@ -623,7 +662,7 @@
       petState.roaming = !!next;
       shell.classList.toggle("roaming", petState.roaming);
       roamBtn.classList.toggle("active", petState.roaming);
-      roamBtn.textContent = petState.roaming ? "Roam" : "Stay";
+      roamBtn.textContent = petState.roaming ? "Pause" : "Wander";
       try { localStorage.setItem(roamKey, petState.roaming ? "1" : "0"); } catch (err) {}
       scheduleRoam();
       if (petState.roaming) showSpeech("Roaming smoothly.", 1400);
@@ -691,7 +730,12 @@
     });
 
     talkBtn.addEventListener("click", function () {
-      showSpeech(pickRandomSpeech(), 3600);
+      var opened = openPersonaPlexChatPanel();
+      if (opened) {
+        showSpeech("PersonaPlex chat opened.", 1800);
+        return;
+      }
+      showSpeech("I could not find the chat button here.", 2400);
     });
 
     window.addEventListener("resize", function () {
