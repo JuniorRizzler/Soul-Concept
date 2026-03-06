@@ -116,24 +116,18 @@
           </div>
         </section>
 
-        <section class="section-tight" style="padding-top: 10px">
-          <div class="container">
-            <div id="lyne-widget" style="border:1px solid #e2d8cb;background:#ffffff;border-radius:14px;padding:14px;display:grid;gap:10px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-                <h3 style="margin:0">LYNE</h3>
-                <span style="font-size:.78rem;font-weight:700;color:#215c4b;background:rgba(33,92,75,.1);border:1px solid rgba(33,92,75,.24);padding:3px 8px;border-radius:999px">Voice Assistant</span>
-              </div>
-              <p style="margin:0;color:#8a8a8a;font-size:.75rem">LYNE widget build: 2026-03-06-C</p>
-              <p style="margin:0;color:#5a5863">Hey, welcome to Soul Concept. I can guide you through libraries, explain material, and help you decide where to go next.</p>
-              <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <button id="lyne-start" class="btn btn-primary" type="button">Start Conversation</button>
-                <button id="lyne-stop" class="btn btn-secondary" type="button">Stop</button>
-              </div>
-              <p id="lyne-meta" style="margin:0;color:#5a5863;font-size:.9rem">Idle.</p>
-              <pre id="lyne-chat" style="margin:0;white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px;min-height:64px">LYNE: Ready when you are.</pre>
-            </div>
+        <div id="lyne-widget" style="position:fixed;right:14px;bottom:14px;z-index:90;width:min(340px,92vw);border:1px solid #e2d8cb;background:#ffffff;border-radius:14px;padding:12px;display:grid;gap:8px;box-shadow:0 14px 30px rgba(23,21,16,.16)">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+            <h3 style="margin:0;font-size:1rem">LYNE</h3>
+            <span style="font-size:.72rem;font-weight:700;color:#215c4b;background:rgba(33,92,75,.1);border:1px solid rgba(33,92,75,.24);padding:2px 7px;border-radius:999px">Voice Widget</span>
           </div>
-        </section>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button id="lyne-start" class="btn btn-primary" type="button">Start</button>
+            <button id="lyne-stop" class="btn btn-secondary" type="button">Stop</button>
+          </div>
+          <p id="lyne-meta" style="margin:0;color:#5a5863;font-size:.85rem">Idle.</p>
+          <pre id="lyne-chat" style="margin:0;white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;padding:9px;min-height:52px;max-height:140px;overflow:auto">LYNE: Ready when you are.</pre>
+        </div>
 
         <section class="section-tight quick-nav-section" id="libraries">
           <div class="container reveal">
@@ -872,11 +866,7 @@
           meta.textContent = 'Conversation stopped.';
         });
 
-        window.setTimeout(function () {
-          var greeting = "Hey, welcome to Soul Concept. I am LYNE. I can guide you to the right section and explain your material in clear steps.";
-          setChat('LYNE: ' + greeting);
-          speak(greeting);
-        }, 500);
+        setChat('LYNE: Ready when you are.');
       })();
     </script>
     <script src="app.js?v=20260327"></script>
