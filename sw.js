@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v58";
+const CACHE_NAME = "soulconcept-v59";
 const ASSETS = [
   "/",
   "/index.html",
@@ -78,6 +78,7 @@ self.addEventListener("fetch", (event) => {
       url.pathname === "/math/math.bundle.js" ||
       url.pathname === "/study-library.bundle.js" ||
       url.pathname === "/app.js" ||
+      url.pathname === "/ai-bridge.js" ||
       url.pathname === "/library-whiteboard.js" ||
       url.pathname === "/styles.css" ||
       url.pathname === "/auth-config.js" ||

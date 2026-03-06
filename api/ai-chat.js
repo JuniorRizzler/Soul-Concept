@@ -2,6 +2,12 @@ function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json').send(JSON.stringify(payload))
 }
 
+function cleanBaseUrl(value, fallback) {
+  const raw = String(value || '').trim()
+  if (!raw) return fallback
+  return raw.replace(/\/$/, '')
+}
+
 function normalizeMessageContent(content) {
   if (typeof content === 'string') return content
   if (Array.isArray(content)) {
@@ -94,18 +100,31 @@ module.exports = async (req, res) => {
     }
   }
 
-  // Fallback path: APIFreeLLM-compatible OpenAI chat endpoint.
-  const apiKey = process.env.FREE_LLM_API_KEY
+  // Fallback path: OpenAI-compatible chat endpoint (PersonaPlex supported).
+  const apiKey =
+    process.env.PERSONAPLEX_API_KEY ||
+    process.env.HUGGINGFACE_API_KEY ||
+    process.env.FREE_LLM_API_KEY
   if (!apiKey) {
     json(res, 500, {
-      error: 'Missing FREE_GPT4_WEB_API_URL or FREE_LLM_API_KEY env var.',
+      error:
+        'Missing AI key. Set PERSONAPLEX_API_KEY (or HUGGINGFACE_API_KEY / FREE_LLM_API_KEY).',
     })
     return
   }
 
-  const model = String(process.env.FREE_LLM_MODEL || source.model || 'gpt-4o-mini')
-  const baseUrl = String(process.env.FREE_LLM_BASE_URL || 'https://api.apifreellm.com/v1').replace(/\/$/, '')
-  const chatUrl = process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
+  const forcedPersonaModel = String(process.env.PERSONAPLEX_MODEL || '').trim()
+  const model = String(
+    forcedPersonaModel ||
+      source.model ||
+      process.env.FREE_LLM_MODEL ||
+      'nvidia/personaplex-7b-v1'
+  )
+  const baseUrl = cleanBaseUrl(
+    process.env.PERSONAPLEX_BASE_URL || process.env.FREE_LLM_BASE_URL,
+    'https://router.huggingface.co/v1'
+  )
+  const chatUrl = process.env.PERSONAPLEX_CHAT_URL || process.env.FREE_LLM_CHAT_URL || baseUrl + '/chat/completions'
   const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
   const temperature = typeof source.temperature === 'number' ? source.temperature : 0.4
 
@@ -154,6 +173,8 @@ module.exports = async (req, res) => {
     json(res, 200, {
       ok: true,
       text: text || '',
+      provider: 'openai-compatible',
+      model,
       providerResponse: parsed || null,
     })
   } catch (err) {

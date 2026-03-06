@@ -27030,7 +27030,7 @@
     const [showPremiumModal, setShowPremiumModal] = (0, import_react3.useState)(false);
     const [showAIAssistant, setShowAIAssistant] = (0, import_react3.useState)(false);
     const [aiMessages, setAiMessages] = (0, import_react3.useState)([
-      { role: "assistant", content: "Hello! I'm L.Y.N.E (Logical Yield Neural Engine), your AI study companion. Ask me anything about your science topics - I can explain concepts, create practice questions, or help you understand difficult material!" }
+      { role: "assistant", content: "Hello! I'm PersonaPlex (Logical Yield Neural Engine), your AI study companion. Ask me anything about your science topics - I can explain concepts, create practice questions, or help you understand difficult material!" }
     ]);
     const [aiInput, setAiInput] = (0, import_react3.useState)("");
     const [isAiThinking, setIsAiThinking] = (0, import_react3.useState)(false);
@@ -27157,7 +27157,7 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: "claude-sonnet-4-20250514",
+            model: "nvidia/personaplex-7b-v1",
             max_tokens: 1e3,
             messages: [
               {
@@ -27517,7 +27517,7 @@ Student question: ${userMessage}`
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "\u2022" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-semibold", children: "Advanced AI features:" }),
-                    " Premium unlocks enhanced L.Y.N.E AI capabilities for deeper explanations"
+                    " Premium unlocks enhanced PersonaPlex AI capabilities for deeper explanations"
                   ] })
                 ] })
               ] })
@@ -28012,7 +28012,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "L.Y.N.E" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "PersonaPlex" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/90 font-semibold", children: "Logical Yield Neural Engine" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/70", children: "Your AI Study Companion" })
               ] })
@@ -28072,7 +28072,7 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-6 h-6" }) }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl", children: [
-                "Chat with L.Y.N.E",
+                "Chat with PersonaPlex",
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" })
               ] }) })
             ] })
@@ -28179,7 +28179,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "L.Y.N.E" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "PersonaPlex" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/90 font-semibold", children: "Logical Yield Neural Engine" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/70", children: "Your AI Study Companion" })
               ] })
@@ -28239,7 +28239,7 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-6 h-6" }) }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl", children: [
-                "Chat with L.Y.N.E",
+                "Chat with PersonaPlex",
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" })
               ] }) })
             ] })
@@ -28403,7 +28403,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "L.Y.N.E" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "PersonaPlex" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/90 font-semibold", children: "Logical Yield Neural Engine" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/70", children: "Your AI Study Companion" })
               ] })
@@ -28463,7 +28463,7 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-6 h-6" }) }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl", children: [
-                "Chat with L.Y.N.E",
+                "Chat with PersonaPlex",
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" })
               ] }) })
             ] })
@@ -28598,7 +28598,7 @@ Student question: ${userMessage}`
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "L.Y.N.E" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "PersonaPlex" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/90 font-semibold", children: "Logical Yield Neural Engine" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/70", children: "Your AI Study Companion" })
                 ] })
@@ -28658,7 +28658,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-6 h-6" }) }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl", children: [
-                  "Chat with L.Y.N.E",
+                  "Chat with PersonaPlex",
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" })
                 ] }) })
               ] })
@@ -29130,7 +29130,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold flex-shrink-0", children: "5" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-semibold text-gray-800 mb-1", children: "Use AI Assistant & Study Planner" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700 text-sm", children: "Ask L.Y.N.E AI for help (blue sparkle button), and use the Study Planner to schedule sessions with automatic time tracking." })
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700 text-sm", children: "Ask PersonaPlex AI for help (blue sparkle button), and use the Study Planner to schedule sessions with automatic time tracking." })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-purple-50 rounded-xl", children: [
@@ -29155,7 +29155,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
                   "\u{1F916} ",
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "AI Help:" }),
-                  " Stuck? Ask L.Y.N.E AI (blue sparkle button) to explain concepts or create practice questions"
+                  " Stuck? Ask PersonaPlex AI (blue sparkle button) to explain concepts or create practice questions"
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
                   "\u{1F4F1} ",
@@ -29222,7 +29222,7 @@ Student question: ${userMessage}`
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-100 hover:border-blue-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-5 h-5 text-blue-500" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "L.Y.N.E AI Assistant" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "PersonaPlex AI Assistant" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Chat with AI for explanations, practice questions, and help" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-blue-600 font-semibold", children: "\u2192 Click the blue sparkle button (bottom-right corner)" })
@@ -29282,7 +29282,7 @@ Student question: ${userMessage}`
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90 mb-2", children: [
             "\u2022 Ask ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "L.Y.N.E AI" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "PersonaPlex AI" }),
             " to explain tricky concepts or create custom practice questions"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90", children: [
@@ -29306,7 +29306,7 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-white/10 animate-ping" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "L.Y.N.E" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-lg", children: "PersonaPlex" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/90 font-semibold", children: "Logical Yield Neural Engine" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-white/70", children: "Your AI Study Companion" })
             ] })
@@ -29366,7 +29366,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-6 h-6" }) }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-900 text-white px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shadow-xl", children: [
-              "Chat with L.Y.N.E",
+              "Chat with PersonaPlex",
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900" })
             ] }) })
           ] })

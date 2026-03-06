@@ -53,6 +53,10 @@
         parsedBody = JSON.parse(init.body || '{}')
       }
     } catch (_err) {}
+    // Force a single assistant model across widgets unless the page overrides it.
+    var forcedModel = String(window.SC_AI_MODEL || 'nvidia/personaplex-7b-v1')
+    if (!parsedBody || typeof parsedBody !== 'object') parsedBody = {}
+    parsedBody.model = forcedModel
 
     try {
       var bridgeRes = await originalFetch('/api/ai-chat', {
