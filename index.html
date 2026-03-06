@@ -424,7 +424,7 @@
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
         var canSpeak = !!window.speechSynthesis;
-        var preferStableEnglishVoice = false;
+        var preferStableEnglishVoice = true;
         var allowBrowserFallback = true;
         var recognition = null;
         var active = false;
@@ -469,7 +469,8 @@
           if (
             lower.indexOf('sorry, we have had an error') !== -1 ||
             lower.indexOf('an error occurred') !== -1 ||
-            lower.indexOf('something went wrong') !== -1
+            lower.indexOf('something went wrong') !== -1 ||
+            lower.indexOf('i hit an error') !== -1
           ) {
             return localFallbackReply(userPrompt || '');
           }
@@ -494,37 +495,13 @@
               window.speechSynthesis.speak(fast);
               return;
             } catch (_err) {
-              // continue to neural path below
-            }
-          }
-          try {
-            var ttsRes = await fetch('/api/tts', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                request: {
-                  text: phrase,
-                  kokoro_lang: 'en',
-                  kokoro_voice: 'af_sarah'
-                }
-              })
-            });
-            if (ttsRes.ok) {
-              var blob = await ttsRes.blob();
-              if (liveAudio) {
-                try { liveAudio.pause(); } catch (_err) {}
-                try { URL.revokeObjectURL(liveAudio.src); } catch (_err) {}
-              }
-              var url = URL.createObjectURL(blob);
-              liveAudio = new Audio(url);
-              liveAudio.onplay = function () { meta.textContent = 'LYNE is speaking...'; };
-              liveAudio.onended = function () { meta.textContent = active ? 'Listening...' : 'Idle.'; };
-              await liveAudio.play();
+              meta.textContent = 'Could not start browser voice.';
               return;
             }
-          } catch (_err) {}
+          }
+          // Neural path disabled by default for stability on Edge.
           if (!allowBrowserFallback || !canSpeak) {
-            meta.textContent = 'Neural voice unavailable. Check ElevenLabs key/settings.';
+            meta.textContent = 'Voice unavailable in this browser.';
             return;
           }
           try {
