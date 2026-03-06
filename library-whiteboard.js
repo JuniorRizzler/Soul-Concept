@@ -505,6 +505,7 @@
     var waiting = false;
     var speaking = false;
     var ignoreMicUntil = 0;
+    var lastSpeechEndedAt = 0;
     var lastAssistantText = "";
     var lastUserText = "";
     var lastUserAt = 0;
@@ -522,7 +523,12 @@
       var u = compactText(text);
       var a = compactText(lastAssistantText);
       if (!u || !a) return false;
-      return u === a || (u.length > 20 && a.indexOf(u) !== -1) || (a.length > 20 && u.indexOf(a) !== -1);
+      return (
+        u === a ||
+        (u.length > 7 && a.indexOf(u) !== -1) ||
+        (a.length > 20 && u.indexOf(a) !== -1) ||
+        (Date.now() - lastSpeechEndedAt < 4500 && u.length > 5)
+      );
     }
 
     function fallbackReply(prompt) {
@@ -553,6 +559,7 @@
           };
           u.onend = function () {
             speaking = false;
+            lastSpeechEndedAt = Date.now();
             ignoreMicUntil = Date.now() + 900;
             meta.textContent = active ? "Listening..." : "Idle.";
             if (active && !waiting) window.setTimeout(startListening, 450);
@@ -560,6 +567,7 @@
           };
           u.onerror = function () {
             speaking = false;
+            lastSpeechEndedAt = Date.now();
             ignoreMicUntil = Date.now() + 700;
             meta.textContent = active ? "Listening..." : "Idle.";
             resolve();

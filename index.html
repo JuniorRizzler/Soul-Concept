@@ -447,6 +447,7 @@
         var captureTimer = null;
         var BARGE_IN_KEYWORDS = ['lyne stop', 'lyne wait', 'lyne pause', 'lyne listen', 'stop lyne', 'wait lyne', 'pause lyne'];
         var ignoreMicUntil = 0;
+        var lastSpeechEndedAt = 0;
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
@@ -552,8 +553,9 @@
           var a = compactText(lastAssistantText);
           if (!u || !a) return false;
           if (u === a) return true;
-          if (u.length > 22 && a.indexOf(u) !== -1) return true;
+          if (u.length > 7 && a.indexOf(u) !== -1) return true;
           if (a.length > 22 && u.indexOf(a) !== -1) return true;
+          if (Date.now() - lastSpeechEndedAt < 4500 && u.length > 5) return true;
           return false;
         }
 
@@ -593,6 +595,7 @@
               };
               u.onend = function () {
                 speaking = false;
+                lastSpeechEndedAt = Date.now();
                 meta.textContent = active ? 'Listening...' : 'Idle.';
                 ignoreMicUntil = Date.now() + 900;
                 nextListenAt = Date.now() + 900;
@@ -604,6 +607,7 @@
               };
               u.onerror = function () {
                 speaking = false;
+                lastSpeechEndedAt = Date.now();
                 meta.textContent = active ? 'Listening...' : 'Idle.';
                 ignoreMicUntil = Date.now() + 700;
                 nextListenAt = Date.now() + 450;
@@ -675,6 +679,9 @@
                 }
               } catch (_err) {}
               speaking = false;
+              lastSpeechEndedAt = Date.now();
+            } else {
+              return;
             }
           }
           try { recognition.start(); } catch (_err) {}
