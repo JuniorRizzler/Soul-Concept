@@ -41,7 +41,7 @@ function messagesToPrompt(messages) {
 async function tryHuggingFaceInferenceFallback(apiKey, model, messages, maxTokens, temperature) {
   const hfModel = String(model || '').trim() || 'nvidia/personaplex-7b-v1'
   const promptText = messagesToPrompt(messages)
-  if (!promptText) return { ok: false, text: '', response: null }
+  if (!promptText) return { ok: false, text: '', response: null, error: 'No prompt text to send.' }
 
   const endpoint = 'https://api-inference.huggingface.co/models/' + encodeURIComponent(hfModel)
   const res = await fetch(endpoint, {
@@ -67,7 +67,11 @@ async function tryHuggingFaceInferenceFallback(apiKey, model, messages, maxToken
   } catch (_err) {}
 
   if (!res.ok) {
-    return { ok: false, text: '', response: parsed || raw }
+    var errText = ''
+    if (parsed && typeof parsed.error === 'string') errText = parsed.error
+    else if (parsed && parsed.error && typeof parsed.error.message === 'string') errText = parsed.error.message
+    else errText = String(raw || 'Hugging Face inference error.')
+    return { ok: false, text: '', response: parsed || raw, error: errText }
   }
 
   let text = ''
@@ -79,7 +83,7 @@ async function tryHuggingFaceInferenceFallback(apiKey, model, messages, maxToken
     text = raw.trim()
   }
 
-  return { ok: true, text: text, response: parsed || raw }
+  return { ok: true, text: text, response: parsed || raw, error: '' }
 }
 
 module.exports = async (req, res) => {
@@ -194,6 +198,28 @@ module.exports = async (req, res) => {
   const completionUrl = process.env.PERSONAPLEX_COMPLETIONS_URL || process.env.FREE_LLM_COMPLETIONS_URL || baseUrl + '/completions'
   const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
   const temperature = typeof source.temperature === 'number' ? source.temperature : 0.4
+  const useDirectHfInference =
+    String(process.env.FORCE_HF_INFERENCE || '').trim() === '1' ||
+    model.toLowerCase().indexOf('personaplex') !== -1
+
+  if (useDirectHfInference) {
+    try {
+      const hfDirect = await tryHuggingFaceInferenceFallback(apiKey, model, messages, maxTokens, temperature)
+      if (hfDirect.ok) {
+        json(res, 200, {
+          ok: true,
+          text: hfDirect.text || '',
+          provider: 'huggingface-inference',
+          model,
+          mode: 'hf-direct',
+          providerResponse: hfDirect.response || null,
+        })
+        return
+      }
+    } catch (_err) {
+      // continue with chat/completions fallback path
+    }
+  }
 
   try {
     const upstreamRes = await fetch(chatUrl, {
@@ -227,7 +253,9 @@ module.exports = async (req, res) => {
         (upstreamErrorText.toLowerCase().indexOf('not a chat model') !== -1 ||
           upstreamErrorText.toLowerCase().indexOf('chat model') !== -1)
 
-      if (canTryCompletionFallback) {
+      var completionErrorText = ''
+      var hfFallbackErrorText = ''
+      if (canTryCompletionFallback || useDirectHfInference) {
         try {
           const promptText = messagesToPrompt(messages)
           const completionRes = await fetch(completionUrl, {
@@ -266,9 +294,17 @@ module.exports = async (req, res) => {
               providerResponse: completionParsed || null,
             })
             return
+          } else {
+            completionErrorText =
+              (completionParsed &&
+                (completionParsed.error && completionParsed.error.message
+                  ? completionParsed.error.message
+                  : completionParsed.error)) ||
+              completionRaw ||
+              'Completions fallback failed.'
           }
         } catch (_err) {
-          // ignore completion fallback errors and return original upstream error below
+          completionErrorText = _err && _err.message ? _err.message : 'Completions fallback failed.'
         }
 
         try {
@@ -283,14 +319,19 @@ module.exports = async (req, res) => {
               providerResponse: hfFallback.response || null,
             })
             return
+          } else {
+            hfFallbackErrorText = String(hfFallback.error || '')
           }
         } catch (_err) {
-          // ignore HF fallback errors and return original upstream error below
+          hfFallbackErrorText = _err && _err.message ? _err.message : 'Hugging Face fallback failed.'
         }
       }
 
+      var mergedError = upstreamErrorText
+      if (hfFallbackErrorText) mergedError += ' | HF fallback: ' + hfFallbackErrorText
+      if (completionErrorText) mergedError += ' | Completions fallback: ' + completionErrorText
       json(res, upstreamRes.status, {
-        error: upstreamErrorText,
+        error: mergedError,
       })
       return
     }
