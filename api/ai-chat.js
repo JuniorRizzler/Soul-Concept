@@ -66,10 +66,19 @@ module.exports = async (req, res) => {
     return
   }
 
-  // Preferred path: self-hosted Free-GPT4-WEB-API.
+  const hasPersonaConfig = Boolean(
+    String(process.env.PERSONAPLEX_API_KEY || '').trim() ||
+    String(process.env.HUGGINGFACE_API_KEY || '').trim() ||
+    String(process.env.PERSONAPLEX_MODEL || '').trim() ||
+    String(process.env.PERSONAPLEX_BASE_URL || '').trim()
+  )
+  const forceFreeWebApi = String(process.env.FORCE_FREE_GPT4_WEB_API || '').trim() === '1'
+
+  // Legacy path: self-hosted Free-GPT4-WEB-API.
   // Expected format: GET {FREE_GPT4_WEB_API_URL}/?text=...
+  // PersonaPlex config takes priority unless FORCE_FREE_GPT4_WEB_API=1.
   const freeGptWebApiUrl = String(process.env.FREE_GPT4_WEB_API_URL || '').trim()
-  if (freeGptWebApiUrl) {
+  if (freeGptWebApiUrl && (!hasPersonaConfig || forceFreeWebApi)) {
     const keyword = String(process.env.FREE_GPT4_WEB_API_KEYWORD || 'text')
     const mergedPrompt = messages
       .map(function (m) {
