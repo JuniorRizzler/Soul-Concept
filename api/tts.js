@@ -88,6 +88,81 @@ async function tryKokoroTts(source, text) {
   return { ok: true, status: 200, error: '', buffer: Buffer.from(arr), contentType: contentType }
 }
 
+async function tryReplicateKokoro(source, text) {
+  const token = String(process.env.REPLICATE_API_TOKEN || '').trim()
+  if (!token) return { ok: false, status: 0, error: '', buffer: null, contentType: '' }
+
+  const modelRef = String(
+    source.replicate_model ||
+      process.env.KOKORO_REPLICATE_MODEL ||
+      'jaaari/kokoro-82m'
+  ).trim()
+  const voice = String(source.kokoro_voice || process.env.KOKORO_VOICE || 'af_sarah').trim()
+  const speed = typeof source.kokoro_speed === 'number' ? source.kokoro_speed : Number(process.env.KOKORO_SPEED || 1.0)
+
+  var body = {
+    input: {
+      text: text,
+      voice: voice,
+      speed: speed,
+    },
+  }
+  if (modelRef.indexOf('/') !== -1 && modelRef.indexOf(':') === -1) body.model = modelRef
+  else body.version = modelRef
+
+  const createRes = await fetch('https://api.replicate.com/v1/predictions', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      Prefer: 'wait=40',
+    },
+    body: JSON.stringify(body),
+  })
+
+  const createRaw = await createRes.text()
+  let createParsed = null
+  try {
+    createParsed = JSON.parse(createRaw)
+  } catch (_err) {}
+
+  if (!createRes.ok) {
+    return { ok: false, status: createRes.status, error: createRaw || 'Replicate create prediction failed.', buffer: null, contentType: '' }
+  }
+
+  var output = createParsed && createParsed.output
+  var url = ''
+  if (typeof output === 'string') url = output
+  else if (Array.isArray(output) && output[0] && typeof output[0] === 'string') url = output[0]
+  if (!url && createParsed && createParsed.urls && createParsed.urls.get) {
+    const pollRes = await fetch(String(createParsed.urls.get), {
+      headers: { Authorization: 'Bearer ' + token },
+    })
+    const pollRaw = await pollRes.text()
+    let pollParsed = null
+    try { pollParsed = JSON.parse(pollRaw) } catch (_err) {}
+    if (!pollRes.ok) {
+      return { ok: false, status: pollRes.status, error: pollRaw || 'Replicate polling failed.', buffer: null, contentType: '' }
+    }
+    output = pollParsed && pollParsed.output
+    if (typeof output === 'string') url = output
+    else if (Array.isArray(output) && output[0] && typeof output[0] === 'string') url = output[0]
+  }
+
+  if (!url) {
+    return { ok: false, status: 502, error: 'Replicate returned no audio output URL.', buffer: null, contentType: '' }
+  }
+
+  const fileRes = await fetch(url)
+  if (!fileRes.ok) {
+    const fileRaw = await fileRes.text()
+    return { ok: false, status: fileRes.status, error: fileRaw || 'Replicate audio download failed.', buffer: null, contentType: '' }
+  }
+  const arr = await fileRes.arrayBuffer()
+  const contentType = String(fileRes.headers.get('content-type') || '').trim() || 'audio/mpeg'
+  return { ok: true, status: 200, error: '', buffer: Buffer.from(arr), contentType: contentType }
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -129,9 +204,23 @@ module.exports = async (req, res) => {
     // fall through to ElevenLabs path
   }
 
+  // Secondary path: hosted Kokoro on Replicate (no self-hosted server required).
+  try {
+    const rep = await tryReplicateKokoro(source, text)
+    if (rep.ok && rep.buffer) {
+      res.status(200)
+      res.setHeader('Content-Type', rep.contentType || 'audio/mpeg')
+      res.setHeader('Cache-Control', 'no-store')
+      res.send(rep.buffer)
+      return
+    }
+  } catch (_err) {
+    // fall through to ElevenLabs path
+  }
+
   const apiKey = String(process.env.ELEVENLABS_API_KEY || '').trim()
   if (!apiKey) {
-    json(res, 501, { error: 'Missing KOKORO_TTS_URL and ELEVENLABS_API_KEY env vars.' })
+    json(res, 501, { error: 'Missing KOKORO_TTS_URL, REPLICATE_API_TOKEN, and ELEVENLABS_API_KEY env vars.' })
     return
   }
 
