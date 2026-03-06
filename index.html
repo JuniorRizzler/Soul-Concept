@@ -433,6 +433,7 @@
         var speaking = false;
         var messages = [];
         var preferredBrowserVoice = null;
+        var heardText = '';
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
@@ -590,7 +591,7 @@
           preferredBrowserVoice = pickPreferredVoice();
           recognition = new SpeechRecognition();
           recognition.lang = 'en-US';
-          recognition.interimResults = true;
+          recognition.interimResults = false;
           recognition.continuous = false;
           recognition.maxAlternatives = 1;
           recognition.onstart = function () {
@@ -604,6 +605,7 @@
             }
             transcript = String(transcript || '').trim();
             if (!transcript) return;
+            heardText = '';
             listening = false;
             askLyne(transcript);
           };
@@ -626,6 +628,12 @@
           };
           recognition.onend = function () {
             listening = false;
+            if (!waiting && heardText) {
+              var captured = heardText;
+              heardText = '';
+              askLyne(captured);
+              return;
+            }
             if (active && !waiting) startListening();
           };
         } else {
