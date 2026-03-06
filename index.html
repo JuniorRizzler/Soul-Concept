@@ -437,6 +437,7 @@
         var nextListenAt = 0;
         var lastUserText = '';
         var lastUserAt = 0;
+        var lastAssistantText = '';
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
@@ -479,6 +480,24 @@
             return localFallbackReply(userPrompt || '');
           }
           return raw;
+        }
+
+        function compactText(value) {
+          return String(value || '')
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+
+        function looksLikeEcho(userText) {
+          var u = compactText(userText);
+          var a = compactText(lastAssistantText);
+          if (!u || !a) return false;
+          if (u === a) return true;
+          if (u.length > 22 && a.indexOf(u) !== -1) return true;
+          if (a.length > 22 && u.indexOf(a) !== -1) return true;
+          return false;
         }
 
         async function speak(text) {
@@ -567,6 +586,10 @@
         async function askLyne(userText) {
           var prompt = String(userText || '').trim();
           if (!prompt) return;
+          if (looksLikeEcho(prompt)) {
+            meta.textContent = active ? 'Listening...' : 'Idle.';
+            return;
+          }
           if (prompt.length < 2) return;
           var now = Date.now();
           if (lastUserText && prompt.toLowerCase() === lastUserText && now - lastUserAt < 4000) {
@@ -604,11 +627,13 @@
             var data = await res.json();
             if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
             var reply = normalizeAssistantText((data && data.text) || '', prompt);
+            lastAssistantText = reply;
             messages.push({ role: 'assistant', content: reply });
             setChat('You: ' + prompt + '\n\nLYNE: ' + reply);
             await speak(reply);
           } catch (err) {
             var fallback = localFallbackReply(prompt);
+            lastAssistantText = fallback;
             messages.push({ role: 'assistant', content: fallback });
             setChat('You: ' + prompt + '\n\nLYNE: ' + fallback);
             meta.textContent = 'Using local fallback reply (network timeout/error).';
