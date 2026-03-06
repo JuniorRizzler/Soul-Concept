@@ -98,12 +98,15 @@ async function tryReplicateKokoro(source, text) {
       'jaaari/kokoro-82m'
   ).trim()
   const voice = String(source.kokoro_voice || process.env.KOKORO_VOICE || 'af_sarah').trim()
+  const lang = String(source.kokoro_lang || process.env.KOKORO_LANG || 'en').trim()
   const speed = typeof source.kokoro_speed === 'number' ? source.kokoro_speed : Number(process.env.KOKORO_SPEED || 1.0)
 
   var body = {
     input: {
       text: text,
       voice: voice,
+      lang: lang,
+      language: lang,
       speed: speed,
     },
   }
