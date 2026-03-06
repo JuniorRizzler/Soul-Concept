@@ -127,6 +127,8 @@
               <textarea id="pp-home-input" style="width:100%;min-height:88px;border:1px solid #d9ccbc;border-radius:8px;padding:10px">Explain linear equations in 3 simple steps.</textarea>
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
                 <button id="pp-home-send" class="btn btn-primary" type="button">Test Hosted AI</button>
+                <button id="pp-home-voice" class="btn btn-secondary" type="button">Start Voice</button>
+                <button id="pp-home-speak" class="btn btn-secondary" type="button">Speak Last Reply</button>
                 <a class="btn btn-secondary" href="study-library.html">Open Science Library</a>
               </div>
               <p id="pp-home-meta" style="margin:10px 0 0 0;color:#5a5863;font-size:.9rem">Idle.</p>
@@ -417,10 +419,85 @@
     <script>
       (function () {
         var btn = document.getElementById('pp-home-send');
+        var voiceBtn = document.getElementById('pp-home-voice');
+        var speakBtn = document.getElementById('pp-home-speak');
         var input = document.getElementById('pp-home-input');
         var out = document.getElementById('pp-home-out');
         var meta = document.getElementById('pp-home-meta');
-        if (!btn || !input || !out || !meta) return;
+        if (!btn || !voiceBtn || !speakBtn || !input || !out || !meta) return;
+        var lastReply = '';
+        var recognition = null;
+        var listening = false;
+        var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var canListen = typeof SpeechRecognition === 'function';
+        var canSpeak = !!window.speechSynthesis;
+        if (!canListen) {
+          voiceBtn.disabled = true;
+          voiceBtn.textContent = 'Voice N/A';
+        }
+        if (!canSpeak) {
+          speakBtn.disabled = true;
+          speakBtn.textContent = 'Speak N/A';
+        }
+
+        function speakText(text) {
+          if (!canSpeak) return;
+          var phrase = String(text || '').trim();
+          if (!phrase) return;
+          try {
+            window.speechSynthesis.cancel();
+            var u = new SpeechSynthesisUtterance(phrase);
+            u.rate = 1.0;
+            u.pitch = 1.0;
+            u.onstart = function () {
+              meta.textContent = 'Speaking...';
+            };
+            u.onend = function () {
+              meta.textContent = 'Done speaking.';
+            };
+            u.onerror = function () {
+              meta.textContent = 'Could not speak response.';
+            };
+            window.speechSynthesis.speak(u);
+          } catch (_err) {
+            meta.textContent = 'Could not speak response.';
+          }
+        }
+
+        if (canListen) {
+          recognition = new SpeechRecognition();
+          recognition.lang = 'en-US';
+          recognition.interimResults = true;
+          recognition.continuous = false;
+          recognition.onstart = function () {
+            listening = true;
+            voiceBtn.textContent = 'Listening...';
+            meta.textContent = 'Listening. Start talking.';
+          };
+          recognition.onresult = function (event) {
+            var transcript = '';
+            for (var i = event.resultIndex; i < event.results.length; i++) {
+              transcript += event.results[i][0].transcript || '';
+            }
+            input.value = transcript.trim();
+          };
+          recognition.onerror = function (event) {
+            listening = false;
+            voiceBtn.textContent = 'Start Voice';
+            meta.textContent = 'Voice error: ' + String((event && event.error) || 'unknown');
+          };
+          recognition.onend = function () {
+            listening = false;
+            voiceBtn.textContent = 'Start Voice';
+            if (String(input.value || '').trim()) {
+              meta.textContent = 'Voice captured. Sending...';
+              btn.click();
+            } else if (meta.textContent.indexOf('error') === -1) {
+              meta.textContent = 'No speech captured.';
+            }
+          };
+        }
+
         btn.addEventListener('click', async function () {
           var prompt = String(input.value || '').trim();
           if (!prompt) return;
@@ -442,14 +519,39 @@
             });
             var data = await res.json();
             if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
-            out.textContent = String((data && data.text) || '').trim() || '(No text returned.)';
+            lastReply = String((data && data.text) || '').trim() || '(No text returned.)';
+            out.textContent = lastReply;
             meta.textContent = 'Connected. Model: ' + String((data && data.model) || 'Qwen/Qwen2.5-7B-Instruct');
+            speakText(lastReply);
           } catch (err) {
             out.textContent = 'Error: ' + (err && err.message ? err.message : 'Request failed.');
             meta.textContent = 'Failed. Check Vercel function logs.';
           } finally {
             btn.disabled = false;
           }
+        });
+
+        voiceBtn.addEventListener('click', function () {
+          if (!recognition) return;
+          if (listening) {
+            recognition.stop();
+            return;
+          }
+          input.value = '';
+          meta.textContent = 'Preparing microphone...';
+          try {
+            recognition.start();
+          } catch (_err) {
+            meta.textContent = 'Could not start microphone.';
+          }
+        });
+
+        speakBtn.addEventListener('click', function () {
+          if (!lastReply) {
+            meta.textContent = 'No reply to speak yet.';
+            return;
+          }
+          speakText(lastReply);
         });
       })();
     </script>

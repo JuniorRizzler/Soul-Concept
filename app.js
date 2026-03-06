@@ -58,6 +58,7 @@
   function mountPersonaPlexHomeDemo() {
     if (currentPage !== 'index.html') return
     if (document.querySelector('[data-pp-demo]')) return
+    if (document.getElementById('pp-home-send')) return
 
     const librariesSection = document.getElementById('libraries')
     if (!librariesSection || !librariesSection.parentNode) return
