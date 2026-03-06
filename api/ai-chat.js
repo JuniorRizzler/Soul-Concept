@@ -74,6 +74,49 @@ function messagesToPrompt(messages) {
     .trim()
 }
 
+function latestUserMessage(messages, prompt) {
+  const arr = Array.isArray(messages) ? messages : []
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const m = arr[i]
+    if (!m || String(m.role || '').toLowerCase() !== 'user') continue
+    const c = normalizeMessageContent(m.content)
+    if (c && String(c).trim()) return String(c).trim()
+  }
+  return String(prompt || '').trim()
+}
+
+function localInstantTutorReply(userText) {
+  const raw = String(userText || '').trim()
+  const q = raw.toLowerCase()
+  if (!raw) return 'Ask a specific question and I will answer in 3 short steps.'
+
+  if (q.includes('where') || q.includes('which page') || q.includes('go to') || q.includes('open')) {
+    if (q.includes('science')) return 'Open Science at study-library.html.'
+    if (q.includes('geography')) return 'Open Geography at geography-library.html.'
+    if (q.includes('grade 10') || q.includes('math 10')) return 'Open Grade 10 Math at grade-10-math.html.'
+    if (q.includes('grade 9') || q.includes('math 9')) return 'Open Grade 9 Math at math/index.html.'
+    return 'Choose one page: Science study-library.html, Geography geography-library.html, Math 9 math/index.html, Math 10 grade-10-math.html.'
+  }
+
+  if (q.includes('slope') || q.includes('slope-intercept') || q.includes('y=mx+b') || q.includes('y = mx + b')) {
+    return 'Slope-intercept form is y = mx + b. m is slope, b is y-intercept. Example: y = 2x + 3 means slope 2 and y-intercept 3.'
+  }
+  if (q.includes('trig') || q.includes('sin') || q.includes('cos') || q.includes('tan')) {
+    return 'Use SOH-CAH-TOA: sin = opp/hyp, cos = adj/hyp, tan = opp/adj. Label sides first, substitute values, then solve.'
+  }
+  if (q.includes('linear equation') || q.includes('solve for x') || q.includes('equation')) {
+    return 'To solve a linear equation: 1) simplify both sides, 2) isolate x by inverse operations, 3) check by substitution.'
+  }
+  if (q.includes('quadratic')) {
+    return 'For quadratics: put in standard form ax^2+bx+c=0, then factor if possible or use x = (-b +/- sqrt(b^2-4ac)) / (2a).'
+  }
+  if (q.includes('pythagorean') || q.includes('right triangle')) {
+    return 'Use a^2 + b^2 = c^2, where c is the hypotenuse. Plug values, solve, then verify the longest side is c.'
+  }
+
+  return 'Direct answer: break this into known formula + substitution + final check. Send the exact problem and I will solve it step by step.'
+}
+
 async function tryHuggingFaceInferenceFallback(apiKey, model, messages, maxTokens, temperature) {
   const hfModel = String(model || '').trim() || 'nvidia/personaplex-7b-v1'
   const promptText = messagesToPrompt(messages)
@@ -165,6 +208,17 @@ module.exports = async (req, res) => {
     json(res, 400, { error: 'No messages provided.' })
     return
   }
+  const latestPrompt = latestUserMessage(messages, prompt)
+
+  if (String(process.env.FORCE_LOCAL_AI || '').trim() === '1') {
+    json(res, 200, {
+      ok: true,
+      text: localInstantTutorReply(latestPrompt),
+      provider: 'local-instant',
+      model: 'local-instant-v1',
+    })
+    return
+  }
 
   const hasPersonaConfig = Boolean(
     String(process.env.DEEPSEEK_API_KEY || '').trim() ||
@@ -234,9 +288,11 @@ module.exports = async (req, res) => {
     process.env.HUGGINGFACE_API_KEY ||
     process.env.FREE_LLM_API_KEY
   if (!apiKey) {
-    json(res, 500, {
-      error:
-        'Missing AI key. Set DEEPSEEK_API_KEY (or PERSONAPLEX_API_KEY / HUGGINGFACE_API_KEY / FREE_LLM_API_KEY).',
+    json(res, 200, {
+      ok: true,
+      text: localInstantTutorReply(latestPrompt),
+      provider: 'local-instant',
+      model: 'local-instant-v1',
     })
     return
   }
@@ -408,8 +464,12 @@ module.exports = async (req, res) => {
       var mergedError = upstreamErrorText
       if (hfFallbackErrorText) mergedError += ' | HF fallback: ' + hfFallbackErrorText
       if (completionErrorText) mergedError += ' | Completions fallback: ' + completionErrorText
-      json(res, upstreamRes.status, {
-        error: mergedError,
+      json(res, 200, {
+        ok: true,
+        text: localInstantTutorReply(latestPrompt),
+        provider: 'local-instant',
+        model: 'local-instant-v1',
+        warning: mergedError,
       })
       return
     }
@@ -433,6 +493,12 @@ module.exports = async (req, res) => {
       providerResponse: parsed || null,
     })
   } catch (err) {
-    json(res, 500, { error: err && err.message ? err.message : 'AI request failed.' })
+    json(res, 200, {
+      ok: true,
+      text: localInstantTutorReply(latestPrompt),
+      provider: 'local-instant',
+      model: 'local-instant-v1',
+      warning: err && err.message ? err.message : 'AI request failed.',
+    })
   }
 }
