@@ -11,6 +11,24 @@ function cleanBaseUrl(value, fallback) {
 const WORKING_HOSTED_MODEL = 'Qwen/Qwen2.5-7B-Instruct'
 const DEFAULT_DEEPSEEK_MODEL = 'deepseek-chat'
 const DEFAULT_DEEPSEEK_BASE_URL = 'https://api.deepseek.com/v1'
+
+function normalizeDeepSeekModelName(input) {
+  const raw = String(input || '').trim().toLowerCase()
+  if (!raw) return DEFAULT_DEEPSEEK_MODEL
+  if (raw === 'deepseek-chat' || raw === 'deepseek-reasoner') return raw
+  if (
+    raw === 'deepseek-v3.2' ||
+    raw === 'deepseek-v3' ||
+    raw === 'deepseek-v3-2' ||
+    raw.indexOf('deepseek-v3') !== -1
+  ) {
+    return 'deepseek-chat'
+  }
+  if (raw.indexOf('reason') !== -1 || raw.indexOf('r1') !== -1) {
+    return 'deepseek-reasoner'
+  }
+  return DEFAULT_DEEPSEEK_MODEL
+}
 const SOUL_CONCEPT_SYSTEM_CONTEXT =
   'You are LYNE, Soul Concept\'s voice-first study copilot. Be accurate, warm, energetic, and conversational. ' +
   'Core purpose: help students study faster with structured libraries and tools instead of random browsing. ' +
@@ -151,6 +169,8 @@ module.exports = async (req, res) => {
   const hasPersonaConfig = Boolean(
     String(process.env.DEEPSEEK_API_KEY || '').trim() ||
     String(process.env.SCIETLY_API_KEY || '').trim() ||
+    String(process.env.DEEPSEEK_KEY || '').trim() ||
+    String(process.env.DEEPSEEK_TOKEN || '').trim() ||
     String(process.env.DEEPSEEK_BASE_URL || '').trim() ||
     String(process.env.DEEPSEEK_MODEL || '').trim() ||
     String(process.env.PERSONAPLEX_API_KEY || '').trim() ||
@@ -196,7 +216,13 @@ module.exports = async (req, res) => {
   }
 
   // Fallback path: OpenAI-compatible chat endpoint (PersonaPlex supported).
-  const deepSeekApiKey = String(process.env.DEEPSEEK_API_KEY || process.env.SCIETLY_API_KEY || '').trim()
+  const deepSeekApiKey = String(
+    process.env.DEEPSEEK_API_KEY ||
+      process.env.SCIETLY_API_KEY ||
+      process.env.DEEPSEEK_KEY ||
+      process.env.DEEPSEEK_TOKEN ||
+      ''
+  ).trim()
   const deepSeekEnabled =
     String(process.env.USE_DEEPSEEK || '').trim() === '1' ||
     String(process.env.AI_PROVIDER || '').trim().toLowerCase() === 'deepseek' ||
@@ -220,9 +246,11 @@ module.exports = async (req, res) => {
   const requestedModel = String(
     forcedPersonaModel ||
       (deepSeekEnabled
-        ? (sourceModel && sourceModel.toLowerCase().indexOf('deepseek') !== -1
-            ? sourceModel
-            : String(process.env.DEEPSEEK_MODEL || DEFAULT_DEEPSEEK_MODEL))
+        ? normalizeDeepSeekModelName(
+            sourceModel && sourceModel.toLowerCase().indexOf('deepseek') !== -1
+              ? sourceModel
+              : String(process.env.DEEPSEEK_MODEL || DEFAULT_DEEPSEEK_MODEL)
+          )
         : sourceModel || process.env.FREE_LLM_MODEL || 'nvidia/personaplex-7b-v1')
   )
   const allowPersonaPlex = String(process.env.ALLOW_PERSONAPLEX || '').trim() === '1'
