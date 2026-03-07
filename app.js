@@ -44,7 +44,7 @@
       '.stats-panel-title{font-size:.88rem;color:#1b1b1f;letter-spacing:.02em;text-transform:uppercase;border-bottom:1px dashed rgba(33,92,75,.24);padding-bottom:6px;margin-bottom:2px}' +
       '.stats-row{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#5a5863;font-size:.9rem}' +
       '.stats-row strong{color:#1b1b1f;font-size:.92rem}' +
-      '.push-widget{position:fixed;bottom:18px;right:18px;z-index:60;width:min(320px,86vw);background:rgba(255,255,255,.95);border:1px solid #e2d8cb;border-radius:18px;box-shadow:0 16px 36px rgba(23,21,16,.12);padding:16px;display:grid;gap:8px}' +
+      '.push-widget{position:fixed;bottom:18px;right:18px;z-index:110;width:min(320px,86vw);background:rgba(255,255,255,.95);border:1px solid #e2d8cb;border-radius:18px;box-shadow:0 16px 36px rgba(23,21,16,.12);padding:16px;display:grid;gap:8px}' +
       '.push-title{font-size:1rem;font-weight:800;color:#1b1b1f}.push-text{margin:0;color:#5a5863;font-size:.9rem}.push-actions{display:flex;gap:8px;flex-wrap:wrap}.push-status{margin:0;font-size:.86rem;min-height:18px}.push-status.ok{color:#166534}.push-status.err{color:#b91c1c}' +
       '.pp-demo-card{border:1px solid #e2d8cb;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(250,247,241,.96));padding:14px;display:grid;gap:10px}' +
       '.pp-demo-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.pp-demo-chip{display:inline-flex;align-items:center;padding:4px 9px;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:rgba(33,92,75,.1);border:1px solid rgba(33,92,75,.24);color:#215c4b}' +
@@ -824,6 +824,9 @@
     } else {
       const widget = document.createElement('div')
       widget.className = 'push-widget'
+      if (document.getElementById('lyne-widget')) {
+        widget.style.bottom = '176px'
+      }
       widget.innerHTML =
         '<div class="push-header">' +
         '<div class="push-title">Sign up for notifications</div>' +
