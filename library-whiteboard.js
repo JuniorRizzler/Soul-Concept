@@ -517,6 +517,7 @@
     var lastPromptKey = "";
     var messages = [];
     var lyneMinKey = "lib-lyne:minimized";
+    var lyneAudio = null;
     function isMobileViewport() {
       return window.innerWidth <= 760;
     }
@@ -724,40 +725,109 @@
     function speak(text) {
       return new Promise(function (resolve) {
         var phrase = String(text || "").trim();
-        if (!phrase || !window.speechSynthesis) return resolve();
+        if (!phrase) return resolve();
         try {
-          window.speechSynthesis.cancel();
-          var u = new SpeechSynthesisUtterance(phrase);
-          u.lang = "en-US";
-          u.rate = 0.94;
-          u.pitch = 1;
-          u.onstart = function () {
-            speaking = true;
-            ignoreMicUntil = Date.now() + 2200;
-            if (recognition && listening) {
-              try { recognition.abort(); } catch (err) {}
-              listening = false;
-            }
-            meta.textContent = "LYNE is speaking...";
-          };
-          u.onend = function () {
-            speaking = false;
-            lastSpeechEndedAt = Date.now();
-            ignoreMicUntil = Date.now() + 900;
-            meta.textContent = active ? "Listening..." : "Idle.";
-            if (active && !waiting) window.setTimeout(startListening, 450);
+          if (lyneAudio) {
+            try { lyneAudio.pause(); } catch (err0) {}
+            lyneAudio = null;
+          }
+        } catch (err1) {}
+        try { window.speechSynthesis.cancel(); } catch (err2) {}
+
+        var tryBrowserFallback = function () {
+          if (!window.speechSynthesis) return resolve();
+          try {
+            window.speechSynthesis.cancel();
+            var u = new SpeechSynthesisUtterance(phrase);
+            u.lang = "en-US";
+            u.rate = 0.94;
+            u.pitch = 1;
+            u.onstart = function () {
+              speaking = true;
+              ignoreMicUntil = Date.now() + 2200;
+              if (recognition && listening) {
+                try { recognition.abort(); } catch (err) {}
+                listening = false;
+              }
+              meta.textContent = "LYNE is speaking...";
+            };
+            u.onend = function () {
+              speaking = false;
+              lastSpeechEndedAt = Date.now();
+              ignoreMicUntil = Date.now() + 900;
+              meta.textContent = active ? "Listening..." : "Idle.";
+              if (active && !waiting) window.setTimeout(startListening, 450);
+              resolve();
+            };
+            u.onerror = function () {
+              speaking = false;
+              lastSpeechEndedAt = Date.now();
+              ignoreMicUntil = Date.now() + 700;
+              meta.textContent = active ? "Listening..." : "Idle.";
+              resolve();
+            };
+            window.speechSynthesis.speak(u);
+          } catch (err) {
             resolve();
-          };
-          u.onerror = function () {
-            speaking = false;
-            lastSpeechEndedAt = Date.now();
-            ignoreMicUntil = Date.now() + 700;
-            meta.textContent = active ? "Listening..." : "Idle.";
-            resolve();
-          };
-          window.speechSynthesis.speak(u);
+          }
+        };
+
+        try {
+          fetch("/api/tts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              request: {
+                text: phrase,
+                openai_model: "gpt-4o-mini-tts",
+                openai_voice: "alloy",
+                openai_format: "mp3"
+              }
+            })
+          })
+            .then(function (ttsRes) {
+              if (!ttsRes.ok) throw new Error("Neural TTS unavailable");
+              return ttsRes.blob();
+            })
+            .then(function (blob) {
+              var url = URL.createObjectURL(blob);
+              var audio = new Audio(url);
+              lyneAudio = audio;
+              speaking = true;
+              ignoreMicUntil = Date.now() + 2200;
+              if (recognition && listening) {
+                try { recognition.abort(); } catch (err) {}
+                listening = false;
+              }
+              meta.textContent = "LYNE is speaking...";
+              audio.onended = function () {
+                try { URL.revokeObjectURL(url); } catch (err3) {}
+                speaking = false;
+                lastSpeechEndedAt = Date.now();
+                ignoreMicUntil = Date.now() + 900;
+                meta.textContent = active ? "Listening..." : "Idle.";
+                lyneAudio = null;
+                if (active && !waiting) window.setTimeout(startListening, 450);
+                resolve();
+              };
+              audio.onerror = function () {
+                try { URL.revokeObjectURL(url); } catch (err4) {}
+                speaking = false;
+                lyneAudio = null;
+                tryBrowserFallback();
+              };
+              audio.play().catch(function () {
+                try { URL.revokeObjectURL(url); } catch (err5) {}
+                speaking = false;
+                lyneAudio = null;
+                tryBrowserFallback();
+              });
+            })
+            .catch(function () {
+              tryBrowserFallback();
+            });
         } catch (err) {
-          resolve();
+          tryBrowserFallback();
         }
       });
     }
@@ -849,6 +919,10 @@
       active = false;
       if (recognition && listening) {
         try { recognition.stop(); } catch (err) {}
+      }
+      if (lyneAudio) {
+        try { lyneAudio.pause(); } catch (errA) {}
+        lyneAudio = null;
       }
       try {
         if (window.speechSynthesis && window.speechSynthesis.speaking) {

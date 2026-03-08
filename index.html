@@ -442,6 +442,7 @@
         var BARGE_IN_KEYWORDS = ['lyne stop', 'lyne wait', 'lyne pause', 'lyne listen', 'stop lyne', 'wait lyne', 'pause lyne'];
         var ignoreMicUntil = 0;
         var lastSpeechEndedAt = 0;
+        var lyneAudio = null;
 
         function setChat(text) {
           chat.textContent = String(text || '').trim() || 'LYNE: Ready when you are.';
@@ -677,6 +678,71 @@
         async function speak(text) {
           var phrase = String(text || '').trim();
           if (!phrase) return;
+          try {
+            if (lyneAudio) {
+              try { lyneAudio.pause(); } catch (_err0) {}
+              lyneAudio = null;
+            }
+          } catch (_err1) {}
+          try { window.speechSynthesis.cancel(); } catch (_err2) {}
+
+          try {
+            var ttsRes = await fetch('/api/tts', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                request: {
+                  text: phrase,
+                  openai_model: 'gpt-4o-mini-tts',
+                  openai_voice: 'alloy',
+                  openai_format: 'mp3'
+                }
+              })
+            });
+            if (ttsRes.ok) {
+              var blob = await ttsRes.blob();
+              var url = URL.createObjectURL(blob);
+              var audio = new Audio(url);
+              lyneAudio = audio;
+              speaking = true;
+              ignoreMicUntil = Date.now() + 2200;
+              if (recognition && listening) {
+                try { recognition.abort(); } catch (_err3) {}
+                listening = false;
+              }
+              meta.textContent = 'LYNE is speaking...';
+              await new Promise(function (resolve) {
+                audio.onended = function () {
+                  try { URL.revokeObjectURL(url); } catch (_err4) {}
+                  speaking = false;
+                  lastSpeechEndedAt = Date.now();
+                  meta.textContent = active ? 'Listening...' : 'Idle.';
+                  ignoreMicUntil = Date.now() + 900;
+                  nextListenAt = Date.now() + 900;
+                  lyneAudio = null;
+                  if (active || pendingListen) {
+                    pendingListen = false;
+                    window.setTimeout(startListening, 400);
+                  }
+                  resolve();
+                };
+                audio.onerror = function () {
+                  try { URL.revokeObjectURL(url); } catch (_err5) {}
+                  speaking = false;
+                  lyneAudio = null;
+                  resolve();
+                };
+                audio.play().catch(function () {
+                  try { URL.revokeObjectURL(url); } catch (_err6) {}
+                  speaking = false;
+                  lyneAudio = null;
+                  resolve();
+                });
+              });
+              return;
+            }
+          } catch (_err7) {}
+
           if (!allowBrowserFallback || !canSpeak) {
             meta.textContent = 'Voice unavailable in this browser.';
             return;
@@ -938,6 +1004,10 @@
           if (recognition && listening) {
             try { recognition.stop(); } catch (_err) {}
           }
+          if (lyneAudio) {
+            try { lyneAudio.pause(); } catch (_errA) {}
+            lyneAudio = null;
+          }
           try {
             if (window.speechSynthesis && window.speechSynthesis.speaking) {
               window.speechSynthesis.cancel();
@@ -950,7 +1020,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308m"></script>
+    <script src="app.js?v=20260308n"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>

@@ -52,6 +52,40 @@ function parseVoiceCandidates(source) {
   })
 }
 
+async function tryOpenAITts(source, text) {
+  const apiKey = String(process.env.OPENAI_API_KEY || '').trim()
+  if (!apiKey) return { ok: false, status: 0, error: '', buffer: null, contentType: '' }
+
+  const baseUrl = String(process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').trim().replace(/\/$/, '')
+  const model = String(source.openai_model || process.env.OPENAI_TTS_MODEL || 'gpt-4o-mini-tts').trim()
+  const voice = String(source.openai_voice || process.env.OPENAI_TTS_VOICE || 'alloy').trim()
+  const format = String(source.openai_format || process.env.OPENAI_TTS_FORMAT || 'mp3').trim()
+
+  const res = await fetch(baseUrl + '/audio/speech', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + apiKey,
+      'Content-Type': 'application/json',
+      Accept: 'audio/mpeg, audio/wav, application/octet-stream',
+    },
+    body: JSON.stringify({
+      model: model,
+      voice: voice,
+      input: text,
+      format: format,
+    }),
+  })
+
+  if (!res.ok) {
+    const raw = await res.text()
+    return { ok: false, status: res.status, error: raw || 'OpenAI TTS upstream error.', buffer: null, contentType: '' }
+  }
+
+  const arr = await res.arrayBuffer()
+  const contentType = String(res.headers.get('content-type') || '').trim() || 'audio/mpeg'
+  return { ok: true, status: 200, error: '', buffer: Buffer.from(arr), contentType: contentType }
+}
+
 async function tryKokoroTts(source, text) {
   const kokoroUrl = String(process.env.KOKORO_TTS_URL || '').trim()
   if (!kokoroUrl) return { ok: false, status: 0, error: '', buffer: null, contentType: '' }
@@ -191,6 +225,20 @@ module.exports = async (req, res) => {
   if (!text) {
     json(res, 400, { error: 'Missing text.' })
     return
+  }
+
+  // Preferred path: OpenAI neural TTS for natural voice.
+  try {
+    const openai = await tryOpenAITts(source, text)
+    if (openai.ok && openai.buffer) {
+      res.status(200)
+      res.setHeader('Content-Type', openai.contentType || 'audio/mpeg')
+      res.setHeader('Cache-Control', 'no-store')
+      res.send(openai.buffer)
+      return
+    }
+  } catch (_err) {
+    // fall through to other providers
   }
 
   // Preferred path: self-hosted Kokoro endpoint (free/near-limitless if you run your own server).
