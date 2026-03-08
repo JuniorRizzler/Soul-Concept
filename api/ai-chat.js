@@ -148,6 +148,20 @@ function localInstantTutorReply(userText) {
   const q = raw.toLowerCase()
   if (!raw) return 'Ask a specific question and I will answer in 3 short steps.'
 
+  // Basic arithmetic guard so fallback answers are still correct for simple math.
+  const mathMatch = raw.match(/^\s*(-?\d+(?:\.\d+)?)\s*([\+\-\*xX\/])\s*(-?\d+(?:\.\d+)?)\s*\??\s*$/)
+  if (mathMatch) {
+    const a = Number(mathMatch[1])
+    const op = String(mathMatch[2])
+    const b = Number(mathMatch[3])
+    if (Number.isFinite(a) && Number.isFinite(b)) {
+      if (op === '+') return String(a + b)
+      if (op === '-') return String(a - b)
+      if (op === '*' || op === 'x' || op === 'X') return String(a * b)
+      if (op === '/') return b === 0 ? 'Division by zero is undefined.' : String(a / b)
+    }
+  }
+
   if (q.includes('where') || q.includes('which page') || q.includes('go to') || q.includes('open')) {
     if (q.includes('science')) return 'Open Science at study-library.html.'
     if (q.includes('geography')) return 'Open Geography at geography-library.html.'
@@ -172,7 +186,7 @@ function localInstantTutorReply(userText) {
     return 'Use a^2 + b^2 = c^2, where c is the hypotenuse. Plug values, solve, then verify the longest side is c.'
   }
 
-  return 'Direct answer: break this into known formula + substitution + final check. Send the exact problem and I will solve it step by step.'
+  return 'Send the exact question and I will answer it directly with clear steps.'
 }
 
 async function tryHuggingFaceInferenceFallback(apiKey, model, messages, maxTokens, temperature) {

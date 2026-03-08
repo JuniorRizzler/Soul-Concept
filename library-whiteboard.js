@@ -568,6 +568,16 @@
       var q = String(prompt || "").toLowerCase();
       var raw = String(prompt || "").trim();
       if (!raw) return "I can help now. Try: Explain slope-intercept form with one example.";
+      var m = raw.match(/^\s*(-?\d+(?:\.\d+)?)\s*([\+\-\*xX\/])\s*(-?\d+(?:\.\d+)?)\s*\??\s*$/);
+      if (m) {
+        var a = Number(m[1]), op = String(m[2]), b = Number(m[3]);
+        if (Number.isFinite(a) && Number.isFinite(b)) {
+          if (op === "+") return String(a + b);
+          if (op === "-") return String(a - b);
+          if (op === "*" || op === "x" || op === "X") return String(a * b);
+          if (op === "/") return b === 0 ? "Division by zero is undefined." : String(a / b);
+        }
+      }
       if (q.indexOf("trig") !== -1 || q.indexOf("sin") !== -1 || q.indexOf("cos") !== -1 || q.indexOf("tan") !== -1) {
         return "Trigonometry in plain steps: 1) Label opposite, adjacent, hypotenuse. 2) Use SOH-CAH-TOA. 3) Substitute values and solve. Share one question and I will solve it with you.";
       }
@@ -586,7 +596,7 @@
       if (q.indexOf("explain") !== -1 || q.indexOf("how") !== -1 || q.indexOf("what") !== -1) {
         return "I can answer that now. I will give a short explanation, steps, and one quick example.";
       }
-      return "Quick answer: use 3 steps, solve one short example, then check your result. Send the exact problem and I will solve it fully.";
+      return "Send the exact question and I will answer it directly.";
     }
 
     function normalizeAssistantText(raw, prompt) {

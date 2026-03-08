@@ -683,6 +683,16 @@
           var q = String(prompt || '').toLowerCase();
           var short = String(prompt || '').trim();
           if (!short) return 'I can help right now. Try: "Explain slope-intercept form with one example."';
+          var m = short.match(/^\s*(-?\d+(?:\.\d+)?)\s*([\+\-\*xX\/])\s*(-?\d+(?:\.\d+)?)\s*\??\s*$/);
+          if (m) {
+            var a = Number(m[1]), op = String(m[2]), b = Number(m[3]);
+            if (Number.isFinite(a) && Number.isFinite(b)) {
+              if (op === '+') return String(a + b);
+              if (op === '-') return String(a - b);
+              if (op === '*' || op === 'x' || op === 'X') return String(a * b);
+              if (op === '/') return b === 0 ? 'Division by zero is undefined.' : String(a / b);
+            }
+          }
           if (q.indexOf('trig') !== -1 || q.indexOf('trigonometry') !== -1 || q.indexOf('sin') !== -1 || q.indexOf('cos') !== -1 || q.indexOf('tan') !== -1) {
             return 'Trig made simple: Step 1, name sides as opposite, adjacent, and hypotenuse. Step 2, use SOH-CAH-TOA. Step 3, plug in values and solve. If you want, I can do one full example with you now.';
           }
@@ -712,7 +722,7 @@
             var t = short.replace(/^(what is|what's|define)\s+/i, '').replace(/\?+$/, '').trim();
             if (t) return t + ' is a key concept in this unit. I can also give you a worked example right now.';
           }
-          return 'Quick answer to your question: break it into 3 steps, solve one small example, then check the result by substitution or estimation. If you paste the exact problem, I will solve it fully.';
+          return 'Send the exact question and I will answer it directly.';
         }
 
         function startListening(forceInterrupt) {
@@ -932,7 +942,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308f"></script>
+    <script src="app.js?v=20260308g"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
