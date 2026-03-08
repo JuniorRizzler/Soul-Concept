@@ -628,6 +628,27 @@
       return "";
     }
 
+    var LYNE_APP_CONTEXT =
+      "You are LYNE, the in-app guide for Soul Concept. " +
+      "App purpose: help Grade 9-10 students study faster with structured libraries and focused tools. " +
+      "Navigation map: Home=index.html, Science Library=study-library.html, Geography Library=geography-library.html, " +
+      "Math 9 Library=math/index.html, Math 10 Library=grade-10-math.html, Pre-AP Preview=preap-grade-10-preview.html, " +
+      "Concept Cards=anki/index.html, Quiz Tool=math-quiz-simulator.html. " +
+      "When asked where to go, give exact file names from this map. " +
+      "When asked what the app was made for, answer directly using the purpose above. " +
+      "For learning questions, answer clearly in short steps with one quick example. " +
+      "Avoid generic repeated lines.";
+
+    function buildLynePrompt(userText) {
+      var section = String(currentSectionName || "general section");
+      return (
+        LYNE_APP_CONTEXT +
+        "\n\nCurrent library section: " + section +
+        "\nUser question: " + String(userText || "").trim() +
+        "\n\nAnswer as LYNE."
+      );
+    }
+
     function ensurePuterReady(timeoutMs) {
       return new Promise(function (resolve, reject) {
         if (window.puter && window.puter.ai && typeof window.puter.ai.chat === "function") return resolve();
@@ -659,7 +680,7 @@
       return new Promise(async function (resolve, reject) {
         try {
           await ensurePuterReady(9000);
-          var res = await window.puter.ai.chat(String(promptText || "").trim(), {
+          var res = await window.puter.ai.chat(buildLynePrompt(promptText), {
             model: "gpt-4o-mini",
             stream: false
           });
