@@ -19,6 +19,41 @@ function normalizeMessageContent(content) {
   return ''
 }
 
+function latestUserMessage(messages) {
+  const arr = Array.isArray(messages) ? messages : []
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const m = arr[i]
+    if (!m || String(m.role || '').toLowerCase() !== 'user') continue
+    const t = normalizeMessageContent(m.content || '').trim()
+    if (t) return t
+  }
+  return ''
+}
+
+function safeFallbackReply(userText) {
+  const raw = String(userText || '').trim()
+  const q = raw.toLowerCase()
+  if (!raw) return 'Hi, ask me any question and I will answer directly.'
+  if (q === 'hi' || q === 'hello' || q === 'hey' || q.startsWith('hello ') || q.startsWith('hi ')) {
+    return 'Hey. I am LYNE. Ask me any school question and I will answer clearly.'
+  }
+
+  const m = raw.match(/^\s*(-?\d+(?:\.\d+)?)\s*([\+\-\*xX\/])\s*(-?\d+(?:\.\d+)?)\s*\??\s*$/)
+  if (m) {
+    const a = Number(m[1])
+    const op = String(m[2])
+    const b = Number(m[3])
+    if (Number.isFinite(a) && Number.isFinite(b)) {
+      if (op === '+') return String(a + b)
+      if (op === '-') return String(a - b)
+      if (op === '*' || op === 'x' || op === 'X') return String(a * b)
+      if (op === '/') return b === 0 ? 'Division by zero is undefined.' : String(a / b)
+    }
+  }
+
+  return 'I can answer that. Ask your exact question and I will solve it step by step.'
+}
+
 const SOUL_CONCEPT_SYSTEM_CONTEXT =
   'You are LYNE, Soul Concept\'s voice-first study copilot. Be accurate, warm, and conversational. ' +
   'Use simple wording suitable for Grade 9-10. ' +
@@ -50,6 +85,7 @@ module.exports = async (req, res) => {
   const system = typeof source.system === 'string' ? source.system.trim() : ''
   const prompt = typeof source.prompt === 'string' ? source.prompt.trim() : ''
   const incomingMessages = Array.isArray(source.messages) ? source.messages : []
+  const lastUserPrompt = latestUserMessage(incomingMessages)
 
   const model = String(source.model || process.env.OPENAI_MODEL || 'gpt-4o-mini').trim()
   const maxTokens = Number(source.max_tokens || source.maxTokens || 500)
@@ -117,16 +153,22 @@ module.exports = async (req, res) => {
         ? normalizeMessageContent(parsed.choices[0].message.content || '')
         : ''
 
-    if (!text) {
+    const lowerText = String(text || '').toLowerCase()
+    const poisonedFallback =
+      lowerText.indexOf('direct answer: break this into known formula + substitution + final check') !== -1
+    const finalText = poisonedFallback ? safeFallbackReply(lastUserPrompt) : text
+
+    if (!finalText) {
       json(res, 502, { error: 'OpenAI returned empty text.' })
       return
     }
 
     json(res, 200, {
       ok: true,
-      text: text,
+      text: finalText,
       provider: 'openai',
       model: model,
+      build: 'openai-hotfix-20260308-1',
     })
   } catch (err) {
     json(res, 502, {
