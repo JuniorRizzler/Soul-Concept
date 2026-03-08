@@ -605,8 +605,35 @@
             LYNE_APP_CONTEXT +
             '\n\nUser question: ' +
             String(userText || '').trim() +
+            '\n\nImportant: This is an in-app navigation assistant, not real-world location guidance. ' +
+            'Never ask for physical location, school name, or campus map. ' +
+            'If user asks where to go, always respond with the exact Soul Concept page route.' +
             '\n\nAnswer as LYNE.'
           );
+        }
+
+        function localAppIntentReply(userText) {
+          var q = String(userText || '').toLowerCase().trim();
+          if (!q) return '';
+          if (q.indexOf('science') !== -1 && (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('open') !== -1 || q.indexOf('library') !== -1)) {
+            return 'Open the Science Library at study-library.html.';
+          }
+          if (q.indexOf('geography') !== -1 && (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('open') !== -1 || q.indexOf('library') !== -1)) {
+            return 'Open the Geography Library at geography-library.html.';
+          }
+          if ((q.indexOf('grade 10') !== -1 || q.indexOf('math 10') !== -1) && (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('open') !== -1 || q.indexOf('library') !== -1)) {
+            return 'Open Grade 10 Math at grade-10-math.html.';
+          }
+          if ((q.indexOf('grade 9') !== -1 || q.indexOf('math 9') !== -1) && (q.indexOf('where') !== -1 || q.indexOf('go') !== -1 || q.indexOf('open') !== -1 || q.indexOf('library') !== -1)) {
+            return 'Open Grade 9 Math at math/index.html.';
+          }
+          if (q.indexOf('what') !== -1 && q.indexOf('made') !== -1 && q.indexOf('app') !== -1) {
+            return 'Soul Concept was made to help Grade 9-10 students study faster using structured libraries, annotations, concept cards, and focused tools.';
+          }
+          if (q.indexOf('feature') !== -1 || q.indexOf('what can you do') !== -1) {
+            return 'Core features: Science, Geography, Math 9, Math 10 libraries, page-based annotations, voice notes, LYNE voice assistant, concept cards, and quiz tools.';
+          }
+          return '';
         }
 
         function ensurePuterReady(timeoutMs) {
@@ -801,7 +828,8 @@
           setChat('You: ' + prompt + '\n\nLYNE: ...');
           messages.push({ role: 'user', content: prompt });
           try {
-            var reply = normalizeAssistantText(await askViaPuter(prompt), prompt);
+            var intentReply = localAppIntentReply(prompt);
+            var reply = normalizeAssistantText(intentReply || (await askViaPuter(prompt)), prompt);
             if (!reply) throw new Error('Puter returned low-value response.');
             meta.textContent = 'Connected (Puter.js).';
             lastAssistantText = reply;
@@ -922,7 +950,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308l"></script>
+    <script src="app.js?v=20260308m"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
