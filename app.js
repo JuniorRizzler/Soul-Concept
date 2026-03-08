@@ -75,7 +75,7 @@
       '<div class="pp-demo-card">' +
       '<div class="pp-demo-head">' +
       '<strong>Ask PersonaPlex</strong>' +
-      '<span class="pp-demo-chip">Model: gpt-4o-mini</span>' +
+      '<span class="pp-demo-chip">Provider: Puter.js (with OpenAI fallback)</span>' +
       '</div>' +
       '<textarea class="pp-demo-input" data-pp-input spellcheck="false">Explain linear equations in 3 simple steps.</textarea>' +
       '<div class="push-actions">' +

@@ -610,6 +610,68 @@
       return text;
     }
 
+    function extractPuterText(payload) {
+      if (!payload) return "";
+      if (typeof payload === "string") return payload.trim();
+      if (typeof payload.text === "string") return payload.text.trim();
+      if (payload.message && typeof payload.message.content === "string") return payload.message.content.trim();
+      if (Array.isArray(payload.messages) && payload.messages[0] && typeof payload.messages[0].content === "string") {
+        return payload.messages[0].content.trim();
+      }
+      if (Array.isArray(payload.parts)) {
+        return payload.parts
+          .map(function (p) { return p && typeof p.text === "string" ? p.text : ""; })
+          .filter(Boolean)
+          .join("\n")
+          .trim();
+      }
+      return "";
+    }
+
+    function ensurePuterReady(timeoutMs) {
+      return new Promise(function (resolve, reject) {
+        if (window.puter && window.puter.ai && typeof window.puter.ai.chat === "function") return resolve();
+        var scriptId = "sc-puter-sdk";
+        var existing = document.getElementById(scriptId);
+        if (!existing) {
+          var s = document.createElement("script");
+          s.id = scriptId;
+          s.src = "https://js.puter.com/v2/";
+          s.async = true;
+          document.head.appendChild(s);
+        }
+        var started = Date.now();
+        var timer = window.setInterval(function () {
+          if (window.puter && window.puter.ai && typeof window.puter.ai.chat === "function") {
+            window.clearInterval(timer);
+            resolve();
+            return;
+          }
+          if (Date.now() - started > (timeoutMs || 8000)) {
+            window.clearInterval(timer);
+            reject(new Error("Puter SDK load timeout."));
+          }
+        }, 120);
+      });
+    }
+
+    function askViaPuter(promptText) {
+      return new Promise(async function (resolve, reject) {
+        try {
+          await ensurePuterReady(9000);
+          var res = await window.puter.ai.chat(String(promptText || "").trim(), {
+            model: "gpt-4o-mini",
+            stream: false
+          });
+          var out = extractPuterText(res);
+          if (!out) return reject(new Error("Puter returned empty text."));
+          resolve(out);
+        } catch (err) {
+          reject(err);
+        }
+      });
+    }
+
 
     function speak(text) {
       return new Promise(function (resolve) {
@@ -679,33 +741,41 @@
         setChat("You: " + prompt + "\n\nLYNE: ...");
         messages.push({ role: "user", content: prompt });
         try {
-          var res = await fetch("/api/ai-chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              request: {
-                model: "gpt-4o-mini",
-                system: "Current library context: " + String(currentSectionName || "general section") + ". Answer the latest user question directly. Avoid repeating previous answers.",
-                messages: messages.slice(-16),
-                max_tokens: 420,
-                temperature: 0.52
-              }
-            })
-          });
-          var data = null;
-          try { data = await res.json(); } catch (err) { data = null; }
-          if (!res.ok) throw new Error((data && data.error) || "Request failed.");
-          if (!data || data.provider === "local-instant") throw new Error("Remote AI unavailable.");
-          var reply = normalizeAssistantText((data && data.text) || "", prompt);
+          var reply = "";
+          try {
+            reply = normalizeAssistantText(await askViaPuter(prompt), prompt);
+            if (reply) meta.textContent = "Connected (Puter.js).";
+          } catch (puterErr) {}
+
+          if (!reply) {
+            var res = await fetch("/api/ai-chat", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                request: {
+                  model: "gpt-4o-mini",
+                  system: "Current library context: " + String(currentSectionName || "general section") + ". Answer the latest user question directly. Avoid repeating previous answers.",
+                  messages: messages.slice(-16),
+                  max_tokens: 420,
+                  temperature: 0.52
+                }
+              })
+            });
+            var data = null;
+            try { data = await res.json(); } catch (err) { data = null; }
+            if (!res.ok) throw new Error((data && data.error) || "Request failed.");
+            if (!data || data.provider === "local-instant") throw new Error("Remote AI unavailable.");
+            reply = normalizeAssistantText((data && data.text) || "", prompt);
+          }
           if (!reply) throw new Error("AI returned a low-value response.");
           lastAssistantText = reply;
           messages.push({ role: "assistant", content: reply });
           setChat("You: " + prompt + "\n\nLYNE: " + reply);
           await speak(reply);
         } catch (err) {
-          var msg = "I cannot reach OpenAI right now. Check OPENAI_API_KEY and redeploy.";
+          var msg = "I cannot reach Puter or OpenAI right now. Check network and try again.";
           setChat("You: " + prompt + "\n\nLYNE: " + msg);
-          meta.textContent = err && err.message ? String(err.message) : "OpenAI unavailable.";
+          meta.textContent = err && err.message ? String(err.message) : "AI unavailable.";
           await speak(msg);
         } finally {
           waiting = false;

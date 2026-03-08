@@ -571,6 +571,62 @@
           return false;
         }
 
+        function extractPuterText(payload) {
+          if (!payload) return '';
+          if (typeof payload === 'string') return payload.trim();
+          if (typeof payload.text === 'string') return payload.text.trim();
+          if (payload.message && typeof payload.message.content === 'string') return payload.message.content.trim();
+          if (Array.isArray(payload.messages) && payload.messages[0] && typeof payload.messages[0].content === 'string') {
+            return payload.messages[0].content.trim();
+          }
+          if (Array.isArray(payload.parts)) {
+            return payload.parts
+              .map(function (p) { return p && typeof p.text === 'string' ? p.text : ''; })
+              .filter(Boolean)
+              .join('\n')
+              .trim();
+          }
+          return '';
+        }
+
+        function ensurePuterReady(timeoutMs) {
+          return new Promise(function (resolve, reject) {
+            if (window.puter && window.puter.ai && typeof window.puter.ai.chat === 'function') return resolve();
+            var scriptId = 'sc-puter-sdk';
+            var existing = document.getElementById(scriptId);
+            if (!existing) {
+              var s = document.createElement('script');
+              s.id = scriptId;
+              s.src = 'https://js.puter.com/v2/';
+              s.async = true;
+              document.head.appendChild(s);
+            }
+            var started = Date.now();
+            var timer = window.setInterval(function () {
+              if (window.puter && window.puter.ai && typeof window.puter.ai.chat === 'function') {
+                window.clearInterval(timer);
+                resolve();
+                return;
+              }
+              if (Date.now() - started > (timeoutMs || 8000)) {
+                window.clearInterval(timer);
+                reject(new Error('Puter SDK load timeout.'));
+              }
+            }, 120);
+          });
+        }
+
+        async function askViaPuter(promptText) {
+          await ensurePuterReady(9000);
+          var res = await window.puter.ai.chat(String(promptText || '').trim(), {
+            model: 'gpt-4o-mini',
+            stream: false
+          });
+          var out = extractPuterText(res);
+          if (!out) throw new Error('Puter returned empty text.');
+          return out;
+        }
+
         async function speak(text) {
           var phrase = String(text || '').trim();
           if (!phrase) return;
@@ -727,7 +783,16 @@
           try {
             var reply = '';
             var lastErr = null;
-            for (var attempt = 0; attempt < 2 && !reply; attempt++) {
+            try {
+              reply = normalizeAssistantText(await askViaPuter(prompt), prompt);
+              if (reply) {
+                meta.textContent = 'Connected (Puter.js).';
+              }
+            } catch (puterErr) {
+              lastErr = puterErr;
+            }
+
+            for (var attempt = 0; attempt < 1 && !reply; attempt++) {
               var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
               var timeout = null;
               if (controller) {
@@ -767,9 +832,9 @@
             setChat('You: ' + prompt + '\n\nLYNE: ' + reply);
             await speak(reply);
           } catch (err) {
-            var msg = 'I cannot reach OpenAI right now. Check OPENAI_API_KEY and redeploy.';
+            var msg = 'I cannot reach Puter or OpenAI right now. Check network and try again.';
             setChat('You: ' + prompt + '\n\nLYNE: ' + msg);
-            meta.textContent = err && err.message ? err.message : 'OpenAI unavailable.';
+            meta.textContent = err && err.message ? err.message : 'AI unavailable.';
             await speak(msg);
           } finally {
             waiting = false;
@@ -880,7 +945,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308h"></script>
+    <script src="app.js?v=20260308i"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
