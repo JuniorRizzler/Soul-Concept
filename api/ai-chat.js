@@ -268,7 +268,26 @@ module.exports = async (req, res) => {
   }
   const latestPrompt = latestUserMessage(messages, prompt)
 
-  if (String(process.env.FORCE_LOCAL_AI || '').trim() === '1') {
+  const geminiApiKey = String(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim()
+  const sourceModel = String(source.model || '').trim()
+  const requestedGemini = sourceModel.toLowerCase().indexOf('gemini') !== -1
+  const forceGemini =
+    String(process.env.USE_GEMINI || '').trim() === '1' ||
+    String(process.env.AI_PROVIDER || '').trim().toLowerCase() === 'gemini'
+  const useGemini = !!geminiApiKey && (forceGemini || requestedGemini || !String(process.env.AI_PROVIDER || '').trim())
+  const requireRemote = source.require_remote === true || forceGemini || requestedGemini
+
+  const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
+  const temperature = typeof source.temperature === 'number' ? source.temperature : 0.68
+
+  if (requireRemote && !geminiApiKey) {
+    json(res, 500, {
+      error: 'Missing GEMINI_API_KEY (or GOOGLE_API_KEY). Set it in Vercel and redeploy.',
+    })
+    return
+  }
+
+  if (String(process.env.FORCE_LOCAL_AI || '').trim() === '1' && !requireRemote) {
     json(res, 200, {
       ok: true,
       text: localInstantTutorReply(latestPrompt),
@@ -277,17 +296,6 @@ module.exports = async (req, res) => {
     })
     return
   }
-
-  const geminiApiKey = String(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim()
-  const sourceModel = String(source.model || '').trim()
-  const requestedGemini = sourceModel.toLowerCase().indexOf('gemini') !== -1
-  const forceGemini =
-    String(process.env.USE_GEMINI || '').trim() === '1' ||
-    String(process.env.AI_PROVIDER || '').trim().toLowerCase() === 'gemini'
-  const useGemini = !!geminiApiKey && (forceGemini || requestedGemini || !String(process.env.AI_PROVIDER || '').trim())
-
-  const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
-  const temperature = typeof source.temperature === 'number' ? source.temperature : 0.68
 
   if (useGemini) {
     const geminiModel = normalizeGeminiModelName(sourceModel || process.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL)
@@ -324,32 +332,28 @@ module.exports = async (req, res) => {
             (geminiParsed.error.message || geminiParsed.error.status || geminiParsed.error.code)) ||
           geminiRaw ||
           'Gemini request failed.'
-        json(res, 200, {
-          ok: true,
-          text: localInstantTutorReply(latestPrompt),
-          provider: 'local-instant',
-          model: 'local-instant-v1',
-          warning: 'Gemini error: ' + String(geminiError),
+        json(res, 502, {
+          error: 'Gemini error: ' + String(geminiError),
         })
         return
       }
 
       const geminiText = extractGeminiText(geminiParsed || {})
+      if (!geminiText) {
+        json(res, 502, { error: 'Gemini returned an empty response.' })
+        return
+      }
       json(res, 200, {
         ok: true,
-        text: geminiText || localInstantTutorReply(latestPrompt),
+        text: geminiText,
         provider: 'gemini',
         model: geminiModel,
         providerResponse: geminiParsed || null,
       })
       return
     } catch (err) {
-      json(res, 200, {
-        ok: true,
-        text: localInstantTutorReply(latestPrompt),
-        provider: 'local-instant',
-        model: 'local-instant-v1',
-        warning: err && err.message ? 'Gemini request failed: ' + err.message : 'Gemini request failed.',
+      json(res, 502, {
+        error: err && err.message ? 'Gemini request failed: ' + err.message : 'Gemini request failed.',
       })
       return
     }

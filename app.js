@@ -108,6 +108,7 @@
           body: JSON.stringify({
             request: {
               model: 'gemini-2.0-flash',
+              require_remote: true,
               temperature: 0.4,
               max_tokens: 500,
               messages: [

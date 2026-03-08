@@ -673,6 +673,7 @@
             body: JSON.stringify({
               request: {
                 model: "gemini-2.0-flash",
+                require_remote: true,
                 system: "Current library context: " + String(currentSectionName || "general section") + ". Answer the latest user question directly. Avoid repeating previous answers.",
                 messages: messages.slice(-16),
                 max_tokens: 420,
@@ -683,6 +684,7 @@
           var data = null;
           try { data = await res.json(); } catch (err) { data = null; }
           if (!res.ok) throw new Error((data && data.error) || "Request failed.");
+          if (!data || data.provider === "local-instant") throw new Error("Remote AI unavailable.");
           var reply = normalizeAssistantText((data && data.text) || "", prompt);
           if (compactText(reply) === compactText(lastAssistantText)) reply = fallbackReply(prompt);
           lastAssistantText = reply;
@@ -690,10 +692,10 @@
           setChat("You: " + prompt + "\n\nLYNE: " + reply);
           await speak(reply);
         } catch (err) {
-          var fallback = fallbackReply(prompt);
-          lastAssistantText = fallback;
-          setChat("You: " + prompt + "\n\nLYNE: " + fallback);
-          await speak(fallback);
+          var msg = "I cannot reach Gemini right now. Check GEMINI_API_KEY and redeploy.";
+          setChat("You: " + prompt + "\n\nLYNE: " + msg);
+          meta.textContent = err && err.message ? String(err.message) : "Gemini unavailable.";
+          await speak(msg);
         } finally {
           waiting = false;
           inFlightPromptKey = "";

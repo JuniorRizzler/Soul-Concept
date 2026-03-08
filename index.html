@@ -731,6 +731,7 @@
                   body: JSON.stringify({
                     request: {
                       model: 'gemini-2.0-flash',
+                      require_remote: true,
                       system: 'Answer the latest user question directly. Avoid repeating prior lines. Only provide navigation when asked where to go.',
                       messages: messages.slice(-20),
                       max_tokens: 500,
@@ -742,6 +743,7 @@
                 var data = null;
                 try { data = await res.json(); } catch (_err) { data = null; }
                 if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
+                if (!data || data.provider === 'local-instant') throw new Error('Remote AI unavailable.');
                 reply = normalizeAssistantText((data && data.text) || '', prompt);
               } catch (errTry) {
                 if (timeout) window.clearTimeout(timeout);
@@ -754,12 +756,10 @@
             setChat('You: ' + prompt + '\n\nLYNE: ' + reply);
             await speak(reply);
           } catch (err) {
-            var fallback = localFallbackReply(prompt);
-            lastAssistantText = fallback;
-            messages.push({ role: 'assistant', content: fallback });
-            setChat('You: ' + prompt + '\n\nLYNE: ' + fallback);
-            meta.textContent = 'Using local fallback reply (network timeout/error).';
-            await speak(fallback);
+            var msg = 'I cannot reach Gemini right now. Check GEMINI_API_KEY in Vercel and redeploy.';
+            setChat('You: ' + prompt + '\n\nLYNE: ' + msg);
+            meta.textContent = err && err.message ? err.message : 'Gemini unavailable.';
+            await speak(msg);
           } finally {
             waiting = false;
             if (active) startListening();
@@ -869,7 +869,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308c"></script>
+    <script src="app.js?v=20260308d"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
