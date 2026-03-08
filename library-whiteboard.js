@@ -672,7 +672,7 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               request: {
-                model: "Qwen/Qwen2.5-7B-Instruct",
+                model: "gemini-2.0-flash",
                 system: "Current library context: " + String(currentSectionName || "general section") + ". Answer the latest user question directly. Avoid repeating previous answers.",
                 messages: messages.slice(-16),
                 max_tokens: 420,

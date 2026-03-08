@@ -75,7 +75,7 @@
       '<div class="pp-demo-card">' +
       '<div class="pp-demo-head">' +
       '<strong>Ask PersonaPlex</strong>' +
-      '<span class="pp-demo-chip">Model: nvidia/personaplex-7b-v1</span>' +
+      '<span class="pp-demo-chip">Model: gemini-2.0-flash</span>' +
       '</div>' +
       '<textarea class="pp-demo-input" data-pp-input spellcheck="false">Explain linear equations in 3 simple steps.</textarea>' +
       '<div class="push-actions">' +
@@ -107,7 +107,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             request: {
-              model: 'nvidia/personaplex-7b-v1',
+              model: 'gemini-2.0-flash',
               temperature: 0.4,
               max_tokens: 500,
               messages: [
@@ -126,7 +126,7 @@
         }
         answer.textContent = String((data && data.text) || '').trim() || '(No text returned.)'
         const provider = data && data.provider ? String(data.provider) : 'openai-compatible'
-        const model = data && data.model ? String(data.model) : 'nvidia/personaplex-7b-v1'
+        const model = data && data.model ? String(data.model) : 'gemini-2.0-flash'
         meta.textContent = 'Connected. Provider: ' + provider + ' | Model: ' + model
       } catch (err) {
         answer.textContent = 'Error: ' + (err && err.message ? err.message : 'Request failed.')

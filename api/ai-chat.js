@@ -11,6 +11,7 @@ function cleanBaseUrl(value, fallback) {
 const WORKING_HOSTED_MODEL = 'Qwen/Qwen2.5-7B-Instruct'
 const DEFAULT_DEEPSEEK_MODEL = 'deepseek-chat'
 const DEFAULT_DEEPSEEK_BASE_URL = 'https://api.deepseek.com/v1'
+const DEFAULT_GEMINI_MODEL = 'gemini-2.0-flash'
 
 function normalizeDeepSeekModelName(input) {
   const raw = String(input || '').trim().toLowerCase()
@@ -28,6 +29,13 @@ function normalizeDeepSeekModelName(input) {
     return 'deepseek-reasoner'
   }
   return DEFAULT_DEEPSEEK_MODEL
+}
+
+function normalizeGeminiModelName(input) {
+  const raw = String(input || '').trim()
+  if (!raw) return DEFAULT_GEMINI_MODEL
+  if (raw.toLowerCase().indexOf('gemini') !== -1) return raw
+  return DEFAULT_GEMINI_MODEL
 }
 const SOUL_CONCEPT_SYSTEM_CONTEXT =
   'You are LYNE, Soul Concept\'s voice-first study copilot. Be accurate, warm, energetic, and conversational. ' +
@@ -83,6 +91,56 @@ function latestUserMessage(messages, prompt) {
     if (c && String(c).trim()) return String(c).trim()
   }
   return String(prompt || '').trim()
+}
+
+function buildGeminiPayload(messages, systemPrompt, maxTokens, temperature) {
+  const contents = []
+  const arr = Array.isArray(messages) ? messages : []
+  for (let i = 0; i < arr.length; i++) {
+    const msg = arr[i]
+    const role = String((msg && msg.role) || 'user').toLowerCase()
+    if (role === 'system') continue
+    const text = normalizeMessageContent(msg ? msg.content : '')
+    if (!text) continue
+    contents.push({
+      role: role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: text }],
+    })
+  }
+
+  if (!contents.length) {
+    contents.push({
+      role: 'user',
+      parts: [{ text: latestUserMessage(messages, '') || 'Help me study.' }],
+    })
+  }
+
+  return {
+    system_instruction: systemPrompt
+      ? {
+          parts: [{ text: systemPrompt }],
+        }
+      : undefined,
+    contents,
+    generationConfig: {
+      maxOutputTokens: Number.isFinite(maxTokens) ? maxTokens : 1200,
+      temperature: typeof temperature === 'number' ? temperature : 0.68,
+    },
+  }
+}
+
+function extractGeminiText(payload) {
+  const candidates = payload && Array.isArray(payload.candidates) ? payload.candidates : []
+  if (!candidates.length) return ''
+  const first = candidates[0]
+  const parts = first && first.content && Array.isArray(first.content.parts) ? first.content.parts : []
+  return parts
+    .map(function (part) {
+      return part && typeof part.text === 'string' ? part.text : ''
+    })
+    .filter(Boolean)
+    .join('\n')
+    .trim()
 }
 
 function localInstantTutorReply(userText) {
@@ -220,6 +278,83 @@ module.exports = async (req, res) => {
     return
   }
 
+  const geminiApiKey = String(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '').trim()
+  const sourceModel = String(source.model || '').trim()
+  const requestedGemini = sourceModel.toLowerCase().indexOf('gemini') !== -1
+  const forceGemini =
+    String(process.env.USE_GEMINI || '').trim() === '1' ||
+    String(process.env.AI_PROVIDER || '').trim().toLowerCase() === 'gemini'
+  const useGemini = !!geminiApiKey && (forceGemini || requestedGemini || !String(process.env.AI_PROVIDER || '').trim())
+
+  const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
+  const temperature = typeof source.temperature === 'number' ? source.temperature : 0.68
+
+  if (useGemini) {
+    const geminiModel = normalizeGeminiModelName(sourceModel || process.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL)
+    const geminiEndpoint =
+      cleanBaseUrl(process.env.GEMINI_BASE_URL, 'https://generativelanguage.googleapis.com/v1beta') +
+      '/models/' +
+      encodeURIComponent(geminiModel) +
+      ':generateContent?key=' +
+      encodeURIComponent(geminiApiKey)
+    try {
+      const geminiRes = await fetch(geminiEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+          buildGeminiPayload(
+            messages,
+            SOUL_CONCEPT_SYSTEM_CONTEXT + (system.trim() ? '\n' + system.trim() : ''),
+            maxTokens,
+            temperature
+          )
+        ),
+      })
+
+      const geminiRaw = await geminiRes.text()
+      let geminiParsed = null
+      try {
+        geminiParsed = JSON.parse(geminiRaw)
+      } catch (_err) {}
+
+      if (!geminiRes.ok) {
+        const geminiError =
+          (geminiParsed &&
+            geminiParsed.error &&
+            (geminiParsed.error.message || geminiParsed.error.status || geminiParsed.error.code)) ||
+          geminiRaw ||
+          'Gemini request failed.'
+        json(res, 200, {
+          ok: true,
+          text: localInstantTutorReply(latestPrompt),
+          provider: 'local-instant',
+          model: 'local-instant-v1',
+          warning: 'Gemini error: ' + String(geminiError),
+        })
+        return
+      }
+
+      const geminiText = extractGeminiText(geminiParsed || {})
+      json(res, 200, {
+        ok: true,
+        text: geminiText || localInstantTutorReply(latestPrompt),
+        provider: 'gemini',
+        model: geminiModel,
+        providerResponse: geminiParsed || null,
+      })
+      return
+    } catch (err) {
+      json(res, 200, {
+        ok: true,
+        text: localInstantTutorReply(latestPrompt),
+        provider: 'local-instant',
+        model: 'local-instant-v1',
+        warning: err && err.message ? 'Gemini request failed: ' + err.message : 'Gemini request failed.',
+      })
+      return
+    }
+  }
+
   const hasPersonaConfig = Boolean(
     String(process.env.DEEPSEEK_API_KEY || '').trim() ||
     String(process.env.SCIETLY_API_KEY || '').trim() ||
@@ -299,7 +434,6 @@ module.exports = async (req, res) => {
 
   const forcedPersonaModel = String(process.env.PERSONAPLEX_MODEL || '').trim()
   const forcedDeepSeekModel = String(process.env.DEEPSEEK_MODEL || '').trim()
-  const sourceModel = String(source.model || '').trim()
   const requestedModel = deepSeekEnabled
     ? normalizeDeepSeekModelName(
         sourceModel && sourceModel.toLowerCase().indexOf('deepseek') !== -1
@@ -324,8 +458,6 @@ module.exports = async (req, res) => {
   const completionUrl = deepSeekEnabled
     ? String(process.env.DEEPSEEK_COMPLETIONS_URL || '').trim() || baseUrl + '/completions'
     : process.env.PERSONAPLEX_COMPLETIONS_URL || process.env.FREE_LLM_COMPLETIONS_URL || baseUrl + '/completions'
-  const maxTokens = Number(source.max_tokens || source.maxTokens || process.env.FREE_LLM_MAX_TOKENS || 1200)
-  const temperature = typeof source.temperature === 'number' ? source.temperature : 0.68
   const useDirectHfInference =
     String(process.env.FORCE_HF_INFERENCE || '').trim() === '1' ||
     (!deepSeekEnabled && model.toLowerCase().indexOf('personaplex') !== -1)
