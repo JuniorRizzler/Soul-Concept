@@ -98,7 +98,7 @@
     ".lib-ai-pet-btn.active{background:#f3c682;color:#42250c;border-color:#d89a4b}",
     ".lib-ai-pet-say{max-width:170px;background:rgba(30,24,17,.95);color:#f6ead9;border:1px solid rgba(228,199,160,.34);border-radius:10px;padding:6px 8px;font:700 10px/1.25 Arial,sans-serif;box-shadow:0 8px 18px rgba(20,12,7,.3)}",
     "@keyframes lib-pet-bob{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-2px) rotate(-1deg)}100%{transform:translateY(0) rotate(0deg)}}",
-    "@media (max-width:760px){.lib-anno-toolbar{left:8px;right:8px;bottom:8px}.lib-anno-toolbar .lib-anno-scope{max-width:88px}.lib-lyne-shell{right:8px;bottom:48px}}"
+    "@media (max-width:760px){.lib-anno-toolbar{left:6px;right:6px;bottom:6px;gap:3px;padding:3px 4px;flex-wrap:nowrap;overflow-x:auto;max-width:calc(100vw - 12px)}.lib-anno-toolbar .lib-anno-scope{max-width:64px}.lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{padding:3px 5px;font-size:8px}.lib-anno-swatch{width:12px;height:12px}.lib-lyne-shell{right:6px;bottom:42px;width:120px;padding:5px;gap:3px}.lib-lyne-title{font-size:10px}.lib-lyne-meta{font-size:8px}.lib-lyne-btn{padding:3px 5px;font-size:8px}}"
   ].join("");
     document.head.appendChild(style);
 
@@ -517,6 +517,9 @@
     var lastPromptKey = "";
     var messages = [];
     var lyneMinKey = "lib-lyne:minimized";
+    function isMobileViewport() {
+      return window.innerWidth <= 760;
+    }
 
     function setLyneMinimized(next) {
       shell.classList.toggle("minimized", !!next);
@@ -752,10 +755,17 @@
     });
 
     try {
-      setLyneMinimized(localStorage.getItem(lyneMinKey) === "1");
+      var storedLyneMin = localStorage.getItem(lyneMinKey);
+      setLyneMinimized(isMobileViewport() ? true : storedLyneMin === "1");
     } catch (err) {
-      setLyneMinimized(false);
+      setLyneMinimized(isMobileViewport());
     }
+
+    window.addEventListener("resize", function () {
+      if (isMobileViewport()) {
+        setLyneMinimized(true);
+      }
+    });
 
     window.setTimeout(function () {
       var greeting = "Hey, welcome to this library. I am LYNE. Ask me anything from this page.";
@@ -1501,7 +1511,7 @@
     try {
       setColor(localStorage.getItem(prefColorKey) || "#e11d48");
       var storedMin = localStorage.getItem(prefMinKey);
-      setMinimized(storedMin === null ? true : storedMin === "1");
+      setMinimized(window.innerWidth <= 760 ? true : storedMin === null ? true : storedMin === "1");
     } catch (err) {
       setColor("#e11d48");
       setMinimized(true);
