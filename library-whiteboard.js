@@ -1685,7 +1685,7 @@
     });
     mutationObs.observe(document.body, { childList: true, subtree: true });
 
-    createLibraryLyneWidget();
+    // LYNE widget intentionally disabled inside libraries (home page only).
     resizeLayerIfNeeded();
     updateContext();
     setScopeLabel();

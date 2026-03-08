@@ -116,17 +116,23 @@
           </div>
         </section>
 
-        <div id="lyne-widget" style="position:fixed;right:14px;bottom:14px;z-index:90;width:min(340px,92vw);border:1px solid #e2d8cb;background:#ffffff;border-radius:14px;padding:12px;display:grid;gap:8px;box-shadow:0 14px 30px rgba(23,21,16,.16)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-            <h3 style="margin:0;font-size:1rem">LYNE</h3>
-            <span style="font-size:.72rem;font-weight:700;color:#215c4b;background:rgba(33,92,75,.1);border:1px solid rgba(33,92,75,.24);padding:2px 7px;border-radius:999px">Voice Widget</span>
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button id="lyne-start" class="btn btn-primary" type="button">Start</button>
-            <button id="lyne-stop" class="btn btn-secondary" type="button">Stop</button>
-          </div>
-          <p id="lyne-meta" style="margin:0;color:#5a5863;font-size:.85rem">Idle.</p>
-          <pre id="lyne-chat" style="margin:0;white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;padding:9px;min-height:52px;max-height:140px;overflow:auto">LYNE: Ready when you are.</pre>
+        <div id="lyne-widget" style="position:fixed;right:14px;bottom:14px;z-index:90;display:grid;gap:10px;justify-items:end">
+          <button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false" style="width:64px;height:64px;border-radius:999px;border:0;cursor:pointer;background:radial-gradient(circle at 28% 28%,#fef3d8 0%,#f3b86e 42%,#8a4c16 100%);box-shadow:0 18px 34px rgba(23,21,16,.35),inset -8px -10px 14px rgba(0,0,0,.22),inset 6px 8px 12px rgba(255,255,255,.35);position:relative;overflow:hidden">
+            <span style="position:absolute;inset:0;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)"></span>
+            <span style="position:absolute;left:16px;top:14px;width:18px;height:8px;border-radius:999px;background:rgba(255,255,255,.58);transform:rotate(-18deg)"></span>
+          </button>
+          <section id="lyne-panel" aria-hidden="true" style="display:none;width:min(360px,92vw);border:1px solid rgba(226,216,203,.8);background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(247,241,233,.96));border-radius:16px;padding:12px;box-shadow:0 18px 36px rgba(23,21,16,.2)">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+              <h3 style="margin:0;font-size:1rem">LYNE</h3>
+              <button id="lyne-panel-close" type="button" class="btn btn-secondary" style="padding:6px 10px">Hide</button>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+              <button id="lyne-start" class="btn btn-primary" type="button">Start</button>
+              <button id="lyne-stop" class="btn btn-secondary" type="button">Stop</button>
+            </div>
+            <p id="lyne-meta" style="margin:8px 0 0;color:#5a5863;font-size:.85rem">Idle.</p>
+            <pre id="lyne-chat" style="margin:8px 0 0;white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:9px;min-height:52px;max-height:160px;overflow:auto">LYNE: Ready when you are.</pre>
+          </section>
         </div>
 
         <section class="section-tight quick-nav-section" id="libraries">
@@ -410,11 +416,28 @@
 
     <script>
       (function () {
+        var orbToggle = document.getElementById('lyne-orb-toggle');
+        var panel = document.getElementById('lyne-panel');
+        var panelClose = document.getElementById('lyne-panel-close');
         var startBtn = document.getElementById('lyne-start');
         var stopBtn = document.getElementById('lyne-stop');
         var meta = document.getElementById('lyne-meta');
         var chat = document.getElementById('lyne-chat');
-        if (!startBtn || !stopBtn || !meta || !chat) return;
+        if (!orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !meta || !chat) return;
+
+        function setPanelOpen(next) {
+          var open = !!next;
+          panel.style.display = open ? 'block' : 'none';
+          panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+          orbToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
+        orbToggle.addEventListener('click', function () {
+          setPanelOpen(panel.style.display !== 'block');
+        });
+        panelClose.addEventListener('click', function () {
+          setPanelOpen(false);
+        });
 
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
@@ -991,6 +1014,7 @@
         startBtn.addEventListener('click', function () {
           if (!canListen) return;
           active = true;
+          setPanelOpen(true);
           meta.textContent = 'Conversation started.';
           startListening(true);
         });
@@ -1020,7 +1044,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308n"></script>
+    <script src="app.js?v=20260308o"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
