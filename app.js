@@ -1,4 +1,39 @@
-Ôªø(function () {
+(function () {
+  const FORCE_CACHE_RESET_KEY = 'sc_force_cache_reset_v20260308'
+
+  async function runForcedCacheResetOnce() {
+    try {
+      if (localStorage.getItem(FORCE_CACHE_RESET_KEY) === '1') return
+    } catch (_err) {}
+
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations()
+        await Promise.all(
+          (regs || []).map(function (reg) {
+            return reg.unregister().catch(function () {})
+          })
+        )
+      }
+      if (typeof caches !== 'undefined' && caches.keys) {
+        const keys = await caches.keys()
+        await Promise.all(
+          (keys || []).map(function (key) {
+            return caches.delete(key).catch(function () {})
+          })
+        )
+      }
+    } catch (_err) {
+      // ignore
+    }
+
+    try {
+      localStorage.setItem(FORCE_CACHE_RESET_KEY, '1')
+    } catch (_err) {}
+  }
+
+  runForcedCacheResetOnce()
+
   const navToggle = document.querySelector('[data-nav-toggle]')
   const navMenu = document.querySelector('[data-nav-menu]')
 
@@ -706,7 +741,7 @@
         return
       }
 
-      alert('To install, use your browser menu and choose ‚ÄúInstall app‚Äù or ‚ÄúAdd to Home Screen‚Äù.')
+      alert('To install, use your browser menu and choose ìInstall appî or ìAdd to Home Screenî.')
     })
   }
 
@@ -1111,7 +1146,7 @@
       page: 'index.html',
       selector: '[data-tour-id="home-tools"]',
       title: 'Study Tools',
-      text: 'Concept Cards use spaced repetition to lock in memory ‚Äî it\'s a strategy even med students use.',
+      text: 'Concept Cards use spaced repetition to lock in memory ó it\'s a strategy even med students use.',
       next: 'anki/index.html'
     },
     {
