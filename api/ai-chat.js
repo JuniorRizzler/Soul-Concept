@@ -359,6 +359,13 @@ module.exports = async (req, res) => {
     }
   }
 
+  if (requireRemote) {
+    json(res, 500, {
+      error: 'Gemini is required for this request, but Gemini is not active. Set AI_PROVIDER=gemini and GEMINI_API_KEY.',
+    })
+    return
+  }
+
   const hasPersonaConfig = Boolean(
     String(process.env.DEEPSEEK_API_KEY || '').trim() ||
     String(process.env.SCIETLY_API_KEY || '').trim() ||
@@ -427,11 +434,8 @@ module.exports = async (req, res) => {
     process.env.HUGGINGFACE_API_KEY ||
     process.env.FREE_LLM_API_KEY
   if (!apiKey) {
-    json(res, 200, {
-      ok: true,
-      text: localInstantTutorReply(latestPrompt),
-      provider: 'local-instant',
-      model: 'local-instant-v1',
+    json(res, 500, {
+      error: 'No AI provider key configured. Set GEMINI_API_KEY and AI_PROVIDER=gemini.',
     })
     return
   }
@@ -594,12 +598,8 @@ module.exports = async (req, res) => {
       var mergedError = upstreamErrorText
       if (hfFallbackErrorText) mergedError += ' | HF fallback: ' + hfFallbackErrorText
       if (completionErrorText) mergedError += ' | Completions fallback: ' + completionErrorText
-      json(res, 200, {
-        ok: true,
-        text: localInstantTutorReply(latestPrompt),
-        provider: 'local-instant',
-        model: 'local-instant-v1',
-        warning: mergedError,
+      json(res, 502, {
+        error: mergedError,
       })
       return
     }
@@ -623,12 +623,8 @@ module.exports = async (req, res) => {
       providerResponse: parsed || null,
     })
   } catch (err) {
-    json(res, 200, {
-      ok: true,
-      text: localInstantTutorReply(latestPrompt),
-      provider: 'local-instant',
-      model: 'local-instant-v1',
-      warning: err && err.message ? err.message : 'AI request failed.',
+    json(res, 502, {
+      error: err && err.message ? err.message : 'AI request failed.',
     })
   }
 }
