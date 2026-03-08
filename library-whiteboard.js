@@ -600,6 +600,56 @@
       return text;
     }
 
+    function getClientGeminiKey() {
+      var key = "";
+      try { key = String(localStorage.getItem("sc_gemini_client_key") || "").trim(); } catch (err) {}
+      if (key) return key;
+      try {
+        var input = window.prompt("Paste your Gemini API key (stored only in this browser):", "");
+        if (input && String(input).trim()) {
+          key = String(input).trim();
+          try { localStorage.setItem("sc_gemini_client_key", key); } catch (err2) {}
+        }
+      } catch (err3) {}
+      return key;
+    }
+
+    function askGeminiDirectly(promptText) {
+      return new Promise(async function (resolve, reject) {
+        try {
+          var key = getClientGeminiKey();
+          if (!key) return reject(new Error("Missing Gemini key in browser."));
+          var endpoint =
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
+            encodeURIComponent(key);
+          var reqBody = {
+            system_instruction: {
+              parts: [{ text: "You are LYNE, a concise helpful study assistant for grade 9-10 students." }]
+            },
+            contents: [{ role: "user", parts: [{ text: String(promptText || "").trim() }] }],
+            generationConfig: { temperature: 0.52, maxOutputTokens: 420 }
+          };
+          var res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(reqBody)
+          });
+          var raw = await res.text();
+          var data = null;
+          try { data = JSON.parse(raw); } catch (err) { data = null; }
+          if (!res.ok) return reject(new Error((data && data.error && data.error.message) || raw || "Direct Gemini request failed."));
+          var parts = data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts;
+          var out = Array.isArray(parts)
+            ? parts.map(function (p) { return p && p.text ? String(p.text) : ""; }).join("\n").trim()
+            : "";
+          if (!out) return reject(new Error("Gemini returned empty text."));
+          resolve(out);
+        } catch (err) {
+          reject(err);
+        }
+      });
+    }
+
     function speak(text) {
       return new Promise(function (resolve) {
         var phrase = String(text || "").trim();
@@ -693,10 +743,20 @@
           setChat("You: " + prompt + "\n\nLYNE: " + reply);
           await speak(reply);
         } catch (err) {
-          var msg = "I cannot reach Gemini right now. Check GEMINI_API_KEY and redeploy.";
-          setChat("You: " + prompt + "\n\nLYNE: " + msg);
-          meta.textContent = err && err.message ? String(err.message) : "Gemini unavailable.";
-          await speak(msg);
+          try {
+            var directReply = normalizeAssistantText(await askGeminiDirectly(prompt), prompt);
+            if (!directReply) throw new Error("Low-value direct Gemini response.");
+            lastAssistantText = directReply;
+            messages.push({ role: "assistant", content: directReply });
+            setChat("You: " + prompt + "\n\nLYNE: " + directReply);
+            meta.textContent = "Connected (direct Gemini).";
+            await speak(directReply);
+          } catch (directErr) {
+            var msg = "I cannot reach Gemini right now. Add valid key and try again.";
+            setChat("You: " + prompt + "\n\nLYNE: " + msg);
+            meta.textContent = directErr && directErr.message ? String(directErr.message) : "Gemini unavailable.";
+            await speak(msg);
+          }
         } finally {
           waiting = false;
           inFlightPromptKey = "";
