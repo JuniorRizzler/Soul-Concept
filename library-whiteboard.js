@@ -102,6 +102,13 @@
   ].join("");
     document.head.appendChild(style);
 
+    function purgeLibraryAssistants() {
+      Array.prototype.slice.call(document.querySelectorAll(".lib-lyne-shell,.lib-ai-pet-shell,#lib-lyne-widget")).forEach(function (el) {
+        try { el.remove(); } catch (_err) {}
+      });
+    }
+    purgeLibraryAssistants();
+
     var layer = document.createElement("canvas");
     layer.className = "lib-anno-layer";
     layer.id = "lib-anno-layer";
@@ -1685,7 +1692,8 @@
     });
     mutationObs.observe(document.body, { childList: true, subtree: true });
 
-    // LYNE widget intentionally disabled inside libraries (home page only).
+    // Assistants intentionally disabled inside libraries (home page only).
+    purgeLibraryAssistants();
     resizeLayerIfNeeded();
     updateContext();
     setScopeLabel();
@@ -1701,6 +1709,7 @@
     setEraseMode(false);
     setVoiceRecordingState(false);
     window.setInterval(updateContext, 900);
+    window.setInterval(purgeLibraryAssistants, 1200);
   }
 
   if (document.readyState === "loading") {
