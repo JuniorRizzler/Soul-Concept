@@ -3,6 +3,7 @@
   window.__scAIBridgeInstalled = true
 
   if (typeof window.fetch !== 'function') return
+  if (String(window.SC_ENABLE_AI_BRIDGE || '') !== '1') return
 
   var originalFetch = window.fetch.bind(window)
   var AI_HOST_MARKERS = [

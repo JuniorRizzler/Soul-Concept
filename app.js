@@ -99,38 +99,27 @@
       const prompt = String(input.value || '').trim()
       if (!prompt) return
       sendBtn.disabled = true
-      meta.textContent = 'Contacting PersonaPlex...'
+      meta.textContent = 'Contacting Puter.js...'
       answer.textContent = 'Thinking...'
       try {
-        const res = await fetch('/api/ai-chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            request: {
-              model: 'gpt-4o-mini',
-              temperature: 0.4,
-              max_tokens: 500,
-              messages: [
-                {
-                  role: 'system',
-                  content: 'You are PersonaPlex, a concise and helpful study assistant for high school students.',
-                },
-                { role: 'user', content: prompt },
-              ],
-            },
-          }),
-        })
-        const data = await res.json()
-        if (!res.ok) {
-          throw new Error((data && data.error) || 'PersonaPlex request failed.')
+        if (!(window.puter && window.puter.ai && typeof window.puter.ai.chat === 'function')) {
+          throw new Error('Puter SDK not ready.')
         }
-        answer.textContent = String((data && data.text) || '').trim() || '(No text returned.)'
-        const provider = data && data.provider ? String(data.provider) : 'openai-compatible'
-        const model = data && data.model ? String(data.model) : 'gpt-4o-mini'
-        meta.textContent = 'Connected. Provider: ' + provider + ' | Model: ' + model
+        const data = await window.puter.ai.chat(prompt, { model: 'gpt-4o-mini', stream: false })
+        const model =
+          (data && data.model && String(data.model)) ||
+          (data && data.message && data.message.model && String(data.message.model)) ||
+          'gpt-4o-mini'
+        const text =
+          (typeof data === 'string' && data) ||
+          (data && typeof data.text === 'string' && data.text) ||
+          (data && data.message && typeof data.message.content === 'string' && data.message.content) ||
+          ''
+        answer.textContent = String(text || '').trim() || '(No text returned.)'
+        meta.textContent = 'Connected. Provider: puter.js | Model: ' + model
       } catch (err) {
         answer.textContent = 'Error: ' + (err && err.message ? err.message : 'Request failed.')
-        meta.textContent = 'Failed. Check deployment env vars and function logs.'
+        meta.textContent = 'Failed. Make sure Puter is loaded and you are signed in.'
       } finally {
         sendBtn.disabled = false
       }
