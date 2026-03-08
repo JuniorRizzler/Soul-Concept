@@ -781,58 +781,15 @@
           setChat('You: ' + prompt + '\n\nLYNE: ...');
           messages.push({ role: 'user', content: prompt });
           try {
-            var reply = '';
-            var lastErr = null;
-            try {
-              reply = normalizeAssistantText(await askViaPuter(prompt), prompt);
-              if (reply) {
-                meta.textContent = 'Connected (Puter.js).';
-              }
-            } catch (puterErr) {
-              lastErr = puterErr;
-            }
-
-            for (var attempt = 0; attempt < 1 && !reply; attempt++) {
-              var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-              var timeout = null;
-              if (controller) {
-                timeout = window.setTimeout(function () {
-                  try { controller.abort(); } catch (_err) {}
-                }, attempt === 0 ? 15000 : 9000);
-              }
-              try {
-                var res = await fetch('/api/ai-chat', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  signal: controller ? controller.signal : undefined,
-                  body: JSON.stringify({
-                    request: {
-                      model: 'gpt-4o-mini',
-                      system: 'Answer the latest user question directly. Avoid repeating prior lines. Only provide navigation when asked where to go.',
-                      messages: messages.slice(-20),
-                      max_tokens: 500,
-                      temperature: 0.58
-                    }
-                  })
-                });
-                if (timeout) window.clearTimeout(timeout);
-                var data = null;
-                try { data = await res.json(); } catch (_err) { data = null; }
-                if (!res.ok) throw new Error((data && data.error) || 'Request failed.');
-                if (!data || data.provider === 'local-instant') throw new Error('Remote AI unavailable.');
-                reply = normalizeAssistantText((data && data.text) || '', prompt);
-              } catch (errTry) {
-                if (timeout) window.clearTimeout(timeout);
-                lastErr = errTry;
-              }
-            }
-            if (!reply) throw (lastErr || new Error('Request failed.'));
+            var reply = normalizeAssistantText(await askViaPuter(prompt), prompt);
+            if (!reply) throw new Error('Puter returned low-value response.');
+            meta.textContent = 'Connected (Puter.js).';
             lastAssistantText = reply;
             messages.push({ role: 'assistant', content: reply });
             setChat('You: ' + prompt + '\n\nLYNE: ' + reply);
             await speak(reply);
           } catch (err) {
-            var msg = 'I cannot reach Puter or OpenAI right now. Check network and try again.';
+            var msg = 'I cannot reach Puter right now. Check network/login and try again.';
             setChat('You: ' + prompt + '\n\nLYNE: ' + msg);
             meta.textContent = err && err.message ? err.message : 'AI unavailable.';
             await speak(msg);
@@ -945,7 +902,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308i"></script>
+    <script src="app.js?v=20260308j"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>

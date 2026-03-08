@@ -741,39 +741,15 @@
         setChat("You: " + prompt + "\n\nLYNE: ...");
         messages.push({ role: "user", content: prompt });
         try {
-          var reply = "";
-          try {
-            reply = normalizeAssistantText(await askViaPuter(prompt), prompt);
-            if (reply) meta.textContent = "Connected (Puter.js).";
-          } catch (puterErr) {}
-
-          if (!reply) {
-            var res = await fetch("/api/ai-chat", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                request: {
-                  model: "gpt-4o-mini",
-                  system: "Current library context: " + String(currentSectionName || "general section") + ". Answer the latest user question directly. Avoid repeating previous answers.",
-                  messages: messages.slice(-16),
-                  max_tokens: 420,
-                  temperature: 0.52
-                }
-              })
-            });
-            var data = null;
-            try { data = await res.json(); } catch (err) { data = null; }
-            if (!res.ok) throw new Error((data && data.error) || "Request failed.");
-            if (!data || data.provider === "local-instant") throw new Error("Remote AI unavailable.");
-            reply = normalizeAssistantText((data && data.text) || "", prompt);
-          }
+          var reply = normalizeAssistantText(await askViaPuter(prompt), prompt);
           if (!reply) throw new Error("AI returned a low-value response.");
+          meta.textContent = "Connected (Puter.js).";
           lastAssistantText = reply;
           messages.push({ role: "assistant", content: reply });
           setChat("You: " + prompt + "\n\nLYNE: " + reply);
           await speak(reply);
         } catch (err) {
-          var msg = "I cannot reach Puter or OpenAI right now. Check network and try again.";
+          var msg = "I cannot reach Puter right now. Check network/login and try again.";
           setChat("You: " + prompt + "\n\nLYNE: " + msg);
           meta.textContent = err && err.message ? String(err.message) : "AI unavailable.";
           await speak(msg);
