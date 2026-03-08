@@ -518,7 +518,7 @@
 
         function normalizeAssistantText(text, userPrompt) {
           var raw = String(text || '').trim();
-          if (!raw) return localFallbackReply(userPrompt || '');
+          if (!raw) return '';
           var lower = raw.toLowerCase();
           if (
             lower.indexOf('sorry, we have had an error') !== -1 ||
@@ -526,17 +526,18 @@
             lower.indexOf('something went wrong') !== -1 ||
             lower.indexOf('i hit an error') !== -1
           ) {
-            return localFallbackReply(userPrompt || '');
+            return '';
           }
           if (
             lower.indexOf('ask me any topic and i will explain') !== -1 ||
             lower.indexOf('go to science at study-library') !== -1 ||
-            lower.indexOf('tell me your subject and i will pick one') !== -1
+            lower.indexOf('tell me your subject and i will pick one') !== -1 ||
+            lower.indexOf('direct answer: break this into known formula + substitution + final check') !== -1
           ) {
-            return localFallbackReply(userPrompt || '');
+            return '';
           }
           if (compactText(raw) === compactText(DEFAULT_STILL_HERE)) {
-            return localFallbackReply(userPrompt || '');
+            return '';
           }
           return raw;
         }
@@ -869,7 +870,7 @@
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308d"></script>
+    <script src="app.js?v=20260308e"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>

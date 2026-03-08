@@ -591,10 +591,11 @@
 
     function normalizeAssistantText(raw, prompt) {
       var text = String(raw || "").replace(/\s+/g, " ").trim();
-      if (!text || isLowValueReply(text)) return fallbackReply(prompt);
+      if (!text || isLowValueReply(text)) return "";
+      if (text.toLowerCase().indexOf("direct answer: break this into known formula + substitution + final check") !== -1) return "";
       if (text.length > 700) text = text.slice(0, 700).trim();
       if (compactText(text) === compactText(lastAssistantText) && compactText(prompt) !== lastPromptKey) {
-        return fallbackReply(prompt);
+        return "";
       }
       return text;
     }
@@ -686,7 +687,7 @@
           if (!res.ok) throw new Error((data && data.error) || "Request failed.");
           if (!data || data.provider === "local-instant") throw new Error("Remote AI unavailable.");
           var reply = normalizeAssistantText((data && data.text) || "", prompt);
-          if (compactText(reply) === compactText(lastAssistantText)) reply = fallbackReply(prompt);
+          if (!reply) throw new Error("AI returned a low-value response.");
           lastAssistantText = reply;
           messages.push({ role: "assistant", content: reply });
           setChat("You: " + prompt + "\n\nLYNE: " + reply);
