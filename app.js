@@ -573,7 +573,9 @@
   let deferredPrompt = null
   const installBtn = document.querySelector('[data-install-btn]')
   const installHint = document.querySelector('[data-install-hint]')
-  const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
+  const isIos =
+    /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
   const isSafari = /safari/i.test(navigator.userAgent) && !/crios|fxios|edgios|opr\//i.test(navigator.userAgent)
   const standaloneMql = window.matchMedia('(display-mode: standalone)')
   const INSTALL_STATE_KEY = 'sc_app_installed'
@@ -638,15 +640,18 @@
     overlay.innerHTML =
       '<div class="ios-install-card" role="dialog" aria-modal="true" aria-label="Install app on iPhone">' +
       '<h3>Install on iPhone/iPad</h3>' +
-      '<p>Apple does not allow automatic Home Screen install. Use these quick steps:</p>' +
+      '<p>Apple does not allow automatic Home Screen install. Use these quick steps in Safari:</p>' +
       '<ol>' +
       '<li>Tap the Share icon in Safari.</li>' +
       '<li>Tap <strong>Add to Home Screen</strong>.</li>' +
       '<li>Tap <strong>Add</strong>.</li>' +
       '</ol>' +
+      (isSafari
+        ? ''
+        : '<p><strong>Note:</strong> You are not in Safari. Open this page in Safari first.</p>') +
       '<div class="ios-install-actions">' +
       '<button type="button" class="secondary" data-ios-close>Close</button>' +
-      '<button type="button" class="primary" data-ios-share>Open Share</button>' +
+      '<button type="button" class="primary" data-ios-share>Try Share Sheet</button>' +
       '</div>' +
       '</div>'
 
@@ -667,9 +672,17 @@
             text: 'Install Soul Concept on your Home Screen',
             url: location.href,
           })
-          .finally(closeGuide)
+          .catch(function () {
+            // keep the guide open if share is cancelled/blocked
+          })
       } else {
-        closeGuide()
+        try {
+          navigator.clipboard.writeText(location.href).catch(function () {
+            // ignore clipboard errors
+          })
+        } catch (err) {
+          // ignore clipboard errors
+        }
       }
     })
 
@@ -700,22 +713,6 @@
 
       if (isIos && !isStandaloneMode()) {
         if (installHint) installHint.classList.add('is-visible')
-        if (!isSafari) {
-          alert('For iPhone/iPad install, open this page in Safari, then use Share -> Add to Home Screen.')
-          return
-        }
-        if (navigator.share) {
-          navigator
-            .share({
-              title: document.title || 'Soul Concept',
-              text: 'Install Soul Concept on your Home Screen',
-              url: location.href,
-            })
-            .catch(function () {
-              showIosInstallGuide()
-            })
-          return
-        }
         showIosInstallGuide()
         return
       }
@@ -862,23 +859,28 @@
       }
 
       async function saveSubscription(subscription) {
-      const res = await fetch('/api/push-subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          subscription,
-          userAgent: navigator.userAgent || ''
-        })
-      })
-      if (!res.ok) {
-        const text = await res.text()
-        // Allow local/device notifications to work even if server persistence is unavailable.
-        if ((text || '').indexOf('Missing Supabase server env vars') !== -1) {
-          return { persisted: false, reason: 'supabase_not_configured' }
+        let res
+        try {
+          res = await fetch('/api/push-subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              subscription,
+              userAgent: navigator.userAgent || ''
+            })
+          })
+        } catch (err) {
+          return { persisted: false, reason: 'network_unavailable' }
         }
-        throw new Error(text || 'Failed to register reminder subscription.')
-      }
-      return { persisted: true }
+        if (!res.ok) {
+          const text = await res.text()
+          // Allow local/device notifications to work even if server persistence is unavailable.
+          if ((text || '').indexOf('Missing Supabase server env vars') !== -1) {
+            return { persisted: false, reason: 'supabase_not_configured' }
+          }
+          return { persisted: false, reason: 'server_rejected' }
+        }
+        return { persisted: true }
       }
 
       async function sendPushPayload(subscription, payload) {
@@ -948,55 +950,71 @@
       }
 
       async function showInstantLocalNotification(templateKey) {
-      const templates = {
-        test: {
-          title: 'Soul Concept',
-          body: 'Test notification received.',
-          url: '/',
-          type: 'general',
-          tag: 'sc-test',
-          requireInteraction: false
-        },
-        update: {
-          title: 'New in Grade 10 Math',
-          body: 'Fresh UI updates are live. Tap to explore the newest library.',
-          url: '/grade-10-math.html',
-          type: 'update',
-          tag: 'sc-update',
-          requireInteraction: false
-        },
-        reminder: {
-          title: 'Study Reminder',
-          body: 'Quick 15-minute review now can save you hours later.',
-          url: '/study-library.html',
-          type: 'reminder',
-          tag: 'sc-reminder',
-          requireInteraction: true
-        },
-        streak: {
-          title: 'Keep Your Streak',
-          body: 'You are one focused session away from extending your streak.',
-          url: '/work.html',
-          type: 'streak',
-          tag: 'sc-streak',
-          requireInteraction: true
+        const templates = {
+          test: {
+            title: 'Soul Concept',
+            body: 'Test notification received.',
+            url: '/',
+            type: 'general',
+            tag: 'sc-test',
+            requireInteraction: false
+          },
+          update: {
+            title: 'New in Grade 10 Math',
+            body: 'Fresh UI updates are live. Tap to explore the newest library.',
+            url: '/grade-10-math.html',
+            type: 'update',
+            tag: 'sc-update',
+            requireInteraction: false
+          },
+          reminder: {
+            title: 'Study Reminder',
+            body: 'Quick 15-minute review now can save you hours later.',
+            url: '/study-library.html',
+            type: 'reminder',
+            tag: 'sc-reminder',
+            requireInteraction: true
+          },
+          streak: {
+            title: 'Keep Your Streak',
+            body: 'You are one focused session away from extending your streak.',
+            url: '/work.html',
+            type: 'streak',
+            tag: 'sc-streak',
+            requireInteraction: true
+          }
         }
-      }
-      const payload = templates[templateKey] || templates.test
-      const registration = await navigator.serviceWorker.ready
-      await registration.showNotification(payload.title, {
-        body: payload.body,
-        icon: '/icons/icon-192.png',
-        badge: '/icons/icon-192.png',
-        tag: payload.tag || ('sc-' + (payload.type || 'general')),
-        renotify: true,
-        requireInteraction: !!payload.requireInteraction,
-        actions: [
-          { action: 'open', title: 'Open' },
-          { action: 'dismiss', title: 'Dismiss' }
-        ],
-        data: { url: payload.url || '/', type: payload.type || 'general' }
-      })
+        const payload = templates[templateKey] || templates.test
+        try {
+          const registration = await navigator.serviceWorker.ready
+          await registration.showNotification(payload.title, {
+            body: payload.body,
+            icon: '/icons/icon-192.png',
+            badge: '/icons/icon-192.png',
+            tag: payload.tag || ('sc-' + (payload.type || 'general')),
+            renotify: true,
+            requireInteraction: !!payload.requireInteraction,
+            actions: [
+              { action: 'open', title: 'Open' },
+              { action: 'dismiss', title: 'Dismiss' }
+            ],
+            data: { url: payload.url || '/', type: payload.type || 'general' }
+          })
+          return
+        } catch (err) {
+          // fallback for browsers that do not expose SW notifications reliably
+        }
+        try {
+          if (Notification.permission === 'granted') {
+            new Notification(payload.title, {
+              body: payload.body,
+              icon: '/icons/icon-192.png',
+              tag: payload.tag || ('sc-' + (payload.type || 'general'))
+            })
+          }
+        } catch (err) {
+          // ignore fallback errors
+        }
       }
 
       if (!canUsePush) {
@@ -1032,7 +1050,9 @@
             const subscription = await getSubscription()
             const saveResult = await saveSubscription(subscription)
             await showInstantLocalNotification('streak')
-            await sendTemplate('streak')
+            await sendTemplate('streak').catch(function () {
+              // server push trigger is best-effort only
+            })
             if (saveResult && saveResult.persisted === false) {
               setStatus('Enabled on this device. Server reminders need Supabase env vars.', false)
             } else {
