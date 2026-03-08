@@ -116,12 +116,27 @@
           </div>
         </section>
 
-        <div id="lyne-widget" style="position:fixed;right:12px;bottom:12px;z-index:90;display:grid;gap:8px;justify-items:end">
-          <button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false" style="width:52px;height:52px;border-radius:999px;border:0;cursor:pointer;background:radial-gradient(circle at 28% 28%,#fef3d8 0%,#f3b86e 42%,#8a4c16 100%);box-shadow:0 14px 24px rgba(23,21,16,.33),inset -7px -9px 12px rgba(0,0,0,.2),inset 5px 7px 10px rgba(255,255,255,.35);position:relative;overflow:hidden">
-            <span style="position:absolute;inset:0;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)"></span>
-            <span style="position:absolute;left:12px;top:11px;width:15px;height:6px;border-radius:999px;background:rgba(255,255,255,.58);transform:rotate(-18deg)"></span>
+        <style>
+          #lyne-widget{position:fixed;right:12px;bottom:12px;z-index:90}
+          #lyne-orb-toggle{width:54px;height:54px;border-radius:999px;border:0;cursor:pointer;position:relative;overflow:hidden;background:radial-gradient(circle at 30% 30%,#fff0d8 0%,#ffb453 45%,#8a410d 100%);box-shadow:0 14px 22px rgba(23,21,16,.35),inset -8px -10px 12px rgba(0,0,0,.22),inset 5px 7px 9px rgba(255,255,255,.35)}
+          #lyne-orb-toggle .flame-core{position:absolute;left:16px;top:11px;width:22px;height:28px;border-radius:52% 48% 58% 42%/52% 40% 60% 48%;background:radial-gradient(circle at 40% 30%,#fff6ea 0%,#ffd58f 32%,#ff8b2b 68%,#bb4b0f 100%);animation:lyneFlame 1.9s ease-in-out infinite;transform-origin:50% 75%}
+          #lyne-orb-toggle .flame-inner{position:absolute;left:22px;top:18px;width:9px;height:12px;border-radius:50% 50% 55% 45%;background:radial-gradient(circle at 50% 24%,#fff8ef 0%,#ffe4ae 55%,rgba(255,228,174,.25) 100%);animation:lyneFlameInner 1.1s ease-in-out infinite}
+          #lyne-orb-toggle .flame-glow{position:absolute;inset:6px;border-radius:999px;box-shadow:0 0 22px rgba(255,147,53,.6);animation:lyneGlow 2.1s ease-in-out infinite}
+          #lyne-widget.lyne-speaking #lyne-orb-toggle .flame-core{animation-duration:.85s}
+          #lyne-widget.lyne-speaking #lyne-orb-toggle .flame-glow{box-shadow:0 0 30px rgba(255,137,40,.85)}
+          #lyne-panel{position:absolute;right:0;bottom:62px;width:min(310px,90vw);border:1px solid rgba(226,216,203,.76);background:linear-gradient(170deg,rgba(255,255,255,.96),rgba(247,241,233,.94));border-radius:16px;padding:10px;box-shadow:0 18px 34px rgba(23,21,16,.24);opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:opacity .24s ease,transform .24s ease}
+          #lyne-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+          @keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}
+          @keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}
+          @keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}
+        </style>
+        <div id="lyne-widget">
+          <button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false">
+            <span class="flame-glow" aria-hidden="true"></span>
+            <span class="flame-core" aria-hidden="true"></span>
+            <span class="flame-inner" aria-hidden="true"></span>
           </button>
-          <section id="lyne-panel" aria-hidden="true" style="display:none;width:min(300px,90vw);border:1px solid rgba(226,216,203,.8);background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(247,241,233,.96));border-radius:14px;padding:10px;box-shadow:0 16px 28px rgba(23,21,16,.2)">
+          <section id="lyne-panel" aria-hidden="true">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
               <h3 style="margin:0;font-size:.95rem">LYNE</h3>
               <button id="lyne-panel-close" type="button" class="btn btn-secondary" style="padding:5px 8px;font-size:.78rem">Hide</button>
@@ -416,6 +431,7 @@
 
     <script>
       (function () {
+        var lyneWidget = document.getElementById('lyne-widget');
         var orbToggle = document.getElementById('lyne-orb-toggle');
         var panel = document.getElementById('lyne-panel');
         var panelClose = document.getElementById('lyne-panel-close');
@@ -423,21 +439,25 @@
         var stopBtn = document.getElementById('lyne-stop');
         var meta = document.getElementById('lyne-meta');
         var chat = document.getElementById('lyne-chat');
-        if (!orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !meta || !chat) return;
+        if (!lyneWidget || !orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !meta || !chat) return;
 
         function setPanelOpen(next) {
           var open = !!next;
-          panel.style.display = open ? 'block' : 'none';
+          panel.classList.toggle('open', open);
           panel.setAttribute('aria-hidden', open ? 'false' : 'true');
           orbToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
 
         orbToggle.addEventListener('click', function () {
-          setPanelOpen(panel.style.display !== 'block');
+          setPanelOpen(!panel.classList.contains('open'));
         });
         panelClose.addEventListener('click', function () {
           setPanelOpen(false);
         });
+
+        function setSpeakingVisual(next) {
+          lyneWidget.classList.toggle('lyne-speaking', !!next);
+        }
 
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var canListen = typeof SpeechRecognition === 'function';
@@ -503,6 +523,7 @@
               }
             } catch (_err) {}
             speaking = false;
+            setSpeakingVisual(false);
             nextListenAt = Date.now() + 120;
             meta.textContent = 'Interrupted. Listening...';
           }
@@ -728,6 +749,7 @@
               var audio = new Audio(url);
               lyneAudio = audio;
               speaking = true;
+              setSpeakingVisual(true);
               ignoreMicUntil = Date.now() + 2200;
               if (recognition && listening) {
                 try { recognition.abort(); } catch (_err3) {}
@@ -738,6 +760,7 @@
                 audio.onended = function () {
                   try { URL.revokeObjectURL(url); } catch (_err4) {}
                   speaking = false;
+                  setSpeakingVisual(false);
                   lastSpeechEndedAt = Date.now();
                   meta.textContent = active ? 'Listening...' : 'Idle.';
                   ignoreMicUntil = Date.now() + 900;
@@ -752,12 +775,14 @@
                 audio.onerror = function () {
                   try { URL.revokeObjectURL(url); } catch (_err5) {}
                   speaking = false;
+                  setSpeakingVisual(false);
                   lyneAudio = null;
                   resolve();
                 };
                 audio.play().catch(function () {
                   try { URL.revokeObjectURL(url); } catch (_err6) {}
                   speaking = false;
+                  setSpeakingVisual(false);
                   lyneAudio = null;
                   resolve();
                 });
@@ -781,6 +806,7 @@
             await new Promise(function (resolve) {
               u.onstart = function () {
                 speaking = true;
+                setSpeakingVisual(true);
                 ignoreMicUntil = Date.now() + 2200;
                 if (recognition && listening) {
                   try { recognition.abort(); } catch (_err) {}
@@ -790,6 +816,7 @@
               };
               u.onend = function () {
                 speaking = false;
+                setSpeakingVisual(false);
                 lastSpeechEndedAt = Date.now();
                 meta.textContent = active ? 'Listening...' : 'Idle.';
                 ignoreMicUntil = Date.now() + 900;
@@ -802,6 +829,7 @@
               };
               u.onerror = function () {
                 speaking = false;
+                setSpeakingVisual(false);
                 lastSpeechEndedAt = Date.now();
                 meta.textContent = active ? 'Listening...' : 'Idle.';
                 ignoreMicUntil = Date.now() + 700;
@@ -817,6 +845,7 @@
           } catch (_err) {
             meta.textContent = 'Could not start voice playback.';
             speaking = false;
+            setSpeakingVisual(false);
           }
         }
 
@@ -978,8 +1007,9 @@
                     window.speechSynthesis.cancel();
                   }
                 } catch (_err) {}
-                speaking = false;
-                meta.textContent = 'Interrupted. Go ahead...';
+              speaking = false;
+              setSpeakingVisual(false);
+              meta.textContent = 'Interrupted. Go ahead...';
               } else {
                 meta.textContent = 'LYNE is speaking. Say "LYNE stop" to interrupt.';
               }
@@ -1038,13 +1068,14 @@
             }
           } catch (_err) {}
           speaking = false;
+          setSpeakingVisual(false);
           meta.textContent = 'Conversation stopped.';
         });
 
         setChat('LYNE: Ready when you are.');
       })();
     </script>
-    <script src="app.js?v=20260308r"></script>
+    <script src="app.js?v=20260308s"></script>
       <script defer src="/_vercel/insights/script.js"></script>
   
     <script src="auth-config.js"></script>
