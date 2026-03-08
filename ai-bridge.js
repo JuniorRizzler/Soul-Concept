@@ -54,7 +54,7 @@
       }
     } catch (_err) {}
     // Force a single assistant model across widgets unless the page overrides it.
-    var forcedModel = String(window.SC_AI_MODEL || 'Qwen/Qwen2.5-7B-Instruct')
+    var forcedModel = String(window.SC_AI_MODEL || 'gpt-4o-mini')
     if (!parsedBody || typeof parsedBody !== 'object') parsedBody = {}
     parsedBody.model = forcedModel
 
