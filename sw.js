@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v79";
+const CACHE_NAME = "soulconcept-v80";
 const ASSETS = [
   "/",
   "/index.html",
@@ -16,10 +16,7 @@ const ASSETS = [
   "/anki/index.html",
   "/styles.css",
   "/app.js",
-  "/auth-config.js",
-  "/auth-guard.js",
   "/library-whiteboard.js",
-  "/auth/callback.html",
   "/manifest.json",
   "/icons/icon.svg",
   "/icons/icon-192.png",
@@ -80,9 +77,7 @@ self.addEventListener("fetch", (event) => {
       url.pathname === "/app.js" ||
       url.pathname === "/ai-bridge.js" ||
       url.pathname === "/library-whiteboard.js" ||
-      url.pathname === "/styles.css" ||
-      url.pathname === "/auth-config.js" ||
-      url.pathname === "/auth-guard.js"
+      url.pathname === "/styles.css"
     )
   ) {
     event.respondWith(
