@@ -375,6 +375,10 @@
     var captureTimer = null
     var captureText = ''
     var ignoreMicUntil = 0
+    var lastSpeechEndedAt = 0
+    var lastAssistantText = ''
+    var lastUserText = ''
+    var lastUserAt = 0
     var preferredVoice = null
     var didDrag = false
 
@@ -517,6 +521,17 @@
       captureTimer = setTimeout(flushCapturedText, delay)
     }
 
+    function looksLikeEcho(value) {
+      var heard = compactText(value)
+      var spoken = compactText(lastAssistantText)
+      if (!heard || !spoken) return false
+      if (heard === spoken) return true
+      if (heard.length > 8 && spoken.indexOf(heard) !== -1) return true
+      if (spoken.length > 18 && heard.indexOf(spoken) !== -1) return true
+      if (Date.now() - lastSpeechEndedAt < 4200) return true
+      return false
+    }
+
     function extractResponseText(payload) {
       if (!payload) return ''
       if (typeof payload.text === 'string') return payload.text
@@ -595,6 +610,10 @@
       try {
         window.speechSynthesis.cancel()
       } catch (_err2) {}
+      if (recognition && listening) {
+        try { recognition.abort() } catch (_errAbort) {}
+        listening = false
+      }
 
       try {
         var ttsRes = await fetch('/api/tts', {
@@ -617,13 +636,14 @@
           speaking = true
           setSpeakingVisual(true)
           meta.textContent = 'LYNE is speaking...'
-          ignoreMicUntil = Date.now() + 1800
+          ignoreMicUntil = Date.now() + 2600
           await new Promise(function (resolve) {
             audio.onended = function () {
               try { URL.revokeObjectURL(url) } catch (_err3) {}
               speaking = false
               lyneAudio = null
               setSpeakingVisual(false)
+              lastSpeechEndedAt = Date.now()
               meta.textContent = active ? 'Listening...' : 'Idle.'
               resolve()
             }
@@ -632,6 +652,7 @@
               speaking = false
               lyneAudio = null
               setSpeakingVisual(false)
+              lastSpeechEndedAt = Date.now()
               resolve()
             }
             audio.play().catch(function () {
@@ -639,6 +660,7 @@
               speaking = false
               lyneAudio = null
               setSpeakingVisual(false)
+              lastSpeechEndedAt = Date.now()
               resolve()
             })
           })
@@ -656,17 +678,19 @@
       speaking = true
       setSpeakingVisual(true)
       meta.textContent = 'LYNE is speaking...'
-      ignoreMicUntil = Date.now() + 1800
+      ignoreMicUntil = Date.now() + 2600
       await new Promise(function (resolve) {
         utterance.onend = function () {
           speaking = false
           setSpeakingVisual(false)
+          lastSpeechEndedAt = Date.now()
           meta.textContent = active ? 'Listening...' : 'Idle.'
           resolve()
         }
         utterance.onerror = function () {
           speaking = false
           setSpeakingVisual(false)
+          lastSpeechEndedAt = Date.now()
           meta.textContent = active ? 'Listening...' : 'Idle.'
           resolve()
         }
@@ -677,6 +701,18 @@
     async function askLyne(prompt) {
       var question = String(prompt || '').trim()
       if (!question || waiting) return
+      if (question.length < 2) return
+      if (looksLikeEcho(question)) {
+        meta.textContent = active ? 'Listening...' : 'Idle.'
+        return
+      }
+      var now = Date.now()
+      if (lastUserText && compactText(question) === lastUserText && now - lastUserAt < 4000) {
+        meta.textContent = active ? 'Listening...' : 'Idle.'
+        return
+      }
+      lastUserText = compactText(question)
+      lastUserAt = now
       waiting = true
       meta.textContent = 'Thinking...'
       setChat(chat, 'You: ' + question + '\n\nLYNE: ...')
@@ -695,15 +731,17 @@
         }
         reply = normalizeAssistantText(reply, question)
         setChat(chat, 'You: ' + question + '\n\nLYNE: ' + reply)
+        lastAssistantText = reply
+        await speak(reply)
         if (guideTarget) {
           meta.textContent = 'Starting guide...'
           setTimeout(function () {
             startGuide(guideTarget)
-          }, 180)
+          }, 220)
         }
-        await speak(reply)
       } catch (_err) {
         var fallback = localFallbackReply(question)
+        lastAssistantText = fallback
         setChat(chat, 'You: ' + question + '\n\nLYNE: ' + fallback)
         await speak(fallback)
         meta.textContent = 'Using fallback reply.'
@@ -828,6 +866,10 @@
         for (var i = event.resultIndex; i < event.results.length; i++) {
           transcript = String((event.results[i] && event.results[i][0] && event.results[i][0].transcript) || '').trim()
           if (!transcript) continue
+          if (looksLikeEcho(transcript)) {
+            meta.textContent = active ? 'Listening...' : 'Idle.'
+            continue
+          }
           captureText = transcript
           meta.textContent = event.results[i].isFinal ? 'Heard: ' + transcript : 'Hearing: ' + transcript
           scheduleFlush(event.results[i].isFinal ? 260 : 850)
