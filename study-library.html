@@ -6,6 +6,7 @@
     <title>Grade 9 Science App (Free)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="ai-bridge.js?v=20260306c"></script>
+    <link rel="stylesheet" href="library-mobile-fix.css" />
     <style>
 :root{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}*{box-sizing:border-box}body{margin:0}
 
@@ -111,7 +112,8 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
             node.parentElement
           )
         }
-        function isSectionView(){var btns=document.querySelectorAll('button');for(var i=0;i<btns.length;i++){var t=(btns[i].textContent||'').trim();if(t==='Back to Library' || t.indexOf('Back to ')===0)return true}return false}\nfunction pruneOnce(root){if(isSectionView())return;
+        function isSectionView(){var btns=document.querySelectorAll('button');for(var i=0;i<btns.length;i++){var t=(btns[i].textContent||'').trim();if(t==='Back to Library' || t.indexOf('Back to ')===0)return true}return false}
+        function pruneOnce(root){if(isSectionView())return;
           var candidates = Array.from(
             root.querySelectorAll('div.rounded-xl, div.rounded-2xl, li.rounded-xl, li.rounded-2xl')
           )
@@ -322,6 +324,7 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
     </script>
     <script>
       (function () {
+        var hintDismissed = false
         function nearBottom() {
           var scrollPos = window.scrollY + window.innerHeight
           var docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight)
@@ -333,9 +336,13 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
             hint = document.createElement('div')
             hint.className = 'scroll-hint'
             hint.innerHTML = '<span class="scroll-dot"></span><span>Scroll down</span>'
+            hint.addEventListener('click', function () {
+              hintDismissed = true
+              hint.style.display = 'none'
+            })
             document.body.appendChild(hint)
           }
-          hint.style.display = nearBottom() ? 'none' : 'flex'
+          hint.style.display = hintDismissed || nearBottom() ? 'none' : 'flex'
         }
         function update() {
           ensureHint()
@@ -372,7 +379,7 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
   </style>
 
 </head>
-  <body>
+  <body class="library-mobile-fix">
 
   <a class="exit-btn" href="index.html" aria-label="Return to Soul Concept index" data-tour-id="exit-home">Return to Index</a>
 

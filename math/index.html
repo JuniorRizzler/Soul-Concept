@@ -6,6 +6,7 @@
     <title>Grade 9 Mathematics App (Free)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../ai-bridge.js?v=20260306c"></script>
+    <link rel="stylesheet" href="../library-mobile-fix.css" />
     <style>
       :root { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
       * { box-sizing: border-box; }
@@ -28,11 +29,11 @@
       .exit-btn:hover { opacity: 1; }
     </style>
   </head>
-  <body>
+  <body class="library-mobile-fix">
     <div id="root"></div>
     <a class="exit-btn" href="../index.html" data-tour-id="exit-home">Back Home</a>
     <script src="../lyne-widget.js?v=20260310a"></script>
-    <script src="/math/math.bundle.js"></script>
+    <script src="./math.bundle.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   
 </body>
