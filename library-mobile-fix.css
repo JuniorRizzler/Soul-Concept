@@ -33,6 +33,12 @@ body {
     margin: 0 auto;
   }
 
+  body.library-mobile-fix--grade10 #root {
+    zoom: 0.76;
+    width: calc(100% / 0.76);
+    margin: 0 auto;
+  }
+
   body.library-mobile-fix .max-w-6xl,
   body.library-mobile-fix .max-w-4xl,
   body.library-mobile-fix .max-w-3xl {
@@ -85,6 +91,11 @@ body {
 @media (max-width: 680px) {
   :root {
     --library-fit-scale: 0.86;
+  }
+
+  body.library-mobile-fix--grade10 #root {
+    zoom: 0.7;
+    width: calc(100% / 0.7);
   }
 
   body.library-mobile-fix--geo {
