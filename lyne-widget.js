@@ -2,6 +2,7 @@
   var POSITION_KEY = 'sc_lyne_widget_position_v1'
   var PANEL_OPEN_KEY = 'sc_lyne_widget_panel_open_v1'
   var CHAT_KEY = 'sc_lyne_widget_chat_v1'
+  var GUIDE_KEY = 'sc_lyne_widget_guide_v1'
   var DEFAULT_CHAT = 'LYNE: Ready when you are.'
   var DEFAULT_STILL_HERE = 'I am still here. Ask me where to go in the app, what to study next, or what concept you want explained.'
   var LYNE_APP_CONTEXT =
@@ -14,6 +15,50 @@
     'When asked what the app was made for, answer directly using the purpose above. ' +
     'For learning questions, answer clearly in short steps with one quick example. ' +
     'Avoid generic repeated lines.'
+  var GUIDE_TARGETS = {
+    science: {
+      path: '/index.html',
+      selector: '[data-tour-id="home-science-open"]',
+      reply: 'I will show you. Scroll to the Libraries section, then click Open Science.',
+      hint: 'Click Open Science'
+    },
+    geography: {
+      path: '/index.html',
+      selector: '[data-tour-id="home-geography"]',
+      reply: 'I will show you. Scroll to the Libraries section, then click Open Geography.',
+      hint: 'Click Open Geography'
+    },
+    math9: {
+      path: '/index.html',
+      selector: '[data-tour-id="home-math9-open"]',
+      reply: 'I will show you. Scroll to the Libraries section, then click Open Math 9.',
+      hint: 'Click Open Math 9'
+    },
+    math10: {
+      path: '/index.html',
+      selector: '[data-tour-id="home-math10-open"]',
+      reply: 'I will show you. Scroll to the Libraries section, then click Open Math 10.',
+      hint: 'Click Open Math 10'
+    },
+    cards: {
+      path: '/index.html',
+      selector: '[data-tour-id="home-cards-open"]',
+      reply: 'I will show you. Scroll to the Libraries section, then click Open Cards.',
+      hint: 'Click Open Cards'
+    },
+    quiz: {
+      path: '/index.html',
+      selector: '[data-tour-id="home-quiz-open"]',
+      reply: 'I will show you. Scroll to the Libraries section, then click Open Quiz Tool.',
+      hint: 'Click Open Quiz Tool'
+    },
+    home: {
+      path: '/index.html',
+      selector: '[data-tour-id="exit-home"]',
+      reply: 'I will show you the way back home.',
+      hint: 'Click Return Home'
+    }
+  }
 
   function readJson(key, fallback) {
     try {
@@ -72,10 +117,14 @@
       '.lyne-mini-btn{padding:7px 10px;font-size:.78rem}' +
       '#lyne-meta{margin:7px 0 0;color:#5a5863;font-size:.8rem}' +
       '#lyne-chat{margin:7px 0 0;white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px;min-height:46px;max-height:132px;overflow:auto;font-size:.78rem;user-select:text}' +
+      '.sc-lyne-guide-target{position:relative;z-index:141 !important;outline:3px solid #ff8a1c !important;outline-offset:4px;border-radius:14px;box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22);animation:scLyneGuidePulse 1.15s ease-in-out infinite}' +
+      '.sc-lyne-guide-bubble{position:fixed;z-index:142;max-width:min(260px,80vw);padding:10px 12px;border-radius:14px;background:rgba(14,23,38,.96);color:#fff;font:700 12px/1.35 Manrope,system-ui,sans-serif;box-shadow:0 16px 30px rgba(0,0,0,.28)}' +
+      '.sc-lyne-guide-bubble strong{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.01em;color:#ffd39c}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
-      '@keyframes lyneHintFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.02)}}'
+      '@keyframes lyneHintFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.02)}}' +
+      '@keyframes scLyneGuidePulse{0%,100%{box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22)}50%{box-shadow:0 0 0 14px rgba(255,138,28,.1),0 20px 36px rgba(20,20,28,.28)}}'
     document.head.appendChild(style)
   }
 
@@ -245,6 +294,30 @@
     return ''
   }
 
+  function detectGuideTarget(prompt) {
+    var q = String(prompt || '').toLowerCase().trim()
+    if (!q) return ''
+    var wantsGuide =
+      q.indexOf('where') !== -1 ||
+      q.indexOf('open') !== -1 ||
+      q.indexOf('go') !== -1 ||
+      q.indexOf('visit') !== -1 ||
+      q.indexOf('head to') !== -1 ||
+      q.indexOf('take me') !== -1 ||
+      q.indexOf('show me') !== -1 ||
+      q.indexOf('how do i get') !== -1 ||
+      q.indexOf('bring me') !== -1
+    if (!wantsGuide) return ''
+    if ((q.indexOf('grade 9') !== -1 || q.indexOf('math 9') !== -1) && q.indexOf('math') !== -1) return 'math9'
+    if (q.indexOf('science') !== -1) return 'science'
+    if (q.indexOf('geography') !== -1) return 'geography'
+    if (q.indexOf('grade 10') !== -1 || q.indexOf('math 10') !== -1) return 'math10'
+    if (q.indexOf('cards') !== -1 || q.indexOf('anki') !== -1 || q.indexOf('flashcards') !== -1) return 'cards'
+    if (q.indexOf('quiz') !== -1) return 'quiz'
+    if ((q.indexOf('home') !== -1 || q.indexOf('back') !== -1) && q.indexOf('math') === -1) return 'home'
+    return ''
+  }
+
   function localFallbackReply(prompt) {
     var raw = String(prompt || '').trim()
     var q = raw.toLowerCase()
@@ -296,6 +369,9 @@
     var waiting = false
     var speaking = false
     var lyneAudio = null
+    var guideBubble = null
+    var guideTargetNode = null
+    var guideCleanupTimer = null
     var captureTimer = null
     var captureText = ''
     var ignoreMicUntil = 0
@@ -313,6 +389,120 @@
 
     function setSpeakingVisual(next) {
       widget.classList.toggle('lyne-speaking', !!next)
+    }
+
+    function currentPath() {
+      var path = String(location.pathname || '/index.html')
+      return path === '/' ? '/index.html' : path
+    }
+
+    function clearGuide() {
+      if (guideCleanupTimer) {
+        clearTimeout(guideCleanupTimer)
+        guideCleanupTimer = null
+      }
+      if (guideTargetNode) {
+        guideTargetNode.classList.remove('sc-lyne-guide-target')
+        guideTargetNode = null
+      }
+      if (guideBubble && guideBubble.parentNode) {
+        guideBubble.parentNode.removeChild(guideBubble)
+      }
+      guideBubble = null
+      try {
+        localStorage.removeItem(GUIDE_KEY)
+      } catch (_err) {}
+    }
+
+    function moveWidgetNearTarget(target) {
+      var rect = target.getBoundingClientRect()
+      var preferredX = rect.right + 14
+      var preferredY = rect.top + Math.max(0, Math.min(80, rect.height * 0.5))
+      if (preferredX + 72 > window.innerWidth) {
+        preferredX = rect.left - 72
+      }
+      if (preferredY + 72 > window.innerHeight) {
+        preferredY = window.innerHeight - 86
+      }
+      applyPosition(widget, {
+        x: preferredX,
+        y: preferredY,
+      })
+    }
+
+    function positionGuideBubble(target, bubble) {
+      var rect = target.getBoundingClientRect()
+      var top = rect.top - bubble.offsetHeight - 14
+      if (top < 12) top = rect.bottom + 14
+      var left = rect.left
+      if (left + bubble.offsetWidth > window.innerWidth - 12) {
+        left = window.innerWidth - bubble.offsetWidth - 12
+      }
+      if (left < 12) left = 12
+      bubble.style.top = top + 'px'
+      bubble.style.left = left + 'px'
+    }
+
+    function activateGuideTarget(targetId) {
+      var spec = GUIDE_TARGETS[targetId]
+      if (!spec) return false
+      var target = document.querySelector(spec.selector)
+      if (!target) {
+        meta.textContent = 'Guide target not found on this page.'
+        return false
+      }
+      clearGuide()
+      guideTargetNode = target
+      target.classList.add('sc-lyne-guide-target')
+      try {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' })
+      } catch (_err) {
+        target.scrollIntoView()
+      }
+      moveWidgetNearTarget(target)
+      var bubble = document.createElement('div')
+      bubble.className = 'sc-lyne-guide-bubble'
+      bubble.innerHTML = '<strong>LYNE Guide</strong>' + String(spec.hint || 'Click here')
+      document.body.appendChild(bubble)
+      guideBubble = bubble
+      positionGuideBubble(target, bubble)
+      var onResize = function () {
+        if (guideTargetNode && guideBubble) {
+          positionGuideBubble(guideTargetNode, guideBubble)
+        }
+      }
+      window.addEventListener('resize', onResize, { once: true })
+      target.addEventListener('click', clearGuide, { once: true })
+      guideCleanupTimer = setTimeout(clearGuide, 12000)
+      meta.textContent = 'Guide active.'
+      return true
+    }
+
+    function startGuide(targetId) {
+      var spec = GUIDE_TARGETS[targetId]
+      if (!spec) return false
+      try {
+        localStorage.setItem(GUIDE_KEY, JSON.stringify({ id: targetId, at: Date.now() }))
+      } catch (_err) {}
+      if (currentPath() !== spec.path) {
+        location.href = spec.path + '#lyne-guide'
+        return true
+      }
+      return activateGuideTarget(targetId)
+    }
+
+    function resumePendingGuide() {
+      var pending = readJson(GUIDE_KEY, null)
+      if (!pending || !pending.id) return
+      if (pending.at && Date.now() - Number(pending.at) > 180000) {
+        clearGuide()
+        return
+      }
+      var spec = GUIDE_TARGETS[pending.id]
+      if (!spec || currentPath() !== spec.path) return
+      setTimeout(function () {
+        activateGuideTarget(pending.id)
+      }, 450)
     }
 
     function flushCapturedText() {
@@ -492,7 +682,8 @@
       setChat(chat, 'You: ' + question + '\n\nLYNE: ...')
       try {
         var intentReply = localAppIntentReply(question)
-        var reply = intentReply
+        var guideTarget = detectGuideTarget(question)
+        var reply = guideTarget && GUIDE_TARGETS[guideTarget] ? GUIDE_TARGETS[guideTarget].reply : intentReply
         if (!reply) {
           try {
             reply = await askViaPuter(question)
@@ -504,6 +695,12 @@
         }
         reply = normalizeAssistantText(reply, question)
         setChat(chat, 'You: ' + question + '\n\nLYNE: ' + reply)
+        if (guideTarget) {
+          meta.textContent = 'Starting guide...'
+          setTimeout(function () {
+            startGuide(guideTarget)
+          }, 180)
+        }
         await speak(reply)
       } catch (_err) {
         var fallback = localFallbackReply(question)
@@ -658,6 +855,7 @@
     window.addEventListener('resize', function () {
       applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
     })
+    resumePendingGuide()
   }
 
   if (document.readyState === 'loading') {
