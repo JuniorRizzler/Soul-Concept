@@ -19,37 +19,37 @@
     science: {
       path: '/index.html',
       selector: '[data-tour-id="home-science-open"]',
-      reply: 'I will show you. Scroll to the Libraries section, then click Open Science.',
+      reply: 'Click Jump to Libraries, then choose Open Science.',
       hint: 'Click Open Science'
     },
     geography: {
       path: '/index.html',
       selector: '[data-tour-id="home-geography"]',
-      reply: 'I will show you. Scroll to the Libraries section, then click Open Geography.',
+      reply: 'Click Jump to Libraries, then choose Open Geography.',
       hint: 'Click Open Geography'
     },
     math9: {
       path: '/index.html',
       selector: '[data-tour-id="home-math9-open"]',
-      reply: 'I will show you. Scroll to the Libraries section, then click Open Math 9.',
+      reply: 'Click Jump to Libraries, then browse the cards and choose Open Math 9.',
       hint: 'Click Open Math 9'
     },
     math10: {
       path: '/index.html',
       selector: '[data-tour-id="home-math10-open"]',
-      reply: 'I will show you. Scroll to the Libraries section, then click Open Math 10.',
+      reply: 'Click Jump to Libraries, then browse the cards and choose Open Math 10.',
       hint: 'Click Open Math 10'
     },
     cards: {
       path: '/index.html',
       selector: '[data-tour-id="home-cards-open"]',
-      reply: 'I will show you. Scroll to the Libraries section, then click Open Cards.',
+      reply: 'Click Jump to Libraries, then choose Open Cards.',
       hint: 'Click Open Cards'
     },
     quiz: {
       path: '/index.html',
       selector: '[data-tour-id="home-quiz-open"]',
-      reply: 'I will show you. Scroll to the Libraries section, then click Open Quiz Tool.',
+      reply: 'Click Jump to Libraries, then choose Open Quiz Tool.',
       hint: 'Click Open Quiz Tool'
     },
     home: {
@@ -109,14 +109,22 @@
       '#lyne-orb-toggle .flame-glow{position:absolute;inset:6px;border-radius:999px;box-shadow:0 0 22px rgba(255,147,53,.6);animation:lyneGlow 2.1s ease-in-out infinite}' +
       '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-core{animation-duration:.85s}' +
       '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-glow{box-shadow:0 0 30px rgba(255,137,40,.85)}' +
-      '#lyne-panel{position:absolute;right:0;bottom:62px;width:min(310px,90vw);border:1px solid rgba(226,216,203,.76);background:linear-gradient(170deg,rgba(255,255,255,.96),rgba(247,241,233,.94));border-radius:16px;padding:10px;box-shadow:0 18px 34px rgba(23,21,16,.24);opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:opacity .24s ease,transform .24s ease}' +
+      '#lyne-panel{position:absolute;right:0;bottom:62px;width:min(286px,88vw);border:1px solid rgba(229,221,210,.78);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,238,230,.96));backdrop-filter:blur(14px);border-radius:20px;padding:10px;box-shadow:0 20px 40px rgba(23,21,16,.18);opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:opacity .24s ease,transform .24s ease}' +
       '#lyne-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}' +
       '.lyne-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;cursor:grab;user-select:none}' +
       '.lyne-panel-head:active{cursor:grabbing}' +
-      '.lyne-panel-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}' +
-      '.lyne-mini-btn{padding:7px 10px;font-size:.78rem}' +
-      '#lyne-meta{margin:7px 0 0;color:#5a5863;font-size:.8rem}' +
-      '#lyne-chat{margin:7px 0 0;white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px;min-height:46px;max-height:132px;overflow:auto;font-size:.78rem;user-select:text}' +
+      '.lyne-panel-title{margin:0;font-size:.84rem;font-weight:800;letter-spacing:.08em;color:#2b2218}' +
+      '.lyne-panel-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}' +
+      '.lyne-mini-btn{padding:6px 9px;font-size:.73rem;border-radius:999px;border:1px solid rgba(70,57,44,.09);background:rgba(255,255,255,.72)}' +
+      '#lyne-panel .btn.btn-primary.lyne-mini-btn{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;border-color:transparent}' +
+      '#lyne-panel .btn.btn-secondary.lyne-mini-btn{background:rgba(255,255,255,.84);color:#382d23}' +
+      '#lyne-meta{margin:7px 0 0;color:#6d6256;font-size:.74rem;font-weight:700}' +
+      '#lyne-chat{margin:8px 0 0;white-space:pre-wrap;background:linear-gradient(180deg,#fbfcfe,#f2f5f8);border:1px solid rgba(191,202,214,.65);border-radius:14px;padding:10px;min-height:42px;max-height:108px;overflow:auto;font-size:.75rem;line-height:1.4;color:#18212b;user-select:text}' +
+      '.lyne-compose{display:flex;align-items:center;gap:6px;margin-top:8px}' +
+      '.lyne-input{flex:1;min-width:0;border:1px solid rgba(181,188,198,.8);background:rgba(255,255,255,.92);border-radius:999px;padding:9px 12px;font:600 12px/1.2 Manrope,system-ui,sans-serif;color:#18212b;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}' +
+      '.lyne-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}' +
+      '.lyne-send{min-width:38px;height:38px;border:0;border-radius:999px;background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;font:800 15px/1 Manrope,system-ui,sans-serif;cursor:pointer;box-shadow:0 10px 20px rgba(234,88,12,.22)}' +
+      '.lyne-send:disabled{opacity:.45;cursor:default;box-shadow:none}' +
       '.sc-lyne-guide-target{position:relative;z-index:141 !important;outline:3px solid #ff8a1c !important;outline-offset:4px;border-radius:14px;box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22);animation:scLyneGuidePulse 1.15s ease-in-out infinite}' +
       '.sc-lyne-guide-bubble{position:fixed;z-index:142;max-width:min(260px,80vw);padding:10px 12px;border-radius:14px;background:rgba(14,23,38,.96);color:#fff;font:700 12px/1.35 Manrope,system-ui,sans-serif;box-shadow:0 16px 30px rgba(0,0,0,.28)}' +
       '.sc-lyne-guide-bubble strong{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.01em;color:#ffd39c}' +
@@ -143,7 +151,7 @@
       '</button>' +
       '<section id="lyne-panel" aria-hidden="true">' +
       '<div class="lyne-panel-head" data-lyne-drag-handle>' +
-      '<h3 style="margin:0;font-size:.95rem">LYNE</h3>' +
+      '<h3 class="lyne-panel-title">LYNE</h3>' +
       '<button id="lyne-panel-close" type="button" class="btn btn-secondary lyne-mini-btn">Hide</button>' +
       '</div>' +
       '<div class="lyne-panel-actions">' +
@@ -152,6 +160,10 @@
       '</div>' +
       '<p id="lyne-meta">Idle.</p>' +
       '<pre id="lyne-chat">' + DEFAULT_CHAT + '</pre>' +
+      '<div class="lyne-compose">' +
+      '<input id="lyne-input" class="lyne-input" type="text" placeholder="Ask LYNE..." maxlength="240" />' +
+      '<button id="lyne-send" class="lyne-send" type="button" aria-label="Send">↑</button>' +
+      '</div>' +
       '</section>' +
       '</div>'
     document.body.appendChild(widget)
@@ -277,19 +289,19 @@
   function localAppIntentReply(prompt) {
     var q = String(prompt || '').toLowerCase()
     if (q.indexOf('science') !== -1 && (q.indexOf('where') !== -1 || q.indexOf('open') !== -1 || q.indexOf('go') !== -1)) {
-      return 'Open the Science Library at study-library.html.'
+      return 'Click Jump to Libraries, then choose Open Science.'
     }
     if (q.indexOf('geography') !== -1 && (q.indexOf('where') !== -1 || q.indexOf('open') !== -1 || q.indexOf('go') !== -1)) {
-      return 'Open the Geography Library at geography-library.html.'
+      return 'Click Jump to Libraries, then choose Open Geography.'
     }
     if ((q.indexOf('grade 10') !== -1 || q.indexOf('math 10') !== -1) && (q.indexOf('where') !== -1 || q.indexOf('open') !== -1 || q.indexOf('go') !== -1)) {
-      return 'Open Grade 10 Math at grade-10-math.html.'
+      return 'Click Jump to Libraries, then browse the cards and choose Open Math 10.'
     }
     if ((q.indexOf('grade 9') !== -1 || q.indexOf('math 9') !== -1) && (q.indexOf('where') !== -1 || q.indexOf('open') !== -1 || q.indexOf('go') !== -1)) {
-      return 'Open Grade 9 Math at math/index.html.'
+      return 'Click Jump to Libraries, then browse the cards and choose Open Math 9.'
     }
     if (q.indexOf('anki') !== -1 || q.indexOf('cards') !== -1 || q.indexOf('flashcards') !== -1) {
-      return 'Open concept cards at anki/index.html.'
+      return 'Click Jump to Libraries, then choose Open Cards.'
     }
     return ''
   }
@@ -355,16 +367,19 @@
     var panelClose = document.getElementById('lyne-panel-close')
     var startBtn = document.getElementById('lyne-start')
     var stopBtn = document.getElementById('lyne-stop')
+    var sendBtn = document.getElementById('lyne-send')
+    var input = document.getElementById('lyne-input')
     var meta = document.getElementById('lyne-meta')
     var chat = document.getElementById('lyne-chat')
     var dragHandle = panel.querySelector('[data-lyne-drag-handle]')
-    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !meta || !chat) return
+    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !sendBtn || !input || !meta || !chat) return
 
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
     var canListen = typeof SpeechRecognition === 'function'
     var canSpeak = !!window.speechSynthesis
     var recognition = null
     var active = false
+    var autoArmTimer = null
     var listening = false
     var waiting = false
     var speaking = false
@@ -389,6 +404,12 @@
       orbToggle.setAttribute('aria-expanded', open ? 'true' : 'false')
       widget.setAttribute('data-panel-open', open ? 'true' : 'false')
       writeText(PANEL_OPEN_KEY, open ? '1' : '0')
+      if (open) {
+        scheduleAutoArm()
+      } else if (autoArmTimer) {
+        clearTimeout(autoArmTimer)
+        autoArmTimer = null
+      }
     }
 
     function setSpeakingVisual(next) {
@@ -416,6 +437,19 @@
       try {
         localStorage.removeItem(GUIDE_KEY)
       } catch (_err) {}
+    }
+
+    function scheduleAutoArm() {
+      if (!canListen) return
+      if (autoArmTimer) clearTimeout(autoArmTimer)
+      autoArmTimer = setTimeout(function () {
+        autoArmTimer = null
+        if (!panel.classList.contains('open')) return
+        if (active || listening || waiting || speaking) return
+        active = true
+        meta.textContent = 'Listening...'
+        startListening()
+      }, 1100)
     }
 
     function moveWidgetNearTarget(target) {
@@ -805,6 +839,11 @@
         return
       }
       setPanelOpen(!panel.classList.contains('open'))
+      if (panel.classList.contains('open')) {
+        scheduleAutoArm()
+      } else {
+        input.blur()
+      }
     })
     panelClose.addEventListener('click', function () {
       setPanelOpen(false)
@@ -836,6 +875,22 @@
       speaking = false
       setSpeakingVisual(false)
       meta.textContent = 'Conversation stopped.'
+    })
+
+    function submitManualPrompt() {
+      var value = String(input.value || '').trim()
+      if (!value) return
+      input.value = ''
+      setPanelOpen(true)
+      askLyne(value)
+    }
+
+    sendBtn.addEventListener('click', submitManualPrompt)
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        submitManualPrompt()
+      }
     })
 
     document.addEventListener('keydown', function (event) {
@@ -884,6 +939,8 @@
         listening = false
         if (active && !waiting) {
           setTimeout(startListening, 350)
+        } else if (panel.classList.contains('open')) {
+          scheduleAutoArm()
         }
       }
     } else {
