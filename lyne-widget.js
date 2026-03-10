@@ -3,6 +3,17 @@
   var PANEL_OPEN_KEY = 'sc_lyne_widget_panel_open_v1'
   var CHAT_KEY = 'sc_lyne_widget_chat_v1'
   var DEFAULT_CHAT = 'LYNE: Ready when you are.'
+  var DEFAULT_STILL_HERE = 'I am still here. Ask me where to go in the app, what to study next, or what concept you want explained.'
+  var LYNE_APP_CONTEXT =
+    'You are LYNE, the in-app guide for Soul Concept. ' +
+    'App purpose: help Grade 9-10 students study faster with structured libraries and focused tools. ' +
+    'Navigation map: Home=index.html, Science Library=study-library.html, Geography Library=geography-library.html, ' +
+    'Math 9 Library=math/index.html, Math 10 Library=grade-10-math.html, Pre-AP Preview=preap-grade-10-preview.html, ' +
+    'Concept Cards=anki/index.html, Quiz Tool=math-quiz-simulator.html. ' +
+    'When asked where to go, give exact file names from this map. ' +
+    'When asked what the app was made for, answer directly using the purpose above. ' +
+    'For learning questions, answer clearly in short steps with one quick example. ' +
+    'Avoid generic repeated lines.'
 
   function readJson(key, fallback) {
     try {
@@ -123,11 +134,95 @@
   }
 
   function normalizeAssistantText(text, fallbackPrompt) {
-    var cleaned = String(text || '').replace(/\s+/g, ' ').trim()
-    if (!cleaned) {
+    var raw = String(text || '').trim()
+    if (!raw) return localFallbackReply(fallbackPrompt)
+    var lower = raw.toLowerCase()
+    if (
+      lower.indexOf('sorry, we have had an error') !== -1 ||
+      lower.indexOf('an error occurred') !== -1 ||
+      lower.indexOf('something went wrong') !== -1 ||
+      lower.indexOf('i hit an error') !== -1 ||
+      lower.indexOf('i cannot reach puter right now') !== -1
+    ) {
       return localFallbackReply(fallbackPrompt)
     }
-    return cleaned
+    if (
+      lower.indexOf('ask me any topic and i will explain') !== -1 ||
+      lower.indexOf('go to science at study-library') !== -1 ||
+      lower.indexOf('tell me your subject and i will pick one') !== -1 ||
+      lower.indexOf('direct answer: break this into known formula + substitution + final check') !== -1
+    ) {
+      return localFallbackReply(fallbackPrompt)
+    }
+    if (compactText(raw) === compactText(DEFAULT_STILL_HERE)) {
+      return localFallbackReply(fallbackPrompt)
+    }
+    return raw
+  }
+
+  function compactText(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  }
+
+  function buildLynePrompt(userText) {
+    return (
+      LYNE_APP_CONTEXT +
+      '\n\nUser question: ' +
+      String(userText || '').trim() +
+      '\n\nImportant: This is an in-app navigation assistant, not real-world location guidance. ' +
+      'Never ask for physical location, school name, or campus map. ' +
+      'If user asks where to go, always respond with the exact Soul Concept page route.' +
+      '\n\nAnswer as LYNE.'
+    )
+  }
+
+  function extractPuterText(payload) {
+    if (!payload) return ''
+    if (typeof payload === 'string') return payload.trim()
+    if (typeof payload.text === 'string') return payload.text.trim()
+    if (payload.message && typeof payload.message.content === 'string') return payload.message.content.trim()
+    if (Array.isArray(payload.messages) && payload.messages[0] && typeof payload.messages[0].content === 'string') {
+      return payload.messages[0].content.trim()
+    }
+    if (Array.isArray(payload.parts)) {
+      return payload.parts
+        .map(function (part) { return part && typeof part.text === 'string' ? part.text : '' })
+        .filter(Boolean)
+        .join('\n')
+        .trim()
+    }
+    return ''
+  }
+
+  function ensurePuterReady(timeoutMs) {
+    return new Promise(function (resolve, reject) {
+      if (window.puter && window.puter.ai && typeof window.puter.ai.chat === 'function') return resolve()
+      var scriptId = 'sc-puter-sdk'
+      var existing = document.getElementById(scriptId)
+      if (!existing) {
+        var script = document.createElement('script')
+        script.id = scriptId
+        script.src = 'https://js.puter.com/v2/'
+        script.async = true
+        document.head.appendChild(script)
+      }
+      var started = Date.now()
+      var timer = window.setInterval(function () {
+        if (window.puter && window.puter.ai && typeof window.puter.ai.chat === 'function') {
+          window.clearInterval(timer)
+          resolve()
+          return
+        }
+        if (Date.now() - started > (timeoutMs || 8000)) {
+          window.clearInterval(timer)
+          reject(new Error('Puter SDK load timeout.'))
+        }
+      }, 120)
+    })
   }
 
   function localAppIntentReply(prompt) {
@@ -261,13 +356,39 @@
       return normalizeAssistantText(extractResponseText(data), prompt)
     }
 
+    async function askViaPuter(prompt) {
+      await ensurePuterReady(9000)
+      var response = await window.puter.ai.chat(buildLynePrompt(prompt), {
+        model: 'gpt-4o-mini',
+        stream: false,
+      })
+      var text = normalizeAssistantText(extractPuterText(response), prompt)
+      if (!text) {
+        throw new Error('Puter returned empty text.')
+      }
+      return text
+    }
+
     function pickPreferredVoice() {
-      if (!window.speechSynthesis || typeof window.speechSynthesis.getVoices !== 'function') return null
+      if (!canSpeak || !window.speechSynthesis || !window.speechSynthesis.getVoices) return null
       var voices = window.speechSynthesis.getVoices() || []
-      for (var i = 0; i < voices.length; i++) {
-        if (/en/i.test(String(voices[i].lang || '')) && /female|samantha|zira|aria|alloy/i.test(String(voices[i].name || ''))) {
-          return voices[i]
+      if (!voices.length) return null
+      var preferredNames = ['microsoft aria online', 'microsoft jenny online', 'google us english', 'samantha', 'microsoft aria', 'microsoft jenny']
+      for (var p = 0; p < preferredNames.length; p++) {
+        for (var i = 0; i < voices.length; i++) {
+          var name = String(voices[i].name || '').toLowerCase()
+          var lang = String(voices[i].lang || '').toLowerCase()
+          if (name.indexOf('multilingual') !== -1) continue
+          if (name.indexOf(preferredNames[p]) !== -1 && (lang === 'en-us' || lang.indexOf('en-us') === 0)) {
+            return voices[i]
+          }
         }
+      }
+      for (var j = 0; j < voices.length; j++) {
+        var fallbackLang = String(voices[j].lang || '').toLowerCase()
+        var fallbackName = String(voices[j].name || '').toLowerCase()
+        if (fallbackName.indexOf('multilingual') !== -1) continue
+        if (fallbackLang === 'en-us' || fallbackLang.indexOf('en-us') === 0) return voices[j]
       }
       return voices[0] || null
     }
@@ -371,7 +492,17 @@
       setChat(chat, 'You: ' + question + '\n\nLYNE: ...')
       try {
         var intentReply = localAppIntentReply(question)
-        var reply = intentReply || (await askAssistant(question))
+        var reply = intentReply
+        if (!reply) {
+          try {
+            reply = await askViaPuter(question)
+            meta.textContent = 'Connected (Puter.js).'
+          } catch (_puterErr) {
+            reply = await askAssistant(question)
+            meta.textContent = 'Connected.'
+          }
+        }
+        reply = normalizeAssistantText(reply, question)
         setChat(chat, 'You: ' + question + '\n\nLYNE: ' + reply)
         await speak(reply)
       } catch (_err) {
