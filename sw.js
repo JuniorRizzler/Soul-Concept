@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v81";
+const CACHE_NAME = "soulconcept-v82";
 const ASSETS = [
   "/",
   "/index.html",
@@ -11,12 +11,14 @@ const ASSETS = [
   "/study-library.html",
   "/grade-10-math.html",
   "/math/index.html",
+  "/auth/callback.html",
   "/math-quiz-simulator.html",
   "/math/auto-quiz.html",
   "/anki/index.html",
   "/styles.css",
   "/app.js",
   "/supabase-client.js",
+  "/supabase-auth.js",
   "/library-whiteboard.js",
   "/manifest.json",
   "/icons/icon.svg",
@@ -77,6 +79,7 @@ self.addEventListener("fetch", (event) => {
       url.pathname === "/study-library.bundle.js" ||
       url.pathname === "/app.js" ||
       url.pathname === "/supabase-client.js" ||
+      url.pathname === "/supabase-auth.js" ||
       url.pathname === "/ai-bridge.js" ||
       url.pathname === "/library-whiteboard.js" ||
       url.pathname === "/styles.css"
