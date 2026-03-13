@@ -73,6 +73,7 @@
     },
     {
       page: '/study-library.html',
+      selector: '#qs-study-notes-content',
       targetText: 'Study Notes & Content',
       message: 'Start here for the main notes. This section is where you learn the content quickly before testing yourself.',
       hint: 'Open Study Notes and Content',
@@ -80,6 +81,7 @@
     },
     {
       page: '/study-library.html',
+      selector: '#qs-practice-test-preparation',
       targetText: 'Practice & Test Preparation',
       message: 'Then use this section to check understanding and practice like a test, not just reread notes.',
       hint: 'Open Practice and Test Preparation',
@@ -203,6 +205,13 @@
       '.sc-lyne-guide-target{position:relative;z-index:141 !important;outline:3px solid #ff8a1c !important;outline-offset:4px;border-radius:14px;box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22);animation:scLyneGuidePulse 1.15s ease-in-out infinite}' +
       '.sc-lyne-guide-bubble{position:fixed;z-index:142;max-width:min(260px,80vw);padding:10px 12px;border-radius:14px;background:rgba(14,23,38,.96);color:#fff;font:700 12px/1.35 Manrope,system-ui,sans-serif;box-shadow:0 16px 30px rgba(0,0,0,.28)}' +
       '.sc-lyne-guide-bubble strong{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.01em;color:#ffd39c}' +
+      '.sc-lyne-tour-pop{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:145;width:min(360px,calc(100vw - 28px));padding:18px 18px 16px;border-radius:20px;background:rgba(20,24,33,.97);color:#fff;box-shadow:0 28px 50px rgba(0,0,0,.34)}' +
+      '.sc-lyne-tour-pop strong{display:block;font:800 12px/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#ffd39c;margin-bottom:10px}' +
+      '.sc-lyne-tour-pop p{margin:0;color:#f4f4f7;font:700 14px/1.5 Manrope,system-ui,sans-serif}' +
+      '.sc-lyne-tour-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}' +
+      '.sc-lyne-tour-btn{appearance:none;border:0;border-radius:999px;padding:9px 12px;font:800 12px/1 Manrope,system-ui,sans-serif;cursor:pointer}' +
+      '.sc-lyne-tour-btn.primary{background:#fff;color:#18212b}' +
+      '.sc-lyne-tour-btn.secondary{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.18)}' +
       '@media (max-width:760px){#lyne-widget{transform:scale(.82);transform-origin:100% 100%}#lyne-hint{right:50px;bottom:6px;max-width:148px;padding:6px 8px;font-size:9px;border-radius:10px}#lyne-hint:after{right:-5px;bottom:8px;width:10px;height:10px}.lyne-hint-text{padding-right:16px}.lyne-hint-close{top:5px;right:5px;font-size:10px}.lyne-hint-actions{gap:4px;margin-top:6px}.lyne-hint-btn{padding:4px 7px;font-size:9px}#lyne-orb-toggle{width:44px;height:44px}#lyne-orb-toggle .flame-core{left:13px;top:9px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:18px;top:15px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:5px}#lyne-panel{bottom:52px;width:min(236px,72vw);padding:8px;border-radius:16px}#lyne-chat{padding:8px;min-height:34px;max-height:82px;font-size:.68rem}#lyne-meta{font-size:.66rem;margin-top:5px}.lyne-panel-actions{gap:4px;margin-top:6px}.lyne-mini-btn{padding:5px 8px;font-size:.66rem}.lyne-compose{gap:5px;margin-top:6px}.lyne-input{padding:7px 10px;font-size:11px}.lyne-send{min-width:32px;height:32px;font-size:13px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
@@ -486,6 +495,7 @@
     var lastOrbTapAt = 0
     var onboardingRetryToken = ''
     var onboardingRetryCount = 0
+    var onboardingPopup = null
 
     function setHintContent(text, actions) {
       var html =
@@ -631,6 +641,47 @@
       try {
         localStorage.removeItem(GUIDE_KEY)
       } catch (_err) {}
+      if (onboardingPopup && onboardingPopup.parentNode) {
+        onboardingPopup.parentNode.removeChild(onboardingPopup)
+      }
+      onboardingPopup = null
+    }
+
+    function showOnboardingPopup(step, target, stepIndex) {
+      if (onboardingPopup && onboardingPopup.parentNode) onboardingPopup.parentNode.removeChild(onboardingPopup)
+      var popup = document.createElement('div')
+      popup.className = 'sc-lyne-tour-pop'
+      popup.innerHTML =
+        '<strong>LYNE Tour</strong>' +
+        '<p>' + String(step.message || 'Follow this step.') + '</p>' +
+        '<div class="sc-lyne-tour-actions">' +
+        '<button class="sc-lyne-tour-btn primary" type="button" data-lyne-tour-next>' + String(step.hint || 'Continue') + '</button>' +
+        '<button class="sc-lyne-tour-btn secondary" type="button" data-lyne-tour-skip>Skip tour</button>' +
+        '</div>'
+      document.body.appendChild(popup)
+      onboardingPopup = popup
+
+      popup.addEventListener('click', function (event) {
+        var skip = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-tour-skip') : null
+        var next = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-tour-next') : null
+        if (skip != null) {
+          finishOnboarding()
+          return
+        }
+        if (next == null) return
+        if (!isOnboardingActive()) return
+        if (step.autoFinish) {
+          finishOnboarding()
+          return
+        }
+        setOnboardingStep(stepIndex + 1)
+        if (target && typeof target.click === 'function') {
+          try { target.click() } catch (_err) {}
+        }
+        if (!step.next || normalizeRoute(step.next) === currentPath()) {
+          setTimeout(showOnboardingStep, 450)
+        }
+      })
     }
 
     function scheduleAutoArm() {
@@ -775,6 +826,7 @@
       meta.textContent = 'LYNE guide'
       setChat(chat, 'LYNE: ' + step.message)
       setHintContent(step.hint || 'Follow LYNE across the app.')
+      showOnboardingPopup(step, target, stepIndex)
       if (isOnboardingVoiceEnabled()) {
         setTimeout(function () {
           speak(step.message)
@@ -833,9 +885,7 @@
       setOnboardingActive(true)
       setOnboardingStep(0)
       setOnboardingVoiceEnabled(!!withVoice)
-      if (withVoice && canListen) {
-        active = true
-      }
+      active = false
       showOnboardingStep()
     }
 
