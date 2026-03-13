@@ -1343,7 +1343,7 @@
 
     setDefaultHint()
     setChat(chat, readText(CHAT_KEY, DEFAULT_CHAT))
-    setPanelOpen(readText(PANEL_OPEN_KEY, '0') === '1')
+    setPanelOpen(false)
     applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
     window.addEventListener('resize', function () {
       applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))

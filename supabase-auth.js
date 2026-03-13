@@ -135,8 +135,10 @@
 
   function closeModal() {
     var backdrop = ensureModal()
-    if (backdrop.classList.contains('locked')) return
     backdrop.classList.remove('open')
+    backdrop.classList.remove('locked')
+    document.documentElement.style.overflow = ''
+    document.body.style.overflow = ''
     setStatus(backdrop, '', '')
   }
 
