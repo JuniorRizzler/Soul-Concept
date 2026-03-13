@@ -6,6 +6,7 @@
     "sync:watch": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-downloads.ps1 -Watch"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "web-push": "^3.6.7"
   }
 }
