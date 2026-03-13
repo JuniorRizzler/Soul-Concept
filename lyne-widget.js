@@ -241,6 +241,7 @@
       '</div>' +
       '<div class="lyne-panel-actions">' +
       '<button id="lyne-start" class="btn btn-primary lyne-mini-btn" type="button">Start</button>' +
+      '<button id="lyne-tutorial" class="btn btn-secondary lyne-mini-btn" type="button">Tutorial</button>' +
       '<button id="lyne-stop" class="btn btn-secondary lyne-mini-btn" type="button">Stop</button>' +
       '</div>' +
       '<p id="lyne-meta">Idle.</p>' +
@@ -461,6 +462,7 @@
     var panel = document.getElementById('lyne-panel')
     var panelClose = document.getElementById('lyne-panel-close')
     var startBtn = document.getElementById('lyne-start')
+    var tutorialBtn = document.getElementById('lyne-tutorial')
     var stopBtn = document.getElementById('lyne-stop')
     var sendBtn = document.getElementById('lyne-send')
     var input = document.getElementById('lyne-input')
@@ -468,7 +470,7 @@
     var chat = document.getElementById('lyne-chat')
     var hint = document.getElementById('lyne-hint')
     var dragHandle = panel.querySelector('[data-lyne-drag-handle]')
-    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint) return
+    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !tutorialBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint) return
 
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
     var canListen = typeof SpeechRecognition === 'function'
@@ -1300,6 +1302,13 @@
       setPanelOpen(true)
       meta.textContent = 'Conversation started.'
       startListening()
+    })
+
+    tutorialBtn.addEventListener('click', function () {
+      clearGuide()
+      setOnboardingDismissed(false)
+      setPanelOpen(true)
+      beginOnboarding(true)
     })
 
     stopBtn.addEventListener('click', function () {
