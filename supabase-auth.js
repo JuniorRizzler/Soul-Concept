@@ -18,7 +18,6 @@
       '.sc-auth-modal-backdrop{position:fixed;inset:0;background:rgba(10,14,20,.48);backdrop-filter:blur(8px);z-index:10020;display:none;align-items:center;justify-content:center;padding:18px}' +
       '.sc-auth-modal-backdrop.open{display:flex}' +
       '.sc-auth-modal-backdrop.locked{background:rgba(10,14,20,.72)}' +
-      '.sc-auth-modal-backdrop.locked .sc-auth-close{display:none}' +
       '.sc-auth-modal{width:min(460px,92vw);border-radius:24px;border:1px solid rgba(226,216,203,.9);background:linear-gradient(180deg,#fffefb 0%,#f7f1e9 100%);box-shadow:0 24px 60px rgba(23,21,16,.18);padding:22px;position:relative}' +
       '.sc-auth-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:999px;border:1px solid #e2d8cb;background:#fff;cursor:pointer;font-size:1rem;font-weight:800}' +
       '.sc-auth-title{margin:0 0 8px;font-family:Sora,Segoe UI,sans-serif;font-size:1.55rem;line-height:1.05;color:#1b1b1f}' +
@@ -34,7 +33,6 @@
       '.sc-auth-status{min-height:20px;margin:0;color:#5a5863;font-size:.88rem}' +
       '.sc-auth-status.ok{color:#166534}' +
       '.sc-auth-status.err{color:#b91c1c}' +
-      '.sc-auth-foot{margin-top:8px;color:#7b746b;font-size:.78rem;line-height:1.45}' +
       '@media (max-width:840px){.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:6px}.sc-auth-user{max-width:132px;padding:7px 9px}.sc-auth-signout{padding:7px 9px}.sc-auth-float{top:10px;right:10px}}'
     document.head.appendChild(style)
   }
@@ -101,7 +99,7 @@
     backdrop.className = 'sc-auth-modal-backdrop'
     backdrop.innerHTML =
       '<div class="sc-auth-modal" role="dialog" aria-modal="true" aria-labelledby="sc-auth-title">' +
-      '<button class="sc-auth-close" type="button" aria-label="Close sign in">x</button>' +
+      '<button class="sc-auth-close" type="button" aria-label="Close sign in">&times;</button>' +
       '<h2 class="sc-auth-title" id="sc-auth-title">Sign in to Soul Concept</h2>' +
       '<p class="sc-auth-copy">Use Google or a magic link sent to your email. This keeps your progress and premium access tied to your account.</p>' +
       '<div class="sc-auth-stack">' +
@@ -115,7 +113,6 @@
       '<button class="btn btn-secondary sc-auth-submit" type="submit">Send magic link</button>' +
       '</form>' +
       '<p class="sc-auth-status" data-auth-status></p>' +
-      '<p class="sc-auth-foot">Google sign-in must be enabled in Supabase Auth Providers, and email sign-in must allow magic links.</p>' +
       '</div>' +
       '</div>'
     document.body.appendChild(backdrop)

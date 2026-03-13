@@ -483,6 +483,9 @@
     var lastUserAt = 0
     var preferredVoice = null
     var didDrag = false
+    var lastOrbTapAt = 0
+    var onboardingRetryToken = ''
+    var onboardingRetryCount = 0
 
     function setHintContent(text, actions) {
       var html =
@@ -653,6 +656,8 @@
       if (preferredY + 72 > window.innerHeight) {
         preferredY = window.innerHeight - 86
       }
+      if (preferredX < 12) preferredX = 12
+      if (preferredY < 12) preferredY = 12
       applyPosition(widget, {
         x: preferredX,
         y: preferredY,
@@ -730,13 +735,27 @@
       }
       if (currentPath() !== normalizeRoute(step.page)) return false
 
+      var retryToken = String(stepIndex) + '|' + currentPath()
+      if (onboardingRetryToken !== retryToken) {
+        onboardingRetryToken = retryToken
+        onboardingRetryCount = 0
+      }
+
       var target = resolveGuideNode(step)
       if (!target) {
+        onboardingRetryCount += 1
+        meta.textContent = 'LYNE guide'
+        if (onboardingRetryCount > 14) {
+          setChat(chat, 'LYNE: I am still lining up this step. If the page is loaded, tap the highlighted section or wait a second.')
+          setHintContent(step.hint || 'Follow LYNE across the app.')
+        }
         setTimeout(function () {
           if (isOnboardingActive()) showOnboardingStep()
-        }, 700)
+        }, onboardingRetryCount > 8 ? 420 : 700)
         return false
       }
+
+      onboardingRetryCount = 0
 
       clearGuide()
       guideTargetNode = target
@@ -747,6 +766,11 @@
         target.scrollIntoView()
       }
       moveWidgetNearTarget(target)
+      setTimeout(function () {
+        if (!guideTargetNode || guideTargetNode !== target || !guideBubble) return
+        moveWidgetNearTarget(target)
+        positionGuideBubble(target, guideBubble)
+      }, 280)
       setPanelOpen(true)
       meta.textContent = 'LYNE guide'
       setChat(chat, 'LYNE: ' + step.message)
@@ -772,10 +796,12 @@
 
       var refreshGuide = function () {
         if (guideTargetNode && guideBubble) {
+          moveWidgetNearTarget(guideTargetNode)
           positionGuideBubble(guideTargetNode, guideBubble)
         }
       }
       window.addEventListener('resize', refreshGuide, { once: true })
+      window.addEventListener('scroll', refreshGuide, { once: true, passive: true })
 
       var advance = function () {
         if (!isOnboardingActive()) return
@@ -1173,18 +1199,19 @@
         didDrag = false
         return
       }
+      var now = Date.now()
+      if (now - lastOrbTapAt < 420) {
+        lastOrbTapAt = 0
+        resetOnboardingForDebug()
+        return
+      }
+      lastOrbTapAt = now
       setPanelOpen(!panel.classList.contains('open'))
       if (panel.classList.contains('open')) {
         scheduleAutoArm()
       } else {
         input.blur()
       }
-    })
-    orbToggle.addEventListener('dblclick', function (event) {
-      event.preventDefault()
-      event.stopPropagation()
-      didDrag = false
-      resetOnboardingForDebug()
     })
     panelClose.addEventListener('click', function () {
       setPanelOpen(false)
