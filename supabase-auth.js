@@ -66,6 +66,21 @@
     } catch (_err) {}
   }
 
+  function normalizeReturnPath(path) {
+    var value = String(path || '').trim()
+    if (!value) return '/index.html'
+    if (value.indexOf('http://') === 0 || value.indexOf('https://') === 0) {
+      try {
+        value = new URL(value).pathname || '/index.html'
+      } catch (_err) {
+        return '/index.html'
+      }
+    }
+    if (value === '/' || value === '') return '/index.html'
+    if (value.toLowerCase().indexOf(CALLBACK_PATH) !== -1) return '/index.html'
+    return value
+  }
+
   function createButton(label, className) {
     var btn = document.createElement('button')
     btn.type = 'button'
@@ -315,7 +330,7 @@
       return
     }
 
-    var target = readReturnPath()
+    var target = normalizeReturnPath(readReturnPath())
     clearReturnPath()
     location.replace(target || '/index.html')
   }
@@ -340,7 +355,7 @@
       mountAuthUi(client, session || null)
       setGateMode(REQUIRE_AUTH && !session)
       if (isCallbackPage() && session) {
-        var target = readReturnPath()
+        var target = normalizeReturnPath(readReturnPath())
         clearReturnPath()
         location.replace(target || '/index.html')
       }
