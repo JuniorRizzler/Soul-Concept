@@ -712,6 +712,10 @@
           return
         }
         setOnboardingStep(stepIndex + 1)
+        if (step.next && normalizeRoute(step.next) !== currentPath()) {
+          location.href = step.next
+          return
+        }
         if (target && typeof target.click === 'function') {
           try { target.click() } catch (_err) {}
         }

@@ -14,7 +14,8 @@
       '.sc-auth-user{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(33,92,75,.18);background:rgba(255,255,255,.92);color:#1b1b1f;font-weight:800;font-size:.82rem;max-width:172px;overflow:hidden}' +
       '.sc-auth-user small{display:block;font-weight:700;color:#5a5863;font-size:.72rem}' +
       '.sc-auth-signout{border:1px solid #e2d8cb;background:#fff;color:#1b1b1f;border-radius:999px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:.82rem}' +
-      '.sc-auth-float{position:fixed;top:14px;right:14px;z-index:10002;display:flex;gap:8px;align-items:center}' +
+      '.sc-auth-float{position:fixed;top:14px;right:14px;z-index:10002;display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(226,216,203,.92);box-shadow:0 12px 30px rgba(23,21,16,.12);backdrop-filter:blur(12px)}' +
+      '.sc-auth-float .sc-auth-launch,.sc-auth-float .sc-auth-signout{box-shadow:none}' +
       '.sc-auth-modal-backdrop{position:fixed;inset:0;background:rgba(10,14,20,.48);backdrop-filter:blur(8px);z-index:10020;display:none;align-items:center;justify-content:center;padding:18px}' +
       '.sc-auth-modal-backdrop.open{display:flex}' +
       '.sc-auth-modal-backdrop.locked{background:rgba(10,14,20,.72)}' +
@@ -33,7 +34,7 @@
       '.sc-auth-status{min-height:20px;margin:0;color:#5a5863;font-size:.88rem}' +
       '.sc-auth-status.ok{color:#166534}' +
       '.sc-auth-status.err{color:#b91c1c}' +
-      '@media (max-width:840px){.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:6px}.sc-auth-user{max-width:132px;padding:7px 9px}.sc-auth-signout{padding:7px 9px}.sc-auth-float{top:10px;right:10px}}'
+      '@media (max-width:840px){.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:6px}.sc-auth-user{max-width:132px;padding:7px 9px}.sc-auth-signout{padding:7px 9px}.sc-auth-float{top:10px;right:10px;padding:7px 8px;max-width:calc(100vw - 20px)}}'
     document.head.appendChild(style)
   }
 
@@ -247,6 +248,7 @@
     }
 
     mount.className = 'sc-auth-float'
+    mount.setAttribute('data-sc-auth-floating', '1')
     document.body.appendChild(mount)
   }
 
