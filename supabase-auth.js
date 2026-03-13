@@ -251,23 +251,66 @@
     return /access_token=|refresh_token=|token_hash=/.test(location.hash || '')
   }
 
+  function getHashParams() {
+    var hash = String(location.hash || '')
+    if (hash.charAt(0) === '#') hash = hash.slice(1)
+    return new URLSearchParams(hash)
+  }
+
   async function handleCallback(client) {
     var bodyBox = document.querySelector('.box')
     if (bodyBox) bodyBox.textContent = 'Completing sign in...'
     var params = new URLSearchParams(location.search || '')
+    var hashParams = getHashParams()
 
-    if (params.get('code')) {
-      var exchange = await client.auth.exchangeCodeForSession(params.get('code'))
-      if (exchange.error) {
-        if (bodyBox) bodyBox.textContent = exchange.error.message || 'Sign in failed.'
+    try {
+      if (params.get('code')) {
+        var exchange = await client.auth.exchangeCodeForSession(params.get('code'))
+        if (exchange && exchange.error) {
+          if (bodyBox) bodyBox.textContent = exchange.error.message || 'Sign in failed.'
+          return
+        }
+      } else if (params.get('token_hash') && params.get('type')) {
+        var verify = await client.auth.verifyOtp({
+          token_hash: params.get('token_hash'),
+          type: params.get('type'),
+        })
+        if (verify && verify.error) {
+          if (bodyBox) bodyBox.textContent = verify.error.message || 'Sign in failed.'
+          return
+        }
+      } else if (hashParams.get('access_token') && hashParams.get('refresh_token')) {
+        var setResult = await client.auth.setSession({
+          access_token: hashParams.get('access_token'),
+          refresh_token: hashParams.get('refresh_token'),
+        })
+        if (setResult && setResult.error) {
+          if (bodyBox) bodyBox.textContent = setResult.error.message || 'Sign in failed.'
+          return
+        }
+      } else if (params.get('error_description') || hashParams.get('error_description')) {
+        if (bodyBox) {
+          bodyBox.textContent =
+            params.get('error_description') ||
+            hashParams.get('error_description') ||
+            'Sign in failed.'
+        }
         return
+      } else if (hasHashTokens()) {
+        await new Promise(function (resolve) { setTimeout(resolve, 350) })
       }
-    } else if (hasHashTokens()) {
-      await new Promise(function (resolve) { setTimeout(resolve, 250) })
+    } catch (err) {
+      if (bodyBox) bodyBox.textContent = err && err.message ? err.message : 'Sign in failed.'
+      return
     }
 
     var result = await client.auth.getSession()
     if (result.error || !(result.data && result.data.session)) {
+      var fallbackTarget = readReturnPath()
+      if (fallbackTarget && fallbackTarget !== CALLBACK_PATH) {
+        location.replace(fallbackTarget)
+        return
+      }
       if (bodyBox) bodyBox.textContent = (result.error && result.error.message) || 'Sign in failed.'
       return
     }
