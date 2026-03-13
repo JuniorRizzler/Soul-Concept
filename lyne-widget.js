@@ -809,6 +809,31 @@
       }, 1200)
     }
 
+    function resetOnboardingForDebug() {
+      clearGuide()
+      setOnboardingActive(false)
+      setOnboardingStep(0)
+      setOnboardingDismissed(false)
+      setOnboardingVoiceEnabled(false)
+      active = false
+      captureText = ''
+      if (captureTimer) clearTimeout(captureTimer)
+      stopListening()
+      try {
+        if (lyneAudio) lyneAudio.pause()
+      } catch (_err) {}
+      lyneAudio = null
+      try {
+        window.speechSynthesis.cancel()
+      } catch (_err2) {}
+      speaking = false
+      setSpeakingVisual(false)
+      setPanelOpen(false)
+      meta.textContent = 'Guide reset. Double-click worked.'
+      setDefaultHint()
+      maybeStartOnboarding()
+    }
+
     function resumePendingGuide() {
       var pending = readJson(GUIDE_KEY, null)
       if (!pending || !pending.id) return
@@ -1137,6 +1162,12 @@
       } else {
         input.blur()
       }
+    })
+    orbToggle.addEventListener('dblclick', function (event) {
+      event.preventDefault()
+      event.stopPropagation()
+      didDrag = false
+      resetOnboardingForDebug()
     })
     panelClose.addEventListener('click', function () {
       setPanelOpen(false)
