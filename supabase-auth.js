@@ -2,6 +2,7 @@
   var CALLBACK_PATH = '/auth/callback.html'
   var CALLBACK_CLEAN_PATH = '/auth/callback'
   var RETURN_TO_KEY = 'sc_auth_return_to'
+  var DISMISS_KEY = 'sc_auth_prompt_dismissed_v1'
   var REQUIRE_AUTH = true
 
   function injectStyles() {
@@ -67,6 +68,20 @@
     } catch (_err) {}
   }
 
+  function isPromptDismissed() {
+    try {
+      return localStorage.getItem(DISMISS_KEY) === '1'
+    } catch (_err) {
+      return false
+    }
+  }
+
+  function setPromptDismissed(value) {
+    try {
+      localStorage.setItem(DISMISS_KEY, value ? '1' : '0')
+    } catch (_err) {}
+  }
+
   function normalizeReturnPath(path) {
     var value = String(path || '').trim()
     if (!value) return '/index.html'
@@ -129,6 +144,7 @@
 
   function openModal() {
     var backdrop = ensureModal()
+    setPromptDismissed(false)
     backdrop.classList.add('open')
     var input = backdrop.querySelector('#sc-auth-email')
     if (input) setTimeout(function () { input.focus() }, 10)
@@ -136,6 +152,7 @@
 
   function closeModal() {
     var backdrop = ensureModal()
+    setPromptDismissed(true)
     backdrop.classList.remove('open')
     backdrop.classList.remove('locked')
     document.documentElement.style.overflow = ''
@@ -254,8 +271,9 @@
 
   function setGateMode(locked) {
     var backdrop = ensureModal()
-    backdrop.classList.toggle('locked', !!locked)
-    if (locked) {
+    var shouldLock = !!locked && !isPromptDismissed()
+    backdrop.classList.toggle('locked', shouldLock)
+    if (shouldLock) {
       openModal()
       document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'

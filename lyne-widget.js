@@ -769,6 +769,15 @@
       bubble.style.left = left + 'px'
     }
 
+    function fallbackGuideTarget() {
+      return (
+        document.querySelector('.exit-btn') ||
+        document.getElementById('root') ||
+        document.querySelector('main') ||
+        document.body
+      )
+    }
+
     function activateGuideTarget(targetId) {
       var spec = GUIDE_TARGETS[targetId]
       if (!spec) return false
@@ -838,13 +847,13 @@
         onboardingRetryCount += 1
         meta.textContent = 'LYNE guide'
         if (onboardingRetryCount > 14) {
-          setChat(chat, 'LYNE: I am still lining up this step. If the page is loaded, tap the highlighted section or wait a second.')
-          setHintContent(step.hint || 'Follow LYNE across the app.')
+          target = fallbackGuideTarget()
+        } else {
+          setTimeout(function () {
+            if (isOnboardingActive()) showOnboardingStep()
+          }, onboardingRetryCount > 8 ? 420 : 700)
+          return false
         }
-        setTimeout(function () {
-          if (isOnboardingActive()) showOnboardingStep()
-        }, onboardingRetryCount > 8 ? 420 : 700)
-        return false
       }
 
       onboardingRetryCount = 0
