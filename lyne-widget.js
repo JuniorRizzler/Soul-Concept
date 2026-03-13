@@ -73,8 +73,22 @@
     },
     {
       page: '/study-library.html',
+      targetText: 'Study Notes & Content',
+      message: 'Start here for the main notes. This section is where you learn the content quickly before testing yourself.',
+      hint: 'Open Study Notes and Content',
+      next: '/study-library.html',
+    },
+    {
+      page: '/study-library.html',
+      targetText: 'Practice & Test Preparation',
+      message: 'Then use this section to check understanding and practice like a test, not just reread notes.',
+      hint: 'Open Practice and Test Preparation',
+      next: '/study-library.html',
+    },
+    {
+      page: '/study-library.html',
       selector: '[data-tour-id="exit-home"]',
-      message: 'This is a full library page. Use this button any time to get back home fast.',
+      message: 'When you want another subject, use this button to get back to the main hub.',
       hint: 'Tap Return to Index',
       next: '/index.html',
     },
@@ -83,6 +97,13 @@
       selector: '[data-tour-id="home-geography"]',
       message: 'Now try the Geography library. LYNE can walk you to any main section like this.',
       hint: 'Tap Open Geography',
+      next: '/geography-library.html',
+    },
+    {
+      page: '/geography-library.html',
+      selector: '#understand-section',
+      message: 'Geography is organized into lesson cards and understand sections, so you can review unit ideas in smaller chunks.',
+      hint: 'This is the main lesson area',
       next: '/geography-library.html',
     },
     {
@@ -412,6 +433,16 @@
     return 'Tell me the exact concept and grade, and I will explain it simply.'
   }
 
+  function normalizeRoute(value) {
+    var path = String(value || '/').trim()
+    if (!path || path === '/') return '/index'
+    path = path.split('#')[0].split('?')[0]
+    path = path.replace(/\/+$/, '')
+    if (!path) return '/index'
+    path = path.replace(/\.html$/i, '')
+    return path === '/index' ? '/index' : path
+  }
+
   function init() {
     ensureStyles()
     var widget = ensureWidgetMarkup()
@@ -495,8 +526,29 @@
     }
 
     function currentPath() {
-      var path = String(location.pathname || '/index.html')
-      return path === '/' ? '/index.html' : path
+      return normalizeRoute(location.pathname || '/index.html')
+    }
+
+    function findNodeByText(text) {
+      if (!text) return null
+      var targetText = String(text).trim()
+      var candidates = document.querySelectorAll('button, a, h1, h2, h3, h4, div, span, p')
+      for (var i = 0; i < candidates.length; i++) {
+        var content = String(candidates[i].textContent || '').replace(/\s+/g, ' ').trim()
+        if (content === targetText) return candidates[i]
+      }
+      return null
+    }
+
+    function resolveGuideNode(step) {
+      if (step.selector) {
+        var selectorTarget = document.querySelector(step.selector)
+        if (selectorTarget) return selectorTarget
+      }
+      if (step.targetText) {
+        return findNodeByText(step.targetText)
+      }
+      return null
     }
 
     function isOnboardingDismissed() {
@@ -644,7 +696,7 @@
       try {
         localStorage.setItem(GUIDE_KEY, JSON.stringify({ id: targetId, at: Date.now() }))
       } catch (_err) {}
-      if (currentPath() !== spec.path) {
+      if (currentPath() !== normalizeRoute(spec.path)) {
         location.href = spec.path + '#lyne-guide'
         return true
       }
@@ -659,10 +711,15 @@
         finishOnboarding()
         return false
       }
-      if (currentPath() !== step.page) return false
+      if (currentPath() !== normalizeRoute(step.page)) return false
 
-      var target = document.querySelector(step.selector)
-      if (!target) return false
+      var target = resolveGuideNode(step)
+      if (!target) {
+        setTimeout(function () {
+          if (isOnboardingActive()) showOnboardingStep()
+        }, 700)
+        return false
+      }
 
       clearGuide()
       guideTargetNode = target
@@ -710,8 +767,8 @@
           return
         }
         setOnboardingStep(stepIndex + 1)
-        if (!step.next || step.next === currentPath()) {
-          setTimeout(showOnboardingStep, 180)
+        if (!step.next || normalizeRoute(step.next) === currentPath()) {
+          setTimeout(showOnboardingStep, 420)
         }
       }
 
@@ -740,7 +797,7 @@
     }
 
     function maybeStartOnboarding() {
-      if (currentPath() !== '/index.html') return
+      if (currentPath() !== '/index') return
       if (isOnboardingDismissed()) return
       if (isOnboardingActive()) return
       setTimeout(function () {
@@ -760,7 +817,7 @@
         return
       }
       var spec = GUIDE_TARGETS[pending.id]
-      if (!spec || currentPath() !== spec.path) return
+      if (!spec || currentPath() !== normalizeRoute(spec.path)) return
       setTimeout(function () {
         activateGuideTarget(pending.id)
       }, 450)
@@ -773,7 +830,7 @@
         finishOnboarding()
         return
       }
-      if (currentPath() !== step.page) return
+      if (currentPath() !== normalizeRoute(step.page)) return
       setTimeout(function () {
         showOnboardingStep()
       }, 520)

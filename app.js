@@ -73,6 +73,7 @@
   const STREAK_KEY = 'sc_daily_streak_v1'
   const USAGE_KEY = 'sc_usage_stats_v1'
   const PUSH_ENABLED_KEY = 'sc_push_enabled'
+  const PUSH_WIDGET_DISMISSED_KEY = 'sc_push_widget_dismissed_v1'
 
   function ensureGlobalUiStyles() {
     if (document.getElementById('sc-global-ui-styles')) return
@@ -816,6 +817,7 @@
     if (pushAlreadyEnabled) {
       try {
         localStorage.setItem(PUSH_ENABLED_KEY, '1')
+        localStorage.removeItem(PUSH_WIDGET_DISMISSED_KEY)
       } catch (err) {
         // ignore storage errors
       }
@@ -887,7 +889,13 @@
       ensurePushRegistration()
     }
 
-    const shouldShowWidget = !pushAlreadyEnabled
+    let pushWidgetDismissed = false
+    try {
+      pushWidgetDismissed = localStorage.getItem(PUSH_WIDGET_DISMISSED_KEY) === '1'
+    } catch (err) {
+      // ignore storage errors
+    }
+    const shouldShowWidget = !pushAlreadyEnabled && !pushWidgetDismissed
     if (!shouldShowWidget) {
       // do not show repeated widget once push has already been enabled
     } else {
@@ -914,6 +922,11 @@
 
       if (closeBtn) {
         closeBtn.addEventListener('click', function () {
+          try {
+            localStorage.setItem(PUSH_WIDGET_DISMISSED_KEY, '1')
+          } catch (err) {
+            // ignore storage errors
+          }
           widget.remove()
         })
       }
@@ -1126,6 +1139,7 @@
             }
             try {
               localStorage.setItem(PUSH_ENABLED_KEY, '1')
+              localStorage.removeItem(PUSH_WIDGET_DISMISSED_KEY)
             } catch (err) {
               // ignore storage errors
             }
