@@ -1,10 +1,11 @@
-<!doctype html>
+ï»¿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Auto Generating Quiz | Math Study Library</title>
     <meta name="description" content="Auto-generating math quiz across Algebra, Geometry, Trig, and Probability." />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7393965350812052" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../styles.css" />
     <style>
       :root {
@@ -190,7 +191,7 @@
         <p class="eyebrow" style="color: rgba(255, 255, 255, 0.7);">Math Study Library</p>
         <h1>Auto Generating Quiz</h1>
         <p>Auto-generated Algebra, Geometry, Trig, and Probability questions. Timed practice with scores.</p>
-        <a class="back-link" href="../index.html" style="color:#fff;">? Back to Math Library</a>
+        <a class="back-link" href="../index.html" style="color:#fff;">Back to Math Library</a>
       </div>
 
       <div class="sim-shell">
@@ -357,15 +358,15 @@
         const variants = [
           () => {
             const h = roundTo(dist * Math.tan(degToRad(angle)), 1);
-            return { text: `A lookout tower is ${dist} m away. The angle of elevation to the top is ${angle}°. How tall is the tower?`, answer: h, tolerance: 0.1, answerDisplay: `${h}`, note: 'Round to the nearest tenth.' };
+            return { text: `A lookout tower is ${dist} m away. The angle of elevation to the top is ${angle}\u00B0. How tall is the tower?`, answer: h, tolerance: 0.1, answerDisplay: `${h}`, note: 'Round to the nearest tenth.' };
           },
           () => {
             const run = roundTo(height / Math.tan(degToRad(angle)), 1);
-            return { text: `A hill rises ${height} m with an angle of elevation of ${angle}°. What is the horizontal run?`, answer: run, tolerance: 0.1, answerDisplay: `${run}`, note: 'Round to the nearest tenth.' };
+            return { text: `A hill rises ${height} m with an angle of elevation of ${angle}\u00B0. What is the horizontal run?`, answer: run, tolerance: 0.1, answerDisplay: `${run}`, note: 'Round to the nearest tenth.' };
           },
           () => {
             const hyp = roundTo(height / Math.sin(degToRad(angle)), 1);
-            return { text: `A drone is ${height} m above the ground. The angle of elevation is ${angle}°. How far away is the drone?`, answer: hyp, tolerance: 0.1, answerDisplay: `${hyp}`, note: 'Round to the nearest tenth.' };
+            return { text: `A drone is ${height} m above the ground. The angle of elevation is ${angle}\u00B0. How far away is the drone?`, answer: hyp, tolerance: 0.1, answerDisplay: `${hyp}`, note: 'Round to the nearest tenth.' };
           }
         ];
         return pick(variants)();
@@ -514,6 +515,7 @@
       <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
+
 
 
 
