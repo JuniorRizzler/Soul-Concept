@@ -1454,15 +1454,7 @@
   }
 
   function scheduleTour() {
-    if (isLibraryContext) return
-    setTimeout(function () {
-      try {
-        showTourPrompt()
-        showTourStep()
-      } catch (err) {
-        // ignore tour errors
-      }
-    }, 700)
+    return
   }
 
   if (document.readyState === 'complete') {

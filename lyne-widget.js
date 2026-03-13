@@ -3,6 +3,10 @@
   var PANEL_OPEN_KEY = 'sc_lyne_widget_panel_open_v1'
   var CHAT_KEY = 'sc_lyne_widget_chat_v1'
   var GUIDE_KEY = 'sc_lyne_widget_guide_v1'
+  var ONBOARDING_ACTIVE_KEY = 'sc_lyne_onboarding_active_v1'
+  var ONBOARDING_STEP_KEY = 'sc_lyne_onboarding_step_v1'
+  var ONBOARDING_DISMISSED_KEY = 'sc_lyne_onboarding_dismissed_v1'
+  var ONBOARDING_VOICE_KEY = 'sc_lyne_onboarding_voice_v1'
   var DEFAULT_CHAT = 'LYNE: Ready when you are.'
   var DEFAULT_STILL_HERE = 'I am still here. Ask me where to go in the app, what to study next, or what concept you want explained.'
   var LYNE_APP_CONTEXT =
@@ -59,6 +63,50 @@
       hint: 'Click Return Home'
     }
   }
+  var ONBOARDING_STEPS = [
+    {
+      page: '/index.html',
+      selector: '[data-tour-id="home-science-open"]',
+      message: 'I will show you the main flow. Start here and open the Science library.',
+      hint: 'Tap Open Science',
+      next: '/study-library.html',
+    },
+    {
+      page: '/study-library.html',
+      selector: '[data-tour-id="exit-home"]',
+      message: 'This is a full library page. Use this button any time to get back home fast.',
+      hint: 'Tap Return to Index',
+      next: '/index.html',
+    },
+    {
+      page: '/index.html',
+      selector: '[data-tour-id="home-geography"]',
+      message: 'Now try the Geography library. LYNE can walk you to any main section like this.',
+      hint: 'Tap Open Geography',
+      next: '/geography-library.html',
+    },
+    {
+      page: '/geography-library.html',
+      selector: '[data-tour-id="exit-home"]',
+      message: 'Same idea here. Exit brings you right back to the main hub.',
+      hint: 'Tap Exit',
+      next: '/index.html',
+    },
+    {
+      page: '/index.html',
+      selector: '[data-tour-id="home-cards-open"]',
+      message: 'One more stop. Open Concept Cards to see the practice side of the app.',
+      hint: 'Tap Open Cards',
+      next: '/anki/index.html',
+    },
+    {
+      page: '/anki/index.html',
+      selector: '[data-tour-id="concept-study"]',
+      message: 'This is the study area. The tour is done, and you can ask LYNE where to go any time.',
+      hint: 'You are ready to use Soul Concept',
+      autoFinish: true,
+    },
+  ]
 
   function readJson(key, fallback) {
     try {
@@ -95,13 +143,17 @@
     var style = document.createElement('style')
     style.id = 'sc-lyne-widget-styles'
     style.textContent =
-      '#lyne-widget{position:fixed;left:calc(100vw - 66px);top:calc(100vh - 66px);z-index:140;touch-action:none;user-select:none}' +
+      '#lyne-widget{position:fixed;left:calc(100vw - 66px);top:calc(100vh - 66px);z-index:140;touch-action:none;user-select:none;transition:left .46s ease,top .46s ease,transform .24s ease}' +
       '#lyne-widget *{box-sizing:border-box}' +
       '#lyne-widget.lyne-dragging{transition:none}' +
       '#lyne-widget button,#lyne-widget textarea,#lyne-widget pre{user-select:text}' +
       '.lyne-shell{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:8px}' +
-      '#lyne-hint{position:absolute;right:66px;bottom:10px;max-width:180px;padding:8px 10px;border-radius:12px;background:linear-gradient(135deg,rgba(27,86,177,.92),rgba(197,37,37,.92));color:#fff;border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 20px rgba(18,18,28,.25);font:700 11px/1.25 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.95;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 2.6s ease-in-out infinite;pointer-events:none}' +
+      '#lyne-hint{position:absolute;right:66px;bottom:10px;max-width:196px;padding:8px 10px;border-radius:12px;background:linear-gradient(135deg,rgba(27,86,177,.92),rgba(197,37,37,.92));color:#fff;border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 20px rgba(18,18,28,.25);font:700 11px/1.25 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.95;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 2.6s ease-in-out infinite;pointer-events:auto}' +
       '#lyne-hint:after{content:"";position:absolute;right:-6px;bottom:10px;width:12px;height:12px;background:linear-gradient(135deg,rgba(114,61,168,.95),rgba(197,37,37,.95));transform:rotate(45deg);border-right:1px solid rgba(255,255,255,.25);border-top:1px solid rgba(255,255,255,.25)}' +
+      '.lyne-hint-text{display:block}' +
+      '.lyne-hint-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}' +
+      '.lyne-hint-btn{appearance:none;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.16);color:#fff;border-radius:999px;padding:4px 8px;font:700 10px/1 Manrope,system-ui,sans-serif;cursor:pointer}' +
+      '.lyne-hint-btn.is-primary{background:rgba(255,255,255,.92);color:#19315c;border-color:transparent}' +
       '#lyne-widget[data-panel-open="true"] #lyne-hint{display:none}' +
       '#lyne-orb-toggle{width:54px;height:54px;border-radius:999px;border:0;cursor:pointer;position:relative;overflow:hidden;background:radial-gradient(circle at 30% 30%,#fff0d8 0%,#ffb453 45%,#8a410d 100%);box-shadow:0 14px 22px rgba(23,21,16,.35),inset -8px -10px 12px rgba(0,0,0,.22),inset 5px 7px 9px rgba(255,255,255,.35)}' +
       '#lyne-orb-toggle .flame-core{position:absolute;left:16px;top:11px;width:22px;height:28px;border-radius:52% 48% 58% 42%/52% 40% 60% 48%;background:radial-gradient(circle at 40% 30%,#fff6ea 0%,#ffd58f 32%,#ff8b2b 68%,#bb4b0f 100%);animation:lyneFlame 1.9s ease-in-out infinite;transform-origin:50% 75%}' +
@@ -128,7 +180,7 @@
       '.sc-lyne-guide-target{position:relative;z-index:141 !important;outline:3px solid #ff8a1c !important;outline-offset:4px;border-radius:14px;box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22);animation:scLyneGuidePulse 1.15s ease-in-out infinite}' +
       '.sc-lyne-guide-bubble{position:fixed;z-index:142;max-width:min(260px,80vw);padding:10px 12px;border-radius:14px;background:rgba(14,23,38,.96);color:#fff;font:700 12px/1.35 Manrope,system-ui,sans-serif;box-shadow:0 16px 30px rgba(0,0,0,.28)}' +
       '.sc-lyne-guide-bubble strong{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.01em;color:#ffd39c}' +
-      '@media (max-width:760px){#lyne-widget{transform:scale(.82);transform-origin:100% 100%}#lyne-hint{right:50px;bottom:6px;max-width:132px;padding:6px 8px;font-size:9px;border-radius:10px}#lyne-hint:after{right:-5px;bottom:8px;width:10px;height:10px}#lyne-orb-toggle{width:44px;height:44px}#lyne-orb-toggle .flame-core{left:13px;top:9px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:18px;top:15px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:5px}#lyne-panel{bottom:52px;width:min(236px,72vw);padding:8px;border-radius:16px}#lyne-chat{padding:8px;min-height:34px;max-height:82px;font-size:.68rem}#lyne-meta{font-size:.66rem;margin-top:5px}.lyne-panel-actions{gap:4px;margin-top:6px}.lyne-mini-btn{padding:5px 8px;font-size:.66rem}.lyne-compose{gap:5px;margin-top:6px}.lyne-input{padding:7px 10px;font-size:11px}.lyne-send{min-width:32px;height:32px;font-size:13px}}' +
+      '@media (max-width:760px){#lyne-widget{transform:scale(.82);transform-origin:100% 100%}#lyne-hint{right:50px;bottom:6px;max-width:148px;padding:6px 8px;font-size:9px;border-radius:10px}#lyne-hint:after{right:-5px;bottom:8px;width:10px;height:10px}.lyne-hint-actions{gap:4px;margin-top:6px}.lyne-hint-btn{padding:4px 7px;font-size:9px}#lyne-orb-toggle{width:44px;height:44px}#lyne-orb-toggle .flame-core{left:13px;top:9px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:18px;top:15px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:5px}#lyne-panel{bottom:52px;width:min(236px,72vw);padding:8px;border-radius:16px}#lyne-chat{padding:8px;min-height:34px;max-height:82px;font-size:.68rem}#lyne-meta{font-size:.66rem;margin-top:5px}.lyne-panel-actions{gap:4px;margin-top:6px}.lyne-mini-btn{padding:5px 8px;font-size:.66rem}.lyne-compose{gap:5px;margin-top:6px}.lyne-input{padding:7px 10px;font-size:11px}.lyne-send{min-width:32px;height:32px;font-size:13px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
@@ -144,7 +196,7 @@
     widget.setAttribute('data-panel-open', 'false')
     widget.innerHTML =
       '<div class="lyne-shell">' +
-      '<div id="lyne-hint">Hey, need help? Ask me.</div>' +
+      '<div id="lyne-hint"><span class="lyne-hint-text">Hey, need help? Ask me.</span></div>' +
       '<button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false">' +
       '<span class="flame-glow" aria-hidden="true"></span>' +
       '<span class="flame-core" aria-hidden="true"></span>' +
@@ -372,8 +424,9 @@
     var input = document.getElementById('lyne-input')
     var meta = document.getElementById('lyne-meta')
     var chat = document.getElementById('lyne-chat')
+    var hint = document.getElementById('lyne-hint')
     var dragHandle = panel.querySelector('[data-lyne-drag-handle]')
-    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !sendBtn || !input || !meta || !chat) return
+    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint) return
 
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
     var canListen = typeof SpeechRecognition === 'function'
@@ -398,6 +451,30 @@
     var preferredVoice = null
     var didDrag = false
 
+    function setHintContent(text, actions) {
+      var html = '<span class="lyne-hint-text">' + String(text || 'Hey, need help? Ask me.') + '</span>'
+      if (Array.isArray(actions) && actions.length) {
+        html += '<div class="lyne-hint-actions">'
+        for (var i = 0; i < actions.length; i++) {
+          var action = actions[i] || {}
+          html +=
+            '<button class="lyne-hint-btn' +
+            (action.primary ? ' is-primary' : '') +
+            '" type="button" data-lyne-hint-action="' +
+            String(action.id || '') +
+            '">' +
+            String(action.label || 'Continue') +
+            '</button>'
+        }
+        html += '</div>'
+      }
+      hint.innerHTML = html
+    }
+
+    function setDefaultHint() {
+      setHintContent('Hey, need help? Ask me.')
+    }
+
     function setPanelOpen(next) {
       var open = !!next
       panel.classList.toggle('open', open)
@@ -420,6 +497,50 @@
     function currentPath() {
       var path = String(location.pathname || '/index.html')
       return path === '/' ? '/index.html' : path
+    }
+
+    function isOnboardingDismissed() {
+      return readText(ONBOARDING_DISMISSED_KEY, '0') === '1'
+    }
+
+    function setOnboardingDismissed(value) {
+      writeText(ONBOARDING_DISMISSED_KEY, value ? '1' : '0')
+    }
+
+    function isOnboardingActive() {
+      return readText(ONBOARDING_ACTIVE_KEY, '0') === '1'
+    }
+
+    function setOnboardingActive(value) {
+      writeText(ONBOARDING_ACTIVE_KEY, value ? '1' : '0')
+    }
+
+    function getOnboardingStep() {
+      var raw = Number(readText(ONBOARDING_STEP_KEY, '0'))
+      return isFinite(raw) && raw >= 0 ? raw : 0
+    }
+
+    function setOnboardingStep(value) {
+      writeText(ONBOARDING_STEP_KEY, String(Math.max(0, Number(value) || 0)))
+    }
+
+    function isOnboardingVoiceEnabled() {
+      return readText(ONBOARDING_VOICE_KEY, '0') === '1'
+    }
+
+    function setOnboardingVoiceEnabled(value) {
+      writeText(ONBOARDING_VOICE_KEY, value ? '1' : '0')
+    }
+
+    function finishOnboarding() {
+      clearGuide()
+      setOnboardingActive(false)
+      setOnboardingDismissed(true)
+      setOnboardingVoiceEnabled(false)
+      setPanelOpen(true)
+      meta.textContent = 'Guide complete.'
+      setChat(chat, 'LYNE: You are set. Ask me where to go, what to study next, or what concept you want explained.')
+      setDefaultHint()
     }
 
     function clearGuide() {
@@ -530,6 +651,107 @@
       return activateGuideTarget(targetId)
     }
 
+    function showOnboardingStep() {
+      if (!isOnboardingActive()) return false
+      var stepIndex = getOnboardingStep()
+      var step = ONBOARDING_STEPS[stepIndex]
+      if (!step) {
+        finishOnboarding()
+        return false
+      }
+      if (currentPath() !== step.page) return false
+
+      var target = document.querySelector(step.selector)
+      if (!target) return false
+
+      clearGuide()
+      guideTargetNode = target
+      target.classList.add('sc-lyne-guide-target')
+      try {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' })
+      } catch (_err) {
+        target.scrollIntoView()
+      }
+      moveWidgetNearTarget(target)
+      setPanelOpen(true)
+      meta.textContent = 'LYNE guide'
+      setChat(chat, 'LYNE: ' + step.message)
+      setHintContent(step.hint || 'Follow LYNE across the app.')
+      if (isOnboardingVoiceEnabled()) {
+        setTimeout(function () {
+          speak(step.message)
+            .then(function () {
+              if (active && canListen) {
+                setTimeout(startListening, 220)
+              }
+            })
+            .catch(function () {})
+        }, 140)
+      }
+
+      var bubble = document.createElement('div')
+      bubble.className = 'sc-lyne-guide-bubble'
+      bubble.innerHTML = '<strong>LYNE</strong>' + String(step.hint || 'Tap here to continue')
+      document.body.appendChild(bubble)
+      guideBubble = bubble
+      positionGuideBubble(target, bubble)
+
+      var refreshGuide = function () {
+        if (guideTargetNode && guideBubble) {
+          positionGuideBubble(guideTargetNode, guideBubble)
+        }
+      }
+      window.addEventListener('resize', refreshGuide, { once: true })
+
+      var advance = function () {
+        if (!isOnboardingActive()) return
+        if (step.autoFinish) {
+          finishOnboarding()
+          return
+        }
+        setOnboardingStep(stepIndex + 1)
+        if (!step.next || step.next === currentPath()) {
+          setTimeout(showOnboardingStep, 180)
+        }
+      }
+
+      target.addEventListener('click', advance, { once: true })
+      if (step.autoFinish) {
+        guideCleanupTimer = setTimeout(function () {
+          finishOnboarding()
+        }, 5200)
+      } else {
+        guideCleanupTimer = setTimeout(function () {
+          if (isOnboardingActive()) showOnboardingStep()
+        }, 14000)
+      }
+      return true
+    }
+
+    function beginOnboarding(withVoice) {
+      setOnboardingDismissed(false)
+      setOnboardingActive(true)
+      setOnboardingStep(0)
+      setOnboardingVoiceEnabled(!!withVoice)
+      if (withVoice && canListen) {
+        active = true
+      }
+      showOnboardingStep()
+    }
+
+    function maybeStartOnboarding() {
+      if (currentPath() !== '/index.html') return
+      if (isOnboardingDismissed()) return
+      if (isOnboardingActive()) return
+      setTimeout(function () {
+        if (isOnboardingDismissed() || isOnboardingActive()) return
+        setHintContent('Want LYNE to guide you through the app?', [
+          { id: 'guide-yes', label: 'Guide me', primary: true },
+          { id: 'guide-no', label: 'Not now' },
+        ])
+      }, 1200)
+    }
+
     function resumePendingGuide() {
       var pending = readJson(GUIDE_KEY, null)
       if (!pending || !pending.id) return
@@ -542,6 +764,19 @@
       setTimeout(function () {
         activateGuideTarget(pending.id)
       }, 450)
+    }
+
+    function resumeOnboarding() {
+      if (!isOnboardingActive()) return
+      var step = ONBOARDING_STEPS[getOnboardingStep()]
+      if (!step) {
+        finishOnboarding()
+        return
+      }
+      if (currentPath() !== step.page) return
+      setTimeout(function () {
+        showOnboardingStep()
+      }, 520)
     }
 
     function flushCapturedText() {
@@ -849,6 +1084,21 @@
     panelClose.addEventListener('click', function () {
       setPanelOpen(false)
     })
+    hint.addEventListener('click', function (event) {
+      var actionId = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-action') : ''
+      if (actionId === 'guide-yes') {
+        beginOnboarding(true)
+        return
+      }
+      if (actionId === 'guide-no') {
+        setOnboardingDismissed(true)
+        setOnboardingActive(false)
+        setOnboardingVoiceEnabled(false)
+        setDefaultHint()
+        return
+      }
+      setPanelOpen(true)
+    })
 
     startBtn.addEventListener('click', function () {
       if (!canListen) {
@@ -863,6 +1113,7 @@
 
     stopBtn.addEventListener('click', function () {
       active = false
+      setOnboardingVoiceEnabled(false)
       captureText = ''
       if (captureTimer) clearTimeout(captureTimer)
       stopListening()
@@ -949,6 +1200,7 @@
       meta.textContent = 'Voice not supported in this browser.'
     }
 
+    setDefaultHint()
     setChat(chat, readText(CHAT_KEY, DEFAULT_CHAT))
     setPanelOpen(readText(PANEL_OPEN_KEY, '0') === '1')
     applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
@@ -956,6 +1208,8 @@
       applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
     })
     resumePendingGuide()
+    resumeOnboarding()
+    maybeStartOnboarding()
   }
 
   if (document.readyState === 'loading') {
