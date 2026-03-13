@@ -171,7 +171,9 @@
       '.lyne-shell{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:8px}' +
       '#lyne-hint{position:absolute;right:66px;bottom:10px;max-width:196px;padding:8px 10px;border-radius:12px;background:linear-gradient(135deg,rgba(27,86,177,.92),rgba(197,37,37,.92));color:#fff;border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 20px rgba(18,18,28,.25);font:700 11px/1.25 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.95;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 2.6s ease-in-out infinite;pointer-events:auto}' +
       '#lyne-hint:after{content:"";position:absolute;right:-6px;bottom:10px;width:12px;height:12px;background:linear-gradient(135deg,rgba(114,61,168,.95),rgba(197,37,37,.95));transform:rotate(45deg);border-right:1px solid rgba(255,255,255,.25);border-top:1px solid rgba(255,255,255,.25)}' +
-      '.lyne-hint-text{display:block}' +
+      '.lyne-hint-text{display:block;padding-right:18px}' +
+      '.lyne-hint-close{position:absolute;top:6px;right:6px;appearance:none;border:0;background:transparent;color:#fff;font:800 12px/1 Manrope,system-ui,sans-serif;cursor:pointer;opacity:.88;padding:2px 3px;border-radius:999px}' +
+      '.lyne-hint-close:hover{background:rgba(255,255,255,.14);opacity:1}' +
       '.lyne-hint-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}' +
       '.lyne-hint-btn{appearance:none;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.16);color:#fff;border-radius:999px;padding:4px 8px;font:700 10px/1 Manrope,system-ui,sans-serif;cursor:pointer}' +
       '.lyne-hint-btn.is-primary{background:rgba(255,255,255,.92);color:#19315c;border-color:transparent}' +
@@ -201,7 +203,7 @@
       '.sc-lyne-guide-target{position:relative;z-index:141 !important;outline:3px solid #ff8a1c !important;outline-offset:4px;border-radius:14px;box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22);animation:scLyneGuidePulse 1.15s ease-in-out infinite}' +
       '.sc-lyne-guide-bubble{position:fixed;z-index:142;max-width:min(260px,80vw);padding:10px 12px;border-radius:14px;background:rgba(14,23,38,.96);color:#fff;font:700 12px/1.35 Manrope,system-ui,sans-serif;box-shadow:0 16px 30px rgba(0,0,0,.28)}' +
       '.sc-lyne-guide-bubble strong{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.01em;color:#ffd39c}' +
-      '@media (max-width:760px){#lyne-widget{transform:scale(.82);transform-origin:100% 100%}#lyne-hint{right:50px;bottom:6px;max-width:148px;padding:6px 8px;font-size:9px;border-radius:10px}#lyne-hint:after{right:-5px;bottom:8px;width:10px;height:10px}.lyne-hint-actions{gap:4px;margin-top:6px}.lyne-hint-btn{padding:4px 7px;font-size:9px}#lyne-orb-toggle{width:44px;height:44px}#lyne-orb-toggle .flame-core{left:13px;top:9px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:18px;top:15px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:5px}#lyne-panel{bottom:52px;width:min(236px,72vw);padding:8px;border-radius:16px}#lyne-chat{padding:8px;min-height:34px;max-height:82px;font-size:.68rem}#lyne-meta{font-size:.66rem;margin-top:5px}.lyne-panel-actions{gap:4px;margin-top:6px}.lyne-mini-btn{padding:5px 8px;font-size:.66rem}.lyne-compose{gap:5px;margin-top:6px}.lyne-input{padding:7px 10px;font-size:11px}.lyne-send{min-width:32px;height:32px;font-size:13px}}' +
+      '@media (max-width:760px){#lyne-widget{transform:scale(.82);transform-origin:100% 100%}#lyne-hint{right:50px;bottom:6px;max-width:148px;padding:6px 8px;font-size:9px;border-radius:10px}#lyne-hint:after{right:-5px;bottom:8px;width:10px;height:10px}.lyne-hint-text{padding-right:16px}.lyne-hint-close{top:5px;right:5px;font-size:10px}.lyne-hint-actions{gap:4px;margin-top:6px}.lyne-hint-btn{padding:4px 7px;font-size:9px}#lyne-orb-toggle{width:44px;height:44px}#lyne-orb-toggle .flame-core{left:13px;top:9px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:18px;top:15px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:5px}#lyne-panel{bottom:52px;width:min(236px,72vw);padding:8px;border-radius:16px}#lyne-chat{padding:8px;min-height:34px;max-height:82px;font-size:.68rem}#lyne-meta{font-size:.66rem;margin-top:5px}.lyne-panel-actions{gap:4px;margin-top:6px}.lyne-mini-btn{padding:5px 8px;font-size:.66rem}.lyne-compose{gap:5px;margin-top:6px}.lyne-input{padding:7px 10px;font-size:11px}.lyne-send{min-width:32px;height:32px;font-size:13px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
@@ -483,7 +485,9 @@
     var didDrag = false
 
     function setHintContent(text, actions) {
-      var html = '<span class="lyne-hint-text">' + String(text || 'Hey, need help? Ask me.') + '</span>'
+      var html =
+        '<button class="lyne-hint-close" type="button" aria-label="Close LYNE prompt" data-lyne-hint-dismiss>&times;</button>' +
+        '<span class="lyne-hint-text">' + String(text || 'Hey, need help? Ask me.') + '</span>'
       if (Array.isArray(actions) && actions.length) {
         html += '<div class="lyne-hint-actions">'
         for (var i = 0; i < actions.length; i++) {
@@ -529,15 +533,28 @@
       return normalizeRoute(location.pathname || '/index.html')
     }
 
+    function promoteGuideTarget(node) {
+      if (!node || !node.closest) return node
+      return (
+        node.closest('button, a, [role="button"], [onclick], .cursor-pointer, .deck-item, summary') ||
+        node
+      )
+    }
+
     function findNodeByText(text) {
       if (!text) return null
       var targetText = String(text).trim()
       var candidates = document.querySelectorAll('button, a, h1, h2, h3, h4, div, span, p')
+      var containsMatch = null
       for (var i = 0; i < candidates.length; i++) {
         var content = String(candidates[i].textContent || '').replace(/\s+/g, ' ').trim()
-        if (content === targetText) return candidates[i]
+        if (!content) continue
+        if (content === targetText) return promoteGuideTarget(candidates[i])
+        if (!containsMatch && content.indexOf(targetText) !== -1) {
+          containsMatch = promoteGuideTarget(candidates[i])
+        }
       }
-      return null
+      return containsMatch
     }
 
     function resolveGuideNode(step) {
@@ -1174,6 +1191,15 @@
     })
     hint.addEventListener('click', function (event) {
       var actionId = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-action') : ''
+      var dismissHint = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-dismiss') : ''
+      if (dismissHint != null) {
+        clearGuide()
+        setOnboardingDismissed(true)
+        setOnboardingActive(false)
+        setOnboardingVoiceEnabled(false)
+        setDefaultHint()
+        return
+      }
       if (actionId === 'guide-yes') {
         beginOnboarding(true)
         return
