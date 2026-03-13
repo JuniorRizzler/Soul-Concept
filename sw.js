@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v83";
+const CACHE_NAME = "soulconcept-v84";
 const ASSETS = [
   "/",
   "/index.html",
@@ -53,6 +53,10 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(req.url);
   if (url.pathname === "/supabase-config.json") {
+    event.respondWith(fetch(req));
+    return;
+  }
+  if (url.pathname.startsWith("/api/")) {
     event.respondWith(fetch(req));
     return;
   }

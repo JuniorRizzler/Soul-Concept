@@ -7,6 +7,16 @@
     } catch (_err) {}
 
     try {
+      if (
+        (typeof Notification !== 'undefined' && Notification.permission === 'granted') ||
+        localStorage.getItem('sc_push_enabled') === '1'
+      ) {
+        localStorage.setItem(FORCE_CACHE_RESET_KEY, '1')
+        return
+      }
+    } catch (_err) {}
+
+    try {
       if ('serviceWorker' in navigator) {
         const regs = await navigator.serviceWorker.getRegistrations()
         await Promise.all(
@@ -741,7 +751,7 @@
         return
       }
 
-      alert('To install, use your browser menu and choose ìInstall appî or ìAdd to Home Screenî.')
+      alert('To install, use your browser menu and choose ‚ÄúInstall app‚Äù or ‚ÄúAdd to Home Screen‚Äù.')
     })
   }
 
@@ -769,17 +779,32 @@
     })
   }
 
+  let serviceWorkerRegistrationPromise = null
+  function ensureServiceWorkerRegistration() {
+    if (!('serviceWorker' in navigator)) {
+      return Promise.reject(new Error('Service workers are not supported in this browser.'))
+    }
+    if (!serviceWorkerRegistrationPromise) {
+      serviceWorkerRegistrationPromise = navigator.serviceWorker
+        .register('/sw.js')
+        .catch(function (err) {
+          serviceWorkerRegistrationPromise = null
+          console.warn('Service worker registration failed:', err)
+          throw err
+        })
+    }
+    return serviceWorkerRegistrationPromise
+  }
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('/sw.js').catch(function (err) {
-        console.warn('Service worker registration failed:', err)
-      })
+    ensureServiceWorkerRegistration().catch(function () {
+      // handled when notifications are enabled explicitly
     })
   }
 
   {
     const canUsePush = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
-    const VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
+    const FALLBACK_VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
+    let vapidPublicKeyPromise = null
     const pushAlreadyEnabled = Notification.permission === 'granted'
     if (Notification.permission !== 'granted') {
       try {
@@ -807,14 +832,37 @@
       }
       return outputArray
     }
+    async function getVapidPublicKey() {
+      if (vapidPublicKeyPromise) return vapidPublicKeyPromise
+      vapidPublicKeyPromise = fetch('/api/push-config', {
+        headers: { Accept: 'application/json' }
+      })
+        .then(async function (res) {
+          if (!res.ok) {
+            throw new Error('Push config request failed (' + res.status + ').')
+          }
+          const data = await res.json().catch(function () {
+            return {}
+          })
+          const key = data && typeof data.vapidPublicKey === 'string' ? data.vapidPublicKey.trim() : ''
+          if (!key) throw new Error('Missing VAPID public key.')
+          return key
+        })
+        .catch(function () {
+          return FALLBACK_VAPID_PUBLIC_KEY
+        })
+      return vapidPublicKeyPromise
+    }
 
     async function ensurePushRegistration() {
       if (!canUsePush || Notification.permission !== 'granted') return
       try {
+        await ensureServiceWorkerRegistration()
         const registration = await navigator.serviceWorker.ready
         let subscription = await registration.pushManager.getSubscription()
         if (!subscription) {
-          const key = urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+          const vapidPublicKey = await getVapidPublicKey()
+          const key = urlBase64ToUint8Array(vapidPublicKey)
           subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: key
@@ -869,10 +917,12 @@
       }
 
       async function getSubscription() {
+        await ensureServiceWorkerRegistration()
         const registration = await navigator.serviceWorker.ready
         let subscription = await registration.pushManager.getSubscription()
         if (!subscription) {
-          const key = urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+          const vapidPublicKey = await getVapidPublicKey()
+          const key = urlBase64ToUint8Array(vapidPublicKey)
           subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: key
@@ -1010,6 +1060,7 @@
         }
         const payload = templates[templateKey] || templates.test
         try {
+          await ensureServiceWorkerRegistration()
           const registration = await navigator.serviceWorker.ready
           await registration.showNotification(payload.title, {
             body: payload.body,
@@ -1146,7 +1197,7 @@
       page: 'index.html',
       selector: '[data-tour-id="home-tools"]',
       title: 'Study Tools',
-      text: 'Concept Cards use spaced repetition to lock in memory ó it\'s a strategy even med students use.',
+      text: 'Concept Cards use spaced repetition to lock in memory ‚Äî it\'s a strategy even med students use.',
       next: 'anki/index.html'
     },
     {
