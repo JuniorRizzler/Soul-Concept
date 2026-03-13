@@ -845,26 +845,20 @@
       var target = resolveGuideNode(step)
       if (!target) {
         onboardingRetryCount += 1
-        meta.textContent = 'LYNE guide'
-        if (onboardingRetryCount > 14) {
-          target = fallbackGuideTarget()
-        } else {
-          setTimeout(function () {
-            if (isOnboardingActive()) showOnboardingStep()
-          }, onboardingRetryCount > 8 ? 420 : 700)
-          return false
-        }
+        target = fallbackGuideTarget()
+      } else {
+        onboardingRetryCount = 0
       }
-
-      onboardingRetryCount = 0
 
       clearGuide()
       guideTargetNode = target
-      target.classList.add('sc-lyne-guide-target')
+      if (target && target.classList && target !== document.body && target !== document.documentElement) {
+        target.classList.add('sc-lyne-guide-target')
+      }
       try {
         target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' })
       } catch (_err) {
-        target.scrollIntoView()
+        if (target && target.scrollIntoView) target.scrollIntoView()
       }
       moveWidgetNearTarget(target)
       setTimeout(function () {
@@ -889,12 +883,14 @@
         }, 140)
       }
 
-      var bubble = document.createElement('div')
-      bubble.className = 'sc-lyne-guide-bubble'
-      bubble.innerHTML = '<strong>LYNE</strong>' + String(step.hint || 'Tap here to continue')
-      document.body.appendChild(bubble)
-      guideBubble = bubble
-      positionGuideBubble(target, bubble)
+      if (target && target !== document.body && target !== document.documentElement) {
+        var bubble = document.createElement('div')
+        bubble.className = 'sc-lyne-guide-bubble'
+        bubble.innerHTML = '<strong>LYNE</strong>' + String(step.hint || 'Tap here to continue')
+        document.body.appendChild(bubble)
+        guideBubble = bubble
+        positionGuideBubble(target, bubble)
+      }
 
       var refreshGuide = function () {
         if (guideTargetNode && guideBubble) {
@@ -917,7 +913,9 @@
         }
       }
 
-      target.addEventListener('click', advance, { once: true })
+      if (target && target.addEventListener && target !== document.body && target !== document.documentElement) {
+        target.addEventListener('click', advance, { once: true })
+      }
       if (step.autoFinish) {
         guideCleanupTimer = setTimeout(function () {
           finishOnboarding()
