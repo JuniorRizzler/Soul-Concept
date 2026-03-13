@@ -1,5 +1,6 @@
 (function () {
   var CALLBACK_PATH = '/auth/callback.html'
+  var CALLBACK_CLEAN_PATH = '/auth/callback'
   var RETURN_TO_KEY = 'sc_auth_return_to'
   var REQUIRE_AUTH = true
 
@@ -39,7 +40,8 @@
   }
 
   function isCallbackPage() {
-    return (location.pathname || '').toLowerCase() === CALLBACK_PATH
+    var path = String(location.pathname || '').toLowerCase()
+    return path === CALLBACK_PATH || path === CALLBACK_CLEAN_PATH
   }
 
   function currentReturnPath() {
@@ -77,7 +79,8 @@
       }
     }
     if (value === '/' || value === '') return '/index.html'
-    if (value.toLowerCase().indexOf(CALLBACK_PATH) !== -1) return '/index.html'
+    var lower = value.toLowerCase()
+    if (lower.indexOf(CALLBACK_PATH) !== -1 || lower.indexOf(CALLBACK_CLEAN_PATH) !== -1) return '/index.html'
     return value
   }
 
