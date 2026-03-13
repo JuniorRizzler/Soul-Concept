@@ -1,6 +1,7 @@
 (function () {
   var CALLBACK_PATH = '/auth/callback.html'
   var RETURN_TO_KEY = 'sc_auth_return_to'
+  var REQUIRE_AUTH = true
 
   function injectStyles() {
     if (document.getElementById('sc-supabase-auth-styles')) return
@@ -9,12 +10,14 @@
     style.textContent =
       '.sc-auth-launch{white-space:nowrap}' +
       '.sc-auth-shell{position:relative;display:inline-flex;align-items:center;gap:8px}' +
-      '.sc-auth-user{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(33,92,75,.18);background:rgba(255,255,255,.92);color:#1b1b1f;font-weight:800;font-size:.86rem}' +
+      '.sc-auth-user{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(33,92,75,.18);background:rgba(255,255,255,.92);color:#1b1b1f;font-weight:800;font-size:.82rem;max-width:172px;overflow:hidden}' +
       '.sc-auth-user small{display:block;font-weight:700;color:#5a5863;font-size:.72rem}' +
-      '.sc-auth-signout{border:1px solid #e2d8cb;background:#fff;color:#1b1b1f;border-radius:999px;padding:8px 12px;font-weight:800;cursor:pointer}' +
+      '.sc-auth-signout{border:1px solid #e2d8cb;background:#fff;color:#1b1b1f;border-radius:999px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:.82rem}' +
       '.sc-auth-float{position:fixed;top:14px;right:14px;z-index:10002;display:flex;gap:8px;align-items:center}' +
       '.sc-auth-modal-backdrop{position:fixed;inset:0;background:rgba(10,14,20,.48);backdrop-filter:blur(8px);z-index:10020;display:none;align-items:center;justify-content:center;padding:18px}' +
       '.sc-auth-modal-backdrop.open{display:flex}' +
+      '.sc-auth-modal-backdrop.locked{background:rgba(10,14,20,.72)}' +
+      '.sc-auth-modal-backdrop.locked .sc-auth-close{display:none}' +
       '.sc-auth-modal{width:min(460px,92vw);border-radius:24px;border:1px solid rgba(226,216,203,.9);background:linear-gradient(180deg,#fffefb 0%,#f7f1e9 100%);box-shadow:0 24px 60px rgba(23,21,16,.18);padding:22px;position:relative}' +
       '.sc-auth-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:999px;border:1px solid #e2d8cb;background:#fff;cursor:pointer;font-size:1rem;font-weight:800}' +
       '.sc-auth-title{margin:0 0 8px;font-family:Sora,Segoe UI,sans-serif;font-size:1.55rem;line-height:1.05;color:#1b1b1f}' +
@@ -31,7 +34,7 @@
       '.sc-auth-status.ok{color:#166534}' +
       '.sc-auth-status.err{color:#b91c1c}' +
       '.sc-auth-foot{margin-top:8px;color:#7b746b;font-size:.78rem;line-height:1.45}' +
-      '@media (max-width:840px){.sc-auth-launch{width:auto}.sc-auth-float{top:10px;right:10px}}'
+      '@media (max-width:840px){.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:6px}.sc-auth-user{max-width:132px;padding:7px 9px}.sc-auth-signout{padding:7px 9px}.sc-auth-float{top:10px;right:10px}}'
     document.head.appendChild(style)
   }
 
@@ -117,6 +120,7 @@
 
   function closeModal() {
     var backdrop = ensureModal()
+    if (backdrop.classList.contains('locked')) return
     backdrop.classList.remove('open')
     setStatus(backdrop, '', '')
   }
@@ -183,10 +187,12 @@
 
     var user = session && session.user ? session.user : null
     var email = user && user.email ? user.email : 'Signed in'
+    var shortEmail = email.length > 24 ? email.slice(0, 21) + '...' : email
 
     var badge = document.createElement('div')
     badge.className = 'sc-auth-user'
-    badge.innerHTML = '<span>Account</span><small>' + email + '</small>'
+    badge.innerHTML = '<span>Account</span><small>' + shortEmail + '</small>'
+    badge.title = email
 
     var signOut = document.createElement('button')
     signOut.type = 'button'
@@ -227,14 +233,45 @@
     document.body.appendChild(mount)
   }
 
+  function setGateMode(locked) {
+    var backdrop = ensureModal()
+    backdrop.classList.toggle('locked', !!locked)
+    if (locked) {
+      openModal()
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden'
+    } else {
+      backdrop.classList.remove('locked')
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+    }
+  }
+
+  function hasHashTokens() {
+    return /access_token=|refresh_token=|token_hash=/.test(location.hash || '')
+  }
+
   async function handleCallback(client) {
     var bodyBox = document.querySelector('.box')
     if (bodyBox) bodyBox.textContent = 'Completing sign in...'
+    var params = new URLSearchParams(location.search || '')
+
+    if (params.get('code')) {
+      var exchange = await client.auth.exchangeCodeForSession(params.get('code'))
+      if (exchange.error) {
+        if (bodyBox) bodyBox.textContent = exchange.error.message || 'Sign in failed.'
+        return
+      }
+    } else if (hasHashTokens()) {
+      await new Promise(function (resolve) { setTimeout(resolve, 250) })
+    }
+
     var result = await client.auth.getSession()
-    if (result.error) {
-      if (bodyBox) bodyBox.textContent = result.error.message || 'Sign in failed.'
+    if (result.error || !(result.data && result.data.session)) {
+      if (bodyBox) bodyBox.textContent = (result.error && result.error.message) || 'Sign in failed.'
       return
     }
+
     var target = readReturnPath()
     clearReturnPath()
     location.replace(target || '/index.html')
@@ -252,10 +289,18 @@
     }
 
     var sessionResult = await client.auth.getSession()
-    mountAuthUi(client, sessionResult && sessionResult.data ? sessionResult.data.session : null)
+    var session = sessionResult && sessionResult.data ? sessionResult.data.session : null
+    mountAuthUi(client, session)
+    setGateMode(REQUIRE_AUTH && !session)
 
     client.auth.onAuthStateChange(function (_event, session) {
       mountAuthUi(client, session || null)
+      setGateMode(REQUIRE_AUTH && !session)
+      if (isCallbackPage() && session) {
+        var target = readReturnPath()
+        clearReturnPath()
+        location.replace(target || '/index.html')
+      }
     })
   }
 

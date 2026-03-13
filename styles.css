@@ -1694,14 +1694,15 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    overflow-x: auto;
-    white-space: nowrap;
+    flex-wrap: wrap;
+    overflow-x: visible;
+    white-space: normal;
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
-    padding: 8px 10px;
-    gap: 8px;
+    padding: 7px 8px;
+    gap: 6px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
   }
@@ -1712,12 +1713,17 @@ main {
   .nav-cta {
     margin: 0;
     flex: 0 0 auto;
+    font-size: 0.84rem;
+  }
+
+  .nav-menu a,
+  .install-btn,
+  .nav-cta {
+    padding: 8px 10px;
   }
 
   .install-hint {
-    padding: 8px 10px;
-    border-radius: 999px;
-    background: rgba(33, 92, 75, 0.08);
+    display: none !important;
   }
 
   .auth-open {
@@ -1812,6 +1818,7 @@ main {
 
   .topbar-inner {
     min-height: 64px;
+    gap: 6px;
   }
 
   .streak-pill-label {
@@ -1832,8 +1839,20 @@ main {
     font-size: 0.92rem;
   }
 
-  .nav-menu a {
-    font-size: 0.95rem;
+  .nav-menu {
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .nav-menu a,
+  .install-btn,
+  .nav-cta {
+    padding: 7px 9px;
+    font-size: 0.8rem;
+  }
+
+  .nav-cta {
+    display: none;
   }
 
   .section-title {
