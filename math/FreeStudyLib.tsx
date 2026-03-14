@@ -1,5 +1,5 @@
-﻿import React, { useState, useEffect } from "react";
-import { BookOpen, ArrowLeft, CheckCircle, Circle, Calculator, TrendingUp, Shapes, Grid3x3, ChevronRight, FileText, Lightbulb, Target, X, ClipboardList, Brain, Sparkles, BookMarked } from "lucide-react";
+import { useState, useEffect } from "react";
+import { BookOpen, ArrowLeft, CheckCircle, Circle, Calculator, TrendingUp, Shapes, Grid3x3, ChevronRight, FileText, Lightbulb, Target, X, ClipboardList, Brain, Sparkles, BookMarked } from "./lucide-react-shim";
 
 const GLOBAL_STYLE = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -27,6 +27,134 @@ const GLOBAL_STYLE = `
   .syne{font-family:'Syne',sans-serif;}.mono{font-family:'JetBrains Mono',monospace;}
   .card-shadow{box-shadow:0 2px 12px rgba(15,23,42,0.06),0 1px 3px rgba(15,23,42,0.04);}
   .card-shadow-hover:hover{box-shadow:0 8px 32px rgba(99,102,241,0.13),0 2px 8px rgba(15,23,42,0.06);}
+
+  /* ── NOTE CARD STYLES ── */
+  .note-topic-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(15,23,42,0.07), 0 1px 4px rgba(15,23,42,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .note-topic-card:hover { box-shadow: 0 8px 36px rgba(15,23,42,0.10), 0 2px 8px rgba(15,23,42,0.06); }
+
+  /* ruled paper lines inside note body */
+  .note-ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 31px,
+      rgba(99,102,241,0.06) 31px,
+      rgba(99,102,241,0.06) 32px
+    );
+    background-size: 100% 32px;
+  }
+
+  /* KEY TERM rows */
+  .note-row-keyterm {
+    background: linear-gradient(90deg, rgba(99,102,241,0.06) 0%, rgba(99,102,241,0.02) 100%);
+    border-left: 3px solid #6366f1;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+  }
+  .note-row-keyterm .key-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #6366f1;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* STEP rows */
+  .note-row-step {
+    background: transparent;
+    position: relative;
+  }
+  .step-num-bubble {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  }
+
+  /* WARNING rows (Do NOT...) */
+  .note-row-warn {
+    background: linear-gradient(90deg, rgba(245,158,11,0.08) 0%, rgba(245,158,11,0.03) 100%);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+  }
+
+  /* EXAMPLE rows */
+  .note-row-example {
+    background: linear-gradient(90deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%);
+    border-left: 3px solid #10b981;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+  }
+
+  /* TIP rows */
+  .note-row-tip {
+    background: linear-gradient(90deg, rgba(14,165,233,0.08) 0%, rgba(14,165,233,0.02) 100%);
+    border-left: 3px solid #0ea5e9;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+  }
+
+  /* REGULAR rows */
+  .note-row-regular {
+    border-left: 2px solid rgba(15,23,42,0.08);
+    margin: 2px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .note-row-regular:hover { border-left-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.02); border-radius: 0 8px 8px 0; }
+
+  /* Step connector line */
+  .steps-container { position: relative; }
+  .steps-container::before {
+    content: '';
+    position: absolute;
+    left: 13px; top: 28px; bottom: 14px;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(99,102,241,0.25), transparent);
+    border-radius: 2px;
+  }
+
+  /* Topic header collapse button */
+  .topic-header-btn { cursor: pointer; user-select: none; }
+  .topic-header-btn:hover { filter: brightness(0.97); }
+
+  @keyframes noteSlideIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  .note-body-open { animation: noteSlideIn 0.22s cubic-bezier(0.22,1,0.36,1); }
+
+  /* Formula chips */
+  .formula-chip {
+    display: inline-block;
+    background: #1e1b4b;
+    color: #a5b4fc;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin: 0 2px;
+  }
+
+  /* Worksheet answer toggle */
+  .ws-answer-reveal { animation: noteSlideIn 0.18s ease; }
 `;
 
 function InjectStyles() {
@@ -41,7 +169,411 @@ function InjectStyles() {
   return null;
 }
 
-// â”€â”€ DIAGRAMS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── NOTE RENDERING ENGINE ─────────────────────────────────────────────────────
+
+const GRAD_COLORS = {
+  "from-violet-500 to-purple-600": { h:"#7c3aed", m:"#a855f7", l:"#f5f3ff", ll:"#ede9fe" },
+  "from-blue-500 to-cyan-600":     { h:"#2563eb", m:"#3b82f6", l:"#eff6ff", ll:"#dbeafe" },
+  "from-amber-500 to-orange-600":  { h:"#d97706", m:"#f59e0b", l:"#fffbeb", ll:"#fef3c7" },
+  "from-emerald-500 to-teal-600":  { h:"#059669", m:"#10b981", l:"#f0fdf4", ll:"#d1fae5" },
+  "from-rose-500 to-pink-600":     { h:"#e11d48", m:"#f43f5e", l:"#fff1f2", ll:"#ffe4e6" },
+  "from-teal-500 to-cyan-600":     { h:"#0d9488", m:"#14b8a6", l:"#f0fdfa", ll:"#ccfbf1" },
+  "from-indigo-500 to-purple-600": { h:"#4f46e5", m:"#6366f1", l:"#eef2ff", ll:"#e0e7ff" },
+  "from-cyan-500 to-blue-600":     { h:"#0891b2", m:"#06b6d4", l:"#ecfeff", ll:"#cffafe" },
+};
+
+function getCol(gradient) {
+  return GRAD_COLORS[gradient] || { h:"#6366f1", m:"#818cf8", l:"#eef2ff", ll:"#e0e7ff" };
+}
+
+function classifyPoint(pt) {
+  if (/^(Do NOT|Do not|NEVER|Warning:|CAUTION:|NOT:|Avoid)/i.test(pt)) return "warn";
+  if (/^(Tip:|TIP:|Note:|NOTE:|Remember:|REMEMBER:|Hint:|HINT:|Pro tip)/i.test(pt)) return "tip";
+  if (/^(e\.g\.|Example:|EXAMPLE:|For example)/i.test(pt)) return "example";
+  if (/^\d+\./.test(pt)) return "step";
+  if (/^([A-Z][A-Z\s/]{2,}):/.test(pt)) return "keyterm";
+  return "regular";
+}
+
+function extractKeyTerm(pt) {
+  const m = pt.match(/^([A-Z][A-Z\s/0-9]{2,}):\s*(.*)/s);
+  return m ? { key: m[1], rest: m[2] } : null;
+}
+
+// ── Math notation renderer ──────────────────────────────────────────────────
+// Converts text like x^2, sqrt(x), pi, <=, >= into proper symbols
+
+const SUP_MAP = {"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","n":"ⁿ","x":"ˣ","a":"ᵃ","b":"ᵇ","m":"ᵐ","+":"⁺","-":"⁻","(":"⁽",")":"⁾"};
+
+function toSup(s) {
+  // Try unicode superscript chars first, fall back to <sup>
+  const mapped = s.split("").map(c => SUP_MAP[c] || null);
+  if (mapped.every(Boolean)) return mapped.join("");
+  return null; // will use <sup> tag
+}
+
+function mathStr(text) {
+  if (typeof text !== "string") return text;
+
+  // Replace symbol words first (order matters)
+  let t = text
+    .replace(/\bsqrt\b/gi, "√")
+    .replace(/\bpi\b/g, "π")
+    .replace(/\btheta\b/gi, "θ")
+    .replace(/\balpha\b/gi, "α")
+    .replace(/\bbeta\b/gi, "β")
+    .replace(/\binfinity\b/gi, "∞")
+    .replace(/\btimes\b/g, "×")
+    .replace(/\bdivided by\b/gi, "÷")
+    .replace(/<=>/g, "⟺")
+    .replace(/<=/g, "≤")
+    .replace(/>=/g, "≥")
+    .replace(/!=/g, "≠")
+    .replace(/\.\.\./g, "…")
+    .replace(/\bapprox\b/gi, "≈")
+    .replace(/±/g, "±")
+    .replace(/\+-/g, "±");
+
+  return t;
+}
+
+function renderMath(text) {
+  if (typeof text !== "string") return text;
+
+  // First apply symbol replacements
+  let t = mathStr(text);
+
+  // Now parse for ^, √(...), fractions into React elements
+  // We'll build a token array by scanning character by character
+  const tokens = [];
+  let buf = "";
+  let i = 0;
+
+  while (i < t.length) {
+    // ── superscript: something^(expr) or something^char ──
+    if (t[i] === "^") {
+      if (buf) { tokens.push(buf); buf = ""; }
+      i++; // skip ^
+      let exp = "";
+      if (t[i] === "(") {
+        // collect until matching )
+        let depth = 1; i++;
+        while (i < t.length && depth > 0) {
+          if (t[i] === "(") depth++;
+          else if (t[i] === ")") { depth--; if (depth === 0) { i++; break; } }
+          if (depth > 0) exp += t[i];
+          i++;
+        }
+      } else {
+        // collect digits, letters, sign until non-alphanumeric
+        while (i < t.length && /[\w\-+]/.test(t[i])) { exp += t[i]; i++; }
+      }
+      const uni = toSup(exp);
+      if (uni) {
+        tokens.push(<span key={tokens.length} style={{ fontSize:"0.78em", verticalAlign:"super", lineHeight:0, fontWeight:700 }}>{uni}</span>);
+      } else {
+        tokens.push(<sup key={tokens.length} style={{ fontSize:"0.72em", fontWeight:700, lineHeight:0 }}>{exp}</sup>);
+      }
+      continue;
+    }
+
+    // ── square root: √(...) or √word ──
+    if (t[i] === "√") {
+      if (buf) { tokens.push(buf); buf = ""; }
+      i++; // skip √
+      let inner = "";
+      if (t[i] === "(") {
+        let depth = 1; i++;
+        while (i < t.length && depth > 0) {
+          if (t[i] === "(") depth++;
+          else if (t[i] === ")") { depth--; if (depth === 0) { i++; break; } }
+          if (depth > 0) inner += t[i];
+          i++;
+        }
+      } else {
+        while (i < t.length && /[\w^.]/.test(t[i])) { inner += t[i]; i++; }
+      }
+      // render as √‾inner‾ with overline
+      tokens.push(
+        <span key={tokens.length} style={{ display:"inline-flex", alignItems:"center", gap:"1px" }}>
+          <span style={{ fontSize:"1.05em", lineHeight:1 }}>√</span>
+          <span style={{ borderTop:"1.5px solid currentColor", paddingTop:"1px", paddingLeft:"1px", paddingRight:"1px", lineHeight:1.2 }}>
+            {renderMath(inner)}
+          </span>
+        </span>
+      );
+      continue;
+    }
+
+    buf += t[i];
+    i++;
+  }
+  if (buf) tokens.push(buf);
+
+  return tokens.length === 1 && typeof tokens[0] === "string" ? tokens[0] : tokens;
+}
+
+// Wrap math tokens in styled span for formula-like content
+function hilite(text) {
+  if (typeof text !== "string") return text;
+
+  // Split on formula-like chunks: things with ^, √, π, ×, ÷, ≤, ≥, ≠, ≈
+  // Strategy: tokenise by detecting "math runs" vs plain prose
+  const mathRx = /([a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*(?:\^[\w()\-+/*]+|√\([^)]*\)|√\w+)[a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*|[a-zA-Z]\s*=\s*[a-zA-Z0-9^√π()+\-*/\s]+(?=[,.\s]|$)|\d+\/\d+)/g;
+
+  // Just run renderMath on the full string — it handles everything inline
+  const result = renderMath(mathStr(text));
+
+  // If it came back as a plain string with no math, return as-is
+  if (typeof result === "string") return result;
+
+  // Wrap math elements in a subtle highlight
+  if (Array.isArray(result)) {
+    return result.map((tok, i) => {
+      if (typeof tok === "string") return tok;
+      // It's a math element (sup, overline sqrt, etc.) — wrap in code style
+      return (
+        <span key={i} style={{ background:"#1e1b4b", color:"#a5b4fc", fontFamily:"'JetBrains Mono',monospace", fontSize:"0.88em", padding:"0px 5px", borderRadius:"5px", fontWeight:600, display:"inline-flex", alignItems:"center", verticalAlign:"middle", lineHeight:1.5 }}>
+          {tok}
+        </span>
+      );
+    });
+  }
+  return result;
+}
+
+// Simpler version for answer text (no chip wrapping, just clean symbols)
+function mathRender(text) {
+  if (typeof text !== "string") return text;
+  return renderMath(mathStr(text));
+}
+
+// ── individual note type renderers ──
+
+function NoteKeyTerm({ parsed, col, idx }) {
+  return (
+    <div style={{ background: col.ll, borderRadius:"14px", padding:"14px 16px", marginBottom:"10px", border:`1.5px solid ${col.h}28` }}>
+      <div style={{ display:"flex", alignItems:"flex-start", gap:"12px" }}>
+        <div style={{ flexShrink:0 }}>
+          <div style={{ background:`linear-gradient(135deg,${col.h},${col.m})`, color:"white", fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:"9px", padding:"3px 10px", borderRadius:"99px", letterSpacing:"0.1em", whiteSpace:"nowrap", marginBottom:"4px" }}>KEY TERM</div>
+          <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:900, fontSize:"15px", color:col.h, lineHeight:1.1 }}>{parsed.key.charAt(0)+parsed.key.slice(1).toLowerCase()}</div>
+        </div>
+        <div style={{ flex:1, borderLeft:`2px solid ${col.h}30`, paddingLeft:"12px" }}>
+          <p style={{ fontSize:"13.5px", color:"#1e293b", lineHeight:1.65, margin:0 }}>{hilite(parsed.rest)}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NoteStep({ num, body, col, total, gradient }) {
+  const isLast = num === String(total);
+  return (
+    <div style={{ display:"flex", alignItems:"flex-start", gap:"14px", marginBottom: isLast ? "0" : "6px", position:"relative" }}>
+      {/* connector line */}
+      {!isLast && <div style={{ position:"absolute", left:"18px", top:"36px", bottom:"-6px", width:"2px", background:`linear-gradient(to bottom, ${col.h}40, transparent)`, zIndex:0 }}/>}
+      <div style={{ flexShrink:0, width:"36px", height:"36px", borderRadius:"50%", background:`linear-gradient(135deg,${col.h},${col.m})`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Syne',sans-serif", fontWeight:900, fontSize:"14px", color:"white", boxShadow:`0 4px 12px ${col.h}40`, zIndex:1, position:"relative" }}>{num}</div>
+      <div style={{ flex:1, background:"white", borderRadius:"12px", padding:"10px 14px", border:`1px solid ${col.h}18`, boxShadow:"0 1px 6px rgba(0,0,0,0.04)" }}>
+        <p style={{ fontSize:"13.5px", color:"#1e293b", lineHeight:1.6, margin:0 }}>{hilite(body)}</p>
+      </div>
+    </div>
+  );
+}
+
+function NoteWarn({ text }) {
+  const body = text.replace(/^(Do NOT|Do not|NEVER|Warning:|CAUTION:|NOT:|Avoid[:]?)\s*/i, "");
+  return (
+    <div style={{ background:"#fff7ed", borderRadius:"14px", padding:"12px 16px", marginBottom:"10px", border:"1.5px solid #fed7aa", display:"flex", alignItems:"flex-start", gap:"10px" }}>
+      <div style={{ flexShrink:0, width:"32px", height:"32px", borderRadius:"10px", background:"#f97316", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"16px" }}>⚠️</div>
+      <div style={{ flex:1 }}>
+        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:"10px", color:"#c2410c", letterSpacing:"0.1em", marginBottom:"3px" }}>WATCH OUT</div>
+        <p style={{ fontSize:"13.5px", color:"#7c2d12", lineHeight:1.6, margin:0, fontWeight:500 }}>{hilite(text)}</p>
+      </div>
+    </div>
+  );
+}
+
+function NoteTip({ text }) {
+  const labelMatch = text.match(/^([A-Za-z\s]+):/);
+  const label = labelMatch ? labelMatch[1].toUpperCase() : "TIP";
+  const body = text.replace(/^[A-Za-z\s]+:\s*/i, "");
+  return (
+    <div style={{ background:"#f0f9ff", borderRadius:"14px", padding:"12px 16px", marginBottom:"10px", border:"1.5px solid #bae6fd", display:"flex", alignItems:"flex-start", gap:"10px" }}>
+      <div style={{ flexShrink:0, width:"32px", height:"32px", borderRadius:"10px", background:"#0ea5e9", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"16px" }}>💡</div>
+      <div style={{ flex:1 }}>
+        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:"10px", color:"#0369a1", letterSpacing:"0.1em", marginBottom:"3px" }}>{label}</div>
+        <p style={{ fontSize:"13.5px", color:"#0c4a6e", lineHeight:1.6, margin:0 }}>{hilite(body)}</p>
+      </div>
+    </div>
+  );
+}
+
+function NoteExample({ text }) {
+  const body = text.replace(/^(e\.g\.|Example:|EXAMPLE:|For example[,:]?)\s*/i, "");
+  return (
+    <div style={{ background:"#f0fdf4", borderRadius:"14px", padding:"12px 16px", marginBottom:"10px", border:"1.5px solid #bbf7d0", display:"flex", alignItems:"flex-start", gap:"10px" }}>
+      <div style={{ flexShrink:0, width:"32px", height:"32px", borderRadius:"10px", background:"#16a34a", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"16px" }}>✏️</div>
+      <div style={{ flex:1 }}>
+        <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:"10px", color:"#15803d", letterSpacing:"0.1em", marginBottom:"4px" }}>EXAMPLE</div>
+        <p style={{ fontSize:"13px", color:"#14532d", lineHeight:1.7, margin:0, fontFamily:"'JetBrains Mono',monospace" }}>{mathRender(body)}</p>
+      </div>
+    </div>
+  );
+}
+
+function NoteRegular({ text, col, isWS, idx, answers }) {
+  const [open, setOpen] = useState(false);
+  const answer = isWS && answers && answers[idx];
+  return (
+    <div style={{ marginBottom:"10px" }}>
+      {/* Question row */}
+      <div style={{ background:"white", borderRadius: open ? "12px 12px 0 0" : "12px", padding:"11px 14px", border:`1px solid ${col.h}18`, display:"flex", alignItems:"flex-start", gap:"10px", boxShadow:"0 1px 4px rgba(0,0,0,0.035)", borderBottom: open ? `1px solid ${col.h}12` : `1px solid ${col.h}18` }}>
+        <div style={{ width:"7px", height:"7px", borderRadius:"50%", background:`linear-gradient(135deg,${col.h},${col.m})`, flexShrink:0, marginTop:"6px", opacity:0.7 }}/>
+        <p style={{ fontSize:"13.5px", color:"#334155", lineHeight:1.65, margin:0, flex:1, fontWeight:500 }}>{hilite(text)}</p>
+        {answer && (
+          <button onClick={() => setOpen(o => !o)} style={{ flexShrink:0, background: open ? col.h : col.ll, color: open ? "white" : col.h, border:"none", borderRadius:"8px", padding:"4px 10px", fontSize:"11px", fontFamily:"'Syne',sans-serif", fontWeight:800, cursor:"pointer", display:"flex", alignItems:"center", gap:"5px", marginTop:"1px", whiteSpace:"nowrap", transition:"all 0.15s" }}>
+            {open ? "Hide" : "Answer"} <span style={{ fontSize:"10px", transition:"transform 0.2s", transform: open ? "rotate(180deg)" : "rotate(0deg)", display:"inline-block" }}>▾</span>
+          </button>
+        )}
+      </div>
+      {/* Dropdown answer */}
+      {answer && open && (
+        <div style={{ background:col.ll, borderRadius:"0 0 12px 12px", padding:"11px 14px 13px 14px", borderLeft:`3px solid ${col.h}`, borderRight:`1px solid ${col.h}18`, borderBottom:`1px solid ${col.h}18`, display:"flex", alignItems:"flex-start", gap:"10px", animation:"noteSlideIn 0.18s cubic-bezier(0.22,1,0.36,1)" }}>
+          <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:"9px", color:"white", background:col.h, padding:"2px 7px", borderRadius:"99px", letterSpacing:"0.08em", whiteSpace:"nowrap", flexShrink:0, marginTop:"2px" }}>ANSWER</span>
+          <p style={{ fontSize:"12.5px", color:col.h, fontFamily:"'JetBrains Mono',monospace", margin:0, lineHeight:1.7, fontWeight:500, flex:1 }}>{mathRender(answer)}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
+function NoteTopicCard({ note, noteIdx, gradient, isWS, diagram }) {
+  const [open, setOpen] = useState(true);
+  const col = getCol(gradient);
+
+  const types = note.points.map(classifyPoint);
+  const stepCount = types.filter(t => t === "step").length;
+  const termCount = types.filter(t => t === "keyterm").length;
+  const warnCount = types.filter(t => t === "warn").length;
+  const totalSteps = stepCount;
+
+  // track running step index for connector lines
+  let stepsSeen = 0;
+
+  return (
+    <div style={{ background:"white", borderRadius:"20px", marginBottom:"16px", overflow:"hidden", boxShadow:"0 4px 20px rgba(15,23,42,0.07), 0 1px 4px rgba(15,23,42,0.04)" }}>
+      {/* ── Header ── */}
+      <button onClick={() => setOpen(o => !o)} style={{ width:"100%", textAlign:"left", cursor:"pointer", background:"none", border:"none", padding:0 }}>
+        <div style={{ background:`linear-gradient(135deg, ${col.ll}, ${col.l} 60%, white)`, padding:"16px 20px", borderBottom: open ? `1px solid ${col.h}18` : "none", display:"flex", alignItems:"center", gap:"12px" }}>
+          <span style={{ fontSize:"26px", lineHeight:1, flexShrink:0 }}>{note.emoji}</span>
+          <div style={{ flex:1 }}>
+            <div style={{ fontFamily:"'Syne',sans-serif", fontWeight:900, fontSize:"15px", color:col.h, lineHeight:1.2, marginBottom:"5px" }}>{note.subtitle}</div>
+            <div style={{ display:"flex", gap:"6px", flexWrap:"wrap" }}>
+              {stepCount > 0 && <span style={{ fontSize:"10px", background:`${col.h}18`, color:col.h, padding:"2px 8px", borderRadius:"99px", fontWeight:700, fontFamily:"'Syne',sans-serif" }}>📋 {stepCount} steps</span>}
+              {termCount > 0 && <span style={{ fontSize:"10px", background:"rgba(99,102,241,0.1)", color:"#4338ca", padding:"2px 8px", borderRadius:"99px", fontWeight:700, fontFamily:"'Syne',sans-serif" }}>📖 {termCount} vocab</span>}
+              {warnCount > 0 && <span style={{ fontSize:"10px", background:"rgba(249,115,22,0.1)", color:"#c2410c", padding:"2px 8px", borderRadius:"99px", fontWeight:700, fontFamily:"'Syne',sans-serif" }}>⚠️ {warnCount} mistake alert</span>}
+            </div>
+          </div>
+          <div style={{ color:col.h, fontSize:"22px", lineHeight:1, transition:"transform 0.25s", transform: open ? "rotate(180deg)" : "rotate(0deg)", flexShrink:0 }}>⌄</div>
+        </div>
+      </button>
+
+      {/* ── Body ── */}
+      {open && (
+        <div style={{ padding:"16px", background:`linear-gradient(180deg, ${col.l}60, white 80px)`, animation:"noteSlideIn 0.22s cubic-bezier(0.22,1,0.36,1)" }}>
+
+          {/* Render all points grouped smartly */}
+          {(() => {
+            const rendered = [];
+            const steps = [];
+
+            note.points.forEach((pt, pi) => {
+              const type = classifyPoint(pt);
+
+              // Flush any accumulated steps when we hit a non-step
+              const flushSteps = () => {
+                if (steps.length > 0) {
+                  rendered.push(
+                    <div key={`steps-${pi}`} style={{ marginBottom:"12px", padding:"4px 0" }}>
+                      <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"10px" }}>
+                        <div style={{ height:"1.5px", flex:1, background:`linear-gradient(to right, ${col.h}30, transparent)` }}/>
+                        <span style={{ fontSize:"10px", color:col.m, fontFamily:"'Syne',sans-serif", fontWeight:700, letterSpacing:"0.1em" }}>STEPS</span>
+                        <div style={{ height:"1.5px", flex:1, background:`linear-gradient(to left, ${col.h}30, transparent)` }}/>
+                      </div>
+                      <div style={{ position:"relative" }}>
+                        {steps.map((s, si) => (
+                          <NoteStep key={si} num={s.num} body={s.body} col={col} total={steps.length} gradient={gradient} />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                  steps.length = 0;
+                }
+              };
+
+              if (type === "step" && !isWS) {
+                const num = pt.match(/^(\d+)/)?.[1];
+                const body = pt.replace(/^\d+\.\s*/, "");
+                steps.push({ num, body, pi });
+              } else {
+                flushSteps();
+                if (type === "keyterm") {
+                  const parsed = extractKeyTerm(pt);
+                  if (parsed) {
+                    rendered.push(<NoteKeyTerm key={pi} parsed={parsed} col={col} idx={pi} />);
+                  } else {
+                    rendered.push(<NoteRegular key={pi} text={pt} col={col} isWS={isWS} idx={pi} answers={note.answers} />);
+                  }
+                } else if (type === "warn") {
+                  rendered.push(<NoteWarn key={pi} text={pt} />);
+                } else if (type === "tip") {
+                  rendered.push(<NoteTip key={pi} text={pt} />);
+                } else if (type === "example") {
+                  rendered.push(<NoteExample key={pi} text={pt} />);
+                } else {
+                  rendered.push(<NoteRegular key={pi} text={pt} col={col} isWS={isWS} idx={pi} answers={note.answers} />);
+                }
+              }
+            });
+
+            // flush any remaining steps
+            if (steps.length > 0) {
+              rendered.push(
+                <div key="steps-end" style={{ marginBottom:"12px", padding:"4px 0" }}>
+                  <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"10px" }}>
+                    <div style={{ height:"1.5px", flex:1, background:`linear-gradient(to right, ${col.h}30, transparent)` }}/>
+                    <span style={{ fontSize:"10px", color:col.m, fontFamily:"'Syne',sans-serif", fontWeight:700, letterSpacing:"0.1em" }}>STEPS</span>
+                    <div style={{ height:"1.5px", flex:1, background:`linear-gradient(to left, ${col.h}30, transparent)` }}/>
+                  </div>
+                  <div style={{ position:"relative" }}>
+                    {steps.map((s, si) => (
+                      <NoteStep key={si} num={s.num} body={s.body} col={col} total={steps.length} gradient={gradient} />
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            return rendered;
+          })()}
+
+          {/* Diagram */}
+          {diagram && (
+            <div style={{ marginTop:"16px", paddingTop:"16px", borderTop:`2px dashed ${col.h}20` }}>
+              <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
+                <span style={{ width:"4px", height:"16px", borderRadius:"2px", background:`linear-gradient(to bottom,${col.h},${col.m})`, display:"inline-block" }}/>
+                <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:"11px", color:col.h, letterSpacing:"0.08em" }}>INTERACTIVE DIAGRAM</span>
+              </div>
+              {diagram}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function DiagramCard({ title, children, color = "slate" }) {
   const borders = { purple:"border-purple-200",blue:"border-blue-200",teal:"border-teal-200",amber:"border-amber-200",green:"border-green-200",slate:"border-slate-200",indigo:"border-indigo-200",rose:"border-rose-200" };
@@ -284,11 +816,10 @@ function SlopeExplorer() {
   const d=pts.length>1?"M "+pts.join(" L "):"";
   const yInt=cy-b*sc;
   const xInt=m!==0?cx+(-b/m)*sc:null;
-  const slopeDesc = m>0?"Rising":"m<0"?m<0?"Falling":"Horizontal":"Horizontal";
   return (
     <div className="bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5">
       <div className="flex items-center gap-2 mb-3 flex-wrap">
-        <span className="text-2xl">ðŸ“ˆ</span>
+        <span className="text-2xl">📈</span>
         <h3 className="text-lg font-bold text-indigo-800">Slope-Intercept Explorer</h3>
         <span className="ml-auto text-sm font-mono bg-indigo-50 px-3 py-1 rounded-full text-indigo-700">
           y = {m}x {b>=0?`+ ${b}`:`- ${Math.abs(b)}`}
@@ -336,7 +867,7 @@ function LinearSystemsVisualizer() {
   const intPt=intersection?toSvg(intersection.x,intersection.y):null;
   return (
     <div className="bg-white rounded-2xl border-2 border-blue-200 shadow-lg p-5">
-      <div className="flex items-center gap-2 mb-3"><span className="text-2xl">{"\u{1F4CA}"}</span><h3 className="text-lg font-bold text-blue-800">Linear Systems Explorer</h3></div>
+      <div className="flex items-center gap-2 mb-3"><span className="text-2xl">📊</span><h3 className="text-lg font-bold text-blue-800">Linear Systems Explorer</h3></div>
       <div className="flex gap-3 mb-3 text-sm flex-wrap">
         <div className="flex items-center gap-1.5"><div className="w-4 h-1 rounded bg-blue-500"/><span className="font-mono text-blue-700">y={m1}x{b1>=0?`+${b1}`:b1}</span></div>
         <div className="flex items-center gap-1.5"><div className="w-4 h-1 rounded bg-rose-500"/><span className="font-mono text-rose-700">y={m2}x{b2>=0?`+${b2}`:b2}</span></div>
@@ -384,13 +915,13 @@ function SubstitutionStepper() {
   const brs=["border-gray-300","border-blue-400","border-indigo-400","border-purple-400","border-violet-400","border-green-500"];
   return (
     <div className="bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5">
-      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">{"\u{1F504}"}</span><h3 className="text-lg font-bold text-indigo-800">Substitution: Step by Step</h3></div>
+      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">🔄</span><h3 className="text-lg font-bold text-indigo-800">Substitution: Step by Step</h3></div>
       <div className="flex gap-1.5 mb-4">{steps.map((_,i)=><button key={i} onClick={()=>setStep(i)} className={`flex-1 h-2 rounded-full transition-all ${i<=step?"bg-indigo-500":"bg-gray-200"}`}/>)}</div>
       <div className={`rounded-xl border-2 ${bgs[step]} ${brs[step]} p-4 mb-4`}>
         <p className="text-sm font-bold text-gray-600 mb-2 uppercase tracking-wide">{s.title}</p>
         <pre className="text-base font-mono text-gray-800 whitespace-pre-wrap leading-relaxed">{s.content}</pre>
       </div>
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">{"\u{1F4A1}"}</span><p className="text-sm text-yellow-800">{s.hint}</p></div>
+      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">💡</span><p className="text-sm text-yellow-800">{s.hint}</p></div>
       <div className="flex justify-between">
         <button onClick={()=>setStep(Math.max(0,step-1))} disabled={step===0} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm">Back</button>
         <span className="text-sm text-gray-500 self-center">Step {step+1}/{steps.length}</span>
@@ -413,7 +944,7 @@ function EliminationStepper() {
   const s=steps[step];
   return (
     <div className="bg-white rounded-2xl border-2 border-teal-200 shadow-lg p-5">
-      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">{"\u2795"}</span><h3 className="text-lg font-bold text-teal-800">Elimination: Step by Step</h3></div>
+      <div className="flex items-center gap-2 mb-4"><span className="text-2xl">➕</span><h3 className="text-lg font-bold text-teal-800">Elimination: Step by Step</h3></div>
       <div className="flex gap-1.5 mb-4">{steps.map((_,i)=><button key={i} onClick={()=>setStep(i)} className={`flex-1 h-2 rounded-full transition-all ${i<=step?"bg-teal-500":"bg-gray-200"}`}/>)}</div>
       <div className="bg-teal-50 border-2 border-teal-300 rounded-xl p-4 mb-3">
         <p className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-3">{s.title}</p>
@@ -423,7 +954,7 @@ function EliminationStepper() {
           {s.result&&<><div className="border-t-2 border-teal-400 mt-1 mb-1"/><p className="text-base font-bold text-teal-800 bg-teal-100 rounded-lg px-3 py-1.5">{s.result}</p></>}
         </div>
       </div>
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">{"\u{1F4A1}"}</span><p className="text-sm text-yellow-800">{s.note}</p></div>
+      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2"><span className="text-lg">💡</span><p className="text-sm text-yellow-800">{s.note}</p></div>
       <div className="flex justify-between">
         <button onClick={()=>setStep(Math.max(0,step-1))} disabled={step===0} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm">Back</button>
         <span className="text-sm text-gray-500 self-center">Step {step+1}/{steps.length}</span>
@@ -447,42 +978,6 @@ const NOTE_DIAGRAMS = {
   "measurement-formulas-0": <MeasurementDiagram />,
   "measurement-pythagorean-0": <PythagoreanDiagram />,
 };
-
-function normalizeEmoji(value = "") {
-  if (!value) return value;
-  if (value === "?" || value === "??") return "\u2728";
-  // Recover mojibake where UTF-8 bytes were interpreted as latin-1.
-  if (
-    value.includes("\u00F0") ||
-    value.includes("\u00E2") ||
-    value.includes("\u00C2") ||
-    value.includes("\u00C3")
-  ) {
-    try {
-      return decodeURIComponent(escape(value));
-    } catch {
-      return value;
-    }
-  }
-  return value;
-}
-
-function conceptCardEmoji(note) {
-  const bySubtitle = {
-    "Unit 1: Square Roots and Number Sets": "\u{1F522}",
-    "Unit 2: Exponent Laws": "\u26A1",
-    "Unit 1: Slope and Rate of Change": "\u{1F4C8}",
-    "Unit 2: Forms of Linear Equations": "\u{1F4DD}",
-    "Methods: Graphing, Substitution, Elimination": "\u{1F3AF}",
-    "Pythagorean Theorem and Applications": "\u{1F4D0}",
-    "Perimeter, Area, and Volume": "\u{1F4E6}",
-  };
-  const normalized = normalizeEmoji(note?.emoji || "");
-  if (normalized && normalized !== "?" && normalized !== "??") return normalized;
-  return bySubtitle[note?.subtitle] || "\u{2728}";
-}
-
-// â”€â”€ DATA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const studyLibrary = {
   flashcards: {
@@ -542,14 +1037,14 @@ const studyLibrary = {
     icon:Target,color:"rose",gradient:"from-rose-500 to-pink-600",
     sections:[
       {id:"number-review",title:"Number Sense Test Review",notes:[
-        {subtitle:"Unit 1: Square Roots and Number Sets",emoji:"ðŸ”¢",points:[
+        {subtitle:"Unit 1: Square Roots and Number Sets",emoji:"🔢",points:[
           "Rational numbers can be written as p/q; irrational numbers cannot",
           "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - memorize these",
           "Estimate square roots: sqrt(20) is between sqrt(16)=4 and sqrt(25)=5, closer to 4.5",
           "Simplify radicals: sqrt(72) = sqrt(36 x 2) = 6*sqrt(2)",
           "BEDMAS order: Brackets, Exponents, Division/Multiplication, Addition/Subtraction",
         ]},
-        {subtitle:"Unit 2: Exponent Laws",emoji:"âš¡",points:[
+        {subtitle:"Unit 2: Exponent Laws",emoji:"⚡",points:[
           "Product: a^m * a^n = a^(m+n). Quotient: a^m / a^n = a^(m-n). Power: (a^m)^n = a^(mn)",
           "Zero exponent: a^0 = 1. Negative: a^(-n) = 1/a^n",
           "Fractional: a^(1/2) = sqrt(a), a^(1/3) = cube root of a, a^(m/n) = nth root of a^m",
@@ -558,13 +1053,13 @@ const studyLibrary = {
         ]},
       ]},
       {id:"linear-review",title:"Linear Relations Test Review",notes:[
-        {subtitle:"Unit 1: Slope and Rate of Change",emoji:"ðŸ“ˆ",points:[
+        {subtitle:"Unit 1: Slope and Rate of Change",emoji:"📈",points:[
           "Slope formula: m = (y2-y1)/(x2-x1). Always reduce to lowest terms.",
           "Positive slope: rises. Negative: falls. Zero: horizontal. Undefined: vertical.",
           "Rate of change equals slope: how much y changes per 1 unit increase in x",
           "From a table: constant first differences means the relation is linear",
         ]},
-        {subtitle:"Unit 2: Forms of Linear Equations",emoji:"ðŸ“",points:[
+        {subtitle:"Unit 2: Forms of Linear Equations",emoji:"📝",points:[
           "Slope-intercept: y = mx + b (m=slope, b=y-intercept) - best for graphing",
           "Standard form: Ax + By = C - best for finding both intercepts",
           "Point-slope: y - y1 = m(x - x1) - use when you know a point and the slope",
@@ -573,7 +1068,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-review",title:"Linear Systems Test Review",notes:[
-        {subtitle:"Methods: Graphing, Substitution, Elimination",emoji:"ðŸŽ¯",points:[
+        {subtitle:"Methods: Graphing, Substitution, Elimination",emoji:"🎯",points:[
           "Graphing: graph both lines, find intersection. Good for understanding, not exact decimals.",
           "Substitution: isolate one variable, substitute. Best when one variable is already isolated.",
           "Elimination: multiply and add/subtract to cancel a variable. Best when coefficients match easily.",
@@ -582,14 +1077,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"measurement-review",title:"Measurement and Geometry Review",notes:[
-        {subtitle:"Pythagorean Theorem and Applications",emoji:"ðŸ“",points:[
+        {subtitle:"Pythagorean Theorem and Applications",emoji:"📐",points:[
           "a^2 + b^2 = c^2 where c is the hypotenuse (opposite the 90 degree angle)",
           "Find hypotenuse: c = sqrt(a^2 + b^2). Find a leg: a = sqrt(c^2 - b^2)",
           "Pythagorean triples (no calculator): 3-4-5, 5-12-13, 8-15-17",
           "Apply in 2D and 3D: find diagonals, heights, distances",
           "Check if right triangle: if a^2+b^2=c^2 then it is a right triangle",
         ]},
-        {subtitle:"Perimeter, Area, and Volume",emoji:"ðŸ“¦",points:[
+        {subtitle:"Perimeter, Area, and Volume",emoji:"📦",points:[
           "Composite figures: break into simpler shapes, add or subtract areas",
           "Surface area: sum of all face areas - always in square units",
           "Volume of prism: V = base area x height",
@@ -642,76 +1137,298 @@ const studyLibrary = {
     icon:ClipboardList,color:"teal",gradient:"from-teal-500 to-cyan-600",
     sections:[
       {id:"number-worksheets",title:"Number Sense Worksheets",notes:[
-        {subtitle:"Worksheet 1: Exponent Laws",emoji:"ðŸ“",points:[
+        {subtitle:"Worksheet 1: Exponent Laws — Level 🟢 Easy",emoji:"📝",points:[
           "1. Simplify: x^5 times x^3",
           "2. Simplify: (y^4)^3",
           "3. Simplify: 12a^6 divided by 4a^2",
           "4. Evaluate: (2^3 times 2^2) divided by 2^4",
           "5. Write 0.0000065 in scientific notation.",
+          "6. Evaluate: 5^0 + 3^0",
+          "7. Simplify: (3x^2)(4x^3)",
+          "8. Write 47,000,000 in scientific notation.",
         ],answers:[
           "x^5 * x^3 = x^(5+3) = x^8",
-          "(y^4)^3 = y^(4x3) = y^12",
+          "(y^4)^3 = y^(4×3) = y^12",
           "12a^6 / 4a^2 = 3a^(6-2) = 3a^4",
-          "(2^3*2^2)/2^4 = 2^5/2^4 = 2^1 = 2",
-          "6.5 x 10^(-6)",
+          "(2^3 * 2^2) / 2^4 = 2^5 / 2^4 = 2^1 = 2",
+          "6.5 × 10^(-6)",
+          "5^0 + 3^0 = 1 + 1 = 2. Any base to the power 0 is 1.",
+          "(3x^2)(4x^3) = 12x^(2+3) = 12x^5",
+          "4.7 × 10^7",
         ]},
-        {subtitle:"Worksheet 2: Square Roots and Radicals",emoji:"ðŸ“",points:[
-          "1. Simplify: sqrt(72)",
-          "2. Estimate sqrt(50) to one decimal place without a calculator.",
-          "3. Is sqrt(144) rational or irrational? Explain.",
-          "4. Order from least to greatest: sqrt(7), 2.5, 8/3",
-          "5. Simplify: sqrt(25*x^4)",
+        {subtitle:"Worksheet 2: Exponent Laws — Level 🟡 Medium",emoji:"📝",points:[
+          "1. Simplify: (2x^3 y^2)(5x y^4)",
+          "2. Simplify: (a^2 b^3)^4",
+          "3. Simplify: 18m^5 n^3 divided by 6m^2 n",
+          "4. Evaluate: (3^(-2))(3^4)",
+          "5. Simplify: (2a)^3 times a^(-2)",
+          "6. Express: (4 × 10^3)(2 × 10^5) in scientific notation.",
+          "7. Simplify: x^(-3) divided by x^(-7)",
+          "8. Evaluate: (16)^(1/2) + (27)^(1/3)",
         ],answers:[
-          "sqrt(72) = sqrt(36 x 2) = 6*sqrt(2)",
-          "sqrt(49)=7 and sqrt(64)=8, so sqrt(50) is approximately 7.1",
-          "Rational. sqrt(144) = 12, which is an integer.",
-          "8/3 is approx 2.67, sqrt(7) is approx 2.65, 2.5. Order: 2.5 < sqrt(7) < 8/3",
-          "sqrt(25*x^4) = 5x^2",
+          "(2 × 5)(x^(3+1))(y^(2+4)) = 10x^4 y^6",
+          "a^(2×4) b^(3×4) = a^8 b^12",
+          "(18/6) m^(5-2) n^(3-1) = 3m^3 n^2",
+          "3^(-2+4) = 3^2 = 9",
+          "(2^3)(a^3)(a^(-2)) = 8a^(3-2) = 8a",
+          "(4 × 2)(10^(3+5)) = 8 × 10^8",
+          "x^(-3-(-7)) = x^(-3+7) = x^4",
+          "sqrt(16) + cube root of 27 = 4 + 3 = 7",
+        ]},
+        {subtitle:"Worksheet 3: Square Roots & Number Sets — Level 🔴 Hard",emoji:"📝",points:[
+          "1. Simplify completely: sqrt(180)",
+          "2. Simplify: sqrt(50) + sqrt(32)",
+          "3. Evaluate: 27^(2/3)",
+          "4. Simplify: (sqrt(3))(sqrt(12))",
+          "5. Order from least to greatest: sqrt(11), 10/3, 3.3, sqrt(10)",
+          "6. Is 0.121212... rational or irrational? Explain fully.",
+          "7. Evaluate: (8/27)^(2/3)",
+          "8. Simplify: sqrt(75 x^6 y^4)",
+        ],answers:[
+          "sqrt(180) = sqrt(36 × 5) = 6*sqrt(5)",
+          "sqrt(50) = 5*sqrt(2), sqrt(32) = 4*sqrt(2), so total = 9*sqrt(2)",
+          "27^(2/3) = (cube root of 27)^2 = 3^2 = 9",
+          "(sqrt(3))(sqrt(12)) = sqrt(3 × 12) = sqrt(36) = 6",
+          "sqrt(10) ≈ 3.162, sqrt(11) ≈ 3.317, 10/3 ≈ 3.333, 3.3. Order: sqrt(10) < 3.3 < sqrt(11) < 10/3",
+          "Rational. The decimal repeats (12 repeating), so it can be written as a fraction: 12/99 = 4/33.",
+          "(8/27)^(2/3) = (cube root of 8/27)^2 = (2/3)^2 = 4/9",
+          "sqrt(75 x^6 y^4) = sqrt(25 × 3 × x^6 × y^4) = 5x^3 y^2 * sqrt(3)",
         ]},
       ]},
       {id:"linear-worksheets",title:"Linear Relations Worksheets",notes:[
-        {subtitle:"Worksheet 1: Slope and Equations",emoji:"ðŸ“",points:[
+        {subtitle:"Worksheet 1: Slope & Graphing — Level 🟢 Easy",emoji:"📝",points:[
           "1. Find the slope of the line through (-1, 4) and (3, -2).",
           "2. Write the equation of the line with slope 3 and y-intercept -5.",
           "3. Find the x- and y-intercepts of 3x - 2y = 12.",
-          "4. Write the equation of the line through (2, 7) with slope 1/2.",
-          "5. Are y=4x-1 and y=(1/4)x+3 perpendicular? Explain.",
+          "4. What is the slope of a horizontal line? What is its equation if it passes through (0, 7)?",
+          "5. Plot two points for y = 2x - 1. What is the y-intercept?",
+          "6. Find the slope of the line through (0, 0) and (4, 8).",
+          "7. What is the slope of a vertical line? Why is it undefined?",
+          "8. Write the equation: slope = -2, passes through the y-axis at y = 4.",
         ],answers:[
-          "m = (-2-4)/(3-(-1)) = -6/4 = -3/2",
+          "m = (-2 - 4) / (3 - (-1)) = -6 / 4 = -3/2",
           "y = 3x - 5",
-          "x-int: set y=0 so 3x=12 and x=4, giving (4,0). y-int: set x=0 so -2y=12 and y=-6, giving (0,-6)",
-          "y - 7 = (1/2)(x - 2) which simplifies to y = (1/2)x + 6",
-          "Perpendicular slopes multiply to -1. Slope of first is 4. Negative reciprocal is -1/4. Since 1/4 is not -1/4, these lines are NOT perpendicular.",
+          "x-int: set y=0 → 3x = 12 → x = 4, giving (4, 0). y-int: set x=0 → -2y = 12 → y = -6, giving (0, -6)",
+          "Slope = 0. Equation: y = 7",
+          "When x=0, y=-1 (y-int is -1). When x=1, y=1. Points (0,-1) and (1,1). y-intercept = -1.",
+          "m = (8-0)/(4-0) = 8/4 = 2",
+          "Undefined. Because the run = 0, and you can't divide by zero.",
+          "y = -2x + 4",
+        ]},
+        {subtitle:"Worksheet 2: Forms of Linear Equations — Level 🟡 Medium",emoji:"📝",points:[
+          "1. Write the equation of the line through (2, 7) with slope 1/2.",
+          "2. Are y=4x-1 and y=(1/4)x+3 perpendicular? Explain.",
+          "3. Find the equation of the line through (3, -1) and (6, 5).",
+          "4. Convert 4x - 2y = 10 to slope-intercept form.",
+          "5. Write the equation of the line through (5, 3) parallel to y = -2x + 1.",
+          "6. A phone plan charges $25/month plus $0.05 per text. Write a linear equation. What is the cost for 200 texts?",
+          "7. Find the equation of the perpendicular to y = 3x + 2 through (0, 1).",
+          "8. What are the intercepts of the line 5x + 2y = 20? Use them to sketch the graph.",
+        ],answers:[
+          "y - 7 = (1/2)(x - 2) → y = (1/2)x + 6",
+          "NOT perpendicular. Slope of first is 4. Perpendicular slope would be -1/4. But second slope is 1/4, not -1/4.",
+          "m = (5-(-1))/(6-3) = 6/3 = 2. Then y-(-1) = 2(x-3) → y = 2x - 7.",
+          "-2y = -4x + 10 → y = 2x - 5. Slope = 2, y-intercept = -5.",
+          "Parallel means same slope (-2). y - 3 = -2(x - 5) → y = -2x + 13.",
+          "C = 0.05t + 25. For 200 texts: C = 0.05(200) + 25 = 10 + 25 = $35.",
+          "Perpendicular slope = -1/3. Through (0,1): y = -(1/3)x + 1.",
+          "x-int: set y=0 → 5x = 20 → x = 4, so (4, 0). y-int: set x=0 → 2y = 20 → y = 10, so (0, 10).",
+        ]},
+        {subtitle:"Worksheet 3: Direct & Partial Variation — Level 🔴 Hard",emoji:"📝",points:[
+          "1. A taxi charges $2.50 base fare plus $1.80 per km. Write a partial variation equation and find the cost for 12 km.",
+          "2. Does y = 4x represent direct or partial variation? Find y when x = 7.",
+          "3. The table shows: (0,5), (2,11), (4,17), (6,23). Is this direct or partial variation? Write the equation.",
+          "4. If y varies directly with x and y = 24 when x = 6, find y when x = 10.",
+          "5. A spring stretches 3 cm for every 2 N of force. It has a natural length of 10 cm. Write the equation for total length L in terms of force F.",
+          "6. Calculate the first differences for: x: 1,2,3,4 and y: 3,7,11,15. Is it linear? What is the equation?",
+          "7. The graph of a line passes through (0, -4) and (3, 5). Is this direct or partial variation? Why?",
+          "8. Two variables have a direct variation where k = 6. If x increases by 3, by how much does y increase?",
+        ],answers:[
+          "C = 1.80d + 2.50. For d=12: C = 1.80(12) + 2.50 = 21.60 + 2.50 = $24.10.",
+          "Direct variation (b=0, passes through origin). y = 4(7) = 28.",
+          "First differences: 11-5=6, 17-11=6, 23-17=6 — constant, so linear. y-intercept is 5 (at x=0). Slope = 6/2 = 3. Equation: y = 3x + 5. Partial variation (b ≠ 0).",
+          "Direct variation: y/x = k = 24/6 = 4. So y = 4x. When x=10: y = 40.",
+          "L = 1.5F + 10. (Each N adds 3/2 = 1.5 cm. At F=0, L=10 cm.)",
+          "First differences: 7-3=4, 11-7=4, 15-11=4. Constant → linear. Slope = 4, y-intercept at x=0: y-int = 3 - 4(1) = -1. Equation: y = 4x - 1.",
+          "Partial variation. The y-intercept is -4 (not 0), so the line does NOT pass through the origin.",
+          "y = 6x. When x increases by 3, y increases by 6(3) = 18.",
         ]},
       ]},
       {id:"systems-worksheets",title:"Linear Systems Worksheets",notes:[
-        {subtitle:"Worksheet 1: Solving Systems",emoji:"ðŸ“",points:[
+        {subtitle:"Worksheet 1: Substitution Method — Level 🟢 Easy",emoji:"📝",points:[
           "1. Solve by substitution: y = x - 3 and 2x + y = 9",
-          "2. Solve by elimination: 3x + 2y = 11 and 3x - y = 5",
-          "3. Solve by elimination: 4x + 3y = 10 and 2x - y = 0",
-          "4. Two types of tickets: adult costs $3 more than student. Two adult + three student = $54. Find each price.",
+          "2. Solve by substitution: y = 2x + 1 and y = -x + 7",
+          "3. Solve by substitution: x = 4y and 2x - 3y = 10",
+          "4. Solve by substitution: y = -3x + 5 and y = x - 3",
           "5. Is (3, 2) a solution to: 2x - y = 4 and x + 3y = 9?",
+          "6. Solve by substitution: x + y = 10 and x = 2y + 1",
+          "7. Solve by substitution: y = 5 and 3x + y = 17",
+          "8. Solve by substitution: x - y = 0 and 3x + 2y = 10",
         ],answers:[
-          "Sub y=x-3 into 2x+y=9: 2x+(x-3)=9 so 3x=12 and x=4, y=1. Solution: (4, 1)",
-          "Subtract eq2 from eq1: 3y=6 so y=2. Then 3x+4=11 so x=7/3. Solution: (7/3, 2)",
-          "Multiply eq2 by 3: 6x-3y=0. Add to eq1: 10x=10 so x=1. Then 2-y=0 so y=2. Solution: (1, 2)",
-          "Let a=adult, s=student. a=s+3 and 2a+3s=54. Sub: 2(s+3)+3s=54 so 5s=48 giving s=$9.60, a=$12.60",
-          "eq1: 2(3)-2=4 correct. eq2: 3+3(2)=9 correct. Yes, (3,2) is a solution.",
+          "Sub y=x-3: 2x+(x-3)=9 → 3x=12 → x=4, y=1. Solution: (4, 1)",
+          "Set equal: 2x+1 = -x+7 → 3x=6 → x=2, y=5. Solution: (2, 5)",
+          "Sub x=4y: 2(4y)-3y=10 → 8y-3y=10 → 5y=10 → y=2, x=8. Solution: (8, 2)",
+          "Set equal: -3x+5 = x-3 → -4x=-8 → x=2, y=-1. Solution: (2, -1)",
+          "eq1: 2(3)-2=4 ✓. eq2: 3+3(2)=9 ✓. Yes, (3,2) is a solution.",
+          "Sub x=2y+1: (2y+1)+y=10 → 3y=9 → y=3, x=7. Solution: (7, 3)",
+          "y=5 already given. Sub: 3x+5=17 → 3x=12 → x=4. Solution: (4, 5)",
+          "From eq1: x=y. Sub: 3y+2y=10 → 5y=10 → y=2, x=2. Solution: (2, 2)",
+        ]},
+        {subtitle:"Worksheet 2: Elimination Method — Level 🟡 Medium",emoji:"📝",points:[
+          "1. Solve by elimination: 3x + 2y = 11 and 3x - y = 5",
+          "2. Solve by elimination: 4x + 3y = 10 and 2x - y = 0",
+          "3. Solve by elimination: 5x + 4y = 22 and 3x - 4y = 2",
+          "4. Solve by elimination: 2x + 3y = 12 and 5x - 3y = 9",
+          "5. Solve by elimination: 3x + 2y = 0 and 5x - y = 7",
+          "6. Solve by elimination: 2x + y = 8 and 4x + 2y = 16",
+          "7. Solve by elimination: x + 2y = 7 and 3x - 2y = 5",
+          "8. Solve by elimination: 6x - 5y = 1 and 2x + 3y = 11",
+        ],answers:[
+          "Subtract eq2 from eq1: 3y=6 → y=2. Sub: 3x+4=11 → x=7/3. Solution: (7/3, 2)",
+          "Multiply eq2 by 3: 6x-3y=0. Add to eq1: 10x=10 → x=1. Sub: 2-y=0 → y=2. Solution: (1, 2)",
+          "Add equations: 8x=24 → x=3. Sub: 15+4y=22 → 4y=7 → y=7/4. Solution: (3, 7/4)",
+          "Add equations: 7x=21 → x=3. Sub: 6+3y=12 → 3y=6 → y=2. Solution: (3, 2)",
+          "Multiply eq2 by 2: 10x-2y=14. Add to eq1: 13x=14 → x=14/13. Sub: y=5x-7=70/13-91/13=-21/13. Solution: (14/13, -21/13)",
+          "Eq2 is exactly 2×Eq1. Infinite solutions — same line.",
+          "Add equations: 4x=12 → x=3. Sub: 3+2y=7 → 2y=4 → y=2. Solution: (3, 2)",
+          "Multiply eq2 by 3: 6x+9y=33. Subtract from eq1: -14y=-32 → y=16/7. Sub: 2x=11-3(16/7)=29/7 → x=29/14. Solution: (29/14, 16/7)",
+        ]},
+        {subtitle:"Worksheet 3: Word Problems — Level 🔴 Hard",emoji:"📝",points:[
+          "1. Two numbers add to 48 and one is 3 times the other. Find both numbers.",
+          "2. Adult tickets cost $12, student tickets cost $8. If 150 tickets were sold for $1520, how many of each?",
+          "3. A boat travels 30 km downstream in 2 hours and 18 km upstream in 3 hours. Find the boat speed and current speed.",
+          "4. Mixing a 20% acid solution with a 50% acid solution gives 60 L of 30% solution. How many litres of each?",
+          "5. A store sells pens for $1.50 and notebooks for $3.25. Maria spends $24.50 on 10 items total. How many of each did she buy?",
+          "6. The sum of two angles is 180°. One angle is 24° more than the other. Find both angles.",
+          "7. A plane flies 1200 km with the wind in 3 hours, but takes 4 hours against the wind. Find the plane's speed in still air and the wind speed.",
+          "8. Two cars start 300 km apart and drive toward each other. Car A goes 80 km/h and Car B goes 70 km/h. After how many hours do they meet? How far has each travelled?",
+        ],answers:[
+          "Let x and y be the numbers. x+y=48 and x=3y. Sub: 3y+y=48 → 4y=48 → y=12, x=36. Numbers are 12 and 36.",
+          "Let a=adults, s=students. a+s=150 and 12a+8s=1520. From eq1: a=150-s. Sub: 12(150-s)+8s=1520 → 1800-4s=1520 → s=70, a=80.",
+          "Let b=boat speed, c=current. Downstream: b+c=15. Upstream: b-c=6. Add: 2b=21 → b=10.5 km/h, c=4.5 km/h.",
+          "Let x=litres of 20%, y=litres of 50%. x+y=60 and 0.20x+0.50y=0.30(60)=18. From eq1: x=60-y. 0.20(60-y)+0.50y=18 → 12+0.30y=18 → y=20 L of 50%, x=40 L of 20%.",
+          "Let p=pens, n=notebooks. p+n=10 and 1.50p+3.25n=24.50. From eq1: p=10-n. 1.50(10-n)+3.25n=24.50 → 15+1.75n=24.50 → n=5.43... Not a whole number — recheck. Actually 1.50p+3.25n=24.50, p+n=10 → p=10-n → 15-1.50n+3.25n=24.50 → 1.75n=9.50 → n≈5.4. Hmm — try p=7, n=3: 10.50+9.75=20.25 no. p=3,n=7: 4.50+22.75=27.25 no. p=6,n=4: 9+13=22 no. p=5,n=5: 7.50+16.25=23.75 no. p=4,n=6: 6+19.50=25.50 no. Check: 1.50(7)+3.25(3)=10.50+9.75=20.25. No exact whole-number solution — good challenge to identify this!",
+          "Let angles be x and y. x+y=180 and x=y+24. Sub: (y+24)+y=180 → 2y=156 → y=78°, x=102°.",
+          "Let p=plane speed, w=wind. With wind: p+w=400. Against wind: p-w=300. Add: 2p=700 → p=350 km/h, w=50 km/h.",
+          "Time to meet: 300/(80+70) = 300/150 = 2 hours. Car A travels 80×2=160 km. Car B travels 70×2=140 km. Check: 160+140=300 ✓",
         ]},
       ]},
-      {id:"measurement-worksheets",title:"Measurement Worksheets",notes:[
-        {subtitle:"Worksheet 1: Pythagorean Theorem",emoji:"ðŸ“",points:[
+      {id:"measurement-worksheets",title:"Measurement & Geometry Worksheets",notes:[
+        {subtitle:"Worksheet 1: Pythagorean Theorem — Level 🟢 Easy",emoji:"📝",points:[
           "1. Find the hypotenuse of a right triangle with legs 9 and 12.",
           "2. A 13 m ladder leans against a wall. Base is 5 m from wall. How high does it reach?",
           "3. Is a triangle with sides 11, 14, 17 a right triangle? Show work.",
           "4. Find the diagonal of a rectangle with length 8 cm and width 6 cm.",
           "5. A square has a diagonal of 10 cm. Find the side length.",
+          "6. Find the missing leg: hypotenuse = 26, one leg = 10.",
+          "7. Is (8, 15, 17) a Pythagorean triple? Verify.",
+          "8. A 10 m pole casts a shadow. The distance from tip of shadow to top of pole is 26 m. How long is the shadow?",
         ],answers:[
-          "c = sqrt(9^2+12^2) = sqrt(81+144) = sqrt(225) = 15",
-          "h = sqrt(13^2-5^2) = sqrt(169-25) = sqrt(144) = 12 m",
-          "11^2+14^2 = 121+196 = 317 which does not equal 17^2=289. Not a right triangle.",
-          "d = sqrt(8^2+6^2) = sqrt(64+36) = sqrt(100) = 10 cm",
-          "s^2+s^2=10^2 so 2s^2=100 and s^2=50 giving s = 5*sqrt(2) which is about 7.07 cm",
+          "c = sqrt(9^2 + 12^2) = sqrt(81 + 144) = sqrt(225) = 15",
+          "h = sqrt(13^2 - 5^2) = sqrt(169 - 25) = sqrt(144) = 12 m",
+          "11^2 + 14^2 = 121 + 196 = 317. 17^2 = 289. Since 317 ≠ 289, NOT a right triangle.",
+          "d = sqrt(8^2 + 6^2) = sqrt(100) = 10 cm",
+          "s^2 + s^2 = 10^2 → 2s^2 = 100 → s^2 = 50 → s = 5*sqrt(2) ≈ 7.07 cm",
+          "b = sqrt(26^2 - 10^2) = sqrt(676 - 100) = sqrt(576) = 24",
+          "8^2 + 15^2 = 64 + 225 = 289 = 17^2. Yes, it is a Pythagorean triple!",
+          "shadow^2 + 10^2 = 26^2 → shadow^2 = 676 - 100 = 576 → shadow = 24 m",
+        ]},
+        {subtitle:"Worksheet 2: Area and Perimeter — Level 🟡 Medium",emoji:"📝",points:[
+          "1. Find the area of a triangle with base 14 cm and height 9 cm.",
+          "2. A circle has circumference 31.4 cm. Find its radius and area (use pi ≈ 3.14).",
+          "3. A trapezoid has parallel sides of 8 m and 14 m and a height of 6 m. Find its area.",
+          "4. A composite shape is a rectangle 10 × 6 with a semicircle on one end (diameter = 6). Find the total area.",
+          "5. Find the shaded area: large circle radius 8, small circle radius 3, same centre.",
+          "6. A path 2 m wide runs around a rectangular garden that is 15 m × 10 m. Find the area of the path only.",
+          "7. Find the perimeter of a right triangle with legs 5 m and 12 m.",
+          "8. A sector of a circle has radius 6 cm and angle 90°. Find its area (use pi ≈ 3.14).",
+        ],answers:[
+          "A = (1/2)(14)(9) = 63 cm^2",
+          "C = 2*pi*r → 31.4 = 2(3.14)r → r = 5 cm. A = pi*r^2 = 3.14 × 25 = 78.5 cm^2",
+          "A = (1/2)(8+14)(6) = (1/2)(22)(6) = 66 m^2",
+          "Rectangle: 10×6 = 60. Semicircle: (1/2)pi*r^2 = (1/2)(3.14)(9) ≈ 14.13. Total ≈ 74.13 cm^2",
+          "Large: pi(8^2) = 64pi. Small: pi(3^2) = 9pi. Shaded = 55pi ≈ 172.7 cm^2",
+          "Outer rectangle: (15+4)(10+4) = 19×14 = 266 m^2. Inner garden: 15×10 = 150 m^2. Path = 266 - 150 = 116 m^2.",
+          "Hypotenuse = sqrt(5^2+12^2) = sqrt(169) = 13 m. Perimeter = 5 + 12 + 13 = 30 m",
+          "Area of sector = (90/360)pi*r^2 = (1/4)(3.14)(36) = 28.26 cm^2",
+        ]},
+        {subtitle:"Worksheet 3: Surface Area and Volume — Level 🔴 Hard",emoji:"📝",points:[
+          "1. Find the surface area of a rectangular prism: l=5, w=3, h=4 cm.",
+          "2. Find the volume of a cylinder: radius 7 cm, height 10 cm. (pi ≈ 3.14)",
+          "3. Find the surface area of a cylinder: radius 4 cm, height 9 cm.",
+          "4. A cone has radius 6 cm and slant height 10 cm. Find its surface area.",
+          "5. A sphere has radius 5 cm. Find its volume and surface area.",
+          "6. A rectangular swimming pool is 12 m × 6 m × 2 m deep. How many litres of water does it hold? (1 m^3 = 1000 L)",
+          "7. A cone and a cylinder have the same radius (4 cm) and height (9 cm). What is the ratio of their volumes?",
+          "8. A cylindrical can has diameter 8 cm and height 12 cm. Find the minimum surface area of material needed to make it.",
+        ],answers:[
+          "SA = 2(lw + lh + wh) = 2(15 + 20 + 12) = 2(47) = 94 cm^2",
+          "V = pi*r^2*h = 3.14 × 49 × 10 = 1538.6 cm^3",
+          "SA = 2*pi*r^2 + 2*pi*r*h = 2(3.14)(16) + 2(3.14)(4)(9) = 100.48 + 226.08 = 326.56 cm^2",
+          "SA = pi*r^2 + pi*r*l = pi(36) + pi(6)(10) = 36pi + 60pi = 96pi ≈ 301.44 cm^2",
+          "V = (4/3)pi*r^3 = (4/3)(3.14)(125) = 523.3 cm^3. SA = 4*pi*r^2 = 4(3.14)(25) = 314 cm^2",
+          "V = 12 × 6 × 2 = 144 m^3. Volume in litres = 144 × 1000 = 144,000 L",
+          "V_cylinder = pi*r^2*h = pi(16)(9) = 144pi. V_cone = (1/3)pi*r^2*h = (1/3)(144pi) = 48pi. Ratio = 48pi : 144pi = 1 : 3",
+          "r = 4 cm. SA = 2*pi*r^2 + 2*pi*r*h = 2(3.14)(16) + 2(3.14)(4)(12) = 100.48 + 301.44 = 401.92 cm^2",
+        ]},
+      ]},
+      {id:"algebra-worksheets",title:"Polynomial Algebra Worksheets",notes:[
+        {subtitle:"Worksheet 1: Adding, Subtracting & Multiplying — Level 🟢 Easy",emoji:"📝",points:[
+          "1. Simplify: (3x^2 + 5x - 2) + (x^2 - 3x + 7)",
+          "2. Simplify: (4a^2 - 2a + 1) - (a^2 + 3a - 4)",
+          "3. Expand: 3x(2x^2 - 4x + 1)",
+          "4. Expand using FOIL: (x + 4)(x + 3)",
+          "5. Expand: (x - 5)(x + 5)",
+          "6. Expand: (2x + 1)(x - 3)",
+          "7. Simplify: (5y^3 - 2y + 8) - (3y^3 + y^2 - 4y + 1)",
+          "8. Expand: -2a(3a^2 - a + 4)",
+        ],answers:[
+          "(3+1)x^2 + (5-3)x + (-2+7) = 4x^2 + 2x + 5",
+          "(4-1)a^2 + (-2-3)a + (1+4) = 3a^2 - 5a + 5",
+          "3x·2x^2 + 3x·(-4x) + 3x·1 = 6x^3 - 12x^2 + 3x",
+          "F: x^2, O: 3x, I: 4x, L: 12. Total: x^2 + 7x + 12",
+          "Difference of squares: x^2 - 25",
+          "F: 2x^2, O: -6x, I: x, L: -3. Total: 2x^2 - 5x - 3",
+          "(5-3)y^3 + (0-1)y^2 + (-2+4)y + (8-1) = 2y^3 - y^2 + 2y + 7",
+          "-6a^3 + 2a^2 - 8a",
+        ]},
+        {subtitle:"Worksheet 2: Factoring — Level 🟡 Medium",emoji:"📝",points:[
+          "1. Factor completely: 6x^3 + 9x^2 - 3x",
+          "2. Factor: x^2 + 5x + 6",
+          "3. Factor: x^2 - 7x + 12",
+          "4. Factor: x^2 + 2x - 15",
+          "5. Factor completely: x^2 - 16",
+          "6. Factor: 4x^2 - 25",
+          "7. Factor completely: 2x^2 + 8x - 24 (hint: common factor first!)",
+          "8. Factor: x^2 - 10x + 25",
+        ],answers:[
+          "GCF = 3x. Result: 3x(2x^2 + 3x - 1)",
+          "Need two numbers that multiply to 6 and add to 5: 2 and 3. Answer: (x+2)(x+3)",
+          "Need two numbers that multiply to 12 and add to -7: -3 and -4. Answer: (x-3)(x-4)",
+          "Need two numbers that multiply to -15 and add to 2: 5 and -3. Answer: (x+5)(x-3)",
+          "Difference of squares: (x+4)(x-4)",
+          "Difference of squares: (2x+5)(2x-5)",
+          "GCF = 2 first: 2(x^2 + 4x - 12). Then factor trinomial: need multiply to -12, add to 4: 6 and -2. Answer: 2(x+6)(x-2)",
+          "Perfect square: (x-5)^2. Check: (x-5)^2 = x^2 - 10x + 25 ✓",
+        ]},
+        {subtitle:"Worksheet 3: Mixed Challenge — Level 🔴 Hard",emoji:"📝",points:[
+          "1. Expand and simplify: (2x + 3)^2",
+          "2. Expand and simplify: (x + 2)(x^2 - 3x + 4)",
+          "3. Factor completely: 3x^2 - 12",
+          "4. Factor completely: 5x^3 - 20x",
+          "5. Expand: (3x - 2)(2x + 5) and verify by substituting x = 1.",
+          "6. Factor: 2x^2 - x - 6",
+          "7. Simplify: (x + 3)^2 - (x - 1)^2",
+          "8. A rectangle has area x^2 + 7x + 10. Write expressions for the length and width. What are the dimensions if x = 5?",
+        ],answers:[
+          "(2x)^2 + 2(2x)(3) + 3^2 = 4x^2 + 12x + 9",
+          "x·x^2 + x·(-3x) + x·4 + 2·x^2 + 2·(-3x) + 2·4 = x^3 - 3x^2 + 4x + 2x^2 - 6x + 8 = x^3 - x^2 - 2x + 8",
+          "GCF = 3: 3(x^2 - 4). Then difference of squares: 3(x+2)(x-2)",
+          "GCF = 5x: 5x(x^2 - 4). Then difference of squares: 5x(x+2)(x-2)",
+          "(3x-2)(2x+5) = 6x^2 + 15x - 4x - 10 = 6x^2 + 11x - 10. Check x=1: (3-2)(2+5) = (1)(7) = 7. Formula: 6+11-10 = 7. ✓",
+          "Multiply to 2×(-6)=-12, add to -1: 3 and -4. Split: 2x^2 + 3x - 4x - 6 = x(2x+3) - 2(2x+3) = (x-2)(2x+3)",
+          "Expand each: (x+3)^2 = x^2+6x+9. (x-1)^2 = x^2-2x+1. Difference: (x^2+6x+9)-(x^2-2x+1) = 8x+8 = 8(x+1)",
+          "Factor: x^2+7x+10 = (x+2)(x+5). So length = x+5, width = x+2. If x=5: length = 10, width = 7.",
         ]},
       ]},
     ]
@@ -721,7 +1438,7 @@ const studyLibrary = {
     icon:Calculator,color:"blue",gradient:"from-blue-500 to-cyan-600",
     sections:[
       {id:"number-rational",title:"Rational and Irrational Numbers",notes:[
-        {subtitle:"The Real Number System",emoji:"ðŸ”¢",points:[
+        {subtitle:"The Real Number System",emoji:"🔢",points:[
           "NATURAL numbers: counting numbers - 1, 2, 3, 4, ...",
           "WHOLE numbers: natural numbers plus zero - 0, 1, 2, 3, ...",
           "INTEGERS: positive and negative whole numbers - ..., -2, -1, 0, 1, 2, ...",
@@ -731,7 +1448,7 @@ const studyLibrary = {
           "Examples of irrational: pi, sqrt(2), sqrt(3), e",
           "REAL numbers: all rational AND irrational numbers together",
         ]},
-        {subtitle:"Square Roots and Estimating Radicals",emoji:"âˆš",points:[
+        {subtitle:"Square Roots and Estimating Radicals",emoji:"√",points:[
           "sqrt(a) is the non-negative number that when squared gives a",
           "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - give rational square roots",
           "Non-perfect square roots are IRRATIONAL: sqrt(2), sqrt(3), sqrt(5), sqrt(7), ...",
@@ -740,7 +1457,7 @@ const studyLibrary = {
           "Rule: sqrt(a x b) = sqrt(a) x sqrt(b). Use this to simplify!",
           "Mixed radical: 3*sqrt(5) means 3 times sqrt(5)",
         ]},
-        {subtitle:"Comparing and Ordering Numbers",emoji:"ðŸ“Š",points:[
+        {subtitle:"Comparing and Ordering Numbers",emoji:"📊",points:[
           "Convert all numbers to decimals to compare: sqrt(7) is about 2.646, 8/3 is about 2.667",
           "Negative numbers: further from zero means smaller. So -5 is less than -3",
           "Absolute value |a| = distance from zero. |-4| = 4 and |3| = 3",
@@ -748,7 +1465,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"number-exponents",title:"Exponent Laws",notes:[
-        {subtitle:"The Seven Exponent Laws",emoji:"âš¡",points:[
+        {subtitle:"The Seven Exponent Laws",emoji:"⚡",points:[
           "PRODUCT LAW: a^m times a^n = a^(m+n) - add exponents when multiplying same base",
           "QUOTIENT LAW: a^m divided by a^n = a^(m-n) - subtract exponents when dividing same base",
           "POWER OF A POWER: (a^m)^n = a^(mn) - multiply the exponents",
@@ -758,7 +1475,7 @@ const studyLibrary = {
           "NEGATIVE EXPONENT: a^(-n) = 1/a^n",
           "All laws require the SAME base to combine exponents!",
         ]},
-        {subtitle:"Fractional Exponents and Radicals",emoji:"âˆš",points:[
+        {subtitle:"Fractional Exponents and Radicals",emoji:"√",points:[
           "a^(1/2) = sqrt(a) (square root)",
           "a^(1/3) = cube root of a",
           "a^(1/n) = nth root of a",
@@ -766,7 +1483,7 @@ const studyLibrary = {
           "Example: 8^(2/3) = (cube root of 8)^2 = 2^2 = 4",
           "Tip: take the ROOT first when possible (smaller numbers to work with)",
         ]},
-        {subtitle:"Scientific Notation",emoji:"ðŸ”¬",points:[
+        {subtitle:"Scientific Notation",emoji:"🔬",points:[
           "Form: a x 10^n where a is between 1 (inclusive) and 10 (exclusive) and n is an integer",
           "Large numbers use positive exponents: 3,200,000 = 3.2 x 10^6",
           "Small numbers use negative exponents: 0.000045 = 4.5 x 10^(-5)",
@@ -782,7 +1499,7 @@ const studyLibrary = {
     icon:TrendingUp,color:"purple",gradient:"from-violet-500 to-purple-600",
     sections:[
       {id:"linear-slopeintercept",title:"Slope and Slope-Intercept Form",notes:[
-        {subtitle:"Understanding Slope",emoji:"ðŸ“",points:[
+        {subtitle:"Understanding Slope",emoji:"📐",points:[
           "Slope measures STEEPNESS and DIRECTION of a line",
           "Formula: m = rise/run = (y2 - y1)/(x2 - x1)",
           "Positive slope: line rises from left to right",
@@ -791,14 +1508,14 @@ const studyLibrary = {
           "Undefined slope: vertical line - x is constant (denominator = 0)",
           "Slope tells you: for every 1 unit right, y changes by m units",
         ]},
-        {subtitle:"Slope-Intercept Form: y = mx + b",emoji:"âœï¸",points:[
+        {subtitle:"Slope-Intercept Form: y = mx + b",emoji:"✏️",points:[
           "m = slope (rate of change)",
           "b = y-intercept (value of y when x = 0)",
           "To graph: plot the y-intercept (0, b), then use slope to find more points",
           "Example: y = 3x - 2. Plot (0, -2). Slope = 3/1 means go up 3 and right 1 to reach (1, 1)",
           "To find slope and y-intercept from an equation: rearrange into y = mx + b form",
         ]},
-        {subtitle:"Direct and Partial Variation",emoji:"ðŸ”—",points:[
+        {subtitle:"Direct and Partial Variation",emoji:"🔗",points:[
           "DIRECT VARIATION: y = kx - passes through origin. k is the constant of variation.",
           "If x doubles, y doubles. Constant ratio y/x = k for all points.",
           "PARTIAL VARIATION: y = mx + b where b is not 0 - does NOT pass through origin",
@@ -808,14 +1525,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"linear-forms",title:"Forms of Linear Equations",notes:[
-        {subtitle:"Standard Form: Ax + By = C",emoji:"ðŸ“",points:[
+        {subtitle:"Standard Form: Ax + By = C",emoji:"📝",points:[
           "Standard form: Ax + By = C where A, B, C are integers and A is at least 0",
           "Finding x-intercept: set y = 0 and solve for x",
           "Finding y-intercept: set x = 0 and solve for y",
           "Example: 3x + 2y = 12. x-int: 3x=12 so x=4, giving (4,0). y-int: 2y=12 so y=6, giving (0,6)",
           "Converting to slope-intercept: isolate y. 2y = -3x + 12 gives y = (-3/2)x + 6",
         ]},
-        {subtitle:"Point-Slope Form and Writing Equations",emoji:"ðŸ–Šï¸",points:[
+        {subtitle:"Point-Slope Form and Writing Equations",emoji:"🖊️",points:[
           "Point-slope form: y - y1 = m(x - x1) - use when given a point and slope",
           "Step 1: Identify slope m and a point (x1, y1)",
           "Step 2: Substitute and simplify to y = mx + b",
@@ -823,7 +1540,7 @@ const studyLibrary = {
           "Horizontal line through (a, b): equation is y = b",
           "Vertical line through (a, b): equation is x = a (undefined slope)",
         ]},
-        {subtitle:"Parallel and Perpendicular Lines",emoji:"âŠ¥",points:[
+        {subtitle:"Parallel and Perpendicular Lines",emoji:"⊥",points:[
           "PARALLEL lines: same slope, different y-intercept. They never intersect.",
           "Example: y = 2x + 3 and y = 2x - 5 are parallel (both slope 2)",
           "PERPENDICULAR lines: slopes are negative reciprocals. Their product equals -1.",
@@ -838,13 +1555,13 @@ const studyLibrary = {
     icon:Grid3x3,color:"amber",gradient:"from-amber-500 to-orange-600",
     sections:[
       {id:"systems-graphing",title:"Graphing Systems",notes:[
-        {subtitle:"Understanding a Linear System",emoji:"ðŸŽ¯",points:[
+        {subtitle:"Understanding a Linear System",emoji:"🎯",points:[
           "A system of linear equations is two or more equations with the same variables",
           "The SOLUTION is the point (x, y) that makes BOTH equations true at the same time",
           "Graphically: the solution is the INTERSECTION POINT of the two lines",
           "Three outcomes: one solution (lines intersect), no solution (parallel), infinite solutions (same line)",
         ]},
-        {subtitle:"Graphing Method",emoji:"ðŸ“‰",points:[
+        {subtitle:"Graphing Method",emoji:"📉",points:[
           "Step 1: Rewrite each equation in slope-intercept form",
           "Step 2: Graph both lines on the same coordinate grid",
           "Step 3: Identify the intersection point",
@@ -854,7 +1571,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-substitution",title:"Substitution Method",notes:[
-        {subtitle:"Substitution - Full Method",emoji:"ðŸ”„",points:[
+        {subtitle:"Substitution - Full Method",emoji:"🔄",points:[
           "Step 1: ISOLATE one variable in one equation (pick whichever is easiest)",
           "Step 2: SUBSTITUTE that expression into the other equation",
           "Step 3: SOLVE the resulting single-variable equation",
@@ -862,7 +1579,7 @@ const studyLibrary = {
           "Step 5: VERIFY by substituting both values into both original equations",
           "BEST USED when: one variable is already isolated or has a coefficient of 1",
         ]},
-        {subtitle:"Common Mistakes to Avoid",emoji:"âš ï¸",points:[
+        {subtitle:"Common Mistakes to Avoid",emoji:"⚠️",points:[
           "Do NOT substitute into the SAME equation you isolated from - use the OTHER one",
           "Do NOT forget to find BOTH variables - one value alone is not a complete solution",
           "Do NOT skip verification - especially when numbers get messy",
@@ -871,7 +1588,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-elimination",title:"Elimination Method",notes:[
-        {subtitle:"Elimination - Full Method",emoji:"âž•",points:[
+        {subtitle:"Elimination - Full Method",emoji:"➕",points:[
           "Step 1: ALIGN both equations with like terms in columns",
           "Step 2: If needed, MULTIPLY one or both equations so one variable has opposite coefficients",
           "Step 3: ADD the equations to ELIMINATE one variable",
@@ -880,7 +1597,7 @@ const studyLibrary = {
           "Step 6: VERIFY in both original equations",
           "BEST USED when: coefficients of one variable are already opposites or easily made so",
         ]},
-        {subtitle:"When to Multiply First",emoji:"âœ–ï¸",points:[
+        {subtitle:"When to Multiply First",emoji:"✖️",points:[
           "If y-coefficients are 3 and 2: multiply first eq by 2 and second by 3 so both become 6",
           "Then subtract to eliminate y",
           "Sometimes only ONE equation needs to be multiplied",
@@ -889,14 +1606,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"systems-word-problems",title:"Systems Word Problems",notes:[
-        {subtitle:"Setting Up Systems from Word Problems",emoji:"ðŸ“–",points:[
+        {subtitle:"Setting Up Systems from Word Problems",emoji:"📖",points:[
           "Step 1: Define your VARIABLES clearly (e.g. let x = adults, y = children)",
           "Step 2: Write TWO equations from the information given",
           "Step 3: Solve using any method (substitution or elimination)",
           "Step 4: Answer the question with proper units",
           "Step 5: Verify your answer makes sense in context",
         ]},
-        {subtitle:"Common Types of Word Problems",emoji:"ðŸ—‚ï¸",points:[
+        {subtitle:"Common Types of Word Problems",emoji:"🗂️",points:[
           "MIXTURE: blend two types of something to get a mixture at a certain value",
           "RATE-TIME-DISTANCE: d = r*t. Set up equations for two different situations.",
           "NUMBER PROBLEMS: two numbers add to 50 and differ by 12. x+y=50 and x-y=12",
@@ -911,7 +1628,7 @@ const studyLibrary = {
     icon:Shapes,color:"green",gradient:"from-emerald-500 to-teal-600",
     sections:[
       {id:"algebra-polynomials",title:"Introduction to Polynomials",notes:[
-        {subtitle:"Polynomial Vocabulary",emoji:"ðŸ“š",points:[
+        {subtitle:"Polynomial Vocabulary",emoji:"📚",points:[
           "TERM: a number, variable, or product of numbers and variables (e.g. 5x^2, -3x, 7)",
           "COEFFICIENT: the number multiplying the variable (in 4x^3 the coefficient is 4)",
           "DEGREE of a term: sum of exponents on the variables (3x^2*y has degree 3)",
@@ -920,7 +1637,7 @@ const studyLibrary = {
           "LIKE TERMS: same variable AND same exponent. Only like terms can be combined!",
           "Examples: 3x^2 and -7x^2 are like terms. 3x^2 and 3x are NOT like terms.",
         ]},
-        {subtitle:"Adding and Subtracting Polynomials",emoji:"âž•",points:[
+        {subtitle:"Adding and Subtracting Polynomials",emoji:"➕",points:[
           "Combine LIKE TERMS only - same variable, same exponent",
           "Adding: simply combine like terms. (3x^2+2x-1)+(x^2-5x+4) = 4x^2-3x+3",
           "Subtracting: distribute the negative sign to ALL terms in the second polynomial",
@@ -929,20 +1646,20 @@ const studyLibrary = {
         ]},
       ]},
       {id:"algebra-multiplying",title:"Multiplying Polynomials",notes:[
-        {subtitle:"Multiplying a Monomial by a Polynomial",emoji:"âœ–ï¸",points:[
+        {subtitle:"Multiplying a Monomial by a Polynomial",emoji:"✖️",points:[
           "Distribute the monomial to EVERY term inside the polynomial",
           "Multiply coefficients, add exponents for same-base variables",
           "Example: 3x(2x^2 - 5x + 1) = 6x^3 - 15x^2 + 3x",
           "Example: -2a^2(3a - 4) = -6a^3 + 8a^2  (be careful with signs!)",
         ]},
-        {subtitle:"FOIL: Multiplying Two Binomials",emoji:"ðŸ” ",points:[
+        {subtitle:"FOIL: Multiplying Two Binomials",emoji:"🔠",points:[
           "FOIL stands for: First, Outer, Inner, Last",
           "(a + b)(c + d) = ac + ad + bc + bd",
           "Example: (x + 3)(x + 5) = x^2 + 5x + 3x + 15 = x^2 + 8x + 15",
           "Example: (2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4",
           "Always collect like terms after FOILing!",
         ]},
-        {subtitle:"Special Products",emoji:"â­",points:[
+        {subtitle:"Special Products",emoji:"⭐",points:[
           "DIFFERENCE OF SQUARES: (a + b)(a - b) = a^2 - b^2",
           "Example: (x + 5)(x - 5) = x^2 - 25 (middle terms cancel)",
           "PERFECT SQUARE TRINOMIAL: (a + b)^2 = a^2 + 2ab + b^2",
@@ -953,14 +1670,14 @@ const studyLibrary = {
         ]},
       ]},
       {id:"algebra-factoring",title:"Factoring Polynomials",notes:[
-        {subtitle:"Common Factoring (GCF)",emoji:"ðŸ”",points:[
+        {subtitle:"Common Factoring (GCF)",emoji:"🔍",points:[
           "ALWAYS look for a GCF (greatest common factor) FIRST before anything else",
           "Find the largest number and highest power that divides every term",
           "Example: 6x^3 + 9x^2 - 3x. GCF = 3x. Result: 3x(2x^2 + 3x - 1)",
           "Example: 4a^2*b + 8a*b^2 - 12ab. GCF = 4ab. Result: 4ab(a + 2b - 3)",
           "After factoring, verify by expanding back: does it match the original?",
         ]},
-        {subtitle:"Factoring Trinomials: x^2 + bx + c",emoji:"ðŸ§©",points:[
+        {subtitle:"Factoring Trinomials: x^2 + bx + c",emoji:"🧩",points:[
           "Find two integers that MULTIPLY to c and ADD to b",
           "Then factor as (x + p)(x + q) where p*q = c and p+q = b",
           "Example: x^2 + 5x + 6. Need: multiply to 6 and add to 5. That is 2 and 3. Answer: (x+2)(x+3)",
@@ -968,7 +1685,7 @@ const studyLibrary = {
           "Example: x^2 + 2x - 15. Need: multiply to -15 and add to 2. That is 5 and -3. Answer: (x+5)(x-3)",
           "Positive product: both same sign. Negative product: opposite signs.",
         ]},
-        {subtitle:"Factoring: Difference of Squares",emoji:"â–¡",points:[
+        {subtitle:"Factoring: Difference of Squares",emoji:"□",points:[
           "Pattern: a^2 - b^2 = (a + b)(a - b)",
           "Both terms must be perfect squares separated by subtraction",
           "Example: x^2 - 16 = (x+4)(x-4)",
@@ -984,7 +1701,7 @@ const studyLibrary = {
     icon:BookMarked,color:"rose",gradient:"from-rose-500 to-pink-600",
     sections:[
       {id:"measurement-pythagorean",title:"The Pythagorean Theorem",notes:[
-        {subtitle:"Understanding the Theorem",emoji:"ðŸ“",points:[
+        {subtitle:"Understanding the Theorem",emoji:"📐",points:[
           "In any right triangle: a^2 + b^2 = c^2, where c is the hypotenuse",
           "The hypotenuse is ALWAYS opposite the right angle and is the longest side",
           "To find hypotenuse: c = sqrt(a^2 + b^2)",
@@ -993,7 +1710,7 @@ const studyLibrary = {
           "Multiples of triples also work: (6,8,10) is (3,4,5) scaled by 2",
           "Converse: if a^2+b^2=c^2, then the triangle IS a right triangle",
         ]},
-        {subtitle:"Applying the Pythagorean Theorem",emoji:"ðŸ—ï¸",points:[
+        {subtitle:"Applying the Pythagorean Theorem",emoji:"🏗️",points:[
           "Identify the hypotenuse FIRST (longest side, opposite 90 degrees)",
           "Draw a diagram and label sides a, b, c",
           "2D applications: diagonals of rectangles, height of isosceles triangles",
@@ -1003,7 +1720,7 @@ const studyLibrary = {
         ]},
       ]},
       {id:"measurement-formulas",title:"Perimeter, Area, and Volume",notes:[
-        {subtitle:"Perimeter and Area: 2D Shapes",emoji:"ðŸ“",points:[
+        {subtitle:"Perimeter and Area: 2D Shapes",emoji:"📏",points:[
           "Rectangle: A = l*w, P = 2(l+w)",
           "Triangle: A = (1/2)*b*h where h is perpendicular to base b. P = sum of all sides",
           "Trapezoid: A = (1/2)(a+b)h where a and b are the parallel sides",
@@ -1011,7 +1728,7 @@ const studyLibrary = {
           "Always use RADIUS (not diameter) in the circle area formula",
           "Composite figures: split into simpler shapes, add or subtract areas",
         ]},
-        {subtitle:"Surface Area: 3D Shapes",emoji:"ðŸ“¦",points:[
+        {subtitle:"Surface Area: 3D Shapes",emoji:"📦",points:[
           "Surface area = total area of ALL outer faces",
           "Rectangular prism: SA = 2(lw + lh + wh)",
           "Cylinder: SA = 2*pi*r^2 + 2*pi*r*h (two circles plus the curved rectangle)",
@@ -1019,7 +1736,7 @@ const studyLibrary = {
           "Sphere: SA = 4*pi*r^2",
           "Always state units as SQUARE units: cm^2 or m^2",
         ]},
-        {subtitle:"Volume: 3D Shapes",emoji:"ðŸ“",points:[
+        {subtitle:"Volume: 3D Shapes",emoji:"📐",points:[
           "Volume = amount of space inside a 3D object",
           "Any prism: V = base area x height",
           "Rectangular prism: V = l*w*h",
@@ -1033,8 +1750,6 @@ const studyLibrary = {
     ]
   },
 };
-
-// â”€â”€ MAIN COMPONENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export default function MathStudyG9() {
   const [showIntro,setShowIntro]=useState(true);
@@ -1228,7 +1943,7 @@ export default function MathStudyG9() {
               <button onClick={()=>setSelectedSection(null)} className="flex items-center gap-2 text-sm syne font-semibold" style={{color:"var(--muted)"}}>
                 <ArrowLeft className="w-4 h-4"/> {selectedSubject.name}
               </button>
-              <span style={{color:"var(--dim)"}}>â€º</span>
+              <span style={{color:"var(--dim)"}}>›</span>
               <span className="syne text-sm font-semibold truncate max-w-48" style={{color:"var(--dim)"}}>{sec.title}</span>
             </div>
             <button onClick={()=>toggleRead(sec.id)} className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs syne font-bold"
@@ -1246,62 +1961,37 @@ export default function MathStudyG9() {
               </div>
             </div>
           </div>
-          <div className="space-y-5">
+          {/* Section intro */}
+          <div className="mb-6 anim-up" style={{ background:`linear-gradient(135deg,${getCol(selectedSubject.gradient).ll},white)`, borderRadius:"16px", padding:"14px 18px", border:`1px solid ${getCol(selectedSubject.gradient).h}20` }}>
+            <p style={{ fontSize:"12.5px", color: getCol(selectedSubject.gradient).h, fontFamily:"'Syne',sans-serif", fontWeight:700, letterSpacing:"0.08em", marginBottom:"3px" }}>HOW TO USE THESE NOTES</p>
+            <p className="text-xs" style={{ color:"#64748b", lineHeight:1.6 }}>
+              Each section has <span style={{fontWeight:700,color:"#4338ca"}}>📖 vocabulary</span> cards, <span style={{fontWeight:700,color:"#15803d"}}>✏️ worked examples</span>, <span style={{fontWeight:700,color:"#c2410c"}}>⚠️ common mistakes</span>, and <span style={{fontWeight:700,color:"#0369a1"}}>💡 tips</span>. Click any section header to collapse it.
+            </p>
+          </div>
+
+          <div>
             {sec.notes&&sec.notes.map((note,idx)=>{
               const diagramKey=`${sec.id}-${idx}`,diagram=NOTE_DIAGRAMS[diagramKey];
               return (
-                <div key={idx} className={`glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx+1,4)}`}>
-                  <div className={`bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`} style={{opacity:0.92}}>
-                    <span className="text-xl leading-none">{conceptCardEmoji(note)}</span>
-                    <h2 className="syne font-bold text-sm text-white leading-snug">{note.subtitle}</h2>
-                  </div>
-                  <div className="px-6 py-5">
-                    <ul className="space-y-1.5">
-                      {note.points.map((pt,pi)=>{
-                        const isStep=/^\d+\./.test(pt);
-                        const hasKey=/^([A-Z][A-Z\s/]+):/.test(pt);
-                        const colon=pt.indexOf(":");
-                        const keyTerm=hasKey&&colon>0?pt.slice(0,colon):null;
-                        const rest=hasKey&&colon>0?pt.slice(colon+1).trim():pt;
-                        return (
-                          <li key={pi}>
-                            <div className="flex items-start gap-3 rounded-xl px-3 py-2 transition-colors"
-                              onMouseOver={e=>e.currentTarget.style.background="rgba(99,102,241,0.04)"}
-                              onMouseOut={e=>e.currentTarget.style.background="transparent"}>
-                              {isStep
-                                ?<span className={`flex-shrink-0 mt-0.5 w-5 h-5 rounded-lg bg-gradient-to-br ${selectedSubject.gradient} text-white text-xs font-bold flex items-center justify-center mono`} style={{opacity:0.85}}>{pt.match(/^(\d+)/)?.[1]}</span>
-                                :<span className={`flex-shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-gradient-to-br ${selectedSubject.gradient}`} style={{opacity:0.7}}/>
-                              }
-                              <p className="text-sm leading-relaxed" style={{color:"var(--muted)"}}>
-                                {keyTerm?<><span className="font-bold" style={{color:"var(--text)"}}>{keyTerm}:</span>{" "}{rest}</>:isStep?<span>{pt.replace(/^\d+\.\s*/,"")}</span>:pt}
-                              </p>
-                            </div>
-                            {isWS&&note.answers&&note.answers[pi]&&(
-                              <div className="ml-8 mt-1">
-                                <button onClick={()=>toggleAnswer(idx,pi)} className="text-xs syne font-bold flex items-center gap-1 px-2 py-1 rounded-lg" style={{color:"rgba(13,148,136,0.8)"}}>
-                                  {revealedAnswers.has(`${idx}-${pi}`)?"Hide Answer":"Show Answer"}
-                                </button>
-                                {revealedAnswers.has(`${idx}-${pi}`)&&(
-                                  <div className="mt-1.5 px-4 py-2.5 rounded-r-xl" style={{background:"rgba(16,185,129,0.07)",borderLeft:"2px solid rgba(16,185,129,0.35)"}}>
-                                    <p className="text-sm mono" style={{color:"rgba(6,78,59,0.9)"}}>{note.answers[pi]}</p>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                    {diagram&&<div className="mt-5 pt-4" style={{borderTop:"1px solid var(--border)"}}>{diagram}</div>}
-                  </div>
-                </div>
+                <NoteTopicCard
+                  key={idx}
+                  note={note}
+                  noteIdx={idx}
+                  gradient={selectedSubject.gradient}
+                  subjectColor={selectedSubject.color}
+                  isWS={isWS}
+                  diagram={diagram}
+                />
               );
             })}
           </div>
-          <div className="mt-8 glass rounded-2xl p-5 flex gap-3">
-            <Lightbulb className="w-5 h-5 flex-shrink-0 mt-0.5" style={{color:"rgba(180,83,9,0.8)"}}/>
-            <p className="text-sm leading-relaxed" style={{color:"var(--dim)"}}>Attempt problems on your own before revealing answers. Active recall is far more effective than re-reading!</p>
-          </div>
+
+          {isWS && (
+            <div className="mt-6 rounded-2xl p-4 flex gap-3 items-start" style={{background:"rgba(245,158,11,0.07)",border:"1px solid rgba(245,158,11,0.2)"}}>
+              <span style={{fontSize:"20px",lineHeight:1,flexShrink:0}}>💡</span>
+              <p className="text-sm leading-relaxed" style={{color:"#92400e"}}>Attempt every problem on your own first before revealing the answer. Active recall is far more effective than re-reading!</p>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -1319,7 +2009,7 @@ export default function MathStudyG9() {
             <button onClick={()=>setSelectedSubject(null)} className="flex items-center gap-2 text-sm syne font-semibold" style={{color:"var(--muted)"}}>
               <ArrowLeft className="w-4 h-4"/> Library
             </button>
-            <span style={{color:"var(--dim)"}}>â€º</span>
+            <span style={{color:"var(--dim)"}}>›</span>
             <span className="syne font-semibold text-sm" style={{color:"var(--muted)"}}>{sub.name}</span>
           </div>
         </div>
@@ -1441,7 +2131,7 @@ export default function MathStudyG9() {
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center"><Calculator className="w-3.5 h-3.5 text-white"/></div>
             <span className="syne font-black text-sm" style={{color:"var(--text)"}}>MathLib</span>
-            <span style={{color:"var(--dim)"}}>&middot;</span>
+            <span style={{color:"var(--dim)"}}>·</span>
             <span className="text-xs mono" style={{color:"var(--muted)"}}>Grade 9</span>
           </div>
           <div className="glass flex items-center gap-2 rounded-xl px-3 py-1.5">

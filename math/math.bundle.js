@@ -25,9 +25,9 @@
     mod
   ));
 
-  // acelabs/grade9-science-vite/node_modules/react/cjs/react.development.js
+  // node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react/cjs/react.development.js"(exports, module) {
+    "node_modules/react/cjs/react.development.js"(exports, module) {
       "use strict";
       (function() {
         function defineDeprecationWarning(methodName, info) {
@@ -245,14 +245,14 @@
         function isValidElement(object) {
           return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
         }
-        function escape2(key) {
+        function escape(key) {
           var escaperLookup = { "=": "=0", ":": "=2" };
           return "$" + key.replace(/[=:]/g, function(match) {
             return escaperLookup[match];
           });
         }
         function getElementKey(element, index) {
-          return "object" === typeof element && null !== element && null != element.key ? (checkKeyStringCoercion(element.key), escape2("" + element.key)) : index.toString(36);
+          return "object" === typeof element && null !== element && null != element.key ? (checkKeyStringCoercion(element.key), escape("" + element.key)) : index.toString(36);
         }
         function resolveThenable(thenable) {
           switch (thenable.status) {
@@ -997,9 +997,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react/index.js
+  // node_modules/react/index.js
   var require_react = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react/index.js"(exports, module) {
+    "node_modules/react/index.js"(exports, module) {
       "use strict";
       if (false) {
         module.exports = null;
@@ -1009,9 +1009,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/scheduler/cjs/scheduler.development.js
+  // node_modules/scheduler/cjs/scheduler.development.js
   var require_scheduler_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+    "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
       "use strict";
       (function() {
         function performWorkUntilDeadline() {
@@ -1268,9 +1268,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/scheduler/index.js
+  // node_modules/scheduler/index.js
   var require_scheduler = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/scheduler/index.js"(exports, module) {
+    "node_modules/scheduler/index.js"(exports, module) {
       "use strict";
       if (false) {
         module.exports = null;
@@ -1280,9 +1280,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom.development.js
+  // node_modules/react-dom/cjs/react-dom.development.js
   var require_react_dom_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom.development.js"(exports) {
+    "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
       "use strict";
       (function() {
         function noop() {
@@ -1329,7 +1329,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React3 = require_react(), Internals = {
+        var React4 = require_react(), Internals = {
           d: {
             f: noop,
             r: function() {
@@ -1347,7 +1347,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -1524,9 +1524,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/index.js
+  // node_modules/react-dom/index.js
   var require_react_dom = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/index.js"(exports, module) {
+    "node_modules/react-dom/index.js"(exports, module) {
       "use strict";
       if (false) {
         checkDCE();
@@ -1537,9 +1537,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom-client.development.js
+  // node_modules/react-dom/cjs/react-dom-client.development.js
   var require_react_dom_client_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom-client.development.js"(exports) {
+    "node_modules/react-dom/cjs/react-dom-client.development.js"(exports) {
       "use strict";
       (function() {
         function findHook(fiber, id) {
@@ -2882,7 +2882,7 @@
           "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React3.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React4.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18514,14 +18514,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React3 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React4 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21309,7 +21309,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React3.version;
+          var isomorphicReactPackageVersion = React4.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21436,9 +21436,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/client.js
+  // node_modules/react-dom/client.js
   var require_client = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/client.js"(exports, module) {
+    "node_modules/react-dom/client.js"(exports, module) {
       "use strict";
       if (false) {
         checkDCE();
@@ -21449,268 +21449,76 @@
     }
   });
 
-  // OneDrive - Appleby College/Apps/Soul-Concept/math/_entry_g9.tsx
-  var import_react4 = __toESM(require_react());
+  // math/_entry_g9.tsx
+  var import_react3 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
-  // OneDrive - Appleby College/Apps/Soul-Concept/math/FreeStudyLib.tsx
-  var import_react3 = __toESM(require_react());
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/createLucideIcon.js
+  // math/FreeStudyLib.tsx
   var import_react2 = __toESM(require_react());
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/shared/src/utils.js
-  var toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-  var toCamelCase = (string) => string.replace(
-    /^([A-Z])|[\s-_]+(\w)/g,
-    (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
-  );
-  var toPascalCase = (string) => {
-    const camelCase = toCamelCase(string);
-    return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
-  };
-  var mergeClasses = (...classes) => classes.filter((className, index, array) => {
-    return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
-  }).join(" ").trim();
-  var hasA11yProp = (props) => {
-    for (const prop in props) {
-      if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
-        return true;
-      }
-    }
-  };
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/Icon.js
+  // math/lucide-react-shim.tsx
   var import_react = __toESM(require_react());
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/defaultAttributes.js
-  var defaultAttributes = {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: 24,
-    height: 24,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 2,
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  };
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/Icon.js
-  var Icon = (0, import_react.forwardRef)(
-    ({
-      color = "currentColor",
-      size = 24,
-      strokeWidth = 2,
-      absoluteStrokeWidth,
-      className = "",
-      children,
-      iconNode,
-      ...rest
-    }, ref) => (0, import_react.createElement)(
-      "svg",
-      {
-        ref,
-        ...defaultAttributes,
-        width: size,
-        height: size,
-        stroke: color,
-        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-        className: mergeClasses("lucide", className),
-        ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
-        ...rest
-      },
-      [
-        ...iconNode.map(([tag, attrs]) => (0, import_react.createElement)(tag, attrs)),
-        ...Array.isArray(children) ? children : [children]
-      ]
-    )
+  function icon(paths) {
+    return function Icon(props) {
+      return /* @__PURE__ */ import_react.default.createElement(
+        "svg",
+        {
+          viewBox: "0 0 24 24",
+          fill: "none",
+          stroke: "currentColor",
+          strokeWidth: "2",
+          strokeLinecap: "round",
+          strokeLinejoin: "round",
+          "aria-hidden": "true",
+          ...props
+        },
+        paths
+      );
+    };
+  }
+  var BookOpen = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", { d: "M2 6.5C2 5.1 3.1 4 4.5 4H10c1.1 0 2 .9 2 2v14c0-1.1-.9-2-2-2H4.5A2.5 2.5 0 0 0 2 20.5z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M22 6.5C22 5.1 20.9 4 19.5 4H14c-1.1 0-2 .9-2 2v14c0-1.1.9-2 2-2h5.5a2.5 2.5 0 0 1 2 2.5z" }))
+  );
+  var ArrowLeft = icon(/* @__PURE__ */ import_react.default.createElement("path", { d: "M19 12H5M12 19l-7-7 7-7" }));
+  var CheckCircle = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "9" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "m9 12 2 2 4-4" }))
+  );
+  var Circle = icon(/* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "9" }));
+  var Calculator = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("rect", { x: "5", y: "3", width: "14", height: "18", rx: "2" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h8" }))
+  );
+  var TrendingUp = icon(/* @__PURE__ */ import_react.default.createElement("path", { d: "M3 17l6-6 4 4 7-8M14 7h6v6" }));
+  var Shapes = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "7.5", cy: "7.5", r: "3.5" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M14 4h6v6h-6zM14 14l3-5 3 5zM4 16h7v4H4z" }))
+  );
+  var Grid3x3 = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", { d: "M4 4h4v4H4zM10 4h4v4h-4zM16 4h4v4h-4zM4 10h4v4H4zM10 10h4v4h-4zM16 10h4v4h-4zM4 16h4v4H4zM10 16h4v4h-4zM16 16h4v4h-4z" }))
+  );
+  var ChevronRight = icon(/* @__PURE__ */ import_react.default.createElement("path", { d: "m9 18 6-6-6-6" }));
+  var FileText = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", { d: "M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M14 2v5h5M9 13h6M9 17h6M9 9h2" }))
+  );
+  var Lightbulb = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c.7.5 1.3 1.4 1.5 2.3h5c.2-.9.8-1.8 1.5-2.3A7 7 0 0 0 12 2z" }))
+  );
+  var Target = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "8" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "4" }), /* @__PURE__ */ import_react.default.createElement("circle", { cx: "12", cy: "12", r: "1.5", fill: "currentColor", stroke: "none" }))
+  );
+  var X = icon(/* @__PURE__ */ import_react.default.createElement("path", { d: "M18 6 6 18M6 6l12 12" }));
+  var ClipboardList = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("rect", { x: "6", y: "4", width: "12", height: "17", rx: "2" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 4.5h6M9 9h6M9 13h6M9 17h4M7.5 9h.01M7.5 13h.01M7.5 17h.01" }))
+  );
+  var Brain = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9.5 4a3 3 0 0 0-5 2.2A3.2 3.2 0 0 0 5 12a3 3 0 0 0 4.5 2.6V4zM14.5 4a3 3 0 0 1 5 2.2A3.2 3.2 0 0 1 19 12a3 3 0 0 1-4.5 2.6V4z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M12 4v16M9 8.5c1 .7 2 .7 3 0M12 12c1 .8 2 .8 3 0" }))
+  );
+  var Sparkles = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", { d: "m12 3 1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 3v2M4 4h2M19 17v2M18 18h2M5 15v1M4.5 15.5h1M19 5v1M18.5 5.5h1" }))
+  );
+  var BookMarked = icon(
+    /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", { d: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 2h11a2 2 0 0 1 2 2v16l-4-2-4 2-4-2-4 2V4a2 2 0 0 1 2-2z" }))
   );
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/createLucideIcon.js
-  var createLucideIcon = (iconName, iconNode) => {
-    const Component = (0, import_react2.forwardRef)(
-      ({ className, ...props }, ref) => (0, import_react2.createElement)(Icon, {
-        ref,
-        iconNode,
-        className: mergeClasses(
-          `lucide-${toKebabCase(toPascalCase(iconName))}`,
-          `lucide-${iconName}`,
-          className
-        ),
-        ...props
-      })
-    );
-    Component.displayName = toPascalCase(iconName);
-    return Component;
-  };
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/arrow-left.js
-  var __iconNode = [
-    ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
-    ["path", { d: "M19 12H5", key: "x3x0zl" }]
-  ];
-  var ArrowLeft = createLucideIcon("arrow-left", __iconNode);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/book-marked.js
-  var __iconNode2 = [
-    ["path", { d: "M10 2v8l3-3 3 3V2", key: "sqw3rj" }],
-    [
-      "path",
-      {
-        d: "M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20",
-        key: "k3hazp"
-      }
-    ]
-  ];
-  var BookMarked = createLucideIcon("book-marked", __iconNode2);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/brain.js
-  var __iconNode3 = [
-    ["path", { d: "M12 18V5", key: "adv99a" }],
-    ["path", { d: "M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4", key: "1e3is1" }],
-    ["path", { d: "M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5", key: "1gqd8o" }],
-    ["path", { d: "M17.997 5.125a4 4 0 0 1 2.526 5.77", key: "iwvgf7" }],
-    ["path", { d: "M18 18a4 4 0 0 0 2-7.464", key: "efp6ie" }],
-    ["path", { d: "M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517", key: "1gq6am" }],
-    ["path", { d: "M6 18a4 4 0 0 1-2-7.464", key: "k1g0md" }],
-    ["path", { d: "M6.003 5.125a4 4 0 0 0-2.526 5.77", key: "q97ue3" }]
-  ];
-  var Brain = createLucideIcon("brain", __iconNode3);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/calculator.js
-  var __iconNode4 = [
-    ["rect", { width: "16", height: "20", x: "4", y: "2", rx: "2", key: "1nb95v" }],
-    ["line", { x1: "8", x2: "16", y1: "6", y2: "6", key: "x4nwl0" }],
-    ["line", { x1: "16", x2: "16", y1: "14", y2: "18", key: "wjye3r" }],
-    ["path", { d: "M16 10h.01", key: "1m94wz" }],
-    ["path", { d: "M12 10h.01", key: "1nrarc" }],
-    ["path", { d: "M8 10h.01", key: "19clt8" }],
-    ["path", { d: "M12 14h.01", key: "1etili" }],
-    ["path", { d: "M8 14h.01", key: "6423bh" }],
-    ["path", { d: "M12 18h.01", key: "mhygvu" }],
-    ["path", { d: "M8 18h.01", key: "lrp35t" }]
-  ];
-  var Calculator = createLucideIcon("calculator", __iconNode4);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/chevron-right.js
-  var __iconNode5 = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-  var ChevronRight = createLucideIcon("chevron-right", __iconNode5);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/circle-check-big.js
-  var __iconNode6 = [
-    ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
-    ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
-  ];
-  var CircleCheckBig = createLucideIcon("circle-check-big", __iconNode6);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/circle.js
-  var __iconNode7 = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-  var Circle = createLucideIcon("circle", __iconNode7);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/clipboard-list.js
-  var __iconNode8 = [
-    ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
-    [
-      "path",
-      {
-        d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2",
-        key: "116196"
-      }
-    ],
-    ["path", { d: "M12 11h4", key: "1jrz19" }],
-    ["path", { d: "M12 16h4", key: "n85exb" }],
-    ["path", { d: "M8 11h.01", key: "1dfujw" }],
-    ["path", { d: "M8 16h.01", key: "18s6g9" }]
-  ];
-  var ClipboardList = createLucideIcon("clipboard-list", __iconNode8);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/file-text.js
-  var __iconNode9 = [
-    ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-    ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-    ["path", { d: "M10 9H8", key: "b1mrlr" }],
-    ["path", { d: "M16 13H8", key: "t4e002" }],
-    ["path", { d: "M16 17H8", key: "z1uh3a" }]
-  ];
-  var FileText = createLucideIcon("file-text", __iconNode9);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/grid-3x3.js
-  var __iconNode10 = [
-    ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
-    ["path", { d: "M3 9h18", key: "1pudct" }],
-    ["path", { d: "M3 15h18", key: "5xshup" }],
-    ["path", { d: "M9 3v18", key: "fh3hqa" }],
-    ["path", { d: "M15 3v18", key: "14nvp0" }]
-  ];
-  var Grid3x3 = createLucideIcon("grid-3x3", __iconNode10);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/lightbulb.js
-  var __iconNode11 = [
-    [
-      "path",
-      {
-        d: "M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5",
-        key: "1gvzjb"
-      }
-    ],
-    ["path", { d: "M9 18h6", key: "x1upvd" }],
-    ["path", { d: "M10 22h4", key: "ceow96" }]
-  ];
-  var Lightbulb = createLucideIcon("lightbulb", __iconNode11);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/shapes.js
-  var __iconNode12 = [
-    [
-      "path",
-      {
-        d: "M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z",
-        key: "1bo67w"
-      }
-    ],
-    ["rect", { x: "3", y: "14", width: "7", height: "7", rx: "1", key: "1bkyp8" }],
-    ["circle", { cx: "17.5", cy: "17.5", r: "3.5", key: "w3z12y" }]
-  ];
-  var Shapes = createLucideIcon("shapes", __iconNode12);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/sparkles.js
-  var __iconNode13 = [
-    [
-      "path",
-      {
-        d: "M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z",
-        key: "1s2grr"
-      }
-    ],
-    ["path", { d: "M20 2v4", key: "1rf3ol" }],
-    ["path", { d: "M22 4h-4", key: "gwowj6" }],
-    ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
-  ];
-  var Sparkles = createLucideIcon("sparkles", __iconNode13);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/target.js
-  var __iconNode14 = [
-    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-    ["circle", { cx: "12", cy: "12", r: "6", key: "1vlfrh" }],
-    ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }]
-  ];
-  var Target = createLucideIcon("target", __iconNode14);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/trending-up.js
-  var __iconNode15 = [
-    ["path", { d: "M16 7h6v6", key: "box55l" }],
-    ["path", { d: "m22 7-8.5 8.5-5-5L2 17", key: "1t1m79" }]
-  ];
-  var TrendingUp = createLucideIcon("trending-up", __iconNode15);
-
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/x.js
-  var __iconNode16 = [
-    ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
-    ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
-  ];
-  var X = createLucideIcon("x", __iconNode16);
-
-  // OneDrive - Appleby College/Apps/Soul-Concept/math/FreeStudyLib.tsx
+  // math/FreeStudyLib.tsx
   var GLOBAL_STYLE = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
   :root {
@@ -21737,9 +21545,137 @@
   .syne{font-family:'Syne',sans-serif;}.mono{font-family:'JetBrains Mono',monospace;}
   .card-shadow{box-shadow:0 2px 12px rgba(15,23,42,0.06),0 1px 3px rgba(15,23,42,0.04);}
   .card-shadow-hover:hover{box-shadow:0 8px 32px rgba(99,102,241,0.13),0 2px 8px rgba(15,23,42,0.06);}
+
+  /* \u2500\u2500 NOTE CARD STYLES \u2500\u2500 */
+  .note-topic-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(15,23,42,0.07), 0 1px 4px rgba(15,23,42,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .note-topic-card:hover { box-shadow: 0 8px 36px rgba(15,23,42,0.10), 0 2px 8px rgba(15,23,42,0.06); }
+
+  /* ruled paper lines inside note body */
+  .note-ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 31px,
+      rgba(99,102,241,0.06) 31px,
+      rgba(99,102,241,0.06) 32px
+    );
+    background-size: 100% 32px;
+  }
+
+  /* KEY TERM rows */
+  .note-row-keyterm {
+    background: linear-gradient(90deg, rgba(99,102,241,0.06) 0%, rgba(99,102,241,0.02) 100%);
+    border-left: 3px solid #6366f1;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+  }
+  .note-row-keyterm .key-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #6366f1;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* STEP rows */
+  .note-row-step {
+    background: transparent;
+    position: relative;
+  }
+  .step-num-bubble {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  }
+
+  /* WARNING rows (Do NOT...) */
+  .note-row-warn {
+    background: linear-gradient(90deg, rgba(245,158,11,0.08) 0%, rgba(245,158,11,0.03) 100%);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+  }
+
+  /* EXAMPLE rows */
+  .note-row-example {
+    background: linear-gradient(90deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%);
+    border-left: 3px solid #10b981;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+  }
+
+  /* TIP rows */
+  .note-row-tip {
+    background: linear-gradient(90deg, rgba(14,165,233,0.08) 0%, rgba(14,165,233,0.02) 100%);
+    border-left: 3px solid #0ea5e9;
+    border-radius: 0 10px 10px 0;
+    margin: 2px 0;
+  }
+
+  /* REGULAR rows */
+  .note-row-regular {
+    border-left: 2px solid rgba(15,23,42,0.08);
+    margin: 2px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .note-row-regular:hover { border-left-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.02); border-radius: 0 8px 8px 0; }
+
+  /* Step connector line */
+  .steps-container { position: relative; }
+  .steps-container::before {
+    content: '';
+    position: absolute;
+    left: 13px; top: 28px; bottom: 14px;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(99,102,241,0.25), transparent);
+    border-radius: 2px;
+  }
+
+  /* Topic header collapse button */
+  .topic-header-btn { cursor: pointer; user-select: none; }
+  .topic-header-btn:hover { filter: brightness(0.97); }
+
+  @keyframes noteSlideIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  .note-body-open { animation: noteSlideIn 0.22s cubic-bezier(0.22,1,0.36,1); }
+
+  /* Formula chips */
+  .formula-chip {
+    display: inline-block;
+    background: #1e1b4b;
+    color: #a5b4fc;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin: 0 2px;
+  }
+
+  /* Worksheet answer toggle */
+  .ws-answer-reveal { animation: noteSlideIn 0.18s ease; }
 `;
   function InjectStyles() {
-    (0, import_react3.useEffect)(() => {
+    (0, import_react2.useEffect)(() => {
       const id = "mathlib-g9-styles";
       if (!document.getElementById(id)) {
         const el = document.createElement("style");
@@ -21750,12 +21686,227 @@
     }, []);
     return null;
   }
+  var GRAD_COLORS = {
+    "from-violet-500 to-purple-600": { h: "#7c3aed", m: "#a855f7", l: "#f5f3ff", ll: "#ede9fe" },
+    "from-blue-500 to-cyan-600": { h: "#2563eb", m: "#3b82f6", l: "#eff6ff", ll: "#dbeafe" },
+    "from-amber-500 to-orange-600": { h: "#d97706", m: "#f59e0b", l: "#fffbeb", ll: "#fef3c7" },
+    "from-emerald-500 to-teal-600": { h: "#059669", m: "#10b981", l: "#f0fdf4", ll: "#d1fae5" },
+    "from-rose-500 to-pink-600": { h: "#e11d48", m: "#f43f5e", l: "#fff1f2", ll: "#ffe4e6" },
+    "from-teal-500 to-cyan-600": { h: "#0d9488", m: "#14b8a6", l: "#f0fdfa", ll: "#ccfbf1" },
+    "from-indigo-500 to-purple-600": { h: "#4f46e5", m: "#6366f1", l: "#eef2ff", ll: "#e0e7ff" },
+    "from-cyan-500 to-blue-600": { h: "#0891b2", m: "#06b6d4", l: "#ecfeff", ll: "#cffafe" }
+  };
+  function getCol(gradient) {
+    return GRAD_COLORS[gradient] || { h: "#6366f1", m: "#818cf8", l: "#eef2ff", ll: "#e0e7ff" };
+  }
+  function classifyPoint(pt) {
+    if (/^(Do NOT|Do not|NEVER|Warning:|CAUTION:|NOT:|Avoid)/i.test(pt)) return "warn";
+    if (/^(Tip:|TIP:|Note:|NOTE:|Remember:|REMEMBER:|Hint:|HINT:|Pro tip)/i.test(pt)) return "tip";
+    if (/^(e\.g\.|Example:|EXAMPLE:|For example)/i.test(pt)) return "example";
+    if (/^\d+\./.test(pt)) return "step";
+    if (/^([A-Z][A-Z\s/]{2,}):/.test(pt)) return "keyterm";
+    return "regular";
+  }
+  function extractKeyTerm(pt) {
+    const m = pt.match(/^([A-Z][A-Z\s/0-9]{2,}):\s*(.*)/s);
+    return m ? { key: m[1], rest: m[2] } : null;
+  }
+  var SUP_MAP = { "0": "\u2070", "1": "\xB9", "2": "\xB2", "3": "\xB3", "4": "\u2074", "5": "\u2075", "6": "\u2076", "7": "\u2077", "8": "\u2078", "9": "\u2079", "n": "\u207F", "x": "\u02E3", "a": "\u1D43", "b": "\u1D47", "m": "\u1D50", "+": "\u207A", "-": "\u207B", "(": "\u207D", ")": "\u207E" };
+  function toSup(s) {
+    const mapped = s.split("").map((c) => SUP_MAP[c] || null);
+    if (mapped.every(Boolean)) return mapped.join("");
+    return null;
+  }
+  function mathStr(text) {
+    if (typeof text !== "string") return text;
+    let t = text.replace(/\bsqrt\b/gi, "\u221A").replace(/\bpi\b/g, "\u03C0").replace(/\btheta\b/gi, "\u03B8").replace(/\balpha\b/gi, "\u03B1").replace(/\bbeta\b/gi, "\u03B2").replace(/\binfinity\b/gi, "\u221E").replace(/\btimes\b/g, "\xD7").replace(/\bdivided by\b/gi, "\xF7").replace(/<=>/g, "\u27FA").replace(/<=/g, "\u2264").replace(/>=/g, "\u2265").replace(/!=/g, "\u2260").replace(/\.\.\./g, "\u2026").replace(/\bapprox\b/gi, "\u2248").replace(/±/g, "\xB1").replace(/\+-/g, "\xB1");
+    return t;
+  }
+  function renderMath(text) {
+    if (typeof text !== "string") return text;
+    let t = mathStr(text);
+    const tokens = [];
+    let buf = "";
+    let i = 0;
+    while (i < t.length) {
+      if (t[i] === "^") {
+        if (buf) {
+          tokens.push(buf);
+          buf = "";
+        }
+        i++;
+        let exp = "";
+        if (t[i] === "(") {
+          let depth = 1;
+          i++;
+          while (i < t.length && depth > 0) {
+            if (t[i] === "(") depth++;
+            else if (t[i] === ")") {
+              depth--;
+              if (depth === 0) {
+                i++;
+                break;
+              }
+            }
+            if (depth > 0) exp += t[i];
+            i++;
+          }
+        } else {
+          while (i < t.length && /[\w\-+]/.test(t[i])) {
+            exp += t[i];
+            i++;
+          }
+        }
+        const uni = toSup(exp);
+        if (uni) {
+          tokens.push(/* @__PURE__ */ React.createElement("span", { key: tokens.length, style: { fontSize: "0.78em", verticalAlign: "super", lineHeight: 0, fontWeight: 700 } }, uni));
+        } else {
+          tokens.push(/* @__PURE__ */ React.createElement("sup", { key: tokens.length, style: { fontSize: "0.72em", fontWeight: 700, lineHeight: 0 } }, exp));
+        }
+        continue;
+      }
+      if (t[i] === "\u221A") {
+        if (buf) {
+          tokens.push(buf);
+          buf = "";
+        }
+        i++;
+        let inner = "";
+        if (t[i] === "(") {
+          let depth = 1;
+          i++;
+          while (i < t.length && depth > 0) {
+            if (t[i] === "(") depth++;
+            else if (t[i] === ")") {
+              depth--;
+              if (depth === 0) {
+                i++;
+                break;
+              }
+            }
+            if (depth > 0) inner += t[i];
+            i++;
+          }
+        } else {
+          while (i < t.length && /[\w^.]/.test(t[i])) {
+            inner += t[i];
+            i++;
+          }
+        }
+        tokens.push(
+          /* @__PURE__ */ React.createElement("span", { key: tokens.length, style: { display: "inline-flex", alignItems: "center", gap: "1px" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "1.05em", lineHeight: 1 } }, "\u221A"), /* @__PURE__ */ React.createElement("span", { style: { borderTop: "1.5px solid currentColor", paddingTop: "1px", paddingLeft: "1px", paddingRight: "1px", lineHeight: 1.2 } }, renderMath(inner)))
+        );
+        continue;
+      }
+      buf += t[i];
+      i++;
+    }
+    if (buf) tokens.push(buf);
+    return tokens.length === 1 && typeof tokens[0] === "string" ? tokens[0] : tokens;
+  }
+  function hilite(text) {
+    if (typeof text !== "string") return text;
+    const mathRx = /([a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*(?:\^[\w()\-+/*]+|√\([^)]*\)|√\w+)[a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*|[a-zA-Z]\s*=\s*[a-zA-Z0-9^√π()+\-*/\s]+(?=[,.\s]|$)|\d+\/\d+)/g;
+    const result = renderMath(mathStr(text));
+    if (typeof result === "string") return result;
+    if (Array.isArray(result)) {
+      return result.map((tok, i) => {
+        if (typeof tok === "string") return tok;
+        return /* @__PURE__ */ React.createElement("span", { key: i, style: { background: "#1e1b4b", color: "#a5b4fc", fontFamily: "'JetBrains Mono',monospace", fontSize: "0.88em", padding: "0px 5px", borderRadius: "5px", fontWeight: 600, display: "inline-flex", alignItems: "center", verticalAlign: "middle", lineHeight: 1.5 } }, tok);
+      });
+    }
+    return result;
+  }
+  function mathRender(text) {
+    if (typeof text !== "string") return text;
+    return renderMath(mathStr(text));
+  }
+  function NoteKeyTerm({ parsed, col, idx }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { background: col.ll, borderRadius: "14px", padding: "14px 16px", marginBottom: "10px", border: `1.5px solid ${col.h}28` } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "flex-start", gap: "12px" } }, /* @__PURE__ */ React.createElement("div", { style: { flexShrink: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { background: `linear-gradient(135deg,${col.h},${col.m})`, color: "white", fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "9px", padding: "3px 10px", borderRadius: "99px", letterSpacing: "0.1em", whiteSpace: "nowrap", marginBottom: "4px" } }, "KEY TERM"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 900, fontSize: "15px", color: col.h, lineHeight: 1.1 } }, parsed.key.charAt(0) + parsed.key.slice(1).toLowerCase())), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, borderLeft: `2px solid ${col.h}30`, paddingLeft: "12px" } }, /* @__PURE__ */ React.createElement("p", { style: { fontSize: "13.5px", color: "#1e293b", lineHeight: 1.65, margin: 0 } }, hilite(parsed.rest)))));
+  }
+  function NoteStep({ num, body, col, total, gradient }) {
+    const isLast = num === String(total);
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "flex-start", gap: "14px", marginBottom: isLast ? "0" : "6px", position: "relative" } }, !isLast && /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: "18px", top: "36px", bottom: "-6px", width: "2px", background: `linear-gradient(to bottom, ${col.h}40, transparent)`, zIndex: 0 } }), /* @__PURE__ */ React.createElement("div", { style: { flexShrink: 0, width: "36px", height: "36px", borderRadius: "50%", background: `linear-gradient(135deg,${col.h},${col.m})`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontWeight: 900, fontSize: "14px", color: "white", boxShadow: `0 4px 12px ${col.h}40`, zIndex: 1, position: "relative" } }, num), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, background: "white", borderRadius: "12px", padding: "10px 14px", border: `1px solid ${col.h}18`, boxShadow: "0 1px 6px rgba(0,0,0,0.04)" } }, /* @__PURE__ */ React.createElement("p", { style: { fontSize: "13.5px", color: "#1e293b", lineHeight: 1.6, margin: 0 } }, hilite(body))));
+  }
+  function NoteWarn({ text }) {
+    const body = text.replace(/^(Do NOT|Do not|NEVER|Warning:|CAUTION:|NOT:|Avoid[:]?)\s*/i, "");
+    return /* @__PURE__ */ React.createElement("div", { style: { background: "#fff7ed", borderRadius: "14px", padding: "12px 16px", marginBottom: "10px", border: "1.5px solid #fed7aa", display: "flex", alignItems: "flex-start", gap: "10px" } }, /* @__PURE__ */ React.createElement("div", { style: { flexShrink: 0, width: "32px", height: "32px", borderRadius: "10px", background: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" } }, "\u26A0\uFE0F"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "10px", color: "#c2410c", letterSpacing: "0.1em", marginBottom: "3px" } }, "WATCH OUT"), /* @__PURE__ */ React.createElement("p", { style: { fontSize: "13.5px", color: "#7c2d12", lineHeight: 1.6, margin: 0, fontWeight: 500 } }, hilite(text))));
+  }
+  function NoteTip({ text }) {
+    const labelMatch = text.match(/^([A-Za-z\s]+):/);
+    const label = labelMatch ? labelMatch[1].toUpperCase() : "TIP";
+    const body = text.replace(/^[A-Za-z\s]+:\s*/i, "");
+    return /* @__PURE__ */ React.createElement("div", { style: { background: "#f0f9ff", borderRadius: "14px", padding: "12px 16px", marginBottom: "10px", border: "1.5px solid #bae6fd", display: "flex", alignItems: "flex-start", gap: "10px" } }, /* @__PURE__ */ React.createElement("div", { style: { flexShrink: 0, width: "32px", height: "32px", borderRadius: "10px", background: "#0ea5e9", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" } }, "\u{1F4A1}"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "10px", color: "#0369a1", letterSpacing: "0.1em", marginBottom: "3px" } }, label), /* @__PURE__ */ React.createElement("p", { style: { fontSize: "13.5px", color: "#0c4a6e", lineHeight: 1.6, margin: 0 } }, hilite(body))));
+  }
+  function NoteExample({ text }) {
+    const body = text.replace(/^(e\.g\.|Example:|EXAMPLE:|For example[,:]?)\s*/i, "");
+    return /* @__PURE__ */ React.createElement("div", { style: { background: "#f0fdf4", borderRadius: "14px", padding: "12px 16px", marginBottom: "10px", border: "1.5px solid #bbf7d0", display: "flex", alignItems: "flex-start", gap: "10px" } }, /* @__PURE__ */ React.createElement("div", { style: { flexShrink: 0, width: "32px", height: "32px", borderRadius: "10px", background: "#16a34a", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" } }, "\u270F\uFE0F"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "10px", color: "#15803d", letterSpacing: "0.1em", marginBottom: "4px" } }, "EXAMPLE"), /* @__PURE__ */ React.createElement("p", { style: { fontSize: "13px", color: "#14532d", lineHeight: 1.7, margin: 0, fontFamily: "'JetBrains Mono',monospace" } }, mathRender(body))));
+  }
+  function NoteRegular({ text, col, isWS, idx, answers }) {
+    const [open, setOpen] = (0, import_react2.useState)(false);
+    const answer = isWS && answers && answers[idx];
+    return /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "10px" } }, /* @__PURE__ */ React.createElement("div", { style: { background: "white", borderRadius: open ? "12px 12px 0 0" : "12px", padding: "11px 14px", border: `1px solid ${col.h}18`, display: "flex", alignItems: "flex-start", gap: "10px", boxShadow: "0 1px 4px rgba(0,0,0,0.035)", borderBottom: open ? `1px solid ${col.h}12` : `1px solid ${col.h}18` } }, /* @__PURE__ */ React.createElement("div", { style: { width: "7px", height: "7px", borderRadius: "50%", background: `linear-gradient(135deg,${col.h},${col.m})`, flexShrink: 0, marginTop: "6px", opacity: 0.7 } }), /* @__PURE__ */ React.createElement("p", { style: { fontSize: "13.5px", color: "#334155", lineHeight: 1.65, margin: 0, flex: 1, fontWeight: 500 } }, hilite(text)), answer && /* @__PURE__ */ React.createElement("button", { onClick: () => setOpen((o) => !o), style: { flexShrink: 0, background: open ? col.h : col.ll, color: open ? "white" : col.h, border: "none", borderRadius: "8px", padding: "4px 10px", fontSize: "11px", fontFamily: "'Syne',sans-serif", fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", marginTop: "1px", whiteSpace: "nowrap", transition: "all 0.15s" } }, open ? "Hide" : "Answer", " ", /* @__PURE__ */ React.createElement("span", { style: { fontSize: "10px", transition: "transform 0.2s", transform: open ? "rotate(180deg)" : "rotate(0deg)", display: "inline-block" } }, "\u25BE"))), answer && open && /* @__PURE__ */ React.createElement("div", { style: { background: col.ll, borderRadius: "0 0 12px 12px", padding: "11px 14px 13px 14px", borderLeft: `3px solid ${col.h}`, borderRight: `1px solid ${col.h}18`, borderBottom: `1px solid ${col.h}18`, display: "flex", alignItems: "flex-start", gap: "10px", animation: "noteSlideIn 0.18s cubic-bezier(0.22,1,0.36,1)" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "9px", color: "white", background: col.h, padding: "2px 7px", borderRadius: "99px", letterSpacing: "0.08em", whiteSpace: "nowrap", flexShrink: 0, marginTop: "2px" } }, "ANSWER"), /* @__PURE__ */ React.createElement("p", { style: { fontSize: "12.5px", color: col.h, fontFamily: "'JetBrains Mono',monospace", margin: 0, lineHeight: 1.7, fontWeight: 500, flex: 1 } }, mathRender(answer))));
+  }
+  function NoteTopicCard({ note, noteIdx, gradient, isWS, diagram }) {
+    const [open, setOpen] = (0, import_react2.useState)(true);
+    const col = getCol(gradient);
+    const types = note.points.map(classifyPoint);
+    const stepCount = types.filter((t) => t === "step").length;
+    const termCount = types.filter((t) => t === "keyterm").length;
+    const warnCount = types.filter((t) => t === "warn").length;
+    const totalSteps = stepCount;
+    let stepsSeen = 0;
+    return /* @__PURE__ */ React.createElement("div", { style: { background: "white", borderRadius: "20px", marginBottom: "16px", overflow: "hidden", boxShadow: "0 4px 20px rgba(15,23,42,0.07), 0 1px 4px rgba(15,23,42,0.04)" } }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpen((o) => !o), style: { width: "100%", textAlign: "left", cursor: "pointer", background: "none", border: "none", padding: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { background: `linear-gradient(135deg, ${col.ll}, ${col.l} 60%, white)`, padding: "16px 20px", borderBottom: open ? `1px solid ${col.h}18` : "none", display: "flex", alignItems: "center", gap: "12px" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "26px", lineHeight: 1, flexShrink: 0 } }, note.emoji), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 900, fontSize: "15px", color: col.h, lineHeight: 1.2, marginBottom: "5px" } }, note.subtitle), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "6px", flexWrap: "wrap" } }, stepCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { fontSize: "10px", background: `${col.h}18`, color: col.h, padding: "2px 8px", borderRadius: "99px", fontWeight: 700, fontFamily: "'Syne',sans-serif" } }, "\u{1F4CB} ", stepCount, " steps"), termCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { fontSize: "10px", background: "rgba(99,102,241,0.1)", color: "#4338ca", padding: "2px 8px", borderRadius: "99px", fontWeight: 700, fontFamily: "'Syne',sans-serif" } }, "\u{1F4D6} ", termCount, " vocab"), warnCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { fontSize: "10px", background: "rgba(249,115,22,0.1)", color: "#c2410c", padding: "2px 8px", borderRadius: "99px", fontWeight: 700, fontFamily: "'Syne',sans-serif" } }, "\u26A0\uFE0F ", warnCount, " mistake alert"))), /* @__PURE__ */ React.createElement("div", { style: { color: col.h, fontSize: "22px", lineHeight: 1, transition: "transform 0.25s", transform: open ? "rotate(180deg)" : "rotate(0deg)", flexShrink: 0 } }, "\u2304"))), open && /* @__PURE__ */ React.createElement("div", { style: { padding: "16px", background: `linear-gradient(180deg, ${col.l}60, white 80px)`, animation: "noteSlideIn 0.22s cubic-bezier(0.22,1,0.36,1)" } }, (() => {
+      const rendered = [];
+      const steps = [];
+      note.points.forEach((pt, pi) => {
+        const type = classifyPoint(pt);
+        const flushSteps = () => {
+          if (steps.length > 0) {
+            rendered.push(
+              /* @__PURE__ */ React.createElement("div", { key: `steps-${pi}`, style: { marginBottom: "12px", padding: "4px 0" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "1.5px", flex: 1, background: `linear-gradient(to right, ${col.h}30, transparent)` } }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: "10px", color: col.m, fontFamily: "'Syne',sans-serif", fontWeight: 700, letterSpacing: "0.1em" } }, "STEPS"), /* @__PURE__ */ React.createElement("div", { style: { height: "1.5px", flex: 1, background: `linear-gradient(to left, ${col.h}30, transparent)` } })), /* @__PURE__ */ React.createElement("div", { style: { position: "relative" } }, steps.map((s, si) => /* @__PURE__ */ React.createElement(NoteStep, { key: si, num: s.num, body: s.body, col, total: steps.length, gradient }))))
+            );
+            steps.length = 0;
+          }
+        };
+        if (type === "step" && !isWS) {
+          const num = pt.match(/^(\d+)/)?.[1];
+          const body = pt.replace(/^\d+\.\s*/, "");
+          steps.push({ num, body, pi });
+        } else {
+          flushSteps();
+          if (type === "keyterm") {
+            const parsed = extractKeyTerm(pt);
+            if (parsed) {
+              rendered.push(/* @__PURE__ */ React.createElement(NoteKeyTerm, { key: pi, parsed, col, idx: pi }));
+            } else {
+              rendered.push(/* @__PURE__ */ React.createElement(NoteRegular, { key: pi, text: pt, col, isWS, idx: pi, answers: note.answers }));
+            }
+          } else if (type === "warn") {
+            rendered.push(/* @__PURE__ */ React.createElement(NoteWarn, { key: pi, text: pt }));
+          } else if (type === "tip") {
+            rendered.push(/* @__PURE__ */ React.createElement(NoteTip, { key: pi, text: pt }));
+          } else if (type === "example") {
+            rendered.push(/* @__PURE__ */ React.createElement(NoteExample, { key: pi, text: pt }));
+          } else {
+            rendered.push(/* @__PURE__ */ React.createElement(NoteRegular, { key: pi, text: pt, col, isWS, idx: pi, answers: note.answers }));
+          }
+        }
+      });
+      if (steps.length > 0) {
+        rendered.push(
+          /* @__PURE__ */ React.createElement("div", { key: "steps-end", style: { marginBottom: "12px", padding: "4px 0" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "1.5px", flex: 1, background: `linear-gradient(to right, ${col.h}30, transparent)` } }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: "10px", color: col.m, fontFamily: "'Syne',sans-serif", fontWeight: 700, letterSpacing: "0.1em" } }, "STEPS"), /* @__PURE__ */ React.createElement("div", { style: { height: "1.5px", flex: 1, background: `linear-gradient(to left, ${col.h}30, transparent)` } })), /* @__PURE__ */ React.createElement("div", { style: { position: "relative" } }, steps.map((s, si) => /* @__PURE__ */ React.createElement(NoteStep, { key: si, num: s.num, body: s.body, col, total: steps.length, gradient }))))
+        );
+      }
+      return rendered;
+    })(), diagram && /* @__PURE__ */ React.createElement("div", { style: { marginTop: "16px", paddingTop: "16px", borderTop: `2px dashed ${col.h}20` } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("span", { style: { width: "4px", height: "16px", borderRadius: "2px", background: `linear-gradient(to bottom,${col.h},${col.m})`, display: "inline-block" } }), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "11px", color: col.h, letterSpacing: "0.08em" } }, "INTERACTIVE DIAGRAM")), diagram)));
+  }
   function DiagramCard({ title, children, color = "slate" }) {
     const borders = { purple: "border-purple-200", blue: "border-blue-200", teal: "border-teal-200", amber: "border-amber-200", green: "border-green-200", slate: "border-slate-200", indigo: "border-indigo-200", rose: "border-rose-200" };
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-white rounded-2xl border-2 ${borders[color] || "border-slate-200"} shadow-md overflow-hidden` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-4 py-2.5 bg-slate-50 border-b border-slate-100 flex items-center gap-2" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-2 h-2 rounded-full bg-${color}-400` }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs font-semibold text-slate-600 uppercase tracking-wider" }, title)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "p-4" }, children));
+    return /* @__PURE__ */ React.createElement("div", { className: `bg-white rounded-2xl border-2 ${borders[color] || "border-slate-200"} shadow-md overflow-hidden` }, /* @__PURE__ */ React.createElement("div", { className: "px-4 py-2.5 bg-slate-50 border-b border-slate-100 flex items-center gap-2" }, /* @__PURE__ */ React.createElement("div", { className: `w-2 h-2 rounded-full bg-${color}-400` }), /* @__PURE__ */ React.createElement("span", { className: "text-xs font-semibold text-slate-600 uppercase tracking-wider" }, title)), /* @__PURE__ */ React.createElement("div", { className: "p-4" }, children));
   }
   function SlopeDiagram() {
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Slope: Rise over Run", color: "blue" }, /* @__PURE__ */ import_react3.default.createElement("svg", { width: 320, height: 190, className: "mx-auto block" }, [0, 1, 2, 3, 4, 5, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("g", { key: v }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: 40 + v * 40, y1: 20, x2: 40 + v * 40, y2: 160, stroke: "#f1f5f9", strokeWidth: "1" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 40, y1: 20 + v * 23, x2: 280, y2: 20 + v * 23, stroke: "#f1f5f9", strokeWidth: "1" }))), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 40, y1: 160, x2: 280, y2: 160, stroke: "#cbd5e1", strokeWidth: "1.5" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 40, y1: 20, x2: 40, y2: 160, stroke: "#cbd5e1", strokeWidth: "1.5" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 60, y1: 145, x2: 260, y2: 45, stroke: "#3b82f6", strokeWidth: "2.5", strokeLinecap: "round" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 100, y1: 118, x2: 220, y2: 118, stroke: "#10b981", strokeWidth: "2", strokeDasharray: "5,3" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 220, y1: 118, x2: 220, y2: 60, stroke: "#ef4444", strokeWidth: "2", strokeDasharray: "5,3" }), /* @__PURE__ */ import_react3.default.createElement("circle", { cx: 100, cy: 118, r: "5", fill: "#3b82f6", stroke: "white", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("circle", { cx: 220, cy: 60, r: "5", fill: "#3b82f6", stroke: "white", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("text", { x: 94, y: 136, fontSize: "11", fill: "#374151", fontWeight: "bold" }, "(x1,y1)"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 224, y: 54, fontSize: "11", fill: "#374151", fontWeight: "bold" }, "(x2,y2)"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 160, y: 132, textAnchor: "middle", fontSize: "12", fill: "#10b981", fontWeight: "bold" }, "run"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 232, y: 92, fontSize: "12", fill: "#ef4444", fontWeight: "bold" }, "rise")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-2 bg-blue-50 rounded-xl p-3 text-center" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base font-bold text-blue-800" }, "m = rise / run = (y2 - y1) / (x2 - x1)"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs text-slate-500 mt-1" }, "Positive: rises left to right. Negative: falls. Zero: horizontal. Undefined: vertical.")));
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Slope: Rise over Run", color: "blue" }, /* @__PURE__ */ React.createElement("svg", { width: 320, height: 190, className: "mx-auto block" }, [0, 1, 2, 3, 4, 5, 6].map((v) => /* @__PURE__ */ React.createElement("g", { key: v }, /* @__PURE__ */ React.createElement("line", { x1: 40 + v * 40, y1: 20, x2: 40 + v * 40, y2: 160, stroke: "#f1f5f9", strokeWidth: "1" }), /* @__PURE__ */ React.createElement("line", { x1: 40, y1: 20 + v * 23, x2: 280, y2: 20 + v * 23, stroke: "#f1f5f9", strokeWidth: "1" }))), /* @__PURE__ */ React.createElement("line", { x1: 40, y1: 160, x2: 280, y2: 160, stroke: "#cbd5e1", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("line", { x1: 40, y1: 20, x2: 40, y2: 160, stroke: "#cbd5e1", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("line", { x1: 60, y1: 145, x2: 260, y2: 45, stroke: "#3b82f6", strokeWidth: "2.5", strokeLinecap: "round" }), /* @__PURE__ */ React.createElement("line", { x1: 100, y1: 118, x2: 220, y2: 118, stroke: "#10b981", strokeWidth: "2", strokeDasharray: "5,3" }), /* @__PURE__ */ React.createElement("line", { x1: 220, y1: 118, x2: 220, y2: 60, stroke: "#ef4444", strokeWidth: "2", strokeDasharray: "5,3" }), /* @__PURE__ */ React.createElement("circle", { cx: 100, cy: 118, r: "5", fill: "#3b82f6", stroke: "white", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("circle", { cx: 220, cy: 60, r: "5", fill: "#3b82f6", stroke: "white", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("text", { x: 94, y: 136, fontSize: "11", fill: "#374151", fontWeight: "bold" }, "(x1,y1)"), /* @__PURE__ */ React.createElement("text", { x: 224, y: 54, fontSize: "11", fill: "#374151", fontWeight: "bold" }, "(x2,y2)"), /* @__PURE__ */ React.createElement("text", { x: 160, y: 132, textAnchor: "middle", fontSize: "12", fill: "#10b981", fontWeight: "bold" }, "run"), /* @__PURE__ */ React.createElement("text", { x: 232, y: 92, fontSize: "12", fill: "#ef4444", fontWeight: "bold" }, "rise")), /* @__PURE__ */ React.createElement("div", { className: "mt-2 bg-blue-50 rounded-xl p-3 text-center" }, /* @__PURE__ */ React.createElement("p", { className: "text-base font-bold text-blue-800" }, "m = rise / run = (y2 - y1) / (x2 - x1)"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-slate-500 mt-1" }, "Positive: rises left to right. Negative: falls. Zero: horizontal. Undefined: vertical.")));
   }
   function LinearGraphDiagram() {
     const W = 320, H = 220, cx = 160, cy = 110, sc = 20;
@@ -21764,15 +21915,15 @@
       { m: 2, b: -2, color: "#10b981", label: "y=2x-2 (m=2,b=-2)" },
       { m: -1, b: 3, color: "#ef4444", label: "y=-x+3 (m=-1,b=3)" }
     ];
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Linear Functions: y=mx+b", color: "indigo" }, /* @__PURE__ */ import_react3.default.createElement("svg", { width: W, height: H, className: "mx-auto block" }, [-5, -3, -1, 1, 3, 5].map((v) => /* @__PURE__ */ import_react3.default.createElement("g", { key: v }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx + v * sc, y1: 10, x2: cx + v * sc, y2: H - 10, stroke: "#f1f5f9", strokeWidth: "1" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy - v * sc, x2: W - 10, y2: cy - v * sc, stroke: "#f1f5f9", strokeWidth: "1" }))), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#cbd5e1", strokeWidth: "1.5" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#cbd5e1", strokeWidth: "1.5" }), lines.map(({ m, b, color }) => {
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Linear Functions: y=mx+b", color: "indigo" }, /* @__PURE__ */ React.createElement("svg", { width: W, height: H, className: "mx-auto block" }, [-5, -3, -1, 1, 3, 5].map((v) => /* @__PURE__ */ React.createElement("g", { key: v }, /* @__PURE__ */ React.createElement("line", { x1: cx + v * sc, y1: 10, x2: cx + v * sc, y2: H - 10, stroke: "#f1f5f9", strokeWidth: "1" }), /* @__PURE__ */ React.createElement("line", { x1: 10, y1: cy - v * sc, x2: W - 10, y2: cy - v * sc, stroke: "#f1f5f9", strokeWidth: "1" }))), /* @__PURE__ */ React.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#cbd5e1", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#cbd5e1", strokeWidth: "1.5" }), lines.map(({ m, b, color }) => {
       const pts = [];
       for (let x = -7; x <= 7; x += 0.5) {
         const y = m * x + b;
         if (y < -6 || y > 6) continue;
         pts.push(`${cx + x * sc},${cy - y * sc}`);
       }
-      return pts.length > 1 ? /* @__PURE__ */ import_react3.default.createElement("path", { key: color, d: "M " + pts.join(" L "), fill: "none", stroke: color, strokeWidth: "2", strokeLinecap: "round" }) : null;
-    }), lines.map(({ color, label }, i) => /* @__PURE__ */ import_react3.default.createElement("g", { key: i, transform: `translate(10,${H - 52 + i * 16})` }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: "0", y1: "5", x2: "14", y2: "5", stroke: color, strokeWidth: "2.5" }), /* @__PURE__ */ import_react3.default.createElement("text", { x: "18", y: "9", fontSize: "10", fill: color, fontWeight: "bold" }, label)))));
+      return pts.length > 1 ? /* @__PURE__ */ React.createElement("path", { key: color, d: "M " + pts.join(" L "), fill: "none", stroke: color, strokeWidth: "2", strokeLinecap: "round" }) : null;
+    }), lines.map(({ color, label }, i) => /* @__PURE__ */ React.createElement("g", { key: i, transform: `translate(10,${H - 52 + i * 16})` }, /* @__PURE__ */ React.createElement("line", { x1: "0", y1: "5", x2: "14", y2: "5", stroke: color, strokeWidth: "2.5" }), /* @__PURE__ */ React.createElement("text", { x: "18", y: "9", fontSize: "10", fill: color, fontWeight: "bold" }, label)))));
   }
   function SystemTypesDiagram() {
     const W = 340, H = 200, sc = 16, pw = 340 / 3, ph = 200;
@@ -21781,7 +21932,7 @@
       { label: "No Solution", sub: "Parallel lines", color: "#ef4444", m1: 1, b1: -2, m2: 1, b2: 2 },
       { label: "Infinite Solutions", sub: "Same line", color: "#f59e0b", m1: 1, b1: 0, m2: 1, b2: 0 }
     ];
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Types of Linear System Solutions", color: "blue" }, /* @__PURE__ */ import_react3.default.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50" }, panels.map(({ label, sub, color, m1, b1, m2, b2 }, pi) => {
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Types of Linear System Solutions", color: "blue" }, /* @__PURE__ */ React.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50" }, panels.map(({ label, sub, color, m1, b1, m2, b2 }, pi) => {
       const ox = pi * pw + pw / 2, oy = ph / 2 - 12;
       const mkLine = (m, b, stroke) => {
         const pts = [];
@@ -21790,46 +21941,46 @@
           if (y < -5 || y > 5) continue;
           pts.push(`${ox + x * sc},${oy - y * sc}`);
         }
-        return pts.length > 1 ? /* @__PURE__ */ import_react3.default.createElement("path", { key: stroke, d: "M " + pts.join(" L "), fill: "none", stroke, strokeWidth: "2", strokeLinecap: "round" }) : null;
+        return pts.length > 1 ? /* @__PURE__ */ React.createElement("path", { key: stroke, d: "M " + pts.join(" L "), fill: "none", stroke, strokeWidth: "2", strokeLinecap: "round" }) : null;
       };
       let ix = null;
       if (pi === 0 && m1 !== m2) {
         const ixv = (b2 - b1) / (m1 - m2), iyv = m1 * ixv + b1;
         ix = { x: ox + ixv * sc, y: oy - iyv * sc };
       }
-      return /* @__PURE__ */ import_react3.default.createElement("g", { key: pi }, /* @__PURE__ */ import_react3.default.createElement("rect", { x: pi * pw + 2, y: 2, width: pw - 4, height: ph - 4, rx: "8", fill: "white", stroke: "#e2e8f0" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: pi * pw + 6, y1: oy, x2: (pi + 1) * pw - 6, y2: oy, stroke: "#cbd5e1", strokeWidth: "1" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: ox, y1: 8, x2: ox, y2: ph - 44, stroke: "#cbd5e1", strokeWidth: "1" }), mkLine(m1, b1, color), mkLine(m2, b2, pi === 2 ? "#f59e0b88" : "#3b82f6"), ix && /* @__PURE__ */ import_react3.default.createElement("circle", { cx: ix.x, cy: ix.y, r: "5", fill: color, stroke: "white", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("text", { x: ox, y: ph - 30, textAnchor: "middle", fontSize: "10", fill: color, fontWeight: "bold" }, label), /* @__PURE__ */ import_react3.default.createElement("text", { x: ox, y: ph - 17, textAnchor: "middle", fontSize: "9", fill: "#64748b" }, sub));
+      return /* @__PURE__ */ React.createElement("g", { key: pi }, /* @__PURE__ */ React.createElement("rect", { x: pi * pw + 2, y: 2, width: pw - 4, height: ph - 4, rx: "8", fill: "white", stroke: "#e2e8f0" }), /* @__PURE__ */ React.createElement("line", { x1: pi * pw + 6, y1: oy, x2: (pi + 1) * pw - 6, y2: oy, stroke: "#cbd5e1", strokeWidth: "1" }), /* @__PURE__ */ React.createElement("line", { x1: ox, y1: 8, x2: ox, y2: ph - 44, stroke: "#cbd5e1", strokeWidth: "1" }), mkLine(m1, b1, color), mkLine(m2, b2, pi === 2 ? "#f59e0b88" : "#3b82f6"), ix && /* @__PURE__ */ React.createElement("circle", { cx: ix.x, cy: ix.y, r: "5", fill: color, stroke: "white", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("text", { x: ox, y: ph - 30, textAnchor: "middle", fontSize: "10", fill: color, fontWeight: "bold" }, label), /* @__PURE__ */ React.createElement("text", { x: ox, y: ph - 17, textAnchor: "middle", fontSize: "9", fill: "#64748b" }, sub));
     })));
   }
   function NumberSetsDiagram() {
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Real Number System", color: "purple" }, /* @__PURE__ */ import_react3.default.createElement("svg", { width: 320, height: 200, className: "mx-auto block" }, /* @__PURE__ */ import_react3.default.createElement("ellipse", { cx: 160, cy: 100, rx: 148, ry: 88, fill: "#faf5ff", stroke: "#a855f7", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("ellipse", { cx: 160, cy: 108, rx: 118, ry: 68, fill: "#eff6ff", stroke: "#3b82f6", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("ellipse", { cx: 160, cy: 115, rx: 88, ry: 50, fill: "#f0fdf4", stroke: "#10b981", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("ellipse", { cx: 160, cy: 120, rx: 58, ry: 34, fill: "#fefce8", stroke: "#f59e0b", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("ellipse", { cx: 160, cy: 124, rx: 28, ry: 18, fill: "#fff1f2", stroke: "#ef4444", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("text", { x: 160, y: 128, textAnchor: "middle", fontSize: "9", fill: "#dc2626", fontWeight: "bold" }, "Natural N"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 160, y: 153, textAnchor: "middle", fontSize: "9", fill: "#b45309", fontWeight: "bold" }, "Integer Z"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 160, y: 169, textAnchor: "middle", fontSize: "9", fill: "#059669", fontWeight: "bold" }, "Rational Q"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 160, y: 46, textAnchor: "middle", fontSize: "9", fill: "#1d4ed8", fontWeight: "bold" }, "Irrational"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 18, y: 28, fontSize: "9", fill: "#7c3aed", fontWeight: "bold" }, "Real R"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 82, y: 75, textAnchor: "middle", fontSize: "8", fill: "#3b82f6" }, "sqrt(2), pi"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 238, y: 115, textAnchor: "middle", fontSize: "8", fill: "#059669" }, "1/2, 0.33..."), /* @__PURE__ */ import_react3.default.createElement("text", { x: 88, y: 148, textAnchor: "middle", fontSize: "8", fill: "#b45309" }, "-3, -1"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 155, y: 122, textAnchor: "middle", fontSize: "8", fill: "#dc2626" }, "1,2,3")), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs text-slate-500 text-center mt-1" }, "Every inner set is contained within the larger set around it."));
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Real Number System", color: "purple" }, /* @__PURE__ */ React.createElement("svg", { width: 320, height: 200, className: "mx-auto block" }, /* @__PURE__ */ React.createElement("ellipse", { cx: 160, cy: 100, rx: 148, ry: 88, fill: "#faf5ff", stroke: "#a855f7", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("ellipse", { cx: 160, cy: 108, rx: 118, ry: 68, fill: "#eff6ff", stroke: "#3b82f6", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("ellipse", { cx: 160, cy: 115, rx: 88, ry: 50, fill: "#f0fdf4", stroke: "#10b981", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("ellipse", { cx: 160, cy: 120, rx: 58, ry: 34, fill: "#fefce8", stroke: "#f59e0b", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("ellipse", { cx: 160, cy: 124, rx: 28, ry: 18, fill: "#fff1f2", stroke: "#ef4444", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("text", { x: 160, y: 128, textAnchor: "middle", fontSize: "9", fill: "#dc2626", fontWeight: "bold" }, "Natural N"), /* @__PURE__ */ React.createElement("text", { x: 160, y: 153, textAnchor: "middle", fontSize: "9", fill: "#b45309", fontWeight: "bold" }, "Integer Z"), /* @__PURE__ */ React.createElement("text", { x: 160, y: 169, textAnchor: "middle", fontSize: "9", fill: "#059669", fontWeight: "bold" }, "Rational Q"), /* @__PURE__ */ React.createElement("text", { x: 160, y: 46, textAnchor: "middle", fontSize: "9", fill: "#1d4ed8", fontWeight: "bold" }, "Irrational"), /* @__PURE__ */ React.createElement("text", { x: 18, y: 28, fontSize: "9", fill: "#7c3aed", fontWeight: "bold" }, "Real R"), /* @__PURE__ */ React.createElement("text", { x: 82, y: 75, textAnchor: "middle", fontSize: "8", fill: "#3b82f6" }, "sqrt(2), pi"), /* @__PURE__ */ React.createElement("text", { x: 238, y: 115, textAnchor: "middle", fontSize: "8", fill: "#059669" }, "1/2, 0.33..."), /* @__PURE__ */ React.createElement("text", { x: 88, y: 148, textAnchor: "middle", fontSize: "8", fill: "#b45309" }, "-3, -1"), /* @__PURE__ */ React.createElement("text", { x: 155, y: 122, textAnchor: "middle", fontSize: "8", fill: "#dc2626" }, "1,2,3")), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-slate-500 text-center mt-1" }, "Every inner set is contained within the larger set around it."));
   }
   function ExponentDiagram() {
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Exponent Laws Summary", color: "amber" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid grid-cols-2 gap-2 text-xs" }, [
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Exponent Laws Summary", color: "amber" }, /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-2 text-xs" }, [
       ["Product", "a^m * a^n = a^(m+n)", "2^3 * 2^2 = 2^5 = 32"],
       ["Quotient", "a^m / a^n = a^(m-n)", "5^4 / 5^2 = 5^2 = 25"],
       ["Power of Power", "(a^m)^n = a^(mn)", "(3^2)^3 = 3^6 = 729"],
       ["Zero Exponent", "a^0 = 1", "7^0 = 1"],
       ["Negative Exponent", "a^(-n) = 1/a^n", "2^(-3) = 1/8"],
       ["Fractional Exp.", "a^(1/n) = nth root of a", "8^(1/3) = 2"]
-    ].map(([name, rule, ex]) => /* @__PURE__ */ import_react3.default.createElement("div", { key: name, className: "bg-amber-50 rounded-xl p-2.5 border border-amber-200" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-amber-800 mb-1" }, name), /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-mono text-slate-700" }, rule), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-slate-500 mt-1" }, "e.g. ", ex)))));
+    ].map(([name, rule, ex]) => /* @__PURE__ */ React.createElement("div", { key: name, className: "bg-amber-50 rounded-xl p-2.5 border border-amber-200" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-amber-800 mb-1" }, name), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-slate-700" }, rule), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500 mt-1" }, "e.g. ", ex)))));
   }
   function PolyAnatomyDiagram() {
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Parts of a Polynomial", color: "green" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex flex-col gap-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-green-50 rounded-2xl p-4 text-center" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-2xl font-mono font-bold text-green-800" }, "3x^2 - 5x + 7")), /* @__PURE__ */ import_react3.default.createElement("svg", { width: 300, height: 90, className: "mx-auto block" }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: 60, y1: 20, x2: 60, y2: 55, stroke: "#6366f1", strokeWidth: "1.5" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 150, y1: 20, x2: 150, y2: 55, stroke: "#ef4444", strokeWidth: "1.5" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 240, y1: 20, x2: 240, y2: 55, stroke: "#f59e0b", strokeWidth: "1.5" }), /* @__PURE__ */ import_react3.default.createElement("text", { x: 60, y: 70, textAnchor: "middle", fontSize: "11", fill: "#4338ca", fontWeight: "bold" }, "3x^2"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 60, y: 84, textAnchor: "middle", fontSize: "9", fill: "#6366f1" }, "leading term"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 150, y: 70, textAnchor: "middle", fontSize: "11", fill: "#b91c1c", fontWeight: "bold" }, "-5x"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 150, y: 84, textAnchor: "middle", fontSize: "9", fill: "#ef4444" }, "middle term"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 240, y: 70, textAnchor: "middle", fontSize: "11", fill: "#b45309", fontWeight: "bold" }, "+7"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 240, y: 84, textAnchor: "middle", fontSize: "9", fill: "#f59e0b" }, "constant")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid grid-cols-3 gap-2 text-xs text-center" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-indigo-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-indigo-700" }, "Degree"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-slate-500" }, "Highest exponent = 2")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-red-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-red-700" }, "Lead Coeff."), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-slate-500" }, "Number in front = 3")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-amber-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-amber-700" }, "Terms"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-slate-500" }, "3 terms = trinomial")))));
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Parts of a Polynomial", color: "green" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-3" }, /* @__PURE__ */ React.createElement("div", { className: "bg-green-50 rounded-2xl p-4 text-center" }, /* @__PURE__ */ React.createElement("p", { className: "text-2xl font-mono font-bold text-green-800" }, "3x^2 - 5x + 7")), /* @__PURE__ */ React.createElement("svg", { width: 300, height: 90, className: "mx-auto block" }, /* @__PURE__ */ React.createElement("line", { x1: 60, y1: 20, x2: 60, y2: 55, stroke: "#6366f1", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("line", { x1: 150, y1: 20, x2: 150, y2: 55, stroke: "#ef4444", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("line", { x1: 240, y1: 20, x2: 240, y2: 55, stroke: "#f59e0b", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("text", { x: 60, y: 70, textAnchor: "middle", fontSize: "11", fill: "#4338ca", fontWeight: "bold" }, "3x^2"), /* @__PURE__ */ React.createElement("text", { x: 60, y: 84, textAnchor: "middle", fontSize: "9", fill: "#6366f1" }, "leading term"), /* @__PURE__ */ React.createElement("text", { x: 150, y: 70, textAnchor: "middle", fontSize: "11", fill: "#b91c1c", fontWeight: "bold" }, "-5x"), /* @__PURE__ */ React.createElement("text", { x: 150, y: 84, textAnchor: "middle", fontSize: "9", fill: "#ef4444" }, "middle term"), /* @__PURE__ */ React.createElement("text", { x: 240, y: 70, textAnchor: "middle", fontSize: "11", fill: "#b45309", fontWeight: "bold" }, "+7"), /* @__PURE__ */ React.createElement("text", { x: 240, y: 84, textAnchor: "middle", fontSize: "9", fill: "#f59e0b" }, "constant")), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-3 gap-2 text-xs text-center" }, /* @__PURE__ */ React.createElement("div", { className: "bg-indigo-50 rounded-lg p-2" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-indigo-700" }, "Degree"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "Highest exponent = 2")), /* @__PURE__ */ React.createElement("div", { className: "bg-red-50 rounded-lg p-2" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-red-700" }, "Lead Coeff."), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "Number in front = 3")), /* @__PURE__ */ React.createElement("div", { className: "bg-amber-50 rounded-lg p-2" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-amber-700" }, "Terms"), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, "3 terms = trinomial")))));
   }
   function MeasurementDiagram() {
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Area and Perimeter Formulas", color: "teal" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid grid-cols-2 gap-2 text-xs" }, [
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Area and Perimeter Formulas", color: "teal" }, /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-2 text-xs" }, [
       { shape: "Rectangle", area: "A = l x w", perim: "P = 2(l + w)" },
       { shape: "Triangle", area: "A = (1/2)bh", perim: "P = a + b + c" },
       { shape: "Circle", area: "A = pi*r^2", perim: "C = 2*pi*r" },
       { shape: "Trapezoid", area: "A = (1/2)(a+b)h", perim: "P = a+b+c+d" }
-    ].map(({ shape, area, perim }) => /* @__PURE__ */ import_react3.default.createElement("div", { key: shape, className: "bg-teal-50 rounded-xl p-2.5 border border-teal-200" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-teal-800 mb-1" }, shape), /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-mono text-slate-700" }, area), /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-mono text-slate-500" }, perim)))));
+    ].map(({ shape, area, perim }) => /* @__PURE__ */ React.createElement("div", { key: shape, className: "bg-teal-50 rounded-xl p-2.5 border border-teal-200" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-teal-800 mb-1" }, shape), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-slate-700" }, area), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-slate-500" }, perim)))));
   }
   function PythagoreanDiagram() {
-    return /* @__PURE__ */ import_react3.default.createElement(DiagramCard, { title: "Pythagorean Theorem", color: "rose" }, /* @__PURE__ */ import_react3.default.createElement("svg", { width: 280, height: 210, className: "mx-auto block" }, /* @__PURE__ */ import_react3.default.createElement("polygon", { points: "50,170 220,170 50,60", fill: "#fff1f2", stroke: "none" }), /* @__PURE__ */ import_react3.default.createElement("rect", { x: 50, y: 154, width: 16, height: 16, fill: "none", stroke: "#be123c", strokeWidth: "1.5" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 50, y1: 170, x2: 220, y2: 170, stroke: "#10b981", strokeWidth: "3", strokeLinecap: "round" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 50, y1: 170, x2: 50, y2: 60, stroke: "#a855f7", strokeWidth: "3", strokeLinecap: "round" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 220, y1: 170, x2: 50, y2: 60, stroke: "#ef4444", strokeWidth: "3", strokeLinecap: "round" }), /* @__PURE__ */ import_react3.default.createElement("text", { x: 135, y: 188, textAnchor: "middle", fontSize: "13", fill: "#059669", fontWeight: "bold" }, "a"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 32, y: 115, textAnchor: "middle", fontSize: "13", fill: "#7c3aed", fontWeight: "bold" }, "b"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 155, y: 105, textAnchor: "middle", fontSize: "13", fill: "#dc2626", fontWeight: "bold" }, "c (hyp)"), /* @__PURE__ */ import_react3.default.createElement("text", { x: 58, y: 165, fontSize: "10", fill: "#be123c", fontWeight: "bold" }, "90")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-2 bg-rose-50 rounded-xl p-3 text-center" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-lg font-bold font-mono text-rose-800" }, "a^2 + b^2 = c^2"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs text-slate-500 mt-1" }, "c is always the hypotenuse (longest side, opposite the 90 degree angle)")));
+    return /* @__PURE__ */ React.createElement(DiagramCard, { title: "Pythagorean Theorem", color: "rose" }, /* @__PURE__ */ React.createElement("svg", { width: 280, height: 210, className: "mx-auto block" }, /* @__PURE__ */ React.createElement("polygon", { points: "50,170 220,170 50,60", fill: "#fff1f2", stroke: "none" }), /* @__PURE__ */ React.createElement("rect", { x: 50, y: 154, width: 16, height: 16, fill: "none", stroke: "#be123c", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("line", { x1: 50, y1: 170, x2: 220, y2: 170, stroke: "#10b981", strokeWidth: "3", strokeLinecap: "round" }), /* @__PURE__ */ React.createElement("line", { x1: 50, y1: 170, x2: 50, y2: 60, stroke: "#a855f7", strokeWidth: "3", strokeLinecap: "round" }), /* @__PURE__ */ React.createElement("line", { x1: 220, y1: 170, x2: 50, y2: 60, stroke: "#ef4444", strokeWidth: "3", strokeLinecap: "round" }), /* @__PURE__ */ React.createElement("text", { x: 135, y: 188, textAnchor: "middle", fontSize: "13", fill: "#059669", fontWeight: "bold" }, "a"), /* @__PURE__ */ React.createElement("text", { x: 32, y: 115, textAnchor: "middle", fontSize: "13", fill: "#7c3aed", fontWeight: "bold" }, "b"), /* @__PURE__ */ React.createElement("text", { x: 155, y: 105, textAnchor: "middle", fontSize: "13", fill: "#dc2626", fontWeight: "bold" }, "c (hyp)"), /* @__PURE__ */ React.createElement("text", { x: 58, y: 165, fontSize: "10", fill: "#be123c", fontWeight: "bold" }, "90")), /* @__PURE__ */ React.createElement("div", { className: "mt-2 bg-rose-50 rounded-xl p-3 text-center" }, /* @__PURE__ */ React.createElement("p", { className: "text-lg font-bold font-mono text-rose-800" }, "a^2 + b^2 = c^2"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-slate-500 mt-1" }, "c is always the hypotenuse (longest side, opposite the 90 degree angle)")));
   }
   function SlopeExplorer() {
-    const [m, setM] = (0, import_react3.useState)(1);
-    const [b, setB] = (0, import_react3.useState)(0);
+    const [m, setM] = (0, import_react2.useState)(1);
+    const [b, setB] = (0, import_react2.useState)(0);
     const W = 340, H = 260, cx = 170, cy = 130, sc = 22;
     const pts = [];
     for (let x = -8; x <= 8; x += 0.5) {
@@ -21840,14 +21991,13 @@
     const d = pts.length > 1 ? "M " + pts.join(" L ") : "";
     const yInt = cy - b * sc;
     const xInt = m !== 0 ? cx + -b / m * sc : null;
-    const slopeDesc = m > 0 ? "Rising" : "m<0" ? m < 0 ? "Falling" : "Horizontal" : "Horizontal";
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2 mb-3 flex-wrap" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "\xF0\u0178\u201C\u02C6"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "text-lg font-bold text-indigo-800" }, "Slope-Intercept Explorer"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "ml-auto text-sm font-mono bg-indigo-50 px-3 py-1 rounded-full text-indigo-700" }, "y = ", m, "x ", b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`)), /* @__PURE__ */ import_react3.default.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50 border border-slate-200" }, [-6, -4, -2, 0, 2, 4, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("g", { key: v }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx + v * sc, y1: 10, x2: cx + v * sc, y2: H - 10, stroke: "#e2e8f0", strokeWidth: "1" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy - v * sc, x2: W - 10, y2: cy - v * sc, stroke: "#e2e8f0", strokeWidth: "1" }))), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#94a3b8", strokeWidth: "2" }), [-6, -4, -2, 2, 4, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("text", { key: v, x: cx + v * sc, y: cy + 14, textAnchor: "middle", fontSize: "9", fill: "#94a3b8" }, v)), d && /* @__PURE__ */ import_react3.default.createElement("path", { d, fill: "none", stroke: "#6366f1", strokeWidth: "2.5", strokeLinecap: "round" }), yInt > 10 && yInt < H - 10 && /* @__PURE__ */ import_react3.default.createElement("circle", { cx, cy: yInt, r: "5", fill: "#0ea5e9", stroke: "white", strokeWidth: "2" }), xInt && xInt > 10 && xInt < W - 10 && /* @__PURE__ */ import_react3.default.createElement("circle", { cx: xInt, cy, r: "5", fill: "#10b981", stroke: "white", strokeWidth: "2" })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-3 grid grid-cols-2 gap-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-indigo-50 rounded-xl p-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "slope (m)"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm font-bold text-indigo-700" }, m)), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -4, max: 4, step: 0.5, value: m, onChange: (e) => setM(parseFloat(e.target.value)), className: "w-full accent-indigo-600" })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-blue-50 rounded-xl p-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "y-intercept (b)"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm font-bold text-blue-700" }, b)), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -5, max: 5, step: 1, value: b, onChange: (e) => setB(parseFloat(e.target.value)), className: "w-full accent-blue-600" }))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-2 grid grid-cols-3 gap-2 text-xs text-center" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-indigo-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-indigo-700" }, "Slope = ", m), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, m > 0 ? "Rising" : m < 0 ? "Falling" : "Horizontal")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-blue-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-blue-700" }, "y-int: (0,", b, ")"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, "Crosses y-axis here")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-green-50 rounded-lg p-2" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "font-bold text-green-700" }, "x-int"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-gray-500" }, m !== 0 ? `(${(-b / m).toFixed(1)}, 0)` : "None (horiz.)"))));
+    return /* @__PURE__ */ React.createElement("div", { className: "bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3 flex-wrap" }, /* @__PURE__ */ React.createElement("span", { className: "text-2xl" }, "\u{1F4C8}"), /* @__PURE__ */ React.createElement("h3", { className: "text-lg font-bold text-indigo-800" }, "Slope-Intercept Explorer"), /* @__PURE__ */ React.createElement("span", { className: "ml-auto text-sm font-mono bg-indigo-50 px-3 py-1 rounded-full text-indigo-700" }, "y = ", m, "x ", b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`)), /* @__PURE__ */ React.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50 border border-slate-200" }, [-6, -4, -2, 0, 2, 4, 6].map((v) => /* @__PURE__ */ React.createElement("g", { key: v }, /* @__PURE__ */ React.createElement("line", { x1: cx + v * sc, y1: 10, x2: cx + v * sc, y2: H - 10, stroke: "#e2e8f0", strokeWidth: "1" }), /* @__PURE__ */ React.createElement("line", { x1: 10, y1: cy - v * sc, x2: W - 10, y2: cy - v * sc, stroke: "#e2e8f0", strokeWidth: "1" }))), /* @__PURE__ */ React.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#94a3b8", strokeWidth: "2" }), [-6, -4, -2, 2, 4, 6].map((v) => /* @__PURE__ */ React.createElement("text", { key: v, x: cx + v * sc, y: cy + 14, textAnchor: "middle", fontSize: "9", fill: "#94a3b8" }, v)), d && /* @__PURE__ */ React.createElement("path", { d, fill: "none", stroke: "#6366f1", strokeWidth: "2.5", strokeLinecap: "round" }), yInt > 10 && yInt < H - 10 && /* @__PURE__ */ React.createElement("circle", { cx, cy: yInt, r: "5", fill: "#0ea5e9", stroke: "white", strokeWidth: "2" }), xInt && xInt > 10 && xInt < W - 10 && /* @__PURE__ */ React.createElement("circle", { cx: xInt, cy, r: "5", fill: "#10b981", stroke: "white", strokeWidth: "2" })), /* @__PURE__ */ React.createElement("div", { className: "mt-3 grid grid-cols-2 gap-3" }, /* @__PURE__ */ React.createElement("div", { className: "bg-indigo-50 rounded-xl p-3" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "slope (m)"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-bold text-indigo-700" }, m)), /* @__PURE__ */ React.createElement("input", { type: "range", min: -4, max: 4, step: 0.5, value: m, onChange: (e) => setM(parseFloat(e.target.value)), className: "w-full accent-indigo-600" })), /* @__PURE__ */ React.createElement("div", { className: "bg-blue-50 rounded-xl p-3" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between mb-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs font-semibold text-gray-600" }, "y-intercept (b)"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-bold text-blue-700" }, b)), /* @__PURE__ */ React.createElement("input", { type: "range", min: -5, max: 5, step: 1, value: b, onChange: (e) => setB(parseFloat(e.target.value)), className: "w-full accent-blue-600" }))), /* @__PURE__ */ React.createElement("div", { className: "mt-2 grid grid-cols-3 gap-2 text-xs text-center" }, /* @__PURE__ */ React.createElement("div", { className: "bg-indigo-50 rounded-lg p-2" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-indigo-700" }, "Slope = ", m), /* @__PURE__ */ React.createElement("p", { className: "text-gray-500" }, m > 0 ? "Rising" : m < 0 ? "Falling" : "Horizontal")), /* @__PURE__ */ React.createElement("div", { className: "bg-blue-50 rounded-lg p-2" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-blue-700" }, "y-int: (0,", b, ")"), /* @__PURE__ */ React.createElement("p", { className: "text-gray-500" }, "Crosses y-axis here")), /* @__PURE__ */ React.createElement("div", { className: "bg-green-50 rounded-lg p-2" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-green-700" }, "x-int"), /* @__PURE__ */ React.createElement("p", { className: "text-gray-500" }, m !== 0 ? `(${(-b / m).toFixed(1)}, 0)` : "None (horiz.)"))));
   }
   function LinearSystemsVisualizer() {
-    const [m1, setM1] = (0, import_react3.useState)(2);
-    const [b1, setB1] = (0, import_react3.useState)(-1);
-    const [m2, setM2] = (0, import_react3.useState)(-1);
-    const [b2, setB2] = (0, import_react3.useState)(3);
+    const [m1, setM1] = (0, import_react2.useState)(2);
+    const [b1, setB1] = (0, import_react2.useState)(-1);
+    const [m2, setM2] = (0, import_react2.useState)(-1);
+    const [b2, setB2] = (0, import_react2.useState)(3);
     const W = 340, H = 260, cx = 170, cy = 130, scale = 22;
     const toSvg = (x, y) => ({ sx: cx + x * scale, sy: cy - y * scale });
     let intersection = null, systemType = "one";
@@ -21868,10 +22018,10 @@
       return pts.length > 1 ? "M " + pts.join(" L ") : "";
     };
     const intPt = intersection ? toSvg(intersection.x, intersection.y) : null;
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-white rounded-2xl border-2 border-blue-200 shadow-lg p-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "\u{1F4CA}"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "text-lg font-bold text-blue-800" }, "Linear Systems Explorer")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex gap-3 mb-3 text-sm flex-wrap" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-1.5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-4 h-1 rounded bg-blue-500" }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "font-mono text-blue-700" }, "y=", m1, "x", b1 >= 0 ? `+${b1}` : b1)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-1.5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-4 h-1 rounded bg-rose-500" }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "font-mono text-rose-700" }, "y=", m2, "x", b2 >= 0 ? `+${b2}` : b2))), /* @__PURE__ */ import_react3.default.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50 border border-slate-200" }, [-6, -4, -2, 0, 2, 4, 6].map((v) => /* @__PURE__ */ import_react3.default.createElement("g", { key: v }, /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx + v * scale, y1: 10, x2: cx + v * scale, y2: H - 10, stroke: "#e2e8f0", strokeWidth: "1" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy - v * scale, x2: W - 10, y2: cy - v * scale, stroke: "#e2e8f0", strokeWidth: "1" }))), /* @__PURE__ */ import_react3.default.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ import_react3.default.createElement("path", { d: linePoints(m1, b1), fill: "none", stroke: "#3b82f6", strokeWidth: "2.5", strokeLinecap: "round" }), /* @__PURE__ */ import_react3.default.createElement("path", { d: linePoints(m2, b2), fill: "none", stroke: "#f43f5e", strokeWidth: "2.5", strokeLinecap: "round" }), intPt && intPt.sx > 10 && intPt.sx < W - 10 && intPt.sy > 10 && intPt.sy < H - 10 && /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("circle", { cx: intPt.sx, cy: intPt.sy, r: "7", fill: "#10b981", stroke: "white", strokeWidth: "2.5" }), /* @__PURE__ */ import_react3.default.createElement("text", { x: intPt.sx + 10, y: intPt.sy - 8, fontSize: "11", fill: "#065f46", fontWeight: "bold" }, "(", intersection.x, ",", intersection.y, ")"))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-3 grid grid-cols-2 gap-3" }, [["blue", "Line 1", m1, setM1, b1, setB1], ["rose", "Line 2", m2, setM2, b2, setB2]].map(([color, label, m, setM, b, setB]) => /* @__PURE__ */ import_react3.default.createElement("div", { key: label, className: `bg-${color}-50 rounded-xl p-3` }, /* @__PURE__ */ import_react3.default.createElement("p", { className: `text-xs font-bold text-${color}-700 mb-1` }, label), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex gap-2 mb-1" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs text-gray-500 w-10" }, "slope"), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -4, max: 4, step: 0.5, value: m, onChange: (e) => setM(parseFloat(e.target.value)), className: `flex-1 accent-${color}-600` }), /* @__PURE__ */ import_react3.default.createElement("span", { className: `text-xs font-bold text-${color}-700 w-6` }, m)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs text-gray-500 w-10" }, "y-int"), /* @__PURE__ */ import_react3.default.createElement("input", { type: "range", min: -5, max: 5, step: 1, value: b, onChange: (e) => setB(parseFloat(e.target.value)), className: `flex-1 accent-${color}-600` }), /* @__PURE__ */ import_react3.default.createElement("span", { className: `text-xs font-bold text-${color}-700 w-6` }, b))))), /* @__PURE__ */ import_react3.default.createElement("div", { className: `mt-3 rounded-xl p-3 text-center font-bold text-sm ${systemType === "one" ? "bg-green-50 text-green-700" : systemType === "none" ? "bg-red-50 text-red-700" : "bg-yellow-50 text-yellow-700"}` }, systemType === "one" && intersection && `One solution: (${intersection.x}, ${intersection.y})`, systemType === "none" && "No solution - lines are parallel", systemType === "infinite" && "Infinite solutions - same line!"));
+    return /* @__PURE__ */ React.createElement("div", { className: "bg-white rounded-2xl border-2 border-blue-200 shadow-lg p-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement("span", { className: "text-2xl" }, "\u{1F4CA}"), /* @__PURE__ */ React.createElement("h3", { className: "text-lg font-bold text-blue-800" }, "Linear Systems Explorer")), /* @__PURE__ */ React.createElement("div", { className: "flex gap-3 mb-3 text-sm flex-wrap" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1.5" }, /* @__PURE__ */ React.createElement("div", { className: "w-4 h-1 rounded bg-blue-500" }), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-blue-700" }, "y=", m1, "x", b1 >= 0 ? `+${b1}` : b1)), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1.5" }, /* @__PURE__ */ React.createElement("div", { className: "w-4 h-1 rounded bg-rose-500" }), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-rose-700" }, "y=", m2, "x", b2 >= 0 ? `+${b2}` : b2))), /* @__PURE__ */ React.createElement("svg", { width: W, height: H, className: "mx-auto block rounded-xl bg-slate-50 border border-slate-200" }, [-6, -4, -2, 0, 2, 4, 6].map((v) => /* @__PURE__ */ React.createElement("g", { key: v }, /* @__PURE__ */ React.createElement("line", { x1: cx + v * scale, y1: 10, x2: cx + v * scale, y2: H - 10, stroke: "#e2e8f0", strokeWidth: "1" }), /* @__PURE__ */ React.createElement("line", { x1: 10, y1: cy - v * scale, x2: W - 10, y2: cy - v * scale, stroke: "#e2e8f0", strokeWidth: "1" }))), /* @__PURE__ */ React.createElement("line", { x1: 10, y1: cy, x2: W - 10, y2: cy, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("line", { x1: cx, y1: 10, x2: cx, y2: H - 10, stroke: "#94a3b8", strokeWidth: "2" }), /* @__PURE__ */ React.createElement("path", { d: linePoints(m1, b1), fill: "none", stroke: "#3b82f6", strokeWidth: "2.5", strokeLinecap: "round" }), /* @__PURE__ */ React.createElement("path", { d: linePoints(m2, b2), fill: "none", stroke: "#f43f5e", strokeWidth: "2.5", strokeLinecap: "round" }), intPt && intPt.sx > 10 && intPt.sx < W - 10 && intPt.sy > 10 && intPt.sy < H - 10 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("circle", { cx: intPt.sx, cy: intPt.sy, r: "7", fill: "#10b981", stroke: "white", strokeWidth: "2.5" }), /* @__PURE__ */ React.createElement("text", { x: intPt.sx + 10, y: intPt.sy - 8, fontSize: "11", fill: "#065f46", fontWeight: "bold" }, "(", intersection.x, ",", intersection.y, ")"))), /* @__PURE__ */ React.createElement("div", { className: "mt-3 grid grid-cols-2 gap-3" }, [["blue", "Line 1", m1, setM1, b1, setB1], ["rose", "Line 2", m2, setM2, b2, setB2]].map(([color, label, m, setM, b, setB]) => /* @__PURE__ */ React.createElement("div", { key: label, className: `bg-${color}-50 rounded-xl p-3` }, /* @__PURE__ */ React.createElement("p", { className: `text-xs font-bold text-${color}-700 mb-1` }, label), /* @__PURE__ */ React.createElement("div", { className: "flex gap-2 mb-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs text-gray-500 w-10" }, "slope"), /* @__PURE__ */ React.createElement("input", { type: "range", min: -4, max: 4, step: 0.5, value: m, onChange: (e) => setM(parseFloat(e.target.value)), className: `flex-1 accent-${color}-600` }), /* @__PURE__ */ React.createElement("span", { className: `text-xs font-bold text-${color}-700 w-6` }, m)), /* @__PURE__ */ React.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs text-gray-500 w-10" }, "y-int"), /* @__PURE__ */ React.createElement("input", { type: "range", min: -5, max: 5, step: 1, value: b, onChange: (e) => setB(parseFloat(e.target.value)), className: `flex-1 accent-${color}-600` }), /* @__PURE__ */ React.createElement("span", { className: `text-xs font-bold text-${color}-700 w-6` }, b))))), /* @__PURE__ */ React.createElement("div", { className: `mt-3 rounded-xl p-3 text-center font-bold text-sm ${systemType === "one" ? "bg-green-50 text-green-700" : systemType === "none" ? "bg-red-50 text-red-700" : "bg-yellow-50 text-yellow-700"}` }, systemType === "one" && intersection && `One solution: (${intersection.x}, ${intersection.y})`, systemType === "none" && "No solution - lines are parallel", systemType === "infinite" && "Infinite solutions - same line!"));
   }
   function SubstitutionStepper() {
-    const [step, setStep] = (0, import_react3.useState)(0);
+    const [step, setStep] = (0, import_react2.useState)(0);
     const steps = [
       { title: "The System", content: "y = 2x + 1\n3x + y = 9", hint: "We have two equations. Notice y is already isolated in the first!" },
       { title: "Step 1: Identify the isolated variable", content: "y = 2x + 1  (y is isolated here)", hint: "Since y is by itself, we can substitute 2x+1 wherever we see y in equation 2." },
@@ -21883,10 +22033,10 @@
     const s = steps[step];
     const bgs = ["bg-gray-50", "bg-blue-50", "bg-indigo-50", "bg-purple-50", "bg-violet-50", "bg-green-50"];
     const brs = ["border-gray-300", "border-blue-400", "border-indigo-400", "border-purple-400", "border-violet-400", "border-green-500"];
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "\u{1F504}"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "text-lg font-bold text-indigo-800" }, "Substitution: Step by Step")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex gap-1.5 mb-4" }, steps.map((_, i) => /* @__PURE__ */ import_react3.default.createElement("button", { key: i, onClick: () => setStep(i), className: `flex-1 h-2 rounded-full transition-all ${i <= step ? "bg-indigo-500" : "bg-gray-200"}` }))), /* @__PURE__ */ import_react3.default.createElement("div", { className: `rounded-xl border-2 ${bgs[step]} ${brs[step]} p-4 mb-4` }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm font-bold text-gray-600 mb-2 uppercase tracking-wide" }, s.title), /* @__PURE__ */ import_react3.default.createElement("pre", { className: "text-base font-mono text-gray-800 whitespace-pre-wrap leading-relaxed" }, s.content)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-lg" }, "\u{1F4A1}"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm text-yellow-800" }, s.hint)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setStep(Math.max(0, step - 1)), disabled: step === 0, className: "px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm" }, "Back"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm text-gray-500 self-center" }, "Step ", step + 1, "/", steps.length), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setStep(Math.min(steps.length - 1, step + 1)), disabled: step === steps.length - 1, className: "px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium disabled:opacity-30 text-sm" }, "Next")));
+    return /* @__PURE__ */ React.createElement("div", { className: "bg-white rounded-2xl border-2 border-indigo-200 shadow-lg p-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement("span", { className: "text-2xl" }, "\u{1F504}"), /* @__PURE__ */ React.createElement("h3", { className: "text-lg font-bold text-indigo-800" }, "Substitution: Step by Step")), /* @__PURE__ */ React.createElement("div", { className: "flex gap-1.5 mb-4" }, steps.map((_, i) => /* @__PURE__ */ React.createElement("button", { key: i, onClick: () => setStep(i), className: `flex-1 h-2 rounded-full transition-all ${i <= step ? "bg-indigo-500" : "bg-gray-200"}` }))), /* @__PURE__ */ React.createElement("div", { className: `rounded-xl border-2 ${bgs[step]} ${brs[step]} p-4 mb-4` }, /* @__PURE__ */ React.createElement("p", { className: "text-sm font-bold text-gray-600 mb-2 uppercase tracking-wide" }, s.title), /* @__PURE__ */ React.createElement("pre", { className: "text-base font-mono text-gray-800 whitespace-pre-wrap leading-relaxed" }, s.content)), /* @__PURE__ */ React.createElement("div", { className: "bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2" }, /* @__PURE__ */ React.createElement("span", { className: "text-lg" }, "\u{1F4A1}"), /* @__PURE__ */ React.createElement("p", { className: "text-sm text-yellow-800" }, s.hint)), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setStep(Math.max(0, step - 1)), disabled: step === 0, className: "px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm" }, "Back"), /* @__PURE__ */ React.createElement("span", { className: "text-sm text-gray-500 self-center" }, "Step ", step + 1, "/", steps.length), /* @__PURE__ */ React.createElement("button", { onClick: () => setStep(Math.min(steps.length - 1, step + 1)), disabled: step === steps.length - 1, className: "px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium disabled:opacity-30 text-sm" }, "Next")));
   }
   function EliminationStepper() {
-    const [step, setStep] = (0, import_react3.useState)(0);
+    const [step, setStep] = (0, import_react2.useState)(0);
     const steps = [
       { title: "The System", eq1: "2x + 3y = 16", eq2: "5x - 3y = 5", note: "The y-coefficients are +3 and -3 already opposites!" },
       { title: "Step 1: Align equations", eq1: "2x + 3y = 16", eq2: "5x - 3y = 5", note: "Coefficients of y (+3 and -3) sum to zero. We can add directly." },
@@ -21896,48 +22046,22 @@
       { title: "Solution: (3, 10/3)", eq1: "Verify: 2(3)+3(10/3)=16  OK", result: "And: 5(3)-3(10/3)=5  OK", note: "Check BOTH equations!" }
     ];
     const s = steps[step];
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-white rounded-2xl border-2 border-teal-200 shadow-lg p-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "\u2795"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "text-lg font-bold text-teal-800" }, "Elimination: Step by Step")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex gap-1.5 mb-4" }, steps.map((_, i) => /* @__PURE__ */ import_react3.default.createElement("button", { key: i, onClick: () => setStep(i), className: `flex-1 h-2 rounded-full transition-all ${i <= step ? "bg-teal-500" : "bg-gray-200"}` }))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-teal-50 border-2 border-teal-300 rounded-xl p-4 mb-3" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs font-bold text-teal-600 uppercase tracking-wide mb-3" }, s.title), /* @__PURE__ */ import_react3.default.createElement("div", { className: "font-mono space-y-1" }, s.eq1 && /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base text-gray-800 bg-white rounded-lg px-3 py-1.5 border border-teal-200" }, s.eq1), s.eq2 && /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base text-gray-800 bg-white rounded-lg px-3 py-1.5 border border-teal-200" }, s.eq2), s.result && /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "border-t-2 border-teal-400 mt-1 mb-1" }), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base font-bold text-teal-800 bg-teal-100 rounded-lg px-3 py-1.5" }, s.result)))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-lg" }, "\u{1F4A1}"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm text-yellow-800" }, s.note)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setStep(Math.max(0, step - 1)), disabled: step === 0, className: "px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm" }, "Back"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm text-gray-500 self-center" }, "Step ", step + 1, "/", steps.length), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setStep(Math.min(steps.length - 1, step + 1)), disabled: step === steps.length - 1, className: "px-4 py-2 bg-teal-600 text-white rounded-lg font-medium disabled:opacity-30 text-sm" }, "Next")));
+    return /* @__PURE__ */ React.createElement("div", { className: "bg-white rounded-2xl border-2 border-teal-200 shadow-lg p-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement("span", { className: "text-2xl" }, "\u2795"), /* @__PURE__ */ React.createElement("h3", { className: "text-lg font-bold text-teal-800" }, "Elimination: Step by Step")), /* @__PURE__ */ React.createElement("div", { className: "flex gap-1.5 mb-4" }, steps.map((_, i) => /* @__PURE__ */ React.createElement("button", { key: i, onClick: () => setStep(i), className: `flex-1 h-2 rounded-full transition-all ${i <= step ? "bg-teal-500" : "bg-gray-200"}` }))), /* @__PURE__ */ React.createElement("div", { className: "bg-teal-50 border-2 border-teal-300 rounded-xl p-4 mb-3" }, /* @__PURE__ */ React.createElement("p", { className: "text-xs font-bold text-teal-600 uppercase tracking-wide mb-3" }, s.title), /* @__PURE__ */ React.createElement("div", { className: "font-mono space-y-1" }, s.eq1 && /* @__PURE__ */ React.createElement("p", { className: "text-base text-gray-800 bg-white rounded-lg px-3 py-1.5 border border-teal-200" }, s.eq1), s.eq2 && /* @__PURE__ */ React.createElement("p", { className: "text-base text-gray-800 bg-white rounded-lg px-3 py-1.5 border border-teal-200" }, s.eq2), s.result && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "border-t-2 border-teal-400 mt-1 mb-1" }), /* @__PURE__ */ React.createElement("p", { className: "text-base font-bold text-teal-800 bg-teal-100 rounded-lg px-3 py-1.5" }, s.result)))), /* @__PURE__ */ React.createElement("div", { className: "bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-4 flex gap-2" }, /* @__PURE__ */ React.createElement("span", { className: "text-lg" }, "\u{1F4A1}"), /* @__PURE__ */ React.createElement("p", { className: "text-sm text-yellow-800" }, s.note)), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setStep(Math.max(0, step - 1)), disabled: step === 0, className: "px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium disabled:opacity-30 text-sm" }, "Back"), /* @__PURE__ */ React.createElement("span", { className: "text-sm text-gray-500 self-center" }, "Step ", step + 1, "/", steps.length), /* @__PURE__ */ React.createElement("button", { onClick: () => setStep(Math.min(steps.length - 1, step + 1)), disabled: step === steps.length - 1, className: "px-4 py-2 bg-teal-600 text-white rounded-lg font-medium disabled:opacity-30 text-sm" }, "Next")));
   }
   var NOTE_DIAGRAMS = {
-    "number-rational-0": /* @__PURE__ */ import_react3.default.createElement(NumberSetsDiagram, null),
-    "number-exponents-0": /* @__PURE__ */ import_react3.default.createElement(ExponentDiagram, null),
-    "algebra-polynomials-0": /* @__PURE__ */ import_react3.default.createElement(PolyAnatomyDiagram, null),
-    "linear-slopeintercept-0": /* @__PURE__ */ import_react3.default.createElement(SlopeDiagram, null),
-    "linear-slopeintercept-1": /* @__PURE__ */ import_react3.default.createElement(LinearGraphDiagram, null),
-    "linear-slopeintercept-2": /* @__PURE__ */ import_react3.default.createElement(SlopeExplorer, null),
-    "systems-graphing-0": /* @__PURE__ */ import_react3.default.createElement(SystemTypesDiagram, null),
-    "systems-substitution-0": /* @__PURE__ */ import_react3.default.createElement(SubstitutionStepper, null),
-    "systems-elimination-0": /* @__PURE__ */ import_react3.default.createElement(EliminationStepper, null),
-    "systems-graphing-1": /* @__PURE__ */ import_react3.default.createElement(LinearSystemsVisualizer, null),
-    "measurement-formulas-0": /* @__PURE__ */ import_react3.default.createElement(MeasurementDiagram, null),
-    "measurement-pythagorean-0": /* @__PURE__ */ import_react3.default.createElement(PythagoreanDiagram, null)
+    "number-rational-0": /* @__PURE__ */ React.createElement(NumberSetsDiagram, null),
+    "number-exponents-0": /* @__PURE__ */ React.createElement(ExponentDiagram, null),
+    "algebra-polynomials-0": /* @__PURE__ */ React.createElement(PolyAnatomyDiagram, null),
+    "linear-slopeintercept-0": /* @__PURE__ */ React.createElement(SlopeDiagram, null),
+    "linear-slopeintercept-1": /* @__PURE__ */ React.createElement(LinearGraphDiagram, null),
+    "linear-slopeintercept-2": /* @__PURE__ */ React.createElement(SlopeExplorer, null),
+    "systems-graphing-0": /* @__PURE__ */ React.createElement(SystemTypesDiagram, null),
+    "systems-substitution-0": /* @__PURE__ */ React.createElement(SubstitutionStepper, null),
+    "systems-elimination-0": /* @__PURE__ */ React.createElement(EliminationStepper, null),
+    "systems-graphing-1": /* @__PURE__ */ React.createElement(LinearSystemsVisualizer, null),
+    "measurement-formulas-0": /* @__PURE__ */ React.createElement(MeasurementDiagram, null),
+    "measurement-pythagorean-0": /* @__PURE__ */ React.createElement(PythagoreanDiagram, null)
   };
-  function normalizeEmoji(value = "") {
-    if (!value) return value;
-    if (value === "?" || value === "??") return "\u2728";
-    if (value.includes("\xF0") || value.includes("\xE2") || value.includes("\xC2") || value.includes("\xC3")) {
-      try {
-        return decodeURIComponent(escape(value));
-      } catch (e) {
-        return value;
-      }
-    }
-    return value;
-  }
-  function conceptCardEmoji(note) {
-    const bySubtitle = {
-      "Unit 1: Square Roots and Number Sets": "\u{1F522}",
-      "Unit 2: Exponent Laws": "\u26A1",
-      "Unit 1: Slope and Rate of Change": "\u{1F4C8}",
-      "Unit 2: Forms of Linear Equations": "\u{1F4DD}",
-      "Methods: Graphing, Substitution, Elimination": "\u{1F3AF}",
-      "Pythagorean Theorem and Applications": "\u{1F4D0}",
-      "Perimeter, Area, and Volume": "\u{1F4E6}"
-    };
-    const normalized = normalizeEmoji((note == null ? void 0 : note.emoji) || "");
-    if (normalized && normalized !== "?" && normalized !== "??") return normalized;
-    return bySubtitle[note == null ? void 0 : note.subtitle] || "\u2728";
-  }
   var studyLibrary = {
     flashcards: {
       id: "flashcards",
@@ -22004,14 +22128,14 @@
       gradient: "from-rose-500 to-pink-600",
       sections: [
         { id: "number-review", title: "Number Sense Test Review", notes: [
-          { subtitle: "Unit 1: Square Roots and Number Sets", emoji: "\xF0\u0178\u201D\xA2", points: [
+          { subtitle: "Unit 1: Square Roots and Number Sets", emoji: "\u{1F522}", points: [
             "Rational numbers can be written as p/q; irrational numbers cannot",
             "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - memorize these",
             "Estimate square roots: sqrt(20) is between sqrt(16)=4 and sqrt(25)=5, closer to 4.5",
             "Simplify radicals: sqrt(72) = sqrt(36 x 2) = 6*sqrt(2)",
             "BEDMAS order: Brackets, Exponents, Division/Multiplication, Addition/Subtraction"
           ] },
-          { subtitle: "Unit 2: Exponent Laws", emoji: "\xE2\u0161\xA1", points: [
+          { subtitle: "Unit 2: Exponent Laws", emoji: "\u26A1", points: [
             "Product: a^m * a^n = a^(m+n). Quotient: a^m / a^n = a^(m-n). Power: (a^m)^n = a^(mn)",
             "Zero exponent: a^0 = 1. Negative: a^(-n) = 1/a^n",
             "Fractional: a^(1/2) = sqrt(a), a^(1/3) = cube root of a, a^(m/n) = nth root of a^m",
@@ -22020,13 +22144,13 @@
           ] }
         ] },
         { id: "linear-review", title: "Linear Relations Test Review", notes: [
-          { subtitle: "Unit 1: Slope and Rate of Change", emoji: "\xF0\u0178\u201C\u02C6", points: [
+          { subtitle: "Unit 1: Slope and Rate of Change", emoji: "\u{1F4C8}", points: [
             "Slope formula: m = (y2-y1)/(x2-x1). Always reduce to lowest terms.",
             "Positive slope: rises. Negative: falls. Zero: horizontal. Undefined: vertical.",
             "Rate of change equals slope: how much y changes per 1 unit increase in x",
             "From a table: constant first differences means the relation is linear"
           ] },
-          { subtitle: "Unit 2: Forms of Linear Equations", emoji: "\xF0\u0178\u201C\x9D", points: [
+          { subtitle: "Unit 2: Forms of Linear Equations", emoji: "\u{1F4DD}", points: [
             "Slope-intercept: y = mx + b (m=slope, b=y-intercept) - best for graphing",
             "Standard form: Ax + By = C - best for finding both intercepts",
             "Point-slope: y - y1 = m(x - x1) - use when you know a point and the slope",
@@ -22035,7 +22159,7 @@
           ] }
         ] },
         { id: "systems-review", title: "Linear Systems Test Review", notes: [
-          { subtitle: "Methods: Graphing, Substitution, Elimination", emoji: "\xF0\u0178\u017D\xAF", points: [
+          { subtitle: "Methods: Graphing, Substitution, Elimination", emoji: "\u{1F3AF}", points: [
             "Graphing: graph both lines, find intersection. Good for understanding, not exact decimals.",
             "Substitution: isolate one variable, substitute. Best when one variable is already isolated.",
             "Elimination: multiply and add/subtract to cancel a variable. Best when coefficients match easily.",
@@ -22044,14 +22168,14 @@
           ] }
         ] },
         { id: "measurement-review", title: "Measurement and Geometry Review", notes: [
-          { subtitle: "Pythagorean Theorem and Applications", emoji: "\xF0\u0178\u201C\x90", points: [
+          { subtitle: "Pythagorean Theorem and Applications", emoji: "\u{1F4D0}", points: [
             "a^2 + b^2 = c^2 where c is the hypotenuse (opposite the 90 degree angle)",
             "Find hypotenuse: c = sqrt(a^2 + b^2). Find a leg: a = sqrt(c^2 - b^2)",
             "Pythagorean triples (no calculator): 3-4-5, 5-12-13, 8-15-17",
             "Apply in 2D and 3D: find diagonals, heights, distances",
             "Check if right triangle: if a^2+b^2=c^2 then it is a right triangle"
           ] },
-          { subtitle: "Perimeter, Area, and Volume", emoji: "\xF0\u0178\u201C\xA6", points: [
+          { subtitle: "Perimeter, Area, and Volume", emoji: "\u{1F4E6}", points: [
             "Composite figures: break into simpler shapes, add or subtract areas",
             "Surface area: sum of all face areas - always in square units",
             "Volume of prism: V = base area x height",
@@ -22112,76 +22236,298 @@
       gradient: "from-teal-500 to-cyan-600",
       sections: [
         { id: "number-worksheets", title: "Number Sense Worksheets", notes: [
-          { subtitle: "Worksheet 1: Exponent Laws", emoji: "\xF0\u0178\u201C\x9D", points: [
+          { subtitle: "Worksheet 1: Exponent Laws \u2014 Level \u{1F7E2} Easy", emoji: "\u{1F4DD}", points: [
             "1. Simplify: x^5 times x^3",
             "2. Simplify: (y^4)^3",
             "3. Simplify: 12a^6 divided by 4a^2",
             "4. Evaluate: (2^3 times 2^2) divided by 2^4",
-            "5. Write 0.0000065 in scientific notation."
+            "5. Write 0.0000065 in scientific notation.",
+            "6. Evaluate: 5^0 + 3^0",
+            "7. Simplify: (3x^2)(4x^3)",
+            "8. Write 47,000,000 in scientific notation."
           ], answers: [
             "x^5 * x^3 = x^(5+3) = x^8",
-            "(y^4)^3 = y^(4x3) = y^12",
+            "(y^4)^3 = y^(4\xD73) = y^12",
             "12a^6 / 4a^2 = 3a^(6-2) = 3a^4",
-            "(2^3*2^2)/2^4 = 2^5/2^4 = 2^1 = 2",
-            "6.5 x 10^(-6)"
+            "(2^3 * 2^2) / 2^4 = 2^5 / 2^4 = 2^1 = 2",
+            "6.5 \xD7 10^(-6)",
+            "5^0 + 3^0 = 1 + 1 = 2. Any base to the power 0 is 1.",
+            "(3x^2)(4x^3) = 12x^(2+3) = 12x^5",
+            "4.7 \xD7 10^7"
           ] },
-          { subtitle: "Worksheet 2: Square Roots and Radicals", emoji: "\xF0\u0178\u201C\x9D", points: [
-            "1. Simplify: sqrt(72)",
-            "2. Estimate sqrt(50) to one decimal place without a calculator.",
-            "3. Is sqrt(144) rational or irrational? Explain.",
-            "4. Order from least to greatest: sqrt(7), 2.5, 8/3",
-            "5. Simplify: sqrt(25*x^4)"
+          { subtitle: "Worksheet 2: Exponent Laws \u2014 Level \u{1F7E1} Medium", emoji: "\u{1F4DD}", points: [
+            "1. Simplify: (2x^3 y^2)(5x y^4)",
+            "2. Simplify: (a^2 b^3)^4",
+            "3. Simplify: 18m^5 n^3 divided by 6m^2 n",
+            "4. Evaluate: (3^(-2))(3^4)",
+            "5. Simplify: (2a)^3 times a^(-2)",
+            "6. Express: (4 \xD7 10^3)(2 \xD7 10^5) in scientific notation.",
+            "7. Simplify: x^(-3) divided by x^(-7)",
+            "8. Evaluate: (16)^(1/2) + (27)^(1/3)"
           ], answers: [
-            "sqrt(72) = sqrt(36 x 2) = 6*sqrt(2)",
-            "sqrt(49)=7 and sqrt(64)=8, so sqrt(50) is approximately 7.1",
-            "Rational. sqrt(144) = 12, which is an integer.",
-            "8/3 is approx 2.67, sqrt(7) is approx 2.65, 2.5. Order: 2.5 < sqrt(7) < 8/3",
-            "sqrt(25*x^4) = 5x^2"
+            "(2 \xD7 5)(x^(3+1))(y^(2+4)) = 10x^4 y^6",
+            "a^(2\xD74) b^(3\xD74) = a^8 b^12",
+            "(18/6) m^(5-2) n^(3-1) = 3m^3 n^2",
+            "3^(-2+4) = 3^2 = 9",
+            "(2^3)(a^3)(a^(-2)) = 8a^(3-2) = 8a",
+            "(4 \xD7 2)(10^(3+5)) = 8 \xD7 10^8",
+            "x^(-3-(-7)) = x^(-3+7) = x^4",
+            "sqrt(16) + cube root of 27 = 4 + 3 = 7"
+          ] },
+          { subtitle: "Worksheet 3: Square Roots & Number Sets \u2014 Level \u{1F534} Hard", emoji: "\u{1F4DD}", points: [
+            "1. Simplify completely: sqrt(180)",
+            "2. Simplify: sqrt(50) + sqrt(32)",
+            "3. Evaluate: 27^(2/3)",
+            "4. Simplify: (sqrt(3))(sqrt(12))",
+            "5. Order from least to greatest: sqrt(11), 10/3, 3.3, sqrt(10)",
+            "6. Is 0.121212... rational or irrational? Explain fully.",
+            "7. Evaluate: (8/27)^(2/3)",
+            "8. Simplify: sqrt(75 x^6 y^4)"
+          ], answers: [
+            "sqrt(180) = sqrt(36 \xD7 5) = 6*sqrt(5)",
+            "sqrt(50) = 5*sqrt(2), sqrt(32) = 4*sqrt(2), so total = 9*sqrt(2)",
+            "27^(2/3) = (cube root of 27)^2 = 3^2 = 9",
+            "(sqrt(3))(sqrt(12)) = sqrt(3 \xD7 12) = sqrt(36) = 6",
+            "sqrt(10) \u2248 3.162, sqrt(11) \u2248 3.317, 10/3 \u2248 3.333, 3.3. Order: sqrt(10) < 3.3 < sqrt(11) < 10/3",
+            "Rational. The decimal repeats (12 repeating), so it can be written as a fraction: 12/99 = 4/33.",
+            "(8/27)^(2/3) = (cube root of 8/27)^2 = (2/3)^2 = 4/9",
+            "sqrt(75 x^6 y^4) = sqrt(25 \xD7 3 \xD7 x^6 \xD7 y^4) = 5x^3 y^2 * sqrt(3)"
           ] }
         ] },
         { id: "linear-worksheets", title: "Linear Relations Worksheets", notes: [
-          { subtitle: "Worksheet 1: Slope and Equations", emoji: "\xF0\u0178\u201C\x9D", points: [
+          { subtitle: "Worksheet 1: Slope & Graphing \u2014 Level \u{1F7E2} Easy", emoji: "\u{1F4DD}", points: [
             "1. Find the slope of the line through (-1, 4) and (3, -2).",
             "2. Write the equation of the line with slope 3 and y-intercept -5.",
             "3. Find the x- and y-intercepts of 3x - 2y = 12.",
-            "4. Write the equation of the line through (2, 7) with slope 1/2.",
-            "5. Are y=4x-1 and y=(1/4)x+3 perpendicular? Explain."
+            "4. What is the slope of a horizontal line? What is its equation if it passes through (0, 7)?",
+            "5. Plot two points for y = 2x - 1. What is the y-intercept?",
+            "6. Find the slope of the line through (0, 0) and (4, 8).",
+            "7. What is the slope of a vertical line? Why is it undefined?",
+            "8. Write the equation: slope = -2, passes through the y-axis at y = 4."
           ], answers: [
-            "m = (-2-4)/(3-(-1)) = -6/4 = -3/2",
+            "m = (-2 - 4) / (3 - (-1)) = -6 / 4 = -3/2",
             "y = 3x - 5",
-            "x-int: set y=0 so 3x=12 and x=4, giving (4,0). y-int: set x=0 so -2y=12 and y=-6, giving (0,-6)",
-            "y - 7 = (1/2)(x - 2) which simplifies to y = (1/2)x + 6",
-            "Perpendicular slopes multiply to -1. Slope of first is 4. Negative reciprocal is -1/4. Since 1/4 is not -1/4, these lines are NOT perpendicular."
+            "x-int: set y=0 \u2192 3x = 12 \u2192 x = 4, giving (4, 0). y-int: set x=0 \u2192 -2y = 12 \u2192 y = -6, giving (0, -6)",
+            "Slope = 0. Equation: y = 7",
+            "When x=0, y=-1 (y-int is -1). When x=1, y=1. Points (0,-1) and (1,1). y-intercept = -1.",
+            "m = (8-0)/(4-0) = 8/4 = 2",
+            "Undefined. Because the run = 0, and you can't divide by zero.",
+            "y = -2x + 4"
+          ] },
+          { subtitle: "Worksheet 2: Forms of Linear Equations \u2014 Level \u{1F7E1} Medium", emoji: "\u{1F4DD}", points: [
+            "1. Write the equation of the line through (2, 7) with slope 1/2.",
+            "2. Are y=4x-1 and y=(1/4)x+3 perpendicular? Explain.",
+            "3. Find the equation of the line through (3, -1) and (6, 5).",
+            "4. Convert 4x - 2y = 10 to slope-intercept form.",
+            "5. Write the equation of the line through (5, 3) parallel to y = -2x + 1.",
+            "6. A phone plan charges $25/month plus $0.05 per text. Write a linear equation. What is the cost for 200 texts?",
+            "7. Find the equation of the perpendicular to y = 3x + 2 through (0, 1).",
+            "8. What are the intercepts of the line 5x + 2y = 20? Use them to sketch the graph."
+          ], answers: [
+            "y - 7 = (1/2)(x - 2) \u2192 y = (1/2)x + 6",
+            "NOT perpendicular. Slope of first is 4. Perpendicular slope would be -1/4. But second slope is 1/4, not -1/4.",
+            "m = (5-(-1))/(6-3) = 6/3 = 2. Then y-(-1) = 2(x-3) \u2192 y = 2x - 7.",
+            "-2y = -4x + 10 \u2192 y = 2x - 5. Slope = 2, y-intercept = -5.",
+            "Parallel means same slope (-2). y - 3 = -2(x - 5) \u2192 y = -2x + 13.",
+            "C = 0.05t + 25. For 200 texts: C = 0.05(200) + 25 = 10 + 25 = $35.",
+            "Perpendicular slope = -1/3. Through (0,1): y = -(1/3)x + 1.",
+            "x-int: set y=0 \u2192 5x = 20 \u2192 x = 4, so (4, 0). y-int: set x=0 \u2192 2y = 20 \u2192 y = 10, so (0, 10)."
+          ] },
+          { subtitle: "Worksheet 3: Direct & Partial Variation \u2014 Level \u{1F534} Hard", emoji: "\u{1F4DD}", points: [
+            "1. A taxi charges $2.50 base fare plus $1.80 per km. Write a partial variation equation and find the cost for 12 km.",
+            "2. Does y = 4x represent direct or partial variation? Find y when x = 7.",
+            "3. The table shows: (0,5), (2,11), (4,17), (6,23). Is this direct or partial variation? Write the equation.",
+            "4. If y varies directly with x and y = 24 when x = 6, find y when x = 10.",
+            "5. A spring stretches 3 cm for every 2 N of force. It has a natural length of 10 cm. Write the equation for total length L in terms of force F.",
+            "6. Calculate the first differences for: x: 1,2,3,4 and y: 3,7,11,15. Is it linear? What is the equation?",
+            "7. The graph of a line passes through (0, -4) and (3, 5). Is this direct or partial variation? Why?",
+            "8. Two variables have a direct variation where k = 6. If x increases by 3, by how much does y increase?"
+          ], answers: [
+            "C = 1.80d + 2.50. For d=12: C = 1.80(12) + 2.50 = 21.60 + 2.50 = $24.10.",
+            "Direct variation (b=0, passes through origin). y = 4(7) = 28.",
+            "First differences: 11-5=6, 17-11=6, 23-17=6 \u2014 constant, so linear. y-intercept is 5 (at x=0). Slope = 6/2 = 3. Equation: y = 3x + 5. Partial variation (b \u2260 0).",
+            "Direct variation: y/x = k = 24/6 = 4. So y = 4x. When x=10: y = 40.",
+            "L = 1.5F + 10. (Each N adds 3/2 = 1.5 cm. At F=0, L=10 cm.)",
+            "First differences: 7-3=4, 11-7=4, 15-11=4. Constant \u2192 linear. Slope = 4, y-intercept at x=0: y-int = 3 - 4(1) = -1. Equation: y = 4x - 1.",
+            "Partial variation. The y-intercept is -4 (not 0), so the line does NOT pass through the origin.",
+            "y = 6x. When x increases by 3, y increases by 6(3) = 18."
           ] }
         ] },
         { id: "systems-worksheets", title: "Linear Systems Worksheets", notes: [
-          { subtitle: "Worksheet 1: Solving Systems", emoji: "\xF0\u0178\u201C\x9D", points: [
+          { subtitle: "Worksheet 1: Substitution Method \u2014 Level \u{1F7E2} Easy", emoji: "\u{1F4DD}", points: [
             "1. Solve by substitution: y = x - 3 and 2x + y = 9",
-            "2. Solve by elimination: 3x + 2y = 11 and 3x - y = 5",
-            "3. Solve by elimination: 4x + 3y = 10 and 2x - y = 0",
-            "4. Two types of tickets: adult costs $3 more than student. Two adult + three student = $54. Find each price.",
-            "5. Is (3, 2) a solution to: 2x - y = 4 and x + 3y = 9?"
+            "2. Solve by substitution: y = 2x + 1 and y = -x + 7",
+            "3. Solve by substitution: x = 4y and 2x - 3y = 10",
+            "4. Solve by substitution: y = -3x + 5 and y = x - 3",
+            "5. Is (3, 2) a solution to: 2x - y = 4 and x + 3y = 9?",
+            "6. Solve by substitution: x + y = 10 and x = 2y + 1",
+            "7. Solve by substitution: y = 5 and 3x + y = 17",
+            "8. Solve by substitution: x - y = 0 and 3x + 2y = 10"
           ], answers: [
-            "Sub y=x-3 into 2x+y=9: 2x+(x-3)=9 so 3x=12 and x=4, y=1. Solution: (4, 1)",
-            "Subtract eq2 from eq1: 3y=6 so y=2. Then 3x+4=11 so x=7/3. Solution: (7/3, 2)",
-            "Multiply eq2 by 3: 6x-3y=0. Add to eq1: 10x=10 so x=1. Then 2-y=0 so y=2. Solution: (1, 2)",
-            "Let a=adult, s=student. a=s+3 and 2a+3s=54. Sub: 2(s+3)+3s=54 so 5s=48 giving s=$9.60, a=$12.60",
-            "eq1: 2(3)-2=4 correct. eq2: 3+3(2)=9 correct. Yes, (3,2) is a solution."
+            "Sub y=x-3: 2x+(x-3)=9 \u2192 3x=12 \u2192 x=4, y=1. Solution: (4, 1)",
+            "Set equal: 2x+1 = -x+7 \u2192 3x=6 \u2192 x=2, y=5. Solution: (2, 5)",
+            "Sub x=4y: 2(4y)-3y=10 \u2192 8y-3y=10 \u2192 5y=10 \u2192 y=2, x=8. Solution: (8, 2)",
+            "Set equal: -3x+5 = x-3 \u2192 -4x=-8 \u2192 x=2, y=-1. Solution: (2, -1)",
+            "eq1: 2(3)-2=4 \u2713. eq2: 3+3(2)=9 \u2713. Yes, (3,2) is a solution.",
+            "Sub x=2y+1: (2y+1)+y=10 \u2192 3y=9 \u2192 y=3, x=7. Solution: (7, 3)",
+            "y=5 already given. Sub: 3x+5=17 \u2192 3x=12 \u2192 x=4. Solution: (4, 5)",
+            "From eq1: x=y. Sub: 3y+2y=10 \u2192 5y=10 \u2192 y=2, x=2. Solution: (2, 2)"
+          ] },
+          { subtitle: "Worksheet 2: Elimination Method \u2014 Level \u{1F7E1} Medium", emoji: "\u{1F4DD}", points: [
+            "1. Solve by elimination: 3x + 2y = 11 and 3x - y = 5",
+            "2. Solve by elimination: 4x + 3y = 10 and 2x - y = 0",
+            "3. Solve by elimination: 5x + 4y = 22 and 3x - 4y = 2",
+            "4. Solve by elimination: 2x + 3y = 12 and 5x - 3y = 9",
+            "5. Solve by elimination: 3x + 2y = 0 and 5x - y = 7",
+            "6. Solve by elimination: 2x + y = 8 and 4x + 2y = 16",
+            "7. Solve by elimination: x + 2y = 7 and 3x - 2y = 5",
+            "8. Solve by elimination: 6x - 5y = 1 and 2x + 3y = 11"
+          ], answers: [
+            "Subtract eq2 from eq1: 3y=6 \u2192 y=2. Sub: 3x+4=11 \u2192 x=7/3. Solution: (7/3, 2)",
+            "Multiply eq2 by 3: 6x-3y=0. Add to eq1: 10x=10 \u2192 x=1. Sub: 2-y=0 \u2192 y=2. Solution: (1, 2)",
+            "Add equations: 8x=24 \u2192 x=3. Sub: 15+4y=22 \u2192 4y=7 \u2192 y=7/4. Solution: (3, 7/4)",
+            "Add equations: 7x=21 \u2192 x=3. Sub: 6+3y=12 \u2192 3y=6 \u2192 y=2. Solution: (3, 2)",
+            "Multiply eq2 by 2: 10x-2y=14. Add to eq1: 13x=14 \u2192 x=14/13. Sub: y=5x-7=70/13-91/13=-21/13. Solution: (14/13, -21/13)",
+            "Eq2 is exactly 2\xD7Eq1. Infinite solutions \u2014 same line.",
+            "Add equations: 4x=12 \u2192 x=3. Sub: 3+2y=7 \u2192 2y=4 \u2192 y=2. Solution: (3, 2)",
+            "Multiply eq2 by 3: 6x+9y=33. Subtract from eq1: -14y=-32 \u2192 y=16/7. Sub: 2x=11-3(16/7)=29/7 \u2192 x=29/14. Solution: (29/14, 16/7)"
+          ] },
+          { subtitle: "Worksheet 3: Word Problems \u2014 Level \u{1F534} Hard", emoji: "\u{1F4DD}", points: [
+            "1. Two numbers add to 48 and one is 3 times the other. Find both numbers.",
+            "2. Adult tickets cost $12, student tickets cost $8. If 150 tickets were sold for $1520, how many of each?",
+            "3. A boat travels 30 km downstream in 2 hours and 18 km upstream in 3 hours. Find the boat speed and current speed.",
+            "4. Mixing a 20% acid solution with a 50% acid solution gives 60 L of 30% solution. How many litres of each?",
+            "5. A store sells pens for $1.50 and notebooks for $3.25. Maria spends $24.50 on 10 items total. How many of each did she buy?",
+            "6. The sum of two angles is 180\xB0. One angle is 24\xB0 more than the other. Find both angles.",
+            "7. A plane flies 1200 km with the wind in 3 hours, but takes 4 hours against the wind. Find the plane's speed in still air and the wind speed.",
+            "8. Two cars start 300 km apart and drive toward each other. Car A goes 80 km/h and Car B goes 70 km/h. After how many hours do they meet? How far has each travelled?"
+          ], answers: [
+            "Let x and y be the numbers. x+y=48 and x=3y. Sub: 3y+y=48 \u2192 4y=48 \u2192 y=12, x=36. Numbers are 12 and 36.",
+            "Let a=adults, s=students. a+s=150 and 12a+8s=1520. From eq1: a=150-s. Sub: 12(150-s)+8s=1520 \u2192 1800-4s=1520 \u2192 s=70, a=80.",
+            "Let b=boat speed, c=current. Downstream: b+c=15. Upstream: b-c=6. Add: 2b=21 \u2192 b=10.5 km/h, c=4.5 km/h.",
+            "Let x=litres of 20%, y=litres of 50%. x+y=60 and 0.20x+0.50y=0.30(60)=18. From eq1: x=60-y. 0.20(60-y)+0.50y=18 \u2192 12+0.30y=18 \u2192 y=20 L of 50%, x=40 L of 20%.",
+            "Let p=pens, n=notebooks. p+n=10 and 1.50p+3.25n=24.50. From eq1: p=10-n. 1.50(10-n)+3.25n=24.50 \u2192 15+1.75n=24.50 \u2192 n=5.43... Not a whole number \u2014 recheck. Actually 1.50p+3.25n=24.50, p+n=10 \u2192 p=10-n \u2192 15-1.50n+3.25n=24.50 \u2192 1.75n=9.50 \u2192 n\u22485.4. Hmm \u2014 try p=7, n=3: 10.50+9.75=20.25 no. p=3,n=7: 4.50+22.75=27.25 no. p=6,n=4: 9+13=22 no. p=5,n=5: 7.50+16.25=23.75 no. p=4,n=6: 6+19.50=25.50 no. Check: 1.50(7)+3.25(3)=10.50+9.75=20.25. No exact whole-number solution \u2014 good challenge to identify this!",
+            "Let angles be x and y. x+y=180 and x=y+24. Sub: (y+24)+y=180 \u2192 2y=156 \u2192 y=78\xB0, x=102\xB0.",
+            "Let p=plane speed, w=wind. With wind: p+w=400. Against wind: p-w=300. Add: 2p=700 \u2192 p=350 km/h, w=50 km/h.",
+            "Time to meet: 300/(80+70) = 300/150 = 2 hours. Car A travels 80\xD72=160 km. Car B travels 70\xD72=140 km. Check: 160+140=300 \u2713"
           ] }
         ] },
-        { id: "measurement-worksheets", title: "Measurement Worksheets", notes: [
-          { subtitle: "Worksheet 1: Pythagorean Theorem", emoji: "\xF0\u0178\u201C\x9D", points: [
+        { id: "measurement-worksheets", title: "Measurement & Geometry Worksheets", notes: [
+          { subtitle: "Worksheet 1: Pythagorean Theorem \u2014 Level \u{1F7E2} Easy", emoji: "\u{1F4DD}", points: [
             "1. Find the hypotenuse of a right triangle with legs 9 and 12.",
             "2. A 13 m ladder leans against a wall. Base is 5 m from wall. How high does it reach?",
             "3. Is a triangle with sides 11, 14, 17 a right triangle? Show work.",
             "4. Find the diagonal of a rectangle with length 8 cm and width 6 cm.",
-            "5. A square has a diagonal of 10 cm. Find the side length."
+            "5. A square has a diagonal of 10 cm. Find the side length.",
+            "6. Find the missing leg: hypotenuse = 26, one leg = 10.",
+            "7. Is (8, 15, 17) a Pythagorean triple? Verify.",
+            "8. A 10 m pole casts a shadow. The distance from tip of shadow to top of pole is 26 m. How long is the shadow?"
           ], answers: [
-            "c = sqrt(9^2+12^2) = sqrt(81+144) = sqrt(225) = 15",
-            "h = sqrt(13^2-5^2) = sqrt(169-25) = sqrt(144) = 12 m",
-            "11^2+14^2 = 121+196 = 317 which does not equal 17^2=289. Not a right triangle.",
-            "d = sqrt(8^2+6^2) = sqrt(64+36) = sqrt(100) = 10 cm",
-            "s^2+s^2=10^2 so 2s^2=100 and s^2=50 giving s = 5*sqrt(2) which is about 7.07 cm"
+            "c = sqrt(9^2 + 12^2) = sqrt(81 + 144) = sqrt(225) = 15",
+            "h = sqrt(13^2 - 5^2) = sqrt(169 - 25) = sqrt(144) = 12 m",
+            "11^2 + 14^2 = 121 + 196 = 317. 17^2 = 289. Since 317 \u2260 289, NOT a right triangle.",
+            "d = sqrt(8^2 + 6^2) = sqrt(100) = 10 cm",
+            "s^2 + s^2 = 10^2 \u2192 2s^2 = 100 \u2192 s^2 = 50 \u2192 s = 5*sqrt(2) \u2248 7.07 cm",
+            "b = sqrt(26^2 - 10^2) = sqrt(676 - 100) = sqrt(576) = 24",
+            "8^2 + 15^2 = 64 + 225 = 289 = 17^2. Yes, it is a Pythagorean triple!",
+            "shadow^2 + 10^2 = 26^2 \u2192 shadow^2 = 676 - 100 = 576 \u2192 shadow = 24 m"
+          ] },
+          { subtitle: "Worksheet 2: Area and Perimeter \u2014 Level \u{1F7E1} Medium", emoji: "\u{1F4DD}", points: [
+            "1. Find the area of a triangle with base 14 cm and height 9 cm.",
+            "2. A circle has circumference 31.4 cm. Find its radius and area (use pi \u2248 3.14).",
+            "3. A trapezoid has parallel sides of 8 m and 14 m and a height of 6 m. Find its area.",
+            "4. A composite shape is a rectangle 10 \xD7 6 with a semicircle on one end (diameter = 6). Find the total area.",
+            "5. Find the shaded area: large circle radius 8, small circle radius 3, same centre.",
+            "6. A path 2 m wide runs around a rectangular garden that is 15 m \xD7 10 m. Find the area of the path only.",
+            "7. Find the perimeter of a right triangle with legs 5 m and 12 m.",
+            "8. A sector of a circle has radius 6 cm and angle 90\xB0. Find its area (use pi \u2248 3.14)."
+          ], answers: [
+            "A = (1/2)(14)(9) = 63 cm^2",
+            "C = 2*pi*r \u2192 31.4 = 2(3.14)r \u2192 r = 5 cm. A = pi*r^2 = 3.14 \xD7 25 = 78.5 cm^2",
+            "A = (1/2)(8+14)(6) = (1/2)(22)(6) = 66 m^2",
+            "Rectangle: 10\xD76 = 60. Semicircle: (1/2)pi*r^2 = (1/2)(3.14)(9) \u2248 14.13. Total \u2248 74.13 cm^2",
+            "Large: pi(8^2) = 64pi. Small: pi(3^2) = 9pi. Shaded = 55pi \u2248 172.7 cm^2",
+            "Outer rectangle: (15+4)(10+4) = 19\xD714 = 266 m^2. Inner garden: 15\xD710 = 150 m^2. Path = 266 - 150 = 116 m^2.",
+            "Hypotenuse = sqrt(5^2+12^2) = sqrt(169) = 13 m. Perimeter = 5 + 12 + 13 = 30 m",
+            "Area of sector = (90/360)pi*r^2 = (1/4)(3.14)(36) = 28.26 cm^2"
+          ] },
+          { subtitle: "Worksheet 3: Surface Area and Volume \u2014 Level \u{1F534} Hard", emoji: "\u{1F4DD}", points: [
+            "1. Find the surface area of a rectangular prism: l=5, w=3, h=4 cm.",
+            "2. Find the volume of a cylinder: radius 7 cm, height 10 cm. (pi \u2248 3.14)",
+            "3. Find the surface area of a cylinder: radius 4 cm, height 9 cm.",
+            "4. A cone has radius 6 cm and slant height 10 cm. Find its surface area.",
+            "5. A sphere has radius 5 cm. Find its volume and surface area.",
+            "6. A rectangular swimming pool is 12 m \xD7 6 m \xD7 2 m deep. How many litres of water does it hold? (1 m^3 = 1000 L)",
+            "7. A cone and a cylinder have the same radius (4 cm) and height (9 cm). What is the ratio of their volumes?",
+            "8. A cylindrical can has diameter 8 cm and height 12 cm. Find the minimum surface area of material needed to make it."
+          ], answers: [
+            "SA = 2(lw + lh + wh) = 2(15 + 20 + 12) = 2(47) = 94 cm^2",
+            "V = pi*r^2*h = 3.14 \xD7 49 \xD7 10 = 1538.6 cm^3",
+            "SA = 2*pi*r^2 + 2*pi*r*h = 2(3.14)(16) + 2(3.14)(4)(9) = 100.48 + 226.08 = 326.56 cm^2",
+            "SA = pi*r^2 + pi*r*l = pi(36) + pi(6)(10) = 36pi + 60pi = 96pi \u2248 301.44 cm^2",
+            "V = (4/3)pi*r^3 = (4/3)(3.14)(125) = 523.3 cm^3. SA = 4*pi*r^2 = 4(3.14)(25) = 314 cm^2",
+            "V = 12 \xD7 6 \xD7 2 = 144 m^3. Volume in litres = 144 \xD7 1000 = 144,000 L",
+            "V_cylinder = pi*r^2*h = pi(16)(9) = 144pi. V_cone = (1/3)pi*r^2*h = (1/3)(144pi) = 48pi. Ratio = 48pi : 144pi = 1 : 3",
+            "r = 4 cm. SA = 2*pi*r^2 + 2*pi*r*h = 2(3.14)(16) + 2(3.14)(4)(12) = 100.48 + 301.44 = 401.92 cm^2"
+          ] }
+        ] },
+        { id: "algebra-worksheets", title: "Polynomial Algebra Worksheets", notes: [
+          { subtitle: "Worksheet 1: Adding, Subtracting & Multiplying \u2014 Level \u{1F7E2} Easy", emoji: "\u{1F4DD}", points: [
+            "1. Simplify: (3x^2 + 5x - 2) + (x^2 - 3x + 7)",
+            "2. Simplify: (4a^2 - 2a + 1) - (a^2 + 3a - 4)",
+            "3. Expand: 3x(2x^2 - 4x + 1)",
+            "4. Expand using FOIL: (x + 4)(x + 3)",
+            "5. Expand: (x - 5)(x + 5)",
+            "6. Expand: (2x + 1)(x - 3)",
+            "7. Simplify: (5y^3 - 2y + 8) - (3y^3 + y^2 - 4y + 1)",
+            "8. Expand: -2a(3a^2 - a + 4)"
+          ], answers: [
+            "(3+1)x^2 + (5-3)x + (-2+7) = 4x^2 + 2x + 5",
+            "(4-1)a^2 + (-2-3)a + (1+4) = 3a^2 - 5a + 5",
+            "3x\xB72x^2 + 3x\xB7(-4x) + 3x\xB71 = 6x^3 - 12x^2 + 3x",
+            "F: x^2, O: 3x, I: 4x, L: 12. Total: x^2 + 7x + 12",
+            "Difference of squares: x^2 - 25",
+            "F: 2x^2, O: -6x, I: x, L: -3. Total: 2x^2 - 5x - 3",
+            "(5-3)y^3 + (0-1)y^2 + (-2+4)y + (8-1) = 2y^3 - y^2 + 2y + 7",
+            "-6a^3 + 2a^2 - 8a"
+          ] },
+          { subtitle: "Worksheet 2: Factoring \u2014 Level \u{1F7E1} Medium", emoji: "\u{1F4DD}", points: [
+            "1. Factor completely: 6x^3 + 9x^2 - 3x",
+            "2. Factor: x^2 + 5x + 6",
+            "3. Factor: x^2 - 7x + 12",
+            "4. Factor: x^2 + 2x - 15",
+            "5. Factor completely: x^2 - 16",
+            "6. Factor: 4x^2 - 25",
+            "7. Factor completely: 2x^2 + 8x - 24 (hint: common factor first!)",
+            "8. Factor: x^2 - 10x + 25"
+          ], answers: [
+            "GCF = 3x. Result: 3x(2x^2 + 3x - 1)",
+            "Need two numbers that multiply to 6 and add to 5: 2 and 3. Answer: (x+2)(x+3)",
+            "Need two numbers that multiply to 12 and add to -7: -3 and -4. Answer: (x-3)(x-4)",
+            "Need two numbers that multiply to -15 and add to 2: 5 and -3. Answer: (x+5)(x-3)",
+            "Difference of squares: (x+4)(x-4)",
+            "Difference of squares: (2x+5)(2x-5)",
+            "GCF = 2 first: 2(x^2 + 4x - 12). Then factor trinomial: need multiply to -12, add to 4: 6 and -2. Answer: 2(x+6)(x-2)",
+            "Perfect square: (x-5)^2. Check: (x-5)^2 = x^2 - 10x + 25 \u2713"
+          ] },
+          { subtitle: "Worksheet 3: Mixed Challenge \u2014 Level \u{1F534} Hard", emoji: "\u{1F4DD}", points: [
+            "1. Expand and simplify: (2x + 3)^2",
+            "2. Expand and simplify: (x + 2)(x^2 - 3x + 4)",
+            "3. Factor completely: 3x^2 - 12",
+            "4. Factor completely: 5x^3 - 20x",
+            "5. Expand: (3x - 2)(2x + 5) and verify by substituting x = 1.",
+            "6. Factor: 2x^2 - x - 6",
+            "7. Simplify: (x + 3)^2 - (x - 1)^2",
+            "8. A rectangle has area x^2 + 7x + 10. Write expressions for the length and width. What are the dimensions if x = 5?"
+          ], answers: [
+            "(2x)^2 + 2(2x)(3) + 3^2 = 4x^2 + 12x + 9",
+            "x\xB7x^2 + x\xB7(-3x) + x\xB74 + 2\xB7x^2 + 2\xB7(-3x) + 2\xB74 = x^3 - 3x^2 + 4x + 2x^2 - 6x + 8 = x^3 - x^2 - 2x + 8",
+            "GCF = 3: 3(x^2 - 4). Then difference of squares: 3(x+2)(x-2)",
+            "GCF = 5x: 5x(x^2 - 4). Then difference of squares: 5x(x+2)(x-2)",
+            "(3x-2)(2x+5) = 6x^2 + 15x - 4x - 10 = 6x^2 + 11x - 10. Check x=1: (3-2)(2+5) = (1)(7) = 7. Formula: 6+11-10 = 7. \u2713",
+            "Multiply to 2\xD7(-6)=-12, add to -1: 3 and -4. Split: 2x^2 + 3x - 4x - 6 = x(2x+3) - 2(2x+3) = (x-2)(2x+3)",
+            "Expand each: (x+3)^2 = x^2+6x+9. (x-1)^2 = x^2-2x+1. Difference: (x^2+6x+9)-(x^2-2x+1) = 8x+8 = 8(x+1)",
+            "Factor: x^2+7x+10 = (x+2)(x+5). So length = x+5, width = x+2. If x=5: length = 10, width = 7."
           ] }
         ] }
       ]
@@ -22195,7 +22541,7 @@
       gradient: "from-blue-500 to-cyan-600",
       sections: [
         { id: "number-rational", title: "Rational and Irrational Numbers", notes: [
-          { subtitle: "The Real Number System", emoji: "\xF0\u0178\u201D\xA2", points: [
+          { subtitle: "The Real Number System", emoji: "\u{1F522}", points: [
             "NATURAL numbers: counting numbers - 1, 2, 3, 4, ...",
             "WHOLE numbers: natural numbers plus zero - 0, 1, 2, 3, ...",
             "INTEGERS: positive and negative whole numbers - ..., -2, -1, 0, 1, 2, ...",
@@ -22205,7 +22551,7 @@
             "Examples of irrational: pi, sqrt(2), sqrt(3), e",
             "REAL numbers: all rational AND irrational numbers together"
           ] },
-          { subtitle: "Square Roots and Estimating Radicals", emoji: "\xE2\u02C6\u0161", points: [
+          { subtitle: "Square Roots and Estimating Radicals", emoji: "\u221A", points: [
             "sqrt(a) is the non-negative number that when squared gives a",
             "Perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100 - give rational square roots",
             "Non-perfect square roots are IRRATIONAL: sqrt(2), sqrt(3), sqrt(5), sqrt(7), ...",
@@ -22214,7 +22560,7 @@
             "Rule: sqrt(a x b) = sqrt(a) x sqrt(b). Use this to simplify!",
             "Mixed radical: 3*sqrt(5) means 3 times sqrt(5)"
           ] },
-          { subtitle: "Comparing and Ordering Numbers", emoji: "\xF0\u0178\u201C\u0160", points: [
+          { subtitle: "Comparing and Ordering Numbers", emoji: "\u{1F4CA}", points: [
             "Convert all numbers to decimals to compare: sqrt(7) is about 2.646, 8/3 is about 2.667",
             "Negative numbers: further from zero means smaller. So -5 is less than -3",
             "Absolute value |a| = distance from zero. |-4| = 4 and |3| = 3",
@@ -22222,7 +22568,7 @@
           ] }
         ] },
         { id: "number-exponents", title: "Exponent Laws", notes: [
-          { subtitle: "The Seven Exponent Laws", emoji: "\xE2\u0161\xA1", points: [
+          { subtitle: "The Seven Exponent Laws", emoji: "\u26A1", points: [
             "PRODUCT LAW: a^m times a^n = a^(m+n) - add exponents when multiplying same base",
             "QUOTIENT LAW: a^m divided by a^n = a^(m-n) - subtract exponents when dividing same base",
             "POWER OF A POWER: (a^m)^n = a^(mn) - multiply the exponents",
@@ -22232,7 +22578,7 @@
             "NEGATIVE EXPONENT: a^(-n) = 1/a^n",
             "All laws require the SAME base to combine exponents!"
           ] },
-          { subtitle: "Fractional Exponents and Radicals", emoji: "\xE2\u02C6\u0161", points: [
+          { subtitle: "Fractional Exponents and Radicals", emoji: "\u221A", points: [
             "a^(1/2) = sqrt(a) (square root)",
             "a^(1/3) = cube root of a",
             "a^(1/n) = nth root of a",
@@ -22240,7 +22586,7 @@
             "Example: 8^(2/3) = (cube root of 8)^2 = 2^2 = 4",
             "Tip: take the ROOT first when possible (smaller numbers to work with)"
           ] },
-          { subtitle: "Scientific Notation", emoji: "\xF0\u0178\u201D\xAC", points: [
+          { subtitle: "Scientific Notation", emoji: "\u{1F52C}", points: [
             "Form: a x 10^n where a is between 1 (inclusive) and 10 (exclusive) and n is an integer",
             "Large numbers use positive exponents: 3,200,000 = 3.2 x 10^6",
             "Small numbers use negative exponents: 0.000045 = 4.5 x 10^(-5)",
@@ -22260,7 +22606,7 @@
       gradient: "from-violet-500 to-purple-600",
       sections: [
         { id: "linear-slopeintercept", title: "Slope and Slope-Intercept Form", notes: [
-          { subtitle: "Understanding Slope", emoji: "\xF0\u0178\u201C\x90", points: [
+          { subtitle: "Understanding Slope", emoji: "\u{1F4D0}", points: [
             "Slope measures STEEPNESS and DIRECTION of a line",
             "Formula: m = rise/run = (y2 - y1)/(x2 - x1)",
             "Positive slope: line rises from left to right",
@@ -22269,14 +22615,14 @@
             "Undefined slope: vertical line - x is constant (denominator = 0)",
             "Slope tells you: for every 1 unit right, y changes by m units"
           ] },
-          { subtitle: "Slope-Intercept Form: y = mx + b", emoji: "\xE2\u0153\x8F\xEF\xB8\x8F", points: [
+          { subtitle: "Slope-Intercept Form: y = mx + b", emoji: "\u270F\uFE0F", points: [
             "m = slope (rate of change)",
             "b = y-intercept (value of y when x = 0)",
             "To graph: plot the y-intercept (0, b), then use slope to find more points",
             "Example: y = 3x - 2. Plot (0, -2). Slope = 3/1 means go up 3 and right 1 to reach (1, 1)",
             "To find slope and y-intercept from an equation: rearrange into y = mx + b form"
           ] },
-          { subtitle: "Direct and Partial Variation", emoji: "\xF0\u0178\u201D\u2014", points: [
+          { subtitle: "Direct and Partial Variation", emoji: "\u{1F517}", points: [
             "DIRECT VARIATION: y = kx - passes through origin. k is the constant of variation.",
             "If x doubles, y doubles. Constant ratio y/x = k for all points.",
             "PARTIAL VARIATION: y = mx + b where b is not 0 - does NOT pass through origin",
@@ -22286,14 +22632,14 @@
           ] }
         ] },
         { id: "linear-forms", title: "Forms of Linear Equations", notes: [
-          { subtitle: "Standard Form: Ax + By = C", emoji: "\xF0\u0178\u201C\x9D", points: [
+          { subtitle: "Standard Form: Ax + By = C", emoji: "\u{1F4DD}", points: [
             "Standard form: Ax + By = C where A, B, C are integers and A is at least 0",
             "Finding x-intercept: set y = 0 and solve for x",
             "Finding y-intercept: set x = 0 and solve for y",
             "Example: 3x + 2y = 12. x-int: 3x=12 so x=4, giving (4,0). y-int: 2y=12 so y=6, giving (0,6)",
             "Converting to slope-intercept: isolate y. 2y = -3x + 12 gives y = (-3/2)x + 6"
           ] },
-          { subtitle: "Point-Slope Form and Writing Equations", emoji: "\xF0\u0178\u2013\u0160\xEF\xB8\x8F", points: [
+          { subtitle: "Point-Slope Form and Writing Equations", emoji: "\u{1F58A}\uFE0F", points: [
             "Point-slope form: y - y1 = m(x - x1) - use when given a point and slope",
             "Step 1: Identify slope m and a point (x1, y1)",
             "Step 2: Substitute and simplify to y = mx + b",
@@ -22301,7 +22647,7 @@
             "Horizontal line through (a, b): equation is y = b",
             "Vertical line through (a, b): equation is x = a (undefined slope)"
           ] },
-          { subtitle: "Parallel and Perpendicular Lines", emoji: "\xE2\u0160\xA5", points: [
+          { subtitle: "Parallel and Perpendicular Lines", emoji: "\u22A5", points: [
             "PARALLEL lines: same slope, different y-intercept. They never intersect.",
             "Example: y = 2x + 3 and y = 2x - 5 are parallel (both slope 2)",
             "PERPENDICULAR lines: slopes are negative reciprocals. Their product equals -1.",
@@ -22320,13 +22666,13 @@
       gradient: "from-amber-500 to-orange-600",
       sections: [
         { id: "systems-graphing", title: "Graphing Systems", notes: [
-          { subtitle: "Understanding a Linear System", emoji: "\xF0\u0178\u017D\xAF", points: [
+          { subtitle: "Understanding a Linear System", emoji: "\u{1F3AF}", points: [
             "A system of linear equations is two or more equations with the same variables",
             "The SOLUTION is the point (x, y) that makes BOTH equations true at the same time",
             "Graphically: the solution is the INTERSECTION POINT of the two lines",
             "Three outcomes: one solution (lines intersect), no solution (parallel), infinite solutions (same line)"
           ] },
-          { subtitle: "Graphing Method", emoji: "\xF0\u0178\u201C\u2030", points: [
+          { subtitle: "Graphing Method", emoji: "\u{1F4C9}", points: [
             "Step 1: Rewrite each equation in slope-intercept form",
             "Step 2: Graph both lines on the same coordinate grid",
             "Step 3: Identify the intersection point",
@@ -22336,7 +22682,7 @@
           ] }
         ] },
         { id: "systems-substitution", title: "Substitution Method", notes: [
-          { subtitle: "Substitution - Full Method", emoji: "\xF0\u0178\u201D\u201E", points: [
+          { subtitle: "Substitution - Full Method", emoji: "\u{1F504}", points: [
             "Step 1: ISOLATE one variable in one equation (pick whichever is easiest)",
             "Step 2: SUBSTITUTE that expression into the other equation",
             "Step 3: SOLVE the resulting single-variable equation",
@@ -22344,7 +22690,7 @@
             "Step 5: VERIFY by substituting both values into both original equations",
             "BEST USED when: one variable is already isolated or has a coefficient of 1"
           ] },
-          { subtitle: "Common Mistakes to Avoid", emoji: "\xE2\u0161\xA0\xEF\xB8\x8F", points: [
+          { subtitle: "Common Mistakes to Avoid", emoji: "\u26A0\uFE0F", points: [
             "Do NOT substitute into the SAME equation you isolated from - use the OTHER one",
             "Do NOT forget to find BOTH variables - one value alone is not a complete solution",
             "Do NOT skip verification - especially when numbers get messy",
@@ -22353,7 +22699,7 @@
           ] }
         ] },
         { id: "systems-elimination", title: "Elimination Method", notes: [
-          { subtitle: "Elimination - Full Method", emoji: "\xE2\u017E\u2022", points: [
+          { subtitle: "Elimination - Full Method", emoji: "\u2795", points: [
             "Step 1: ALIGN both equations with like terms in columns",
             "Step 2: If needed, MULTIPLY one or both equations so one variable has opposite coefficients",
             "Step 3: ADD the equations to ELIMINATE one variable",
@@ -22362,7 +22708,7 @@
             "Step 6: VERIFY in both original equations",
             "BEST USED when: coefficients of one variable are already opposites or easily made so"
           ] },
-          { subtitle: "When to Multiply First", emoji: "\xE2\u0153\u2013\xEF\xB8\x8F", points: [
+          { subtitle: "When to Multiply First", emoji: "\u2716\uFE0F", points: [
             "If y-coefficients are 3 and 2: multiply first eq by 2 and second by 3 so both become 6",
             "Then subtract to eliminate y",
             "Sometimes only ONE equation needs to be multiplied",
@@ -22371,14 +22717,14 @@
           ] }
         ] },
         { id: "systems-word-problems", title: "Systems Word Problems", notes: [
-          { subtitle: "Setting Up Systems from Word Problems", emoji: "\xF0\u0178\u201C\u2013", points: [
+          { subtitle: "Setting Up Systems from Word Problems", emoji: "\u{1F4D6}", points: [
             "Step 1: Define your VARIABLES clearly (e.g. let x = adults, y = children)",
             "Step 2: Write TWO equations from the information given",
             "Step 3: Solve using any method (substitution or elimination)",
             "Step 4: Answer the question with proper units",
             "Step 5: Verify your answer makes sense in context"
           ] },
-          { subtitle: "Common Types of Word Problems", emoji: "\xF0\u0178\u2014\u201A\xEF\xB8\x8F", points: [
+          { subtitle: "Common Types of Word Problems", emoji: "\u{1F5C2}\uFE0F", points: [
             "MIXTURE: blend two types of something to get a mixture at a certain value",
             "RATE-TIME-DISTANCE: d = r*t. Set up equations for two different situations.",
             "NUMBER PROBLEMS: two numbers add to 50 and differ by 12. x+y=50 and x-y=12",
@@ -22397,7 +22743,7 @@
       gradient: "from-emerald-500 to-teal-600",
       sections: [
         { id: "algebra-polynomials", title: "Introduction to Polynomials", notes: [
-          { subtitle: "Polynomial Vocabulary", emoji: "\xF0\u0178\u201C\u0161", points: [
+          { subtitle: "Polynomial Vocabulary", emoji: "\u{1F4DA}", points: [
             "TERM: a number, variable, or product of numbers and variables (e.g. 5x^2, -3x, 7)",
             "COEFFICIENT: the number multiplying the variable (in 4x^3 the coefficient is 4)",
             "DEGREE of a term: sum of exponents on the variables (3x^2*y has degree 3)",
@@ -22406,7 +22752,7 @@
             "LIKE TERMS: same variable AND same exponent. Only like terms can be combined!",
             "Examples: 3x^2 and -7x^2 are like terms. 3x^2 and 3x are NOT like terms."
           ] },
-          { subtitle: "Adding and Subtracting Polynomials", emoji: "\xE2\u017E\u2022", points: [
+          { subtitle: "Adding and Subtracting Polynomials", emoji: "\u2795", points: [
             "Combine LIKE TERMS only - same variable, same exponent",
             "Adding: simply combine like terms. (3x^2+2x-1)+(x^2-5x+4) = 4x^2-3x+3",
             "Subtracting: distribute the negative sign to ALL terms in the second polynomial",
@@ -22415,20 +22761,20 @@
           ] }
         ] },
         { id: "algebra-multiplying", title: "Multiplying Polynomials", notes: [
-          { subtitle: "Multiplying a Monomial by a Polynomial", emoji: "\xE2\u0153\u2013\xEF\xB8\x8F", points: [
+          { subtitle: "Multiplying a Monomial by a Polynomial", emoji: "\u2716\uFE0F", points: [
             "Distribute the monomial to EVERY term inside the polynomial",
             "Multiply coefficients, add exponents for same-base variables",
             "Example: 3x(2x^2 - 5x + 1) = 6x^3 - 15x^2 + 3x",
             "Example: -2a^2(3a - 4) = -6a^3 + 8a^2  (be careful with signs!)"
           ] },
-          { subtitle: "FOIL: Multiplying Two Binomials", emoji: "\xF0\u0178\u201D\xA0", points: [
+          { subtitle: "FOIL: Multiplying Two Binomials", emoji: "\u{1F520}", points: [
             "FOIL stands for: First, Outer, Inner, Last",
             "(a + b)(c + d) = ac + ad + bc + bd",
             "Example: (x + 3)(x + 5) = x^2 + 5x + 3x + 15 = x^2 + 8x + 15",
             "Example: (2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4",
             "Always collect like terms after FOILing!"
           ] },
-          { subtitle: "Special Products", emoji: "\xE2\xAD\x90", points: [
+          { subtitle: "Special Products", emoji: "\u2B50", points: [
             "DIFFERENCE OF SQUARES: (a + b)(a - b) = a^2 - b^2",
             "Example: (x + 5)(x - 5) = x^2 - 25 (middle terms cancel)",
             "PERFECT SQUARE TRINOMIAL: (a + b)^2 = a^2 + 2ab + b^2",
@@ -22439,14 +22785,14 @@
           ] }
         ] },
         { id: "algebra-factoring", title: "Factoring Polynomials", notes: [
-          { subtitle: "Common Factoring (GCF)", emoji: "\xF0\u0178\u201D\x8D", points: [
+          { subtitle: "Common Factoring (GCF)", emoji: "\u{1F50D}", points: [
             "ALWAYS look for a GCF (greatest common factor) FIRST before anything else",
             "Find the largest number and highest power that divides every term",
             "Example: 6x^3 + 9x^2 - 3x. GCF = 3x. Result: 3x(2x^2 + 3x - 1)",
             "Example: 4a^2*b + 8a*b^2 - 12ab. GCF = 4ab. Result: 4ab(a + 2b - 3)",
             "After factoring, verify by expanding back: does it match the original?"
           ] },
-          { subtitle: "Factoring Trinomials: x^2 + bx + c", emoji: "\xF0\u0178\xA7\xA9", points: [
+          { subtitle: "Factoring Trinomials: x^2 + bx + c", emoji: "\u{1F9E9}", points: [
             "Find two integers that MULTIPLY to c and ADD to b",
             "Then factor as (x + p)(x + q) where p*q = c and p+q = b",
             "Example: x^2 + 5x + 6. Need: multiply to 6 and add to 5. That is 2 and 3. Answer: (x+2)(x+3)",
@@ -22454,7 +22800,7 @@
             "Example: x^2 + 2x - 15. Need: multiply to -15 and add to 2. That is 5 and -3. Answer: (x+5)(x-3)",
             "Positive product: both same sign. Negative product: opposite signs."
           ] },
-          { subtitle: "Factoring: Difference of Squares", emoji: "\xE2\u2013\xA1", points: [
+          { subtitle: "Factoring: Difference of Squares", emoji: "\u25A1", points: [
             "Pattern: a^2 - b^2 = (a + b)(a - b)",
             "Both terms must be perfect squares separated by subtraction",
             "Example: x^2 - 16 = (x+4)(x-4)",
@@ -22474,7 +22820,7 @@
       gradient: "from-rose-500 to-pink-600",
       sections: [
         { id: "measurement-pythagorean", title: "The Pythagorean Theorem", notes: [
-          { subtitle: "Understanding the Theorem", emoji: "\xF0\u0178\u201C\x90", points: [
+          { subtitle: "Understanding the Theorem", emoji: "\u{1F4D0}", points: [
             "In any right triangle: a^2 + b^2 = c^2, where c is the hypotenuse",
             "The hypotenuse is ALWAYS opposite the right angle and is the longest side",
             "To find hypotenuse: c = sqrt(a^2 + b^2)",
@@ -22483,7 +22829,7 @@
             "Multiples of triples also work: (6,8,10) is (3,4,5) scaled by 2",
             "Converse: if a^2+b^2=c^2, then the triangle IS a right triangle"
           ] },
-          { subtitle: "Applying the Pythagorean Theorem", emoji: "\xF0\u0178\x8F\u2014\xEF\xB8\x8F", points: [
+          { subtitle: "Applying the Pythagorean Theorem", emoji: "\u{1F3D7}\uFE0F", points: [
             "Identify the hypotenuse FIRST (longest side, opposite 90 degrees)",
             "Draw a diagram and label sides a, b, c",
             "2D applications: diagonals of rectangles, height of isosceles triangles",
@@ -22493,7 +22839,7 @@
           ] }
         ] },
         { id: "measurement-formulas", title: "Perimeter, Area, and Volume", notes: [
-          { subtitle: "Perimeter and Area: 2D Shapes", emoji: "\xF0\u0178\u201C\x8F", points: [
+          { subtitle: "Perimeter and Area: 2D Shapes", emoji: "\u{1F4CF}", points: [
             "Rectangle: A = l*w, P = 2(l+w)",
             "Triangle: A = (1/2)*b*h where h is perpendicular to base b. P = sum of all sides",
             "Trapezoid: A = (1/2)(a+b)h where a and b are the parallel sides",
@@ -22501,7 +22847,7 @@
             "Always use RADIUS (not diameter) in the circle area formula",
             "Composite figures: split into simpler shapes, add or subtract areas"
           ] },
-          { subtitle: "Surface Area: 3D Shapes", emoji: "\xF0\u0178\u201C\xA6", points: [
+          { subtitle: "Surface Area: 3D Shapes", emoji: "\u{1F4E6}", points: [
             "Surface area = total area of ALL outer faces",
             "Rectangular prism: SA = 2(lw + lh + wh)",
             "Cylinder: SA = 2*pi*r^2 + 2*pi*r*h (two circles plus the curved rectangle)",
@@ -22509,7 +22855,7 @@
             "Sphere: SA = 4*pi*r^2",
             "Always state units as SQUARE units: cm^2 or m^2"
           ] },
-          { subtitle: "Volume: 3D Shapes", emoji: "\xF0\u0178\u201C\x90", points: [
+          { subtitle: "Volume: 3D Shapes", emoji: "\u{1F4D0}", points: [
             "Volume = amount of space inside a 3D object",
             "Any prism: V = base area x height",
             "Rectangular prism: V = l*w*h",
@@ -22524,19 +22870,19 @@
     }
   };
   function MathStudyG9() {
-    const [showIntro, setShowIntro] = (0, import_react3.useState)(true);
-    const [selectedSubject, setSelectedSubject] = (0, import_react3.useState)(null);
-    const [selectedSection, setSelectedSection] = (0, import_react3.useState)(null);
-    const [readSections, setReadSections] = (0, import_react3.useState)(/* @__PURE__ */ new Set());
-    const [currentQuiz, setCurrentQuiz] = (0, import_react3.useState)(null);
-    const [currentQuestion, setCurrentQuestion] = (0, import_react3.useState)(0);
-    const [selectedAnswer, setSelectedAnswer] = (0, import_react3.useState)(null);
-    const [showExplanation, setShowExplanation] = (0, import_react3.useState)(false);
-    const [quizScore, setQuizScore] = (0, import_react3.useState)({ correct: 0, total: 0 });
-    const [revealedAnswers, setRevealedAnswers] = (0, import_react3.useState)(/* @__PURE__ */ new Set());
-    const [currentFlashcard, setCurrentFlashcard] = (0, import_react3.useState)(0);
-    const [isFlipped, setIsFlipped] = (0, import_react3.useState)(false);
-    const [flashcardStats, setFlashcardStats] = (0, import_react3.useState)({ known: 0, learning: 0 });
+    const [showIntro, setShowIntro] = (0, import_react2.useState)(true);
+    const [selectedSubject, setSelectedSubject] = (0, import_react2.useState)(null);
+    const [selectedSection, setSelectedSection] = (0, import_react2.useState)(null);
+    const [readSections, setReadSections] = (0, import_react2.useState)(/* @__PURE__ */ new Set());
+    const [currentQuiz, setCurrentQuiz] = (0, import_react2.useState)(null);
+    const [currentQuestion, setCurrentQuestion] = (0, import_react2.useState)(0);
+    const [selectedAnswer, setSelectedAnswer] = (0, import_react2.useState)(null);
+    const [showExplanation, setShowExplanation] = (0, import_react2.useState)(false);
+    const [quizScore, setQuizScore] = (0, import_react2.useState)({ correct: 0, total: 0 });
+    const [revealedAnswers, setRevealedAnswers] = (0, import_react2.useState)(/* @__PURE__ */ new Set());
+    const [currentFlashcard, setCurrentFlashcard] = (0, import_react2.useState)(0);
+    const [isFlipped, setIsFlipped] = (0, import_react2.useState)(false);
+    const [flashcardStats, setFlashcardStats] = (0, import_react2.useState)({ known: 0, learning: 0 });
     const toggleRead = (id) => {
       const s = new Set(readSections);
       if (s.has(id)) s.delete(id);
@@ -22592,27 +22938,27 @@
     };
     if (selectedSection && selectedSection.flashcards && selectedSection.flashcards.length > 0) {
       const card = selectedSection.flashcards[currentFlashcard];
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid flex flex-col", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40 px-5 h-14 flex items-center justify-between", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => {
+      return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen dot-grid flex flex-col", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement(InjectStyles, null), /* @__PURE__ */ React.createElement("div", { className: "glass sticky top-0 z-40 px-5 h-14 flex items-center justify-between", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ React.createElement("button", { onClick: () => {
         setSelectedSection(null);
         setCurrentFlashcard(0);
         setIsFlipped(false);
         setFlashcardStats({ known: 0, learning: 0 });
-      }, className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " Exit"), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-4" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-xs font-bold", style: { color: "rgba(52,211,153,0.9)" } }, "Done: ", flashcardStats.known), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-xs font-bold", style: { color: "rgba(251,191,36,0.9)" } }, "Review: ", flashcardStats.learning))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 max-w-2xl mx-auto w-full px-4 py-8 flex flex-col" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "mb-6 flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 flex gap-1" }, selectedSection.flashcards.map((_, i) => /* @__PURE__ */ import_react3.default.createElement("div", { key: i, className: "flex-1 h-1 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, i < currentFlashcard && /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-full w-full rounded-full bg-emerald-500" }), i === currentFlashcard && /* @__PURE__ */ import_react3.default.createElement("div", { className: `h-full rounded-full shimmer bg-gradient-to-r ${selectedSubject.gradient}`, style: { width: "100%" } })))), /* @__PURE__ */ import_react3.default.createElement("span", { className: "mono text-xs", style: { color: "var(--dim)" } }, currentFlashcard + 1, "/", selectedSection.flashcards.length)), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-bold text-base mb-5", style: { color: "var(--text)" } }, selectedSection.title), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flip-card flex-1 cursor-pointer mb-6 min-h-56", onClick: () => setIsFlipped(!isFlipped) }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `flip-inner relative w-full h-full ${isFlipped ? "flipped" : ""}`, style: { minHeight: "220px" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `flip-front absolute inset-0 bg-gradient-to-br ${selectedSubject.gradient} rounded-3xl flex items-center justify-center p-8 shadow-2xl` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute inset-0 opacity-20 rounded-3xl", style: { backgroundImage: "radial-gradient(circle at 70% 30%, white, transparent 65%)" } }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "text-center relative" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-black text-white/50 text-xs uppercase tracking-widest mb-4" }, "Question"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "syne font-black text-white leading-snug", style: { fontSize: "clamp(1.1rem,3vw,1.5rem)" } }, card.front), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/40 mt-6 text-xs mono" }, "tap to reveal answer"))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flip-back absolute inset-0 glass rounded-3xl flex items-center justify-center p-8" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-black text-xs uppercase tracking-widest mb-4", style: { color: "var(--dim)" } }, "Answer"), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "syne font-bold leading-relaxed", style: { fontSize: "clamp(1rem,2.5vw,1.2rem)", color: "var(--text)" } }, card.back), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs mono mt-6", style: { color: "var(--dim)" } }, "tap to flip back"))))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center justify-between gap-3" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: prevCard, disabled: currentFlashcard === 0, className: "px-5 py-2.5 rounded-xl text-sm syne font-bold disabled:opacity-20", style: { background: "var(--surface)", border: "1px solid var(--border)", color: "var(--muted)" } }, "Prev"), isFlipped && /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex gap-2 flex-1" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => {
+      }, className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ React.createElement(ArrowLeft, { className: "w-4 h-4" }), " Exit"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-4" }, /* @__PURE__ */ React.createElement("span", { className: "syne text-xs font-bold", style: { color: "rgba(52,211,153,0.9)" } }, "Done: ", flashcardStats.known), /* @__PURE__ */ React.createElement("span", { className: "syne text-xs font-bold", style: { color: "rgba(251,191,36,0.9)" } }, "Review: ", flashcardStats.learning))), /* @__PURE__ */ React.createElement("div", { className: "flex-1 max-w-2xl mx-auto w-full px-4 py-8 flex flex-col" }, /* @__PURE__ */ React.createElement("div", { className: "mb-6 flex items-center gap-3" }, /* @__PURE__ */ React.createElement("div", { className: "flex-1 flex gap-1" }, selectedSection.flashcards.map((_, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "flex-1 h-1 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, i < currentFlashcard && /* @__PURE__ */ React.createElement("div", { className: "h-full w-full rounded-full bg-emerald-500" }), i === currentFlashcard && /* @__PURE__ */ React.createElement("div", { className: `h-full rounded-full shimmer bg-gradient-to-r ${selectedSubject.gradient}`, style: { width: "100%" } })))), /* @__PURE__ */ React.createElement("span", { className: "mono text-xs", style: { color: "var(--dim)" } }, currentFlashcard + 1, "/", selectedSection.flashcards.length)), /* @__PURE__ */ React.createElement("h2", { className: "syne font-bold text-base mb-5", style: { color: "var(--text)" } }, selectedSection.title), /* @__PURE__ */ React.createElement("div", { className: "flip-card flex-1 cursor-pointer mb-6 min-h-56", onClick: () => setIsFlipped(!isFlipped) }, /* @__PURE__ */ React.createElement("div", { className: `flip-inner relative w-full h-full ${isFlipped ? "flipped" : ""}`, style: { minHeight: "220px" } }, /* @__PURE__ */ React.createElement("div", { className: `flip-front absolute inset-0 bg-gradient-to-br ${selectedSubject.gradient} rounded-3xl flex items-center justify-center p-8 shadow-2xl` }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-0 opacity-20 rounded-3xl", style: { backgroundImage: "radial-gradient(circle at 70% 30%, white, transparent 65%)" } }), /* @__PURE__ */ React.createElement("div", { className: "text-center relative" }, /* @__PURE__ */ React.createElement("p", { className: "syne font-black text-white/50 text-xs uppercase tracking-widest mb-4" }, "Question"), /* @__PURE__ */ React.createElement("h3", { className: "syne font-black text-white leading-snug", style: { fontSize: "clamp(1.1rem,3vw,1.5rem)" } }, card.front), /* @__PURE__ */ React.createElement("p", { className: "text-white/40 mt-6 text-xs mono" }, "tap to reveal answer"))), /* @__PURE__ */ React.createElement("div", { className: "flip-back absolute inset-0 glass rounded-3xl flex items-center justify-center p-8" }, /* @__PURE__ */ React.createElement("div", { className: "text-center" }, /* @__PURE__ */ React.createElement("p", { className: "syne font-black text-xs uppercase tracking-widest mb-4", style: { color: "var(--dim)" } }, "Answer"), /* @__PURE__ */ React.createElement("h3", { className: "syne font-bold leading-relaxed", style: { fontSize: "clamp(1rem,2.5vw,1.2rem)", color: "var(--text)" } }, card.back), /* @__PURE__ */ React.createElement("p", { className: "text-xs mono mt-6", style: { color: "var(--dim)" } }, "tap to flip back"))))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: prevCard, disabled: currentFlashcard === 0, className: "px-5 py-2.5 rounded-xl text-sm syne font-bold disabled:opacity-20", style: { background: "var(--surface)", border: "1px solid var(--border)", color: "var(--muted)" } }, "Prev"), isFlipped && /* @__PURE__ */ React.createElement("div", { className: "flex gap-2 flex-1" }, /* @__PURE__ */ React.createElement("button", { onClick: () => {
         setFlashcardStats((s) => ({ ...s, learning: s.learning + 1 }));
         nextCard();
-      }, className: "flex-1 py-2.5 rounded-xl text-sm syne font-black", style: { background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.25)", color: "rgb(251,191,36)" } }, "Still Learning"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => {
+      }, className: "flex-1 py-2.5 rounded-xl text-sm syne font-black", style: { background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.25)", color: "rgb(251,191,36)" } }, "Still Learning"), /* @__PURE__ */ React.createElement("button", { onClick: () => {
         setFlashcardStats((s) => ({ ...s, known: s.known + 1 }));
         nextCard();
-      }, className: "flex-1 py-2.5 rounded-xl text-sm syne font-black", style: { background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", color: "rgb(52,211,153)" } }, "Got It")), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: nextCard, disabled: currentFlashcard === selectedSection.flashcards.length - 1, className: "px-5 py-2.5 rounded-xl text-sm syne font-bold disabled:opacity-20", style: { background: "var(--surface)", border: "1px solid var(--border)", color: "var(--muted)" } }, "Next"))));
+      }, className: "flex-1 py-2.5 rounded-xl text-sm syne font-black", style: { background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", color: "rgb(52,211,153)" } }, "Got It")), /* @__PURE__ */ React.createElement("button", { onClick: nextCard, disabled: currentFlashcard === selectedSection.flashcards.length - 1, className: "px-5 py-2.5 rounded-xl text-sm syne font-bold disabled:opacity-20", style: { background: "var(--surface)", border: "1px solid var(--border)", color: "var(--muted)" } }, "Next"))));
     }
     if (currentQuiz) {
       const q = currentQuiz.quiz[currentQuestion];
       const isOk = selectedAnswer === q.correct;
       const labels = ["A", "B", "C", "D"];
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass px-5 h-14 flex items-center justify-between sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => {
+      return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement(InjectStyles, null), /* @__PURE__ */ React.createElement("div", { className: "glass px-5 h-14 flex items-center justify-between sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ React.createElement("button", { onClick: () => {
         setCurrentQuiz(null);
         setSelectedSection(null);
-      }, className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " Exit Quiz"), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "mono text-xs", style: { color: "var(--dim)" } }, currentQuestion + 1, "/", currentQuiz.quiz.length), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.2)" } }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-emerald-600 font-bold mono text-sm" }, quizScore.correct), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" }, className: "text-xs" }, "correct")))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-2xl mx-auto px-4 py-8" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex gap-1 mb-8" }, currentQuiz.quiz.map((_, i) => /* @__PURE__ */ import_react3.default.createElement("div", { key: i, className: "flex-1 h-1 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, i < currentQuestion && /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-full w-full bg-emerald-500 rounded-full" }), i === currentQuestion && /* @__PURE__ */ import_react3.default.createElement("div", { className: `h-full rounded-full shimmer bg-gradient-to-r ${selectedSubject.gradient}`, style: { width: "100%" } })))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass rounded-3xl p-7 mb-5 anim-up" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-start gap-4 mb-6" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-9 h-9 rounded-xl bg-gradient-to-br ${selectedSubject.gradient} flex items-center justify-center flex-shrink-0 shadow-lg` }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne font-black text-white text-sm" }, currentQuestion + 1)), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "syne font-bold text-lg leading-snug", style: { color: "var(--text)" } }, q.question)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-2.5" }, q.options.map((opt, idx) => {
+      }, className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ React.createElement(ArrowLeft, { className: "w-4 h-4" }), " Exit Quiz"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "mono text-xs", style: { color: "var(--dim)" } }, currentQuestion + 1, "/", currentQuiz.quiz.length), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.2)" } }, /* @__PURE__ */ React.createElement("span", { className: "text-emerald-600 font-bold mono text-sm" }, quizScore.correct), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--dim)" }, className: "text-xs" }, "correct")))), /* @__PURE__ */ React.createElement("div", { className: "max-w-2xl mx-auto px-4 py-8" }, /* @__PURE__ */ React.createElement("div", { className: "flex gap-1 mb-8" }, currentQuiz.quiz.map((_, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "flex-1 h-1 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, i < currentQuestion && /* @__PURE__ */ React.createElement("div", { className: "h-full w-full bg-emerald-500 rounded-full" }), i === currentQuestion && /* @__PURE__ */ React.createElement("div", { className: `h-full rounded-full shimmer bg-gradient-to-r ${selectedSubject.gradient}`, style: { width: "100%" } })))), /* @__PURE__ */ React.createElement("div", { className: "glass rounded-3xl p-7 mb-5 anim-up" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-start gap-4 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: `w-9 h-9 rounded-xl bg-gradient-to-br ${selectedSubject.gradient} flex items-center justify-center flex-shrink-0 shadow-lg` }, /* @__PURE__ */ React.createElement("span", { className: "syne font-black text-white text-sm" }, currentQuestion + 1)), /* @__PURE__ */ React.createElement("h3", { className: "syne font-bold text-lg leading-snug", style: { color: "var(--text)" } }, q.question)), /* @__PURE__ */ React.createElement("div", { className: "space-y-2.5" }, q.options.map((opt, idx) => {
         const isSel = selectedAnswer === idx, isCorr = idx === q.correct;
         let bg = "rgba(15,23,42,0.03)", border = "rgba(15,23,42,0.1)", textCol = "var(--muted)", labelBg = "rgba(15,23,42,0.06)", labelCol = "var(--dim)";
         if (!showExplanation && isSel) {
@@ -22634,7 +22980,7 @@
           labelBg = "rgba(239,68,68,0.15)";
           labelCol = "#dc2626";
         }
-        return /* @__PURE__ */ import_react3.default.createElement(
+        return /* @__PURE__ */ React.createElement(
           "button",
           {
             key: idx,
@@ -22643,56 +22989,49 @@
             className: "w-full text-left rounded-2xl px-4 py-3.5 transition-all duration-200 flex items-center gap-3.5",
             style: { background: bg, border: `1px solid ${border}`, cursor: showExplanation ? "default" : "pointer" }
           },
-          /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mono text-xs font-bold", style: { background: labelBg, color: labelCol } }, labels[idx]),
-          /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-sm font-medium", style: { color: textCol } }, opt),
-          showExplanation && isCorr && /* @__PURE__ */ import_react3.default.createElement(CircleCheckBig, { className: "w-4 h-4 text-emerald-600 ml-auto flex-shrink-0" }),
-          showExplanation && isSel && !isCorr && /* @__PURE__ */ import_react3.default.createElement(X, { className: "w-4 h-4 text-red-400 ml-auto flex-shrink-0" })
+          /* @__PURE__ */ React.createElement("div", { className: "w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mono text-xs font-bold", style: { background: labelBg, color: labelCol } }, labels[idx]),
+          /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium", style: { color: textCol } }, opt),
+          showExplanation && isCorr && /* @__PURE__ */ React.createElement(CheckCircle, { className: "w-4 h-4 text-emerald-600 ml-auto flex-shrink-0" }),
+          showExplanation && isSel && !isCorr && /* @__PURE__ */ React.createElement(X, { className: "w-4 h-4 text-red-400 ml-auto flex-shrink-0" })
         );
-      }))), showExplanation && /* @__PURE__ */ import_react3.default.createElement("div", { className: "rounded-2xl p-5 mb-5 anim-up flex items-start gap-3.5", style: { background: isOk ? "rgba(16,185,129,0.07)" : "rgba(99,102,241,0.07)", border: `1px solid ${isOk ? "rgba(16,185,129,0.25)" : "rgba(99,102,241,0.25)"}` } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${isOk ? "bg-emerald-500/20" : "bg-indigo-500/20"}` }, /* @__PURE__ */ import_react3.default.createElement(Lightbulb, { className: `w-4 h-4 ${isOk ? "text-emerald-600" : "text-indigo-500"}` })), /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("p", { className: `syne font-bold text-sm mb-1 ${isOk ? "text-emerald-700" : "text-indigo-600"}` }, isOk ? "Correct!" : "Here is why:"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: "var(--muted)" } }, q.explanation))), !showExplanation ? /* @__PURE__ */ import_react3.default.createElement("button", { onClick: handleCheck, disabled: selectedAnswer === null, className: `w-full py-3.5 rounded-2xl syne font-bold text-sm text-white bg-gradient-to-r ${selectedSubject.gradient} disabled:opacity-30 shadow-lg` }, "Check Answer") : /* @__PURE__ */ import_react3.default.createElement("button", { onClick: handleNext, className: `w-full py-3.5 rounded-2xl syne font-bold text-sm text-white bg-gradient-to-r ${selectedSubject.gradient} shadow-lg` }, currentQuestion < currentQuiz.quiz.length - 1 ? "Next Question" : "Finish Quiz")));
+      }))), showExplanation && /* @__PURE__ */ React.createElement("div", { className: "rounded-2xl p-5 mb-5 anim-up flex items-start gap-3.5", style: { background: isOk ? "rgba(16,185,129,0.07)" : "rgba(99,102,241,0.07)", border: `1px solid ${isOk ? "rgba(16,185,129,0.25)" : "rgba(99,102,241,0.25)"}` } }, /* @__PURE__ */ React.createElement("div", { className: `w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${isOk ? "bg-emerald-500/20" : "bg-indigo-500/20"}` }, /* @__PURE__ */ React.createElement(Lightbulb, { className: `w-4 h-4 ${isOk ? "text-emerald-600" : "text-indigo-500"}` })), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: `syne font-bold text-sm mb-1 ${isOk ? "text-emerald-700" : "text-indigo-600"}` }, isOk ? "Correct!" : "Here is why:"), /* @__PURE__ */ React.createElement("p", { className: "text-sm leading-relaxed", style: { color: "var(--muted)" } }, q.explanation))), !showExplanation ? /* @__PURE__ */ React.createElement("button", { onClick: handleCheck, disabled: selectedAnswer === null, className: `w-full py-3.5 rounded-2xl syne font-bold text-sm text-white bg-gradient-to-r ${selectedSubject.gradient} disabled:opacity-30 shadow-lg` }, "Check Answer") : /* @__PURE__ */ React.createElement("button", { onClick: handleNext, className: `w-full py-3.5 rounded-2xl syne font-bold text-sm text-white bg-gradient-to-r ${selectedSubject.gradient} shadow-lg` }, currentQuestion < currentQuiz.quiz.length - 1 ? "Next Question" : "Finish Quiz")));
     }
     if (selectedSection && selectedSubject) {
       const sec = selectedSection, isRead = readSections.has(sec.id), hasQuiz = sec.quiz && sec.quiz.length > 0, isWS = selectedSubject.id === "worksheets";
       if (hasQuiz && !currentQuiz) {
-        return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid flex items-center justify-center p-4", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-lg w-full text-center anim-up" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSection(null), className: "flex items-center gap-2 text-sm syne font-semibold mb-10 mx-auto", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " ", selectedSubject.name), /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br ${selectedSubject.gradient} flex items-center justify-center shadow-2xl` }, /* @__PURE__ */ import_react3.default.createElement(FileText, { className: "w-9 h-9 text-white" })), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-black mb-3", style: { fontSize: "2rem", color: "var(--text)" } }, "Ready to practice?"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base mb-8", style: { color: "var(--muted)" } }, sec.quiz.length, " questions with detailed explanations."), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => startQuiz(sec), className: `w-full py-4 bg-gradient-to-r ${selectedSubject.gradient} text-white rounded-2xl syne font-black text-sm shadow-lg` }, "Start Quiz")));
+        return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen dot-grid flex items-center justify-center p-4", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement(InjectStyles, null), /* @__PURE__ */ React.createElement("div", { className: "max-w-lg w-full text-center anim-up" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setSelectedSection(null), className: "flex items-center gap-2 text-sm syne font-semibold mb-10 mx-auto", style: { color: "var(--muted)" } }, /* @__PURE__ */ React.createElement(ArrowLeft, { className: "w-4 h-4" }), " ", selectedSubject.name), /* @__PURE__ */ React.createElement("div", { className: `w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br ${selectedSubject.gradient} flex items-center justify-center shadow-2xl` }, /* @__PURE__ */ React.createElement(FileText, { className: "w-9 h-9 text-white" })), /* @__PURE__ */ React.createElement("h2", { className: "syne font-black mb-3", style: { fontSize: "2rem", color: "var(--text)" } }, "Ready to practice?"), /* @__PURE__ */ React.createElement("p", { className: "text-base mb-8", style: { color: "var(--muted)" } }, sec.quiz.length, " questions with detailed explanations."), /* @__PURE__ */ React.createElement("button", { onClick: () => startQuiz(sec), className: `w-full py-4 bg-gradient-to-r ${selectedSubject.gradient} text-white rounded-2xl syne font-black text-sm shadow-lg` }, "Start Quiz")));
       }
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSection(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " ", selectedSubject.name), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" } }, "\xE2\u20AC\xBA"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-sm font-semibold truncate max-w-48", style: { color: "var(--dim)" } }, sec.title)), /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement(InjectStyles, null), /* @__PURE__ */ React.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ React.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setSelectedSection(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ React.createElement(ArrowLeft, { className: "w-4 h-4" }), " ", selectedSubject.name), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--dim)" } }, "\u203A"), /* @__PURE__ */ React.createElement("span", { className: "syne text-sm font-semibold truncate max-w-48", style: { color: "var(--dim)" } }, sec.title)), /* @__PURE__ */ React.createElement(
         "button",
         {
           onClick: () => toggleRead(sec.id),
           className: "flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs syne font-bold",
           style: isRead ? { background: "rgba(16,185,129,0.10)", border: "1px solid rgba(16,185,129,0.3)", color: "#059669" } : { background: "var(--surface)", border: "1px solid var(--border)", color: "var(--muted)" }
         },
-        isRead ? /* @__PURE__ */ import_react3.default.createElement(CircleCheckBig, { className: "w-3.5 h-3.5" }) : /* @__PURE__ */ import_react3.default.createElement(Circle, { className: "w-3.5 h-3.5" }),
+        isRead ? /* @__PURE__ */ React.createElement(CheckCircle, { className: "w-3.5 h-3.5" }) : /* @__PURE__ */ React.createElement(Circle, { className: "w-3.5 h-3.5" }),
         isRead ? "Completed" : "Mark complete"
-      ))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-10" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "mb-8 anim-up" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `inline-block bg-gradient-to-r ${selectedSubject.gradient} rounded-2xl p-px` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "rounded-2xl px-5 py-3", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black text-xl", style: { color: "var(--text)" } }, sec.title)))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "space-y-5" }, sec.notes && sec.notes.map((note, idx) => {
+      ))), /* @__PURE__ */ React.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-10" }, /* @__PURE__ */ React.createElement("div", { className: "mb-8 anim-up" }, /* @__PURE__ */ React.createElement("div", { className: `inline-block bg-gradient-to-r ${selectedSubject.gradient} rounded-2xl p-px` }, /* @__PURE__ */ React.createElement("div", { className: "rounded-2xl px-5 py-3", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement("h1", { className: "syne font-black text-xl", style: { color: "var(--text)" } }, sec.title)))), /* @__PURE__ */ React.createElement("div", { className: "mb-6 anim-up", style: { background: `linear-gradient(135deg,${getCol(selectedSubject.gradient).ll},white)`, borderRadius: "16px", padding: "14px 18px", border: `1px solid ${getCol(selectedSubject.gradient).h}20` } }, /* @__PURE__ */ React.createElement("p", { style: { fontSize: "12.5px", color: getCol(selectedSubject.gradient).h, fontFamily: "'Syne',sans-serif", fontWeight: 700, letterSpacing: "0.08em", marginBottom: "3px" } }, "HOW TO USE THESE NOTES"), /* @__PURE__ */ React.createElement("p", { className: "text-xs", style: { color: "#64748b", lineHeight: 1.6 } }, "Each section has ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#4338ca" } }, "\u{1F4D6} vocabulary"), " cards, ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#15803d" } }, "\u270F\uFE0F worked examples"), ", ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#c2410c" } }, "\u26A0\uFE0F common mistakes"), ", and ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#0369a1" } }, "\u{1F4A1} tips"), ". Click any section header to collapse it.")), /* @__PURE__ */ React.createElement("div", null, sec.notes && sec.notes.map((note, idx) => {
         const diagramKey = `${sec.id}-${idx}`, diagram = NOTE_DIAGRAMS[diagramKey];
-        return /* @__PURE__ */ import_react3.default.createElement("div", { key: idx, className: `glass rounded-2xl overflow-hidden anim-up anim-up-${Math.min(idx + 1, 4)}` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-gradient-to-r ${selectedSubject.gradient} px-5 py-3 flex items-center gap-3`, style: { opacity: 0.92 } }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xl leading-none" }, conceptCardEmoji(note)), /* @__PURE__ */ import_react3.default.createElement("h2", { className: "syne font-bold text-sm text-white leading-snug" }, note.subtitle)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-6 py-5" }, /* @__PURE__ */ import_react3.default.createElement("ul", { className: "space-y-1.5" }, note.points.map((pt, pi) => {
-          var _a;
-          const isStep = /^\d+\./.test(pt);
-          const hasKey = /^([A-Z][A-Z\s/]+):/.test(pt);
-          const colon = pt.indexOf(":");
-          const keyTerm = hasKey && colon > 0 ? pt.slice(0, colon) : null;
-          const rest = hasKey && colon > 0 ? pt.slice(colon + 1).trim() : pt;
-          return /* @__PURE__ */ import_react3.default.createElement("li", { key: pi }, /* @__PURE__ */ import_react3.default.createElement(
-            "div",
-            {
-              className: "flex items-start gap-3 rounded-xl px-3 py-2 transition-colors",
-              onMouseOver: (e) => e.currentTarget.style.background = "rgba(99,102,241,0.04)",
-              onMouseOut: (e) => e.currentTarget.style.background = "transparent"
-            },
-            isStep ? /* @__PURE__ */ import_react3.default.createElement("span", { className: `flex-shrink-0 mt-0.5 w-5 h-5 rounded-lg bg-gradient-to-br ${selectedSubject.gradient} text-white text-xs font-bold flex items-center justify-center mono`, style: { opacity: 0.85 } }, (_a = pt.match(/^(\d+)/)) == null ? void 0 : _a[1]) : /* @__PURE__ */ import_react3.default.createElement("span", { className: `flex-shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-gradient-to-br ${selectedSubject.gradient}`, style: { opacity: 0.7 } }),
-            /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: "var(--muted)" } }, keyTerm ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("span", { className: "font-bold", style: { color: "var(--text)" } }, keyTerm, ":"), " ", rest) : isStep ? /* @__PURE__ */ import_react3.default.createElement("span", null, pt.replace(/^\d+\.\s*/, "")) : pt)
-          ), isWS && note.answers && note.answers[pi] && /* @__PURE__ */ import_react3.default.createElement("div", { className: "ml-8 mt-1" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => toggleAnswer(idx, pi), className: "text-xs syne font-bold flex items-center gap-1 px-2 py-1 rounded-lg", style: { color: "rgba(13,148,136,0.8)" } }, revealedAnswers.has(`${idx}-${pi}`) ? "Hide Answer" : "Show Answer"), revealedAnswers.has(`${idx}-${pi}`) && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-1.5 px-4 py-2.5 rounded-r-xl", style: { background: "rgba(16,185,129,0.07)", borderLeft: "2px solid rgba(16,185,129,0.35)" } }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm mono", style: { color: "rgba(6,78,59,0.9)" } }, note.answers[pi]))));
-        })), diagram && /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-5 pt-4", style: { borderTop: "1px solid var(--border)" } }, diagram)));
-      })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mt-8 glass rounded-2xl p-5 flex gap-3" }, /* @__PURE__ */ import_react3.default.createElement(Lightbulb, { className: "w-5 h-5 flex-shrink-0 mt-0.5", style: { color: "rgba(180,83,9,0.8)" } }), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-sm leading-relaxed", style: { color: "var(--dim)" } }, "Attempt problems on your own before revealing answers. Active recall is far more effective than re-reading!"))));
+        return /* @__PURE__ */ React.createElement(
+          NoteTopicCard,
+          {
+            key: idx,
+            note,
+            noteIdx: idx,
+            gradient: selectedSubject.gradient,
+            subjectColor: selectedSubject.color,
+            isWS,
+            diagram
+          }
+        );
+      })), isWS && /* @__PURE__ */ React.createElement("div", { className: "mt-6 rounded-2xl p-4 flex gap-3 items-start", style: { background: "rgba(245,158,11,0.07)", border: "1px solid rgba(245,158,11,0.2)" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "20px", lineHeight: 1, flexShrink: 0 } }, "\u{1F4A1}"), /* @__PURE__ */ React.createElement("p", { className: "text-sm leading-relaxed", style: { color: "#92400e" } }, "Attempt every problem on your own first before revealing the answer. Active recall is far more effective than re-reading!"))));
     }
     if (selectedSubject) {
       const sub = selectedSubject, completed = sub.sections.filter((s) => readSections.has(s.id)).length, prog = completed / sub.sections.length * 100;
       const SubIcon = sub.icon;
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelectedSubject(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ import_react3.default.createElement(ArrowLeft, { className: "w-4 h-4" }), " Library"), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" } }, "\xE2\u20AC\xBA"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne font-semibold text-sm", style: { color: "var(--muted)" } }, sub.name))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-12" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `relative bg-gradient-to-br ${sub.gradient} rounded-3xl p-8 mb-10 overflow-hidden anim-up` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute inset-0 opacity-20", style: { backgroundImage: "radial-gradient(circle at 85% 50%, white 0%, transparent 55%)" } }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative flex items-start justify-between flex-wrap gap-4" }, /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-14 h-14 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center mb-4 shadow-xl" }, /* @__PURE__ */ import_react3.default.createElement(SubIcon, { className: "w-7 h-7 text-white" })), /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black text-white mb-2", style: { fontSize: "clamp(1.6rem,4vw,2.2rem)" } }, sub.name), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/70 text-sm max-w-sm leading-relaxed" }, sub.description)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "text-right" }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-black text-white", style: { fontSize: "3rem", lineHeight: 1 } }, Math.round(prog), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl" }, "%")), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/60 text-xs mt-1" }, completed, " of ", sub.sections.length, " done"))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative mt-6" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-2 rounded-full overflow-hidden", style: { background: "rgba(0,0,0,0.2)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-full bg-white/60 rounded-full shimmer", style: { width: `${prog}%` } })))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, sub.sections.map((sec, i) => {
-        var _a, _b;
+      return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement(InjectStyles, null), /* @__PURE__ */ React.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ React.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setSelectedSubject(null), className: "flex items-center gap-2 text-sm syne font-semibold", style: { color: "var(--muted)" } }, /* @__PURE__ */ React.createElement(ArrowLeft, { className: "w-4 h-4" }), " Library"), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--dim)" } }, "\u203A"), /* @__PURE__ */ React.createElement("span", { className: "syne font-semibold text-sm", style: { color: "var(--muted)" } }, sub.name))), /* @__PURE__ */ React.createElement("div", { className: "max-w-5xl mx-auto px-4 md:px-6 py-12" }, /* @__PURE__ */ React.createElement("div", { className: `relative bg-gradient-to-br ${sub.gradient} rounded-3xl p-8 mb-10 overflow-hidden anim-up` }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-0 opacity-20", style: { backgroundImage: "radial-gradient(circle at 85% 50%, white 0%, transparent 55%)" } }), /* @__PURE__ */ React.createElement("div", { className: "relative flex items-start justify-between flex-wrap gap-4" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "w-14 h-14 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center mb-4 shadow-xl" }, /* @__PURE__ */ React.createElement(SubIcon, { className: "w-7 h-7 text-white" })), /* @__PURE__ */ React.createElement("h1", { className: "syne font-black text-white mb-2", style: { fontSize: "clamp(1.6rem,4vw,2.2rem)" } }, sub.name), /* @__PURE__ */ React.createElement("p", { className: "text-white/70 text-sm max-w-sm leading-relaxed" }, sub.description)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "syne font-black text-white", style: { fontSize: "3rem", lineHeight: 1 } }, Math.round(prog), /* @__PURE__ */ React.createElement("span", { className: "text-2xl" }, "%")), /* @__PURE__ */ React.createElement("p", { className: "text-white/60 text-xs mt-1" }, completed, " of ", sub.sections.length, " done"))), /* @__PURE__ */ React.createElement("div", { className: "relative mt-6" }, /* @__PURE__ */ React.createElement("div", { className: "h-2 rounded-full overflow-hidden", style: { background: "rgba(0,0,0,0.2)" } }, /* @__PURE__ */ React.createElement("div", { className: "h-full bg-white/60 rounded-full shimmer", style: { width: `${prog}%` } })))), /* @__PURE__ */ React.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, sub.sections.map((sec, i) => {
         const isR = readSections.has(sec.id);
-        return /* @__PURE__ */ import_react3.default.createElement(
+        return /* @__PURE__ */ React.createElement(
           "div",
           {
             key: sec.id,
@@ -22700,48 +23039,48 @@
             className: `glass glass-hover card-shadow card-shadow-hover rounded-2xl p-6 cursor-pointer group transition-all duration-200 anim-up anim-up-${i % 4 + 1}`,
             style: isR ? { borderColor: "rgba(16,185,129,0.3)", background: "rgba(16,185,129,0.04)" } : {}
           },
-          /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-start justify-between gap-3" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "mono text-xs", style: { color: "var(--dim)" } }, String(i + 1).padStart(2, "0")), isR && /* @__PURE__ */ import_react3.default.createElement("span", { className: "flex items-center gap-1 text-xs font-semibold syne", style: { color: "#34d399" } }, /* @__PURE__ */ import_react3.default.createElement(CircleCheckBig, { className: "w-3 h-3" }), " Done")), /* @__PURE__ */ import_react3.default.createElement("h3", { className: "syne font-bold text-base leading-snug", style: { color: "var(--text)" } }, sec.title), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs mt-2", style: { color: "var(--dim)" } }, ((_a = sec.notes) == null ? void 0 : _a.length) > 0 ? `${sec.notes.length} topics` : ((_b = sec.quiz) == null ? void 0 : _b.length) > 0 ? `${sec.quiz.length} questions` : sec.flashcards ? `${sec.flashcards.length} cards` : "View")), /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-9 h-9 rounded-xl bg-gradient-to-br ${sub.gradient} flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-all` }, /* @__PURE__ */ import_react3.default.createElement(ChevronRight, { className: "w-4 h-4 text-white" })))
+          /* @__PURE__ */ React.createElement("div", { className: "flex items-start justify-between gap-3" }, /* @__PURE__ */ React.createElement("div", { className: "flex-1" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-2" }, /* @__PURE__ */ React.createElement("span", { className: "mono text-xs", style: { color: "var(--dim)" } }, String(i + 1).padStart(2, "0")), isR && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-1 text-xs font-semibold syne", style: { color: "#34d399" } }, /* @__PURE__ */ React.createElement(CheckCircle, { className: "w-3 h-3" }), " Done")), /* @__PURE__ */ React.createElement("h3", { className: "syne font-bold text-base leading-snug", style: { color: "var(--text)" } }, sec.title), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "var(--dim)" } }, sec.notes?.length > 0 ? `${sec.notes.length} topics` : sec.quiz?.length > 0 ? `${sec.quiz.length} questions` : sec.flashcards ? `${sec.flashcards.length} cards` : "View")), /* @__PURE__ */ React.createElement("div", { className: `w-9 h-9 rounded-xl bg-gradient-to-br ${sub.gradient} flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-all` }, /* @__PURE__ */ React.createElement(ChevronRight, { className: "w-4 h-4 text-white" })))
         );
       }))));
     }
     if (showIntro) {
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid flex items-center justify-center p-4", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-2xl w-full" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex justify-center mb-8" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass flex items-center gap-3 rounded-2xl px-5 py-2.5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center" }, /* @__PURE__ */ import_react3.default.createElement(Calculator, { className: "w-3.5 h-3.5 text-white" })), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne font-semibold text-sm", style: { color: "var(--muted)" } }, "MathLib - Grade 9"))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "text-center mb-10" }, /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black mb-4 leading-none", style: { fontSize: "clamp(2.2rem,6vw,3rem)", color: "var(--text)" } }, "Your complete", /* @__PURE__ */ import_react3.default.createElement("br", null), /* @__PURE__ */ import_react3.default.createElement("span", { style: { background: "linear-gradient(135deg,#4f46e5,#7c3aed,#0891b2)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" } }, "Grade 9 math study system")), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base leading-relaxed max-w-sm mx-auto", style: { color: "var(--muted)" } }, "Notes, flashcards, practice problems, interactive diagrams, and worksheets built for Grade 9.")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid grid-cols-3 gap-3 mb-8" }, [
+      return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen dot-grid flex items-center justify-center p-4", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement(InjectStyles, null), /* @__PURE__ */ React.createElement("div", { className: "max-w-2xl w-full" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-center mb-8" }, /* @__PURE__ */ React.createElement("div", { className: "glass flex items-center gap-3 rounded-2xl px-5 py-2.5" }, /* @__PURE__ */ React.createElement("div", { className: "w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center" }, /* @__PURE__ */ React.createElement(Calculator, { className: "w-3.5 h-3.5 text-white" })), /* @__PURE__ */ React.createElement("span", { className: "syne font-semibold text-sm", style: { color: "var(--muted)" } }, "MathLib - Grade 9"))), /* @__PURE__ */ React.createElement("div", { className: "text-center mb-10" }, /* @__PURE__ */ React.createElement("h1", { className: "syne font-black mb-4 leading-none", style: { fontSize: "clamp(2.2rem,6vw,3rem)", color: "var(--text)" } }, "Your complete", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { background: "linear-gradient(135deg,#4f46e5,#7c3aed,#0891b2)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" } }, "Grade 9 math study system")), /* @__PURE__ */ React.createElement("p", { className: "text-base leading-relaxed max-w-sm mx-auto", style: { color: "var(--muted)" } }, "Notes, flashcards, practice problems, interactive diagrams, and worksheets built for Grade 9.")), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-3 gap-3 mb-8" }, [
         { icon: Brain, label: "Flashcards", desc: "Active recall", grad: "from-cyan-500 to-blue-500" },
         { icon: Target, label: "Practice", desc: "Instant feedback", grad: "from-violet-500 to-purple-500" },
         { icon: Sparkles, label: "Diagrams", desc: "Visual learning", grad: "from-emerald-500 to-teal-500" }
-      ].map(({ icon: Icon2, label, desc, grad }) => /* @__PURE__ */ import_react3.default.createElement("div", { key: label, className: "glass glass-hover rounded-2xl p-4 text-center" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-10 h-10 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center mx-auto mb-3 shadow-lg` }, /* @__PURE__ */ import_react3.default.createElement(Icon2, { className: "w-5 h-5 text-white" })), /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-bold text-sm", style: { color: "var(--text)" } }, label), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs mt-0.5", style: { color: "var(--dim)" } }, desc)))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass rounded-2xl p-5 mb-5 space-y-4" }, [
+      ].map(({ icon: Icon, label, desc, grad }) => /* @__PURE__ */ React.createElement("div", { key: label, className: "glass glass-hover rounded-2xl p-4 text-center" }, /* @__PURE__ */ React.createElement("div", { className: `w-10 h-10 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center mx-auto mb-3 shadow-lg` }, /* @__PURE__ */ React.createElement(Icon, { className: "w-5 h-5 text-white" })), /* @__PURE__ */ React.createElement("p", { className: "syne font-bold text-sm", style: { color: "var(--text)" } }, label), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-0.5", style: { color: "var(--dim)" } }, desc)))), /* @__PURE__ */ React.createElement("div", { className: "glass rounded-2xl p-5 mb-5 space-y-4" }, [
         { n: "01", title: "Browse Grade 9 topics", body: "Number Sense, Linear Relations, Systems, Polynomials, and Measurement." },
         { n: "02", title: "Study the notes", body: "Clear explanations with interactive diagrams and visual examples." },
         { n: "03", title: "Test yourself", body: "Flashcards, multiple choice, and worksheets with full step-by-step solutions." }
-      ].map(({ n, title, body }) => /* @__PURE__ */ import_react3.default.createElement("div", { key: n, className: "flex items-start gap-4" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "mono font-black text-xs w-6 flex-shrink-0 mt-0.5", style: { color: "rgba(129,140,248,0.7)" } }, n), /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-bold text-sm", style: { color: "var(--text)" } }, title), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs mt-0.5 leading-relaxed", style: { color: "var(--dim)" } }, body))))), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setShowIntro(false), className: "w-full py-4 rounded-2xl syne font-black text-white text-sm bg-gradient-to-r from-indigo-500 to-violet-500 shadow-lg" }, "Open Library")));
+      ].map(({ n, title, body }) => /* @__PURE__ */ React.createElement("div", { key: n, className: "flex items-start gap-4" }, /* @__PURE__ */ React.createElement("span", { className: "mono font-black text-xs w-6 flex-shrink-0 mt-0.5", style: { color: "rgba(129,140,248,0.7)" } }, n), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "syne font-bold text-sm", style: { color: "var(--text)" } }, title), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-0.5 leading-relaxed", style: { color: "var(--dim)" } }, body))))), /* @__PURE__ */ React.createElement("button", { onClick: () => setShowIntro(false), className: "w-full py-4 rounded-2xl syne font-black text-white text-sm bg-gradient-to-r from-indigo-500 to-violet-500 shadow-lg" }, "Open Library")));
     }
     const subjects = Object.values(studyLibrary);
     const tools = subjects.slice(0, 4);
     const notes = subjects.slice(4);
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ import_react3.default.createElement(InjectStyles, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-2.5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center" }, /* @__PURE__ */ import_react3.default.createElement(Calculator, { className: "w-3.5 h-3.5 text-white" })), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne font-black text-sm", style: { color: "var(--text)" } }, "MathLib"), /* @__PURE__ */ import_react3.default.createElement("span", { style: { color: "var(--dim)" } }, "\xB7"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs mono", style: { color: "var(--muted)" } }, "Grade 9")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "glass flex items-center gap-2 rounded-xl px-3 py-1.5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-1.5 h-1.5 rounded-full bg-emerald-400" }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-xs font-bold", style: { color: "var(--muted)" } }, readSections.size, " completed")))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "max-w-6xl mx-auto px-4 md:px-6 py-14" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "mb-14 anim-up" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "rounded-3xl p-8 md:p-12 overflow-hidden relative card-shadow", style: { background: "linear-gradient(135deg,#eef2ff 0%,#f0fdf4 50%,#faf5ff 100%)", border: "1px solid rgba(99,102,241,0.12)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl -translate-y-1/3 translate-x-1/4", style: { background: "rgba(99,102,241,0.12)" } }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "inline-flex items-center gap-2 rounded-full px-3 py-1 mb-5", style: { background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.18)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-1.5 h-1.5 rounded-full bg-indigo-500" }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-xs font-bold uppercase tracking-wider", style: { color: "rgba(79,70,229,0.9)" } }, "Interactive Study Library")), /* @__PURE__ */ import_react3.default.createElement("h1", { className: "syne font-black mb-3 leading-none", style: { fontSize: "clamp(2.4rem,5vw,3.2rem)", color: "var(--text)" } }, "Grade 9 Math"), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-base max-w-xl leading-relaxed", style: { color: "var(--muted)" } }, "Comprehensive notes, interactive tools, flashcards, and practice for Ontario Grade 9 Math."), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex flex-wrap gap-8 mt-7" }, [
+    return /* @__PURE__ */ React.createElement("div", { className: "min-h-screen dot-grid", style: { background: "var(--bg)" } }, /* @__PURE__ */ React.createElement(InjectStyles, null), /* @__PURE__ */ React.createElement("div", { className: "glass sticky top-0 z-40", style: { borderBottom: "1px solid var(--border)" } }, /* @__PURE__ */ React.createElement("div", { className: "max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2.5" }, /* @__PURE__ */ React.createElement("div", { className: "w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center" }, /* @__PURE__ */ React.createElement(Calculator, { className: "w-3.5 h-3.5 text-white" })), /* @__PURE__ */ React.createElement("span", { className: "syne font-black text-sm", style: { color: "var(--text)" } }, "MathLib"), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--dim)" } }, "\xB7"), /* @__PURE__ */ React.createElement("span", { className: "text-xs mono", style: { color: "var(--muted)" } }, "Grade 9")), /* @__PURE__ */ React.createElement("div", { className: "glass flex items-center gap-2 rounded-xl px-3 py-1.5" }, /* @__PURE__ */ React.createElement("div", { className: "w-1.5 h-1.5 rounded-full bg-emerald-400" }), /* @__PURE__ */ React.createElement("span", { className: "syne text-xs font-bold", style: { color: "var(--muted)" } }, readSections.size, " completed")))), /* @__PURE__ */ React.createElement("div", { className: "max-w-6xl mx-auto px-4 md:px-6 py-14" }, /* @__PURE__ */ React.createElement("div", { className: "mb-14 anim-up" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-3xl p-8 md:p-12 overflow-hidden relative card-shadow", style: { background: "linear-gradient(135deg,#eef2ff 0%,#f0fdf4 50%,#faf5ff 100%)", border: "1px solid rgba(99,102,241,0.12)" } }, /* @__PURE__ */ React.createElement("div", { className: "absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl -translate-y-1/3 translate-x-1/4", style: { background: "rgba(99,102,241,0.12)" } }), /* @__PURE__ */ React.createElement("div", { className: "relative" }, /* @__PURE__ */ React.createElement("div", { className: "inline-flex items-center gap-2 rounded-full px-3 py-1 mb-5", style: { background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.18)" } }, /* @__PURE__ */ React.createElement("div", { className: "w-1.5 h-1.5 rounded-full bg-indigo-500" }), /* @__PURE__ */ React.createElement("span", { className: "syne text-xs font-bold uppercase tracking-wider", style: { color: "rgba(79,70,229,0.9)" } }, "Interactive Study Library")), /* @__PURE__ */ React.createElement("h1", { className: "syne font-black mb-3 leading-none", style: { fontSize: "clamp(2.4rem,5vw,3.2rem)", color: "var(--text)" } }, "Grade 9 Math"), /* @__PURE__ */ React.createElement("p", { className: "text-base max-w-xl leading-relaxed", style: { color: "var(--muted)" } }, "Comprehensive notes, interactive tools, flashcards, and practice for Ontario Grade 9 Math."), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-8 mt-7" }, [
       { val: subjects.reduce((s, x) => s + x.sections.length, 0), label: "Total sections" },
       { val: readSections.size, label: "Completed" },
       { val: 5, label: "Subject areas" }
-    ].map(({ val, label }) => /* @__PURE__ */ import_react3.default.createElement("div", { key: label }, /* @__PURE__ */ import_react3.default.createElement("p", { className: "syne font-black text-2xl", style: { color: "var(--text)" } }, val), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs mt-0.5", style: { color: "var(--dim)" } }, label))))))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-4 mb-5 anim-up anim-up-1" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-1 h-4 rounded-full bg-gradient-to-b from-cyan-400 to-blue-500" }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-xs font-black uppercase tracking-widest", style: { color: "var(--muted)" } }, "Study Tools"), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 h-px", style: { background: "var(--border)" } })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid md:grid-cols-2 gap-4 mb-12" }, tools.map((sub, i) => {
+    ].map(({ val, label }) => /* @__PURE__ */ React.createElement("div", { key: label }, /* @__PURE__ */ React.createElement("p", { className: "syne font-black text-2xl", style: { color: "var(--text)" } }, val), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-0.5", style: { color: "var(--dim)" } }, label))))))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-4 mb-5 anim-up anim-up-1" }, /* @__PURE__ */ React.createElement("div", { className: "w-1 h-4 rounded-full bg-gradient-to-b from-cyan-400 to-blue-500" }), /* @__PURE__ */ React.createElement("span", { className: "syne text-xs font-black uppercase tracking-widest", style: { color: "var(--muted)" } }, "Study Tools"), /* @__PURE__ */ React.createElement("div", { className: "flex-1 h-px", style: { background: "var(--border)" } })), /* @__PURE__ */ React.createElement("div", { className: "grid md:grid-cols-2 gap-4 mb-12" }, tools.map((sub, i) => {
       const done = sub.sections.filter((s) => readSections.has(s.id)).length, prog = done / sub.sections.length * 100;
       const SubIcon = sub.icon;
-      return /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ React.createElement(
         "div",
         {
           key: sub.id,
           onClick: () => setSelectedSubject(sub),
           className: `glass glass-hover card-shadow card-shadow-hover rounded-2xl p-6 cursor-pointer group transition-all duration-200 anim-up anim-up-${i % 4 + 1}`
         },
-        /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-start justify-between mb-5" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `w-12 h-12 rounded-xl bg-gradient-to-br ${sub.gradient} flex items-center justify-center shadow-lg` }, /* @__PURE__ */ import_react3.default.createElement(SubIcon, { className: "w-6 h-6 text-white" })), /* @__PURE__ */ import_react3.default.createElement(ChevronRight, { className: "w-4 h-4 group-hover:translate-x-1 transition-all", style: { color: "var(--dim)" } })),
-        /* @__PURE__ */ import_react3.default.createElement("h3", { className: "syne font-bold text-base mb-1", style: { color: "var(--text)" } }, sub.name),
-        /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-xs mb-4 leading-relaxed", style: { color: "var(--dim)" } }, sub.description),
-        /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center justify-between mb-1.5" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs", style: { color: "var(--dim)" } }, done, "/", sub.sections.length, " done"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "mono text-xs font-semibold", style: { color: "var(--muted)" } }, Math.round(prog), "%")),
-        /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-1.5 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `h-full bg-gradient-to-r ${sub.gradient} rounded-full shimmer`, style: { width: `${prog}%` } }))
+        /* @__PURE__ */ React.createElement("div", { className: "flex items-start justify-between mb-5" }, /* @__PURE__ */ React.createElement("div", { className: `w-12 h-12 rounded-xl bg-gradient-to-br ${sub.gradient} flex items-center justify-center shadow-lg` }, /* @__PURE__ */ React.createElement(SubIcon, { className: "w-6 h-6 text-white" })), /* @__PURE__ */ React.createElement(ChevronRight, { className: "w-4 h-4 group-hover:translate-x-1 transition-all", style: { color: "var(--dim)" } })),
+        /* @__PURE__ */ React.createElement("h3", { className: "syne font-bold text-base mb-1", style: { color: "var(--text)" } }, sub.name),
+        /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4 leading-relaxed", style: { color: "var(--dim)" } }, sub.description),
+        /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1.5" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "var(--dim)" } }, done, "/", sub.sections.length, " done"), /* @__PURE__ */ React.createElement("span", { className: "mono text-xs font-semibold", style: { color: "var(--muted)" } }, Math.round(prog), "%")),
+        /* @__PURE__ */ React.createElement("div", { className: "h-1.5 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, /* @__PURE__ */ React.createElement("div", { className: `h-full bg-gradient-to-r ${sub.gradient} rounded-full shimmer`, style: { width: `${prog}%` } }))
       );
-    })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center gap-4 mb-5 anim-up anim-up-2" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-1 h-4 rounded-full bg-gradient-to-b from-emerald-400 to-teal-500" }), /* @__PURE__ */ import_react3.default.createElement("span", { className: "syne text-xs font-black uppercase tracking-widest", style: { color: "var(--muted)" } }, "Notes"), /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex-1 h-px", style: { background: "var(--border)" } })), /* @__PURE__ */ import_react3.default.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, notes.map((sub, i) => {
+    })), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-4 mb-5 anim-up anim-up-2" }, /* @__PURE__ */ React.createElement("div", { className: "w-1 h-4 rounded-full bg-gradient-to-b from-emerald-400 to-teal-500" }), /* @__PURE__ */ React.createElement("span", { className: "syne text-xs font-black uppercase tracking-widest", style: { color: "var(--muted)" } }, "Notes"), /* @__PURE__ */ React.createElement("div", { className: "flex-1 h-px", style: { background: "var(--border)" } })), /* @__PURE__ */ React.createElement("div", { className: "grid md:grid-cols-2 gap-4" }, notes.map((sub, i) => {
       const done = sub.sections.filter((s) => readSections.has(s.id)).length, prog = done / sub.sections.length * 100;
       const SubIcon = sub.icon;
-      return /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ React.createElement(
         "div",
         {
           key: sub.id,
@@ -22749,17 +23088,17 @@
           className: `group cursor-pointer rounded-2xl overflow-hidden transition-all duration-200 anim-up anim-up-${i % 4 + 1}`,
           style: { border: "1px solid var(--border)" }
         },
-        /* @__PURE__ */ import_react3.default.createElement("div", { className: `bg-gradient-to-br ${sub.gradient} p-6 relative overflow-hidden` }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "absolute inset-0 opacity-20", style: { backgroundImage: "radial-gradient(circle at 75% 40%, white 0%, transparent 60%)" } }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "relative flex items-start justify-between" }, /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("h3", { className: "syne font-black text-xl text-white mb-1" }, sub.name), /* @__PURE__ */ import_react3.default.createElement("p", { className: "text-white/70 text-xs leading-relaxed max-w-xs" }, sub.description)), /* @__PURE__ */ import_react3.default.createElement("div", { className: "w-12 h-12 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center flex-shrink-0" }, /* @__PURE__ */ import_react3.default.createElement(SubIcon, { className: "w-6 h-6 text-white" })))),
-        /* @__PURE__ */ import_react3.default.createElement("div", { className: "px-5 py-5", style: { background: "var(--bg-2)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "flex items-center justify-between mb-2" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-xs", style: { color: "var(--muted)" } }, done, " of ", sub.sections.length, " done"), /* @__PURE__ */ import_react3.default.createElement("span", { className: "mono text-xs font-semibold", style: { color: "var(--muted)" } }, Math.round(prog), "%")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-1.5 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: `h-full bg-gradient-to-r ${sub.gradient} rounded-full shimmer`, style: { width: `${prog}%` } })))
+        /* @__PURE__ */ React.createElement("div", { className: `bg-gradient-to-br ${sub.gradient} p-6 relative overflow-hidden` }, /* @__PURE__ */ React.createElement("div", { className: "absolute inset-0 opacity-20", style: { backgroundImage: "radial-gradient(circle at 75% 40%, white 0%, transparent 60%)" } }), /* @__PURE__ */ React.createElement("div", { className: "relative flex items-start justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h3", { className: "syne font-black text-xl text-white mb-1" }, sub.name), /* @__PURE__ */ React.createElement("p", { className: "text-white/70 text-xs leading-relaxed max-w-xs" }, sub.description)), /* @__PURE__ */ React.createElement("div", { className: "w-12 h-12 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center flex-shrink-0" }, /* @__PURE__ */ React.createElement(SubIcon, { className: "w-6 h-6 text-white" })))),
+        /* @__PURE__ */ React.createElement("div", { className: "px-5 py-5", style: { background: "var(--bg-2)" } }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-2" }, /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "var(--muted)" } }, done, " of ", sub.sections.length, " done"), /* @__PURE__ */ React.createElement("span", { className: "mono text-xs font-semibold", style: { color: "var(--muted)" } }, Math.round(prog), "%")), /* @__PURE__ */ React.createElement("div", { className: "h-1.5 rounded-full overflow-hidden", style: { background: "rgba(99,102,241,0.1)" } }, /* @__PURE__ */ React.createElement("div", { className: `h-full bg-gradient-to-r ${sub.gradient} rounded-full shimmer`, style: { width: `${prog}%` } })))
       );
     }))));
   }
 
-  // OneDrive - Appleby College/Apps/Soul-Concept/math/_entry_g9.tsx
+  // math/_entry_g9.tsx
   var root = document.getElementById("root");
   if (root) {
     (0, import_client.createRoot)(root).render(
-      /* @__PURE__ */ import_react4.default.createElement(import_react4.default.StrictMode, null, /* @__PURE__ */ import_react4.default.createElement(MathStudyG9, null))
+      /* @__PURE__ */ import_react3.default.createElement(import_react3.default.StrictMode, null, /* @__PURE__ */ import_react3.default.createElement(MathStudyG9, null))
     );
   }
 })();
@@ -22807,33 +23146,5 @@ react-dom/cjs/react-dom-client.development.js:
    *
    * This source code is licensed under the MIT license found in the
    * LICENSE file in the root directory of this source tree.
-   *)
-
-lucide-react/dist/esm/shared/src/utils.js:
-lucide-react/dist/esm/defaultAttributes.js:
-lucide-react/dist/esm/Icon.js:
-lucide-react/dist/esm/createLucideIcon.js:
-lucide-react/dist/esm/icons/arrow-left.js:
-lucide-react/dist/esm/icons/book-marked.js:
-lucide-react/dist/esm/icons/brain.js:
-lucide-react/dist/esm/icons/calculator.js:
-lucide-react/dist/esm/icons/chevron-right.js:
-lucide-react/dist/esm/icons/circle-check-big.js:
-lucide-react/dist/esm/icons/circle.js:
-lucide-react/dist/esm/icons/clipboard-list.js:
-lucide-react/dist/esm/icons/file-text.js:
-lucide-react/dist/esm/icons/grid-3x3.js:
-lucide-react/dist/esm/icons/lightbulb.js:
-lucide-react/dist/esm/icons/shapes.js:
-lucide-react/dist/esm/icons/sparkles.js:
-lucide-react/dist/esm/icons/target.js:
-lucide-react/dist/esm/icons/trending-up.js:
-lucide-react/dist/esm/icons/x.js:
-lucide-react/dist/esm/lucide-react.js:
-  (**
-   * @license lucide-react v0.542.0 - ISC
-   *
-   * This source code is licensed under the ISC license.
-   * See the LICENSE file in the root directory of this source tree.
    *)
 */

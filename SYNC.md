@@ -22,7 +22,7 @@ npm run sync:once
 Edit `sync-map.json`:
 ```json
 [
-  { "source": "C:\\Users\\2029089\\Downloads\\math-study-g9.tsx", "target": "math\\FreeStudyLib.tsx" },
+  { "source": "C:\\Users\\2029089\\Downloads\\math-study-g9.jsx", "target": "math\\FreeStudyLib.tsx" },
   { "source": "C:\\Users\\2029089\\Downloads\\anki-index.html", "target": "anki\\index.html" }
 ]
 ```
