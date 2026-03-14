@@ -33,6 +33,45 @@
   <body class="library-mobile-fix">
     <div id="root"></div>
     <a class="exit-btn" href="../index.html" data-tour-id="exit-home">Back Home</a>
+    <script>
+      (function () {
+        var root = document.getElementById('root');
+        if (root) {
+          root.innerHTML =
+            '<div style="min-height:100vh;display:grid;place-items:center;padding:24px;background:#f6f7fb;color:#0f172a;font-family:system-ui,sans-serif;">' +
+            '<div style="max-width:680px;width:100%;background:#fff;border:1px solid rgba(15,23,42,0.08);border-radius:20px;padding:24px;box-shadow:0 18px 40px rgba(15,23,42,0.08);">' +
+            '<h1 style="margin:0 0 10px;font-size:1.4rem;">Loading Grade 9 Math...</h1>' +
+            '<p style="margin:0;color:rgba(15,23,42,0.72);line-height:1.5;">If this screen stays here, the bundle failed before React mounted.</p>' +
+            '</div></div>';
+        }
+
+        function showRuntimeError(label, message) {
+          if (!root) return;
+          root.innerHTML =
+            '<div style="min-height:100vh;display:grid;place-items:center;padding:24px;background:#f6f7fb;color:#0f172a;font-family:system-ui,sans-serif;">' +
+            '<div style="max-width:760px;width:100%;background:#fff;border:1px solid rgba(15,23,42,0.08);border-radius:20px;padding:24px;box-shadow:0 18px 40px rgba(15,23,42,0.08);">' +
+            '<h1 style="margin:0 0 10px;font-size:1.4rem;">Grade 9 Math failed before mount</h1>' +
+            '<p style="margin:0 0 14px;line-height:1.5;color:rgba(15,23,42,0.72);">' + label + '</p>' +
+            '<pre style="margin:0;white-space:pre-wrap;word-break:break-word;background:#f8fafc;border-radius:14px;padding:14px;border:1px solid rgba(148,163,184,0.25);color:#b91c1c;font-size:0.85rem;">' +
+            String(message || 'Unknown error') +
+            '</pre>' +
+            '</div></div>';
+        }
+
+        window.addEventListener('error', function (event) {
+          var msg = event && event.error && event.error.stack
+            ? event.error.stack
+            : (event && event.message) || 'Unknown script error';
+          showRuntimeError('A script error stopped the Grade 9 Math page from loading.', msg);
+        });
+
+        window.addEventListener('unhandledrejection', function (event) {
+          var reason = event && event.reason;
+          var msg = reason && reason.stack ? reason.stack : String(reason || 'Unhandled promise rejection');
+          showRuntimeError('An unhandled promise rejection stopped the Grade 9 Math page from loading.', msg);
+        });
+      })();
+    </script>
     <script src="/supabase-client.js?v=20260312a"></script>
     <script src="/supabase-auth.js?v=20260312a"></script>
     <script src="/vercel-speed-insights.js?v=20260313a"></script>
