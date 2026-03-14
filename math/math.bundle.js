@@ -23095,10 +23095,55 @@
   }
 
   // math/_entry_g9.tsx
+  var RootErrorBoundary = class extends import_react3.default.Component {
+    constructor(props) {
+      super(props);
+      this.state = { error: null };
+    }
+    static getDerivedStateFromError(error) {
+      return { error };
+    }
+    componentDidCatch(error) {
+      console.error("Grade 9 Math render failed:", error);
+    }
+    render() {
+      if (this.state.error) {
+        return /* @__PURE__ */ import_react3.default.createElement("div", { style: {
+          minHeight: "100vh",
+          display: "grid",
+          placeItems: "center",
+          padding: "24px",
+          fontFamily: "system-ui, sans-serif",
+          background: "#f6f7fb",
+          color: "#0f172a"
+        } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: {
+          maxWidth: "680px",
+          width: "100%",
+          background: "#fff",
+          border: "1px solid rgba(15,23,42,0.08)",
+          borderRadius: "20px",
+          padding: "24px",
+          boxShadow: "0 18px 40px rgba(15,23,42,0.08)"
+        } }, /* @__PURE__ */ import_react3.default.createElement("h1", { style: { margin: "0 0 10px", fontSize: "1.4rem" } }, "Grade 9 Math failed to load"), /* @__PURE__ */ import_react3.default.createElement("p", { style: { margin: "0 0 14px", lineHeight: 1.5, color: "rgba(15,23,42,0.72)" } }, "The page hit a runtime error while rendering the new library. The error is shown below so it can be fixed directly."), /* @__PURE__ */ import_react3.default.createElement("pre", { style: {
+          margin: 0,
+          whiteSpace: "pre-wrap",
+          wordBreak: "break-word",
+          background: "#f8fafc",
+          borderRadius: "14px",
+          padding: "14px",
+          border: "1px solid rgba(148,163,184,0.25)",
+          color: "#b91c1c",
+          fontSize: "0.85rem"
+        } }, String(this.state.error?.message || this.state.error))));
+      }
+      return this.props.children;
+    }
+  };
   var root = document.getElementById("root");
   if (root) {
+    root.textContent = "Loading Grade 9 Math...";
     (0, import_client.createRoot)(root).render(
-      /* @__PURE__ */ import_react3.default.createElement(import_react3.default.StrictMode, null, /* @__PURE__ */ import_react3.default.createElement(MathStudyG9, null))
+      /* @__PURE__ */ import_react3.default.createElement(import_react3.default.StrictMode, null, /* @__PURE__ */ import_react3.default.createElement(RootErrorBoundary, null, /* @__PURE__ */ import_react3.default.createElement(MathStudyG9, null)))
     );
   }
 })();
