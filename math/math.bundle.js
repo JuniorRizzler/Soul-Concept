@@ -21711,29 +21711,27 @@
     const m = pt.match(/^([A-Z][A-Z\s/0-9]{2,}):\s*(.*)/s);
     return m ? { key: m[1], rest: m[2] } : null;
   }
-  var SUP_MAP = { "0": "\u2070", "1": "\xB9", "2": "\xB2", "3": "\xB3", "4": "\u2074", "5": "\u2075", "6": "\u2076", "7": "\u2077", "8": "\u2078", "9": "\u2079", "n": "\u207F", "x": "\u02E3", "a": "\u1D43", "b": "\u1D47", "m": "\u1D50", "+": "\u207A", "-": "\u207B", "(": "\u207D", ")": "\u207E" };
-  function toSup(s) {
-    const mapped = s.split("").map((c) => SUP_MAP[c] || null);
-    if (mapped.every(Boolean)) return mapped.join("");
-    return null;
+  var SUP_CHARS = { "0": "\u2070", "1": "\xB9", "2": "\xB2", "3": "\xB3", "4": "\u2074", "5": "\u2075", "6": "\u2076", "7": "\u2077", "8": "\u2078", "9": "\u2079", "+": "\u207A", "-": "\u207B", "n": "\u207F", "x": "\u02E3", "m": "\u1D50", "a": "\u1D43", "b": "\u1D47", "k": "\u1D4F" };
+  function toSupStr(s) {
+    const mapped = s.split("").map((c) => SUP_CHARS[c] ?? null);
+    return mapped.every(Boolean) ? mapped.join("") : null;
   }
-  function mathStr(text) {
+  function mathRender(text) {
     if (typeof text !== "string") return text;
-    let t = text.replace(/\bsqrt\b/gi, "\u221A").replace(/\bpi\b/g, "\u03C0").replace(/\btheta\b/gi, "\u03B8").replace(/\balpha\b/gi, "\u03B1").replace(/\bbeta\b/gi, "\u03B2").replace(/\binfinity\b/gi, "\u221E").replace(/\btimes\b/g, "\xD7").replace(/\bdivided by\b/gi, "\xF7").replace(/<=>/g, "\u27FA").replace(/<=/g, "\u2264").replace(/>=/g, "\u2265").replace(/!=/g, "\u2260").replace(/\.\.\./g, "\u2026").replace(/\bapprox\b/gi, "\u2248").replace(/±/g, "\xB1").replace(/\+-/g, "\xB1");
-    return t;
-  }
-  function renderMath(text) {
-    if (typeof text !== "string") return text;
-    let t = mathStr(text);
-    const tokens = [];
+    let t = text.replace(/\bsqrt\b/gi, "\u221A").replace(/\bpi\b/g, "\u03C0").replace(/\btheta\b/gi, "\u03B8").replace(/\btimes\b/g, "\xD7").replace(/\bdivided by\b/gi, "\xF7").replace(/\bapprox\b/gi, "\u2248").replace(/<=/g, "\u2264").replace(/>=/g, "\u2265").replace(/!=/g, "\u2260").replace(/\+-/g, "\xB1").replace(/\bcube root of\b/gi, "\u221B").replace(/\bnth root of\b/gi, "\u207F\u221A").replace(/\bdegree(s)?\b/gi, "\xB0").replace(/\.\.\./g, "\u2026");
+    const out = [];
     let buf = "";
     let i = 0;
+    let key = 0;
+    const flush = () => {
+      if (buf) {
+        out.push(buf);
+        buf = "";
+      }
+    };
     while (i < t.length) {
       if (t[i] === "^") {
-        if (buf) {
-          tokens.push(buf);
-          buf = "";
-        }
+        flush();
         i++;
         let exp = "";
         if (t[i] === "(") {
@@ -21752,24 +21750,21 @@
             i++;
           }
         } else {
-          while (i < t.length && /[\w\-+]/.test(t[i])) {
-            exp += t[i];
-            i++;
+          while (i < t.length && /[\w\-+/*]/.test(t[i])) {
+            exp += t[i++];
           }
         }
-        const uni = toSup(exp);
+        const uni = toSupStr(exp);
         if (uni) {
-          tokens.push(/* @__PURE__ */ import_react2.default.createElement("span", { key: tokens.length, style: { fontSize: "0.78em", verticalAlign: "super", lineHeight: 0, fontWeight: 700 } }, uni));
+          out.push(/* @__PURE__ */ import_react2.default.createElement("span", { key: key++, style: { fontWeight: "inherit" } }, uni));
         } else {
-          tokens.push(/* @__PURE__ */ import_react2.default.createElement("sup", { key: tokens.length, style: { fontSize: "0.72em", fontWeight: 700, lineHeight: 0 } }, exp));
+          out.push(/* @__PURE__ */ import_react2.default.createElement("sup", { key: key++, style: { fontSize: "0.75em", fontWeight: 700, verticalAlign: "super", lineHeight: 0 } }, exp));
         }
         continue;
       }
-      if (t[i] === "\u221A") {
-        if (buf) {
-          tokens.push(buf);
-          buf = "";
-        }
+      if (t[i] === "\u221A" || t[i] === "\u221B") {
+        flush();
+        const sym = t[i];
         i++;
         let inner = "";
         if (t[i] === "(") {
@@ -21788,38 +21783,22 @@
             i++;
           }
         } else {
-          while (i < t.length && /[\w^.]/.test(t[i])) {
-            inner += t[i];
-            i++;
+          while (i < t.length && /[\w^.+\-*/²³⁴⁵]/.test(t[i])) {
+            inner += t[i++];
           }
         }
-        tokens.push(
-          /* @__PURE__ */ import_react2.default.createElement("span", { key: tokens.length, style: { display: "inline-flex", alignItems: "center", gap: "1px" } }, /* @__PURE__ */ import_react2.default.createElement("span", { style: { fontSize: "1.05em", lineHeight: 1 } }, "\u221A"), /* @__PURE__ */ import_react2.default.createElement("span", { style: { borderTop: "1.5px solid currentColor", paddingTop: "1px", paddingLeft: "1px", paddingRight: "1px", lineHeight: 1.2 } }, renderMath(inner)))
+        out.push(
+          /* @__PURE__ */ import_react2.default.createElement("span", { key: key++, style: { display: "inline-flex", alignItems: "center", gap: "1px", verticalAlign: "middle" } }, /* @__PURE__ */ import_react2.default.createElement("span", { style: { fontSize: "1.1em", lineHeight: 1, fontWeight: 400 } }, sym), /* @__PURE__ */ import_react2.default.createElement("span", { style: { borderTop: "1.5px solid currentColor", paddingLeft: "1px", paddingRight: "2px", lineHeight: 1.25, fontSize: "inherit" } }, mathRender(inner)))
         );
         continue;
       }
-      buf += t[i];
-      i++;
+      buf += t[i++];
     }
-    if (buf) tokens.push(buf);
-    return tokens.length === 1 && typeof tokens[0] === "string" ? tokens[0] : tokens;
+    flush();
+    return out.length === 0 ? "" : out.length === 1 && typeof out[0] === "string" ? out[0] : out;
   }
   function hilite(text) {
-    if (typeof text !== "string") return text;
-    const mathRx = /([a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*(?:\^[\w()\-+/*]+|√\([^)]*\)|√\w+)[a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*|[a-zA-Z]\s*=\s*[a-zA-Z0-9^√π()+\-*/\s]+(?=[,.\s]|$)|\d+\/\d+)/g;
-    const result = renderMath(mathStr(text));
-    if (typeof result === "string") return result;
-    if (Array.isArray(result)) {
-      return result.map((tok, i) => {
-        if (typeof tok === "string") return tok;
-        return /* @__PURE__ */ import_react2.default.createElement("span", { key: i, style: { background: "#1e1b4b", color: "#a5b4fc", fontFamily: "'JetBrains Mono',monospace", fontSize: "0.88em", padding: "0px 5px", borderRadius: "5px", fontWeight: 600, display: "inline-flex", alignItems: "center", verticalAlign: "middle", lineHeight: 1.5 } }, tok);
-      });
-    }
-    return result;
-  }
-  function mathRender(text) {
-    if (typeof text !== "string") return text;
-    return renderMath(mathStr(text));
+    return mathRender(text);
   }
   function NoteKeyTerm({ parsed, col, idx }) {
     return /* @__PURE__ */ import_react2.default.createElement("div", { style: { background: col.ll, borderRadius: "14px", padding: "14px 16px", marginBottom: "10px", border: `1.5px solid ${col.h}28` } }, /* @__PURE__ */ import_react2.default.createElement("div", { style: { display: "flex", alignItems: "flex-start", gap: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("div", { style: { flexShrink: 0 } }, /* @__PURE__ */ import_react2.default.createElement("div", { style: { background: `linear-gradient(135deg,${col.h},${col.m})`, color: "white", fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "9px", padding: "3px 10px", borderRadius: "99px", letterSpacing: "0.1em", whiteSpace: "nowrap", marginBottom: "4px" } }, "KEY TERM"), /* @__PURE__ */ import_react2.default.createElement("div", { style: { fontFamily: "'Syne',sans-serif", fontWeight: 900, fontSize: "15px", color: col.h, lineHeight: 1.1 } }, parsed.key.charAt(0) + parsed.key.slice(1).toLowerCase())), /* @__PURE__ */ import_react2.default.createElement("div", { style: { flex: 1, borderLeft: `2px solid ${col.h}30`, paddingLeft: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("p", { style: { fontSize: "13.5px", color: "#1e293b", lineHeight: 1.65, margin: 0 } }, hilite(parsed.rest)))));

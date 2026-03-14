@@ -201,62 +201,51 @@ function extractKeyTerm(pt) {
 }
 
 // ── Math notation renderer ──────────────────────────────────────────────────
-// Converts text like x^2, sqrt(x), pi, <=, >= into proper symbols
 
-const SUP_MAP = {"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","n":"ⁿ","x":"ˣ","a":"ᵃ","b":"ᵇ","m":"ᵐ","+":"⁺","-":"⁻","(":"⁽",")":"⁾"};
+const SUP_CHARS = {"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","+":"⁺","-":"⁻","n":"ⁿ","x":"ˣ","m":"ᵐ","a":"ᵃ","b":"ᵇ","k":"ᵏ"};
 
-function toSup(s) {
-  // Try unicode superscript chars first, fall back to <sup>
-  const mapped = s.split("").map(c => SUP_MAP[c] || null);
-  if (mapped.every(Boolean)) return mapped.join("");
-  return null; // will use <sup> tag
+function toSupStr(s) {
+  const mapped = s.split("").map(c => SUP_CHARS[c] ?? null);
+  return mapped.every(Boolean) ? mapped.join("") : null;
 }
 
-function mathStr(text) {
+// Convert plain-text math notation into readable symbols and JSX
+function mathRender(text) {
   if (typeof text !== "string") return text;
 
-  // Replace symbol words first (order matters)
+  // Step 1: plain string replacements (no JSX needed)
   let t = text
     .replace(/\bsqrt\b/gi, "√")
     .replace(/\bpi\b/g, "π")
     .replace(/\btheta\b/gi, "θ")
-    .replace(/\balpha\b/gi, "α")
-    .replace(/\bbeta\b/gi, "β")
-    .replace(/\binfinity\b/gi, "∞")
     .replace(/\btimes\b/g, "×")
     .replace(/\bdivided by\b/gi, "÷")
-    .replace(/<=>/g, "⟺")
+    .replace(/\bapprox\b/gi, "≈")
     .replace(/<=/g, "≤")
     .replace(/>=/g, "≥")
     .replace(/!=/g, "≠")
-    .replace(/\.\.\./g, "…")
-    .replace(/\bapprox\b/gi, "≈")
-    .replace(/±/g, "±")
-    .replace(/\+-/g, "±");
+    .replace(/\+-/g, "±")
+    .replace(/\bcube root of\b/gi, "∛")
+    .replace(/\bnth root of\b/gi, "ⁿ√")
+    .replace(/\bdegree(s)?\b/gi, "°")
+    .replace(/\.\.\./g, "…");
 
-  return t;
-}
-
-function renderMath(text) {
-  if (typeof text !== "string") return text;
-
-  // First apply symbol replacements
-  let t = mathStr(text);
-
-  // Now parse for ^, √(...), fractions into React elements
-  // We'll build a token array by scanning character by character
-  const tokens = [];
+  // Step 2: parse character by character for ^ and √ to produce JSX
+  const out = [];
   let buf = "";
   let i = 0;
+  let key = 0;
+
+  const flush = () => { if (buf) { out.push(buf); buf = ""; } };
 
   while (i < t.length) {
-    // ── superscript: something^(expr) or something^char ──
+
+    // ── caret: base^exp ──
     if (t[i] === "^") {
-      if (buf) { tokens.push(buf); buf = ""; }
-      i++; // skip ^
+      flush();
+      i++;
       let exp = "";
       if (t[i] === "(") {
-        // collect until matching )
         let depth = 1; i++;
         while (i < t.length && depth > 0) {
           if (t[i] === "(") depth++;
@@ -265,22 +254,23 @@ function renderMath(text) {
           i++;
         }
       } else {
-        // collect digits, letters, sign until non-alphanumeric
-        while (i < t.length && /[\w\-+]/.test(t[i])) { exp += t[i]; i++; }
+        while (i < t.length && /[\w\-+/*]/.test(t[i])) { exp += t[i++]; }
       }
-      const uni = toSup(exp);
+      const uni = toSupStr(exp);
       if (uni) {
-        tokens.push(<span key={tokens.length} style={{ fontSize:"0.78em", verticalAlign:"super", lineHeight:0, fontWeight:700 }}>{uni}</span>);
+        // Pure unicode superscript — same size, same color, totally readable
+        out.push(<span key={key++} style={{ fontWeight:"inherit" }}>{uni}</span>);
       } else {
-        tokens.push(<sup key={tokens.length} style={{ fontSize:"0.72em", fontWeight:700, lineHeight:0 }}>{exp}</sup>);
+        // Fallback: styled <sup>
+        out.push(<sup key={key++} style={{ fontSize:"0.75em", fontWeight:700, verticalAlign:"super", lineHeight:0 }}>{exp}</sup>);
       }
       continue;
     }
 
-    // ── square root: √(...) or √word ──
-    if (t[i] === "√") {
-      if (buf) { tokens.push(buf); buf = ""; }
-      i++; // skip √
+    // ── square root: √(inner) or √word ──
+    if (t[i] === "√" || t[i] === "∛") {
+      flush();
+      const sym = t[i]; i++;
       let inner = "";
       if (t[i] === "(") {
         let depth = 1; i++;
@@ -291,61 +281,29 @@ function renderMath(text) {
           i++;
         }
       } else {
-        while (i < t.length && /[\w^.]/.test(t[i])) { inner += t[i]; i++; }
+        while (i < t.length && /[\w^.+\-*/²³⁴⁵]/.test(t[i])) { inner += t[i++]; }
       }
-      // render as √‾inner‾ with overline
-      tokens.push(
-        <span key={tokens.length} style={{ display:"inline-flex", alignItems:"center", gap:"1px" }}>
-          <span style={{ fontSize:"1.05em", lineHeight:1 }}>√</span>
-          <span style={{ borderTop:"1.5px solid currentColor", paddingTop:"1px", paddingLeft:"1px", paddingRight:"1px", lineHeight:1.2 }}>
-            {renderMath(inner)}
+      out.push(
+        <span key={key++} style={{ display:"inline-flex", alignItems:"center", gap:"1px", verticalAlign:"middle" }}>
+          <span style={{ fontSize:"1.1em", lineHeight:1, fontWeight:400 }}>{sym}</span>
+          <span style={{ borderTop:"1.5px solid currentColor", paddingLeft:"1px", paddingRight:"2px", lineHeight:1.25, fontSize:"inherit" }}>
+            {mathRender(inner)}
           </span>
         </span>
       );
       continue;
     }
 
-    buf += t[i];
-    i++;
+    buf += t[i++];
   }
-  if (buf) tokens.push(buf);
+  flush();
 
-  return tokens.length === 1 && typeof tokens[0] === "string" ? tokens[0] : tokens;
+  return out.length === 0 ? "" : out.length === 1 && typeof out[0] === "string" ? out[0] : out;
 }
 
-// Wrap math tokens in styled span for formula-like content
+// hilite = mathRender, just clean readable text — no chip/badge styling
 function hilite(text) {
-  if (typeof text !== "string") return text;
-
-  // Split on formula-like chunks: things with ^, √, π, ×, ÷, ≤, ≥, ≠, ≈
-  // Strategy: tokenise by detecting "math runs" vs plain prose
-  const mathRx = /([a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*(?:\^[\w()\-+/*]+|√\([^)]*\)|√\w+)[a-zA-Z0-9_()+\-*/÷×^√πθ≤≥≠≈±²³⁴⁵⁶⁷⁸⁹⁰ⁿ]*|[a-zA-Z]\s*=\s*[a-zA-Z0-9^√π()+\-*/\s]+(?=[,.\s]|$)|\d+\/\d+)/g;
-
-  // Just run renderMath on the full string — it handles everything inline
-  const result = renderMath(mathStr(text));
-
-  // If it came back as a plain string with no math, return as-is
-  if (typeof result === "string") return result;
-
-  // Wrap math elements in a subtle highlight
-  if (Array.isArray(result)) {
-    return result.map((tok, i) => {
-      if (typeof tok === "string") return tok;
-      // It's a math element (sup, overline sqrt, etc.) — wrap in code style
-      return (
-        <span key={i} style={{ background:"#1e1b4b", color:"#a5b4fc", fontFamily:"'JetBrains Mono',monospace", fontSize:"0.88em", padding:"0px 5px", borderRadius:"5px", fontWeight:600, display:"inline-flex", alignItems:"center", verticalAlign:"middle", lineHeight:1.5 }}>
-          {tok}
-        </span>
-      );
-    });
-  }
-  return result;
-}
-
-// Simpler version for answer text (no chip wrapping, just clean symbols)
-function mathRender(text) {
-  if (typeof text !== "string") return text;
-  return renderMath(mathStr(text));
+  return mathRender(text);
 }
 
 // ── individual note type renderers ──
