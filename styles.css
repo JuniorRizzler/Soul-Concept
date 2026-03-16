@@ -606,6 +606,22 @@ main {
   line-height: 0.98;
   letter-spacing: -0.02em;
   max-width: 12ch;
+  display: grid;
+  gap: 6px;
+}
+
+.hero-title-brand {
+  display: block;
+  font-size: 1em;
+  line-height: 0.92;
+}
+
+.hero-title-sub {
+  display: block;
+  font-size: clamp(1.18rem, 2.1vw, 1.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: rgba(27, 27, 31, 0.72);
 }
 
 .hero-copy p {
@@ -1781,6 +1797,7 @@ main {
 
   .hero-title {
     font-size: clamp(1.8rem, 7vw, 2.6rem);
+    gap: 4px;
   }
 
   .hero-copy p {
