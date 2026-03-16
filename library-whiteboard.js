@@ -47,7 +47,7 @@
 
     var style = document.createElement("style");
     style.textContent = [
-    ".lib-anno-toolbar{position:fixed;right:14px;top:74px;bottom:auto;z-index:2147483646;display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:4px 5px;border-radius:10px;background:linear-gradient(135deg,rgba(30,24,17,.88),rgba(52,38,24,.86));backdrop-filter:blur(10px);border:1px solid rgba(228,199,160,.2);box-shadow:0 8px 18px rgba(20,12,7,.34)}",
+    ".lib-anno-toolbar{position:fixed;right:10px;bottom:10px;z-index:2147483646;display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:4px 5px;border-radius:10px;background:linear-gradient(135deg,rgba(30,24,17,.88),rgba(52,38,24,.86));backdrop-filter:blur(10px);border:1px solid rgba(228,199,160,.2);box-shadow:0 8px 18px rgba(20,12,7,.34)}",
     ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(207,167,118,.34);background:rgba(250,240,225,.96);color:#2d2015;border-radius:7px;padding:4px 6px;font:700 9px/1 Arial,sans-serif;cursor:pointer;transition:all .15s ease}",
     ".lib-anno-toolbar .lib-anno-btn:hover{transform:translateY(-1px)}",
     ".lib-anno-toolbar .lib-anno-btn.active{background:#f5d4a2;border-color:#d59644;color:#6b3a08}",
@@ -1688,11 +1688,11 @@
     setScopeLabel();
     try {
       setColor(localStorage.getItem(prefColorKey) || "#e11d48");
-      var storedMin = localStorage.getItem(prefMinKey);
-      setMinimized(window.innerWidth <= 760 ? true : storedMin === null ? true : storedMin === "1");
+      localStorage.removeItem(prefMinKey);
+      setMinimized(false);
     } catch (err) {
       setColor("#e11d48");
-      setMinimized(true);
+      setMinimized(false);
     }
     setDrawingEnabled(false);
     setEraseMode(false);
