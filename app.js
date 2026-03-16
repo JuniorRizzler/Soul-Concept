@@ -1188,6 +1188,23 @@
     },
     {
       page: 'study-library.html',
+      selector: '[data-tour-id="anno-toggle"]',
+      title: 'Annotations Bar',
+      text: 'I opened the annotations bar for you. Use On to draw notes directly on the page.',
+      next: 'study-library.html',
+      autoExpandAnnotations: true,
+      forceDrawingOff: true
+    },
+    {
+      page: 'study-library.html',
+      selector: '[data-tour-id="anno-toggle"]',
+      title: 'Turn Annotations Off',
+      text: 'When you want to click sections, buttons, or cards again, switch annotations back Off first.',
+      next: 'study-library.html',
+      autoExpandAnnotations: true
+    },
+    {
+      page: 'study-library.html',
       selector: 'body',
       title: 'How Science Is Organized',
       text: 'Science is organized by sections so you can open a subject and study one topic at a time.',
@@ -1308,6 +1325,18 @@
     return overlay
   }
 
+  function prepareTourStep(step) {
+    if (!step || getPageName() !== 'study-library.html') return
+    const annoApi = window.scLibraryAnnotations
+    if (!annoApi) return
+    if (step.autoExpandAnnotations && typeof annoApi.expandToolbar === 'function') {
+      annoApi.expandToolbar()
+    }
+    if (step.forceDrawingOff && typeof annoApi.setDrawingEnabled === 'function') {
+      annoApi.setDrawingEnabled(false)
+    }
+  }
+
   function showTourStep() {
     if (!isTourActive()) return
     const stepIndex = getTourStep()
@@ -1320,6 +1349,7 @@
 
     ensureTourStyles()
     const overlay = createTourOverlay()
+    prepareTourStep(step)
     const tooltip = overlay.querySelector('.tour-tooltip')
     const titleEl = overlay.querySelector('.tour-title')
     const bodyEl = overlay.querySelector('.tour-body')
