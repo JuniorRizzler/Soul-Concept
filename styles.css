@@ -602,26 +602,27 @@ main {
 .hero-title {
   margin: 0;
   font-family: var(--title);
-  font-size: clamp(2.6rem, 5.8vw, 4.9rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 6.6vw, 5.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
   max-width: 12ch;
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
 .hero-title-brand {
   display: block;
   font-size: 1em;
-  line-height: 0.92;
+  line-height: 0.9;
+  text-wrap: balance;
 }
 
 .hero-title-sub {
   display: block;
-  font-size: clamp(1.3rem, 2.45vw, 2rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: rgba(27, 27, 31, 0.72);
+  font-size: clamp(1.45rem, 2.8vw, 2.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: rgba(27, 27, 31, 0.68);
 }
 
 .hero-copy p {
@@ -1796,8 +1797,8 @@ main {
   }
 
   .hero-title {
-    font-size: clamp(2rem, 8vw, 2.9rem);
-    gap: 4px;
+    font-size: clamp(2.3rem, 9.4vw, 3.4rem);
+    gap: 5px;
   }
 
   .hero-copy p {
