@@ -1205,18 +1205,25 @@
     },
     {
       page: 'study-library.html',
-      selector: 'body',
-      title: 'How Science Is Organized',
-      text: 'Science is organized by sections so you can open a subject and study one topic at a time.',
-      next: 'study-library.html',
-      noHighlight: true
+      selector: '#qs-study-notes-content',
+      title: 'Study Notes And Content',
+      text: 'Start in Study Notes & Content first. This is where the main science sections are organized.',
+      next: 'study-library.html'
+    },
+    {
+      page: 'study-library.html',
+      selector: '#qs-practice-test-preparation',
+      title: 'Practice And Test Prep',
+      text: 'After notes, go to Practice & Test Preparation to review and check what you remember.',
+      next: 'study-library.html'
     },
     {
       page: 'study-library.html',
       selector: '[data-tour-id="exit-home"]',
-      title: 'Quick Tip',
-      text: 'Use Exit to return home anytime.',
-      next: 'index.html'
+      title: 'Return To Index',
+      text: 'Now tap Return to Index so the tutorial can continue from the main page.',
+      next: 'index.html',
+      requireClick: true
     },
     {
       page: 'index.html',
