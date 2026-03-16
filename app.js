@@ -1277,11 +1277,14 @@
     style.textContent =
       '.tour-overlay{position:fixed;inset:0;background:transparent;z-index:1200;display:none;pointer-events:none}' +
       '.tour-overlay.is-visible{display:block}' +
-      '.tour-tooltip{position:absolute;max-width:260px;background:#fff;border:1px solid #e2d8cb;border-radius:12px;padding:12px;box-shadow:0 10px 24px rgba(23,21,16,.1);pointer-events:auto}' +
+      '.tour-tooltip{position:fixed;top:18px;right:18px;max-width:280px;background:#fff;border:1px solid #e2d8cb;border-radius:12px;padding:12px;box-shadow:0 14px 36px rgba(23,21,16,.16);pointer-events:auto}' +
       '.tour-tooltip h4{margin:0 0 6px;font-size:1rem}' +
       '.tour-tooltip p{margin:0 0 12px;font-size:.92rem;color:#5a5863;line-height:1.4}' +
       '.tour-actions{display:flex;gap:8px}' +
-      '.tour-highlight{outline:3px solid rgba(243,106,61,.6);outline-offset:4px;border-radius:999px;position:relative;z-index:1201}'
+      '.tour-highlight{outline:3px solid rgba(243,106,61,.7);outline-offset:4px;border-radius:999px;position:relative;z-index:1201}' +
+      '.tour-highlight-pulse{box-shadow:0 0 0 0 rgba(243,106,61,.45);animation:tourPulse 1.15s ease-out infinite}' +
+      '@keyframes tourPulse{0%{box-shadow:0 0 0 0 rgba(243,106,61,.5)}70%{box-shadow:0 0 0 14px rgba(243,106,61,0)}100%{box-shadow:0 0 0 0 rgba(243,106,61,0)}}' +
+      '@media (max-width:680px){.tour-tooltip{top:auto;right:12px;left:12px;bottom:88px;max-width:none}}'
     document.head.appendChild(style)
   }
 
@@ -1325,32 +1328,34 @@
     const nextBtn = overlay.querySelector('[data-tour-next]')
     const target = document.querySelector(step.selector)
     if (!target || !tooltip || !titleEl || !bodyEl || !backBtn || !skipBtn || !nextBtn) return
+    const needsUserClick = step.next && step.next !== getPageName()
 
-    document.querySelectorAll('.tour-highlight').forEach(function (node) {
+    document.querySelectorAll('.tour-highlight, .tour-highlight-pulse').forEach(function (node) {
       node.classList.remove('tour-highlight')
+      node.classList.remove('tour-highlight-pulse')
     })
     if (!step.noHighlight) {
       target.classList.add('tour-highlight')
+      if (needsUserClick) {
+        target.classList.add('tour-highlight-pulse')
+      }
     }
 
     titleEl.textContent = step.title
-    bodyEl.textContent = step.text
+    bodyEl.textContent = needsUserClick ? step.text + ' Tap the highlighted button next.' : step.text
     backBtn.disabled = stepIndex === 0
-    const needsUserClick = step.next && step.next !== getPageName()
     nextBtn.textContent = step.finish ? 'Finish' : needsUserClick ? 'Click highlighted button' : 'Next'
     nextBtn.disabled = false
-
-    const rect = target.getBoundingClientRect()
-    const top = rect.bottom + window.scrollY + 12
-    const left = Math.min(window.innerWidth - 360, rect.left + window.scrollX)
-    tooltip.style.top = Math.max(16, top) + 'px'
-    tooltip.style.left = Math.max(16, left) + 'px'
+    if (!step.noHighlight) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+    }
 
     overlay.classList.add('is-visible')
 
     function cleanup() {
       overlay.classList.remove('is-visible')
       target.classList.remove('tour-highlight')
+      target.classList.remove('tour-highlight-pulse')
     }
 
     backBtn.onclick = function () {

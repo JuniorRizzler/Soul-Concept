@@ -106,6 +106,38 @@
     return btn
   }
 
+  function isStandaloneMode() {
+    try {
+      return (
+        (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+        window.navigator.standalone === true
+      )
+    } catch (_err) {
+      return false
+    }
+  }
+
+  function isEmbeddedBrowser() {
+    var ua = String(navigator.userAgent || '').toLowerCase()
+    return (
+      ua.indexOf('wv') !== -1 ||
+      ua.indexOf('instagram') !== -1 ||
+      ua.indexOf('fbav') !== -1 ||
+      ua.indexOf('fban') !== -1 ||
+      ua.indexOf('tiktok') !== -1 ||
+      ua.indexOf('snapchat') !== -1 ||
+      ua.indexOf('line/') !== -1
+    )
+  }
+
+  function shouldAvoidGoogleOAuth() {
+    return isStandaloneMode() || isEmbeddedBrowser()
+  }
+
+  function getBrowserPolicyMessage() {
+    return 'Google sign-in can be blocked by secure browser policy in PWAs, in-app browsers, or school-managed browsers. Use the magic link below or open Soul Concept in Safari or Chrome.'
+  }
+
   function ensureModal() {
     var existing = document.getElementById('sc-auth-modal-backdrop')
     if (existing) return existing
@@ -118,6 +150,7 @@
       '<button class="sc-auth-close" type="button" aria-label="Close sign in">&times;</button>' +
       '<h2 class="sc-auth-title" id="sc-auth-title">Sign in to Soul Concept</h2>' +
       '<p class="sc-auth-copy">Use Google or a magic link sent to your email. This keeps your progress and premium access tied to your account.</p>' +
+      '<p class="sc-auth-status" data-auth-policy></p>' +
       '<div class="sc-auth-stack">' +
       '<button class="btn btn-primary sc-auth-google" type="button" data-auth-google>Continue with Google</button>' +
       '<div class="sc-auth-divider">or</div>' +
@@ -137,6 +170,13 @@
 
   function setStatus(backdrop, message, kind) {
     var status = backdrop.querySelector('[data-auth-status]')
+    if (!status) return
+    status.textContent = message || ''
+    status.className = 'sc-auth-status' + (kind ? ' ' + kind : '')
+  }
+
+  function setPolicyMessage(backdrop, message, kind) {
+    var status = backdrop.querySelector('[data-auth-policy]')
     if (!status) return
     status.textContent = message || ''
     status.className = 'sc-auth-status' + (kind ? ' ' + kind : '')
@@ -168,6 +208,12 @@
     var closeBtn = backdrop.querySelector('.sc-auth-close')
     var googleBtn = backdrop.querySelector('[data-auth-google]')
     var emailForm = backdrop.querySelector('[data-auth-email-form]')
+    var avoidGoogleOAuth = shouldAvoidGoogleOAuth()
+
+    if (avoidGoogleOAuth) {
+      googleBtn.textContent = 'Use magic link instead'
+      setPolicyMessage(backdrop, getBrowserPolicyMessage(), 'err')
+    }
 
     closeBtn.addEventListener('click', closeModal)
     backdrop.addEventListener('click', function (event) {
@@ -175,6 +221,10 @@
     })
 
     googleBtn.addEventListener('click', async function () {
+      if (avoidGoogleOAuth) {
+        setStatus(backdrop, getBrowserPolicyMessage(), 'err')
+        return
+      }
       setStatus(backdrop, 'Redirecting to Google...', '')
       saveReturnPath(currentReturnPath())
       var result = await client.auth.signInWithOAuth({
