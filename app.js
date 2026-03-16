@@ -1181,8 +1181,8 @@
     {
       page: 'study-library.html',
       selector: '[data-tour-id="science-continue"]',
-      title: 'Continue First',
-      text: 'Press the Continue button at the bottom first to enter the science library.',
+      title: 'Enter Library',
+      text: 'Scroll down and press Enter Library first to begin.',
       next: 'study-library.html',
       requireClick: true
     },

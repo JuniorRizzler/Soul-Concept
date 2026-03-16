@@ -293,7 +293,13 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
           var buttons = document.querySelectorAll('button,a')
           for (var i = 0; i < buttons.length; i++) {
             var text = (buttons[i].textContent || '').trim()
-            if (text === "Let's Get Started!" || text === 'Get Started') {
+            if (
+              text === "Let's Get Started!" ||
+              text === 'Get Started' ||
+              text.indexOf("Let's Get Started!") === 0 ||
+              text.indexOf('Get Started') === 0 ||
+              text.indexOf('Continue') === 0
+            ) {
               buttons[i].setAttribute('data-tour-id', 'science-continue')
               buttons[i].classList.toggle('floating-start', !!isMobile)
               return true
@@ -394,7 +400,6 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
 <script src="/supabase-client.js?v=20260312a"></script>
 <script src="/supabase-auth.js?v=20260312a"></script>
 <script src="/vercel-speed-insights.js?v=20260313a"></script>
-<script src="lyne-widget.js?v=20260313b"></script>
 <script src="app.js?v=20260308t"></script>
 </html>
 
