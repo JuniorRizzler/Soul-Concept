@@ -92,6 +92,10 @@
       '.stats-row strong{color:#1b1b1f;font-size:.92rem}' +
       '.push-widget{position:fixed;bottom:18px;right:18px;z-index:110;width:min(320px,86vw);background:rgba(255,255,255,.95);border:1px solid #e2d8cb;border-radius:18px;box-shadow:0 16px 36px rgba(23,21,16,.12);padding:16px;display:grid;gap:8px}' +
       '.push-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.push-title{font-size:1rem;font-weight:800;color:#1b1b1f}.push-close{appearance:none;border:0;background:transparent;color:#7a7685;font:700 1.05rem/1 system-ui,sans-serif;cursor:pointer;padding:2px 4px;border-radius:999px}.push-close:hover{background:rgba(27,27,31,.06);color:#1b1b1f}.push-close:focus-visible{outline:2px solid rgba(27,27,31,.2);outline-offset:2px}.push-text{margin:0;color:#5a5863;font-size:.9rem}.push-actions{display:flex;gap:8px;flex-wrap:wrap}.push-status{margin:0;font-size:.86rem;min-height:18px}.push-status.ok{color:#166534}.push-status.err{color:#b91c1c}' +
+      '.sc-corner-tag{position:fixed;right:14px;bottom:14px;z-index:95;color:rgba(15,23,42,.56);text-decoration:none;font:700 .78rem/1.1 \"Courier New\",\"SFMono-Regular\",Consolas,monospace;letter-spacing:.06em;opacity:.82;transition:opacity .18s ease,transform .18s ease}' +
+      '.sc-corner-tag:hover,.sc-corner-tag:focus-visible{opacity:1;transform:translateY(-1px)}' +
+      '.sc-corner-tag:focus-visible{outline:2px solid rgba(15,23,42,.18);outline-offset:3px;border-radius:999px}' +
+      '@media (max-width:680px){.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}' +
       '.pp-demo-card{border:1px solid #e2d8cb;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(250,247,241,.96));padding:14px;display:grid;gap:10px}' +
       '.pp-demo-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.pp-demo-chip{display:inline-flex;align-items:center;padding:4px 9px;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:rgba(33,92,75,.1);border:1px solid rgba(33,92,75,.24);color:#215c4b}' +
       '.pp-demo-input{width:100%;min-height:78px;resize:vertical;border:1px solid #d9ccbc;border-radius:10px;padding:10px 11px;font:500 .93rem/1.45 Manrope,system-ui,sans-serif;color:#1b1b1f;background:#fff}' +
@@ -100,6 +104,29 @@
   }
 
   ensureGlobalUiStyles()
+
+  function mountCornerTag() {
+    if (!document.body) return
+    const existingTag =
+      document.querySelector('[data-sc-corner-tag]') || document.querySelector('.deanacious-tag')
+    if (existingTag) return
+
+    const tag = document.createElement('a')
+    tag.className = 'sc-corner-tag'
+    tag.href = 'https://www.instagram.com/deanacious/'
+    tag.target = '_blank'
+    tag.rel = 'noopener noreferrer'
+    tag.textContent = '@deanacious'
+    tag.setAttribute('aria-label', 'Visit deanacious on Instagram')
+    tag.setAttribute('data-sc-corner-tag', '1')
+    document.body.appendChild(tag)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountCornerTag, { once: true })
+  } else {
+    mountCornerTag()
+  }
 
   function mountPersonaPlexHomeDemo() {
     if (currentPage !== 'index.html') return
