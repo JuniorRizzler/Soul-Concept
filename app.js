@@ -1199,7 +1199,7 @@
       page: 'study-library.html',
       selector: '[data-tour-id="anno-toggle"]',
       title: 'Turn Annotations Off',
-      text: 'When you want to click sections, buttons, or cards again, switch annotations back Off first.',
+      text: 'Turn annotation mode Off to continue interacting with buttons, sections, and cards.',
       next: 'study-library.html',
       autoExpandAnnotations: true
     },
