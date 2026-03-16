@@ -607,7 +607,7 @@ main {
   letter-spacing: -0.035em;
   max-width: 12ch;
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .hero-title-brand {
@@ -615,6 +615,16 @@ main {
   font-size: 1em;
   line-height: 0.9;
   text-wrap: balance;
+  color: #111114;
+  text-shadow: 0 8px 24px rgba(255, 255, 255, 0.34);
+}
+
+.hero-title-stack {
+  display: grid;
+  gap: 6px;
+  width: fit-content;
+  padding-left: 14px;
+  border-left: 2px solid rgba(33, 92, 75, 0.18);
 }
 
 .hero-title-sub {
@@ -622,7 +632,8 @@ main {
   font-size: clamp(1.45rem, 2.8vw, 2.25rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
-  color: rgba(27, 27, 31, 0.68);
+  color: rgba(27, 27, 31, 0.74);
+  text-wrap: balance;
 }
 
 .hero-copy p {
@@ -1799,6 +1810,11 @@ main {
   .hero-title {
     font-size: clamp(2.3rem, 9.4vw, 3.4rem);
     gap: 5px;
+  }
+
+  .hero-title-stack {
+    gap: 4px;
+    padding-left: 10px;
   }
 
   .hero-copy p {
