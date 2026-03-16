@@ -1190,7 +1190,7 @@
       page: 'study-library.html',
       selector: '[data-tour-id="anno-toggle"]',
       title: 'Annotations Bar',
-      text: 'I opened the annotations bar for you. Use On to draw notes directly on the page.',
+      text: 'I opened the annotations bar for you. Use On to draw notes directly on the page. After drawing, turn annotation mode Off to continue interacting.',
       next: 'study-library.html',
       autoExpandAnnotations: true,
       forceDrawingOff: true
