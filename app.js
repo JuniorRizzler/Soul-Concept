@@ -70,6 +70,38 @@
     }
   })
 
+  function mountStartupSplash() {
+    if (currentPage !== 'index.html') return
+    const overlay = document.querySelector('[data-startup-overlay]')
+    if (!overlay) return
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.body.classList.add('startup-ready')
+      overlay.remove()
+      return
+    }
+
+    document.body.classList.add('startup-active')
+
+    function finishSplash() {
+      if (!overlay || overlay.classList.contains('is-leaving')) return
+      overlay.classList.add('is-leaving')
+      document.body.classList.add('startup-ready')
+      document.body.classList.remove('startup-active')
+      window.setTimeout(function () {
+        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay)
+      }, 520)
+    }
+
+    window.setTimeout(finishSplash, 1225)
+    window.addEventListener('pageshow', finishSplash, { once: true })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountStartupSplash, { once: true })
+  } else {
+    mountStartupSplash()
+  }
+
   const STREAK_KEY = 'sc_daily_streak_v1'
   const USAGE_KEY = 'sc_usage_stats_v1'
   const PUSH_ENABLED_KEY = 'sc_push_enabled'

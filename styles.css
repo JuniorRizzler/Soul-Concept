@@ -45,6 +45,180 @@ body {
     linear-gradient(180deg, #f8f3eb 0%, #f4efe6 100%);
 }
 
+body.startup-active {
+  overflow: hidden;
+}
+
+.startup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1600;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(620px 320px at 50% 42%, rgba(255, 255, 255, 0.96), rgba(247, 241, 234, 0.9) 58%, rgba(243, 236, 227, 0.82) 100%),
+    linear-gradient(180deg, rgba(248, 243, 235, 0.98), rgba(241, 236, 228, 0.98));
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.startup-overlay.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.startup-bloom {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(18px);
+  opacity: 0;
+  animation: startupBloom 1.12s cubic-bezier(0.2, 0.9, 0.22, 1) forwards;
+}
+
+.startup-bloom-a {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(39, 173, 177, 0.28), rgba(39, 173, 177, 0));
+  transform: translate(-110px, -36px);
+}
+
+.startup-bloom-b {
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(245, 131, 74, 0.25), rgba(245, 131, 74, 0));
+  transform: translate(88px, -22px);
+  animation-delay: 0.06s;
+}
+
+.startup-bloom-c {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(246, 191, 76, 0.26), rgba(246, 191, 76, 0));
+  transform: translate(18px, 78px);
+  animation-delay: 0.14s;
+}
+
+.startup-core {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  transform: scale(0.88);
+  animation: startupPop 0.82s cubic-bezier(0.22, 1, 0.3, 1) forwards;
+}
+
+.startup-logo {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  background: transparent url('icons/soulconceptflame.png') center/contain no-repeat;
+  filter: drop-shadow(0 18px 28px rgba(23, 21, 16, 0.14));
+  opacity: 0;
+  transform: scale(0.52) rotate(-14deg) translateY(16px);
+  animation:
+    startupLogoSettle 1s cubic-bezier(0.2, 0.9, 0.22, 1) 0.04s forwards,
+    startupLogoFloat 1.7s ease-in-out 0.96s 1;
+}
+
+.startup-wordmark {
+  font-family: var(--title);
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(17, 17, 20, 0.92);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: startupWordmark 0.58s cubic-bezier(0.22, 1, 0.3, 1) 0.32s forwards;
+}
+
+.startup-credit {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(27, 27, 31, 0.5);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: startupWordmark 0.5s cubic-bezier(0.22, 1, 0.3, 1) 0.42s forwards;
+}
+
+.startup-overlay + .site-wrap {
+  opacity: 0;
+  transform: translateY(10px) scale(0.995);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+body.startup-ready .startup-overlay + .site-wrap {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes startupPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.76);
+  }
+  48% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes startupBloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  42% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 0.52;
+    transform: scale(1);
+  }
+}
+
+@keyframes startupLogoSettle {
+  0% {
+    opacity: 0;
+    transform: scale(0.52) rotate(-14deg) translateY(16px);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.14) rotate(3deg) translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg) translateY(0);
+  }
+}
+
+@keyframes startupLogoFloat {
+  0%, 100% {
+    transform: scale(1) rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: scale(1.02) rotate(1.4deg) translateY(-3px);
+  }
+}
+
+@keyframes startupWordmark {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .home {
   background:
     radial-gradient(900px 520px at 85% -10%, rgba(11, 78, 85, 0.18), transparent 60%),
@@ -1686,6 +1860,20 @@ main {
 }
 
 @media (max-width: 840px) {
+  .startup-logo {
+    width: 108px;
+    height: 108px;
+  }
+
+  .startup-wordmark {
+    font-size: 1.35rem;
+  }
+
+  .startup-credit {
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+  }
+
   .nav-toggle {
     display: none;
   }
@@ -1908,5 +2096,22 @@ main {
 
   .auth-actions {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startup-overlay {
+    display: none;
+  }
+
+  body.startup-active {
+    overflow: auto;
+  }
+
+  .startup-overlay + .site-wrap,
+  body.startup-ready .startup-overlay + .site-wrap {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
