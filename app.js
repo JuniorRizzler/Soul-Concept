@@ -1411,7 +1411,7 @@
     skipBtn.onclick = function () {
       setTourActive(false)
       try {
-        localStorage.setItem(TOUR_DECLINED_KEY, '1')
+        localStorage.setItem(TOUR_NEVER_KEY, '0')
       } catch (err) {
         // ignore
       }
@@ -1514,7 +1514,11 @@
   }
 
   function scheduleTour() {
-    return
+    if (isTourActive()) {
+      showTourStep()
+      return
+    }
+    showTourPrompt()
   }
 
   if (document.readyState === 'complete') {
