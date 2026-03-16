@@ -1180,26 +1180,26 @@
     },
     {
       page: 'study-library.html',
-      selector: '[data-tour-id="exit-home"]',
-      title: 'Quick Tip',
-      text: 'Use Exit to return home anytime.',
-      next: 'index.html'
+      selector: '[data-tour-id="science-continue"]',
+      title: 'Continue First',
+      text: 'Press the Continue button at the bottom first to enter the science library.',
+      next: 'study-library.html',
+      requireClick: true
     },
     {
       page: 'study-library.html',
       selector: 'body',
-      title: 'Split Screen',
-      text: 'Use split screen to keep questions and notes side by side.',
+      title: 'How Science Is Organized',
+      text: 'Science is organized by sections so you can open a subject and study one topic at a time.',
       next: 'study-library.html',
       noHighlight: true
     },
     {
       page: 'study-library.html',
-      selector: 'body',
-      title: 'Chemistry Notes',
-      text: 'Open the Chemistry section to review key definitions and examples fast.',
-      next: 'index.html',
-      noHighlight: true
+      selector: '[data-tour-id="exit-home"]',
+      title: 'Quick Tip',
+      text: 'Use Exit to return home anytime.',
+      next: 'index.html'
     },
     {
       page: 'index.html',
@@ -1328,7 +1328,7 @@
     const nextBtn = overlay.querySelector('[data-tour-next]')
     const target = document.querySelector(step.selector)
     if (!target || !tooltip || !titleEl || !bodyEl || !backBtn || !skipBtn || !nextBtn) return
-    const needsUserClick = step.next && step.next !== getPageName()
+    const needsUserClick = !!step.requireClick || (step.next && step.next !== getPageName())
 
     document.querySelectorAll('.tour-highlight, .tour-highlight-pulse').forEach(function (node) {
       node.classList.remove('tour-highlight')
@@ -1345,7 +1345,7 @@
     bodyEl.textContent = needsUserClick ? step.text + ' Tap the highlighted button next.' : step.text
     backBtn.disabled = stepIndex === 0
     nextBtn.textContent = step.finish ? 'Finish' : needsUserClick ? 'Click highlighted button' : 'Next'
-    nextBtn.disabled = false
+    nextBtn.disabled = !!step.requireClick
     if (!step.noHighlight) {
       target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
     }
@@ -1393,12 +1393,16 @@
       showTourStep()
     }
 
-    if (step.next && step.next !== getPageName()) {
+    if (needsUserClick) {
       target.addEventListener(
         'click',
         function () {
           const nextIndex = stepIndex + 1
           setTourStep(nextIndex)
+          cleanup()
+          setTimeout(function () {
+            showTourStep()
+          }, 80)
         },
         { once: true },
       )
