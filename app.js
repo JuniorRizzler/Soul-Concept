@@ -92,6 +92,9 @@
       '.stats-row strong{color:#1b1b1f;font-size:.92rem}' +
       '.push-widget{position:fixed;bottom:18px;right:18px;z-index:110;width:min(320px,86vw);background:rgba(255,255,255,.95);border:1px solid #e2d8cb;border-radius:18px;box-shadow:0 16px 36px rgba(23,21,16,.12);padding:16px;display:grid;gap:8px}' +
       '.push-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.push-title{font-size:1rem;font-weight:800;color:#1b1b1f}.push-close{appearance:none;border:0;background:transparent;color:#7a7685;font:700 1.05rem/1 system-ui,sans-serif;cursor:pointer;padding:2px 4px;border-radius:999px}.push-close:hover{background:rgba(27,27,31,.06);color:#1b1b1f}.push-close:focus-visible{outline:2px solid rgba(27,27,31,.2);outline-offset:2px}.push-text{margin:0;color:#5a5863;font-size:.9rem}.push-actions{display:flex;gap:8px;flex-wrap:wrap}.push-status{margin:0;font-size:.86rem;min-height:18px}.push-status.ok{color:#166534}.push-status.err{color:#b91c1c}' +
+      '.sc-founder-linkedin{margin-top:12px;display:flex;justify-content:flex-start}' +
+      '.sc-founder-linkedin .badge-base{transform-origin:left top;transform:scale(.72);margin:0 0 -56px -30px;box-shadow:0 10px 24px rgba(15,23,42,.08);border-radius:12px;overflow:hidden}' +
+      '@media (max-width:680px){.sc-founder-linkedin .badge-base{transform:scale(.66);margin:0 0 -62px -36px}}' +
       '.sc-corner-tag{position:fixed;right:14px;bottom:14px;z-index:2147483000;color:rgba(15,23,42,.7);text-decoration:none;font:700 .8rem/1.1 \"Courier New\",\"SFMono-Regular\",Consolas,monospace;letter-spacing:.06em;opacity:.88;text-shadow:0 1px 2px rgba(255,255,255,.72);transition:opacity .18s ease,transform .18s ease}' +
       '.sc-corner-tag:hover,.sc-corner-tag:focus-visible{opacity:1;transform:translateY(-1px)}' +
       '.sc-corner-tag:focus-visible{outline:2px solid rgba(15,23,42,.18);outline-offset:3px;border-radius:999px}' +
@@ -126,6 +129,39 @@
     document.addEventListener('DOMContentLoaded', mountCornerTag, { once: true })
   } else {
     mountCornerTag()
+  }
+
+  function loadLinkedInBadgeScript() {
+    if (document.querySelector('script[data-sc-linkedin-script]')) return
+    const script = document.createElement('script')
+    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
+    script.async = true
+    script.defer = true
+    script.type = 'text/javascript'
+    script.setAttribute('data-sc-linkedin-script', '1')
+    document.head.appendChild(script)
+  }
+
+  function mountLinkedInBadge() {
+    const founderSlot = document.querySelector('[data-founder-linkedin-slot]')
+    if (!founderSlot || founderSlot.querySelector('.badge-base')) return
+
+    const wrap = document.createElement('div')
+    wrap.className = 'sc-founder-linkedin'
+    wrap.setAttribute('data-sc-linkedin-badge', '1')
+    wrap.innerHTML =
+      '<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="dean-concepcion-ba32983a9" data-version="v1">' +
+      '<a class="badge-base__link LI-simple-link" href="https://ca.linkedin.com/in/dean-concepcion-ba32983a9?trk=profile-badge">Dean Concepcion</a>' +
+      '</div>'
+
+    founderSlot.appendChild(wrap)
+    loadLinkedInBadgeScript()
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountLinkedInBadge, { once: true })
+  } else {
+    mountLinkedInBadge()
   }
 
   function mountPersonaPlexHomeDemo() {
