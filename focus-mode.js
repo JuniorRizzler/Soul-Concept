@@ -2,6 +2,7 @@
   var FOCUS_ENABLED_KEY = 'sc_focus_mode_enabled_v1'
   var FOCUS_DISMISSED_KEY = 'sc_focus_mode_dismissed_v1'
   var FOCUS_SOUND_KEY = 'sc_focus_mode_sound_v1'
+  var APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
   var ATTENTION_WARN_MS = 5000
   var ATTENTION_STRONG_MS = 14000
   var lastAttentiveAt = 0
@@ -30,27 +31,32 @@
     var style = document.createElement('style')
     style.id = 'sc-focus-mode-styles'
     style.textContent =
-      '.focus-mode-dock{position:fixed;left:18px;bottom:18px;z-index:10030;display:grid;gap:10px;width:min(320px,88vw)}' +
-      '.focus-mode-shell{display:grid;gap:10px}' +
-      '.focus-mode-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;border-radius:22px;border:1px solid rgba(218,208,193,.9);background:rgba(255,255,255,.94);box-shadow:0 18px 40px rgba(23,21,16,.14);backdrop-filter:blur(10px)}' +
-      '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:999px;border:1px solid rgba(33,92,75,.22);background:rgba(255,255,255,.94);box-shadow:none;color:#1b1b1f;font:800 .88rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:44px}' +
-      '.focus-mode-icon{padding:11px 12px;min-width:44px;font-size:.95rem;font-weight:900}' +
-      '.focus-mode-toggle.is-on{background:linear-gradient(135deg,rgba(33,92,75,.96),rgba(18,68,54,.96));color:#fff;border-color:transparent}' +
+      '.focus-mode-dock{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(270px,78vw)}' +
+      '.focus-mode-shell{display:grid;gap:8px}' +
+      '.focus-mode-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(208,219,211,.92);background:rgba(255,255,255,.94);box-shadow:0 14px 30px rgba(20,26,22,.1);backdrop-filter:blur(12px)}' +
+      '.focus-mode-indicator{width:10px;height:10px;border-radius:999px;background:#b42318;box-shadow:0 0 0 4px rgba(180,35,24,.12)}' +
+      '.focus-mode-indicator.is-on{background:#1f8f53;box-shadow:0 0 0 4px rgba(31,143,83,.14)}' +
+      '.focus-mode-indicator.is-alert{background:#b7791f;box-shadow:0 0 0 4px rgba(183,121,31,.14)}' +
+      '.focus-mode-summary{min-width:0;display:grid;gap:1px;flex:1}' +
+      '.focus-mode-title{color:#16211b;font:800 .74rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
+      '.focus-mode-status{color:#5d665f;font:600 .72rem/1.2 Manrope,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 11px;border-radius:999px;border:1px solid rgba(33,92,75,.14);background:rgba(247,250,248,.96);color:#132019;font:800 .72rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:34px}' +
+      '.focus-mode-toggle.is-on{background:#163e2f;color:#fff;border-color:#163e2f}' +
       '.focus-mode-icon.is-active{background:#1b1b1f;color:#fff;border-color:#1b1b1f}' +
       '.focus-mode-shell.is-collapsed .focus-mode-note{display:none}' +
-      '.focus-mode-note{margin:0;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.95);border:1px solid rgba(226,216,203,.92);box-shadow:0 18px 40px rgba(23,21,16,.12);color:#5a5863;font-size:.84rem;line-height:1.45}' +
-      '.focus-mode-note strong{display:block;margin-bottom:4px;color:#1b1b1f;font-size:.92rem}' +
-      '.focus-mode-meta{display:block;margin-top:8px;color:#215c4b;font-size:.76rem;font-weight:800;letter-spacing:.01em}' +
-      '.focus-mode-alert{position:fixed;right:18px;bottom:18px;z-index:10031;max-width:min(360px,90vw);padding:16px 18px;border-radius:22px;background:rgba(17,20,24,.94);color:#fff;box-shadow:0 20px 46px rgba(8,10,14,.28);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .22s ease,transform .22s ease}' +
+      '.focus-mode-note{margin:0;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.96);border:1px solid rgba(226,216,203,.9);box-shadow:0 16px 34px rgba(23,21,16,.1);color:#5a5863;font-size:.75rem;line-height:1.45}' +
+      '.focus-mode-note strong{display:block;margin-bottom:3px;color:#1b1b1f;font-size:.8rem}' +
+      '.focus-mode-meta{display:block;margin-top:6px;color:#215c4b;font-size:.7rem;font-weight:800;letter-spacing:.01em}' +
+      '.focus-mode-alert{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:10031;max-width:min(320px,84vw);padding:14px 16px;border-radius:18px;background:rgba(17,20,24,.94);color:#fff;box-shadow:0 20px 46px rgba(8,10,14,.28);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .22s ease,transform .22s ease}' +
       '.focus-mode-alert.show{opacity:1;transform:translateY(0)}' +
-      '.focus-mode-alert strong{display:block;margin-bottom:6px;font-size:1rem}' +
-      '.focus-mode-alert p{margin:0;color:rgba(255,255,255,.82);font-size:.9rem;line-height:1.45}' +
+      '.focus-mode-alert strong{display:block;margin-bottom:5px;font-size:.95rem}' +
+      '.focus-mode-alert p{margin:0;color:rgba(255,255,255,.82);font-size:.84rem;line-height:1.45}' +
       '.focus-mode-alert.is-strong{background:linear-gradient(135deg,rgba(27,27,31,.96),rgba(145,52,29,.94))}' +
       '.focus-mode-video{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px}' +
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));width:auto}.focus-mode-shell{gap:8px}.focus-mode-bar{padding:8px;border-radius:18px}.focus-mode-toggle{flex:1 1 150px;font-size:.82rem;padding:10px 12px}.focus-mode-icon{flex:0 0 44px;padding:10px}.focus-mode-note{font-size:.8rem;padding:11px 12px}.focus-mode-alert{left:10px;right:10px;bottom:calc(max(10px,env(safe-area-inset-bottom)) + 72px);max-width:none}}'
+      '@media (max-width:680px){.focus-mode-dock{left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:min(248px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:7px 8px}.focus-mode-title{font-size:.68rem}.focus-mode-status{font-size:.67rem}.focus-mode-toggle,.focus-mode-icon{min-height:32px;padding:7px 10px;font-size:.68rem}.focus-mode-note{font-size:.72rem;padding:9px 11px}.focus-mode-alert{left:10px;right:10px;top:calc(max(10px,env(safe-area-inset-top)) + 58px);max-width:none}}'
     document.head.appendChild(style)
   }
 
@@ -86,9 +92,11 @@
       dock.innerHTML =
         '<div class="focus-mode-shell" data-focus-mode-shell>' +
         '<div class="focus-mode-bar">' +
-        '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Focus Mode Off</button>' +
-        '<button class="focus-mode-icon is-active" type="button" data-focus-mode-sound aria-label="Toggle focus sounds" title="Toggle focus sounds">Sound</button>' +
-        '<button class="focus-mode-icon" type="button" data-focus-mode-collapse aria-label="Collapse focus mode panel" title="Collapse focus mode panel">Hide</button>' +
+        '<span class="focus-mode-indicator" data-focus-mode-indicator aria-hidden="true"></span>' +
+        '<span class="focus-mode-summary"><strong class="focus-mode-title">Focus Mode</strong><span class="focus-mode-status" data-focus-mode-status>Off</span></span>' +
+        '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Off</button>' +
+        '<button class="focus-mode-icon is-active" type="button" data-focus-mode-sound aria-label="Toggle focus sounds" title="Toggle focus sounds">Bell</button>' +
+        '<button class="focus-mode-icon" type="button" data-focus-mode-collapse aria-label="Show focus mode details" title="Show focus mode details">Info</button>' +
         '</div>' +
         '<p class="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span></p>' +
         '</div>'
@@ -109,15 +117,25 @@
 
   function setStatusText(text) {
     var status = document.querySelector('[data-focus-mode-meta]')
+    var compact = document.querySelector('[data-focus-mode-status]')
     if (!status) return
-    status.textContent = String(text || '').trim()
+    var message = String(text || '').trim()
+    status.textContent = message
+    if (compact) compact.textContent = message
+  }
+
+  function setIndicatorState(mode) {
+    var indicator = document.querySelector('[data-focus-mode-indicator]')
+    if (!indicator) return
+    indicator.classList.toggle('is-on', mode === 'on')
+    indicator.classList.toggle('is-alert', mode === 'alert')
   }
 
   function setSoundState(enabled) {
     var button = document.querySelector('[data-focus-mode-sound]')
     if (!button) return
     button.classList.toggle('is-active', enabled)
-    button.textContent = enabled ? 'Sound' : 'Mute'
+    button.textContent = enabled ? 'Bell' : 'Mute'
   }
 
   function setCollapsedState(collapsed) {
@@ -125,11 +143,17 @@
     var button = document.querySelector('[data-focus-mode-collapse]')
     if (!shell || !button) return
     shell.classList.toggle('is-collapsed', collapsed)
-    button.textContent = collapsed ? 'Show' : 'Hide'
+    button.textContent = collapsed ? 'Info' : 'Hide'
     button.classList.toggle('is-active', collapsed)
   }
 
   function shouldPlaySound() {
+    if (window.SoulAudio && typeof window.SoulAudio.isEnabled === 'function') {
+      return window.SoulAudio.isEnabled()
+    }
+    if (readFlag(APP_SOUND_KEY) === false && hasStoredValue(APP_SOUND_KEY)) {
+      return false
+    }
     return readFlag(FOCUS_SOUND_KEY)
   }
 
@@ -164,6 +188,24 @@
   }
 
   function playCue(kind) {
+    if (window.SoulAudio && typeof window.SoulAudio.play === 'function') {
+      if (kind === 'start') {
+        window.SoulAudio.play('startup')
+        return
+      }
+      if (kind === 'stop') {
+        window.SoulAudio.play('toggleOff')
+        return
+      }
+      if (kind === 'warn') {
+        window.SoulAudio.play('alert')
+        return
+      }
+      if (kind === 'strong') {
+        window.SoulAudio.play('alarm')
+        return
+      }
+    }
     if (kind === 'start') {
       playTone({ type: 'sine', start: 520, end: 700, duration: 0.16, volume: 0.028 })
       return
@@ -185,7 +227,8 @@
     var toggle = document.querySelector('[data-focus-mode-toggle]')
     if (!toggle) return
     toggle.classList.toggle('is-on', enabled)
-    toggle.textContent = enabled ? 'Focus Mode On' : 'Focus Mode Off'
+    toggle.textContent = enabled ? 'On' : 'Off'
+    setIndicatorState(enabled ? 'on' : 'off')
     setStatusText(enabled ? 'Camera starting...' : 'Camera off. Nothing is being tracked.')
   }
 
@@ -203,11 +246,13 @@
         ? '<strong>Come back to Soul Concept</strong><p>You have been away for a while. Re-focus and keep your study streak moving.</p>'
         : '<strong>Focus check</strong><p>Eyes back on the page. Stay with this study block.</p>'
     playCue(level > 1 ? 'strong' : 'warn')
+    setIndicatorState('alert')
     document.body.classList.add('focus-warning')
     alertTimer = window.setTimeout(function () {
       alert.classList.remove('show')
       alert.classList.remove('is-strong')
       document.body.classList.remove('focus-warning')
+      setIndicatorState(readFlag(FOCUS_ENABLED_KEY) ? 'on' : 'off')
       alertTimer = 0
     }, level > 1 ? 3200 : 2200)
   }
@@ -372,6 +417,7 @@
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera active. Checking attention...' }
     setStatusText(latestAttention.reason)
+    setIndicatorState('on')
     playCue('start')
     requestAnimationFrame(trackFrame)
   }
@@ -381,6 +427,7 @@
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
     setStatusText(latestAttention.reason)
+    setIndicatorState('off')
     playCue('stop')
     if (streamRef) {
       streamRef.getTracks().forEach(function (track) { track.stop() })
@@ -401,6 +448,7 @@
     if (latestAttention.attentive) {
       lastAttentiveAt = Date.now()
       warningLevel = 0
+      setIndicatorState('on')
       if (frameCounter % 24 === 0) {
         setStatusText(latestAttention.reason)
       }
@@ -444,9 +492,9 @@
 
     setToggleState(readFlag(FOCUS_ENABLED_KEY))
     if (!hasStoredValue(FOCUS_SOUND_KEY)) {
-      writeFlag(FOCUS_SOUND_KEY, true)
+      writeFlag(FOCUS_SOUND_KEY, readFlag(APP_SOUND_KEY) || !hasStoredValue(APP_SOUND_KEY))
     }
-    setSoundState(readFlag(FOCUS_SOUND_KEY))
+    setSoundState(shouldPlaySound())
     if (readFlag(FOCUS_DISMISSED_KEY)) {
       setCollapsedState(true)
     } else {
@@ -471,10 +519,20 @@
       soundButton.addEventListener('click', function () {
         var enabled = !readFlag(FOCUS_SOUND_KEY)
         writeFlag(FOCUS_SOUND_KEY, enabled)
+        writeFlag(APP_SOUND_KEY, enabled)
+        if (window.SoulAudio && typeof window.SoulAudio.setEnabled === 'function') {
+          window.SoulAudio.setEnabled(enabled)
+        }
         if (enabled) unlockAudio()
         setSoundState(enabled)
       })
     }
+
+    document.addEventListener('sc:sound-state-changed', function (event) {
+      var enabled = !!(event && event.detail && event.detail.enabled)
+      writeFlag(FOCUS_SOUND_KEY, enabled)
+      setSoundState(enabled)
+    })
 
     if (collapseButton) {
       collapseButton.addEventListener('click', function () {

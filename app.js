@@ -52,6 +52,7 @@
       navMenu.classList.toggle('open')
       const expanded = navMenu.classList.contains('open')
       navToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false')
+      playAppSound(expanded ? 'panel' : 'tap')
     })
   }
 
@@ -87,6 +88,7 @@
       overlay.classList.add('is-leaving')
       document.body.classList.add('startup-ready')
       document.body.classList.remove('startup-active')
+      if (soundState.unlocked) playAppSound('startup')
       window.setTimeout(function () {
         if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay)
       }, 520)
@@ -106,6 +108,143 @@
   const USAGE_KEY = 'sc_usage_stats_v1'
   const PUSH_ENABLED_KEY = 'sc_push_enabled'
   const PUSH_WIDGET_DISMISSED_KEY = 'sc_push_widget_dismissed_v1'
+  const APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
+
+  function readBooleanFlag(key, fallbackValue) {
+    try {
+      const raw = localStorage.getItem(key)
+      if (raw === null) return !!fallbackValue
+      return raw === '1'
+    } catch (_err) {
+      return !!fallbackValue
+    }
+  }
+
+  function writeBooleanFlag(key, value) {
+    try {
+      localStorage.setItem(key, value ? '1' : '0')
+    } catch (_err) {}
+  }
+
+  const soundState = {
+    enabled: readBooleanFlag(APP_SOUND_KEY, true),
+    context: null,
+    unlocked: false,
+  }
+
+  function ensureAudioContext() {
+    const AudioCtor = window.AudioContext || window.webkitAudioContext
+    if (!AudioCtor) return null
+    if (!soundState.context) soundState.context = new AudioCtor()
+    if (soundState.context.state === 'suspended') {
+      soundState.context.resume().catch(function () {})
+    }
+    soundState.unlocked = true
+    return soundState.context
+  }
+
+  function unlockAppSound() {
+    return ensureAudioContext()
+  }
+
+  function getSoundToggleLabel() {
+    return soundState.enabled ? 'Sound On' : 'Sound Off'
+  }
+
+  function updateSoundToggleUi() {
+    document.querySelectorAll('[data-sc-sound-toggle]').forEach(function (button) {
+      button.classList.toggle('is-off', !soundState.enabled)
+      button.textContent = getSoundToggleLabel()
+      button.setAttribute('aria-pressed', soundState.enabled ? 'true' : 'false')
+      button.setAttribute('aria-label', soundState.enabled ? 'Turn ambient sounds off' : 'Turn ambient sounds on')
+      button.title = soundState.enabled ? 'Turn ambient sounds off' : 'Turn ambient sounds on'
+    })
+  }
+
+  function setSoundEnabled(nextEnabled) {
+    soundState.enabled = !!nextEnabled
+    writeBooleanFlag(APP_SOUND_KEY, soundState.enabled)
+    updateSoundToggleUi()
+    document.dispatchEvent(
+      new CustomEvent('sc:sound-state-changed', { detail: { enabled: soundState.enabled } }),
+    )
+  }
+
+  function playSynthLayer(ctx, now, layer) {
+    const oscillator = ctx.createOscillator()
+    const gain = ctx.createGain()
+    oscillator.type = layer.type || 'sine'
+    oscillator.frequency.setValueAtTime(layer.start, now)
+    oscillator.frequency.linearRampToValueAtTime(layer.end || layer.start, now + (layer.duration || 0.18))
+    gain.gain.setValueAtTime(0.0001, now)
+    gain.gain.linearRampToValueAtTime(layer.volume || 0.028, now + (layer.attack || 0.02))
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + (layer.duration || 0.18))
+    oscillator.connect(gain)
+    gain.connect(ctx.destination)
+    oscillator.start(now)
+    oscillator.stop(now + (layer.duration || 0.18) + 0.04)
+  }
+
+  function playAppSound(name) {
+    if (!soundState.enabled) return
+    const ctx = ensureAudioContext()
+    if (!ctx) return
+    const now = ctx.currentTime
+    const palette = {
+      tap: [{ type: 'sine', start: 440, end: 500, duration: 0.07, volume: 0.008, attack: 0.014 }],
+      panel: [
+        { type: 'sine', start: 330, end: 390, duration: 0.12, volume: 0.009, attack: 0.02 },
+        { type: 'sine', start: 495, end: 560, duration: 0.16, volume: 0.006, attack: 0.03 },
+      ],
+      filter: [{ type: 'sine', start: 370, end: 470, duration: 0.09, volume: 0.009, attack: 0.014 }],
+      success: [
+        { type: 'sine', start: 470, end: 560, duration: 0.12, volume: 0.01, attack: 0.02 },
+        { type: 'sine', start: 610, end: 700, duration: 0.16, volume: 0.007, attack: 0.028 },
+      ],
+      error: [
+        { type: 'sine', start: 300, end: 270, duration: 0.16, volume: 0.012, attack: 0.015 },
+        { type: 'sine', start: 240, end: 220, duration: 0.24, volume: 0.009, attack: 0.02 },
+      ],
+      startup: [
+        { type: 'sine', start: 392, end: 440, duration: 0.22, volume: 0.008, attack: 0.04 },
+        { type: 'sine', start: 523, end: 587, duration: 0.28, volume: 0.005, attack: 0.05 },
+      ],
+      toggleOn: [
+        { type: 'sine', start: 430, end: 510, duration: 0.12, volume: 0.009, attack: 0.02 },
+        { type: 'sine', start: 560, end: 640, duration: 0.14, volume: 0.006, attack: 0.028 },
+      ],
+      toggleOff: [{ type: 'sine', start: 380, end: 300, duration: 0.12, volume: 0.009, attack: 0.016 }],
+      message: [
+        { type: 'sine', start: 520, end: 610, duration: 0.09, volume: 0.008, attack: 0.014 },
+        { type: 'sine', start: 660, end: 720, duration: 0.1, volume: 0.005, attack: 0.018 },
+      ],
+      alert: [
+        { type: 'sine', start: 260, end: 240, duration: 0.18, volume: 0.013, attack: 0.015 },
+        { type: 'sine', start: 310, end: 290, duration: 0.22, volume: 0.009, attack: 0.02 },
+      ],
+      alarm: [
+        { type: 'sine', start: 220, end: 210, duration: 0.22, volume: 0.015, attack: 0.015 },
+        { type: 'sine', start: 277, end: 262, duration: 0.24, volume: 0.011, attack: 0.02 },
+        { type: 'sine', start: 220, end: 210, duration: 0.22, volume: 0.01, attack: 0.015 },
+      ],
+    }
+    const layers = palette[name] || palette.tap
+    layers.forEach(function (layer, index) {
+      playSynthLayer(ctx, now + index * 0.035, layer)
+    })
+  }
+
+  window.SoulAudio = {
+    unlock: unlockAppSound,
+    play: playAppSound,
+    isEnabled: function () {
+      return soundState.enabled
+    },
+    setEnabled: setSoundEnabled,
+  }
+
+  document.addEventListener('pointerdown', unlockAppSound, { passive: true })
+  document.addEventListener('keydown', unlockAppSound)
 
   function ensureGlobalUiStyles() {
     if (document.getElementById('sc-global-ui-styles')) return
@@ -124,14 +263,59 @@
       '.stats-row strong{color:#1b1b1f;font-size:.92rem}' +
       '.push-widget{position:fixed;bottom:18px;right:18px;z-index:110;width:min(320px,86vw);background:rgba(255,255,255,.95);border:1px solid #e2d8cb;border-radius:18px;box-shadow:0 16px 36px rgba(23,21,16,.12);padding:16px;display:grid;gap:8px}' +
       '.push-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.push-title{font-size:1rem;font-weight:800;color:#1b1b1f}.push-close{appearance:none;border:0;background:transparent;color:#7a7685;font:700 1.05rem/1 system-ui,sans-serif;cursor:pointer;padding:2px 4px;border-radius:999px}.push-close:hover{background:rgba(27,27,31,.06);color:#1b1b1f}.push-close:focus-visible{outline:2px solid rgba(27,27,31,.2);outline-offset:2px}.push-text{margin:0;color:#5a5863;font-size:.9rem}.push-actions{display:flex;gap:8px;flex-wrap:wrap}.push-status{margin:0;font-size:.86rem;min-height:18px}.push-status.ok{color:#166534}.push-status.err{color:#b91c1c}' +
+      '.sc-sound-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border-radius:999px;border:1px solid rgba(33,92,75,.2);background:rgba(255,255,255,.94);box-shadow:0 10px 22px rgba(23,21,16,.08);color:#1b1b1f;font:800 .78rem/1 Manrope,system-ui,sans-serif;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}' +
+      '.sc-sound-toggle:hover,.sc-sound-toggle:focus-visible{transform:translateY(-1px);box-shadow:0 14px 26px rgba(23,21,16,.12)}' +
+      '.sc-sound-toggle.is-off{background:rgba(255,255,255,.84);color:#6b7280}' +
+      '.sc-sound-toggle.is-floating{position:fixed;top:14px;right:14px;z-index:2147482999}' +
       '.sc-corner-tag{position:fixed;right:14px;bottom:14px;z-index:2147483000;color:rgba(15,23,42,.7);text-decoration:none;font:700 .8rem/1.1 \"Courier New\",\"SFMono-Regular\",Consolas,monospace;letter-spacing:.06em;opacity:.88;text-shadow:0 1px 2px rgba(255,255,255,.72);transition:opacity .18s ease,transform .18s ease}' +
       '.sc-corner-tag:hover,.sc-corner-tag:focus-visible{opacity:1;transform:translateY(-1px)}' +
       '.sc-corner-tag:focus-visible{outline:2px solid rgba(15,23,42,.18);outline-offset:3px;border-radius:999px}' +
-      '@media (max-width:680px){.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
+      '@media (max-width:680px){.sc-sound-toggle.is-floating{top:10px;right:10px;min-height:36px;padding:7px 10px;font-size:.72rem}.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
     document.head.appendChild(style)
   }
 
   ensureGlobalUiStyles()
+
+  function mountSoundToggle() {
+    if (!document.body) return
+    let toggle = document.querySelector('[data-sc-sound-toggle]')
+    if (!toggle) {
+      toggle = document.createElement('button')
+      toggle.type = 'button'
+      toggle.className = 'sc-sound-toggle'
+      toggle.setAttribute('data-sc-sound-toggle', '1')
+      const topbarInner = document.querySelector('.topbar-inner')
+      if (topbarInner) {
+        const navToggleButton = topbarInner.querySelector('[data-nav-toggle]')
+        if (navToggleButton) {
+          topbarInner.insertBefore(toggle, navToggleButton)
+        } else {
+          topbarInner.appendChild(toggle)
+        }
+      } else {
+        toggle.classList.add('is-floating')
+        document.body.appendChild(toggle)
+      }
+      toggle.addEventListener('click', function () {
+        unlockAppSound()
+        const nextEnabled = !soundState.enabled
+        if (nextEnabled) {
+          setSoundEnabled(true)
+          playAppSound('toggleOn')
+        } else {
+          playAppSound('toggleOff')
+          setSoundEnabled(false)
+        }
+      })
+    }
+    updateSoundToggleUi()
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountSoundToggle, { once: true })
+  } else {
+    mountSoundToggle()
+  }
 
   function mountCornerTag() {
     if (!document.body) return
@@ -351,6 +535,7 @@
       toggleBtn.addEventListener('click', function () {
         const isOpen = panel.classList.contains('open')
         setPanelOpen(!isOpen)
+        playAppSound(isOpen ? 'tap' : 'panel')
         if (!isOpen) updateStatsUI()
       })
     }
@@ -471,6 +656,7 @@
         item.classList.add('open')
         content.style.maxHeight = content.scrollHeight + 'px'
       }
+      playAppSound(isOpen ? 'tap' : 'panel')
     })
   })
 
@@ -484,6 +670,7 @@
           node.classList.remove('active')
         })
         btn.classList.add('active')
+        playAppSound('filter')
 
         filterCards.forEach(function (card) {
           const category = card.getAttribute('data-category') || ''
@@ -511,6 +698,7 @@
 
         tab.classList.add('active')
         tab.setAttribute('aria-selected', 'true')
+        playAppSound('panel')
         const panel = roadmap.querySelector('[data-roadmap-panel="' + target + '"]')
         if (panel) panel.classList.add('active')
       })
@@ -533,6 +721,7 @@
         })
         btn.classList.add('active')
         btn.setAttribute('aria-selected', 'true')
+        playAppSound('panel')
         const panel = switcher.querySelector('[data-switch-panel="' + target + '"]')
         if (panel) panel.classList.add('active')
       })
@@ -549,6 +738,7 @@
           node.classList.remove('active')
         })
         btn.classList.add('active')
+        playAppSound('tap')
         if (hidden) hidden.value = btn.getAttribute('data-feedback-type') || 'feedback'
       })
     })
@@ -570,6 +760,7 @@
           status.textContent = 'Please provide a valid name, email, and a message with at least 20 characters.'
           status.className = 'form-status err'
         }
+        playAppSound('error')
         return
       }
 
@@ -577,6 +768,7 @@
         status.textContent = 'Thanks for the feedback. We have received it.'
         status.className = 'form-status ok'
       }
+      playAppSound('success')
       contactForm.reset()
     })
   }
@@ -702,6 +894,7 @@
 
   if (installBtn) {
     installBtn.addEventListener('click', function () {
+      playAppSound('panel')
       if (isAppInstalled()) {
         updateInstallUiVisibility()
         return
@@ -742,6 +935,7 @@
     setInstalledState(true)
     deferredPrompt = null
     updateInstallUiVisibility()
+    playAppSound('success')
   })
 
   if (isStandaloneMode()) {
@@ -903,6 +1097,7 @@
           } catch (err) {
             // ignore storage errors
           }
+          playAppSound('tap')
           widget.remove()
         })
       }
@@ -1110,6 +1305,7 @@
                 // ignore storage errors
               }
               document.dispatchEvent(new Event('sc:push-state-changed'))
+              playAppSound('error')
               setStatus('Permission denied.', true)
               return
             }
@@ -1131,10 +1327,12 @@
             } else {
               setStatus('Notifications enabled.', false)
             }
+            playAppSound('success')
             setTimeout(function () {
               widget.remove()
             }, 900)
           } catch (err) {
+            playAppSound('error')
             setStatus(err.message || 'Failed to enable notifications.', true)
           }
         })

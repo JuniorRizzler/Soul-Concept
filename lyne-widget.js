@@ -507,6 +507,14 @@
     var dragHandle = panel.querySelector('[data-lyne-drag-handle]')
     if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !tutorialBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint) return
 
+    function playUiSound(name) {
+      try {
+        if (window.SoulAudio && typeof window.SoulAudio.play === 'function') {
+          window.SoulAudio.play(name)
+        }
+      } catch (_err) {}
+    }
+
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
     var canListen = typeof SpeechRecognition === 'function'
     var canSpeak = !!window.speechSynthesis
@@ -1278,6 +1286,7 @@
       }
       lastOrbTapAt = now
       setPanelOpen(!panel.classList.contains('open'))
+      playUiSound(panel.classList.contains('open') ? 'panel' : 'tap')
       if (panel.classList.contains('open')) {
         scheduleAutoArm()
       } else {
@@ -1286,6 +1295,7 @@
     })
     panelClose.addEventListener('click', function () {
       setPanelOpen(false)
+      playUiSound('tap')
     })
     hint.addEventListener('click', function (event) {
       var actionId = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-action') : ''
@@ -1334,6 +1344,7 @@
       active = true
       setPanelOpen(true)
       meta.textContent = 'Conversation started.'
+      playUiSound('success')
       startListening()
     })
 
@@ -1341,6 +1352,7 @@
       clearGuide()
       setOnboardingDismissed(false)
       setPanelOpen(true)
+      playUiSound('panel')
       beginOnboarding(true)
     })
 
@@ -1360,6 +1372,7 @@
       speaking = false
       setSpeakingVisual(false)
       meta.textContent = 'Conversation stopped.'
+      playUiSound('tap')
     })
 
     function submitManualPrompt() {
@@ -1367,6 +1380,7 @@
       if (!value) return
       input.value = ''
       setPanelOpen(true)
+      playUiSound('message')
       askLyne(value)
     }
 
