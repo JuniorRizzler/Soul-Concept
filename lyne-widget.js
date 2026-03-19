@@ -1442,7 +1442,6 @@
     })
     resumePendingGuide()
     resumeOnboarding()
-    maybeStartOnboarding()
   }
 
   if (document.readyState === 'loading') {
