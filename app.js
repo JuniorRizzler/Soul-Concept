@@ -192,10 +192,7 @@
     const now = ctx.currentTime
     const palette = {
       tap: [{ type: 'sine', start: 440, end: 500, duration: 0.07, volume: 0.008, attack: 0.014 }],
-      panel: [
-        { type: 'sine', start: 330, end: 390, duration: 0.12, volume: 0.009, attack: 0.02 },
-        { type: 'sine', start: 495, end: 560, duration: 0.16, volume: 0.006, attack: 0.03 },
-      ],
+      panel: [],
       filter: [{ type: 'sine', start: 370, end: 470, duration: 0.09, volume: 0.009, attack: 0.014 }],
       success: [
         { type: 'sine', start: 470, end: 560, duration: 0.12, volume: 0.01, attack: 0.02 },
@@ -229,6 +226,7 @@
       ],
     }
     const layers = palette[name] || palette.tap
+    if (!layers.length) return
     layers.forEach(function (layer, index) {
       playSynthLayer(ctx, now + index * 0.035, layer)
     })
