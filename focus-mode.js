@@ -1,6 +1,7 @@
 (function () {
   var FOCUS_ENABLED_KEY = 'sc_focus_mode_enabled_v1'
   var FOCUS_DISMISSED_KEY = 'sc_focus_mode_dismissed_v1'
+  var FOCUS_SOUND_KEY = 'sc_focus_mode_sound_v1'
   var ATTENTION_WARN_MS = 5000
   var ATTENTION_STRONG_MS = 14000
   var lastAttentiveAt = 0
@@ -11,6 +12,9 @@
   var videoEl = null
   var streamRef = null
   var frameCounter = 0
+  var alertTimer = 0
+  var audioCtx = null
+  var audioUnlocked = false
   var latestAttention = { attentive: true, reason: 'Focus Mode is ready.' }
 
   function getPageName() {
@@ -27,8 +31,13 @@
     style.id = 'sc-focus-mode-styles'
     style.textContent =
       '.focus-mode-dock{position:fixed;left:18px;bottom:18px;z-index:10030;display:grid;gap:10px;width:min(320px,88vw)}' +
-      '.focus-mode-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:999px;border:1px solid rgba(33,92,75,.22);background:rgba(255,255,255,.94);box-shadow:0 14px 34px rgba(23,21,16,.12);color:#1b1b1f;font:800 .88rem/1 Manrope,system-ui,sans-serif;cursor:pointer}' +
+      '.focus-mode-shell{display:grid;gap:10px}' +
+      '.focus-mode-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;border-radius:22px;border:1px solid rgba(218,208,193,.9);background:rgba(255,255,255,.94);box-shadow:0 18px 40px rgba(23,21,16,.14);backdrop-filter:blur(10px)}' +
+      '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:999px;border:1px solid rgba(33,92,75,.22);background:rgba(255,255,255,.94);box-shadow:none;color:#1b1b1f;font:800 .88rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:44px}' +
+      '.focus-mode-icon{padding:11px 12px;min-width:44px;font-size:.95rem;font-weight:900}' +
       '.focus-mode-toggle.is-on{background:linear-gradient(135deg,rgba(33,92,75,.96),rgba(18,68,54,.96));color:#fff;border-color:transparent}' +
+      '.focus-mode-icon.is-active{background:#1b1b1f;color:#fff;border-color:#1b1b1f}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-note{display:none}' +
       '.focus-mode-note{margin:0;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.95);border:1px solid rgba(226,216,203,.92);box-shadow:0 18px 40px rgba(23,21,16,.12);color:#5a5863;font-size:.84rem;line-height:1.45}' +
       '.focus-mode-note strong{display:block;margin-bottom:4px;color:#1b1b1f;font-size:.92rem}' +
       '.focus-mode-meta{display:block;margin-top:8px;color:#215c4b;font-size:.76rem;font-weight:800;letter-spacing:.01em}' +
@@ -40,7 +49,8 @@
       '.focus-mode-video{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px}' +
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
-      '@media (max-width:680px){.focus-mode-dock{left:10px;bottom:10px}.focus-mode-alert{right:10px;bottom:10px}}'
+      '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
+      '@media (max-width:680px){.focus-mode-dock{left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));width:auto}.focus-mode-shell{gap:8px}.focus-mode-bar{padding:8px;border-radius:18px}.focus-mode-toggle{flex:1 1 150px;font-size:.82rem;padding:10px 12px}.focus-mode-icon{flex:0 0 44px;padding:10px}.focus-mode-note{font-size:.8rem;padding:11px 12px}.focus-mode-alert{left:10px;right:10px;bottom:calc(max(10px,env(safe-area-inset-bottom)) + 72px);max-width:none}}'
     document.head.appendChild(style)
   }
 
@@ -58,6 +68,14 @@
     } catch (_err) {}
   }
 
+  function hasStoredValue(key) {
+    try {
+      return localStorage.getItem(key) !== null
+    } catch (_err) {
+      return false
+    }
+  }
+
   function ensureUi() {
     injectStyles()
     var dock = document.querySelector('[data-focus-mode-dock]')
@@ -66,8 +84,14 @@
       dock.className = 'focus-mode-dock'
       dock.setAttribute('data-focus-mode-dock', '1')
       dock.innerHTML =
+        '<div class="focus-mode-shell" data-focus-mode-shell>' +
+        '<div class="focus-mode-bar">' +
         '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Focus Mode Off</button>' +
-        '<p class="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span></p>'
+        '<button class="focus-mode-icon is-active" type="button" data-focus-mode-sound aria-label="Toggle focus sounds" title="Toggle focus sounds">Sound</button>' +
+        '<button class="focus-mode-icon" type="button" data-focus-mode-collapse aria-label="Collapse focus mode panel" title="Collapse focus mode panel">Hide</button>' +
+        '</div>' +
+        '<p class="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span></p>' +
+        '</div>'
       document.body.appendChild(dock)
     }
 
@@ -89,6 +113,74 @@
     status.textContent = String(text || '').trim()
   }
 
+  function setSoundState(enabled) {
+    var button = document.querySelector('[data-focus-mode-sound]')
+    if (!button) return
+    button.classList.toggle('is-active', enabled)
+    button.textContent = enabled ? 'Sound' : 'Mute'
+  }
+
+  function setCollapsedState(collapsed) {
+    var shell = document.querySelector('[data-focus-mode-shell]')
+    var button = document.querySelector('[data-focus-mode-collapse]')
+    if (!shell || !button) return
+    shell.classList.toggle('is-collapsed', collapsed)
+    button.textContent = collapsed ? 'Show' : 'Hide'
+    button.classList.toggle('is-active', collapsed)
+  }
+
+  function shouldPlaySound() {
+    return readFlag(FOCUS_SOUND_KEY)
+  }
+
+  function unlockAudio() {
+    var AudioCtor = window.AudioContext || window.webkitAudioContext
+    if (!AudioCtor) return null
+    if (!audioCtx) audioCtx = new AudioCtor()
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function () {})
+    }
+    audioUnlocked = true
+    return audioCtx
+  }
+
+  function playTone(config) {
+    if (!shouldPlaySound()) return
+    var ctx = unlockAudio()
+    if (!ctx) return
+    var now = ctx.currentTime
+    var oscillator = ctx.createOscillator()
+    var gain = ctx.createGain()
+    oscillator.type = config.type || 'sine'
+    oscillator.frequency.setValueAtTime(config.start, now)
+    oscillator.frequency.linearRampToValueAtTime(config.end || config.start, now + (config.duration || 0.18))
+    gain.gain.setValueAtTime(0.0001, now)
+    gain.gain.linearRampToValueAtTime(config.volume || 0.035, now + 0.02)
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + (config.duration || 0.18))
+    oscillator.connect(gain)
+    gain.connect(ctx.destination)
+    oscillator.start(now)
+    oscillator.stop(now + (config.duration || 0.18) + 0.03)
+  }
+
+  function playCue(kind) {
+    if (kind === 'start') {
+      playTone({ type: 'sine', start: 520, end: 700, duration: 0.16, volume: 0.028 })
+      return
+    }
+    if (kind === 'stop') {
+      playTone({ type: 'sine', start: 420, end: 260, duration: 0.14, volume: 0.022 })
+      return
+    }
+    if (kind === 'warn') {
+      playTone({ type: 'triangle', start: 360, end: 300, duration: 0.22, volume: 0.032 })
+      return
+    }
+    if (kind === 'strong') {
+      playTone({ type: 'square', start: 280, end: 220, duration: 0.28, volume: 0.04 })
+    }
+  }
+
   function setToggleState(enabled) {
     var toggle = document.querySelector('[data-focus-mode-toggle]')
     if (!toggle) return
@@ -100,17 +192,23 @@
   function showAlert(level) {
     var alert = document.querySelector('[data-focus-mode-alert]')
     if (!alert) return
+    if (alertTimer) {
+      window.clearTimeout(alertTimer)
+      alertTimer = 0
+    }
     alert.classList.add('show')
     alert.classList.toggle('is-strong', level > 1)
     alert.innerHTML =
       level > 1
         ? '<strong>Come back to Soul Concept</strong><p>You have been away for a while. Re-focus and keep your study streak moving.</p>'
         : '<strong>Focus check</strong><p>Eyes back on the page. Stay with this study block.</p>'
+    playCue(level > 1 ? 'strong' : 'warn')
     document.body.classList.add('focus-warning')
-    window.setTimeout(function () {
+    alertTimer = window.setTimeout(function () {
       alert.classList.remove('show')
       alert.classList.remove('is-strong')
       document.body.classList.remove('focus-warning')
+      alertTimer = 0
     }, level > 1 ? 3200 : 2200)
   }
 
@@ -143,6 +241,10 @@
     videoEl.srcObject = streamRef
     await videoEl.play()
     return videoEl
+  }
+
+  function canUseCameraTracking() {
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
   }
 
   function getLandmark(landmarks, index) {
@@ -242,6 +344,11 @@
 
   async function startTracking() {
     if (running) return
+    if (!canUseCameraTracking()) {
+      setStatusText('Camera tracking is not supported on this device.')
+      showAlert(1)
+      return
+    }
     var loaded = await ensureMediapipe()
     if (!loaded || !(window.FilesetResolver && window.FaceLandmarker)) {
       setStatusText('Camera model failed to load.')
@@ -265,6 +372,7 @@
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera active. Checking attention...' }
     setStatusText(latestAttention.reason)
+    playCue('start')
     requestAnimationFrame(trackFrame)
   }
 
@@ -273,6 +381,7 @@
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
     setStatusText(latestAttention.reason)
+    playCue('stop')
     if (streamRef) {
       streamRef.getTracks().forEach(function (track) { track.stop() })
       streamRef = null
@@ -328,28 +437,53 @@
   function bindUi() {
     var ui = ensureUi()
     var toggle = ui.dock.querySelector('[data-focus-mode-toggle]')
+    var soundButton = ui.dock.querySelector('[data-focus-mode-sound]')
+    var collapseButton = ui.dock.querySelector('[data-focus-mode-collapse]')
     if (!toggle || toggle.getAttribute('data-bound') === '1') return
     toggle.setAttribute('data-bound', '1')
 
     setToggleState(readFlag(FOCUS_ENABLED_KEY))
+    if (!hasStoredValue(FOCUS_SOUND_KEY)) {
+      writeFlag(FOCUS_SOUND_KEY, true)
+    }
+    setSoundState(readFlag(FOCUS_SOUND_KEY))
     if (readFlag(FOCUS_DISMISSED_KEY)) {
-      var note = ui.dock.querySelector('[data-focus-mode-note]')
-      if (note) note.style.display = 'none'
+      setCollapsedState(true)
+    } else {
+      setCollapsedState(false)
     }
 
     toggle.addEventListener('click', async function () {
+      unlockAudio()
       var enabled = !readFlag(FOCUS_ENABLED_KEY)
       writeFlag(FOCUS_ENABLED_KEY, enabled)
       setToggleState(enabled)
       writeFlag(FOCUS_DISMISSED_KEY, true)
-      var note = ui.dock.querySelector('[data-focus-mode-note]')
-      if (note) note.style.display = 'none'
+      setCollapsedState(true)
       if (enabled) {
         await startTracking()
       } else {
         stopTracking()
       }
     })
+
+    if (soundButton) {
+      soundButton.addEventListener('click', function () {
+        var enabled = !readFlag(FOCUS_SOUND_KEY)
+        writeFlag(FOCUS_SOUND_KEY, enabled)
+        if (enabled) unlockAudio()
+        setSoundState(enabled)
+      })
+    }
+
+    if (collapseButton) {
+      collapseButton.addEventListener('click', function () {
+        var shell = document.querySelector('[data-focus-mode-shell]')
+        if (!shell) return
+        var collapsed = !shell.classList.contains('is-collapsed')
+        setCollapsedState(collapsed)
+      })
+    }
 
     document.addEventListener('visibilitychange', function () {
       if (!readFlag(FOCUS_ENABLED_KEY)) return
@@ -360,6 +494,7 @@
     })
 
     if (readFlag(FOCUS_ENABLED_KEY)) {
+      unlockAudio()
       startTracking().catch(function () {
         setStatusText('Camera access failed.')
       })
