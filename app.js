@@ -264,11 +264,11 @@
       '.sc-sound-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border-radius:999px;border:1px solid rgba(33,92,75,.2);background:rgba(255,255,255,.94);box-shadow:0 10px 22px rgba(23,21,16,.08);color:#1b1b1f;font:800 .78rem/1 Manrope,system-ui,sans-serif;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}' +
       '.sc-sound-toggle:hover,.sc-sound-toggle:focus-visible{transform:translateY(-1px);box-shadow:0 14px 26px rgba(23,21,16,.12)}' +
       '.sc-sound-toggle.is-off{background:rgba(255,255,255,.84);color:#6b7280}' +
-      '.sc-sound-toggle.is-floating{position:fixed;top:14px;right:14px;z-index:2147482999}' +
+      '.sc-sound-toggle.is-floating{position:fixed;top:92px;right:14px;z-index:2147482999}' +
       '.sc-corner-tag{position:fixed;right:14px;bottom:14px;z-index:2147483000;color:rgba(15,23,42,.7);text-decoration:none;font:700 .8rem/1.1 \"Courier New\",\"SFMono-Regular\",Consolas,monospace;letter-spacing:.06em;opacity:.88;text-shadow:0 1px 2px rgba(255,255,255,.72);transition:opacity .18s ease,transform .18s ease}' +
       '.sc-corner-tag:hover,.sc-corner-tag:focus-visible{opacity:1;transform:translateY(-1px)}' +
       '.sc-corner-tag:focus-visible{outline:2px solid rgba(15,23,42,.18);outline-offset:3px;border-radius:999px}' +
-      '@media (max-width:680px){.sc-sound-toggle.is-floating{top:10px;right:10px;min-height:36px;padding:7px 10px;font-size:.72rem}.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
+      '@media (max-width:680px){.sc-sound-toggle.is-floating{top:82px;right:10px;min-height:36px;padding:7px 10px;font-size:.72rem}.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
     document.head.appendChild(style)
   }
 

@@ -244,7 +244,20 @@
       '.sc-lyne-guide-target{position:relative;z-index:141 !important;outline:3px solid #ff8a1c !important;outline-offset:4px;border-radius:14px;box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22);animation:scLyneGuidePulse 1.15s ease-in-out infinite}' +
       '.sc-lyne-guide-bubble{position:fixed;z-index:142;max-width:min(260px,80vw);padding:10px 12px;border-radius:14px;background:rgba(14,23,38,.96);color:#fff;font:700 12px/1.35 Manrope,system-ui,sans-serif;box-shadow:0 16px 30px rgba(0,0,0,.28)}' +
       '.sc-lyne-guide-bubble strong{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.01em;color:#ffd39c}' +
-      '@media (max-width:760px){#lyne-widget{transform:scale(.82);transform-origin:100% 100%}#lyne-hint{right:52px;bottom:6px;max-width:170px;padding:9px 10px 8px;font-size:9px;border-radius:14px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:10px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:44px;height:44px}#lyne-orb-toggle .flame-core{left:13px;top:9px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:18px;top:15px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:5px}#lyne-panel{bottom:52px;width:min(252px,76vw);padding:9px;border-radius:18px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.9rem}.lyne-panel-actions{gap:5px;margin-top:8px}.lyne-mini-btn{padding:7px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:9px 10px;min-height:38px;max-height:86px;font-size:.68rem}#lyne-meta{font-size:.64rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:36px;height:36px;border-radius:14px;font-size:13px}}' +
+      '#lyne-widget.lyne-return-mode{left:50% !important;top:50% !important;transform:translate(-50%,-50%) scale(1.02);z-index:10060}' +
+      '#lyne-widget.lyne-return-mode #lyne-hint{display:none !important}' +
+      '#lyne-widget.lyne-return-mode .lyne-shell{align-items:center}' +
+      '#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:72px;height:72px;box-shadow:0 22px 40px rgba(23,21,16,.28),inset -9px -12px 14px rgba(0,0,0,.22),inset 7px 9px 10px rgba(255,255,255,.36)}' +
+      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:22px;top:15px;width:28px;height:34px}' +
+      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{left:30px;top:25px;width:11px;height:15px}' +
+      '#lyne-widget.lyne-return-mode #lyne-panel{right:auto;left:50%;bottom:90px;transform:translate(-50%,12px) scale(.96);width:min(520px,92vw);padding:16px 18px;border-radius:28px;box-shadow:0 30px 72px rgba(15,23,42,.24),inset 0 1px 0 rgba(255,255,255,.84)}' +
+      '#lyne-widget.lyne-return-mode #lyne-panel.open{transform:translate(-50%,0) scale(1)}' +
+      '#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1.18rem}' +
+      '#lyne-widget.lyne-return-mode #lyne-meta{font-size:.8rem;color:#27547a}' +
+      '#lyne-widget.lyne-return-mode #lyne-chat{min-height:82px;max-height:180px;padding:16px 18px;font-size:.96rem;line-height:1.55;border-radius:22px}' +
+      '#lyne-widget.lyne-return-mode .lyne-compose{display:none}' +
+      '#lyne-widget.lyne-return-mode .lyne-panel-actions{display:none}' +
+      '@media (max-width:760px){#lyne-widget{transform:scale(.82);transform-origin:100% 100%}#lyne-hint{right:52px;bottom:6px;max-width:170px;padding:9px 10px 8px;font-size:9px;border-radius:14px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:10px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:44px;height:44px}#lyne-orb-toggle .flame-core{left:13px;top:9px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:18px;top:15px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:5px}#lyne-panel{bottom:52px;width:min(252px,76vw);padding:9px;border-radius:18px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.9rem}.lyne-panel-actions{gap:5px;margin-top:8px}.lyne-mini-btn{padding:7px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:9px 10px;min-height:38px;max-height:86px;font-size:.68rem}#lyne-meta{font-size:.64rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:36px;height:36px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:22px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:13px;width:23px;height:28px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{left:24px;top:21px;width:9px;height:12px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
@@ -540,6 +553,9 @@
     var lastOrbTapAt = 0
     var onboardingRetryToken = ''
     var onboardingRetryCount = 0
+    var returnPromptActive = false
+    var returnPromptState = null
+    var returnPromptSpoken = false
 
     function setHintContent(text, actions) {
       var html =
@@ -565,6 +581,52 @@
 
     function setDefaultHint() {
       setHintContent('Hey, need help? Ask me.')
+    }
+
+    function isLibraryPage() {
+      var path = currentPath()
+      return (
+        path === '/study-library' ||
+        path === '/geography-library' ||
+        path === '/grade-10-math' ||
+        path === '/math/index'
+      )
+    }
+
+    function showReturnPrompt(detail) {
+      if (!isLibraryPage()) return
+      var firstShow = !returnPromptActive
+      if (!returnPromptActive) {
+        returnPromptState = {
+          panelOpen: panel.classList.contains('open'),
+          meta: meta.textContent,
+          chat: chat.textContent,
+        }
+      }
+      returnPromptActive = true
+      widget.classList.add('lyne-return-mode')
+      setPanelOpen(true)
+      meta.textContent = 'Focus reminder active.'
+      chat.textContent = 'LYNE: Please return to library.'
+      returnPromptSpoken = false
+      if (firstShow && !document.hidden) {
+        lastAssistantText = 'Please return to library.'
+        returnPromptSpoken = true
+        speak('Please return to library.').catch(function () {})
+      }
+    }
+
+    function clearReturnPrompt() {
+      if (!returnPromptActive) return
+      returnPromptActive = false
+      widget.classList.remove('lyne-return-mode')
+      if (returnPromptState) {
+        setPanelOpen(!!returnPromptState.panelOpen)
+        meta.textContent = returnPromptState.meta || 'Idle.'
+        chat.textContent = returnPromptState.chat || DEFAULT_CHAT
+      }
+      returnPromptState = null
+      returnPromptSpoken = false
     }
 
     function setPanelOpen(next) {
@@ -1244,6 +1306,7 @@
 
     function beginDrag(startEvent) {
       if (startEvent.button != null && startEvent.button !== 0) return
+      if (returnPromptActive) return
       var startX = startEvent.clientX
       var startY = startEvent.clientY
       var rect = widget.getBoundingClientRect()
@@ -1274,6 +1337,10 @@
     orbToggle.addEventListener('pointerdown', beginDrag)
     dragHandle.addEventListener('pointerdown', beginDrag)
     orbToggle.addEventListener('click', function () {
+      if (returnPromptActive) {
+        clearReturnPrompt()
+        return
+      }
       if (didDrag) {
         didDrag = false
         return
@@ -1294,10 +1361,12 @@
       }
     })
     panelClose.addEventListener('click', function () {
+      clearReturnPrompt()
       setPanelOpen(false)
       playUiSound('tap')
     })
     hint.addEventListener('click', function (event) {
+      clearReturnPrompt()
       var actionId = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-action') : ''
       var dismissHint = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-dismiss') : ''
       if (dismissHint != null) {
@@ -1337,6 +1406,7 @@
     })
 
     startBtn.addEventListener('click', function () {
+      clearReturnPrompt()
       if (!canListen) {
         meta.textContent = 'Voice not supported in this browser.'
         return
@@ -1349,6 +1419,7 @@
     })
 
     tutorialBtn.addEventListener('click', function () {
+      clearReturnPrompt()
       clearGuide()
       setOnboardingDismissed(false)
       setPanelOpen(true)
@@ -1357,6 +1428,7 @@
     })
 
     stopBtn.addEventListener('click', function () {
+      clearReturnPrompt()
       active = false
       setOnboardingVoiceEnabled(false)
       captureText = ''
@@ -1376,6 +1448,7 @@
     })
 
     function submitManualPrompt() {
+      clearReturnPrompt()
       var value = String(input.value || '').trim()
       if (!value) return
       input.value = ''
@@ -1394,8 +1467,24 @@
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && panel.classList.contains('open')) {
+        clearReturnPrompt()
         setPanelOpen(false)
       }
+    })
+
+    document.addEventListener('visibilitychange', function () {
+      if (!returnPromptActive || returnPromptSpoken || document.hidden) return
+      lastAssistantText = 'Please return to library.'
+      returnPromptSpoken = true
+      speak('Please return to library.').catch(function () {})
+    })
+
+    document.addEventListener('sc:lyne-return-prompt', function (event) {
+      showReturnPrompt(event && event.detail ? event.detail : null)
+    })
+
+    document.addEventListener('sc:lyne-return-clear', function () {
+      clearReturnPrompt()
     })
 
     if (canListen) {

@@ -47,11 +47,11 @@
 
     var style = document.createElement("style");
     style.textContent = [
-    ".lib-anno-toolbar{position:fixed;right:12px;bottom:12px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 9px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.14));backdrop-filter:blur(18px) saturate(145%);border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 36px rgba(12,18,14,.18),inset 0 1px 0 rgba(255,255,255,.42)}",
-    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.24);color:#102019;border-radius:999px;padding:7px 10px;font:800 11px/1 Manrope,system-ui,sans-serif;cursor:pointer;transition:transform .16s ease,background .16s ease,border-color .16s ease,box-shadow .16s ease;backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.34)}",
-    ".lib-anno-toolbar .lib-anno-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.34)}",
+    ".lib-anno-toolbar{position:fixed;right:12px;bottom:12px;z-index:2147483646;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 9px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(245,242,236,.28));backdrop-filter:blur(18px) saturate(145%);border:1px solid rgba(255,255,255,.42);box-shadow:0 18px 36px rgba(12,18,14,.18),inset 0 1px 0 rgba(255,255,255,.52)}",
+    ".lib-anno-toolbar .lib-anno-btn,.lib-anno-toolbar input{border:1px solid rgba(255,255,255,.38);background:rgba(255,255,255,.42);color:#0b1712;border-radius:999px;padding:7px 10px;font:800 11px/1 Manrope,system-ui,sans-serif;cursor:pointer;transition:transform .16s ease,background .16s ease,border-color .16s ease,box-shadow .16s ease;backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.38)}",
+    ".lib-anno-toolbar .lib-anno-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.54)}",
     ".lib-anno-toolbar .lib-anno-btn.active{background:linear-gradient(180deg,rgba(23,82,58,.92),rgba(18,63,45,.88));border-color:rgba(23,82,58,.72);color:#fff}",
-    ".lib-anno-toolbar .lib-anno-scope{color:rgba(255,255,255,.88);font:800 10px/1 Manrope,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;max-width:92px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 3px;opacity:.95}",
+    ".lib-anno-toolbar .lib-anno-scope{color:#20372d;font:800 10px/1 Manrope,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;max-width:92px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 3px;opacity:1;text-shadow:0 1px 0 rgba(255,255,255,.28)}",
     ".lib-anno-color-row{display:flex;align-items:center;gap:4px}",
     ".lib-anno-swatch{width:14px;height:14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.3)}",
     ".lib-anno-swatch.active{outline:2px solid #fff;outline-offset:1px}",

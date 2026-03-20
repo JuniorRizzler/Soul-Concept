@@ -25,42 +25,50 @@
     return getPageName() !== 'offline.html'
   }
 
+  function isStartupBlocking() {
+    var overlay = document.querySelector('[data-startup-overlay]')
+    if (!overlay) return false
+    if (document.body && document.body.classList.contains('startup-ready')) return false
+    return !overlay.classList.contains('is-leaving')
+  }
+
   function injectStyles() {
     if (document.getElementById('sc-focus-mode-styles')) return
     var style = document.createElement('style')
     style.id = 'sc-focus-mode-styles'
     style.textContent =
-      '.focus-mode-dock{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(298px,82vw)}' +
+      '.focus-mode-dock{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(268px,78vw)}' +
       '.focus-mode-shell{display:grid;gap:8px}' +
-      '.focus-mode-bar{display:grid;gap:8px;padding:11px;border-radius:26px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
-      '.focus-mode-topline{display:flex;align-items:center;gap:10px}' +
-      '.focus-mode-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}' +
-      '.focus-mode-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.26);color:rgba(15,29,23,.74);font:800 .64rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
+      '.focus-mode-bar{display:grid;gap:7px;padding:9px 10px;border-radius:22px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
+      '.focus-mode-topline{display:flex;align-items:center;gap:8px}' +
+      '.focus-mode-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}' +
+      '.focus-mode-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.26);color:rgba(15,29,23,.74);font:800 .61rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
       '.focus-mode-chip.is-on{background:rgba(34,161,93,.12);color:#175739;border-color:rgba(34,161,93,.24)}' +
       '.focus-mode-chip.is-alert{background:rgba(209,154,45,.14);color:#8a5a09;border-color:rgba(209,154,45,.24)}' +
-      '.focus-mode-indicator{width:11px;height:11px;border-radius:999px;background:#c63b32;box-shadow:0 0 0 5px rgba(198,59,50,.12),0 0 18px rgba(198,59,50,.22)}' +
-      '.focus-mode-indicator.is-on{background:#22a15d;box-shadow:0 0 0 5px rgba(34,161,93,.12),0 0 18px rgba(34,161,93,.24)}' +
-      '.focus-mode-indicator.is-alert{background:#d19a2d;box-shadow:0 0 0 5px rgba(209,154,45,.14),0 0 18px rgba(209,154,45,.24)}' +
+      '.focus-mode-indicator{width:10px;height:10px;border-radius:999px;background:#c63b32;box-shadow:0 0 0 4px rgba(198,59,50,.12),0 0 16px rgba(198,59,50,.22)}' +
+      '.focus-mode-indicator.is-on{background:#22a15d;box-shadow:0 0 0 4px rgba(34,161,93,.12),0 0 16px rgba(34,161,93,.24)}' +
+      '.focus-mode-indicator.is-alert{background:#d19a2d;box-shadow:0 0 0 4px rgba(209,154,45,.14),0 0 16px rgba(209,154,45,.24)}' +
       '.focus-mode-summary{min-width:0;display:grid;gap:1px;flex:1}' +
-      '.focus-mode-title{color:#112019;font:800 .68rem/1.1 Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}' +
-      '.focus-mode-status{color:rgba(17,32,25,.62);font:600 .74rem/1.22 Manrope,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.42);background:rgba(255,255,255,.24);color:#0f1d17;font:800 .7rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:34px;backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.34)}' +
+      '.focus-mode-title{color:#112019;font:800 .64rem/1.1 Manrope,system-ui,sans-serif;letter-spacing:.11em;text-transform:uppercase}' +
+      '.focus-mode-status{color:rgba(17,32,25,.62);font:600 .69rem/1.2 Manrope,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.42);background:rgba(255,255,255,.24);color:#0f1d17;font:800 .65rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:31px;backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.34)}' +
       '.focus-mode-toggle.is-on{background:linear-gradient(180deg,rgba(23,82,58,.92),rgba(18,63,45,.88));color:#fff;border-color:rgba(23,82,58,.72)}' +
       '.focus-mode-icon.is-active{background:rgba(17,27,22,.86);color:#fff;border-color:rgba(17,27,22,.72)}' +
       '.focus-mode-shell.is-collapsed .focus-mode-note{display:none}' +
-      '.focus-mode-note{margin:0;padding:11px 12px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 34px rgba(18,24,20,.1),inset 0 1px 0 rgba(255,255,255,.35);color:rgba(19,28,22,.78);font-size:.73rem;line-height:1.5;backdrop-filter:blur(18px) saturate(140%)}' +
-      '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.76rem;letter-spacing:.04em;text-transform:uppercase}' +
-      '.focus-mode-meta{display:block;margin-top:7px;color:#215c4b;font-size:.68rem;font-weight:800;letter-spacing:.01em}' +
-      '.focus-mode-alert{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:10031;max-width:min(320px,84vw);padding:14px 16px;border-radius:18px;background:rgba(17,20,24,.94);color:#fff;box-shadow:0 20px 46px rgba(8,10,14,.28);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .22s ease,transform .22s ease}' +
+      '.focus-mode-note{margin:0;padding:10px 11px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 34px rgba(18,24,20,.1),inset 0 1px 0 rgba(255,255,255,.35);color:rgba(19,28,22,.78);font-size:.69rem;line-height:1.45;backdrop-filter:blur(18px) saturate(140%)}' +
+      '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}' +
+      '.focus-mode-meta{display:block;margin-top:6px;color:#215c4b;font-size:.64rem;font-weight:800;letter-spacing:.01em}' +
+      '.focus-mode-alert{position:fixed;right:max(12px,env(safe-area-inset-right));top:calc(max(12px,env(safe-area-inset-top)) + 72px);z-index:10031;max-width:min(248px,74vw);padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,rgba(18,21,25,.94),rgba(25,29,34,.9));color:#fff;box-shadow:0 16px 32px rgba(8,10,14,.22);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .22s ease,transform .22s ease;backdrop-filter:blur(14px) saturate(140%)}' +
       '.focus-mode-alert.show{opacity:1;transform:translateY(0)}' +
-      '.focus-mode-alert strong{display:block;margin-bottom:5px;font-size:.95rem}' +
-      '.focus-mode-alert p{margin:0;color:rgba(255,255,255,.82);font-size:.84rem;line-height:1.45}' +
+      '.focus-mode-alert strong{display:block;margin-bottom:4px;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}' +
+      '.focus-mode-alert p{margin:0;color:rgba(255,255,255,.82);font-size:.72rem;line-height:1.38}' +
       '.focus-mode-alert.is-strong{background:linear-gradient(135deg,rgba(27,27,31,.96),rgba(145,52,29,.94))}' +
+      'body.startup-active .focus-mode-dock,body.startup-active .focus-mode-alert{opacity:0;pointer-events:none}' +
       '.focus-mode-video{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px}' +
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:min(258px,calc(100vw - 20px))}.focus-mode-bar{gap:7px;padding:9px}.focus-mode-title{font-size:.64rem}.focus-mode-status{font-size:.66rem}.focus-mode-chip{font-size:.6rem;padding:5px 8px}.focus-mode-actions{gap:6px}.focus-mode-toggle,.focus-mode-icon{min-height:31px;padding:7px 10px;font-size:.66rem}.focus-mode-note{font-size:.7rem;padding:9px 10px}.focus-mode-alert{left:10px;right:10px;top:calc(max(10px,env(safe-area-inset-top)) + 58px);max-width:none}}'
+      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(10px,env(safe-area-inset-top));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-alert{right:10px;left:auto;top:calc(max(10px,env(safe-area-inset-top)) + 56px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}}'
     document.head.appendChild(style)
   }
 
@@ -242,6 +250,7 @@
   function showAlert(level) {
     var alert = document.querySelector('[data-focus-mode-alert]')
     if (!alert) return
+    if (isStartupBlocking()) return
     if (alertTimer) {
       window.clearTimeout(alertTimer)
       alertTimer = 0
@@ -262,6 +271,25 @@
       setIndicatorState(readFlag(FOCUS_ENABLED_KEY) ? 'on' : 'off')
       alertTimer = 0
     }, level > 1 ? 3200 : 2200)
+  }
+
+  function notifyLyneReturnPrompt(level, reason) {
+    try {
+      document.dispatchEvent(
+        new CustomEvent('sc:lyne-return-prompt', {
+          detail: {
+            level: level,
+            reason: String(reason || '').trim(),
+          },
+        })
+      )
+    } catch (_err) {}
+  }
+
+  function clearLyneReturnPrompt() {
+    try {
+      document.dispatchEvent(new CustomEvent('sc:lyne-return-clear'))
+    } catch (_err) {}
   }
 
   async function ensureMediapipe() {
@@ -423,6 +451,7 @@
     lastAttentiveAt = Date.now()
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera active. Checking attention...' }
+    clearLyneReturnPrompt()
     setStatusText(latestAttention.reason)
     setIndicatorState('on')
     playCue('start')
@@ -433,6 +462,7 @@
     running = false
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
+    clearLyneReturnPrompt()
     setStatusText(latestAttention.reason)
     setIndicatorState('off')
     playCue('stop')
@@ -453,6 +483,9 @@
   function evaluateAttention(result) {
     latestAttention = getAttentionState(result)
     if (latestAttention.attentive) {
+      if (warningLevel > 0) {
+        clearLyneReturnPrompt()
+      }
       lastAttentiveAt = Date.now()
       warningLevel = 0
       setIndicatorState('on')
@@ -469,10 +502,12 @@
     var awayFor = Date.now() - lastAttentiveAt
     if (awayFor >= ATTENTION_STRONG_MS && warningLevel < 2) {
       warningLevel = 2
+      notifyLyneReturnPrompt(2, latestAttention.reason)
       showAlert(2)
       setStatusText(latestAttention.reason + ' Strong focus reminder active.')
     } else if (awayFor >= ATTENTION_WARN_MS && warningLevel < 1) {
       warningLevel = 1
+      notifyLyneReturnPrompt(1, latestAttention.reason)
       showAlert(1)
       setStatusText(latestAttention.reason + ' Focus reminder active.')
     }
@@ -529,6 +564,7 @@
     document.addEventListener('visibilitychange', function () {
       if (!readFlag(FOCUS_ENABLED_KEY)) return
       if (document.hidden) {
+        notifyLyneReturnPrompt(1, 'Tab hidden.')
         showAlert(1)
         setStatusText('Tab hidden. Focus reminder active.')
       }
