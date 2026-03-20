@@ -30,6 +30,8 @@
   var attentiveFrameStreak = 0
   var awayFrameStreak = 0
   var previewOpen = false
+  var trackingArmed = false
+  var trackingArmStartedAt = 0
 
   function getPageName() {
     return (location.pathname.split('/').pop() || 'index.html').toLowerCase()
@@ -784,6 +786,8 @@
     lastAttentiveAt = Date.now()
     trackingGraceUntil = Date.now() + STARTUP_GRACE_MS
     hasFaceLock = false
+    trackingArmed = false
+    trackingArmStartedAt = 0
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera active. Checking attention...' }
     clearLyneReturnPrompt()
@@ -803,6 +807,8 @@
     attentionState = 'idle'
     attentiveFrameStreak = 0
     awayFrameStreak = 0
+    trackingArmed = false
+    trackingArmStartedAt = 0
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
     clearLyneReturnPrompt()
@@ -837,6 +843,8 @@
       attentionState +
       ' | Face lock: ' +
       (hasFaceLock ? 'yes' : 'no') +
+      ' | Armed: ' +
+      (trackingArmed ? 'yes' : 'no') +
       ' | Current: ' +
       latestAttention.reason
     )
@@ -875,6 +883,27 @@
         setStatusText('Face locked. Focus session active.')
       } else if (frameCounter % 24 === 0) {
         setStatusText('Align your face with the camera to begin focus tracking.')
+      }
+      return
+    }
+
+    if (!trackingArmed) {
+      if (latestAttention.attentive) {
+        if (!trackingArmStartedAt) trackingArmStartedAt = Date.now()
+        if (Date.now() - trackingArmStartedAt >= 3000) {
+          trackingArmed = true
+          lastAttentiveAt = Date.now()
+          warningLevel = 0
+          setIndicatorState('on')
+          setStatusText('Focus tracking armed.')
+        } else if (frameCounter % 24 === 0) {
+          setStatusText('Hold still for a moment to arm focus tracking...')
+        }
+      } else {
+        trackingArmStartedAt = 0
+        if (frameCounter % 24 === 0) {
+          setStatusText('Face lock found. Hold steady to arm tracking.')
+        }
       }
       return
     }
