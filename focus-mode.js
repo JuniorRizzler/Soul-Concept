@@ -6,6 +6,8 @@
   var ATTENTION_WARN_MS = 9000
   var ATTENTION_STRONG_MS = 22000
   var STARTUP_GRACE_MS = 8000
+  var ATTENTIVE_CONFIRM_FRAMES = 6
+  var AWAY_CONFIRM_FRAMES = 12
   var DEFAULT_SESSION_MS = 25 * 60 * 1000
   var lastAttentiveAt = 0
   var warningLevel = 0
@@ -24,6 +26,10 @@
   var focusSession = null
   var trackingGraceUntil = 0
   var hasFaceLock = false
+  var attentionState = 'idle'
+  var attentiveFrameStreak = 0
+  var awayFrameStreak = 0
+  var previewOpen = false
 
   function getPageName() {
     return (location.pathname.split('/').pop() || 'index.html').toLowerCase()
@@ -76,6 +82,10 @@
       '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}' +
       '.focus-mode-meta{display:block;margin-top:6px;color:#215c4b;font-size:.64rem;font-weight:800;letter-spacing:.01em}' +
       '.focus-mode-stats{display:block;margin-top:4px;color:rgba(17,32,25,.68);font-size:.62rem;font-weight:700;letter-spacing:.01em}' +
+      '.focus-mode-preview{display:none;margin-top:8px;border-radius:14px;overflow:hidden;border:1px solid rgba(17,27,22,.12);background:rgba(255,255,255,.72)}' +
+      '.focus-mode-preview.is-open{display:block}' +
+      '.focus-mode-preview video{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;transform:scaleX(-1);background:#0f172a}' +
+      '.focus-mode-debug{display:block;padding:8px 10px;color:#183227;font:700 .63rem/1.4 Manrope,system-ui,sans-serif}' +
       '.focus-mode-alert{position:fixed;right:max(14px,env(safe-area-inset-right));top:calc(max(88px,calc(env(safe-area-inset-top) + 72px)) + 72px);z-index:10031;max-width:min(248px,74vw);padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,rgba(18,21,25,.94),rgba(25,29,34,.9));color:#fff;box-shadow:0 16px 32px rgba(8,10,14,.22);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .22s ease,transform .22s ease;backdrop-filter:blur(14px) saturate(140%)}' +
       '.focus-mode-alert.show{opacity:1;transform:translateY(0)}' +
       '.focus-mode-alert strong{display:block;margin-bottom:4px;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}' +
@@ -86,7 +96,7 @@
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions,.focus-mode-session{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-timer{min-width:70px;font-size:.65rem;padding:6px 8px}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px}}'
+      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions,.focus-mode-session{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-timer{min-width:70px;font-size:.65rem;padding:6px 8px}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-debug{font-size:.6rem;padding:7px 8px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px}}'
     document.head.appendChild(style)
   }
 
@@ -145,13 +155,14 @@
         '<span class="focus-mode-chip" data-focus-mode-chip>Idle</span>' +
         '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Activate</button>' +
         '<button class="focus-mode-icon focus-mode-info" type="button" data-focus-mode-info aria-expanded="false" aria-controls="focus-mode-note">Info</button>' +
+        '<button class="focus-mode-icon" type="button" data-focus-mode-preview-toggle aria-expanded="false">Test</button>' +
         '</div>' +
         '<div class="focus-mode-session">' +
         '<span class="focus-mode-timer" data-focus-mode-timer>25:00</span>' +
         '</div>' +
         '<button class="focus-mode-icon focus-mode-collapse-side" type="button" data-focus-mode-collapse aria-label="Collapse focus mode" title="Collapse focus mode" aria-expanded="true">&lsaquo;</button>' +
         '</div>' +
-        '<p class="focus-mode-note" id="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span><span class="focus-mode-stats" data-focus-mode-stats>No active session.</span></p>' +
+        '<p class="focus-mode-note" id="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span><span class="focus-mode-stats" data-focus-mode-stats>No active session.</span><span class="focus-mode-preview" data-focus-mode-preview><video data-focus-mode-preview-video playsinline muted></video><span class="focus-mode-debug" data-focus-mode-debug>Camera preview off.</span></span></p>' +
         '</div>'
       document.body.appendChild(dock)
     }
@@ -210,6 +221,7 @@
     button.setAttribute('aria-label', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
     button.setAttribute('title', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
     button.classList.toggle('is-active', collapsed)
+    syncPreview()
   }
 
   function setStatsText(text) {
@@ -222,6 +234,36 @@
     var timer = document.querySelector('[data-focus-mode-timer]')
     if (!timer) return
     timer.textContent = String(text || '25:00')
+  }
+
+  function setDebugText(text) {
+    var debug = document.querySelector('[data-focus-mode-debug]')
+    if (!debug) return
+    debug.textContent = String(text || '').trim()
+  }
+
+  function syncPreview() {
+    var shell = document.querySelector('[data-focus-mode-shell]')
+    var preview = document.querySelector('[data-focus-mode-preview]')
+    var toggle = document.querySelector('[data-focus-mode-preview-toggle]')
+    var previewVideo = document.querySelector('[data-focus-mode-preview-video]')
+    if (!preview || !toggle) return
+    var open = !!previewOpen && shell && !shell.classList.contains('is-collapsed')
+    preview.classList.toggle('is-open', open)
+    toggle.classList.toggle('is-active', open)
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
+    if (previewVideo) {
+      previewVideo.srcObject = open && videoEl && streamRef ? streamRef : null
+      if (open && previewVideo.srcObject) {
+        previewVideo.muted = true
+        var playResult = previewVideo.play()
+        if (playResult && typeof playResult.catch === 'function') {
+          playResult.catch(function () {})
+        }
+      } else {
+        try { previewVideo.pause() } catch (_err) {}
+      }
+    }
   }
 
   function formatClock(ms) {
@@ -374,6 +416,7 @@
     button.textContent = next ? 'Hide' : 'Info'
     button.setAttribute('aria-expanded', next ? 'true' : 'false')
     button.classList.toggle('is-active', next)
+    syncPreview()
   }
 
   function shouldPlaySound() {
@@ -579,6 +622,7 @@
     streamRef = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
     videoEl.srcObject = streamRef
     await videoEl.play()
+    syncPreview()
     return videoEl
   }
 
@@ -756,6 +800,9 @@
     lastFrameAt = 0
     trackingGraceUntil = 0
     hasFaceLock = false
+    attentionState = 'idle'
+    attentiveFrameStreak = 0
+    awayFrameStreak = 0
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
     clearLyneReturnPrompt()
@@ -775,6 +822,8 @@
       faceLandmarker.close()
       faceLandmarker = null
     }
+    syncPreview()
+    setDebugText('Camera preview off.')
   }
 
   function evaluateAttention(result) {
@@ -783,10 +832,21 @@
     var frameDelta = lastFrameAt ? Math.max(0, Math.min(1500, now - lastFrameAt)) : 0
     lastFrameAt = now
     latestAttention = getAttentionState(result)
+    setDebugText(
+      'State: ' +
+      attentionState +
+      ' | Face lock: ' +
+      (hasFaceLock ? 'yes' : 'no') +
+      ' | Current: ' +
+      latestAttention.reason
+    )
 
     if (Date.now() < trackingGraceUntil) {
       if (latestAttention.attentive) {
         hasFaceLock = true
+        attentionState = 'attentive'
+        attentiveFrameStreak = ATTENTIVE_CONFIRM_FRAMES
+        awayFrameStreak = 0
         lastAttentiveAt = Date.now()
         if (session.active && !session.completed) {
           session.lastAttentionState = 'attentive'
@@ -803,6 +863,9 @@
     if (!hasFaceLock) {
       if (latestAttention.attentive) {
         hasFaceLock = true
+        attentionState = 'attentive'
+        attentiveFrameStreak = ATTENTIVE_CONFIRM_FRAMES
+        awayFrameStreak = 0
         lastAttentiveAt = Date.now()
         if (session.active && !session.completed) {
           session.lastAttentionState = 'attentive'
@@ -817,16 +880,27 @@
     }
 
     if (latestAttention.attentive) {
+      attentiveFrameStreak += 1
+      awayFrameStreak = 0
+      if (attentionState !== 'attentive' && attentiveFrameStreak >= ATTENTIVE_CONFIRM_FRAMES) {
+        attentionState = 'attentive'
+        lastAttentiveAt = Date.now()
+        if (session.active && !session.completed) {
+          session.lastAttentionState = 'attentive'
+          persistSession()
+        }
+      }
       if (session.active && !session.completed) {
         session.focusedMs += frameDelta
-        session.lastAttentionState = 'attentive'
         persistSession()
       }
       if (warningLevel > 0) {
         clearLyneReturnPrompt()
         setStatusText('Focus recovered. Session active.')
       }
-      lastAttentiveAt = Date.now()
+      if (attentionState === 'attentive') {
+        lastAttentiveAt = Date.now()
+      }
       warningLevel = 0
       setIndicatorState('on')
       if (frameCounter % 24 === 0) {
@@ -835,11 +909,18 @@
       return
     }
 
+    attentiveFrameStreak = 0
+    awayFrameStreak += 1
+
     if (frameCounter % 24 === 0) {
       setStatusText(latestAttention.reason)
     }
 
-    if (session.active && !session.completed && session.lastAttentionState === 'attentive') {
+    if (attentionState !== 'away' && awayFrameStreak >= AWAY_CONFIRM_FRAMES) {
+      attentionState = 'away'
+    }
+
+    if (attentionState === 'away' && session.active && !session.completed && session.lastAttentionState === 'attentive') {
       session.breakCount += 1
       session.lastAttentionState = 'away'
       persistSession()
@@ -883,12 +964,14 @@
     var toggle = ui.dock.querySelector('[data-focus-mode-toggle]')
     var collapseButton = ui.dock.querySelector('[data-focus-mode-collapse]')
     var infoButton = ui.dock.querySelector('[data-focus-mode-info]')
+    var previewButton = ui.dock.querySelector('[data-focus-mode-preview-toggle]')
     if (!toggle || toggle.getAttribute('data-bound') === '1') return
     toggle.setAttribute('data-bound', '1')
 
     setToggleState(readFlag(FOCUS_ENABLED_KEY))
     ensureSessionState()
     setInfoOpenState(false)
+    syncPreview()
     if (readFlag(FOCUS_DISMISSED_KEY)) {
       setCollapsedState(true)
     } else {
@@ -929,6 +1012,16 @@
         if (!shell) return
         var next = !shell.classList.contains('is-info-open')
         setInfoOpenState(next)
+      })
+    }
+
+    if (previewButton) {
+      previewButton.addEventListener('click', function () {
+        previewOpen = !previewOpen
+        if (previewOpen) {
+          setInfoOpenState(true)
+        }
+        syncPreview()
       })
     }
 
