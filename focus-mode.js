@@ -2,20 +2,28 @@
   var FOCUS_ENABLED_KEY = 'sc_focus_mode_enabled_v1'
   var FOCUS_DISMISSED_KEY = 'sc_focus_mode_dismissed_v1'
   var APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
-  var ATTENTION_WARN_MS = 5000
-  var ATTENTION_STRONG_MS = 14000
+  var FOCUS_SESSION_KEY = 'sc_focus_mode_session_v1'
+  var ATTENTION_WARN_MS = 9000
+  var ATTENTION_STRONG_MS = 22000
+  var STARTUP_GRACE_MS = 8000
+  var DEFAULT_SESSION_MS = 25 * 60 * 1000
   var lastAttentiveAt = 0
   var warningLevel = 0
   var faceLandmarker = null
   var running = false
   var lastVideoTime = -1
+  var lastFrameAt = 0
   var videoEl = null
   var streamRef = null
   var frameCounter = 0
   var alertTimer = 0
+  var sessionTimer = 0
   var audioCtx = null
   var audioUnlocked = false
   var latestAttention = { attentive: true, reason: 'Focus Mode is ready.' }
+  var focusSession = null
+  var trackingGraceUntil = 0
+  var hasFaceLock = false
 
   function getPageName() {
     return (location.pathname.split('/').pop() || 'index.html').toLowerCase()
@@ -42,9 +50,12 @@
       '.focus-mode-bar{position:relative;display:grid;gap:7px;padding:9px 34px 9px 10px;border-radius:22px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
       '.focus-mode-topline{display:flex;align-items:center;gap:8px}' +
       '.focus-mode-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}' +
+      '.focus-mode-session{display:flex;align-items:center;gap:6px;flex-wrap:wrap}' +
       '.focus-mode-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.26);color:rgba(15,29,23,.74);font:800 .61rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
       '.focus-mode-chip.is-on{background:rgba(34,161,93,.12);color:#175739;border-color:rgba(34,161,93,.24)}' +
       '.focus-mode-chip.is-alert{background:rgba(209,154,45,.14);color:#8a5a09;border-color:rgba(209,154,45,.24)}' +
+      '.focus-mode-chip.is-complete{background:rgba(41,121,255,.12);color:#184a9d;border-color:rgba(41,121,255,.2)}' +
+      '.focus-mode-timer{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;background:rgba(17,27,22,.84);color:#fff;border:1px solid rgba(17,27,22,.72);font:900 .7rem/1 Manrope,system-ui,sans-serif;letter-spacing:.06em;min-width:78px}' +
       '.focus-mode-indicator{width:10px;height:10px;border-radius:999px;background:#c63b32;box-shadow:0 0 0 4px rgba(198,59,50,.12),0 0 16px rgba(198,59,50,.22)}' +
       '.focus-mode-indicator.is-on{background:#22a15d;box-shadow:0 0 0 4px rgba(34,161,93,.12),0 0 16px rgba(34,161,93,.24)}' +
       '.focus-mode-indicator.is-alert{background:#d19a2d;box-shadow:0 0 0 4px rgba(209,154,45,.14),0 0 16px rgba(209,154,45,.24)}' +
@@ -56,7 +67,7 @@
       '.focus-mode-icon.is-active{background:rgba(17,27,22,.86);color:#fff;border-color:rgba(17,27,22,.72)}' +
       '.focus-mode-collapse-side{position:absolute;top:8px;right:8px;padding:0;width:22px;min-width:22px;min-height:22px;height:22px;border-radius:999px;font-size:.82rem;line-height:1;background:rgba(17,27,22,.74);color:#fff;border:1px solid rgba(17,27,22,.38)}' +
       '.focus-mode-shell:not(.is-info-open) .focus-mode-note{display:none}' +
-      '.focus-mode-shell.is-collapsed .focus-mode-note,.focus-mode-shell.is-collapsed .focus-mode-summary,.focus-mode-shell.is-collapsed .focus-mode-chip,.focus-mode-shell.is-collapsed .focus-mode-toggle,.focus-mode-shell.is-collapsed .focus-mode-info{display:none}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-note,.focus-mode-shell.is-collapsed .focus-mode-summary,.focus-mode-shell.is-collapsed .focus-mode-chip,.focus-mode-shell.is-collapsed .focus-mode-toggle,.focus-mode-shell.is-collapsed .focus-mode-info,.focus-mode-shell.is-collapsed .focus-mode-timer,.focus-mode-shell.is-collapsed .focus-mode-session{display:none}' +
       '.focus-mode-shell.is-collapsed .focus-mode-bar{width:36px;min-height:92px;padding:8px 6px;border-radius:16px;gap:10px;justify-items:center;align-content:space-between;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(239,247,243,.22));box-shadow:0 14px 28px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45)}' +
       '.focus-mode-shell.is-collapsed .focus-mode-topline{justify-content:center}' +
       '.focus-mode-shell.is-collapsed .focus-mode-actions{width:100%;justify-content:center}' +
@@ -64,6 +75,7 @@
       '.focus-mode-note{margin:0;padding:10px 11px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 34px rgba(18,24,20,.1),inset 0 1px 0 rgba(255,255,255,.35);color:rgba(19,28,22,.78);font-size:.69rem;line-height:1.45;backdrop-filter:blur(18px) saturate(140%)}' +
       '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}' +
       '.focus-mode-meta{display:block;margin-top:6px;color:#215c4b;font-size:.64rem;font-weight:800;letter-spacing:.01em}' +
+      '.focus-mode-stats{display:block;margin-top:4px;color:rgba(17,32,25,.68);font-size:.62rem;font-weight:700;letter-spacing:.01em}' +
       '.focus-mode-alert{position:fixed;right:max(14px,env(safe-area-inset-right));top:calc(max(88px,calc(env(safe-area-inset-top) + 72px)) + 72px);z-index:10031;max-width:min(248px,74vw);padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,rgba(18,21,25,.94),rgba(25,29,34,.9));color:#fff;box-shadow:0 16px 32px rgba(8,10,14,.22);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .22s ease,transform .22s ease;backdrop-filter:blur(14px) saturate(140%)}' +
       '.focus-mode-alert.show{opacity:1;transform:translateY(0)}' +
       '.focus-mode-alert strong{display:block;margin-bottom:4px;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}' +
@@ -74,7 +86,7 @@
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px}}'
+      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions,.focus-mode-session{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-timer{min-width:70px;font-size:.65rem;padding:6px 8px}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px}}'
     document.head.appendChild(style)
   }
 
@@ -89,6 +101,21 @@
   function writeFlag(key, value) {
     try {
       localStorage.setItem(key, value ? '1' : '0')
+    } catch (_err) {}
+  }
+
+  function readJson(key, fallback) {
+    try {
+      var raw = localStorage.getItem(key)
+      return raw ? JSON.parse(raw) : fallback
+    } catch (_err) {
+      return fallback
+    }
+  }
+
+  function writeJson(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value))
     } catch (_err) {}
   }
 
@@ -119,9 +146,12 @@
         '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Activate</button>' +
         '<button class="focus-mode-icon focus-mode-info" type="button" data-focus-mode-info aria-expanded="false" aria-controls="focus-mode-note">Info</button>' +
         '</div>' +
+        '<div class="focus-mode-session">' +
+        '<span class="focus-mode-timer" data-focus-mode-timer>25:00</span>' +
+        '</div>' +
         '<button class="focus-mode-icon focus-mode-collapse-side" type="button" data-focus-mode-collapse aria-label="Collapse focus mode" title="Collapse focus mode" aria-expanded="true">&lsaquo;</button>' +
         '</div>' +
-        '<p class="focus-mode-note" id="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span></p>' +
+        '<p class="focus-mode-note" id="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span><span class="focus-mode-stats" data-focus-mode-stats>No active session.</span></p>' +
         '</div>'
       document.body.appendChild(dock)
     }
@@ -156,7 +186,8 @@
     if (chip) {
       chip.classList.toggle('is-on', mode === 'on')
       chip.classList.toggle('is-alert', mode === 'alert')
-      chip.textContent = mode === 'alert' ? 'Alert' : mode === 'on' ? 'Tracking' : 'Idle'
+      chip.classList.toggle('is-complete', mode === 'complete')
+      chip.textContent = mode === 'complete' ? 'Complete' : mode === 'alert' ? 'Alert' : mode === 'on' ? 'Tracking' : 'Idle'
     }
   }
 
@@ -179,6 +210,148 @@
     button.setAttribute('aria-label', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
     button.setAttribute('title', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
     button.classList.toggle('is-active', collapsed)
+  }
+
+  function setStatsText(text) {
+    var stats = document.querySelector('[data-focus-mode-stats]')
+    if (!stats) return
+    stats.textContent = String(text || '').trim()
+  }
+
+  function setTimerText(text) {
+    var timer = document.querySelector('[data-focus-mode-timer]')
+    if (!timer) return
+    timer.textContent = String(text || '25:00')
+  }
+
+  function formatClock(ms) {
+    var totalSeconds = Math.max(0, Math.ceil((Number(ms) || 0) / 1000))
+    var minutes = Math.floor(totalSeconds / 60)
+    var seconds = totalSeconds % 60
+    return String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0')
+  }
+
+  function formatMinutes(ms) {
+    var minutes = Math.max(0, Math.round((Number(ms) || 0) / 60000))
+    return minutes + 'm'
+  }
+
+  function createSession() {
+    return {
+      active: false,
+      targetMs: DEFAULT_SESSION_MS,
+      focusedMs: 0,
+      breakCount: 0,
+      warningCount: 0,
+      lastAttentionState: 'attentive',
+      completed: false,
+      page: getPageName(),
+      startedAt: 0,
+      endsAt: 0,
+      completedAt: 0,
+    }
+  }
+
+  function ensureSessionState() {
+    if (!focusSession) {
+      focusSession = readJson(FOCUS_SESSION_KEY, null) || createSession()
+    }
+    return focusSession
+  }
+
+  function persistSession() {
+    writeJson(FOCUS_SESSION_KEY, ensureSessionState())
+  }
+
+  function updateSessionUi() {
+    var session = ensureSessionState()
+    var remaining = session.active && session.endsAt ? Math.max(0, session.endsAt - Date.now()) : Math.max(0, session.targetMs - session.focusedMs)
+    setTimerText(formatClock(remaining))
+    if (session.completed) {
+      setStatsText('Completed ' + formatMinutes(session.focusedMs) + ' focused. Breaks: ' + session.breakCount + '.')
+      return
+    }
+    if (session.active) {
+      setStatsText('Focused ' + formatMinutes(session.focusedMs) + ' of ' + formatMinutes(session.targetMs) + '. Breaks: ' + session.breakCount + '.')
+      return
+    }
+    setStatsText('Ready for a ' + formatMinutes(session.targetMs) + ' session.')
+  }
+
+  function stopSessionTimer() {
+    if (sessionTimer) {
+      window.clearInterval(sessionTimer)
+      sessionTimer = 0
+    }
+  }
+
+  function startSessionTimer() {
+    stopSessionTimer()
+    sessionTimer = window.setInterval(function () {
+      var session = ensureSessionState()
+      if (session.active && session.endsAt && Date.now() >= session.endsAt) {
+        session.focusedMs = Math.min(session.targetMs, Math.max(session.focusedMs, session.targetMs))
+        persistSession()
+        completeSession()
+        return
+      }
+      updateSessionUi()
+    }, 1000)
+  }
+
+  function completeSession() {
+    var session = ensureSessionState()
+    session.active = false
+    session.completed = true
+    session.completedAt = Date.now()
+    persistSession()
+    stopSessionTimer()
+    writeFlag(FOCUS_ENABLED_KEY, false)
+    running = false
+    if (streamRef) {
+      streamRef.getTracks().forEach(function (track) { track.stop() })
+      streamRef = null
+    }
+    if (videoEl) {
+      videoEl.remove()
+      videoEl = null
+    }
+    if (faceLandmarker && typeof faceLandmarker.close === 'function') {
+      faceLandmarker.close()
+      faceLandmarker = null
+    }
+    setToggleState(false)
+    setIndicatorState('complete')
+    setStatsText('Session complete. Focused ' + formatMinutes(session.focusedMs) + '. Breaks: ' + session.breakCount + '.')
+    setStatusText('Session complete. Camera off.')
+    showAlert(2)
+  }
+
+  function startSession() {
+    focusSession = createSession()
+    var session = focusSession
+    session.active = true
+    session.completed = false
+    session.page = getPageName()
+    session.startedAt = Date.now()
+    session.endsAt = Date.now() + session.targetMs
+    session.lastAttentionState = 'attentive'
+    persistSession()
+    startSessionTimer()
+    updateSessionUi()
+  }
+
+  function stopSession(reset) {
+    var session = ensureSessionState()
+    session.active = false
+    if (reset) {
+      focusSession = createSession()
+      session = focusSession
+    }
+    session.endsAt = 0
+    persistSession()
+    stopSessionTimer()
+    updateSessionUi()
   }
 
   function setInfoOpenState(open) {
@@ -283,9 +456,10 @@
     var toggle = document.querySelector('[data-focus-mode-toggle]')
     if (!toggle) return
     toggle.classList.toggle('is-on', enabled)
-    toggle.textContent = enabled ? 'Active' : 'Activate'
+    toggle.textContent = enabled ? 'End' : 'Activate'
     setIndicatorState(enabled ? 'on' : 'off')
     setStatusText(enabled ? 'Camera starting...' : 'Camera off. Nothing is being tracked.')
+    updateSessionUi()
   }
 
   function showAlert(level) {
@@ -335,8 +509,45 @@
 
   async function ensureMediapipe() {
     if (window.FilesetResolver && window.FaceLandmarker) return true
-    if (document.querySelector('script[data-focus-mediapipe="1"]')) {
-      return false
+    var existing = document.querySelector('script[data-focus-mediapipe="1"]')
+    if (existing) {
+      return new Promise(function (resolve) {
+        if (window.FilesetResolver && window.FaceLandmarker) {
+          resolve(true)
+          return
+        }
+        if (existing.getAttribute('data-load-state') === 'error') {
+          resolve(false)
+          return
+        }
+        var settled = false
+        var timeout = window.setTimeout(function () {
+          if (settled) return
+          settled = true
+          cleanup()
+          resolve(!!(window.FilesetResolver && window.FaceLandmarker))
+        }, 12000)
+        function cleanup() {
+          window.clearTimeout(timeout)
+          existing.removeEventListener('load', onLoad)
+          existing.removeEventListener('error', onError)
+        }
+        function onLoad() {
+          if (settled) return
+          settled = true
+          cleanup()
+          resolve(!!(window.FilesetResolver && window.FaceLandmarker))
+        }
+        function onError() {
+          if (settled) return
+          settled = true
+          existing.setAttribute('data-load-state', 'error')
+          cleanup()
+          resolve(false)
+        }
+        existing.addEventListener('load', onLoad)
+        existing.addEventListener('error', onError)
+      })
     }
     return new Promise(function (resolve) {
       var script = document.createElement('script')
@@ -344,8 +555,15 @@
       script.async = true
       script.defer = true
       script.setAttribute('data-focus-mediapipe', '1')
-      script.onload = function () { resolve(true) }
-      script.onerror = function () { resolve(false) }
+      script.setAttribute('data-load-state', 'loading')
+      script.onload = function () {
+        script.setAttribute('data-load-state', 'ready')
+        resolve(!!(window.FilesetResolver && window.FaceLandmarker))
+      }
+      script.onerror = function () {
+        script.setAttribute('data-load-state', 'error')
+        resolve(false)
+      }
       document.head.appendChild(script)
     })
   }
@@ -450,13 +668,13 @@
     var rightEAR = eyeAspectRatio(landmarks, [362, 385, 387, 263, 373, 380])
     var eyeOpen = (leftEAR + rightEAR) / 2
 
-    if (yaw > 0.19) {
+    if (yaw > 0.3) {
       return { attentive: false, reason: 'Head turned away.' }
     }
-    if (pitch > 0.16) {
+    if (pitch > 0.24) {
       return { attentive: false, reason: 'Eyes off the screen.' }
     }
-    if (eyeOpen < 0.18) {
+    if (eyeOpen > 0 && eyeOpen < 0.12) {
       return { attentive: false, reason: 'Eyes not clearly on-screen.' }
     }
 
@@ -464,46 +682,84 @@
   }
 
   async function startTracking() {
-    if (running) return
+    if (running) return true
     if (!canUseCameraTracking()) {
       setStatusText('Camera tracking is not supported on this device.')
       showAlert(1)
-      return
+      return false
+    }
+    try {
+      await ensureVideo()
+      setStatusText('Camera active. Loading focus model...')
+    } catch (_errVideo) {
+      setStatusText('Camera permission failed or device camera is unavailable.')
+      showAlert(2)
+      return false
     }
     var loaded = await ensureMediapipe()
     if (!loaded || !(window.FilesetResolver && window.FaceLandmarker)) {
       setStatusText('Camera model failed to load.')
+      if (streamRef) {
+        streamRef.getTracks().forEach(function (track) { track.stop() })
+        streamRef = null
+      }
+      if (videoEl) {
+        videoEl.remove()
+        videoEl = null
+      }
       showAlert(2)
-      return
+      return false
     }
 
-    var vision = await window.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm')
-    faceLandmarker = await window.FaceLandmarker.createFromOptions(vision, {
-      baseOptions: {
-        modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
-      },
-      runningMode: 'VIDEO',
-      numFaces: 1
-    })
+    try {
+      var vision = await window.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm')
+      faceLandmarker = await window.FaceLandmarker.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
+        },
+        runningMode: 'VIDEO',
+        numFaces: 1
+      })
+    } catch (_err) {
+      setStatusText('Camera model could not initialize. Check connection and reload.')
+      if (streamRef) {
+        streamRef.getTracks().forEach(function (track) { track.stop() })
+        streamRef = null
+      }
+      if (videoEl) {
+        videoEl.remove()
+        videoEl = null
+      }
+      showAlert(2)
+      return false
+    }
 
-    await ensureVideo()
     running = true
     frameCounter = 0
+    lastFrameAt = performance.now()
     lastAttentiveAt = Date.now()
+    trackingGraceUntil = Date.now() + STARTUP_GRACE_MS
+    hasFaceLock = false
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera active. Checking attention...' }
     clearLyneReturnPrompt()
     setStatusText(latestAttention.reason)
     setIndicatorState('on')
     playCue('start')
+    startSession()
     requestAnimationFrame(trackFrame)
+    return true
   }
 
   function stopTracking() {
     running = false
+    lastFrameAt = 0
+    trackingGraceUntil = 0
+    hasFaceLock = false
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
     clearLyneReturnPrompt()
+    stopSession(false)
     setStatusText(latestAttention.reason)
     setIndicatorState('off')
     playCue('stop')
@@ -522,10 +778,53 @@
   }
 
   function evaluateAttention(result) {
+    var session = ensureSessionState()
+    var now = performance.now()
+    var frameDelta = lastFrameAt ? Math.max(0, Math.min(1500, now - lastFrameAt)) : 0
+    lastFrameAt = now
     latestAttention = getAttentionState(result)
+
+    if (Date.now() < trackingGraceUntil) {
+      if (latestAttention.attentive) {
+        hasFaceLock = true
+        lastAttentiveAt = Date.now()
+        if (session.active && !session.completed) {
+          session.lastAttentionState = 'attentive'
+          persistSession()
+        }
+        setIndicatorState('on')
+      }
+      if (frameCounter % 24 === 0) {
+        setStatusText('Camera active. Calibrating focus...')
+      }
+      return
+    }
+
+    if (!hasFaceLock) {
+      if (latestAttention.attentive) {
+        hasFaceLock = true
+        lastAttentiveAt = Date.now()
+        if (session.active && !session.completed) {
+          session.lastAttentionState = 'attentive'
+          persistSession()
+        }
+        setIndicatorState('on')
+        setStatusText('Face locked. Focus session active.')
+      } else if (frameCounter % 24 === 0) {
+        setStatusText('Align your face with the camera to begin focus tracking.')
+      }
+      return
+    }
+
     if (latestAttention.attentive) {
+      if (session.active && !session.completed) {
+        session.focusedMs += frameDelta
+        session.lastAttentionState = 'attentive'
+        persistSession()
+      }
       if (warningLevel > 0) {
         clearLyneReturnPrompt()
+        setStatusText('Focus recovered. Session active.')
       }
       lastAttentiveAt = Date.now()
       warningLevel = 0
@@ -540,14 +839,28 @@
       setStatusText(latestAttention.reason)
     }
 
+    if (session.active && !session.completed && session.lastAttentionState === 'attentive') {
+      session.breakCount += 1
+      session.lastAttentionState = 'away'
+      persistSession()
+    }
+
     var awayFor = Date.now() - lastAttentiveAt
     if (awayFor >= ATTENTION_STRONG_MS && warningLevel < 2) {
       warningLevel = 2
+      if (session.active && !session.completed) {
+        session.warningCount += 1
+        persistSession()
+      }
       notifyLyneReturnPrompt(2, latestAttention.reason)
       showAlert(2)
       setStatusText(latestAttention.reason + ' Strong focus reminder active.')
     } else if (awayFor >= ATTENTION_WARN_MS && warningLevel < 1) {
       warningLevel = 1
+      if (session.active && !session.completed) {
+        session.warningCount += 1
+        persistSession()
+      }
       notifyLyneReturnPrompt(1, latestAttention.reason)
       showAlert(1)
       setStatusText(latestAttention.reason + ' Focus reminder active.')
@@ -574,6 +887,7 @@
     toggle.setAttribute('data-bound', '1')
 
     setToggleState(readFlag(FOCUS_ENABLED_KEY))
+    ensureSessionState()
     setInfoOpenState(false)
     if (readFlag(FOCUS_DISMISSED_KEY)) {
       setCollapsedState(true)
@@ -588,11 +902,15 @@
       setToggleState(enabled)
       writeFlag(FOCUS_DISMISSED_KEY, true)
       setInfoOpenState(false)
-      setCollapsedState(true)
       if (enabled) {
-        await startTracking()
+        var started = await startTracking()
+        if (!started) {
+          writeFlag(FOCUS_ENABLED_KEY, false)
+          setToggleState(false)
+        }
       } else {
         stopTracking()
+        stopSession(true)
       }
     })
 
@@ -616,6 +934,7 @@
 
     document.addEventListener('visibilitychange', function () {
       if (!readFlag(FOCUS_ENABLED_KEY)) return
+      if (Date.now() < trackingGraceUntil || !hasFaceLock) return
       if (document.hidden) {
         notifyLyneReturnPrompt(1, 'Tab hidden.')
         showAlert(1)
@@ -629,6 +948,7 @@
         setStatusText('Camera access failed.')
       })
     }
+    updateSessionUi()
   }
 
   if (!shouldMount()) return
