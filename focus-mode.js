@@ -37,9 +37,9 @@
     var style = document.createElement('style')
     style.id = 'sc-focus-mode-styles'
     style.textContent =
-      '.focus-mode-dock{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(268px,78vw)}' +
-      '.focus-mode-shell{display:grid;gap:8px}' +
-      '.focus-mode-bar{display:grid;gap:7px;padding:9px 10px;border-radius:22px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
+      '.focus-mode-dock{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(268px,78vw);transition:width .22s ease}' +
+      '.focus-mode-shell{display:grid;gap:8px;justify-items:end}' +
+      '.focus-mode-bar{position:relative;display:grid;gap:7px;padding:9px 34px 9px 10px;border-radius:22px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
       '.focus-mode-topline{display:flex;align-items:center;gap:8px}' +
       '.focus-mode-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}' +
       '.focus-mode-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.26);color:rgba(15,29,23,.74);font:800 .61rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
@@ -54,7 +54,13 @@
       '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.42);background:rgba(255,255,255,.24);color:#0f1d17;font:800 .65rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:31px;backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.34)}' +
       '.focus-mode-toggle.is-on{background:linear-gradient(180deg,rgba(23,82,58,.92),rgba(18,63,45,.88));color:#fff;border-color:rgba(23,82,58,.72)}' +
       '.focus-mode-icon.is-active{background:rgba(17,27,22,.86);color:#fff;border-color:rgba(17,27,22,.72)}' +
-      '.focus-mode-shell.is-collapsed .focus-mode-note{display:none}' +
+      '.focus-mode-collapse-side{position:absolute;top:8px;right:8px;padding:0;width:22px;min-width:22px;min-height:22px;height:22px;border-radius:999px;font-size:.82rem;line-height:1;background:rgba(17,27,22,.74);color:#fff;border:1px solid rgba(17,27,22,.38)}' +
+      '.focus-mode-shell:not(.is-info-open) .focus-mode-note{display:none}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-note,.focus-mode-shell.is-collapsed .focus-mode-summary,.focus-mode-shell.is-collapsed .focus-mode-chip,.focus-mode-shell.is-collapsed .focus-mode-toggle,.focus-mode-shell.is-collapsed .focus-mode-info{display:none}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-bar{width:36px;min-height:92px;padding:8px 6px;border-radius:16px;gap:10px;justify-items:center;align-content:space-between;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(239,247,243,.22));box-shadow:0 14px 28px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45)}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-topline{justify-content:center}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-actions{width:100%;justify-content:center}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-collapse-side{position:static;padding:0;width:22px;min-width:22px;min-height:22px;height:22px;border-radius:999px;font-size:.82rem;line-height:1;background:rgba(17,27,22,.74);color:#fff;border-color:rgba(17,27,22,.38)}' +
       '.focus-mode-note{margin:0;padding:10px 11px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 34px rgba(18,24,20,.1),inset 0 1px 0 rgba(255,255,255,.35);color:rgba(19,28,22,.78);font-size:.69rem;line-height:1.45;backdrop-filter:blur(18px) saturate(140%)}' +
       '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}' +
       '.focus-mode-meta{display:block;margin-top:6px;color:#215c4b;font-size:.64rem;font-weight:800;letter-spacing:.01em}' +
@@ -68,7 +74,7 @@
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(10px,env(safe-area-inset-top));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-alert{right:10px;left:auto;top:calc(max(10px,env(safe-area-inset-top)) + 56px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}}'
+      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(10px,env(safe-area-inset-top));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-alert{right:10px;left:auto;top:calc(max(10px,env(safe-area-inset-top)) + 56px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px}}'
     document.head.appendChild(style)
   }
 
@@ -111,10 +117,11 @@
         '<div class="focus-mode-actions">' +
         '<span class="focus-mode-chip" data-focus-mode-chip>Idle</span>' +
         '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Activate</button>' +
-        '<button class="focus-mode-icon" type="button" data-focus-mode-collapse aria-label="Show focus mode details" title="Show focus mode details">Info</button>' +
+        '<button class="focus-mode-icon focus-mode-info" type="button" data-focus-mode-info aria-expanded="false" aria-controls="focus-mode-note">Info</button>' +
         '</div>' +
+        '<button class="focus-mode-icon focus-mode-collapse-side" type="button" data-focus-mode-collapse aria-label="Collapse focus mode" title="Collapse focus mode" aria-expanded="true">&lsaquo;</button>' +
         '</div>' +
-        '<p class="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span></p>' +
+        '<p class="focus-mode-note" id="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span></p>' +
         '</div>'
       document.body.appendChild(dock)
     }
@@ -158,8 +165,42 @@
     var button = document.querySelector('[data-focus-mode-collapse]')
     if (!shell || !button) return
     shell.classList.toggle('is-collapsed', collapsed)
-    button.textContent = collapsed ? 'Info' : 'Hide'
+    if (collapsed) {
+      shell.classList.remove('is-info-open')
+      var infoButton = document.querySelector('[data-focus-mode-info]')
+      if (infoButton) {
+        infoButton.textContent = 'Info'
+        infoButton.setAttribute('aria-expanded', 'false')
+        infoButton.classList.remove('is-active')
+      }
+    }
+    button.innerHTML = collapsed ? '&rsaquo;' : '&lsaquo;'
+    button.setAttribute('aria-expanded', collapsed ? 'false' : 'true')
+    button.setAttribute('aria-label', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
+    button.setAttribute('title', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
     button.classList.toggle('is-active', collapsed)
+  }
+
+  function setInfoOpenState(open) {
+    var shell = document.querySelector('[data-focus-mode-shell]')
+    var button = document.querySelector('[data-focus-mode-info]')
+    if (!shell || !button) return
+    var next = !!open
+    if (shell.classList.contains('is-collapsed') && next) {
+      shell.classList.remove('is-collapsed')
+      var collapseButton = document.querySelector('[data-focus-mode-collapse]')
+      if (collapseButton) {
+        collapseButton.innerHTML = '&lsaquo;'
+        collapseButton.setAttribute('aria-expanded', 'true')
+        collapseButton.setAttribute('aria-label', 'Collapse focus mode')
+        collapseButton.setAttribute('title', 'Collapse focus mode')
+        collapseButton.classList.remove('is-active')
+      }
+    }
+    shell.classList.toggle('is-info-open', next)
+    button.textContent = next ? 'Hide' : 'Info'
+    button.setAttribute('aria-expanded', next ? 'true' : 'false')
+    button.classList.toggle('is-active', next)
   }
 
   function shouldPlaySound() {
@@ -528,10 +569,12 @@
     var ui = ensureUi()
     var toggle = ui.dock.querySelector('[data-focus-mode-toggle]')
     var collapseButton = ui.dock.querySelector('[data-focus-mode-collapse]')
+    var infoButton = ui.dock.querySelector('[data-focus-mode-info]')
     if (!toggle || toggle.getAttribute('data-bound') === '1') return
     toggle.setAttribute('data-bound', '1')
 
     setToggleState(readFlag(FOCUS_ENABLED_KEY))
+    setInfoOpenState(false)
     if (readFlag(FOCUS_DISMISSED_KEY)) {
       setCollapsedState(true)
     } else {
@@ -544,6 +587,7 @@
       writeFlag(FOCUS_ENABLED_KEY, enabled)
       setToggleState(enabled)
       writeFlag(FOCUS_DISMISSED_KEY, true)
+      setInfoOpenState(false)
       setCollapsedState(true)
       if (enabled) {
         await startTracking()
@@ -558,6 +602,15 @@
         if (!shell) return
         var collapsed = !shell.classList.contains('is-collapsed')
         setCollapsedState(collapsed)
+      })
+    }
+
+    if (infoButton) {
+      infoButton.addEventListener('click', function () {
+        var shell = document.querySelector('[data-focus-mode-shell]')
+        if (!shell) return
+        var next = !shell.classList.contains('is-info-open')
+        setInfoOpenState(next)
       })
     }
 
