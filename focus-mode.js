@@ -1,7 +1,6 @@
 (function () {
   var FOCUS_ENABLED_KEY = 'sc_focus_mode_enabled_v1'
   var FOCUS_DISMISSED_KEY = 'sc_focus_mode_dismissed_v1'
-  var FOCUS_SOUND_KEY = 'sc_focus_mode_sound_v1'
   var APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
   var ATTENTION_WARN_MS = 5000
   var ATTENTION_STRONG_MS = 14000
@@ -104,7 +103,6 @@
         '<div class="focus-mode-actions">' +
         '<span class="focus-mode-chip" data-focus-mode-chip>Idle</span>' +
         '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Activate</button>' +
-        '<button class="focus-mode-icon is-active" type="button" data-focus-mode-sound aria-label="Toggle focus sounds" title="Toggle focus sounds">Bell</button>' +
         '<button class="focus-mode-icon" type="button" data-focus-mode-collapse aria-label="Show focus mode details" title="Show focus mode details">Info</button>' +
         '</div>' +
         '</div>' +
@@ -147,13 +145,6 @@
     }
   }
 
-  function setSoundState(enabled) {
-    var button = document.querySelector('[data-focus-mode-sound]')
-    if (!button) return
-    button.classList.toggle('is-active', enabled)
-    button.textContent = enabled ? 'Bell' : 'Mute'
-  }
-
   function setCollapsedState(collapsed) {
     var shell = document.querySelector('[data-focus-mode-shell]')
     var button = document.querySelector('[data-focus-mode-collapse]')
@@ -170,7 +161,7 @@
     if (readFlag(APP_SOUND_KEY) === false && hasStoredValue(APP_SOUND_KEY)) {
       return false
     }
-    return readFlag(FOCUS_SOUND_KEY)
+    return readFlag(APP_SOUND_KEY) || !hasStoredValue(APP_SOUND_KEY)
   }
 
   function unlockAudio() {
@@ -501,16 +492,11 @@
   function bindUi() {
     var ui = ensureUi()
     var toggle = ui.dock.querySelector('[data-focus-mode-toggle]')
-    var soundButton = ui.dock.querySelector('[data-focus-mode-sound]')
     var collapseButton = ui.dock.querySelector('[data-focus-mode-collapse]')
     if (!toggle || toggle.getAttribute('data-bound') === '1') return
     toggle.setAttribute('data-bound', '1')
 
     setToggleState(readFlag(FOCUS_ENABLED_KEY))
-    if (!hasStoredValue(FOCUS_SOUND_KEY)) {
-      writeFlag(FOCUS_SOUND_KEY, readFlag(APP_SOUND_KEY) || !hasStoredValue(APP_SOUND_KEY))
-    }
-    setSoundState(shouldPlaySound())
     if (readFlag(FOCUS_DISMISSED_KEY)) {
       setCollapsedState(true)
     } else {
@@ -529,25 +515,6 @@
       } else {
         stopTracking()
       }
-    })
-
-    if (soundButton) {
-      soundButton.addEventListener('click', function () {
-        var enabled = !readFlag(FOCUS_SOUND_KEY)
-        writeFlag(FOCUS_SOUND_KEY, enabled)
-        writeFlag(APP_SOUND_KEY, enabled)
-        if (window.SoulAudio && typeof window.SoulAudio.setEnabled === 'function') {
-          window.SoulAudio.setEnabled(enabled)
-        }
-        if (enabled) unlockAudio()
-        setSoundState(enabled)
-      })
-    }
-
-    document.addEventListener('sc:sound-state-changed', function (event) {
-      var enabled = !!(event && event.detail && event.detail.enabled)
-      writeFlag(FOCUS_SOUND_KEY, enabled)
-      setSoundState(enabled)
     })
 
     if (collapseButton) {
