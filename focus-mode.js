@@ -31,9 +31,14 @@
     var style = document.createElement('style')
     style.id = 'sc-focus-mode-styles'
     style.textContent =
-      '.focus-mode-dock{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(286px,80vw)}' +
+      '.focus-mode-dock{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(298px,82vw)}' +
       '.focus-mode-shell{display:grid;gap:8px}' +
-      '.focus-mode-bar{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:24px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
+      '.focus-mode-bar{display:grid;gap:8px;padding:11px;border-radius:26px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
+      '.focus-mode-topline{display:flex;align-items:center;gap:10px}' +
+      '.focus-mode-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}' +
+      '.focus-mode-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.26);color:rgba(15,29,23,.74);font:800 .64rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
+      '.focus-mode-chip.is-on{background:rgba(34,161,93,.12);color:#175739;border-color:rgba(34,161,93,.24)}' +
+      '.focus-mode-chip.is-alert{background:rgba(209,154,45,.14);color:#8a5a09;border-color:rgba(209,154,45,.24)}' +
       '.focus-mode-indicator{width:11px;height:11px;border-radius:999px;background:#c63b32;box-shadow:0 0 0 5px rgba(198,59,50,.12),0 0 18px rgba(198,59,50,.22)}' +
       '.focus-mode-indicator.is-on{background:#22a15d;box-shadow:0 0 0 5px rgba(34,161,93,.12),0 0 18px rgba(34,161,93,.24)}' +
       '.focus-mode-indicator.is-alert{background:#d19a2d;box-shadow:0 0 0 5px rgba(209,154,45,.14),0 0 18px rgba(209,154,45,.24)}' +
@@ -56,7 +61,7 @@
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:min(252px,calc(100vw - 20px))}.focus-mode-bar{gap:7px;padding:8px 9px}.focus-mode-title{font-size:.64rem}.focus-mode-status{font-size:.66rem}.focus-mode-toggle,.focus-mode-icon{min-height:31px;padding:7px 10px;font-size:.66rem}.focus-mode-note{font-size:.7rem;padding:9px 10px}.focus-mode-alert{left:10px;right:10px;top:calc(max(10px,env(safe-area-inset-top)) + 58px);max-width:none}}'
+      '@media (max-width:680px){.focus-mode-dock{left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:min(258px,calc(100vw - 20px))}.focus-mode-bar{gap:7px;padding:9px}.focus-mode-title{font-size:.64rem}.focus-mode-status{font-size:.66rem}.focus-mode-chip{font-size:.6rem;padding:5px 8px}.focus-mode-actions{gap:6px}.focus-mode-toggle,.focus-mode-icon{min-height:31px;padding:7px 10px;font-size:.66rem}.focus-mode-note{font-size:.7rem;padding:9px 10px}.focus-mode-alert{left:10px;right:10px;top:calc(max(10px,env(safe-area-inset-top)) + 58px);max-width:none}}'
     document.head.appendChild(style)
   }
 
@@ -92,11 +97,16 @@
       dock.innerHTML =
         '<div class="focus-mode-shell" data-focus-mode-shell>' +
         '<div class="focus-mode-bar">' +
+        '<div class="focus-mode-topline">' +
         '<span class="focus-mode-indicator" data-focus-mode-indicator aria-hidden="true"></span>' +
-        '<span class="focus-mode-summary"><strong class="focus-mode-title">Focus Mode</strong><span class="focus-mode-status" data-focus-mode-status>Off</span></span>' +
-        '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Off</button>' +
+        '<span class="focus-mode-summary"><strong class="focus-mode-title">Focus Mode</strong><span class="focus-mode-status" data-focus-mode-status>Camera idle.</span></span>' +
+        '</div>' +
+        '<div class="focus-mode-actions">' +
+        '<span class="focus-mode-chip" data-focus-mode-chip>Idle</span>' +
+        '<button class="focus-mode-toggle" type="button" data-focus-mode-toggle>Activate</button>' +
         '<button class="focus-mode-icon is-active" type="button" data-focus-mode-sound aria-label="Toggle focus sounds" title="Toggle focus sounds">Bell</button>' +
         '<button class="focus-mode-icon" type="button" data-focus-mode-collapse aria-label="Show focus mode details" title="Show focus mode details">Info</button>' +
+        '</div>' +
         '</div>' +
         '<p class="focus-mode-note" data-focus-mode-note><strong>Anti-Procrastination Mode</strong>Use your camera on-device to detect when you look away, turn away, or leave the tab for too long and nudge you back into your study flow.<span class="focus-mode-meta" data-focus-mode-meta>Camera off. Nothing is being tracked.</span></p>' +
         '</div>'
@@ -126,9 +136,15 @@
 
   function setIndicatorState(mode) {
     var indicator = document.querySelector('[data-focus-mode-indicator]')
+    var chip = document.querySelector('[data-focus-mode-chip]')
     if (!indicator) return
     indicator.classList.toggle('is-on', mode === 'on')
     indicator.classList.toggle('is-alert', mode === 'alert')
+    if (chip) {
+      chip.classList.toggle('is-on', mode === 'on')
+      chip.classList.toggle('is-alert', mode === 'alert')
+      chip.textContent = mode === 'alert' ? 'Alert' : mode === 'on' ? 'Tracking' : 'Idle'
+    }
   }
 
   function setSoundState(enabled) {
@@ -227,7 +243,7 @@
     var toggle = document.querySelector('[data-focus-mode-toggle]')
     if (!toggle) return
     toggle.classList.toggle('is-on', enabled)
-    toggle.textContent = enabled ? 'On' : 'Off'
+    toggle.textContent = enabled ? 'Active' : 'Activate'
     setIndicatorState(enabled ? 'on' : 'off')
     setStatusText(enabled ? 'Camera starting...' : 'Camera off. Nothing is being tracked.')
   }
