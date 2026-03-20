@@ -1327,7 +1327,6 @@
     function beginDrag(startEvent) {
       if (startEvent.button != null && startEvent.button !== 0) return
       if (returnPromptActive) return
-      if (startEvent.target && startEvent.target.closest && startEvent.target.closest('button, input, textarea')) return
       var startX = startEvent.clientX
       var startY = startEvent.clientY
       var rect = widget.getBoundingClientRect()
