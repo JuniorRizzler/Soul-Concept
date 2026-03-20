@@ -25,39 +25,33 @@
     return getPageName() !== 'offline.html'
   }
 
-  function shouldHideForStartup() {
-    return !!(document.body && document.body.classList.contains('startup-active'))
-  }
-
   function injectStyles() {
     if (document.getElementById('sc-focus-mode-styles')) return
     var style = document.createElement('style')
     style.id = 'sc-focus-mode-styles'
     style.textContent =
-      '.focus-mode-dock{position:fixed;right:max(14px,env(safe-area-inset-right));top:calc(max(14px,env(safe-area-inset-top)) + 56px);z-index:10024;display:grid;gap:8px;width:min(298px,82vw)}' +
-      '.focus-mode-dock.is-hidden{display:none}' +
+      '.focus-mode-dock{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));z-index:10030;display:grid;gap:8px;width:min(298px,82vw)}' +
       '.focus-mode-shell{display:grid;gap:8px}' +
-      '.focus-mode-bar{display:grid;gap:8px;padding:11px;border-radius:26px;border:1px solid rgba(148,181,164,.28);background:linear-gradient(180deg,rgba(239,250,244,.9),rgba(214,233,223,.76));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.56);backdrop-filter:blur(18px) saturate(150%)}' +
+      '.focus-mode-bar{display:grid;gap:8px;padding:11px;border-radius:26px;border:1px solid rgba(255,255,255,.42);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));box-shadow:0 18px 38px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45);backdrop-filter:blur(18px) saturate(150%)}' +
       '.focus-mode-topline{display:flex;align-items:center;gap:10px}' +
-      '.focus-mode-close{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;border:1px solid rgba(148,181,164,.22);background:rgba(255,255,255,.58);color:#355648;font:900 .82rem/1 Manrope,system-ui,sans-serif;cursor:pointer}' +
       '.focus-mode-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}' +
-      '.focus-mode-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.56);border:1px solid rgba(148,181,164,.24);color:#315444;font:800 .64rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
+      '.focus-mode-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.26);color:rgba(15,29,23,.74);font:800 .64rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
       '.focus-mode-chip.is-on{background:rgba(34,161,93,.12);color:#175739;border-color:rgba(34,161,93,.24)}' +
       '.focus-mode-chip.is-alert{background:rgba(209,154,45,.14);color:#8a5a09;border-color:rgba(209,154,45,.24)}' +
       '.focus-mode-indicator{width:11px;height:11px;border-radius:999px;background:#c63b32;box-shadow:0 0 0 5px rgba(198,59,50,.12),0 0 18px rgba(198,59,50,.22)}' +
       '.focus-mode-indicator.is-on{background:#22a15d;box-shadow:0 0 0 5px rgba(34,161,93,.12),0 0 18px rgba(34,161,93,.24)}' +
       '.focus-mode-indicator.is-alert{background:#d19a2d;box-shadow:0 0 0 5px rgba(209,154,45,.14),0 0 18px rgba(209,154,45,.24)}' +
       '.focus-mode-summary{min-width:0;display:grid;gap:1px;flex:1}' +
-      '.focus-mode-title{color:#163126;font:800 .68rem/1.1 Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}' +
-      '.focus-mode-status{color:#406354;font:600 .74rem/1.22 Manrope,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 11px;border-radius:999px;border:1px solid rgba(148,181,164,.24);background:rgba(255,255,255,.62);color:#163126;font:800 .7rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:34px;backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}' +
+      '.focus-mode-title{color:#112019;font:800 .68rem/1.1 Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}' +
+      '.focus-mode-status{color:rgba(17,32,25,.62);font:600 .74rem/1.22 Manrope,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '.focus-mode-toggle,.focus-mode-icon{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.42);background:rgba(255,255,255,.24);color:#0f1d17;font:800 .7rem/1 Manrope,system-ui,sans-serif;cursor:pointer;min-height:34px;backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.34)}' +
       '.focus-mode-toggle.is-on{background:linear-gradient(180deg,rgba(23,82,58,.92),rgba(18,63,45,.88));color:#fff;border-color:rgba(23,82,58,.72)}' +
       '.focus-mode-icon.is-active{background:rgba(17,27,22,.86);color:#fff;border-color:rgba(17,27,22,.72)}' +
       '.focus-mode-shell.is-collapsed .focus-mode-note{display:none}' +
-      '.focus-mode-note{margin:0;padding:11px 12px;border-radius:18px;background:linear-gradient(180deg,rgba(248,252,249,.96),rgba(232,242,236,.92));border:1px solid rgba(175,198,186,.3);box-shadow:0 18px 34px rgba(18,24,20,.08),inset 0 1px 0 rgba(255,255,255,.48);color:#284539;font-size:.73rem;line-height:1.5;backdrop-filter:blur(18px) saturate(140%)}' +
-      '.focus-mode-note strong{display:block;margin-bottom:4px;color:#163126;font-size:.76rem;letter-spacing:.04em;text-transform:uppercase}' +
+      '.focus-mode-note{margin:0;padding:11px 12px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 34px rgba(18,24,20,.1),inset 0 1px 0 rgba(255,255,255,.35);color:rgba(19,28,22,.78);font-size:.73rem;line-height:1.5;backdrop-filter:blur(18px) saturate(140%)}' +
+      '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.76rem;letter-spacing:.04em;text-transform:uppercase}' +
       '.focus-mode-meta{display:block;margin-top:7px;color:#215c4b;font-size:.68rem;font-weight:800;letter-spacing:.01em}' +
-      '.focus-mode-alert{position:fixed;right:max(14px,env(safe-area-inset-right));top:calc(max(14px,env(safe-area-inset-top)) + 150px);z-index:10025;max-width:min(320px,84vw);padding:14px 16px;border-radius:18px;background:rgba(17,20,24,.94);color:#fff;box-shadow:0 20px 46px rgba(8,10,14,.28);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .22s ease,transform .22s ease}' +
+      '.focus-mode-alert{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:10031;max-width:min(320px,84vw);padding:14px 16px;border-radius:18px;background:rgba(17,20,24,.94);color:#fff;box-shadow:0 20px 46px rgba(8,10,14,.28);border:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .22s ease,transform .22s ease}' +
       '.focus-mode-alert.show{opacity:1;transform:translateY(0)}' +
       '.focus-mode-alert strong{display:block;margin-bottom:5px;font-size:.95rem}' +
       '.focus-mode-alert p{margin:0;color:rgba(255,255,255,.82);font-size:.84rem;line-height:1.45}' +
@@ -66,7 +60,7 @@
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:calc(max(10px,env(safe-area-inset-top)) + 52px);width:min(246px,calc(100vw - 20px))}.focus-mode-bar{gap:7px;padding:9px}.focus-mode-title{font-size:.64rem}.focus-mode-status{font-size:.66rem}.focus-mode-chip{font-size:.6rem;padding:5px 8px}.focus-mode-actions{gap:6px}.focus-mode-toggle,.focus-mode-icon{min-height:31px;padding:7px 10px;font-size:.66rem}.focus-mode-note{font-size:.7rem;padding:9px 10px}.focus-mode-alert{left:auto;right:10px;top:calc(max(10px,env(safe-area-inset-top)) + 126px);width:min(246px,calc(100vw - 20px));max-width:none}}'
+      '@media (max-width:680px){.focus-mode-dock{left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:min(258px,calc(100vw - 20px))}.focus-mode-bar{gap:7px;padding:9px}.focus-mode-title{font-size:.64rem}.focus-mode-status{font-size:.66rem}.focus-mode-chip{font-size:.6rem;padding:5px 8px}.focus-mode-actions{gap:6px}.focus-mode-toggle,.focus-mode-icon{min-height:31px;padding:7px 10px;font-size:.66rem}.focus-mode-note{font-size:.7rem;padding:9px 10px}.focus-mode-alert{left:10px;right:10px;top:calc(max(10px,env(safe-area-inset-top)) + 58px);max-width:none}}'
     document.head.appendChild(style)
   }
 
@@ -105,7 +99,6 @@
         '<div class="focus-mode-topline">' +
         '<span class="focus-mode-indicator" data-focus-mode-indicator aria-hidden="true"></span>' +
         '<span class="focus-mode-summary"><strong class="focus-mode-title">Focus Mode</strong><span class="focus-mode-status" data-focus-mode-status>Camera idle.</span></span>' +
-        '<button class="focus-mode-close" type="button" data-focus-mode-close aria-label="Close focus mode">X</button>' +
         '</div>' +
         '<div class="focus-mode-actions">' +
         '<span class="focus-mode-chip" data-focus-mode-chip>Idle</span>' +
@@ -128,12 +121,6 @@
     }
 
     return { dock: dock, alert: alert }
-  }
-
-  function setDockHidden(hidden) {
-    var dock = document.querySelector('[data-focus-mode-dock]')
-    if (!dock) return
-    dock.classList.toggle('is-hidden', !!hidden)
   }
 
   function setStatusText(text) {
@@ -506,15 +493,8 @@
     var ui = ensureUi()
     var toggle = ui.dock.querySelector('[data-focus-mode-toggle]')
     var collapseButton = ui.dock.querySelector('[data-focus-mode-collapse]')
-    var closeButton = ui.dock.querySelector('[data-focus-mode-close]')
     if (!toggle || toggle.getAttribute('data-bound') === '1') return
     toggle.setAttribute('data-bound', '1')
-
-    if (readFlag(FOCUS_HIDDEN_KEY) || shouldHideForStartup()) {
-      setDockHidden(true)
-    } else {
-      setDockHidden(false)
-    }
 
     setToggleState(readFlag(FOCUS_ENABLED_KEY))
     if (readFlag(FOCUS_DISMISSED_KEY)) {
@@ -527,8 +507,6 @@
       unlockAudio()
       var enabled = !readFlag(FOCUS_ENABLED_KEY)
       writeFlag(FOCUS_ENABLED_KEY, enabled)
-      writeFlag(FOCUS_HIDDEN_KEY, false)
-      setDockHidden(false)
       setToggleState(enabled)
       writeFlag(FOCUS_DISMISSED_KEY, true)
       setCollapsedState(true)
@@ -548,15 +526,6 @@
       })
     }
 
-    if (closeButton) {
-      closeButton.addEventListener('click', function () {
-        stopTracking()
-        writeFlag(FOCUS_ENABLED_KEY, false)
-        writeFlag(FOCUS_HIDDEN_KEY, true)
-        setDockHidden(true)
-      })
-    }
-
     document.addEventListener('visibilitychange', function () {
       if (!readFlag(FOCUS_ENABLED_KEY)) return
       if (document.hidden) {
@@ -564,17 +533,6 @@
         setStatusText('Tab hidden. Focus reminder active.')
       }
     })
-
-    var startupObserver = window.setInterval(function () {
-      if (shouldHideForStartup()) {
-        setDockHidden(true)
-        return
-      }
-      if (!readFlag(FOCUS_HIDDEN_KEY)) {
-        setDockHidden(false)
-      }
-      window.clearInterval(startupObserver)
-    }, 250)
 
     if (readFlag(FOCUS_ENABLED_KEY)) {
       unlockAudio()
