@@ -3,6 +3,7 @@
   var PANEL_OPEN_KEY = 'sc_lyne_widget_panel_open_v1'
   var CHAT_KEY = 'sc_lyne_widget_chat_v1'
   var GUIDE_KEY = 'sc_lyne_widget_guide_v1'
+  var HINT_DISMISSED_KEY = 'sc_lyne_widget_hint_dismissed_v1'
   var ONBOARDING_ACTIVE_KEY = 'sc_lyne_onboarding_active_v1'
   var ONBOARDING_STEP_KEY = 'sc_lyne_onboarding_step_v1'
   var ONBOARDING_DISMISSED_KEY = 'sc_lyne_onboarding_dismissed_v1'
@@ -194,6 +195,14 @@
     try {
       localStorage.setItem(key, value)
     } catch (_err) {}
+  }
+
+  function setHintDismissed(value) {
+    writeText(HINT_DISMISSED_KEY, value ? '1' : '0')
+  }
+
+  function isHintDismissed() {
+    return readText(HINT_DISMISSED_KEY, '0') === '1'
   }
 
   function ensureStyles() {
@@ -577,10 +586,20 @@
         html += '</div>'
       }
       hint.innerHTML = html
+      hint.style.display = isHintDismissed() ? 'none' : ''
     }
 
     function setDefaultHint() {
       setHintContent('Hey, need help? Ask me.')
+    }
+
+    function syncHintVisibility() {
+      if (!hint) return
+      if (isHintDismissed() || panel.classList.contains('open')) {
+        hint.style.display = 'none'
+      } else {
+        hint.style.display = ''
+      }
     }
 
     function isLibraryPage() {
@@ -636,6 +655,7 @@
       orbToggle.setAttribute('aria-expanded', open ? 'true' : 'false')
       widget.setAttribute('data-panel-open', open ? 'true' : 'false')
       writeText(PANEL_OPEN_KEY, open ? '1' : '0')
+      syncHintVisibility()
       if (open) {
         scheduleAutoArm()
       } else if (autoArmTimer) {
@@ -1307,6 +1327,7 @@
     function beginDrag(startEvent) {
       if (startEvent.button != null && startEvent.button !== 0) return
       if (returnPromptActive) return
+      if (startEvent.target && startEvent.target.closest && startEvent.target.closest('button, input, textarea')) return
       var startX = startEvent.clientX
       var startY = startEvent.clientY
       var rect = widget.getBoundingClientRect()
@@ -1336,6 +1357,9 @@
 
     orbToggle.addEventListener('pointerdown', beginDrag)
     dragHandle.addEventListener('pointerdown', beginDrag)
+    panelClose.addEventListener('pointerdown', function (event) {
+      event.stopPropagation()
+    })
     orbToggle.addEventListener('click', function () {
       if (returnPromptActive) {
         clearReturnPrompt()
@@ -1360,7 +1384,8 @@
         input.blur()
       }
     })
-    panelClose.addEventListener('click', function () {
+    panelClose.addEventListener('click', function (event) {
+      if (event && typeof event.stopPropagation === 'function') event.stopPropagation()
       clearReturnPrompt()
       setPanelOpen(false)
       playUiSound('tap')
@@ -1370,11 +1395,13 @@
       var actionId = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-action') : ''
       var dismissHint = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-dismiss') : ''
       if (dismissHint != null) {
+        if (event && typeof event.stopPropagation === 'function') event.stopPropagation()
         clearGuide()
+        setHintDismissed(true)
         setOnboardingDismissed(true)
         setOnboardingActive(false)
         setOnboardingVoiceEnabled(false)
-        setDefaultHint()
+        syncHintVisibility()
         return
       }
       if (actionId === 'guide-yes') {
@@ -1539,6 +1566,7 @@
     setDefaultHint()
     setChat(chat, readText(CHAT_KEY, DEFAULT_CHAT))
     setPanelOpen(false)
+    syncHintVisibility()
     applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
     window.addEventListener('resize', function () {
       applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
