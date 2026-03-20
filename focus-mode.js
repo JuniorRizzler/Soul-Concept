@@ -32,6 +32,7 @@
   var previewOpen = false
   var trackingArmed = false
   var trackingArmStartedAt = 0
+  var postArmGraceUntil = 0
 
   function getPageName() {
     return (location.pathname.split('/').pop() || 'index.html').toLowerCase()
@@ -788,6 +789,7 @@
     hasFaceLock = false
     trackingArmed = false
     trackingArmStartedAt = 0
+    postArmGraceUntil = 0
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera active. Checking attention...' }
     clearLyneReturnPrompt()
@@ -809,6 +811,7 @@
     awayFrameStreak = 0
     trackingArmed = false
     trackingArmStartedAt = 0
+    postArmGraceUntil = 0
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
     clearLyneReturnPrompt()
@@ -845,6 +848,8 @@
       (hasFaceLock ? 'yes' : 'no') +
       ' | Armed: ' +
       (trackingArmed ? 'yes' : 'no') +
+      ' | Grace: ' +
+      (postArmGraceUntil > Date.now() ? 'yes' : 'no') +
       ' | Current: ' +
       latestAttention.reason
     )
@@ -893,6 +898,7 @@
         if (Date.now() - trackingArmStartedAt >= 3000) {
           trackingArmed = true
           lastAttentiveAt = Date.now()
+          postArmGraceUntil = Date.now() + 10000
           warningLevel = 0
           setIndicatorState('on')
           setStatusText('Focus tracking armed.')
@@ -904,6 +910,18 @@
         if (frameCounter % 24 === 0) {
           setStatusText('Face lock found. Hold steady to arm tracking.')
         }
+      }
+      return
+    }
+
+    if (Date.now() < postArmGraceUntil) {
+      if (latestAttention.attentive) {
+        lastAttentiveAt = Date.now()
+        warningLevel = 0
+        setIndicatorState('on')
+      }
+      if (frameCounter % 24 === 0) {
+        setStatusText('Focus tracking armed. Keep your face in view.')
       }
       return
     }
@@ -1013,14 +1031,17 @@
       writeFlag(FOCUS_ENABLED_KEY, enabled)
       setToggleState(enabled)
       writeFlag(FOCUS_DISMISSED_KEY, true)
-      setInfoOpenState(false)
       if (enabled) {
+        if (previewOpen) {
+          setInfoOpenState(true)
+        }
         var started = await startTracking()
         if (!started) {
           writeFlag(FOCUS_ENABLED_KEY, false)
           setToggleState(false)
         }
       } else {
+        setInfoOpenState(false)
         stopTracking()
         stopSession(true)
       }
