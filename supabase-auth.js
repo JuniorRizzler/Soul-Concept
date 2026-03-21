@@ -11,10 +11,13 @@
     style.id = 'sc-supabase-auth-styles'
     style.textContent =
       '.sc-auth-launch{white-space:nowrap}' +
-      '.sc-auth-shell{position:relative;display:inline-flex;align-items:center;gap:8px}' +
-      '.sc-auth-user{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(33,92,75,.18);background:rgba(255,255,255,.92);color:#1b1b1f;font-weight:800;font-size:.82rem;max-width:172px;overflow:hidden}' +
-      '.sc-auth-user small{display:block;font-weight:700;color:#5a5863;font-size:.72rem}' +
-      '.sc-auth-signout{border:1px solid #e2d8cb;background:#fff;color:#1b1b1f;border-radius:999px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:.82rem}' +
+      '.sc-auth-shell{position:relative;display:inline-flex;align-items:center;gap:6px}' +
+      '.sc-auth-user{display:inline-flex;align-items:center;gap:7px;padding:7px 9px;border-radius:999px;border:1px solid rgba(33,92,75,.18);background:rgba(255,255,255,.92);color:#1b1b1f;font-weight:800;font-size:.8rem;max-width:126px;overflow:hidden;min-width:0}' +
+      '.sc-auth-user strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;font-size:.77rem;line-height:1.1}' +
+      '.sc-auth-user small{display:block;font-weight:700;color:#5a5863;font-size:.68rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.05}' +
+      '.sc-auth-avatar{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:999px;background:rgba(33,92,75,.12);color:#215c4b;font-size:.72rem;font-weight:900;flex:0 0 auto}' +
+      '.sc-auth-copywrap{display:block;min-width:0;overflow:hidden}' +
+      '.sc-auth-signout{border:1px solid #e2d8cb;background:#fff;color:#1b1b1f;border-radius:999px;padding:7px 9px;font-weight:800;cursor:pointer;font-size:.78rem;line-height:1}' +
       '.sc-auth-float{position:fixed;top:14px;right:14px;z-index:10002;display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(226,216,203,.92);box-shadow:0 12px 30px rgba(23,21,16,.12);backdrop-filter:blur(12px)}' +
       '.sc-auth-float .sc-auth-launch,.sc-auth-float .sc-auth-signout{box-shadow:none}' +
       '.sc-auth-modal-backdrop{position:fixed;inset:0;background:rgba(10,14,20,.48);backdrop-filter:blur(8px);z-index:10020;display:none;align-items:center;justify-content:center;padding:18px}' +
@@ -35,7 +38,7 @@
       '.sc-auth-status{min-height:20px;margin:0;color:#5a5863;font-size:.88rem}' +
       '.sc-auth-status.ok{color:#166534}' +
       '.sc-auth-status.err{color:#b91c1c}' +
-      '@media (max-width:840px){.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:6px}.sc-auth-user{max-width:132px;padding:7px 9px}.sc-auth-signout{padding:7px 9px}.sc-auth-float{top:10px;right:10px;padding:7px 8px;max-width:calc(100vw - 20px)}}'
+      '@media (max-width:840px){.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:5px}.sc-auth-user{max-width:104px;padding:6px 8px;gap:6px}.sc-auth-avatar{width:22px;height:22px;font-size:.68rem}.sc-auth-signout{padding:7px 8px;font-size:.74rem}.sc-auth-float{top:10px;right:10px;padding:7px 8px;max-width:calc(100vw - 20px)}}'
     document.head.appendChild(style)
   }
 
@@ -272,12 +275,23 @@
 
     var user = session && session.user ? session.user : null
     var email = user && user.email ? user.email : 'Signed in'
-    var shortEmail = email.length > 24 ? email.slice(0, 21) + '...' : email
+    var metadata = (user && user.user_metadata) || {}
+    var displayName =
+      metadata.display_name ||
+      metadata.full_name ||
+      metadata.name ||
+      email.split('@')[0] ||
+      'Account'
+    var shortName = displayName.length > 14 ? displayName.slice(0, 12) + '...' : displayName
+    var shortEmail = email.length > 18 ? email.slice(0, 15) + '...' : email
+    var initial = shortName.charAt(0).toUpperCase()
 
     var badge = document.createElement('div')
     badge.className = 'sc-auth-user'
-    badge.innerHTML = '<span>Account</span><small>' + shortEmail + '</small>'
-    badge.title = email
+    badge.innerHTML =
+      '<span class="sc-auth-avatar">' + initial + '</span>' +
+      '<span class="sc-auth-copywrap"><strong>' + shortName + '</strong><small>' + shortEmail + '</small></span>'
+    badge.title = displayName + ' • ' + email
 
     var signOut = document.createElement('button')
     signOut.type = 'button'

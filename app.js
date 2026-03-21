@@ -265,10 +265,11 @@
       '.sc-sound-toggle:hover,.sc-sound-toggle:focus-visible{transform:translateY(-1px);box-shadow:0 14px 26px rgba(23,21,16,.12)}' +
       '.sc-sound-toggle.is-off{background:rgba(255,255,255,.84);color:#6b7280}' +
       '.sc-sound-toggle.is-floating{position:fixed;top:92px;right:14px;z-index:2147482999}' +
+      '.sc-sound-toggle.is-library-floating{top:182px;right:14px}' +
       '.sc-corner-tag{position:fixed;right:14px;bottom:14px;z-index:2147483000;color:rgba(15,23,42,.7);text-decoration:none;font:700 .8rem/1.1 \"Courier New\",\"SFMono-Regular\",Consolas,monospace;letter-spacing:.06em;opacity:.88;text-shadow:0 1px 2px rgba(255,255,255,.72);transition:opacity .18s ease,transform .18s ease}' +
       '.sc-corner-tag:hover,.sc-corner-tag:focus-visible{opacity:1;transform:translateY(-1px)}' +
       '.sc-corner-tag:focus-visible{outline:2px solid rgba(15,23,42,.18);outline-offset:3px;border-radius:999px}' +
-      '@media (max-width:680px){.sc-sound-toggle.is-floating{top:82px;right:10px;min-height:36px;padding:7px 10px;font-size:.72rem}.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
+      '@media (max-width:680px){.sc-sound-toggle.is-floating{top:82px;right:10px;min-height:36px;padding:7px 10px;font-size:.72rem}.sc-sound-toggle.is-library-floating{top:148px;right:10px}.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
     document.head.appendChild(style)
   }
 
@@ -283,7 +284,7 @@
       toggle.className = 'sc-sound-toggle'
       toggle.setAttribute('data-sc-sound-toggle', '1')
       const topbarInner = document.querySelector('.topbar-inner')
-      if (topbarInner) {
+      if (topbarInner && !isLibraryContext) {
         const navToggleButton = topbarInner.querySelector('[data-nav-toggle]')
         if (navToggleButton) {
           topbarInner.insertBefore(toggle, navToggleButton)
@@ -292,6 +293,7 @@
         }
       } else {
         toggle.classList.add('is-floating')
+        if (isLibraryContext) toggle.classList.add('is-library-floating')
         document.body.appendChild(toggle)
       }
       toggle.addEventListener('click', function () {
@@ -306,6 +308,8 @@
         }
       })
     }
+    toggle.classList.toggle('is-floating', !document.querySelector('.topbar-inner') || isLibraryContext)
+    toggle.classList.toggle('is-library-floating', !!isLibraryContext)
     updateSoundToggleUi()
   }
 
