@@ -810,11 +810,12 @@ main {
   letter-spacing: -0.05em;
   max-width: 12ch;
   display: grid;
-  gap: 10px;
+  gap: 18px;
 }
 
 .hero-title-brand {
   display: block;
+  position: relative;
   font-size: 1em;
   line-height: 0.9;
   text-wrap: balance;
@@ -822,20 +823,36 @@ main {
   text-shadow: 0 8px 24px rgba(255, 255, 255, 0.34);
 }
 
+.hero-title-mark-note {
+  position: absolute;
+  right: 0.2ch;
+  bottom: -1.18em;
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 0.17em;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: rgba(27, 27, 31, 0.48);
+  white-space: nowrap;
+}
+
 .hero-title-stack {
   display: grid;
-  gap: 6px;
+  gap: 10px;
   width: fit-content;
-  padding-left: 14px;
+  margin-top: 24px;
+  padding-left: 20px;
   border-left: 2px solid rgba(33, 92, 75, 0.18);
 }
 
 .hero-title-sub {
   display: block;
   font-size: clamp(1.45rem, 2.8vw, 2.25rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
-  color: rgba(27, 27, 31, 0.74);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  color: rgba(27, 27, 31, 0.7);
   text-wrap: balance;
 }
 
@@ -845,6 +862,10 @@ main {
   font-size: 1.06rem;
   line-height: 1.68;
   margin: 0 0 12px;
+}
+
+.hero-title + p {
+  margin-top: 20px;
 }
 
 .hero-actions {
@@ -863,6 +884,10 @@ main {
 }
 
 .jump-link {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   color: #1f4f42;
   font-weight: 800;
@@ -873,6 +898,7 @@ main {
   padding: 7px 12px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 6px 14px rgba(23, 21, 16, 0.06);
   backdrop-filter: blur(10px);
+  cursor: pointer;
 }
 
 .jump-link:hover {
@@ -2567,6 +2593,12 @@ main {
   .hero-title-stack {
     gap: 4px;
     padding-left: 10px;
+  }
+
+  .hero-title-mark-note {
+    bottom: -1.26em;
+    right: 0.1ch;
+    font-size: 0.2em;
   }
 
   .hero-copy p {

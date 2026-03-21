@@ -563,11 +563,12 @@
     var preferredVoice = null
     var didDrag = false
     var lastOrbTapAt = 0
-    var onboardingRetryToken = ''
-    var onboardingRetryCount = 0
-    var returnPromptActive = false
-    var returnPromptState = null
-    var returnPromptSpoken = false
+      var onboardingRetryToken = ''
+      var onboardingRetryCount = 0
+      var returnPromptActive = false
+      var returnPromptState = null
+      var returnPromptSpoken = false
+      var tutorSpotlightTimers = []
 
     function setHintContent(text, actions) {
       var html =
@@ -592,9 +593,42 @@
       hint.style.display = isHintDismissed() ? 'none' : ''
     }
 
-    function setDefaultHint() {
-      setHintContent('Hey, need help? Ask me.')
-    }
+      function setDefaultHint() {
+        setHintContent('Hey, need help? Ask me.')
+      }
+
+      function clearTutorSpotlightTimers() {
+        while (tutorSpotlightTimers.length) {
+          clearTimeout(tutorSpotlightTimers.pop())
+        }
+      }
+
+      function spotlightTutorAssistant() {
+        clearTutorSpotlightTimers()
+        clearReturnPrompt()
+        clearGuide()
+        setHintDismissed(false)
+        setPanelOpen(false)
+        var x = Math.max(88, Math.min(window.innerWidth - 88, Math.round(window.innerWidth * 0.72)))
+        var y = Math.max(156, Math.min(window.innerHeight - 88, Math.round(window.innerHeight * 0.56)))
+        applyPosition(widget, { x: x, y: y })
+        meta.textContent = 'Tutor AI'
+        chat.textContent = DEFAULT_STILL_HERE
+        setHintContent('Click me to open LYNE.', [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
+        syncHintVisibility()
+        tutorSpotlightTimers.push(
+          setTimeout(function () {
+            if (panel.classList.contains('open') || isHintDismissed()) return
+            setHintContent('Move me anywhere on the screen.', [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
+          }, 1900)
+        )
+        tutorSpotlightTimers.push(
+          setTimeout(function () {
+            if (panel.classList.contains('open') || isHintDismissed()) return
+            setHintContent('Ask me what to study next.', [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
+          }, 4100)
+        )
+      }
 
     function syncHintVisibility() {
       if (!hint) return
@@ -671,6 +705,7 @@
       orbToggle.setAttribute('aria-expanded', open ? 'true' : 'false')
       widget.setAttribute('data-panel-open', open ? 'true' : 'false')
       writeText(PANEL_OPEN_KEY, open ? '1' : '0')
+      if (open) clearTutorSpotlightTimers()
       syncHintVisibility()
       if (open) {
         scheduleAutoArm()
@@ -1411,6 +1446,7 @@
       var dismissHint = event.target && event.target.getAttribute ? event.target.getAttribute('data-lyne-hint-dismiss') : ''
       if (dismissHint != null) {
         if (event && typeof event.stopPropagation === 'function') event.stopPropagation()
+        clearTutorSpotlightTimers()
         clearGuide()
         setHintDismissed(true)
         setOnboardingDismissed(true)
@@ -1420,10 +1456,17 @@
         return
       }
       if (actionId === 'guide-yes') {
+        clearTutorSpotlightTimers()
         beginOnboarding(true)
         return
       }
+      if (actionId === 'spotlight-open') {
+        clearTutorSpotlightTimers()
+        setPanelOpen(true)
+        return
+      }
       if (actionId === 'guide-next') {
+        clearTutorSpotlightTimers()
         var currentIndex = getOnboardingStep()
         var currentStep = ONBOARDING_STEPS[currentIndex]
         if (!currentStep) {
@@ -1434,16 +1477,19 @@
         return
       }
       if (actionId === 'guide-skip') {
+        clearTutorSpotlightTimers()
         finishOnboarding()
         return
       }
       if (actionId === 'guide-no') {
+        clearTutorSpotlightTimers()
         setOnboardingDismissed(true)
         setOnboardingActive(false)
         setOnboardingVoiceEnabled(false)
         setDefaultHint()
         return
       }
+      clearTutorSpotlightTimers()
       setPanelOpen(true)
     })
 
@@ -1527,6 +1573,14 @@
 
     document.addEventListener('sc:lyne-return-clear', function () {
       clearReturnPrompt()
+    })
+
+    document.addEventListener('click', function (event) {
+      var trigger = event.target && event.target.closest ? event.target.closest('[data-lyne-spotlight]') : null
+      if (!trigger) return
+      event.preventDefault()
+      playUiSound('panel')
+      spotlightTutorAssistant()
     })
 
     if (canListen) {

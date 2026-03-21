@@ -9,20 +9,29 @@
     if (document.getElementById('sc-supabase-auth-styles')) return
     var style = document.createElement('style')
     style.id = 'sc-supabase-auth-styles'
-    style.textContent =
-      '.sc-auth-launch{white-space:nowrap}' +
-      '.sc-auth-shell{position:relative;display:inline-flex;align-items:center;gap:6px}' +
-      '.sc-auth-user{display:inline-flex;align-items:center;gap:7px;padding:7px 9px;border-radius:999px;border:1px solid rgba(33,92,75,.18);background:rgba(255,255,255,.92);color:#1b1b1f;font-weight:800;font-size:.8rem;max-width:126px;overflow:hidden;min-width:0}' +
-      '.sc-auth-user strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;font-size:.77rem;line-height:1.1}' +
-      '.sc-auth-user small{display:block;font-weight:700;color:#5a5863;font-size:.68rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.05}' +
-      '.sc-auth-avatar{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:999px;background:rgba(33,92,75,.12);color:#215c4b;font-size:.72rem;font-weight:900;flex:0 0 auto}' +
-      '.sc-auth-copywrap{display:block;min-width:0;overflow:hidden}' +
-      '.sc-auth-signout{border:1px solid #e2d8cb;background:#fff;color:#1b1b1f;border-radius:999px;padding:7px 9px;font-weight:800;cursor:pointer;font-size:.78rem;line-height:1}' +
-      '.sc-auth-float{position:fixed;top:14px;right:14px;z-index:10002;display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(226,216,203,.92);box-shadow:0 12px 30px rgba(23,21,16,.12);backdrop-filter:blur(12px)}' +
-      '.sc-auth-float .sc-auth-launch,.sc-auth-float .sc-auth-signout{box-shadow:none}' +
-      '.sc-auth-modal-backdrop{position:fixed;inset:0;background:rgba(10,14,20,.48);backdrop-filter:blur(8px);z-index:10020;display:none;align-items:center;justify-content:center;padding:18px}' +
-      '.sc-auth-modal-backdrop.open{display:flex}' +
-      '.sc-auth-modal-backdrop.locked{background:rgba(10,14,20,.72)}' +
+      style.textContent =
+        '.sc-auth-launch{white-space:nowrap}' +
+        '.sc-auth-inline{display:inline-flex;align-items:center;flex:0 0 auto;margin-left:auto}' +
+        '.nav-more{position:relative;display:none;align-items:center}' +
+        '.nav-more.is-active{display:inline-flex}' +
+        '.nav-more-toggle{appearance:none;border:0;text-decoration:none;color:#5a5863;padding:8px 14px;border-radius:999px;font-weight:800;font-size:.86rem;letter-spacing:-.012em;background:transparent;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0);transition:background .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease}' +
+        '.nav-more-toggle:hover,.nav-more-toggle[aria-expanded="true"]{color:#1b1b1f;background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(33,92,75,.12));box-shadow:inset 0 1px 0 rgba(255,255,255,.78),0 6px 14px rgba(23,21,16,.06);transform:translateY(-1px)}' +
+        '.nav-more-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:198px;padding:8px;border-radius:18px;border:1px solid rgba(226,216,203,.88);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(247,241,233,.96));box-shadow:0 20px 42px rgba(23,21,16,.14);display:none;gap:6px;z-index:45}' +
+        '.nav-more.open .nav-more-menu{display:grid}' +
+        '.nav-more-menu > *{width:100%;margin:0 !important;justify-content:flex-start !important}' +
+        '.nav-more-menu .install-hint{display:none !important}' +
+        '.sc-auth-shell{position:relative;display:inline-flex;align-items:center;gap:6px}' +
+        '.sc-auth-user{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;border:1px solid rgba(33,92,75,.16);background:rgba(255,255,255,.92);color:#1b1b1f;font-weight:800;font-size:.77rem;max-width:112px;overflow:hidden;min-width:0}' +
+        '.sc-auth-user strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;font-size:.74rem;line-height:1.05}' +
+        '.sc-auth-user small{display:block;font-weight:700;color:#5a5863;font-size:.64rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.02}' +
+        '.sc-auth-avatar{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:999px;background:rgba(33,92,75,.12);color:#215c4b;font-size:.68rem;font-weight:900;flex:0 0 auto}' +
+        '.sc-auth-copywrap{display:block;min-width:0;overflow:hidden}' +
+        '.sc-auth-signout{border:1px solid #e2d8cb;background:#fff;color:#1b1b1f;border-radius:999px;padding:6px 8px;font-weight:800;cursor:pointer;font-size:.74rem;line-height:1;white-space:nowrap}' +
+        '.sc-auth-float{position:fixed;top:14px;right:14px;z-index:10002;display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(226,216,203,.92);box-shadow:0 12px 30px rgba(23,21,16,.12);backdrop-filter:blur(12px)}' +
+        '.sc-auth-float .sc-auth-launch,.sc-auth-float .sc-auth-signout{box-shadow:none}' +
+        '.sc-auth-modal-backdrop{position:fixed;inset:0;background:rgba(10,14,20,.48);backdrop-filter:blur(8px);z-index:10020;display:none;align-items:center;justify-content:center;padding:18px}' +
+        '.sc-auth-modal-backdrop.open{display:flex}' +
+        '.sc-auth-modal-backdrop.locked{background:rgba(10,14,20,.72)}' +
       '.sc-auth-modal{width:min(460px,92vw);border-radius:24px;border:1px solid rgba(226,216,203,.9);background:linear-gradient(180deg,#fffefb 0%,#f7f1e9 100%);box-shadow:0 24px 60px rgba(23,21,16,.18);padding:22px;position:relative}' +
       '.sc-auth-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:999px;border:1px solid #e2d8cb;background:#fff;cursor:pointer;font-size:1rem;font-weight:800}' +
       '.sc-auth-title{margin:0 0 8px;font-family:Sora,Segoe UI,sans-serif;font-size:1.55rem;line-height:1.05;color:#1b1b1f}' +
@@ -38,8 +47,80 @@
       '.sc-auth-status{min-height:20px;margin:0;color:#5a5863;font-size:.88rem}' +
       '.sc-auth-status.ok{color:#166534}' +
       '.sc-auth-status.err{color:#b91c1c}' +
-      '@media (max-width:840px){.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:5px}.sc-auth-user{max-width:104px;padding:6px 8px;gap:6px}.sc-auth-avatar{width:22px;height:22px;font-size:.68rem}.sc-auth-signout{padding:7px 8px;font-size:.74rem}.sc-auth-float{top:10px;right:10px;padding:7px 8px;max-width:calc(100vw - 20px)}}'
+        '@media (max-width:840px){.sc-auth-inline{order:3;margin-left:0}.nav-more{display:none !important}.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:5px}.sc-auth-user{max-width:96px;padding:6px 8px;gap:6px}.sc-auth-avatar{width:22px;height:22px;font-size:.68rem}.sc-auth-signout{padding:7px 8px;font-size:.72rem}.sc-auth-float{top:10px;right:10px;padding:7px 8px;max-width:calc(100vw - 20px)}}'
     document.head.appendChild(style)
+  }
+
+  var navMoreBound = false
+
+  function ensureNavMoreMenu(navMenu) {
+    if (!navMenu) return null
+    var more = navMenu.querySelector('[data-nav-more]')
+    if (!more) {
+      more = document.createElement('div')
+      more.className = 'nav-more'
+      more.setAttribute('data-nav-more', '1')
+      more.innerHTML =
+        '<button class="nav-more-toggle" type="button" data-nav-more-toggle aria-expanded="false">More</button>' +
+        '<div class="nav-more-menu" data-nav-more-menu></div>'
+      navMenu.appendChild(more)
+    }
+    if (!navMoreBound) {
+      navMoreBound = true
+      document.addEventListener('click', function (event) {
+        var openMore = document.querySelector('[data-nav-more].open')
+        if (!openMore) return
+        if (openMore.contains(event.target)) return
+        openMore.classList.remove('open')
+        var toggle = openMore.querySelector('[data-nav-more-toggle]')
+        if (toggle) toggle.setAttribute('aria-expanded', 'false')
+      })
+    }
+    var toggleButton = more.querySelector('[data-nav-more-toggle]')
+    if (toggleButton && toggleButton.getAttribute('data-bound') !== '1') {
+      toggleButton.setAttribute('data-bound', '1')
+      toggleButton.addEventListener('click', function () {
+        var next = !more.classList.contains('open')
+        more.classList.toggle('open', next)
+        toggleButton.setAttribute('aria-expanded', next ? 'true' : 'false')
+      })
+    }
+    return more
+  }
+
+  function syncNavMoreMenu() {
+    var navMenu = document.querySelector('[data-nav-menu]')
+    if (!navMenu) return
+    var more = ensureNavMoreMenu(navMenu)
+    if (!more) return
+    var moreMenu = more.querySelector('[data-nav-more-menu]')
+    if (!moreMenu) return
+    var desktop = window.matchMedia ? window.matchMedia('(min-width: 841px)').matches : window.innerWidth > 840
+    var authMounted = !!document.querySelector('[data-sc-auth-mount]')
+    var selectors = [
+      'a[href="about.html"]',
+      'a[href="contact.html"]',
+      '[data-install-btn]',
+      '[data-install-hint]'
+    ]
+
+    selectors.forEach(function (selector) {
+      var node = moreMenu.querySelector(selector)
+      if (node) navMenu.insertBefore(node, more)
+    })
+
+    if (desktop && authMounted) {
+      selectors.forEach(function (selector) {
+        var node = navMenu.querySelector(selector)
+        if (node && node.parentNode === navMenu) moreMenu.appendChild(node)
+      })
+      more.classList.add('is-active')
+    } else {
+      more.classList.remove('is-active')
+      more.classList.remove('open')
+      var toggle = more.querySelector('[data-nav-more-toggle]')
+      if (toggle) toggle.setAttribute('aria-expanded', 'false')
+    }
   }
 
   function isCallbackPage() {
@@ -186,21 +267,23 @@
   }
 
   function openModal() {
-    var backdrop = ensureModal()
-    setPromptDismissed(false)
-    backdrop.classList.add('open')
-    var input = backdrop.querySelector('#sc-auth-email')
-    if (input) setTimeout(function () { input.focus() }, 10)
-  }
+      var backdrop = ensureModal()
+      setPromptDismissed(false)
+      backdrop.classList.add('open')
+      if (document.body) document.body.classList.add('auth-modal-open')
+      var input = backdrop.querySelector('#sc-auth-email')
+      if (input) setTimeout(function () { input.focus() }, 10)
+    }
 
   function closeModal() {
-    var backdrop = ensureModal()
-    setPromptDismissed(true)
-    backdrop.classList.remove('open')
-    backdrop.classList.remove('locked')
-    document.documentElement.style.overflow = ''
-    document.body.style.overflow = ''
-    setStatus(backdrop, '', '')
+      var backdrop = ensureModal()
+      setPromptDismissed(true)
+      backdrop.classList.remove('open')
+      backdrop.classList.remove('locked')
+      if (document.body) document.body.classList.remove('auth-modal-open')
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+      setStatus(backdrop, '', '')
   }
 
   function bindModal(client) {
@@ -308,12 +391,13 @@
   }
 
   function mountAuthUi(client, session) {
-    var host = document.querySelector('[data-nav-menu]')
-    var existing = document.querySelector('[data-sc-auth-mount]')
-    if (existing) existing.remove()
+      var topbarInner = document.querySelector('.topbar-inner')
+      var existing = document.querySelector('[data-sc-auth-mount]')
+      if (existing) existing.remove()
 
-    var mount = document.createElement('div')
-    mount.setAttribute('data-sc-auth-mount', '1')
+      var mount = document.createElement('div')
+      mount.setAttribute('data-sc-auth-mount', '1')
+      mount.className = 'sc-auth-inline'
 
     if (session && session.user) {
       mount.appendChild(buildSignedInUi(client, session))
@@ -323,30 +407,33 @@
       mount.appendChild(btn)
     }
 
-    if (host) {
-      host.appendChild(mount)
-      return
+      if (topbarInner) {
+        topbarInner.appendChild(mount)
+        syncNavMoreMenu()
+        return
+      }
+
+      mount.className = 'sc-auth-float'
+      mount.setAttribute('data-sc-auth-floating', '1')
+      document.body.appendChild(mount)
+      syncNavMoreMenu()
     }
 
-    mount.className = 'sc-auth-float'
-    mount.setAttribute('data-sc-auth-floating', '1')
-    document.body.appendChild(mount)
-  }
-
-  function setGateMode(locked) {
-    var backdrop = ensureModal()
-    var shouldLock = !!locked && !isPromptDismissed()
-    backdrop.classList.toggle('locked', shouldLock)
-    if (shouldLock) {
-      openModal()
-      document.documentElement.style.overflow = 'hidden'
-      document.body.style.overflow = 'hidden'
-    } else {
-      backdrop.classList.remove('locked')
-      document.documentElement.style.overflow = ''
-      document.body.style.overflow = ''
+    function setGateMode(locked) {
+      var backdrop = ensureModal()
+      var shouldLock = !!locked && !isPromptDismissed()
+      backdrop.classList.toggle('locked', shouldLock)
+      if (shouldLock) {
+        openModal()
+        document.documentElement.style.overflow = 'hidden'
+        document.body.style.overflow = 'hidden'
+      } else {
+        backdrop.classList.remove('locked')
+        if (document.body) document.body.classList.remove('auth-modal-open')
+        document.documentElement.style.overflow = ''
+        document.body.style.overflow = ''
+      }
     }
-  }
 
   function hasHashTokens() {
     return /access_token=|refresh_token=|token_hash=/.test(location.hash || '')
@@ -436,10 +523,13 @@
     var session = sessionResult && sessionResult.data ? sessionResult.data.session : null
     mountAuthUi(client, session)
     setGateMode(REQUIRE_AUTH && !session)
+    syncNavMoreMenu()
+    window.addEventListener('resize', syncNavMoreMenu)
 
     client.auth.onAuthStateChange(function (_event, session) {
       mountAuthUi(client, session || null)
       setGateMode(REQUIRE_AUTH && !session)
+      syncNavMoreMenu()
       if (isCallbackPage() && session) {
         var target = normalizeReturnPath(readReturnPath())
         clearReturnPath()
