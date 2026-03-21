@@ -106,6 +106,8 @@
 
   const STREAK_KEY = 'sc_daily_streak_v1'
   const USAGE_KEY = 'sc_usage_stats_v1'
+  const ANALYTICS_KEY = 'sc_study_analytics_v1'
+  const FOCUS_SESSION_KEY = 'sc_focus_mode_session_v1'
   const PUSH_ENABLED_KEY = 'sc_push_enabled'
   const PUSH_WIDGET_DISMISSED_KEY = 'sc_push_widget_dismissed_v1'
   const APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
@@ -254,9 +256,10 @@
       '.streak-pill-label{color:#5a5863;font-size:.78rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}' +
       '.streak-pill-value{color:#1b1b1f;font-size:1rem;line-height:1}' +
       '.stats-wrap{position:relative;display:inline-flex;align-items:center}' +
-      '.stats-panel{position:absolute;top:calc(100% + 10px);right:0;width:min(300px,86vw);padding:12px;border-radius:14px;border:1px solid #e2d8cb;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(250,247,241,.96));box-shadow:0 16px 36px rgba(23,21,16,.12);display:grid;gap:8px;z-index:120;opacity:0;transform:translateY(6px) scale(.98);pointer-events:none;transition:opacity .18s ease,transform .18s ease}' +
+      '.stats-panel{position:absolute;top:calc(100% + 10px);right:0;width:min(338px,88vw);padding:12px;border-radius:14px;border:1px solid #e2d8cb;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(250,247,241,.96));box-shadow:0 16px 36px rgba(23,21,16,.12);display:grid;gap:8px;z-index:120;opacity:0;transform:translateY(6px) scale(.98);pointer-events:none;transition:opacity .18s ease,transform .18s ease}' +
       '.stats-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}' +
       '.stats-panel-title{font-size:.88rem;color:#1b1b1f;letter-spacing:.02em;text-transform:uppercase;border-bottom:1px dashed rgba(33,92,75,.24);padding-bottom:6px;margin-bottom:2px}' +
+      '.stats-panel-subtitle{font-size:.72rem;color:#7a746b;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-top:4px}' +
       '.stats-row{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#5a5863;font-size:.9rem}' +
       '.stats-row strong{color:#1b1b1f;font-size:.92rem}' +
       '.push-widget{position:fixed;bottom:18px;right:18px;z-index:110;width:min(320px,86vw);background:rgba(255,255,255,.95);border:1px solid #e2d8cb;border-radius:18px;box-shadow:0 16px 36px rgba(23,21,16,.12);padding:16px;display:grid;gap:8px}' +
@@ -265,11 +268,11 @@
       '.sc-sound-toggle:hover,.sc-sound-toggle:focus-visible{transform:translateY(-1px);box-shadow:0 14px 26px rgba(23,21,16,.12)}' +
       '.sc-sound-toggle.is-off{background:rgba(255,255,255,.84);color:#6b7280}' +
       '.sc-sound-toggle.is-floating{position:fixed;top:92px;right:14px;z-index:2147482999}' +
-      '.sc-sound-toggle.is-library-floating{top:182px;right:14px}' +
+      '.sc-sound-toggle.is-library-floating{top:14px;left:14px;right:auto}' +
       '.sc-corner-tag{position:fixed;right:14px;bottom:14px;z-index:2147483000;color:rgba(15,23,42,.7);text-decoration:none;font:700 .8rem/1.1 \"Courier New\",\"SFMono-Regular\",Consolas,monospace;letter-spacing:.06em;opacity:.88;text-shadow:0 1px 2px rgba(255,255,255,.72);transition:opacity .18s ease,transform .18s ease}' +
       '.sc-corner-tag:hover,.sc-corner-tag:focus-visible{opacity:1;transform:translateY(-1px)}' +
       '.sc-corner-tag:focus-visible{outline:2px solid rgba(15,23,42,.18);outline-offset:3px;border-radius:999px}' +
-      '@media (max-width:680px){.sc-sound-toggle.is-floating{top:82px;right:10px;min-height:36px;padding:7px 10px;font-size:.72rem}.sc-sound-toggle.is-library-floating{top:148px;right:10px}.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
+      '@media (max-width:680px){.sc-sound-toggle.is-floating{top:82px;right:10px;min-height:36px;padding:7px 10px;font-size:.72rem}.sc-sound-toggle.is-library-floating{top:10px;left:10px;right:auto}.sc-corner-tag{right:10px;bottom:10px;font-size:.72rem}}'
     document.head.appendChild(style)
   }
 
@@ -438,6 +441,86 @@
     }
   }
 
+  function cleanPageName(name) {
+    const value = String(name || currentPage || 'index.html').toLowerCase()
+    if (value === 'index.html') return 'Home'
+    if (value === 'study-library.html') return 'Science'
+    if (value === 'geography-library.html') return 'Geography'
+    if (value === 'grade-10-math.html') return 'Math 10'
+    if (value === 'math-quiz-simulator.html') return 'Quiz Tool'
+    if (value === 'services.html') return 'Tools'
+    if (value === 'subjects.html') return 'Subjects'
+    if (value === 'work.html') return 'Library'
+    if (value === 'about.html') return 'About'
+    if (value === 'contact.html') return 'Feedback'
+    if (value === 'index.html') return 'Home'
+    if (value.indexOf('/math/') !== -1 || value === 'math/index.html') return 'Math 9'
+    if (value.indexOf('anki') !== -1) return 'Concept Cards'
+    return value.replace('.html', '').replace(/[-_/]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase() })
+  }
+
+  function readAnalyticsData() {
+    try {
+      const raw = localStorage.getItem(ANALYTICS_KEY)
+      if (!raw) return { pageVisits: {}, pageMs: {}, focusMs: 0, focusBreaks: 0, focusWarnings: 0, sessionsCompleted: 0 }
+      const parsed = JSON.parse(raw)
+      return {
+        pageVisits: parsed && parsed.pageVisits ? parsed.pageVisits : {},
+        pageMs: parsed && parsed.pageMs ? parsed.pageMs : {},
+        focusMs: Math.max(0, Number((parsed && parsed.focusMs) || 0)),
+        focusBreaks: Math.max(0, Number((parsed && parsed.focusBreaks) || 0)),
+        focusWarnings: Math.max(0, Number((parsed && parsed.focusWarnings) || 0)),
+        sessionsCompleted: Math.max(0, Number((parsed && parsed.sessionsCompleted) || 0)),
+      }
+    } catch (_err) {
+      return { pageVisits: {}, pageMs: {}, focusMs: 0, focusBreaks: 0, focusWarnings: 0, sessionsCompleted: 0 }
+    }
+  }
+
+  function saveAnalyticsData(data) {
+    try {
+      localStorage.setItem(ANALYTICS_KEY, JSON.stringify(data))
+    } catch (_err) {
+      // ignore storage errors
+    }
+  }
+
+  function readFocusSessionSnapshot() {
+    try {
+      const raw = localStorage.getItem(FOCUS_SESSION_KEY)
+      return raw ? JSON.parse(raw) : null
+    } catch (_err) {
+      return null
+    }
+  }
+
+  function applyFocusSessionAnalytics(analytics) {
+    const session = readFocusSessionSnapshot()
+    if (!session || !session.completedAt) return
+    const marker = String(session.completedAt)
+    if (analytics.lastFocusSessionMarker === marker) return
+    analytics.focusMs += Math.max(0, Number(session.focusedMs || 0))
+    analytics.focusBreaks += Math.max(0, Number(session.breakCount || 0))
+    analytics.focusWarnings += Math.max(0, Number(session.warningCount || 0))
+    analytics.sessionsCompleted += session.completed ? 1 : 0
+    analytics.lastFocusSessionMarker = marker
+  }
+
+  function getLiveFocusStats(analytics) {
+    const session = readFocusSessionSnapshot()
+    const base = {
+      focusedMs: Math.max(0, Number((analytics && analytics.focusMs) || 0)),
+      breakCount: Math.max(0, Number((analytics && analytics.focusBreaks) || 0)),
+      warningCount: Math.max(0, Number((analytics && analytics.focusWarnings) || 0)),
+    }
+    if (!session) return base
+    if (session.completed && session.completedAt) return base
+    base.focusedMs += Math.max(0, Number(session.focusedMs || 0))
+    base.breakCount += Math.max(0, Number(session.breakCount || 0))
+    base.warningCount += Math.max(0, Number(session.warningCount || 0))
+    return base
+  }
+
   function saveUsageData(data) {
     try {
       localStorage.setItem(USAGE_KEY, JSON.stringify(data))
@@ -472,6 +555,12 @@
         '<div class="stats-row"><span>Streak</span><strong data-stats-streak>0 days</strong></div>' +
         '<div class="stats-row"><span>Time spent</span><strong data-stats-spent>0s</strong></div>' +
         '<div class="stats-row"><span>Time logged in</span><strong data-stats-session>0s</strong></div>' +
+        '<div class="stats-panel-subtitle">Study analytics</div>' +
+        '<div class="stats-row"><span>Focused time</span><strong data-stats-focus>0m</strong></div>' +
+        '<div class="stats-row"><span>Breaks caught</span><strong data-stats-breaks>0</strong></div>' +
+        '<div class="stats-row"><span>Warnings sent</span><strong data-stats-warnings>0</strong></div>' +
+        '<div class="stats-row"><span>Top page</span><strong data-stats-top-page>Home</strong></div>' +
+        '<div class="stats-row"><span>Page visits</span><strong data-stats-visits>0</strong></div>' +
         '<div class="stats-row"><span>Notifications</span><strong data-stats-notifs>Unavailable</strong></div>' +
         '</div>'
       const navToggleBtn = topbarInner.querySelector('[data-nav-toggle]')
@@ -487,12 +576,22 @@
     const streakEl = wrapper.querySelector('[data-stats-streak]')
     const spentEl = wrapper.querySelector('[data-stats-spent]')
     const sessionEl = wrapper.querySelector('[data-stats-session]')
+    const focusEl = wrapper.querySelector('[data-stats-focus]')
+    const breaksEl = wrapper.querySelector('[data-stats-breaks]')
+    const warningsEl = wrapper.querySelector('[data-stats-warnings]')
+    const topPageEl = wrapper.querySelector('[data-stats-top-page]')
+    const visitsEl = wrapper.querySelector('[data-stats-visits]')
     const notifsEl = wrapper.querySelector('[data-stats-notifs]')
 
     const usage = readUsageData()
+    const analytics = readAnalyticsData()
     const sessionStartedAt = Date.now()
     let pendingVisibleMs = 0
     let activeStartedAt = document.visibilityState === 'visible' ? Date.now() : 0
+    const analyticsPageKey = currentPage || 'index.html'
+    analytics.pageVisits[analyticsPageKey] = Math.max(0, Number(analytics.pageVisits[analyticsPageKey] || 0)) + 1
+    applyFocusSessionAnalytics(analytics)
+    saveAnalyticsData(analytics)
 
     function flushActiveTime() {
       if (!activeStartedAt) return
@@ -503,8 +602,10 @@
     function persistUsage() {
       if (pendingVisibleMs <= 0) return
       usage.totalMs += pendingVisibleMs
+      analytics.pageMs[analyticsPageKey] = Math.max(0, Number(analytics.pageMs[analyticsPageKey] || 0)) + pendingVisibleMs
       pendingVisibleMs = 0
       saveUsageData(usage)
+      saveAnalyticsData(analytics)
     }
 
     function getLiveVisibleMs() {
@@ -519,12 +620,33 @@
       return 'Available'
     }
 
+    function getTopPageLabel() {
+      let winner = analyticsPageKey
+      let winnerMs = -1
+      Object.keys(analytics.pageMs || {}).forEach(function (page) {
+        const ms = Math.max(0, Number(analytics.pageMs[page] || 0))
+        if (ms > winnerMs) {
+          winner = page
+          winnerMs = ms
+        }
+      })
+      return cleanPageName(winner)
+    }
+
     function updateStatsUI() {
       const streak = Math.max(0, Number((streakData && streakData.streak) || 0))
+      applyFocusSessionAnalytics(analytics)
+      const liveFocus = getLiveFocusStats(analytics)
       if (streakEl) streakEl.textContent = streak + (streak === 1 ? ' day' : ' days')
       if (spentEl) spentEl.textContent = formatDuration(usage.totalMs + pendingVisibleMs + getLiveVisibleMs())
       if (sessionEl) sessionEl.textContent = formatDuration(Date.now() - sessionStartedAt)
+      if (focusEl) focusEl.textContent = formatDuration(liveFocus.focusedMs || 0)
+      if (breaksEl) breaksEl.textContent = String(Math.max(0, Number(liveFocus.breakCount || 0)))
+      if (warningsEl) warningsEl.textContent = String(Math.max(0, Number(liveFocus.warningCount || 0)))
+      if (topPageEl) topPageEl.textContent = getTopPageLabel()
+      if (visitsEl) visitsEl.textContent = String(Math.max(0, Number(analytics.pageVisits[analyticsPageKey] || 0)))
       if (notifsEl) notifsEl.textContent = getNotificationStatus()
+      saveAnalyticsData(analytics)
     }
 
     function setPanelOpen(open) {

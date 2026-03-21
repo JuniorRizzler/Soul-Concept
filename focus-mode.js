@@ -111,9 +111,10 @@
       '.focus-mode-collapse-side{position:absolute;top:8px;right:8px;padding:0;width:22px;min-width:22px;min-height:22px;height:22px;border-radius:999px;font-size:.82rem;line-height:1;background:rgba(17,27,22,.74);color:#fff;border:1px solid rgba(17,27,22,.38)}' +
       '.focus-mode-shell:not(.is-info-open) .focus-mode-note{display:none}' +
       '.focus-mode-shell.is-collapsed .focus-mode-note,.focus-mode-shell.is-collapsed .focus-mode-summary,.focus-mode-shell.is-collapsed .focus-mode-chip,.focus-mode-shell.is-collapsed .focus-mode-toggle,.focus-mode-shell.is-collapsed .focus-mode-info,.focus-mode-shell.is-collapsed .focus-mode-timer,.focus-mode-shell.is-collapsed .focus-mode-session{display:none}' +
-      '.focus-mode-shell.is-collapsed .focus-mode-bar{width:36px;min-height:92px;padding:8px 6px;border-radius:16px;gap:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(239,247,243,.22));box-shadow:0 14px 28px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45)}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-bar{width:48px;min-height:108px;padding:8px 6px;border-radius:18px;gap:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(239,247,243,.22));box-shadow:0 14px 28px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45)}' +
       '.focus-mode-shell.is-collapsed .focus-mode-topline{width:100%;justify-content:center;align-items:center}' +
       '.focus-mode-shell.is-collapsed .focus-mode-actions{width:100%;justify-content:center;align-items:center}' +
+      '.focus-mode-shell.is-collapsed [data-focus-mode-preview-toggle]{width:34px;min-width:34px;min-height:24px;height:24px;padding:0;border-radius:999px;font-size:.5rem;letter-spacing:.04em}' +
       '.focus-mode-shell.is-collapsed .focus-mode-collapse-side{position:static;padding:0;width:22px;min-width:22px;min-height:22px;height:22px;border-radius:999px;font-size:.82rem;line-height:1;background:rgba(17,27,22,.74);color:#fff;border-color:rgba(17,27,22,.38)}' +
       '.focus-mode-note{margin:0;padding:10px 11px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 34px rgba(18,24,20,.1),inset 0 1px 0 rgba(255,255,255,.35);color:rgba(19,28,22,.78);font-size:.69rem;line-height:1.45;backdrop-filter:blur(18px) saturate(140%)}' +
       '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}' +
@@ -133,7 +134,7 @@
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions,.focus-mode-session{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-timer{min-width:70px;font-size:.65rem;padding:6px 8px}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-debug{font-size:.6rem;padding:7px 8px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px;align-items:center;justify-content:center}}'
+      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions,.focus-mode-session{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-timer{min-width:70px;font-size:.65rem;padding:6px 8px}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-debug{font-size:.6rem;padding:7px 8px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:42px;min-height:94px;padding:7px 5px;align-items:center;justify-content:center}.focus-mode-shell.is-collapsed [data-focus-mode-preview-toggle]{width:30px;min-width:30px;min-height:22px;height:22px;font-size:.48rem}}'
     document.head.appendChild(style)
   }
 
@@ -242,8 +243,15 @@
   function setCollapsedState(collapsed) {
     var shell = document.querySelector('[data-focus-mode-shell]')
     var button = document.querySelector('[data-focus-mode-collapse]')
+    var previewButton = document.querySelector('[data-focus-mode-preview-toggle]')
     if (!shell || !button) return
     shell.classList.toggle('is-collapsed', collapsed)
+    if (previewButton) {
+      var collapsedLabel = previewOpen ? 'Preview' : 'Focus'
+      previewButton.textContent = collapsed ? collapsedLabel : 'Test'
+      previewButton.setAttribute('aria-label', collapsed ? collapsedLabel + ' camera' : 'Test camera preview')
+      previewButton.setAttribute('title', collapsed ? collapsedLabel + ' camera' : 'Test camera preview')
+    }
     if (collapsed) {
       shell.classList.remove('is-info-open')
       var infoButton = document.querySelector('[data-focus-mode-info]')
@@ -357,6 +365,16 @@
     preview.classList.toggle('is-open', open)
     toggle.classList.toggle('is-active', open)
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
+    if (shell.classList.contains('is-collapsed')) {
+      var collapsedLabel = previewOpen ? 'Preview' : 'Focus'
+      toggle.textContent = collapsedLabel
+      toggle.setAttribute('aria-label', collapsedLabel + ' camera')
+      toggle.setAttribute('title', collapsedLabel + ' camera')
+    } else {
+      toggle.textContent = 'Test'
+      toggle.setAttribute('aria-label', 'Test camera preview')
+      toggle.setAttribute('title', 'Test camera preview')
+    }
     if (previewVideo) {
       previewVideo.srcObject = open && videoEl && streamRef ? streamRef : null
       if (open && previewVideo.srcObject) {
