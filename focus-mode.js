@@ -3,11 +3,25 @@
   var FOCUS_DISMISSED_KEY = 'sc_focus_mode_dismissed_v1'
   var APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
   var FOCUS_SESSION_KEY = 'sc_focus_mode_session_v1'
+  var MEDIAPIPE_SCRIPT_URLS = [
+    'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14',
+    'https://unpkg.com/@mediapipe/tasks-vision@0.10.14'
+  ]
+  var MEDIAPIPE_WASM_URLS = [
+    'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm',
+    'https://unpkg.com/@mediapipe/tasks-vision@0.10.14/wasm'
+  ]
+  var MEDIAPIPE_MODEL_URLS = [
+    'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
+  ]
   var ATTENTION_WARN_MS = 9000
   var ATTENTION_STRONG_MS = 22000
+  var FALLBACK_IDLE_WARN_MS = 12000
+  var FACE_MISSING_CONFIRM_FRAMES = 4
   var STARTUP_GRACE_MS = 8000
   var ATTENTIVE_CONFIRM_FRAMES = 6
   var AWAY_CONFIRM_FRAMES = 12
+  var FACE_LOCK_CONFIRM_FRAMES = 12
   var DEFAULT_SESSION_MS = 25 * 60 * 1000
   var lastAttentiveAt = 0
   var warningLevel = 0
@@ -33,6 +47,26 @@
   var trackingArmed = false
   var trackingArmStartedAt = 0
   var postArmGraceUntil = 0
+  var faceLockFrameStreak = 0
+  var warningEligibleAt = 0
+  var recoveryInFlight = false
+  var previewStarting = false
+  var modelReady = false
+  var modelStatus = 'idle'
+  var lastInteractionAt = Date.now()
+  var fallbackProbeCanvas = null
+  var fallbackProbeCtx = null
+  var fallbackDarkFrameStreak = 0
+  var SCRIPT_BASE_URL =
+    document.currentScript && document.currentScript.src
+      ? new URL('.', document.currentScript.src).href
+      : new URL('.', location.href).href
+  var LOCAL_MEDIAPIPE_BUNDLE_URLS = [
+    new URL('vendor/mediapipe/vision_bundle.js', SCRIPT_BASE_URL).href,
+    new URL('vendor/mediapipe/vision_bundle.mjs', SCRIPT_BASE_URL).href
+  ]
+  var LOCAL_MEDIAPIPE_WASM_URL = new URL('vendor/mediapipe', SCRIPT_BASE_URL).href.replace(/\/$/, '')
+  var LOCAL_MEDIAPIPE_MODEL_URL = new URL('vendor/mediapipe/face_landmarker.task', SCRIPT_BASE_URL).href
 
   function getPageName() {
     return (location.pathname.split('/').pop() || 'index.html').toLowerCase()
@@ -77,9 +111,9 @@
       '.focus-mode-collapse-side{position:absolute;top:8px;right:8px;padding:0;width:22px;min-width:22px;min-height:22px;height:22px;border-radius:999px;font-size:.82rem;line-height:1;background:rgba(17,27,22,.74);color:#fff;border:1px solid rgba(17,27,22,.38)}' +
       '.focus-mode-shell:not(.is-info-open) .focus-mode-note{display:none}' +
       '.focus-mode-shell.is-collapsed .focus-mode-note,.focus-mode-shell.is-collapsed .focus-mode-summary,.focus-mode-shell.is-collapsed .focus-mode-chip,.focus-mode-shell.is-collapsed .focus-mode-toggle,.focus-mode-shell.is-collapsed .focus-mode-info,.focus-mode-shell.is-collapsed .focus-mode-timer,.focus-mode-shell.is-collapsed .focus-mode-session{display:none}' +
-      '.focus-mode-shell.is-collapsed .focus-mode-bar{width:36px;min-height:92px;padding:8px 6px;border-radius:16px;gap:10px;justify-items:center;align-content:space-between;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(239,247,243,.22));box-shadow:0 14px 28px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45)}' +
-      '.focus-mode-shell.is-collapsed .focus-mode-topline{justify-content:center}' +
-      '.focus-mode-shell.is-collapsed .focus-mode-actions{width:100%;justify-content:center}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-bar{width:36px;min-height:92px;padding:8px 6px;border-radius:16px;gap:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(239,247,243,.22));box-shadow:0 14px 28px rgba(12,18,14,.12),inset 0 1px 0 rgba(255,255,255,.45)}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-topline{width:100%;justify-content:center;align-items:center}' +
+      '.focus-mode-shell.is-collapsed .focus-mode-actions{width:100%;justify-content:center;align-items:center}' +
       '.focus-mode-shell.is-collapsed .focus-mode-collapse-side{position:static;padding:0;width:22px;min-width:22px;min-height:22px;height:22px;border-radius:999px;font-size:.82rem;line-height:1;background:rgba(17,27,22,.74);color:#fff;border-color:rgba(17,27,22,.38)}' +
       '.focus-mode-note{margin:0;padding:10px 11px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.34);box-shadow:0 18px 34px rgba(18,24,20,.1),inset 0 1px 0 rgba(255,255,255,.35);color:rgba(19,28,22,.78);font-size:.69rem;line-height:1.45;backdrop-filter:blur(18px) saturate(140%)}' +
       '.focus-mode-note strong{display:block;margin-bottom:4px;color:#0f1d17;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}' +
@@ -99,7 +133,7 @@
       'body.focus-warning .site-wrap{animation:focusPulse .55s ease}' +
       '@keyframes focusPulse{0%{transform:scale(1)}35%{transform:scale(.997)}100%{transform:scale(1)}}' +
       '@media (prefers-reduced-motion:reduce){.focus-mode-alert,body.focus-warning .site-wrap{transition:none;animation:none}}' +
-      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions,.focus-mode-session{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-timer{min-width:70px;font-size:.65rem;padding:6px 8px}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-debug{font-size:.6rem;padding:7px 8px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px}}'
+      '@media (max-width:680px){.focus-mode-dock{right:max(10px,env(safe-area-inset-right));top:max(74px,calc(env(safe-area-inset-top) + 58px));width:min(234px,calc(100vw - 20px))}.focus-mode-bar{gap:6px;padding:8px 30px 8px 8px}.focus-mode-title{font-size:.61rem}.focus-mode-status{font-size:.63rem}.focus-mode-chip{font-size:.58rem;padding:5px 7px}.focus-mode-actions,.focus-mode-session{gap:5px}.focus-mode-toggle,.focus-mode-icon{min-height:29px;padding:6px 9px;font-size:.62rem}.focus-mode-timer{min-width:70px;font-size:.65rem;padding:6px 8px}.focus-mode-note{font-size:.66rem;padding:8px 9px}.focus-mode-debug{font-size:.6rem;padding:7px 8px}.focus-mode-alert{right:10px;left:auto;top:calc(max(74px,calc(env(safe-area-inset-top) + 58px)) + 58px);max-width:min(220px,calc(100vw - 20px));padding:9px 11px}.focus-mode-collapse-side{top:7px;right:7px;width:20px;min-width:20px;height:20px;min-height:20px;font-size:.76rem}.focus-mode-shell.is-collapsed .focus-mode-bar{width:34px;min-height:82px;padding:7px 5px;align-items:center;justify-content:center}}'
     document.head.appendChild(style)
   }
 
@@ -245,6 +279,74 @@
     debug.textContent = String(text || '').trim()
   }
 
+  function isStreamLive() {
+    return !!(
+      streamRef &&
+      typeof streamRef.getVideoTracks === 'function' &&
+      streamRef.getVideoTracks().some(function (track) {
+        return track && track.readyState === 'live' && track.enabled !== false
+      })
+    )
+  }
+
+  async function recoverCameraStream() {
+    if (recoveryInFlight || !running) return false
+    recoveryInFlight = true
+    try {
+      if (streamRef) {
+        try {
+          streamRef.getTracks().forEach(function (track) { track.stop() })
+        } catch (_errStop) {}
+        streamRef = null
+      }
+      if (!videoEl) {
+        videoEl = document.createElement('video')
+        videoEl.className = 'focus-mode-video'
+        videoEl.setAttribute('playsinline', '')
+        videoEl.setAttribute('muted', '')
+        videoEl.muted = true
+        document.body.appendChild(videoEl)
+      }
+      streamRef = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+      videoEl.srcObject = streamRef
+      await videoEl.play()
+      resetTrackingState()
+      latestAttention.reason = 'Camera recovered. Recalibrating focus...'
+      setStatusText(latestAttention.reason)
+      setDebugText(getDebugSummary('Current: recovering stream'))
+      syncPreview()
+      return true
+    } catch (_err) {
+      setStatusText('Camera stream dropped. Re-open focus mode to retry.')
+      setDebugText(getDebugSummary('Current: recovery failed'))
+      return false
+    } finally {
+      recoveryInFlight = false
+    }
+  }
+
+  function getDebugSummary(extra) {
+    var streamState = isStreamLive() ? 'live' : streamRef ? 'inactive' : 'none'
+    var videoState = videoEl ? (videoEl.readyState || 0) + '/' + String(Number(videoEl.currentTime || 0).toFixed(2)) : 'none'
+    return (
+      'State: ' +
+      attentionState +
+      ' | Face lock: ' +
+      (hasFaceLock ? 'yes' : 'no') +
+      ' | Armed: ' +
+      (trackingArmed ? 'yes' : 'no') +
+      ' | Grace: ' +
+      (postArmGraceUntil > Date.now() ? 'yes' : 'no') +
+      ' | Model: ' +
+      modelStatus +
+      ' | Stream: ' +
+      streamState +
+      ' | Video: ' +
+      videoState +
+      (extra ? ' | ' + extra : '')
+    )
+  }
+
   function syncPreview() {
     var shell = document.querySelector('[data-focus-mode-shell]')
     var preview = document.querySelector('[data-focus-mode-preview]')
@@ -267,6 +369,112 @@
         try { previewVideo.pause() } catch (_err) {}
       }
     }
+  }
+
+  function resetTrackingState() {
+    lastVideoTime = -1
+    frameCounter = 0
+    lastFrameAt = performance.now()
+    lastAttentiveAt = Date.now()
+    lastInteractionAt = Date.now()
+    trackingGraceUntil = Date.now() + STARTUP_GRACE_MS
+    hasFaceLock = false
+    attentionState = 'idle'
+    attentiveFrameStreak = 0
+    awayFrameStreak = 0
+    trackingArmed = false
+    trackingArmStartedAt = 0
+    postArmGraceUntil = 0
+    faceLockFrameStreak = 0
+    warningEligibleAt = 0
+    recoveryInFlight = false
+    fallbackDarkFrameStreak = 0
+    warningLevel = 0
+    latestAttention = { attentive: true, faceVisible: false, faceReliable: false, reason: 'Camera active. Checking attention...' }
+    clearLyneReturnPrompt()
+    setIndicatorState('on')
+    setStatusText(latestAttention.reason)
+    setDebugText(getDebugSummary('Current: preview live'))
+  }
+
+  function markInteraction() {
+    lastInteractionAt = Date.now()
+  }
+
+  function getFallbackFrameState() {
+    if (!videoEl || videoEl.readyState < 2 || !videoEl.videoWidth || !videoEl.videoHeight) {
+      return null
+    }
+    if (!fallbackProbeCanvas) {
+      fallbackProbeCanvas = document.createElement('canvas')
+      fallbackProbeCanvas.width = 24
+      fallbackProbeCanvas.height = 18
+      fallbackProbeCtx = fallbackProbeCanvas.getContext('2d', { willReadFrequently: true })
+    }
+    if (!fallbackProbeCtx) return null
+    fallbackProbeCtx.drawImage(videoEl, 0, 0, fallbackProbeCanvas.width, fallbackProbeCanvas.height)
+    var pixels = fallbackProbeCtx.getImageData(0, 0, fallbackProbeCanvas.width, fallbackProbeCanvas.height).data
+    var brightnessTotal = 0
+    var minBrightness = 255
+    var maxBrightness = 0
+    for (var i = 0; i < pixels.length; i += 4) {
+      var pixelBrightness = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3
+      brightnessTotal += pixelBrightness
+      if (pixelBrightness < minBrightness) minBrightness = pixelBrightness
+      if (pixelBrightness > maxBrightness) maxBrightness = pixelBrightness
+    }
+    var averageBrightness = brightnessTotal / (pixels.length / 4)
+    var brightnessRange = maxBrightness - minBrightness
+    var looksCovered = averageBrightness < 42 || brightnessRange < 18
+    if (looksCovered) {
+      fallbackDarkFrameStreak += 1
+    } else {
+      fallbackDarkFrameStreak = 0
+    }
+    return {
+      averageBrightness: averageBrightness,
+      brightnessRange: brightnessRange,
+      covered: fallbackDarkFrameStreak >= 4
+    }
+  }
+
+  function getFallbackAttentionState(frameState) {
+    if (document.hidden) {
+      return { attentive: false, faceVisible: true, faceReliable: false, reason: 'Tab hidden.' }
+    }
+    if (frameState && frameState.covered) {
+      return { attentive: false, faceVisible: false, faceReliable: false, reason: 'Camera covered or very dark.' }
+    }
+    var idleFor = Date.now() - lastInteractionAt
+    if (idleFor >= FALLBACK_IDLE_WARN_MS) {
+      return { attentive: false, faceVisible: true, faceReliable: false, reason: 'No study activity detected.' }
+    }
+    return { attentive: true, faceVisible: true, faceReliable: false, reason: 'Camera-only focus mode active.' }
+  }
+
+  function enterFallbackTrackingMode(reason) {
+    running = true
+    modelReady = false
+    modelStatus = 'fallback'
+    resetTrackingState()
+    hasFaceLock = true
+    trackingArmed = true
+    trackingGraceUntil = Date.now() + 2000
+    postArmGraceUntil = Date.now() + 4000
+    warningEligibleAt = Date.now() + 6000
+    latestAttention = {
+      attentive: true,
+      faceVisible: true,
+      faceReliable: false,
+      reason: reason || 'Camera-only focus mode active.'
+    }
+    setIndicatorState('on')
+    setStatusText(latestAttention.reason)
+    setDebugText(getDebugSummary('Current: camera-only fallback'))
+    playCue('start')
+    startSession()
+    requestAnimationFrame(trackFrame)
+    return true
   }
 
   function formatClock(ms) {
@@ -504,7 +712,13 @@
     toggle.classList.toggle('is-on', enabled)
     toggle.textContent = enabled ? 'End' : 'Activate'
     setIndicatorState(enabled ? 'on' : 'off')
-    setStatusText(enabled ? 'Camera starting...' : 'Camera off. Nothing is being tracked.')
+    if (enabled) {
+      setStatusText('Camera starting...')
+    } else if (videoEl && isStreamLive()) {
+      setStatusText('Camera preview live. Tracking is off.')
+    } else {
+      setStatusText('Camera off. Nothing is being tracked.')
+    }
     updateSessionUi()
   }
 
@@ -555,6 +769,41 @@
 
   async function ensureMediapipe() {
     if (window.FilesetResolver && window.FaceLandmarker) return true
+    for (var localIndex = 0; localIndex < LOCAL_MEDIAPIPE_BUNDLE_URLS.length; localIndex++) {
+      try {
+        var localModule = await import(LOCAL_MEDIAPIPE_BUNDLE_URLS[localIndex])
+        if (localModule && localModule.FilesetResolver && localModule.FaceLandmarker) {
+          window.FilesetResolver = localModule.FilesetResolver
+          window.FaceLandmarker = localModule.FaceLandmarker
+          return true
+        }
+      } catch (_errImport) {}
+    }
+    for (var blobIndex = 0; blobIndex < LOCAL_MEDIAPIPE_BUNDLE_URLS.length; blobIndex++) {
+      try {
+        var response = await fetch(LOCAL_MEDIAPIPE_BUNDLE_URLS[blobIndex], { cache: 'no-store' })
+        if (!response.ok) continue
+        var source = await response.text()
+        var blobUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }))
+        try {
+          var blobModule = await import(blobUrl)
+          if (blobModule && blobModule.FilesetResolver && blobModule.FaceLandmarker) {
+            window.FilesetResolver = blobModule.FilesetResolver
+            window.FaceLandmarker = blobModule.FaceLandmarker
+            return true
+          }
+        } finally {
+          try { URL.revokeObjectURL(blobUrl) } catch (_errRevoke) {}
+        }
+      } catch (_errBlobImport) {}
+    }
+    try {
+      if (window.FocusVisionBundle && window.FocusVisionBundle.FilesetResolver && window.FocusVisionBundle.FaceLandmarker) {
+        window.FilesetResolver = window.FocusVisionBundle.FilesetResolver
+        window.FaceLandmarker = window.FocusVisionBundle.FaceLandmarker
+        return true
+      }
+    } catch (_errBundle) {}
     var existing = document.querySelector('script[data-focus-mediapipe="1"]')
     if (existing) {
       return new Promise(function (resolve) {
@@ -596,37 +845,157 @@
       })
     }
     return new Promise(function (resolve) {
-      var script = document.createElement('script')
-      script.src = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14'
-      script.async = true
-      script.defer = true
-      script.setAttribute('data-focus-mediapipe', '1')
-      script.setAttribute('data-load-state', 'loading')
-      script.onload = function () {
-        script.setAttribute('data-load-state', 'ready')
-        resolve(!!(window.FilesetResolver && window.FaceLandmarker))
+      var index = 0
+      function tryNext() {
+        if (index >= MEDIAPIPE_SCRIPT_URLS.length) {
+          resolve(false)
+          return
+        }
+        var script = document.createElement('script')
+        script.src = MEDIAPIPE_SCRIPT_URLS[index]
+        index += 1
+        script.async = true
+        script.defer = true
+        script.setAttribute('data-focus-mediapipe', '1')
+        script.setAttribute('data-load-state', 'loading')
+        script.onload = function () {
+          script.setAttribute('data-load-state', 'ready')
+          resolve(!!(window.FilesetResolver && window.FaceLandmarker))
+        }
+        script.onerror = function () {
+          script.setAttribute('data-load-state', 'error')
+          try { script.remove() } catch (_errRemove) {}
+          tryNext()
+        }
+        document.head.appendChild(script)
       }
-      script.onerror = function () {
-        script.setAttribute('data-load-state', 'error')
-        resolve(false)
-      }
-      document.head.appendChild(script)
+      tryNext()
     })
   }
 
   async function ensureVideo() {
-    if (videoEl) return videoEl
-    videoEl = document.createElement('video')
-    videoEl.className = 'focus-mode-video'
-    videoEl.setAttribute('playsinline', '')
-    videoEl.setAttribute('muted', '')
-    videoEl.muted = true
-    document.body.appendChild(videoEl)
+    if (videoEl && isStreamLive()) return videoEl
+    if (!videoEl) {
+      videoEl = document.createElement('video')
+      videoEl.className = 'focus-mode-video'
+      videoEl.setAttribute('playsinline', '')
+      videoEl.setAttribute('muted', '')
+      videoEl.muted = true
+      document.body.appendChild(videoEl)
+    }
+    if (streamRef && !isStreamLive()) {
+      try {
+        streamRef.getTracks().forEach(function (track) { track.stop() })
+      } catch (_errStop) {}
+      streamRef = null
+    }
     streamRef = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
     videoEl.srcObject = streamRef
     await videoEl.play()
     syncPreview()
     return videoEl
+  }
+
+  async function startPreview() {
+    if (previewStarting) return !!(videoEl && isStreamLive())
+    if (!canUseCameraTracking()) {
+      setStatusText('Camera tracking is not supported on this device.')
+      setDebugText(getDebugSummary('Current: camera unsupported'))
+      return false
+    }
+    previewStarting = true
+    try {
+      await ensureVideo()
+      resetTrackingState()
+      setStatusText('Camera preview live. Use Activate to begin focus tracking.')
+      setDebugText(getDebugSummary('Current: preview ready'))
+      return true
+    } catch (_errVideo) {
+      setStatusText('Camera permission failed or device camera is unavailable.')
+      setDebugText(getDebugSummary('Current: preview failed'))
+      return false
+    } finally {
+      previewStarting = false
+      syncPreview()
+    }
+  }
+
+  function stopPreview() {
+    if (streamRef) {
+      try {
+        streamRef.getTracks().forEach(function (track) { track.stop() })
+      } catch (_err) {}
+      streamRef = null
+    }
+    if (videoEl) {
+      try { videoEl.pause() } catch (_errPause) {}
+      try { videoEl.remove() } catch (_errRemove) {}
+      videoEl = null
+    }
+    syncPreview()
+  }
+
+  async function createLandmarkerFromCandidates() {
+    var lastError = null
+    if (window.FilesetResolver && window.FaceLandmarker) {
+      try {
+        var localVision = await window.FilesetResolver.forVisionTasks(LOCAL_MEDIAPIPE_WASM_URL)
+        return await window.FaceLandmarker.createFromOptions(localVision, {
+          baseOptions: {
+            modelAssetPath: LOCAL_MEDIAPIPE_MODEL_URL
+          },
+          runningMode: 'VIDEO',
+          numFaces: 1
+        })
+      } catch (errLocal) {
+        lastError = errLocal
+      }
+    }
+    for (var i = 0; i < MEDIAPIPE_WASM_URLS.length; i++) {
+      try {
+        var vision = await window.FilesetResolver.forVisionTasks(MEDIAPIPE_WASM_URLS[i])
+        for (var j = 0; j < MEDIAPIPE_MODEL_URLS.length; j++) {
+          try {
+            return await window.FaceLandmarker.createFromOptions(vision, {
+              baseOptions: {
+                modelAssetPath: MEDIAPIPE_MODEL_URLS[j]
+              },
+              runningMode: 'VIDEO',
+              numFaces: 1
+            })
+          } catch (errModel) {
+            lastError = errModel
+          }
+        }
+      } catch (errWasm) {
+        lastError = errWasm
+      }
+    }
+    throw lastError || new Error('Unable to load MediaPipe model assets.')
+  }
+
+  async function ensureTrackerModel() {
+    if (modelReady && faceLandmarker) return true
+    modelStatus = 'loading'
+    var loaded = await ensureMediapipe()
+    if (!loaded || !(window.FilesetResolver && window.FaceLandmarker)) {
+      modelStatus = 'load-failed'
+      setStatusText('Focus model download failed. Camera preview is still live.')
+      setDebugText(getDebugSummary('Current: model load failed'))
+      return false
+    }
+
+    try {
+      faceLandmarker = await createLandmarkerFromCandidates()
+      modelReady = true
+      modelStatus = 'ready'
+      return true
+    } catch (_err) {
+      modelStatus = 'init-failed'
+      setStatusText('Focus model could not initialize. Camera preview is still live.')
+      setDebugText(getDebugSummary('Current: model init failed'))
+      return false
+    }
   }
 
   function canUseCameraTracking() {
@@ -673,10 +1042,14 @@
 
   function getAttentionState(result) {
     if (document.hidden) {
-      return { attentive: false, reason: 'Tab hidden.' }
+      return { attentive: false, faceVisible: false, faceReliable: false, reason: 'Tab hidden.' }
+    }
+    var frameState = getFallbackFrameState()
+    if (frameState && frameState.covered) {
+      return { attentive: false, faceVisible: false, faceReliable: false, reason: 'Camera covered or very dark.' }
     }
     if (!result || !result.faceLandmarks || !result.faceLandmarks.length) {
-      return { attentive: false, reason: 'Face not visible.' }
+      return { attentive: false, faceVisible: false, faceReliable: false, reason: 'Face not visible.' }
     }
 
     var landmarks = result.faceLandmarks[0]
@@ -698,13 +1071,13 @@
     var mouthTop = getLandmark(landmarks, 13)
     var mouthBottom = getLandmark(landmarks, 14)
     if (!leftEye || !rightEye || !nose || !forehead || !chin || !mouthTop || !mouthBottom) {
-      return { attentive: true, reason: 'Face found.' }
+      return { attentive: false, faceVisible: true, faceReliable: false, reason: 'Face found. Hold centered for calibration.' }
     }
 
     var eyeSpan = pointDistance(leftEye, rightEye)
     var faceHeight = pointDistance(forehead, chin)
     if (!eyeSpan || !faceHeight) {
-      return { attentive: true, reason: 'Face found.' }
+      return { attentive: false, faceVisible: true, faceReliable: false, reason: 'Face found. Hold centered for calibration.' }
     }
 
     var eyeMid = averagePoints([leftEye, rightEye])
@@ -714,87 +1087,68 @@
     var leftEAR = eyeAspectRatio(landmarks, [33, 160, 158, 133, 153, 144])
     var rightEAR = eyeAspectRatio(landmarks, [362, 385, 387, 263, 373, 380])
     var eyeOpen = (leftEAR + rightEAR) / 2
+    var faceCenterX = nose.x
+    var faceCenterY = ((forehead.y || 0) + (chin.y || 0)) / 2
+    var faceSize = faceHeight
+    var base = {
+      faceVisible: true,
+      faceReliable: true,
+      yaw: yaw,
+      pitch: pitch,
+      eyeOpen: eyeOpen,
+      faceCenterX: faceCenterX,
+      faceCenterY: faceCenterY,
+      faceSize: faceSize,
+    }
+
+    if (faceSize < 0.14) {
+      base.attentive = false
+      base.faceReliable = false
+      base.reason = 'Face too far from the camera.'
+      return base
+    }
+    if (faceCenterX < 0.18 || faceCenterX > 0.82 || faceCenterY < 0.18 || faceCenterY > 0.84) {
+      base.attentive = false
+      base.faceReliable = false
+      base.reason = 'Face leaving the frame.'
+      return base
+    }
 
     if (yaw > 0.3) {
-      return { attentive: false, reason: 'Head turned away.' }
+      base.attentive = false
+      base.reason = 'Head turned away.'
+      return base
     }
     if (pitch > 0.24) {
-      return { attentive: false, reason: 'Eyes off the screen.' }
+      base.attentive = false
+      base.reason = 'Eyes off the screen.'
+      return base
     }
     if (eyeOpen > 0 && eyeOpen < 0.12) {
-      return { attentive: false, reason: 'Eyes not clearly on-screen.' }
+      base.attentive = false
+      base.reason = 'Eyes not clearly on-screen.'
+      return base
     }
 
-    return { attentive: true, reason: 'Eyes on the page.' }
+    base.attentive = true
+    base.reason = 'Eyes on the page.'
+    return base
   }
 
   async function startTracking() {
     if (running) return true
-    if (!canUseCameraTracking()) {
-      setStatusText('Camera tracking is not supported on this device.')
-      showAlert(1)
+    var previewReady = await startPreview()
+    if (!previewReady) {
       return false
     }
-    try {
-      await ensureVideo()
-      setStatusText('Camera active. Loading focus model...')
-    } catch (_errVideo) {
-      setStatusText('Camera permission failed or device camera is unavailable.')
-      showAlert(2)
-      return false
-    }
-    var loaded = await ensureMediapipe()
-    if (!loaded || !(window.FilesetResolver && window.FaceLandmarker)) {
-      setStatusText('Camera model failed to load.')
-      if (streamRef) {
-        streamRef.getTracks().forEach(function (track) { track.stop() })
-        streamRef = null
-      }
-      if (videoEl) {
-        videoEl.remove()
-        videoEl = null
-      }
-      showAlert(2)
-      return false
-    }
-
-    try {
-      var vision = await window.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm')
-      faceLandmarker = await window.FaceLandmarker.createFromOptions(vision, {
-        baseOptions: {
-          modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
-        },
-        runningMode: 'VIDEO',
-        numFaces: 1
-      })
-    } catch (_err) {
-      setStatusText('Camera model could not initialize. Check connection and reload.')
-      if (streamRef) {
-        streamRef.getTracks().forEach(function (track) { track.stop() })
-        streamRef = null
-      }
-      if (videoEl) {
-        videoEl.remove()
-        videoEl = null
-      }
-      showAlert(2)
-      return false
+    setStatusText('Camera active. Loading focus model...')
+    var trackerReady = await ensureTrackerModel()
+    if (!trackerReady) {
+      return enterFallbackTrackingMode('Camera-only focus mode active. Tracker model unavailable.')
     }
 
     running = true
-    frameCounter = 0
-    lastFrameAt = performance.now()
-    lastAttentiveAt = Date.now()
-    trackingGraceUntil = Date.now() + STARTUP_GRACE_MS
-    hasFaceLock = false
-    trackingArmed = false
-    trackingArmStartedAt = 0
-    postArmGraceUntil = 0
-    warningLevel = 0
-    latestAttention = { attentive: true, reason: 'Camera active. Checking attention...' }
-    clearLyneReturnPrompt()
-    setStatusText(latestAttention.reason)
-    setIndicatorState('on')
+    resetTrackingState()
     playCue('start')
     startSession()
     requestAnimationFrame(trackFrame)
@@ -812,6 +1166,10 @@
     trackingArmed = false
     trackingArmStartedAt = 0
     postArmGraceUntil = 0
+    faceLockFrameStreak = 0
+    warningEligibleAt = 0
+    recoveryInFlight = false
+    modelStatus = 'idle'
     warningLevel = 0
     latestAttention = { attentive: true, reason: 'Camera off. Nothing is being tracked.' }
     clearLyneReturnPrompt()
@@ -831,7 +1189,9 @@
       faceLandmarker.close()
       faceLandmarker = null
     }
-    syncPreview()
+    modelReady = false
+    previewStarting = false
+    stopPreview()
     setDebugText('Camera preview off.')
   }
 
@@ -841,64 +1201,67 @@
     var frameDelta = lastFrameAt ? Math.max(0, Math.min(1500, now - lastFrameAt)) : 0
     lastFrameAt = now
     latestAttention = getAttentionState(result)
-    setDebugText(
-      'State: ' +
-      attentionState +
-      ' | Face lock: ' +
-      (hasFaceLock ? 'yes' : 'no') +
-      ' | Armed: ' +
-      (trackingArmed ? 'yes' : 'no') +
-      ' | Grace: ' +
-      (postArmGraceUntil > Date.now() ? 'yes' : 'no') +
-      ' | Current: ' +
-      latestAttention.reason
-    )
+    setDebugText(getDebugSummary('Current: ' + latestAttention.reason))
 
     if (Date.now() < trackingGraceUntil) {
-      if (latestAttention.attentive) {
-        hasFaceLock = true
-        attentionState = 'attentive'
-        attentiveFrameStreak = ATTENTIVE_CONFIRM_FRAMES
-        awayFrameStreak = 0
-        lastAttentiveAt = Date.now()
-        if (session.active && !session.completed) {
-          session.lastAttentionState = 'attentive'
-          persistSession()
+      if (latestAttention.faceReliable) {
+        faceLockFrameStreak += 1
+        if (faceLockFrameStreak >= FACE_LOCK_CONFIRM_FRAMES) {
+          hasFaceLock = true
+          attentionState = latestAttention.attentive ? 'attentive' : 'idle'
+          attentiveFrameStreak = latestAttention.attentive ? ATTENTIVE_CONFIRM_FRAMES : 0
+          awayFrameStreak = 0
+          if (latestAttention.attentive) {
+            lastAttentiveAt = Date.now()
+            if (session.active && !session.completed) {
+              session.lastAttentionState = 'attentive'
+              persistSession()
+            }
+            setIndicatorState('on')
+          }
         }
-        setIndicatorState('on')
+      } else {
+        faceLockFrameStreak = 0
       }
       if (frameCounter % 24 === 0) {
-        setStatusText('Camera active. Calibrating focus...')
+        setStatusText(hasFaceLock ? 'Camera active. Calibrating focus...' : 'Camera active. Looking for your face...')
       }
       return
     }
 
     if (!hasFaceLock) {
-      if (latestAttention.attentive) {
-        hasFaceLock = true
-        attentionState = 'attentive'
-        attentiveFrameStreak = ATTENTIVE_CONFIRM_FRAMES
-        awayFrameStreak = 0
-        lastAttentiveAt = Date.now()
-        if (session.active && !session.completed) {
-          session.lastAttentionState = 'attentive'
-          persistSession()
+      if (latestAttention.faceReliable) {
+        faceLockFrameStreak += 1
+        if (faceLockFrameStreak >= FACE_LOCK_CONFIRM_FRAMES) {
+          hasFaceLock = true
+          attentionState = latestAttention.attentive ? 'attentive' : 'idle'
+          attentiveFrameStreak = latestAttention.attentive ? ATTENTIVE_CONFIRM_FRAMES : 0
+          awayFrameStreak = 0
+          if (latestAttention.attentive) {
+            lastAttentiveAt = Date.now()
+            if (session.active && !session.completed) {
+              session.lastAttentionState = 'attentive'
+              persistSession()
+            }
+            setIndicatorState('on')
+          }
+          setStatusText('Face locked. Focus session active.')
         }
-        setIndicatorState('on')
-        setStatusText('Face locked. Focus session active.')
       } else if (frameCounter % 24 === 0) {
+        faceLockFrameStreak = 0
         setStatusText('Align your face with the camera to begin focus tracking.')
       }
       return
     }
 
     if (!trackingArmed) {
-      if (latestAttention.attentive) {
+      if (latestAttention.faceReliable && latestAttention.attentive) {
         if (!trackingArmStartedAt) trackingArmStartedAt = Date.now()
         if (Date.now() - trackingArmStartedAt >= 3000) {
           trackingArmed = true
           lastAttentiveAt = Date.now()
           postArmGraceUntil = Date.now() + 10000
+          warningEligibleAt = postArmGraceUntil + 6000
           warningLevel = 0
           setIndicatorState('on')
           setStatusText('Focus tracking armed.')
@@ -922,6 +1285,18 @@
       }
       if (frameCounter % 24 === 0) {
         setStatusText('Focus tracking armed. Keep your face in view.')
+      }
+      return
+    }
+
+    if (Date.now() < warningEligibleAt) {
+      if (latestAttention.attentive) {
+        lastAttentiveAt = Date.now()
+        warningLevel = 0
+        setIndicatorState('on')
+      }
+      if (frameCounter % 24 === 0) {
+        setStatusText('Focus tracking live. Building a stable baseline...')
       }
       return
     }
@@ -973,6 +1348,28 @@
       persistSession()
     }
 
+    if (
+      (
+        (latestAttention.reason === 'Face not visible.' ||
+          latestAttention.reason === 'Face leaving the frame.' ||
+          latestAttention.reason === 'Face too far from the camera.') &&
+        awayFrameStreak >= FACE_MISSING_CONFIRM_FRAMES
+      ) ||
+      latestAttention.reason === 'Camera covered or very dark.'
+    ) {
+      if (warningLevel < 2) {
+        warningLevel = 2
+        if (session.active && !session.completed) {
+          session.warningCount += 1
+          persistSession()
+        }
+        notifyLyneReturnPrompt(2, latestAttention.reason)
+        showAlert(2)
+      }
+      setStatusText(latestAttention.reason + ' Strong focus reminder active.')
+      return
+    }
+
     var awayFor = Date.now() - lastAttentiveAt
     if (awayFor >= ATTENTION_STRONG_MS && warningLevel < 2) {
       warningLevel = 2
@@ -996,12 +1393,85 @@
   }
 
   function trackFrame() {
-    if (!running || !videoEl || !faceLandmarker) return
-    if (videoEl.currentTime !== lastVideoTime) {
-      frameCounter += 1
-      lastVideoTime = videoEl.currentTime
-      var result = faceLandmarker.detectForVideo(videoEl, performance.now())
-      evaluateAttention(result)
+    if (!running) return
+    if (!videoEl) {
+      requestAnimationFrame(trackFrame)
+      return
+    }
+    if (!isStreamLive()) {
+      setStatusText('Camera stream paused. Recovering...')
+      setDebugText(getDebugSummary('Current: stream lost'))
+      recoverCameraStream().finally(function () {
+        requestAnimationFrame(trackFrame)
+      })
+      return
+    }
+    if (!faceLandmarker || modelStatus === 'fallback') {
+      if (videoEl.currentTime !== lastVideoTime) {
+        frameCounter += 1
+        lastVideoTime = videoEl.currentTime
+        var fallbackFrameState = getFallbackFrameState()
+        latestAttention = getFallbackAttentionState(fallbackFrameState)
+        if (latestAttention.attentive) {
+          lastAttentiveAt = Date.now()
+          warningLevel = 0
+          setIndicatorState('on')
+          if (frameCounter % 24 === 0) {
+            setStatusText(latestAttention.reason === 'Camera-only focus mode active.' ? 'Camera-only focus mode active. Tracker model unavailable.' : latestAttention.reason)
+          }
+          clearLyneReturnPrompt()
+        } else {
+          var fallbackAwayFor = Date.now() - lastAttentiveAt
+          setIndicatorState('alert')
+          if (frameCounter % 24 === 0) {
+            setStatusText(latestAttention.reason + ' Focus reminder active.')
+          }
+          if (latestAttention.reason === 'Camera covered or very dark.') {
+            if (warningLevel < 2) {
+              warningLevel = 2
+              notifyLyneReturnPrompt(2, latestAttention.reason)
+              showAlert(2)
+            }
+          } else if (Date.now() >= warningEligibleAt) {
+            if (fallbackAwayFor >= ATTENTION_STRONG_MS && warningLevel < 2) {
+              warningLevel = 2
+              notifyLyneReturnPrompt(2, latestAttention.reason)
+              showAlert(2)
+            } else if (fallbackAwayFor >= ATTENTION_WARN_MS && warningLevel < 1) {
+              warningLevel = 1
+              notifyLyneReturnPrompt(1, latestAttention.reason)
+              showAlert(1)
+            }
+          }
+        }
+        setDebugText(
+          getDebugSummary(
+            'Current: ' +
+              latestAttention.reason +
+              (fallbackFrameState
+                ? ' | Brightness: ' +
+                  Math.round(fallbackFrameState.averageBrightness) +
+                  ' | Range: ' +
+                  Math.round(fallbackFrameState.brightnessRange)
+                : '')
+          )
+        )
+      }
+      requestAnimationFrame(trackFrame)
+      return
+    }
+    try {
+      if (videoEl.currentTime !== lastVideoTime) {
+        frameCounter += 1
+        lastVideoTime = videoEl.currentTime
+        var result = faceLandmarker.detectForVideo(videoEl, performance.now())
+        evaluateAttention(result)
+      } else if (frameCounter % 30 === 0) {
+        setDebugText(getDebugSummary('Current: waiting for video frame'))
+      }
+    } catch (_err) {
+      setStatusText('Focus tracker is recovering. Keep the camera pointed at you.')
+      setDebugText(getDebugSummary('Current: detector frame error'))
     }
     requestAnimationFrame(trackFrame)
   }
@@ -1066,27 +1536,43 @@
     }
 
     if (previewButton) {
-      previewButton.addEventListener('click', function () {
+      previewButton.addEventListener('click', async function () {
         previewOpen = !previewOpen
         if (previewOpen) {
           setInfoOpenState(true)
+          syncPreview()
+          await startPreview()
+        } else {
+          syncPreview()
         }
-        syncPreview()
       })
     }
 
+    ;['pointerdown', 'pointermove', 'keydown', 'scroll', 'touchstart'].forEach(function (eventName) {
+      document.addEventListener(eventName, markInteraction, { passive: true })
+    })
+
     document.addEventListener('visibilitychange', function () {
+      markInteraction()
       if (!readFlag(FOCUS_ENABLED_KEY)) return
-      if (Date.now() < trackingGraceUntil || !hasFaceLock) return
       if (document.hidden) {
-        notifyLyneReturnPrompt(1, 'Tab hidden.')
-        showAlert(1)
-        setStatusText('Tab hidden. Focus reminder active.')
+        warningLevel = Math.max(warningLevel, 2)
+        notifyLyneReturnPrompt(2, 'Tab hidden.')
+        showAlert(2)
+        setStatusText('Tab hidden. Strong focus reminder active.')
+      } else {
+        clearLyneReturnPrompt()
+        warningLevel = 0
+        setIndicatorState(readFlag(FOCUS_ENABLED_KEY) ? 'on' : 'off')
+        setStatusText(running ? 'Focus session active.' : 'Camera preview live. Tracking is off.')
       }
     })
 
     if (readFlag(FOCUS_ENABLED_KEY)) {
       unlockAudio()
+      previewOpen = true
+      setInfoOpenState(true)
+      syncPreview()
       startTracking().catch(function () {
         setStatusText('Camera access failed.')
       })
