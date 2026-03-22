@@ -11,7 +11,7 @@
     style.id = 'sc-supabase-auth-styles'
       style.textContent =
         '.sc-auth-launch{white-space:nowrap;border-color:rgba(226,216,203,.88);background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(244,236,226,.84));box-shadow:inset 0 1px 0 rgba(255,255,255,.82),0 8px 18px rgba(23,21,16,.08)}' +
-        '.sc-auth-inline{display:inline-flex;align-items:center;flex:0 0 auto;margin-left:auto}' +
+        '.sc-auth-inline{display:inline-flex;align-items:center;flex:0 0 auto;margin-left:0;min-width:0}' +
         '.nav-more{position:relative;display:none;align-items:center}' +
         '.nav-more.is-active{display:inline-flex}' +
         '.nav-more-toggle{appearance:none;border:0;text-decoration:none;color:#5a5863;padding:8px 14px;border-radius:999px;font-weight:800;font-size:.86rem;letter-spacing:-.012em;background:transparent;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0);transition:background .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease}' +
@@ -96,6 +96,7 @@
     var moreMenu = more.querySelector('[data-nav-more-menu]')
     if (!moreMenu) return
     var desktop = window.matchMedia ? window.matchMedia('(min-width: 841px)').matches : window.innerWidth > 840
+    var compactDesktop = window.matchMedia ? window.matchMedia('(max-width: 1320px)').matches : window.innerWidth <= 1320
     var authMounted = !!document.querySelector('.sc-auth-shell')
     var selectors = [
       'a[href="about.html"]',
@@ -109,7 +110,7 @@
       if (node) navMenu.insertBefore(node, more)
     })
 
-    if (desktop && authMounted) {
+    if (desktop && (authMounted || compactDesktop)) {
       selectors.forEach(function (selector) {
         var node = navMenu.querySelector(selector)
         if (node && node.parentNode === navMenu) moreMenu.appendChild(node)

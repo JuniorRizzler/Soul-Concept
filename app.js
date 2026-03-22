@@ -539,6 +539,474 @@
     return seconds + 's'
   }
 
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+  }
+
+  function mountAnalyticsDashboard() {
+    const root = document.querySelector('[data-home-analytics], [data-analytics-page]')
+    if (!root) return
+
+    const isAdvancedPage = root.hasAttribute('data-analytics-page')
+    const focusEl = root.querySelector('[data-analytics-focus]')
+    const sessionsEl = root.querySelector('[data-analytics-sessions]')
+    const topPageEl = root.querySelector('[data-analytics-top-page]')
+    const scoreEl = root.querySelector('[data-analytics-score]')
+    const barsEl = root.querySelector('[data-analytics-bars]')
+    const ringEl = root.querySelector('[data-analytics-ring-progress]')
+    const ringValueEl = root.querySelector('[data-analytics-ring-value]')
+    const warningsEl = root.querySelector('[data-analytics-warnings]')
+    const breaksEl = root.querySelector('[data-analytics-breaks]')
+    const visitsEl = root.querySelector('[data-analytics-visits]')
+    const summaryEl = root.querySelector('[data-analytics-ai-summary]')
+    const listEl = root.querySelector('[data-analytics-ai-list]')
+    const liveLabelEl = root.querySelector('[data-analytics-live-label]')
+    const depthScoreEl = root.querySelector('[data-analytics-depth-score]')
+    const depthLabelEl = root.querySelector('[data-analytics-depth-label]')
+    const consistencyScoreEl = root.querySelector('[data-analytics-consistency-score]')
+    const consistencyLabelEl = root.querySelector('[data-analytics-consistency-label]')
+    const disciplineScoreEl = root.querySelector('[data-analytics-discipline-score]')
+    const disciplineLabelEl = root.querySelector('[data-analytics-discipline-label]')
+    const momentumScoreEl = root.querySelector('[data-analytics-momentum-score]')
+    const momentumLabelEl = root.querySelector('[data-analytics-momentum-label]')
+    const retentionScoreEl = root.querySelector('[data-analytics-retention-score]')
+    const retentionLabelEl = root.querySelector('[data-analytics-retention-label]')
+    const burnoutScoreEl = root.querySelector('[data-analytics-burnout-score]')
+    const burnoutLabelEl = root.querySelector('[data-analytics-burnout-label]')
+    const groupBarsEl = root.querySelector('[data-analytics-group-bars]')
+    const strengthsEl = root.querySelector('[data-analytics-strengths]')
+    const risksEl = root.querySelector('[data-analytics-risks]')
+    const nextStepsEl = root.querySelector('[data-analytics-next-steps]')
+    const coachHeadlineEl = root.querySelector('[data-analytics-coach-headline]')
+    const coachWindowEl = root.querySelector('[data-analytics-coach-window]')
+    const coachTargetEl = root.querySelector('[data-analytics-coach-target]')
+    const patternSummaryEl = root.querySelector('[data-analytics-pattern-summary]')
+    const patternListEl = root.querySelector('[data-analytics-pattern-list]')
+
+    const mountedAt = Date.now()
+    const ringLength = 264
+
+    function classifyPage(key) {
+      const page = String(key || '').toLowerCase()
+      if (!page || page === 'index.html' || page === '/' || page.indexOf('index') !== -1) return 'home'
+      if (
+        page.indexOf('study-library') !== -1 ||
+        page.indexOf('geography-library') !== -1 ||
+        page.indexOf('grade-10-math') !== -1 ||
+        page.indexOf('/math/') !== -1
+      ) {
+        return 'library'
+      }
+      if (
+        page.indexOf('anki') !== -1 ||
+        page.indexOf('quiz') !== -1 ||
+        page.indexOf('focus') !== -1 ||
+        page.indexOf('analytics') !== -1
+      ) {
+        return 'tool'
+      }
+      return 'other'
+    }
+
+    function getAnalyticsSnapshot() {
+      const analytics = readAnalyticsData()
+      applyFocusSessionAnalytics(analytics)
+      const usage = readUsageData()
+      const liveFocus = getLiveFocusStats(analytics)
+      const totalUsageMs =
+        usage.totalMs + (document.visibilityState === 'visible' ? Math.max(0, Date.now() - mountedAt) : 0)
+      const pageMs = Object.assign({}, analytics.pageMs || {})
+      pageMs[currentPage] = Math.max(0, Number(pageMs[currentPage] || 0)) + (document.visibilityState === 'visible'
+        ? Math.max(0, Date.now() - mountedAt)
+        : 0)
+
+      const pageVisits = Object.assign({}, analytics.pageVisits || {})
+      const totalVisits = Object.keys(pageVisits).reduce(function (sum, key) {
+        return sum + Math.max(0, Number(pageVisits[key] || 0))
+      }, 0)
+
+      let topPageKey = currentPage
+      let topPageMs = -1
+      Object.keys(pageMs).forEach(function (key) {
+        const ms = Math.max(0, Number(pageMs[key] || 0))
+        if (ms > topPageMs) {
+          topPageMs = ms
+          topPageKey = key
+        }
+      })
+
+      const totalTrackedPageMs = Object.keys(pageMs).reduce(function (sum, key) {
+        return sum + Math.max(0, Number(pageMs[key] || 0))
+      }, 0)
+      const visitedPageCount = Object.keys(pageVisits).filter(function (key) {
+        return Math.max(0, Number(pageVisits[key] || 0)) > 0
+      }).length
+      const focusRatio = totalUsageMs > 0 ? Math.min(1, liveFocus.focusedMs / totalUsageMs) : 0
+      const avgFocusSessionMs = analytics.sessionsCompleted > 0
+        ? liveFocus.focusedMs / analytics.sessionsCompleted
+        : liveFocus.focusedMs
+      const warningRate = liveFocus.focusedMs > 0 ? liveFocus.warningCount / (liveFocus.focusedMs / 3600000 || 1) : 0
+      const breakRate = liveFocus.focusedMs > 0 ? liveFocus.breakCount / (liveFocus.focusedMs / 3600000 || 1) : 0
+      const topPageShare = totalTrackedPageMs > 0 ? Math.min(1, topPageMs / totalTrackedPageMs) : 0
+      const pageGroups = { library: 0, tool: 0, home: 0, other: 0 }
+      Object.keys(pageMs).forEach(function (key) {
+        const bucket = classifyPage(key)
+        pageGroups[bucket] += Math.max(0, Number(pageMs[key] || 0))
+      })
+      const libraryShare = totalTrackedPageMs > 0 ? pageGroups.library / totalTrackedPageMs : 0
+      const toolShare = totalTrackedPageMs > 0 ? pageGroups.tool / totalTrackedPageMs : 0
+      const homeShare = totalTrackedPageMs > 0 ? pageGroups.home / totalTrackedPageMs : 0
+      const avgVisitMs = totalVisits > 0 ? totalTrackedPageMs / totalVisits : 0
+      const depthScore = Math.max(
+        0,
+        Math.min(100, Math.round((Math.min(avgFocusSessionMs, 25 * 60000) / (25 * 60000)) * 100)),
+      )
+      const consistencyScore = Math.max(
+        0,
+        Math.min(
+          100,
+          Math.round(
+            Math.min(1, analytics.sessionsCompleted / 4) * 45 +
+              Math.min(1, totalVisits / 10) * 25 +
+              Math.min(1, visitedPageCount / 4) * 10 +
+              (1 - Math.min(0.55, Math.abs(topPageShare - 0.45)) / 0.55) * 20,
+          ),
+        ),
+      )
+      const disciplineScore = Math.max(
+        0,
+        Math.min(100, Math.round(100 - Math.min(60, warningRate * 8 + breakRate * 6))),
+      )
+      const momentumScore = Math.max(
+        0,
+        Math.min(
+          100,
+          Math.round(
+            Math.min(1, totalUsageMs / (45 * 60000)) * 34 +
+              Math.min(1, analytics.sessionsCompleted / 5) * 34 +
+              Math.min(1, focusRatio / 0.62) * 32,
+          ),
+        ),
+      )
+      const retentionScore = Math.max(
+        0,
+        Math.min(
+          100,
+          Math.round(
+            depthScore * 0.34 +
+              consistencyScore * 0.28 +
+              Math.min(100, libraryShare * 140) * 0.22 +
+              Math.min(100, toolShare * 170) * 0.16,
+          ),
+        ),
+      )
+      const burnoutRisk = Math.max(
+        0,
+        Math.min(
+          100,
+          Math.round(
+            Math.min(100, Math.max(0, (1 - focusRatio) * 56 + warningRate * 6 + breakRate * 4 + Math.max(0, homeShare - 0.22) * 120)),
+          ),
+        ),
+      )
+      const focusScore = Math.max(
+        0,
+        Math.min(
+          100,
+          Math.round(
+            focusRatio * 48 +
+              depthScore * 0.2 +
+              consistencyScore * 0.14 +
+              disciplineScore * 0.18,
+          ),
+        ),
+      )
+
+      return {
+        analytics: analytics,
+        usage: usage,
+        liveFocus: liveFocus,
+        totalUsageMs: totalUsageMs,
+        pageMs: pageMs,
+        pageVisits: pageVisits,
+        totalVisits: totalVisits,
+        topPageKey: topPageKey,
+        topPageLabel: cleanPageName(topPageKey),
+        totalTrackedPageMs: totalTrackedPageMs,
+        visitedPageCount: visitedPageCount,
+        focusRatio: focusRatio,
+        avgFocusSessionMs: avgFocusSessionMs,
+        avgVisitMs: avgVisitMs,
+        topPageShare: topPageShare,
+        warningRate: warningRate,
+        breakRate: breakRate,
+        depthScore: depthScore,
+        consistencyScore: consistencyScore,
+        disciplineScore: disciplineScore,
+        momentumScore: momentumScore,
+        retentionScore: retentionScore,
+        burnoutRisk: burnoutRisk,
+        pageGroups: pageGroups,
+        libraryShare: libraryShare,
+        toolShare: toolShare,
+        homeShare: homeShare,
+        focusScore: focusScore,
+      }
+    }
+
+    function describeBand(score, highLabel, midLabel, lowLabel) {
+      if (score >= 75) return highLabel
+      if (score >= 45) return midLabel
+      return lowLabel
+    }
+
+    function buildAiBreakdown(snapshot) {
+      const topPage = snapshot.topPageLabel
+      const strongestPage = topPage === 'Home' && snapshot.pageMs['study-library.html'] ? 'Science' : topPage
+      const recommendations = []
+      const strengths = []
+      const risks = []
+      const nextSteps = []
+      const patternNotes = []
+      let summary = 'Soul Concept is collecting enough live data to start coaching your study flow.'
+      let weakestMetric = 'depth'
+      let weakestScore = snapshot.depthScore
+      let coachHeadline = 'Build a stronger study cycle'
+      let coachWindow = 'Next 20 minutes'
+      let coachTarget = 'Complete one focused block before switching pages.'
+
+      ;[
+        { key: 'consistency', score: snapshot.consistencyScore },
+        { key: 'discipline', score: snapshot.disciplineScore },
+      ].forEach(function (metric) {
+        if (metric.score < weakestScore) {
+          weakestMetric = metric.key
+          weakestScore = metric.score
+        }
+      })
+
+      if (snapshot.totalUsageMs < 8 * 60 * 1000) {
+        summary = 'You do not have enough stable data yet. The next priority is building one real study block so the analysis stops guessing.'
+        recommendations.push('Run one uninterrupted 15 minute session in a library page instead of browsing across the app.')
+        coachHeadline = 'Not enough signal yet'
+        coachTarget = 'Stay in one library for 15 minutes so the system can model your pattern accurately.'
+      } else if (weakestMetric === 'discipline') {
+        summary = 'Your biggest limiter is attention control. The warning and break pattern says the study session is fragmenting before it compounds.'
+        recommendations.push('Reduce the next session to one section only and use Focus Mode so you finish clean before switching tasks.')
+        recommendations.push('Your current interruption rate is too high. Aim to cut warnings and breaks by at least one third next session.')
+        risks.push('Attention leaks are costing you retention before the session compounds.')
+        coachHeadline = 'Stabilize attention before adding volume'
+        coachTarget = 'One page, one output, zero switching until the block ends.'
+      } else if (weakestMetric === 'depth') {
+        summary = 'Your sessions are active but shallow. You are showing up, but the average block is not deep enough to create strong retention.'
+        recommendations.push('Increase your next study block length. Stay on one subject until you finish one quiz, one note set, or one flashcard run.')
+        recommendations.push('Target 12 to 20 focused minutes per block. Right now your average block is only ' + formatDuration(snapshot.avgFocusSessionMs) + '.')
+        risks.push('Session length is too short to move ideas into long-term memory.')
+        coachHeadline = 'Increase depth, not just activity'
+        coachTarget = 'Push the next block past ' + formatDuration(Math.max(snapshot.avgFocusSessionMs + 5 * 60000, 12 * 60000)) + '.'
+      } else {
+        summary = 'Your routine lacks repetition. The app sees study activity, but not enough recurring session structure to build momentum.'
+        recommendations.push('Return to the same strongest page tomorrow before opening new tools. Consistency will raise retention faster than variety right now.')
+        recommendations.push('Aim for 3 to 4 completed focus sessions before expanding into more subjects.')
+        risks.push('The routine is too irregular to create compounding recall gains.')
+        coachHeadline = 'Repeat the strongest lane'
+        coachTarget = 'Come back to ' + strongestPage + ' before opening anything new.'
+      }
+
+      recommendations.push('Best study lane right now: ' + strongestPage + '. That is where the strongest momentum signal is forming.')
+
+      if (snapshot.topPageShare > 0.72 && snapshot.visitedPageCount <= 2) {
+        recommendations.push('Your study is concentrated in one lane. Finish that lane, then deliberately add one recall tool or quiz so understanding turns into retention.')
+      } else if (snapshot.topPageShare < 0.34 && snapshot.visitedPageCount >= 4) {
+        recommendations.push('You are spreading time too thin. Cut the next session down to one page and one output goal instead of rotating across the platform.')
+      } else {
+        recommendations.push('Your page balance is usable. Keep the strongest page as the anchor, then add one supporting review tool after the main block.')
+      }
+
+      if (snapshot.momentumScore >= 72) {
+        strengths.push('Momentum is strong. You are spending enough time in the app for the session to matter.')
+      } else {
+        risks.push('Momentum is weak. Total active study time is still below the level where progress compounds.')
+      }
+      if (snapshot.retentionScore >= 68) {
+        strengths.push('Retention profile is healthy. Your mix of depth and review is starting to support memory, not just exposure.')
+      } else {
+        risks.push('Retention profile is soft. You need a better mix of core library study and recall-based review.')
+      }
+      if (snapshot.disciplineScore >= 70) {
+        strengths.push('Discipline is holding. Focus loss is not the main bottleneck right now.')
+      }
+      if (snapshot.libraryShare >= 0.5) {
+        strengths.push('Most of your time is going into actual library study, which is the right base layer.')
+      } else {
+        risks.push('Too much time is outside the core libraries. Learning time needs a stronger content anchor.')
+      }
+
+      nextSteps.push('Open ' + strongestPage + ' and set a concrete finish line before you start.')
+      nextSteps.push('When the main block ends, add one recall layer such as cards or a quiz to convert understanding into retention.')
+      nextSteps.push('Use Focus Mode if you need stricter control over drift and interruptions.')
+
+      patternNotes.push('Average focus block: ' + formatDuration(snapshot.avgFocusSessionMs) + '.')
+      patternNotes.push('Average time per visit: ' + formatDuration(snapshot.avgVisitMs) + '.')
+      patternNotes.push('Study mix: ' + Math.round(snapshot.libraryShare * 100) + '% libraries, ' + Math.round(snapshot.toolShare * 100) + '% tools, ' + Math.round(snapshot.homeShare * 100) + '% navigation/home.')
+      patternNotes.push('Burnout risk is ' + Math.round(snapshot.burnoutRisk) + '%. Lower it by reducing drift rather than simply taking more breaks.')
+
+      return {
+        summary: summary,
+        items: recommendations.slice(0, 4),
+        depthLabel: describeBand(snapshot.depthScore, 'Strong session length', 'Sessions need more depth', 'Too shallow right now'),
+        consistencyLabel: describeBand(snapshot.consistencyScore, 'Good repeat pattern', 'Routine still forming', 'Needs more repetition'),
+        disciplineLabel: describeBand(snapshot.disciplineScore, 'Attention under control', 'Some drift showing', 'Focus is leaking'),
+        momentumLabel: describeBand(snapshot.momentumScore, 'Momentum is building', 'Momentum is uneven', 'Momentum is weak'),
+        retentionLabel: describeBand(snapshot.retentionScore, 'Retention setup is strong', 'Retention is mixed', 'Retention needs structure'),
+        burnoutLabel: describeBand(100 - snapshot.burnoutRisk, 'Burnout risk is low', 'Watch energy management', 'Burnout risk is elevated'),
+        strengths: strengths.slice(0, 3),
+        risks: risks.slice(0, 3),
+        nextSteps: nextSteps.slice(0, 3),
+        coachHeadline: coachHeadline,
+        coachWindow: coachWindow,
+        coachTarget: coachTarget,
+        patternSummary: 'Your strongest lane is ' + strongestPage + ', while the main constraint is ' + weakestMetric + '.',
+        patternNotes: patternNotes.slice(0, 4),
+      }
+    }
+
+    function renderBars(snapshot) {
+      if (!barsEl) return
+      const entries = Object.keys(snapshot.pageMs)
+        .map(function (key) {
+          return {
+            key: key,
+            label: cleanPageName(key),
+            ms: Math.max(0, Number(snapshot.pageMs[key] || 0)),
+          }
+        })
+        .filter(function (entry) {
+          return entry.ms > 0
+        })
+        .sort(function (a, b) {
+          return b.ms - a.ms
+        })
+        .slice(0, 5)
+
+      if (!entries.length) {
+        barsEl.innerHTML = '<p class="section-lead" style="margin:0">Open a library and the chart will start filling live.</p>'
+        return
+      }
+
+      const maxMs = entries[0].ms || 1
+      barsEl.innerHTML = entries
+        .map(function (entry) {
+          const width = Math.max(10, Math.round((entry.ms / maxMs) * 100))
+          return (
+            '<div class="analytics-bar-row">' +
+            '<div class="analytics-bar-meta"><strong>' +
+            escapeHtml(entry.label) +
+            '</strong><span>' +
+            escapeHtml(formatDuration(entry.ms)) +
+            '</span></div>' +
+            '<div class="analytics-bar-track"><div class="analytics-bar-fill" style="width:' +
+            width +
+            '%"></div></div>' +
+            '</div>'
+          )
+        })
+        .join('')
+    }
+
+    function renderGroupBars(snapshot) {
+      if (!groupBarsEl) return
+      const groups = [
+        { label: 'Libraries', value: snapshot.libraryShare, tone: 'var(--primary)' },
+        { label: 'Tools', value: snapshot.toolShare, tone: 'var(--accent)' },
+        { label: 'Home / Nav', value: snapshot.homeShare, tone: '#64748b' },
+      ]
+      groupBarsEl.innerHTML = groups
+        .map(function (group) {
+          return (
+            '<div class="analytics-mix-row">' +
+            '<div class="analytics-bar-meta"><strong>' +
+            escapeHtml(group.label) +
+            '</strong><span>' +
+            Math.round(group.value * 100) +
+            '%</span></div>' +
+            '<div class="analytics-bar-track"><div class="analytics-bar-fill" style="width:' +
+            Math.max(6, Math.round(group.value * 100)) +
+            '%;background:' +
+            group.tone +
+            ';box-shadow:none"></div></div>' +
+            '</div>'
+          )
+        })
+        .join('')
+    }
+
+    function renderBulletList(node, items) {
+      if (!node) return
+      node.innerHTML = (items || []).map(function (item) {
+        return '<li>' + escapeHtml(item) + '</li>'
+      }).join('')
+    }
+
+    function updateDashboard() {
+      const snapshot = getAnalyticsSnapshot()
+      const ai = buildAiBreakdown(snapshot)
+
+      if (focusEl) focusEl.textContent = formatDuration(snapshot.liveFocus.focusedMs)
+      if (sessionsEl) sessionsEl.textContent = String(Math.max(0, Number(snapshot.analytics.sessionsCompleted || 0)))
+      if (topPageEl) topPageEl.textContent = snapshot.topPageLabel
+      if (scoreEl) scoreEl.textContent = snapshot.focusScore + '%'
+      if (ringValueEl) ringValueEl.textContent = Math.round(snapshot.focusRatio * 100) + '%'
+      if (warningsEl) warningsEl.textContent = String(snapshot.liveFocus.warningCount)
+      if (breaksEl) breaksEl.textContent = String(snapshot.liveFocus.breakCount)
+      if (visitsEl) visitsEl.textContent = String(snapshot.totalVisits)
+      if (summaryEl) summaryEl.textContent = ai.summary
+      if (depthScoreEl) depthScoreEl.textContent = String(snapshot.depthScore)
+      if (depthLabelEl) depthLabelEl.textContent = ai.depthLabel
+      if (consistencyScoreEl) consistencyScoreEl.textContent = String(snapshot.consistencyScore)
+      if (consistencyLabelEl) consistencyLabelEl.textContent = ai.consistencyLabel
+      if (disciplineScoreEl) disciplineScoreEl.textContent = String(snapshot.disciplineScore)
+      if (disciplineLabelEl) disciplineLabelEl.textContent = ai.disciplineLabel
+      if (momentumScoreEl) momentumScoreEl.textContent = String(snapshot.momentumScore)
+      if (momentumLabelEl) momentumLabelEl.textContent = ai.momentumLabel
+      if (retentionScoreEl) retentionScoreEl.textContent = String(snapshot.retentionScore)
+      if (retentionLabelEl) retentionLabelEl.textContent = ai.retentionLabel
+      if (burnoutScoreEl) burnoutScoreEl.textContent = String(snapshot.burnoutRisk) + '%'
+      if (burnoutLabelEl) burnoutLabelEl.textContent = ai.burnoutLabel
+      if (listEl) {
+        listEl.innerHTML = ai.items.map(function (item) { return '<li>' + escapeHtml(item) + '</li>' }).join('')
+      }
+      if (liveLabelEl) liveLabelEl.textContent = 'Updated now'
+      if (ringEl) {
+        const progress = Math.max(0, Math.min(1, snapshot.focusRatio))
+        ringEl.style.strokeDashoffset = String(ringLength - ringLength * progress)
+      }
+
+      renderBars(snapshot)
+      renderGroupBars(snapshot)
+      renderBulletList(strengthsEl, ai.strengths)
+      renderBulletList(risksEl, ai.risks)
+      renderBulletList(nextStepsEl, ai.nextSteps)
+      renderBulletList(patternListEl, ai.patternNotes)
+      if (coachHeadlineEl) coachHeadlineEl.textContent = ai.coachHeadline
+      if (coachWindowEl) coachWindowEl.textContent = ai.coachWindow
+      if (coachTargetEl) coachTargetEl.textContent = ai.coachTarget
+      if (patternSummaryEl) patternSummaryEl.textContent = ai.patternSummary
+      if (liveLabelEl) liveLabelEl.textContent = isAdvancedPage ? 'Live local analysis' : 'Updated now'
+    }
+
+    updateDashboard()
+    setInterval(updateDashboard, 4000)
+    document.addEventListener('visibilitychange', updateDashboard)
+    window.addEventListener('focus', updateDashboard)
+    document.addEventListener('sc:push-state-changed', updateDashboard)
+  }
+
   function mountStatsButton(streakData) {
     const topbarInner = document.querySelector('.topbar-inner')
     if (!topbarInner) return
@@ -708,6 +1176,7 @@
   const streakData = updateDailyStreak()
   mountStreakPill(streakData)
   mountStatsButton(streakData)
+  mountAnalyticsDashboard()
 
   // Sign-in feature removed by request.
 

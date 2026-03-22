@@ -1,6 +1,337 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Search, ArrowLeft, CheckCircle, Circle, Leaf, Beaker, Zap, Globe, ChevronRight, FileText, Lightbulb, Target, X, ClipboardList, Award, Trophy, Star, Flame, Brain, Sparkles } from 'lucide-react';
 
+// ── SOUL UI · Light Mode Style Injection ─────────────────────────────────────
+const SoulStyles = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
+    /* ---- Reset ---- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* ---- Fonts ---- */
+    h1, h2, h3, h4, h5, h6    { font-family: 'Syne', sans-serif; }
+    body, p, span, div, input, button, label, td, th, li, summary, a { font-family: 'DM Sans', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif; }
+    code, pre                  { font-family: 'Space Mono', monospace; }
+    .soul-font-display         { font-family: 'Syne', sans-serif; font-weight: 700; }
+
+    /* ---- Scrollbar ---- */
+    ::-webkit-scrollbar              { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track        { background: #f0eeea; }
+    ::-webkit-scrollbar-thumb        { background: rgba(99,102,241,0.3); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover  { background: rgba(99,102,241,0.5); }
+
+    /* ---- Page background dot grid ---- */
+    .soul-grid {
+      background-color: #f5f4f0;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.055) 1px, transparent 1px);
+      background-size: 28px 28px;
+      min-height: 100vh;
+    }
+
+    /* ---- Animations ---- */
+    @keyframes fadeIn  { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes s-ping  { 0% { transform:scale(1); opacity:0.7; } 100% { transform:scale(2.2); opacity:0; } }
+    @keyframes s-grad  { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+    .animate-fadeIn        { animation: fadeIn 0.35s ease both; }
+    .animate-soul-ring     { animation: s-ping 1.8s ease-out infinite; }
+    .animate-soul-gradient { animation: s-grad 5s ease infinite; background-size: 200% 200%; }
+
+    /* ================================================================
+       LIGHT MODE -- all rules below restore the original Tailwind light
+       palette and fix any dark-mode artifacts.
+       ================================================================ */
+
+    /* ---- Page & surface backgrounds ---- */
+    body                { background-color: #f5f4f0 !important; }
+    .bg-white           { background-color: #ffffff !important; }
+    .bg-gray-50         { background-color: #f9fafb !important; }
+    .bg-gray-100        { background-color: #f3f4f6 !important; }
+    .bg-gray-200        { background-color: #e5e7eb !important; }
+
+    /* ---- Pastel tint backgrounds ---- */
+    .bg-blue-50    { background-color: #eff6ff !important; }
+    .bg-indigo-50  { background-color: #eef2ff !important; }
+    .bg-purple-50  { background-color: #faf5ff !important; }
+    .bg-violet-50  { background-color: #f5f3ff !important; }
+    .bg-green-50   { background-color: #f0fdf4 !important; }
+    .bg-emerald-50 { background-color: #ecfdf5 !important; }
+    .bg-teal-50    { background-color: #f0fdfa !important; }
+    .bg-cyan-50    { background-color: #ecfeff !important; }
+    .bg-sky-50     { background-color: #f0f9ff !important; }
+    .bg-red-50     { background-color: #fef2f2 !important; }
+    .bg-orange-50  { background-color: #fff7ed !important; }
+    .bg-amber-50   { background-color: #fffbeb !important; }
+    .bg-yellow-50  { background-color: #fefce8 !important; }
+    .bg-pink-50    { background-color: #fdf2f8 !important; }
+    .bg-rose-50    { background-color: #fff1f2 !important; }
+    .bg-slate-50   { background-color: #f8fafc !important; }
+
+    /* ---- Deeper tint backgrounds (info boxes, key-point panels) ---- */
+    .bg-blue-100   { background-color: #dbeafe !important; }
+    .bg-indigo-100 { background-color: #e0e7ff !important; }
+    .bg-purple-100 { background-color: #f3e8ff !important; }
+    .bg-green-100  { background-color: #dcfce7 !important; }
+    .bg-teal-100   { background-color: #ccfbf1 !important; }
+    .bg-cyan-100   { background-color: #cffafe !important; }
+    .bg-red-100    { background-color: #fee2e2 !important; }
+    .bg-orange-100 { background-color: #ffedd5 !important; }
+    .bg-amber-100  { background-color: #fef3c7 !important; }
+    .bg-yellow-100 { background-color: #fef9c3 !important; }
+    .bg-pink-100   { background-color: #fce7f3 !important; }
+    .bg-rose-100   { background-color: #ffe4e6 !important; }
+
+    /* ---- Glassy overlays -- MUST stay transparent, never solid white ---- */
+    /* These sit on top of coloured gradient backgrounds */
+    [class*="bg-white/10"] { background-color: rgba(255,255,255,0.10) !important; }
+    [class*="bg-white/15"] { background-color: rgba(255,255,255,0.15) !important; }
+    [class*="bg-white/20"] { background-color: rgba(255,255,255,0.20) !important; }
+    [class*="bg-white/25"] { background-color: rgba(255,255,255,0.25) !important; }
+    [class*="bg-white/30"] { background-color: rgba(255,255,255,0.30) !important; }
+    [class*="bg-white/35"] { background-color: rgba(255,255,255,0.35) !important; }
+    [class*="bg-white/40"] { background-color: rgba(255,255,255,0.40) !important; }
+    [class*="bg-white/50"] { background-color: rgba(255,255,255,0.50) !important; }
+
+    /* ---- Text colours ---- */
+    /* Dark body text on white backgrounds */
+    .text-gray-900  { color: #111827 !important; }
+    .text-gray-800  { color: #1f2937 !important; }
+    .text-gray-700  { color: #374151 !important; }
+    .text-gray-600  { color: #4b5563 !important; }
+    .text-gray-500  { color: #6b7280 !important; }
+    .text-gray-400  { color: #9ca3af !important; }
+    /* These got darkened during dark-mode pass -- restore */
+    .text-gray-100  { color: #1f2937 !important; }
+    .text-gray-200  { color: #374151 !important; }
+    .text-gray-300  { color: #4b5563 !important; }
+
+    /* Slate text on white */
+    .text-slate-300 { color: #64748b !important; }
+    .text-slate-400 { color: #64748b !important; }
+    .text-slate-500 { color: #475569 !important; }
+    .text-slate-600 { color: #334155 !important; }
+    .text-slate-700 { color: #1e293b !important; }
+    .text-slate-800 { color: #0f172a !important; }
+    .text-slate-900 { color: #0f172a !important; }
+
+    /* Vivid coloured text -- both the -300 (set during dark mode) and -700/-800 variants */
+    .text-blue-300, .text-blue-600   { color: #2563eb !important; }
+    .text-blue-700                   { color: #1d4ed8 !important; }
+    .text-blue-800                   { color: #1e40af !important; }
+    .text-indigo-300, .text-indigo-600 { color: #4f46e5 !important; }
+    .text-indigo-700                 { color: #4338ca !important; }
+    .text-indigo-800                 { color: #312e81 !important; }
+    .text-purple-300, .text-purple-600 { color: #9333ea !important; }
+    .text-purple-700                 { color: #7e22ce !important; }
+    .text-purple-800                 { color: #581c87 !important; }
+    .text-green-300, .text-green-600  { color: #16a34a !important; }
+    .text-green-700                  { color: #15803d !important; }
+    .text-green-800                  { color: #166534 !important; }
+    .text-teal-300, .text-teal-600   { color: #0d9488 !important; }
+    .text-teal-700                   { color: #0f766e !important; }
+    .text-teal-800                   { color: #115e59 !important; }
+    .text-cyan-300, .text-cyan-600   { color: #0891b2 !important; }
+    .text-cyan-700                   { color: #0e7490 !important; }
+    .text-cyan-800                   { color: #155e75 !important; }
+    .text-red-300, .text-red-600     { color: #dc2626 !important; }
+    .text-red-700                    { color: #b91c1c !important; }
+    .text-red-800                    { color: #991b1b !important; }
+    .text-orange-300, .text-orange-600 { color: #ea580c !important; }
+    .text-orange-700                 { color: #c2410c !important; }
+    .text-orange-800                 { color: #9a3412 !important; }
+    .text-amber-300, .text-amber-600  { color: #d97706 !important; }
+    .text-amber-700                  { color: #b45309 !important; }
+    .text-amber-800                  { color: #92400e !important; }
+    .text-yellow-300, .text-yellow-600 { color: #ca8a04 !important; }
+    .text-yellow-800                 { color: #854d0e !important; }
+    .text-pink-300, .text-pink-600   { color: #db2777 !important; }
+
+    /* White text -- ONLY applies on coloured/gradient surfaces, not on white bg.
+       We cannot globally force text-white to white because it also appears on white cards.
+       Instead we target gradient containers specifically below. */
+
+    /* ---- WHITE TEXT inside gradient banners & subject cards ---- */
+    [class*="bg-gradient-to-r"] .text-white,
+    [class*="bg-gradient-to-br"] .text-white,
+    [class*="bg-gradient-to-r"] h1,
+    [class*="bg-gradient-to-r"] h2,
+    [class*="bg-gradient-to-r"] h3,
+    [class*="bg-gradient-to-br"] h1,
+    [class*="bg-gradient-to-br"] h2,
+    [class*="bg-gradient-to-br"] h3,
+    [class*="bg-gradient-to-r"] p,
+    [class*="bg-gradient-to-br"] p,
+    [class*="bg-gradient-to-r"] span,
+    [class*="bg-gradient-to-br"] span { color: #ffffff !important; }
+
+    /* Coloured solid bg surfaces also get white text */
+    [class*="bg-blue-500"] .text-white,
+    [class*="bg-blue-600"] .text-white,
+    [class*="bg-indigo-500"] .text-white,
+    [class*="bg-emerald-500"] .text-white,
+    [class*="bg-teal-500"] .text-white { color: #ffffff !important; }
+
+    /* ---- Borders ---- */
+    .border-gray-100  { border-color: #f3f4f6 !important; }
+    .border-gray-200  { border-color: #e5e7eb !important; }
+    .border-gray-300  { border-color: #d1d5db !important; }
+    [class*="border-white/10"] { border-color: rgba(255,255,255,0.10) !important; }
+    [class*="border-white/20"] { border-color: rgba(255,255,255,0.20) !important; }
+    [class*="border-white/30"] { border-color: rgba(255,255,255,0.30) !important; }
+
+    /* ---- Inputs ---- */
+    input, textarea, select {
+      background-color: #ffffff !important;
+      border-color: #e5e7eb !important;
+      color: #111827 !important;
+    }
+    input::placeholder, textarea::placeholder { color: #9ca3af !important; }
+    input:focus, textarea:focus {
+      border-color: #6366f1 !important;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.10) !important;
+      outline: none !important;
+    }
+
+    /* ---- Tables ---- */
+    th { background-color: #f3f4f6 !important; color: #111827 !important; }
+    td { color: #374151 !important; border-color: #f3f4f6 !important; }
+    tr:nth-child(even) td { background-color: #fafafa !important; }
+
+    /* ---- Cards & shadows ---- */
+    [class*="shadow-lg"]  { box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06) !important; }
+    [class*="shadow-md"]  { box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.05) !important; }
+    [class*="shadow-2xl"] { box-shadow: 0 8px 40px rgba(0,0,0,0.10) !important; }
+    [class*="hover:shadow-xl"]:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.10), 0 20px 48px rgba(0,0,0,0.08) !important; }
+
+    /* ---- Modals ---- */
+    [class*="fixed inset-0"] > [class*="rounded-3xl"],
+    [class*="fixed inset-0"] > [class*="rounded-2xl"] {
+      background-color: #ffffff !important;
+      box-shadow: 0 12px 60px rgba(0,0,0,0.15) !important;
+    }
+
+    /* ---- SVG diagram text ---- */
+    svg text {
+      fill: #1f2937 !important;
+      font-weight: 600;
+    }
+
+    /* ---- Diagram contrast on light panels ---- */
+    [class*="from-blue-50"][class*="p-8"] .text-white,
+    [class*="from-indigo-50"][class*="p-8"] .text-white,
+    [class*="from-green-50"][class*="p-8"] .text-white,
+    [class*="from-emerald-50"][class*="p-8"] .text-white,
+    [class*="from-red-50"][class*="p-8"] .text-white,
+    [class*="from-orange-50"][class*="p-8"] .text-white,
+    [class*="from-amber-50"][class*="p-8"] .text-white,
+    [class*="from-yellow-50"][class*="p-8"] .text-white,
+    [class*="from-purple-50"][class*="p-8"] .text-white,
+    [class*="from-pink-50"][class*="p-8"] .text-white,
+    [class*="from-cyan-50"][class*="p-8"] .text-white,
+    [class*="from-teal-50"][class*="p-8"] .text-white,
+    [class*="from-rose-50"][class*="p-8"] .text-white {
+      color: #0f172a !important;
+      text-shadow: none !important;
+    }
+    [class*="from-blue-50"][class*="p-8"] .text-blue-300,
+    [class*="from-indigo-50"][class*="p-8"] .text-blue-300,
+    [class*="from-green-50"][class*="p-8"] .text-green-300,
+    [class*="from-emerald-50"][class*="p-8"] .text-green-300,
+    [class*="from-red-50"][class*="p-8"] .text-red-300,
+    [class*="from-amber-50"][class*="p-8"] .text-amber-300,
+    [class*="from-yellow-50"][class*="p-8"] .text-amber-300,
+    [class*="from-purple-50"][class*="p-8"] .text-purple-300,
+    [class*="from-cyan-50"][class*="p-8"] .text-cyan-300,
+    [class*="from-teal-50"][class*="p-8"] .text-cyan-300 {
+      color: inherit !important;
+    }
+    [class*="from-blue-50"][class*="p-8"] .text-blue-300,
+    [class*="from-indigo-50"][class*="p-8"] .text-blue-300 { color: #1d4ed8 !important; }
+    [class*="from-green-50"][class*="p-8"] .text-green-300,
+    [class*="from-emerald-50"][class*="p-8"] .text-green-300 { color: #15803d !important; }
+    [class*="from-red-50"][class*="p-8"] .text-red-300 { color: #b91c1c !important; }
+    [class*="from-amber-50"][class*="p-8"] .text-amber-300,
+    [class*="from-yellow-50"][class*="p-8"] .text-amber-300 { color: #b45309 !important; }
+    [class*="from-purple-50"][class*="p-8"] .text-purple-300 { color: #7e22ce !important; }
+    [class*="from-cyan-50"][class*="p-8"] .text-cyan-300,
+    [class*="from-teal-50"][class*="p-8"] .text-cyan-300 { color: #0e7490 !important; }
+    [class*="from-blue-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-indigo-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-green-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-emerald-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-red-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-amber-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-yellow-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-purple-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-cyan-50"][class*="p-8"] .bg-white\/20,
+    [class*="from-teal-50"][class*="p-8"] .bg-white\/20 {
+      background-color: rgba(255,255,255,0.82) !important;
+      border: 1px solid rgba(148,163,184,0.18);
+    }
+    [class*="from-blue-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-indigo-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-green-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-emerald-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-red-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-orange-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-amber-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-yellow-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-purple-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-pink-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-cyan-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-teal-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-rose-50"][class*="p-8"] .bg-white\/20 .text-white {
+      color: #0f172a !important;
+    }
+
+    /* ---- Hover states ---- */
+    .hover\:bg-gray-50:hover   { background-color: #f9fafb !important; }
+    .hover\:bg-gray-100:hover  { background-color: #f3f4f6 !important; }
+    .hover\:border-gray-300:hover { border-color: #d1d5db !important; }
+
+    /* ---- Mark complete button ---- */
+    button[class*="bg-green-100"] {
+      background-color: #dcfce7 !important;
+      color: #166534 !important;
+    }
+
+    /* ---- Locked content ---- */
+    .opacity-40 { opacity: 0.4 !important; }
+
+    /* ---- Feature card hover borders ---- */
+    [class*="hover:border-blue-300"]:hover   { border-color: #93c5fd !important; }
+    [class*="hover:border-indigo-300"]:hover { border-color: #a5b4fc !important; }
+    [class*="hover:border-purple-300"]:hover { border-color: #d8b4fe !important; }
+    [class*="hover:border-yellow-300"]:hover { border-color: #fde68a !important; }
+    [class*="hover:border-cyan-300"]:hover   { border-color: #a5f3fc !important; }
+    [class*="hover:border-green-300"]:hover  { border-color: #86efac !important; }
+
+    /* ---- Targeted readability fixes ---- */
+    .quick-start-panel {
+      background: linear-gradient(180deg, #ffffff, #f8fbff) !important;
+      border-color: #bfdbfe !important;
+      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.08) !important;
+    }
+    .quick-start-panel h2,
+    .quick-start-panel h3,
+    .quick-start-panel p,
+    .quick-start-panel span {
+      color: inherit !important;
+    }
+    .sponsor-panel,
+    .sponsor-panel h1,
+    .sponsor-panel h2,
+    .sponsor-panel h3,
+    .sponsor-panel p,
+    .sponsor-panel span {
+      color: #1f2937 !important;
+    }
+    .sponsor-panel .text-amber-600 {
+      color: #d97706 !important;
+    }
+`}</style>
+);
 // Diagram Components
 const LewisDotDiagram = () => (
   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
@@ -43,7 +374,7 @@ const LewisDotDiagram = () => (
       ))}
     </div>
     <div className="mt-6 bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-800 text-center">
+      <p className="text-sm text-blue-300 text-center">
         <span className="font-bold">Key Point:</span> The number of dots = number of valence electrons = group number (for main groups)
       </p>
     </div>
@@ -65,7 +396,7 @@ const PhotosynthesisDiagram = () => (
         <p className="text-sm text-gray-600">From Air</p>
       </div>
 
-      <div className="text-4xl text-gray-400">+</div>
+      <div className="text-4xl text-gray-600">+</div>
 
       <div className="text-center">
         <div className="w-32 h-32 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg mb-2">
@@ -97,7 +428,7 @@ const PhotosynthesisDiagram = () => (
         <p className="text-sm text-gray-600">Sugar (Food)</p>
       </div>
 
-      <div className="text-4xl text-gray-400">+</div>
+      <div className="text-4xl text-gray-600">+</div>
 
       <div className="text-center">
         <div className="w-32 h-32 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg mb-2">
@@ -111,7 +442,7 @@ const PhotosynthesisDiagram = () => (
     </div>
 
     <div className="mt-6 bg-green-100 rounded-lg p-4">
-      <p className="text-sm text-green-800 text-center">
+      <p className="text-sm text-green-300 text-center">
         <span className="font-bold">Key Point:</span> Plants use sunlight energy to convert CO₂ and water into glucose (their food) and oxygen (which we breathe)!
       </p>
     </div>
@@ -133,7 +464,7 @@ const CellRespirationDiagram = () => (
         <p className="text-sm text-gray-600">Food</p>
       </div>
 
-      <div className="text-4xl text-gray-400">+</div>
+      <div className="text-4xl text-gray-600">+</div>
 
       <div className="text-center">
         <div className="w-32 h-32 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg mb-2">
@@ -158,7 +489,7 @@ const CellRespirationDiagram = () => (
         <p className="text-sm text-gray-600">Released to Air</p>
       </div>
 
-      <div className="text-4xl text-gray-400">+</div>
+      <div className="text-4xl text-gray-600">+</div>
 
       <div className="text-center">
         <div className="w-32 h-32 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg mb-2">
@@ -170,7 +501,7 @@ const CellRespirationDiagram = () => (
         <p className="text-sm text-gray-600">Released</p>
       </div>
 
-      <div className="text-4xl text-gray-400">+</div>
+      <div className="text-4xl text-gray-600">+</div>
 
       <div className="text-center">
         <div className="w-32 h-32 rounded-xl bg-yellow-500 flex items-center justify-center shadow-lg mb-2">
@@ -184,7 +515,7 @@ const CellRespirationDiagram = () => (
     </div>
 
     <div className="mt-6 bg-red-100 rounded-lg p-4">
-      <p className="text-sm text-red-800 text-center">
+      <p className="text-sm text-red-300 text-center">
         <span className="font-bold">Key Point:</span> Opposite of photosynthesis! Organisms break down glucose with oxygen to release energy (ATP) for living.
       </p>
     </div>
@@ -201,7 +532,7 @@ const FoodChainDiagram = () => (
         <div className="w-32 h-32 rounded-xl bg-green-500 flex items-center justify-center shadow-lg mb-2">
           <span className="text-6xl">🌾</span>
         </div>
-        <p className="font-bold text-green-800">Grass</p>
+        <p className="font-bold text-green-300">Grass</p>
         <p className="text-xs text-gray-600">Producer</p>
         <p className="text-xs text-green-600 font-bold mt-1">10,000 kcal</p>
       </div>
@@ -237,14 +568,14 @@ const FoodChainDiagram = () => (
         <div className="w-32 h-32 rounded-xl bg-red-500 flex items-center justify-center shadow-lg mb-2">
           <span className="text-6xl">🐍</span>
         </div>
-        <p className="font-bold text-red-800">Snake</p>
+        <p className="font-bold text-red-300">Snake</p>
         <p className="text-xs text-gray-600">Tertiary Consumer</p>
         <p className="text-xs text-red-600 font-bold mt-1">10 kcal</p>
       </div>
     </div>
 
     <div className="bg-amber-100 rounded-lg p-4">
-      <p className="text-sm text-amber-800 text-center">
+      <p className="text-sm text-amber-300 text-center">
         <span className="font-bold">Energy Flow:</span> Notice how only 10% of energy transfers to each level (10,000 → 1,000 → 100 → 10)
       </p>
     </div>
@@ -261,7 +592,7 @@ const AquaticFoodChainDiagram = () => (
         <div className="w-32 h-32 rounded-xl bg-green-400 flex items-center justify-center shadow-lg mb-2">
           <span className="text-6xl">🦠</span>
         </div>
-        <p className="font-bold text-green-800">Phytoplankton</p>
+        <p className="font-bold text-green-300">Phytoplankton</p>
         <p className="text-xs text-gray-600">Producer</p>
         <p className="text-xs text-green-600 font-bold mt-1">50,000 kcal</p>
       </div>
@@ -304,7 +635,7 @@ const AquaticFoodChainDiagram = () => (
     </div>
 
     <div className="bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-800 text-center">
+      <p className="text-sm text-blue-300 text-center">
         <span className="font-bold">Ocean Food Chain:</span> Starts with microscopic phytoplankton that use sunlight to make food through photosynthesis
       </p>
     </div>
@@ -391,20 +722,20 @@ const NitrogenCycleDiagram = () => (
 
     <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
       <div className="bg-green-100 rounded-lg p-2">
-        <span className="font-bold text-green-800">Fixation:</span>
-        <p className="text-green-700">N₂ → NH₃ (bacteria/lightning)</p>
+        <span className="font-bold text-green-300">Fixation:</span>
+        <p className="text-green-300">N₂ → NH₃ (bacteria/lightning)</p>
       </div>
       <div className="bg-orange-100 rounded-lg p-2">
         <span className="font-bold text-orange-800">Nitrification:</span>
-        <p className="text-orange-700">NH₃ → NO₂⁻ → NO₃⁻ (bacteria)</p>
+        <p className="text-orange-300">NH₃ → NO₂⁻ → NO₃⁻ (bacteria)</p>
       </div>
       <div className="bg-purple-100 rounded-lg p-2">
         <span className="font-bold text-purple-800">Ammonification:</span>
-        <p className="text-purple-700">Dead matter → NH₄⁺</p>
+        <p className="text-purple-300">Dead matter → NH₄⁺</p>
       </div>
       <div className="bg-blue-100 rounded-lg p-2">
-        <span className="font-bold text-blue-800">Denitrification:</span>
-        <p className="text-blue-700">NO₃⁻ → N₂ (back to air)</p>
+        <span className="font-bold text-blue-300">Denitrification:</span>
+        <p className="text-blue-300">NO₃⁻ → N₂ (back to air)</p>
       </div>
     </div>
   </div>
@@ -417,7 +748,7 @@ const DensityComparisonDiagram = () => (
     <div className="grid md:grid-cols-2 gap-6">
       {/* Object Floats */}
       <div className="bg-white rounded-xl p-4 border-2 border-blue-300">
-        <h5 className="text-center font-bold text-blue-800 mb-4">Object Floats ⬆️</h5>
+        <h5 className="text-center font-bold text-blue-300 mb-4">Object Floats ⬆️</h5>
         <div className="relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400">
           {/* Water level */}
           <div className="absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500"></div>
@@ -431,12 +762,12 @@ const DensityComparisonDiagram = () => (
           </div>
           
           {/* Water label */}
-          <div className="absolute bottom-4 right-4 text-blue-800 font-bold text-sm">
+          <div className="absolute bottom-4 right-4 text-blue-300 font-bold text-sm">
             Water: 1.0 g/cm³
           </div>
         </div>
         <div className="mt-3 bg-green-100 rounded-lg p-3">
-          <p className="text-sm text-green-800 text-center">
+          <p className="text-sm text-green-300 text-center">
             <span className="font-bold">0.6 &lt; 1.0</span><br/>
             Object density &lt; Water density<br/>
             = FLOATS! 🎈
@@ -446,7 +777,7 @@ const DensityComparisonDiagram = () => (
 
       {/* Object Sinks */}
       <div className="bg-white rounded-xl p-4 border-2 border-red-300">
-        <h5 className="text-center font-bold text-red-800 mb-4">Object Sinks ⬇️</h5>
+        <h5 className="text-center font-bold text-red-300 mb-4">Object Sinks ⬇️</h5>
         <div className="relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400">
           {/* Water level */}
           <div className="absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500"></div>
@@ -460,12 +791,12 @@ const DensityComparisonDiagram = () => (
           </div>
           
           {/* Water label */}
-          <div className="absolute bottom-4 right-4 text-blue-800 font-bold text-sm">
+          <div className="absolute bottom-4 right-4 text-blue-300 font-bold text-sm">
             Water: 1.0 g/cm³
           </div>
         </div>
         <div className="mt-3 bg-red-100 rounded-lg p-3">
-          <p className="text-sm text-red-800 text-center">
+          <p className="text-sm text-red-300 text-center">
             <span className="font-bold">2.5 &gt; 1.0</span><br/>
             Object density &gt; Water density<br/>
             = SINKS! ⚓
@@ -475,7 +806,7 @@ const DensityComparisonDiagram = () => (
     </div>
 
     <div className="mt-6 bg-indigo-100 rounded-lg p-4">
-      <p className="text-sm text-indigo-800 text-center">
+      <p className="text-sm text-indigo-300 text-center">
         <span className="font-bold">Rule:</span> If object density is less than liquid density → floats. If greater → sinks!
       </p>
     </div>
@@ -555,7 +886,7 @@ const IonDiagram = () => (
           <p className="text-xs text-gray-600 mt-2">11 protons, 10 electrons</p>
           <p className="text-xs font-bold text-red-600">Charge: +1 (cation)</p>
           <div className="mt-2 inline-block bg-red-100 px-3 py-1 rounded-full">
-            <p className="text-xs text-red-700 font-bold">11p⁺ - 10e⁻ = +1</p>
+            <p className="text-xs text-red-300 font-bold">11p⁺ - 10e⁻ = +1</p>
           </div>
         </div>
       </div>
@@ -642,7 +973,7 @@ const IonDiagram = () => (
           <p className="text-xs text-gray-600 mt-2">17 protons, 18 electrons</p>
           <p className="text-xs font-bold text-green-600">Charge: -1 (anion)</p>
           <div className="mt-2 inline-block bg-green-100 px-3 py-1 rounded-full">
-            <p className="text-xs text-green-700 font-bold">17p⁺ - 18e⁻ = -1</p>
+            <p className="text-xs text-green-300 font-bold">17p⁺ - 18e⁻ = -1</p>
           </div>
         </div>
       </div>
@@ -727,7 +1058,7 @@ const EnergyPyramid = () => (
     </div>
     <div className="mt-6 text-center">
       <div className="inline-block bg-blue-100 rounded-lg px-4 py-2">
-        <p className="text-sm font-semibold text-blue-800">⚡ Only 10% of energy passes to the next level</p>
+        <p className="text-sm font-semibold text-blue-300">⚡ Only 10% of energy passes to the next level</p>
         <p className="text-xs text-blue-600 mt-1">90% lost as heat, movement, and waste</p>
       </div>
     </div>
@@ -804,12 +1135,12 @@ const CarbonCycle = () => (
     </div>
     <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
       <div className="bg-green-100 rounded-lg p-2">
-        <span className="font-bold text-green-800">Photosynthesis:</span>
-        <p className="text-green-700">CO₂ + H₂O → C₆H₁₂O₆ + O₂</p>
+        <span className="font-bold text-green-300">Photosynthesis:</span>
+        <p className="text-green-300">CO₂ + H₂O → C₆H₁₂O₆ + O₂</p>
       </div>
       <div className="bg-blue-100 rounded-lg p-2">
-        <span className="font-bold text-blue-800">Respiration:</span>
-        <p className="text-blue-700">C₆H₁₂O₆ + O₂ → CO₂ + H₂O</p>
+        <span className="font-bold text-blue-300">Respiration:</span>
+        <p className="text-blue-300">C₆H₁₂O₆ + O₂ → CO₂ + H₂O</p>
       </div>
     </div>
   </div>
@@ -987,20 +1318,20 @@ const SeriesCircuitDiagram = () => (
     
     <div className="grid grid-cols-2 gap-3">
       <div className="bg-blue-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-blue-800 mb-1">✓ Current</p>
-        <p className="text-xs text-blue-700">Same everywhere (0.5A)</p>
+        <p className="text-sm font-bold text-blue-300 mb-1">✓ Current</p>
+        <p className="text-xs text-blue-300">Same everywhere (0.5A)</p>
       </div>
       <div className="bg-purple-100 rounded-lg p-3">
         <p className="text-sm font-bold text-purple-800 mb-1">✓ Voltage</p>
-        <p className="text-xs text-purple-700">Divides: 6V = 2V + 2V + 2V</p>
+        <p className="text-xs text-purple-300">Divides: 6V = 2V + 2V + 2V</p>
       </div>
       <div className="bg-orange-100 rounded-lg p-3">
         <p className="text-sm font-bold text-orange-800 mb-1">✓ Path</p>
-        <p className="text-xs text-orange-700">One route only</p>
+        <p className="text-xs text-orange-300">One route only</p>
       </div>
       <div className="bg-red-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-red-800 mb-1">✗ One Fails</p>
-        <p className="text-xs text-red-700">All stop working</p>
+        <p className="text-sm font-bold text-red-300 mb-1">✗ One Fails</p>
+        <p className="text-xs text-red-300">All stop working</p>
       </div>
     </div>
   </div>
@@ -1076,20 +1407,20 @@ const ParallelCircuitDiagram = () => (
     
     <div className="grid grid-cols-2 gap-3">
       <div className="bg-green-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-green-800 mb-1">✓ Voltage</p>
-        <p className="text-xs text-green-700">Same across all (12V)</p>
+        <p className="text-sm font-bold text-green-300 mb-1">✓ Voltage</p>
+        <p className="text-xs text-green-300">Same across all (12V)</p>
       </div>
       <div className="bg-purple-100 rounded-lg p-3">
         <p className="text-sm font-bold text-purple-800 mb-1">✓ Current</p>
-        <p className="text-xs text-purple-700">Divides: 3A = 1A + 1A + 1A</p>
+        <p className="text-xs text-purple-300">Divides: 3A = 1A + 1A + 1A</p>
       </div>
       <div className="bg-orange-100 rounded-lg p-3">
         <p className="text-sm font-bold text-orange-800 mb-1">✓ Paths</p>
-        <p className="text-xs text-orange-700">Multiple routes</p>
+        <p className="text-xs text-orange-300">Multiple routes</p>
       </div>
       <div className="bg-green-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-green-800 mb-1">✓ One Fails</p>
-        <p className="text-xs text-green-700">Others keep working!</p>
+        <p className="text-sm font-bold text-green-300 mb-1">✓ One Fails</p>
+        <p className="text-xs text-green-300">Others keep working!</p>
       </div>
     </div>
   </div>
@@ -1118,7 +1449,7 @@ const OhmsLawTriangle = () => (
       <div className="bg-purple-100 rounded-xl p-4 text-center border-2 border-purple-300">
         <p className="text-sm font-bold text-purple-800 mb-2">Find Voltage</p>
         <p className="text-2xl font-bold text-purple-900 mb-1">V = I × R</p>
-        <p className="text-xs text-purple-700">Cover V</p>
+        <p className="text-xs text-purple-300">Cover V</p>
       </div>
       
       <div className="bg-pink-100 rounded-xl p-4 text-center border-2 border-pink-300">
@@ -1128,9 +1459,9 @@ const OhmsLawTriangle = () => (
       </div>
       
       <div className="bg-indigo-100 rounded-xl p-4 text-center border-2 border-indigo-300">
-        <p className="text-sm font-bold text-indigo-800 mb-2">Find Resistance</p>
+        <p className="text-sm font-bold text-indigo-300 mb-2">Find Resistance</p>
         <p className="text-2xl font-bold text-indigo-900 mb-1">R = V ÷ I</p>
-        <p className="text-xs text-indigo-700">Cover R</p>
+        <p className="text-xs text-indigo-300">Cover R</p>
       </div>
     </div>
     
@@ -1193,7 +1524,7 @@ const CircuitDiagram = () => (
       </svg>
     </div>
     <div className="bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-800 text-center">
+      <p className="text-sm text-blue-300 text-center">
         <span className="font-bold">Complete Circuit:</span> All components connected in a closed loop allowing current to flow
       </p>
     </div>
@@ -1207,7 +1538,7 @@ const StaticElectricityDiagram = () => (
     <div className="grid md:grid-cols-2 gap-6 mb-6">
       {/* Like Charges Repel */}
       <div className="bg-white rounded-xl p-6 border-2 border-red-200">
-        <h5 className="text-center font-bold text-red-800 mb-4">Like Charges REPEL</h5>
+        <h5 className="text-center font-bold text-red-300 mb-4">Like Charges REPEL</h5>
         
         <div className="flex justify-center items-center gap-8 mb-4">
           <div className="relative">
@@ -1277,12 +1608,12 @@ const StaticElectricityDiagram = () => (
           </div>
         </div>
         
-        <p className="text-center text-sm text-red-700 font-semibold mt-4">+ repels + | − repels −</p>
+        <p className="text-center text-sm text-red-300 font-semibold mt-4">+ repels + | − repels −</p>
       </div>
       
       {/* Opposite Charges Attract */}
       <div className="bg-white rounded-xl p-6 border-2 border-green-200">
-        <h5 className="text-center font-bold text-green-800 mb-4">Opposite Charges ATTRACT</h5>
+        <h5 className="text-center font-bold text-green-300 mb-4">Opposite Charges ATTRACT</h5>
         
         <div className="flex justify-center items-center gap-8 mb-8 mt-12">
           <div className="relative">
@@ -1318,16 +1649,16 @@ const StaticElectricityDiagram = () => (
           </div>
         </div>
         
-        <p className="text-center text-sm text-green-700 font-semibold mt-12">+ attracts − | − attracts +</p>
+        <p className="text-center text-sm text-green-300 font-semibold mt-12">+ attracts − | − attracts +</p>
       </div>
     </div>
     
-    <div className="bg-amber-100 rounded-xl p-4 border-2 border-amber-300">
+    <div className="bg-amber-50 rounded-xl p-4 border-2 border-amber-300">
       <div className="flex items-start gap-3">
         <Lightbulb className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
         <div>
-          <p className="font-bold text-amber-800 mb-1">Remember:</p>
-          <p className="text-sm text-amber-700">Only ELECTRONS move in static electricity! Protons stay in the nucleus. When you rub a balloon on your hair, electrons transfer from your hair to the balloon.</p>
+          <p className="font-bold text-amber-300 mb-1">Remember:</p>
+          <p className="text-sm text-amber-300">Only ELECTRONS move in static electricity! Protons stay in the nucleus. When you rub a balloon on your hair, electrons transfer from your hair to the balloon.</p>
         </div>
       </div>
     </div>
@@ -1347,19 +1678,19 @@ const PowerFormulaDiagram = () => (
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-orange-100 rounded-lg p-4 text-center">
           <p className="text-sm font-bold text-orange-800 mb-2">Power (P)</p>
-          <p className="text-xs text-orange-700">Measured in Watts (W)</p>
+          <p className="text-xs text-orange-300">Measured in Watts (W)</p>
           <p className="text-xs text-orange-600 mt-2">How fast energy is used</p>
         </div>
         
         <div className="bg-red-100 rounded-lg p-4 text-center">
-          <p className="text-sm font-bold text-red-800 mb-2">Voltage (V)</p>
-          <p className="text-xs text-red-700">Measured in Volts (V)</p>
+          <p className="text-sm font-bold text-red-300 mb-2">Voltage (V)</p>
+          <p className="text-xs text-red-300">Measured in Volts (V)</p>
           <p className="text-xs text-red-600 mt-2">Electrical "pressure"</p>
         </div>
         
         <div className="bg-yellow-100 rounded-lg p-4 text-center">
           <p className="text-sm font-bold text-yellow-800 mb-2">Current (I)</p>
-          <p className="text-xs text-yellow-700">Measured in Amperes (A)</p>
+          <p className="text-xs text-yellow-300">Measured in Amperes (A)</p>
           <p className="text-xs text-yellow-600 mt-2">Flow of electrons</p>
         </div>
       </div>
@@ -1371,22 +1702,22 @@ const PowerFormulaDiagram = () => (
         <div className="space-y-2 text-sm">
           <p className="text-gray-700">Given: V = 120V, I = 0.5A</p>
           <p className="text-gray-700">Find: P = ?</p>
-          <div className="bg-white rounded p-3 mt-2">
-            <p className="font-mono text-orange-700">P = V × I</p>
-            <p className="font-mono text-orange-700">P = 120V × 0.5A</p>
+          <div className="bg-gray-100 rounded p-3 mt-2">
+            <p className="font-mono text-orange-300">P = V × I</p>
+            <p className="font-mono text-orange-300">P = 120V × 0.5A</p>
             <p className="font-mono font-bold text-orange-900">P = 60W</p>
           </div>
         </div>
       </div>
       
       <div className="bg-gradient-to-br from-red-100 to-pink-100 rounded-xl p-4 border-2 border-red-300">
-        <p className="font-bold text-red-800 mb-3">Example 2: Heater</p>
+        <p className="font-bold text-red-300 mb-3">Example 2: Heater</p>
         <div className="space-y-2 text-sm">
           <p className="text-gray-700">Given: P = 1500W, V = 120V</p>
           <p className="text-gray-700">Find: I = ?</p>
-          <div className="bg-white rounded p-3 mt-2">
-            <p className="font-mono text-red-700">I = P ÷ V</p>
-            <p className="font-mono text-red-700">I = 1500W ÷ 120V</p>
+          <div className="bg-gray-100 rounded p-3 mt-2">
+            <p className="font-mono text-red-300">I = P ÷ V</p>
+            <p className="font-mono text-red-300">I = 1500W ÷ 120V</p>
             <p className="font-mono font-bold text-red-900">I = 12.5A</p>
           </div>
         </div>
@@ -1421,11 +1752,11 @@ const WaterAnalogyDiagram = () => (
             <text x="12" y="38" fontSize="10" fill="white" fontWeight="bold">V</text>
           </svg>
         </div>
-        <h5 className="font-bold text-blue-800 text-lg mb-2">VOLTAGE (V)</h5>
-        <p className="text-blue-700 text-sm font-semibold">= Water Pressure</p>
+        <h5 className="font-bold text-blue-300 text-lg mb-2">VOLTAGE (V)</h5>
+        <p className="text-blue-300 text-sm font-semibold">= Water Pressure</p>
         <p className="text-gray-600 text-xs mt-2">The "push" that forces water through the pipe. Higher pressure = more force. Measured in Volts (V).</p>
         <div className="mt-3 bg-blue-100 rounded-lg px-3 py-2">
-          <p className="text-xs text-blue-800 font-bold">Think: Pump pushing water</p>
+          <p className="text-xs text-blue-300 font-bold">Think: Pump pushing water</p>
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-cyan-300 shadow-md text-center">
@@ -1437,7 +1768,7 @@ const WaterAnalogyDiagram = () => (
           </svg>
         </div>
         <h5 className="font-bold text-cyan-800 text-lg mb-2">CURRENT (I)</h5>
-        <p className="text-cyan-700 text-sm font-semibold">= Flow Rate of Water</p>
+        <p className="text-cyan-300 text-sm font-semibold">= Flow Rate of Water</p>
         <p className="text-gray-600 text-xs mt-2">How much water flows past a point each second. More flow = higher current. Measured in Amperes (A).</p>
         <div className="mt-3 bg-cyan-100 rounded-lg px-3 py-2">
           <p className="text-xs text-cyan-800 font-bold">Think: Litres per second</p>
@@ -1452,7 +1783,7 @@ const WaterAnalogyDiagram = () => (
           </svg>
         </div>
         <h5 className="font-bold text-orange-800 text-lg mb-2">RESISTANCE (R)</h5>
-        <p className="text-orange-700 text-sm font-semibold">= Pipe Narrowing</p>
+        <p className="text-orange-300 text-sm font-semibold">= Pipe Narrowing</p>
         <p className="text-gray-600 text-xs mt-2">A narrower pipe restricts flow. More resistance = less current for same pressure. Measured in Ohms (Ω).</p>
         <div className="mt-3 bg-orange-100 rounded-lg px-3 py-2">
           <p className="text-xs text-orange-800 font-bold">Think: Narrow kink in pipe</p>
@@ -1463,11 +1794,11 @@ const WaterAnalogyDiagram = () => (
       <div className="flex items-center justify-center gap-4 flex-wrap text-center">
         <div className="text-purple-800 font-bold text-lg">More Pressure (V↑)</div>
         <div className="text-2xl">→</div>
-        <div className="text-cyan-700 font-bold text-lg">More Flow (I↑)</div>
-        <div className="mx-4 text-gray-400 font-bold">|</div>
-        <div className="text-orange-700 font-bold text-lg">Narrower Pipe (R↑)</div>
+        <div className="text-cyan-300 font-bold text-lg">More Flow (I↑)</div>
+        <div className="mx-4 text-gray-600 font-bold">|</div>
+        <div className="text-orange-300 font-bold text-lg">Narrower Pipe (R↑)</div>
         <div className="text-2xl">→</div>
-        <div className="text-cyan-700 font-bold text-lg">Less Flow (I↓)</div>
+        <div className="text-cyan-300 font-bold text-lg">Less Flow (I↓)</div>
       </div>
       <p className="text-center text-sm text-gray-600 mt-3 font-semibold">This is exactly how V = I × R works in Ohm's Law!</p>
     </div>
@@ -1481,31 +1812,31 @@ const OhmsLawWorkedExamples = () => (
       <div className="bg-white rounded-xl p-5 border-2 border-green-300 shadow-md">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
-          <h5 className="font-bold text-green-800">Find Current</h5>
+          <h5 className="font-bold text-green-300">Find Current</h5>
         </div>
         <div className="bg-green-50 rounded-lg p-3 mb-3 font-mono text-sm">
           <p className="text-gray-600">Given: V = 12V, R = 4Ω</p>
           <p className="text-gray-600">Find: I = ?</p>
         </div>
         <div className="space-y-1 text-sm">
-          <p className="text-gray-700">Formula: <span className="font-bold text-green-700">I = V ÷ R</span></p>
+          <p className="text-gray-700">Formula: <span className="font-bold text-green-300">I = V ÷ R</span></p>
           <p className="text-gray-700">I = 12 ÷ 4</p>
-          <p className="text-xl font-bold text-green-700 text-center mt-2">I = 3 A</p>
+          <p className="text-xl font-bold text-green-300 text-center mt-2">I = 3 A</p>
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-blue-300 shadow-md">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
-          <h5 className="font-bold text-blue-800">Find Voltage</h5>
+          <h5 className="font-bold text-blue-300">Find Voltage</h5>
         </div>
         <div className="bg-blue-50 rounded-lg p-3 mb-3 font-mono text-sm">
           <p className="text-gray-600">Given: I = 2A, R = 6Ω</p>
           <p className="text-gray-600">Find: V = ?</p>
         </div>
         <div className="space-y-1 text-sm">
-          <p className="text-gray-700">Formula: <span className="font-bold text-blue-700">V = I × R</span></p>
+          <p className="text-gray-700">Formula: <span className="font-bold text-blue-300">V = I × R</span></p>
           <p className="text-gray-700">V = 2 × 6</p>
-          <p className="text-xl font-bold text-blue-700 text-center mt-2">V = 12 V</p>
+          <p className="text-xl font-bold text-blue-300 text-center mt-2">V = 12 V</p>
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-orange-300 shadow-md">
@@ -1518,9 +1849,9 @@ const OhmsLawWorkedExamples = () => (
           <p className="text-gray-600">Find: R = ?</p>
         </div>
         <div className="space-y-1 text-sm">
-          <p className="text-gray-700">Formula: <span className="font-bold text-orange-700">R = V ÷ I</span></p>
+          <p className="text-gray-700">Formula: <span className="font-bold text-orange-300">R = V ÷ I</span></p>
           <p className="text-gray-700">R = 24 ÷ 3</p>
-          <p className="text-xl font-bold text-orange-700 text-center mt-2">R = 8 Ω</p>
+          <p className="text-xl font-bold text-orange-300 text-center mt-2">R = 8 Ω</p>
         </div>
       </div>
     </div>
@@ -1546,7 +1877,7 @@ const SeriesCircuitCalculations = () => (
   <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Series Circuit — Step-by-Step Calculations</h4>
     <div className="bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md">
-      <p className="text-center font-bold text-green-800 mb-4">Example: 12V battery, 3 resistors in series (R₁=2Ω, R₂=3Ω, R₃=7Ω)</p>
+      <p className="text-center font-bold text-green-300 mb-4">Example: 12V battery, 3 resistors in series (R₁=2Ω, R₂=3Ω, R₃=7Ω)</p>
       <svg viewBox="0 0 480 120" className="w-full mb-4">
         <line x1="40" y1="30" x2="40" y2="90" stroke="#1F2937" strokeWidth="3"/>
         <line x1="40" y1="30" x2="110" y2="30" stroke="#1F2937" strokeWidth="3"/>
@@ -1571,16 +1902,16 @@ const SeriesCircuitCalculations = () => (
       </svg>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div className="bg-green-50 rounded-lg p-3 border border-green-200">
-          <p className="font-bold text-green-800 mb-2">① Total Resistance</p>
+          <p className="font-bold text-green-300 mb-2">① Total Resistance</p>
           <p className="text-gray-700">R_total = R₁+R₂+R₃</p>
           <p className="text-gray-700">= 2+3+7</p>
-          <p className="font-bold text-green-700 text-lg">= 12 Ω</p>
+          <p className="font-bold text-green-300 text-lg">= 12 Ω</p>
         </div>
         <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-          <p className="font-bold text-blue-800 mb-2">② Total Current</p>
+          <p className="font-bold text-blue-300 mb-2">② Total Current</p>
           <p className="text-gray-700">I = V ÷ R_total</p>
           <p className="text-gray-700">= 12 ÷ 12</p>
-          <p className="font-bold text-blue-700 text-lg">= 1 A (same everywhere)</p>
+          <p className="font-bold text-blue-300 text-lg">= 1 A (same everywhere)</p>
         </div>
         <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
           <p className="font-bold text-orange-800 mb-2">③ Voltage Drops</p>
@@ -1592,19 +1923,19 @@ const SeriesCircuitCalculations = () => (
       </div>
     </div>
     <div className="grid grid-cols-2 gap-4 text-sm">
-      <div className="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-        <p className="font-bold text-blue-800 mb-2">📌 Series Rules to Memorize:</p>
-        <p className="text-blue-700">• Current: I₁ = I₂ = I₃ (same everywhere)</p>
-        <p className="text-blue-700">• Voltage: V_total = V₁ + V₂ + V₃</p>
-        <p className="text-blue-700">• Resistance: R_total = R₁ + R₂ + R₃</p>
-        <p className="text-blue-700">• One break → all stop</p>
+      <div className="bg-blue-50 rounded-xl p-4">
+        <p className="font-bold text-blue-300 mb-2">📌 Series Rules to Memorize:</p>
+        <p className="text-blue-300">• Current: I₁ = I₂ = I₃ (same everywhere)</p>
+        <p className="text-blue-300">• Voltage: V_total = V₁ + V₂ + V₃</p>
+        <p className="text-blue-300">• Resistance: R_total = R₁ + R₂ + R₃</p>
+        <p className="text-blue-300">• One break → all stop</p>
       </div>
-      <div className="bg-red-50 rounded-xl p-4 border-2 border-red-200">
-        <p className="font-bold text-red-800 mb-2">⚠️ Common Exam Mistakes:</p>
-        <p className="text-red-700">• Forgetting current is the SAME in series</p>
-        <p className="text-red-700">• Adding voltages wrong</p>
-        <p className="text-red-700">• Not checking: ΣV = battery V</p>
-        <p className="text-red-700">• Mixing up series and parallel rules</p>
+      <div className="bg-red-950/30 rounded-xl p-4 border border-red-500/20">
+        <p className="font-bold text-red-300 mb-2">⚠️ Common Exam Mistakes:</p>
+        <p className="text-red-300">• Forgetting current is the SAME in series</p>
+        <p className="text-red-300">• Adding voltages wrong</p>
+        <p className="text-red-300">• Not checking: ΣV = battery V</p>
+        <p className="text-red-300">• Mixing up series and parallel rules</p>
       </div>
     </div>
   </div>
@@ -1614,7 +1945,7 @@ const ParallelCircuitCalculations = () => (
   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Parallel Circuit — Step-by-Step Calculations</h4>
     <div className="bg-white rounded-xl p-5 border-2 border-blue-300 mb-5 shadow-md">
-      <p className="text-center font-bold text-blue-800 mb-4">Example: 12V battery, 3 resistors in parallel (R₁=6Ω, R₂=4Ω, R₃=12Ω)</p>
+      <p className="text-center font-bold text-blue-300 mb-4">Example: 12V battery, 3 resistors in parallel (R₁=6Ω, R₂=4Ω, R₃=12Ω)</p>
       <svg viewBox="0 0 480 160" className="w-full mb-4">
         <line x1="40" y1="20" x2="40" y2="140" stroke="#1F2937" strokeWidth="3"/>
         <line x1="40" y1="20" x2="440" y2="20" stroke="#1F2937" strokeWidth="3"/>
@@ -1641,12 +1972,12 @@ const ParallelCircuitCalculations = () => (
       </svg>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-          <p className="font-bold text-blue-800 mb-2">① Voltage (easy!)</p>
+          <p className="font-bold text-blue-300 mb-2">① Voltage (easy!)</p>
           <p className="text-gray-700">All branches = battery V</p>
-          <p className="font-bold text-blue-700">V₁=V₂=V₃= 12V</p>
+          <p className="font-bold text-blue-300">V₁=V₂=V₃= 12V</p>
         </div>
         <div className="bg-green-50 rounded-lg p-3 border border-green-200">
-          <p className="font-bold text-green-800 mb-2">② Branch Currents</p>
+          <p className="font-bold text-green-300 mb-2">② Branch Currents</p>
           <p className="text-gray-700">I₁=12÷6 = <span className="font-bold">2A</span></p>
           <p className="text-gray-700">I₂=12÷4 = <span className="font-bold">3A</span></p>
           <p className="text-gray-700">I₃=12÷12 = <span className="font-bold">1A</span></p>
@@ -1655,24 +1986,24 @@ const ParallelCircuitCalculations = () => (
           <p className="font-bold text-orange-800 mb-2">③ Total Current</p>
           <p className="text-gray-700">I_total = I₁+I₂+I₃</p>
           <p className="text-gray-700">= 2+3+1</p>
-          <p className="font-bold text-orange-700 text-lg">= 6 A</p>
+          <p className="font-bold text-orange-300 text-lg">= 6 A</p>
         </div>
       </div>
     </div>
     <div className="grid grid-cols-2 gap-4 text-sm">
-      <div className="bg-indigo-50 rounded-xl p-4 border-2 border-indigo-200">
-        <p className="font-bold text-indigo-800 mb-2">📌 Parallel Rules to Memorize:</p>
-        <p className="text-indigo-700">• Voltage: V₁ = V₂ = V₃ (same everywhere)</p>
-        <p className="text-indigo-700">• Current: I_total = I₁ + I₂ + I₃</p>
-        <p className="text-indigo-700">• Each branch: I = V ÷ R (that branch's R)</p>
-        <p className="text-indigo-700">• One break → others keep working</p>
+      <div className="bg-indigo-950/30 rounded-xl p-4 border border-indigo-500/20">
+        <p className="font-bold text-indigo-300 mb-2">📌 Parallel Rules to Memorize:</p>
+        <p className="text-indigo-300">• Voltage: V₁ = V₂ = V₃ (same everywhere)</p>
+        <p className="text-indigo-300">• Current: I_total = I₁ + I₂ + I₃</p>
+        <p className="text-indigo-300">• Each branch: I = V ÷ R (that branch's R)</p>
+        <p className="text-indigo-300">• One break → others keep working</p>
       </div>
-      <div className="bg-amber-50 rounded-xl p-4 border-2 border-amber-200">
-        <p className="font-bold text-amber-800 mb-2">🏠 Real-Life Parallel:</p>
-        <p className="text-amber-700">• Home outlets all wired in parallel</p>
-        <p className="text-amber-700">• Each device gets full 120V</p>
-        <p className="text-amber-700">• Turning one device off doesn't affect others</p>
-        <p className="text-amber-700">• Adding devices draws more total current</p>
+      <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/20">
+        <p className="font-bold text-amber-300 mb-2">🏠 Real-Life Parallel:</p>
+        <p className="text-amber-300">• Home outlets all wired in parallel</p>
+        <p className="text-amber-300">• Each device gets full 120V</p>
+        <p className="text-amber-300">• Turning one device off doesn't affect others</p>
+        <p className="text-amber-300">• Adding devices draws more total current</p>
       </div>
     </div>
   </div>
@@ -1761,7 +2092,7 @@ const ChargingMethodsDiagram = () => (
         </div>
       </div>
     </div>
-    <div className="mt-5 bg-white rounded-xl p-4 border-2 border-gray-200">
+    <div className="mt-5 bg-white rounded-xl p-4 border border-gray-200">
       <p className="text-center font-bold text-gray-700 mb-3">Key Rule: Only ELECTRONS Move — Protons NEVER move!</p>
       <div className="flex justify-center gap-8 text-sm">
         <div className="text-center"><span className="text-red-600 font-bold text-xl">+</span><p className="text-gray-600 text-xs">Proton: FIXED in nucleus</p></div>
@@ -1786,11 +2117,11 @@ const ResistanceFactorsDiagram = () => (
           <line x1="10" y1="80" x2="220" y2="80" stroke="#DC2626" strokeWidth="6" strokeLinecap="round"/>
           <text x="10" y="97" fontSize="10" fill="#DC2626" fontWeight="bold">R = high ✗</text>
         </svg>
-        <p className="text-sm text-orange-700 text-center font-semibold">Longer wire = MORE resistance</p>
+        <p className="text-sm text-orange-300 text-center font-semibold">Longer wire = MORE resistance</p>
         <p className="text-xs text-gray-600 text-center mt-1">More collisions between electrons and atoms</p>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-red-300 shadow-md">
-        <h5 className="font-bold text-red-800 mb-4 text-center">Thickness of Wire</h5>
+        <h5 className="font-bold text-red-300 mb-4 text-center">Thickness of Wire</h5>
         <svg viewBox="0 0 240 100" className="w-full mb-3">
           <text x="10" y="20" fontSize="11" fill="#374151" fontWeight="bold">Thick wire (Low R)</text>
           <line x1="10" y1="35" x2="170" y2="35" stroke="#10B981" strokeWidth="14" strokeLinecap="round"/>
@@ -1799,7 +2130,7 @@ const ResistanceFactorsDiagram = () => (
           <line x1="10" y1="85" x2="170" y2="85" stroke="#DC2626" strokeWidth="3" strokeLinecap="round"/>
           <text x="175" y="89" fontSize="10" fill="#DC2626" fontWeight="bold">R = high</text>
         </svg>
-        <p className="text-sm text-red-700 text-center font-semibold">Thinner wire = MORE resistance</p>
+        <p className="text-sm text-red-300 text-center font-semibold">Thinner wire = MORE resistance</p>
         <p className="text-xs text-gray-600 text-center mt-1">Less space for electrons to flow through</p>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-yellow-300 shadow-md">
@@ -1823,7 +2154,7 @@ const ResistanceFactorsDiagram = () => (
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-blue-300 shadow-md">
-        <h5 className="font-bold text-blue-800 mb-4 text-center">Temperature Effect</h5>
+        <h5 className="font-bold text-blue-300 mb-4 text-center">Temperature Effect</h5>
         <svg viewBox="0 0 240 110" className="w-full">
           <path d="M 30 90 Q 80 85 130 70 Q 180 55 210 30" fill="none" stroke="#DC2626" strokeWidth="3"/>
           <text x="30" y="105" fontSize="9" fill="#374151">Cold (0°C)</text>
@@ -1834,12 +2165,12 @@ const ResistanceFactorsDiagram = () => (
           <text x="5" y="60" fontSize="9" fill="#374151">R</text>
           <text x="100" y="108" fontSize="9" fill="#374151">Temperature →</text>
         </svg>
-        <p className="text-sm text-blue-700 text-center font-semibold mt-2">Hotter = MORE resistance (for metals)</p>
+        <p className="text-sm text-blue-300 text-center font-semibold mt-2">Hotter = MORE resistance (for metals)</p>
         <p className="text-xs text-gray-600 text-center mt-1">Atoms vibrate more, blocking electron flow</p>
       </div>
     </div>
-    <div className="bg-amber-100 rounded-xl p-4 border-2 border-amber-300">
-      <p className="font-bold text-amber-800 text-center">Summary: R increases with → longer length, thinner wire, certain materials, higher temperature</p>
+    <div className="bg-amber-50 rounded-xl p-4 border-2 border-amber-300">
+      <p className="font-bold text-amber-300 text-center">Summary: R increases with → longer length, thinner wire, certain materials, higher temperature</p>
     </div>
   </div>
 );
@@ -1891,7 +2222,7 @@ const ElectricalSafetyDiagram = () => (
       <div className="bg-white rounded-xl p-5 border-2 border-green-300 shadow-md">
         <div className="text-center mb-3">
           <div className="text-3xl mb-1">🌍</div>
-          <h5 className="font-bold text-green-800">GROUNDING</h5>
+          <h5 className="font-bold text-green-300">GROUNDING</h5>
         </div>
         <svg viewBox="0 0 160 80" className="w-full mb-3">
           <rect x="50" y="5" width="60" height="35" rx="5" fill="#DCFCE7" stroke="#16A34A" strokeWidth="2"/>
@@ -1912,10 +2243,10 @@ const ElectricalSafetyDiagram = () => (
       </div>
     </div>
     <div className="bg-red-100 rounded-xl p-4 border-2 border-red-400">
-      <p className="font-bold text-red-800 text-center mb-3">⚠️ Current Danger Levels — Know These!</p>
+      <p className="font-bold text-red-300 text-center mb-3">⚠️ Current Danger Levels — Know These!</p>
       <div className="grid grid-cols-4 gap-3 text-center text-xs">
         {[
-          { mA: '1 mA', effect: 'Barely felt', color: 'bg-green-100 border-green-400 text-green-800' },
+          { mA: '1 mA', effect: 'Barely felt', color: 'bg-green-100 border-green-400 text-green-300' },
           { mA: '10 mA', effect: 'Painful, muscle contraction', color: 'bg-yellow-100 border-yellow-400 text-yellow-800' },
           { mA: '100 mA', effect: '⚠️ FATAL — ventricular fibrillation', color: 'bg-orange-100 border-orange-400 text-orange-800' },
           { mA: '1000 mA', effect: '💀 Certain death, severe burns', color: 'bg-red-200 border-red-500 text-red-900' },
@@ -1934,46 +2265,46 @@ const PowerCostCalculatorDiagram = () => (
   <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Electrical Energy Cost — Worked Examples</h4>
     <div className="bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md">
-      <p className="text-center font-bold text-gray-700 mb-4">Formula Chain: <span className="text-green-700">P = V × I</span> → <span className="text-blue-700">E = P × t</span> → <span className="text-purple-700">Cost = E × rate</span></p>
+      <p className="text-center font-bold text-gray-700 mb-4">Formula Chain: <span className="text-green-300">P = V × I</span> → <span className="text-blue-300">E = P × t</span> → <span className="text-purple-300">Cost = E × rate</span></p>
       <div className="grid md:grid-cols-3 gap-4 text-sm">
-        <div className="bg-green-50 rounded-xl p-4 border border-green-200">
-          <p className="font-bold text-green-800 mb-2">Example 1 — Light Bulb</p>
-          <div className="space-y-1 text-gray-700 text-xs">
+        <div className="bg-green-950/30 rounded-xl p-4 border border-green-500/20">
+          <p className="font-bold text-green-300 mb-2">Example 1 — Light Bulb</p>
+          <div className="space-y-1 text-gray-600 text-xs">
             <p>60W bulb, 5 hours/day, 30 days</p>
             <p>Rate: $0.13/kWh</p>
             <p className="border-t pt-1">E = 0.06 kW × 5h × 30</p>
-            <p>E = <span className="font-bold text-green-700">9 kWh</span></p>
+            <p>E = <span className="font-bold text-green-300">9 kWh</span></p>
             <p>Cost = 9 × $0.13</p>
-            <p className="text-lg font-bold text-green-700">= $1.17/month</p>
+            <p className="text-lg font-bold text-green-300">= $1.17/month</p>
           </div>
         </div>
-        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
-          <p className="font-bold text-blue-800 mb-2">Example 2 — Heater</p>
-          <div className="space-y-1 text-gray-700 text-xs">
+        <div className="bg-blue-50 rounded-xl p-4">
+          <p className="font-bold text-blue-300 mb-2">Example 2 — Heater</p>
+          <div className="space-y-1 text-gray-600 text-xs">
             <p>1500W heater, 8 hours</p>
             <p>Rate: $0.12/kWh</p>
             <p className="border-t pt-1">E = 1.5 kW × 8h</p>
-            <p>E = <span className="font-bold text-blue-700">12 kWh</span></p>
+            <p>E = <span className="font-bold text-blue-300">12 kWh</span></p>
             <p>Cost = 12 × $0.12</p>
-            <p className="text-lg font-bold text-blue-700">= $1.44</p>
+            <p className="text-lg font-bold text-blue-300">= $1.44</p>
           </div>
         </div>
         <div className="bg-purple-50 rounded-xl p-4 border border-purple-200">
           <p className="font-bold text-purple-800 mb-2">Example 3 — From V & I</p>
-          <div className="space-y-1 text-gray-700 text-xs">
+          <div className="space-y-1 text-gray-600 text-xs">
             <p>Device: 120V, draws 2.5A, 4 hours</p>
             <p>Rate: $0.10/kWh</p>
             <p className="border-t pt-1">P = 120 × 2.5 = 300W</p>
-            <p>E = 0.3 kW × 4h = <span className="font-bold text-purple-700">1.2 kWh</span></p>
+            <p>E = 0.3 kW × 4h = <span className="font-bold text-purple-300">1.2 kWh</span></p>
             <p>Cost = 1.2 × $0.10</p>
-            <p className="text-lg font-bold text-purple-700">= $0.12</p>
+            <p className="text-lg font-bold text-purple-300">= $0.12</p>
           </div>
         </div>
       </div>
     </div>
     <div className="grid grid-cols-2 gap-4">
       <div className="bg-white rounded-xl p-4 border-2 border-amber-200">
-        <p className="font-bold text-amber-800 mb-3">🏠 Common Appliance Wattages</p>
+        <p className="font-bold text-amber-300 mb-3">🏠 Common Appliance Wattages</p>
         <div className="space-y-2">
           {[
             { name: 'LED Bulb', w: 10, bar: 1 },
@@ -2037,7 +2368,7 @@ const StaticVsCurrentDiagram = () => (
           <text x="70" y="78" fontSize="10" fill="#92400E" fontWeight="bold">charges STAY in place</text>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Charge <span className="font-bold text-yellow-700">builds up</span> on surface of object</p>
+          <p>• Charge <span className="font-bold text-yellow-300">builds up</span> on surface of object</p>
           <p>• Electrons do <span className="font-bold">not</span> flow continuously</p>
           <p>• Discharge happens suddenly (spark!)</p>
           <p>• Examples: balloon, walking on carpet, lightning</p>
@@ -2047,7 +2378,7 @@ const StaticVsCurrentDiagram = () => (
       <div className="bg-white rounded-xl p-5 border-2 border-blue-400 shadow-md">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-2xl">🔋</div>
-          <h5 className="font-bold text-blue-800 text-xl">CURRENT Electricity</h5>
+          <h5 className="font-bold text-blue-300 text-xl">CURRENT Electricity</h5>
         </div>
         <svg viewBox="0 0 220 90" className="w-full mb-3">
           <rect x="10" y="30" width="200" height="30" rx="5" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="2"/>
@@ -2055,7 +2386,7 @@ const StaticVsCurrentDiagram = () => (
           <text x="55" y="75" fontSize="10" fill="#1E40AF" fontWeight="bold">electrons FLOW in a loop</text>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Electrons <span className="font-bold text-blue-700">flow continuously</span> in a circuit</p>
+          <p>• Electrons <span className="font-bold text-blue-300">flow continuously</span> in a circuit</p>
           <p>• Requires a closed loop (circuit)</p>
           <p>• Needs an energy source (battery, outlet)</p>
           <p>• Examples: lights, phone charger, TV</p>
@@ -2069,8 +2400,8 @@ const StaticVsCurrentDiagram = () => (
           <React.Fragment key={i}>
             <div className={`p-2 rounded ${i===0?'bg-purple-100 text-purple-800':i%2===0?'bg-gray-50':'bg-white'} col-span-1`}>{row[0]}</div>
             <div className={`p-2 rounded ${i===0?'bg-yellow-100 text-yellow-800':i%2===0?'bg-gray-50':'bg-white'}`}>{row[1]}</div>
-            <div className={`p-2 rounded ${i===0?'bg-blue-100 text-blue-800':i%2===0?'bg-gray-50':'bg-white'}`}>{row[2]}</div>
-            <div className={`p-2 rounded ${i===0?'bg-green-100 text-green-800':i%2===0?'bg-gray-50':'bg-white'}`}>{row[3]}</div>
+            <div className={`p-2 rounded ${i===0?'bg-blue-100 text-blue-300':i%2===0?'bg-gray-50':'bg-white'}`}>{row[2]}</div>
+            <div className={`p-2 rounded ${i===0?'bg-green-100 text-green-300':i%2===0?'bg-gray-50':'bg-white'}`}>{row[3]}</div>
           </React.Fragment>
         ))}
       </div>
@@ -2083,7 +2414,7 @@ const ElectroscopeDiagram = () => (
     <h4 className="text-center font-semibold text-gray-700 mb-6">How an Electroscope Works</h4>
     <div className="grid md:grid-cols-3 gap-6 mb-5">
       {[
-        { label: 'Neutral', color: '#6B7280', leafAngle: 0, desc: 'Leaves hang straight down. Equal + and − charges.', borderColor: 'border-gray-300', bg: 'bg-gray-50' },
+        { label: 'Neutral', color: '#6B7280', leafAngle: 0, desc: 'Leaves hang straight down. Equal + and − charges.', borderColor: 'border-gray-200', bg: 'bg-gray-50' },
         { label: 'Charged (−)', color: '#3B82F6', leafAngle: 35, desc: 'Leaves spread apart — both leaves got − charge, repel each other.', borderColor: 'border-blue-300', bg: 'bg-blue-50' },
         { label: 'Charged (+)', color: '#EF4444', leafAngle: 35, desc: 'Leaves spread apart — both leaves got + charge (lost electrons), repel.', borderColor: 'border-red-300', bg: 'bg-red-50' },
       ].map((state, i) => (
@@ -2113,15 +2444,15 @@ const ElectroscopeDiagram = () => (
         </div>
       ))}
     </div>
-    <div className="bg-amber-50 rounded-xl p-4 border-2 border-amber-200">
-      <p className="font-bold text-amber-800 mb-2 text-center">Key Rule: Leaves spread = charged. Leaves collapse = neutral or opposite charge nearby</p>
+    <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/20">
+      <p className="font-bold text-amber-300 mb-2 text-center">Key Rule: Leaves spread = charged. Leaves collapse = neutral or opposite charge nearby</p>
       <div className="grid grid-cols-2 gap-3 text-sm">
         <div className="bg-white rounded-lg p-3 border border-amber-200">
-          <p className="font-bold text-amber-700 mb-1">Using Induction with Electroscope:</p>
+          <p className="font-bold text-amber-300 mb-1">Using Induction with Electroscope:</p>
           <p className="text-gray-600 text-xs">Bring charged rod near (don't touch) → leaves spread. Touch your finger to plate while rod is near → ground it. Remove finger, then rod → leaves stay slightly spread (opposite charge induced)</p>
         </div>
         <div className="bg-white rounded-lg p-3 border border-amber-200">
-          <p className="font-bold text-amber-700 mb-1">Using Conduction with Electroscope:</p>
+          <p className="font-bold text-amber-300 mb-1">Using Conduction with Electroscope:</p>
           <p className="text-gray-600 text-xs">Touch charged rod to plate → charge transfers directly. Leaves spread and STAY spread even after rod is removed. Object now holds same type of charge as rod that touched it.</p>
         </div>
       </div>
@@ -2167,7 +2498,7 @@ const LightningDiagram = () => (
             <div className="w-7 h-7 bg-yellow-400 text-slate-900 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0">{s.step}</div>
             <div>
               <p className="font-bold text-white text-sm">{s.title}</p>
-              <p className="text-gray-300 text-xs mt-1">{s.text}</p>
+              <p className="text-gray-600 text-xs mt-1">{s.text}</p>
             </div>
           </div>
         ))}
@@ -2181,7 +2512,7 @@ const OhmsLawGraph = () => (
     <h4 className="text-center font-semibold text-gray-700 mb-6">Ohm's Law — Graphical Relationships</h4>
     <div className="grid md:grid-cols-3 gap-5 mb-5">
       <div className="bg-white rounded-xl p-4 border-2 border-blue-300 shadow-md">
-        <h5 className="font-bold text-blue-800 text-center mb-3">V vs I (R constant)</h5>
+        <h5 className="font-bold text-blue-300 text-center mb-3">V vs I (R constant)</h5>
         <svg viewBox="0 0 160 140" className="w-full mb-2">
           <line x1="25" y1="10" x2="25" y2="115" stroke="#374151" strokeWidth="2"/>
           <line x1="20" y1="110" x2="150" y2="110" stroke="#374151" strokeWidth="2"/>
@@ -2194,11 +2525,11 @@ const OhmsLawGraph = () => (
           <circle cx="95" cy="56" r="3" fill="#3B82F6"/>
           <circle cx="130" cy="29" r="3" fill="#3B82F6"/>
         </svg>
-        <p className="text-xs text-blue-700 text-center font-semibold">Straight line through origin → V ∝ I</p>
+        <p className="text-xs text-blue-300 text-center font-semibold">Straight line through origin → V ∝ I</p>
         <p className="text-xs text-gray-600 text-center">Steeper slope = higher resistance</p>
       </div>
       <div className="bg-white rounded-xl p-4 border-2 border-green-300 shadow-md">
-        <h5 className="font-bold text-green-800 text-center mb-3">I vs R (V constant)</h5>
+        <h5 className="font-bold text-green-300 text-center mb-3">I vs R (V constant)</h5>
         <svg viewBox="0 0 160 140" className="w-full mb-2">
           <line x1="25" y1="10" x2="25" y2="115" stroke="#374151" strokeWidth="2"/>
           <line x1="20" y1="110" x2="150" y2="110" stroke="#374151" strokeWidth="2"/>
@@ -2208,7 +2539,7 @@ const OhmsLawGraph = () => (
           <text x="90" y="38" fontSize="10" fill="#10B981" fontWeight="bold">I = V/R</text>
           <text x="100" y="50" fontSize="9" fill="#10B981">(hyperbola)</text>
         </svg>
-        <p className="text-xs text-green-700 text-center font-semibold">Curve → as R↑, I↓ (inverse)</p>
+        <p className="text-xs text-green-300 text-center font-semibold">Curve → as R↑, I↓ (inverse)</p>
         <p className="text-xs text-gray-600 text-center">Double R → halve I</p>
       </div>
       <div className="bg-white rounded-xl p-4 border-2 border-orange-300 shadow-md">
@@ -2225,23 +2556,23 @@ const OhmsLawGraph = () => (
           <text x="80" y="130" textAnchor="middle" fontSize="11" fill="#374151" fontWeight="bold">Current (I) →</text>
           <text x="10" y="70" fontSize="11" fill="#374151" fontWeight="bold" transform="rotate(-90,10,70)">Voltage (V)</text>
         </svg>
-        <p className="text-xs text-orange-700 text-center font-semibold">All lines through origin</p>
+        <p className="text-xs text-orange-300 text-center font-semibold">All lines through origin</p>
         <p className="text-xs text-gray-600 text-center">Higher R = steeper slope</p>
       </div>
     </div>
     <div className="bg-white rounded-xl p-4 border-2 border-indigo-200">
-      <p className="font-bold text-indigo-800 mb-3 text-center">📊 Reading V-I Graphs on Tests</p>
+      <p className="font-bold text-indigo-300 mb-3 text-center">📊 Reading V-I Graphs on Tests</p>
       <div className="grid grid-cols-3 gap-3 text-xs">
         <div className="bg-indigo-50 rounded-lg p-3">
-          <p className="font-bold text-indigo-700 mb-1">Finding Resistance:</p>
+          <p className="font-bold text-indigo-300 mb-1">Finding Resistance:</p>
           <p className="text-gray-600">Pick any point on the line. R = V ÷ I using those coordinates. Steeper slope = higher R.</p>
         </div>
         <div className="bg-purple-50 rounded-lg p-3">
-          <p className="font-bold text-purple-700 mb-1">Ohmic vs Non-Ohmic:</p>
+          <p className="font-bold text-purple-300 mb-1">Ohmic vs Non-Ohmic:</p>
           <p className="text-gray-600">Straight line through origin = Ohmic (follows V=IR). Curved line = Non-Ohmic (e.g. light bulb filament heats up).</p>
         </div>
         <div className="bg-blue-50 rounded-lg p-3">
-          <p className="font-bold text-blue-700 mb-1">Exam Tip:</p>
+          <p className="font-bold text-blue-300 mb-1">Exam Tip:</p>
           <p className="text-gray-600">If graph is curved at high I → resistance is increasing (filament getting hot). Always check if line passes through origin!</p>
         </div>
       </div>
@@ -2276,7 +2607,7 @@ const AmpmeterVoltmeterDiagram = () => (
           <defs><marker id="tarr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0D9488"/></marker></defs>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Connected <span className="font-bold text-teal-700">IN SERIES</span> — current flows THROUGH it</p>
+          <p>• Connected <span className="font-bold text-teal-300">IN SERIES</span> — current flows THROUGH it</p>
           <p>• Must be in the same wire/path as what you're measuring</p>
           <p>• Has very LOW resistance (doesn't disturb circuit)</p>
           <p>• Breaking circuit and inserting ammeter in the gap</p>
@@ -2305,7 +2636,7 @@ const AmpmeterVoltmeterDiagram = () => (
           <text x="162" y="118" textAnchor="middle" fontSize="9" fill="#0891B2" fontWeight="bold">V in PARALLEL across R</text>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Connected <span className="font-bold text-cyan-700">IN PARALLEL</span> — bridges across the component</p>
+          <p>• Connected <span className="font-bold text-cyan-300">IN PARALLEL</span> — bridges across the component</p>
           <p>• Placed across (in parallel with) the component to measure</p>
           <p>• Has very HIGH resistance (barely any current flows through it)</p>
           <p>• Does NOT break the circuit — just connects across</p>
@@ -2313,8 +2644,8 @@ const AmpmeterVoltmeterDiagram = () => (
         </div>
       </div>
     </div>
-    <div className="bg-white rounded-xl p-4 border-2 border-gray-200">
-      <p className="font-bold text-gray-700 text-center mb-3">Memory Trick: <span className="text-teal-700">A</span>mmeter in series = <span className="text-teal-700">A</span>long the path | <span className="text-cyan-700">V</span>oltmeter in parallel = <span className="text-cyan-700">V</span>ertical bridge</p>
+    <div className="bg-white rounded-xl p-4 border border-gray-200">
+      <p className="font-bold text-gray-700 text-center mb-3">Memory Trick: <span className="text-teal-300">A</span>mmeter in series = <span className="text-teal-300">A</span>long the path | <span className="text-cyan-300">V</span>oltmeter in parallel = <span className="text-cyan-300">V</span>ertical bridge</p>
     </div>
   </div>
 );
@@ -2343,26 +2674,26 @@ const SeriesParallelComparisonTable = () => (
           ].map((row, i) => (
             <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               <td className="p-3 font-semibold text-purple-800 border-b border-gray-100">{row[0]}</td>
-              <td className="p-3 text-blue-800 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[1]}</td>
-              <td className="p-3 text-green-800 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[2]}</td>
+              <td className="p-3 text-blue-300 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[1]}</td>
+              <td className="p-3 text-green-300 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[2]}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
     <div className="grid grid-cols-2 gap-4">
-      <div className="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-        <p className="font-bold text-blue-800 mb-2">📌 Series Exam Checklist:</p>
-        <div className="space-y-1 text-xs text-blue-700">
+      <div className="bg-blue-50 rounded-xl p-4">
+        <p className="font-bold text-blue-300 mb-2">📌 Series Exam Checklist:</p>
+        <div className="space-y-1 text-xs text-blue-300">
           <p>□ R_total = sum of all resistors</p>
           <p>□ I = V_battery ÷ R_total (same everywhere)</p>
           <p>□ Each V = I × that R (voltage divider)</p>
           <p>□ Check: all V's add to battery voltage</p>
         </div>
       </div>
-      <div className="bg-green-50 rounded-xl p-4 border-2 border-green-200">
-        <p className="font-bold text-green-800 mb-2">📌 Parallel Exam Checklist:</p>
-        <div className="space-y-1 text-xs text-green-700">
+      <div className="bg-green-950/30 rounded-xl p-4 border border-green-500/20">
+        <p className="font-bold text-green-300 mb-2">📌 Parallel Exam Checklist:</p>
+        <div className="space-y-1 text-xs text-green-300">
           <p>□ Each branch: V = battery voltage</p>
           <p>□ Each branch: I = V ÷ that branch's R</p>
           <p>□ I_total = sum of all branch currents</p>
@@ -2378,7 +2709,7 @@ const EnergyConversionDiagram = () => (
     <h4 className="text-center font-semibold text-gray-700 mb-6">Energy Conversions in Electrical Devices</h4>
     <div className="grid md:grid-cols-2 gap-6 mb-5">
       <div>
-        <h5 className="font-bold text-amber-800 mb-4 text-center">Input → Process → Output</h5>
+        <h5 className="font-bold text-amber-300 mb-4 text-center">Input → Process → Output</h5>
         {[
           { device: '💡 Light Bulb', input: 'Electrical', arrow: '→', output: 'Light + Heat', eff: '~5%', color: 'border-yellow-300 bg-yellow-50' },
           { device: '💡 LED Bulb', input: 'Electrical', arrow: '→', output: 'Light + tiny Heat', eff: '~40%', color: 'border-green-300 bg-green-50' },
@@ -2391,14 +2722,14 @@ const EnergyConversionDiagram = () => (
             <span className="text-xl w-8">{item.device.split(' ')[0]}</span>
             <span className="text-xs font-semibold text-gray-700 w-24">{item.device.substring(2)}</span>
             <span className="text-xs text-gray-500 flex-1">{item.input} → {item.output}</span>
-            <span className="text-xs font-bold text-gray-600 bg-white rounded px-1">{item.eff} eff.</span>
+            <span className="text-xs font-bold text-gray-600 bg-gray-200 rounded px-1">{item.eff} eff.</span>
           </div>
         ))}
       </div>
       <div>
-        <h5 className="font-bold text-amber-800 mb-4 text-center">Law of Conservation of Energy</h5>
+        <h5 className="font-bold text-amber-300 mb-4 text-center">Law of Conservation of Energy</h5>
         <div className="bg-white rounded-xl p-5 border-2 border-amber-300 mb-4">
-          <p className="text-center font-bold text-amber-800 text-lg mb-3">Energy is NEVER created or destroyed — only CONVERTED</p>
+          <p className="text-center font-bold text-amber-300 text-lg mb-3">Energy is NEVER created or destroyed — only CONVERTED</p>
           <svg viewBox="0 0 220 140" className="w-full">
             <circle cx="110" cy="70" r="55" fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="8"/>
             <rect x="75" y="50" width="70" height="40" rx="8" fill="#FEF3C7" stroke="#D97706" strokeWidth="2"/>
@@ -2420,9 +2751,9 @@ const EnergyConversionDiagram = () => (
           </svg>
           <p className="text-xs text-center text-gray-600 mt-2">Total energy out = total energy in. "Lost" energy just became heat!</p>
         </div>
-        <div className="bg-red-50 rounded-xl p-4 border-2 border-red-200">
-          <p className="font-bold text-red-700 mb-2">Efficiency Formula:</p>
-          <p className="font-mono text-center text-sm font-bold text-red-800 mb-1">Efficiency = (Useful Output ÷ Total Input) × 100%</p>
+        <div className="bg-red-950/30 rounded-xl p-4 border border-red-500/20">
+          <p className="font-bold text-red-300 mb-2">Efficiency Formula:</p>
+          <p className="font-mono text-center text-sm font-bold text-red-300 mb-1">Efficiency = (Useful Output ÷ Total Input) × 100%</p>
           <p className="text-xs text-gray-600">Example: motor uses 200J electricity, produces 170J motion → efficiency = (170÷200)×100 = 85%</p>
         </div>
       </div>
@@ -2462,14 +2793,14 @@ const CircuitTroubleshootingDiagram = () => (
             { mistake: 'Forgetting to verify: voltages must add up in series', fix: 'Always check: V₁ + V₂ + V₃ = V_battery as a final sanity check.' },
           ].map((item, i) => (
             <div key={i} className="mb-3 p-3 bg-pink-50 rounded-lg border border-pink-200">
-              <p className="text-xs text-red-700 font-semibold">✗ Mistake: {item.mistake}</p>
-              <p className="text-xs text-green-700 font-semibold mt-1">✓ Fix: {item.fix}</p>
+              <p className="text-xs text-red-300 font-semibold">✗ Mistake: {item.mistake}</p>
+              <p className="text-xs text-green-300 font-semibold mt-1">✓ Fix: {item.fix}</p>
             </div>
           ))}
         </div>
         <div className="bg-white rounded-xl p-4 border-2 border-purple-200">
           <p className="font-bold text-purple-800 mb-2">2-Resistor Parallel Shortcut:</p>
-          <p className="font-mono text-center text-sm font-bold text-purple-700 my-2">R_total = (R₁ × R₂) ÷ (R₁ + R₂)</p>
+          <p className="font-mono text-center text-sm font-bold text-purple-300 my-2">R_total = (R₁ × R₂) ÷ (R₁ + R₂)</p>
           <p className="text-xs text-gray-600">Example: R₁=6Ω, R₂=12Ω → R_t = (6×12)÷(6+12) = 72÷18 = 4Ω</p>
           <p className="text-xs text-gray-500 mt-1">Note: R_total is always LESS than either individual resistor</p>
         </div>
@@ -2541,7 +2872,7 @@ const ElectricChargesDiagram = () => (
       </div>
     </div>
     <div className="bg-amber-100 rounded-lg p-3 text-center">
-      <p className="text-sm font-bold text-amber-800">🧠 Memory Trick: "Opposites attract, likes repel" — just like magnets!</p>
+      <p className="text-sm font-bold text-amber-300">🧠 Memory Trick: "Opposites attract, likes repel" — just like magnets!</p>
     </div>
   </div>
 );
@@ -2553,7 +2884,7 @@ const ConductorInsulatorDiagram = () => (
       <div className="bg-white rounded-xl p-4 border-2 border-yellow-300 shadow-sm">
         <div className="text-center mb-3">
           <span className="text-3xl">🔩</span>
-          <h5 className="font-bold text-yellow-700 mt-1">CONDUCTOR</h5>
+          <h5 className="font-bold text-yellow-300 mt-1">CONDUCTOR</h5>
           <p className="text-xs text-gray-500">Electrons move FREELY</p>
         </div>
         <svg viewBox="0 0 160 50" className="w-full h-12 mb-2">
@@ -2577,7 +2908,7 @@ const ConductorInsulatorDiagram = () => (
       <div className="bg-white rounded-xl p-4 border-2 border-purple-300 shadow-sm">
         <div className="text-center mb-3">
           <span className="text-3xl">🔒</span>
-          <h5 className="font-bold text-purple-700 mt-1">INSULATOR</h5>
+          <h5 className="font-bold text-purple-300 mt-1">INSULATOR</h5>
           <p className="text-xs text-gray-500">Electrons are LOCKED in place</p>
         </div>
         <svg viewBox="0 0 160 50" className="w-full h-12 mb-2">
@@ -2596,7 +2927,7 @@ const ConductorInsulatorDiagram = () => (
       </div>
     </div>
     <div className="bg-blue-100 rounded-lg p-3 text-center">
-      <p className="text-sm text-blue-800"><span className="font-bold">Real-world example:</span> Copper wire (conductor) coated in rubber (insulator) = safe electrical cable!</p>
+      <p className="text-sm text-blue-300"><span className="font-bold">Real-world example:</span> Copper wire (conductor) coated in rubber (insulator) = safe electrical cable!</p>
     </div>
   </div>
 );
@@ -2630,25 +2961,25 @@ const VIRTriangleDiagram = () => (
       </div>
       <div className="space-y-3 flex-1 min-w-48">
         <div className="bg-indigo-100 rounded-lg p-3 border-l-4 border-indigo-500">
-          <p className="font-bold text-indigo-800 text-sm">Find Voltage:</p>
-          <p className="text-indigo-700 text-sm font-mono">V = I × R</p>
+          <p className="font-bold text-indigo-300 text-sm">Find Voltage:</p>
+          <p className="text-indigo-300 text-sm font-mono">V = I × R</p>
           <p className="text-indigo-600 text-xs mt-1">Cover V → I × R</p>
         </div>
         <div className="bg-green-100 rounded-lg p-3 border-l-4 border-green-500">
-          <p className="font-bold text-green-800 text-sm">Find Current:</p>
-          <p className="text-green-700 text-sm font-mono">I = V ÷ R</p>
+          <p className="font-bold text-green-300 text-sm">Find Current:</p>
+          <p className="text-green-300 text-sm font-mono">I = V ÷ R</p>
           <p className="text-green-600 text-xs mt-1">Cover I → V on top, R below</p>
         </div>
         <div className="bg-amber-100 rounded-lg p-3 border-l-4 border-amber-500">
-          <p className="font-bold text-amber-800 text-sm">Find Resistance:</p>
-          <p className="text-amber-700 text-sm font-mono">R = V ÷ I</p>
+          <p className="font-bold text-amber-300 text-sm">Find Resistance:</p>
+          <p className="text-amber-300 text-sm font-mono">R = V ÷ I</p>
           <p className="text-amber-600 text-xs mt-1">Cover R → V on top, I below</p>
         </div>
         <div className="bg-gray-100 rounded-lg p-3">
           <p className="text-xs font-bold text-gray-700 mb-1">⚡ Quick Examples:</p>
-          <p className="text-xs text-gray-600">V=12V, R=4Ω → <span className="font-bold text-green-700">I = 3A</span></p>
-          <p className="text-xs text-gray-600">I=2A, R=6Ω → <span className="font-bold text-indigo-700">V = 12V</span></p>
-          <p className="text-xs text-gray-600">V=24V, I=3A → <span className="font-bold text-amber-700">R = 8Ω</span></p>
+          <p className="text-xs text-gray-600">V=12V, R=4Ω → <span className="font-bold text-green-300">I = 3A</span></p>
+          <p className="text-xs text-gray-600">I=2A, R=6Ω → <span className="font-bold text-indigo-300">V = 12V</span></p>
+          <p className="text-xs text-gray-600">V=24V, I=3A → <span className="font-bold text-amber-300">R = 8Ω</span></p>
         </div>
       </div>
     </div>
@@ -2656,12 +2987,12 @@ const VIRTriangleDiagram = () => (
 );
 
 const SeriesVsParallelVisual = () => (
-  <div className="bg-gradient-to-br from-slate-50 to-gray-100 rounded-xl p-6">
+  <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6">
     <h4 className="text-center font-bold text-gray-700 mb-5 text-lg">⚖️ Series vs Parallel — Side by Side</h4>
     <div className="grid grid-cols-2 gap-4 mb-4">
       {/* Series */}
       <div className="bg-white rounded-xl p-4 border-2 border-blue-300 shadow-sm">
-        <h5 className="font-bold text-blue-700 text-center mb-3">➡️ SERIES</h5>
+        <h5 className="font-bold text-blue-300 text-center mb-3">➡️ SERIES</h5>
         <svg viewBox="0 0 200 80" className="w-full h-20 mb-3">
           {/* Battery */}
           <line x1="10" y1="20" x2="10" y2="60" stroke="#374151" strokeWidth="3"/>
@@ -2689,15 +3020,15 @@ const SeriesVsParallelVisual = () => (
         </svg>
         <div className="space-y-1.5 text-xs">
           <div className="flex items-center gap-2 bg-blue-50 rounded p-1.5">
-            <span className="font-bold text-blue-700 w-12">Current:</span>
+            <span className="font-bold text-blue-300 w-12">Current:</span>
             <span className="text-blue-600">Same everywhere (I₁=I₂)</span>
           </div>
           <div className="flex items-center gap-2 bg-blue-50 rounded p-1.5">
-            <span className="font-bold text-blue-700 w-12">Voltage:</span>
+            <span className="font-bold text-blue-300 w-12">Voltage:</span>
             <span className="text-blue-600">Splits (V₁+V₂=V_bat)</span>
           </div>
           <div className="flex items-center gap-2 bg-blue-50 rounded p-1.5">
-            <span className="font-bold text-blue-700 w-12">Resistance:</span>
+            <span className="font-bold text-blue-300 w-12">Resistance:</span>
             <span className="text-blue-600">Adds up (R₁+R₂)</span>
           </div>
           <div className="flex items-center gap-2 bg-red-50 rounded p-1.5 border border-red-200">
@@ -2707,7 +3038,7 @@ const SeriesVsParallelVisual = () => (
       </div>
       {/* Parallel */}
       <div className="bg-white rounded-xl p-4 border-2 border-orange-300 shadow-sm">
-        <h5 className="font-bold text-orange-700 text-center mb-3">🔀 PARALLEL</h5>
+        <h5 className="font-bold text-orange-300 text-center mb-3">🔀 PARALLEL</h5>
         <svg viewBox="0 0 200 80" className="w-full h-20 mb-3">
           {/* Battery */}
           <line x1="10" y1="20" x2="10" y2="60" stroke="#374151" strokeWidth="3"/>
@@ -2733,15 +3064,15 @@ const SeriesVsParallelVisual = () => (
         </svg>
         <div className="space-y-1.5 text-xs">
           <div className="flex items-center gap-2 bg-orange-50 rounded p-1.5">
-            <span className="font-bold text-orange-700 w-12">Voltage:</span>
+            <span className="font-bold text-orange-300 w-12">Voltage:</span>
             <span className="text-orange-600">Same everywhere (V₁=V₂)</span>
           </div>
           <div className="flex items-center gap-2 bg-orange-50 rounded p-1.5">
-            <span className="font-bold text-orange-700 w-12">Current:</span>
+            <span className="font-bold text-orange-300 w-12">Current:</span>
             <span className="text-orange-600">Splits (I₁+I₂=I_total)</span>
           </div>
           <div className="flex items-center gap-2 bg-orange-50 rounded p-1.5">
-            <span className="font-bold text-orange-700 w-12">Resistance:</span>
+            <span className="font-bold text-orange-300 w-12">Resistance:</span>
             <span className="text-orange-600">Decreases (less than R₁)</span>
           </div>
           <div className="flex items-center gap-2 bg-green-50 rounded p-1.5 border border-green-200">
@@ -2751,7 +3082,7 @@ const SeriesVsParallelVisual = () => (
       </div>
     </div>
     <div className="bg-indigo-50 rounded-lg p-3 text-center border border-indigo-200">
-      <p className="text-sm text-indigo-800"><span className="font-bold">🏠 Real life:</span> Your home outlets are PARALLEL — every device gets full 120V independently!</p>
+      <p className="text-sm text-indigo-300"><span className="font-bold">🏠 Real life:</span> Your home outlets are PARALLEL — every device gets full 120V independently!</p>
     </div>
   </div>
 );
@@ -2763,7 +3094,7 @@ const PowerTriangleDiagram = () => (
       {[
         { formula: 'P = V × I', label: 'Use when you know\nVoltage & Current', color: 'bg-yellow-100 border-yellow-400', text: 'text-yellow-800', example: '120V × 0.5A = 60W' },
         { formula: 'P = I² × R', label: 'Use when you know\nCurrent & Resistance', color: 'bg-orange-100 border-orange-400', text: 'text-orange-800', example: '2² × 10 = 40W' },
-        { formula: 'P = V² ÷ R', label: 'Use when you know\nVoltage & Resistance', color: 'bg-red-100 border-red-400', text: 'text-red-800', example: '12² ÷ 6 = 24W' },
+        { formula: 'P = V² ÷ R', label: 'Use when you know\nVoltage & Resistance', color: 'bg-red-100 border-red-400', text: 'text-red-300', example: '12² ÷ 6 = 24W' },
       ].map((item, i) => (
         <div key={i} className={`${item.color} border-2 rounded-xl p-3 text-center`}>
           <p className={`font-bold font-mono text-base ${item.text} mb-1`}>{item.formula}</p>
@@ -2774,7 +3105,7 @@ const PowerTriangleDiagram = () => (
         </div>
       ))}
     </div>
-    <div className="bg-white rounded-xl p-4 border-2 border-gray-200">
+    <div className="bg-white rounded-xl p-4 border border-gray-200">
       <p className="text-center text-xs font-bold text-gray-700 mb-3">⚡ Energy & Cost Chain</p>
       <div className="flex items-center justify-center gap-1 flex-wrap text-xs">
         {[
@@ -2782,9 +3113,9 @@ const PowerTriangleDiagram = () => (
           { arrow: '× time (hrs) ÷ 1000' },
           { label: 'Energy', sub: 'kWh', color: 'bg-orange-200 text-orange-800' },
           { arrow: '× rate ($/kWh)' },
-          { label: 'Cost', sub: '$$$', color: 'bg-green-200 text-green-800' },
+          { label: 'Cost', sub: '$$$', color: 'bg-green-200 text-green-300' },
         ].map((item, i) => item.arrow
-          ? <div key={i} className="text-gray-500 font-bold mx-1 text-center"><p>→</p><p className="text-gray-400" style={{fontSize:'9px'}}>{item.arrow}</p></div>
+          ? <div key={i} className="text-gray-500 font-bold mx-1 text-center"><p>→</p><p className="text-gray-600" style={{fontSize:'9px'}}>{item.arrow}</p></div>
           : <div key={i} className={`${item.color} rounded-lg px-3 py-2 text-center font-bold`}>
               <p>{item.label}</p>
               <p className="font-normal opacity-75">{item.sub}</p>
@@ -2792,7 +3123,7 @@ const PowerTriangleDiagram = () => (
         )}
       </div>
       <div className="mt-3 bg-gray-50 rounded-lg p-2 text-xs text-center text-gray-600">
-        <span className="font-bold">Example:</span> 1500W heater × 8h ÷ 1000 = 12 kWh × $0.12 = <span className="font-bold text-green-700">$1.44</span>
+        <span className="font-bold">Example:</span> 1500W heater × 8h ÷ 1000 = 12 kWh × $0.12 = <span className="font-bold text-green-300">$1.44</span>
       </div>
     </div>
   </div>
@@ -2814,7 +3145,7 @@ const CurrentDangerDiagram = () => (
           <div className="w-20 text-xs font-bold text-gray-700 shrink-0">{row.ma}</div>
           <div className="flex-1">
             <p className="text-xs text-gray-700">{row.label}</p>
-            <div className="mt-1 bg-white rounded-full h-1.5 overflow-hidden">
+            <div className="mt-1 bg-gray-200 rounded-full h-1.5 overflow-hidden">
               <div className="h-full bg-red-500 rounded-full" style={{width: row.bar}}></div>
             </div>
           </div>
@@ -2822,9 +3153,9 @@ const CurrentDangerDiagram = () => (
       ))}
     </div>
     <div className="bg-red-100 rounded-lg p-3 border-2 border-red-300">
-      <p className="text-xs text-red-800 font-bold text-center">⚠️ It's the CURRENT, not the voltage, that kills you.</p>
-      <p className="text-xs text-red-700 text-center mt-1">BUT: high voltage → forces more current through body → more dangerous!</p>
-      <p className="text-xs text-red-700 text-center mt-1">Water lowers skin resistance 1000× → same voltage = much more current!</p>
+      <p className="text-xs text-red-300 font-bold text-center">⚠️ It's the CURRENT, not the voltage, that kills you.</p>
+      <p className="text-xs text-red-300 text-center mt-1">BUT: high voltage → forces more current through body → more dangerous!</p>
+      <p className="text-xs text-red-300 text-center mt-1">Water lowers skin resistance 1000× → same voltage = much more current!</p>
     </div>
   </div>
 );
@@ -2854,7 +3185,7 @@ const AppliancePowerDiagram = () => (
         </div>
       ))}
     </div>
-    <div className="mt-4 bg-indigo-100 rounded-lg p-3 text-xs text-center text-indigo-800">
+    <div className="mt-4 bg-indigo-100 rounded-lg p-3 text-xs text-center text-indigo-300">
       <span className="font-bold">💡 Tip:</span> Devices with heating elements (kettle, dryer, oven) use the MOST power!
     </div>
   </div>
@@ -2867,7 +3198,7 @@ const FuseCircuitBreakerDiagram = () => (
       <div className="bg-white rounded-xl p-4 border-2 border-red-200">
         <div className="text-center mb-3">
           <span className="text-3xl">🔥</span>
-          <h5 className="font-bold text-red-700 mt-1">FUSE</h5>
+          <h5 className="font-bold text-red-300 mt-1">FUSE</h5>
         </div>
         <svg viewBox="0 0 160 60" className="w-full h-14 mb-3">
           <line x1="5" y1="30" x2="30" y2="30" stroke="#374151" strokeWidth="3"/>
@@ -2887,7 +3218,7 @@ const FuseCircuitBreakerDiagram = () => (
       <div className="bg-white rounded-xl p-4 border-2 border-green-200">
         <div className="text-center mb-3">
           <span className="text-3xl">⚡</span>
-          <h5 className="font-bold text-green-700 mt-1">CIRCUIT BREAKER</h5>
+          <h5 className="font-bold text-green-300 mt-1">CIRCUIT BREAKER</h5>
         </div>
         <svg viewBox="0 0 160 60" className="w-full h-14 mb-3">
           <line x1="5" y1="30" x2="40" y2="30" stroke="#374151" strokeWidth="3"/>
@@ -2907,8 +3238,8 @@ const FuseCircuitBreakerDiagram = () => (
       </div>
     </div>
     <div className="bg-amber-100 rounded-lg p-3 border border-amber-300 text-xs text-center">
-      <p className="font-bold text-amber-800">Both are rated in AMPERES (e.g. 15A breaker trips when current exceeds 15A)</p>
-      <p className="text-amber-700 mt-1">GFCI outlets: cut power in 0.025 seconds if they detect tiny current leaks — used in bathrooms & kitchens</p>
+      <p className="font-bold text-amber-300">Both are rated in AMPERES (e.g. 15A breaker trips when current exceeds 15A)</p>
+      <p className="text-amber-300 mt-1">GFCI outlets: cut power in 0.025 seconds if they detect tiny current leaks — used in bathrooms & kitchens</p>
     </div>
   </div>
 );
@@ -2918,18 +3249,18 @@ const EnergyTransformationsDiagram = () => (
     <h4 className="text-center font-bold text-gray-700 mb-4 text-lg">🔄 Energy Transformations in Circuits</h4>
     <div className="grid grid-cols-2 gap-3 mb-4">
       {[
-        { device: '🔋 Battery', from: 'Chemical', to: 'Electrical', fromColor: 'bg-green-100 text-green-700', toColor: 'bg-yellow-100 text-yellow-700' },
-        { device: '💡 Light Bulb', from: 'Electrical', to: 'Light + Heat', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-orange-100 text-orange-700' },
-        { device: '⚙️ Motor', from: 'Electrical', to: 'Mechanical', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-blue-100 text-blue-700' },
-        { device: '🔊 Speaker', from: 'Electrical', to: 'Sound', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-purple-100 text-purple-700' },
-        { device: '🌡️ Toaster', from: 'Electrical', to: 'Heat', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-red-100 text-red-700' },
-        { device: '📱 Charging', from: 'Electrical', to: 'Chemical', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-green-100 text-green-700' },
+        { device: '🔋 Battery', from: 'Chemical', to: 'Electrical', fromColor: 'bg-green-100 text-green-300', toColor: 'bg-yellow-100 text-yellow-300' },
+        { device: '💡 Light Bulb', from: 'Electrical', to: 'Light + Heat', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-orange-100 text-orange-300' },
+        { device: '⚙️ Motor', from: 'Electrical', to: 'Mechanical', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-blue-100 text-blue-300' },
+        { device: '🔊 Speaker', from: 'Electrical', to: 'Sound', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-purple-100 text-purple-300' },
+        { device: '🌡️ Toaster', from: 'Electrical', to: 'Heat', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-red-100 text-red-300' },
+        { device: '📱 Charging', from: 'Electrical', to: 'Chemical', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-green-100 text-green-300' },
       ].map((item, i) => (
         <div key={i} className="bg-white rounded-xl p-3 border border-gray-200 shadow-sm">
           <p className="text-sm font-bold text-gray-700 mb-2">{item.device}</p>
           <div className="flex items-center gap-2 text-xs">
             <span className={`${item.fromColor} px-2 py-1 rounded font-semibold`}>{item.from}</span>
-            <span className="text-gray-400 font-bold">→</span>
+            <span className="text-gray-600 font-bold">→</span>
             <span className={`${item.toColor} px-2 py-1 rounded font-semibold`}>{item.to}</span>
           </div>
         </div>
@@ -2937,7 +3268,7 @@ const EnergyTransformationsDiagram = () => (
     </div>
     <div className="bg-purple-100 rounded-lg p-3 text-center text-xs border border-purple-300">
       <p className="font-bold text-purple-800">♾️ Law of Conservation of Energy:</p>
-      <p className="text-purple-700 mt-1">Energy is NEVER created or destroyed — it only changes form. Total energy in = total energy out!</p>
+      <p className="text-purple-300 mt-1">Energy is NEVER created or destroyed — it only changes form. Total energy in = total energy out!</p>
     </div>
   </div>
 );
@@ -2949,7 +3280,7 @@ const EfficiencyDiagram = () => (
       <p className="text-center font-bold text-gray-700 mb-3 text-sm">Efficiency (%) = (Useful Output ÷ Total Input) × 100</p>
       {/* Sankey-style diagram */}
       <div className="flex items-center gap-3 justify-center mb-4">
-        <div className="bg-blue-200 rounded-lg p-3 text-center text-sm font-bold text-blue-800">100J<br/><span className="text-xs font-normal">IN</span></div>
+        <div className="bg-blue-200 rounded-lg p-3 text-center text-sm font-bold text-blue-300">100J<br/><span className="text-xs font-normal">IN</span></div>
         <svg viewBox="0 0 80 60" className="w-20 h-14">
           <path d="M 0 20 L 45 20 L 80 5" stroke="#10B981" strokeWidth="6" fill="none" strokeLinecap="round"/>
           <path d="M 0 40 L 45 40 L 80 55" stroke="#EF4444" strokeWidth="6" fill="none" strokeLinecap="round"/>
@@ -2957,8 +3288,8 @@ const EfficiencyDiagram = () => (
           <text x="62" y="59" fontSize="9" fill="#DC2626" fontWeight="bold">Waste</text>
         </svg>
         <div className="space-y-2">
-          <div className="bg-green-100 rounded p-2 text-center text-xs font-bold text-green-800">Useful Output</div>
-          <div className="bg-red-100 rounded p-2 text-center text-xs font-bold text-red-800">Heat (Wasted)</div>
+          <div className="bg-green-100 rounded p-2 text-center text-xs font-bold text-green-300">Useful Output</div>
+          <div className="bg-red-100 rounded p-2 text-center text-xs font-bold text-red-300">Heat (Wasted)</div>
         </div>
       </div>
     </div>
@@ -2998,7 +3329,7 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-purple-900 mb-1">Dalton (1803)</h5>
-        <p className="text-xs text-purple-700">Solid Sphere</p>
+        <p className="text-xs text-purple-300">Solid Sphere</p>
         <p className="text-xs text-gray-600 mt-1">Indivisible ball</p>
       </div>
 
@@ -3019,7 +3350,7 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-orange-900 mb-1">Thomson (1897)</h5>
-        <p className="text-xs text-orange-700">Plum Pudding</p>
+        <p className="text-xs text-orange-300">Plum Pudding</p>
         <p className="text-xs text-gray-600 mt-1">Electrons in positive</p>
       </div>
 
@@ -3039,7 +3370,7 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-red-900 mb-1">Rutherford (1911)</h5>
-        <p className="text-xs text-red-700">Nuclear Model</p>
+        <p className="text-xs text-red-300">Nuclear Model</p>
         <p className="text-xs text-gray-600 mt-1">Dense nucleus</p>
       </div>
 
@@ -3059,12 +3390,12 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-blue-900 mb-1">Bohr (1913)</h5>
-        <p className="text-xs text-blue-700">Planetary Model</p>
+        <p className="text-xs text-blue-300">Planetary Model</p>
         <p className="text-xs text-gray-600 mt-1">Energy levels</p>
       </div>
     </div>
     <div className="mt-6 bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-800 text-center">
+      <p className="text-sm text-blue-300 text-center">
         <span className="font-bold">Evolution:</span> From solid ball → embedded electrons → nuclear center → specific orbits
       </p>
     </div>
@@ -3343,12 +3674,12 @@ const PeriodicTableDiagram = () => {
 
       <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
         <div className="bg-red-50 rounded-lg p-2 border border-red-200">
-          <p className="font-bold text-red-800 mb-1">Group 1: Alkali Metals</p>
-          <p className="text-red-700">Soft, highly reactive, 1 valence e⁻</p>
+          <p className="font-bold text-red-300 mb-1">Group 1: Alkali Metals</p>
+          <p className="text-red-300">Soft, highly reactive, 1 valence e⁻</p>
         </div>
         <div className="bg-purple-50 rounded-lg p-2 border border-purple-200">
           <p className="font-bold text-purple-800 mb-1">Group 18: Noble Gases</p>
-          <p className="text-purple-700">Unreactive, full outer shell</p>
+          <p className="text-purple-300">Unreactive, full outer shell</p>
         </div>
       </div>
     </div>
@@ -3616,6 +3947,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 1: Biodiversity Types',
             emoji: '🌿',
+                        layout: 'bullets',
             points: [
               'What are the three types of biodiversity? Provide an example of each',
               'Genetic, species, and ecosystem diversity'
@@ -3624,6 +3956,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 2: H.I.P.P.O.C Threats',
             emoji: '⚠️',
+                        layout: 'bullets',
             points: [
               'Explain what each letter of H.I.P.P.O.C stands for',
               'Provide an example of each threat',
@@ -3633,6 +3966,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 3: Ecosystem Factors',
             emoji: '🌍',
+                        layout: 'bullets',
             points: [
               'Differentiate between biotic and abiotic factors',
               'Name 6 examples of each type',
@@ -3644,6 +3978,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 4: Ecosystem Services & Types',
             emoji: '🎯',
+                        layout: 'bullets',
             points: [
               'Explain what an ecosystem service is',
               'Give two examples of ecosystem services',
@@ -3654,6 +3989,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 5: Symbiosis & Relationships',
             emoji: '🤝',
+                        layout: 'bullets',
             points: [
               'What is symbiosis?',
               'Different types of symbiotic relationships (mutualism, commensalism, parasitism)',
@@ -3663,6 +3999,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 6: Food Chains & Energy',
             emoji: '🔗',
+                        layout: 'bullets',
             points: [
               'What is a food chain?',
               'Practice aquatic and terrestrial food chains',
@@ -3674,6 +4011,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 7: Energy Pyramids',
             emoji: '🔺',
+                        layout: 'bullets',
             points: [
               'Draw an energy pyramid for a food chain',
               'If producers have 54,670 kcal, calculate each level',
@@ -3684,6 +4022,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 8: Nutrient Cycles',
             emoji: '♻️',
+                        layout: 'bullets',
             points: [
               'What are nutrients? Why are they important?',
               'Examples of reservoirs and transfer processes',
@@ -3696,6 +4035,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 9: Invasive Species',
             emoji: '🦟',
+                        layout: 'bullets',
             points: [
               'What are invasive species? What criteria defines them?',
               'Examples of invasive species',
@@ -3706,6 +4046,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 10: Climate Change & Restoration',
             emoji: '🌡️',
+                        layout: 'bullets',
             points: [
               'What is climate change? Evidence that climate is changing?',
               'Worldwide impacts of climate change',
@@ -3723,6 +4064,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 1: Safety + Lab Equipment',
             emoji: '🥽',
+                        layout: 'bullets',
             points: [
               'Be familiar with WHMIS safety labels on chemical containers',
               'Know all lab safety rules',
@@ -3732,6 +4074,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 2: Types of Matter',
             emoji: '🧪',
+                        layout: 'bullets',
             points: [
               'Distinguish between pure substances and mixtures',
               'Heterogeneous mixtures: mechanical mixtures, suspensions, emulsions',
@@ -3742,6 +4085,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 3: Properties of Matter',
             emoji: '⚖️',
+                        layout: 'bullets',
             points: [
               'Distinguish chemical vs physical properties (with examples)',
               'Distinguish quantitative vs qualitative properties (with examples)',
@@ -3754,6 +4098,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 4: Physical/Chemical Changes',
             emoji: '🔬',
+                        layout: 'bullets',
             points: [
               'Explain the meaning of physical change vs chemical change',
               'List evidence to look for when checking for chemical change',
@@ -3763,6 +4108,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 5: Organization of Periodic Table',
             emoji: '📋',
+                        layout: 'bullets',
             points: [
               'Identify properties and location of families: alkali metals, alkaline earth metals, halogens, noble gases',
               'List name and symbols for first 20 elements',
@@ -3773,6 +4119,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 6: Models of the Atom',
             emoji: '🔭',
+                        layout: 'bullets',
             points: [
               'Outline contributions of Dalton, Thomson, Rutherford, and Bohr',
               'Know the names of each scientist\'s atomic model',
@@ -3782,6 +4129,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 7: Subatomic Particles + Bohr-Rutherford Diagrams',
             emoji: '⚛️',
+                        layout: 'bullets',
             points: [
               'Explain electrons, protons, neutrons (charge and mass)',
               'Use periodic table to determine # of protons, neutrons, electrons',
@@ -3793,6 +4141,7 @@ const studyLibrary = {
           {
             subtitle: 'Lesson 8: Valence Electrons & Ions',
             emoji: '💫',
+                        layout: 'bullets',
             points: [
               'Explain what valence electrons are',
               'Explain and draw Lewis dot diagrams for different elements',
@@ -4794,6 +5143,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 1: Biodiversity & H.I.P.P.O.C',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Define the three types of biodiversity and give an example of each.',
               '2. Create a diagram showing genetic diversity in dogs (3 different breeds).',
@@ -4812,6 +5162,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 2: Ecosystem Factors & Services',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. List 6 biotic factors and 6 abiotic factors in a forest ecosystem.',
               '2. Explain the difference between sustainable and non-sustainable ecosystems.',
@@ -4832,6 +5183,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 3: Food Chains & Energy',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Draw an aquatic food chain with 4 trophic levels. Label each level.',
               '2. Draw a terrestrial food chain with 4 trophic levels. Label each level.',
@@ -4854,6 +5206,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 4: Bioaccumulation & Nutrient Cycles',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Define bioaccumulation and biomagnification. Give an example of each.',
               '2. Draw a simple food chain and show how mercury concentration increases at each level.',
@@ -4876,6 +5229,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 5: Nitrogen Cycle & Restoration',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Draw the nitrogen cycle with reservoirs labeled (atmosphere, soil, organisms, water).',
               '2. Label these processes: nitrogen fixation, nitrification, assimilation, ammonification, denitrification.',
@@ -4913,6 +5267,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 1: Lab Safety & Matter Classification',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Draw 5 WHMIS symbols and explain what each one means.',
               '2. List 5 important lab safety rules.',
@@ -4931,6 +5286,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 2: Properties & Density',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. List 4 qualitative physical properties and 4 quantitative physical properties.',
               '2. List 3 chemical properties with examples.',
@@ -4953,6 +5309,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 3: Physical & Chemical Changes',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Define physical change and chemical change.',
               '2. List the 5 indicators of a chemical change.',
@@ -4975,6 +5332,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 4: Periodic Table',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Fill in the table: Elements 1-20 with names and symbols.',
               '2. Where are alkali metals located? List 3 properties.',
@@ -4997,6 +5355,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 5: Atomic Structure',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. Draw and label the 4 atomic models: Dalton, Thomson, Rutherford, Bohr.',
               '2. Describe the contribution of each scientist to atomic theory.',
@@ -5017,6 +5376,7 @@ const studyLibrary = {
           {
             subtitle: 'Worksheet 6: Valence Electrons & Ions',
             emoji: '📝',
+                        layout: 'bullets',
             points: [
               '1. What are valence electrons? Why are they important?',
               '2. Draw Lewis dot diagrams for: H, C, N, O, F, Na, Mg, Al, Cl.',
@@ -5057,119 +5417,119 @@ const studyLibrary = {
           {
             subtitle: 'Biodiversity Terms',
             emoji: '🌿',
-            points: [
-              'BIODIVERSITY: Variety of life in an area (genetic, species, ecosystem)',
-              'GENETIC DIVERSITY: Variation of genes within a species',
-              'SPECIES DIVERSITY: Variety of different species in a habitat',
-              'ECOSYSTEM DIVERSITY: Variety of ecosystems in a region',
-              'SPECIES: Group of organisms that can reproduce and produce fertile offspring',
-              'POPULATION: All members of one species in an area',
-              'HABITAT: Natural home or environment of an organism'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '🌍', label: 'BIODIVERSITY', value: 'Genetic + Species + Ecosystem', sub: 'Total variety of life in an area across all three levels', color: 'bg-green-50 border-green-300' },
+              { icon: '🧬', label: 'GENETIC DIVERSITY', value: 'Within a species', sub: 'Variation of genes in one species (e.g. different dog breeds)', color: 'bg-teal-50 border-teal-300' },
+              { icon: '🐠', label: 'SPECIES DIVERSITY', value: 'Within a habitat', sub: 'Variety of different species in one place (e.g. coral reef)', color: 'bg-cyan-50 border-cyan-300' },
+              { icon: '🌲', label: 'ECOSYSTEM DIVERSITY', value: 'Within a region', sub: 'Variety of different ecosystems (forests, wetlands, grasslands)', color: 'bg-emerald-50 border-emerald-300' },
+              { icon: '👥', label: 'POPULATION', value: 'Same species, one area', sub: 'All members of one species living in the same place', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🏡', label: 'HABITAT', value: 'Natural home', sub: 'The environment an organism naturally lives and grows in', color: 'bg-lime-50 border-lime-300' },
+            ],
+            points: []
           },
           {
             subtitle: 'Ecosystem Terms',
             emoji: '🌍',
-            points: [
-              'ECOSYSTEM: Community of living things interacting with non-living environment',
-              'BIOTIC FACTOR: Living component of ecosystem (plants, animals, bacteria)',
-              'ABIOTIC FACTOR: Non-living component (sunlight, water, soil, temperature)',
-              'SUSTAINABLE ECOSYSTEM: Can maintain itself over time, resources regenerate',
-              'BIOSPHERE: All living things on Earth',
-              'ATMOSPHERE: Layer of gases surrounding Earth',
-              'HYDROSPHERE: All water on Earth',
-              'LITHOSPHERE: Earth\'s crust (rocks and soil)'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '🔗', label: 'ECOSYSTEM', value: 'Community + Environment', sub: 'All living things interacting with the non-living environment', color: 'bg-green-50 border-green-300' },
+              { icon: '🌱', label: 'BIOTIC FACTOR', value: 'Living component', sub: 'Plants, animals, bacteria, fungi — anything alive', color: 'bg-emerald-50 border-emerald-300' },
+              { icon: '☀️', label: 'ABIOTIC FACTOR', value: 'Non-living component', sub: 'Sunlight, water, soil, temperature, pH levels', color: 'bg-yellow-50 border-yellow-300' },
+              { icon: '♻️', label: 'SUSTAINABLE ECOSYSTEM', value: 'Self-maintaining', sub: 'Resources regenerate as fast as they are used — balanced', color: 'bg-teal-50 border-teal-300' },
+              { icon: '🌎', label: 'BIOSPHERE', value: 'All life on Earth', sub: 'The total of all ecosystems — every living thing on the planet', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🪨', label: 'LITHOSPHERE', value: "Earth's crust", sub: 'Rocks, soil, and minerals that form the land surface', color: 'bg-stone-50 border-stone-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Organism Roles',
+            subtitle: 'Organism Roles in the Food Chain',
             emoji: '🔗',
-            points: [
-              'PRODUCER: Organism that makes own food through photosynthesis (plants)',
-              'CONSUMER: Organism that eats other organisms for energy',
-              'PRIMARY CONSUMER: Herbivore that eats producers (rabbit, deer)',
-              'SECONDARY CONSUMER: Carnivore that eats primary consumers (snake, fox)',
-              'TERTIARY CONSUMER: Top predator that eats secondary consumers (eagle, shark)',
-              'DECOMPOSER: Breaks down dead matter (bacteria, fungi, worms)',
-              'HERBIVORE: Eats only plants',
-              'CARNIVORE: Eats only animals',
-              'OMNIVORE: Eats both plants and animals'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🌿', label: 'PRODUCER — Makes its own food via photosynthesis', sub: 'Plants, algae, phytoplankton. The base of every food chain', color: 'bg-green-50 border-green-400' },
+              { icon: '🐇', label: 'PRIMARY CONSUMER — Herbivore that eats producers', sub: 'Rabbit, deer, grasshopper. Trophic level 2', color: 'bg-lime-50 border-lime-400' },
+              { icon: '🦊', label: 'SECONDARY CONSUMER — Eats primary consumers', sub: 'Snake, fox, frog. Trophic level 3', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🦅', label: 'TERTIARY CONSUMER — Top predator', sub: 'Eagle, shark, orca. Trophic level 4. Gets the least energy', color: 'bg-orange-50 border-orange-400' },
+              { icon: '🍄', label: 'DECOMPOSER — Breaks down dead matter', sub: 'Bacteria, fungi, worms. Recycle nutrients back into soil', color: 'bg-brown-50 border-amber-400' },
+            ],
+            points: []
           },
           {
             subtitle: 'Energy Flow Terms',
             emoji: '⚡',
-            points: [
-              'FOOD CHAIN: Linear sequence showing who eats whom',
-              'FOOD WEB: Interconnected food chains in ecosystem',
-              'TROPHIC LEVEL: Position in food chain (producer, primary consumer, etc.)',
-              'ENERGY PYRAMID: Diagram showing energy at each trophic level',
-              '10% RULE: Only 10% of energy passes to next level, 90% lost as heat',
-              'BIOMASS: Total mass of living organisms in an area',
-              'BIOACCUMULATION: Build-up of substance in single organism over time',
-              'BIOMAGNIFICATION: Increase in toxin concentration up food chain'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '⛓️', label: 'FOOD CHAIN', value: 'Linear sequence', sub: 'Shows who eats whom in a straight line', color: 'bg-green-50 border-green-300' },
+              { icon: '🕸️', label: 'FOOD WEB', value: 'Interconnected chains', sub: 'Many food chains linked together — more realistic', color: 'bg-teal-50 border-teal-300' },
+              { icon: '🔟', label: '10% RULE', value: 'Energy transfer', sub: 'Only 10% of energy passes to next level — 90% lost as heat', color: 'bg-amber-50 border-amber-300' },
+              { icon: '🔺', label: 'ENERGY PYRAMID', value: 'Decreasing energy', sub: 'Diagram showing energy shrinks at each trophic level', color: 'bg-orange-50 border-orange-300' },
+              { icon: '🐟', label: 'BIOACCUMULATION', value: 'One organism', sub: 'Toxin builds up inside a single organism over its lifetime', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🦅', label: 'BIOMAGNIFICATION', value: 'Up the food chain', sub: 'Toxin concentration multiplies at each trophic level', color: 'bg-red-50 border-red-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Relationships',
+            subtitle: 'Species Relationships (Symbiosis)',
             emoji: '🤝',
-            points: [
-              'SYMBIOSIS: Close relationship between two species',
-              'MUTUALISM: Both species benefit (bee and flower)',
-              'COMMENSALISM: One benefits, other unaffected (bird nesting in tree)',
-              'PARASITISM: One benefits, other harmed (tick on dog)',
-              'PREDATION: One organism hunts and eats another',
-              'COMPETITION: Organisms compete for same limited resources'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🐝', label: 'MUTUALISM — Both species benefit', sub: 'Bee pollinates flower; flower gives bee nectar. Win-win', color: 'bg-green-50 border-green-400' },
+              { icon: '🐦', label: 'COMMENSALISM — One benefits, other unaffected', sub: 'Bird nests in a tree. Tree is not helped or harmed', color: 'bg-blue-50 border-blue-400' },
+              { icon: '🦟', label: 'PARASITISM — One benefits, other is harmed', sub: 'Tick on a dog. Tick feeds; dog loses blood and may get sick', color: 'bg-red-50 border-red-400' },
+              { icon: '🐺', label: 'PREDATION — One hunts and eats the other', sub: 'Wolf eats rabbit. Controls population size naturally', color: 'bg-orange-50 border-orange-400' },
+            ],
+            points: []
           },
           {
             subtitle: 'Photosynthesis & Respiration',
             emoji: '🌱',
-            points: [
-              'PHOTOSYNTHESIS: Plants use CO₂ + water + sunlight → glucose + oxygen',
-              'CELLULAR RESPIRATION: Organisms break down glucose + oxygen → CO₂ + water + ATP',
-              'ATP: Energy currency of cells',
-              'CHLOROPHYLL: Green pigment in plants that captures sunlight',
-              'CHLOROPLAST: Organelle where photosynthesis occurs',
-              'MITOCHONDRIA: Organelle where cellular respiration occurs'
-            ]
+            layout: 'formula',
+            items: [
+              { formula: '6CO₂ + 6H₂O + sunlight → C₆H₁₂O₆ + 6O₂', meaning: 'PHOTOSYNTHESIS — Plants convert carbon dioxide + water + light into glucose + oxygen', example: 'Happens in chloroplasts. Only plants, algae, and some bacteria', color: 'border-green-400', headerBg: 'bg-green-600' },
+              { formula: 'C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP', meaning: 'CELLULAR RESPIRATION — Organisms break down glucose to release energy (ATP)', example: 'Happens in mitochondria. ALL living organisms do this', color: 'border-blue-400', headerBg: 'bg-blue-600' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Nutrient Cycles',
+            subtitle: 'Nutrient Cycles — Key Terms',
             emoji: '♻️',
-            points: [
-              'CARBON CYCLE: Movement of carbon through atmosphere, organisms, soil, water',
-              'NITROGEN CYCLE: Movement of nitrogen through atmosphere, soil, organisms',
-              'NITROGEN FIXATION: Converting N₂ gas to ammonia (by bacteria or lightning)',
-              'NITRIFICATION: Converting ammonia to nitrite to nitrate (by bacteria)',
-              'DENITRIFICATION: Converting nitrate back to N₂ gas (returns to atmosphere)',
-              'AMMONIFICATION: Decomposers release ammonia from dead matter'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '💨', label: 'CARBON CYCLE — Carbon moves through atmosphere, organisms, soil, and water', sub: 'Photosynthesis removes CO₂; respiration and combustion release it', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🌱', label: 'NITROGEN CYCLE — Nitrogen moves between atmosphere and soil', sub: '78% of air is N₂ — but plants cannot use it without bacteria', color: 'bg-blue-50 border-blue-400' },
+              { icon: '⚡', label: 'NITROGEN FIXATION — N₂ gas converted to ammonia (NH₃)', sub: 'Done by Rhizobium bacteria in root nodules OR lightning', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🔬', label: 'NITRIFICATION → DENITRIFICATION — Nitrate cycle', sub: 'Nitrification: NH₃ → NO₂⁻ → NO₃⁻ (usable). Denitrification: NO₃⁻ → N₂ (returns to air)', color: 'bg-green-50 border-green-400' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Threats to Biodiversity',
+            subtitle: 'Threats to Biodiversity (H.I.P.P.O.C)',
             emoji: '⚠️',
-            points: [
-              'HABITAT DESTRUCTION: Removal of living spaces (deforestation)',
-              'INVASIVE SPECIES: Non-native species that cause harm',
-              'POLLUTION: Harmful substances in environment (oil spills, chemicals)',
-              'OVERHARVESTING: Taking organisms faster than they can reproduce',
-              'CLIMATE CHANGE: Long-term changes in temperature and weather patterns',
-              'EXTINCTION: Permanent loss of a species',
-              'ENDANGERED: Species at risk of extinction'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🏗️', label: 'H — Habitat Destruction', sub: 'Deforestation, urban sprawl. Removes living spaces — #1 threat', color: 'bg-red-50 border-red-400' },
+              { icon: '🦟', label: 'I — Invasive Species', sub: 'Non-native species out-compete locals (zebra mussels in Great Lakes)', color: 'bg-orange-50 border-orange-400' },
+              { icon: '🏭', label: 'P — Pollution', sub: 'Oil spills, chemicals, plastics, noise all kill or displace organisms', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '👥', label: 'P — Population (Human Growth)', sub: 'More people = more land used, more resources consumed', color: 'bg-purple-50 border-purple-400' },
+              { icon: '🎣', label: 'O — Overharvesting', sub: 'Fishing/hunting faster than species can reproduce (Atlantic cod collapse)', color: 'bg-blue-50 border-blue-400' },
+              { icon: '🌡️', label: 'C — Climate Change', sub: 'Warming seas → coral bleaching. Shifting seasons → habitat loss', color: 'bg-green-50 border-green-400' },
+            ],
+            points: []
           },
           {
             subtitle: 'Conservation & Restoration',
             emoji: '🌲',
-            points: [
-              'REFORESTATION: Planting trees where they were cut down',
-              'BIOREMEDIATION: Using organisms to break down waste and improve environment',
-              'BIOAUGMENTATION: Adding bacteria/fungi to neutralize toxins',
-              'CONSERVATION: Protection and preservation of ecosystems',
-              'SUSTAINABILITY: Meeting current needs without harming future generations',
-              'BIODEGRADABLE: Can be broken down naturally by decomposers'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '🌳', label: 'REFORESTATION', value: 'Plant trees back', sub: 'Prevents erosion, restores habitat, stores carbon', color: 'bg-green-50 border-green-300' },
+              { icon: '🦠', label: 'BIOREMEDIATION', value: 'Microbes clean up', sub: 'Bacteria/fungi break down toxins naturally (used in oil spill cleanup)', color: 'bg-teal-50 border-teal-300' },
+              { icon: '➕', label: 'BIOAUGMENTATION', value: 'Add organisms', sub: 'Introduce specific bacteria/fungi to neutralize pollution faster', color: 'bg-cyan-50 border-cyan-300' },
+              { icon: '🔒', label: 'CONSERVATION', value: 'Protect & preserve', sub: 'National parks, protected areas, wildlife reserves', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🔄', label: 'SUSTAINABILITY', value: "Don't use faster than nature renews", sub: 'Meet current needs without harming future generations', color: 'bg-emerald-50 border-emerald-300' },
+              { icon: '🍂', label: 'BIODEGRADABLE', value: 'Breaks down naturally', sub: 'Decomposers can break it down — unlike plastic', color: 'bg-lime-50 border-lime-300' },
+            ],
+            points: []
           }
         ]
       },
@@ -5179,92 +5539,67 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Genetic Diversity',
-            emoji: '🧬',
-            points: [
-              'Variation of genes within a species',
-              'Example: Different breeds of dogs',
-              'Why it matters: Helps species adapt and survive'
-            ]
+            subtitle: 'Three Levels at a Glance',
+            emoji: '🌿',
+            layout: 'compare',
+            items: [
+              {
+                label: '🧬 GENETIC',
+                color: 'bg-purple-50 border-purple-400',
+                rows: ['Variation WITHIN a species', 'Same species, different genes', 'Example: dog breeds', 'Why: helps species adapt']
+              },
+              {
+                label: '🐠 SPECIES',
+                color: 'bg-cyan-50 border-cyan-400',
+                rows: ['Variety of SPECIES in a habitat', 'Different organisms coexisting', 'Example: coral reef fish', 'Why: stability of ecosystem']
+              },
+              'Ecosystem diversity = variety of entire ecosystem types (forests, wetlands, grasslands) in a region.'
+            ],
+            points: []
           },
           {
-            subtitle: 'Species Diversity',
-            emoji: '🐠',
-            points: [
-              'Variety of species within a habitat',
-              'Example: Variety of fish species in a coral reef',
-              'More species = More stable ecosystem'
-            ]
-          },
-          {
-            subtitle: 'Ecosystem Diversity',
-            emoji: '🌍',
-            points: [
-              'Variety of ecosystems in a region',
-              'Example: Forests, wetlands, grasslands in an area',
-              'Different ecosystems support different life forms'
-            ]
+            subtitle: 'Why Biodiversity Matters',
+            emoji: '❓',
+            layout: 'rules',
+            items: [
+              { icon: '💪', label: 'Genetic diversity = resilience', sub: 'More genetic variation = better chance species survives disease or climate shift', color: 'bg-purple-50 border-purple-400' },
+              { icon: '⚖️', label: 'Species diversity = stable ecosystems', sub: 'More species = more ways to fill each role. Losing one species hurts fewer others', color: 'bg-cyan-50 border-cyan-400' },
+              { icon: '🌍', label: 'Ecosystem diversity = services for all life', sub: 'Different ecosystems provide clean air, water filtration, food, climate control', color: 'bg-green-50 border-green-400' },
+            ],
+            points: []
           }
         ]
       },
       {
         id: 'hippoc',
-        title: 'H.I.P.P.O.C. - Threats to Biodiversity',
+        title: 'H.I.P.P.O.C. — Threats to Biodiversity',
         image: 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'H - Habitat Destruction',
-            emoji: '🏗️',
-            points: [
-              'Removes living spaces for species',
-              'Example: Deforestation of Amazon rainforest',
-              'Species cannot survive without homes'
-            ]
+            subtitle: 'All Six Threats',
+            emoji: '⚠️',
+            layout: 'rules',
+            items: [
+              { icon: '🏗️', label: 'H — Habitat Destruction', sub: 'Deforestation, mining, urban sprawl remove living spaces. The #1 cause of extinction', color: 'bg-red-50 border-red-500' },
+              { icon: '🦟', label: 'I — Invasive Species', sub: 'Non-native species with no natural predators outcompete locals. Zebra mussels destroyed Great Lakes food webs', color: 'bg-orange-50 border-orange-500' },
+              { icon: '🏭', label: 'P — Pollution', sub: 'Oil spills, pesticides, plastic, noise and light pollution all kill or displace wildlife', color: 'bg-yellow-50 border-yellow-500' },
+              { icon: '👥', label: 'P — Population (Human Growth)', sub: 'More people = more land cleared, more water used, more waste produced', color: 'bg-purple-50 border-purple-500' },
+              { icon: '🎣', label: 'O — Overharvesting', sub: 'Fishing/hunting/logging faster than species can reproduce. Atlantic cod collapsed in 1992', color: 'bg-blue-50 border-blue-500' },
+              { icon: '🌡️', label: 'C — Climate Change', sub: 'Warming oceans bleach coral. Shifting seasons disrupt migration and breeding cycles', color: 'bg-teal-50 border-teal-500' },
+            ],
+            points: []
           },
           {
-            subtitle: 'I - Invasive Species',
-            emoji: '🦟',
-            points: [
-              'Outsiders compete with native species',
-              'Example: Zebra mussels in North American lakes',
-              'Disrupts natural balance'
-            ]
-          },
-          {
-            subtitle: 'P - Pollution',
-            emoji: '🏭',
-            points: [
-              'Toxic chemicals, waste, and noise',
-              'Example: Oil spills in oceans',
-              'Kills or harms organisms'
-            ]
-          },
-          {
-            subtitle: 'P - Population (Human)',
-            emoji: '👥',
-            points: [
-              'Too many people = more resources used',
-              'Example: Urban sprawl reduces wildlife space',
-              'Less room for native animals'
-            ]
-          },
-          {
-            subtitle: 'O - Overharvesting',
-            emoji: '🎣',
-            points: [
-              'Taking too much (fishing/hunting/logging)',
-              'Example: Overfishing of Atlantic cod',
-              'Depletes species faster than recovery'
-            ]
-          },
-          {
-            subtitle: 'C - Climate Change',
-            emoji: '🌡️',
-            points: [
-              'Alters habitats and weather patterns',
-              'Example: Coral bleaching from warming seas',
-              'Species struggle to adapt'
-            ]
+            subtitle: 'Exam Tip — Solutions for Each Threat',
+            emoji: '🎯',
+            layout: 'cards',
+            items: [
+              { icon: '🏗️', label: 'Habitat Destruction', value: 'Solution:', sub: 'Protected areas, reforestation, sustainable forestry certification', color: 'bg-red-50 border-red-200' },
+              { icon: '🦟', label: 'Invasive Species', value: 'Solution:', sub: 'Early detection, biological control, preventing new introductions', color: 'bg-orange-50 border-orange-200' },
+              { icon: '🏭', label: 'Pollution', value: 'Solution:', sub: 'Stricter regulations, bioremediation, reduce plastic use', color: 'bg-yellow-50 border-yellow-200' },
+              { icon: '🎣', label: 'Overharvesting', value: 'Solution:', sub: 'Fishing quotas, seasonal bans, protected marine areas', color: 'bg-blue-50 border-blue-200' },
+            ],
+            points: []
           }
         ]
       },
@@ -5281,22 +5616,35 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Biotic Factors (Living)',
-            emoji: '🌱',
-            points: [
-              'Plants, animals, bacteria, fungi',
-              'Algae, insects, microorganisms',
-              'Note: Dying/decaying things are still biotic (e.g., decaying logs)'
-            ]
+            subtitle: 'Biotic vs Abiotic — Side by Side',
+            emoji: '🌍',
+            layout: 'compare',
+            items: [
+              {
+                label: '🌱 BIOTIC (Living)',
+                color: 'bg-green-50 border-green-400',
+                rows: ['Plants, animals, fungi', 'Bacteria and microorganisms', 'Decaying/dead matter still counts!', 'Affect each other through eating, competing, symbiosis']
+              },
+              {
+                label: '☀️ ABIOTIC (Non-living)',
+                color: 'bg-yellow-50 border-yellow-400',
+                rows: ['Sunlight, temperature', 'Water, soil, air', 'pH levels, salinity', 'Physical & chemical environment']
+              },
+              'Both biotic and abiotic factors TOGETHER define what can live in a habitat.'
+            ],
+            points: []
           },
           {
-            subtitle: 'Abiotic Factors (Non-living)',
-            emoji: '☀️',
-            points: [
-              'Sunlight, temperature, water',
-              'Soil, air, pH levels',
-              'Physical and chemical components'
-            ]
+            subtitle: 'The Four Spheres',
+            emoji: '🌐',
+            layout: 'cards',
+            items: [
+              { icon: '🌿', label: 'BIOSPHERE', value: 'All living things', sub: 'Every organism on Earth — the living layer of the planet', color: 'bg-green-50 border-green-300' },
+              { icon: '💨', label: 'ATMOSPHERE', value: 'All gases', sub: 'Nitrogen (78%), oxygen (21%), CO₂ and others', color: 'bg-sky-50 border-sky-300' },
+              { icon: '💧', label: 'HYDROSPHERE', value: 'All water', sub: 'Oceans, rivers, lakes, groundwater, ice caps', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🪨', label: 'LITHOSPHERE', value: "Earth's crust", sub: 'Rocks, soil, minerals — what the land is made of', color: 'bg-stone-50 border-stone-300' },
+            ],
+            points: []
           }
         ]
       },
@@ -5313,56 +5661,59 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Terrestrial Food Chain',
-            emoji: '🌾',
-            points: [
-              'Example: Grass → Grasshopper → Mouse → Snake',
-              'Starts with plants (producers)',
-              'Energy flows one direction',
-              'Each level is called a trophic level'
+            subtitle: 'Food Chain — How Energy Flows',
+            emoji: '⛓️',
+            layout: 'steps',
+            items: [
+              { label: 'PRODUCERS — Capture energy from the Sun', sub: 'Plants, algae, phytoplankton. Convert sunlight → glucose via photosynthesis' },
+              { label: 'PRIMARY CONSUMERS — Eat producers', sub: 'Herbivores (grasshopper, deer, rabbit). Get 10% of producer energy' },
+              { label: 'SECONDARY CONSUMERS — Eat primary consumers', sub: 'Omnivores/carnivores (frog, snake, fox). Get 10% of primary consumer energy' },
+              { label: 'TERTIARY CONSUMERS — Top predators', sub: 'Eagle, shark, orca. Get only 0.1% of original producer energy!' },
             ],
+            points: [],
             diagram: 'food-chain'
           },
           {
-            subtitle: 'Aquatic Food Chain',
-            emoji: '🌊',
-            points: [
-              'Example: Phytoplankton → Small fish → Medium fish → Shark',
-              'Starts with microscopic organisms',
-              'Same 10% energy transfer rule',
-              'Top predators get very little energy'
+            subtitle: 'The 10% Rule — Why Chains Are Short',
+            emoji: '🔟',
+            layout: 'formula',
+            items: [
+              { formula: 'Energy at next level = Current level × 10%', meaning: 'Only 10% transfers up — 90% lost as heat, movement, waste, and uneaten parts', example: '100,000 kcal producers → 10,000 primary → 1,000 secondary → 100 tertiary', color: 'border-amber-400', headerBg: 'bg-amber-500' },
             ],
-            diagram: 'aquatic-food-chain'
-          },
-          {
-            subtitle: 'The 10% Rule',
-            emoji: '⚡',
-            points: [
-              'Only 10% of energy passes to next level',
-              '90% lost as heat, movement, waste',
-              'That is why food chains are limited in length!'
-            ],
+            points: [],
             diagram: 'energy-pyramid'
           },
           {
-            subtitle: 'Energy Pyramid Example',
-            emoji: '🔺',
-            points: [
-              'Producers: 54,670 kcal',
-              'Primary consumers: 5,467 kcal (10%)',
-              'Secondary consumers: 547 kcal (10%)',
-              'Tertiary consumers: 54.7 kcal (10%)'
-            ]
+            subtitle: 'Terrestrial vs Aquatic Chains',
+            emoji: '🌊',
+            layout: 'compare',
+            items: [
+              {
+                label: '🌾 TERRESTRIAL',
+                color: 'bg-green-50 border-green-400',
+                rows: ['Grass → Grasshopper', '→ Mouse → Snake → Eagle', 'Producers: land plants', 'Sunlight hits leaves directly']
+              },
+              {
+                label: '🌊 AQUATIC',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Phytoplankton → Zooplankton', '→ Small fish → Large fish → Shark', 'Producers: microscopic algae', 'Same 10% rule applies']
+              },
+              'Key rule: Arrows in food chains point FROM the food source TO the consumer (show energy flow direction).'
+            ],
+            points: [],
+            diagram: 'aquatic-food-chain'
           },
           {
-            subtitle: 'Key Points',
-            emoji: '📌',
-            points: [
-              'Decomposers not included in energy pyramid',
-              'Ecosystems can survive without consumers',
-              'Producers are essential (initial energy source)',
-              'Humans not included (can be anywhere in chain)'
-            ]
+            subtitle: 'Key Facts Examiners Love',
+            emoji: '🎯',
+            layout: 'rules',
+            items: [
+              { icon: '🍄', label: 'Decomposers are NOT shown in the energy pyramid', sub: 'They get energy from ALL levels — breaking down dead matter at every stage', color: 'bg-amber-50 border-amber-400' },
+              { icon: '🌿', label: 'Ecosystems can survive without consumers — NOT without producers', sub: 'Remove all plants and the whole system collapses', color: 'bg-green-50 border-green-400' },
+              { icon: '👤', label: 'Humans can appear at any trophic level', sub: 'We eat plants (level 2) AND meat (level 3+) — we are omnivores', color: 'bg-blue-50 border-blue-400' },
+              { icon: '📏', label: 'Why are food chains limited to 4-5 levels?', sub: 'Not enough energy left after 5 steps to support another organism', color: 'bg-red-50 border-red-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -5379,23 +5730,35 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Bioaccumulation',
-            emoji: '🐟',
-            points: [
-              'Build-up of substance in organism over time',
-              'Example: Mercury in fish',
-              'Individual organism absorbs toxins'
-            ]
+            subtitle: 'Bioaccumulation vs Biomagnification',
+            emoji: '☠️',
+            layout: 'compare',
+            items: [
+              {
+                label: '🐟 BIOACCUMULATION',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Toxin builds up in ONE organism', 'Absorbs more than it excretes', 'Example: Fish absorbs mercury from water over its lifetime', 'Happens at EVERY level']
+              },
+              {
+                label: '🦅 BIOMAGNIFICATION',
+                color: 'bg-red-50 border-red-400',
+                rows: ['Concentration INCREASES up chain', 'Top predators hit hardest', 'Example: DDT killed eagle eggs', 'Plankton: 0.01ppm → Eagle: 10+ ppm']
+              },
+              'Real example: Mercury → plankton (absorb from water) → small fish (eat many plankton) → large fish → humans. Swordfish/tuna have HIGH mercury.'
+            ],
+            points: []
           },
           {
-            subtitle: 'Biomagnification',
-            emoji: '🦅',
-            points: [
-              'Concentration increases up food chain',
-              'Example: DDT in birds of prey',
-              'Top predators affected most',
-              'Small fish eat plankton → bigger fish eat small fish → concentration increases'
-            ]
+            subtitle: 'Why Top Predators Are Most Affected',
+            emoji: '🔢',
+            layout: 'steps',
+            items: [
+              { label: 'Plankton absorb tiny amounts of toxin from water', sub: 'e.g. 0.01 ppm mercury each' },
+              { label: 'Small fish eat thousands of plankton', sub: 'Toxin from all that plankton concentrates → 0.1 ppm' },
+              { label: 'Large fish eat many small fish', sub: 'Concentration keeps multiplying → 1 ppm' },
+              { label: 'Top predator eats many large fish across years', sub: 'Can reach 10-25 ppm — enough to cause nerve damage and reproductive failure' },
+            ],
+            points: []
           }
         ]
       },
@@ -5412,31 +5775,34 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Bio-Augmentation (Fixes)',
-            emoji: '🦠',
-            points: [
-              'Uses bacteria/fungi to neutralize toxins',
-              'Example: 2010 BP oil spill cleanup',
-              'Breaks down contaminants naturally'
-            ]
+            subtitle: 'Three Restoration Methods',
+            emoji: '🔧',
+            layout: 'rules',
+            items: [
+              { icon: '🌲', label: 'REFORESTATION — Plant trees where they were removed', sub: 'Prevents soil erosion, restores habitat, captures CO₂. Provides food, shelter, shade', color: 'bg-green-50 border-green-400' },
+              { icon: '🌿', label: 'BIOREMEDIATION — Use living organisms to clean up pollution', sub: 'Bacteria and fungi naturally break down toxins. Example: microbes used in 2010 BP Gulf oil spill', color: 'bg-teal-50 border-teal-400' },
+              { icon: '🦠', label: 'BIOAUGMENTATION — Add specific organisms to speed up cleanup', sub: 'Introduce bacteria/fungi that target specific toxins. Faster than natural bioremediation', color: 'bg-blue-50 border-blue-400' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Bio-Remediation (Adds)',
-            emoji: '🌿',
-            points: [
-              'Adding species that break down waste',
-              'Improves soil quality and cleans water',
-              'Example: Microbes as natural water filtration'
-            ]
-          },
-          {
-            subtitle: 'Reforestation',
-            emoji: '🌲',
-            points: [
-              'Planting trees where they were cut',
-              'Prevents soil erosion',
-              'Provides food, shelter, shade for wildlife'
-            ]
+            subtitle: 'Bioremediation vs Bioaugmentation',
+            emoji: '🔬',
+            layout: 'compare',
+            items: [
+              {
+                label: '🌿 BIOREMEDIATION',
+                color: 'bg-teal-50 border-teal-400',
+                rows: ['Uses organisms ALREADY there', 'Slower but natural', 'Less intervention needed', 'Example: leaving marsh plants to filter runoff']
+              },
+              {
+                label: '🦠 BIOAUGMENTATION',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['ADDS new organisms to site', 'Faster for severe pollution', 'More controlled', 'Example: adding Pseudomonas bacteria to oil spill']
+              },
+              'Both are preferred over chemical cleanup — they work with nature, not against it.'
+            ],
+            points: []
           }
         ]
       },
@@ -5446,48 +5812,40 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Reservoirs',
+            subtitle: 'Carbon Reservoirs',
             emoji: '💨',
-            points: [
-              'Atmosphere: CO₂ gas',
-              'Biosphere: Living organisms',
-              'Lithosphere: Fossil fuels, carbonate rocks',
-              'Hydrosphere: Dissolved CO₂ in water'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '💨', label: 'ATMOSPHERE', value: 'CO₂ gas', sub: 'Small reservoir but drives climate. Increasing from human activity', color: 'bg-sky-50 border-sky-300' },
+              { icon: '🌿', label: 'BIOSPHERE', value: 'Living organisms', sub: 'Carbon in all living things — plants store large amounts', color: 'bg-green-50 border-green-300' },
+              { icon: '🛢️', label: 'LITHOSPHERE', value: 'Fossil fuels + rock', sub: 'Coal, oil, natural gas — carbon locked away for millions of years', color: 'bg-stone-50 border-stone-300' },
+              { icon: '🌊', label: 'HYDROSPHERE', value: 'Dissolved CO₂', sub: 'Oceans absorb ~30% of CO₂ released by humans', color: 'bg-blue-50 border-blue-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Photosynthesis vs Respiration',
+            subtitle: 'Processes That Move Carbon',
             emoji: '🔄',
-            points: [
-              'Photosynthesis: Plants absorb CO₂ → glucose',
-              'Respiration: Organisms release CO₂',
-              'Combustion: Burning fuels releases CO₂',
-              'Decomposition: Dead matter releases CO₂',
-              'Ocean uptake: Oceans absorb atmospheric CO₂'
+            layout: 'rules',
+            items: [
+              { icon: '🌱', label: 'PHOTOSYNTHESIS — CO₂ out of atmosphere into plants', sub: '6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. Carbon stored as glucose', color: 'bg-green-50 border-green-400' },
+              { icon: '💨', label: 'RESPIRATION — CO₂ released back to atmosphere', sub: 'All living things do this continuously, day and night', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🔥', label: 'COMBUSTION — Carbon from fossil fuels → CO₂ fast', sub: 'Burning coal/oil/gas releases carbon locked away for 300+ million years', color: 'bg-red-50 border-red-400' },
+              { icon: '🍂', label: 'DECOMPOSITION — Dead matter → CO₂ and nutrients', sub: 'Bacteria and fungi break down organisms, releasing stored carbon', color: 'bg-amber-50 border-amber-400' },
             ],
+            points: [],
             diagram: 'carbon-cycle'
           },
           {
-            subtitle: 'Photosynthesis Equation',
-            emoji: '🌱',
-            points: [
-              '6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂',
-              'Uses sunlight energy',
-              'Produces glucose (sugar) and oxygen',
-              'Only happens in plants and some bacteria'
+            subtitle: 'Photosynthesis vs Respiration',
+            emoji: '⚖️',
+            layout: 'formula',
+            items: [
+              { formula: '6CO₂ + 6H₂O + sunlight → C₆H₁₂O₆ + 6O₂', meaning: 'PHOTOSYNTHESIS — Takes CO₂ IN, releases O₂ OUT. Only in plants/algae in LIGHT', example: 'Chloroplasts. Requires chlorophyll (green pigment)', color: 'border-green-400', headerBg: 'bg-green-600' },
+              { formula: 'C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP energy', meaning: 'RESPIRATION — Uses O₂, releases CO₂. ALL organisms, ALL the time', example: 'Mitochondria. Plants respire even in the dark', color: 'border-blue-400', headerBg: 'bg-blue-600' },
             ],
+            points: [],
             diagram: 'photosynthesis'
-          },
-          {
-            subtitle: 'Cellular Respiration Equation',
-            emoji: '💨',
-            points: [
-              'C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP',
-              'Breaks down glucose with oxygen',
-              'Releases energy (ATP) for life',
-              'Happens in ALL living organisms'
-            ],
-            diagram: 'respiration'
           }
         ]
       },
@@ -5497,51 +5855,28 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Complete Nitrogen Cycle',
-            emoji: '♻️',
-            points: [
-              'Nitrogen moves between atmosphere, soil, and organisms',
-              'Essential for proteins and DNA',
-              'Bacteria do most of the work!',
-              '78% of air is nitrogen gas (N₂)'
-            ],
-            diagram: 'nitrogen-cycle'
-          },
-          {
-            subtitle: 'Nitrogen Fixation',
-            emoji: '⚡',
-            points: [
-              'N₂ → ammonia (NH₃)',
-              'Done by bacteria (Rhizobium) or lightning',
-              'Makes nitrogen usable for plants'
-            ]
-          },
-          {
-            subtitle: 'Nitrification',
+            subtitle: 'Why Nitrogen Matters',
             emoji: '🔬',
-            points: [
-              'Ammonia → nitrite (NO₂⁻) by Nitrosomonas',
-              'Nitrite → nitrate (NO₃⁻) by Nitrobacter',
-              'Two-step bacterial process'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🧬', label: '78% of air is nitrogen (N₂) — but plants CANNOT use it directly', sub: 'N₂ gas has a triple bond too strong for plants to break on their own', color: 'bg-blue-50 border-blue-400' },
+              { icon: '💪', label: 'Nitrogen is essential for proteins and DNA', sub: "Every living cell needs nitrogen — it's the backbone of amino acids", color: 'bg-green-50 border-green-400' },
+              { icon: '🦠', label: 'Bacteria do the heavy lifting in the nitrogen cycle', sub: 'Different bacteria fix, nitrify, and denitrify nitrogen at each stage', color: 'bg-purple-50 border-purple-400' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Assimilation & Ammonification',
-            emoji: '🌱',
-            points: [
-              'Assimilation: Plants absorb nitrate from soil',
-              'Ammonification: Decomposers release ammonium',
-              'Returns nitrogen to soil'
-            ]
-          },
-          {
-            subtitle: 'Denitrification',
-            emoji: '💨',
-            points: [
-              'Nitrate → N₂ gas',
-              'By denitrifying bacteria',
-              'Returns nitrogen to atmosphere'
-            ]
+            subtitle: 'The 4 Stages of the Nitrogen Cycle',
+            emoji: '♻️',
+            layout: 'steps',
+            items: [
+              { label: 'NITROGEN FIXATION — N₂ → NH₃ (ammonia)', sub: 'Rhizobium bacteria in root nodules (legumes) OR lightning. Makes nitrogen usable for plants' },
+              { label: 'NITRIFICATION — NH₃ → NO₂⁻ → NO₃⁻ (nitrate)', sub: 'Nitrosomonas bacteria: ammonia → nitrite. Nitrobacter: nitrite → nitrate. Now plants can absorb it' },
+              { label: 'ASSIMILATION — Plants absorb nitrate from soil', sub: 'Roots take up NO₃⁻ and use nitrogen to build proteins and DNA. Animals eat plants to get nitrogen' },
+              { label: 'AMMONIFICATION → DENITRIFICATION — Back to N₂', sub: 'Decomposers release NH₃ from dead matter. Denitrifying bacteria convert NO₃⁻ → N₂ gas, returning it to atmosphere' },
+            ],
+            points: [],
+            diagram: 'nitrogen-cycle'
           }
         ]
       },
@@ -5599,139 +5934,131 @@ const studyLibrary = {
           {
             subtitle: 'Matter & Classification',
             emoji: '🧪',
-            points: [
-              'MATTER: Anything that has mass and takes up space',
-              'PURE SUBSTANCE: Uniform composition - element or compound',
-              'ELEMENT: Pure substance made of one type of atom (gold, oxygen)',
-              'COMPOUND: Two or more elements chemically bonded (H₂O, CO₂)',
-              'MIXTURE: Two or more substances physically combined (not bonded)',
-              'HOMOGENEOUS MIXTURE: Uniform throughout, can\'t see parts (salt water)',
-              'HETEROGENEOUS MIXTURE: Can see different parts (sand and water)',
-              'SOLUTION: Type of homogeneous mixture (dissolved)',
-              'SUSPENSION: Heterogeneous mixture where particles settle',
-              'ALLOY: Mixture of metals (brass, steel)'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '⚛️', label: 'ELEMENT — One type of atom only', sub: 'Cannot be broken down chemically. Examples: Gold (Au), Oxygen (O₂), Carbon (C)', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🔗', label: 'COMPOUND — Two or more elements BONDED together', sub: 'New substance with new properties. H₂O, CO₂, NaCl — cannot be separated physically', color: 'bg-blue-50 border-blue-400' },
+              { icon: '🥗', label: 'MIXTURE — Substances COMBINED but not bonded', sub: 'Retains individual properties. Can be separated physically (filtration, evaporation)', color: 'bg-green-50 border-green-400' },
+              { icon: '🥤', label: 'HOMOGENEOUS — Uniform throughout (solution)', sub: 'Cannot see individual parts. Salt water, air, alloys (brass)', color: 'bg-cyan-50 border-cyan-400' },
+              { icon: '🥣', label: 'HETEROGENEOUS — Can see different parts', sub: 'Sand and water (suspension), trail mix (mechanical mixture)', color: 'bg-orange-50 border-orange-400' },
+            ],
+            points: []
           },
           {
             subtitle: 'Properties of Matter',
             emoji: '⚖️',
-            points: [
-              'PHYSICAL PROPERTY: Observable without changing substance (color, density)',
-              'CHEMICAL PROPERTY: How substance reacts with others (flammability)',
-              'QUALITATIVE: Descriptive property (color, texture, odor)',
-              'QUANTITATIVE: Measurable property with numbers (mass, volume, temperature)',
-              'DENSITY: Mass per unit volume (D = m/V), measured in g/cm³ or g/mL',
-              'MASS: Amount of matter in object, measured in grams (g)',
-              'VOLUME: Space object occupies, measured in cm³ or mL',
-              'MELTING POINT: Temperature solid becomes liquid',
-              'BOILING POINT: Temperature liquid becomes gas',
-              'SOLUBILITY: How much solute dissolves in solvent'
-            ]
-          },
-          {
-            subtitle: 'Changes in Matter',
-            emoji: '🔬',
-            points: [
-              'PHYSICAL CHANGE: Same substance, different form (melting ice)',
-              'CHEMICAL CHANGE: New substance forms (burning wood)',
-              'INDICATORS OF CHEMICAL CHANGE: Color change, gas production, temperature change, light, precipitate',
-              'PRECIPITATE: Solid that forms in liquid during chemical reaction',
-              'COMBUSTION: Burning - reaction with oxygen producing heat and light',
-              'OXIDATION: Reaction with oxygen (rusting)',
-              'REACTANTS: Substances you start with in chemical reaction',
-              'PRODUCTS: New substances formed in chemical reaction'
-            ]
+            layout: 'compare',
+            items: [
+              {
+                label: '👁️ PHYSICAL PROPERTIES',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Observable WITHOUT changing substance', 'Qualitative: color, odor, texture, luster', 'Quantitative: mass, density, boiling point', 'Melting point, solubility, malleability']
+              },
+              {
+                label: '⚗️ CHEMICAL PROPERTIES',
+                color: 'bg-orange-50 border-orange-400',
+                rows: ['How substance REACTS with others', 'Flammability (ability to burn)', 'Reactivity with acids/water', 'Stability, oxidation (rusting)']
+              },
+              'Density formula: D = m/V  |  Units: g/cm³ or g/mL  |  1 mL = 1 cm³'
+            ],
+            points: []
           },
           {
             subtitle: 'Atomic Structure',
             emoji: '⚛️',
-            points: [
-              'ATOM: Smallest unit of element that keeps its properties',
-              'NUCLEUS: Dense center of atom containing protons and neutrons',
-              'PROTON: Positively charged particle in nucleus (+1 charge)',
-              'NEUTRON: Neutral particle in nucleus (0 charge)',
-              'ELECTRON: Negatively charged particle orbiting nucleus (-1 charge)',
-              'ATOMIC NUMBER: Number of protons (identifies element)',
-              'MASS NUMBER: Total protons + neutrons',
-              'ISOTOPE: Same element with different number of neutrons',
-              'ELECTRON SHELL: Energy level where electrons orbit',
-              'VALENCE ELECTRONS: Electrons in outermost shell (determine bonding)'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '🔴', label: 'PROTON', value: 'Charge: +1', sub: 'In the nucleus. Atomic number = number of protons = identity of element', color: 'bg-red-50 border-red-300' },
+              { icon: '⚫', label: 'NEUTRON', value: 'Charge: 0', sub: 'In the nucleus. Neutrons = Mass number − Atomic number', color: 'bg-gray-50 border-gray-200' },
+              { icon: '🔵', label: 'ELECTRON', value: 'Charge: −1', sub: 'In shells outside nucleus. Negligible mass. Determine bonding behavior', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🔢', label: 'ATOMIC NUMBER', value: '= # protons', sub: 'Never changes — defines which element it is. Equal to electrons in neutral atom', color: 'bg-purple-50 border-purple-300' },
+              { icon: '⚖️', label: 'MASS NUMBER', value: 'Protons + Neutrons', sub: 'Rounded from atomic mass on periodic table', color: 'bg-indigo-50 border-indigo-300' },
+              { icon: '🔄', label: 'ISOTOPE', value: 'Same element, different neutrons', sub: 'Same protons, different mass. Carbon-12 vs Carbon-14', color: 'bg-teal-50 border-teal-300' },
+            ],
+            points: []
           },
           {
             subtitle: 'Ions & Bonding',
             emoji: '⚡',
-            points: [
-              'ION: Atom with unequal protons and electrons (charged)',
-              'CATION: Positive ion (lost electrons), metals form cations',
-              'ANION: Negative ion (gained electrons), non-metals form anions',
-              'IONIC BOND: Transfer of electrons between atoms',
-              'OCTET RULE: Atoms want 8 valence electrons for stability',
-              'CHARGE: Number of protons minus number of electrons'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '➕', label: 'CATION — Positive ion (lost electrons)', sub: 'Metals lose electrons. Na⁺, Ca²⁺, Al³⁺. More protons than electrons', color: 'bg-red-50 border-red-400' },
+              { icon: '➖', label: 'ANION — Negative ion (gained electrons)', sub: 'Non-metals gain electrons. Cl⁻, O²⁻, N³⁻. More electrons than protons', color: 'bg-blue-50 border-blue-400' },
+              { icon: '🎯', label: 'OCTET RULE — Atoms want 8 valence electrons', sub: 'Stable configuration = full outer shell. Noble gases already have it — do not react', color: 'bg-green-50 border-green-400' },
+              { icon: '🔗', label: 'IONIC BOND — Electron TRANSFER between atoms', sub: 'Metal gives electron to non-metal. Forms ions with opposite charges that attract', color: 'bg-yellow-50 border-yellow-400' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Periodic Table Terms',
+            subtitle: 'Periodic Table Groups',
             emoji: '📊',
-            points: [
-              'PERIODIC TABLE: Chart organizing elements by properties',
-              'PERIOD: Horizontal row on periodic table',
-              'GROUP/FAMILY: Vertical column with similar properties',
-              'ALKALI METALS (Group 1): Soft, highly reactive, 1 valence electron',
-              'ALKALINE EARTH METALS (Group 2): Form +2 ions, 2 valence electrons',
-              'HALOGENS (Group 17): Reactive non-metals, 7 valence electrons',
-              'NOBLE GASES (Group 18): Unreactive, 8 valence electrons (stable)',
-              'TRANSITION METALS: Groups 3-12, can form multiple ion charges',
-              'METAL: Shiny, conductive, malleable, loses electrons',
-              'NON-METAL: Dull, poor conductor, brittle, gains electrons',
-              'METALLOID: Properties between metals and non-metals (silicon)'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '1️⃣', label: 'ALKALI METALS (Group 1)', value: '1 valence e⁻', sub: 'Soft, highly reactive, form +1 ions. Li, Na, K. Never found pure in nature', color: 'bg-red-50 border-red-300' },
+              { icon: '2️⃣', label: 'ALKALINE EARTH (Group 2)', value: '2 valence e⁻', sub: 'Form +2 ions. Mg, Ca, Ba. Less reactive than Group 1', color: 'bg-orange-50 border-orange-300' },
+              { icon: '7️⃣', label: 'HALOGENS (Group 17)', value: '7 valence e⁻', sub: 'Very reactive non-metals, form −1 ions. F, Cl, Br, I. Form diatomic molecules', color: 'bg-green-50 border-green-300' },
+              { icon: '8️⃣', label: 'NOBLE GASES (Group 18)', value: '8 valence e⁻', sub: 'Full outer shell — almost completely unreactive. He, Ne, Ar, Kr', color: 'bg-purple-50 border-purple-300' },
+              { icon: '🔩', label: 'METALS (left side)', value: 'Lose electrons', sub: 'Shiny, conductive, malleable, ductile. Most elements are metals', color: 'bg-yellow-50 border-yellow-300' },
+              { icon: '🔒', label: 'NON-METALS (right side)', value: 'Gain electrons', sub: 'Dull, poor conductors, brittle. Oxygen, sulfur, chlorine', color: 'bg-blue-50 border-blue-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Atomic Models',
-            emoji: '🔭',
-            points: [
-              'DALTON MODEL (1803): Solid sphere, indivisible atoms',
-              'THOMSON MODEL (1897): Plum pudding - positive with embedded electrons',
-              'RUTHERFORD MODEL (1911): Nuclear model - dense nucleus with orbiting electrons',
-              'BOHR MODEL (1913): Planetary model - electrons in specific energy levels/shells'
-            ]
+            subtitle: 'Changes in Matter',
+            emoji: '🔬',
+            layout: 'compare',
+            items: [
+              {
+                label: '❄️ PHYSICAL CHANGE',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Same substance — just different form', 'Usually REVERSIBLE', 'No new substance formed', 'Ice melting, cutting paper, dissolving sugar']
+              },
+              {
+                label: '🔥 CHEMICAL CHANGE',
+                color: 'bg-red-50 border-red-400',
+                rows: ['NEW substance(s) formed', 'Usually NOT reversible', 'Signs: color, gas, temp change, light, precipitate', 'Burning wood, rusting iron, cooking egg']
+              },
+              'Key rule: If a new substance is formed with different properties → chemical change.'
+            ],
+            points: []
+          },
+          {
+            subtitle: 'Key Formulas',
+            emoji: '📐',
+            layout: 'formula',
+            items: [
+              { formula: 'D = m ÷ V', meaning: 'Density = mass divided by volume', example: 'm=24g, V=8cm³ → D=3 g/cm³', color: 'border-indigo-300', headerBg: 'bg-indigo-600' },
+              { formula: 'Neutrons = Mass number − Atomic number', meaning: 'Find neutrons from periodic table values', example: 'Carbon: mass=12, atomic=6 → 6 neutrons', color: 'border-blue-400', headerBg: 'bg-blue-600' },
+              { formula: 'Charge = Protons − Electrons', meaning: 'Positive if more protons, negative if more electrons', example: 'Na⁺: 11 protons, 10 electrons → +1 charge', color: 'border-green-400', headerBg: 'bg-green-600' },
+            ],
+            points: []
           },
           {
             subtitle: 'Separation Methods',
             emoji: '🔧',
-            points: [
-              'FILTRATION: Separating solid from liquid using filter',
-              'DISTILLATION: Separating liquids by different boiling points',
-              'EVAPORATION: Liquid evaporates leaving dissolved solid behind',
-              'CHROMATOGRAPHY: Separating dissolved substances by movement rate',
-              'MAGNETISM: Separating magnetic from non-magnetic materials'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🫙', label: 'FILTRATION — Separates solid from liquid', sub: 'Filter paper traps solid, liquid passes through. Example: sand from water', color: 'bg-blue-50 border-blue-400' },
+              { icon: '🌡️', label: 'DISTILLATION — Separates liquids with different boiling points', sub: 'Heat to evaporate one liquid, then cool to condense it. Example: purify water from salt', color: 'bg-orange-50 border-orange-400' },
+              { icon: '💨', label: 'EVAPORATION — Leaves dissolved solid behind', sub: 'Evaporate the solvent to collect the solute. Example: collect salt from salt water', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🧲', label: 'MAGNETISM — Separates magnetic from non-magnetic', sub: 'Iron filings from sand. Only works with magnetic materials', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🎨', label: 'CHROMATOGRAPHY — Separates dissolved substances by movement rate', sub: 'Ink on filter paper in water — different dyes travel different distances', color: 'bg-pink-50 border-pink-400' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Important Formulas',
-            emoji: '📐',
-            points: [
-              'DENSITY: D = m/V (Density = mass ÷ volume)',
-              'MASS: m = D × V (Mass = density × volume)',
-              'VOLUME: V = m/D (Volume = mass ÷ density)',
-              'NEUTRONS: N = Mass number - Atomic number',
-              'CHARGE: Charge = Protons - Electrons',
-              'Floating: Object floats if density < liquid density',
-              'Sinking: Object sinks if density > liquid density'
-            ]
-          },
-          {
-            subtitle: 'Units & Conversions',
-            emoji: '🔢',
-            points: [
-              'Mass: grams (g), kilograms (kg), 1 kg = 1000 g',
-              'Volume: milliliters (mL), liters (L), cubic centimeters (cm³)',
-              '1 mL = 1 cm³',
-              'Density: g/cm³ or g/mL',
-              'Temperature: Celsius (°C), Kelvin (K), °C + 273 = K',
-              'AMU (atomic mass unit): Unit for atomic mass, 1 amu ≈ mass of proton/neutron'
-            ]
+            subtitle: 'States of Matter',
+            emoji: '🧊',
+            layout: 'cards',
+            items: [
+              { icon: '🧊', label: 'SOLID', value: 'Definite shape + volume', sub: 'Particles tightly packed, vibrate in place. Cannot compress', color: 'bg-blue-50 border-blue-300' },
+              { icon: '💧', label: 'LIQUID', value: 'Definite volume, no shape', sub: 'Particles close but can flow. Takes shape of container', color: 'bg-cyan-50 border-cyan-300' },
+              { icon: '💨', label: 'GAS', value: 'No definite shape or volume', sub: 'Particles far apart, move fast. Fills any container, compressible', color: 'bg-gray-50 border-gray-200' },
+              { icon: '⚡', label: 'PLASMA', value: 'Super-heated gas', sub: 'Charged particles. Found in stars, lightning, neon signs', color: 'bg-purple-50 border-purple-300' },
+              { icon: '🔼', label: 'SUBLIMATION', value: 'Solid → Gas directly', sub: 'Dry ice (CO₂) skips liquid phase. Iodine crystals also sublime', color: 'bg-indigo-50 border-indigo-300' },
+              { icon: '🔽', label: 'DEPOSITION', value: 'Gas → Solid directly', sub: 'Frost forming on a cold window. Reverse of sublimation', color: 'bg-teal-50 border-teal-300' },
+            ],
+            points: []
           }
         ]
       },
@@ -5741,154 +6068,63 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'States of Matter',
-            emoji: '💧',
-            points: [
-              'SOLID: Definite shape and volume, particles tightly packed',
-              'LIQUID: Definite volume but no shape, particles close but can move',
-              'GAS: No definite shape or volume, particles far apart and moving fast',
-              'PLASMA: Super-heated gas with charged particles (found in stars)',
-              'MELTING: Solid to liquid (ice → water)',
-              'FREEZING: Liquid to solid (water → ice)',
-              'EVAPORATION: Liquid to gas (water → steam)',
-              'CONDENSATION: Gas to liquid (steam → water)',
-              'SUBLIMATION: Solid directly to gas (dry ice)',
-              'DEPOSITION: Gas directly to solid (frost forming)'
-            ]
-          },
-          {
-            subtitle: 'Lab Safety',
+            subtitle: 'Lab Safety Rules',
             emoji: '🥽',
-            points: [
-              'SAFETY GOGGLES: Protect eyes from chemicals and broken glass',
-              'LAB COAT/APRON: Protect clothing and skin',
-              'FIRE EXTINGUISHER: Put out fires (know location)',
-              'EYEWASH STATION: Rinse eyes if chemicals splash',
-              'SAFETY SHOWER: Rinse body if large chemical spill',
-              'FUME HOOD: Ventilated area for handling toxic fumes',
-              'MSDS (Material Safety Data Sheet): Information about chemical hazards',
-              'WHMIS: Workplace Hazardous Materials Information System (Canadian)',
-              'Never eat/drink in lab, tie back long hair, report all accidents'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '👓', label: 'ALWAYS wear safety goggles when chemicals or heat are present', sub: 'Even if you think it is safe — one splash can cause permanent eye damage', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🚫', label: 'NEVER eat, drink, or smell chemicals directly', sub: 'Waft fumes toward your nose — never sniff directly from container', color: 'bg-red-50 border-red-400' },
+              { icon: '💈', label: 'Tie back long hair. No loose clothing near open flames', sub: 'Hair and synthetic fabrics catch fire instantly', color: 'bg-orange-50 border-orange-400' },
+              { icon: '🚨', label: 'Report ALL accidents immediately — no exceptions', sub: 'Know location of: eyewash station, safety shower, fire extinguisher, fire blanket', color: 'bg-blue-50 border-blue-400' },
+            ],
+            points: []
           },
           {
-            subtitle: 'WHMIS Symbols',
+            subtitle: 'WHMIS Symbols — Know These 10',
             emoji: '⚠️',
-            points: [
-              'FLAME: Flammable materials that catch fire easily',
-              'FLAME OVER CIRCLE: Oxidizers that make fires burn stronger',
-              'GAS CYLINDER: Compressed gases under pressure',
-              'CORROSION: Acids/bases that burn skin and eyes',
-              'SKULL & CROSSBONES: Poisonous/toxic materials',
-              'EXCLAMATION MARK: Irritants causing skin/eye irritation',
-              'HEALTH HAZARD: Long-term health effects (cancer, breathing problems)',
-              'EXPLODING BOMB: Explosives',
-              'BIOHAZARD: Infectious materials',
-              'ENVIRONMENT: Toxic to aquatic life and ecosystems'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '💥', label: 'EXPLODING BOMB', value: 'Explosive', sub: 'Risk of explosion from heat, shock, or friction', color: 'bg-red-50 border-red-300' },
+              { icon: '🔥', label: 'FLAME', value: 'Flammable', sub: 'Catches fire easily. Keep away from heat and sparks', color: 'bg-orange-50 border-orange-300' },
+              { icon: '🟡', label: 'FLAME OVER CIRCLE', value: 'Oxidizer', sub: 'Makes fires burn stronger even without fuel', color: 'bg-yellow-50 border-yellow-300' },
+              { icon: '💀', label: 'SKULL & CROSSBONES', value: 'Toxic/Poisonous', sub: 'Can cause death even in small amounts', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🌊', label: 'CORROSION', value: 'Acid or Base', sub: 'Burns skin and eyes. Destroys metals and fabrics', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🫁', label: 'HEALTH HAZARD', value: 'Long-term harm', sub: 'May cause cancer, reproductive harm, or organ damage', color: 'bg-purple-50 border-purple-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Chemical Reactions',
+            subtitle: 'Chemical Reaction Types',
             emoji: '⚗️',
-            points: [
-              'CHEMICAL REACTION: Process where substances change into new substances',
-              'SYNTHESIS: Two or more substances combine (A + B → AB)',
-              'DECOMPOSITION: Compound breaks down (AB → A + B)',
-              'SINGLE REPLACEMENT: One element replaces another (A + BC → AC + B)',
-              'DOUBLE REPLACEMENT: Two compounds swap parts (AB + CD → AD + CB)',
-              'EXOTHERMIC: Releases energy/heat (combustion, hand warmers)',
-              'ENDOTHERMIC: Absorbs energy/heat (photosynthesis, cold packs)',
-              'CATALYST: Speeds up reaction without being used up',
-              'ACTIVATION ENERGY: Minimum energy needed to start reaction'
-            ]
-          },
-          {
-            subtitle: 'Solutions & Concentration',
-            emoji: '🧬',
-            points: [
-              'SOLVENT: Substance doing the dissolving (usually water)',
-              'SOLUTE: Substance being dissolved (sugar, salt)',
-              'CONCENTRATED: Solution with lots of solute',
-              'DILUTE: Solution with little solute',
-              'SATURATED: Maximum amount of solute dissolved at given temperature',
-              'UNSATURATED: Can dissolve more solute',
-              'SUPERSATURATED: More solute than normally possible (unstable)',
-              'SOLUBLE: Able to dissolve',
-              'INSOLUBLE: Unable to dissolve',
-              'AQUEOUS: Dissolved in water (symbol: aq)'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '➕', label: 'SYNTHESIS — A + B → AB', sub: 'Two or more substances combine to make one new substance', color: 'bg-green-50 border-green-400' },
+              { icon: '➗', label: 'DECOMPOSITION — AB → A + B', sub: 'One compound breaks down into two or more substances', color: 'bg-blue-50 border-blue-400' },
+              { icon: '🔄', label: 'SINGLE REPLACEMENT — A + BC → AC + B', sub: 'One element replaces another in a compound', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🔃', label: 'DOUBLE REPLACEMENT — AB + CD → AD + CB', sub: 'Two compounds swap parts. Often forms precipitate', color: 'bg-purple-50 border-purple-400' },
+              { icon: '🔥', label: 'EXOTHERMIC — Releases energy (heat/light)', sub: 'Combustion, hand warmers, explosions. Products have less energy than reactants', color: 'bg-red-50 border-red-400' },
+              { icon: '❄️', label: 'ENDOTHERMIC — Absorbs energy', sub: 'Photosynthesis, cold packs. Products have MORE energy than reactants', color: 'bg-cyan-50 border-cyan-400' },
+            ],
+            points: []
           },
           {
             subtitle: 'Acids & Bases',
             emoji: '🧪',
-            points: [
-              'ACID: Substance with pH less than 7, tastes sour, donates H⁺ ions',
-              'BASE: Substance with pH greater than 7, tastes bitter, accepts H⁺ ions',
-              'NEUTRAL: pH of exactly 7 (pure water)',
-              'pH SCALE: Measures acidity/basicity from 0 (very acidic) to 14 (very basic)',
-              'INDICATOR: Substance that changes color in acids vs bases (litmus paper)',
-              'NEUTRALIZATION: Acid + Base → Salt + Water',
-              'CORROSIVE: Strong acid or base that burns/damages materials',
-              'Examples of acids: HCl (hydrochloric), H₂SO₄ (sulfuric), vinegar',
-              'Examples of bases: NaOH (sodium hydroxide), ammonia, soap'
-            ]
-          },
-          {
-            subtitle: 'Chemical Nomenclature',
-            emoji: '📝',
-            points: [
-              'CHEMICAL FORMULA: Symbols showing what\'s in compound (H₂O)',
-              'SUBSCRIPT: Small number showing how many atoms (H₂O has 2 hydrogen)',
-              'COEFFICIENT: Number before formula showing how many molecules (2H₂O)',
-              'DIATOMIC MOLECULES: Elements existing as pairs (H₂, O₂, N₂, F₂, Cl₂, Br₂, I₂)',
-              'BINARY COMPOUND: Compound made of two elements (NaCl)',
-              'POLYATOMIC ION: Group of atoms with charge (SO₄²⁻, NO₃⁻)',
-              'MOLECULAR FORMULA: Shows actual number of atoms in molecule',
-              'EMPIRICAL FORMULA: Shows simplest whole number ratio'
-            ]
-          },
-          {
-            subtitle: 'Energy in Chemistry',
-            emoji: '🔥',
-            points: [
-              'CHEMICAL ENERGY: Energy stored in chemical bonds',
-              'THERMAL ENERGY: Heat energy from particle motion',
-              'KINETIC ENERGY: Energy of motion',
-              'POTENTIAL ENERGY: Stored energy',
-              'LAW OF CONSERVATION OF ENERGY: Energy cannot be created or destroyed',
-              'LAW OF CONSERVATION OF MASS: Matter cannot be created or destroyed in chemical reactions',
-              'TEMPERATURE: Measure of average kinetic energy of particles',
-              'HEAT: Transfer of thermal energy from hot to cold'
-            ]
-          },
-          {
-            subtitle: 'Advanced Atomic Concepts',
-            emoji: '🌟',
-            points: [
-              'ORBITAL: Region where electron is likely to be found',
-              'QUANTUM: Smallest discrete amount of energy',
-              'GROUND STATE: Lowest energy state of atom',
-              'EXCITED STATE: Higher energy state when electron absorbs energy',
-              'EMISSION SPECTRUM: Light given off when excited electrons return to ground state',
-              'ATOMIC MASS: Weighted average mass of all isotopes',
-              'RELATIVE ATOMIC MASS: Atomic mass compared to carbon-12',
-              'ELECTRON CONFIGURATION: Arrangement of electrons in shells/orbitals'
-            ]
-          },
-          {
-            subtitle: 'Scientific Method & Measurement',
-            emoji: '🔬',
-            points: [
-              'HYPOTHESIS: Testable prediction based on observations',
-              'EXPERIMENT: Test to check if hypothesis is correct',
-              'VARIABLE: Factor that can change in experiment',
-              'CONTROL: Part of experiment that stays the same for comparison',
-              'INDEPENDENT VARIABLE: What you change on purpose',
-              'DEPENDENT VARIABLE: What you measure (depends on independent variable)',
-              'PRECISION: How close measurements are to each other (consistency)',
-              'ACCURACY: How close measurement is to true value (correctness)',
-              'SIGNIFICANT FIGURES: Digits in measurement that are certain plus one estimated digit'
-            ]
+            layout: 'compare',
+            items: [
+              {
+                label: '🔴 ACIDS (pH < 7)',
+                color: 'bg-red-50 border-red-400',
+                rows: ['Taste sour (do not taste in lab!)', 'Donate H⁺ ions', 'Turn litmus paper RED', 'HCl, H₂SO₄, vinegar, citrus juice']
+              },
+              {
+                label: '🔵 BASES (pH > 7)',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Taste bitter, feel slippery', 'Accept H⁺ ions', 'Turn litmus paper BLUE', 'NaOH, ammonia, soap, bleach']
+              },
+              'Neutralization: Acid + Base → Salt + Water. pH 7 = neutral (pure water). Stronger acid = lower pH number.'
+            ],
+            points: []
           }
         ]
       },
@@ -5900,67 +6136,49 @@ const studyLibrary = {
           {
             subtitle: 'Measuring & Transferring',
             emoji: '📏',
-            points: [
-              'Graduated Cylinder: Measures liquid volume accurately',
-              'Beaker: Holds and mixes liquids (less accurate measurements)',
-              'Erlenmeyer Flask: For mixing, heating, and storing liquids',
-              'Funnel: Transfers liquids or powders into containers'
-            ]
-          },
-          {
-            subtitle: 'Heating Equipment',
-            emoji: '🔥',
-            points: [
-              'Portable Bunsen Burner: Heats substances with controlled flame',
-              'Lighter: Ignites Bunsen burner'
-            ]
-          },
-          {
-            subtitle: 'Handling & Mixing',
-            emoji: '🥄',
-            points: [
-              'Scoopula/Spatula: Scoops and transfers solid chemicals',
-              'Stirring Rod: Stirs and mixes liquids without contamination',
-              'Test Tubes: Holds small amounts of liquid for experiments'
-            ]
-          },
-          {
-            subtitle: 'Measuring & Observation',
-            emoji: '⚖️',
-            points: [
-              'Electronic Balance/Scale: Measures mass of objects accurately',
-              'Overflow Can: Measures volume by water displacement',
-              'Dimple Tile: Holds small samples for mixing or observation'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '🧪', label: 'Graduated Cylinder', value: 'Measures liquid volume', sub: 'Most accurate for liquids. Read at bottom of meniscus', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🫙', label: 'Beaker', value: 'Holds & mixes liquids', sub: 'Less accurate for measuring. Good for heating and mixing', color: 'bg-gray-50 border-gray-200' },
+              { icon: '🍶', label: 'Erlenmeyer Flask', value: 'Mix, heat, store', sub: 'Conical shape prevents splashing. Good for swirling', color: 'bg-teal-50 border-teal-300' },
+              { icon: '⚖️', label: 'Electronic Balance', value: 'Measures mass', sub: 'Zero (tare) it before measuring. Results in grams', color: 'bg-green-50 border-green-300' },
+              { icon: '💧', label: 'Overflow Can', value: 'Measures volume by displacement', sub: 'Measures irregular solids. Water displaced = object volume', color: 'bg-cyan-50 border-cyan-300' },
+              { icon: '🔥', label: 'Bunsen Burner', value: 'Controlled heat source', sub: 'Blue flame = hotter. Yellow flame = unburned carbon (soot)', color: 'bg-orange-50 border-orange-300' },
+            ],
+            points: []
           }
         ]
       },
       {
         id: 'lab-safety',
-        title: 'Lab Safety & WHMIS Symbols',
+        title: 'Lab Safety & WHMIS',
         image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'General Safety Rules',
+            subtitle: 'Non-Negotiable Safety Rules',
             emoji: '⚠️',
-            points: [
-              'Wear safety goggles when required',
-              'Tie back long hair',
-              'NO eating or drinking in lab',
-              'Report all accidents immediately',
-              'Know where safety equipment is located'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '👓', label: 'Safety goggles ON whenever chemicals or heating is involved', sub: 'Even if just observing — one accident from a neighbour can hit you', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🚫', label: 'NO eating, drinking, or smelling containers directly', sub: 'Waft technique: wave hand over top to direct fumes toward nose gently', color: 'bg-red-50 border-red-400' },
+              { icon: '💈', label: 'Tie hair back, no loose sleeves near flames', sub: 'Synthetic fabrics melt and stick to skin — wear cotton when possible', color: 'bg-orange-50 border-orange-400' },
+              { icon: '🚨', label: 'Report EVERY accident, spill, or broken glass immediately', sub: 'No exception. Your teacher needs to know even small incidents', color: 'bg-blue-50 border-blue-400' },
+              { icon: '📍', label: 'Know where ALL safety equipment is BEFORE starting', sub: 'Eyewash station, safety shower, fire extinguisher, fire blanket, first aid kit', color: 'bg-green-50 border-green-400' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Key WHMIS Symbols to Know',
+            subtitle: 'Key WHMIS Symbols',
             emoji: '🔶',
-            points: [
-              'Explosive: Risk of exploding',
-              'Flammable: Catches fire easily',
-              'Corrosive: Burns skin and eyes',
-              'Health Hazard: May cause serious health issues',
-              'Environmental Hazard: Toxic to aquatic life'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '💥', label: 'Explosive', value: 'Exploding bomb', sub: 'Risk of explosion. Store in cool, dry place away from shock', color: 'bg-red-50 border-red-300' },
+              { icon: '🔥', label: 'Flammable', value: 'Flame symbol', sub: 'Catches fire easily. Keep from heat, sparks, open flames', color: 'bg-orange-50 border-orange-300' },
+              { icon: '🌊', label: 'Corrosive', value: 'Dripping onto surface', sub: 'Burns skin, eyes, and destroys metals. Use in fume hood', color: 'bg-blue-50 border-blue-300' },
+              { icon: '💀', label: 'Toxic', value: 'Skull and crossbones', sub: 'Poisonous — even small amounts can be fatal', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🌿', label: 'Environmental hazard', value: 'Dead tree/fish', sub: 'Toxic to aquatic life and ecosystems. Do not pour down drain', color: 'bg-green-50 border-green-300' },
+            ],
+            points: []
           }
         ]
       },
@@ -5970,31 +6188,34 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Pure Substances',
-            emoji: '✨',
-            points: [
-              'Elements: One type of atom (e.g., Gold, Oxygen)',
-              'Compounds: Two+ elements bonded (e.g., H₂O, NaCl)',
-              'Uniform composition throughout'
-            ]
+            subtitle: 'Pure Substances vs Mixtures',
+            emoji: '🧬',
+            layout: 'compare',
+            items: [
+              {
+                label: '✨ PURE SUBSTANCE',
+                color: 'bg-indigo-50 border-indigo-400',
+                rows: ['Uniform composition throughout', 'Fixed properties (melting point, boiling point)', 'Element: one type of atom (Au, O₂)', 'Compound: atoms bonded (H₂O, NaCl, CO₂)']
+              },
+              {
+                label: '🥗 MIXTURE',
+                color: 'bg-green-50 border-green-400',
+                rows: ['Variable composition', 'Properties vary with ratio', 'Homogeneous: uniform (salt water, air)', 'Heterogeneous: can see parts (sand + water)']
+              },
+              'Key test: does it have a single fixed melting/boiling point? Yes → pure substance. No → mixture.'
+            ],
+            points: []
           },
           {
-            subtitle: 'Homogeneous Mixtures',
-            emoji: '🥤',
-            points: [
-              'Uniform throughout - cannot see parts',
-              'Examples: Salt water, air, brass',
-              'Also called solutions'
-            ]
-          },
-          {
-            subtitle: 'Heterogeneous Mixtures',
-            emoji: '🥗',
-            points: [
-              'Can see different parts',
-              'Suspensions: Particles settle (muddy water)',
-              'Mechanical: Parts clearly visible (trail mix)'
-            ]
+            subtitle: 'Flow Chart: How to Classify',
+            emoji: '🔍',
+            layout: 'steps',
+            items: [
+              { label: 'Is it uniform throughout? Can you see separate parts?', sub: 'Yes uniform → pure substance or homogeneous mixture. Can see parts → heterogeneous mixture' },
+              { label: 'Can it be separated by physical means (filter, magnet, evaporate)?', sub: 'Yes → mixture. No physical separation possible → pure substance' },
+              { label: 'Is the pure substance made of only ONE element?', sub: 'One element → Element (e.g. O₂, Fe). Two or more elements bonded → Compound (e.g. H₂O)' },
+            ],
+            points: []
           }
         ]
       },
@@ -6004,15 +6225,17 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Common Methods',
+            subtitle: 'Which Method — Which Mixture?',
             emoji: '🔬',
-            points: [
-              'Filtration: Solid from liquid (sand from water)',
-              'Distillation: Different boiling points (water from salt)',
-              'Evaporation: Dissolved solid from liquid (get salt)',
-              'Magnetism: Magnetic from non-magnetic (iron from sand)',
-              'Chromatography: Dissolved substances (separate dyes)'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🫙', label: 'FILTRATION → Solid from liquid', sub: 'Use: sand from water, soil from water. Paper traps solid, liquid passes through', color: 'bg-blue-50 border-blue-400' },
+              { icon: '🌡️', label: 'DISTILLATION → Liquids with different boiling points', sub: 'Use: separate water from salt (water boils away, salt stays)', color: 'bg-orange-50 border-orange-400' },
+              { icon: '💨', label: 'EVAPORATION → Recover dissolved solid', sub: 'Use: extract salt from salt water. Evaporate the water, salt is left behind', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🧲', label: 'MAGNETISM → Magnetic from non-magnetic', sub: 'Use: iron filings from sand or sawdust', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🎨', label: 'CHROMATOGRAPHY → Dissolved dyes/pigments', sub: 'Different compounds travel different distances in a solvent. Identifies inks', color: 'bg-pink-50 border-pink-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -6022,25 +6245,36 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1628863353691-0071c8c1874c?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Physical Changes',
-            emoji: '❄️',
-            points: [
-              'Same substance, different appearance',
-              'Usually reversible',
-              'Examples: Ice melting, cutting paper, dissolving sugar'
-            ]
+            subtitle: 'Physical vs Chemical — Key Differences',
+            emoji: '🔄',
+            layout: 'compare',
+            items: [
+              {
+                label: '❄️ PHYSICAL CHANGE',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Same substance — different form', 'Usually reversible', 'No new substance formed', 'Examples: ice melting, cutting paper, dissolving sugar, tearing cloth']
+              },
+              {
+                label: '🔥 CHEMICAL CHANGE',
+                color: 'bg-red-50 border-red-400',
+                rows: ['NEW substance(s) formed', 'Usually irreversible', 'Energy usually released or absorbed', 'Examples: burning wood, rusting iron, cooking egg, baking soda + vinegar']
+              },
+              "Clue words: 'new substance', cannot reverse → chemical. 'Same substance, different form' → physical."
+            ],
+            points: []
           },
           {
-            subtitle: 'Chemical Changes - Look For',
-            emoji: '🔥',
-            points: [
-              'Color change (iron rusting)',
-              'Gas production/bubbles (vinegar + baking soda)',
-              'Temperature change (hand warmers)',
-              'Light production (fireworks)',
-              'Precipitate forms (solid in liquid)',
-              'Difficult/impossible to reverse'
-            ]
+            subtitle: '5 Signs of a Chemical Change',
+            emoji: '🔍',
+            layout: 'rules',
+            items: [
+              { icon: '🎨', label: 'COLOR CHANGE (unexpected)', sub: 'Iron turning orange-brown (rusting). Note: dissolving food coloring is physical', color: 'bg-orange-50 border-orange-400' },
+              { icon: '💨', label: 'GAS PRODUCED (bubbles)', sub: 'Vinegar + baking soda fizzes. Hydrogen gas from metal + acid', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🌡️', label: 'TEMPERATURE CHANGE', sub: 'Hand warmers (exothermic). Cold packs (endothermic). Change without external heating', color: 'bg-red-50 border-red-400' },
+              { icon: '✨', label: 'LIGHT PRODUCED', sub: 'Fireworks, burning, glow sticks. Light = energy being released', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🌧️', label: 'PRECIPITATE FORMS', sub: 'Solid appears in a liquid. Two clear solutions mix → cloudy solid forms', color: 'bg-blue-50 border-blue-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -6050,33 +6284,26 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'The Formula',
+            subtitle: 'Density — 3 Formulas',
             emoji: '📐',
-            points: [
-              'D = m/V',
-              'D = Density (g/cm³ or g/mL)',
-              'm = Mass (grams)',
-              'V = Volume (cm³ or mL)'
-            ]
-          },
-          {
-            subtitle: 'Triangle Trick',
-            emoji: '🔺',
-            points: [
-              'Top: m (mass)',
-              'Bottom left: D (density)',
-              'Bottom right: V (volume)',
-              'Cover what you are solving for!'
-            ]
-          },
-          {
-            subtitle: 'Floating Rule',
-            emoji: '🛟',
-            points: [
-              'Object floats if density < liquid density',
-              'Object sinks if density > liquid density',
-              'Example: Ice (0.92) floats on water (1.0)'
+            layout: 'formula',
+            items: [
+              { formula: 'D = m ÷ V', meaning: 'Find Density — cover D, divide mass by volume', example: 'm=24g, V=8cm³ → D=3 g/cm³', color: 'border-indigo-300', headerBg: 'bg-indigo-600' },
+              { formula: 'm = D × V', meaning: 'Find Mass — cover m, multiply D × V', example: 'D=3 g/cm³, V=10cm³ → m=30g', color: 'border-blue-400', headerBg: 'bg-blue-600' },
+              { formula: 'V = m ÷ D', meaning: 'Find Volume — cover V, divide mass by density', example: 'm=30g, D=3 g/cm³ → V=10cm³', color: 'border-teal-400', headerBg: 'bg-teal-600' },
             ],
+            points: []
+          },
+          {
+            subtitle: 'Floating & Sinking Rule',
+            emoji: '🛟',
+            layout: 'rules',
+            items: [
+              { icon: '🏊', label: 'Object FLOATS if its density is LESS than the liquid', sub: 'Ice (0.92 g/cm³) floats on water (1.00 g/cm³). Wood floats on water', color: 'bg-blue-50 border-blue-400' },
+              { icon: '⬇️', label: 'Object SINKS if its density is GREATER than the liquid', sub: 'Iron (7.9 g/cm³) sinks in water. Steel ship floats because of hollow air spaces', color: 'bg-red-50 border-red-400' },
+              { icon: '🪨', label: 'Measuring irregular solid volume — Water Displacement', sub: 'Put object in graduated cylinder with water. Volume of water rise = object volume', color: 'bg-gray-50 border-gray-400' },
+            ],
+            points: [],
             diagram: 'density'
           }
         ]
@@ -6087,23 +6314,34 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Physical Properties',
+            subtitle: 'Physical Properties — Two Types',
             emoji: '👁️',
-            points: [
-              'Qualitative: Color, texture, odor, state, luster, malleability, ductility',
-              'Quantitative: Mass, volume, density, melting/boiling point, solubility',
-              'Observable WITHOUT changing the substance'
-            ]
+            layout: 'compare',
+            items: [
+              {
+                label: '🗣️ QUALITATIVE',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Descriptive — no numbers needed', 'Color, texture, odor, state', 'Luster (shininess), malleability', 'Ductility, transparency, hardness']
+              },
+              {
+                label: '📏 QUANTITATIVE',
+                color: 'bg-green-50 border-green-400',
+                rows: ['Measurable — has a number + unit', 'Mass, volume, density', 'Melting point, boiling point', 'Solubility, conductivity']
+              },
+              'Both are observable WITHOUT changing the substance into something new.'
+            ],
+            points: []
           },
           {
             subtitle: 'Chemical Properties',
             emoji: '⚗️',
-            points: [
-              'Combustibility: Ability to burn',
-              'Reactivity with acids (metals produce hydrogen gas)',
-              'Stability: Reactivity with oxygen (e.g., iron rusting)',
-              'How substance reacts with OTHER substances'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🔥', label: 'COMBUSTIBILITY — Ability to burn in oxygen', sub: 'Wood, gasoline, methane are combustible. Water is not', color: 'bg-red-50 border-red-400' },
+              { icon: '⚡', label: 'REACTIVITY WITH ACIDS — metals produce H₂ gas', sub: 'Zinc + hydrochloric acid → zinc chloride + hydrogen gas', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🟤', label: 'STABILITY / OXIDATION — reaction with oxygen over time', sub: 'Iron + oxygen + water → iron oxide (rust). Slow combustion', color: 'bg-orange-50 border-orange-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -6113,24 +6351,47 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Element Families',
-            emoji: '👨‍👩‍👧‍👦',
-            points: [
-              'Alkali Metals (Group 1): Soft, highly reactive, form basic solutions',
-              'Alkaline-Earth Metals (Group 2): Form +2 ions, basic oxides',
-              'Halogens (Group 17): Reactive non-metals, diatomic, form salts',
-              'Noble Gases (Group 18): Full valence shells, almost unreactive'
+            subtitle: 'How the Table is Organized',
+            emoji: '📊',
+            layout: 'rules',
+            items: [
+              { icon: '↔️', label: 'PERIODS — Horizontal rows (1 to 7)', sub: 'Each new period = new electron shell being filled. Period 2 has 2 shells, etc.', color: 'bg-blue-50 border-blue-400' },
+              { icon: '↕️', label: 'GROUPS / FAMILIES — Vertical columns (1 to 18)', sub: 'Same number of valence electrons = similar chemical properties', color: 'bg-green-50 border-green-400' },
+              { icon: '📈', label: 'Atomic number increases LEFT → RIGHT and TOP → BOTTOM', sub: 'Arranged in order of increasing protons. Same as increasing electrons in neutral atom', color: 'bg-indigo-50 border-indigo-400' },
             ],
+            points: []
+          },
+          {
+            subtitle: 'Metals, Non-metals & Metalloids',
+            emoji: '🔧',
+            layout: 'compare',
+            items: [
+              {
+                label: '🔩 METALS (left + middle)',
+                color: 'bg-yellow-50 border-yellow-400',
+                rows: ['Shiny (lustrous)', 'Conductive (heat & electricity)', 'Malleable & ductile', 'LOSE electrons → cations (+)']
+              },
+              {
+                label: '🔒 NON-METALS (right side)',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Dull appearance', 'Poor conductors', 'Brittle in solid form', 'GAIN electrons → anions (−)']
+              },
+              'Metalloids (staircase line): Silicon, Boron, Germanium. Semiconductors — used in computer chips.'
+            ],
+            points: [],
             diagram: 'periodic-table'
           },
           {
-            subtitle: 'Metals vs Non-metals',
-            emoji: '🔧',
-            points: [
-              'Metals: Shiny, conductive, malleable, lose electrons (Na, Fe, Cu)',
-              'Non-metals: Dull, poor conductors, brittle, gain electrons (O, S, Cl)',
-              'Metalloids: Between metals/non-metals, semiconductors (Si, B, As)'
-            ]
+            subtitle: 'Key Element Families',
+            emoji: '👨‍👩‍👧‍👦',
+            layout: 'cards',
+            items: [
+              { icon: '🔴', label: 'Alkali Metals (Group 1)', value: '1 valence e⁻', sub: 'Li, Na, K. Softest metals. Explode violently with water', color: 'bg-red-50 border-red-300' },
+              { icon: '🟠', label: 'Alkaline Earth (Group 2)', value: '2 valence e⁻', sub: 'Mg, Ca. Reactive but less than Group 1. Ca in bones', color: 'bg-orange-50 border-orange-300' },
+              { icon: '🟢', label: 'Halogens (Group 17)', value: '7 valence e⁻', sub: 'F, Cl, Br, I. Very reactive. Form diatomic molecules (Cl₂)', color: 'bg-green-50 border-green-300' },
+              { icon: '🟣', label: 'Noble Gases (Group 18)', value: '8 valence e⁻', sub: 'He, Ne, Ar. Full outer shell — almost completely unreactive', color: 'bg-purple-50 border-purple-300' },
+            ],
+            points: []
           }
         ]
       },
@@ -6147,48 +6408,28 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'John Dalton (1766-1844) - The Atomic Model',
-            emoji: '⚪',
-            points: [
-              'Matter is made of small indivisible atoms',
-              'Atoms can\'t be subdivided, created or destroyed',
-              'Atoms of the same element have the same properties',
-              'Atoms of different elements have different properties',
-              'Atoms of different elements can form compounds'
+            subtitle: 'Evolution of the Atomic Model',
+            emoji: '🔭',
+            layout: 'steps',
+            items: [
+              { label: 'DALTON (1803) — Solid sphere model', sub: 'Atoms are indivisible, solid balls. All atoms of one element are identical. Atoms combine in whole-number ratios' },
+              { label: 'THOMSON (1897) — Plum pudding model', sub: 'Discovered the electron. Atom = positive "pudding" with negative electrons embedded. Like raisins in a bun' },
+              { label: 'RUTHERFORD (1911) — Nuclear model', sub: 'Gold foil experiment — most particles went straight through. Concluded: atoms are mostly empty space with tiny dense positive nucleus' },
+              { label: 'BOHR (1913) — Planetary model', sub: 'Electrons orbit in specific energy levels (shells). Each shell has a fixed energy. Electrons jump between shells by absorbing/releasing energy' },
             ],
+            points: [],
             diagram: 'atomic-models'
           },
           {
-            subtitle: 'J.J. Thomson (1856-1940) - Plum Pudding Model',
-            emoji: '🍮',
-            points: [
-              'An atom is electrically neutral (no net charge)',
-              'Positive and negative charges are equal in an atom',
-              'Atom is a sphere of positive charge with negative electrons embedded in it',
-              'Discovered the electron'
-            ]
-          },
-          {
-            subtitle: 'Ernest Rutherford (1871-1937) - Nuclear Model',
+            subtitle: 'Rutherford Gold Foil Experiment',
             emoji: '🎯',
-            points: [
-              'Atoms are mostly empty space',
-              'Most of the mass is concentrated in the center (nucleus)',
-              'The nucleus is tiny, dense, and positively charged',
-              'Electrons are located outside the nucleus'
-            ]
-          },
-          {
-            subtitle: 'Niels Bohr (1885-1962) - Planetary Model',
-            emoji: '🪐',
-            points: [
-              'Electrons orbit the nucleus in specific energy levels (shells)',
-              'The energy of an orbit is related to its size',
-              'The lowest energy is found in the smallest orbit',
-              'Electrons move between shells when gaining or losing energy',
-              'Gaining energy → electrons move to farther orbits',
-              'Losing energy → electrons move to closer orbits'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🔫', label: 'Fired alpha particles at thin gold foil', sub: 'Expected: all particles to pass straight through (Thomson model predicted this)', color: 'bg-gray-50 border-gray-400' },
+              { icon: '😲', label: 'OBSERVED: most passed through, but some bounced back!', sub: '"Like firing artillery at tissue paper and having it bounce back at you" — Rutherford', color: 'bg-red-50 border-red-400' },
+              { icon: '💡', label: 'CONCLUSION: Atom has a tiny, dense, positive nucleus', sub: 'Nucleus is ~100,000× smaller than the atom. Most of atom is empty space', color: 'bg-yellow-50 border-yellow-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -6207,40 +6448,49 @@ const studyLibrary = {
           {
             subtitle: 'The Three Particles',
             emoji: '⚛️',
-            points: [
-              'Protons: Positive (+1), mass ≈ 1 amu, in nucleus',
-              'Neutrons: Neutral (0), mass ≈ 1 amu, in nucleus',
-              'Electrons: Negative (-1), negligible mass, in shells'
-            ]
-          },
-          {
-            subtitle: 'Using the Periodic Table',
-            emoji: '📊',
-            points: [
-              'Atomic number = # protons = # electrons (neutral atom)',
-              'Mass number ≈ atomic mass (rounded)',
-              'Neutrons = Mass number - Atomic number'
-            ]
-          },
-          {
-            subtitle: 'Bohr-Rutherford Diagrams',
-            emoji: '🎨',
-            points: [
-              'Nucleus in center (protons + neutrons)',
-              '1st shell: max 2 electrons',
-              '2nd shell: max 8 electrons',
-              '3rd shell: max 8 electrons (for first 20 elements)'
+            layout: 'cards',
+            items: [
+              { icon: '🔴', label: 'PROTON', value: 'Charge: +1, mass: 1 amu', sub: 'In nucleus. Atomic number = proton count = identity of element', color: 'bg-red-50 border-red-300' },
+              { icon: '⚫', label: 'NEUTRON', value: 'Charge: 0, mass: 1 amu', sub: 'In nucleus alongside protons. Neutrons = Mass# − Atomic#', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🔵', label: 'ELECTRON', value: 'Charge: −1, mass: ~0', sub: 'In shells outside nucleus. Determine chemical bonding and charge', color: 'bg-blue-50 border-blue-300' },
             ],
+            points: []
+          },
+          {
+            subtitle: 'Reading the Periodic Table',
+            emoji: '📊',
+            layout: 'steps',
+            items: [
+              { label: 'Atomic number (top number) = number of PROTONS', sub: 'Also equals number of ELECTRONS in a neutral atom' },
+              { label: 'Atomic mass (bottom number, in amu) — round to get Mass Number', sub: 'Carbon: atomic mass ≈ 12.01 → Mass Number = 12' },
+              { label: 'Neutrons = Mass Number − Atomic Number', sub: 'Carbon: 12 − 6 = 6 neutrons' },
+              { label: 'For ions: Electrons = Protons − Charge', sub: 'Na⁺: 11 protons − (+1) = 10 electrons. Cl⁻: 17 protons − (−1) = 18 electrons' },
+            ],
+            points: []
+          },
+          {
+            subtitle: 'Bohr-Rutherford Diagram Rules',
+            emoji: '🎨',
+            layout: 'rules',
+            items: [
+              { icon: '⭕', label: 'Draw nucleus in center — show p⁺ and n⁰ counts', sub: 'Label: e.g. 6p⁺, 6n⁰ for carbon', color: 'bg-gray-50 border-gray-400' },
+              { icon: '1️⃣', label: 'Shell 1 (closest to nucleus): Maximum 2 electrons', sub: 'Fill this before moving to shell 2', color: 'bg-blue-50 border-blue-400' },
+              { icon: '2️⃣', label: 'Shell 2: Maximum 8 electrons', sub: 'Fill completely before moving to shell 3', color: 'bg-indigo-50 border-indigo-400' },
+              { icon: '3️⃣', label: 'Shell 3: Maximum 8 electrons (for first 20 elements)', sub: 'Works for elements 1-20. Beyond calcium, rules get more complex', color: 'bg-purple-50 border-purple-400' },
+            ],
+            points: [],
             diagram: 'bohr'
           },
           {
             subtitle: 'Isotopes',
             emoji: '🔄',
-            points: [
-              'Same element, different neutron count',
-              'Same protons, different mass numbers',
-              'Example: Carbon-12 vs Carbon-14'
-            ]
+            layout: 'rules',
+            items: [
+              { icon: '🟰', label: 'Isotopes have the SAME number of protons', sub: 'Same element, same atomic number, same chemical behavior', color: 'bg-green-50 border-green-400' },
+              { icon: '≠', label: 'Isotopes have DIFFERENT numbers of neutrons', sub: 'Different mass numbers. Carbon-12 (6n) vs Carbon-14 (8n)', color: 'bg-red-50 border-red-400' },
+              { icon: '☢️', label: 'Carbon-14 is RADIOACTIVE — used in carbon dating', sub: 'Decays at known rate → can date organic material up to ~50,000 years', color: 'bg-orange-50 border-orange-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -6257,38 +6507,48 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Valence Electrons',
+            subtitle: 'Valence Electrons — Why They Matter',
             emoji: '🌟',
-            points: [
-              'Electrons in outermost shell',
-              'Determine chemical behavior',
-              'Shown in Lewis dot diagrams',
-              'Group number = number of valence electrons'
+            layout: 'rules',
+            items: [
+              { icon: '🔢', label: 'Group number = number of valence electrons', sub: 'Group 1 → 1 valence e⁻. Group 17 → 7 valence e⁻. Group 18 → 8 (stable!)', color: 'bg-indigo-50 border-indigo-400' },
+              { icon: '🎯', label: 'Valence electrons determine ALL chemical behavior', sub: 'Bonding, reactivity, ion formation — all driven by the outer shell', color: 'bg-blue-50 border-blue-400' },
+              { icon: '⚖️', label: 'Octet rule — atoms want 8 valence electrons (full outer shell)', sub: 'Nobel gases are already stable. Everything else reacts to get there', color: 'bg-green-50 border-green-400' },
             ],
+            points: [],
             diagram: 'lewis'
           },
           {
-            subtitle: 'Ions - Charged Atoms',
+            subtitle: 'Cations vs Anions',
             emoji: '⚡',
-            points: [
-              'Cations: Positive (lost electrons), protons > electrons',
-              'Anions: Negative (gained electrons), electrons > protons',
-              'Protons NEVER change (determines element)',
-              'Electrons = protons - charge',
-              'Atoms form ions to get a full outer shell (stable)'
+            layout: 'compare',
+            items: [
+              {
+                label: '➕ CATION (positive)',
+                color: 'bg-red-50 border-red-400',
+                rows: ['LOST electrons', 'Protons > Electrons', 'Formed by METALS', 'Na loses 1e⁻ → Na⁺', 'Mg loses 2e⁻ → Mg²⁺']
+              },
+              {
+                label: '➖ ANION (negative)',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['GAINED electrons', 'Electrons > Protons', 'Formed by NON-METALS', 'Cl gains 1e⁻ → Cl⁻', 'O gains 2e⁻ → O²⁻']
+              },
+              'Memory: cAt-ion = pAWsitive (cat has paws, positive). An-ion = negative (An-gry).'
             ],
+            points: [],
             diagram: 'ions'
           },
           {
             subtitle: 'Why Atoms Form Ions',
             emoji: '🎯',
-            points: [
-              'Atoms want 8 valence electrons (octet rule)',
-              'Metals (Groups 1-3): Easier to LOSE 1-3 electrons → form cations (+)',
-              'Non-metals (Groups 15-17): Easier to GAIN 1-3 electrons → form anions (-)',
-              'Noble gases already have 8 (or 2 for He) → don\'t form ions',
-              'Example: Na loses 1e⁻ → Na⁺ | Cl gains 1e⁻ → Cl⁻'
-            ]
+            layout: 'steps',
+            items: [
+              { label: 'Atoms want a FULL outer shell (8 electrons = stable)', sub: 'Noble gases already have this — that is why they do not react' },
+              { label: 'METALS (Groups 1-3): it is easier to LOSE 1-3 electrons', sub: 'Less work to empty the outer shell than fill it. Forms cations (+1, +2, +3)' },
+              { label: 'NON-METALS (Groups 15-17): it is easier to GAIN 1-3 electrons', sub: 'Less work to fill the last few spots. Forms anions (−1, −2, −3)' },
+              { label: 'Opposite charges attract → IONIC BOND forms', sub: 'Na⁺ + Cl⁻ → NaCl. The compound is electrically neutral overall' },
+            ],
+            points: []
           }
         ]
       },
@@ -6308,7 +6568,7 @@ const studyLibrary = {
       },
       {
         id: 'mole-concept',
-        title: 'The Mole Concept & Avogadro\'s Number',
+        title: "The Mole Concept & Avogadro\'s Number",
         image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop',
         locked: true,
         notes: []
@@ -6592,8 +6852,8 @@ const studyLibrary = {
             emoji: '🔋',
             layout: 'cards',
             items: [
-              { icon: '1️⃣', label: 'CELL', value: '~1.5V each', sub: 'Single electrochemical unit (one AA or AAA is a cell)', color: 'bg-gray-50 border-gray-300' },
-              { icon: '🔋🔋', label: 'BATTERY', value: 'Cells combined', sub: 'Two or more cells. Technically your "battery" is often a single cell', color: 'bg-gray-50 border-gray-300' },
+              { icon: '1️⃣', label: 'CELL', value: '~1.5V each', sub: 'Single electrochemical unit (one AA or AAA is a cell)', color: 'bg-gray-50 border-gray-200' },
+              { icon: '🔋🔋', label: 'BATTERY', value: 'Cells combined', sub: 'Two or more cells. Technically your "battery" is often a single cell', color: 'bg-gray-50 border-gray-200' },
               { icon: '➕', label: 'Cells in SERIES', value: 'Voltages ADD', sub: '3 × 1.5V = 4.5V total — same current capacity', color: 'bg-green-50 border-green-300' },
               { icon: '↔️', label: 'Cells in PARALLEL', value: 'Voltage same', sub: 'Still 1.5V — but lasts longer (more current capacity)', color: 'bg-blue-50 border-blue-300' },
             ],
@@ -6878,125 +7138,111 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Solar System Basics',
+            subtitle: 'Objects in the Solar System',
             emoji: '☀️',
-            points: [
-              'SOLAR SYSTEM: Sun and all objects that orbit it',
-              'SUN: Star at center of our solar system, provides light and heat',
-              'PLANET: Large celestial body orbiting a star',
-              'DWARF PLANET: Smaller celestial body that hasn\'t cleared its orbit (Pluto)',
-              'MOON: Natural satellite orbiting a planet',
-              'ASTEROID: Rocky object smaller than planet, mostly in asteroid belt',
-              'COMET: Icy object with tail when near Sun',
-              'METEOROID: Small rocky/metallic object in space',
-              'METEOR: Meteoroid burning up in Earth\'s atmosphere (shooting star)',
-              'METEORITE: Meteoroid that reaches Earth\'s surface'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '☀️', label: 'STAR', value: 'Nuclear fusion reactor', sub: 'Massive ball of gas producing light & heat. Our Sun fuses H → He', color: 'bg-yellow-50 border-yellow-300' },
+              { icon: '🪐', label: 'PLANET', value: 'Orbits star, cleared orbit', sub: '8 in our solar system. Must orbit Sun AND dominate its orbital zone', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🔴', label: 'DWARF PLANET', value: 'Orbits star, NOT cleared', sub: 'Pluto, Eris, Ceres. Too small to clear their orbital neighborhood', color: 'bg-red-50 border-red-300' },
+              { icon: '🌑', label: 'MOON', value: 'Natural satellite', sub: 'Orbits a planet. Earth has 1. Jupiter has 95! Saturn has 146', color: 'bg-gray-50 border-gray-400' },
+              { icon: '🪨', label: 'ASTEROID', value: 'Rocky, in asteroid belt', sub: 'Mostly between Mars and Jupiter. Ceres is the largest', color: 'bg-stone-50 border-stone-300' },
+              { icon: '☄️', label: 'COMET', value: 'Icy with tail near Sun', sub: 'Dust and ice. Tail always points AWAY from Sun (solar wind)', color: 'bg-indigo-50 border-indigo-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Planetary Classifications',
-            emoji: '🪐',
-            points: [
-              'INNER/TERRESTRIAL PLANETS: Mercury, Venus, Earth, Mars - rocky surfaces',
-              'OUTER/GAS GIANTS: Jupiter, Saturn - made mostly of gas',
-              'ICE GIANTS: Uranus, Neptune - made of ice and gas',
-              'ORBIT: Path object takes around another object',
-              'ROTATION: Spinning on axis (Earth rotates in 24 hours = 1 day)',
-              'REVOLUTION: Orbiting around Sun (Earth revolves in 365 days = 1 year)',
-              'AXIS: Imaginary line through planet\'s center (Earth tilts 23.5°)'
-            ]
-          },
-          {
-            subtitle: 'Stars & Galaxies',
-            emoji: '⭐',
-            points: [
-              'STAR: Massive ball of gas producing light and heat through fusion',
-              'GALAXY: Massive system of billions of stars, gas, and dust',
-              'MILKY WAY: Our galaxy containing 200-400 billion stars',
-              'CONSTELLATION: Pattern of stars as seen from Earth',
-              'LIGHT-YEAR: Distance light travels in one year (9.46 trillion km)',
-              'NEBULA: Cloud of gas and dust where stars are born',
-              'SUPERNOVA: Massive explosion of dying star',
-              'BLACK HOLE: Region with gravity so strong light can\'t escape'
-            ]
-          },
-          {
-            subtitle: 'Space Exploration',
-            emoji: '🚀',
-            points: [
-              'SATELLITE: Object orbiting planet (natural like Moon or artificial)',
-              'SPACE STATION: Large spacecraft where astronauts live and work (ISS)',
-              'ROCKET: Vehicle that launches spacecraft into space',
-              'SPACECRAFT: Vehicle designed for travel in space',
-              'ROVER: Vehicle designed to explore surface of planets/moons',
-              'TELESCOPE: Instrument to observe distant objects (Hubble)',
-              'ASTRONAUT: Person trained for space travel',
-              'GRAVITY: Force attracting objects toward each other'
-            ]
-          },
-          {
-            subtitle: 'Earth & Moon',
+            subtitle: 'Motion Terms — Rotation vs Revolution',
             emoji: '🌍',
-            points: [
-              'ATMOSPHERE: Layer of gases surrounding Earth',
-              'PHASES OF MOON: Different shapes we see as Moon orbits Earth',
-              'NEW MOON: Moon between Earth and Sun (can\'t see it)',
-              'FULL MOON: Earth between Sun and Moon (fully lit)',
-              'ECLIPSE: When one celestial body blocks light from another',
-              'SOLAR ECLIPSE: Moon blocks Sun\'s light (Moon between Earth and Sun)',
-              'LUNAR ECLIPSE: Earth blocks Sun\'s light to Moon (Earth\'s shadow on Moon)',
-              'TIDES: Rise and fall of ocean caused by Moon\'s gravity'
-            ]
+            layout: 'compare',
+            items: [
+              {
+                label: '🔄 ROTATION (spinning)',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Spinning on its own AXIS', 'Earth: 24 hours = 1 day', 'Causes day and night cycle', 'Earth tilts 23.5° on axis']
+              },
+              {
+                label: '🔁 REVOLUTION (orbiting)',
+                color: 'bg-purple-50 border-purple-400',
+                rows: ['Orbiting AROUND another object', 'Earth: 365.25 days = 1 year', 'Caused by gravity and inertia', 'Closer to Sun = shorter year']
+              },
+              'Memory: Rotation = spinning like a top. Revolution = racing AROUND a track.'
+            ],
+            points: []
           },
           {
-            subtitle: 'The Universe',
-            emoji: '🌌',
-            points: [
-              'UNIVERSE: Everything that exists - all matter, energy, space, and time',
-              'BIG BANG THEORY: Theory that universe began from single point 13.8 billion years ago',
-              'EXPANSION: Universe is still growing/expanding',
-              'COSMIC BACKGROUND RADIATION: Leftover energy from Big Bang',
-              'DARK MATTER: Invisible matter detected by gravitational effects',
-              'DARK ENERGY: Mysterious force causing universe to expand faster'
-            ]
+            subtitle: 'Stars, Galaxies & the Universe',
+            emoji: '⭐',
+            layout: 'cards',
+            items: [
+              { icon: '🌌', label: 'GALAXY', value: 'Billions of stars', sub: 'Our galaxy = Milky Way (~300 billion stars). Observable universe has ~2 trillion galaxies', color: 'bg-purple-50 border-purple-300' },
+              { icon: '💡', label: 'LIGHT-YEAR', value: '9.46 trillion km', sub: 'Distance light travels in one year. Used to measure space distances', color: 'bg-yellow-50 border-yellow-300' },
+              { icon: '💨', label: 'NEBULA', value: 'Star nursery', sub: 'Cloud of gas and dust where new stars form. Orion Nebula visible with binoculars', color: 'bg-pink-50 border-pink-300' },
+              { icon: '💥', label: 'SUPERNOVA', value: 'Dying massive star', sub: 'Massive explosion — briefly outshines entire galaxy. Scatters heavy elements into space', color: 'bg-red-50 border-red-300' },
+              { icon: '⚫', label: 'BLACK HOLE', value: 'Gravity trap', sub: 'Gravity so strong light cannot escape. Forms when massive star collapses', color: 'bg-gray-900 border-gray-700 text-white' },
+              { icon: '🌫️', label: 'DARK MATTER/ENERGY', value: '~95% of universe', sub: 'Cannot be seen but detected by gravity. Dark energy is driving expansion of universe', color: 'bg-indigo-50 border-indigo-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Space Technology',
-            emoji: '🛰️',
-            points: [
-              'SPACE PROBE: Unmanned spacecraft exploring space',
-              'LANDER: Spacecraft that lands on celestial body',
-              'ORBITER: Spacecraft that orbits a planet/moon',
-              'GPS (Global Positioning System): Satellites for location on Earth',
-              'COMMUNICATION SATELLITE: Relays signals for phones, TV, internet',
-              'SPACE SHUTTLE: Reusable spacecraft (retired 2011)',
-              'LAUNCH PAD: Platform where rockets take off'
-            ]
+            subtitle: 'Space Exploration Vocabulary',
+            emoji: '🚀',
+            layout: 'cards',
+            items: [
+              { icon: '🛰️', label: 'SATELLITE', value: 'Orbits a planet', sub: 'Natural (Moon) or artificial (GPS, weather satellites)', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🏠', label: 'SPACE STATION', value: 'Orbiting lab', sub: 'ISS: 400km up, 90 min per orbit, 6 astronauts at a time', color: 'bg-green-50 border-green-300' },
+              { icon: '🤖', label: 'ROVER', value: 'Surface explorer', sub: 'Remotely controlled vehicle. Perseverance currently on Mars (2021-)', color: 'bg-red-50 border-red-300' },
+              { icon: '🔭', label: 'SPACE TELESCOPE', value: 'Above atmosphere', sub: 'Hubble (1990-): optical. James Webb (2021-): infrared, sees 13.7 billion light-years back', color: 'bg-purple-50 border-purple-300' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Important Missions',
-            emoji: '🏆',
-            points: [
-              'SPUTNIK 1 (1957): First artificial satellite (USSR)',
-              'APOLLO 11 (1969): First humans on Moon (USA)',
-              'VOYAGER 1 & 2 (1977): Exploring outer solar system and beyond',
-              'HUBBLE SPACE TELESCOPE (1990): Orbiting telescope with deep space images',
-              'MARS ROVERS: Spirit, Opportunity, Curiosity, Perseverance',
-              'ISS (1998-present): International Space Station orbiting Earth'
-            ]
+            subtitle: 'Moon Phases & Eclipses',
+            emoji: '🌙',
+            layout: 'steps',
+            items: [
+              { label: 'NEW MOON — Moon is between Earth and Sun', sub: 'We see the unlit side. Moon not visible. Spring tides (highest high tides)' },
+              { label: 'FIRST QUARTER → FULL MOON — Moon moves to opposite side of Earth', sub: 'Full Moon: Earth between Sun and Moon. We see the fully lit side' },
+              { label: 'SOLAR ECLIPSE — Moon blocks Sun (Moon between Earth and Sun)', sub: 'Rare — Moon must be perfectly aligned. Total eclipse only along narrow path' },
+              { label: 'LUNAR ECLIPSE — Earth blocks Sun from Moon (Earth between Sun and Moon)', sub: 'Moon turns red ("Blood Moon"). Visible everywhere on the night side of Earth' },
+            ],
+            points: []
           },
           {
-            subtitle: 'Distances & Measurements',
+            subtitle: 'Key Space Measurements',
             emoji: '📏',
-            points: [
-              'AU (Astronomical Unit): Earth-Sun distance = 150 million km',
-              'Light-year: 9.46 trillion km',
-              'Parsec: 3.26 light-years',
-              'Earth to Moon: 384,400 km',
-              'Sun\'s diameter: 1.4 million km (109 times Earth\'s diameter)',
-              'Speed of light: 300,000 km/second',
-              'Age of universe: About 13.8 billion years'
-            ]
+            layout: 'cards',
+            items: [
+              { icon: '🌍', label: 'AU (Astronomical Unit)', value: '150 million km', sub: 'Earth-Sun distance. Neptune is 30 AU from the Sun', color: 'bg-blue-50 border-blue-300' },
+              { icon: '💡', label: 'Light-year', value: '9.46 × 10¹² km', sub: 'Nearest star (Proxima Centauri): 4.24 light-years away', color: 'bg-yellow-50 border-yellow-300' },
+              { icon: '🌎', label: 'Earth to Moon', value: '384,400 km', sub: 'Apollo 11 took 3 days to get there', color: 'bg-gray-50 border-gray-200' },
+              { icon: '💨', label: 'Speed of light', value: '300,000 km/s', sub: 'Fastest possible speed. Light takes 8 min 20 sec to reach Earth from Sun', color: 'bg-purple-50 border-purple-300' },
+            ],
+            points: []
+          },
+          {
+            subtitle: 'Key Space Missions — Timeline',
+            emoji: '🏆',
+            layout: 'steps',
+            items: [
+              { label: 'SPUTNIK 1 (1957, USSR) — First artificial satellite', sub: 'Proved humans could put objects into orbit. Kicked off the Space Race' },
+              { label: 'APOLLO 11 (1969, USA) — First humans on the Moon', sub: 'Neil Armstrong and Buzz Aldrin landed July 20. "One small step for man..."' },
+              { label: 'HUBBLE SPACE TELESCOPE (1990) — Deep space imaging', sub: 'Orbiting optical telescope. Images of galaxies 13 billion light-years away' },
+              { label: 'ISS (1998-present) — International Space Station', sub: 'Continuous human presence in space since 2000. 15 nations cooperating' },
+              { label: 'JAMES WEBB TELESCOPE (2021) — Infrared, deepest ever view', sub: 'Sees 13.7 billion light-years away — nearly to the Big Bang itself' },
+            ],
+            points: []
+          },
+          {
+            subtitle: 'The Universe — Big Picture',
+            emoji: '🌌',
+            layout: 'rules',
+            items: [
+              { icon: '💥', label: 'BIG BANG THEORY — Universe began ~13.8 billion years ago', sub: 'Everything expanded from an incredibly hot, dense single point. Evidence: cosmic background radiation, redshift', color: 'bg-red-50 border-red-400' },
+              { icon: '📡', label: 'COSMIC BACKGROUND RADIATION — Leftover heat from Big Bang', sub: 'Discovered 1965 by accident (appeared as noise in radio telescopes). Strongest evidence for Big Bang', color: 'bg-orange-50 border-orange-400' },
+              { icon: '🌌', label: 'UNIVERSE IS STILL EXPANDING — and accelerating', sub: 'All galaxies moving away from each other. Dark energy is driving this acceleration', color: 'bg-blue-50 border-blue-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -7006,24 +7252,37 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Inner Planets (Rocky)',
-            emoji: '🪨',
-            points: [
-              'Mercury - Closest to Sun, extreme temperatures',
-              'Venus - Hottest planet, thick atmosphere',
-              'Earth - Our home, only known life',
-              'Mars - Red planet, has polar ice caps'
-            ]
+            subtitle: 'Inner vs Outer Planets',
+            emoji: '🪐',
+            layout: 'compare',
+            items: [
+              {
+                label: '🪨 INNER (Terrestrial)',
+                color: 'bg-red-50 border-red-400',
+                rows: ['Mercury, Venus, Earth, Mars', 'Rocky solid surfaces', 'Small, dense', 'Few or no moons', 'Close to Sun — short years']
+              },
+              {
+                label: '🌪️ OUTER (Gas/Ice Giants)',
+                color: 'bg-blue-50 border-blue-400',
+                rows: ['Jupiter, Saturn, Uranus, Neptune', 'Mostly gas/ice — no solid surface', 'Huge, low density', 'Many moons + ring systems', 'Far from Sun — long years']
+              },
+              'Asteroid Belt between Mars and Jupiter separates the two groups.'
+            ],
+            points: []
           },
           {
-            subtitle: 'Outer Planets (Gas Giants)',
-            emoji: '🌪️',
-            points: [
-              'Jupiter - Largest planet, Great Red Spot',
-              'Saturn - Famous rings',
-              'Uranus - Tilted on its side',
-              'Neptune - Coldest planet, strong winds'
-            ]
+            subtitle: 'Planet Facts',
+            emoji: '🌍',
+            layout: 'cards',
+            items: [
+              { icon: '⚫', label: 'MERCURY', value: 'Closest to Sun', sub: 'Extreme temps: −180°C to 430°C. No atmosphere to hold heat. No moons', color: 'bg-gray-50 border-gray-200' },
+              { icon: '🔥', label: 'VENUS', value: 'Hottest planet (465°C)', sub: 'Thick CO₂ atmosphere causes runaway greenhouse effect. Hotter than Mercury!', color: 'bg-orange-50 border-orange-300' },
+              { icon: '🌍', label: 'EARTH', value: 'Only known life', sub: 'Liquid water, ozone layer, perfect temperature range. 1 moon', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🔴', label: 'MARS', value: 'Red Planet', sub: 'Iron oxide (rust) gives red color. Polar ice caps. Olympus Mons = largest volcano in solar system', color: 'bg-red-50 border-red-300' },
+              { icon: '🟠', label: 'JUPITER', value: 'Largest planet', sub: 'Great Red Spot = storm larger than Earth, raging 350+ years. 95 moons including Europa', color: 'bg-amber-50 border-amber-300' },
+              { icon: '🪐', label: 'SATURN', value: 'Famous ring system', sub: 'Rings made of ice and rock. Least dense planet — would float on water!', color: 'bg-yellow-50 border-yellow-300' },
+            ],
+            points: []
           }
         ]
       },
@@ -7033,14 +7292,28 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Key Milestones',
-            emoji: '🚀',
-            points: [
-              'Sputnik 1 - First artificial satellite (1957)',
-              'Apollo 11 - First moon landing (1969)',
-              'Hubble Telescope - Deep space observations',
-              'ISS - International Space Station'
-            ]
+            subtitle: 'Key Milestones in Order',
+            emoji: '📅',
+            layout: 'steps',
+            items: [
+              { label: 'SPUTNIK 1 — Oct 4, 1957 (USSR)', sub: 'First artificial satellite. Proved orbit was possible. Started the Space Race' },
+              { label: 'APOLLO 11 — July 20, 1969 (USA)', sub: 'First Moon landing. Armstrong + Aldrin walked on Moon. Collins orbited above' },
+              { label: 'HUBBLE SPACE TELESCOPE — 1990 (NASA)', sub: 'Orbiting telescope above atmosphere. Crisp images of deep space. Still operating' },
+              { label: 'ISS — 1998–present (15 nations)', sub: 'Permanent human presence in space. Research in microgravity, medicine, engineering' },
+            ],
+            points: []
+          },
+          {
+            subtitle: 'Types of Spacecraft',
+            emoji: '🛸',
+            layout: 'cards',
+            items: [
+              { icon: '🛸', label: 'SPACE PROBE', value: 'Unmanned explorer', sub: 'Voyager 1 (1977) now beyond our solar system. Sends data back to Earth', color: 'bg-blue-50 border-blue-300' },
+              { icon: '🤖', label: 'ROVER', value: 'Surface vehicle', sub: 'Perseverance on Mars since 2021. Searches for signs of ancient life', color: 'bg-red-50 border-red-300' },
+              { icon: '🏠', label: 'SPACE STATION', value: 'Orbiting habitat', sub: 'ISS: 109m wide, 6 crew, travelling at 27,600 km/h', color: 'bg-green-50 border-green-300' },
+              { icon: '🛰️', label: 'SATELLITE', value: 'Communications & observation', sub: 'GPS, weather forecasting, internet, TV — all use satellites', color: 'bg-purple-50 border-purple-300' },
+            ],
+            points: []
           }
         ]
       },
@@ -7050,14 +7323,29 @@ const studyLibrary = {
         image: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=400&fit=crop',
         notes: [
           {
-            subtitle: 'Big Stuff',
-            emoji: '🌌',
-            points: [
-              'Our galaxy: Milky Way',
-              'Contains billions of stars',
-              'Big Bang Theory - Universe origin',
-              'Universe still expanding'
-            ]
+            subtitle: 'The Scale of the Universe',
+            emoji: '🔭',
+            layout: 'steps',
+            items: [
+              { label: 'YOU → Earth (12,742 km diameter)', sub: 'Your reference point. Light takes 0.04 seconds to travel around Earth' },
+              { label: 'Earth → Moon (384,400 km)', sub: 'Light travel time: 1.3 seconds. Apollo took 3 days' },
+              { label: 'Earth → Sun (150 million km = 1 AU)', sub: 'Light travel time: 8 minutes 20 seconds' },
+              { label: 'Sun → Nearest star (4.24 light-years)', sub: 'Proxima Centauri. Our fastest spacecraft would take 70,000+ years to reach it' },
+              { label: 'Our galaxy → edge of observable universe (46 billion light-years)', sub: 'Universe is 13.8 billion years old — but has expanded much farther in that time' },
+            ],
+            points: []
+          },
+          {
+            subtitle: 'Big Bang & Evidence',
+            emoji: '💥',
+            layout: 'rules',
+            items: [
+              { icon: '💥', label: 'BIG BANG — Universe began 13.8 billion years ago', sub: 'All matter, energy, space, and time originated from a single infinitely hot, dense point', color: 'bg-red-50 border-red-400' },
+              { icon: '📡', label: 'EVIDENCE 1: Cosmic Microwave Background Radiation', sub: 'Faint afterglow of the Big Bang fills the entire sky. Discovered in 1965 by Penzias & Wilson', color: 'bg-orange-50 border-orange-400' },
+              { icon: '🔴', label: 'EVIDENCE 2: Redshift of galaxies', sub: 'All distant galaxies moving away. Like a raisin cake expanding — every raisin sees all others moving away', color: 'bg-yellow-50 border-yellow-400' },
+              { icon: '🌌', label: 'Universe is not just expanding — it is ACCELERATING', sub: 'Dark energy (unknown force) is pushing galaxies apart faster over time', color: 'bg-purple-50 border-purple-400' },
+            ],
+            points: []
           }
         ]
       },
@@ -7264,89 +7552,39 @@ export default function ScienceStudyLibrary() {
     return () => clearInterval(interval);
   }, [isTimerRunning, currentStudySession]);
 
+  // Calculate efficient study time based on content
+
   // ── VISUAL NOTE RENDERER ─────────────────────────────────────────────────
-  // Supports layout types: 'steps', 'cards', 'compare', 'formula', 'rules', 'danger', 'bullets' (default)
-  const renderNotePoints = (note, gradient) => {
+  const renderNotePoints = (note: any, gradient: string) => {
     const layout = note.layout || 'bullets';
-    const items = note.items || note.points;
+    const items = note.items || [];
 
-    if (layout === 'steps') {
+    if (layout === 'cards' && items.length > 0) {
       return (
-        <div className="space-y-2">
-          {items.map((item, i) => (
-            <div key={i} className="flex gap-3 items-start">
-              <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${gradient} text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5 shadow`}>{i + 1}</div>
-              <div className="flex-1 bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
-                <p className="text-sm text-gray-800 leading-snug font-medium">{item.label || item}</p>
-                {item.sub && <p className="text-xs text-gray-500 mt-1">{item.sub}</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+          {items.map((item: any, i: number) => (
+            <div key={i} className={`rounded-xl border-2 p-3 ${item.color || 'bg-gray-50 border-gray-200'}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">{item.icon}</span>
+                <span className="font-bold text-gray-800 text-sm">{item.label}</span>
+                {item.value && <span className={`ml-auto text-xs font-semibold px-2 py-0.5 rounded-full bg-white/70 text-gray-700`}>{item.value}</span>}
               </div>
+              {item.sub && <p className="text-xs text-gray-600 ml-7 leading-relaxed">{item.sub}</p>}
             </div>
           ))}
         </div>
       );
     }
 
-    if (layout === 'cards') {
+    if (layout === 'rules' && items.length > 0) {
       return (
-        <div className="grid grid-cols-2 gap-2">
-          {items.map((item, i) => (
-            <div key={i} className={`rounded-xl p-3 border-2 ${item.color || 'bg-gray-50 border-gray-200'}`}>
-              {item.icon && <div className="text-2xl mb-1">{item.icon}</div>}
-              <p className="font-bold text-sm text-gray-800">{item.label}</p>
-              {item.value && <p className={`text-xs font-mono font-bold mt-1 ${item.valueColor || 'text-indigo-600'}`}>{item.value}</p>}
-              {item.sub && <p className="text-xs text-gray-600 mt-1 leading-snug">{item.sub}</p>}
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    if (layout === 'compare') {
-      const [left, right] = items;
-      return (
-        <div className="space-y-2">
-          <div className="grid grid-cols-2 gap-2 mb-1">
-            <div className={`rounded-xl p-3 border-2 ${left.color}`}>
-              <p className="font-bold text-sm mb-2">{left.label}</p>
-              {left.rows.map((r, i) => <p key={i} className="text-xs text-gray-700 py-0.5 border-b border-white/50 last:border-0">{r}</p>)}
-            </div>
-            <div className={`rounded-xl p-3 border-2 ${right.color}`}>
-              <p className="font-bold text-sm mb-2">{right.label}</p>
-              {right.rows.map((r, i) => <p key={i} className="text-xs text-gray-700 py-0.5 border-b border-white/50 last:border-0">{r}</p>)}
-            </div>
-          </div>
-          {items[2] && <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-2 text-xs text-indigo-800 text-center font-medium">{items[2]}</div>}
-        </div>
-      );
-    }
-
-    if (layout === 'formula') {
-      return (
-        <div className="space-y-3">
-          {items.map((item, i) => (
-            <div key={i} className={`rounded-xl overflow-hidden border-2 ${item.color || 'border-indigo-200'}`}>
-              <div className={`px-4 py-2 ${item.headerBg || 'bg-indigo-600'}`}>
-                <p className="font-mono font-bold text-white text-base tracking-wide">{item.formula}</p>
-              </div>
-              <div className="bg-white px-4 py-2">
-                <p className="text-xs text-gray-600">{item.meaning}</p>
-                {item.example && <p className="text-xs font-mono text-green-700 mt-1 bg-green-50 px-2 py-1 rounded">e.g. {item.example}</p>}
-              </div>
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    if (layout === 'rules') {
-      return (
-        <div className="space-y-2">
-          {items.map((item, i) => (
-            <div key={i} className={`flex gap-3 items-start rounded-xl p-3 border-l-4 ${item.color || 'bg-red-50 border-red-400'}`}>
-              <span className="text-xl flex-shrink-0">{item.icon}</span>
+        <div className="space-y-2 mt-2">
+          {items.map((item: any, i: number) => (
+            <div key={i} className={`flex items-start gap-3 rounded-xl border-l-4 p-3 ${item.color || 'bg-gray-50 border-gray-200'}`}>
+              <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
               <div>
-                <p className="font-bold text-sm text-gray-800">{item.label}</p>
-                {item.sub && <p className="text-xs text-gray-600 mt-0.5">{item.sub}</p>}
+                <p className="font-bold text-gray-800 text-sm">{item.label}</p>
+                {item.sub && <p className="text-xs text-gray-600 mt-0.5 leading-relaxed">{item.sub}</p>}
               </div>
             </div>
           ))}
@@ -7354,20 +7592,17 @@ export default function ScienceStudyLibrary() {
       );
     }
 
-    if (layout === 'danger') {
+    if (layout === 'steps' && items.length > 0) {
       return (
-        <div className="space-y-1.5">
-          {items.map((item, i) => (
-            <div key={i} className={`flex items-center gap-3 rounded-lg p-2.5 border ${item.color}`}>
-              <span className="text-xl w-7 text-center flex-shrink-0">{item.icon}</span>
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-0.5">
-                  <p className="text-xs font-bold text-gray-800">{item.label}</p>
-                  <span className="text-xs font-mono text-gray-500">{item.value}</span>
-                </div>
-                <div className="bg-white rounded-full h-1.5 overflow-hidden">
-                  <div className="h-full rounded-full" style={{width: item.pct, backgroundColor: item.barColor}}/>
-                </div>
+        <div className="space-y-3 mt-2">
+          {items.map((item: any, i: number) => (
+            <div key={i} className="flex items-start gap-3">
+              <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-0.5 shadow`}>
+                {i + 1}
+              </div>
+              <div className="flex-1 bg-white rounded-xl shadow-sm border border-gray-100 p-3">
+                <p className="font-semibold text-gray-800 text-sm">{item.label}</p>
+                {item.sub && <p className="text-xs text-gray-500 mt-1 leading-relaxed">{item.sub}</p>}
               </div>
             </div>
           ))}
@@ -7375,21 +7610,85 @@ export default function ScienceStudyLibrary() {
       );
     }
 
-    // default bullets
+    if (layout === 'compare' && items.length >= 2) {
+      const [left, right, summary] = items;
+      return (
+        <div className="mt-2 space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            {[left, right].map((panel: any, i: number) => (
+              <div key={i} className={`rounded-xl border-2 p-3 ${panel.color || 'bg-gray-50 border-gray-200'}`}>
+                <p className="font-bold text-gray-800 text-sm mb-2">{panel.label}</p>
+                <div className="space-y-1">
+                  {(panel.rows || []).map((row: string, j: number) => (
+                    <div key={j} className="flex items-start gap-1.5">
+                      <span className="text-gray-600 mt-1 text-xs flex-shrink-0">•</span>
+                      <span className="text-xs text-gray-700 leading-relaxed">{row}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          {typeof summary === 'string' && (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
+              <p className="text-xs text-amber-300 leading-relaxed">{summary}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    if (layout === 'formula' && items.length > 0) {
+      return (
+        <div className="space-y-3 mt-2">
+          {items.map((item: any, i: number) => (
+            <div key={i} className={`rounded-xl border-2 overflow-hidden ${item.color || 'border-indigo-300'}`}>
+              <div className={`${item.headerBg || 'bg-indigo-600'} px-4 py-2`}>
+                <p className="text-white font-bold text-lg font-mono tracking-wide">{item.formula}</p>
+              </div>
+              <div className="bg-gray-100 px-4 py-3 space-y-1">
+                {item.meaning && <p className="text-sm text-gray-700">{item.meaning}</p>}
+                {item.example && <p className="text-xs text-gray-500 font-mono bg-gray-50 rounded px-2 py-1">{item.example}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (layout === 'danger' && items.length > 0) {
+      return (
+        <div className="space-y-2 mt-2">
+          {items.map((item: any, i: number) => (
+            <div key={i} className={`rounded-xl p-3 ${item.color || 'bg-red-50'}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg">{item.icon}</span>
+                <span className="font-semibold text-sm text-gray-800">{item.label}</span>
+                <span className="ml-auto text-xs font-bold text-red-300">{item.value}</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div className={`h-full rounded-full ${item.barColor || 'bg-red-500'}`} style={{width: `${item.pct || 50}%`}} />
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    // Default: bullets (layout === 'bullets' or fallback)
+    const points = note.points || [];
     return (
-      <div className="space-y-2">
-        {items.map((point, i) => (
-          <div key={i} className="flex items-start gap-3 group p-3 rounded-lg hover:bg-white transition-all">
-            <div className={`mt-1.5 w-2 h-2 rounded-full bg-gradient-to-r ${gradient} flex-shrink-0 shadow-sm`} />
-            <p className="text-gray-700 leading-relaxed text-sm group-hover:text-gray-900 transition-colors">{point}</p>
+      <div className="space-y-1 mt-2">
+        {points.map((point: string, i: number) => (
+          <div key={i} className="flex items-start gap-2">
+            <div className={`mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-r ${gradient} flex-shrink-0`} />
+            <p className="text-sm text-gray-700 leading-relaxed">{point}</p>
           </div>
         ))}
       </div>
     );
   };
-  // ── END VISUAL NOTE RENDERER ──────────────────────────────────────────────
 
-  // Calculate efficient study time based on content
   const calculateStudyTime = (section) => {
     // Quiz sections - quick practice and review
     if (section.quiz && section.quiz.length > 0) {
@@ -7410,7 +7709,7 @@ export default function ScienceStudyLibrary() {
       let totalTime = 0;
       
       section.notes.forEach(note => {
-        const pointsCount = note.points.length;
+        const pointsCount = (note.items || note.points).length;
         
         // Definition sections - skim and highlight key terms
         if (section.id.includes('definitions')) {
@@ -7814,11 +8113,11 @@ Student question: ${userMessage}`
     if (!showPremiumModal) return null;
 
     return (
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full my-8 animate-fadeIn">
+      <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div className="bg-white rounded-3xl border border-gray-200 max-w-2xl w-full my-8 animate-fadeIn">
           <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 p-8 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gray-200 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gray-200 rounded-full blur-3xl"></div>
             
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
@@ -7833,7 +8132,7 @@ Student question: ${userMessage}`
                 </div>
                 <button
                   onClick={() => setShowPremiumModal(false)}
-                  className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -7945,7 +8244,7 @@ Student question: ${userMessage}`
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200">
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -7993,8 +8292,8 @@ Student question: ${userMessage}`
     const progressPercent = totalTime > 0 ? (completedTime / totalTime) * 100 : 0;
 
     return (
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+      <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl border border-gray-200 max-w-4xl w-full max-h-[90vh] overflow-hidden">
           <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 text-white">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -8010,7 +8309,7 @@ Student question: ${userMessage}`
               </div>
               <button
                 onClick={() => setShowStudyPlanner(false)}
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -8025,7 +8324,7 @@ Student question: ${userMessage}`
                 </div>
                 <div className="w-full bg-white/20 rounded-full h-3 overflow-hidden">
                   <div
-                    className="bg-white h-full transition-all duration-500"
+                    className="bg-gradient-to-r from-blue-400 to-indigo-400 h-full transition-all duration-500"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
@@ -8041,7 +8340,7 @@ Student question: ${userMessage}`
             {studyPlan.length === 0 ? (
               <div className="text-center py-12">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-                  <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                 </div>
@@ -8064,7 +8363,7 @@ Student question: ${userMessage}`
                         ? 'bg-green-50 border-green-200'
                         : currentStudySession?.id === item.id
                         ? 'bg-blue-50 border-blue-300 shadow-lg'
-                        : 'bg-white border-gray-200 hover:border-gray-300'
+                        : 'bg-white border-gray-200 hover:border-gray-200'
                     }`}
                   >
                     <div className="p-4">
@@ -8090,9 +8389,9 @@ Student question: ${userMessage}`
                             <div className="text-right flex-shrink-0 ml-4">
                               <div className={`px-3 py-1 rounded-lg text-sm font-semibold ${
                                 item.completed
-                                  ? 'bg-green-100 text-green-700'
+                                  ? 'bg-green-100 text-green-300'
                                   : currentStudySession?.id === item.id
-                                  ? 'bg-blue-100 text-blue-700'
+                                  ? 'bg-blue-100 text-blue-300'
                                   : 'bg-gray-100 text-gray-700'
                               }`}>
                                 {item.estimatedTime} min
@@ -8104,7 +8403,7 @@ Student question: ${userMessage}`
                           {currentStudySession?.id === item.id && (
                             <div className="bg-blue-100 rounded-lg p-3 mb-3">
                               <div className="flex items-center justify-between">
-                                <span className="text-sm font-semibold text-blue-800">Time Elapsed:</span>
+                                <span className="text-sm font-semibold text-blue-300">Time Elapsed:</span>
                                 <span className="text-2xl font-bold text-blue-600">{formatTime(studyTimer)}</span>
                               </div>
                               <div className="mt-2 w-full bg-blue-200 rounded-full h-2 overflow-hidden">
@@ -8211,8 +8510,8 @@ Student question: ${userMessage}`
     const progress = (unlockedCount / totalCount) * 100;
     
     return (
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+      <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl border border-gray-200 max-w-4xl w-full max-h-[90vh] overflow-hidden">
           <div className="bg-gradient-to-r from-yellow-500 to-orange-600 p-6 text-white">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -8221,7 +8520,7 @@ Student question: ${userMessage}`
               </div>
               <button
                 onClick={() => setShowAchievements(false)}
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -8233,7 +8532,7 @@ Student question: ${userMessage}`
               </div>
               <div className="w-full bg-white/20 rounded-full h-3 overflow-hidden">
                 <div
-                  className="bg-white h-full transition-all duration-500 rounded-full"
+                  className="bg-gradient-to-r from-blue-400 to-indigo-400 h-full transition-all duration-500 rounded-full"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -8270,11 +8569,11 @@ Student question: ${userMessage}`
                           </h3>
                           {isUnlocked && <CheckCircle className="w-5 h-5 text-green-500" />}
                         </div>
-                        <p className={`text-sm ${isUnlocked ? 'text-gray-600' : 'text-gray-400'}`}>
+                        <p className={`text-sm ${isUnlocked ? 'text-gray-600' : 'text-gray-600'}`}>
                           {achievement.description}
                         </p>
                         {!isUnlocked && (
-                          <p className="text-xs text-gray-400 mt-2">🔒 Locked</p>
+                          <p className="text-xs text-gray-600 mt-2">🔒 Locked</p>
                         )}
                       </div>
                     </div>
@@ -8292,7 +8591,7 @@ Student question: ${userMessage}`
   const renderPanelContent = (panel, panelSide) => {
     if (!panel) {
       return (
-        <div className="h-full flex items-center justify-center text-gray-400">
+        <div className="h-full flex items-center justify-center text-gray-600">
           <div className="text-center">
             <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-50" />
             <p className="font-semibold">Select content to view here</p>
@@ -8389,7 +8688,7 @@ Student question: ${userMessage}`
 
           {quizState.showExplanation && (
             <div className="p-3 rounded-lg mb-4 bg-blue-50 border-2 border-blue-200">
-              <p className="text-sm font-semibold text-blue-800 mb-1">
+              <p className="text-sm font-semibold text-blue-300 mb-1">
                 {quizState.selectedAnswer === question.correct ? '✓ Correct!' : 'Explanation:'}
               </p>
               <p className="text-sm text-gray-700">{question.explanation}</p>
@@ -8449,7 +8748,6 @@ Student question: ${userMessage}`
 
     // Notes view for split screen
     const isWorksheet = subject.id === 'worksheets';
-
     
     return (
       <div className="h-full overflow-y-auto p-6 bg-gradient-to-br from-slate-50 to-slate-100">
@@ -8457,7 +8755,7 @@ Student question: ${userMessage}`
           <h3 className="text-xl font-bold text-gray-800">{section.title}</h3>
           <button
             onClick={closePanel}
-            className="w-8 h-8 rounded-lg bg-white hover:bg-gray-100 flex items-center justify-center shadow-sm"
+            className="w-8 h-8 rounded-lg bg-gray-200 hover:bg-gray-200 flex items-center justify-center shadow-sm"
           >
             <X className="w-5 h-5" />
           </button>
@@ -8474,7 +8772,7 @@ Student question: ${userMessage}`
               </div>
               
               <div className="p-4">
-                <div className="space-y-2">
+                <div>
                   {renderNotePoints(note, subject.gradient)}
                 </div>
                 
@@ -8510,16 +8808,7 @@ Student question: ${userMessage}`
                     {note.diagram === 'series-parallel-table' && <SeriesParallelComparisonTable />}
                     {note.diagram === 'energy-conversion' && <EnergyConversionDiagram />}
                     {note.diagram === 'circuit-troubleshooting' && <CircuitTroubleshootingDiagram />}
-                    {note.diagram === 'electric-charges' && <ElectricChargesDiagram />}
-                    {note.diagram === 'conductor-insulator' && <ConductorInsulatorDiagram />}
-                    {note.diagram === 'vir-triangle' && <VIRTriangleDiagram />}
-                    {note.diagram === 'series-vs-parallel' && <SeriesVsParallelVisual />}
-                    {note.diagram === 'power-triangle' && <PowerTriangleDiagram />}
-                    {note.diagram === 'current-danger' && <CurrentDangerDiagram />}
-                    {note.diagram === 'appliance-power' && <AppliancePowerDiagram />}
-                    {note.diagram === 'fuse-breaker' && <FuseCircuitBreakerDiagram />}
-                    {note.diagram === 'energy-transformations' && <EnergyTransformationsDiagram />}
-                    {note.diagram === 'efficiency' && <EfficiencyDiagram />}
+                    {note.diagram === 'renewable-energy' && <RenewableEnergyDiagram />}
                   </div>
                 )}
               </div>
@@ -8539,23 +8828,23 @@ Student question: ${userMessage}`
         
         {/* L.Y.N.E AI Assistant Widget */}
         {showAIAssistant && (
-          <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden">
+          <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative">
                   <Sparkles className="w-5 h-5" />
-                  <div className="absolute inset-0 rounded-full bg-white/10 animate-ping"></div>
+                  <div className="absolute inset-0 rounded-full bg-gray-200 animate-ping"></div>
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">L.Y.N.E</h3>
+                  <h3 className="font-bold text-lg tracking-widest text-white" style={{fontFamily:"Space Mono,monospace"}}>L.Y.N.E</h3>
                   <p className="text-xs text-white/90 font-semibold">Logical Yield Neural Engine</p>
                   <p className="text-xs text-white/70">Your AI Study Companion</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowAIAssistant(false)}
-                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -8601,7 +8890,7 @@ Student question: ${userMessage}`
                     }
                   }}
                   placeholder="Ask a question..."
-                  className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm"
+                  className="flex-1 px-4 py-2 rounded-xl bg-gray-100 border border-gray-200 text-gray-800 focus:border-cyan-500 focus:outline-none text-sm placeholder:text-gray-400"
                   disabled={isAiThinking}
                 />
                 <button
@@ -8630,10 +8919,10 @@ Student question: ${userMessage}`
           >
             <div className="relative">
               {/* Pulsing ring */}
-              <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75"></div>
+              <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-60"></div>
               
               {/* Main button */}
-              <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
+              <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:shadow-blue-500/30 transition-all">
                 <Sparkles className="w-6 h-6" />
               </div>
               
@@ -8649,7 +8938,7 @@ Student question: ${userMessage}`
         )}
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 text-white shadow-lg">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white shadow-md">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center">
@@ -8670,7 +8959,7 @@ Student question: ${userMessage}`
                   setSelectedSubject(null);
                   setSelectedSection(null);
                 }}
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex items-center gap-2"
+                className="px-4 py-2 bg-gray-200 hover:bg-white/20 rounded-lg transition-colors flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Library
@@ -8678,7 +8967,7 @@ Student question: ${userMessage}`
               
               <button
                 onClick={closeSplitScreen}
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex items-center gap-2"
+                className="px-4 py-2 bg-gray-200 hover:bg-white/20 rounded-lg transition-colors flex items-center gap-2"
               >
                 <X className="w-4 h-4" />
                 Exit Split View
@@ -8690,12 +8979,12 @@ Student question: ${userMessage}`
         {/* Content browser sidebar */}
         <div className="flex-1 flex overflow-hidden">
           {/* Sidebar for browsing content */}
-          <div className="w-80 bg-white border-r-2 border-gray-300 overflow-y-auto p-4">
+          <div className="w-80 bg-white border-r-2 border-gray-200 overflow-y-auto p-4">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Browse Content</h3>
             
             <div className="space-y-4">
               {Object.values(studyLibrary).map(subject => (
-                <div key={subject.id} className="border-2 border-gray-200 rounded-xl overflow-hidden">
+                <div key={subject.id} className="border border-gray-200 rounded-xl overflow-hidden">
                   <div className={`bg-gradient-to-r ${subject.gradient} p-3`}>
                     <div className="flex items-center gap-2">
                       <subject.icon className="w-5 h-5 text-white" />
@@ -8732,7 +9021,7 @@ Student question: ${userMessage}`
                         disabled={section.flashcards && section.flashcards.length > 0 || section.locked}
                         className={`w-full text-left p-2 text-sm rounded-lg transition-colors ${
                           section.locked
-                            ? 'opacity-50 cursor-not-allowed blur-sm'
+                            ? 'opacity-40 cursor-not-allowed'
                             : section.flashcards && section.flashcards.length > 0
                             ? 'opacity-50 cursor-not-allowed'
                             : 'hover:bg-gray-100'
@@ -8746,12 +9035,12 @@ Student question: ${userMessage}`
                           ) : (
                             <BookOpen className="w-4 h-4 text-emerald-500" />
                           )}
-                          <span className="text-gray-700 text-xs">{section.title}</span>
+                          <span className="text-gray-600 text-xs">{section.title}</span>
                           {section.flashcards && section.flashcards.length > 0 && (
-                            <span className="ml-auto text-xs text-gray-400">(Full screen only)</span>
+                            <span className="ml-auto text-xs text-gray-600">(Full screen only)</span>
                           )}
                           {section.locked && (
-                            <span className="ml-auto text-xs text-gray-400">(Premium)</span>
+                            <span className="ml-auto text-xs text-gray-600">(Premium)</span>
                           )}
                         </div>
                       </button>
@@ -8765,7 +9054,7 @@ Student question: ${userMessage}`
           {/* Split panels */}
           <div className="flex-1 flex overflow-hidden">
             {/* Left Panel */}
-            <div className="flex-1 border-r-2 border-gray-300 overflow-hidden">
+            <div className="flex-1 border-r-2 border-gray-200 overflow-hidden">
               {renderPanelContent(leftPanel, 'left')}
             </div>
 
@@ -8785,26 +9074,27 @@ Student question: ${userMessage}`
     const progress = ((currentFlashcard + 1) / selectedSection.flashcards.length) * 100;
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gray-50 soul-grid">
+      <SoulStyles />
         {/* L.Y.N.E AI Assistant Widget */}
         {showAIAssistant && (
-          <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden">
+          <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative">
                   <Sparkles className="w-5 h-5" />
-                  <div className="absolute inset-0 rounded-full bg-white/10 animate-ping"></div>
+                  <div className="absolute inset-0 rounded-full bg-gray-200 animate-ping"></div>
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">L.Y.N.E</h3>
+                  <h3 className="font-bold text-lg tracking-widest text-white" style={{fontFamily:"Space Mono,monospace"}}>L.Y.N.E</h3>
                   <p className="text-xs text-white/90 font-semibold">Logical Yield Neural Engine</p>
                   <p className="text-xs text-white/70">Your AI Study Companion</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowAIAssistant(false)}
-                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -8850,7 +9140,7 @@ Student question: ${userMessage}`
                     }
                   }}
                   placeholder="Ask a question..."
-                  className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm"
+                  className="flex-1 px-4 py-2 rounded-xl bg-gray-100 border border-gray-200 text-gray-800 focus:border-cyan-500 focus:outline-none text-sm placeholder:text-gray-400"
                   disabled={isAiThinking}
                 />
                 <button
@@ -8879,10 +9169,10 @@ Student question: ${userMessage}`
           >
             <div className="relative">
               {/* Pulsing ring */}
-              <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75"></div>
+              <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-60"></div>
               
               {/* Main button */}
-              <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
+              <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:shadow-blue-500/30 transition-all">
                 <Sparkles className="w-6 h-6" />
               </div>
               
@@ -8913,7 +9203,7 @@ Student question: ${userMessage}`
             </button>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-2xl font-bold text-gray-800">{selectedSection.title}</h2>
@@ -8973,7 +9263,7 @@ Student question: ${userMessage}`
                   <div className="text-center">
                     <p className="text-sm text-gray-500 mb-4 font-semibold uppercase tracking-wide">Answer</p>
                     <h3 className="text-2xl font-semibold text-gray-800 leading-relaxed whitespace-pre-line">{flashcard.back}</h3>
-                    <p className="text-gray-400 mt-6 text-sm">Click to flip back</p>
+                    <p className="text-gray-600 mt-6 text-sm">Click to flip back</p>
                   </div>
                 </div>
               </div>
@@ -9037,26 +9327,27 @@ Student question: ${userMessage}`
     const progress = ((currentQuestion + 1) / currentQuiz.quiz.length) * 100;
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gray-50 soul-grid">
+      <SoulStyles />
         {/* L.Y.N.E AI Assistant Widget */}
         {showAIAssistant && (
-          <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden">
+          <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative">
                   <Sparkles className="w-5 h-5" />
-                  <div className="absolute inset-0 rounded-full bg-white/10 animate-ping"></div>
+                  <div className="absolute inset-0 rounded-full bg-gray-200 animate-ping"></div>
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">L.Y.N.E</h3>
+                  <h3 className="font-bold text-lg tracking-widest text-white" style={{fontFamily:"Space Mono,monospace"}}>L.Y.N.E</h3>
                   <p className="text-xs text-white/90 font-semibold">Logical Yield Neural Engine</p>
                   <p className="text-xs text-white/70">Your AI Study Companion</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowAIAssistant(false)}
-                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -9102,7 +9393,7 @@ Student question: ${userMessage}`
                     }
                   }}
                   placeholder="Ask a question..."
-                  className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm"
+                  className="flex-1 px-4 py-2 rounded-xl bg-gray-100 border border-gray-200 text-gray-800 focus:border-cyan-500 focus:outline-none text-sm placeholder:text-gray-400"
                   disabled={isAiThinking}
                 />
                 <button
@@ -9131,10 +9422,10 @@ Student question: ${userMessage}`
           >
             <div className="relative">
               {/* Pulsing ring */}
-              <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75"></div>
+              <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-60"></div>
               
               {/* Main button */}
-              <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
+              <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:shadow-blue-500/30 transition-all">
                 <Sparkles className="w-6 h-6" />
               </div>
               
@@ -9174,7 +9465,7 @@ Student question: ${userMessage}`
             </button>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-2xl font-bold text-gray-800">{currentQuiz.title}</h2>
@@ -9224,7 +9515,7 @@ Student question: ${userMessage}`
                           ? 'border-red-500 bg-red-500'
                           : selectedAnswer === idx
                           ? 'border-blue-500 bg-blue-500'
-                          : 'border-gray-300'
+                          : 'border-gray-200'
                       }`}>
                         {((showExplanation && idx === question.correct) || (!showExplanation && selectedAnswer === idx)) && (
                           <CheckCircle className="w-4 h-4 text-white" />
@@ -9245,7 +9536,7 @@ Student question: ${userMessage}`
                 <div className="flex items-start gap-3">
                   <Lightbulb className={`w-6 h-6 flex-shrink-0 ${isCorrect ? 'text-green-600' : 'text-blue-600'}`} />
                   <div>
-                    <p className={`font-semibold mb-1 ${isCorrect ? 'text-green-800' : 'text-blue-800'}`}>
+                    <p className={`font-semibold mb-1 ${isCorrect ? 'text-green-300' : 'text-blue-300'}`}>
                       {isCorrect ? '✓ Correct!' : 'Explanation:'}
                     </p>
                     <p className="text-gray-700">{question.explanation}</p>
@@ -9286,26 +9577,27 @@ Student question: ${userMessage}`
     // If this is a quiz section, show quiz interface
     if (hasQuiz && !currentQuiz) {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+        <div className="min-h-screen bg-gray-50 soul-grid">
+      <SoulStyles />
           {/* L.Y.N.E AI Assistant Widget */}
           {showAIAssistant && (
-            <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden">
+            <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
               {/* Header */}
-              <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative">
                     <Sparkles className="w-5 h-5" />
-                    <div className="absolute inset-0 rounded-full bg-white/10 animate-ping"></div>
+                    <div className="absolute inset-0 rounded-full bg-gray-200 animate-ping"></div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">L.Y.N.E</h3>
+                    <h3 className="font-bold text-lg tracking-widest text-white" style={{fontFamily:"Space Mono,monospace"}}>L.Y.N.E</h3>
                     <p className="text-xs text-white/90 font-semibold">Logical Yield Neural Engine</p>
                     <p className="text-xs text-white/70">Your AI Study Companion</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowAIAssistant(false)}
-                  className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                  className="w-8 h-8 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -9351,7 +9643,7 @@ Student question: ${userMessage}`
                       }
                     }}
                     placeholder="Ask a question..."
-                    className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm"
+                    className="flex-1 px-4 py-2 rounded-xl bg-gray-100 border border-gray-200 text-gray-800 focus:border-cyan-500 focus:outline-none text-sm placeholder:text-gray-400"
                     disabled={isAiThinking}
                   />
                   <button
@@ -9380,10 +9672,10 @@ Student question: ${userMessage}`
             >
               <div className="relative">
                 {/* Pulsing ring */}
-                <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75"></div>
+                <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-60"></div>
                 
                 {/* Main button */}
-                <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
+                <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:shadow-blue-500/30 transition-all">
                   <Sparkles className="w-6 h-6" />
                 </div>
                 
@@ -9433,7 +9725,7 @@ Student question: ${userMessage}`
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-lg p-8 text-center">
               <div className="max-w-2xl mx-auto">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                   <FileText className="w-10 h-10 text-white" />
@@ -9457,7 +9749,8 @@ Student question: ${userMessage}`
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gray-50 soul-grid">
+      <SoulStyles />
         <div className="max-w-5xl mx-auto p-4 md:p-6">
           <div className="flex items-center justify-between mb-6">
             <button
@@ -9480,9 +9773,9 @@ Student question: ${userMessage}`
             </button>
           </div>
 
-          <div className={`relative rounded-xl overflow-hidden mb-6 bg-gradient-to-br ${selectedSubject.gradient} border-2 border-gray-200`}>
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+          <div className={`relative rounded-xl overflow-hidden mb-6 bg-gradient-to-br ${selectedSubject.gradient} border border-gray-200`}>
+            <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-black/5 rounded-full blur-2xl"></div>
             
             <div className="relative z-10 p-6 flex items-center justify-between">
               <div className="flex-1">
@@ -9508,8 +9801,8 @@ Student question: ${userMessage}`
               onClick={() => toggleRead(section.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                 isRead
-                  ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 border-2 border-gray-200'
+                  ? 'bg-green-100 text-green-300 hover:bg-green-200'
+                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
               }`}
             >
               {isRead ? <CheckCircle className="w-5 h-5" /> : <Circle className="w-5 h-5" />}
@@ -9572,8 +9865,8 @@ Student question: ${userMessage}`
                     onClick={() => isCollapsible && toggleDefinitionNote(section.id, idx)}
                   >
                     {/* Decorative background elements */}
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
-                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-gray-200 rounded-full blur-2xl"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-gray-200 rounded-full blur-2xl"></div>
                     
                     <div className="flex items-center justify-between relative z-10">
                       <div className="flex items-center gap-3">
@@ -9594,20 +9887,20 @@ Student question: ${userMessage}`
                     {isCollapsible && !isExpanded && (
                       <div className="mt-2 relative z-10">
                         <p className="text-white/80 text-sm">
-                          Click to expand • {note.points.length} {note.points.length === 1 ? 'term' : 'terms'}
+                          Click to expand • {(note.items || note.points).length} {(note.items || note.points).length === 1 ? 'term' : 'terms'}
                         </p>
                       </div>
                     )}
                   </div>
                   
                   {(!isCollapsible || isExpanded) && (
-                    <div className="p-6 bg-gradient-to-b from-white to-gray-50">
-                      <div className="space-y-3">
+                    <div className="p-6 bg-gray-50">
+                      <div>
                         {renderNotePoints(note, selectedSubject.gradient)}
                       </div>
                       
                       {note.diagram && (
-                        <div className="mt-6 p-4 bg-gradient-to-br from-slate-50 to-gray-100 rounded-xl border-2 border-gray-200 shadow-inner">
+                        <div className="mt-6 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl border border-gray-200 shadow-inner">
                           {note.diagram === 'lewis' && <LewisDotDiagram />}
                           {note.diagram === 'bohr' && <BohrDiagram />}
                           {note.diagram === 'energy-pyramid' && <EnergyPyramid />}
@@ -9644,16 +9937,7 @@ Student question: ${userMessage}`
                           {note.diagram === 'series-parallel-table' && <SeriesParallelComparisonTable />}
                           {note.diagram === 'energy-conversion' && <EnergyConversionDiagram />}
                           {note.diagram === 'circuit-troubleshooting' && <CircuitTroubleshootingDiagram />}
-                          {note.diagram === 'electric-charges' && <ElectricChargesDiagram />}
-                          {note.diagram === 'conductor-insulator' && <ConductorInsulatorDiagram />}
-                          {note.diagram === 'vir-triangle' && <VIRTriangleDiagram />}
-                          {note.diagram === 'series-vs-parallel' && <SeriesVsParallelVisual />}
-                          {note.diagram === 'power-triangle' && <PowerTriangleDiagram />}
-                          {note.diagram === 'current-danger' && <CurrentDangerDiagram />}
-                          {note.diagram === 'appliance-power' && <AppliancePowerDiagram />}
-                          {note.diagram === 'fuse-breaker' && <FuseCircuitBreakerDiagram />}
-                          {note.diagram === 'energy-transformations' && <EnergyTransformationsDiagram />}
-                          {note.diagram === 'efficiency' && <EfficiencyDiagram />}
+                          {note.diagram === 'renewable-energy' && <RenewableEnergyDiagram />}
                         </div>
                       )}
                     </div>
@@ -9678,7 +9962,7 @@ Student question: ${userMessage}`
           <div className="mt-6 flex justify-center">
             <button
               onClick={() => setSelectedSection(null)}
-              className="flex items-center gap-2 px-6 py-3 bg-white text-gray-700 rounded-xl font-semibold hover:bg-gray-100 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-100 transition-all shadow-md hover:shadow-lg"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to {selectedSubject.name}
@@ -9696,7 +9980,8 @@ Student question: ${userMessage}`
     const nonHeaderCount = subject.sections.filter(s => !s.isSectionHeader).length; const progress = nonHeaderCount > 0 ? (completedCount / nonHeaderCount) * 100 : 0;
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gray-50 soul-grid">
+      <SoulStyles />
         <div className="max-w-5xl mx-auto p-4 md:p-6">
           <button
             onClick={() => setSelectedSubject(null)}
@@ -9706,9 +9991,9 @@ Student question: ${userMessage}`
             Back to Library
           </button>
 
-          <div className={`relative rounded-xl overflow-hidden mb-6 bg-gradient-to-br ${subject.gradient} border-2 border-gray-200`}>
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+          <div className={`relative rounded-xl overflow-hidden mb-6 bg-gradient-to-br ${subject.gradient} border border-gray-200`}>
+            <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-black/5 rounded-full blur-2xl"></div>
             
             <div className="relative z-10 p-6 flex items-center justify-between">
               <div className="flex-1">
@@ -9725,7 +10010,7 @@ Student question: ${userMessage}`
             <div className="relative z-10 px-6 pb-4">
               <div className="bg-white/20 backdrop-blur rounded-full h-2 overflow-hidden">
                 <div
-                  className="bg-white h-full transition-all duration-500 rounded-full"
+                  className="bg-gradient-to-r from-blue-400 to-indigo-400 h-full transition-all duration-500 rounded-full"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -9745,7 +10030,7 @@ Student question: ${userMessage}`
                 return (
                   <div
                     key={section.id}
-                    className={`col-span-full bg-gradient-to-r ${section.headerColor} rounded-xl p-6 text-white shadow-lg border-2 border-white/20`}
+                    className={`col-span-full bg-gradient-to-r ${section.headerColor} rounded-xl p-6 text-white shadow-lg border-2 border-gray-300`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -9766,7 +10051,7 @@ Student question: ${userMessage}`
                 <div
                   key={section.id}
                   onClick={() => !isLocked && setSelectedSection(section)}
-                  className={`bg-white rounded-xl overflow-hidden ${isLocked ? 'cursor-not-allowed opacity-75' : 'cursor-pointer hover:shadow-lg'} group transition-all border-2 border-gray-100 ${!isLocked && 'hover:border-gray-300'} relative`}
+                  className={`bg-white rounded-xl overflow-hidden ${isLocked ? 'cursor-not-allowed opacity-75' : 'cursor-pointer hover:shadow-lg'} group transition-all border border-gray-100 ${!isLocked && 'hover:border-gray-200'} relative`}
                 >
                   {isLocked && (
                     <div className="absolute inset-0 bg-gray-100/80 backdrop-blur-[2px] z-10 flex items-center justify-center">
@@ -9781,9 +10066,9 @@ Student question: ${userMessage}`
                     </div>
                   )}
                   
-                  <div className={`relative h-24 bg-gradient-to-br ${subject.gradient} p-4 overflow-hidden ${isLocked ? 'blur-sm' : ''}`}>
-                    <div className="absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full blur-lg"></div>
-                    <div className="absolute -bottom-2 -left-2 w-12 h-12 bg-white/10 rounded-full blur-lg"></div>
+                  <div className={`relative h-24 bg-gradient-to-br ${subject.gradient} p-4 overflow-hidden ${isLocked ? 'opacity-40 pointer-events-none select-none' : ''}`}>
+                    <div className="absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full blur-xl"></div>
+                    <div className="absolute -bottom-2 -left-2 w-12 h-12 bg-black/5 rounded-full blur-xl"></div>
                     
                     <div className="relative z-10 flex items-start justify-between h-full">
                       <h3 className="text-sm font-bold text-white pr-2 line-clamp-2 leading-tight">{section.title}</h3>
@@ -9795,18 +10080,18 @@ Student question: ${userMessage}`
                     </div>
                   </div>
 
-                  <div className={`p-3 ${isLocked ? 'blur-sm' : ''}`}>
+                  <div className={`p-3 ${isLocked ? 'opacity-40 pointer-events-none select-none' : ''}`}>
                     <div className="flex items-center gap-2 mb-2">
                       {hasQuiz && (
                         <div className="flex items-center gap-1 px-2 py-1 bg-indigo-50 rounded-md">
                           <FileText className="w-3 h-3 text-indigo-600" />
-                          <span className="text-xs font-medium text-indigo-700">{section.quiz.length} questions</span>
+                          <span className="text-xs font-medium text-indigo-300">{section.quiz.length} questions</span>
                         </div>
                       )}
                       {hasFlashcards && (
                         <div className="flex items-center gap-1 px-2 py-1 bg-cyan-50 rounded-md">
                           <Brain className="w-3 h-3 text-cyan-600" />
-                          <span className="text-xs font-medium text-cyan-700">{section.flashcards.length} cards</span>
+                          <span className="text-xs font-medium text-cyan-300">{section.flashcards.length} cards</span>
                         </div>
                       )}
                       {!hasQuiz && !hasFlashcards && section.notes && (
@@ -9818,14 +10103,14 @@ Student question: ${userMessage}`
                       {isLocked && (
                         <div className="flex items-center gap-1 px-2 py-1 bg-yellow-50 rounded-md">
                           <Award className="w-3 h-3 text-yellow-600" />
-                          <span className="text-xs font-medium text-yellow-700">Premium</span>
+                          <span className="text-xs font-medium text-yellow-300">Premium</span>
                         </div>
                       )}
                     </div>
                     
                     <div className="flex items-center justify-between text-xs text-gray-500">
                       <span>{isLocked ? 'Locked' : isRead ? 'Completed' : 'Not started'}</span>
-                      {!isLocked && <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />}
+                      {!isLocked && <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-blue-600 transition-colors" />}
                     </div>
                   </div>
                 </div>
@@ -9836,8 +10121,8 @@ Student question: ${userMessage}`
           {/* Premium CTA Banner at bottom of subject view */}
           {subject.sections.some(s => s.locked) && (
             <div className="mt-8 bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 rounded-2xl p-8 text-white shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gray-200 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-gray-200 rounded-full blur-3xl"></div>
               
               <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex-1">
@@ -9878,141 +10163,6 @@ Student question: ${userMessage}`
     );
   }
 
-  // Introduction modal
-  if (showIntro) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-        <div className="max-w-3xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
-          <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-8 text-white relative overflow-hidden">
-            {/* Animated sound wave decoration */}
-            <div className="absolute top-0 right-0 opacity-20">
-              <div className="flex gap-1 items-end h-16">
-                {[...Array(8)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-2 bg-gradient-to-t from-emerald-400 to-blue-500 rounded-t animate-pulse"
-                    style={{
-                      height: `${30 + Math.random() * 40}px`,
-                      animationDelay: `${i * 0.1}s`,
-                      animationDuration: '1s'
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4 mb-4 relative z-10">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center animate-bounce">
-                <BookOpen className="w-8 h-8" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold">Welcome to Your Study Library!</h1>
-                <p className="text-slate-300">Grade 9 Science • Appleby College</p>
-                <p className="text-slate-400 text-sm mt-1">Created by Dean Concepcion</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-8">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <Lightbulb className="w-6 h-6 text-yellow-500" />
-                Why This Was Made
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                This interactive study library was created by <span className="font-semibold">Dean Concepcion</span> specifically to help Grade 9 students at Appleby College prepare for their Science tests more effectively. Instead of scattered notes across different pages, everything is organized in one place with clear sections, visual aids, and practice questions tailored to the Appleby curriculum.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                Whether you're reviewing for Biology's ecosystem concepts, Chemistry's atomic structure, or tackling practice questions, this tool makes studying more organized and less overwhelming—designed with Appleby Grade 9 students in mind.
-              </p>
-            </div>
-
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <Target className="w-6 h-6 text-blue-500" />
-                How to Use This Library
-              </h2>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-xl">
-                  <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Browse Subjects</h3>
-                    <p className="text-gray-700 text-sm">Click on any subject card (Biology, Chemistry, etc.) to view all the topics inside.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-4 bg-green-50 rounded-xl">
-                  <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Study Sections</h3>
-                    <p className="text-gray-700 text-sm">Each section has visual notes with key points. Mark sections as complete to track your progress!</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
-                  <div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Practice & Review</h3>
-                    <p className="text-gray-700 text-sm">Try the Test Review Guide and Practice Questions sections to test your knowledge with instant feedback.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-4 bg-amber-50 rounded-xl">
-                  <div className="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Search Anything</h3>
-                    <p className="text-gray-700 text-sm">Use the search bar to quickly find specific topics, concepts, or keywords across all subjects.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-4 bg-teal-50 rounded-xl">
-                  <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Use AI Assistant & Study Planner</h3>
-                    <p className="text-gray-700 text-sm">Ask L.Y.N.E AI for help (blue sparkle button), and use the Study Planner to schedule sessions with automatic time tracking.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
-                  <div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold flex-shrink-0">6</div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Track Your Progress</h3>
-                    <p className="text-gray-700 text-sm">Mark sections complete, unlock achievements, and use split screen mode for efficient multi-tasking while studying.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-r from-emerald-500 to-blue-500 rounded-xl p-6 text-white mb-6">
-              <div className="flex items-start gap-3">
-                <Lightbulb className="w-6 h-6 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-bold mb-2">Pro Tips for Efficient Studying</h3>
-                  <div className="space-y-2 text-white/90 text-sm">
-                    <p>💡 <strong>Study Planner:</strong> Click "+ Add to Plan" on sections to build your custom schedule with time estimates</p>
-                    <p>🤖 <strong>AI Help:</strong> Stuck? Ask L.Y.N.E AI (blue sparkle button) to explain concepts or create practice questions</p>
-                    <p>📱 <strong>Split Screen:</strong> Use dual-panel view to reference notes while taking quizzes simultaneously</p>
-                    <p>🏆 <strong>Achievements:</strong> Unlock all 10 badges by completing sections and maintaining study streaks</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => {
-                setShowIntro(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="w-full py-4 bg-gradient-to-r from-slate-900 to-slate-700 text-white rounded-xl font-semibold text-lg hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-            >
-              Let's Get Started! 🚀
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   // Main library view
   const subjects = Object.values(studyLibrary);
 
@@ -10035,7 +10185,7 @@ Student question: ${userMessage}`
     const hasMatchingContent = subject.sections.some(section =>
       (section.notes || []).some(note =>
         note.subtitle.toLowerCase().includes(searchLower) ||
-        note.points.some(point => point.toLowerCase().includes(searchLower))
+        (note.points || []).some(point => typeof point === 'string' && point.toLowerCase().includes(searchLower))
       )
     );
     if (hasMatchingContent) return true;
@@ -10045,7 +10195,7 @@ Student question: ${userMessage}`
 
   // Feature highlights section
   const FeatureHighlights = () => (
-    <div className="mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 relative">
+    <div className="quick-start-panel mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 relative">
       <button
         onClick={() => setShowFeatureHighlights(false)}
         className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-colors shadow-sm border border-gray-200"
@@ -10176,7 +10326,8 @@ Student question: ${userMessage}`
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gray-50 soul-grid">
+      <SoulStyles />
       <AchievementPopup achievement={newAchievement} />
       <AchievementsModal />
       <StudyPlannerModal />
@@ -10184,23 +10335,23 @@ Student question: ${userMessage}`
       
       {/* AI Assistant Widget */}
       {showAIAssistant && (
-        <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border-2 border-blue-200 flex flex-col z-50 overflow-hidden">
+        <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 text-white flex items-center justify-between">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative">
                 <Sparkles className="w-5 h-5" />
-                <div className="absolute inset-0 rounded-full bg-white/10 animate-ping"></div>
+                <div className="absolute inset-0 rounded-full bg-gray-200 animate-ping"></div>
               </div>
               <div>
-                <h3 className="font-bold text-lg">L.Y.N.E</h3>
+                <h3 className="font-bold text-lg tracking-widest text-white" style={{fontFamily:"Space Mono,monospace"}}>L.Y.N.E</h3>
                 <p className="text-xs text-white/90 font-semibold">Logical Yield Neural Engine</p>
                 <p className="text-xs text-white/70">Your AI Study Companion</p>
               </div>
             </div>
             <button
               onClick={() => setShowAIAssistant(false)}
-              className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+              className="w-8 h-8 rounded-full bg-white/20 hover:bg-gray-200 flex items-center justify-center transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -10246,7 +10397,7 @@ Student question: ${userMessage}`
                   }
                 }}
                 placeholder="Ask a question..."
-                className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-sm"
+                className="flex-1 px-4 py-2 rounded-xl bg-gray-100 border border-gray-200 text-gray-800 focus:border-cyan-500 focus:outline-none text-sm placeholder:text-gray-400"
                 disabled={isAiThinking}
               />
               <button
@@ -10275,10 +10426,10 @@ Student question: ${userMessage}`
         >
           <div className="relative">
             {/* Pulsing ring */}
-            <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-75"></div>
+            <div className="absolute inset-0 w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-ping opacity-60"></div>
             
             {/* Main button */}
-            <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform">
+            <div className="relative w-14 h-14 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 hover:shadow-blue-500/30 transition-all">
               <Sparkles className="w-6 h-6" />
             </div>
             
@@ -10295,238 +10446,67 @@ Student question: ${userMessage}`
       
       <div className="max-w-6xl mx-auto p-4 md:p-6">
         <div className="mb-8">
-          <div className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 rounded-3xl p-8 md:p-10 text-white shadow-2xl overflow-hidden border border-white/10 group">
-            {/* Ultra-advanced animated background layers */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e520_1px,transparent_1px),linear-gradient(to_bottom,#4f46e520_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] animate-pulse"></div>
-            
-            {/* Animated gradient orbs with better physics */}
-            <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-emerald-500/30 to-teal-500/20 rounded-full blur-3xl animate-pulse" style={{ animation: 'float 8s ease-in-out infinite' }}></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-500/30 to-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animation: 'float 10s ease-in-out infinite reverse', animationDelay: '1s' }}></div>
-            <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-purple-500/30 to-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animation: 'float 12s ease-in-out infinite', animationDelay: '2s' }}></div>
-            
-            {/* Scanning line effect */}
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-blue-400 to-transparent top-0" style={{ animation: 'scan 3s ease-in-out infinite' }}></div>
-            </div>
-            
-            {/* Enhanced floating particles with trails */}
-            <div className="absolute inset-0 overflow-hidden">
-              {[...Array(30)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animation: `float ${5 + Math.random() * 10}s ease-in-out infinite`,
-                    animationDelay: `${Math.random() * 5}s`
-                  }}
-                >
-                  <div className="w-1 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg shadow-blue-500/50"></div>
-                  <div className="absolute top-0 left-0 w-20 h-px bg-gradient-to-r from-blue-400/50 to-transparent -rotate-45"></div>
+          <div className="relative bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-500 rounded-2xl p-6 md:p-8 overflow-hidden shadow-lg">
+            {/* soft light orb top-right */}
+            <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/20 rounded-full blur-2xl pointer-events-none" />
+            {/* soft orb bottom-left */}
+            <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-white/15 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+              {/* Left: icon + title */}
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center flex-shrink-0 shadow-md">
+                  <BookOpen className="w-7 h-7 text-white drop-shadow" />
                 </div>
-              ))}
-            </div>
-            
-            {/* Mesh gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 mix-blend-overlay"></div>
-            
-            {/* Noise texture */}
-            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")' }}></div>
-            
-            <div className="relative z-10">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl group-hover:shadow-emerald-500/50 transition-all duration-500">
-                    {/* Rotating border effect */}
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"></div>
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-2xl opacity-75 blur animate-pulse"></div>
-                    <div className="absolute inset-0 rounded-2xl border-2 border-white/20 group-hover:border-white/40 transition-colors duration-500"></div>
-                    
-                    {/* Icon with 3D effect */}
-                    <BookOpen className="w-10 h-10 relative z-10 drop-shadow-2xl group-hover:scale-110 transition-transform duration-500" style={{ filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.5))' }} />
-                    
-                    {/* Corner accents */}
-                    <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-emerald-400 rounded-tl-lg"></div>
-                    <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-blue-400 rounded-tr-lg"></div>
-                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-purple-400 rounded-bl-lg"></div>
-                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-pink-400 rounded-br-lg"></div>
-                  </div>
-                  <div>
-                    <h1 className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-2xl animate-gradient" style={{ backgroundSize: '200% 200%' }}>
-                      Science Study Library
-                    </h1>
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
-                        Grade 9
-                      </span>
-                      <span className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
-                        Appleby College
-                      </span>
-                    </div>
-                  </div>
+                <div>
+                  <h1 className="soul-font-display text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-sm">
+                    Science Study Library
+                  </h1>
+                  <p className="text-sm text-white/75 mt-0.5 font-medium">Grade 9 &middot; Appleby College &middot; by Dean Concepcion</p>
                 </div>
-                
+              </div>
+
+              {/* Right: stats + action buttons */}
+              <div className="flex items-center gap-3 flex-wrap">
+                {/* completed count */}
+                <div className="flex items-center gap-2 px-3 py-2 bg-white/15 backdrop-blur-sm rounded-lg border border-white/20">
+                  <CheckCircle className="w-4 h-4 text-white" />
+                  <span className="text-sm font-semibold text-white">{readSections.size} completed</span>
+                </div>
+
+                {/* Achievements */}
                 <button
                   onClick={() => setShowAchievements(true)}
-                  className="relative px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl font-bold flex items-center gap-2 shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border border-yellow-400/50 overflow-hidden group/btn"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white rounded-lg text-sm font-semibold hover:bg-white/30 transition-colors shadow-sm"
                 >
-                  {/* Animated shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
-                  
-                  {/* Rotating trophy */}
-                  <Trophy className="w-5 h-5 relative z-10 group-hover/btn:rotate-12 group-hover/btn:scale-110 transition-transform duration-300" />
-                  <span className="relative z-10">Achievements</span>
-                  <span className="relative z-10 px-2 py-1 bg-white/20 rounded-full text-xs backdrop-blur-xl border border-white/20">
+                  <Trophy className="w-4 h-4 text-yellow-200" />
+                  <span>Achievements</span>
+                  <span className="bg-white/20 text-white text-xs px-1.5 py-0.5 rounded-full border border-white/20">
                     {unlockedAchievements.size}/{achievements.length}
                   </span>
-                  
-                  {/* Glow pulse */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/50 to-orange-400/50 blur-xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                 </button>
-              </div>
-              
-              <div className="mb-6">
-                <div className="inline-block bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-2xl p-1 shadow-2xl hover:shadow-emerald-500/50 transition-all group">
-                  <div className="bg-slate-900/80 backdrop-blur-xl rounded-xl px-6 py-3 group-hover:bg-slate-900/90 transition-all">
-                    <p className="text-white font-black text-xl md:text-2xl tracking-wide text-center bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text">
-                      🔌 Plug In. 📚 Study Smart. 🚀 Succeed Fast.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <p className="text-slate-300 text-lg max-w-3xl">
-                Your complete science companion with <span className="text-emerald-400 font-bold">70+ flashcards</span>, 
-                <span className="text-blue-400 font-bold"> 80+ quiz questions</span>, and 
-                <span className="text-purple-400 font-bold"> interactive diagrams</span>
-              </p>
-              
-              <div className="flex items-center gap-6 mt-6 flex-wrap">
-                <div className="flex items-center gap-2 group/stat cursor-pointer relative">
-                  <div className="relative">
-                    {/* Multi-layer pulse effect */}
-                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-green-400 animate-ping opacity-75"></div>
-                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-green-400 opacity-50 blur-sm"></div>
-                    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 shadow-lg shadow-green-500/50 group-hover/stat:shadow-green-500/70 transition-shadow"></div>
-                  </div>
-                  <div className="group-hover/stat:translate-x-1 transition-all duration-300">
-                    <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-green-400 transition-colors">{readSections.size}</p>
-                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Sections Completed</p>
-                  </div>
-                  {/* Hover glow */}
-                  <div className="absolute inset-0 bg-green-500/0 group-hover/stat:bg-green-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
-                </div>
-                
-                <div className="w-px h-12 bg-gradient-to-b from-transparent via-slate-600 to-transparent relative">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent blur-sm"></div>
-                </div>
-                
-                <div className="flex items-center gap-2 group/stat cursor-pointer relative">
-                  <div className="relative">
-                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-yellow-400 animate-ping opacity-75" style={{ animationDelay: '0.5s' }}></div>
-                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-yellow-400 opacity-50 blur-sm"></div>
-                    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg shadow-yellow-500/50 group-hover/stat:shadow-yellow-500/70 transition-shadow"></div>
-                  </div>
-                  <div className="group-hover/stat:translate-x-1 transition-all duration-300">
-                    <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-yellow-400 transition-colors">{unlockedAchievements.size}</p>
-                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Achievements Unlocked</p>
-                  </div>
-                  <div className="absolute inset-0 bg-yellow-500/0 group-hover/stat:bg-yellow-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
-                </div>
-                
-                <div className="w-px h-12 bg-gradient-to-b from-transparent via-slate-600 to-transparent relative">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent blur-sm"></div>
-                </div>
-                
-                <div className="flex items-center gap-2 group/stat cursor-pointer relative">
-                  <div className="relative">
-                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-blue-400 animate-ping opacity-75" style={{ animationDelay: '1s' }}></div>
-                    <div className="absolute inset-0 w-3 h-3 rounded-full bg-blue-400 opacity-50 blur-sm"></div>
-                    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 shadow-lg shadow-blue-500/50 group-hover/stat:shadow-blue-500/70 transition-shadow"></div>
-                  </div>
-                  <div className="group-hover/stat:translate-x-1 transition-all duration-300">
-                    <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-blue-400 transition-colors">{stats.quizCorrect}</p>
-                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Quiz Questions Correct</p>
-                  </div>
-                  <div className="absolute inset-0 bg-blue-500/0 group-hover/stat:bg-blue-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
-                </div>
-                
-                <div className="w-px h-12 bg-gradient-to-b from-transparent via-slate-600 to-transparent relative">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/50 to-transparent blur-sm"></div>
-                </div>
-                
+
+                {/* Study Planner */}
                 <button
                   onClick={() => setShowStudyPlanner(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all backdrop-blur-xl border border-white/20 hover:border-white/40 group/planner relative overflow-hidden"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white rounded-lg text-sm font-semibold hover:bg-white/30 transition-colors shadow-sm"
                 >
-                  {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 -translate-x-full group-hover/planner:translate-x-full transition-transform duration-1000"></div>
-                  
-                  <svg className="w-5 h-5 group-hover/planner:rotate-12 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  <div className="text-left relative z-10">
-                    <p className="text-sm font-bold">Study Planner</p>
-                    <p className="text-xs text-slate-300">{studyPlan.length} sessions</p>
-                  </div>
-                </button>
-                
-                <button
-                  onClick={() => setShowPremiumModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors backdrop-blur border border-white/20 relative group"
-                  title="Dark Mode (Premium)"
-                >
-                  <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                  <div className="text-left">
-                    <p className="text-sm font-bold">Dark Mode</p>
-                    <p className="text-xs text-yellow-300 font-semibold">Premium</p>
-                  </div>
-                </button>
-                
-                <button
-                  onClick={() => setShowPremiumModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors backdrop-blur border border-white/20 relative group"
-                  title="Mobile/Desktop Mode (Premium)"
-                >
-                  <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                    <div className="text-left">
-                      <p className="text-sm font-bold">View Mode</p>
-                      <p className="text-xs text-yellow-300 font-semibold">Premium</p>
-                    </div>
-                  </>
+                  <ClipboardList className="w-4 h-4 text-blue-100" />
+                  <span>Study Planner</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
-
         <div className="relative mb-8">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
           <input
             type="text"
             placeholder="Search topics, concepts, keywords..."
             value={searchTerm}
             onChange={(e) => handleSearchChange(e.target.value)}
             onFocus={() => searchTerm && setShowSearchDropdown(true)}
-            className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none text-gray-800 bg-white shadow-sm"
+            className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none text-gray-800 bg-white"
           />
           {searchTerm && (
             <button
@@ -10534,7 +10514,7 @@ Student question: ${userMessage}`
                 setSearchTerm('');
                 setShowSearchDropdown(false);
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-600"
             >
               <X className="w-5 h-5" />
             </button>
@@ -10542,7 +10522,7 @@ Student question: ${userMessage}`
           
           {/* Search Dropdown */}
           {showSearchDropdown && searchResults.length > 0 && (
-            <div className="absolute w-full mt-2 bg-white rounded-xl shadow-2xl border-2 border-gray-200 overflow-hidden z-50 max-h-96 overflow-y-auto">
+            <div className="absolute w-full mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 max-h-96 overflow-y-auto">
               <div className="p-3 bg-gray-50 border-b border-gray-200">
                 <p className="text-sm font-semibold text-gray-600">
                   Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''}
@@ -10565,7 +10545,7 @@ Student question: ${userMessage}`
                         <span className="text-xs font-semibold text-gray-500 uppercase">
                           {result.match}
                         </span>
-                        <span className="text-xs text-gray-400">•</span>
+                        <span className="text-xs text-gray-600">•</span>
                         <span className="text-xs text-gray-500">
                           {result.subject.name}
                         </span>
@@ -10582,7 +10562,7 @@ Student question: ${userMessage}`
                       )}
                     </div>
                     
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors flex-shrink-0 mt-1" />
+                    <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-blue-600 transition-colors flex-shrink-0 mt-1" />
                   </div>
                 </button>
               ))}
@@ -10604,7 +10584,7 @@ Student question: ${userMessage}`
 
         {searchTerm && (
           <div className="mb-6 bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
-            <p className="text-blue-800">
+            <p className="text-blue-300">
               <span className="font-semibold">Found {filteredSubjects.length} subject(s)</span> matching "{searchTerm}"
             </p>
           </div>
@@ -10612,7 +10592,7 @@ Student question: ${userMessage}`
 
         {filteredSubjects.length === 0 ? (
           <div className="text-center py-12">
-            <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            <Search className="w-16 h-16 text-gray-700 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-600 mb-2">No results found</h3>
             <p className="text-gray-500">Try searching for different keywords like "biodiversity", "density", or "atoms"</p>
             <button
@@ -10654,15 +10634,15 @@ Student question: ${userMessage}`
                           subjectsViewed: new Set([...prev.subjectsViewed, subject.id])
                         }));
                       }}
-                      className={`bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all border-2 border-gray-100 hover:border-gray-300 ${
+                      className={`bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all border border-gray-100 hover:border-gray-200 ${
                         mobileMode ? 'w-full' : ''
                       }`}
                     >
                       <div className={`relative bg-gradient-to-br ${subject.gradient} p-5 overflow-hidden ${
                         mobileMode ? 'h-24' : 'h-32'
                       }`}>
-                        <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
-                        <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+                        <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+                        <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-black/5 rounded-full blur-2xl"></div>
                         
                         <div className="relative z-10 flex items-start justify-between h-full">
                           <div className="flex-1">
@@ -10710,7 +10690,7 @@ Student question: ${userMessage}`
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-300 to-transparent"></div>
                 <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full shadow-lg">
                   <BookOpen className="w-5 h-5 text-white" />
-                  <span className="text-white font-bold">Study Notes & Content</span>
+                  <span className="text-white font-bold soul-font-display tracking-wide">STUDY NOTES & CONTENT</span>
                 </div>
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-300 to-transparent"></div>
               </div>
@@ -10734,15 +10714,15 @@ Student question: ${userMessage}`
                           subjectsViewed: new Set([...prev.subjectsViewed, subject.id])
                         }));
                       }}
-                      className={`bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all border-2 border-gray-100 hover:border-gray-300 ${
+                      className={`bg-white rounded-xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all border border-gray-100 hover:border-gray-200 ${
                         mobileMode ? 'w-full' : ''
                       }`}
                     >
                       <div className={`relative bg-gradient-to-br ${subject.gradient} p-5 overflow-hidden ${
                         mobileMode ? 'h-24' : 'h-32'
                       }`}>
-                        <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
-                        <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+                        <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+                        <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-black/5 rounded-full blur-2xl"></div>
                         
                         <div className="relative z-10 flex items-start justify-between h-full">
                           <div className="flex-1">
@@ -10788,18 +10768,18 @@ Student question: ${userMessage}`
 
         {/* Special Thanks Section */}
         <div className="mt-12 mb-8 text-center">
-          <div className="inline-block bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl px-8 py-4 border-2 border-amber-200">
+          <div className="sponsor-panel inline-block bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl px-8 py-4 border-2 border-amber-200">
             <p className="text-sm text-gray-600 mb-1">Special Thanks to Our Sponsors</p>
             <div className="flex items-center gap-3 justify-center flex-wrap">
               <span className="text-lg font-bold text-amber-600">⭐</span>
               <span className="font-bold text-gray-800">Aland Cai</span>
-              <span className="text-gray-400">•</span>
+              <span className="text-gray-600">•</span>
               <span className="font-bold text-gray-800">Derek Zhu</span>
-              <span className="text-gray-400">•</span>
+              <span className="text-gray-600">•</span>
               <span className="font-bold text-gray-800">Max James</span>
-              <span className="text-gray-400">•</span>
+              <span className="text-gray-600">•</span>
               <span className="font-bold text-gray-800">Yoshi Imaizumi</span>
-              <span className="text-gray-400">•</span>
+              <span className="text-gray-600">•</span>
               <span className="font-bold text-gray-800">Lachlan McGuire</span>
               <span className="text-lg font-bold text-amber-600">⭐</span>
             </div>
