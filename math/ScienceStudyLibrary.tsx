@@ -219,18 +219,70 @@ const SoulStyles = () => (
 
     /* ---- Diagram contrast on light panels ---- */
     [class*="from-blue-50"][class*="p-8"] .text-white,
+    [class*="from-blue-50"][class*="p-8"] .text-white\/90,
+    [class*="from-blue-50"][class*="p-8"] .text-white\/80,
+    [class*="from-blue-50"][class*="p-8"] .text-white\/75,
+    [class*="from-blue-50"][class*="p-8"] .text-white\/70,
     [class*="from-indigo-50"][class*="p-8"] .text-white,
+    [class*="from-indigo-50"][class*="p-8"] .text-white\/90,
+    [class*="from-indigo-50"][class*="p-8"] .text-white\/80,
+    [class*="from-indigo-50"][class*="p-8"] .text-white\/75,
+    [class*="from-indigo-50"][class*="p-8"] .text-white\/70,
     [class*="from-green-50"][class*="p-8"] .text-white,
+    [class*="from-green-50"][class*="p-8"] .text-white\/90,
+    [class*="from-green-50"][class*="p-8"] .text-white\/80,
+    [class*="from-green-50"][class*="p-8"] .text-white\/75,
+    [class*="from-green-50"][class*="p-8"] .text-white\/70,
     [class*="from-emerald-50"][class*="p-8"] .text-white,
+    [class*="from-emerald-50"][class*="p-8"] .text-white\/90,
+    [class*="from-emerald-50"][class*="p-8"] .text-white\/80,
+    [class*="from-emerald-50"][class*="p-8"] .text-white\/75,
+    [class*="from-emerald-50"][class*="p-8"] .text-white\/70,
     [class*="from-red-50"][class*="p-8"] .text-white,
+    [class*="from-red-50"][class*="p-8"] .text-white\/90,
+    [class*="from-red-50"][class*="p-8"] .text-white\/80,
+    [class*="from-red-50"][class*="p-8"] .text-white\/75,
+    [class*="from-red-50"][class*="p-8"] .text-white\/70,
     [class*="from-orange-50"][class*="p-8"] .text-white,
+    [class*="from-orange-50"][class*="p-8"] .text-white\/90,
+    [class*="from-orange-50"][class*="p-8"] .text-white\/80,
+    [class*="from-orange-50"][class*="p-8"] .text-white\/75,
+    [class*="from-orange-50"][class*="p-8"] .text-white\/70,
     [class*="from-amber-50"][class*="p-8"] .text-white,
+    [class*="from-amber-50"][class*="p-8"] .text-white\/90,
+    [class*="from-amber-50"][class*="p-8"] .text-white\/80,
+    [class*="from-amber-50"][class*="p-8"] .text-white\/75,
+    [class*="from-amber-50"][class*="p-8"] .text-white\/70,
     [class*="from-yellow-50"][class*="p-8"] .text-white,
+    [class*="from-yellow-50"][class*="p-8"] .text-white\/90,
+    [class*="from-yellow-50"][class*="p-8"] .text-white\/80,
+    [class*="from-yellow-50"][class*="p-8"] .text-white\/75,
+    [class*="from-yellow-50"][class*="p-8"] .text-white\/70,
     [class*="from-purple-50"][class*="p-8"] .text-white,
+    [class*="from-purple-50"][class*="p-8"] .text-white\/90,
+    [class*="from-purple-50"][class*="p-8"] .text-white\/80,
+    [class*="from-purple-50"][class*="p-8"] .text-white\/75,
+    [class*="from-purple-50"][class*="p-8"] .text-white\/70,
     [class*="from-pink-50"][class*="p-8"] .text-white,
+    [class*="from-pink-50"][class*="p-8"] .text-white\/90,
+    [class*="from-pink-50"][class*="p-8"] .text-white\/80,
+    [class*="from-pink-50"][class*="p-8"] .text-white\/75,
+    [class*="from-pink-50"][class*="p-8"] .text-white\/70,
     [class*="from-cyan-50"][class*="p-8"] .text-white,
+    [class*="from-cyan-50"][class*="p-8"] .text-white\/90,
+    [class*="from-cyan-50"][class*="p-8"] .text-white\/80,
+    [class*="from-cyan-50"][class*="p-8"] .text-white\/75,
+    [class*="from-cyan-50"][class*="p-8"] .text-white\/70,
     [class*="from-teal-50"][class*="p-8"] .text-white,
-    [class*="from-rose-50"][class*="p-8"] .text-white {
+    [class*="from-teal-50"][class*="p-8"] .text-white\/90,
+    [class*="from-teal-50"][class*="p-8"] .text-white\/80,
+    [class*="from-teal-50"][class*="p-8"] .text-white\/75,
+    [class*="from-teal-50"][class*="p-8"] .text-white\/70,
+    [class*="from-rose-50"][class*="p-8"] .text-white,
+    [class*="from-rose-50"][class*="p-8"] .text-white\/90,
+    [class*="from-rose-50"][class*="p-8"] .text-white\/80,
+    [class*="from-rose-50"][class*="p-8"] .text-white\/75,
+    [class*="from-rose-50"][class*="p-8"] .text-white\/70 {
       color: #0f172a !important;
       text-shadow: none !important;
     }
@@ -270,18 +322,70 @@ const SoulStyles = () => (
       border: 1px solid rgba(148,163,184,0.18);
     }
     [class*="from-blue-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-blue-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-blue-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-blue-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-blue-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-indigo-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-indigo-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-indigo-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-indigo-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-indigo-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-green-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-green-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-green-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-green-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-green-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-emerald-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-emerald-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-emerald-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-emerald-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-emerald-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-red-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-red-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-red-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-red-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-red-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-orange-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-orange-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-orange-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-orange-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-orange-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-amber-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-amber-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-amber-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-amber-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-amber-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-yellow-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-yellow-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-yellow-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-yellow-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-yellow-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-purple-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-purple-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-purple-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-purple-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-purple-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-pink-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-pink-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-pink-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-pink-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-pink-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-cyan-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-cyan-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-cyan-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-cyan-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-cyan-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
     [class*="from-teal-50"][class*="p-8"] .bg-white\/20 .text-white,
-    [class*="from-rose-50"][class*="p-8"] .bg-white\/20 .text-white {
+    [class*="from-teal-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-teal-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-teal-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-teal-50"][class*="p-8"] .bg-white\/20 .text-white\/70,
+    [class*="from-rose-50"][class*="p-8"] .bg-white\/20 .text-white,
+    [class*="from-rose-50"][class*="p-8"] .bg-white\/20 .text-white\/90,
+    [class*="from-rose-50"][class*="p-8"] .bg-white\/20 .text-white\/80,
+    [class*="from-rose-50"][class*="p-8"] .bg-white\/20 .text-white\/75,
+    [class*="from-rose-50"][class*="p-8"] .bg-white\/20 .text-white\/70 {
       color: #0f172a !important;
     }
 
@@ -721,21 +825,21 @@ const NitrogenCycleDiagram = () => (
     </div>
 
     <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
-      <div className="bg-green-100 rounded-lg p-2">
-        <span className="font-bold text-green-300">Fixation:</span>
-        <p className="text-green-300">N₂ → NH₃ (bacteria/lightning)</p>
+      <div className="bg-green-100 rounded-lg p-2" style={{ color: '#111827' }}>
+        <span className="font-bold" style={{ color: '#111827' }}>Fixation:</span>
+        <p style={{ color: '#111827' }}>N₂ → NH₃ (bacteria/lightning)</p>
       </div>
-      <div className="bg-orange-100 rounded-lg p-2">
-        <span className="font-bold text-orange-800">Nitrification:</span>
-        <p className="text-orange-300">NH₃ → NO₂⁻ → NO₃⁻ (bacteria)</p>
+      <div className="bg-orange-100 rounded-lg p-2" style={{ color: '#111827' }}>
+        <span className="font-bold" style={{ color: '#111827' }}>Nitrification:</span>
+        <p style={{ color: '#111827' }}>NH₃ → NO₂⁻ → NO₃⁻ (bacteria)</p>
       </div>
-      <div className="bg-purple-100 rounded-lg p-2">
-        <span className="font-bold text-purple-800">Ammonification:</span>
-        <p className="text-purple-300">Dead matter → NH₄⁺</p>
+      <div className="bg-purple-100 rounded-lg p-2" style={{ color: '#111827' }}>
+        <span className="font-bold" style={{ color: '#111827' }}>Ammonification:</span>
+        <p style={{ color: '#111827' }}>Dead matter → NH₄⁺</p>
       </div>
-      <div className="bg-blue-100 rounded-lg p-2">
-        <span className="font-bold text-blue-300">Denitrification:</span>
-        <p className="text-blue-300">NO₃⁻ → N₂ (back to air)</p>
+      <div className="bg-blue-100 rounded-lg p-2" style={{ color: '#111827' }}>
+        <span className="font-bold" style={{ color: '#111827' }}>Denitrification:</span>
+        <p style={{ color: '#111827' }}>NO₃⁻ → N₂ (back to air)</p>
       </div>
     </div>
   </div>
@@ -1135,12 +1239,12 @@ const CarbonCycle = () => (
     </div>
     <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
       <div className="bg-green-100 rounded-lg p-2">
-        <span className="font-bold text-green-300">Photosynthesis:</span>
-        <p className="text-green-300">CO₂ + H₂O → C₆H₁₂O₆ + O₂</p>
+        <span className="font-bold text-green-800">Photosynthesis:</span>
+        <p className="text-green-800">CO₂ + H₂O → C₆H₁₂O₆ + O₂</p>
       </div>
       <div className="bg-blue-100 rounded-lg p-2">
-        <span className="font-bold text-blue-300">Respiration:</span>
-        <p className="text-blue-300">C₆H₁₂O₆ + O₂ → CO₂ + H₂O</p>
+        <span className="font-bold text-blue-800">Respiration:</span>
+        <p className="text-blue-800">C₆H₁₂O₆ + O₂ → CO₂ + H₂O</p>
       </div>
     </div>
   </div>

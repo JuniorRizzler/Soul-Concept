@@ -4219,7 +4219,7 @@
                 break;
               } else {
                 if (value.$$typeof === REACT_ELEMENT_TYPE) {
-                  var typeName2 = getComponentNameFromType(value.type) || "\u2026", key = value.key;
+                  var typeName2 = getComponentNameFromType(value.type) || "…", key = value.key;
                   value = value.props;
                   var propsKeys = Object.keys(value), propsLength = propsKeys.length;
                   if (null == key && 0 === propsLength) {
@@ -4227,11 +4227,11 @@
                     break;
                   }
                   if (3 > indent || 1 === propsLength && "children" === propsKeys[0] && null == key) {
-                    value = "<" + typeName2 + " \u2026 />";
+                    value = "<" + typeName2 + " … />";
                     break;
                   }
                   properties.push([
-                    prefix2 + "\xA0\xA0".repeat(indent) + propertyName,
+                    prefix2 + "  ".repeat(indent) + propertyName,
                     "<" + typeName2
                   ]);
                   null !== key && addValueToProperties(
@@ -4252,7 +4252,7 @@
                     );
                   properties.push([
                     "",
-                    propertyName ? ">\u2026</" + typeName2 + ">" : "/>"
+                    propertyName ? ">…</" + typeName2 + ">" : "/>"
                   ]);
                   return;
                 }
@@ -4264,7 +4264,7 @@
                     break;
                   } else if (propKey === ENTRIES_ARRAY) {
                     properties.push([
-                      prefix2 + "\xA0\xA0".repeat(indent) + propertyName,
+                      prefix2 + "  ".repeat(indent) + propertyName,
                       ""
                     ]);
                     for (propertyName = 0; propertyName < value.length; propertyName++)
@@ -4303,15 +4303,15 @@
                     return;
                   }
                   properties.push([
-                    "\xA0\xA0".repeat(indent) + propertyName,
+                    "  ".repeat(indent) + propertyName,
                     "Promise"
                   ]);
                   return;
                 }
                 "Object" === typeName2 && (propKey = Object.getPrototypeOf(value)) && "function" === typeof propKey.constructor && (typeName2 = propKey.constructor.name);
                 properties.push([
-                  prefix2 + "\xA0\xA0".repeat(indent) + propertyName,
-                  "Object" === typeName2 ? 3 > indent ? "" : "\u2026" : typeName2
+                  prefix2 + "  ".repeat(indent) + propertyName,
+                  "Object" === typeName2 ? 3 > indent ? "" : "…" : typeName2
                 ]);
                 3 > indent && addObjectToProperties(value, properties, indent + 1, prefix2);
                 return;
@@ -4320,7 +4320,7 @@
               value = "" === value.name ? "() => {}" : value.name + "() {}";
               break;
             case "string":
-              value = value === OMITTED_PROP_ERROR ? "\u2026" : JSON.stringify(value);
+              value = value === OMITTED_PROP_ERROR ? "…" : JSON.stringify(value);
               break;
             case "undefined":
               value = "undefined";
@@ -4332,7 +4332,7 @@
               value = String(value);
           }
           properties.push([
-            prefix2 + "\xA0\xA0".repeat(indent) + propertyName,
+            prefix2 + "  ".repeat(indent) + propertyName,
             value
           ]);
         }
@@ -4340,8 +4340,8 @@
           var isDeeplyEqual = true;
           for (key in prev)
             key in next || (properties.push([
-              REMOVED + "\xA0\xA0".repeat(indent) + key,
-              "\u2026"
+              REMOVED + "  ".repeat(indent) + key,
+              "…"
             ]), isDeeplyEqual = false);
           for (var _key in next)
             if (_key in prev) {
@@ -4349,18 +4349,18 @@
               var nextValue = next[_key];
               if (key !== nextValue) {
                 if (0 === indent && "children" === _key)
-                  isDeeplyEqual = "\xA0\xA0".repeat(indent) + _key, properties.push(
-                    [REMOVED + isDeeplyEqual, "\u2026"],
-                    [ADDED + isDeeplyEqual, "\u2026"]
+                  isDeeplyEqual = "  ".repeat(indent) + _key, properties.push(
+                    [REMOVED + isDeeplyEqual, "…"],
+                    [ADDED + isDeeplyEqual, "…"]
                   );
                 else {
                   if (!(3 <= indent)) {
                     if ("object" === typeof key && "object" === typeof nextValue && null !== key && null !== nextValue && key.$$typeof === nextValue.$$typeof)
                       if (nextValue.$$typeof === REACT_ELEMENT_TYPE) {
                         if (key.type === nextValue.type && key.key === nextValue.key) {
-                          key = getComponentNameFromType(nextValue.type) || "\u2026";
-                          isDeeplyEqual = "\xA0\xA0".repeat(indent) + _key;
-                          key = "<" + key + " \u2026 />";
+                          key = getComponentNameFromType(nextValue.type) || "…";
+                          isDeeplyEqual = "  ".repeat(indent) + _key;
+                          key = "<" + key + " … />";
                           properties.push(
                             [REMOVED + isDeeplyEqual, key],
                             [ADDED + isDeeplyEqual, key]
@@ -4372,7 +4372,7 @@
                         var prevKind = Object.prototype.toString.call(key), nextKind = Object.prototype.toString.call(nextValue);
                         if (prevKind === nextKind && ("[object Object]" === nextKind || "[object Array]" === nextKind)) {
                           prevKind = [
-                            UNCHANGED + "\xA0\xA0".repeat(indent) + _key,
+                            UNCHANGED + "  ".repeat(indent) + _key,
                             "[object Array]" === nextKind ? "Array" : ""
                           ];
                           properties.push(prevKind);
@@ -4389,7 +4389,7 @@
                     else if ("function" === typeof key && "function" === typeof nextValue && key.name === nextValue.name && key.length === nextValue.length && (prevKind = Function.prototype.toString.call(key), nextKind = Function.prototype.toString.call(nextValue), prevKind === nextKind)) {
                       key = "" === nextValue.name ? "() => {}" : nextValue.name + "() {}";
                       properties.push([
-                        UNCHANGED + "\xA0\xA0".repeat(indent) + _key,
+                        UNCHANGED + "  ".repeat(indent) + _key,
                         key + " Referentially unequal function closure. Consider memoization."
                       ]);
                       continue;
@@ -4402,8 +4402,8 @@
               }
             } else
               properties.push([
-                ADDED + "\xA0\xA0".repeat(indent) + _key,
-                "\u2026"
+                ADDED + "  ".repeat(indent) + _key,
+                "…"
               ]), isDeeplyEqual = false;
           return isDeeplyEqual;
         }
@@ -4440,11 +4440,11 @@
             ), 1 < child.length && (props && !alreadyWarnedForDeepEquality && 0 === (alternate.lanes & committedLanes) && 100 < fiber.actualDuration ? (alreadyWarnedForDeepEquality = true, child[0] = reusableDeeplyEqualPropsEntry, reusableComponentDevToolDetails.color = "warning", reusableComponentDevToolDetails.tooltipText = DEEP_EQUALITY_WARNING) : (reusableComponentDevToolDetails.color = wasHydrated, reusableComponentDevToolDetails.tooltipText = name), reusableComponentDevToolDetails.properties = child, reusableComponentOptions.start = startTime, reusableComponentOptions.end = endTime, null != selfTime ? selfTime.run(
               performance.measure.bind(
                 performance,
-                "\u200B" + name,
+                "​" + name,
                 reusableComponentOptions
               )
             ) : performance.measure(
-              "\u200B" + name,
+              "​" + name,
               reusableComponentOptions
             ))) : null != selfTime ? selfTime.run(
               console.timeStamp.bind(
@@ -4495,8 +4495,8 @@
                 }
               };
               debugTask ? debugTask.run(
-                performance.measure.bind(performance, "\u200B" + name, fiber)
-              ) : performance.measure("\u200B" + name, fiber);
+                performance.measure.bind(performance, "​" + name, fiber)
+              ) : performance.measure("​" + name, fiber);
             }
           }
         }
@@ -4530,10 +4530,10 @@
                 (fiber = fiber._debugTask) ? fiber.run(
                   performance.measure.bind(
                     performance,
-                    "\u200B" + name,
+                    "​" + name,
                     startTime
                   )
-                ) : performance.measure("\u200B" + name, startTime);
+                ) : performance.measure("​" + name, startTime);
               }
             }
           } else
@@ -6181,7 +6181,7 @@
                 }
                 runWithFiberInDEV(workInProgress2, function() {
                   console.error(
-                    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version.",
+                    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.",
                     key
                   );
                 });
@@ -19562,7 +19562,7 @@
             return;
           }
           console.error(error);
-        }, OMITTED_PROP_ERROR = "This object has been omitted by React in the console log to avoid sending too much data from the server. Try logging smaller or more specific objects.", EMPTY_ARRAY = 0, COMPLEX_ARRAY = 1, PRIMITIVE_ARRAY = 2, ENTRIES_ARRAY = 3, REMOVED = "\u2013\xA0", ADDED = "+\xA0", UNCHANGED = "\u2007\xA0", supportsUserTiming = "undefined" !== typeof console && "function" === typeof console.timeStamp && "undefined" !== typeof performance && "function" === typeof performance.measure, COMPONENTS_TRACK = "Components \u269B", LANES_TRACK_GROUP = "Scheduler \u269B", currentTrack = "Blocking", alreadyWarnedForDeepEquality = false, reusableComponentDevToolDetails = {
+        }, OMITTED_PROP_ERROR = "This object has been omitted by React in the console log to avoid sending too much data from the server. Try logging smaller or more specific objects.", EMPTY_ARRAY = 0, COMPLEX_ARRAY = 1, PRIMITIVE_ARRAY = 2, ENTRIES_ARRAY = 3, REMOVED = "– ", ADDED = "+ ", UNCHANGED = "  ", supportsUserTiming = "undefined" !== typeof console && "function" === typeof console.timeStamp && "undefined" !== typeof performance && "function" === typeof performance.measure, COMPONENTS_TRACK = "Components ⚛", LANES_TRACK_GROUP = "Scheduler ⚛", currentTrack = "Blocking", alreadyWarnedForDeepEquality = false, reusableComponentDevToolDetails = {
           color: "primary",
           properties: null,
           tooltipText: "",
@@ -21718,11 +21718,11 @@
     }
   });
 
-  // acelabs/grade9-science-vite/src/entry.science.tmp.tsx
+  // acelabs/grade9-science-vite/src/entry.science.preview2.tmp.tsx
   var import_react4 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
-  // acelabs/grade9-science-vite/src/ScienceStudyLibrary.tmp.tsx
+  // acelabs/grade9-science-vite/src/ScienceStudyLibrary.preview2.tmp.tsx
   var import_react3 = __toESM(require_react(), 1);
 
   // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/createLucideIcon.js
@@ -22029,7 +22029,7 @@
   ];
   var Zap = createLucideIcon("zap", __iconNode21);
 
-  // acelabs/grade9-science-vite/src/ScienceStudyLibrary.tmp.tsx
+  // acelabs/grade9-science-vite/src/ScienceStudyLibrary.preview2.tmp.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
   var SoulStyles = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: `
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
@@ -22247,70 +22247,18 @@
 
     /* ---- Diagram contrast on light panels ---- */
     [class*="from-blue-50"][class*="p-8"] .text-white,
-    [class*="from-blue-50"][class*="p-8"] .text-white/90,
-    [class*="from-blue-50"][class*="p-8"] .text-white/80,
-    [class*="from-blue-50"][class*="p-8"] .text-white/75,
-    [class*="from-blue-50"][class*="p-8"] .text-white/70,
     [class*="from-indigo-50"][class*="p-8"] .text-white,
-    [class*="from-indigo-50"][class*="p-8"] .text-white/90,
-    [class*="from-indigo-50"][class*="p-8"] .text-white/80,
-    [class*="from-indigo-50"][class*="p-8"] .text-white/75,
-    [class*="from-indigo-50"][class*="p-8"] .text-white/70,
     [class*="from-green-50"][class*="p-8"] .text-white,
-    [class*="from-green-50"][class*="p-8"] .text-white/90,
-    [class*="from-green-50"][class*="p-8"] .text-white/80,
-    [class*="from-green-50"][class*="p-8"] .text-white/75,
-    [class*="from-green-50"][class*="p-8"] .text-white/70,
     [class*="from-emerald-50"][class*="p-8"] .text-white,
-    [class*="from-emerald-50"][class*="p-8"] .text-white/90,
-    [class*="from-emerald-50"][class*="p-8"] .text-white/80,
-    [class*="from-emerald-50"][class*="p-8"] .text-white/75,
-    [class*="from-emerald-50"][class*="p-8"] .text-white/70,
     [class*="from-red-50"][class*="p-8"] .text-white,
-    [class*="from-red-50"][class*="p-8"] .text-white/90,
-    [class*="from-red-50"][class*="p-8"] .text-white/80,
-    [class*="from-red-50"][class*="p-8"] .text-white/75,
-    [class*="from-red-50"][class*="p-8"] .text-white/70,
     [class*="from-orange-50"][class*="p-8"] .text-white,
-    [class*="from-orange-50"][class*="p-8"] .text-white/90,
-    [class*="from-orange-50"][class*="p-8"] .text-white/80,
-    [class*="from-orange-50"][class*="p-8"] .text-white/75,
-    [class*="from-orange-50"][class*="p-8"] .text-white/70,
     [class*="from-amber-50"][class*="p-8"] .text-white,
-    [class*="from-amber-50"][class*="p-8"] .text-white/90,
-    [class*="from-amber-50"][class*="p-8"] .text-white/80,
-    [class*="from-amber-50"][class*="p-8"] .text-white/75,
-    [class*="from-amber-50"][class*="p-8"] .text-white/70,
     [class*="from-yellow-50"][class*="p-8"] .text-white,
-    [class*="from-yellow-50"][class*="p-8"] .text-white/90,
-    [class*="from-yellow-50"][class*="p-8"] .text-white/80,
-    [class*="from-yellow-50"][class*="p-8"] .text-white/75,
-    [class*="from-yellow-50"][class*="p-8"] .text-white/70,
     [class*="from-purple-50"][class*="p-8"] .text-white,
-    [class*="from-purple-50"][class*="p-8"] .text-white/90,
-    [class*="from-purple-50"][class*="p-8"] .text-white/80,
-    [class*="from-purple-50"][class*="p-8"] .text-white/75,
-    [class*="from-purple-50"][class*="p-8"] .text-white/70,
     [class*="from-pink-50"][class*="p-8"] .text-white,
-    [class*="from-pink-50"][class*="p-8"] .text-white/90,
-    [class*="from-pink-50"][class*="p-8"] .text-white/80,
-    [class*="from-pink-50"][class*="p-8"] .text-white/75,
-    [class*="from-pink-50"][class*="p-8"] .text-white/70,
     [class*="from-cyan-50"][class*="p-8"] .text-white,
-    [class*="from-cyan-50"][class*="p-8"] .text-white/90,
-    [class*="from-cyan-50"][class*="p-8"] .text-white/80,
-    [class*="from-cyan-50"][class*="p-8"] .text-white/75,
-    [class*="from-cyan-50"][class*="p-8"] .text-white/70,
     [class*="from-teal-50"][class*="p-8"] .text-white,
-    [class*="from-teal-50"][class*="p-8"] .text-white/90,
-    [class*="from-teal-50"][class*="p-8"] .text-white/80,
-    [class*="from-teal-50"][class*="p-8"] .text-white/75,
-    [class*="from-teal-50"][class*="p-8"] .text-white/70,
-    [class*="from-rose-50"][class*="p-8"] .text-white,
-    [class*="from-rose-50"][class*="p-8"] .text-white/90,
-    [class*="from-rose-50"][class*="p-8"] .text-white/80,
-    [class*="from-rose-50"][class*="p-8"] .text-white/75,
-    [class*="from-rose-50"][class*="p-8"] .text-white/70 {
+    [class*="from-rose-50"][class*="p-8"] .text-white {
       color: #0f172a !important;
       text-shadow: none !important;
     }
@@ -22350,70 +22298,18 @@
       border: 1px solid rgba(148,163,184,0.18);
     }
     [class*="from-blue-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-blue-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-blue-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-blue-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-blue-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-indigo-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-indigo-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-indigo-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-indigo-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-indigo-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-green-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-green-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-green-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-green-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-green-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-emerald-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-emerald-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-emerald-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-emerald-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-emerald-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-red-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-red-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-red-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-red-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-red-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-orange-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-orange-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-orange-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-orange-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-orange-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-amber-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-amber-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-amber-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-amber-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-amber-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-yellow-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-yellow-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-yellow-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-yellow-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-yellow-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-purple-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-purple-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-purple-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-purple-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-purple-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-pink-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-pink-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-pink-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-pink-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-pink-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-cyan-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-cyan-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-cyan-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-cyan-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-cyan-50"][class*="p-8"] .bg-white/20 .text-white/70,
     [class*="from-teal-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-teal-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-teal-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-teal-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-teal-50"][class*="p-8"] .bg-white/20 .text-white/70,
-    [class*="from-rose-50"][class*="p-8"] .bg-white/20 .text-white,
-    [class*="from-rose-50"][class*="p-8"] .bg-white/20 .text-white/90,
-    [class*="from-rose-50"][class*="p-8"] .bg-white/20 .text-white/80,
-    [class*="from-rose-50"][class*="p-8"] .bg-white/20 .text-white/75,
-    [class*="from-rose-50"][class*="p-8"] .bg-white/20 .text-white/70 {
+    [class*="from-rose-50"][class*="p-8"] .bg-white/20 .text-white {
       color: #0f172a !important;
     }
 
@@ -22493,7 +22389,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-medium text-gray-600", children: element.name }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-gray-500", children: [
         element.dots,
-        " valence e\u207B"
+        " valence e⁻"
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-blue-600 font-semibold", children: [
         "Group ",
@@ -22510,7 +22406,7 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-4 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-blue-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6CO\u2082" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6CO₂" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Carbon Dioxide" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "From Air" })
@@ -22518,19 +22414,19 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-gray-600", children: "+" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6H\u2082O" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6H₂O" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Water" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "From Soil" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-24 h-24 rounded-full bg-yellow-400 flex items-center justify-center shadow-lg", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-white text-2xl", children: "\u2600\uFE0F" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-24 h-24 rounded-full bg-yellow-400 flex items-center justify-center shadow-lg", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-white text-2xl", children: "☀️" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-1", children: "Sunlight Energy" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-green-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-green-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold", children: "C\u2086H\u2081\u2082O\u2086" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold", children: "C₆H₁₂O₆" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Glucose" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Sugar (Food)" })
@@ -22538,7 +22434,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-gray-600", children: "+" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6O\u2082" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6O₂" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Oxygen" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Released to Air" })
@@ -22546,7 +22442,7 @@
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-green-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-green-300 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Key Point:" }),
-      " Plants use sunlight energy to convert CO\u2082 and water into glucose (their food) and oxygen (which we breathe)!"
+      " Plants use sunlight energy to convert CO₂ and water into glucose (their food) and oxygen (which we breathe)!"
     ] }) })
   ] });
   var CellRespirationDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8", children: [
@@ -22554,7 +22450,7 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-4 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold", children: "C\u2086H\u2081\u2082O\u2086" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold", children: "C₆H₁₂O₆" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Glucose" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Food" })
@@ -22562,15 +22458,15 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-gray-600", children: "+" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6O\u2082" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6O₂" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Oxygen" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "From Air" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-red-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-red-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-blue-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6CO\u2082" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6CO₂" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Carbon Dioxide" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Released to Air" })
@@ -22578,7 +22474,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-gray-600", children: "+" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6H\u2082O" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold", children: "6H₂O" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "Water" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Released" })
@@ -22601,28 +22497,28 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Terrestrial Food Chain Example" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-3 mb-6 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-green-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F33E}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-green-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🌾" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300", children: "Grass" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Producer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-600 font-bold mt-1", children: "10,000 kcal" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-gray-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-gray-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-yellow-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F997}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-yellow-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🦗" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-yellow-800", children: "Grasshopper" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Primary Consumer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-600 font-bold mt-1", children: "1,000 kcal" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-gray-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-gray-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F42D}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🐭" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800", children: "Mouse" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Secondary Consumer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-600 font-bold mt-1", children: "100 kcal" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-gray-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-gray-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-red-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F40D}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-red-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🐍" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300", children: "Snake" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Tertiary Consumer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-600 font-bold mt-1", children: "10 kcal" })
@@ -22630,35 +22526,35 @@
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-amber-300 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Energy Flow:" }),
-      " Notice how only 10% of energy transfers to each level (10,000 \u2192 1,000 \u2192 100 \u2192 10)"
+      " Notice how only 10% of energy transfers to each level (10,000 → 1,000 → 100 → 10)"
     ] }) })
   ] });
   var AquaticFoodChainDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Aquatic Food Chain Example" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-3 mb-6 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-green-400 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F9A0}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-green-400 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🦠" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300", children: "Phytoplankton" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Producer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-600 font-bold mt-1", children: "50,000 kcal" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-blue-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-blue-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-yellow-400 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F420}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-yellow-400 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🐠" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-yellow-800", children: "Small Fish" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Primary Consumer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-600 font-bold mt-1", children: "5,000 kcal" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-blue-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-blue-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-orange-400 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F41F}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-orange-400 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🐟" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800", children: "Medium Fish" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Secondary Consumer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-600 font-bold mt-1", children: "500 kcal" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-blue-600", children: "\u2192" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-blue-600", children: "→" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F988}" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "🦈" }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-100", children: "Shark" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-200", children: "Tertiary Consumer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-100 font-bold mt-1", children: "50 kcal" })
@@ -22674,13 +22570,13 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative h-96", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 500 400", className: "w-full h-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "200", y: "10", width: "100", height: "60", rx: "10", fill: "#93C5FD", stroke: "#3B82F6", strokeWidth: "2" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "250", y: "35", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#1E40AF", children: "Atmosphere" }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "250", y: "55", textAnchor: "middle", fontSize: "12", fill: "#1E40AF", children: "N\u2082 Gas (78%)" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "250", y: "55", textAnchor: "middle", fontSize: "12", fill: "#1E40AF", children: "N₂ Gas (78%)" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "50", y: "150", width: "100", height: "60", rx: "10", fill: "#86EFAC", stroke: "#22C55E", strokeWidth: "2" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "175", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#15803D", children: "Plants" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "195", textAnchor: "middle", fontSize: "11", fill: "#15803D", children: "Proteins" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "200", y: "200", width: "100", height: "60", rx: "10", fill: "#D97706", stroke: "#92400E", strokeWidth: "2" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "250", y: "220", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#78350F", children: "Soil" }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "250", y: "235", textAnchor: "middle", fontSize: "11", fill: "#78350F", children: "NH\u2083, NO\u2083\u207B" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "250", y: "235", textAnchor: "middle", fontSize: "11", fill: "#78350F", children: "NH₃, NO₃⁻" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "250", y: "250", textAnchor: "middle", fontSize: "10", fill: "#78350F", children: "(Bacteria)" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "350", y: "150", width: "100", height: "60", rx: "10", fill: "#FCD34D", stroke: "#F59E0B", strokeWidth: "2" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "400", y: "175", textAnchor: "middle", fontSize: "14", fontWeight: "bold", fill: "#92400E", children: "Animals" }),
@@ -22711,21 +22607,21 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "280", y: "130", fontSize: "10", fill: "#1E40AF", fontWeight: "bold", children: "Denitrification" })
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-4 grid grid-cols-2 gap-3 text-xs", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-2", style: { color: "#111827" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", style: { color: "#111827" }, children: "Fixation:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { color: "#111827" }, children: "N\u2082 \u2192 NH\u2083 (bacteria/lightning)" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "Fixation:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-300", children: "N₂ → NH₃ (bacteria/lightning)" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-2", style: { color: "#111827" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", style: { color: "#111827" }, children: "Nitrification:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { color: "#111827" }, children: "NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (bacteria)" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-orange-800", children: "Nitrification:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-orange-300", children: "NH₃ → NO₂⁻ → NO₃⁻ (bacteria)" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-lg p-2", style: { color: "#111827" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", style: { color: "#111827" }, children: "Ammonification:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { color: "#111827" }, children: "Dead matter \u2192 NH\u2084\u207A" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-lg p-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-purple-800", children: "Ammonification:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-purple-300", children: "Dead matter → NH₄⁺" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-2", style: { color: "#111827" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", style: { color: "#111827" }, children: "Denitrification:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { color: "#111827" }, children: "NO\u2083\u207B \u2192 N\u2082 (back to air)" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "Denitrification:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "NO₃⁻ → N₂ (back to air)" })
       ] })
     ] })
   ] });
@@ -22733,45 +22629,45 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Density Comparison - Floating vs Sinking" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-300", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-blue-300 mb-4", children: "Object Floats \u2B06\uFE0F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-blue-300 mb-4", children: "Object Floats ⬆️" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-1/3 left-1/2 -translate-x-1/2 w-20 h-20 bg-yellow-400 rounded-lg border-2 border-yellow-600 flex items-center justify-center shadow-lg", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold", children: "Wood" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "0.6 g/cm\xB3" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "0.6 g/cm³" })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-300 font-bold text-sm", children: "Water: 1.0 g/cm\xB3" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-300 font-bold text-sm", children: "Water: 1.0 g/cm³" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-green-100 rounded-lg p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-green-300 text-center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "0.6 < 1.0" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
           "Object density < Water density",
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
-          "= FLOATS! \u{1F388}"
+          "= FLOATS! 🎈"
         ] }) })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-red-300", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-red-300 mb-4", children: "Object Sinks \u2B07\uFE0F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-red-300 mb-4", children: "Object Sinks ⬇️" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-8 left-1/2 -translate-x-1/2 w-20 h-20 bg-gray-600 rounded-lg border-2 border-gray-800 flex items-center justify-center shadow-lg", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center text-white", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold", children: "Rock" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "2.5 g/cm\xB3" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "2.5 g/cm³" })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-300 font-bold text-sm", children: "Water: 1.0 g/cm\xB3" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-300 font-bold text-sm", children: "Water: 1.0 g/cm³" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-red-100 rounded-lg p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-red-300 text-center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "2.5 > 1.0" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
           "Object density > Water density",
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
-          "= SINKS! \u2693"
+          "= SINKS! ⚓"
         ] }) })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-indigo-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-indigo-300 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Rule:" }),
-      " If object density is less than liquid density \u2192 floats. If greater \u2192 sinks!"
+      " If object density is less than liquid density → floats. If greater → sinks!"
     ] }) })
   ] });
   var IonDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8", children: [
@@ -22783,8 +22679,8 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-gray-600 mb-3", children: "Neutral Sodium (Na)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "11p\u207A" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "12n\u2070" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "11p⁺" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "12n⁰" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "25", fill: "none", stroke: "#3B82F6", strokeWidth: "2" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "85", cy: "60", r: "3", fill: "#3B82F6" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "35", cy: "60", r: "3", fill: "#3B82F6" }),
@@ -22802,15 +22698,15 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Charge: 0 (neutral)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-red-500", children: "\u2192" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-600 font-bold mt-1", children: "Loses 1e\u207B" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-red-500", children: "→" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-600 font-bold mt-1", children: "Loses 1e⁻" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-gray-600 mb-3", children: "Sodium Ion (Na\u207A)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-gray-600 mb-3", children: "Sodium Ion (Na⁺)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "11p\u207A" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "12n\u2070" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "11p⁺" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "12n⁰" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "25", fill: "none", stroke: "#3B82F6", strokeWidth: "2" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "85", cy: "60", r: "3", fill: "#3B82F6" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "35", cy: "60", r: "3", fill: "#3B82F6" }),
@@ -22824,7 +22720,7 @@
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-2", children: "11 protons, 10 electrons" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold text-red-600", children: "Charge: +1 (cation)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-red-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-300 font-bold", children: "11p\u207A - 10e\u207B = +1" }) })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-red-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-300 font-bold", children: "11p⁺ - 10e⁻ = +1" }) })
         ] })
       ] })
     ] }),
@@ -22835,8 +22731,8 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-gray-600 mb-3", children: "Neutral Chlorine (Cl)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "17p\u207A" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "18n\u2070" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "17p⁺" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "18n⁰" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "20", fill: "none", stroke: "#3B82F6", strokeWidth: "1.5" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "80", cy: "60", r: "2.5", fill: "#3B82F6" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "40", cy: "60", r: "2.5", fill: "#3B82F6" }),
@@ -22859,15 +22755,15 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Charge: 0 (neutral)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-green-500", children: "\u2192" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-600 font-bold mt-1", children: "Gains 1e\u207B" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl text-green-500", children: "→" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-600 font-bold mt-1", children: "Gains 1e⁻" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-gray-600 mb-3", children: "Chloride Ion (Cl\u207B)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-gray-600 mb-3", children: "Chloride Ion (Cl⁻)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 120 120", className: "w-32 h-32 mx-auto", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "12", fill: "#DC2626" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "17p\u207A" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "18n\u2070" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "58", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "17p⁺" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "66", textAnchor: "middle", fontSize: "8", fill: "white", fontWeight: "bold", children: "18n⁰" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "60", cy: "60", r: "20", fill: "none", stroke: "#3B82F6", strokeWidth: "1.5" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "80", cy: "60", r: "2.5", fill: "#3B82F6" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "40", cy: "60", r: "2.5", fill: "#3B82F6" }),
@@ -22888,7 +22784,7 @@
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-2", children: "17 protons, 18 electrons" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold text-green-600", children: "Charge: -1 (anion)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-green-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300 font-bold", children: "17p\u207A - 18e\u207B = -1" }) })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-green-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300 font-bold", children: "17p⁺ - 18e⁻ = -1" }) })
         ] })
       ] })
     ] }),
@@ -22911,8 +22807,8 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Bohr Diagram - Oxygen (8 protons, 8 neutrons, 8 electrons)" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative w-80 h-80", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gradient-to-br from-red-400 to-orange-400 flex items-center justify-center shadow-lg z-10", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center text-white", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs font-bold", children: "8p\u207A" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs font-bold", children: "8n\u2070" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs font-bold", children: "8p⁺" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs font-bold", children: "8n⁰" })
       ] }) }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-3 border-blue-300" }),
       [0, 180].map((angle, i) => {
@@ -22942,8 +22838,8 @@
           `shell2-${i}`
         );
       }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -right-12 top-1/3 text-xs font-semibold text-blue-600", children: "Shell 1: 2e\u207B" }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -right-12 bottom-1/4 text-xs font-semibold text-green-600", children: "Shell 2: 6e\u207B" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -right-12 top-1/3 text-xs font-semibold text-blue-600", children: "Shell 1: 2e⁻" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -right-12 bottom-1/4 text-xs font-semibold text-green-600", children: "Shell 2: 6e⁻" })
     ] }) })
   ] });
   var EnergyPyramid = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8", children: [
@@ -22958,7 +22854,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs", children: tier.energy })
     ] }, i)) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "inline-block bg-blue-100 rounded-lg px-4 py-2", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-300", children: "\u26A1 Only 10% of energy passes to the next level" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-300", children: "⚡ Only 10% of energy passes to the next level" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-600 mt-1", children: "90% lost as heat, movement, and waste" })
     ] }) })
   ] });
@@ -22967,7 +22863,7 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative h-80", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 400 300", className: "w-full h-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "200", cy: "60", r: "40", fill: "#93C5FD", stroke: "#3B82F6", strokeWidth: "2" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "200", y: "60", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#1E40AF", children: "Atmosphere" }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "200", y: "75", textAnchor: "middle", fontSize: "10", fill: "#1E40AF", children: "CO\u2082" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "200", y: "75", textAnchor: "middle", fontSize: "10", fill: "#1E40AF", children: "CO₂" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "80", cy: "150", r: "40", fill: "#86EFAC", stroke: "#22C55E", strokeWidth: "2" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "150", textAnchor: "middle", fontSize: "12", fontWeight: "bold", fill: "#15803D", children: "Plants" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "165", textAnchor: "middle", fontSize: "10", fill: "#15803D", children: "(Producers)" }),
@@ -22998,12 +22894,12 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-4 grid grid-cols-2 gap-3 text-xs", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-800", children: "Photosynthesis:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-800", children: "CO\u2082 + H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + O\u2082" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "Photosynthesis:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-300", children: "CO₂ + H₂O → C₆H₁₂O₆ + O₂" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-800", children: "Respiration:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-800", children: "C\u2086H\u2081\u2082O\u2086 + O\u2082 \u2192 CO\u2082 + H\u2082O" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "Respiration:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "C₆H₁₂O₆ + O₂ → CO₂ + H₂O" })
       ] })
     ] })
   ] });
@@ -23019,7 +22915,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "55", y1: "15", x2: "55", y2: "25", stroke: "#1F2937", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "55", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "20", y: "8", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "+" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "8", fontSize: "10", fill: "#1F2937", fontWeight: "bold", children: "\u2212" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "8", fontSize: "10", fill: "#1F2937", fontWeight: "bold", children: "−" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-gray-800", children: "Battery" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Power source" })
@@ -23088,7 +22984,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "55", y1: "20", x2: "70", y2: "20", stroke: "#1F2937", strokeWidth: "2" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-gray-800", children: "Motor" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Electrical \u2192 Motion" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Electrical → Motion" })
       ] })
     ] })
   ] });
@@ -23122,19 +23018,19 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-3", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-blue-300 mb-1", children: "\u2713 Current" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-blue-300 mb-1", children: "✓ Current" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-300", children: "Same everywhere (0.5A)" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-1", children: "\u2713 Voltage" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-1", children: "✓ Voltage" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-300", children: "Divides: 6V = 2V + 2V + 2V" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-orange-800 mb-1", children: "\u2713 Path" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-orange-800 mb-1", children: "✓ Path" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300", children: "One route only" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-red-300 mb-1", children: "\u2717 One Fails" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-red-300 mb-1", children: "✗ One Fails" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-300", children: "All stop working" })
       ] })
     ] })
@@ -23186,19 +23082,19 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-3", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-300 mb-1", children: "\u2713 Voltage" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-300 mb-1", children: "✓ Voltage" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300", children: "Same across all (12V)" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-1", children: "\u2713 Current" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-1", children: "✓ Current" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-300", children: "Divides: 3A = 1A + 1A + 1A" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-orange-800 mb-1", children: "\u2713 Paths" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-orange-800 mb-1", children: "✓ Paths" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300", children: "Multiple routes" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-300 mb-1", children: "\u2713 One Fails" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-300 mb-1", children: "✓ One Fails" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300", children: "Others keep working!" })
       ] })
     ] })
@@ -23215,24 +23111,24 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-4 mb-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-xl p-4 text-center border-2 border-purple-300", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-2", children: "Find Voltage" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-purple-900 mb-1", children: "V = I \xD7 R" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-purple-900 mb-1", children: "V = I × R" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-300", children: "Cover V" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-pink-100 rounded-xl p-4 text-center border-2 border-pink-300", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-pink-800 mb-2", children: "Find Current" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-pink-900 mb-1", children: "I = V \xF7 R" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-pink-900 mb-1", children: "I = V ÷ R" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-pink-700", children: "Cover I" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-indigo-100 rounded-xl p-4 text-center border-2 border-indigo-300", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-indigo-300 mb-2", children: "Find Resistance" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-indigo-900 mb-1", children: "R = V \xF7 I" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-indigo-900 mb-1", children: "R = V ÷ I" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-indigo-300", children: "Cover R" })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-4 text-white", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold mb-2", children: "Example Problem:" }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm mb-2", children: "A circuit has 12V battery and 4\u03A9 resistor. Find current." }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-mono bg-white/20 rounded p-2", children: "I = V \xF7 R = 12V \xF7 4\u03A9 = 3A" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm mb-2", children: "A circuit has 12V battery and 4Ω resistor. Find current." }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-mono bg-white/20 rounded p-2", children: "I = V ÷ R = 12V ÷ 4Ω = 3A" })
     ] })
   ] });
   var CircuitDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8", children: [
@@ -23243,7 +23139,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "80", y1: "130", x2: "80", y2: "170", stroke: "#1F2937", strokeWidth: "5" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "95", y1: "135", x2: "95", y2: "165", stroke: "#1F2937", strokeWidth: "4" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "120", fontSize: "12", fill: "#DC2626", fontWeight: "bold", children: "+" }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "90", y: "120", fontSize: "12", fill: "#1F2937", fontWeight: "bold", children: "\u2212" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "90", y: "120", fontSize: "12", fill: "#1F2937", fontWeight: "bold", children: "−" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "55", y: "200", fontSize: "11", fill: "#1F2937", fontWeight: "bold", children: "Battery" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "200", y1: "50", x2: "220", y2: "50", stroke: "#1F2937", strokeWidth: "3" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "220", cy: "50", r: "3", fill: "#1F2937" }),
@@ -23300,21 +23196,21 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex justify-center items-center gap-8 mt-6", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "\u2212" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "−" }) }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -right-3 top-1/2 -translate-y-1/2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { width: "30", height: "30", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 5 15 L 20 15", stroke: "#2563EB", strokeWidth: "3", markerEnd: "url(#arrowrepel3)" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("marker", { id: "arrowrepel3", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M0,0 L0,6 L9,3 z", fill: "#2563EB" }) }) })
             ] }) })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "\u2212" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "−" }) }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -left-3 top-1/2 -translate-y-1/2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { width: "30", height: "30", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 25 15 L 10 15", stroke: "#2563EB", strokeWidth: "3", markerEnd: "url(#arrowrepel4)" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("marker", { id: "arrowrepel4", markerWidth: "10", markerHeight: "10", refX: "9", refY: "3", orient: "auto", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M0,0 L0,6 L9,3 z", fill: "#2563EB" }) }) })
             ] }) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-red-300 font-semibold mt-4", children: "+ repels + | \u2212 repels \u2212" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-red-300 font-semibold mt-4", children: "+ repels + | − repels −" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-6 border-2 border-green-200", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-green-300 mb-4", children: "Opposite Charges ATTRACT" }),
@@ -23327,14 +23223,14 @@
             ] }) })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "\u2212" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-blue-400 border-4 border-blue-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "−" }) }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -left-3 top-1/2 -translate-y-1/2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { width: "30", height: "30", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 25 15 L 10 15", stroke: "#22C55E", strokeWidth: "3", markerStart: "url(#arrowattract2)" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("marker", { id: "arrowattract2", markerWidth: "10", markerHeight: "10", refX: "1", refY: "3", orient: "auto", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M9,0 L9,6 L0,3 z", fill: "#22C55E" }) }) })
             ] }) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-green-300 font-semibold mt-12", children: "+ attracts \u2212 | \u2212 attracts +" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-green-300 font-semibold mt-12", children: "+ attracts − | − attracts +" })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 rounded-xl p-4 border-2 border-amber-300", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3", children: [
@@ -23349,8 +23245,8 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Electrical Power Formulas" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-6 mb-6 border-2 border-orange-200", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-6", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-4xl font-bold text-orange-600 mb-2", children: "P = V \xD7 I" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Power = Voltage \xD7 Current" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-4xl font-bold text-orange-600 mb-2", children: "P = V × I" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Power = Voltage × Current" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-4 text-center", children: [
@@ -23377,8 +23273,8 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Given: V = 120V, I = 0.5A" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Find: P = ?" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-100 rounded p-3 mt-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-300", children: "P = V \xD7 I" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-300", children: "P = 120V \xD7 0.5A" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-300", children: "P = V × I" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-300", children: "P = 120V × 0.5A" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono font-bold text-orange-900", children: "P = 60W" })
           ] })
         ] })
@@ -23389,8 +23285,8 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Given: P = 1500W, V = 120V" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Find: I = ?" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-100 rounded p-3 mt-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-300", children: "I = P \xF7 V" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-300", children: "I = 1500W \xF7 120V" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-300", children: "I = P ÷ V" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-300", children: "I = 1500W ÷ 120V" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono font-bold text-red-900", children: "I = 12.5A" })
           ] })
         ] })
@@ -23401,10 +23297,10 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold mb-2", children: "Common Appliance Power:" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-2 text-sm", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 LED bulb: 10W" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Laptop: 50W" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Microwave: 1000W" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Hair dryer: 1800W" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• LED bulb: 10W" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Laptop: 50W" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Microwave: 1000W" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Hair dryer: 1800W" })
         ] })
       ] })
     ] }) })
@@ -23436,30 +23332,30 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-orange-300 shadow-md text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 mx-auto mb-3 bg-orange-500 rounded-full flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 40 40", className: "w-10 h-10", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "12", y: "14", width: "16", height: "12", rx: "2", fill: "white", opacity: "0.9" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "14", y: "24", fontSize: "8", fill: "#f97316", fontWeight: "bold", children: "\u03A9" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "14", y: "24", fontSize: "8", fill: "#f97316", fontWeight: "bold", children: "Ω" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "12", y: "38", fontSize: "10", fill: "white", fontWeight: "bold", children: "R" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-orange-800 text-lg mb-2", children: "RESISTANCE (R)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-orange-300 text-sm font-semibold", children: "= Pipe Narrowing" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs mt-2", children: "A narrower pipe restricts flow. More resistance = less current for same pressure. Measured in Ohms (\u03A9)." }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs mt-2", children: "A narrower pipe restricts flow. More resistance = less current for same pressure. Measured in Ohms (Ω)." }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-orange-100 rounded-lg px-3 py-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-800 font-bold", children: "Think: Narrow kink in pipe" }) })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-200", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-4 flex-wrap text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-purple-800 font-bold text-lg", children: "More Pressure (V\u2191)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-2xl", children: "\u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-300 font-bold text-lg", children: "More Flow (I\u2191)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-purple-800 font-bold text-lg", children: "More Pressure (V↑)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-2xl", children: "→" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-300 font-bold text-lg", children: "More Flow (I↑)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mx-4 text-gray-600 font-bold", children: "|" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-orange-300 font-bold text-lg", children: "Narrower Pipe (R\u2191)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-2xl", children: "\u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-300 font-bold text-lg", children: "Less Flow (I\u2193)" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-orange-300 font-bold text-lg", children: "Narrower Pipe (R↑)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-2xl", children: "→" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-300 font-bold text-lg", children: "Less Flow (I↓)" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-gray-600 mt-3 font-semibold", children: "This is exactly how V = I \xD7 R works in Ohm's Law!" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-gray-600 mt-3 font-semibold", children: "This is exactly how V = I × R works in Ohm's Law!" })
     ] })
   ] });
   var OhmsLawWorkedExamples = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ohm's Law \u2014 Worked Examples" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ohm's Law — Worked Examples" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-5 mb-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-3", children: [
@@ -23467,15 +23363,15 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-300", children: "Find Current" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-50 rounded-lg p-3 mb-3 font-mono text-sm", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Given: V = 12V, R = 4\u03A9" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Given: V = 12V, R = 4Ω" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Find: I = ?" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
             "Formula: ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "I = V \xF7 R" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "I = V ÷ R" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I = 12 \xF7 4" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I = 12 ÷ 4" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-green-300 text-center mt-2", children: "I = 3 A" })
         ] })
       ] }),
@@ -23485,15 +23381,15 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300", children: "Find Voltage" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3 mb-3 font-mono text-sm", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Given: I = 2A, R = 6\u03A9" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Given: I = 2A, R = 6Ω" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Find: V = ?" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
             "Formula: ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "V = I \xD7 R" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "V = I × R" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "V = 2 \xD7 6" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "V = 2 × 6" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-blue-300 text-center mt-2", children: "V = 12 V" })
         ] })
       ] }),
@@ -23509,31 +23405,31 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
             "Formula: ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-orange-300", children: "R = V \xF7 I" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-orange-300", children: "R = V ÷ I" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "R = 24 \xF7 3" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-orange-300 text-center mt-2", children: "R = 8 \u03A9" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "R = 24 ÷ 3" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-orange-300 text-center mt-2", children: "R = 8 Ω" })
         ] })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-4 border-2 border-purple-300", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-purple-800 mb-3", children: "\u2B50 Cover-Up Method \u2014 Cover what you want to find!" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-purple-800 mb-3", children: "⭐ Cover-Up Method — Cover what you want to find!" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 220 120", className: "w-64 h-32", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 110 10 L 200 100 L 20 100 Z", fill: "#8B5CF6", stroke: "#6D28D9", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "20", y1: "55", x2: "200", y2: "55", stroke: "#6D28D9", strokeWidth: "2" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "110", y: "45", textAnchor: "middle", fontSize: "28", fontWeight: "bold", fill: "white", children: "V" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "70", y: "85", textAnchor: "middle", fontSize: "28", fontWeight: "bold", fill: "white", children: "I" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "150", y: "85", textAnchor: "middle", fontSize: "28", fontWeight: "bold", fill: "white", children: "R" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "115", fontSize: "9", fill: "#6D28D9", children: "Cover V \u2192 I\xD7R" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "110", y: "115", textAnchor: "middle", fontSize: "9", fill: "#6D28D9", children: "Cover I \u2192 V\xF7R" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "175", y: "115", fontSize: "9", fill: "#6D28D9", children: "Cover R \u2192 V\xF7I" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "115", fontSize: "9", fill: "#6D28D9", children: "Cover V → I×R" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "110", y: "115", textAnchor: "middle", fontSize: "9", fill: "#6D28D9", children: "Cover I → V÷R" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "175", y: "115", fontSize: "9", fill: "#6D28D9", children: "Cover R → V÷I" })
       ] }) })
     ] })
   ] });
   var SeriesCircuitCalculations = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Series Circuit \u2014 Step-by-Step Calculations" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Series Circuit — Step-by-Step Calculations" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-green-300 mb-4", children: "Example: 12V battery, 3 resistors in series (R\u2081=2\u03A9, R\u2082=3\u03A9, R\u2083=7\u03A9)" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-green-300 mb-4", children: "Example: 12V battery, 3 resistors in series (R₁=2Ω, R₂=3Ω, R₃=7Ω)" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 480 120", className: "w-full mb-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "30", x2: "40", y2: "90", stroke: "#1F2937", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "30", x2: "110", y2: "30", stroke: "#1F2937", strokeWidth: "3" }),
@@ -23544,70 +23440,70 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "50", y1: "58", x2: "50", y2: "62", stroke: "#1F2937", strokeWidth: "2" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "55", y: "65", fontSize: "11", fill: "#DC2626", fontWeight: "bold", children: "+12V" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 110 30 L 115 22 L 120 38 L 125 22 L 130 38 L 135 22 L 140 38 L 145 30", fill: "none", stroke: "#3B82F6", strokeWidth: "2.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "122", y: "16", fontSize: "11", fill: "#3B82F6", fontWeight: "bold", children: "R\u2081=2\u03A9" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "122", y: "16", fontSize: "11", fill: "#3B82F6", fontWeight: "bold", children: "R₁=2Ω" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "145", y1: "30", x2: "195", y2: "30", stroke: "#1F2937", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 195 30 L 200 22 L 205 38 L 210 22 L 215 38 L 220 22 L 225 38 L 230 30", fill: "none", stroke: "#10B981", strokeWidth: "2.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "205", y: "16", fontSize: "11", fill: "#10B981", fontWeight: "bold", children: "R\u2082=3\u03A9" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "205", y: "16", fontSize: "11", fill: "#10B981", fontWeight: "bold", children: "R₂=3Ω" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "230", y1: "30", x2: "280", y2: "30", stroke: "#1F2937", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 280 30 L 285 22 L 290 38 L 295 22 L 300 38 L 305 22 L 310 38 L 315 30", fill: "none", stroke: "#F59E0B", strokeWidth: "2.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "287", y: "16", fontSize: "11", fill: "#F59E0B", fontWeight: "bold", children: "R\u2083=7\u03A9" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "287", y: "16", fontSize: "11", fill: "#F59E0B", fontWeight: "bold", children: "R₃=7Ω" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "315", y1: "30", x2: "390", y2: "30", stroke: "#1F2937", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 200 55 L 215 55", stroke: "#DC2626", strokeWidth: "2", markerEnd: "url(#arr1)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("marker", { id: "arr1", markerWidth: "8", markerHeight: "8", refX: "8", refY: "3", orient: "auto", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M0,0 L0,6 L8,3 z", fill: "#DC2626" }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "185", y: "72", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "I flows \u2192" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "185", y: "72", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "I flows →" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-4 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-50 rounded-lg p-3 border border-green-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "\u2460 Total Resistance" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "R_total = R\u2081+R\u2082+R\u2083" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "① Total Resistance" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "R_total = R₁+R₂+R₃" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "= 2+3+7" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 text-lg", children: "= 12 \u03A9" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 text-lg", children: "= 12 Ω" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3 border border-blue-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u2461 Total Current" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I = V \xF7 R_total" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "= 12 \xF7 12" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "② Total Current" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I = V ÷ R_total" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "= 12 ÷ 12" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 text-lg", children: "= 1 A (same everywhere)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-50 rounded-lg p-3 border border-orange-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800 mb-2", children: "\u2462 Voltage Drops" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800 mb-2", children: "③ Voltage Drops" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
-            "V\u2081=1\xD72 = ",
+            "V₁=1×2 = ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "2V" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
-            "V\u2082=1\xD73 = ",
+            "V₂=1×3 = ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "3V" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
-            "V\u2083=1\xD77 = ",
+            "V₃=1×7 = ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "7V" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-600 mt-1", children: "\u2713 2+3+7=12V \u2713" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-600 mt-1", children: "✓ 2+3+7=12V ✓" })
         ] })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4 text-sm", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-xl p-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u{1F4CC} Series Rules to Memorize:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 Current: I\u2081 = I\u2082 = I\u2083 (same everywhere)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 Voltage: V_total = V\u2081 + V\u2082 + V\u2083" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 Resistance: R_total = R\u2081 + R\u2082 + R\u2083" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 One break \u2192 all stop" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "📌 Series Rules to Memorize:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "• Current: I₁ = I₂ = I₃ (same everywhere)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "• Voltage: V_total = V₁ + V₂ + V₃" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "• Resistance: R_total = R₁ + R₂ + R₃" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "• One break → all stop" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-950/30 rounded-xl p-4 border border-red-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-2", children: "\u26A0\uFE0F Common Exam Mistakes:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Forgetting current is the SAME in series" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Adding voltages wrong" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Not checking: \u03A3V = battery V" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Mixing up series and parallel rules" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-2", children: "⚠️ Common Exam Mistakes:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "• Forgetting current is the SAME in series" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "• Adding voltages wrong" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "• Not checking: ΣV = battery V" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "• Mixing up series and parallel rules" })
       ] })
     ] })
   ] });
   var ParallelCircuitCalculations = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Parallel Circuit \u2014 Step-by-Step Calculations" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Parallel Circuit — Step-by-Step Calculations" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-blue-300 mb-5 shadow-md", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-blue-300 mb-4", children: "Example: 12V battery, 3 resistors in parallel (R\u2081=6\u03A9, R\u2082=4\u03A9, R\u2083=12\u03A9)" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-blue-300 mb-4", children: "Example: 12V battery, 3 resistors in parallel (R₁=6Ω, R₂=4Ω, R₃=12Ω)" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 480 160", className: "w-full mb-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "20", x2: "40", y2: "140", stroke: "#1F2937", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "20", x2: "440", y2: "20", stroke: "#1F2937", strokeWidth: "3" }),
@@ -23619,43 +23515,43 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "160", y1: "20", x2: "160", y2: "140", stroke: "#9CA3AF", strokeWidth: "1.5", strokeDasharray: "4" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "280", y1: "20", x2: "280", y2: "140", stroke: "#9CA3AF", strokeWidth: "1.5", strokeDasharray: "4" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 160 50 L 165 40 L 170 60 L 175 40 L 180 60 L 185 40 L 190 60 L 195 50", fill: "none", stroke: "#3B82F6", strokeWidth: "2.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "165", y: "35", fontSize: "11", fill: "#3B82F6", fontWeight: "bold", children: "R\u2081=6\u03A9" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "162", y: "75", fontSize: "10", fill: "#3B82F6", children: "I\u2081=2A" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "165", y: "35", fontSize: "11", fill: "#3B82F6", fontWeight: "bold", children: "R₁=6Ω" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "162", y: "75", fontSize: "10", fill: "#3B82F6", children: "I₁=2A" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 160 90 L 165 80 L 170 100 L 175 80 L 180 100 L 185 80 L 190 100 L 195 90", fill: "none", stroke: "#10B981", strokeWidth: "2.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "165", y: "75", fontSize: "11", fill: "#10B981", fontWeight: "bold", children: "R\u2082=4\u03A9" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "162", y: "115", fontSize: "10", fill: "#10B981", children: "I\u2082=3A" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "165", y: "75", fontSize: "11", fill: "#10B981", fontWeight: "bold", children: "R₂=4Ω" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "162", y: "115", fontSize: "10", fill: "#10B981", children: "I₂=3A" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 280 80 L 285 70 L 290 90 L 295 70 L 300 90 L 305 70 L 310 90 L 315 80", fill: "none", stroke: "#F59E0B", strokeWidth: "2.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "280", y: "65", fontSize: "11", fill: "#F59E0B", fontWeight: "bold", children: "R\u2083=12\u03A9" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "280", y: "105", fontSize: "10", fill: "#F59E0B", children: "I\u2083=1A" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "15", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "I_total=6A \u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "350", y: "15", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "\u2190 6A" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "280", y: "65", fontSize: "11", fill: "#F59E0B", fontWeight: "bold", children: "R₃=12Ω" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "280", y: "105", fontSize: "10", fill: "#F59E0B", children: "I₃=1A" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "15", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "I_total=6A →" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "350", y: "15", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "← 6A" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "380", y: "80", fontSize: "10", fill: "#6B7280", children: "Each branch:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "380", y: "95", fontSize: "10", fill: "#6B7280", children: "V = 12V \u2713" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "380", y: "95", fontSize: "10", fill: "#6B7280", children: "V = 12V ✓" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-4 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3 border border-blue-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u2460 Voltage (easy!)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "① Voltage (easy!)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "All branches = battery V" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300", children: "V\u2081=V\u2082=V\u2083= 12V" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300", children: "V₁=V₂=V₃= 12V" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-50 rounded-lg p-3 border border-green-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "\u2461 Branch Currents" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "② Branch Currents" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
-            "I\u2081=12\xF76 = ",
+            "I₁=12÷6 = ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "2A" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
-            "I\u2082=12\xF74 = ",
+            "I₂=12÷4 = ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "3A" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
-            "I\u2083=12\xF712 = ",
+            "I₃=12÷12 = ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "1A" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-50 rounded-lg p-3 border border-orange-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800 mb-2", children: "\u2462 Total Current" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I_total = I\u2081+I\u2082+I\u2083" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800 mb-2", children: "③ Total Current" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I_total = I₁+I₂+I₃" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "= 2+3+1" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-300 text-lg", children: "= 6 A" })
         ] })
@@ -23663,18 +23559,18 @@
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4 text-sm", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-indigo-950/30 rounded-xl p-4 border border-indigo-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-2", children: "\u{1F4CC} Parallel Rules to Memorize:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 Voltage: V\u2081 = V\u2082 = V\u2083 (same everywhere)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 Current: I_total = I\u2081 + I\u2082 + I\u2083" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 Each branch: I = V \xF7 R (that branch's R)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 One break \u2192 others keep working" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-2", children: "📌 Parallel Rules to Memorize:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "• Voltage: V₁ = V₂ = V₃ (same everywhere)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "• Current: I_total = I₁ + I₂ + I₃" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "• Each branch: I = V ÷ R (that branch's R)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "• One break → others keep working" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-amber-950/30 rounded-xl p-4 border border-amber-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-2", children: "\u{1F3E0} Real-Life Parallel:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Home outlets all wired in parallel" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Each device gets full 120V" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Turning one device off doesn't affect others" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Adding devices draws more total current" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-2", children: "🏠 Real-Life Parallel:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "• Home outlets all wired in parallel" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "• Each device gets full 120V" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "• Turning one device off doesn't affect others" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "• Adding devices draws more total current" })
       ] })
     ] })
   ] });
@@ -23683,7 +23579,7 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-yellow-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl mb-2", children: "\u{1FAE7}" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl mb-2", children: "🫧" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-yellow-800 text-lg", children: "FRICTION" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-500", children: "Triboelectric Effect" })
         ] }),
@@ -23693,32 +23589,32 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ellipse", { cx: "120", cy: "40", rx: "30", ry: "18", fill: "#D1FAE5", stroke: "#10B981", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "120", y: "44", textAnchor: "middle", fontSize: "11", fill: "#065F46", fontWeight: "bold", children: "Hair" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 80 35 Q 95 25 90 40 Q 95 55 80 45", fill: "#DC2626", stroke: "#DC2626", strokeWidth: "1" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "84", y: "20", fontSize: "9", fill: "#DC2626", children: "e\u207B transfer" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "84", y: "20", fontSize: "9", fill: "#DC2626", children: "e⁻ transfer" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-gray-700", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Rubbing transfers electrons from one object to another" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Rubbing transfers electrons from one object to another" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Balloon gains electrons \u2192 ",
+            "• Balloon gains electrons → ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-600", children: "negative charge" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Hair loses electrons \u2192 ",
+            "• Hair loses electrons → ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-red-600", children: "positive charge" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Objects attract each other" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Objects attract each other" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-yellow-50 rounded-lg p-2 text-xs text-yellow-800 font-semibold text-center", children: "Examples: balloon + hair, shoes + carpet" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-orange-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl mb-2", children: "\u{1F446}" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl mb-2", children: "👆" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-orange-800 text-lg", children: "CONDUCTION" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-500", children: "Direct Contact" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 80", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "15", y: "25", width: "50", height: "30", rx: "5", fill: "#FEE2E2", stroke: "#DC2626", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "40", y: "44", textAnchor: "middle", fontSize: "10", fill: "#991B1B", fontWeight: "bold", children: "Charged" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "40", y: "55", textAnchor: "middle", fontSize: "9", fill: "#991B1B", children: "(\u2013 \u2013 \u2013)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "40", y: "55", textAnchor: "middle", fontSize: "9", fill: "#991B1B", children: "(– – –)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "95", y: "25", width: "50", height: "30", rx: "5", fill: "#DBEAFE", stroke: "#3B82F6", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "120", y: "44", textAnchor: "middle", fontSize: "10", fill: "#1D4ED8", fontWeight: "bold", children: "Neutral" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "120", y: "55", textAnchor: "middle", fontSize: "9", fill: "#1D4ED8", children: "(neutral)" }),
@@ -23727,28 +23623,28 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "72", y: "32", fontSize: "8", fill: "#DC2626", children: "touch!" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-gray-700", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Charged object TOUCHES the neutral object" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Electrons flow from charged to neutral" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Charged object TOUCHES the neutral object" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Electrons flow from charged to neutral" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Both objects end up with ",
+            "• Both objects end up with ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "same type of charge" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Charge is shared between objects" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Charge is shared between objects" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-orange-50 rounded-lg p-2 text-xs text-orange-800 font-semibold text-center", children: "Examples: touching a Van de Graaff generator" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-purple-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl mb-2", children: "\u{1F9F2}" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-4xl mb-2", children: "🧲" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-purple-800 text-lg", children: "INDUCTION" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-500", children: "No Contact Needed" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 80", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "10", y: "25", width: "45", height: "30", rx: "5", fill: "#FEE2E2", stroke: "#DC2626", strokeWidth: "2" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "32", y: "40", textAnchor: "middle", fontSize: "10", fill: "#991B1B", fontWeight: "bold", children: "\u2013 \u2013 \u2013" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "32", y: "40", textAnchor: "middle", fontSize: "10", fill: "#991B1B", fontWeight: "bold", children: "– – –" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "32", y: "52", textAnchor: "middle", fontSize: "8", fill: "#991B1B", children: "charged" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "85", y: "25", width: "60", height: "30", rx: "5", fill: "#E0E7FF", stroke: "#6366F1", strokeWidth: "2" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "40", fontSize: "10", fill: "#3730A3", fontWeight: "bold", children: "+ \u2013" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "40", fontSize: "10", fill: "#3730A3", fontWeight: "bold", children: "+ –" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "95", y: "52", fontSize: "8", fill: "#3730A3", children: "induced!" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "55", y1: "40", x2: "85", y2: "40", stroke: "#9CA3AF", strokeWidth: "1.5", strokeDasharray: "4" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "58", y: "34", fontSize: "8", fill: "#9CA3AF", children: "no touch" }),
@@ -23756,30 +23652,30 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Charged object brought ",
+            "• Charged object brought ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "NEAR" }),
             " (not touching) neutral object"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Electrons in neutral object rearrange" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Near side gets opposite charge" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Far side gets same charge as charged object" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Electrons in neutral object rearrange" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Near side gets opposite charge" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Far side gets same charge as charged object" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-purple-50 rounded-lg p-2 text-xs text-purple-800 font-semibold text-center", children: "Examples: charged comb attracts paper" })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-5 bg-white rounded-xl p-4 border border-gray-200", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-gray-700 mb-3", children: "Key Rule: Only ELECTRONS Move \u2014 Protons NEVER move!" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-gray-700 mb-3", children: "Key Rule: Only ELECTRONS Move — Protons NEVER move!" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex justify-center gap-8 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-red-600 font-bold text-xl", children: "+" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Proton: FIXED in nucleus" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-600 font-bold text-xl", children: "\u2013" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-600 font-bold text-xl", children: "–" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Electron: moves freely" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-500 font-bold text-xl", children: "\u25CB" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-500 font-bold text-xl", children: "○" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Neutron: no charge" })
         ] })
       ] })
@@ -23793,10 +23689,10 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 240 100", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "20", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Short wire (Low R)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "10", y1: "35", x2: "120", y2: "35", stroke: "#10B981", strokeWidth: "6", strokeLinecap: "round" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "125", y: "39", fontSize: "10", fill: "#10B981", fontWeight: "bold", children: "R = low \u2713" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "125", y: "39", fontSize: "10", fill: "#10B981", fontWeight: "bold", children: "R = low ✓" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "65", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Long wire (High R)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "10", y1: "80", x2: "220", y2: "80", stroke: "#DC2626", strokeWidth: "6", strokeLinecap: "round" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "97", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "R = high \u2717" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "97", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "R = high ✗" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-orange-300 text-center font-semibold", children: "Longer wire = MORE resistance" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center mt-1", children: "More collisions between electrons and atoms" })
@@ -23832,26 +23728,26 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300 mb-4 text-center", children: "Temperature Effect" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 240 110", className: "w-full", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 30 90 Q 80 85 130 70 Q 180 55 210 30", fill: "none", stroke: "#DC2626", strokeWidth: "3" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "105", fontSize: "9", fill: "#374151", children: "Cold (0\xB0C)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "180", y: "25", fontSize: "9", fill: "#374151", children: "Hot (100\xB0C)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "90", y: "50", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "Resistance \u2191" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "105", fontSize: "9", fill: "#374151", children: "Cold (0°C)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "180", y: "25", fontSize: "9", fill: "#374151", children: "Hot (100°C)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "90", y: "50", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "Resistance ↑" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "30", y1: "15", x2: "30", y2: "95", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "25", y1: "95", x2: "215", y2: "95", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "5", y: "60", fontSize: "9", fill: "#374151", children: "R" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "108", fontSize: "9", fill: "#374151", children: "Temperature \u2192" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "108", fontSize: "9", fill: "#374151", children: "Temperature →" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-blue-300 text-center font-semibold mt-2", children: "Hotter = MORE resistance (for metals)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center mt-1", children: "Atoms vibrate more, blocking electron flow" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 rounded-xl p-4 border-2 border-amber-300", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 text-center", children: "Summary: R increases with \u2192 longer length, thinner wire, certain materials, higher temperature" }) })
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 rounded-xl p-4 border-2 border-amber-300", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 text-center", children: "Summary: R increases with → longer length, thinner wire, certain materials, higher temperature" }) })
   ] });
   var ElectricalSafetyDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-red-50 to-rose-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Electrical Safety & Protection Devices" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-5 mb-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-yellow-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-3", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl mb-1", children: "\u{1F50C}" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl mb-1", children: "🔌" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-yellow-800", children: "FUSE" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 70", className: "w-full mb-3", children: [
@@ -23863,22 +23759,22 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-xs text-gray-700 space-y-1", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Contains a ",
+            "• Contains a ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "thin wire" }),
             " that melts when current is too high"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Permanently breaks the circuit" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Permanently breaks the circuit" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Must be ",
+            "• Must be ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-red-600", children: "replaced" }),
             " after it blows"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Rated in Amperes (e.g., 15A fuse)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Rated in Amperes (e.g., 15A fuse)" })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-orange-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-3", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl mb-1", children: "\u26A1" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl mb-1", children: "⚡" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-orange-800", children: "CIRCUIT BREAKER" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 70", className: "w-full mb-3", children: [
@@ -23892,22 +23788,22 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-xs text-gray-700 space-y-1", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Electromagnetic switch that ",
+            "• Electromagnetic switch that ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "trips" }),
             " on overload"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Can be ",
+            "• Can be ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-600", children: "reset" }),
             " (unlike fuse)"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Used in home electrical panels" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Resets by flipping the switch back" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Used in home electrical panels" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Resets by flipping the switch back" })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-3", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl mb-1", children: "\u{1F30D}" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl mb-1", children: "🌍" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-300", children: "GROUNDING" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 80", className: "w-full mb-3", children: [
@@ -23921,23 +23817,23 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "80", textAnchor: "middle", fontSize: "9", fill: "#16A34A", fontWeight: "bold", children: "Earth/Ground" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-xs text-gray-700 space-y-1", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 3rd prong connects device to Earth" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• 3rd prong connects device to Earth" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Provides safe path for ",
+            "• Provides safe path for ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "fault current" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Prevents electrocution if wiring fails" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Required for all metal appliances" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Prevents electrocution if wiring fails" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Required for all metal appliances" })
         ] })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-100 rounded-xl p-4 border-2 border-red-400", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 text-center mb-3", children: "\u26A0\uFE0F Current Danger Levels \u2014 Know These!" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 text-center mb-3", children: "⚠️ Current Danger Levels — Know These!" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid grid-cols-4 gap-3 text-center text-xs", children: [
         { mA: "1 mA", effect: "Barely felt", color: "bg-green-100 border-green-400 text-green-300" },
         { mA: "10 mA", effect: "Painful, muscle contraction", color: "bg-yellow-100 border-yellow-400 text-yellow-800" },
-        { mA: "100 mA", effect: "\u26A0\uFE0F FATAL \u2014 ventricular fibrillation", color: "bg-orange-100 border-orange-400 text-orange-800" },
-        { mA: "1000 mA", effect: "\u{1F480} Certain death, severe burns", color: "bg-red-200 border-red-500 text-red-900" }
+        { mA: "100 mA", effect: "⚠️ FATAL — ventricular fibrillation", color: "bg-orange-100 border-orange-400 text-orange-800" },
+        { mA: "1000 mA", effect: "💀 Certain death, severe burns", color: "bg-red-200 border-red-500 text-red-900" }
       ].map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `rounded-lg p-2 border-2 ${d.color}`, children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-black text-lg", children: d.mA }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: d.effect })
@@ -23945,56 +23841,56 @@
     ] })
   ] });
   var PowerCostCalculatorDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Electrical Energy Cost \u2014 Worked Examples" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Electrical Energy Cost — Worked Examples" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-center font-bold text-gray-700 mb-4", children: [
         "Formula Chain: ",
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-green-300", children: "P = V \xD7 I" }),
-        " \u2192 ",
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-300", children: "E = P \xD7 t" }),
-        " \u2192 ",
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-purple-300", children: "Cost = E \xD7 rate" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-green-300", children: "P = V × I" }),
+        " → ",
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-300", children: "E = P × t" }),
+        " → ",
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-purple-300", children: "Cost = E × rate" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-4 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-950/30 rounded-xl p-4 border border-green-500/20", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "Example 1 \u2014 Light Bulb" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "Example 1 — Light Bulb" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-gray-600 text-xs", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "60W bulb, 5 hours/day, 30 days" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Rate: $0.13/kWh" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "E = 0.06 kW \xD7 5h \xD7 30" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "E = 0.06 kW × 5h × 30" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
               "E = ",
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "9 kWh" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 9 \xD7 $0.13" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 9 × $0.13" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-green-300", children: "= $1.17/month" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-xl p-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "Example 2 \u2014 Heater" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "Example 2 — Heater" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-gray-600 text-xs", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "1500W heater, 8 hours" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Rate: $0.12/kWh" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "E = 1.5 kW \xD7 8h" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "E = 1.5 kW × 8h" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
               "E = ",
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "12 kWh" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 12 \xD7 $0.12" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 12 × $0.12" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-blue-300", children: "= $1.44" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-50 rounded-xl p-4 border border-purple-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-800 mb-2", children: "Example 3 \u2014 From V & I" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-800 mb-2", children: "Example 3 — From V & I" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-gray-600 text-xs", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Device: 120V, draws 2.5A, 4 hours" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Rate: $0.10/kWh" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "P = 120 \xD7 2.5 = 300W" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "P = 120 × 2.5 = 300W" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-              "E = 0.3 kW \xD7 4h = ",
+              "E = 0.3 kW × 4h = ",
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-purple-300", children: "1.2 kWh" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 1.2 \xD7 $0.10" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 1.2 × $0.10" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-purple-300", children: "= $0.12" })
           ] })
         ] })
@@ -24002,7 +23898,7 @@
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-amber-200", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-3", children: "\u{1F3E0} Common Appliance Wattages" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-3", children: "🏠 Common Appliance Wattages" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "space-y-2", children: [
           { name: "LED Bulb", w: 10, bar: 1 },
           { name: "Laptop", w: 50, bar: 3 },
@@ -24020,39 +23916,39 @@
         ] }, i)) })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-teal-200", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-teal-800 mb-3", children: "\u{1F4DD} Step-by-Step Method" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-teal-800 mb-3", children: "📝 Step-by-Step Method" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-2 text-xs", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex gap-2 items-start", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-5 h-5 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0", children: "1" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
               "Convert Watts to Kilowatts: ",
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-mono font-bold", children: "\xF7 1000" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-mono font-bold", children: "÷ 1000" })
             ] })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex gap-2 items-start", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-5 h-5 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0", children: "2" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
               "Calculate Energy: ",
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "kW \xD7 hours = kWh" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "kW × hours = kWh" })
             ] })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex gap-2 items-start", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-5 h-5 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0", children: "3" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
               "Calculate Cost: ",
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "kWh \xD7 $/kWh" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "kWh × $/kWh" })
             ] })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex gap-2 items-start", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-5 h-5 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0", children: "!" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
               "If given V and I first: ",
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "P = V \xD7 I" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "P = V × I" }),
               ", then continue"
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-teal-50 rounded-lg p-2 text-xs text-teal-800 font-semibold", children: "\u{1F4A1} kWh is what your electricity bill charges for!" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-teal-50 rounded-lg p-2 text-xs text-teal-800 font-semibold", children: "💡 kWh is what your electricity bill charges for!" })
       ] })
     ] })
   ] });
@@ -24061,55 +23957,55 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-yellow-400 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3 mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-2xl", children: "\u26A1" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-2xl", children: "⚡" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-yellow-800 text-xl", children: "STATIC Electricity" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 220 90", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "10", y: "20", width: "200", height: "50", rx: "8", fill: "#FEF9C3", stroke: "#EAB308", strokeWidth: "2" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "40", fontSize: "18", fill: "#B45309", children: "\u2013 \u2013 \u2013 \u2013 \u2013 \u2013 \u2013 \u2013 \u2013" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "60", fontSize: "18", fill: "#B45309", children: "\u2013 \u2013 \u2013 \u2013 \u2013 \u2013 \u2013 \u2013 \u2013" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "40", fontSize: "18", fill: "#B45309", children: "– – – – – – – – –" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "60", fontSize: "18", fill: "#B45309", children: "– – – – – – – – –" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "70", y: "78", fontSize: "10", fill: "#92400E", fontWeight: "bold", children: "charges STAY in place" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Charge ",
+            "• Charge ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-yellow-300", children: "builds up" }),
             " on surface of object"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Electrons do ",
+            "• Electrons do ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "not" }),
             " flow continuously"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Discharge happens suddenly (spark!)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Examples: balloon, walking on carpet, lightning" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Cannot do useful electrical work" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Discharge happens suddenly (spark!)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Examples: balloon, walking on carpet, lightning" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Cannot do useful electrical work" })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-blue-400 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3 mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-2xl", children: "\u{1F50B}" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-2xl", children: "🔋" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300 text-xl", children: "CURRENT Electricity" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 220 90", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "10", y: "30", width: "200", height: "30", rx: "5", fill: "#DBEAFE", stroke: "#3B82F6", strokeWidth: "2" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "20", y: "50", fontSize: "18", fill: "#1D4ED8", children: "\u2192 \u2192 \u2192 \u2192 \u2192 \u2192 \u2192 \u2192" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "20", y: "50", fontSize: "18", fill: "#1D4ED8", children: "→ → → → → → → →" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "55", y: "75", fontSize: "10", fill: "#1E40AF", fontWeight: "bold", children: "electrons FLOW in a loop" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Electrons ",
+            "• Electrons ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "flow continuously" }),
             " in a circuit"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Requires a closed loop (circuit)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Needs an energy source (battery, outlet)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Examples: lights, phone charger, TV" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Does useful work (powers devices)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Requires a closed loop (circuit)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Needs an energy source (battery, outlet)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Examples: lights, phone charger, TV" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Does useful work (powers devices)" })
         ] })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-200", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid grid-cols-4 gap-3 text-center text-xs font-semibold", children: [["Property", "Static", "Current", "Winner"], ["Motion", "Charges stay", "Charges flow", "Current"], ["Path needed", "No", "Yes (circuit)", "\u2014"], ["Continuous?", "No (one burst)", "Yes", "Current"], ["Powers devices?", "No", "Yes", "Current"], ["Example", "Doorknob shock", "LED bulb", "\u2014"]].map((row, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react3.default.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-200", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid grid-cols-4 gap-3 text-center text-xs font-semibold", children: [["Property", "Static", "Current", "Winner"], ["Motion", "Charges stay", "Charges flow", "Current"], ["Path needed", "No", "Yes (circuit)", "—"], ["Continuous?", "No (one burst)", "Yes", "Current"], ["Powers devices?", "No", "Yes", "Current"], ["Example", "Doorknob shock", "LED bulb", "—"]].map((row, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react3.default.Fragment, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-purple-100 text-purple-800" : i % 2 === 0 ? "bg-gray-50" : "bg-white"} col-span-1`, children: row[0] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-yellow-100 text-yellow-800" : i % 2 === 0 ? "bg-gray-50" : "bg-white"}`, children: row[1] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-blue-100 text-blue-300" : i % 2 === 0 ? "bg-gray-50" : "bg-white"}`, children: row[2] }),
@@ -24119,9 +24015,9 @@
   var ElectroscopeDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "How an Electroscope Works" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid md:grid-cols-3 gap-6 mb-5", children: [
-      { label: "Neutral", color: "#6B7280", leafAngle: 0, desc: "Leaves hang straight down. Equal + and \u2212 charges.", borderColor: "border-gray-200", bg: "bg-gray-50" },
-      { label: "Charged (\u2212)", color: "#3B82F6", leafAngle: 35, desc: "Leaves spread apart \u2014 both leaves got \u2212 charge, repel each other.", borderColor: "border-blue-300", bg: "bg-blue-50" },
-      { label: "Charged (+)", color: "#EF4444", leafAngle: 35, desc: "Leaves spread apart \u2014 both leaves got + charge (lost electrons), repel.", borderColor: "border-red-300", bg: "bg-red-50" }
+      { label: "Neutral", color: "#6B7280", leafAngle: 0, desc: "Leaves hang straight down. Equal + and − charges.", borderColor: "border-gray-200", bg: "bg-gray-50" },
+      { label: "Charged (−)", color: "#3B82F6", leafAngle: 35, desc: "Leaves spread apart — both leaves got − charge, repel each other.", borderColor: "border-blue-300", bg: "bg-blue-50" },
+      { label: "Charged (+)", color: "#EF4444", leafAngle: 35, desc: "Leaves spread apart — both leaves got + charge (lost electrons), repel.", borderColor: "border-red-300", bg: "bg-red-50" }
     ].map((state, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `bg-white rounded-xl p-5 border-2 ${state.borderColor} shadow-md text-center`, children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold mb-3", style: { color: state.color }, children: state.label }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 120 160", className: "w-full h-36 mx-auto mb-3", children: [
@@ -24136,7 +24032,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "57", y1: "84", x2: "35", y2: "128", stroke: state.color, strokeWidth: "3", strokeLinecap: "round" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "63", y1: "84", x2: "85", y2: "128", stroke: state.color, strokeWidth: "3", strokeLinecap: "round" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "150", textAnchor: "middle", fontSize: "9", fill: state.color, fontWeight: "bold", children: state.leafAngle === 0 ? "\u2190 closed \u2192" : "\u2190 open \u2192" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "60", y: "150", textAnchor: "middle", fontSize: "9", fill: state.color, fontWeight: "bold", children: state.leafAngle === 0 ? "← closed →" : "← open →" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: state.desc })
     ] }, i)) }),
@@ -24145,17 +24041,17 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-3 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-lg p-3 border border-amber-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-1", children: "Using Induction with Electroscope:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Bring charged rod near (don't touch) \u2192 leaves spread. Touch your finger to plate while rod is near \u2192 ground it. Remove finger, then rod \u2192 leaves stay slightly spread (opposite charge induced)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Bring charged rod near (don't touch) → leaves spread. Touch your finger to plate while rod is near → ground it. Remove finger, then rod → leaves stay slightly spread (opposite charge induced)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-lg p-3 border border-amber-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-1", children: "Using Conduction with Electroscope:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Touch charged rod to plate \u2192 charge transfers directly. Leaves spread and STAY spread even after rod is removed. Object now holds same type of charge as rod that touched it." })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Touch charged rod to plate → charge transfers directly. Leaves spread and STAY spread even after rod is removed. Object now holds same type of charge as rod that touched it." })
         ] })
       ] })
     ] })
   ] });
   var LightningDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-white mb-6", children: "How Lightning Forms \u2014 Static on a Massive Scale" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-white mb-6", children: "How Lightning Forms — Static on a Massive Scale" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 260 280", className: "w-full", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("radialGradient", { id: "cloudGrad", cx: "50%", cy: "50%", r: "50%", children: [
@@ -24164,7 +24060,7 @@
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ellipse", { cx: "130", cy: "60", rx: "110", ry: "50", fill: "url(#cloudGrad)", opacity: "0.9" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "130", y: "45", textAnchor: "middle", fontSize: "13", fill: "white", fontWeight: "bold", children: "Storm Cloud" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "130", y: "62", textAnchor: "middle", fontSize: "20", children: "\u2013 \u2013 \u2013 \u2013 \u2013" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "130", y: "62", textAnchor: "middle", fontSize: "20", children: "– – – – –" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "130", y: "82", textAnchor: "middle", fontSize: "11", fill: "#FCD34D", children: "Bottom: negative charge" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "65", y: "35", fontSize: "16", fill: "#FCD34D", children: "+ + +" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "65", y: "22", fontSize: "10", fill: "#FCD34D", children: "Top: positive" }),
@@ -24176,10 +24072,10 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "65", y: "226", fontSize: "10", fill: "#60A5FA", children: "down = lightning!" })
       ] }) }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "space-y-3", children: [
-        { step: "1", title: "Charge Separation", text: "Ice crystals and water droplets collide inside storm cloud, separating charges. Negative (\u2212) charges accumulate at bottom, positive (+) at top.", color: "bg-blue-900 border-blue-500" },
+        { step: "1", title: "Charge Separation", text: "Ice crystals and water droplets collide inside storm cloud, separating charges. Negative (−) charges accumulate at bottom, positive (+) at top.", color: "bg-blue-900 border-blue-500" },
         { step: "2", title: "Ground Induction", text: "The negative cloud base REPELS electrons in the ground below. Ground surface becomes positively charged (electrons pushed away).", color: "bg-purple-900 border-purple-500" },
         { step: "3", title: "Leader Stroke", text: 'Invisible "stepped leader" of electrons zigzags down from cloud. A "streamer" of positive charge rises from ground objects (trees, buildings).', color: "bg-amber-900 border-amber-500" },
-        { step: "4", title: "Return Stroke = LIGHTNING!", text: "When leader meets streamer \u2192 massive current flows. The bright flash is the return stroke \u2014 billions of volts, 30,000\xB0C, 30,000 amps!", color: "bg-yellow-900 border-yellow-400" },
+        { step: "4", title: "Return Stroke = LIGHTNING!", text: "When leader meets streamer → massive current flows. The bright flash is the return stroke — billions of volts, 30,000°C, 30,000 amps!", color: "bg-yellow-900 border-yellow-400" },
         { step: "5", title: "Lightning Rod", text: "Metal rod on building provides easy path for charge to flow safely to ground. Prevents charge buildup that leads to dangerous strike on building.", color: "bg-green-900 border-green-500" }
       ].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `rounded-lg p-3 border-2 ${s.color} flex gap-3`, children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-7 h-7 bg-yellow-400 text-slate-900 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0", children: s.step }),
@@ -24191,7 +24087,7 @@
     ] })
   ] });
   var OhmsLawGraph = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ohm's Law \u2014 Graphical Relationships" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ohm's Law — Graphical Relationships" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-5 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300 text-center mb-3", children: "V vs I (R constant)" }),
@@ -24199,7 +24095,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "25", y1: "10", x2: "25", y2: "115", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "20", y1: "110", x2: "150", y2: "110", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 25 110 L 140 20", stroke: "#3B82F6", strokeWidth: "3", fill: "none" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "130", textAnchor: "middle", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Current (I) \u2192" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "130", textAnchor: "middle", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Current (I) →" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "70", fontSize: "11", fill: "#374151", fontWeight: "bold", transform: "rotate(-90,10,70)", children: "Voltage (V)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "45", fontSize: "10", fill: "#3B82F6", fontWeight: "bold", children: "slope = R" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "25", cy: "110", r: "3", fill: "#3B82F6" }),
@@ -24207,7 +24103,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "95", cy: "56", r: "3", fill: "#3B82F6" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "130", cy: "29", r: "3", fill: "#3B82F6" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-300 text-center font-semibold", children: "Straight line through origin \u2192 V \u221D I" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-300 text-center font-semibold", children: "Straight line through origin → V ∝ I" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center", children: "Steeper slope = higher resistance" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-green-300 shadow-md", children: [
@@ -24216,13 +24112,13 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "25", y1: "10", x2: "25", y2: "115", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "20", y1: "110", x2: "150", y2: "110", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 30 20 Q 60 40 90 65 Q 120 85 145 100", stroke: "#10B981", strokeWidth: "3", fill: "none" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "130", textAnchor: "middle", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Resistance (R) \u2192" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "130", textAnchor: "middle", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Resistance (R) →" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "70", fontSize: "11", fill: "#374151", fontWeight: "bold", transform: "rotate(-90,10,70)", children: "Current (I)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "90", y: "38", fontSize: "10", fill: "#10B981", fontWeight: "bold", children: "I = V/R" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "50", fontSize: "9", fill: "#10B981", children: "(hyperbola)" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300 text-center font-semibold", children: "Curve \u2192 as R\u2191, I\u2193 (inverse)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center", children: "Double R \u2192 halve I" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300 text-center font-semibold", children: "Curve → as R↑, I↓ (inverse)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center", children: "Double R → halve I" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-orange-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-orange-800 text-center mb-3", children: "Multiple R values" }),
@@ -24235,7 +24131,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "142", y: "30", fontSize: "9", fill: "#EF4444", children: "R=high" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "142", y: "55", fontSize: "9", fill: "#F59E0B", children: "R=med" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "142", y: "85", fontSize: "9", fill: "#10B981", children: "R=low" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "130", textAnchor: "middle", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Current (I) \u2192" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "130", textAnchor: "middle", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Current (I) →" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "70", fontSize: "11", fill: "#374151", fontWeight: "bold", transform: "rotate(-90,10,70)", children: "Voltage (V)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300 text-center font-semibold", children: "All lines through origin" }),
@@ -24243,11 +24139,11 @@
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-indigo-200", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-3 text-center", children: "\u{1F4CA} Reading V-I Graphs on Tests" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-3 text-center", children: "📊 Reading V-I Graphs on Tests" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-3 text-xs", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-indigo-50 rounded-lg p-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-1", children: "Finding Resistance:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Pick any point on the line. R = V \xF7 I using those coordinates. Steeper slope = higher R." })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Pick any point on the line. R = V ÷ I using those coordinates. Steeper slope = higher R." })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-50 rounded-lg p-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-300 mb-1", children: "Ohmic vs Non-Ohmic:" }),
@@ -24255,18 +24151,18 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-1", children: "Exam Tip:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "If graph is curved at high I \u2192 resistance is increasing (filament getting hot). Always check if line passes through origin!" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "If graph is curved at high I → resistance is increasing (filament getting hot). Always check if line passes through origin!" })
         ] })
       ] })
     ] })
   ] });
   var AmpmeterVoltmeterDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ammeter & Voltmeter \u2014 How to Connect Them" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ammeter & Voltmeter — How to Connect Them" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-teal-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-9 h-9 bg-teal-500 rounded-full flex items-center justify-center text-white font-black text-sm", children: "A" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-teal-800 text-lg", children: "AMMETER \u2014 measures current (A)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-teal-800 text-lg", children: "AMMETER — measures current (A)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 260 110", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "5", y: "45", width: "35", height: "25", rx: "4", fill: "#FEF9C3", stroke: "#EAB308", strokeWidth: "2" }),
@@ -24287,20 +24183,20 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Connected ",
+            "• Connected ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-teal-300", children: "IN SERIES" }),
-            " \u2014 current flows THROUGH it"
+            " — current flows THROUGH it"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Must be in the same wire/path as what you're measuring" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Has very LOW resistance (doesn't disturb circuit)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Breaking circuit and inserting ammeter in the gap" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-600 font-semibold", children: "\u26A0\uFE0F Never connect directly across a battery \u2014 low resistance = huge current = damage!" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Must be in the same wire/path as what you're measuring" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Has very LOW resistance (doesn't disturb circuit)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Breaking circuit and inserting ammeter in the gap" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-600 font-semibold", children: "⚠️ Never connect directly across a battery — low resistance = huge current = damage!" })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-cyan-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-9 h-9 bg-cyan-500 rounded-full flex items-center justify-center text-white font-black text-sm", children: "V" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-cyan-800 text-lg", children: "VOLTMETER \u2014 measures voltage (V)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-cyan-800 text-lg", children: "VOLTMETER — measures voltage (V)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 260 130", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "5", y: "45", width: "35", height: "25", rx: "4", fill: "#FEF9C3", stroke: "#EAB308", strokeWidth: "2" }),
@@ -24320,14 +24216,14 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-            "\u2022 Connected ",
+            "• Connected ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-cyan-300", children: "IN PARALLEL" }),
-            " \u2014 bridges across the component"
+            " — bridges across the component"
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Placed across (in parallel with) the component to measure" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Has very HIGH resistance (barely any current flows through it)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Does NOT break the circuit \u2014 just connects across" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-600 font-semibold", children: "\u2713 Safe to connect across battery \u2014 reads battery voltage" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Placed across (in parallel with) the component to measure" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Has very HIGH resistance (barely any current flows through it)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "• Does NOT break the circuit — just connects across" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-600 font-semibold", children: "✓ Safe to connect across battery — reads battery voltage" })
         ] })
       ] })
     ] }),
@@ -24344,7 +24240,7 @@
     ] }) })
   ] });
   var SeriesParallelComparisonTable = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-violet-50 to-purple-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Series vs Parallel \u2014 Complete Comparison" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Series vs Parallel — Complete Comparison" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "overflow-x-auto mb-5", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", { className: "w-full text-sm", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { className: "bg-purple-200 text-purple-900 p-3 rounded-tl-lg text-left", children: "Property" }),
@@ -24352,13 +24248,13 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { className: "bg-green-200 text-green-900 p-3 rounded-tr-lg text-center", children: "Parallel Circuit" })
       ] }) }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", { children: [
-        ["Current (I)", "SAME everywhere\nI = I\u2081 = I\u2082 = I\u2083", "DIVIDES at junctions\nI_total = I\u2081 + I\u2082 + I\u2083"],
-        ["Voltage (V)", "DIVIDES among components\nV_total = V\u2081 + V\u2082 + V\u2083", "SAME across all branches\nV = V\u2081 = V\u2082 = V\u2083"],
-        ["Resistance (R)", "ADDS UP\nR_total = R\u2081 + R\u2082 + R\u2083", "DECREASES\n1/R_t = 1/R\u2081 + 1/R\u2082 + 1/R\u2083"],
-        ["If one breaks", "ALL stop working \u2717", "Others keep working \u2713"],
+        ["Current (I)", "SAME everywhere\nI = I₁ = I₂ = I₃", "DIVIDES at junctions\nI_total = I₁ + I₂ + I₃"],
+        ["Voltage (V)", "DIVIDES among components\nV_total = V₁ + V₂ + V₃", "SAME across all branches\nV = V₁ = V₂ = V₃"],
+        ["Resistance (R)", "ADDS UP\nR_total = R₁ + R₂ + R₃", "DECREASES\n1/R_t = 1/R₁ + 1/R₂ + 1/R₃"],
+        ["If one breaks", "ALL stop working ✗", "Others keep working ✓"],
         ["Adding more", "More dim (more R shared)", "Same brightness (same V)"],
         ["Real-life use", "Old string lights, switches", "Home wiring, hospital gear"],
-        ["Formula check", "V\u2081+V\u2082+V\u2083 = battery V", "I\u2081+I\u2082+I\u2083 = total I"]
+        ["Formula check", "V₁+V₂+V₃ = battery V", "I₁+I₂+I₃ = total I"]
       ].map((row, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { className: i % 2 === 0 ? "bg-white" : "bg-gray-50", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { className: "p-3 font-semibold text-purple-800 border-b border-gray-100", children: row[0] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { className: "p-3 text-blue-300 border-b border-gray-100 text-center whitespace-pre-line text-xs", children: row[1] }),
@@ -24367,21 +24263,21 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-xl p-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u{1F4CC} Series Exam Checklist:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "📌 Series Exam Checklist:" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-blue-300", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 R_total = sum of all resistors" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 I = V_battery \xF7 R_total (same everywhere)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Each V = I \xD7 that R (voltage divider)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Check: all V's add to battery voltage" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ R_total = sum of all resistors" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ I = V_battery ÷ R_total (same everywhere)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ Each V = I × that R (voltage divider)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ Check: all V's add to battery voltage" })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-950/30 rounded-xl p-4 border border-green-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "\u{1F4CC} Parallel Exam Checklist:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "📌 Parallel Exam Checklist:" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-green-300", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Each branch: V = battery voltage" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Each branch: I = V \xF7 that branch's R" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 I_total = sum of all branch currents" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Check: all I's add to total current" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ Each branch: V = battery voltage" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ Each branch: I = V ÷ that branch's R" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ I_total = sum of all branch currents" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "□ Check: all I's add to total current" })
         ] })
       ] })
     ] })
@@ -24390,20 +24286,20 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Energy Conversions in Electrical Devices" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-amber-300 mb-4 text-center", children: "Input \u2192 Process \u2192 Output" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-amber-300 mb-4 text-center", children: "Input → Process → Output" }),
         [
-          { device: "\u{1F4A1} Light Bulb", input: "Electrical", arrow: "\u2192", output: "Light + Heat", eff: "~5%", color: "border-yellow-300 bg-yellow-50" },
-          { device: "\u{1F4A1} LED Bulb", input: "Electrical", arrow: "\u2192", output: "Light + tiny Heat", eff: "~40%", color: "border-green-300 bg-green-50" },
-          { device: "\u{1F50A} Speaker", input: "Electrical", arrow: "\u2192", output: "Sound + Heat", eff: "~25%", color: "border-blue-300 bg-blue-50" },
-          { device: "\u2699\uFE0F Motor", input: "Electrical", arrow: "\u2192", output: "Motion + Heat", eff: "~85%", color: "border-purple-300 bg-purple-50" },
-          { device: "\u{1F50B} Battery charger", input: "Electrical", arrow: "\u2192", output: "Chemical energy", eff: "~90%", color: "border-teal-300 bg-teal-50" },
-          { device: "\u2600\uFE0F Solar Panel", input: "Light", arrow: "\u2192", output: "Electrical + Heat", eff: "~20%", color: "border-orange-300 bg-orange-50" }
+          { device: "💡 Light Bulb", input: "Electrical", arrow: "→", output: "Light + Heat", eff: "~5%", color: "border-yellow-300 bg-yellow-50" },
+          { device: "💡 LED Bulb", input: "Electrical", arrow: "→", output: "Light + tiny Heat", eff: "~40%", color: "border-green-300 bg-green-50" },
+          { device: "🔊 Speaker", input: "Electrical", arrow: "→", output: "Sound + Heat", eff: "~25%", color: "border-blue-300 bg-blue-50" },
+          { device: "⚙️ Motor", input: "Electrical", arrow: "→", output: "Motion + Heat", eff: "~85%", color: "border-purple-300 bg-purple-50" },
+          { device: "🔋 Battery charger", input: "Electrical", arrow: "→", output: "Chemical energy", eff: "~90%", color: "border-teal-300 bg-teal-50" },
+          { device: "☀️ Solar Panel", input: "Light", arrow: "→", output: "Electrical + Heat", eff: "~20%", color: "border-orange-300 bg-orange-50" }
         ].map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `flex items-center gap-3 p-2 rounded-lg border mb-2 ${item.color}`, children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xl w-8", children: item.device.split(" ")[0] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs font-semibold text-gray-700 w-24", children: item.device.substring(2) }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs text-gray-500 flex-1", children: [
             item.input,
-            " \u2192 ",
+            " → ",
             item.output
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs font-bold text-gray-600 bg-gray-200 rounded px-1", children: [
@@ -24415,7 +24311,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-amber-300 mb-4 text-center", children: "Law of Conservation of Energy" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-amber-300 mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-amber-300 text-lg mb-3", children: "Energy is NEVER created or destroyed \u2014 only CONVERTED" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-amber-300 text-lg mb-3", children: "Energy is NEVER created or destroyed — only CONVERTED" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 220 140", className: "w-full", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "110", cy: "70", r: "55", fill: "none", stroke: "#F59E0B", strokeWidth: "2", strokeDasharray: "8" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "75", y: "50", width: "70", height: "40", rx: "8", fill: "#FEF3C7", stroke: "#D97706", strokeWidth: "2" }),
@@ -24439,23 +24335,23 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-950/30 rounded-xl p-4 border border-red-500/20", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-2", children: "Efficiency Formula:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-red-300 mb-1", children: "Efficiency = (Useful Output \xF7 Total Input) \xD7 100%" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Example: motor uses 200J electricity, produces 170J motion \u2192 efficiency = (170\xF7200)\xD7100 = 85%" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-red-300 mb-1", children: "Efficiency = (Useful Output ÷ Total Input) × 100%" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Example: motor uses 200J electricity, produces 170J motion → efficiency = (170÷200)×100 = 85%" })
         ] })
       ] })
     ] })
   ] });
   var CircuitTroubleshootingDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-rose-50 to-pink-50 rounded-xl p-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Circuit Problem-Solving \u2014 Step-by-Step Strategy" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Circuit Problem-Solving — Step-by-Step Strategy" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-rose-300 shadow-md", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-rose-800 mb-4 text-center", children: "\u{1F50E} The 5-Step Method for Any Circuit Problem" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-rose-800 mb-4 text-center", children: "🔎 The 5-Step Method for Any Circuit Problem" }),
         [
           { n: "1", title: "Identify circuit type", detail: "Is it series (one path) or parallel (multiple paths)? Look for branches in the diagram.", color: "bg-red-100 border-red-300" },
-          { n: "2", title: "Write known values", detail: "List every V, I, R value given. Label components (R\u2081, R\u2082...). Draw and label the circuit.", color: "bg-orange-100 border-orange-300" },
-          { n: "3", title: "Find total resistance", detail: "Series: add all R. Parallel: use 1/R_t = 1/R\u2081+1/R\u2082+... (or for 2: R_t = R\u2081\xD7R\u2082\xF7(R\u2081+R\u2082))", color: "bg-yellow-100 border-yellow-300" },
+          { n: "2", title: "Write known values", detail: "List every V, I, R value given. Label components (R₁, R₂...). Draw and label the circuit.", color: "bg-orange-100 border-orange-300" },
+          { n: "3", title: "Find total resistance", detail: "Series: add all R. Parallel: use 1/R_t = 1/R₁+1/R₂+... (or for 2: R_t = R₁×R₂÷(R₁+R₂))", color: "bg-yellow-100 border-yellow-300" },
           { n: "4", title: "Apply Ohm's Law", detail: "Use V=IR (or I=V/R or R=V/I). Start from what you know and work toward what you need.", color: "bg-green-100 border-green-300" },
-          { n: "5", title: "Verify your answer", detail: "Series: check V\u2081+V\u2082+...= V_battery. Parallel: check I\u2081+I\u2082+...= I_total. Units correct?", color: "bg-blue-100 border-blue-300" }
+          { n: "5", title: "Verify your answer", detail: "Series: check V₁+V₂+...= V_battery. Parallel: check I₁+I₂+...= I_total. Units correct?", color: "bg-blue-100 border-blue-300" }
         ].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `flex gap-3 p-3 rounded-lg border mb-2 ${s.color}`, children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-7 h-7 bg-rose-500 text-white rounded-full flex items-center justify-center font-black text-sm flex-shrink-0", children: s.n }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
@@ -24466,27 +24362,27 @@
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-pink-300 shadow-md mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-pink-800 mb-3 text-center", children: "\u26A0\uFE0F Most Common Exam Mistakes" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-pink-800 mb-3 text-center", children: "⚠️ Most Common Exam Mistakes" }),
           [
             { mistake: 'Mixing up which quantity is "same" in each circuit type', fix: "Series = same CURRENT. Parallel = same VOLTAGE. Repeat until automatic." },
-            { mistake: "Not converting W \u2192 kW before energy/cost calculation", fix: "Divide watts by 1000 first. Then multiply kW \xD7 hours = kWh." },
+            { mistake: "Not converting W → kW before energy/cost calculation", fix: "Divide watts by 1000 first. Then multiply kW × hours = kWh." },
             { mistake: "Confusing ammeter and voltmeter connections", fix: "Ammeter: break circuit, insert IN SERIES. Voltmeter: connect ACROSS (parallel)." },
-            { mistake: "Forgetting to verify: voltages must add up in series", fix: "Always check: V\u2081 + V\u2082 + V\u2083 = V_battery as a final sanity check." }
+            { mistake: "Forgetting to verify: voltages must add up in series", fix: "Always check: V₁ + V₂ + V₃ = V_battery as a final sanity check." }
           ].map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mb-3 p-3 bg-pink-50 rounded-lg border border-pink-200", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-red-300 font-semibold", children: [
-              "\u2717 Mistake: ",
+              "✗ Mistake: ",
               item.mistake
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-green-300 font-semibold mt-1", children: [
-              "\u2713 Fix: ",
+              "✓ Fix: ",
               item.fix
             ] })
           ] }, i))
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-800 mb-2", children: "2-Resistor Parallel Shortcut:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-purple-300 my-2", children: "R_total = (R\u2081 \xD7 R\u2082) \xF7 (R\u2081 + R\u2082)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Example: R\u2081=6\u03A9, R\u2082=12\u03A9 \u2192 R_t = (6\xD712)\xF7(6+12) = 72\xF718 = 4\u03A9" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-purple-300 my-2", children: "R_total = (R₁ × R₂) ÷ (R₁ + R₂)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Example: R₁=6Ω, R₂=12Ω → R_t = (6×12)÷(6+12) = 72÷18 = 4Ω" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-500 mt-1", children: "Note: R_total is always LESS than either individual resistor" })
         ] })
       ] })
@@ -24553,7 +24449,7 @@
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-300 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Evolution:" }),
-      " From solid ball \u2192 embedded electrons \u2192 nuclear center \u2192 specific orbits"
+      " From solid ball → embedded electrons → nuclear center → specific orbits"
     ] }) })
   ] });
   var PeriodicTableDiagram = () => {
@@ -24796,7 +24692,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-4 grid grid-cols-2 gap-2 text-xs", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-50 rounded-lg p-2 border border-red-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-1", children: "Group 1: Alkali Metals" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "Soft, highly reactive, 1 valence e\u207B" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "Soft, highly reactive, 1 valence e⁻" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-50 rounded-lg p-2 border border-purple-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-800 mb-1", children: "Group 18: Noble Gases" }),
@@ -24862,7 +24758,7 @@
       sections: [
         {
           id: "bio-flashcards-header",
-          title: "\u{1F33F} Biology Flashcards",
+          title: "🌿 Biology Flashcards",
           isSectionHeader: true,
           headerColor: "from-emerald-500 to-teal-600",
           image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&h=400&fit=crop",
@@ -24881,9 +24777,9 @@
             { front: "What is the 10% rule in energy transfer?", back: "Only 10% of energy passes to the next trophic level. 90% is lost as heat, movement, and waste." },
             { front: "What is bioaccumulation?", back: "The build-up of a substance (like a toxin) in a single organism over time" },
             { front: "What is biomagnification?", back: "The increase in concentration of a substance as you move up the food chain" },
-            { front: "What is photosynthesis?", back: "The process where plants use CO\u2082 and water to make glucose and oxygen using sunlight\n6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082" },
-            { front: "What is cellular respiration?", back: "The process where organisms break down glucose with oxygen to release energy\nC\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + ATP" },
-            { front: "What is nitrogen fixation?", back: "The conversion of atmospheric nitrogen (N\u2082) into ammonia (NH\u2083) by bacteria or lightning" },
+            { front: "What is photosynthesis?", back: "The process where plants use CO₂ and water to make glucose and oxygen using sunlight\n6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂" },
+            { front: "What is cellular respiration?", back: "The process where organisms break down glucose with oxygen to release energy\nC₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP" },
+            { front: "What is nitrogen fixation?", back: "The conversion of atmospheric nitrogen (N₂) into ammonia (NH₃) by bacteria or lightning" },
             { front: "What makes a species invasive?", back: "A non-native species that causes harm by: rapid reproduction, outcompeting natives, lacking natural predators, and disrupting ecosystems" },
             { front: "What is reforestation?", back: "Planting trees in areas where they were previously cut down to restore ecosystems" },
             { front: "What is bioremediation?", back: "Adding organisms (like bacteria) that break down waste and improve soil/water quality" },
@@ -24902,14 +24798,14 @@
             { front: "What is an example of ecosystem diversity?", back: "A region with forests, wetlands, grasslands, and lakes" },
             { front: "Why is biodiversity important?", back: "More diverse ecosystems are more stable, resilient to change, and provide essential services (clean air, water, food)" },
             { front: "What is bioaugmentation?", back: "Using bacteria or fungi to neutralize toxins and clean up pollution (like oil spills)" },
-            { front: "What is nitrification?", back: "The conversion of ammonia (NH\u2083) to nitrite (NO\u2082\u207B) and then to nitrate (NO\u2083\u207B) by bacteria" },
-            { front: "What is denitrification?", back: "The conversion of nitrate (NO\u2083\u207B) back into nitrogen gas (N\u2082) that returns to the atmosphere" }
+            { front: "What is nitrification?", back: "The conversion of ammonia (NH₃) to nitrite (NO₂⁻) and then to nitrate (NO₃⁻) by bacteria" },
+            { front: "What is denitrification?", back: "The conversion of nitrate (NO₃⁻) back into nitrogen gas (N₂) that returns to the atmosphere" }
           ],
           notes: []
         },
         {
           id: "physics-flashcards-header",
-          title: "\u26A1 Physics Flashcards",
+          title: "⚡ Physics Flashcards",
           isSectionHeader: true,
           headerColor: "from-amber-500 to-orange-600",
           image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
@@ -24927,20 +24823,20 @@
             { front: "What is current electricity?", back: "Continuous flow of electrons through a conductor. Unlike static, charges are MOVING constantly. Requires a complete circuit (closed loop)." },
             { front: "What is voltage (V)?", back: 'Electrical pressure or "push" that moves electrons through a circuit. Measured in Volts (V). Think: the force that pushes water through a pipe.' },
             { front: "What is current (I)?", back: "Rate of flow of electric charge (electrons). Measured in Amperes (A). Think: how much water flows through a pipe per second." },
-            { front: "What is resistance (R)?", back: "Opposition to flow of current. Measured in Ohms (\u03A9). Think: friction that slows down water flow in a pipe." },
-            { front: "What is Ohm's Law?", back: "V = I \xD7 R\nVoltage = Current \xD7 Resistance\nIf you know any 2 values, you can find the 3rd." },
-            { front: "How do you calculate current using Ohm's Law?", back: "I = V / R\nCurrent = Voltage \xF7 Resistance\nExample: 12V \xF7 4\u03A9 = 3A" },
-            { front: "How do you calculate resistance using Ohm's Law?", back: "R = V / I\nResistance = Voltage \xF7 Current\nExample: 12V \xF7 3A = 4\u03A9" },
+            { front: "What is resistance (R)?", back: "Opposition to flow of current. Measured in Ohms (Ω). Think: friction that slows down water flow in a pipe." },
+            { front: "What is Ohm's Law?", back: "V = I × R\nVoltage = Current × Resistance\nIf you know any 2 values, you can find the 3rd." },
+            { front: "How do you calculate current using Ohm's Law?", back: "I = V / R\nCurrent = Voltage ÷ Resistance\nExample: 12V ÷ 4Ω = 3A" },
+            { front: "How do you calculate resistance using Ohm's Law?", back: "R = V / I\nResistance = Voltage ÷ Current\nExample: 12V ÷ 3A = 4Ω" },
             { front: "What is a series circuit?", back: "ONE path for current to flow. Components connected end-to-end. Current is SAME everywhere. Voltage DIVIDES among components. If one breaks, ALL stop working." },
             { front: "What is a parallel circuit?", back: "MULTIPLE paths for current. Components connected across same two points. Voltage is SAME across all branches. Current DIVIDES among paths. If one breaks, others KEEP working." },
-            { front: "In a series circuit, what happens to current?", back: "Current is the SAME at all points in the circuit.\nI\u2081 = I\u2082 = I\u2083\nElectrons have only one path to follow." },
-            { front: "In a series circuit, what happens to voltage?", back: "Voltage DIVIDES among components.\nV_total = V\u2081 + V\u2082 + V\u2083\nEach component gets a portion of the total voltage." },
-            { front: "In a parallel circuit, what happens to voltage?", back: "Voltage is the SAME across all branches.\nV\u2081 = V\u2082 = V\u2083\nEach path gets the full battery voltage." },
-            { front: "In a parallel circuit, what happens to current?", back: "Current DIVIDES among branches.\nI_total = I\u2081 + I\u2082 + I\u2083\nMore paths = more total current drawn." },
+            { front: "In a series circuit, what happens to current?", back: "Current is the SAME at all points in the circuit.\nI₁ = I₂ = I₃\nElectrons have only one path to follow." },
+            { front: "In a series circuit, what happens to voltage?", back: "Voltage DIVIDES among components.\nV_total = V₁ + V₂ + V₃\nEach component gets a portion of the total voltage." },
+            { front: "In a parallel circuit, what happens to voltage?", back: "Voltage is the SAME across all branches.\nV₁ = V₂ = V₃\nEach path gets the full battery voltage." },
+            { front: "In a parallel circuit, what happens to current?", back: "Current DIVIDES among branches.\nI_total = I₁ + I₂ + I₃\nMore paths = more total current drawn." },
             { front: "What is electrical power (P)?", back: "Rate at which electrical energy is used or produced. Measured in Watts (W). Higher wattage = more energy used per second. 1000W = 1 Kilowatt (kW)." },
-            { front: "What is the power formula?", back: "P = V \xD7 I\nPower = Voltage \xD7 Current\nExample: 120V \xD7 0.5A = 60W" },
-            { front: "What is the difference between energy and power?", back: "POWER: How fast you use energy (Watts)\nENERGY: Total amount used over time (Joules or kWh)\nEnergy = Power \xD7 Time" },
-            { front: "How do you calculate the cost of electricity?", back: "Cost = (Power in kW) \xD7 (Time in hours) \xD7 (Rate per kWh)\nExample: 1.5 kW heater \xD7 8 hours \xD7 $0.12/kWh = $1.44" },
+            { front: "What is the power formula?", back: "P = V × I\nPower = Voltage × Current\nExample: 120V × 0.5A = 60W" },
+            { front: "What is the difference between energy and power?", back: "POWER: How fast you use energy (Watts)\nENERGY: Total amount used over time (Joules or kWh)\nEnergy = Power × Time" },
+            { front: "How do you calculate the cost of electricity?", back: "Cost = (Power in kW) × (Time in hours) × (Rate per kWh)\nExample: 1.5 kW heater × 8 hours × $0.12/kWh = $1.44" },
             { front: "What is a conductor?", back: "Material that allows electricity to flow easily. Examples: copper, metals, water with minerals. Low resistance to current flow." },
             { front: "What is an insulator?", back: "Material that resists flow of electricity. Examples: rubber, plastic, wood, glass. High resistance to current flow. Used for safety." },
             { front: "What is a circuit breaker?", back: "Safety switch that automatically opens (trips) when too much current flows. Prevents fires and electrocution. Can be reset after fixing the problem." },
@@ -24950,24 +24846,24 @@
             { front: "What does an ammeter measure?", back: 'Measures electric current (I) in Amperes (A). Must be connected in SERIES with the component. Symbol: Circle with "A" inside.' },
             { front: "What does a voltmeter measure?", back: 'Measures voltage (V) in Volts. Must be connected in PARALLEL across the component. Symbol: Circle with "V" inside.' },
             { front: "What are the circuit symbol components?", back: "Battery: Long line (+) and short line (-)\nWire: Straight line\nBulb/Resistor: Zigzag or circle with X\nSwitch: Break in line that can open/close\nAmmeter: Circle with A\nVoltmeter: Circle with V" },
-            { front: "What happens when you add more bulbs in series?", back: "More resistance, so dimmer light. Current decreases. Total resistance increases (R_total = R\u2081 + R\u2082 + R\u2083). Voltage divides among more bulbs." },
+            { front: "What happens when you add more bulbs in series?", back: "More resistance, so dimmer light. Current decreases. Total resistance increases (R_total = R₁ + R₂ + R₃). Voltage divides among more bulbs." },
             { front: "What happens when you add more branches in parallel?", back: "Each bulb stays bright. More total current drawn. Each branch has same voltage. More paths = easier for current to flow (less total resistance)." },
             { front: "What factors affect resistance?", back: "LENGTH: Longer wire = MORE resistance\nTHICKNESS: Thinner wire = MORE resistance\nMATERIAL: Copper (low) vs Rubber (high)\nTEMPERATURE: Hotter = MORE resistance (usually)" },
-            { front: "If a 12V battery powers a 3\u03A9 resistor, what is the current?", back: "Use I = V / R\nI = 12V / 3\u03A9 = 4A\nThe current is 4 Amperes." },
-            { front: "If 2A of current flows through a 6\u03A9 resistor, what is the voltage?", back: "Use V = I \xD7 R\nV = 2A \xD7 6\u03A9 = 12V\nThe voltage is 12 Volts." },
-            { front: "A 100W bulb runs for 10 hours. How much energy is used?", back: "Energy = Power \xD7 Time\n= 100W \xD7 10h = 1000 Wh = 1 kWh\nEnergy used is 1 kilowatt-hour." },
+            { front: "If a 12V battery powers a 3Ω resistor, what is the current?", back: "Use I = V / R\nI = 12V / 3Ω = 4A\nThe current is 4 Amperes." },
+            { front: "If 2A of current flows through a 6Ω resistor, what is the voltage?", back: "Use V = I × R\nV = 2A × 6Ω = 12V\nThe voltage is 12 Volts." },
+            { front: "A 100W bulb runs for 10 hours. How much energy is used?", back: "Energy = Power × Time\n= 100W × 10h = 1000 Wh = 1 kWh\nEnergy used is 1 kilowatt-hour." },
             { front: "What is a load in a circuit?", back: "Device that uses electrical energy. Examples: bulb, motor, resistor, heater. Converts electrical energy to light, motion, or heat." },
             { front: "What makes a complete circuit?", back: "Must have: Power source (battery), Wires (conductor), Load (bulb/resistor), Complete loop (closed path). If any part is broken, current stops flowing." },
             { front: "Why do homes use parallel circuits?", back: "Each outlet/appliance works independently. If one device breaks, others keep working. Each device gets full voltage (120V). Can control devices separately." },
             { front: "What happens if a circuit is short-circuited?", back: "Unintended path with very low resistance forms. HUGE current flows. Can cause: fires, melted wires, battery damage. Circuit breaker/fuse should stop it." },
             { front: "How does a light switch work?", back: "Opens or closes the circuit. OPEN: Gap in circuit, no current flows, light OFF. CLOSED: Complete path, current flows, light ON." },
-            { front: "What is the power of a device using 120V and 5A?", back: "P = V \xD7 I\nP = 120V \xD7 5A = 600W\nThe power is 600 Watts." }
+            { front: "What is the power of a device using 120V and 5A?", back: "P = V × I\nP = 120V × 5A = 600W\nThe power is 600 Watts." }
           ],
           notes: []
         },
         {
           id: "chem-flashcards-header",
-          title: "\u{1F9EA} Chemistry Flashcards",
+          title: "🧪 Chemistry Flashcards",
           isSectionHeader: true,
           headerColor: "from-violet-500 to-purple-600",
           image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
@@ -24983,7 +24879,7 @@
             { front: "What is a pure substance?", back: "Matter with uniform composition - either an element (one type of atom) or compound (bonded elements)" },
             { front: "What is a homogeneous mixture?", back: "A mixture that is uniform throughout - you cannot see the individual parts (solution)" },
             { front: "What is a heterogeneous mixture?", back: "A mixture where you can see different parts (mechanical mixture, suspension)" },
-            { front: "What is density?", back: "Mass per unit volume\nD = m/V\nMeasured in g/cm\xB3 or g/mL" },
+            { front: "What is density?", back: "Mass per unit volume\nD = m/V\nMeasured in g/cm³ or g/mL" },
             { front: "What is a physical property?", back: "A characteristic you can observe WITHOUT changing the substance (color, mass, density, melting point)" },
             { front: "What is a chemical property?", back: "How a substance reacts with OTHER substances (combustibility, reactivity, stability)" },
             { front: "What are 5 signs of a chemical change?", back: "Color change, gas production, temperature change, light production, precipitate forms" },
@@ -25003,9 +24899,9 @@
             { front: "What is the mass number?", back: "The total number of protons + neutrons in the nucleus" },
             { front: "What is John Dalton known for?", back: "Proposed atoms are indivisible solid spheres (Solid Sphere Model - 1803)" },
             { front: "What is an element?", back: "A pure substance made of only one type of atom (e.g., gold, oxygen, carbon)" },
-            { front: "What is a compound?", back: "A pure substance made of two or more elements chemically bonded (e.g., H\u2082O, CO\u2082, NaCl)" },
-            { front: "What is a cation?", back: "A positively charged ion formed when an atom LOSES electrons (e.g., Na\u207A, Ca\xB2\u207A, Al\xB3\u207A)" },
-            { front: "What is an anion?", back: "A negatively charged ion formed when an atom GAINS electrons (e.g., Cl\u207B, O\xB2\u207B, N\xB3\u207B)" },
+            { front: "What is a compound?", back: "A pure substance made of two or more elements chemically bonded (e.g., H₂O, CO₂, NaCl)" },
+            { front: "What is a cation?", back: "A positively charged ion formed when an atom LOSES electrons (e.g., Na⁺, Ca²⁺, Al³⁺)" },
+            { front: "What is an anion?", back: "A negatively charged ion formed when an atom GAINS electrons (e.g., Cl⁻, O²⁻, N³⁻)" },
             { front: "How many electrons fit in shell 1?", back: "2 electrons maximum" },
             { front: "How many electrons fit in shell 2?", back: "8 electrons maximum" },
             { front: "How many electrons fit in shell 3?", back: "8 electrons maximum (for first 20 elements)" },
@@ -25065,7 +24961,7 @@
           notes: [
             {
               subtitle: "Lesson 1: Biodiversity Types",
-              emoji: "\u{1F33F}",
+              emoji: "🌿",
               layout: "bullets",
               points: [
                 "What are the three types of biodiversity? Provide an example of each",
@@ -25074,7 +24970,7 @@
             },
             {
               subtitle: "Lesson 2: H.I.P.P.O.C Threats",
-              emoji: "\u26A0\uFE0F",
+              emoji: "⚠️",
               layout: "bullets",
               points: [
                 "Explain what each letter of H.I.P.P.O.C stands for",
@@ -25084,7 +24980,7 @@
             },
             {
               subtitle: "Lesson 3: Ecosystem Factors",
-              emoji: "\u{1F30D}",
+              emoji: "🌍",
               layout: "bullets",
               points: [
                 "Differentiate between biotic and abiotic factors",
@@ -25096,7 +24992,7 @@
             },
             {
               subtitle: "Lesson 4: Ecosystem Services & Types",
-              emoji: "\u{1F3AF}",
+              emoji: "🎯",
               layout: "bullets",
               points: [
                 "Explain what an ecosystem service is",
@@ -25107,7 +25003,7 @@
             },
             {
               subtitle: "Lesson 5: Symbiosis & Relationships",
-              emoji: "\u{1F91D}",
+              emoji: "🤝",
               layout: "bullets",
               points: [
                 "What is symbiosis?",
@@ -25117,7 +25013,7 @@
             },
             {
               subtitle: "Lesson 6: Food Chains & Energy",
-              emoji: "\u{1F517}",
+              emoji: "🔗",
               layout: "bullets",
               points: [
                 "What is a food chain?",
@@ -25129,7 +25025,7 @@
             },
             {
               subtitle: "Lesson 7: Energy Pyramids",
-              emoji: "\u{1F53A}",
+              emoji: "🔺",
               layout: "bullets",
               points: [
                 "Draw an energy pyramid for a food chain",
@@ -25140,7 +25036,7 @@
             },
             {
               subtitle: "Lesson 8: Nutrient Cycles",
-              emoji: "\u267B\uFE0F",
+              emoji: "♻️",
               layout: "bullets",
               points: [
                 "What are nutrients? Why are they important?",
@@ -25153,7 +25049,7 @@
             },
             {
               subtitle: "Lesson 9: Invasive Species",
-              emoji: "\u{1F99F}",
+              emoji: "🦟",
               layout: "bullets",
               points: [
                 "What are invasive species? What criteria defines them?",
@@ -25164,7 +25060,7 @@
             },
             {
               subtitle: "Lesson 10: Climate Change & Restoration",
-              emoji: "\u{1F321}\uFE0F",
+              emoji: "🌡️",
               layout: "bullets",
               points: [
                 "What is climate change? Evidence that climate is changing?",
@@ -25182,7 +25078,7 @@
           notes: [
             {
               subtitle: "Lesson 1: Safety + Lab Equipment",
-              emoji: "\u{1F97D}",
+              emoji: "🥽",
               layout: "bullets",
               points: [
                 "Be familiar with WHMIS safety labels on chemical containers",
@@ -25192,7 +25088,7 @@
             },
             {
               subtitle: "Lesson 2: Types of Matter",
-              emoji: "\u{1F9EA}",
+              emoji: "🧪",
               layout: "bullets",
               points: [
                 "Distinguish between pure substances and mixtures",
@@ -25203,7 +25099,7 @@
             },
             {
               subtitle: "Lesson 3: Properties of Matter",
-              emoji: "\u2696\uFE0F",
+              emoji: "⚖️",
               layout: "bullets",
               points: [
                 "Distinguish chemical vs physical properties (with examples)",
@@ -25216,7 +25112,7 @@
             },
             {
               subtitle: "Lesson 4: Physical/Chemical Changes",
-              emoji: "\u{1F52C}",
+              emoji: "🔬",
               layout: "bullets",
               points: [
                 "Explain the meaning of physical change vs chemical change",
@@ -25226,7 +25122,7 @@
             },
             {
               subtitle: "Lesson 5: Organization of Periodic Table",
-              emoji: "\u{1F4CB}",
+              emoji: "📋",
               layout: "bullets",
               points: [
                 "Identify properties and location of families: alkali metals, alkaline earth metals, halogens, noble gases",
@@ -25237,7 +25133,7 @@
             },
             {
               subtitle: "Lesson 6: Models of the Atom",
-              emoji: "\u{1F52D}",
+              emoji: "🔭",
               layout: "bullets",
               points: [
                 "Outline contributions of Dalton, Thomson, Rutherford, and Bohr",
@@ -25247,7 +25143,7 @@
             },
             {
               subtitle: "Lesson 7: Subatomic Particles + Bohr-Rutherford Diagrams",
-              emoji: "\u269B\uFE0F",
+              emoji: "⚛️",
               layout: "bullets",
               points: [
                 "Explain electrons, protons, neutrons (charge and mass)",
@@ -25259,7 +25155,7 @@
             },
             {
               subtitle: "Lesson 8: Valence Electrons & Ions",
-              emoji: "\u{1F4AB}",
+              emoji: "💫",
               layout: "bullets",
               points: [
                 "Explain what valence electrons are",
@@ -25284,7 +25180,7 @@
       sections: [
         {
           id: "biology-section-header",
-          title: "\u{1F33F} Biology Practice Questions",
+          title: "🌿 Biology Practice Questions",
           isSectionHeader: true,
           headerColor: "from-emerald-500 to-teal-600",
           image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&h=400&fit=crop",
@@ -25394,7 +25290,7 @@
               question: "If producers have 50,000 kcal, how much energy do primary consumers get?",
               options: ["50,000 kcal", "25,000 kcal", "5,000 kcal", "500 kcal"],
               correct: 2,
-              explanation: "Primary consumers receive 10% of the producer energy: 50,000 \xD7 0.10 = 5,000 kcal."
+              explanation: "Primary consumers receive 10% of the producer energy: 50,000 × 0.10 = 5,000 kcal."
             },
             {
               question: "What is bioaccumulation?",
@@ -25403,16 +25299,16 @@
               explanation: "Bioaccumulation is the build-up of a substance within a single organism over time, like mercury accumulating in a fish."
             },
             {
-              question: "What process removes CO\u2082 from the atmosphere?",
+              question: "What process removes CO₂ from the atmosphere?",
               options: ["Respiration", "Photosynthesis", "Combustion", "Decomposition"],
               correct: 1,
-              explanation: "Photosynthesis removes CO\u2082 from the atmosphere as plants convert it into glucose using sunlight."
+              explanation: "Photosynthesis removes CO₂ from the atmosphere as plants convert it into glucose using sunlight."
             },
             {
-              question: "In the nitrogen cycle, what converts N\u2082 into ammonia?",
+              question: "In the nitrogen cycle, what converts N₂ into ammonia?",
               options: ["Photosynthesis", "Respiration", "Nitrogen fixation", "Denitrification"],
               correct: 2,
-              explanation: "Nitrogen fixation (by bacteria or lightning) converts atmospheric N\u2082 into ammonia (NH\u2083) that plants can use."
+              explanation: "Nitrogen fixation (by bacteria or lightning) converts atmospheric N₂ into ammonia (NH₃) that plants can use."
             },
             {
               question: "What is biomagnification?",
@@ -25424,11 +25320,11 @@
               question: "If primary consumers have 10,000 kcal, how much do secondary consumers get?",
               options: ["10,000 kcal", "5,000 kcal", "1,000 kcal", "100 kcal"],
               correct: 2,
-              explanation: "Secondary consumers get 10% of primary consumer energy: 10,000 \xD7 0.10 = 1,000 kcal."
+              explanation: "Secondary consumers get 10% of primary consumer energy: 10,000 × 0.10 = 1,000 kcal."
             },
             {
               question: "What is the correct order of a food chain?",
-              options: ["Consumer \u2192 Producer \u2192 Decomposer", "Producer \u2192 Consumer \u2192 Decomposer", "Decomposer \u2192 Producer \u2192 Consumer", "Consumer \u2192 Decomposer \u2192 Producer"],
+              options: ["Consumer → Producer → Decomposer", "Producer → Consumer → Decomposer", "Decomposer → Producer → Consumer", "Consumer → Decomposer → Producer"],
               correct: 1,
               explanation: "Food chains always start with producers (plants), then consumers (animals), and decomposers break down dead matter."
             },
@@ -25478,9 +25374,9 @@
             },
             {
               question: "What is the photosynthesis equation (simplified)?",
-              options: ["CO\u2082 + H\u2082O \u2192 Glucose + O\u2082", "Glucose + O\u2082 \u2192 CO\u2082 + H\u2082O", "N\u2082 \u2192 NH\u2083", "CH\u2084 + O\u2082 \u2192 CO\u2082"],
+              options: ["CO₂ + H₂O → Glucose + O₂", "Glucose + O₂ → CO₂ + H₂O", "N₂ → NH₃", "CH₄ + O₂ → CO₂"],
               correct: 0,
-              explanation: "Photosynthesis: CO\u2082 + H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + O\u2082. Plants use carbon dioxide and water to make glucose and oxygen."
+              explanation: "Photosynthesis: CO₂ + H₂O → C₆H₁₂O₆ + O₂. Plants use carbon dioxide and water to make glucose and oxygen."
             },
             {
               question: "What does reforestation mean?",
@@ -25520,9 +25416,9 @@
             },
             {
               question: "What is nitrification?",
-              options: ["N\u2082 to NH\u2083", "NH\u2083 to NO\u2083\u207B", "NO\u2083\u207B to N\u2082", "N\u2082 to protein"],
+              options: ["N₂ to NH₃", "NH₃ to NO₃⁻", "NO₃⁻ to N₂", "N₂ to protein"],
               correct: 1,
-              explanation: "Nitrification is when bacteria convert ammonia (NH\u2083) to nitrite (NO\u2082\u207B) and then to nitrate (NO\u2083\u207B) that plants can use."
+              explanation: "Nitrification is when bacteria convert ammonia (NH₃) to nitrite (NO₂⁻) and then to nitrate (NO₃⁻) that plants can use."
             },
             {
               question: "Which is an example of an invasive species in North America?",
@@ -25532,16 +25428,16 @@
             },
             {
               question: "What is denitrification?",
-              options: ["Adding nitrogen to soil", "Converting nitrate back to N\u2082 gas", "Plants absorbing nitrogen", "Bacteria dying"],
+              options: ["Adding nitrogen to soil", "Converting nitrate back to N₂ gas", "Plants absorbing nitrogen", "Bacteria dying"],
               correct: 1,
-              explanation: "Denitrification is when bacteria convert nitrate (NO\u2083\u207B) back into nitrogen gas (N\u2082) that returns to the atmosphere."
+              explanation: "Denitrification is when bacteria convert nitrate (NO₃⁻) back into nitrogen gas (N₂) that returns to the atmosphere."
             }
           ],
           notes: []
         },
         {
           id: "chemistry-section-header",
-          title: "\u{1F9EA} Chemistry Practice Questions",
+          title: "🧪 Chemistry Practice Questions",
           isSectionHeader: true,
           headerColor: "from-violet-500 to-purple-600",
           image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
@@ -25591,7 +25487,7 @@
               question: "What is the difference between an element and a compound?",
               options: ["Elements are pure, compounds are mixed", "Elements have one atom type, compounds have bonded elements", "No difference", "Compounds are always solid"],
               correct: 1,
-              explanation: "Elements contain only one type of atom (like oxygen), while compounds contain two or more elements chemically bonded together (like H\u2082O)."
+              explanation: "Elements contain only one type of atom (like oxygen), while compounds contain two or more elements chemically bonded together (like H₂O)."
             },
             {
               question: "Which is evidence of a chemical change?",
@@ -25636,10 +25532,10 @@
               explanation: "All safety rules are important! They work together to keep you safe. Never skip any safety procedures."
             },
             {
-              question: "What does H\u2082O represent?",
+              question: "What does H₂O represent?",
               options: ["Element", "Mixture", "Compound", "Solution"],
               correct: 2,
-              explanation: "H\u2082O (water) is a compound - two or more elements (hydrogen and oxygen) chemically bonded together."
+              explanation: "H₂O (water) is a compound - two or more elements (hydrogen and oxygen) chemically bonded together."
             }
           ],
           notes: []
@@ -25650,16 +25546,16 @@
           image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&h=400&fit=crop",
           quiz: [
             {
-              question: "A substance has mass of 80g and volume of 20cm\xB3. What is its density?",
-              options: ["2 g/cm\xB3", "4 g/cm\xB3", "60 g/cm\xB3", "100 g/cm\xB3"],
+              question: "A substance has mass of 80g and volume of 20cm³. What is its density?",
+              options: ["2 g/cm³", "4 g/cm³", "60 g/cm³", "100 g/cm³"],
               correct: 1,
-              explanation: "D = m/V = 80g / 20cm\xB3 = 4 g/cm\xB3"
+              explanation: "D = m/V = 80g / 20cm³ = 4 g/cm³"
             },
             {
-              question: "Will an object with density 1.5 g/cm\xB3 float or sink in water (1.0 g/cm\xB3)?",
+              question: "Will an object with density 1.5 g/cm³ float or sink in water (1.0 g/cm³)?",
               options: ["Float", "Sink", "Stay suspended", "Depends on size"],
               correct: 1,
-              explanation: "The object will sink because its density (1.5 g/cm\xB3) is greater than water's density (1.0 g/cm\xB3)."
+              explanation: "The object will sink because its density (1.5 g/cm³) is greater than water's density (1.0 g/cm³)."
             },
             {
               question: "Which is a qualitative property?",
@@ -25669,7 +25565,7 @@
             },
             {
               question: "What is the density formula?",
-              options: ["D = m \xD7 V", "D = m / V", "D = V / m", "D = m + V"],
+              options: ["D = m × V", "D = m / V", "D = V / m", "D = m + V"],
               correct: 1,
               explanation: "Density = mass / volume (D = m/V). This tells us how much mass is in a given volume."
             },
@@ -25680,7 +25576,7 @@
               explanation: "Filtration separates solids from liquids. The filter paper catches sand while water passes through."
             },
             {
-              question: "An object has density 0.8 g/cm\xB3. Will it float in water (1.0 g/cm\xB3)?",
+              question: "An object has density 0.8 g/cm³. Will it float in water (1.0 g/cm³)?",
               options: ["Yes, float", "No, sink", "Cannot tell", "Depends on shape"],
               correct: 0,
               explanation: "It will float because its density (0.8) is less than water's density (1.0). Objects less dense than the liquid float."
@@ -25698,10 +25594,10 @@
               explanation: "Distillation separates liquids based on different boiling points. The liquid with lower boiling point evaporates first."
             },
             {
-              question: "What is the mass of an object with density 2 g/cm\xB3 and volume 30 cm\xB3?",
+              question: "What is the mass of an object with density 2 g/cm³ and volume 30 cm³?",
               options: ["15g", "32g", "60g", "28g"],
               correct: 2,
-              explanation: "Rearrange D = m/V to m = D \xD7 V. So m = 2 g/cm\xB3 \xD7 30 cm\xB3 = 60g"
+              explanation: "Rearrange D = m/V to m = D × V. So m = 2 g/cm³ × 30 cm³ = 60g"
             },
             {
               question: "Which tool would you use to measure liquid volume?",
@@ -25859,7 +25755,7 @@
             },
             {
               question: "How do you calculate the number of neutrons?",
-              options: ["Atomic number - mass number", "Mass number - atomic number", "Protons + electrons", "Atomic mass \xD7 2"],
+              options: ["Atomic number - mass number", "Mass number - atomic number", "Protons + electrons", "Atomic mass × 2"],
               correct: 1,
               explanation: "Neutrons = Mass number - Atomic number (or Mass number - Protons)"
             },
@@ -25910,7 +25806,7 @@
         },
         {
           id: "physics-section-header",
-          title: "\u26A1 Physics Practice Questions",
+          title: "⚡ Physics Practice Questions",
           isSectionHeader: true,
           headerColor: "from-amber-500 to-orange-600",
           image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
@@ -25947,16 +25843,16 @@
               explanation: "Current (I) is measured in Amperes (A). It represents the rate of flow of electric charge."
             },
             {
-              question: "If V = 12V and R = 4\u03A9, what is I?",
+              question: "If V = 12V and R = 4Ω, what is I?",
               options: ["3A", "8A", "16A", "48A"],
               correct: 0,
-              explanation: "Using Ohm's Law: I = V/R = 12V / 4\u03A9 = 3A"
+              explanation: "Using Ohm's Law: I = V/R = 12V / 4Ω = 3A"
             },
             {
               question: "What does resistance measure?",
               options: ["Energy", "Opposition to current flow", "Speed of electrons", "Power"],
               correct: 1,
-              explanation: "Resistance (R) measures the opposition to the flow of electric current, measured in Ohms (\u03A9)."
+              explanation: "Resistance (R) measures the opposition to the flow of electric current, measured in Ohms (Ω)."
             },
             {
               question: "Which material is a good conductor?",
@@ -25966,9 +25862,9 @@
             },
             {
               question: "If V = 24V and I = 3A, what is R?",
-              options: ["8\u03A9", "21\u03A9", "27\u03A9", "72\u03A9"],
+              options: ["8Ω", "21Ω", "27Ω", "72Ω"],
               correct: 0,
-              explanation: "Using Ohm's Law: R = V/I = 24V / 3A = 8\u03A9"
+              explanation: "Using Ohm's Law: R = V/I = 24V / 3A = 8Ω"
             },
             {
               question: "What is the purpose of an insulator?",
@@ -25977,10 +25873,10 @@
               explanation: "Insulators resist the flow of electricity and are used for safety to prevent shocks."
             },
             {
-              question: "If I = 5A and R = 6\u03A9, what is V?",
+              question: "If I = 5A and R = 6Ω, what is V?",
               options: ["1.2V", "11V", "30V", "0.83V"],
               correct: 2,
-              explanation: "Using Ohm's Law: V = I \xD7 R = 5A \xD7 6\u03A9 = 30V"
+              explanation: "Using Ohm's Law: V = I × R = 5A × 6Ω = 30V"
             }
           ],
           notes: []
@@ -26000,7 +25896,7 @@
               question: "In a series circuit, how does voltage behave?",
               options: ["Same everywhere", "Divides among components", "Only at battery", "Increases"],
               correct: 1,
-              explanation: "In series circuits, voltage DIVIDES among components: V_total = V\u2081 + V\u2082 + V\u2083"
+              explanation: "In series circuits, voltage DIVIDES among components: V_total = V₁ + V₂ + V₃"
             },
             {
               question: "What happens if one bulb breaks in a series circuit?",
@@ -26018,7 +25914,7 @@
               question: "In a parallel circuit, how does current behave?",
               options: ["Same everywhere", "Divides among branches", "Only in main wire", "Zero"],
               correct: 1,
-              explanation: "In parallel circuits, current DIVIDES among branches: I_total = I\u2081 + I\u2082 + I\u2083"
+              explanation: "In parallel circuits, current DIVIDES among branches: I_total = I₁ + I₂ + I₃"
             },
             {
               question: "What happens if one bulb breaks in a parallel circuit?",
@@ -26042,13 +25938,13 @@
               question: "In parallel, what does each branch receive?",
               options: ["Different voltages", "Same voltage", "No voltage", "Half voltage"],
               correct: 1,
-              explanation: "Each parallel branch receives the full battery voltage. V\u2081 = V\u2082 = V\u2083 = V_battery"
+              explanation: "Each parallel branch receives the full battery voltage. V₁ = V₂ = V₃ = V_battery"
             },
             {
               question: "A 12V battery powers 3 identical bulbs in series. Voltage across each bulb?",
               options: ["12V", "6V", "4V", "3V"],
               correct: 2,
-              explanation: "Voltage divides equally in series: 12V \xF7 3 bulbs = 4V per bulb"
+              explanation: "Voltage divides equally in series: 12V ÷ 3 bulbs = 4V per bulb"
             }
           ],
           notes: []
@@ -26060,15 +25956,15 @@
           quiz: [
             {
               question: "What is the formula for electrical power?",
-              options: ["P = V / I", "P = V \xD7 I", "P = I / V", "P = V + I"],
+              options: ["P = V / I", "P = V × I", "P = I / V", "P = V + I"],
               correct: 1,
-              explanation: "Power = Voltage \xD7 Current, or P = V \xD7 I, measured in Watts (W)."
+              explanation: "Power = Voltage × Current, or P = V × I, measured in Watts (W)."
             },
             {
               question: "A device uses 120V and 2A. What is its power?",
               options: ["60W", "122W", "240W", "118W"],
               correct: 2,
-              explanation: "P = V \xD7 I = 120V \xD7 2A = 240W"
+              explanation: "P = V × I = 120V × 2A = 240W"
             },
             {
               question: "What does a watt measure?",
@@ -26092,7 +25988,7 @@
               question: "If a 100W bulb runs for 5 hours, how much energy is used?",
               options: ["20 kWh", "0.5 kWh", "500 Wh", "100 kWh"],
               correct: 1,
-              explanation: "Energy = Power \xD7 Time = 100W \xD7 5h = 500 Wh = 0.5 kWh"
+              explanation: "Energy = Power × Time = 100W × 5h = 500 Wh = 0.5 kWh"
             },
             {
               question: "What is a fuse?",
@@ -26116,7 +26012,7 @@
               question: "A heater uses 1500W for 4 hours. At $0.10/kWh, what is the cost?",
               options: ["$0.60", "$6.00", "$0.15", "$1.50"],
               correct: 0,
-              explanation: "Energy = 1.5kW \xD7 4h = 6 kWh. Cost = 6 kWh \xD7 $0.10 = $0.60"
+              explanation: "Energy = 1.5kW × 4h = 6 kWh. Cost = 6 kWh × $0.10 = $0.60"
             }
           ],
           notes: []
@@ -26127,22 +26023,22 @@
           image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
           quiz: [
             {
-              question: "A circuit has a voltage of 24V and a resistance of 6\u03A9. Calculate the current.",
+              question: "A circuit has a voltage of 24V and a resistance of 6Ω. Calculate the current.",
               options: ["2A", "4A", "18A", "30A"],
               correct: 1,
-              explanation: "Use I = V/R. Current = 24V \xF7 6\u03A9 = 4A. Remember: when voltage goes up or resistance goes down, current increases."
+              explanation: "Use I = V/R. Current = 24V ÷ 6Ω = 4A. Remember: when voltage goes up or resistance goes down, current increases."
             },
             {
               question: "A light bulb draws 0.5A from a 120V outlet. What is its resistance?",
-              options: ["60\u03A9", "120\u03A9", "240\u03A9", "119.5\u03A9"],
+              options: ["60Ω", "120Ω", "240Ω", "119.5Ω"],
               correct: 2,
-              explanation: "Use R = V/I. Resistance = 120V \xF7 0.5A = 240\u03A9. Higher resistance means less current flows."
+              explanation: "Use R = V/I. Resistance = 120V ÷ 0.5A = 240Ω. Higher resistance means less current flows."
             },
             {
-              question: "A resistor has 3A flowing through it with a resistance of 8\u03A9. Find the voltage.",
+              question: "A resistor has 3A flowing through it with a resistance of 8Ω. Find the voltage.",
               options: ["2.67V", "11V", "24V", "5V"],
               correct: 2,
-              explanation: "Use V = I \xD7 R. Voltage = 3A \xD7 8\u03A9 = 24V. More current or more resistance means higher voltage needed."
+              explanation: "Use V = I × R. Voltage = 3A × 8Ω = 24V. More current or more resistance means higher voltage needed."
             },
             {
               question: "If you double the voltage and keep resistance constant, what happens to current?",
@@ -26152,9 +26048,9 @@
             },
             {
               question: "A 9V battery powers a device drawing 0.03A. What is the resistance?",
-              options: ["0.27\u03A9", "3\u03A9", "27\u03A9", "300\u03A9"],
+              options: ["0.27Ω", "3Ω", "27Ω", "300Ω"],
               correct: 3,
-              explanation: "Use R = V/I. Resistance = 9V \xF7 0.03A = 300\u03A9. Very high resistance means very little current flows."
+              explanation: "Use R = V/I. Resistance = 9V ÷ 0.03A = 300Ω. Very high resistance means very little current flows."
             }
           ],
           notes: []
@@ -26165,22 +26061,22 @@
           image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=400&fit=crop",
           quiz: [
             {
-              question: "Three 4\u03A9 resistors are connected in series to a 12V battery. What is the total resistance?",
-              options: ["4\u03A9", "8\u03A9", "12\u03A9", "1.33\u03A9"],
+              question: "Three 4Ω resistors are connected in series to a 12V battery. What is the total resistance?",
+              options: ["4Ω", "8Ω", "12Ω", "1.33Ω"],
               correct: 2,
-              explanation: "In series: R_total = R\u2081 + R\u2082 + R\u2083 = 4\u03A9 + 4\u03A9 + 4\u03A9 = 12\u03A9. Resistances add up in series."
+              explanation: "In series: R_total = R₁ + R₂ + R₃ = 4Ω + 4Ω + 4Ω = 12Ω. Resistances add up in series."
             },
             {
               question: "Using the circuit from Q1, what is the total current?",
               options: ["0.5A", "1A", "3A", "4A"],
               correct: 1,
-              explanation: "Use I = V/R. Current = 12V \xF7 12\u03A9 = 1A. This same current flows through all components in series."
+              explanation: "Use I = V/R. Current = 12V ÷ 12Ω = 1A. This same current flows through all components in series."
             },
             {
               question: "Using the circuit from Q1, what is the voltage drop across each resistor?",
               options: ["12V", "6V", "4V", "3V"],
               correct: 2,
-              explanation: "Voltage divides equally: 12V \xF7 3 resistors = 4V per resistor. We can verify: V = I \xD7 R = 1A \xD7 4\u03A9 = 4V."
+              explanation: "Voltage divides equally: 12V ÷ 3 resistors = 4V per resistor. We can verify: V = I × R = 1A × 4Ω = 4V."
             },
             {
               question: "Three identical bulbs are in parallel with a 12V battery. What voltage does each receive?",
@@ -26192,7 +26088,7 @@
               question: "In a parallel circuit, if Branch 1 has 2A and Branch 2 has 3A, what is total current?",
               options: ["1A", "2.5A", "5A", "6A"],
               correct: 2,
-              explanation: "In parallel: I_total = I\u2081 + I\u2082 = 2A + 3A = 5A. Currents add up in parallel circuits."
+              explanation: "In parallel: I_total = I₁ + I₂ = 2A + 3A = 5A. Currents add up in parallel circuits."
             }
           ],
           notes: []
@@ -26206,31 +26102,31 @@
               question: "A device operates at 120V and draws 5A. What is its power consumption?",
               options: ["24W", "115W", "125W", "600W"],
               correct: 3,
-              explanation: "Use P = V \xD7 I. Power = 120V \xD7 5A = 600W. This device uses 600 joules of energy per second."
+              explanation: "Use P = V × I. Power = 120V × 5A = 600W. This device uses 600 joules of energy per second."
             },
             {
               question: "A 60W light bulb runs for 10 hours. How much energy does it use in kWh?",
               options: ["0.06 kWh", "0.6 kWh", "6 kWh", "600 kWh"],
               correct: 1,
-              explanation: "Energy = Power \xD7 Time = 60W \xD7 10h = 600 Wh = 0.6 kWh. Remember: 1000 Wh = 1 kWh."
+              explanation: "Energy = Power × Time = 60W × 10h = 600 Wh = 0.6 kWh. Remember: 1000 Wh = 1 kWh."
             },
             {
               question: "If electricity costs $0.12/kWh, what is the cost to run a 1500W heater for 8 hours?",
               options: ["$0.96", "$1.44", "$14.40", "$9.60"],
               correct: 1,
-              explanation: "Energy = 1.5kW \xD7 8h = 12 kWh. Cost = 12 kWh \xD7 $0.12 = $1.44. The heater costs about $1.44 for 8 hours."
+              explanation: "Energy = 1.5kW × 8h = 12 kWh. Cost = 12 kWh × $0.12 = $1.44. The heater costs about $1.44 for 8 hours."
             },
             {
               question: "A laptop charger outputs 19V and 3A. What is its power output?",
               options: ["6.33W", "16W", "22W", "57W"],
               correct: 3,
-              explanation: "Use P = V \xD7 I. Power = 19V \xD7 3A = 57W. The charger delivers 57 watts to charge the laptop."
+              explanation: "Use P = V × I. Power = 19V × 3A = 57W. The charger delivers 57 watts to charge the laptop."
             },
             {
               question: "Which uses more energy: 100W bulb for 5 hours OR 1000W microwave for 30 minutes?",
               options: ["Bulb uses more", "Same", "Microwave uses more", "Cannot determine"],
               correct: 1,
-              explanation: "Bulb: 100W \xD7 5h = 500 Wh. Microwave: 1000W \xD7 0.5h = 500 Wh. They use the SAME energy! Power \xD7 time matters, not just power."
+              explanation: "Bulb: 100W × 5h = 500 Wh. Microwave: 1000W × 0.5h = 500 Wh. They use the SAME energy! Power × time matters, not just power."
             }
           ],
           notes: []
@@ -26248,7 +26144,7 @@
       sections: [
         {
           id: "bio-worksheets-header",
-          title: "\u{1F33F} Biology Practice Worksheets",
+          title: "🌿 Biology Practice Worksheets",
           isSectionHeader: true,
           headerColor: "from-emerald-500 to-teal-600",
           image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop",
@@ -26261,7 +26157,7 @@
           notes: [
             {
               subtitle: "Worksheet 1: Biodiversity & H.I.P.P.O.C",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Define the three types of biodiversity and give an example of each.",
@@ -26271,16 +26167,16 @@
                 "5. Explain which H.I.P.P.O.C threat you think is most serious and why."
               ],
               answers: [
-                "Genetic diversity: variation within a species (e.g., different dog breeds) \u2022 Species diversity: variety of species in a habitat (e.g., coral reef fish) \u2022 Ecosystem diversity: variety of ecosystems in a region (e.g., forests, wetlands, grasslands)",
-                "Draw three different dog breeds showing physical differences \u2022 Label traits like size, coat color, ear shape \u2022 Explain these are same species but different genes",
-                "H = Habitat Destruction (deforestation) \u2022 I = Invasive Species (zebra mussels) \u2022 P = Pollution (oil spills) \u2022 P = Population/Human (urban sprawl) \u2022 O = Overharvesting (overfishing cod) \u2022 C = Climate Change (coral bleaching)",
-                "Choose any threat \u2022 Example: Habitat Destruction \u2192 Solution 1: Protected areas/parks \u2022 Solution 2: Reforestation programs",
-                "Answers vary \u2022 Should explain reasoning \u2022 Example: Climate change affects all ecosystems globally \u2022 Discuss long-term impacts"
+                "Genetic diversity: variation within a species (e.g., different dog breeds) • Species diversity: variety of species in a habitat (e.g., coral reef fish) • Ecosystem diversity: variety of ecosystems in a region (e.g., forests, wetlands, grasslands)",
+                "Draw three different dog breeds showing physical differences • Label traits like size, coat color, ear shape • Explain these are same species but different genes",
+                "H = Habitat Destruction (deforestation) • I = Invasive Species (zebra mussels) • P = Pollution (oil spills) • P = Population/Human (urban sprawl) • O = Overharvesting (overfishing cod) • C = Climate Change (coral bleaching)",
+                "Choose any threat • Example: Habitat Destruction → Solution 1: Protected areas/parks • Solution 2: Reforestation programs",
+                "Answers vary • Should explain reasoning • Example: Climate change affects all ecosystems globally • Discuss long-term impacts"
               ]
             },
             {
               subtitle: "Worksheet 2: Ecosystem Factors & Services",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. List 6 biotic factors and 6 abiotic factors in a forest ecosystem.",
@@ -26291,17 +26187,17 @@
                 "6. Compare natural vs artificial ecosystems with examples."
               ],
               answers: [
-                "Biotic: trees, deer, birds, insects, fungi, bacteria \u2022 Abiotic: sunlight, water, soil, air, temperature, rocks",
-                "Sustainable: can maintain itself over time, resources regenerate, balanced ecosystem \u2022 Non-sustainable: resources depleted faster than replaced, imbalanced, eventually collapses",
-                "Biosphere (plants, animals) \u2022 Atmosphere (air, oxygen) \u2022 Hydrosphere (oceans, rivers) \u2022 Lithosphere (rocks, soil)",
-                "Example 1: Rain (atmosphere) waters plants (biosphere) \u2022 Example 2: Plants (biosphere) add oxygen to air (atmosphere) \u2022 Example 3: Rivers (hydrosphere) erode rocks (lithosphere)",
-                "Ecosystem services = benefits from nature \u2022 Provisioning: food/water \u2022 Regulating: climate control \u2022 Supporting: nutrient cycling \u2022 Cultural: recreation/parks",
-                "Natural: self-sustaining, biodiversity, no human maintenance (forest, coral reef) \u2022 Artificial: human-made, needs maintenance, limited diversity (farm, aquarium)"
+                "Biotic: trees, deer, birds, insects, fungi, bacteria • Abiotic: sunlight, water, soil, air, temperature, rocks",
+                "Sustainable: can maintain itself over time, resources regenerate, balanced ecosystem • Non-sustainable: resources depleted faster than replaced, imbalanced, eventually collapses",
+                "Biosphere (plants, animals) • Atmosphere (air, oxygen) • Hydrosphere (oceans, rivers) • Lithosphere (rocks, soil)",
+                "Example 1: Rain (atmosphere) waters plants (biosphere) • Example 2: Plants (biosphere) add oxygen to air (atmosphere) • Example 3: Rivers (hydrosphere) erode rocks (lithosphere)",
+                "Ecosystem services = benefits from nature • Provisioning: food/water • Regulating: climate control • Supporting: nutrient cycling • Cultural: recreation/parks",
+                "Natural: self-sustaining, biodiversity, no human maintenance (forest, coral reef) • Artificial: human-made, needs maintenance, limited diversity (farm, aquarium)"
               ]
             },
             {
               subtitle: "Worksheet 3: Food Chains & Energy",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Draw an aquatic food chain with 4 trophic levels. Label each level.",
@@ -26313,18 +26209,18 @@
                 "7. Why can't food chains be infinitely long? Explain using energy transfer."
               ],
               answers: [
-                "Example: Phytoplankton \u2192 Small fish \u2192 Medium fish \u2192 Shark \u2022 Label: Producer \u2192 Primary consumer \u2192 Secondary consumer \u2192 Tertiary consumer",
-                "Example: Grass \u2192 Grasshopper \u2192 Mouse \u2192 Snake \u2022 Label: Producer \u2192 Primary consumer \u2192 Secondary consumer \u2192 Tertiary consumer",
-                'Arrows point from food source to consumer \u2022 Shows direction energy flows \u2022 Each arrow = "is eaten by"',
-                "Producers: 100,000 kcal \u2022 Primary consumers: 10,000 kcal (10%) \u2022 Secondary consumers: 1,000 kcal (10%) \u2022 Tertiary consumers: 100 kcal (10%)",
-                "Draw pyramid shape \u2022 Bottom largest (producers 100,000) \u2022 Each level smaller going up \u2022 Top smallest (tertiary 100)",
-                "90% lost as heat from movement/metabolism \u2022 Used for life processes (breathing, moving) \u2022 Released as waste \u2022 Only 10% stored in body tissues",
-                "Not enough energy left after several levels \u2022 By 4-5 levels, too little energy to support organisms \u2022 Would need massive producer base for tiny top predator population"
+                "Example: Phytoplankton → Small fish → Medium fish → Shark • Label: Producer → Primary consumer → Secondary consumer → Tertiary consumer",
+                "Example: Grass → Grasshopper → Mouse → Snake • Label: Producer → Primary consumer → Secondary consumer → Tertiary consumer",
+                'Arrows point from food source to consumer • Shows direction energy flows • Each arrow = "is eaten by"',
+                "Producers: 100,000 kcal • Primary consumers: 10,000 kcal (10%) • Secondary consumers: 1,000 kcal (10%) • Tertiary consumers: 100 kcal (10%)",
+                "Draw pyramid shape • Bottom largest (producers 100,000) • Each level smaller going up • Top smallest (tertiary 100)",
+                "90% lost as heat from movement/metabolism • Used for life processes (breathing, moving) • Released as waste • Only 10% stored in body tissues",
+                "Not enough energy left after several levels • By 4-5 levels, too little energy to support organisms • Would need massive producer base for tiny top predator population"
               ]
             },
             {
               subtitle: "Worksheet 4: Bioaccumulation & Nutrient Cycles",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Define bioaccumulation and biomagnification. Give an example of each.",
@@ -26336,18 +26232,18 @@
                 "7. How do humans affect the carbon cycle? List 3 ways."
               ],
               answers: [
-                "Bioaccumulation: toxin builds up in one organism over time (fish absorbs mercury from water) \u2022 Biomagnification: concentration increases up food chain (eagle has more mercury than fish it eats)",
-                "Example: Plankton (0.01 ppm) \u2192 Small fish (0.1 ppm) \u2192 Large fish (1 ppm) \u2192 Bird (10 ppm) \u2022 Show concentration multiplies at each level",
-                "Draw four reservoirs in boxes/circles \u2022 Atmosphere (CO\u2082 gas) \u2022 Biosphere (living things) \u2022 Lithosphere (fossil fuels, rocks) \u2022 Hydrosphere (dissolved CO\u2082 in water)",
-                "Photosynthesis: CO\u2082 from atmosphere to plants \u2022 Respiration: CO\u2082 from organisms to atmosphere \u2022 Combustion: CO\u2082 from burning to atmosphere \u2022 Decomposition: CO\u2082 from dead matter to atmosphere/soil \u2022 Ocean uptake: CO\u2082 from atmosphere to ocean",
-                "Word: Carbon dioxide + Water \u2192 Glucose + Oxygen \u2022 Chemical: 6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082",
-                "Word: Glucose + Oxygen \u2192 Carbon dioxide + Water + Energy \u2022 Chemical: C\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + ATP",
-                "Burning fossil fuels (releases stored carbon) \u2022 Deforestation (less CO\u2082 absorbed) \u2022 Agriculture/livestock (releases methane and CO\u2082)"
+                "Bioaccumulation: toxin builds up in one organism over time (fish absorbs mercury from water) • Biomagnification: concentration increases up food chain (eagle has more mercury than fish it eats)",
+                "Example: Plankton (0.01 ppm) → Small fish (0.1 ppm) → Large fish (1 ppm) → Bird (10 ppm) • Show concentration multiplies at each level",
+                "Draw four reservoirs in boxes/circles • Atmosphere (CO₂ gas) • Biosphere (living things) • Lithosphere (fossil fuels, rocks) • Hydrosphere (dissolved CO₂ in water)",
+                "Photosynthesis: CO₂ from atmosphere to plants • Respiration: CO₂ from organisms to atmosphere • Combustion: CO₂ from burning to atmosphere • Decomposition: CO₂ from dead matter to atmosphere/soil • Ocean uptake: CO₂ from atmosphere to ocean",
+                "Word: Carbon dioxide + Water → Glucose + Oxygen • Chemical: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂",
+                "Word: Glucose + Oxygen → Carbon dioxide + Water + Energy • Chemical: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP",
+                "Burning fossil fuels (releases stored carbon) • Deforestation (less CO₂ absorbed) • Agriculture/livestock (releases methane and CO₂)"
               ]
             },
             {
               subtitle: "Worksheet 5: Nitrogen Cycle & Restoration",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Draw the nitrogen cycle with reservoirs labeled (atmosphere, soil, organisms, water).",
@@ -26359,20 +26255,20 @@
                 "7. How does climate change affect ecosystems? List 4 impacts."
               ],
               answers: [
-                "Draw cycle showing: Atmosphere (N\u2082 gas) \u2192 Soil (NH\u2083, NO\u2083\u207B) \u2192 Organisms (proteins) \u2192 back to atmosphere \u2022 Include arrows between reservoirs",
-                "Nitrogen fixation: N\u2082 \u2192 NH\u2083 (atmosphere to soil) \u2022 Nitrification: NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (in soil) \u2022 Assimilation: NO\u2083\u207B absorbed by plants \u2022 Ammonification: dead matter \u2192 NH\u2084\u207A \u2022 Denitrification: NO\u2083\u207B \u2192 N\u2082 (back to atmosphere)",
-                "Bacteria perform most conversions \u2022 Rhizobium fixes nitrogen in plant roots \u2022 Nitrosomonas/Nitrobacter do nitrification \u2022 Decomposers do ammonification \u2022 Denitrifying bacteria return N\u2082 to air",
-                "Invasive species: non-native organism that causes harm \u2022 Characteristics: rapid reproduction, outcompete natives, lack natural predators, disrupt food chains",
-                "Example: Zebra mussels \u2022 Origin: Eastern Europe/Russia \u2022 Invasive: Great Lakes, North America \u2022 Harm: clog water pipes, outcompete native mussels, disrupt food chain \u2022 Control: drain/clean boats, chemical treatments",
-                "Reforestation: planting trees where cut down (Amazon restoration) \u2022 Bioaugmentation: adding bacteria/organisms to break down toxins (oil spill cleanup) \u2022 Bioremediation: using organisms to improve soil/water quality (microbes filtering water)",
-                "Rising temperatures change habitats \u2022 Extreme weather destroys ecosystems \u2022 Sea level rise floods coastal areas \u2022 Species migration/extinction \u2022 Coral bleaching \u2022 Changes in precipitation patterns"
+                "Draw cycle showing: Atmosphere (N₂ gas) → Soil (NH₃, NO₃⁻) → Organisms (proteins) → back to atmosphere • Include arrows between reservoirs",
+                "Nitrogen fixation: N₂ → NH₃ (atmosphere to soil) • Nitrification: NH₃ → NO₂⁻ → NO₃⁻ (in soil) • Assimilation: NO₃⁻ absorbed by plants • Ammonification: dead matter → NH₄⁺ • Denitrification: NO₃⁻ → N₂ (back to atmosphere)",
+                "Bacteria perform most conversions • Rhizobium fixes nitrogen in plant roots • Nitrosomonas/Nitrobacter do nitrification • Decomposers do ammonification • Denitrifying bacteria return N₂ to air",
+                "Invasive species: non-native organism that causes harm • Characteristics: rapid reproduction, outcompete natives, lack natural predators, disrupt food chains",
+                "Example: Zebra mussels • Origin: Eastern Europe/Russia • Invasive: Great Lakes, North America • Harm: clog water pipes, outcompete native mussels, disrupt food chain • Control: drain/clean boats, chemical treatments",
+                "Reforestation: planting trees where cut down (Amazon restoration) • Bioaugmentation: adding bacteria/organisms to break down toxins (oil spill cleanup) • Bioremediation: using organisms to improve soil/water quality (microbes filtering water)",
+                "Rising temperatures change habitats • Extreme weather destroys ecosystems • Sea level rise floods coastal areas • Species migration/extinction • Coral bleaching • Changes in precipitation patterns"
               ]
             }
           ]
         },
         {
           id: "chem-worksheets-header",
-          title: "\u{1F9EA} Chemistry Practice Worksheets",
+          title: "🧪 Chemistry Practice Worksheets",
           isSectionHeader: true,
           headerColor: "from-violet-500 to-purple-600",
           image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&h=400&fit=crop",
@@ -26385,49 +26281,49 @@
           notes: [
             {
               subtitle: "Worksheet 1: Lab Safety & Matter Classification",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Draw 5 WHMIS symbols and explain what each one means.",
                 "2. List 5 important lab safety rules.",
                 "3. Create a flow chart showing how matter is classified (pure substances, mixtures, etc.).",
-                "4. Classify these: salt water, gold, pizza, air, H\u2082O, trail mix, brass.",
+                "4. Classify these: salt water, gold, pizza, air, H₂O, trail mix, brass.",
                 "5. For each mixture above, identify if it's homogeneous or heterogeneous and explain why."
               ],
               answers: [
-                "Flame (flammable) \u2022 Skull/crossbones (poisonous) \u2022 Exclamation (irritant) \u2022 Test tube on hand (corrosive) \u2022 Circle with flame (oxidizer) \u2022 Draw symbols and explain hazards",
-                "Wear safety goggles \u2022 Tie back long hair \u2022 No eating/drinking \u2022 Report accidents immediately \u2022 Know location of safety equipment \u2022 Read labels before using chemicals",
-                "Matter \u2192 Pure substances (elements, compounds) and Mixtures (homogeneous, heterogeneous) \u2022 Show branching diagram",
-                "Salt water: homogeneous mixture \u2022 Gold: element \u2022 Pizza: heterogeneous mixture \u2022 Air: homogeneous mixture \u2022 H\u2082O: compound \u2022 Trail mix: heterogeneous mixture \u2022 Brass: homogeneous mixture (alloy)",
-                "Salt water: homogeneous, uniform throughout \u2022 Pizza: heterogeneous, see different parts \u2022 Air: homogeneous, uniform gas mixture \u2022 Trail mix: heterogeneous, see nuts/raisins \u2022 Brass: homogeneous, metal alloy is uniform"
+                "Flame (flammable) • Skull/crossbones (poisonous) • Exclamation (irritant) • Test tube on hand (corrosive) • Circle with flame (oxidizer) • Draw symbols and explain hazards",
+                "Wear safety goggles • Tie back long hair • No eating/drinking • Report accidents immediately • Know location of safety equipment • Read labels before using chemicals",
+                "Matter → Pure substances (elements, compounds) and Mixtures (homogeneous, heterogeneous) • Show branching diagram",
+                "Salt water: homogeneous mixture • Gold: element • Pizza: heterogeneous mixture • Air: homogeneous mixture • H₂O: compound • Trail mix: heterogeneous mixture • Brass: homogeneous mixture (alloy)",
+                "Salt water: homogeneous, uniform throughout • Pizza: heterogeneous, see different parts • Air: homogeneous, uniform gas mixture • Trail mix: heterogeneous, see nuts/raisins • Brass: homogeneous, metal alloy is uniform"
               ]
             },
             {
               subtitle: "Worksheet 2: Properties & Density",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. List 4 qualitative physical properties and 4 quantitative physical properties.",
                 "2. List 3 chemical properties with examples.",
-                "3. Solve: A rock has mass 150g and volume 50cm\xB3. Find density.",
+                "3. Solve: A rock has mass 150g and volume 50cm³. Find density.",
                 "4. Solve: An object has density 2.5 g/mL and mass 75g. Find volume.",
                 "5. Solve: A liquid has density 0.8 g/mL and volume 200mL. Find mass.",
-                "6. Will an object with density 1.5 g/cm\xB3 float or sink in water (1.0 g/cm\xB3)? Explain.",
+                "6. Will an object with density 1.5 g/cm³ float or sink in water (1.0 g/cm³)? Explain.",
                 "7. Describe how to find the volume of an irregular shaped object using water displacement."
               ],
               answers: [
-                "Qualitative: color, texture, odor, luster \u2022 Quantitative: mass, volume, density, melting point",
-                "Combustibility: paper burns \u2022 Reactivity with acid: metals produce hydrogen \u2022 Stability: iron rusts in oxygen",
-                "D = m/V = 150g / 50cm\xB3 = 3 g/cm\xB3",
+                "Qualitative: color, texture, odor, luster • Quantitative: mass, volume, density, melting point",
+                "Combustibility: paper burns • Reactivity with acid: metals produce hydrogen • Stability: iron rusts in oxygen",
+                "D = m/V = 150g / 50cm³ = 3 g/cm³",
                 "V = m/D = 75g / 2.5 g/mL = 30 mL",
-                "m = D \xD7 V = 0.8 g/mL \xD7 200mL = 160g",
-                "Sink \u2022 Object density (1.5) > water density (1.0) \u2022 Objects denser than liquid sink",
-                "Measure initial water level in graduated cylinder \u2022 Carefully place object in water \u2022 Measure new water level \u2022 Volume = final level - initial level"
+                "m = D × V = 0.8 g/mL × 200mL = 160g",
+                "Sink • Object density (1.5) > water density (1.0) • Objects denser than liquid sink",
+                "Measure initial water level in graduated cylinder • Carefully place object in water • Measure new water level • Volume = final level - initial level"
               ]
             },
             {
               subtitle: "Worksheet 3: Physical & Chemical Changes",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Define physical change and chemical change.",
@@ -26439,18 +26335,18 @@
                 "7. Give 2 examples of chemical changes that produce heat."
               ],
               answers: [
-                "Physical: same substance, different form, usually reversible (ice \u2192 water) \u2022 Chemical: new substance forms, difficult to reverse (burning wood \u2192 ash)",
-                "Color change \u2022 Gas production/bubbles \u2022 Temperature change \u2022 Light production \u2022 Precipitate forms (solid in liquid)",
-                "Physical: ice melting, cutting paper, dissolving sugar, breaking glass \u2022 Chemical: wood burning, rusting nail, cooking egg, baking cake",
-                "Wood burning: light, heat, gas, color change \u2022 Rusting: color change \u2022 Cooking egg: color change, temperature \u2022 Baking cake: gas (bubbles), color, temperature",
-                "Salt molecules separate but don't change \u2022 Can evaporate water and get salt back \u2022 No new substance formed \u2022 Reversible process",
-                "Vinegar + baking soda \u2192 CO\u2082 bubbles \u2022 Antacid tablet in water \u2192 gas bubbles",
-                "Combustion (burning wood) \u2022 Hand warmer packets \u2022 Neutralization reactions"
+                "Physical: same substance, different form, usually reversible (ice → water) • Chemical: new substance forms, difficult to reverse (burning wood → ash)",
+                "Color change • Gas production/bubbles • Temperature change • Light production • Precipitate forms (solid in liquid)",
+                "Physical: ice melting, cutting paper, dissolving sugar, breaking glass • Chemical: wood burning, rusting nail, cooking egg, baking cake",
+                "Wood burning: light, heat, gas, color change • Rusting: color change • Cooking egg: color change, temperature • Baking cake: gas (bubbles), color, temperature",
+                "Salt molecules separate but don't change • Can evaporate water and get salt back • No new substance formed • Reversible process",
+                "Vinegar + baking soda → CO₂ bubbles • Antacid tablet in water → gas bubbles",
+                "Combustion (burning wood) • Hand warmer packets • Neutralization reactions"
               ]
             },
             {
               subtitle: "Worksheet 4: Periodic Table",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Fill in the table: Elements 1-20 with names and symbols.",
@@ -26462,18 +26358,18 @@
                 "7. Using the periodic table, identify these as metal, non-metal, or metalloid: Fe, Cl, Si, Na, O, B, Cu."
               ],
               answers: [
-                "H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca \u2022 Should know names and symbols for all",
-                "Group 1, left side \u2022 Soft, highly reactive, shiny, low density, form +1 ions, react with water",
-                "Group 17, right side before noble gases \u2022 Reactive non-metals, diatomic molecules, form salts, gain 1 electron, poisonous/toxic",
-                "Group 18, far right column \u2022 Unreactive because full valence shell (8 electrons) \u2022 Stable, don't need to gain/lose electrons",
-                "Metals: shiny, conductive, malleable, ductile, lose electrons \u2022 Non-metals: dull, insulators, brittle, gain electrons, lower melting points",
-                "Metalloids: properties between metals and non-metals, semiconductors \u2022 Examples: Silicon (Si), Boron (B), Arsenic (As), Germanium (Ge)",
-                "Fe: metal \u2022 Cl: non-metal \u2022 Si: metalloid \u2022 Na: metal \u2022 O: non-metal \u2022 B: metalloid \u2022 Cu: metal"
+                "H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca • Should know names and symbols for all",
+                "Group 1, left side • Soft, highly reactive, shiny, low density, form +1 ions, react with water",
+                "Group 17, right side before noble gases • Reactive non-metals, diatomic molecules, form salts, gain 1 electron, poisonous/toxic",
+                "Group 18, far right column • Unreactive because full valence shell (8 electrons) • Stable, don't need to gain/lose electrons",
+                "Metals: shiny, conductive, malleable, ductile, lose electrons • Non-metals: dull, insulators, brittle, gain electrons, lower melting points",
+                "Metalloids: properties between metals and non-metals, semiconductors • Examples: Silicon (Si), Boron (B), Arsenic (As), Germanium (Ge)",
+                "Fe: metal • Cl: non-metal • Si: metalloid • Na: metal • O: non-metal • B: metalloid • Cu: metal"
               ]
             },
             {
               subtitle: "Worksheet 5: Atomic Structure",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. Draw and label the 4 atomic models: Dalton, Thomson, Rutherford, Bohr.",
@@ -26484,17 +26380,17 @@
                 "6. An atom has 17 protons, 18 neutrons, 17 electrons. What element is it? Draw its Bohr diagram."
               ],
               answers: [
-                "Dalton: solid sphere \u2022 Thomson: plum pudding (positive with electrons) \u2022 Rutherford: nucleus with orbiting electrons \u2022 Bohr: electrons in specific shells",
-                "Dalton: atoms are indivisible spheres \u2022 Thomson: discovered electrons, positive material \u2022 Rutherford: discovered nucleus, mostly empty space \u2022 Bohr: electrons in energy levels/shells",
-                "C: 6p, 6n, 6e \u2022 O: 8p, 8n, 8e \u2022 Na: 11p, 12n, 11e \u2022 Mg: 12p, 12n, 12e \u2022 Cl: 17p, 18n, 17e",
-                "H: 1e in shell 1 \u2022 He: 2e in shell 1 \u2022 C: 2e in shell 1, 4e in shell 2 \u2022 N: 2e, 5e \u2022 O: 2e, 6e \u2022 Na: 2e, 8e, 1e \u2022 Mg: 2e, 8e, 2e",
-                "Isotopes: same element, different neutrons \u2022 C-12: 6p, 6n, 6e \u2022 C-14: 6p, 8n, 6e \u2022 Both have 2e in shell 1, 4e in shell 2",
-                "Chlorine (Cl) \u2022 17 protons = atomic number 17 \u2022 Draw: nucleus with 17p 18n, shell 1: 2e, shell 2: 8e, shell 3: 7e"
+                "Dalton: solid sphere • Thomson: plum pudding (positive with electrons) • Rutherford: nucleus with orbiting electrons • Bohr: electrons in specific shells",
+                "Dalton: atoms are indivisible spheres • Thomson: discovered electrons, positive material • Rutherford: discovered nucleus, mostly empty space • Bohr: electrons in energy levels/shells",
+                "C: 6p, 6n, 6e • O: 8p, 8n, 8e • Na: 11p, 12n, 11e • Mg: 12p, 12n, 12e • Cl: 17p, 18n, 17e",
+                "H: 1e in shell 1 • He: 2e in shell 1 • C: 2e in shell 1, 4e in shell 2 • N: 2e, 5e • O: 2e, 6e • Na: 2e, 8e, 1e • Mg: 2e, 8e, 2e",
+                "Isotopes: same element, different neutrons • C-12: 6p, 6n, 6e • C-14: 6p, 8n, 6e • Both have 2e in shell 1, 4e in shell 2",
+                "Chlorine (Cl) • 17 protons = atomic number 17 • Draw: nucleus with 17p 18n, shell 1: 2e, shell 2: 8e, shell 3: 7e"
               ]
             },
             {
               subtitle: "Worksheet 6: Valence Electrons & Ions",
-              emoji: "\u{1F4DD}",
+              emoji: "📝",
               layout: "bullets",
               points: [
                 "1. What are valence electrons? Why are they important?",
@@ -26502,17 +26398,17 @@
                 "3. How many valence electrons does each group have? Groups 1, 2, 13-18.",
                 "4. Define cation and anion. Give 2 examples of each.",
                 "5. An ion has 11 protons, 12 neutrons, and 10 electrons. What is its charge? What element?",
-                "6. Complete the table for these ions: Na\u207A, Cl\u207B, Mg\xB2\u207A, O\xB2\u207B (protons, neutrons, electrons).",
+                "6. Complete the table for these ions: Na⁺, Cl⁻, Mg²⁺, O²⁻ (protons, neutrons, electrons).",
                 "7. Why do atoms form ions? Explain using the concept of stability."
               ],
               answers: [
-                "Electrons in outermost shell \u2022 Determine how atoms bond and react \u2022 Atoms want full outer shell for stability",
-                "H: 1 dot \u2022 C: 4 dots \u2022 N: 5 dots \u2022 O: 6 dots \u2022 F: 7 dots \u2022 Na: 1 dot \u2022 Mg: 2 dots \u2022 Al: 3 dots \u2022 Cl: 7 dots",
-                "Group 1: 1 valence e\u207B \u2022 Group 2: 2 \u2022 Group 13: 3 \u2022 Group 14: 4 \u2022 Group 15: 5 \u2022 Group 16: 6 \u2022 Group 17: 7 \u2022 Group 18: 8",
-                "Cation: positive ion, lost electrons (Na\u207A, Ca\xB2\u207A) \u2022 Anion: negative ion, gained electrons (Cl\u207B, O\xB2\u207B)",
-                "Charge: +1 (11 protons - 10 electrons) \u2022 Element: Sodium (Na) because 11 protons",
-                "Na\u207A: 11p, 12n, 10e \u2022 Cl\u207B: 17p, 18n, 18e \u2022 Mg\xB2\u207A: 12p, 12n, 10e \u2022 O\xB2\u207B: 8p, 8n, 10e",
-                "Atoms form ions to achieve stable electron configuration (full outer shell) \u2022 Metals lose electrons to empty outer shell \u2022 Non-metals gain electrons to fill outer shell \u2022 Noble gas configuration is most stable"
+                "Electrons in outermost shell • Determine how atoms bond and react • Atoms want full outer shell for stability",
+                "H: 1 dot • C: 4 dots • N: 5 dots • O: 6 dots • F: 7 dots • Na: 1 dot • Mg: 2 dots • Al: 3 dots • Cl: 7 dots",
+                "Group 1: 1 valence e⁻ • Group 2: 2 • Group 13: 3 • Group 14: 4 • Group 15: 5 • Group 16: 6 • Group 17: 7 • Group 18: 8",
+                "Cation: positive ion, lost electrons (Na⁺, Ca²⁺) • Anion: negative ion, gained electrons (Cl⁻, O²⁻)",
+                "Charge: +1 (11 protons - 10 electrons) • Element: Sodium (Na) because 11 protons",
+                "Na⁺: 11p, 12n, 10e • Cl⁻: 17p, 18n, 18e • Mg²⁺: 12p, 12n, 10e • O²⁻: 8p, 8n, 10e",
+                "Atoms form ions to achieve stable electron configuration (full outer shell) • Metals lose electrons to empty outer shell • Non-metals gain electrons to fill outer shell • Noble gas configuration is most stable"
               ]
             }
           ]
@@ -26535,118 +26431,118 @@
           notes: [
             {
               subtitle: "Biodiversity Terms",
-              emoji: "\u{1F33F}",
+              emoji: "🌿",
               layout: "cards",
               items: [
-                { icon: "\u{1F30D}", label: "BIODIVERSITY", value: "Genetic + Species + Ecosystem", sub: "Total variety of life in an area across all three levels", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F9EC}", label: "GENETIC DIVERSITY", value: "Within a species", sub: "Variation of genes in one species (e.g. different dog breeds)", color: "bg-teal-50 border-teal-300" },
-                { icon: "\u{1F420}", label: "SPECIES DIVERSITY", value: "Within a habitat", sub: "Variety of different species in one place (e.g. coral reef)", color: "bg-cyan-50 border-cyan-300" },
-                { icon: "\u{1F332}", label: "ECOSYSTEM DIVERSITY", value: "Within a region", sub: "Variety of different ecosystems (forests, wetlands, grasslands)", color: "bg-emerald-50 border-emerald-300" },
-                { icon: "\u{1F465}", label: "POPULATION", value: "Same species, one area", sub: "All members of one species living in the same place", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F3E1}", label: "HABITAT", value: "Natural home", sub: "The environment an organism naturally lives and grows in", color: "bg-lime-50 border-lime-300" }
+                { icon: "🌍", label: "BIODIVERSITY", value: "Genetic + Species + Ecosystem", sub: "Total variety of life in an area across all three levels", color: "bg-green-50 border-green-300" },
+                { icon: "🧬", label: "GENETIC DIVERSITY", value: "Within a species", sub: "Variation of genes in one species (e.g. different dog breeds)", color: "bg-teal-50 border-teal-300" },
+                { icon: "🐠", label: "SPECIES DIVERSITY", value: "Within a habitat", sub: "Variety of different species in one place (e.g. coral reef)", color: "bg-cyan-50 border-cyan-300" },
+                { icon: "🌲", label: "ECOSYSTEM DIVERSITY", value: "Within a region", sub: "Variety of different ecosystems (forests, wetlands, grasslands)", color: "bg-emerald-50 border-emerald-300" },
+                { icon: "👥", label: "POPULATION", value: "Same species, one area", sub: "All members of one species living in the same place", color: "bg-blue-50 border-blue-300" },
+                { icon: "🏡", label: "HABITAT", value: "Natural home", sub: "The environment an organism naturally lives and grows in", color: "bg-lime-50 border-lime-300" }
               ],
               points: []
             },
             {
               subtitle: "Ecosystem Terms",
-              emoji: "\u{1F30D}",
+              emoji: "🌍",
               layout: "cards",
               items: [
-                { icon: "\u{1F517}", label: "ECOSYSTEM", value: "Community + Environment", sub: "All living things interacting with the non-living environment", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F331}", label: "BIOTIC FACTOR", value: "Living component", sub: "Plants, animals, bacteria, fungi \u2014 anything alive", color: "bg-emerald-50 border-emerald-300" },
-                { icon: "\u2600\uFE0F", label: "ABIOTIC FACTOR", value: "Non-living component", sub: "Sunlight, water, soil, temperature, pH levels", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u267B\uFE0F", label: "SUSTAINABLE ECOSYSTEM", value: "Self-maintaining", sub: "Resources regenerate as fast as they are used \u2014 balanced", color: "bg-teal-50 border-teal-300" },
-                { icon: "\u{1F30E}", label: "BIOSPHERE", value: "All life on Earth", sub: "The total of all ecosystems \u2014 every living thing on the planet", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1FAA8}", label: "LITHOSPHERE", value: "Earth's crust", sub: "Rocks, soil, and minerals that form the land surface", color: "bg-stone-50 border-stone-300" }
+                { icon: "🔗", label: "ECOSYSTEM", value: "Community + Environment", sub: "All living things interacting with the non-living environment", color: "bg-green-50 border-green-300" },
+                { icon: "🌱", label: "BIOTIC FACTOR", value: "Living component", sub: "Plants, animals, bacteria, fungi — anything alive", color: "bg-emerald-50 border-emerald-300" },
+                { icon: "☀️", label: "ABIOTIC FACTOR", value: "Non-living component", sub: "Sunlight, water, soil, temperature, pH levels", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "♻️", label: "SUSTAINABLE ECOSYSTEM", value: "Self-maintaining", sub: "Resources regenerate as fast as they are used — balanced", color: "bg-teal-50 border-teal-300" },
+                { icon: "🌎", label: "BIOSPHERE", value: "All life on Earth", sub: "The total of all ecosystems — every living thing on the planet", color: "bg-blue-50 border-blue-300" },
+                { icon: "🪨", label: "LITHOSPHERE", value: "Earth's crust", sub: "Rocks, soil, and minerals that form the land surface", color: "bg-stone-50 border-stone-300" }
               ],
               points: []
             },
             {
               subtitle: "Organism Roles in the Food Chain",
-              emoji: "\u{1F517}",
+              emoji: "🔗",
               layout: "rules",
               items: [
-                { icon: "\u{1F33F}", label: "PRODUCER \u2014 Makes its own food via photosynthesis", sub: "Plants, algae, phytoplankton. The base of every food chain", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F407}", label: "PRIMARY CONSUMER \u2014 Herbivore that eats producers", sub: "Rabbit, deer, grasshopper. Trophic level 2", color: "bg-lime-50 border-lime-400" },
-                { icon: "\u{1F98A}", label: "SECONDARY CONSUMER \u2014 Eats primary consumers", sub: "Snake, fox, frog. Trophic level 3", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F985}", label: "TERTIARY CONSUMER \u2014 Top predator", sub: "Eagle, shark, orca. Trophic level 4. Gets the least energy", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F344}", label: "DECOMPOSER \u2014 Breaks down dead matter", sub: "Bacteria, fungi, worms. Recycle nutrients back into soil", color: "bg-brown-50 border-amber-400" }
+                { icon: "🌿", label: "PRODUCER — Makes its own food via photosynthesis", sub: "Plants, algae, phytoplankton. The base of every food chain", color: "bg-green-50 border-green-400" },
+                { icon: "🐇", label: "PRIMARY CONSUMER — Herbivore that eats producers", sub: "Rabbit, deer, grasshopper. Trophic level 2", color: "bg-lime-50 border-lime-400" },
+                { icon: "🦊", label: "SECONDARY CONSUMER — Eats primary consumers", sub: "Snake, fox, frog. Trophic level 3", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🦅", label: "TERTIARY CONSUMER — Top predator", sub: "Eagle, shark, orca. Trophic level 4. Gets the least energy", color: "bg-orange-50 border-orange-400" },
+                { icon: "🍄", label: "DECOMPOSER — Breaks down dead matter", sub: "Bacteria, fungi, worms. Recycle nutrients back into soil", color: "bg-brown-50 border-amber-400" }
               ],
               points: []
             },
             {
               subtitle: "Energy Flow Terms",
-              emoji: "\u26A1",
+              emoji: "⚡",
               layout: "cards",
               items: [
-                { icon: "\u26D3\uFE0F", label: "FOOD CHAIN", value: "Linear sequence", sub: "Shows who eats whom in a straight line", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F578}\uFE0F", label: "FOOD WEB", value: "Interconnected chains", sub: "Many food chains linked together \u2014 more realistic", color: "bg-teal-50 border-teal-300" },
-                { icon: "\u{1F51F}", label: "10% RULE", value: "Energy transfer", sub: "Only 10% of energy passes to next level \u2014 90% lost as heat", color: "bg-amber-50 border-amber-300" },
-                { icon: "\u{1F53A}", label: "ENERGY PYRAMID", value: "Decreasing energy", sub: "Diagram showing energy shrinks at each trophic level", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u{1F41F}", label: "BIOACCUMULATION", value: "One organism", sub: "Toxin builds up inside a single organism over its lifetime", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F985}", label: "BIOMAGNIFICATION", value: "Up the food chain", sub: "Toxin concentration multiplies at each trophic level", color: "bg-red-50 border-red-300" }
+                { icon: "⛓️", label: "FOOD CHAIN", value: "Linear sequence", sub: "Shows who eats whom in a straight line", color: "bg-green-50 border-green-300" },
+                { icon: "🕸️", label: "FOOD WEB", value: "Interconnected chains", sub: "Many food chains linked together — more realistic", color: "bg-teal-50 border-teal-300" },
+                { icon: "🔟", label: "10% RULE", value: "Energy transfer", sub: "Only 10% of energy passes to next level — 90% lost as heat", color: "bg-amber-50 border-amber-300" },
+                { icon: "🔺", label: "ENERGY PYRAMID", value: "Decreasing energy", sub: "Diagram showing energy shrinks at each trophic level", color: "bg-orange-50 border-orange-300" },
+                { icon: "🐟", label: "BIOACCUMULATION", value: "One organism", sub: "Toxin builds up inside a single organism over its lifetime", color: "bg-blue-50 border-blue-300" },
+                { icon: "🦅", label: "BIOMAGNIFICATION", value: "Up the food chain", sub: "Toxin concentration multiplies at each trophic level", color: "bg-red-50 border-red-300" }
               ],
               points: []
             },
             {
               subtitle: "Species Relationships (Symbiosis)",
-              emoji: "\u{1F91D}",
+              emoji: "🤝",
               layout: "rules",
               items: [
-                { icon: "\u{1F41D}", label: "MUTUALISM \u2014 Both species benefit", sub: "Bee pollinates flower; flower gives bee nectar. Win-win", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F426}", label: "COMMENSALISM \u2014 One benefits, other unaffected", sub: "Bird nests in a tree. Tree is not helped or harmed", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F99F}", label: "PARASITISM \u2014 One benefits, other is harmed", sub: "Tick on a dog. Tick feeds; dog loses blood and may get sick", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F43A}", label: "PREDATION \u2014 One hunts and eats the other", sub: "Wolf eats rabbit. Controls population size naturally", color: "bg-orange-50 border-orange-400" }
+                { icon: "🐝", label: "MUTUALISM — Both species benefit", sub: "Bee pollinates flower; flower gives bee nectar. Win-win", color: "bg-green-50 border-green-400" },
+                { icon: "🐦", label: "COMMENSALISM — One benefits, other unaffected", sub: "Bird nests in a tree. Tree is not helped or harmed", color: "bg-blue-50 border-blue-400" },
+                { icon: "🦟", label: "PARASITISM — One benefits, other is harmed", sub: "Tick on a dog. Tick feeds; dog loses blood and may get sick", color: "bg-red-50 border-red-400" },
+                { icon: "🐺", label: "PREDATION — One hunts and eats the other", sub: "Wolf eats rabbit. Controls population size naturally", color: "bg-orange-50 border-orange-400" }
               ],
               points: []
             },
             {
               subtitle: "Photosynthesis & Respiration",
-              emoji: "\u{1F331}",
+              emoji: "🌱",
               layout: "formula",
               items: [
-                { formula: "6CO\u2082 + 6H\u2082O + sunlight \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082", meaning: "PHOTOSYNTHESIS \u2014 Plants convert carbon dioxide + water + light into glucose + oxygen", example: "Happens in chloroplasts. Only plants, algae, and some bacteria", color: "border-green-400", headerBg: "bg-green-600" },
-                { formula: "C\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + ATP", meaning: "CELLULAR RESPIRATION \u2014 Organisms break down glucose to release energy (ATP)", example: "Happens in mitochondria. ALL living organisms do this", color: "border-blue-400", headerBg: "bg-blue-600" }
+                { formula: "6CO₂ + 6H₂O + sunlight → C₆H₁₂O₆ + 6O₂", meaning: "PHOTOSYNTHESIS — Plants convert carbon dioxide + water + light into glucose + oxygen", example: "Happens in chloroplasts. Only plants, algae, and some bacteria", color: "border-green-400", headerBg: "bg-green-600" },
+                { formula: "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP", meaning: "CELLULAR RESPIRATION — Organisms break down glucose to release energy (ATP)", example: "Happens in mitochondria. ALL living organisms do this", color: "border-blue-400", headerBg: "bg-blue-600" }
               ],
               points: []
             },
             {
-              subtitle: "Nutrient Cycles \u2014 Key Terms",
-              emoji: "\u267B\uFE0F",
+              subtitle: "Nutrient Cycles — Key Terms",
+              emoji: "♻️",
               layout: "rules",
               items: [
-                { icon: "\u{1F4A8}", label: "CARBON CYCLE \u2014 Carbon moves through atmosphere, organisms, soil, and water", sub: "Photosynthesis removes CO\u2082; respiration and combustion release it", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F331}", label: "NITROGEN CYCLE \u2014 Nitrogen moves between atmosphere and soil", sub: "78% of air is N\u2082 \u2014 but plants cannot use it without bacteria", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u26A1", label: "NITROGEN FIXATION \u2014 N\u2082 gas converted to ammonia (NH\u2083)", sub: "Done by Rhizobium bacteria in root nodules OR lightning", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F52C}", label: "NITRIFICATION \u2192 DENITRIFICATION \u2014 Nitrate cycle", sub: "Nitrification: NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (usable). Denitrification: NO\u2083\u207B \u2192 N\u2082 (returns to air)", color: "bg-green-50 border-green-400" }
+                { icon: "💨", label: "CARBON CYCLE — Carbon moves through atmosphere, organisms, soil, and water", sub: "Photosynthesis removes CO₂; respiration and combustion release it", color: "bg-gray-50 border-gray-400" },
+                { icon: "🌱", label: "NITROGEN CYCLE — Nitrogen moves between atmosphere and soil", sub: "78% of air is N₂ — but plants cannot use it without bacteria", color: "bg-blue-50 border-blue-400" },
+                { icon: "⚡", label: "NITROGEN FIXATION — N₂ gas converted to ammonia (NH₃)", sub: "Done by Rhizobium bacteria in root nodules OR lightning", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🔬", label: "NITRIFICATION → DENITRIFICATION — Nitrate cycle", sub: "Nitrification: NH₃ → NO₂⁻ → NO₃⁻ (usable). Denitrification: NO₃⁻ → N₂ (returns to air)", color: "bg-green-50 border-green-400" }
               ],
               points: []
             },
             {
               subtitle: "Threats to Biodiversity (H.I.P.P.O.C)",
-              emoji: "\u26A0\uFE0F",
+              emoji: "⚠️",
               layout: "rules",
               items: [
-                { icon: "\u{1F3D7}\uFE0F", label: "H \u2014 Habitat Destruction", sub: "Deforestation, urban sprawl. Removes living spaces \u2014 #1 threat", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F99F}", label: "I \u2014 Invasive Species", sub: "Non-native species out-compete locals (zebra mussels in Great Lakes)", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F3ED}", label: "P \u2014 Pollution", sub: "Oil spills, chemicals, plastics, noise all kill or displace organisms", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F465}", label: "P \u2014 Population (Human Growth)", sub: "More people = more land used, more resources consumed", color: "bg-purple-50 border-purple-400" },
-                { icon: "\u{1F3A3}", label: "O \u2014 Overharvesting", sub: "Fishing/hunting faster than species can reproduce (Atlantic cod collapse)", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F321}\uFE0F", label: "C \u2014 Climate Change", sub: "Warming seas \u2192 coral bleaching. Shifting seasons \u2192 habitat loss", color: "bg-green-50 border-green-400" }
+                { icon: "🏗️", label: "H — Habitat Destruction", sub: "Deforestation, urban sprawl. Removes living spaces — #1 threat", color: "bg-red-50 border-red-400" },
+                { icon: "🦟", label: "I — Invasive Species", sub: "Non-native species out-compete locals (zebra mussels in Great Lakes)", color: "bg-orange-50 border-orange-400" },
+                { icon: "🏭", label: "P — Pollution", sub: "Oil spills, chemicals, plastics, noise all kill or displace organisms", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "👥", label: "P — Population (Human Growth)", sub: "More people = more land used, more resources consumed", color: "bg-purple-50 border-purple-400" },
+                { icon: "🎣", label: "O — Overharvesting", sub: "Fishing/hunting faster than species can reproduce (Atlantic cod collapse)", color: "bg-blue-50 border-blue-400" },
+                { icon: "🌡️", label: "C — Climate Change", sub: "Warming seas → coral bleaching. Shifting seasons → habitat loss", color: "bg-green-50 border-green-400" }
               ],
               points: []
             },
             {
               subtitle: "Conservation & Restoration",
-              emoji: "\u{1F332}",
+              emoji: "🌲",
               layout: "cards",
               items: [
-                { icon: "\u{1F333}", label: "REFORESTATION", value: "Plant trees back", sub: "Prevents erosion, restores habitat, stores carbon", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F9A0}", label: "BIOREMEDIATION", value: "Microbes clean up", sub: "Bacteria/fungi break down toxins naturally (used in oil spill cleanup)", color: "bg-teal-50 border-teal-300" },
-                { icon: "\u2795", label: "BIOAUGMENTATION", value: "Add organisms", sub: "Introduce specific bacteria/fungi to neutralize pollution faster", color: "bg-cyan-50 border-cyan-300" },
-                { icon: "\u{1F512}", label: "CONSERVATION", value: "Protect & preserve", sub: "National parks, protected areas, wildlife reserves", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F504}", label: "SUSTAINABILITY", value: "Don't use faster than nature renews", sub: "Meet current needs without harming future generations", color: "bg-emerald-50 border-emerald-300" },
-                { icon: "\u{1F342}", label: "BIODEGRADABLE", value: "Breaks down naturally", sub: "Decomposers can break it down \u2014 unlike plastic", color: "bg-lime-50 border-lime-300" }
+                { icon: "🌳", label: "REFORESTATION", value: "Plant trees back", sub: "Prevents erosion, restores habitat, stores carbon", color: "bg-green-50 border-green-300" },
+                { icon: "🦠", label: "BIOREMEDIATION", value: "Microbes clean up", sub: "Bacteria/fungi break down toxins naturally (used in oil spill cleanup)", color: "bg-teal-50 border-teal-300" },
+                { icon: "➕", label: "BIOAUGMENTATION", value: "Add organisms", sub: "Introduce specific bacteria/fungi to neutralize pollution faster", color: "bg-cyan-50 border-cyan-300" },
+                { icon: "🔒", label: "CONSERVATION", value: "Protect & preserve", sub: "National parks, protected areas, wildlife reserves", color: "bg-blue-50 border-blue-300" },
+                { icon: "🔄", label: "SUSTAINABILITY", value: "Don't use faster than nature renews", sub: "Meet current needs without harming future generations", color: "bg-emerald-50 border-emerald-300" },
+                { icon: "🍂", label: "BIODEGRADABLE", value: "Breaks down naturally", sub: "Decomposers can break it down — unlike plastic", color: "bg-lime-50 border-lime-300" }
               ],
               points: []
             }
@@ -26659,16 +26555,16 @@
           notes: [
             {
               subtitle: "Three Levels at a Glance",
-              emoji: "\u{1F33F}",
+              emoji: "🌿",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F9EC} GENETIC",
+                  label: "🧬 GENETIC",
                   color: "bg-purple-50 border-purple-400",
                   rows: ["Variation WITHIN a species", "Same species, different genes", "Example: dog breeds", "Why: helps species adapt"]
                 },
                 {
-                  label: "\u{1F420} SPECIES",
+                  label: "🐠 SPECIES",
                   color: "bg-cyan-50 border-cyan-400",
                   rows: ["Variety of SPECIES in a habitat", "Different organisms coexisting", "Example: coral reef fish", "Why: stability of ecosystem"]
                 },
@@ -26678,12 +26574,12 @@
             },
             {
               subtitle: "Why Biodiversity Matters",
-              emoji: "\u2753",
+              emoji: "❓",
               layout: "rules",
               items: [
-                { icon: "\u{1F4AA}", label: "Genetic diversity = resilience", sub: "More genetic variation = better chance species survives disease or climate shift", color: "bg-purple-50 border-purple-400" },
-                { icon: "\u2696\uFE0F", label: "Species diversity = stable ecosystems", sub: "More species = more ways to fill each role. Losing one species hurts fewer others", color: "bg-cyan-50 border-cyan-400" },
-                { icon: "\u{1F30D}", label: "Ecosystem diversity = services for all life", sub: "Different ecosystems provide clean air, water filtration, food, climate control", color: "bg-green-50 border-green-400" }
+                { icon: "💪", label: "Genetic diversity = resilience", sub: "More genetic variation = better chance species survives disease or climate shift", color: "bg-purple-50 border-purple-400" },
+                { icon: "⚖️", label: "Species diversity = stable ecosystems", sub: "More species = more ways to fill each role. Losing one species hurts fewer others", color: "bg-cyan-50 border-cyan-400" },
+                { icon: "🌍", label: "Ecosystem diversity = services for all life", sub: "Different ecosystems provide clean air, water filtration, food, climate control", color: "bg-green-50 border-green-400" }
               ],
               points: []
             }
@@ -26691,32 +26587,32 @@
         },
         {
           id: "hippoc",
-          title: "H.I.P.P.O.C. \u2014 Threats to Biodiversity",
+          title: "H.I.P.P.O.C. — Threats to Biodiversity",
           image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=400&fit=crop",
           notes: [
             {
               subtitle: "All Six Threats",
-              emoji: "\u26A0\uFE0F",
+              emoji: "⚠️",
               layout: "rules",
               items: [
-                { icon: "\u{1F3D7}\uFE0F", label: "H \u2014 Habitat Destruction", sub: "Deforestation, mining, urban sprawl remove living spaces. The #1 cause of extinction", color: "bg-red-50 border-red-500" },
-                { icon: "\u{1F99F}", label: "I \u2014 Invasive Species", sub: "Non-native species with no natural predators outcompete locals. Zebra mussels destroyed Great Lakes food webs", color: "bg-orange-50 border-orange-500" },
-                { icon: "\u{1F3ED}", label: "P \u2014 Pollution", sub: "Oil spills, pesticides, plastic, noise and light pollution all kill or displace wildlife", color: "bg-yellow-50 border-yellow-500" },
-                { icon: "\u{1F465}", label: "P \u2014 Population (Human Growth)", sub: "More people = more land cleared, more water used, more waste produced", color: "bg-purple-50 border-purple-500" },
-                { icon: "\u{1F3A3}", label: "O \u2014 Overharvesting", sub: "Fishing/hunting/logging faster than species can reproduce. Atlantic cod collapsed in 1992", color: "bg-blue-50 border-blue-500" },
-                { icon: "\u{1F321}\uFE0F", label: "C \u2014 Climate Change", sub: "Warming oceans bleach coral. Shifting seasons disrupt migration and breeding cycles", color: "bg-teal-50 border-teal-500" }
+                { icon: "🏗️", label: "H — Habitat Destruction", sub: "Deforestation, mining, urban sprawl remove living spaces. The #1 cause of extinction", color: "bg-red-50 border-red-500" },
+                { icon: "🦟", label: "I — Invasive Species", sub: "Non-native species with no natural predators outcompete locals. Zebra mussels destroyed Great Lakes food webs", color: "bg-orange-50 border-orange-500" },
+                { icon: "🏭", label: "P — Pollution", sub: "Oil spills, pesticides, plastic, noise and light pollution all kill or displace wildlife", color: "bg-yellow-50 border-yellow-500" },
+                { icon: "👥", label: "P — Population (Human Growth)", sub: "More people = more land cleared, more water used, more waste produced", color: "bg-purple-50 border-purple-500" },
+                { icon: "🎣", label: "O — Overharvesting", sub: "Fishing/hunting/logging faster than species can reproduce. Atlantic cod collapsed in 1992", color: "bg-blue-50 border-blue-500" },
+                { icon: "🌡️", label: "C — Climate Change", sub: "Warming oceans bleach coral. Shifting seasons disrupt migration and breeding cycles", color: "bg-teal-50 border-teal-500" }
               ],
               points: []
             },
             {
-              subtitle: "Exam Tip \u2014 Solutions for Each Threat",
-              emoji: "\u{1F3AF}",
+              subtitle: "Exam Tip — Solutions for Each Threat",
+              emoji: "🎯",
               layout: "cards",
               items: [
-                { icon: "\u{1F3D7}\uFE0F", label: "Habitat Destruction", value: "Solution:", sub: "Protected areas, reforestation, sustainable forestry certification", color: "bg-red-50 border-red-200" },
-                { icon: "\u{1F99F}", label: "Invasive Species", value: "Solution:", sub: "Early detection, biological control, preventing new introductions", color: "bg-orange-50 border-orange-200" },
-                { icon: "\u{1F3ED}", label: "Pollution", value: "Solution:", sub: "Stricter regulations, bioremediation, reduce plastic use", color: "bg-yellow-50 border-yellow-200" },
-                { icon: "\u{1F3A3}", label: "Overharvesting", value: "Solution:", sub: "Fishing quotas, seasonal bans, protected marine areas", color: "bg-blue-50 border-blue-200" }
+                { icon: "🏗️", label: "Habitat Destruction", value: "Solution:", sub: "Protected areas, reforestation, sustainable forestry certification", color: "bg-red-50 border-red-200" },
+                { icon: "🦟", label: "Invasive Species", value: "Solution:", sub: "Early detection, biological control, preventing new introductions", color: "bg-orange-50 border-orange-200" },
+                { icon: "🏭", label: "Pollution", value: "Solution:", sub: "Stricter regulations, bioremediation, reduce plastic use", color: "bg-yellow-50 border-yellow-200" },
+                { icon: "🎣", label: "Overharvesting", value: "Solution:", sub: "Fishing quotas, seasonal bans, protected marine areas", color: "bg-blue-50 border-blue-200" }
               ],
               points: []
             }
@@ -26735,17 +26631,17 @@
           image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Biotic vs Abiotic \u2014 Side by Side",
-              emoji: "\u{1F30D}",
+              subtitle: "Biotic vs Abiotic — Side by Side",
+              emoji: "🌍",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F331} BIOTIC (Living)",
+                  label: "🌱 BIOTIC (Living)",
                   color: "bg-green-50 border-green-400",
                   rows: ["Plants, animals, fungi", "Bacteria and microorganisms", "Decaying/dead matter still counts!", "Affect each other through eating, competing, symbiosis"]
                 },
                 {
-                  label: "\u2600\uFE0F ABIOTIC (Non-living)",
+                  label: "☀️ ABIOTIC (Non-living)",
                   color: "bg-yellow-50 border-yellow-400",
                   rows: ["Sunlight, temperature", "Water, soil, air", "pH levels, salinity", "Physical & chemical environment"]
                 },
@@ -26755,13 +26651,13 @@
             },
             {
               subtitle: "The Four Spheres",
-              emoji: "\u{1F310}",
+              emoji: "🌐",
               layout: "cards",
               items: [
-                { icon: "\u{1F33F}", label: "BIOSPHERE", value: "All living things", sub: "Every organism on Earth \u2014 the living layer of the planet", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F4A8}", label: "ATMOSPHERE", value: "All gases", sub: "Nitrogen (78%), oxygen (21%), CO\u2082 and others", color: "bg-sky-50 border-sky-300" },
-                { icon: "\u{1F4A7}", label: "HYDROSPHERE", value: "All water", sub: "Oceans, rivers, lakes, groundwater, ice caps", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1FAA8}", label: "LITHOSPHERE", value: "Earth's crust", sub: "Rocks, soil, minerals \u2014 what the land is made of", color: "bg-stone-50 border-stone-300" }
+                { icon: "🌿", label: "BIOSPHERE", value: "All living things", sub: "Every organism on Earth — the living layer of the planet", color: "bg-green-50 border-green-300" },
+                { icon: "💨", label: "ATMOSPHERE", value: "All gases", sub: "Nitrogen (78%), oxygen (21%), CO₂ and others", color: "bg-sky-50 border-sky-300" },
+                { icon: "💧", label: "HYDROSPHERE", value: "All water", sub: "Oceans, rivers, lakes, groundwater, ice caps", color: "bg-blue-50 border-blue-300" },
+                { icon: "🪨", label: "LITHOSPHERE", value: "Earth's crust", sub: "Rocks, soil, minerals — what the land is made of", color: "bg-stone-50 border-stone-300" }
               ],
               points: []
             }
@@ -26780,42 +26676,42 @@
           image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Food Chain \u2014 How Energy Flows",
-              emoji: "\u26D3\uFE0F",
+              subtitle: "Food Chain — How Energy Flows",
+              emoji: "⛓️",
               layout: "steps",
               items: [
-                { label: "PRODUCERS \u2014 Capture energy from the Sun", sub: "Plants, algae, phytoplankton. Convert sunlight \u2192 glucose via photosynthesis" },
-                { label: "PRIMARY CONSUMERS \u2014 Eat producers", sub: "Herbivores (grasshopper, deer, rabbit). Get 10% of producer energy" },
-                { label: "SECONDARY CONSUMERS \u2014 Eat primary consumers", sub: "Omnivores/carnivores (frog, snake, fox). Get 10% of primary consumer energy" },
-                { label: "TERTIARY CONSUMERS \u2014 Top predators", sub: "Eagle, shark, orca. Get only 0.1% of original producer energy!" }
+                { label: "PRODUCERS — Capture energy from the Sun", sub: "Plants, algae, phytoplankton. Convert sunlight → glucose via photosynthesis" },
+                { label: "PRIMARY CONSUMERS — Eat producers", sub: "Herbivores (grasshopper, deer, rabbit). Get 10% of producer energy" },
+                { label: "SECONDARY CONSUMERS — Eat primary consumers", sub: "Omnivores/carnivores (frog, snake, fox). Get 10% of primary consumer energy" },
+                { label: "TERTIARY CONSUMERS — Top predators", sub: "Eagle, shark, orca. Get only 0.1% of original producer energy!" }
               ],
               points: [],
               diagram: "food-chain"
             },
             {
-              subtitle: "The 10% Rule \u2014 Why Chains Are Short",
-              emoji: "\u{1F51F}",
+              subtitle: "The 10% Rule — Why Chains Are Short",
+              emoji: "🔟",
               layout: "formula",
               items: [
-                { formula: "Energy at next level = Current level \xD7 10%", meaning: "Only 10% transfers up \u2014 90% lost as heat, movement, waste, and uneaten parts", example: "100,000 kcal producers \u2192 10,000 primary \u2192 1,000 secondary \u2192 100 tertiary", color: "border-amber-400", headerBg: "bg-amber-500" }
+                { formula: "Energy at next level = Current level × 10%", meaning: "Only 10% transfers up — 90% lost as heat, movement, waste, and uneaten parts", example: "100,000 kcal producers → 10,000 primary → 1,000 secondary → 100 tertiary", color: "border-amber-400", headerBg: "bg-amber-500" }
               ],
               points: [],
               diagram: "energy-pyramid"
             },
             {
               subtitle: "Terrestrial vs Aquatic Chains",
-              emoji: "\u{1F30A}",
+              emoji: "🌊",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F33E} TERRESTRIAL",
+                  label: "🌾 TERRESTRIAL",
                   color: "bg-green-50 border-green-400",
-                  rows: ["Grass \u2192 Grasshopper", "\u2192 Mouse \u2192 Snake \u2192 Eagle", "Producers: land plants", "Sunlight hits leaves directly"]
+                  rows: ["Grass → Grasshopper", "→ Mouse → Snake → Eagle", "Producers: land plants", "Sunlight hits leaves directly"]
                 },
                 {
-                  label: "\u{1F30A} AQUATIC",
+                  label: "🌊 AQUATIC",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Phytoplankton \u2192 Zooplankton", "\u2192 Small fish \u2192 Large fish \u2192 Shark", "Producers: microscopic algae", "Same 10% rule applies"]
+                  rows: ["Phytoplankton → Zooplankton", "→ Small fish → Large fish → Shark", "Producers: microscopic algae", "Same 10% rule applies"]
                 },
                 "Key rule: Arrows in food chains point FROM the food source TO the consumer (show energy flow direction)."
               ],
@@ -26824,13 +26720,13 @@
             },
             {
               subtitle: "Key Facts Examiners Love",
-              emoji: "\u{1F3AF}",
+              emoji: "🎯",
               layout: "rules",
               items: [
-                { icon: "\u{1F344}", label: "Decomposers are NOT shown in the energy pyramid", sub: "They get energy from ALL levels \u2014 breaking down dead matter at every stage", color: "bg-amber-50 border-amber-400" },
-                { icon: "\u{1F33F}", label: "Ecosystems can survive without consumers \u2014 NOT without producers", sub: "Remove all plants and the whole system collapses", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F464}", label: "Humans can appear at any trophic level", sub: "We eat plants (level 2) AND meat (level 3+) \u2014 we are omnivores", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F4CF}", label: "Why are food chains limited to 4-5 levels?", sub: "Not enough energy left after 5 steps to support another organism", color: "bg-red-50 border-red-400" }
+                { icon: "🍄", label: "Decomposers are NOT shown in the energy pyramid", sub: "They get energy from ALL levels — breaking down dead matter at every stage", color: "bg-amber-50 border-amber-400" },
+                { icon: "🌿", label: "Ecosystems can survive without consumers — NOT without producers", sub: "Remove all plants and the whole system collapses", color: "bg-green-50 border-green-400" },
+                { icon: "👤", label: "Humans can appear at any trophic level", sub: "We eat plants (level 2) AND meat (level 3+) — we are omnivores", color: "bg-blue-50 border-blue-400" },
+                { icon: "📏", label: "Why are food chains limited to 4-5 levels?", sub: "Not enough energy left after 5 steps to support another organism", color: "bg-red-50 border-red-400" }
               ],
               points: []
             }
@@ -26850,32 +26746,32 @@
           notes: [
             {
               subtitle: "Bioaccumulation vs Biomagnification",
-              emoji: "\u2620\uFE0F",
+              emoji: "☠️",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F41F} BIOACCUMULATION",
+                  label: "🐟 BIOACCUMULATION",
                   color: "bg-blue-50 border-blue-400",
                   rows: ["Toxin builds up in ONE organism", "Absorbs more than it excretes", "Example: Fish absorbs mercury from water over its lifetime", "Happens at EVERY level"]
                 },
                 {
-                  label: "\u{1F985} BIOMAGNIFICATION",
+                  label: "🦅 BIOMAGNIFICATION",
                   color: "bg-red-50 border-red-400",
-                  rows: ["Concentration INCREASES up chain", "Top predators hit hardest", "Example: DDT killed eagle eggs", "Plankton: 0.01ppm \u2192 Eagle: 10+ ppm"]
+                  rows: ["Concentration INCREASES up chain", "Top predators hit hardest", "Example: DDT killed eagle eggs", "Plankton: 0.01ppm → Eagle: 10+ ppm"]
                 },
-                "Real example: Mercury \u2192 plankton (absorb from water) \u2192 small fish (eat many plankton) \u2192 large fish \u2192 humans. Swordfish/tuna have HIGH mercury."
+                "Real example: Mercury → plankton (absorb from water) → small fish (eat many plankton) → large fish → humans. Swordfish/tuna have HIGH mercury."
               ],
               points: []
             },
             {
               subtitle: "Why Top Predators Are Most Affected",
-              emoji: "\u{1F522}",
+              emoji: "🔢",
               layout: "steps",
               items: [
                 { label: "Plankton absorb tiny amounts of toxin from water", sub: "e.g. 0.01 ppm mercury each" },
-                { label: "Small fish eat thousands of plankton", sub: "Toxin from all that plankton concentrates \u2192 0.1 ppm" },
-                { label: "Large fish eat many small fish", sub: "Concentration keeps multiplying \u2192 1 ppm" },
-                { label: "Top predator eats many large fish across years", sub: "Can reach 10-25 ppm \u2014 enough to cause nerve damage and reproductive failure" }
+                { label: "Small fish eat thousands of plankton", sub: "Toxin from all that plankton concentrates → 0.1 ppm" },
+                { label: "Large fish eat many small fish", sub: "Concentration keeps multiplying → 1 ppm" },
+                { label: "Top predator eats many large fish across years", sub: "Can reach 10-25 ppm — enough to cause nerve damage and reproductive failure" }
               ],
               points: []
             }
@@ -26895,31 +26791,31 @@
           notes: [
             {
               subtitle: "Three Restoration Methods",
-              emoji: "\u{1F527}",
+              emoji: "🔧",
               layout: "rules",
               items: [
-                { icon: "\u{1F332}", label: "REFORESTATION \u2014 Plant trees where they were removed", sub: "Prevents soil erosion, restores habitat, captures CO\u2082. Provides food, shelter, shade", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F33F}", label: "BIOREMEDIATION \u2014 Use living organisms to clean up pollution", sub: "Bacteria and fungi naturally break down toxins. Example: microbes used in 2010 BP Gulf oil spill", color: "bg-teal-50 border-teal-400" },
-                { icon: "\u{1F9A0}", label: "BIOAUGMENTATION \u2014 Add specific organisms to speed up cleanup", sub: "Introduce bacteria/fungi that target specific toxins. Faster than natural bioremediation", color: "bg-blue-50 border-blue-400" }
+                { icon: "🌲", label: "REFORESTATION — Plant trees where they were removed", sub: "Prevents soil erosion, restores habitat, captures CO₂. Provides food, shelter, shade", color: "bg-green-50 border-green-400" },
+                { icon: "🌿", label: "BIOREMEDIATION — Use living organisms to clean up pollution", sub: "Bacteria and fungi naturally break down toxins. Example: microbes used in 2010 BP Gulf oil spill", color: "bg-teal-50 border-teal-400" },
+                { icon: "🦠", label: "BIOAUGMENTATION — Add specific organisms to speed up cleanup", sub: "Introduce bacteria/fungi that target specific toxins. Faster than natural bioremediation", color: "bg-blue-50 border-blue-400" }
               ],
               points: []
             },
             {
               subtitle: "Bioremediation vs Bioaugmentation",
-              emoji: "\u{1F52C}",
+              emoji: "🔬",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F33F} BIOREMEDIATION",
+                  label: "🌿 BIOREMEDIATION",
                   color: "bg-teal-50 border-teal-400",
                   rows: ["Uses organisms ALREADY there", "Slower but natural", "Less intervention needed", "Example: leaving marsh plants to filter runoff"]
                 },
                 {
-                  label: "\u{1F9A0} BIOAUGMENTATION",
+                  label: "🦠 BIOAUGMENTATION",
                   color: "bg-blue-50 border-blue-400",
                   rows: ["ADDS new organisms to site", "Faster for severe pollution", "More controlled", "Example: adding Pseudomonas bacteria to oil spill"]
                 },
-                "Both are preferred over chemical cleanup \u2014 they work with nature, not against it."
+                "Both are preferred over chemical cleanup — they work with nature, not against it."
               ],
               points: []
             }
@@ -26932,36 +26828,36 @@
           notes: [
             {
               subtitle: "Carbon Reservoirs",
-              emoji: "\u{1F4A8}",
+              emoji: "💨",
               layout: "cards",
               items: [
-                { icon: "\u{1F4A8}", label: "ATMOSPHERE", value: "CO\u2082 gas", sub: "Small reservoir but drives climate. Increasing from human activity", color: "bg-sky-50 border-sky-300" },
-                { icon: "\u{1F33F}", label: "BIOSPHERE", value: "Living organisms", sub: "Carbon in all living things \u2014 plants store large amounts", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F6E2}\uFE0F", label: "LITHOSPHERE", value: "Fossil fuels + rock", sub: "Coal, oil, natural gas \u2014 carbon locked away for millions of years", color: "bg-stone-50 border-stone-300" },
-                { icon: "\u{1F30A}", label: "HYDROSPHERE", value: "Dissolved CO\u2082", sub: "Oceans absorb ~30% of CO\u2082 released by humans", color: "bg-blue-50 border-blue-300" }
+                { icon: "💨", label: "ATMOSPHERE", value: "CO₂ gas", sub: "Small reservoir but drives climate. Increasing from human activity", color: "bg-sky-50 border-sky-300" },
+                { icon: "🌿", label: "BIOSPHERE", value: "Living organisms", sub: "Carbon in all living things — plants store large amounts", color: "bg-green-50 border-green-300" },
+                { icon: "🛢️", label: "LITHOSPHERE", value: "Fossil fuels + rock", sub: "Coal, oil, natural gas — carbon locked away for millions of years", color: "bg-stone-50 border-stone-300" },
+                { icon: "🌊", label: "HYDROSPHERE", value: "Dissolved CO₂", sub: "Oceans absorb ~30% of CO₂ released by humans", color: "bg-blue-50 border-blue-300" }
               ],
               points: []
             },
             {
               subtitle: "Processes That Move Carbon",
-              emoji: "\u{1F504}",
+              emoji: "🔄",
               layout: "rules",
               items: [
-                { icon: "\u{1F331}", label: "PHOTOSYNTHESIS \u2014 CO\u2082 out of atmosphere into plants", sub: "6CO\u2082 + 6H\u2082O + light \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082. Carbon stored as glucose", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F4A8}", label: "RESPIRATION \u2014 CO\u2082 released back to atmosphere", sub: "All living things do this continuously, day and night", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F525}", label: "COMBUSTION \u2014 Carbon from fossil fuels \u2192 CO\u2082 fast", sub: "Burning coal/oil/gas releases carbon locked away for 300+ million years", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F342}", label: "DECOMPOSITION \u2014 Dead matter \u2192 CO\u2082 and nutrients", sub: "Bacteria and fungi break down organisms, releasing stored carbon", color: "bg-amber-50 border-amber-400" }
+                { icon: "🌱", label: "PHOTOSYNTHESIS — CO₂ out of atmosphere into plants", sub: "6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. Carbon stored as glucose", color: "bg-green-50 border-green-400" },
+                { icon: "💨", label: "RESPIRATION — CO₂ released back to atmosphere", sub: "All living things do this continuously, day and night", color: "bg-gray-50 border-gray-400" },
+                { icon: "🔥", label: "COMBUSTION — Carbon from fossil fuels → CO₂ fast", sub: "Burning coal/oil/gas releases carbon locked away for 300+ million years", color: "bg-red-50 border-red-400" },
+                { icon: "🍂", label: "DECOMPOSITION — Dead matter → CO₂ and nutrients", sub: "Bacteria and fungi break down organisms, releasing stored carbon", color: "bg-amber-50 border-amber-400" }
               ],
               points: [],
               diagram: "carbon-cycle"
             },
             {
               subtitle: "Photosynthesis vs Respiration",
-              emoji: "\u2696\uFE0F",
+              emoji: "⚖️",
               layout: "formula",
               items: [
-                { formula: "6CO\u2082 + 6H\u2082O + sunlight \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082", meaning: "PHOTOSYNTHESIS \u2014 Takes CO\u2082 IN, releases O\u2082 OUT. Only in plants/algae in LIGHT", example: "Chloroplasts. Requires chlorophyll (green pigment)", color: "border-green-400", headerBg: "bg-green-600" },
-                { formula: "C\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + ATP energy", meaning: "RESPIRATION \u2014 Uses O\u2082, releases CO\u2082. ALL organisms, ALL the time", example: "Mitochondria. Plants respire even in the dark", color: "border-blue-400", headerBg: "bg-blue-600" }
+                { formula: "6CO₂ + 6H₂O + sunlight → C₆H₁₂O₆ + 6O₂", meaning: "PHOTOSYNTHESIS — Takes CO₂ IN, releases O₂ OUT. Only in plants/algae in LIGHT", example: "Chloroplasts. Requires chlorophyll (green pigment)", color: "border-green-400", headerBg: "bg-green-600" },
+                { formula: "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP energy", meaning: "RESPIRATION — Uses O₂, releases CO₂. ALL organisms, ALL the time", example: "Mitochondria. Plants respire even in the dark", color: "border-blue-400", headerBg: "bg-blue-600" }
               ],
               points: [],
               diagram: "photosynthesis"
@@ -26975,24 +26871,24 @@
           notes: [
             {
               subtitle: "Why Nitrogen Matters",
-              emoji: "\u{1F52C}",
+              emoji: "🔬",
               layout: "rules",
               items: [
-                { icon: "\u{1F9EC}", label: "78% of air is nitrogen (N\u2082) \u2014 but plants CANNOT use it directly", sub: "N\u2082 gas has a triple bond too strong for plants to break on their own", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F4AA}", label: "Nitrogen is essential for proteins and DNA", sub: "Every living cell needs nitrogen \u2014 it's the backbone of amino acids", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F9A0}", label: "Bacteria do the heavy lifting in the nitrogen cycle", sub: "Different bacteria fix, nitrify, and denitrify nitrogen at each stage", color: "bg-purple-50 border-purple-400" }
+                { icon: "🧬", label: "78% of air is nitrogen (N₂) — but plants CANNOT use it directly", sub: "N₂ gas has a triple bond too strong for plants to break on their own", color: "bg-blue-50 border-blue-400" },
+                { icon: "💪", label: "Nitrogen is essential for proteins and DNA", sub: "Every living cell needs nitrogen — it's the backbone of amino acids", color: "bg-green-50 border-green-400" },
+                { icon: "🦠", label: "Bacteria do the heavy lifting in the nitrogen cycle", sub: "Different bacteria fix, nitrify, and denitrify nitrogen at each stage", color: "bg-purple-50 border-purple-400" }
               ],
               points: []
             },
             {
               subtitle: "The 4 Stages of the Nitrogen Cycle",
-              emoji: "\u267B\uFE0F",
+              emoji: "♻️",
               layout: "steps",
               items: [
-                { label: "NITROGEN FIXATION \u2014 N\u2082 \u2192 NH\u2083 (ammonia)", sub: "Rhizobium bacteria in root nodules (legumes) OR lightning. Makes nitrogen usable for plants" },
-                { label: "NITRIFICATION \u2014 NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (nitrate)", sub: "Nitrosomonas bacteria: ammonia \u2192 nitrite. Nitrobacter: nitrite \u2192 nitrate. Now plants can absorb it" },
-                { label: "ASSIMILATION \u2014 Plants absorb nitrate from soil", sub: "Roots take up NO\u2083\u207B and use nitrogen to build proteins and DNA. Animals eat plants to get nitrogen" },
-                { label: "AMMONIFICATION \u2192 DENITRIFICATION \u2014 Back to N\u2082", sub: "Decomposers release NH\u2083 from dead matter. Denitrifying bacteria convert NO\u2083\u207B \u2192 N\u2082 gas, returning it to atmosphere" }
+                { label: "NITROGEN FIXATION — N₂ → NH₃ (ammonia)", sub: "Rhizobium bacteria in root nodules (legumes) OR lightning. Makes nitrogen usable for plants" },
+                { label: "NITRIFICATION — NH₃ → NO₂⁻ → NO₃⁻ (nitrate)", sub: "Nitrosomonas bacteria: ammonia → nitrite. Nitrobacter: nitrite → nitrate. Now plants can absorb it" },
+                { label: "ASSIMILATION — Plants absorb nitrate from soil", sub: "Roots take up NO₃⁻ and use nitrogen to build proteins and DNA. Animals eat plants to get nitrogen" },
+                { label: "AMMONIFICATION → DENITRIFICATION — Back to N₂", sub: "Decomposers release NH₃ from dead matter. Denitrifying bacteria convert NO₃⁻ → N₂ gas, returning it to atmosphere" }
               ],
               points: [],
               diagram: "nitrogen-cycle"
@@ -27052,130 +26948,130 @@
           notes: [
             {
               subtitle: "Matter & Classification",
-              emoji: "\u{1F9EA}",
+              emoji: "🧪",
               layout: "rules",
               items: [
-                { icon: "\u269B\uFE0F", label: "ELEMENT \u2014 One type of atom only", sub: "Cannot be broken down chemically. Examples: Gold (Au), Oxygen (O\u2082), Carbon (C)", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F517}", label: "COMPOUND \u2014 Two or more elements BONDED together", sub: "New substance with new properties. H\u2082O, CO\u2082, NaCl \u2014 cannot be separated physically", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F957}", label: "MIXTURE \u2014 Substances COMBINED but not bonded", sub: "Retains individual properties. Can be separated physically (filtration, evaporation)", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F964}", label: "HOMOGENEOUS \u2014 Uniform throughout (solution)", sub: "Cannot see individual parts. Salt water, air, alloys (brass)", color: "bg-cyan-50 border-cyan-400" },
-                { icon: "\u{1F963}", label: "HETEROGENEOUS \u2014 Can see different parts", sub: "Sand and water (suspension), trail mix (mechanical mixture)", color: "bg-orange-50 border-orange-400" }
+                { icon: "⚛️", label: "ELEMENT — One type of atom only", sub: "Cannot be broken down chemically. Examples: Gold (Au), Oxygen (O₂), Carbon (C)", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🔗", label: "COMPOUND — Two or more elements BONDED together", sub: "New substance with new properties. H₂O, CO₂, NaCl — cannot be separated physically", color: "bg-blue-50 border-blue-400" },
+                { icon: "🥗", label: "MIXTURE — Substances COMBINED but not bonded", sub: "Retains individual properties. Can be separated physically (filtration, evaporation)", color: "bg-green-50 border-green-400" },
+                { icon: "🥤", label: "HOMOGENEOUS — Uniform throughout (solution)", sub: "Cannot see individual parts. Salt water, air, alloys (brass)", color: "bg-cyan-50 border-cyan-400" },
+                { icon: "🥣", label: "HETEROGENEOUS — Can see different parts", sub: "Sand and water (suspension), trail mix (mechanical mixture)", color: "bg-orange-50 border-orange-400" }
               ],
               points: []
             },
             {
               subtitle: "Properties of Matter",
-              emoji: "\u2696\uFE0F",
+              emoji: "⚖️",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F441}\uFE0F PHYSICAL PROPERTIES",
+                  label: "👁️ PHYSICAL PROPERTIES",
                   color: "bg-blue-50 border-blue-400",
                   rows: ["Observable WITHOUT changing substance", "Qualitative: color, odor, texture, luster", "Quantitative: mass, density, boiling point", "Melting point, solubility, malleability"]
                 },
                 {
-                  label: "\u2697\uFE0F CHEMICAL PROPERTIES",
+                  label: "⚗️ CHEMICAL PROPERTIES",
                   color: "bg-orange-50 border-orange-400",
                   rows: ["How substance REACTS with others", "Flammability (ability to burn)", "Reactivity with acids/water", "Stability, oxidation (rusting)"]
                 },
-                "Density formula: D = m/V  |  Units: g/cm\xB3 or g/mL  |  1 mL = 1 cm\xB3"
+                "Density formula: D = m/V  |  Units: g/cm³ or g/mL  |  1 mL = 1 cm³"
               ],
               points: []
             },
             {
               subtitle: "Atomic Structure",
-              emoji: "\u269B\uFE0F",
+              emoji: "⚛️",
               layout: "cards",
               items: [
-                { icon: "\u{1F534}", label: "PROTON", value: "Charge: +1", sub: "In the nucleus. Atomic number = number of protons = identity of element", color: "bg-red-50 border-red-300" },
-                { icon: "\u26AB", label: "NEUTRON", value: "Charge: 0", sub: "In the nucleus. Neutrons = Mass number \u2212 Atomic number", color: "bg-gray-50 border-gray-200" },
-                { icon: "\u{1F535}", label: "ELECTRON", value: "Charge: \u22121", sub: "In shells outside nucleus. Negligible mass. Determine bonding behavior", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F522}", label: "ATOMIC NUMBER", value: "= # protons", sub: "Never changes \u2014 defines which element it is. Equal to electrons in neutral atom", color: "bg-purple-50 border-purple-300" },
-                { icon: "\u2696\uFE0F", label: "MASS NUMBER", value: "Protons + Neutrons", sub: "Rounded from atomic mass on periodic table", color: "bg-indigo-50 border-indigo-300" },
-                { icon: "\u{1F504}", label: "ISOTOPE", value: "Same element, different neutrons", sub: "Same protons, different mass. Carbon-12 vs Carbon-14", color: "bg-teal-50 border-teal-300" }
+                { icon: "🔴", label: "PROTON", value: "Charge: +1", sub: "In the nucleus. Atomic number = number of protons = identity of element", color: "bg-red-50 border-red-300" },
+                { icon: "⚫", label: "NEUTRON", value: "Charge: 0", sub: "In the nucleus. Neutrons = Mass number − Atomic number", color: "bg-gray-50 border-gray-200" },
+                { icon: "🔵", label: "ELECTRON", value: "Charge: −1", sub: "In shells outside nucleus. Negligible mass. Determine bonding behavior", color: "bg-blue-50 border-blue-300" },
+                { icon: "🔢", label: "ATOMIC NUMBER", value: "= # protons", sub: "Never changes — defines which element it is. Equal to electrons in neutral atom", color: "bg-purple-50 border-purple-300" },
+                { icon: "⚖️", label: "MASS NUMBER", value: "Protons + Neutrons", sub: "Rounded from atomic mass on periodic table", color: "bg-indigo-50 border-indigo-300" },
+                { icon: "🔄", label: "ISOTOPE", value: "Same element, different neutrons", sub: "Same protons, different mass. Carbon-12 vs Carbon-14", color: "bg-teal-50 border-teal-300" }
               ],
               points: []
             },
             {
               subtitle: "Ions & Bonding",
-              emoji: "\u26A1",
+              emoji: "⚡",
               layout: "rules",
               items: [
-                { icon: "\u2795", label: "CATION \u2014 Positive ion (lost electrons)", sub: "Metals lose electrons. Na\u207A, Ca\xB2\u207A, Al\xB3\u207A. More protons than electrons", color: "bg-red-50 border-red-400" },
-                { icon: "\u2796", label: "ANION \u2014 Negative ion (gained electrons)", sub: "Non-metals gain electrons. Cl\u207B, O\xB2\u207B, N\xB3\u207B. More electrons than protons", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F3AF}", label: "OCTET RULE \u2014 Atoms want 8 valence electrons", sub: "Stable configuration = full outer shell. Noble gases already have it \u2014 do not react", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F517}", label: "IONIC BOND \u2014 Electron TRANSFER between atoms", sub: "Metal gives electron to non-metal. Forms ions with opposite charges that attract", color: "bg-yellow-50 border-yellow-400" }
+                { icon: "➕", label: "CATION — Positive ion (lost electrons)", sub: "Metals lose electrons. Na⁺, Ca²⁺, Al³⁺. More protons than electrons", color: "bg-red-50 border-red-400" },
+                { icon: "➖", label: "ANION — Negative ion (gained electrons)", sub: "Non-metals gain electrons. Cl⁻, O²⁻, N³⁻. More electrons than protons", color: "bg-blue-50 border-blue-400" },
+                { icon: "🎯", label: "OCTET RULE — Atoms want 8 valence electrons", sub: "Stable configuration = full outer shell. Noble gases already have it — do not react", color: "bg-green-50 border-green-400" },
+                { icon: "🔗", label: "IONIC BOND — Electron TRANSFER between atoms", sub: "Metal gives electron to non-metal. Forms ions with opposite charges that attract", color: "bg-yellow-50 border-yellow-400" }
               ],
               points: []
             },
             {
               subtitle: "Periodic Table Groups",
-              emoji: "\u{1F4CA}",
+              emoji: "📊",
               layout: "cards",
               items: [
-                { icon: "1\uFE0F\u20E3", label: "ALKALI METALS (Group 1)", value: "1 valence e\u207B", sub: "Soft, highly reactive, form +1 ions. Li, Na, K. Never found pure in nature", color: "bg-red-50 border-red-300" },
-                { icon: "2\uFE0F\u20E3", label: "ALKALINE EARTH (Group 2)", value: "2 valence e\u207B", sub: "Form +2 ions. Mg, Ca, Ba. Less reactive than Group 1", color: "bg-orange-50 border-orange-300" },
-                { icon: "7\uFE0F\u20E3", label: "HALOGENS (Group 17)", value: "7 valence e\u207B", sub: "Very reactive non-metals, form \u22121 ions. F, Cl, Br, I. Form diatomic molecules", color: "bg-green-50 border-green-300" },
-                { icon: "8\uFE0F\u20E3", label: "NOBLE GASES (Group 18)", value: "8 valence e\u207B", sub: "Full outer shell \u2014 almost completely unreactive. He, Ne, Ar, Kr", color: "bg-purple-50 border-purple-300" },
-                { icon: "\u{1F529}", label: "METALS (left side)", value: "Lose electrons", sub: "Shiny, conductive, malleable, ductile. Most elements are metals", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u{1F512}", label: "NON-METALS (right side)", value: "Gain electrons", sub: "Dull, poor conductors, brittle. Oxygen, sulfur, chlorine", color: "bg-blue-50 border-blue-300" }
+                { icon: "1️⃣", label: "ALKALI METALS (Group 1)", value: "1 valence e⁻", sub: "Soft, highly reactive, form +1 ions. Li, Na, K. Never found pure in nature", color: "bg-red-50 border-red-300" },
+                { icon: "2️⃣", label: "ALKALINE EARTH (Group 2)", value: "2 valence e⁻", sub: "Form +2 ions. Mg, Ca, Ba. Less reactive than Group 1", color: "bg-orange-50 border-orange-300" },
+                { icon: "7️⃣", label: "HALOGENS (Group 17)", value: "7 valence e⁻", sub: "Very reactive non-metals, form −1 ions. F, Cl, Br, I. Form diatomic molecules", color: "bg-green-50 border-green-300" },
+                { icon: "8️⃣", label: "NOBLE GASES (Group 18)", value: "8 valence e⁻", sub: "Full outer shell — almost completely unreactive. He, Ne, Ar, Kr", color: "bg-purple-50 border-purple-300" },
+                { icon: "🔩", label: "METALS (left side)", value: "Lose electrons", sub: "Shiny, conductive, malleable, ductile. Most elements are metals", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "🔒", label: "NON-METALS (right side)", value: "Gain electrons", sub: "Dull, poor conductors, brittle. Oxygen, sulfur, chlorine", color: "bg-blue-50 border-blue-300" }
               ],
               points: []
             },
             {
               subtitle: "Changes in Matter",
-              emoji: "\u{1F52C}",
+              emoji: "🔬",
               layout: "compare",
               items: [
                 {
-                  label: "\u2744\uFE0F PHYSICAL CHANGE",
+                  label: "❄️ PHYSICAL CHANGE",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Same substance \u2014 just different form", "Usually REVERSIBLE", "No new substance formed", "Ice melting, cutting paper, dissolving sugar"]
+                  rows: ["Same substance — just different form", "Usually REVERSIBLE", "No new substance formed", "Ice melting, cutting paper, dissolving sugar"]
                 },
                 {
-                  label: "\u{1F525} CHEMICAL CHANGE",
+                  label: "🔥 CHEMICAL CHANGE",
                   color: "bg-red-50 border-red-400",
                   rows: ["NEW substance(s) formed", "Usually NOT reversible", "Signs: color, gas, temp change, light, precipitate", "Burning wood, rusting iron, cooking egg"]
                 },
-                "Key rule: If a new substance is formed with different properties \u2192 chemical change."
+                "Key rule: If a new substance is formed with different properties → chemical change."
               ],
               points: []
             },
             {
               subtitle: "Key Formulas",
-              emoji: "\u{1F4D0}",
+              emoji: "📐",
               layout: "formula",
               items: [
-                { formula: "D = m \xF7 V", meaning: "Density = mass divided by volume", example: "m=24g, V=8cm\xB3 \u2192 D=3 g/cm\xB3", color: "border-indigo-300", headerBg: "bg-indigo-600" },
-                { formula: "Neutrons = Mass number \u2212 Atomic number", meaning: "Find neutrons from periodic table values", example: "Carbon: mass=12, atomic=6 \u2192 6 neutrons", color: "border-blue-400", headerBg: "bg-blue-600" },
-                { formula: "Charge = Protons \u2212 Electrons", meaning: "Positive if more protons, negative if more electrons", example: "Na\u207A: 11 protons, 10 electrons \u2192 +1 charge", color: "border-green-400", headerBg: "bg-green-600" }
+                { formula: "D = m ÷ V", meaning: "Density = mass divided by volume", example: "m=24g, V=8cm³ → D=3 g/cm³", color: "border-indigo-300", headerBg: "bg-indigo-600" },
+                { formula: "Neutrons = Mass number − Atomic number", meaning: "Find neutrons from periodic table values", example: "Carbon: mass=12, atomic=6 → 6 neutrons", color: "border-blue-400", headerBg: "bg-blue-600" },
+                { formula: "Charge = Protons − Electrons", meaning: "Positive if more protons, negative if more electrons", example: "Na⁺: 11 protons, 10 electrons → +1 charge", color: "border-green-400", headerBg: "bg-green-600" }
               ],
               points: []
             },
             {
               subtitle: "Separation Methods",
-              emoji: "\u{1F527}",
+              emoji: "🔧",
               layout: "rules",
               items: [
-                { icon: "\u{1FAD9}", label: "FILTRATION \u2014 Separates solid from liquid", sub: "Filter paper traps solid, liquid passes through. Example: sand from water", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F321}\uFE0F", label: "DISTILLATION \u2014 Separates liquids with different boiling points", sub: "Heat to evaporate one liquid, then cool to condense it. Example: purify water from salt", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F4A8}", label: "EVAPORATION \u2014 Leaves dissolved solid behind", sub: "Evaporate the solvent to collect the solute. Example: collect salt from salt water", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F9F2}", label: "MAGNETISM \u2014 Separates magnetic from non-magnetic", sub: "Iron filings from sand. Only works with magnetic materials", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F3A8}", label: "CHROMATOGRAPHY \u2014 Separates dissolved substances by movement rate", sub: "Ink on filter paper in water \u2014 different dyes travel different distances", color: "bg-pink-50 border-pink-400" }
+                { icon: "🫙", label: "FILTRATION — Separates solid from liquid", sub: "Filter paper traps solid, liquid passes through. Example: sand from water", color: "bg-blue-50 border-blue-400" },
+                { icon: "🌡️", label: "DISTILLATION — Separates liquids with different boiling points", sub: "Heat to evaporate one liquid, then cool to condense it. Example: purify water from salt", color: "bg-orange-50 border-orange-400" },
+                { icon: "💨", label: "EVAPORATION — Leaves dissolved solid behind", sub: "Evaporate the solvent to collect the solute. Example: collect salt from salt water", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🧲", label: "MAGNETISM — Separates magnetic from non-magnetic", sub: "Iron filings from sand. Only works with magnetic materials", color: "bg-gray-50 border-gray-400" },
+                { icon: "🎨", label: "CHROMATOGRAPHY — Separates dissolved substances by movement rate", sub: "Ink on filter paper in water — different dyes travel different distances", color: "bg-pink-50 border-pink-400" }
               ],
               points: []
             },
             {
               subtitle: "States of Matter",
-              emoji: "\u{1F9CA}",
+              emoji: "🧊",
               layout: "cards",
               items: [
-                { icon: "\u{1F9CA}", label: "SOLID", value: "Definite shape + volume", sub: "Particles tightly packed, vibrate in place. Cannot compress", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F4A7}", label: "LIQUID", value: "Definite volume, no shape", sub: "Particles close but can flow. Takes shape of container", color: "bg-cyan-50 border-cyan-300" },
-                { icon: "\u{1F4A8}", label: "GAS", value: "No definite shape or volume", sub: "Particles far apart, move fast. Fills any container, compressible", color: "bg-gray-50 border-gray-200" },
-                { icon: "\u26A1", label: "PLASMA", value: "Super-heated gas", sub: "Charged particles. Found in stars, lightning, neon signs", color: "bg-purple-50 border-purple-300" },
-                { icon: "\u{1F53C}", label: "SUBLIMATION", value: "Solid \u2192 Gas directly", sub: "Dry ice (CO\u2082) skips liquid phase. Iodine crystals also sublime", color: "bg-indigo-50 border-indigo-300" },
-                { icon: "\u{1F53D}", label: "DEPOSITION", value: "Gas \u2192 Solid directly", sub: "Frost forming on a cold window. Reverse of sublimation", color: "bg-teal-50 border-teal-300" }
+                { icon: "🧊", label: "SOLID", value: "Definite shape + volume", sub: "Particles tightly packed, vibrate in place. Cannot compress", color: "bg-blue-50 border-blue-300" },
+                { icon: "💧", label: "LIQUID", value: "Definite volume, no shape", sub: "Particles close but can flow. Takes shape of container", color: "bg-cyan-50 border-cyan-300" },
+                { icon: "💨", label: "GAS", value: "No definite shape or volume", sub: "Particles far apart, move fast. Fills any container, compressible", color: "bg-gray-50 border-gray-200" },
+                { icon: "⚡", label: "PLASMA", value: "Super-heated gas", sub: "Charged particles. Found in stars, lightning, neon signs", color: "bg-purple-50 border-purple-300" },
+                { icon: "🔼", label: "SUBLIMATION", value: "Solid → Gas directly", sub: "Dry ice (CO₂) skips liquid phase. Iodine crystals also sublime", color: "bg-indigo-50 border-indigo-300" },
+                { icon: "🔽", label: "DEPOSITION", value: "Gas → Solid directly", sub: "Frost forming on a cold window. Reverse of sublimation", color: "bg-teal-50 border-teal-300" }
               ],
               points: []
             }
@@ -27188,60 +27084,60 @@
           notes: [
             {
               subtitle: "Lab Safety Rules",
-              emoji: "\u{1F97D}",
+              emoji: "🥽",
               layout: "rules",
               items: [
-                { icon: "\u{1F453}", label: "ALWAYS wear safety goggles when chemicals or heat are present", sub: "Even if you think it is safe \u2014 one splash can cause permanent eye damage", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F6AB}", label: "NEVER eat, drink, or smell chemicals directly", sub: "Waft fumes toward your nose \u2014 never sniff directly from container", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F488}", label: "Tie back long hair. No loose clothing near open flames", sub: "Hair and synthetic fabrics catch fire instantly", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F6A8}", label: "Report ALL accidents immediately \u2014 no exceptions", sub: "Know location of: eyewash station, safety shower, fire extinguisher, fire blanket", color: "bg-blue-50 border-blue-400" }
+                { icon: "👓", label: "ALWAYS wear safety goggles when chemicals or heat are present", sub: "Even if you think it is safe — one splash can cause permanent eye damage", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🚫", label: "NEVER eat, drink, or smell chemicals directly", sub: "Waft fumes toward your nose — never sniff directly from container", color: "bg-red-50 border-red-400" },
+                { icon: "💈", label: "Tie back long hair. No loose clothing near open flames", sub: "Hair and synthetic fabrics catch fire instantly", color: "bg-orange-50 border-orange-400" },
+                { icon: "🚨", label: "Report ALL accidents immediately — no exceptions", sub: "Know location of: eyewash station, safety shower, fire extinguisher, fire blanket", color: "bg-blue-50 border-blue-400" }
               ],
               points: []
             },
             {
-              subtitle: "WHMIS Symbols \u2014 Know These 10",
-              emoji: "\u26A0\uFE0F",
+              subtitle: "WHMIS Symbols — Know These 10",
+              emoji: "⚠️",
               layout: "cards",
               items: [
-                { icon: "\u{1F4A5}", label: "EXPLODING BOMB", value: "Explosive", sub: "Risk of explosion from heat, shock, or friction", color: "bg-red-50 border-red-300" },
-                { icon: "\u{1F525}", label: "FLAME", value: "Flammable", sub: "Catches fire easily. Keep away from heat and sparks", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u{1F7E1}", label: "FLAME OVER CIRCLE", value: "Oxidizer", sub: "Makes fires burn stronger even without fuel", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u{1F480}", label: "SKULL & CROSSBONES", value: "Toxic/Poisonous", sub: "Can cause death even in small amounts", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F30A}", label: "CORROSION", value: "Acid or Base", sub: "Burns skin and eyes. Destroys metals and fabrics", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1FAC1}", label: "HEALTH HAZARD", value: "Long-term harm", sub: "May cause cancer, reproductive harm, or organ damage", color: "bg-purple-50 border-purple-300" }
+                { icon: "💥", label: "EXPLODING BOMB", value: "Explosive", sub: "Risk of explosion from heat, shock, or friction", color: "bg-red-50 border-red-300" },
+                { icon: "🔥", label: "FLAME", value: "Flammable", sub: "Catches fire easily. Keep away from heat and sparks", color: "bg-orange-50 border-orange-300" },
+                { icon: "🟡", label: "FLAME OVER CIRCLE", value: "Oxidizer", sub: "Makes fires burn stronger even without fuel", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "💀", label: "SKULL & CROSSBONES", value: "Toxic/Poisonous", sub: "Can cause death even in small amounts", color: "bg-gray-50 border-gray-400" },
+                { icon: "🌊", label: "CORROSION", value: "Acid or Base", sub: "Burns skin and eyes. Destroys metals and fabrics", color: "bg-blue-50 border-blue-300" },
+                { icon: "🫁", label: "HEALTH HAZARD", value: "Long-term harm", sub: "May cause cancer, reproductive harm, or organ damage", color: "bg-purple-50 border-purple-300" }
               ],
               points: []
             },
             {
               subtitle: "Chemical Reaction Types",
-              emoji: "\u2697\uFE0F",
+              emoji: "⚗️",
               layout: "rules",
               items: [
-                { icon: "\u2795", label: "SYNTHESIS \u2014 A + B \u2192 AB", sub: "Two or more substances combine to make one new substance", color: "bg-green-50 border-green-400" },
-                { icon: "\u2797", label: "DECOMPOSITION \u2014 AB \u2192 A + B", sub: "One compound breaks down into two or more substances", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F504}", label: "SINGLE REPLACEMENT \u2014 A + BC \u2192 AC + B", sub: "One element replaces another in a compound", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F503}", label: "DOUBLE REPLACEMENT \u2014 AB + CD \u2192 AD + CB", sub: "Two compounds swap parts. Often forms precipitate", color: "bg-purple-50 border-purple-400" },
-                { icon: "\u{1F525}", label: "EXOTHERMIC \u2014 Releases energy (heat/light)", sub: "Combustion, hand warmers, explosions. Products have less energy than reactants", color: "bg-red-50 border-red-400" },
-                { icon: "\u2744\uFE0F", label: "ENDOTHERMIC \u2014 Absorbs energy", sub: "Photosynthesis, cold packs. Products have MORE energy than reactants", color: "bg-cyan-50 border-cyan-400" }
+                { icon: "➕", label: "SYNTHESIS — A + B → AB", sub: "Two or more substances combine to make one new substance", color: "bg-green-50 border-green-400" },
+                { icon: "➗", label: "DECOMPOSITION — AB → A + B", sub: "One compound breaks down into two or more substances", color: "bg-blue-50 border-blue-400" },
+                { icon: "🔄", label: "SINGLE REPLACEMENT — A + BC → AC + B", sub: "One element replaces another in a compound", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🔃", label: "DOUBLE REPLACEMENT — AB + CD → AD + CB", sub: "Two compounds swap parts. Often forms precipitate", color: "bg-purple-50 border-purple-400" },
+                { icon: "🔥", label: "EXOTHERMIC — Releases energy (heat/light)", sub: "Combustion, hand warmers, explosions. Products have less energy than reactants", color: "bg-red-50 border-red-400" },
+                { icon: "❄️", label: "ENDOTHERMIC — Absorbs energy", sub: "Photosynthesis, cold packs. Products have MORE energy than reactants", color: "bg-cyan-50 border-cyan-400" }
               ],
               points: []
             },
             {
               subtitle: "Acids & Bases",
-              emoji: "\u{1F9EA}",
+              emoji: "🧪",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F534} ACIDS (pH < 7)",
+                  label: "🔴 ACIDS (pH < 7)",
                   color: "bg-red-50 border-red-400",
-                  rows: ["Taste sour (do not taste in lab!)", "Donate H\u207A ions", "Turn litmus paper RED", "HCl, H\u2082SO\u2084, vinegar, citrus juice"]
+                  rows: ["Taste sour (do not taste in lab!)", "Donate H⁺ ions", "Turn litmus paper RED", "HCl, H₂SO₄, vinegar, citrus juice"]
                 },
                 {
-                  label: "\u{1F535} BASES (pH > 7)",
+                  label: "🔵 BASES (pH > 7)",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Taste bitter, feel slippery", "Accept H\u207A ions", "Turn litmus paper BLUE", "NaOH, ammonia, soap, bleach"]
+                  rows: ["Taste bitter, feel slippery", "Accept H⁺ ions", "Turn litmus paper BLUE", "NaOH, ammonia, soap, bleach"]
                 },
-                "Neutralization: Acid + Base \u2192 Salt + Water. pH 7 = neutral (pure water). Stronger acid = lower pH number."
+                "Neutralization: Acid + Base → Salt + Water. pH 7 = neutral (pure water). Stronger acid = lower pH number."
               ],
               points: []
             }
@@ -27254,15 +27150,15 @@
           notes: [
             {
               subtitle: "Measuring & Transferring",
-              emoji: "\u{1F4CF}",
+              emoji: "📏",
               layout: "cards",
               items: [
-                { icon: "\u{1F9EA}", label: "Graduated Cylinder", value: "Measures liquid volume", sub: "Most accurate for liquids. Read at bottom of meniscus", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1FAD9}", label: "Beaker", value: "Holds & mixes liquids", sub: "Less accurate for measuring. Good for heating and mixing", color: "bg-gray-50 border-gray-200" },
-                { icon: "\u{1F376}", label: "Erlenmeyer Flask", value: "Mix, heat, store", sub: "Conical shape prevents splashing. Good for swirling", color: "bg-teal-50 border-teal-300" },
-                { icon: "\u2696\uFE0F", label: "Electronic Balance", value: "Measures mass", sub: "Zero (tare) it before measuring. Results in grams", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F4A7}", label: "Overflow Can", value: "Measures volume by displacement", sub: "Measures irregular solids. Water displaced = object volume", color: "bg-cyan-50 border-cyan-300" },
-                { icon: "\u{1F525}", label: "Bunsen Burner", value: "Controlled heat source", sub: "Blue flame = hotter. Yellow flame = unburned carbon (soot)", color: "bg-orange-50 border-orange-300" }
+                { icon: "🧪", label: "Graduated Cylinder", value: "Measures liquid volume", sub: "Most accurate for liquids. Read at bottom of meniscus", color: "bg-blue-50 border-blue-300" },
+                { icon: "🫙", label: "Beaker", value: "Holds & mixes liquids", sub: "Less accurate for measuring. Good for heating and mixing", color: "bg-gray-50 border-gray-200" },
+                { icon: "🍶", label: "Erlenmeyer Flask", value: "Mix, heat, store", sub: "Conical shape prevents splashing. Good for swirling", color: "bg-teal-50 border-teal-300" },
+                { icon: "⚖️", label: "Electronic Balance", value: "Measures mass", sub: "Zero (tare) it before measuring. Results in grams", color: "bg-green-50 border-green-300" },
+                { icon: "💧", label: "Overflow Can", value: "Measures volume by displacement", sub: "Measures irregular solids. Water displaced = object volume", color: "bg-cyan-50 border-cyan-300" },
+                { icon: "🔥", label: "Bunsen Burner", value: "Controlled heat source", sub: "Blue flame = hotter. Yellow flame = unburned carbon (soot)", color: "bg-orange-50 border-orange-300" }
               ],
               points: []
             }
@@ -27275,27 +27171,27 @@
           notes: [
             {
               subtitle: "Non-Negotiable Safety Rules",
-              emoji: "\u26A0\uFE0F",
+              emoji: "⚠️",
               layout: "rules",
               items: [
-                { icon: "\u{1F453}", label: "Safety goggles ON whenever chemicals or heating is involved", sub: "Even if just observing \u2014 one accident from a neighbour can hit you", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F6AB}", label: "NO eating, drinking, or smelling containers directly", sub: "Waft technique: wave hand over top to direct fumes toward nose gently", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F488}", label: "Tie hair back, no loose sleeves near flames", sub: "Synthetic fabrics melt and stick to skin \u2014 wear cotton when possible", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F6A8}", label: "Report EVERY accident, spill, or broken glass immediately", sub: "No exception. Your teacher needs to know even small incidents", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F4CD}", label: "Know where ALL safety equipment is BEFORE starting", sub: "Eyewash station, safety shower, fire extinguisher, fire blanket, first aid kit", color: "bg-green-50 border-green-400" }
+                { icon: "👓", label: "Safety goggles ON whenever chemicals or heating is involved", sub: "Even if just observing — one accident from a neighbour can hit you", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🚫", label: "NO eating, drinking, or smelling containers directly", sub: "Waft technique: wave hand over top to direct fumes toward nose gently", color: "bg-red-50 border-red-400" },
+                { icon: "💈", label: "Tie hair back, no loose sleeves near flames", sub: "Synthetic fabrics melt and stick to skin — wear cotton when possible", color: "bg-orange-50 border-orange-400" },
+                { icon: "🚨", label: "Report EVERY accident, spill, or broken glass immediately", sub: "No exception. Your teacher needs to know even small incidents", color: "bg-blue-50 border-blue-400" },
+                { icon: "📍", label: "Know where ALL safety equipment is BEFORE starting", sub: "Eyewash station, safety shower, fire extinguisher, fire blanket, first aid kit", color: "bg-green-50 border-green-400" }
               ],
               points: []
             },
             {
               subtitle: "Key WHMIS Symbols",
-              emoji: "\u{1F536}",
+              emoji: "🔶",
               layout: "cards",
               items: [
-                { icon: "\u{1F4A5}", label: "Explosive", value: "Exploding bomb", sub: "Risk of explosion. Store in cool, dry place away from shock", color: "bg-red-50 border-red-300" },
-                { icon: "\u{1F525}", label: "Flammable", value: "Flame symbol", sub: "Catches fire easily. Keep from heat, sparks, open flames", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u{1F30A}", label: "Corrosive", value: "Dripping onto surface", sub: "Burns skin, eyes, and destroys metals. Use in fume hood", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F480}", label: "Toxic", value: "Skull and crossbones", sub: "Poisonous \u2014 even small amounts can be fatal", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F33F}", label: "Environmental hazard", value: "Dead tree/fish", sub: "Toxic to aquatic life and ecosystems. Do not pour down drain", color: "bg-green-50 border-green-300" }
+                { icon: "💥", label: "Explosive", value: "Exploding bomb", sub: "Risk of explosion. Store in cool, dry place away from shock", color: "bg-red-50 border-red-300" },
+                { icon: "🔥", label: "Flammable", value: "Flame symbol", sub: "Catches fire easily. Keep from heat, sparks, open flames", color: "bg-orange-50 border-orange-300" },
+                { icon: "🌊", label: "Corrosive", value: "Dripping onto surface", sub: "Burns skin, eyes, and destroys metals. Use in fume hood", color: "bg-blue-50 border-blue-300" },
+                { icon: "💀", label: "Toxic", value: "Skull and crossbones", sub: "Poisonous — even small amounts can be fatal", color: "bg-gray-50 border-gray-400" },
+                { icon: "🌿", label: "Environmental hazard", value: "Dead tree/fish", sub: "Toxic to aquatic life and ecosystems. Do not pour down drain", color: "bg-green-50 border-green-300" }
               ],
               points: []
             }
@@ -27308,31 +27204,31 @@
           notes: [
             {
               subtitle: "Pure Substances vs Mixtures",
-              emoji: "\u{1F9EC}",
+              emoji: "🧬",
               layout: "compare",
               items: [
                 {
-                  label: "\u2728 PURE SUBSTANCE",
+                  label: "✨ PURE SUBSTANCE",
                   color: "bg-indigo-50 border-indigo-400",
-                  rows: ["Uniform composition throughout", "Fixed properties (melting point, boiling point)", "Element: one type of atom (Au, O\u2082)", "Compound: atoms bonded (H\u2082O, NaCl, CO\u2082)"]
+                  rows: ["Uniform composition throughout", "Fixed properties (melting point, boiling point)", "Element: one type of atom (Au, O₂)", "Compound: atoms bonded (H₂O, NaCl, CO₂)"]
                 },
                 {
-                  label: "\u{1F957} MIXTURE",
+                  label: "🥗 MIXTURE",
                   color: "bg-green-50 border-green-400",
                   rows: ["Variable composition", "Properties vary with ratio", "Homogeneous: uniform (salt water, air)", "Heterogeneous: can see parts (sand + water)"]
                 },
-                "Key test: does it have a single fixed melting/boiling point? Yes \u2192 pure substance. No \u2192 mixture."
+                "Key test: does it have a single fixed melting/boiling point? Yes → pure substance. No → mixture."
               ],
               points: []
             },
             {
               subtitle: "Flow Chart: How to Classify",
-              emoji: "\u{1F50D}",
+              emoji: "🔍",
               layout: "steps",
               items: [
-                { label: "Is it uniform throughout? Can you see separate parts?", sub: "Yes uniform \u2192 pure substance or homogeneous mixture. Can see parts \u2192 heterogeneous mixture" },
-                { label: "Can it be separated by physical means (filter, magnet, evaporate)?", sub: "Yes \u2192 mixture. No physical separation possible \u2192 pure substance" },
-                { label: "Is the pure substance made of only ONE element?", sub: "One element \u2192 Element (e.g. O\u2082, Fe). Two or more elements bonded \u2192 Compound (e.g. H\u2082O)" }
+                { label: "Is it uniform throughout? Can you see separate parts?", sub: "Yes uniform → pure substance or homogeneous mixture. Can see parts → heterogeneous mixture" },
+                { label: "Can it be separated by physical means (filter, magnet, evaporate)?", sub: "Yes → mixture. No physical separation possible → pure substance" },
+                { label: "Is the pure substance made of only ONE element?", sub: "One element → Element (e.g. O₂, Fe). Two or more elements bonded → Compound (e.g. H₂O)" }
               ],
               points: []
             }
@@ -27344,15 +27240,15 @@
           image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Which Method \u2014 Which Mixture?",
-              emoji: "\u{1F52C}",
+              subtitle: "Which Method — Which Mixture?",
+              emoji: "🔬",
               layout: "rules",
               items: [
-                { icon: "\u{1FAD9}", label: "FILTRATION \u2192 Solid from liquid", sub: "Use: sand from water, soil from water. Paper traps solid, liquid passes through", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F321}\uFE0F", label: "DISTILLATION \u2192 Liquids with different boiling points", sub: "Use: separate water from salt (water boils away, salt stays)", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F4A8}", label: "EVAPORATION \u2192 Recover dissolved solid", sub: "Use: extract salt from salt water. Evaporate the water, salt is left behind", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F9F2}", label: "MAGNETISM \u2192 Magnetic from non-magnetic", sub: "Use: iron filings from sand or sawdust", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F3A8}", label: "CHROMATOGRAPHY \u2192 Dissolved dyes/pigments", sub: "Different compounds travel different distances in a solvent. Identifies inks", color: "bg-pink-50 border-pink-400" }
+                { icon: "🫙", label: "FILTRATION → Solid from liquid", sub: "Use: sand from water, soil from water. Paper traps solid, liquid passes through", color: "bg-blue-50 border-blue-400" },
+                { icon: "🌡️", label: "DISTILLATION → Liquids with different boiling points", sub: "Use: separate water from salt (water boils away, salt stays)", color: "bg-orange-50 border-orange-400" },
+                { icon: "💨", label: "EVAPORATION → Recover dissolved solid", sub: "Use: extract salt from salt water. Evaporate the water, salt is left behind", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🧲", label: "MAGNETISM → Magnetic from non-magnetic", sub: "Use: iron filings from sand or sawdust", color: "bg-gray-50 border-gray-400" },
+                { icon: "🎨", label: "CHROMATOGRAPHY → Dissolved dyes/pigments", sub: "Different compounds travel different distances in a solvent. Identifies inks", color: "bg-pink-50 border-pink-400" }
               ],
               points: []
             }
@@ -27364,34 +27260,34 @@
           image: "https://images.unsplash.com/photo-1628863353691-0071c8c1874c?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Physical vs Chemical \u2014 Key Differences",
-              emoji: "\u{1F504}",
+              subtitle: "Physical vs Chemical — Key Differences",
+              emoji: "🔄",
               layout: "compare",
               items: [
                 {
-                  label: "\u2744\uFE0F PHYSICAL CHANGE",
+                  label: "❄️ PHYSICAL CHANGE",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Same substance \u2014 different form", "Usually reversible", "No new substance formed", "Examples: ice melting, cutting paper, dissolving sugar, tearing cloth"]
+                  rows: ["Same substance — different form", "Usually reversible", "No new substance formed", "Examples: ice melting, cutting paper, dissolving sugar, tearing cloth"]
                 },
                 {
-                  label: "\u{1F525} CHEMICAL CHANGE",
+                  label: "🔥 CHEMICAL CHANGE",
                   color: "bg-red-50 border-red-400",
                   rows: ["NEW substance(s) formed", "Usually irreversible", "Energy usually released or absorbed", "Examples: burning wood, rusting iron, cooking egg, baking soda + vinegar"]
                 },
-                "Clue words: 'new substance', cannot reverse \u2192 chemical. 'Same substance, different form' \u2192 physical."
+                "Clue words: 'new substance', cannot reverse → chemical. 'Same substance, different form' → physical."
               ],
               points: []
             },
             {
               subtitle: "5 Signs of a Chemical Change",
-              emoji: "\u{1F50D}",
+              emoji: "🔍",
               layout: "rules",
               items: [
-                { icon: "\u{1F3A8}", label: "COLOR CHANGE (unexpected)", sub: "Iron turning orange-brown (rusting). Note: dissolving food coloring is physical", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F4A8}", label: "GAS PRODUCED (bubbles)", sub: "Vinegar + baking soda fizzes. Hydrogen gas from metal + acid", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F321}\uFE0F", label: "TEMPERATURE CHANGE", sub: "Hand warmers (exothermic). Cold packs (endothermic). Change without external heating", color: "bg-red-50 border-red-400" },
-                { icon: "\u2728", label: "LIGHT PRODUCED", sub: "Fireworks, burning, glow sticks. Light = energy being released", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F327}\uFE0F", label: "PRECIPITATE FORMS", sub: "Solid appears in a liquid. Two clear solutions mix \u2192 cloudy solid forms", color: "bg-blue-50 border-blue-400" }
+                { icon: "🎨", label: "COLOR CHANGE (unexpected)", sub: "Iron turning orange-brown (rusting). Note: dissolving food coloring is physical", color: "bg-orange-50 border-orange-400" },
+                { icon: "💨", label: "GAS PRODUCED (bubbles)", sub: "Vinegar + baking soda fizzes. Hydrogen gas from metal + acid", color: "bg-gray-50 border-gray-400" },
+                { icon: "🌡️", label: "TEMPERATURE CHANGE", sub: "Hand warmers (exothermic). Cold packs (endothermic). Change without external heating", color: "bg-red-50 border-red-400" },
+                { icon: "✨", label: "LIGHT PRODUCED", sub: "Fireworks, burning, glow sticks. Light = energy being released", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🌧️", label: "PRECIPITATE FORMS", sub: "Solid appears in a liquid. Two clear solutions mix → cloudy solid forms", color: "bg-blue-50 border-blue-400" }
               ],
               points: []
             }
@@ -27403,24 +27299,24 @@
           image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Density \u2014 3 Formulas",
-              emoji: "\u{1F4D0}",
+              subtitle: "Density — 3 Formulas",
+              emoji: "📐",
               layout: "formula",
               items: [
-                { formula: "D = m \xF7 V", meaning: "Find Density \u2014 cover D, divide mass by volume", example: "m=24g, V=8cm\xB3 \u2192 D=3 g/cm\xB3", color: "border-indigo-300", headerBg: "bg-indigo-600" },
-                { formula: "m = D \xD7 V", meaning: "Find Mass \u2014 cover m, multiply D \xD7 V", example: "D=3 g/cm\xB3, V=10cm\xB3 \u2192 m=30g", color: "border-blue-400", headerBg: "bg-blue-600" },
-                { formula: "V = m \xF7 D", meaning: "Find Volume \u2014 cover V, divide mass by density", example: "m=30g, D=3 g/cm\xB3 \u2192 V=10cm\xB3", color: "border-teal-400", headerBg: "bg-teal-600" }
+                { formula: "D = m ÷ V", meaning: "Find Density — cover D, divide mass by volume", example: "m=24g, V=8cm³ → D=3 g/cm³", color: "border-indigo-300", headerBg: "bg-indigo-600" },
+                { formula: "m = D × V", meaning: "Find Mass — cover m, multiply D × V", example: "D=3 g/cm³, V=10cm³ → m=30g", color: "border-blue-400", headerBg: "bg-blue-600" },
+                { formula: "V = m ÷ D", meaning: "Find Volume — cover V, divide mass by density", example: "m=30g, D=3 g/cm³ → V=10cm³", color: "border-teal-400", headerBg: "bg-teal-600" }
               ],
               points: []
             },
             {
               subtitle: "Floating & Sinking Rule",
-              emoji: "\u{1F6DF}",
+              emoji: "🛟",
               layout: "rules",
               items: [
-                { icon: "\u{1F3CA}", label: "Object FLOATS if its density is LESS than the liquid", sub: "Ice (0.92 g/cm\xB3) floats on water (1.00 g/cm\xB3). Wood floats on water", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u2B07\uFE0F", label: "Object SINKS if its density is GREATER than the liquid", sub: "Iron (7.9 g/cm\xB3) sinks in water. Steel ship floats because of hollow air spaces", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1FAA8}", label: "Measuring irregular solid volume \u2014 Water Displacement", sub: "Put object in graduated cylinder with water. Volume of water rise = object volume", color: "bg-gray-50 border-gray-400" }
+                { icon: "🏊", label: "Object FLOATS if its density is LESS than the liquid", sub: "Ice (0.92 g/cm³) floats on water (1.00 g/cm³). Wood floats on water", color: "bg-blue-50 border-blue-400" },
+                { icon: "⬇️", label: "Object SINKS if its density is GREATER than the liquid", sub: "Iron (7.9 g/cm³) sinks in water. Steel ship floats because of hollow air spaces", color: "bg-red-50 border-red-400" },
+                { icon: "🪨", label: "Measuring irregular solid volume — Water Displacement", sub: "Put object in graduated cylinder with water. Volume of water rise = object volume", color: "bg-gray-50 border-gray-400" }
               ],
               points: [],
               diagram: "density"
@@ -27433,19 +27329,19 @@
           image: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Physical Properties \u2014 Two Types",
-              emoji: "\u{1F441}\uFE0F",
+              subtitle: "Physical Properties — Two Types",
+              emoji: "👁️",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F5E3}\uFE0F QUALITATIVE",
+                  label: "🗣️ QUALITATIVE",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Descriptive \u2014 no numbers needed", "Color, texture, odor, state", "Luster (shininess), malleability", "Ductility, transparency, hardness"]
+                  rows: ["Descriptive — no numbers needed", "Color, texture, odor, state", "Luster (shininess), malleability", "Ductility, transparency, hardness"]
                 },
                 {
-                  label: "\u{1F4CF} QUANTITATIVE",
+                  label: "📏 QUANTITATIVE",
                   color: "bg-green-50 border-green-400",
-                  rows: ["Measurable \u2014 has a number + unit", "Mass, volume, density", "Melting point, boiling point", "Solubility, conductivity"]
+                  rows: ["Measurable — has a number + unit", "Mass, volume, density", "Melting point, boiling point", "Solubility, conductivity"]
                 },
                 "Both are observable WITHOUT changing the substance into something new."
               ],
@@ -27453,12 +27349,12 @@
             },
             {
               subtitle: "Chemical Properties",
-              emoji: "\u2697\uFE0F",
+              emoji: "⚗️",
               layout: "rules",
               items: [
-                { icon: "\u{1F525}", label: "COMBUSTIBILITY \u2014 Ability to burn in oxygen", sub: "Wood, gasoline, methane are combustible. Water is not", color: "bg-red-50 border-red-400" },
-                { icon: "\u26A1", label: "REACTIVITY WITH ACIDS \u2014 metals produce H\u2082 gas", sub: "Zinc + hydrochloric acid \u2192 zinc chloride + hydrogen gas", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F7E4}", label: "STABILITY / OXIDATION \u2014 reaction with oxygen over time", sub: "Iron + oxygen + water \u2192 iron oxide (rust). Slow combustion", color: "bg-orange-50 border-orange-400" }
+                { icon: "🔥", label: "COMBUSTIBILITY — Ability to burn in oxygen", sub: "Wood, gasoline, methane are combustible. Water is not", color: "bg-red-50 border-red-400" },
+                { icon: "⚡", label: "REACTIVITY WITH ACIDS — metals produce H₂ gas", sub: "Zinc + hydrochloric acid → zinc chloride + hydrogen gas", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🟤", label: "STABILITY / OXIDATION — reaction with oxygen over time", sub: "Iron + oxygen + water → iron oxide (rust). Slow combustion", color: "bg-orange-50 border-orange-400" }
               ],
               points: []
             }
@@ -27471,44 +27367,44 @@
           notes: [
             {
               subtitle: "How the Table is Organized",
-              emoji: "\u{1F4CA}",
+              emoji: "📊",
               layout: "rules",
               items: [
-                { icon: "\u2194\uFE0F", label: "PERIODS \u2014 Horizontal rows (1 to 7)", sub: "Each new period = new electron shell being filled. Period 2 has 2 shells, etc.", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u2195\uFE0F", label: "GROUPS / FAMILIES \u2014 Vertical columns (1 to 18)", sub: "Same number of valence electrons = similar chemical properties", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F4C8}", label: "Atomic number increases LEFT \u2192 RIGHT and TOP \u2192 BOTTOM", sub: "Arranged in order of increasing protons. Same as increasing electrons in neutral atom", color: "bg-indigo-50 border-indigo-400" }
+                { icon: "↔️", label: "PERIODS — Horizontal rows (1 to 7)", sub: "Each new period = new electron shell being filled. Period 2 has 2 shells, etc.", color: "bg-blue-50 border-blue-400" },
+                { icon: "↕️", label: "GROUPS / FAMILIES — Vertical columns (1 to 18)", sub: "Same number of valence electrons = similar chemical properties", color: "bg-green-50 border-green-400" },
+                { icon: "📈", label: "Atomic number increases LEFT → RIGHT and TOP → BOTTOM", sub: "Arranged in order of increasing protons. Same as increasing electrons in neutral atom", color: "bg-indigo-50 border-indigo-400" }
               ],
               points: []
             },
             {
               subtitle: "Metals, Non-metals & Metalloids",
-              emoji: "\u{1F527}",
+              emoji: "🔧",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F529} METALS (left + middle)",
+                  label: "🔩 METALS (left + middle)",
                   color: "bg-yellow-50 border-yellow-400",
-                  rows: ["Shiny (lustrous)", "Conductive (heat & electricity)", "Malleable & ductile", "LOSE electrons \u2192 cations (+)"]
+                  rows: ["Shiny (lustrous)", "Conductive (heat & electricity)", "Malleable & ductile", "LOSE electrons → cations (+)"]
                 },
                 {
-                  label: "\u{1F512} NON-METALS (right side)",
+                  label: "🔒 NON-METALS (right side)",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Dull appearance", "Poor conductors", "Brittle in solid form", "GAIN electrons \u2192 anions (\u2212)"]
+                  rows: ["Dull appearance", "Poor conductors", "Brittle in solid form", "GAIN electrons → anions (−)"]
                 },
-                "Metalloids (staircase line): Silicon, Boron, Germanium. Semiconductors \u2014 used in computer chips."
+                "Metalloids (staircase line): Silicon, Boron, Germanium. Semiconductors — used in computer chips."
               ],
               points: [],
               diagram: "periodic-table"
             },
             {
               subtitle: "Key Element Families",
-              emoji: "\u{1F468}\u200D\u{1F469}\u200D\u{1F467}\u200D\u{1F466}",
+              emoji: "👨‍👩‍👧‍👦",
               layout: "cards",
               items: [
-                { icon: "\u{1F534}", label: "Alkali Metals (Group 1)", value: "1 valence e\u207B", sub: "Li, Na, K. Softest metals. Explode violently with water", color: "bg-red-50 border-red-300" },
-                { icon: "\u{1F7E0}", label: "Alkaline Earth (Group 2)", value: "2 valence e\u207B", sub: "Mg, Ca. Reactive but less than Group 1. Ca in bones", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u{1F7E2}", label: "Halogens (Group 17)", value: "7 valence e\u207B", sub: "F, Cl, Br, I. Very reactive. Form diatomic molecules (Cl\u2082)", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F7E3}", label: "Noble Gases (Group 18)", value: "8 valence e\u207B", sub: "He, Ne, Ar. Full outer shell \u2014 almost completely unreactive", color: "bg-purple-50 border-purple-300" }
+                { icon: "🔴", label: "Alkali Metals (Group 1)", value: "1 valence e⁻", sub: "Li, Na, K. Softest metals. Explode violently with water", color: "bg-red-50 border-red-300" },
+                { icon: "🟠", label: "Alkaline Earth (Group 2)", value: "2 valence e⁻", sub: "Mg, Ca. Reactive but less than Group 1. Ca in bones", color: "bg-orange-50 border-orange-300" },
+                { icon: "🟢", label: "Halogens (Group 17)", value: "7 valence e⁻", sub: "F, Cl, Br, I. Very reactive. Form diatomic molecules (Cl₂)", color: "bg-green-50 border-green-300" },
+                { icon: "🟣", label: "Noble Gases (Group 18)", value: "8 valence e⁻", sub: "He, Ne, Ar. Full outer shell — almost completely unreactive", color: "bg-purple-50 border-purple-300" }
               ],
               points: []
             }
@@ -27528,25 +27424,25 @@
           notes: [
             {
               subtitle: "Evolution of the Atomic Model",
-              emoji: "\u{1F52D}",
+              emoji: "🔭",
               layout: "steps",
               items: [
-                { label: "DALTON (1803) \u2014 Solid sphere model", sub: "Atoms are indivisible, solid balls. All atoms of one element are identical. Atoms combine in whole-number ratios" },
-                { label: "THOMSON (1897) \u2014 Plum pudding model", sub: 'Discovered the electron. Atom = positive "pudding" with negative electrons embedded. Like raisins in a bun' },
-                { label: "RUTHERFORD (1911) \u2014 Nuclear model", sub: "Gold foil experiment \u2014 most particles went straight through. Concluded: atoms are mostly empty space with tiny dense positive nucleus" },
-                { label: "BOHR (1913) \u2014 Planetary model", sub: "Electrons orbit in specific energy levels (shells). Each shell has a fixed energy. Electrons jump between shells by absorbing/releasing energy" }
+                { label: "DALTON (1803) — Solid sphere model", sub: "Atoms are indivisible, solid balls. All atoms of one element are identical. Atoms combine in whole-number ratios" },
+                { label: "THOMSON (1897) — Plum pudding model", sub: 'Discovered the electron. Atom = positive "pudding" with negative electrons embedded. Like raisins in a bun' },
+                { label: "RUTHERFORD (1911) — Nuclear model", sub: "Gold foil experiment — most particles went straight through. Concluded: atoms are mostly empty space with tiny dense positive nucleus" },
+                { label: "BOHR (1913) — Planetary model", sub: "Electrons orbit in specific energy levels (shells). Each shell has a fixed energy. Electrons jump between shells by absorbing/releasing energy" }
               ],
               points: [],
               diagram: "atomic-models"
             },
             {
               subtitle: "Rutherford Gold Foil Experiment",
-              emoji: "\u{1F3AF}",
+              emoji: "🎯",
               layout: "rules",
               items: [
-                { icon: "\u{1F52B}", label: "Fired alpha particles at thin gold foil", sub: "Expected: all particles to pass straight through (Thomson model predicted this)", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F632}", label: "OBSERVED: most passed through, but some bounced back!", sub: '"Like firing artillery at tissue paper and having it bounce back at you" \u2014 Rutherford', color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F4A1}", label: "CONCLUSION: Atom has a tiny, dense, positive nucleus", sub: "Nucleus is ~100,000\xD7 smaller than the atom. Most of atom is empty space", color: "bg-yellow-50 border-yellow-400" }
+                { icon: "🔫", label: "Fired alpha particles at thin gold foil", sub: "Expected: all particles to pass straight through (Thomson model predicted this)", color: "bg-gray-50 border-gray-400" },
+                { icon: "😲", label: "OBSERVED: most passed through, but some bounced back!", sub: '"Like firing artillery at tissue paper and having it bounce back at you" — Rutherford', color: "bg-red-50 border-red-400" },
+                { icon: "💡", label: "CONCLUSION: Atom has a tiny, dense, positive nucleus", sub: "Nucleus is ~100,000× smaller than the atom. Most of atom is empty space", color: "bg-yellow-50 border-yellow-400" }
               ],
               points: []
             }
@@ -27566,48 +27462,48 @@
           notes: [
             {
               subtitle: "The Three Particles",
-              emoji: "\u269B\uFE0F",
+              emoji: "⚛️",
               layout: "cards",
               items: [
-                { icon: "\u{1F534}", label: "PROTON", value: "Charge: +1, mass: 1 amu", sub: "In nucleus. Atomic number = proton count = identity of element", color: "bg-red-50 border-red-300" },
-                { icon: "\u26AB", label: "NEUTRON", value: "Charge: 0, mass: 1 amu", sub: "In nucleus alongside protons. Neutrons = Mass# \u2212 Atomic#", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F535}", label: "ELECTRON", value: "Charge: \u22121, mass: ~0", sub: "In shells outside nucleus. Determine chemical bonding and charge", color: "bg-blue-50 border-blue-300" }
+                { icon: "🔴", label: "PROTON", value: "Charge: +1, mass: 1 amu", sub: "In nucleus. Atomic number = proton count = identity of element", color: "bg-red-50 border-red-300" },
+                { icon: "⚫", label: "NEUTRON", value: "Charge: 0, mass: 1 amu", sub: "In nucleus alongside protons. Neutrons = Mass# − Atomic#", color: "bg-gray-50 border-gray-400" },
+                { icon: "🔵", label: "ELECTRON", value: "Charge: −1, mass: ~0", sub: "In shells outside nucleus. Determine chemical bonding and charge", color: "bg-blue-50 border-blue-300" }
               ],
               points: []
             },
             {
               subtitle: "Reading the Periodic Table",
-              emoji: "\u{1F4CA}",
+              emoji: "📊",
               layout: "steps",
               items: [
                 { label: "Atomic number (top number) = number of PROTONS", sub: "Also equals number of ELECTRONS in a neutral atom" },
-                { label: "Atomic mass (bottom number, in amu) \u2014 round to get Mass Number", sub: "Carbon: atomic mass \u2248 12.01 \u2192 Mass Number = 12" },
-                { label: "Neutrons = Mass Number \u2212 Atomic Number", sub: "Carbon: 12 \u2212 6 = 6 neutrons" },
-                { label: "For ions: Electrons = Protons \u2212 Charge", sub: "Na\u207A: 11 protons \u2212 (+1) = 10 electrons. Cl\u207B: 17 protons \u2212 (\u22121) = 18 electrons" }
+                { label: "Atomic mass (bottom number, in amu) — round to get Mass Number", sub: "Carbon: atomic mass ≈ 12.01 → Mass Number = 12" },
+                { label: "Neutrons = Mass Number − Atomic Number", sub: "Carbon: 12 − 6 = 6 neutrons" },
+                { label: "For ions: Electrons = Protons − Charge", sub: "Na⁺: 11 protons − (+1) = 10 electrons. Cl⁻: 17 protons − (−1) = 18 electrons" }
               ],
               points: []
             },
             {
               subtitle: "Bohr-Rutherford Diagram Rules",
-              emoji: "\u{1F3A8}",
+              emoji: "🎨",
               layout: "rules",
               items: [
-                { icon: "\u2B55", label: "Draw nucleus in center \u2014 show p\u207A and n\u2070 counts", sub: "Label: e.g. 6p\u207A, 6n\u2070 for carbon", color: "bg-gray-50 border-gray-400" },
-                { icon: "1\uFE0F\u20E3", label: "Shell 1 (closest to nucleus): Maximum 2 electrons", sub: "Fill this before moving to shell 2", color: "bg-blue-50 border-blue-400" },
-                { icon: "2\uFE0F\u20E3", label: "Shell 2: Maximum 8 electrons", sub: "Fill completely before moving to shell 3", color: "bg-indigo-50 border-indigo-400" },
-                { icon: "3\uFE0F\u20E3", label: "Shell 3: Maximum 8 electrons (for first 20 elements)", sub: "Works for elements 1-20. Beyond calcium, rules get more complex", color: "bg-purple-50 border-purple-400" }
+                { icon: "⭕", label: "Draw nucleus in center — show p⁺ and n⁰ counts", sub: "Label: e.g. 6p⁺, 6n⁰ for carbon", color: "bg-gray-50 border-gray-400" },
+                { icon: "1️⃣", label: "Shell 1 (closest to nucleus): Maximum 2 electrons", sub: "Fill this before moving to shell 2", color: "bg-blue-50 border-blue-400" },
+                { icon: "2️⃣", label: "Shell 2: Maximum 8 electrons", sub: "Fill completely before moving to shell 3", color: "bg-indigo-50 border-indigo-400" },
+                { icon: "3️⃣", label: "Shell 3: Maximum 8 electrons (for first 20 elements)", sub: "Works for elements 1-20. Beyond calcium, rules get more complex", color: "bg-purple-50 border-purple-400" }
               ],
               points: [],
               diagram: "bohr"
             },
             {
               subtitle: "Isotopes",
-              emoji: "\u{1F504}",
+              emoji: "🔄",
               layout: "rules",
               items: [
-                { icon: "\u{1F7F0}", label: "Isotopes have the SAME number of protons", sub: "Same element, same atomic number, same chemical behavior", color: "bg-green-50 border-green-400" },
-                { icon: "\u2260", label: "Isotopes have DIFFERENT numbers of neutrons", sub: "Different mass numbers. Carbon-12 (6n) vs Carbon-14 (8n)", color: "bg-red-50 border-red-400" },
-                { icon: "\u2622\uFE0F", label: "Carbon-14 is RADIOACTIVE \u2014 used in carbon dating", sub: "Decays at known rate \u2192 can date organic material up to ~50,000 years", color: "bg-orange-50 border-orange-400" }
+                { icon: "🟰", label: "Isotopes have the SAME number of protons", sub: "Same element, same atomic number, same chemical behavior", color: "bg-green-50 border-green-400" },
+                { icon: "≠", label: "Isotopes have DIFFERENT numbers of neutrons", sub: "Different mass numbers. Carbon-12 (6n) vs Carbon-14 (8n)", color: "bg-red-50 border-red-400" },
+                { icon: "☢️", label: "Carbon-14 is RADIOACTIVE — used in carbon dating", sub: "Decays at known rate → can date organic material up to ~50,000 years", color: "bg-orange-50 border-orange-400" }
               ],
               points: []
             }
@@ -27626,31 +27522,31 @@
           image: "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Valence Electrons \u2014 Why They Matter",
-              emoji: "\u{1F31F}",
+              subtitle: "Valence Electrons — Why They Matter",
+              emoji: "🌟",
               layout: "rules",
               items: [
-                { icon: "\u{1F522}", label: "Group number = number of valence electrons", sub: "Group 1 \u2192 1 valence e\u207B. Group 17 \u2192 7 valence e\u207B. Group 18 \u2192 8 (stable!)", color: "bg-indigo-50 border-indigo-400" },
-                { icon: "\u{1F3AF}", label: "Valence electrons determine ALL chemical behavior", sub: "Bonding, reactivity, ion formation \u2014 all driven by the outer shell", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u2696\uFE0F", label: "Octet rule \u2014 atoms want 8 valence electrons (full outer shell)", sub: "Nobel gases are already stable. Everything else reacts to get there", color: "bg-green-50 border-green-400" }
+                { icon: "🔢", label: "Group number = number of valence electrons", sub: "Group 1 → 1 valence e⁻. Group 17 → 7 valence e⁻. Group 18 → 8 (stable!)", color: "bg-indigo-50 border-indigo-400" },
+                { icon: "🎯", label: "Valence electrons determine ALL chemical behavior", sub: "Bonding, reactivity, ion formation — all driven by the outer shell", color: "bg-blue-50 border-blue-400" },
+                { icon: "⚖️", label: "Octet rule — atoms want 8 valence electrons (full outer shell)", sub: "Nobel gases are already stable. Everything else reacts to get there", color: "bg-green-50 border-green-400" }
               ],
               points: [],
               diagram: "lewis"
             },
             {
               subtitle: "Cations vs Anions",
-              emoji: "\u26A1",
+              emoji: "⚡",
               layout: "compare",
               items: [
                 {
-                  label: "\u2795 CATION (positive)",
+                  label: "➕ CATION (positive)",
                   color: "bg-red-50 border-red-400",
-                  rows: ["LOST electrons", "Protons > Electrons", "Formed by METALS", "Na loses 1e\u207B \u2192 Na\u207A", "Mg loses 2e\u207B \u2192 Mg\xB2\u207A"]
+                  rows: ["LOST electrons", "Protons > Electrons", "Formed by METALS", "Na loses 1e⁻ → Na⁺", "Mg loses 2e⁻ → Mg²⁺"]
                 },
                 {
-                  label: "\u2796 ANION (negative)",
+                  label: "➖ ANION (negative)",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["GAINED electrons", "Electrons > Protons", "Formed by NON-METALS", "Cl gains 1e\u207B \u2192 Cl\u207B", "O gains 2e\u207B \u2192 O\xB2\u207B"]
+                  rows: ["GAINED electrons", "Electrons > Protons", "Formed by NON-METALS", "Cl gains 1e⁻ → Cl⁻", "O gains 2e⁻ → O²⁻"]
                 },
                 "Memory: cAt-ion = pAWsitive (cat has paws, positive). An-ion = negative (An-gry)."
               ],
@@ -27659,13 +27555,13 @@
             },
             {
               subtitle: "Why Atoms Form Ions",
-              emoji: "\u{1F3AF}",
+              emoji: "🎯",
               layout: "steps",
               items: [
-                { label: "Atoms want a FULL outer shell (8 electrons = stable)", sub: "Noble gases already have this \u2014 that is why they do not react" },
+                { label: "Atoms want a FULL outer shell (8 electrons = stable)", sub: "Noble gases already have this — that is why they do not react" },
                 { label: "METALS (Groups 1-3): it is easier to LOSE 1-3 electrons", sub: "Less work to empty the outer shell than fill it. Forms cations (+1, +2, +3)" },
-                { label: "NON-METALS (Groups 15-17): it is easier to GAIN 1-3 electrons", sub: "Less work to fill the last few spots. Forms anions (\u22121, \u22122, \u22123)" },
-                { label: "Opposite charges attract \u2192 IONIC BOND forms", sub: "Na\u207A + Cl\u207B \u2192 NaCl. The compound is electrically neutral overall" }
+                { label: "NON-METALS (Groups 15-17): it is easier to GAIN 1-3 electrons", sub: "Less work to fill the last few spots. Forms anions (−1, −2, −3)" },
+                { label: "Opposite charges attract → IONIC BOND forms", sub: "Na⁺ + Cl⁻ → NaCl. The compound is electrically neutral overall" }
               ],
               points: []
             }
@@ -27697,7 +27593,7 @@
     physics: {
       id: "physics",
       name: "Physics: Electricity",
-      description: "11 in-depth sections with interactive diagrams \u2014 static electricity, Ohm's Law, circuits, energy, and safety.",
+      description: "11 in-depth sections with interactive diagrams — static electricity, Ohm's Law, circuits, energy, and safety.",
       icon: Zap,
       color: "amber",
       gradient: "from-amber-500 to-orange-600",
@@ -27710,49 +27606,49 @@
           notes: [
             {
               subtitle: "The Big 3: V, I, R",
-              emoji: "\u{1F511}",
+              emoji: "🔑",
               layout: "cards",
               items: [
-                { icon: "\u{1F4A7}", label: "VOLTAGE (V)", value: "Volts (V)", sub: 'The "pressure" pushing electrons. Higher V = more push.', color: "bg-indigo-50 border-indigo-300" },
-                { icon: "\u{1F30A}", label: "CURRENT (I)", value: "Amperes (A)", sub: "How many electrons flow per second.", color: "bg-cyan-50 border-cyan-300" },
-                { icon: "\u{1F6A7}", label: "RESISTANCE (R)", value: "Ohms (\u03A9)", sub: "Opposes flow. Like a narrow kink in a pipe.", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u26A1", label: "CHARGE (Q)", value: "Coulombs (C)", sub: "1 Ampere = 1 Coulomb flowing per second.", color: "bg-yellow-50 border-yellow-300" }
+                { icon: "💧", label: "VOLTAGE (V)", value: "Volts (V)", sub: 'The "pressure" pushing electrons. Higher V = more push.', color: "bg-indigo-50 border-indigo-300" },
+                { icon: "🌊", label: "CURRENT (I)", value: "Amperes (A)", sub: "How many electrons flow per second.", color: "bg-cyan-50 border-cyan-300" },
+                { icon: "🚧", label: "RESISTANCE (R)", value: "Ohms (Ω)", sub: "Opposes flow. Like a narrow kink in a pipe.", color: "bg-orange-50 border-orange-300" },
+                { icon: "⚡", label: "CHARGE (Q)", value: "Coulombs (C)", sub: "1 Ampere = 1 Coulomb flowing per second.", color: "bg-yellow-50 border-yellow-300" }
               ],
               points: []
             },
             {
-              subtitle: "Circuit Types \u2014 Know the Difference",
-              emoji: "\u{1F50C}",
+              subtitle: "Circuit Types — Know the Difference",
+              emoji: "🔌",
               layout: "rules",
               items: [
-                { icon: "\u2705", label: "CLOSED circuit", sub: "Complete loop \u2014 current flows normally", color: "bg-green-50 border-green-400" },
-                { icon: "\u274C", label: "OPEN circuit", sub: "Broken path \u2014 current stops completely (what a switch does when off)", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u26A0\uFE0F", label: "SHORT circuit", sub: "Unintended low-resistance path \u2014 massive current \u2192 fire risk", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F4A1}", label: "LOAD", sub: "Any device using electrical energy: bulb, motor, resistor", color: "bg-yellow-50 border-yellow-400" }
+                { icon: "✅", label: "CLOSED circuit", sub: "Complete loop — current flows normally", color: "bg-green-50 border-green-400" },
+                { icon: "❌", label: "OPEN circuit", sub: "Broken path — current stops completely (what a switch does when off)", color: "bg-gray-50 border-gray-400" },
+                { icon: "⚠️", label: "SHORT circuit", sub: "Unintended low-resistance path — massive current → fire risk", color: "bg-red-50 border-red-400" },
+                { icon: "💡", label: "LOAD", sub: "Any device using electrical energy: bulb, motor, resistor", color: "bg-yellow-50 border-yellow-400" }
               ],
               points: []
             },
             {
               subtitle: "All Formulas at a Glance",
-              emoji: "\u{1F4D0}",
+              emoji: "📐",
               layout: "formula",
               items: [
-                { formula: "V = I \xD7 R", meaning: "Ohm's Law \u2014 Voltage = Current \xD7 Resistance", example: "I=3A, R=4\u03A9 \u2192 V=12V", color: "border-indigo-300", headerBg: "bg-indigo-600" },
-                { formula: "P = V \xD7 I", meaning: "Power in Watts (also: P=I\xB2R and P=V\xB2\xF7R)", example: "120V \xD7 0.5A = 60W", color: "border-amber-300", headerBg: "bg-amber-500" },
-                { formula: "E = P \xD7 t", meaning: "Energy \u2014 Watts\xD7sec=Joules OR kW\xD7hours=kWh", example: "1.5kW \xD7 8h = 12 kWh", color: "border-green-300", headerBg: "bg-green-600" },
-                { formula: "Cost = E(kWh) \xD7 Rate", meaning: "Electricity cost \u2014 always convert W\u2192kW first!", example: "12kWh \xD7 $0.12 = $1.44", color: "border-rose-300", headerBg: "bg-rose-500" }
+                { formula: "V = I × R", meaning: "Ohm's Law — Voltage = Current × Resistance", example: "I=3A, R=4Ω → V=12V", color: "border-indigo-300", headerBg: "bg-indigo-600" },
+                { formula: "P = V × I", meaning: "Power in Watts (also: P=I²R and P=V²÷R)", example: "120V × 0.5A = 60W", color: "border-amber-300", headerBg: "bg-amber-500" },
+                { formula: "E = P × t", meaning: "Energy — Watts×sec=Joules OR kW×hours=kWh", example: "1.5kW × 8h = 12 kWh", color: "border-green-300", headerBg: "bg-green-600" },
+                { formula: "Cost = E(kWh) × Rate", meaning: "Electricity cost — always convert W→kW first!", example: "12kWh × $0.12 = $1.44", color: "border-rose-300", headerBg: "bg-rose-500" }
               ],
               points: []
             },
             {
               subtitle: "Safety Devices",
-              emoji: "\u{1F6E1}\uFE0F",
+              emoji: "🛡️",
               layout: "cards",
               items: [
-                { icon: "\u{1F525}", label: "FUSE", value: "Single-use", sub: "Thin wire MELTS when overloaded. Must be replaced.", color: "bg-red-50 border-red-300" },
-                { icon: "\u26A1", label: "CIRCUIT BREAKER", value: "Reusable", sub: "Switch TRIPS open. Just reset it \u2014 used in homes.", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F30D}", label: "GROUND (3rd prong)", value: "Safety path", sub: "Routes fault current to Earth, not through you.", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F4A7}", label: "GFCI outlet", value: "Cuts in 0.025s", sub: "Detects tiny leaks. Required in bathrooms/kitchens.", color: "bg-teal-50 border-teal-300" }
+                { icon: "🔥", label: "FUSE", value: "Single-use", sub: "Thin wire MELTS when overloaded. Must be replaced.", color: "bg-red-50 border-red-300" },
+                { icon: "⚡", label: "CIRCUIT BREAKER", value: "Reusable", sub: "Switch TRIPS open. Just reset it — used in homes.", color: "bg-green-50 border-green-300" },
+                { icon: "🌍", label: "GROUND (3rd prong)", value: "Safety path", sub: "Routes fault current to Earth, not through you.", color: "bg-blue-50 border-blue-300" },
+                { icon: "💧", label: "GFCI outlet", value: "Cuts in 0.025s", sub: "Detects tiny leaks. Required in bathrooms/kitchens.", color: "bg-teal-50 border-teal-300" }
               ],
               points: []
             }
@@ -27765,51 +27661,51 @@
           notes: [
             {
               subtitle: "What Is Static Electricity?",
-              emoji: "\u26A1",
+              emoji: "⚡",
               layout: "bullets",
               points: [
-                "Static = charge BUILDS UP on the surface of an object and stays there \u2014 it does not flow",
-                "Too many electrons \u2192 object is NEGATIVE (\u2212). Too few \u2192 POSITIVE (+)",
-                "KEY RULE: Only ELECTRONS move \u2014 protons are locked in the nucleus forever",
+                "Static = charge BUILDS UP on the surface of an object and stays there — it does not flow",
+                "Too many electrons → object is NEGATIVE (−). Too few → POSITIVE (+)",
+                "KEY RULE: Only ELECTRONS move — protons are locked in the nucleus forever",
                 "Objects become neutral again by discharge (spark) or grounding"
               ]
             },
             {
               subtitle: "Law of Electric Charges",
-              emoji: "\u{1F9F2}",
+              emoji: "🧲",
               layout: "rules",
               items: [
-                { icon: "\u2194\uFE0F", label: "LIKE charges REPEL each other", sub: "+ pushes + away    \u2014 pushes \u2014 away", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F517}", label: "OPPOSITE charges ATTRACT each other", sub: "+ and \u2014 pull toward each other", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F388}", label: "POLARIZATION \u2014 why neutral objects are attracted", sub: "Charged balloon near neutral wall \u2192 shifts wall electrons \u2192 near side becomes opposite charge \u2192 attraction!", color: "bg-blue-50 border-blue-400" }
+                { icon: "↔️", label: "LIKE charges REPEL each other", sub: "+ pushes + away    — pushes — away", color: "bg-red-50 border-red-400" },
+                { icon: "🔗", label: "OPPOSITE charges ATTRACT each other", sub: "+ and — pull toward each other", color: "bg-green-50 border-green-400" },
+                { icon: "🎈", label: "POLARIZATION — why neutral objects are attracted", sub: "Charged balloon near neutral wall → shifts wall electrons → near side becomes opposite charge → attraction!", color: "bg-blue-50 border-blue-400" }
               ],
               points: [],
               diagram: "electric-charges"
             },
             {
               subtitle: "3 Ways to Charge Objects",
-              emoji: "\u{1F504}",
+              emoji: "🔄",
               layout: "steps",
               items: [
-                { label: "FRICTION \u2014 Rub two objects together", sub: "Electrons transfer from one surface to the other. Balloon on hair: balloon gets \u2212, hair gets +" },
-                { label: "CONDUCTION \u2014 Direct contact with a charged object", sub: "Charge spreads by touch. Both objects end up with the same type of charge" },
-                { label: "INDUCTION \u2014 Bring a charged object NEAR without touching", sub: "Charges separate inside the neutral object. Remove the charged object \u2014 induced charge stays" }
+                { label: "FRICTION — Rub two objects together", sub: "Electrons transfer from one surface to the other. Balloon on hair: balloon gets −, hair gets +" },
+                { label: "CONDUCTION — Direct contact with a charged object", sub: "Charge spreads by touch. Both objects end up with the same type of charge" },
+                { label: "INDUCTION — Bring a charged object NEAR without touching", sub: "Charges separate inside the neutral object. Remove the charged object — induced charge stays" }
               ],
               points: [],
               diagram: "charging-methods"
             },
             {
               subtitle: "Conductors vs Insulators",
-              emoji: "\u{1F50C}",
+              emoji: "🔌",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F7E1} CONDUCTOR",
+                  label: "🟡 CONDUCTOR",
                   color: "bg-yellow-50 border-yellow-400",
                   rows: ["Electrons move FREELY", "Copper, silver, aluminum", "Salt water", "Charge spreads out evenly"]
                 },
                 {
-                  label: "\u{1F7E3} INSULATOR",
+                  label: "🟣 INSULATOR",
                   color: "bg-purple-50 border-purple-400",
                   rows: ["Electrons are LOCKED in place", "Rubber, plastic, glass", "Dry wood", "Charge stays put"]
                 },
@@ -27819,13 +27715,13 @@
               diagram: "conductor-insulator"
             },
             {
-              subtitle: "Lightning \u2014 How It Forms",
-              emoji: "\u{1F329}\uFE0F",
+              subtitle: "Lightning — How It Forms",
+              emoji: "🌩️",
               layout: "steps",
               items: [
-                { label: "Ice crystals and water droplets COLLIDE inside storm clouds", sub: "Electrons transfer \u2192 charge separates inside the cloud" },
-                { label: "Negative charges pool at the cloud bottom, positive at the top", sub: "Negative base repels electrons from ground \u2192 ground surface becomes +" },
-                { label: "Charge difference becomes enormous \u2192 electrons find a path down", sub: "LIGHTNING: 30,000\xB0C \u2014 5\xD7 hotter than the sun, carrying ~30,000 amps" },
+                { label: "Ice crystals and water droplets COLLIDE inside storm clouds", sub: "Electrons transfer → charge separates inside the cloud" },
+                { label: "Negative charges pool at the cloud bottom, positive at the top", sub: "Negative base repels electrons from ground → ground surface becomes +" },
+                { label: "Charge difference becomes enormous → electrons find a path down", sub: "LIGHTNING: 30,000°C — 5× hotter than the sun, carrying ~30,000 amps" },
                 { label: "Lightning rod provides an easy low-resistance path to Earth", sub: "Safely redirects the strike, protecting the building" }
               ],
               points: [],
@@ -27839,45 +27735,45 @@
           image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Static vs Current \u2014 Side by Side",
-              emoji: "\u26A1",
+              subtitle: "Static vs Current — Side by Side",
+              emoji: "⚡",
               layout: "compare",
               items: [
                 {
-                  label: "\u26A1 STATIC",
+                  label: "⚡ STATIC",
                   color: "bg-yellow-50 border-yellow-400",
                   rows: ["Charge STORED on surface", "Does not flow continuously", "Single sudden burst (spark)", "Like a water BALLOON"]
                 },
                 {
-                  label: "\u{1F50B} CURRENT",
+                  label: "🔋 CURRENT",
                   color: "bg-blue-50 border-blue-400",
                   rows: ["Charge FLOWS in a loop", "Moves continuously", "Steady and controllable", "Like a running TAP"]
                 },
-                "Both involve electrons \u2014 the difference is stored vs flowing."
+                "Both involve electrons — the difference is stored vs flowing."
               ],
               points: [],
               diagram: "static-vs-current"
             },
             {
-              subtitle: "Polarization \u2014 Why Neutral Objects Are Attracted",
-              emoji: "\u{1F9F2}",
+              subtitle: "Polarization — Why Neutral Objects Are Attracted",
+              emoji: "🧲",
               layout: "steps",
               items: [
-                { label: "Bring a charged object NEAR a neutral object (no touching)", sub: "Charges rearrange INSIDE the neutral object \u2014 they do not transfer" },
-                { label: "Near side becomes the OPPOSITE charge", sub: "Charged balloon near wall \u2192 wall electrons shift away \u2192 near side becomes +" },
-                { label: "Opposite charges attract \u2192 neutral object is pulled in", sub: "This is why a charged comb picks up tiny scraps of paper" }
+                { label: "Bring a charged object NEAR a neutral object (no touching)", sub: "Charges rearrange INSIDE the neutral object — they do not transfer" },
+                { label: "Near side becomes the OPPOSITE charge", sub: "Charged balloon near wall → wall electrons shift away → near side becomes +" },
+                { label: "Opposite charges attract → neutral object is pulled in", sub: "This is why a charged comb picks up tiny scraps of paper" }
               ],
               points: []
             },
             {
               subtitle: "Conductors, Insulators & Semiconductors",
-              emoji: "\u{1F50C}",
+              emoji: "🔌",
               layout: "cards",
               items: [
-                { icon: "\u{1F529}", label: "CONDUCTOR", value: "Copper, Silver, Al", sub: "Outer electrons loosely held \u2014 move freely. Best conductor = silver", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u{1F512}", label: "INSULATOR", value: "Rubber, Plastic, Glass", sub: "Electrons tightly bound \u2014 cannot move. Holds charge in place", color: "bg-purple-50 border-purple-300" },
-                { icon: "\u{1F4BB}", label: "SEMICONDUCTOR", value: "Silicon, Germanium", sub: "Conductivity is controllable. Basis of ALL computer chips and electronics", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F9CA}", label: "SUPERCONDUCTOR", value: "Near 0 Kelvin", sub: "Zero resistance at extremely low temperatures. Still experimental", color: "bg-indigo-50 border-indigo-300" }
+                { icon: "🔩", label: "CONDUCTOR", value: "Copper, Silver, Al", sub: "Outer electrons loosely held — move freely. Best conductor = silver", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "🔒", label: "INSULATOR", value: "Rubber, Plastic, Glass", sub: "Electrons tightly bound — cannot move. Holds charge in place", color: "bg-purple-50 border-purple-300" },
+                { icon: "💻", label: "SEMICONDUCTOR", value: "Silicon, Germanium", sub: "Conductivity is controllable. Basis of ALL computer chips and electronics", color: "bg-blue-50 border-blue-300" },
+                { icon: "🧊", label: "SUPERCONDUCTOR", value: "Near 0 Kelvin", sub: "Zero resistance at extremely low temperatures. Still experimental", color: "bg-indigo-50 border-indigo-300" }
               ],
               points: []
             }
@@ -27889,39 +27785,39 @@
           image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "V, I, R \u2014 Water Pipe Analogy",
-              emoji: "\u{1F4A7}",
+              subtitle: "V, I, R — Water Pipe Analogy",
+              emoji: "💧",
               layout: "cards",
               items: [
-                { icon: "\u{1F6B0}", label: "Battery = Pump", value: "Powers the circuit", sub: 'Converts chemical energy into electrical "pressure"', color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F30A}", label: "Current = Flow rate", value: "Amperes (A)", sub: "More voltage = more flow. More resistance = less flow", color: "bg-cyan-50 border-cyan-300" },
-                { icon: "\u{1F6A7}", label: "Resistance = Narrow pipe", value: "Ohms (\u03A9)", sub: "Slows current down. Wire, bends, thin sections all add resistance", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u{1F4A1}", label: "Load = Water wheel", value: "Uses the energy", sub: "Converts electrical energy into light, heat, motion, sound", color: "bg-yellow-50 border-yellow-300" }
+                { icon: "🚰", label: "Battery = Pump", value: "Powers the circuit", sub: 'Converts chemical energy into electrical "pressure"', color: "bg-green-50 border-green-300" },
+                { icon: "🌊", label: "Current = Flow rate", value: "Amperes (A)", sub: "More voltage = more flow. More resistance = less flow", color: "bg-cyan-50 border-cyan-300" },
+                { icon: "🚧", label: "Resistance = Narrow pipe", value: "Ohms (Ω)", sub: "Slows current down. Wire, bends, thin sections all add resistance", color: "bg-orange-50 border-orange-300" },
+                { icon: "💡", label: "Load = Water wheel", value: "Uses the energy", sub: "Converts electrical energy into light, heat, motion, sound", color: "bg-yellow-50 border-yellow-300" }
               ],
               points: [],
               diagram: "water-analogy"
             },
             {
-              subtitle: "Ohm's Law \u2014 3 Forms",
-              emoji: "\u{1F4D0}",
+              subtitle: "Ohm's Law — 3 Forms",
+              emoji: "📐",
               layout: "formula",
               items: [
-                { formula: "V = I \xD7 R", meaning: "Find Voltage \u2014 cover V, multiply I \xD7 R", example: "I=3A, R=4\u03A9 \u2192 V=12V", color: "border-indigo-300", headerBg: "bg-indigo-600" },
-                { formula: "I = V \xF7 R", meaning: "Find Current \u2014 cover I, divide V by R", example: "V=12V, R=4\u03A9 \u2192 I=3A", color: "border-green-300", headerBg: "bg-green-600" },
-                { formula: "R = V \xF7 I", meaning: "Find Resistance \u2014 cover R, divide V by I", example: "V=24V, I=3A \u2192 R=8\u03A9", color: "border-amber-300", headerBg: "bg-amber-500" }
+                { formula: "V = I × R", meaning: "Find Voltage — cover V, multiply I × R", example: "I=3A, R=4Ω → V=12V", color: "border-indigo-300", headerBg: "bg-indigo-600" },
+                { formula: "I = V ÷ R", meaning: "Find Current — cover I, divide V by R", example: "V=12V, R=4Ω → I=3A", color: "border-green-300", headerBg: "bg-green-600" },
+                { formula: "R = V ÷ I", meaning: "Find Resistance — cover R, divide V by I", example: "V=24V, I=3A → R=8Ω", color: "border-amber-300", headerBg: "bg-amber-500" }
               ],
               points: [],
               diagram: "vir-triangle"
             },
             {
               subtitle: "What Affects Resistance?",
-              emoji: "\u{1F50C}",
+              emoji: "🔌",
               layout: "rules",
               items: [
-                { icon: "\u{1F4CF}", label: "LENGTH \u2014 longer wire = MORE resistance", sub: "More distance = more electron-atom collisions", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F535}", label: "THICKNESS \u2014 thinner wire = MORE resistance", sub: "Less cross-sectional area = less room for electrons to flow", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u2697\uFE0F", label: "MATERIAL \u2014 Silver < Copper < Al < Tungsten", sub: "Different atomic structures hold electrons more or less tightly", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F321}\uFE0F", label: "TEMPERATURE \u2014 hotter metal = MORE resistance", sub: "EXCEPTION: Semiconductors (silicon) resistance DECREASES with heat", color: "bg-red-50 border-red-400" }
+                { icon: "📏", label: "LENGTH — longer wire = MORE resistance", sub: "More distance = more electron-atom collisions", color: "bg-orange-50 border-orange-400" },
+                { icon: "🔵", label: "THICKNESS — thinner wire = MORE resistance", sub: "Less cross-sectional area = less room for electrons to flow", color: "bg-orange-50 border-orange-400" },
+                { icon: "⚗️", label: "MATERIAL — Silver < Copper < Al < Tungsten", sub: "Different atomic structures hold electrons more or less tightly", color: "bg-blue-50 border-blue-400" },
+                { icon: "🌡️", label: "TEMPERATURE — hotter metal = MORE resistance", sub: "EXCEPTION: Semiconductors (silicon) resistance DECREASES with heat", color: "bg-red-50 border-red-400" }
               ],
               points: [],
               diagram: "resistance-factors"
@@ -27930,21 +27826,21 @@
         },
         {
           id: "electronics-components",
-          title: "Measuring Circuits \u2014 Ammeter & Voltmeter",
+          title: "Measuring Circuits — Ammeter & Voltmeter",
           image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop",
           notes: [
             {
               subtitle: "Ammeter vs Voltmeter",
-              emoji: "\u{1F4CF}",
+              emoji: "📏",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F535} AMMETER",
+                  label: "🔵 AMMETER",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Measures CURRENT (Amperes)", "Connected IN SERIES", "Very LOW internal resistance", "Break wire \u2014 insert in gap", "NEVER across battery (will burn!)"]
+                  rows: ["Measures CURRENT (Amperes)", "Connected IN SERIES", "Very LOW internal resistance", "Break wire — insert in gap", "NEVER across battery (will burn!)"]
                 },
                 {
-                  label: "\u{1F534} VOLTMETER",
+                  label: "🔴 VOLTMETER",
                   color: "bg-red-50 border-red-400",
                   rows: ["Measures VOLTAGE (Volts)", "Connected IN PARALLEL", "Very HIGH internal resistance", "Probe across the component", "Safe to connect across battery"]
                 },
@@ -27955,26 +27851,26 @@
             },
             {
               subtitle: "Circuit Diagram Symbols",
-              emoji: "\u{1F4CB}",
+              emoji: "📋",
               layout: "rules",
               items: [
-                { icon: "\u{1F50B}", label: "Battery/Cell \u2014 long line = + (positive), short line = \u2212 (negative)", sub: "Multiple cells in a row = battery. Longer stack = higher voltage", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F300}", label: "Resistor \u2014 zigzag (North American) or rectangle (European)", sub: "Any device that uses energy can be shown as a resistor", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F4A1}", label: "Light bulb \u2014 circle with X inside", sub: "The X represents the filament wire inside", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1F513}", label: "Switch \u2014 gap with a flap. Open = circuit broken. Closed = flap bridges gap", sub: "Switches are always connected IN SERIES with their load", color: "bg-gray-50 border-gray-400" }
+                { icon: "🔋", label: "Battery/Cell — long line = + (positive), short line = − (negative)", sub: "Multiple cells in a row = battery. Longer stack = higher voltage", color: "bg-gray-50 border-gray-400" },
+                { icon: "🌀", label: "Resistor — zigzag (North American) or rectangle (European)", sub: "Any device that uses energy can be shown as a resistor", color: "bg-gray-50 border-gray-400" },
+                { icon: "💡", label: "Light bulb — circle with X inside", sub: "The X represents the filament wire inside", color: "bg-gray-50 border-gray-400" },
+                { icon: "🔓", label: "Switch — gap with a flap. Open = circuit broken. Closed = flap bridges gap", sub: "Switches are always connected IN SERIES with their load", color: "bg-gray-50 border-gray-400" }
               ],
               points: [],
               diagram: "circuit-symbols"
             },
             {
               subtitle: "Cell vs Battery",
-              emoji: "\u{1F50B}",
+              emoji: "🔋",
               layout: "cards",
               items: [
-                { icon: "1\uFE0F\u20E3", label: "CELL", value: "~1.5V each", sub: "Single electrochemical unit (one AA or AAA is a cell)", color: "bg-gray-50 border-gray-200" },
-                { icon: "\u{1F50B}\u{1F50B}", label: "BATTERY", value: "Cells combined", sub: 'Two or more cells. Technically your "battery" is often a single cell', color: "bg-gray-50 border-gray-200" },
-                { icon: "\u2795", label: "Cells in SERIES", value: "Voltages ADD", sub: "3 \xD7 1.5V = 4.5V total \u2014 same current capacity", color: "bg-green-50 border-green-300" },
-                { icon: "\u2194\uFE0F", label: "Cells in PARALLEL", value: "Voltage same", sub: "Still 1.5V \u2014 but lasts longer (more current capacity)", color: "bg-blue-50 border-blue-300" }
+                { icon: "1️⃣", label: "CELL", value: "~1.5V each", sub: "Single electrochemical unit (one AA or AAA is a cell)", color: "bg-gray-50 border-gray-200" },
+                { icon: "🔋🔋", label: "BATTERY", value: "Cells combined", sub: 'Two or more cells. Technically your "battery" is often a single cell', color: "bg-gray-50 border-gray-200" },
+                { icon: "➕", label: "Cells in SERIES", value: "Voltages ADD", sub: "3 × 1.5V = 4.5V total — same current capacity", color: "bg-green-50 border-green-300" },
+                { icon: "↔️", label: "Cells in PARALLEL", value: "Voltage same", sub: "Still 1.5V — but lasts longer (more current capacity)", color: "bg-blue-50 border-blue-300" }
               ],
               points: []
             }
@@ -27986,19 +27882,19 @@
           image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Series vs Parallel \u2014 The Core Difference",
-              emoji: "\u2696\uFE0F",
+              subtitle: "Series vs Parallel — The Core Difference",
+              emoji: "⚖️",
               layout: "compare",
               items: [
                 {
-                  label: "\u27A1\uFE0F SERIES",
+                  label: "➡️ SERIES",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["ONE path for current", "Current: SAME everywhere", "Voltage: DIVIDES (V1+V2+V3=Vbat)", "Resistance: ADDS (R1+R2+R3)", "One break \u2192 ALL stop"]
+                  rows: ["ONE path for current", "Current: SAME everywhere", "Voltage: DIVIDES (V1+V2+V3=Vbat)", "Resistance: ADDS (R1+R2+R3)", "One break → ALL stop"]
                 },
                 {
-                  label: "\u{1F500} PARALLEL",
+                  label: "🔀 PARALLEL",
                   color: "bg-orange-50 border-orange-400",
-                  rows: ["MULTIPLE paths", "Voltage: SAME everywhere", "Current: DIVIDES (I1+I2+I3=Itot)", "Resistance: DECREASES", "One break \u2192 others continue"]
+                  rows: ["MULTIPLE paths", "Voltage: SAME everywhere", "Current: DIVIDES (I1+I2+I3=Itot)", "Resistance: DECREASES", "One break → others continue"]
                 },
                 'Memory: "Series = Same current" | "Parallel = same Pressure (voltage)"'
               ],
@@ -28006,40 +27902,40 @@
               diagram: "series-vs-parallel"
             },
             {
-              subtitle: "Series Circuit \u2014 Worked Example",
-              emoji: "\u{1F522}",
+              subtitle: "Series Circuit — Worked Example",
+              emoji: "🔢",
               layout: "steps",
               items: [
-                { label: "Given: 12V battery, R1=2\u03A9, R2=3\u03A9, R3=7\u03A9 in series", sub: "Goal: find total resistance, current, and voltage across each resistor" },
-                { label: "Step 1 \u2014 Total R: R_total = 2 + 3 + 7 = 12\u03A9", sub: "In series, resistances simply add together" },
-                { label: "Step 2 \u2014 Total current: I = V \xF7 R = 12 \xF7 12 = 1A", sub: "This same 1A flows through every component" },
-                { label: "Step 3 \u2014 Voltage drops: V1=1\xD72=2V  V2=1\xD73=3V  V3=1\xD77=7V", sub: "Check: 2+3+7 = 12V \u2713  Must equal battery voltage" }
+                { label: "Given: 12V battery, R1=2Ω, R2=3Ω, R3=7Ω in series", sub: "Goal: find total resistance, current, and voltage across each resistor" },
+                { label: "Step 1 — Total R: R_total = 2 + 3 + 7 = 12Ω", sub: "In series, resistances simply add together" },
+                { label: "Step 2 — Total current: I = V ÷ R = 12 ÷ 12 = 1A", sub: "This same 1A flows through every component" },
+                { label: "Step 3 — Voltage drops: V1=1×2=2V  V2=1×3=3V  V3=1×7=7V", sub: "Check: 2+3+7 = 12V ✓  Must equal battery voltage" }
               ],
               points: [],
               diagram: "series-calculations"
             },
             {
-              subtitle: "Parallel Circuit \u2014 Worked Example",
-              emoji: "\u{1F522}",
+              subtitle: "Parallel Circuit — Worked Example",
+              emoji: "🔢",
               layout: "steps",
               items: [
-                { label: "Given: 12V battery, R1=6\u03A9, R2=4\u03A9, R3=12\u03A9 in parallel", sub: "Goal: find branch currents and total current" },
-                { label: "Step 1 \u2014 Voltage: V1=V2=V3=12V (same as battery \u2014 always start here!)", sub: "In parallel, every branch sees the full battery voltage" },
-                { label: "Step 2 \u2014 Branch currents: I1=12\xF76=2A  I2=12\xF74=3A  I3=12\xF712=1A", sub: "Each branch uses V=IR independently" },
-                { label: "Step 3 \u2014 Total current: I_total = 2+3+1 = 6A", sub: "Check: all branch currents must add to total \u2713" }
+                { label: "Given: 12V battery, R1=6Ω, R2=4Ω, R3=12Ω in parallel", sub: "Goal: find branch currents and total current" },
+                { label: "Step 1 — Voltage: V1=V2=V3=12V (same as battery — always start here!)", sub: "In parallel, every branch sees the full battery voltage" },
+                { label: "Step 2 — Branch currents: I1=12÷6=2A  I2=12÷4=3A  I3=12÷12=1A", sub: "Each branch uses V=IR independently" },
+                { label: "Step 3 — Total current: I_total = 2+3+1 = 6A", sub: "Check: all branch currents must add to total ✓" }
               ],
               points: [],
               diagram: "parallel-calculations"
             },
             {
               subtitle: "Spot the Circuit Type on Exams",
-              emoji: "\u{1F50D}",
+              emoji: "🔍",
               layout: "rules",
               items: [
-                { icon: "\u{1F4A5}", label: '"A bulb goes out when another is removed"', sub: "\u2192 They are in SERIES (one break = everything stops)", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u2705", label: '"Removing one bulb does not affect the others"', sub: "\u2192 They are in PARALLEL (independent branches)", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F526}", label: '"What happens if R2 is added in series?"', sub: "\u2192 R_total increases \u2192 current decreases \u2192 ALL bulbs dimmer", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u26A1", label: '"Which resistor has more power?" (series circuit)', sub: "\u2192 Bigger R has more power: P=I\xB2R, same I, bigger R = more P", color: "bg-red-50 border-red-400" }
+                { icon: "💥", label: '"A bulb goes out when another is removed"', sub: "→ They are in SERIES (one break = everything stops)", color: "bg-blue-50 border-blue-400" },
+                { icon: "✅", label: '"Removing one bulb does not affect the others"', sub: "→ They are in PARALLEL (independent branches)", color: "bg-orange-50 border-orange-400" },
+                { icon: "🔦", label: '"What happens if R2 is added in series?"', sub: "→ R_total increases → current decreases → ALL bulbs dimmer", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "⚡", label: '"Which resistor has more power?" (series circuit)', sub: "→ Bigger R has more power: P=I²R, same I, bigger R = more P", color: "bg-red-50 border-red-400" }
               ],
               points: []
             }
@@ -28051,28 +27947,28 @@
           image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "The 5-Step Method \u2014 Use Every Time",
-              emoji: "\u{1F50E}",
+              subtitle: "The 5-Step Method — Use Every Time",
+              emoji: "🔎",
               layout: "steps",
               items: [
-                { label: "IDENTIFY \u2014 Series or parallel?", sub: "One path = series. Branches going off the main line = parallel" },
-                { label: "LIST \u2014 Write every known value with labels", sub: "Label every component R1, R2, V1, I1... Write what you know, circle what you need" },
+                { label: "IDENTIFY — Series or parallel?", sub: "One path = series. Branches going off the main line = parallel" },
+                { label: "LIST — Write every known value with labels", sub: "Label every component R1, R2, V1, I1... Write what you know, circle what you need" },
                 { label: "FIND R_total", sub: "Series: add all resistors. Parallel: 1/Rt = 1/R1 + 1/R2 (or use product-over-sum shortcut for two resistors)" },
-                { label: "APPLY Ohm's Law \u2014 V=IR at total level first, then at component level", sub: "Start with what you can calculate, then work outward" },
+                { label: "APPLY Ohm's Law — V=IR at total level first, then at component level", sub: "Start with what you can calculate, then work outward" },
                 { label: "VERIFY your answer", sub: "Series: V1+V2+...=Vbat  |  Parallel: I1+I2+...=Itotal" }
               ],
               points: [],
               diagram: "circuit-troubleshooting"
             },
             {
-              subtitle: "Series vs Parallel \u2014 Full Reference",
-              emoji: "\u{1F4CA}",
+              subtitle: "Series vs Parallel — Full Reference",
+              emoji: "📊",
               layout: "cards",
               items: [
-                { icon: "\u{1F535}", label: "Series CURRENT", value: "I same everywhere", sub: "I1 = I2 = I3 = I_total \u2014 current never splits", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F535}", label: "Series VOLTAGE", value: "Divides up", sub: "V1 + V2 + V3 = V_battery \u2014 each gets a share", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F7E0}", label: "Parallel VOLTAGE", value: "V same everywhere", sub: "V1 = V2 = V3 = V_battery \u2014 every branch gets full voltage", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u{1F7E0}", label: "Parallel CURRENT", value: "Divides up", sub: "I1 + I2 + I3 = I_total \u2014 current splits across branches", color: "bg-orange-50 border-orange-300" }
+                { icon: "🔵", label: "Series CURRENT", value: "I same everywhere", sub: "I1 = I2 = I3 = I_total — current never splits", color: "bg-blue-50 border-blue-300" },
+                { icon: "🔵", label: "Series VOLTAGE", value: "Divides up", sub: "V1 + V2 + V3 = V_battery — each gets a share", color: "bg-blue-50 border-blue-300" },
+                { icon: "🟠", label: "Parallel VOLTAGE", value: "V same everywhere", sub: "V1 = V2 = V3 = V_battery — every branch gets full voltage", color: "bg-orange-50 border-orange-300" },
+                { icon: "🟠", label: "Parallel CURRENT", value: "Divides up", sub: "I1 + I2 + I3 = I_total — current splits across branches", color: "bg-orange-50 border-orange-300" }
               ],
               points: []
             }
@@ -28084,38 +27980,38 @@
           image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Power \u2014 3 Formulas, When to Use Each",
-              emoji: "\u26A1",
+              subtitle: "Power — 3 Formulas, When to Use Each",
+              emoji: "⚡",
               layout: "formula",
               items: [
-                { formula: "P = V \xD7 I", meaning: "Use when you know Voltage AND Current", example: "120V \xD7 0.5A = 60W", color: "border-yellow-400", headerBg: "bg-yellow-500" },
-                { formula: "P = I\xB2 \xD7 R", meaning: "Use when you know Current AND Resistance", example: "2\xB2 \xD7 10\u03A9 = 40W", color: "border-orange-400", headerBg: "bg-orange-500" },
-                { formula: "P = V\xB2 \xF7 R", meaning: "Use when you know Voltage AND Resistance", example: "12\xB2 \xF7 6\u03A9 = 24W", color: "border-red-400", headerBg: "bg-red-500" }
+                { formula: "P = V × I", meaning: "Use when you know Voltage AND Current", example: "120V × 0.5A = 60W", color: "border-yellow-400", headerBg: "bg-yellow-500" },
+                { formula: "P = I² × R", meaning: "Use when you know Current AND Resistance", example: "2² × 10Ω = 40W", color: "border-orange-400", headerBg: "bg-orange-500" },
+                { formula: "P = V² ÷ R", meaning: "Use when you know Voltage AND Resistance", example: "12² ÷ 6Ω = 24W", color: "border-red-400", headerBg: "bg-red-500" }
               ],
               points: [],
               diagram: "power-formula"
             },
             {
-              subtitle: "Energy \u2192 Cost \u2014 Step by Step",
-              emoji: "\u{1F4B0}",
+              subtitle: "Energy → Cost — Step by Step",
+              emoji: "💰",
               layout: "steps",
               items: [
-                { label: "Convert Watts \u2192 Kilowatts: divide by 1000", sub: "CRITICAL: skip this step and your answer is 1000\xD7 too large!" },
-                { label: "Calculate Energy: E (kWh) = Power (kW) \xD7 Time (hours)", sub: "Example: 1.5kW heater running 8 hours = 12 kWh" },
-                { label: "Calculate Cost: Cost = Energy (kWh) \xD7 Rate ($/kWh)", sub: "Example: 12 kWh \xD7 $0.12 = $1.44  |  Ontario rate: ~$0.12\u2013$0.17/kWh" }
+                { label: "Convert Watts → Kilowatts: divide by 1000", sub: "CRITICAL: skip this step and your answer is 1000× too large!" },
+                { label: "Calculate Energy: E (kWh) = Power (kW) × Time (hours)", sub: "Example: 1.5kW heater running 8 hours = 12 kWh" },
+                { label: "Calculate Cost: Cost = Energy (kWh) × Rate ($/kWh)", sub: "Example: 12 kWh × $0.12 = $1.44  |  Ontario rate: ~$0.12–$0.17/kWh" }
               ],
               points: [],
               diagram: "power-cost"
             },
             {
-              subtitle: "Appliance Power \u2014 Know These!",
-              emoji: "\u{1F3E0}",
+              subtitle: "Appliance Power — Know These!",
+              emoji: "🏠",
               layout: "rules",
               items: [
-                { icon: "\u{1F4A1}", label: "LED bulb: 10W  vs  Old incandescent: 60W", sub: "LEDs use 6\xD7 LESS energy for the same light", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F4BB}", label: "Laptop: ~50W  vs  Desktop + monitor: ~250W", sub: "Laptops are much more energy-efficient", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u2615", label: "Kettle: ~1500W  |  Hair dryer: ~1800W", sub: "Heating elements use the most power \u2014 avoid long use", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F300}", label: "Clothes dryer: ~5000W \u2014 the biggest home energy user", sub: "Run at night (off-peak) to save money on time-of-use pricing", color: "bg-red-50 border-red-400" }
+                { icon: "💡", label: "LED bulb: 10W  vs  Old incandescent: 60W", sub: "LEDs use 6× LESS energy for the same light", color: "bg-green-50 border-green-400" },
+                { icon: "💻", label: "Laptop: ~50W  vs  Desktop + monitor: ~250W", sub: "Laptops are much more energy-efficient", color: "bg-blue-50 border-blue-400" },
+                { icon: "☕", label: "Kettle: ~1500W  |  Hair dryer: ~1800W", sub: "Heating elements use the most power — avoid long use", color: "bg-orange-50 border-orange-400" },
+                { icon: "🌀", label: "Clothes dryer: ~5000W — the biggest home energy user", sub: "Run at night (off-peak) to save money on time-of-use pricing", color: "bg-red-50 border-red-400" }
               ],
               points: [],
               diagram: "appliance-power"
@@ -28129,47 +28025,47 @@
           notes: [
             {
               subtitle: "Law of Conservation of Energy",
-              emoji: "\u267B\uFE0F",
+              emoji: "♻️",
               layout: "rules",
               items: [
-                { icon: "\u267E\uFE0F", label: "Energy cannot be created or destroyed \u2014 only converted", sub: "Total energy IN always = total energy OUT", color: "bg-purple-50 border-purple-400" },
-                { icon: "\u{1F321}\uFE0F", label: '"Lost" energy is not really lost \u2014 it becomes waste heat', sub: "It just becomes low-quality heat that cannot do useful work", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F6AB}", label: "Perpetual motion machines are IMPOSSIBLE", sub: "Some energy is always wasted as heat \u2014 no 100% efficient machine exists", color: "bg-red-50 border-red-400" }
+                { icon: "♾️", label: "Energy cannot be created or destroyed — only converted", sub: "Total energy IN always = total energy OUT", color: "bg-purple-50 border-purple-400" },
+                { icon: "🌡️", label: '"Lost" energy is not really lost — it becomes waste heat', sub: "It just becomes low-quality heat that cannot do useful work", color: "bg-orange-50 border-orange-400" },
+                { icon: "🚫", label: "Perpetual motion machines are IMPOSSIBLE", sub: "Some energy is always wasted as heat — no 100% efficient machine exists", color: "bg-red-50 border-red-400" }
               ],
               points: []
             },
             {
               subtitle: "Energy Transformations in Devices",
-              emoji: "\u{1F504}",
+              emoji: "🔄",
               layout: "cards",
               items: [
-                { icon: "\u{1F50B}", label: "Battery", value: "Chemical \u2192 Electrical", sub: "Chemical reactions push electrons through the circuit", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F4A1}", label: "Light Bulb", value: "Electrical \u2192 Light + Heat", sub: "Filament gets so hot it glows (incandescent) or electrons excite phosphor (LED)", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u2699\uFE0F", label: "Motor", value: "Electrical \u2192 Mechanical", sub: "Magnetic force turns a shaft \u2014 some energy lost as heat", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F50A}", label: "Speaker", value: "Electrical \u2192 Sound", sub: "Electrical signal vibrates a membrane, which vibrates air", color: "bg-purple-50 border-purple-300" }
+                { icon: "🔋", label: "Battery", value: "Chemical → Electrical", sub: "Chemical reactions push electrons through the circuit", color: "bg-green-50 border-green-300" },
+                { icon: "💡", label: "Light Bulb", value: "Electrical → Light + Heat", sub: "Filament gets so hot it glows (incandescent) or electrons excite phosphor (LED)", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "⚙️", label: "Motor", value: "Electrical → Mechanical", sub: "Magnetic force turns a shaft — some energy lost as heat", color: "bg-blue-50 border-blue-300" },
+                { icon: "🔊", label: "Speaker", value: "Electrical → Sound", sub: "Electrical signal vibrates a membrane, which vibrates air", color: "bg-purple-50 border-purple-300" }
               ],
               points: [],
               diagram: "energy-transformations"
             },
             {
-              subtitle: "Efficiency \u2014 How Much is Actually Useful?",
-              emoji: "\u{1F4CA}",
+              subtitle: "Efficiency — How Much is Actually Useful?",
+              emoji: "📊",
               layout: "formula",
               items: [
-                { formula: "Efficiency (%) = (Useful Output \xF7 Total Input) \xD7 100", meaning: "Always a percentage between 0% and 100% (never reaches 100%)", example: "170J motion from 200J electrical = 85% efficient", color: "border-emerald-400", headerBg: "bg-emerald-600" }
+                { formula: "Efficiency (%) = (Useful Output ÷ Total Input) × 100", meaning: "Always a percentage between 0% and 100% (never reaches 100%)", example: "170J motion from 200J electrical = 85% efficient", color: "border-emerald-400", headerBg: "bg-emerald-600" }
               ],
               points: [],
               diagram: "efficiency"
             },
             {
               subtitle: "Efficiency Comparison",
-              emoji: "\u{1F4C9}",
+              emoji: "📉",
               layout: "rules",
               items: [
-                { icon: "\u{1F947}", label: "Electric motor: ~90% efficient", sub: "Best common device \u2014 most electrical energy becomes motion", color: "bg-green-50 border-green-400" },
-                { icon: "\u{1F948}", label: "LED bulb: ~40% efficient", sub: "Much better than incandescent but still produces heat", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F697}", label: "Car engine: ~30% efficient", sub: "70% of fuel energy wasted as heat out the exhaust", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F4A1}", label: "Incandescent bulb: ~5% efficient", sub: "95% of electrical energy wasted as heat \u2014 that is why they were banned!", color: "bg-red-50 border-red-400" }
+                { icon: "🥇", label: "Electric motor: ~90% efficient", sub: "Best common device — most electrical energy becomes motion", color: "bg-green-50 border-green-400" },
+                { icon: "🥈", label: "LED bulb: ~40% efficient", sub: "Much better than incandescent but still produces heat", color: "bg-blue-50 border-blue-400" },
+                { icon: "🚗", label: "Car engine: ~30% efficient", sub: "70% of fuel energy wasted as heat out the exhaust", color: "bg-orange-50 border-orange-400" },
+                { icon: "💡", label: "Incandescent bulb: ~5% efficient", sub: "95% of electrical energy wasted as heat — that is why they were banned!", color: "bg-red-50 border-red-400" }
               ],
               points: []
             }
@@ -28181,60 +28077,60 @@
           image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&h=400&fit=crop",
           notes: [
             {
-              subtitle: "Current Through the Body \u2014 Danger Levels",
-              emoji: "\u2620\uFE0F",
+              subtitle: "Current Through the Body — Danger Levels",
+              emoji: "☠️",
               layout: "danger",
               items: [
-                { icon: "\u{1F610}", label: "Barely noticeable tingle", value: "1 mA", pct: "5%", barColor: "#22C55E", color: "bg-green-50 border-green-200" },
-                { icon: "\u{1F62C}", label: "Mild shock \u2014 uncomfortable", value: "5 mA", pct: "20%", barColor: "#84CC16", color: "bg-lime-50 border-lime-200" },
-                { icon: "\u{1F630}", label: "Painful \u2014 muscle locks up, may not let go", value: "10\u201320 mA", pct: "45%", barColor: "#F59E0B", color: "bg-yellow-50 border-yellow-200" },
-                { icon: "\u{1F480}", label: "POTENTIALLY FATAL \u2014 ventricular fibrillation", value: "50\u2013100 mA", pct: "75%", barColor: "#EF4444", color: "bg-red-50 border-red-200" },
-                { icon: "\u2620\uFE0F", label: "DEFINITELY FATAL \u2014 severe burns, heart stops", value: "1\u20134 A", pct: "100%", barColor: "#991B1B", color: "bg-red-100 border-red-400" }
+                { icon: "😐", label: "Barely noticeable tingle", value: "1 mA", pct: "5%", barColor: "#22C55E", color: "bg-green-50 border-green-200" },
+                { icon: "😬", label: "Mild shock — uncomfortable", value: "5 mA", pct: "20%", barColor: "#84CC16", color: "bg-lime-50 border-lime-200" },
+                { icon: "😰", label: "Painful — muscle locks up, may not let go", value: "10–20 mA", pct: "45%", barColor: "#F59E0B", color: "bg-yellow-50 border-yellow-200" },
+                { icon: "💀", label: "POTENTIALLY FATAL — ventricular fibrillation", value: "50–100 mA", pct: "75%", barColor: "#EF4444", color: "bg-red-50 border-red-200" },
+                { icon: "☠️", label: "DEFINITELY FATAL — severe burns, heart stops", value: "1–4 A", pct: "100%", barColor: "#991B1B", color: "bg-red-100 border-red-400" }
               ],
               points: [],
               diagram: "current-danger"
             },
             {
               subtitle: "Fuse vs Circuit Breaker",
-              emoji: "\u{1F6E1}\uFE0F",
+              emoji: "🛡️",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F525} FUSE",
+                  label: "🔥 FUSE",
                   color: "bg-red-50 border-red-400",
-                  rows: ["Thin wire MELTS when overloaded", "DESTROYED \u2014 must be replaced", "Cheap but single-use", "Rated in Amps (e.g. 15A)"]
+                  rows: ["Thin wire MELTS when overloaded", "DESTROYED — must be replaced", "Cheap but single-use", "Rated in Amps (e.g. 15A)"]
                 },
                 {
-                  label: "\u26A1 CIRCUIT BREAKER",
+                  label: "⚡ CIRCUIT BREAKER",
                   color: "bg-green-50 border-green-400",
-                  rows: ["Switch TRIPS open when overloaded", "Just RESET \u2014 reusable forever", "Standard in all modern homes", "Also rated in Amps (e.g. 15A)"]
+                  rows: ["Switch TRIPS open when overloaded", "Just RESET — reusable forever", "Standard in all modern homes", "Also rated in Amps (e.g. 15A)"]
                 },
-                "GFCI outlets cut power in 0.025 seconds \u2014 detects tiny current leaks. Required near water."
+                "GFCI outlets cut power in 0.025 seconds — detects tiny current leaks. Required near water."
               ],
               points: [],
               diagram: "fuse-breaker"
             },
             {
               subtitle: "Golden Safety Rules",
-              emoji: "\u{1F6AB}",
+              emoji: "🚫",
               layout: "rules",
               items: [
-                { icon: "\u{1F4A7}", label: "NEVER use electrical devices near water", sub: "Water lowers skin resistance 1000\xD7 \u2014 same voltage = far more current through you", color: "bg-blue-50 border-blue-400" },
-                { icon: "\u{1F50C}", label: "NEVER overload outlets", sub: "Total current from all devices can overheat wires and start a fire", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u26A1", label: "NEVER touch downed power lines", sub: "Call 911. Stay at least 10 metres away", color: "bg-red-50 border-red-500" },
-                { icon: "\u{1F527}", label: "ALWAYS unplug before servicing", sub: "Pull by the plug, not the cord. Replace frayed cords immediately", color: "bg-gray-50 border-gray-400" }
+                { icon: "💧", label: "NEVER use electrical devices near water", sub: "Water lowers skin resistance 1000× — same voltage = far more current through you", color: "bg-blue-50 border-blue-400" },
+                { icon: "🔌", label: "NEVER overload outlets", sub: "Total current from all devices can overheat wires and start a fire", color: "bg-orange-50 border-orange-400" },
+                { icon: "⚡", label: "NEVER touch downed power lines", sub: "Call 911. Stay at least 10 metres away", color: "bg-red-50 border-red-500" },
+                { icon: "🔧", label: "ALWAYS unplug before servicing", sub: "Pull by the plug, not the cord. Replace frayed cords immediately", color: "bg-gray-50 border-gray-400" }
               ],
               points: []
             },
             {
               subtitle: "Emergency Response",
-              emoji: "\u{1F198}",
+              emoji: "🆘",
               layout: "steps",
               items: [
-                { label: "DO NOT touch someone who is being shocked", sub: "You will become part of the circuit \u2014 current will flow through you too" },
+                { label: "DO NOT touch someone who is being shocked", sub: "You will become part of the circuit — current will flow through you too" },
                 { label: "Turn OFF power at the breaker panel", sub: "OR push the person away using dry non-conductive material (wood, plastic)" },
-                { label: "Call 911 immediately", sub: "Even if they seem fine \u2014 internal burns and heart damage are possible with no visible injuries" },
-                { label: "Electrical fire? NEVER use water", sub: "Use a Class C (CO\u2082) fire extinguisher only. Water conducts electricity" }
+                { label: "Call 911 immediately", sub: "Even if they seem fine — internal burns and heart damage are possible with no visible injuries" },
+                { label: "Electrical fire? NEVER use water", sub: "Use a Class C (CO₂) fire extinguisher only. Water conducts electricity" }
               ],
               points: []
             }
@@ -28258,30 +28154,30 @@
           notes: [
             {
               subtitle: "Objects in the Solar System",
-              emoji: "\u2600\uFE0F",
+              emoji: "☀️",
               layout: "cards",
               items: [
-                { icon: "\u2600\uFE0F", label: "STAR", value: "Nuclear fusion reactor", sub: "Massive ball of gas producing light & heat. Our Sun fuses H \u2192 He", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u{1FA90}", label: "PLANET", value: "Orbits star, cleared orbit", sub: "8 in our solar system. Must orbit Sun AND dominate its orbital zone", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F534}", label: "DWARF PLANET", value: "Orbits star, NOT cleared", sub: "Pluto, Eris, Ceres. Too small to clear their orbital neighborhood", color: "bg-red-50 border-red-300" },
-                { icon: "\u{1F311}", label: "MOON", value: "Natural satellite", sub: "Orbits a planet. Earth has 1. Jupiter has 95! Saturn has 146", color: "bg-gray-50 border-gray-400" },
-                { icon: "\u{1FAA8}", label: "ASTEROID", value: "Rocky, in asteroid belt", sub: "Mostly between Mars and Jupiter. Ceres is the largest", color: "bg-stone-50 border-stone-300" },
-                { icon: "\u2604\uFE0F", label: "COMET", value: "Icy with tail near Sun", sub: "Dust and ice. Tail always points AWAY from Sun (solar wind)", color: "bg-indigo-50 border-indigo-300" }
+                { icon: "☀️", label: "STAR", value: "Nuclear fusion reactor", sub: "Massive ball of gas producing light & heat. Our Sun fuses H → He", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "🪐", label: "PLANET", value: "Orbits star, cleared orbit", sub: "8 in our solar system. Must orbit Sun AND dominate its orbital zone", color: "bg-blue-50 border-blue-300" },
+                { icon: "🔴", label: "DWARF PLANET", value: "Orbits star, NOT cleared", sub: "Pluto, Eris, Ceres. Too small to clear their orbital neighborhood", color: "bg-red-50 border-red-300" },
+                { icon: "🌑", label: "MOON", value: "Natural satellite", sub: "Orbits a planet. Earth has 1. Jupiter has 95! Saturn has 146", color: "bg-gray-50 border-gray-400" },
+                { icon: "🪨", label: "ASTEROID", value: "Rocky, in asteroid belt", sub: "Mostly between Mars and Jupiter. Ceres is the largest", color: "bg-stone-50 border-stone-300" },
+                { icon: "☄️", label: "COMET", value: "Icy with tail near Sun", sub: "Dust and ice. Tail always points AWAY from Sun (solar wind)", color: "bg-indigo-50 border-indigo-300" }
               ],
               points: []
             },
             {
-              subtitle: "Motion Terms \u2014 Rotation vs Revolution",
-              emoji: "\u{1F30D}",
+              subtitle: "Motion Terms — Rotation vs Revolution",
+              emoji: "🌍",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1F504} ROTATION (spinning)",
+                  label: "🔄 ROTATION (spinning)",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Spinning on its own AXIS", "Earth: 24 hours = 1 day", "Causes day and night cycle", "Earth tilts 23.5\xB0 on axis"]
+                  rows: ["Spinning on its own AXIS", "Earth: 24 hours = 1 day", "Causes day and night cycle", "Earth tilts 23.5° on axis"]
                 },
                 {
-                  label: "\u{1F501} REVOLUTION (orbiting)",
+                  label: "🔁 REVOLUTION (orbiting)",
                   color: "bg-purple-50 border-purple-400",
                   rows: ["Orbiting AROUND another object", "Earth: 365.25 days = 1 year", "Caused by gravity and inertia", "Closer to Sun = shorter year"]
                 },
@@ -28291,75 +28187,75 @@
             },
             {
               subtitle: "Stars, Galaxies & the Universe",
-              emoji: "\u2B50",
+              emoji: "⭐",
               layout: "cards",
               items: [
-                { icon: "\u{1F30C}", label: "GALAXY", value: "Billions of stars", sub: "Our galaxy = Milky Way (~300 billion stars). Observable universe has ~2 trillion galaxies", color: "bg-purple-50 border-purple-300" },
-                { icon: "\u{1F4A1}", label: "LIGHT-YEAR", value: "9.46 trillion km", sub: "Distance light travels in one year. Used to measure space distances", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u{1F4A8}", label: "NEBULA", value: "Star nursery", sub: "Cloud of gas and dust where new stars form. Orion Nebula visible with binoculars", color: "bg-pink-50 border-pink-300" },
-                { icon: "\u{1F4A5}", label: "SUPERNOVA", value: "Dying massive star", sub: "Massive explosion \u2014 briefly outshines entire galaxy. Scatters heavy elements into space", color: "bg-red-50 border-red-300" },
-                { icon: "\u26AB", label: "BLACK HOLE", value: "Gravity trap", sub: "Gravity so strong light cannot escape. Forms when massive star collapses", color: "bg-gray-900 border-gray-700 text-white" },
-                { icon: "\u{1F32B}\uFE0F", label: "DARK MATTER/ENERGY", value: "~95% of universe", sub: "Cannot be seen but detected by gravity. Dark energy is driving expansion of universe", color: "bg-indigo-50 border-indigo-300" }
+                { icon: "🌌", label: "GALAXY", value: "Billions of stars", sub: "Our galaxy = Milky Way (~300 billion stars). Observable universe has ~2 trillion galaxies", color: "bg-purple-50 border-purple-300" },
+                { icon: "💡", label: "LIGHT-YEAR", value: "9.46 trillion km", sub: "Distance light travels in one year. Used to measure space distances", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "💨", label: "NEBULA", value: "Star nursery", sub: "Cloud of gas and dust where new stars form. Orion Nebula visible with binoculars", color: "bg-pink-50 border-pink-300" },
+                { icon: "💥", label: "SUPERNOVA", value: "Dying massive star", sub: "Massive explosion — briefly outshines entire galaxy. Scatters heavy elements into space", color: "bg-red-50 border-red-300" },
+                { icon: "⚫", label: "BLACK HOLE", value: "Gravity trap", sub: "Gravity so strong light cannot escape. Forms when massive star collapses", color: "bg-gray-900 border-gray-700 text-white" },
+                { icon: "🌫️", label: "DARK MATTER/ENERGY", value: "~95% of universe", sub: "Cannot be seen but detected by gravity. Dark energy is driving expansion of universe", color: "bg-indigo-50 border-indigo-300" }
               ],
               points: []
             },
             {
               subtitle: "Space Exploration Vocabulary",
-              emoji: "\u{1F680}",
+              emoji: "🚀",
               layout: "cards",
               items: [
-                { icon: "\u{1F6F0}\uFE0F", label: "SATELLITE", value: "Orbits a planet", sub: "Natural (Moon) or artificial (GPS, weather satellites)", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F3E0}", label: "SPACE STATION", value: "Orbiting lab", sub: "ISS: 400km up, 90 min per orbit, 6 astronauts at a time", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F916}", label: "ROVER", value: "Surface explorer", sub: "Remotely controlled vehicle. Perseverance currently on Mars (2021-)", color: "bg-red-50 border-red-300" },
-                { icon: "\u{1F52D}", label: "SPACE TELESCOPE", value: "Above atmosphere", sub: "Hubble (1990-): optical. James Webb (2021-): infrared, sees 13.7 billion light-years back", color: "bg-purple-50 border-purple-300" }
+                { icon: "🛰️", label: "SATELLITE", value: "Orbits a planet", sub: "Natural (Moon) or artificial (GPS, weather satellites)", color: "bg-blue-50 border-blue-300" },
+                { icon: "🏠", label: "SPACE STATION", value: "Orbiting lab", sub: "ISS: 400km up, 90 min per orbit, 6 astronauts at a time", color: "bg-green-50 border-green-300" },
+                { icon: "🤖", label: "ROVER", value: "Surface explorer", sub: "Remotely controlled vehicle. Perseverance currently on Mars (2021-)", color: "bg-red-50 border-red-300" },
+                { icon: "🔭", label: "SPACE TELESCOPE", value: "Above atmosphere", sub: "Hubble (1990-): optical. James Webb (2021-): infrared, sees 13.7 billion light-years back", color: "bg-purple-50 border-purple-300" }
               ],
               points: []
             },
             {
               subtitle: "Moon Phases & Eclipses",
-              emoji: "\u{1F319}",
+              emoji: "🌙",
               layout: "steps",
               items: [
-                { label: "NEW MOON \u2014 Moon is between Earth and Sun", sub: "We see the unlit side. Moon not visible. Spring tides (highest high tides)" },
-                { label: "FIRST QUARTER \u2192 FULL MOON \u2014 Moon moves to opposite side of Earth", sub: "Full Moon: Earth between Sun and Moon. We see the fully lit side" },
-                { label: "SOLAR ECLIPSE \u2014 Moon blocks Sun (Moon between Earth and Sun)", sub: "Rare \u2014 Moon must be perfectly aligned. Total eclipse only along narrow path" },
-                { label: "LUNAR ECLIPSE \u2014 Earth blocks Sun from Moon (Earth between Sun and Moon)", sub: 'Moon turns red ("Blood Moon"). Visible everywhere on the night side of Earth' }
+                { label: "NEW MOON — Moon is between Earth and Sun", sub: "We see the unlit side. Moon not visible. Spring tides (highest high tides)" },
+                { label: "FIRST QUARTER → FULL MOON — Moon moves to opposite side of Earth", sub: "Full Moon: Earth between Sun and Moon. We see the fully lit side" },
+                { label: "SOLAR ECLIPSE — Moon blocks Sun (Moon between Earth and Sun)", sub: "Rare — Moon must be perfectly aligned. Total eclipse only along narrow path" },
+                { label: "LUNAR ECLIPSE — Earth blocks Sun from Moon (Earth between Sun and Moon)", sub: 'Moon turns red ("Blood Moon"). Visible everywhere on the night side of Earth' }
               ],
               points: []
             },
             {
               subtitle: "Key Space Measurements",
-              emoji: "\u{1F4CF}",
+              emoji: "📏",
               layout: "cards",
               items: [
-                { icon: "\u{1F30D}", label: "AU (Astronomical Unit)", value: "150 million km", sub: "Earth-Sun distance. Neptune is 30 AU from the Sun", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F4A1}", label: "Light-year", value: "9.46 \xD7 10\xB9\xB2 km", sub: "Nearest star (Proxima Centauri): 4.24 light-years away", color: "bg-yellow-50 border-yellow-300" },
-                { icon: "\u{1F30E}", label: "Earth to Moon", value: "384,400 km", sub: "Apollo 11 took 3 days to get there", color: "bg-gray-50 border-gray-200" },
-                { icon: "\u{1F4A8}", label: "Speed of light", value: "300,000 km/s", sub: "Fastest possible speed. Light takes 8 min 20 sec to reach Earth from Sun", color: "bg-purple-50 border-purple-300" }
+                { icon: "🌍", label: "AU (Astronomical Unit)", value: "150 million km", sub: "Earth-Sun distance. Neptune is 30 AU from the Sun", color: "bg-blue-50 border-blue-300" },
+                { icon: "💡", label: "Light-year", value: "9.46 × 10¹² km", sub: "Nearest star (Proxima Centauri): 4.24 light-years away", color: "bg-yellow-50 border-yellow-300" },
+                { icon: "🌎", label: "Earth to Moon", value: "384,400 km", sub: "Apollo 11 took 3 days to get there", color: "bg-gray-50 border-gray-200" },
+                { icon: "💨", label: "Speed of light", value: "300,000 km/s", sub: "Fastest possible speed. Light takes 8 min 20 sec to reach Earth from Sun", color: "bg-purple-50 border-purple-300" }
               ],
               points: []
             },
             {
-              subtitle: "Key Space Missions \u2014 Timeline",
-              emoji: "\u{1F3C6}",
+              subtitle: "Key Space Missions — Timeline",
+              emoji: "🏆",
               layout: "steps",
               items: [
-                { label: "SPUTNIK 1 (1957, USSR) \u2014 First artificial satellite", sub: "Proved humans could put objects into orbit. Kicked off the Space Race" },
-                { label: "APOLLO 11 (1969, USA) \u2014 First humans on the Moon", sub: 'Neil Armstrong and Buzz Aldrin landed July 20. "One small step for man..."' },
-                { label: "HUBBLE SPACE TELESCOPE (1990) \u2014 Deep space imaging", sub: "Orbiting optical telescope. Images of galaxies 13 billion light-years away" },
-                { label: "ISS (1998-present) \u2014 International Space Station", sub: "Continuous human presence in space since 2000. 15 nations cooperating" },
-                { label: "JAMES WEBB TELESCOPE (2021) \u2014 Infrared, deepest ever view", sub: "Sees 13.7 billion light-years away \u2014 nearly to the Big Bang itself" }
+                { label: "SPUTNIK 1 (1957, USSR) — First artificial satellite", sub: "Proved humans could put objects into orbit. Kicked off the Space Race" },
+                { label: "APOLLO 11 (1969, USA) — First humans on the Moon", sub: 'Neil Armstrong and Buzz Aldrin landed July 20. "One small step for man..."' },
+                { label: "HUBBLE SPACE TELESCOPE (1990) — Deep space imaging", sub: "Orbiting optical telescope. Images of galaxies 13 billion light-years away" },
+                { label: "ISS (1998-present) — International Space Station", sub: "Continuous human presence in space since 2000. 15 nations cooperating" },
+                { label: "JAMES WEBB TELESCOPE (2021) — Infrared, deepest ever view", sub: "Sees 13.7 billion light-years away — nearly to the Big Bang itself" }
               ],
               points: []
             },
             {
-              subtitle: "The Universe \u2014 Big Picture",
-              emoji: "\u{1F30C}",
+              subtitle: "The Universe — Big Picture",
+              emoji: "🌌",
               layout: "rules",
               items: [
-                { icon: "\u{1F4A5}", label: "BIG BANG THEORY \u2014 Universe began ~13.8 billion years ago", sub: "Everything expanded from an incredibly hot, dense single point. Evidence: cosmic background radiation, redshift", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F4E1}", label: "COSMIC BACKGROUND RADIATION \u2014 Leftover heat from Big Bang", sub: "Discovered 1965 by accident (appeared as noise in radio telescopes). Strongest evidence for Big Bang", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F30C}", label: "UNIVERSE IS STILL EXPANDING \u2014 and accelerating", sub: "All galaxies moving away from each other. Dark energy is driving this acceleration", color: "bg-blue-50 border-blue-400" }
+                { icon: "💥", label: "BIG BANG THEORY — Universe began ~13.8 billion years ago", sub: "Everything expanded from an incredibly hot, dense single point. Evidence: cosmic background radiation, redshift", color: "bg-red-50 border-red-400" },
+                { icon: "📡", label: "COSMIC BACKGROUND RADIATION — Leftover heat from Big Bang", sub: "Discovered 1965 by accident (appeared as noise in radio telescopes). Strongest evidence for Big Bang", color: "bg-orange-50 border-orange-400" },
+                { icon: "🌌", label: "UNIVERSE IS STILL EXPANDING — and accelerating", sub: "All galaxies moving away from each other. Dark energy is driving this acceleration", color: "bg-blue-50 border-blue-400" }
               ],
               points: []
             }
@@ -28372,18 +28268,18 @@
           notes: [
             {
               subtitle: "Inner vs Outer Planets",
-              emoji: "\u{1FA90}",
+              emoji: "🪐",
               layout: "compare",
               items: [
                 {
-                  label: "\u{1FAA8} INNER (Terrestrial)",
+                  label: "🪨 INNER (Terrestrial)",
                   color: "bg-red-50 border-red-400",
-                  rows: ["Mercury, Venus, Earth, Mars", "Rocky solid surfaces", "Small, dense", "Few or no moons", "Close to Sun \u2014 short years"]
+                  rows: ["Mercury, Venus, Earth, Mars", "Rocky solid surfaces", "Small, dense", "Few or no moons", "Close to Sun — short years"]
                 },
                 {
-                  label: "\u{1F32A}\uFE0F OUTER (Gas/Ice Giants)",
+                  label: "🌪️ OUTER (Gas/Ice Giants)",
                   color: "bg-blue-50 border-blue-400",
-                  rows: ["Jupiter, Saturn, Uranus, Neptune", "Mostly gas/ice \u2014 no solid surface", "Huge, low density", "Many moons + ring systems", "Far from Sun \u2014 long years"]
+                  rows: ["Jupiter, Saturn, Uranus, Neptune", "Mostly gas/ice — no solid surface", "Huge, low density", "Many moons + ring systems", "Far from Sun — long years"]
                 },
                 "Asteroid Belt between Mars and Jupiter separates the two groups."
               ],
@@ -28391,15 +28287,15 @@
             },
             {
               subtitle: "Planet Facts",
-              emoji: "\u{1F30D}",
+              emoji: "🌍",
               layout: "cards",
               items: [
-                { icon: "\u26AB", label: "MERCURY", value: "Closest to Sun", sub: "Extreme temps: \u2212180\xB0C to 430\xB0C. No atmosphere to hold heat. No moons", color: "bg-gray-50 border-gray-200" },
-                { icon: "\u{1F525}", label: "VENUS", value: "Hottest planet (465\xB0C)", sub: "Thick CO\u2082 atmosphere causes runaway greenhouse effect. Hotter than Mercury!", color: "bg-orange-50 border-orange-300" },
-                { icon: "\u{1F30D}", label: "EARTH", value: "Only known life", sub: "Liquid water, ozone layer, perfect temperature range. 1 moon", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F534}", label: "MARS", value: "Red Planet", sub: "Iron oxide (rust) gives red color. Polar ice caps. Olympus Mons = largest volcano in solar system", color: "bg-red-50 border-red-300" },
-                { icon: "\u{1F7E0}", label: "JUPITER", value: "Largest planet", sub: "Great Red Spot = storm larger than Earth, raging 350+ years. 95 moons including Europa", color: "bg-amber-50 border-amber-300" },
-                { icon: "\u{1FA90}", label: "SATURN", value: "Famous ring system", sub: "Rings made of ice and rock. Least dense planet \u2014 would float on water!", color: "bg-yellow-50 border-yellow-300" }
+                { icon: "⚫", label: "MERCURY", value: "Closest to Sun", sub: "Extreme temps: −180°C to 430°C. No atmosphere to hold heat. No moons", color: "bg-gray-50 border-gray-200" },
+                { icon: "🔥", label: "VENUS", value: "Hottest planet (465°C)", sub: "Thick CO₂ atmosphere causes runaway greenhouse effect. Hotter than Mercury!", color: "bg-orange-50 border-orange-300" },
+                { icon: "🌍", label: "EARTH", value: "Only known life", sub: "Liquid water, ozone layer, perfect temperature range. 1 moon", color: "bg-blue-50 border-blue-300" },
+                { icon: "🔴", label: "MARS", value: "Red Planet", sub: "Iron oxide (rust) gives red color. Polar ice caps. Olympus Mons = largest volcano in solar system", color: "bg-red-50 border-red-300" },
+                { icon: "🟠", label: "JUPITER", value: "Largest planet", sub: "Great Red Spot = storm larger than Earth, raging 350+ years. 95 moons including Europa", color: "bg-amber-50 border-amber-300" },
+                { icon: "🪐", label: "SATURN", value: "Famous ring system", sub: "Rings made of ice and rock. Least dense planet — would float on water!", color: "bg-yellow-50 border-yellow-300" }
               ],
               points: []
             }
@@ -28412,25 +28308,25 @@
           notes: [
             {
               subtitle: "Key Milestones in Order",
-              emoji: "\u{1F4C5}",
+              emoji: "📅",
               layout: "steps",
               items: [
-                { label: "SPUTNIK 1 \u2014 Oct 4, 1957 (USSR)", sub: "First artificial satellite. Proved orbit was possible. Started the Space Race" },
-                { label: "APOLLO 11 \u2014 July 20, 1969 (USA)", sub: "First Moon landing. Armstrong + Aldrin walked on Moon. Collins orbited above" },
-                { label: "HUBBLE SPACE TELESCOPE \u2014 1990 (NASA)", sub: "Orbiting telescope above atmosphere. Crisp images of deep space. Still operating" },
-                { label: "ISS \u2014 1998\u2013present (15 nations)", sub: "Permanent human presence in space. Research in microgravity, medicine, engineering" }
+                { label: "SPUTNIK 1 — Oct 4, 1957 (USSR)", sub: "First artificial satellite. Proved orbit was possible. Started the Space Race" },
+                { label: "APOLLO 11 — July 20, 1969 (USA)", sub: "First Moon landing. Armstrong + Aldrin walked on Moon. Collins orbited above" },
+                { label: "HUBBLE SPACE TELESCOPE — 1990 (NASA)", sub: "Orbiting telescope above atmosphere. Crisp images of deep space. Still operating" },
+                { label: "ISS — 1998–present (15 nations)", sub: "Permanent human presence in space. Research in microgravity, medicine, engineering" }
               ],
               points: []
             },
             {
               subtitle: "Types of Spacecraft",
-              emoji: "\u{1F6F8}",
+              emoji: "🛸",
               layout: "cards",
               items: [
-                { icon: "\u{1F6F8}", label: "SPACE PROBE", value: "Unmanned explorer", sub: "Voyager 1 (1977) now beyond our solar system. Sends data back to Earth", color: "bg-blue-50 border-blue-300" },
-                { icon: "\u{1F916}", label: "ROVER", value: "Surface vehicle", sub: "Perseverance on Mars since 2021. Searches for signs of ancient life", color: "bg-red-50 border-red-300" },
-                { icon: "\u{1F3E0}", label: "SPACE STATION", value: "Orbiting habitat", sub: "ISS: 109m wide, 6 crew, travelling at 27,600 km/h", color: "bg-green-50 border-green-300" },
-                { icon: "\u{1F6F0}\uFE0F", label: "SATELLITE", value: "Communications & observation", sub: "GPS, weather forecasting, internet, TV \u2014 all use satellites", color: "bg-purple-50 border-purple-300" }
+                { icon: "🛸", label: "SPACE PROBE", value: "Unmanned explorer", sub: "Voyager 1 (1977) now beyond our solar system. Sends data back to Earth", color: "bg-blue-50 border-blue-300" },
+                { icon: "🤖", label: "ROVER", value: "Surface vehicle", sub: "Perseverance on Mars since 2021. Searches for signs of ancient life", color: "bg-red-50 border-red-300" },
+                { icon: "🏠", label: "SPACE STATION", value: "Orbiting habitat", sub: "ISS: 109m wide, 6 crew, travelling at 27,600 km/h", color: "bg-green-50 border-green-300" },
+                { icon: "🛰️", label: "SATELLITE", value: "Communications & observation", sub: "GPS, weather forecasting, internet, TV — all use satellites", color: "bg-purple-50 border-purple-300" }
               ],
               points: []
             }
@@ -28443,26 +28339,26 @@
           notes: [
             {
               subtitle: "The Scale of the Universe",
-              emoji: "\u{1F52D}",
+              emoji: "🔭",
               layout: "steps",
               items: [
-                { label: "YOU \u2192 Earth (12,742 km diameter)", sub: "Your reference point. Light takes 0.04 seconds to travel around Earth" },
-                { label: "Earth \u2192 Moon (384,400 km)", sub: "Light travel time: 1.3 seconds. Apollo took 3 days" },
-                { label: "Earth \u2192 Sun (150 million km = 1 AU)", sub: "Light travel time: 8 minutes 20 seconds" },
-                { label: "Sun \u2192 Nearest star (4.24 light-years)", sub: "Proxima Centauri. Our fastest spacecraft would take 70,000+ years to reach it" },
-                { label: "Our galaxy \u2192 edge of observable universe (46 billion light-years)", sub: "Universe is 13.8 billion years old \u2014 but has expanded much farther in that time" }
+                { label: "YOU → Earth (12,742 km diameter)", sub: "Your reference point. Light takes 0.04 seconds to travel around Earth" },
+                { label: "Earth → Moon (384,400 km)", sub: "Light travel time: 1.3 seconds. Apollo took 3 days" },
+                { label: "Earth → Sun (150 million km = 1 AU)", sub: "Light travel time: 8 minutes 20 seconds" },
+                { label: "Sun → Nearest star (4.24 light-years)", sub: "Proxima Centauri. Our fastest spacecraft would take 70,000+ years to reach it" },
+                { label: "Our galaxy → edge of observable universe (46 billion light-years)", sub: "Universe is 13.8 billion years old — but has expanded much farther in that time" }
               ],
               points: []
             },
             {
               subtitle: "Big Bang & Evidence",
-              emoji: "\u{1F4A5}",
+              emoji: "💥",
               layout: "rules",
               items: [
-                { icon: "\u{1F4A5}", label: "BIG BANG \u2014 Universe began 13.8 billion years ago", sub: "All matter, energy, space, and time originated from a single infinitely hot, dense point", color: "bg-red-50 border-red-400" },
-                { icon: "\u{1F4E1}", label: "EVIDENCE 1: Cosmic Microwave Background Radiation", sub: "Faint afterglow of the Big Bang fills the entire sky. Discovered in 1965 by Penzias & Wilson", color: "bg-orange-50 border-orange-400" },
-                { icon: "\u{1F534}", label: "EVIDENCE 2: Redshift of galaxies", sub: "All distant galaxies moving away. Like a raisin cake expanding \u2014 every raisin sees all others moving away", color: "bg-yellow-50 border-yellow-400" },
-                { icon: "\u{1F30C}", label: "Universe is not just expanding \u2014 it is ACCELERATING", sub: "Dark energy (unknown force) is pushing galaxies apart faster over time", color: "bg-purple-50 border-purple-400" }
+                { icon: "💥", label: "BIG BANG — Universe began 13.8 billion years ago", sub: "All matter, energy, space, and time originated from a single infinitely hot, dense point", color: "bg-red-50 border-red-400" },
+                { icon: "📡", label: "EVIDENCE 1: Cosmic Microwave Background Radiation", sub: "Faint afterglow of the Big Bang fills the entire sky. Discovered in 1965 by Penzias & Wilson", color: "bg-orange-50 border-orange-400" },
+                { icon: "🔴", label: "EVIDENCE 2: Redshift of galaxies", sub: "All distant galaxies moving away. Like a raisin cake expanding — every raisin sees all others moving away", color: "bg-yellow-50 border-yellow-400" },
+                { icon: "🌌", label: "Universe is not just expanding — it is ACCELERATING", sub: "Dark energy (unknown force) is pushing galaxies apart faster over time", color: "bg-purple-50 border-purple-400" }
               ],
               points: []
             }
@@ -28682,7 +28578,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid grid-cols-2 gap-3", children: [left, right].map((panel, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `rounded-xl border-2 p-3 ${panel.color || "bg-gray-50 border-gray-200"}`, children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-gray-800 text-sm mb-2", children: panel.label }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "space-y-1", children: (panel.rows || []).map((row, j) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-1.5", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600 mt-1 text-xs flex-shrink-0", children: "\u2022" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600 mt-1 text-xs flex-shrink-0", children: "•" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs text-gray-700 leading-relaxed", children: row })
             ] }, j)) })
           ] }, i)) }),
@@ -29079,42 +28975,42 @@ Student question: ${userMessage}`
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-4 mb-6", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "✓" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Advanced Quiz Library" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "4 premium quizzes with 50+ advanced questions personally crafted by Dean" })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "✓" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Exclusive Flashcard Sets" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "50+ additional flashcards with expert explanations" })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "✓" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Detailed Study Guides" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Comprehensive summaries and exam-ready cheat sheets" })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border-2 border-amber-200", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "✓" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Personal Updates by Dean" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Continuously updated with new features and content as you study" })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-rose-50 to-pink-50 rounded-xl border-2 border-rose-200", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "✓" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Direct Support Access" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Get help directly from Dean for any questions or improvements" })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl border-2 border-cyan-200", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-cyan-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-cyan-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "✓" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Custom Study Tools" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Advanced features tailored specifically for Appleby students" })
@@ -29126,7 +29022,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-white/80 mb-1", children: "One-time payment" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-4xl font-bold", children: "Affordable Price" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-white/90 mt-2", children: "Lifetime access \u2022 No subscriptions \u2022 Pay once, use forever" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-white/90 mt-2", children: "Lifetime access • No subscriptions • Pay once, use forever" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-white/80 text-sm mt-2 flex items-center gap-2", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-4 h-4" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-semibold", children: "Personally maintained and updated by Dean Concepcion" })
@@ -29140,28 +29036,28 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "text-lg font-bold text-gray-800 mb-2", children: "Why Premium is Worth It" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", { className: "space-y-2 text-sm text-gray-700", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "\u2022" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "•" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-semibold", children: "Continuously evolving:" }),
                     " Dean personally adds new quizzes, diagrams, and study tools based on student feedback"
                   ] })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "\u2022" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "•" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-semibold", children: "Appleby-specific:" }),
                     " Content tailored exactly to the Grade 9 Appleby curriculum and teaching style"
                   ] })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "\u2022" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "•" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-semibold", children: "Direct creator access:" }),
                     " Get personalized help and request specific features from Dean himself"
                   ] })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { className: "flex items-start gap-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "\u2022" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-500 font-bold mt-0.5", children: "•" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-semibold", children: "Advanced AI features:" }),
                     " Premium unlocks enhanced L.Y.N.E AI capabilities for deeper explanations"
@@ -29275,21 +29171,21 @@ Student question: ${userMessage}`
         ] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "space-y-3", children: studyPlan.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "div",
           {
-            className: `rounded-xl border-2 overflow-hidden transition-all ${item.completed ? "bg-green-50 border-green-200" : (currentStudySession == null ? void 0 : currentStudySession.id) === item.id ? "bg-blue-50 border-blue-300 shadow-lg" : "bg-white border-gray-200 hover:border-gray-200"}`,
+            className: `rounded-xl border-2 overflow-hidden transition-all ${item.completed ? "bg-green-50 border-green-200" : currentStudySession?.id === item.id ? "bg-blue-50 border-blue-300 shadow-lg" : "bg-white border-gray-200 hover:border-gray-200"}`,
             children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-4", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `w-10 h-10 rounded-lg flex items-center justify-center font-bold flex-shrink-0 ${item.completed ? "bg-green-500 text-white" : (currentStudySession == null ? void 0 : currentStudySession.id) === item.id ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"}`, children: item.completed ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheckBig, { className: "w-5 h-5" }) : index + 1 }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `w-10 h-10 rounded-lg flex items-center justify-center font-bold flex-shrink-0 ${item.completed ? "bg-green-500 text-white" : currentStudySession?.id === item.id ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"}`, children: item.completed ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheckBig, { className: "w-5 h-5" }) : index + 1 }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex-1 min-w-0", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start justify-between mb-2", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800 mb-1", children: item.section.title }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: item.subject.name })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-right flex-shrink-0 ml-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `px-3 py-1 rounded-lg text-sm font-semibold ${item.completed ? "bg-green-100 text-green-300" : (currentStudySession == null ? void 0 : currentStudySession.id) === item.id ? "bg-blue-100 text-blue-300" : "bg-gray-100 text-gray-700"}`, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-right flex-shrink-0 ml-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `px-3 py-1 rounded-lg text-sm font-semibold ${item.completed ? "bg-green-100 text-green-300" : currentStudySession?.id === item.id ? "bg-blue-100 text-blue-300" : "bg-gray-100 text-gray-700"}`, children: [
                     item.estimatedTime,
                     " min"
                   ] }) })
                 ] }),
-                (currentStudySession == null ? void 0 : currentStudySession.id) === item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-3 mb-3", children: [
+                currentStudySession?.id === item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-3 mb-3", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-between", children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-sm font-semibold text-blue-300", children: "Time Elapsed:" }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-2xl font-bold text-blue-600", children: formatTime(studyTimer) })
@@ -29305,7 +29201,7 @@ Student question: ${userMessage}`
                   ) })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2", children: [
-                  !item.completed && (currentStudySession == null ? void 0 : currentStudySession.id) !== item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+                  !item.completed && currentStudySession?.id !== item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
                     "button",
                     {
                       onClick: () => startStudySession(item),
@@ -29313,7 +29209,7 @@ Student question: ${userMessage}`
                       children: "Start Session"
                     }
                   ),
-                  (currentStudySession == null ? void 0 : currentStudySession.id) === item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+                  currentStudySession?.id === item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
                       "button",
                       {
@@ -29343,7 +29239,7 @@ Student question: ${userMessage}`
                       children: "View"
                     }
                   ),
-                  !item.completed && (currentStudySession == null ? void 0 : currentStudySession.id) !== item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+                  !item.completed && currentStudySession?.id !== item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
                     "button",
                     {
                       onClick: () => removeFromStudyPlan(item.id),
@@ -29440,7 +29336,7 @@ Student question: ${userMessage}`
                     isUnlocked && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheckBig, { className: "w-5 h-5 text-green-500" })
                   ] }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: `text-sm ${isUnlocked ? "text-gray-600" : "text-gray-600"}`, children: achievement.description }),
-                  !isUnlocked && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-2", children: "\u{1F512} Locked" })
+                  !isUnlocked && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-2", children: "🔒 Locked" })
                 ] })
               ] })
             },
@@ -29537,7 +29433,7 @@ Student question: ${userMessage}`
             );
           }) }),
           quizState.showExplanation && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "p-3 rounded-lg mb-4 bg-blue-50 border-2 border-blue-200", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-300 mb-1", children: quizState.selectedAnswer === question.correct ? "\u2713 Correct!" : "Explanation:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-300 mb-1", children: quizState.selectedAnswer === question.correct ? "✓ Correct!" : "Explanation:" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-700", children: question.explanation })
           ] }),
           !quizState.showExplanation ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
@@ -29583,7 +29479,7 @@ Student question: ${userMessage}`
                 }
               },
               className: `w-full py-2 bg-gradient-to-r ${subject.gradient} text-white rounded-lg font-semibold text-sm`,
-              children: quizState.currentQuestion < section.quiz.length - 1 ? "Next \u2192" : "Finish"
+              children: quizState.currentQuestion < section.quiz.length - 1 ? "Next →" : "Finish"
             }
           )
         ] });
@@ -29994,7 +29890,7 @@ Student question: ${userMessage}`
                   onClick: handlePreviousFlashcard,
                   disabled: currentFlashcard === 0,
                   className: "px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 transition-all",
-                  children: "\u2190 Previous"
+                  children: "← Previous"
                 }
               ),
               isFlipped && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex gap-3", children: [
@@ -30021,7 +29917,7 @@ Student question: ${userMessage}`
                   onClick: handleNextFlashcard,
                   disabled: currentFlashcard === selectedSection.flashcards.length - 1,
                   className: "px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 transition-all",
-                  children: "Next \u2192"
+                  children: "Next →"
                 }
               )
             ] })
@@ -30206,7 +30102,7 @@ Student question: ${userMessage}`
             showExplanation && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-4 rounded-xl mb-6 ${isCorrect ? "bg-green-50 border-2 border-green-200" : "bg-blue-50 border-2 border-blue-200"}`, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lightbulb, { className: `w-6 h-6 flex-shrink-0 ${isCorrect ? "text-green-600" : "text-blue-600"}` }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: `font-semibold mb-1 ${isCorrect ? "text-green-300" : "text-blue-300"}`, children: isCorrect ? "\u2713 Correct!" : "Explanation:" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: `font-semibold mb-1 ${isCorrect ? "text-green-300" : "text-blue-300"}`, children: isCorrect ? "✓ Correct!" : "Explanation:" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: question.explanation })
               ] })
             ] }) }),
@@ -30223,7 +30119,7 @@ Student question: ${userMessage}`
               {
                 onClick: handleNextQuestion,
                 className: `w-full py-3 bg-gradient-to-r ${selectedSubject.gradient} text-white rounded-xl font-semibold hover:shadow-lg transition-all`,
-                children: currentQuestion < currentQuiz.quiz.length - 1 ? "Next Question \u2192" : "Finish Quiz"
+                children: currentQuestion < currentQuiz.quiz.length - 1 ? "Next Question →" : "Finish Quiz"
               }
             )
           ] })
@@ -30450,7 +30346,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-lg", children: "Quick Study Time" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-white/80 text-sm", children: [
                   calculateStudyTime(section),
-                  " minutes \u2022",
+                  " minutes •",
                   section.quiz ? " Efficient quiz practice" : section.flashcards ? " Focused card review" : section.id.includes("definitions") ? " Skim key terms" : section.id.includes("worksheet") ? " Key problems only" : " Essential concepts"
                 ] })
               ] })
@@ -30469,7 +30365,7 @@ Student question: ${userMessage}`
           ] }) }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "space-y-8", children: section.notes.map((note, idx) => {
             const isDefinitionSection = section.id === "biology-definitions" || section.id === "chemistry-definitions" || section.id === "chemistry-definitions-2" || section.id === "space-definitions";
-            const isElectricitySection = (selectedSubject == null ? void 0 : selectedSubject.id) === "physics" && section.id !== "definitions";
+            const isElectricitySection = selectedSubject?.id === "physics" && section.id !== "definitions";
             const isCollapsible = isDefinitionSection || isElectricitySection;
             const noteKey = `${section.id}-${idx}`;
             const isExpanded = expandedDefinitionNotes.has(noteKey);
@@ -30490,7 +30386,7 @@ Student question: ${userMessage}`
                       isCollapsible && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center transition-all ${isExpanded ? "bg-white/30" : ""}`, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { className: `w-5 h-5 text-white transition-transform duration-300 ${isExpanded ? "rotate-90" : ""}` }) })
                     ] }),
                     isCollapsible && !isExpanded && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 relative z-10", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-white/80 text-sm", children: [
-                      "Click to expand \u2022 ",
+                      "Click to expand • ",
                       (note.items || note.points).length,
                       " ",
                       (note.items || note.points).length === 1 ? "term" : "terms"
@@ -30591,7 +30487,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { className: "text-3xl font-bold text-white mb-1", children: subject.name }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-white/90 text-sm", children: [
                   subject.sections.filter((s) => !s.isSectionHeader).length,
-                  " sections \u2022 ",
+                  " sections • ",
                   completedCount,
                   " completed"
                 ] })
@@ -30699,7 +30595,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-white/90 text-lg mb-2", children: "Unlock advanced quizzes, exclusive flashcards, and detailed study guides" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-white/80 mb-2", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Affordable one-time payment" }),
-                  " \u2022 No subscriptions \u2022 Lifetime access"
+                  " • No subscriptions • Lifetime access"
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-white/90 text-sm flex items-center gap-2", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-4 h-4" }),
@@ -30763,7 +30659,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "L.Y.N.E AI Assistant" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Chat with AI for explanations, practice questions, and help" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-blue-600 font-semibold", children: "\u2192 Click the blue sparkle button (bottom-right corner)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-blue-600 font-semibold", children: "→ Click the blue sparkle button (bottom-right corner)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-indigo-100 hover:border-indigo-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -30771,7 +30667,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "Study Session Planner" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Build custom study sessions with time tracking" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-indigo-600 font-semibold", children: '\u2192 Click "+ Add to Plan" or "Study Planner" in header' })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-indigo-600 font-semibold", children: '→ Click "+ Add to Plan" or "Study Planner" in header' })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-100 hover:border-purple-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -30782,7 +30678,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "Split Screen Mode" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "View quizzes and notes side by side for efficient studying" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-purple-600 font-semibold", children: '\u2192 Click "Open Split View" on any section' })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-purple-600 font-semibold", children: '→ Click "Open Split View" on any section' })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-yellow-100 hover:border-yellow-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -30790,7 +30686,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "Unlock Achievements" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Earn badges as you complete sections and quizzes" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-yellow-600 font-semibold", children: "\u2192 Study to unlock all 10 achievements!" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-yellow-600 font-semibold", children: "→ Study to unlock all 10 achievements!" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-cyan-100 hover:border-cyan-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -30798,7 +30694,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "Interactive Flashcards" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "70+ cards with flip animation for memorization" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-cyan-600 font-semibold", children: '\u2192 Click to flip, mark as "Known" or "Learning"' })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-cyan-600 font-semibold", children: '→ Click to flip, mark as "Known" or "Learning"' })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-green-100 hover:border-green-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -30806,7 +30702,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "Smart Search" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Find topics instantly across all subjects" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-green-600 font-semibold", children: '\u2192 Type keywords like "density" or "biodiversity"' })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-green-600 font-semibold", children: '→ Type keywords like "density" or "biodiversity"' })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl p-4 text-white", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3", children: [
@@ -30814,17 +30710,17 @@ Student question: ${userMessage}`
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-semibold mb-1", children: "Pro Study Tips" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90 mb-2", children: [
-            "\u2022 Use the ",
+            "• Use the ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Study Planner" }),
             " to organize sessions with automatic time tracking"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90 mb-2", children: [
-            "\u2022 Ask ",
+            "• Ask ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "L.Y.N.E AI" }),
             " to explain tricky concepts or create custom practice questions"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90", children: [
-            "\u2022 Enable ",
+            "• Enable ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Split Screen" }),
             " to quiz yourself while referencing notes simultaneously"
           ] })
@@ -30920,7 +30816,7 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center flex-shrink-0 shadow-md", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, { className: "w-7 h-7 text-white drop-shadow" }) }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { className: "soul-font-display text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-sm", children: "Science Study Library" }),
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-white/75 mt-0.5 font-medium", children: "Grade 9 \xB7 Appleby College \xB7 by Dean Concepcion" })
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-white/75 mt-0.5 font-medium", children: "Grade 9 · Appleby College · by Dean Concepcion" })
               ] })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3 flex-wrap", children: [
@@ -31002,7 +30898,7 @@ Student question: ${userMessage}`
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex-1 min-w-0", children: [
                     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-1", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs font-semibold text-gray-500 uppercase", children: result.match }),
-                      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs text-gray-600", children: "\u2022" }),
+                      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs text-gray-600", children: "•" }),
                       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs text-gray-500", children: result.subject.name })
                     ] }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-semibold text-gray-800 group-hover:text-blue-600 transition-colors mb-1", children: result.title }),
@@ -31187,24 +31083,24 @@ Student question: ${userMessage}`
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-12 mb-8 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "sponsor-panel inline-block bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl px-8 py-4 border-2 border-amber-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-1", children: "Special Thanks to Our Sponsors" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3 justify-center flex-wrap", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg font-bold text-amber-600", children: "\u2B50" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg font-bold text-amber-600", children: "⭐" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-gray-800", children: "Aland Cai" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "\u2022" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "•" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-gray-800", children: "Derek Zhu" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "\u2022" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "•" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-gray-800", children: "Max James" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "\u2022" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "•" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-gray-800", children: "Yoshi Imaizumi" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "\u2022" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-600", children: "•" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-gray-800", children: "Lachlan McGuire" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg font-bold text-amber-600", children: "\u2B50" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg font-bold text-amber-600", children: "⭐" })
           ] })
         ] }) })
       ] })
     ] });
   }
 
-  // acelabs/grade9-science-vite/src/entry.science.tmp.tsx
+  // acelabs/grade9-science-vite/src/entry.science.preview2.tmp.tsx
   (0, import_client.createRoot)(document.getElementById("root")).render(import_react4.default.createElement(ScienceStudyLibrary));
 })();
 /*! Bundled license information:
