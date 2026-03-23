@@ -2294,6 +2294,279 @@ main {
   flex: 0 0 auto;
 }
 
+.home-libraries-section,
+.home-feature-map,
+.home-platform-section,
+.home-future-section,
+.home-audience-section,
+.home-build-section,
+.home-feedback-section,
+.home-how-section,
+.home-showcase-section {
+  position: relative;
+}
+
+.home-libraries-section::before,
+.home-feature-map::before,
+.home-platform-section::before,
+.home-build-section::before,
+.home-showcase-section::before {
+  content: '';
+  position: absolute;
+  inset: 18px 4% auto;
+  height: 100%;
+  border-radius: 34px;
+  pointer-events: none;
+  background:
+    radial-gradient(520px 220px at 18% 10%, rgba(255, 255, 255, 0.4), transparent 72%),
+    radial-gradient(380px 200px at 82% 14%, rgba(33, 92, 75, 0.08), transparent 70%);
+  opacity: 0.92;
+}
+
+.home-libraries-section .container,
+.home-feature-map .container,
+.home-platform-section .container,
+.home-build-section .container,
+.home-showcase-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.home-libraries-section .section-title,
+.home-feature-map .section-title,
+.home-platform-section .section-title,
+.home-build-section .section-title,
+.home-how-section .section-title,
+.home-showcase-section .section-title {
+  max-width: 12ch;
+}
+
+.home-libraries-section .section-lead,
+.home-feature-map .section-lead,
+.home-platform-section .section-lead,
+.home-build-section .section-lead {
+  max-width: 62ch;
+}
+
+.home-libraries-section .quick-nav-grid,
+.home-feature-map .feature-map-grid {
+  margin-top: 22px;
+  gap: 18px;
+}
+
+.home-libraries-section .quick-nav-card,
+.home-feature-map .feature-map-card {
+  min-height: 100%;
+  border-radius: 22px;
+}
+
+.home-libraries-section .quick-nav-card {
+  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,238,228,0.92)),
+    radial-gradient(circle at 84% 16%, rgba(255,255,255,0.56), transparent 36%);
+}
+
+.home-libraries-section .quick-nav-card:nth-child(1) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(236,246,243,0.94)),
+    radial-gradient(circle at 84% 16%, rgba(61, 182, 147, 0.18), transparent 32%);
+}
+
+.home-libraries-section .quick-nav-card:nth-child(2) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(236,242,249,0.94)),
+    radial-gradient(circle at 84% 16%, rgba(59, 130, 246, 0.16), transparent 32%);
+}
+
+.home-libraries-section .quick-nav-card:nth-child(3),
+.home-libraries-section .quick-nav-card:nth-child(4) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,240,231,0.94)),
+    radial-gradient(circle at 84% 16%, rgba(245, 158, 11, 0.16), transparent 32%);
+}
+
+.home-libraries-section .quick-nav-card:nth-child(5),
+.home-libraries-section .quick-nav-card:nth-child(6) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,237,231,0.94)),
+    radial-gradient(circle at 84% 16%, rgba(243, 106, 61, 0.16), transparent 32%);
+}
+
+.home-libraries-section .quick-nav-card h3,
+.home-feature-map .feature-map-card h3,
+.home-showcase-grid .card h3 {
+  font-size: 1.16rem;
+}
+
+.home-feature-map .feature-map-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-feature-map .feature-map-card {
+  padding: 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,238,229,0.92)),
+    radial-gradient(circle at 84% 16%, rgba(33, 92, 75, 0.12), transparent 34%);
+}
+
+.home-platform-section .platform-shell {
+  gap: 22px;
+}
+
+.home-platform-section .platform-copy,
+.home-platform-section .platform-panel,
+.home-feedback-section .feedback-strip-shell {
+  box-shadow: var(--shadow-card-hover), var(--shadow-inset);
+}
+
+.home-platform-section .platform-copy {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,238,228,0.92)),
+    radial-gradient(circle at 82% 12%, rgba(33, 92, 75, 0.1), transparent 36%);
+}
+
+.home-platform-section .platform-panel {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,236,226,0.92)),
+    radial-gradient(circle at 18% 18%, rgba(243, 106, 61, 0.14), transparent 34%);
+}
+
+.home-future-callout {
+  padding: 28px;
+  border-radius: 30px;
+  background:
+    radial-gradient(360px 200px at 86% 18%, rgba(255,255,255,0.34), transparent 58%),
+    linear-gradient(135deg, rgba(33, 92, 75, 0.14), rgba(243, 106, 61, 0.14));
+  box-shadow: var(--shadow-float), var(--shadow-inset);
+}
+
+.home-future-grid .card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,238,228,0.9)),
+    radial-gradient(circle at 84% 14%, rgba(255,255,255,0.42), transparent 34%);
+}
+
+.home-audience-section .logos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.home-audience-section .logo-item {
+  min-height: 92px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,238,228,0.92)),
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.5), transparent 56%);
+  font-family: var(--title);
+  font-size: 1.08rem;
+  letter-spacing: var(--tracking-soft);
+  color: #102019;
+}
+
+.home-build-section .grid-3 {
+  gap: 18px;
+}
+
+.home-build-section .card,
+.home-showcase-grid .card {
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,240,231,0.92)),
+    radial-gradient(circle at 84% 14%, rgba(255,255,255,0.42), transparent 34%);
+}
+
+.home-build-section .switcher {
+  margin-top: 22px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,238,228,0.92)),
+    radial-gradient(circle at 90% 0%, rgba(33, 92, 75, 0.08), transparent 36%);
+  box-shadow: var(--shadow-card-3d), var(--shadow-inset);
+}
+
+.home-feedback-section .feedback-strip-shell {
+  padding: 28px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,238,228,0.92)),
+    radial-gradient(circle at 86% 16%, rgba(243, 106, 61, 0.12), transparent 34%);
+}
+
+.home-how-section .grid-2,
+.home-showcase-grid {
+  gap: 22px;
+}
+
+.home-how-section .timeline {
+  border-radius: 26px;
+  border: 1px solid rgba(226, 216, 203, 0.88);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,238,228,0.92)),
+    radial-gradient(circle at 84% 14%, rgba(33, 92, 75, 0.1), transparent 36%);
+  box-shadow: var(--shadow-card-3d), var(--shadow-inset);
+  padding: 12px;
+}
+
+.home-how-section .timeline-item {
+  border-radius: 18px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(226, 216, 203, 0.7);
+}
+
+.home-showcase-grid {
+  align-items: stretch;
+}
+
+.home-showcase-grid .card:nth-child(1) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(241,238,231,0.94)),
+    radial-gradient(circle at 84% 14%, rgba(243, 106, 61, 0.12), transparent 36%);
+}
+
+.home-showcase-grid .card:nth-child(2) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(236,246,243,0.94)),
+    radial-gradient(circle at 84% 14%, rgba(61, 182, 147, 0.16), transparent 36%);
+}
+
+.home-showcase-grid .card:nth-child(3) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(236,242,249,0.94)),
+    radial-gradient(circle at 84% 14%, rgba(59, 130, 246, 0.16), transparent 36%);
+}
+
+.home-showcase-grid .card:nth-child(4),
+.home-showcase-grid .card:nth-child(5) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,240,231,0.94)),
+    radial-gradient(circle at 84% 14%, rgba(245, 158, 11, 0.16), transparent 36%);
+}
+
+@media (max-width: 1100px) {
+  .home-feature-map .feature-map-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-audience-section .logos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .home-feature-map .feature-map-grid,
+  .home-audience-section .logos {
+    grid-template-columns: 1fr;
+  }
+
+  .home-future-callout,
+  .home-feedback-section .feedback-strip-shell {
+    padding: 22px;
+  }
+}
+
 .stack {
   display: grid;
   gap: 12px;
