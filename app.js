@@ -64,6 +64,29 @@
     pathName.includes('grade-10-math.html') ||
     pathName.includes('math-quiz-simulator.html') ||
     pathName.includes('/math/')
+
+  function suppressGlobalLyneWidgetInLibraries() {
+    if (!isLibraryContext || !document.body) return
+
+    function removeGlobalLyne() {
+      const widget = document.getElementById('lyne-widget')
+      if (widget && widget.parentNode) widget.parentNode.removeChild(widget)
+    }
+
+    removeGlobalLyne()
+
+    const observer = new MutationObserver(function () {
+      removeGlobalLyne()
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', suppressGlobalLyneWidgetInLibraries, { once: true })
+  } else {
+    suppressGlobalLyneWidgetInLibraries()
+  }
+
   document.querySelectorAll('[data-nav-link]').forEach(function (link) {
     const target = (link.getAttribute('href') || '').toLowerCase()
     if (target === currentPage) {
