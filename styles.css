@@ -2676,6 +2676,12 @@ main {
     radial-gradient(circle at 84% 16%, rgba(243, 106, 61, 0.16), transparent 32%);
 }
 
+.home-libraries-section .quick-nav-card:nth-child(7) {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(237,241,248,0.95)),
+    radial-gradient(circle at 84% 16%, rgba(76, 110, 245, 0.16), transparent 32%);
+}
+
 .home-libraries-section .quick-nav-card h3,
 .home-feature-map .feature-map-card h3,
 .home-showcase-grid .card h3 {
