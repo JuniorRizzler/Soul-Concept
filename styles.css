@@ -1705,14 +1705,15 @@ main {
 }
 
 .analytics-hero .hero-title {
-  max-width: 11ch;
-  gap: 10px;
+  max-width: 13ch;
+  gap: 6px;
 }
 
 .analytics-hero .hero-title-brand {
-  display: grid;
-  gap: 8px;
-  align-items: start;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
 .analytics-hero .hero-title-mark-note {
@@ -1720,26 +1721,27 @@ main {
   right: auto;
   bottom: auto;
   width: fit-content;
-  padding: 6px 10px;
+  padding: 4px 9px;
   border: 1px solid rgba(33, 92, 75, 0.14);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.72);
   box-shadow: 0 10px 20px rgba(23, 21, 16, 0.06);
-  font-size: 0.135em;
-  letter-spacing: 0.16em;
+  font-size: 0.12em;
+  letter-spacing: 0.14em;
   color: rgba(27, 27, 31, 0.56);
+  transform: translateY(1px);
 }
 
 .analytics-hero .hero-title-stack {
-  margin-top: 4px;
-  gap: 6px;
-  padding-left: 12px;
+  margin-top: 0;
+  gap: 4px;
+  padding-left: 10px;
   border-left-width: 1px;
 }
 
 .analytics-hero .hero-title-sub {
-  font-size: clamp(1.22rem, 2.25vw, 1.72rem);
-  line-height: 1.08;
+  font-size: clamp(1.15rem, 2vw, 1.56rem);
+  line-height: 1.02;
 }
 
 .analytics-hero .hero-copy.reveal,
@@ -3623,7 +3625,7 @@ main {
 
   .analytics-hero .hero-title {
     max-width: none;
-    gap: 8px;
+    gap: 6px;
   }
 
   .analytics-hero .hero-title-brand {
@@ -3631,8 +3633,8 @@ main {
   }
 
   .analytics-hero .hero-title-stack {
-    margin-top: 6px;
-    padding-left: 12px;
+    margin-top: 0;
+    padding-left: 10px;
   }
 
   .page-banner-grid {
@@ -3859,13 +3861,13 @@ main {
   }
 
   .analytics-hero .hero-title {
-    gap: 10px;
+    gap: 6px;
   }
 
   .analytics-hero .hero-title-mark-note {
     position: static;
-    padding: 6px 9px;
-    font-size: 0.145em;
+    padding: 4px 8px;
+    font-size: 0.125em;
   }
 
   .analytics-hero .hero-title-stack {
