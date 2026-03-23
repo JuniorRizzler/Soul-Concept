@@ -1704,6 +1704,54 @@ main {
   padding-bottom: 28px;
 }
 
+.analytics-hero .hero-title {
+  max-width: 14.5ch;
+  gap: 14px;
+}
+
+.analytics-hero .hero-title-brand {
+  display: grid;
+  gap: 12px;
+  align-items: start;
+}
+
+.analytics-hero .hero-title-mark-note {
+  position: static;
+  right: auto;
+  bottom: auto;
+  width: fit-content;
+  padding: 8px 12px;
+  border: 1px solid rgba(33, 92, 75, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 10px 20px rgba(23, 21, 16, 0.06);
+  font-size: 0.15em;
+  letter-spacing: 0.18em;
+  color: rgba(27, 27, 31, 0.56);
+}
+
+.analytics-hero .hero-title-stack {
+  margin-top: 10px;
+  gap: 8px;
+  padding-left: 16px;
+}
+
+.analytics-hero .hero-copy.reveal,
+.analytics-hero .hero-visual.reveal,
+.analytics-section .reveal {
+  transform: translateY(18px) scale(0.985);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.72s cubic-bezier(0.16, 0.84, 0.22, 1),
+    transform 0.78s cubic-bezier(0.16, 0.84, 0.22, 1);
+}
+
+.analytics-hero .hero-copy.reveal.is-visible,
+.analytics-hero .hero-visual.reveal.is-visible,
+.analytics-section .reveal.is-visible {
+  transform: translateY(0) scale(1);
+}
+
 .analytics-hero-grid {
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
@@ -3567,6 +3615,19 @@ main {
     grid-template-columns: 1fr;
   }
 
+  .analytics-hero .hero-title {
+    max-width: none;
+  }
+
+  .analytics-hero .hero-title-brand {
+    gap: 10px;
+  }
+
+  .analytics-hero .hero-title-stack {
+    margin-top: 8px;
+    padding-left: 12px;
+  }
+
   .page-banner-grid {
     grid-template-columns: 1fr;
   }
@@ -3788,6 +3849,23 @@ main {
     bottom: -1.26em;
     right: 0.1ch;
     font-size: 0.2em;
+  }
+
+  .analytics-hero .hero-title {
+    gap: 10px;
+  }
+
+  .analytics-hero .hero-title-mark-note {
+    position: static;
+    padding: 7px 10px;
+    font-size: 0.16em;
+  }
+
+  .analytics-hero .hero-title-stack {
+    gap: 6px;
+    padding-left: 0;
+    border-left: 0;
+    margin-top: 6px;
   }
 
   .hero-copy p {
