@@ -147,6 +147,7 @@
     var saveTimer = null;
     var lastSizeW = 0;
     var lastSizeH = 0;
+    var lastPixelRatio = 1;
     var currentSectionName = "General";
     var currentStorageKey = "";
     var drawingCacheName = "soulconcept-drawings-v2";
@@ -160,6 +161,13 @@
     var isVoiceRecording = false;
     var recordingForKey = "";
     var petState = null;
+    var strokeOps = [];
+    var activeStroke = null;
+    var activeStrokeMode = "draw";
+    var baseRasterData = "";
+    var baseRasterWidth = 0;
+    var baseRasterHeight = 0;
+    var renderRevision = 0;
 
     function normalize(text) {
     return (text || "general")
@@ -250,6 +258,142 @@
 
     function storageKey(sectionName) {
     return "lib-anno:v3:" + window.location.pathname + window.location.search + ":" + normalize(sectionName);
+  }
+
+    function getPixelRatio() {
+    var ratio = Number(window.devicePixelRatio) || 1;
+    return Math.max(1, ratio);
+  }
+
+    function clamp01(value) {
+    var num = Number(value);
+    if (!isFinite(num)) return 0;
+    if (num < 0) return 0;
+    if (num > 1) return 1;
+    return num;
+  }
+
+    function normalizePoint(pt, width, height) {
+    var safeW = Math.max(1, Number(width) || lastSizeW || 1);
+    var safeH = Math.max(1, Number(height) || lastSizeH || 1);
+    return {
+      x: Number((pt.x / safeW).toFixed(6)),
+      y: Number((pt.y / safeH).toFixed(6))
+    };
+  }
+
+    function denormalizePoint(point) {
+    return {
+      x: clamp01(point && point.x) * Math.max(1, lastSizeW || 1),
+      y: clamp01(point && point.y) * Math.max(1, lastSizeH || 1)
+    };
+  }
+
+    function resetContextState() {
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.imageSmoothingEnabled = true;
+  }
+
+    function clearCanvasOnly() {
+    ctx.save();
+    ctx.setTransform(lastPixelRatio, 0, 0, lastPixelRatio, 0, 0);
+    ctx.clearRect(0, 0, Math.max(1, lastSizeW || 1), Math.max(1, lastSizeH || 1));
+    ctx.restore();
+  }
+
+    function drawStrokeOp(op) {
+    if (!op || !Array.isArray(op.points) || !op.points.length) return;
+
+    var mode = op.mode === "erase" ? "erase" : "draw";
+    var width = Number(op.size) || 4;
+    ctx.save();
+    ctx.globalCompositeOperation = mode === "erase" ? "destination-out" : "source-over";
+    ctx.strokeStyle = op.color || "#e11d48";
+    ctx.fillStyle = op.color || "#e11d48";
+    ctx.lineWidth = width;
+
+    if (op.points.length === 1) {
+      var dot = denormalizePoint(op.points[0]);
+      var radius = Math.max(0.75, width / 2);
+      ctx.beginPath();
+      ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
+      if (mode === "erase") {
+        ctx.fillStyle = "#000";
+      }
+      ctx.fill();
+      ctx.restore();
+      return;
+    }
+
+    ctx.beginPath();
+    for (var i = 0; i < op.points.length; i++) {
+      var pt = denormalizePoint(op.points[i]);
+      if (i === 0) ctx.moveTo(pt.x, pt.y);
+      else ctx.lineTo(pt.x, pt.y);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+    function drawAllStrokeOps() {
+    for (var i = 0; i < strokeOps.length; i++) {
+      drawStrokeOp(strokeOps[i]);
+    }
+  }
+
+    function renderAnnotations() {
+    var revision = ++renderRevision;
+    clearCanvasOnly();
+    resetContextState();
+
+    if (!baseRasterData) {
+      drawAllStrokeOps();
+      return;
+    }
+
+    var img = new Image();
+    img.onload = function () {
+      if (revision !== renderRevision) return;
+      clearCanvasOnly();
+      resetContextState();
+      var srcW = Number(baseRasterWidth) || Math.max(1, lastSizeW || 1);
+      var srcH = Number(baseRasterHeight) || Math.max(1, lastSizeH || 1);
+      ctx.drawImage(img, 0, 0, srcW, srcH, 0, 0, Math.max(1, lastSizeW || 1), Math.max(1, lastSizeH || 1));
+      drawAllStrokeOps();
+    };
+    img.src = baseRasterData;
+  }
+
+    function sanitizePoint(point) {
+    if (!point || typeof point !== "object") return null;
+    return {
+      x: clamp01(point.x),
+      y: clamp01(point.y)
+    };
+  }
+
+    function sanitizeStrokeOp(op) {
+    if (!op || typeof op !== "object") return null;
+    var points = Array.isArray(op.points)
+      ? op.points.map(sanitizePoint).filter(Boolean)
+      : [];
+    if (!points.length) return null;
+    return {
+      mode: op.mode === "erase" ? "erase" : "draw",
+      color: typeof op.color === "string" ? op.color : "#e11d48",
+      size: Math.max(1, Number(op.size) || 4),
+      points: points
+    };
+  }
+
+    function resetAnnotationState() {
+    strokeOps = [];
+    activeStroke = null;
+    baseRasterData = "";
+    baseRasterWidth = 0;
+    baseRasterHeight = 0;
+    renderRevision += 1;
   }
 
     function prettyScopeName(raw) {
@@ -1328,31 +1472,21 @@
 
     function resizeLayerIfNeeded() {
     var size = getDocSize();
-    if (size.width === lastSizeW && size.height === lastSizeH) return;
+    var nextRatio = getPixelRatio();
+    if (size.width === lastSizeW && size.height === lastSizeH && nextRatio === lastPixelRatio) return;
 
-    var prev = document.createElement("canvas");
-    prev.width = layer.width;
-    prev.height = layer.height;
-    if (layer.width > 0 && layer.height > 0) {
-      prev.getContext("2d").drawImage(layer, 0, 0);
-    }
-
-    layer.width = size.width;
-    layer.height = size.height;
+    layer.width = Math.max(1, Math.round(size.width * nextRatio));
+    layer.height = Math.max(1, Math.round(size.height * nextRatio));
     layer.style.width = size.width + "px";
     layer.style.height = size.height + "px";
 
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, layer.width, layer.height);
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-
-    if (prev.width > 0 && prev.height > 0) {
-      ctx.drawImage(prev, 0, 0, prev.width, prev.height, 0, 0, layer.width, layer.height);
-    }
-
+    lastPixelRatio = nextRatio;
     lastSizeW = size.width;
     lastSizeH = size.height;
+    ctx.setTransform(lastPixelRatio, 0, 0, lastPixelRatio, 0, 0);
+    clearCanvasOnly();
+    resetContextState();
+    renderAnnotations();
   }
 
     function canUseCacheStorage() {
@@ -1416,9 +1550,11 @@
 
     function buildPayload() {
     return JSON.stringify({
-      width: layer.width,
-      height: layer.height,
-      data: layer.toDataURL("image/png")
+      version: 4,
+      width: lastSizeW,
+      height: lastSizeH,
+      ops: strokeOps,
+      data: baseRasterData || ""
     });
   }
 
@@ -1439,7 +1575,8 @@
   }
 
     function clearLayer() {
-    ctx.clearRect(0, 0, layer.width, layer.height);
+    resetAnnotationState();
+    renderAnnotations();
   }
 
     function drawFromPayload(raw) {
@@ -1450,16 +1587,21 @@
     } catch (err) {
       return;
     }
-    if (!parsed || !parsed.data) return;
+    resetAnnotationState();
+    if (!parsed || typeof parsed !== "object") {
+      renderAnnotations();
+      return;
+    }
 
-    var img = new Image();
-    img.onload = function () {
-      ctx.clearRect(0, 0, layer.width, layer.height);
-      var srcW = Number(parsed.width) || layer.width;
-      var srcH = Number(parsed.height) || layer.height;
-      ctx.drawImage(img, 0, 0, srcW, srcH, 0, 0, layer.width, layer.height);
-    };
-    img.src = parsed.data;
+    if (Array.isArray(parsed.ops)) {
+      strokeOps = parsed.ops.map(sanitizeStrokeOp).filter(Boolean);
+    }
+    if (parsed.data) {
+      baseRasterData = String(parsed.data || "");
+      baseRasterWidth = Number(parsed.width) || Math.max(1, lastSizeW || 1);
+      baseRasterHeight = Number(parsed.height) || Math.max(1, lastSizeH || 1);
+    }
+    renderAnnotations();
   }
 
   function loadForCurrentKey() {
@@ -1534,11 +1676,20 @@
     lastY = pt.y;
 
     var usingEraser = isEraserInput(event);
+    activeStrokeMode = usingEraser ? "erase" : "draw";
+    activeStroke = {
+      mode: activeStrokeMode,
+      color: colorInput.value || "#e11d48",
+      size: usingEraser
+        ? Math.max(12, Number(sizeInput.value || 4) * 2.5)
+        : Number(sizeInput.value || 4),
+      points: [normalizePoint(pt, lastSizeW, lastSizeH)]
+    };
     ctx.globalCompositeOperation = usingEraser ? "destination-out" : "source-over";
     ctx.strokeStyle = colorInput.value || "#e11d48";
-    ctx.lineWidth = usingEraser
-      ? Math.max(12, Number(sizeInput.value || 4) * 2.5)
-      : Number(sizeInput.value || 4);
+    ctx.lineWidth = activeStroke.size;
+
+    drawStrokeOp(activeStroke);
 
     event.preventDefault();
   }
@@ -1557,6 +1708,10 @@
     ctx.lineTo(pt.x, pt.y);
     ctx.stroke();
 
+    if (activeStroke) {
+      activeStroke.points.push(normalizePoint(pt, lastSizeW, lastSizeH));
+    }
+
     lastX = pt.x;
     lastY = pt.y;
     event.preventDefault();
@@ -1565,6 +1720,10 @@
     function endStroke(event) {
     if (activePointerId === null || event.pointerId !== activePointerId) return;
     activePointerId = null;
+    if (activeStroke && activeStroke.points && activeStroke.points.length) {
+      strokeOps.push(activeStroke);
+    }
+    activeStroke = null;
     saveSoon();
     event.preventDefault();
   }
