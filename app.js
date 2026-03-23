@@ -280,24 +280,23 @@
 
   function mountSoundToggle() {
     if (!document.body) return
+    const topbarInner = document.querySelector('.topbar-inner')
+    const shouldShowSoundToggle = currentPage === 'index.html' && !!topbarInner
     let toggle = document.querySelector('[data-sc-sound-toggle]')
+    if (!shouldShowSoundToggle) {
+      if (toggle && toggle.parentNode) toggle.parentNode.removeChild(toggle)
+      return
+    }
     if (!toggle) {
       toggle = document.createElement('button')
       toggle.type = 'button'
       toggle.className = 'sc-sound-toggle'
       toggle.setAttribute('data-sc-sound-toggle', '1')
-      const topbarInner = document.querySelector('.topbar-inner')
-      if (topbarInner && !isLibraryContext) {
-        const navToggleButton = topbarInner.querySelector('[data-nav-toggle]')
-        if (navToggleButton) {
-          topbarInner.insertBefore(toggle, navToggleButton)
-        } else {
-          topbarInner.appendChild(toggle)
-        }
+      const navToggleButton = topbarInner.querySelector('[data-nav-toggle]')
+      if (navToggleButton) {
+        topbarInner.insertBefore(toggle, navToggleButton)
       } else {
-        toggle.classList.add('is-floating')
-        if (isLibraryContext) toggle.classList.add('is-library-floating')
-        document.body.appendChild(toggle)
+        topbarInner.appendChild(toggle)
       }
       toggle.addEventListener('click', function () {
         unlockAppSound()
@@ -311,8 +310,7 @@
         }
       })
     }
-    toggle.classList.toggle('is-floating', !document.querySelector('.topbar-inner') || isLibraryContext)
-    toggle.classList.toggle('is-library-floating', !!isLibraryContext)
+    toggle.classList.remove('is-floating', 'is-library-floating')
     updateSoundToggleUi()
   }
 
