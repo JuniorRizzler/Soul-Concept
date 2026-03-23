@@ -65,22 +65,6 @@
     pathName.includes('math-quiz-simulator.html') ||
     pathName.includes('/math/')
 
-  function suppressGlobalLyneWidgetInLibraries() {
-    if (!isLibraryContext || !document.body) return
-
-    function removeGlobalLyne() {
-      const widget = document.getElementById('lyne-widget')
-      if (widget && widget.parentNode) widget.parentNode.removeChild(widget)
-    }
-
-    removeGlobalLyne()
-
-    const observer = new MutationObserver(function () {
-      removeGlobalLyne()
-    })
-    observer.observe(document.body, { childList: true, subtree: true })
-  }
-
   function suppressScienceBundleLyneAssistant() {
     if (currentPage !== 'study-library.html' || !document.body) return
 
@@ -116,10 +100,8 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', suppressGlobalLyneWidgetInLibraries, { once: true })
     document.addEventListener('DOMContentLoaded', suppressScienceBundleLyneAssistant, { once: true })
   } else {
-    suppressGlobalLyneWidgetInLibraries()
     suppressScienceBundleLyneAssistant()
   }
 
