@@ -1439,9 +1439,9 @@
         const py = rect.height ? (currentY - rect.top) / rect.height : 0.5
         const clampedX = Math.max(0, Math.min(1, px))
         const clampedY = Math.max(0, Math.min(1, py))
-        const zoomScale = 1 + currentStrength * 0.14
-        const blur = currentStrength * 0.95
-        const depth = currentStrength * 34
+        const zoomScale = 1 + currentStrength * 0.055
+        const blur = currentStrength * 0.32
+        const depth = currentStrength * 14
 
         group.style.setProperty('--zoom-scale', zoomScale.toFixed(3))
         group.style.setProperty('--zoom-blur', blur.toFixed(2) + 'px')
