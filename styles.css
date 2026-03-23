@@ -1222,6 +1222,28 @@ main {
   color: rgba(27, 27, 31, 0.72);
   font-size: 1.03rem;
   line-height: 1.72;
+  transform-origin: left center;
+  transform:
+    perspective(900px)
+    translate3d(0, var(--zoom-shift, 0px), calc(var(--focus, 0) * 22px))
+    scale(calc(1 + var(--focus, 0) * 0.035));
+  filter:
+    blur(var(--blur, 0px))
+    saturate(calc(1 + var(--focus, 0) * 0.1))
+    brightness(calc(1 + var(--focus, 0) * 0.03));
+  text-shadow:
+    0 calc(var(--focus, 0) * 10px) calc(var(--focus, 0) * 22px) rgba(23, 21, 16, calc(var(--focus, 0) * 0.1)),
+    0 1px 0 rgba(255, 255, 255, calc(var(--focus, 0) * 0.3));
+  transition:
+    transform 0.7s cubic-bezier(0.16, 0.84, 0.22, 1),
+    filter 0.7s cubic-bezier(0.16, 0.84, 0.22, 1),
+    text-shadow 0.7s cubic-bezier(0.16, 0.84, 0.22, 1),
+    color 0.7s cubic-bezier(0.16, 0.84, 0.22, 1);
+  will-change: transform, filter;
+}
+
+.hero-lead-stack:hover p {
+  color: rgba(27, 27, 31, 0.6);
 }
 
 .hero-title + p {

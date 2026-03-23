@@ -1402,6 +1402,97 @@
 
   mountHeroLetterPop()
 
+  function mountHeroLeadZoom() {
+    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const groups = Array.from(document.querySelectorAll('.hero-lead-stack'))
+    if (!groups.length) return
+
+    groups.forEach(function (group) {
+      const lines = Array.from(group.querySelectorAll('p'))
+      if (!lines.length) return
+      let rafId = 0
+      let targetX = 0
+      let targetY = 0
+      let currentX = 0
+      let currentY = 0
+      let targetStrength = 0
+      let currentStrength = 0
+      let isInside = false
+
+      function resetLines() {
+        lines.forEach(function (line) {
+          line.style.setProperty('--focus', '0')
+          line.style.setProperty('--blur', '0px')
+          line.style.setProperty('--zoom-shift', '0px')
+        })
+      }
+
+      function renderFrame() {
+        const maxDistance = 170
+        currentX += (targetX - currentX) * 0.18
+        currentY += (targetY - currentY) * 0.18
+        currentStrength += (targetStrength - currentStrength) * 0.14
+        let keepAnimating = isInside || Math.abs(targetStrength - currentStrength) > 0.003
+
+        lines.forEach(function (line) {
+          const rect = line.getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const centerY = rect.top + rect.height / 2
+          const dx = currentX - centerX
+          const dy = currentY - centerY
+          const distance = Math.sqrt(dx * dx + dy * dy)
+          const influence = Math.max(0, 1 - distance / maxDistance) * currentStrength
+          const eased = influence * influence * (3 - 2 * influence)
+          const blur = Math.max(0, (1 - eased) * currentStrength * 1.6)
+          const shift = eased * -10
+          line.style.setProperty('--focus', eased.toFixed(3))
+          line.style.setProperty('--blur', blur.toFixed(2) + 'px')
+          line.style.setProperty('--zoom-shift', shift.toFixed(2) + 'px')
+          if (eased > 0.01 || blur > 0.01) keepAnimating = true
+        })
+
+        if (keepAnimating) {
+          rafId = window.requestAnimationFrame(renderFrame)
+        } else {
+          rafId = 0
+        }
+      }
+
+      function queueFrame() {
+        if (rafId) return
+        rafId = window.requestAnimationFrame(renderFrame)
+      }
+
+      group.addEventListener('pointerenter', function (event) {
+        isInside = true
+        targetStrength = 1
+        targetX = currentX = event.clientX
+        targetY = currentY = event.clientY
+        queueFrame()
+      })
+
+      group.addEventListener('pointermove', function (event) {
+        isInside = true
+        targetStrength = 1
+        targetX = event.clientX
+        targetY = event.clientY
+        queueFrame()
+      })
+
+      group.addEventListener('pointerleave', function () {
+        isInside = false
+        targetStrength = 0
+        queueFrame()
+      })
+
+      resetLines()
+    })
+  }
+
+  mountHeroLeadZoom()
+
   const counters = Array.from(document.querySelectorAll('[data-counter]'))
   if (counters.length) {
     const animateCounter = function (el) {
