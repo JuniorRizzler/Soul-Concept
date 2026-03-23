@@ -1215,6 +1215,33 @@ main {
   margin-top: 6px;
   border-left: 0;
   max-width: 38rem;
+  position: relative;
+  transform-origin: var(--zoom-x, 50%) var(--zoom-y, 50%);
+  transform:
+    perspective(1200px)
+    translate3d(0, 0, var(--zoom-depth, 0px))
+    scale(var(--zoom-scale, 1));
+  filter:
+    saturate(calc(1 + (var(--zoom-scale, 1) - 1) * 1.2))
+    brightness(calc(1 + (var(--zoom-scale, 1) - 1) * 0.36));
+  transition:
+    transform 0.82s cubic-bezier(0.16, 0.84, 0.22, 1),
+    filter 0.82s cubic-bezier(0.16, 0.84, 0.22, 1);
+  will-change: transform, filter;
+}
+
+.hero-lead-stack::before {
+  content: '';
+  position: absolute;
+  inset: -8px -14px;
+  background:
+    radial-gradient(circle at var(--zoom-shine-x, 50%) var(--zoom-shine-y, 50%), rgba(255,255,255,0.34), rgba(255,255,255,0.08) 18%, rgba(255,255,255,0) 56%);
+  opacity: calc((var(--zoom-scale, 1) - 1) * 6.5);
+  filter: blur(calc(14px + var(--zoom-blur, 0px)));
+  pointer-events: none;
+  transition:
+    opacity 0.72s cubic-bezier(0.16, 0.84, 0.22, 1),
+    filter 0.72s cubic-bezier(0.16, 0.84, 0.22, 1);
 }
 
 .hero-lead-stack p {
@@ -1222,28 +1249,26 @@ main {
   color: rgba(27, 27, 31, 0.72);
   font-size: 1.03rem;
   line-height: 1.72;
-  transform-origin: left center;
-  transform:
-    perspective(900px)
-    translate3d(0, var(--zoom-shift, 0px), calc(var(--focus, 0) * 22px))
-    scale(calc(1 + var(--focus, 0) * 0.035));
+  position: relative;
+  z-index: 1;
+  transform-origin: var(--zoom-x, 50%) var(--zoom-y, 50%);
+  transform: scale(calc(1 + (var(--zoom-scale, 1) - 1) * 0.24));
   filter:
-    blur(var(--blur, 0px))
-    saturate(calc(1 + var(--focus, 0) * 0.1))
-    brightness(calc(1 + var(--focus, 0) * 0.03));
+    blur(calc(var(--zoom-blur, 0px) * 0.18))
+    contrast(calc(1 + (var(--zoom-scale, 1) - 1) * 0.35));
   text-shadow:
-    0 calc(var(--focus, 0) * 10px) calc(var(--focus, 0) * 22px) rgba(23, 21, 16, calc(var(--focus, 0) * 0.1)),
-    0 1px 0 rgba(255, 255, 255, calc(var(--focus, 0) * 0.3));
+    0 calc((var(--zoom-scale, 1) - 1) * 28px) calc((var(--zoom-scale, 1) - 1) * 42px) rgba(23, 21, 16, calc((var(--zoom-scale, 1) - 1) * 0.4)),
+    0 1px 0 rgba(255, 255, 255, calc((var(--zoom-scale, 1) - 1) * 1.8));
   transition:
-    transform 0.7s cubic-bezier(0.16, 0.84, 0.22, 1),
-    filter 0.7s cubic-bezier(0.16, 0.84, 0.22, 1),
-    text-shadow 0.7s cubic-bezier(0.16, 0.84, 0.22, 1),
-    color 0.7s cubic-bezier(0.16, 0.84, 0.22, 1);
+    transform 0.82s cubic-bezier(0.16, 0.84, 0.22, 1),
+    filter 0.82s cubic-bezier(0.16, 0.84, 0.22, 1),
+    text-shadow 0.82s cubic-bezier(0.16, 0.84, 0.22, 1),
+    color 0.82s cubic-bezier(0.16, 0.84, 0.22, 1);
   will-change: transform, filter;
 }
 
 .hero-lead-stack:hover p {
-  color: rgba(27, 27, 31, 0.6);
+  color: rgba(27, 27, 31, 0.68);
 }
 
 .hero-title + p {

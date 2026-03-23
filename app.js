@@ -1410,8 +1410,6 @@
     if (!groups.length) return
 
     groups.forEach(function (group) {
-      const lines = Array.from(group.querySelectorAll('p'))
-      if (!lines.length) return
       let rafId = 0
       let targetX = 0
       let targetY = 0
@@ -1421,37 +1419,37 @@
       let currentStrength = 0
       let isInside = false
 
-      function resetLines() {
-        lines.forEach(function (line) {
-          line.style.setProperty('--focus', '0')
-          line.style.setProperty('--blur', '0px')
-          line.style.setProperty('--zoom-shift', '0px')
-        })
+      function resetGroup() {
+        group.style.setProperty('--zoom-scale', '1')
+        group.style.setProperty('--zoom-blur', '0px')
+        group.style.setProperty('--zoom-x', '50%')
+        group.style.setProperty('--zoom-y', '50%')
+        group.style.setProperty('--zoom-shine-x', '50%')
+        group.style.setProperty('--zoom-shine-y', '50%')
+        group.style.setProperty('--zoom-depth', '0px')
       }
 
       function renderFrame() {
-        const maxDistance = 170
         currentX += (targetX - currentX) * 0.18
         currentY += (targetY - currentY) * 0.18
-        currentStrength += (targetStrength - currentStrength) * 0.14
+        currentStrength += (targetStrength - currentStrength) * 0.12
         let keepAnimating = isInside || Math.abs(targetStrength - currentStrength) > 0.003
+        const rect = group.getBoundingClientRect()
+        const px = rect.width ? (currentX - rect.left) / rect.width : 0.5
+        const py = rect.height ? (currentY - rect.top) / rect.height : 0.5
+        const clampedX = Math.max(0, Math.min(1, px))
+        const clampedY = Math.max(0, Math.min(1, py))
+        const zoomScale = 1 + currentStrength * 0.14
+        const blur = currentStrength * 0.95
+        const depth = currentStrength * 34
 
-        lines.forEach(function (line) {
-          const rect = line.getBoundingClientRect()
-          const centerX = rect.left + rect.width / 2
-          const centerY = rect.top + rect.height / 2
-          const dx = currentX - centerX
-          const dy = currentY - centerY
-          const distance = Math.sqrt(dx * dx + dy * dy)
-          const influence = Math.max(0, 1 - distance / maxDistance) * currentStrength
-          const eased = influence * influence * (3 - 2 * influence)
-          const blur = Math.max(0, (1 - eased) * currentStrength * 1.6)
-          const shift = eased * -10
-          line.style.setProperty('--focus', eased.toFixed(3))
-          line.style.setProperty('--blur', blur.toFixed(2) + 'px')
-          line.style.setProperty('--zoom-shift', shift.toFixed(2) + 'px')
-          if (eased > 0.01 || blur > 0.01) keepAnimating = true
-        })
+        group.style.setProperty('--zoom-scale', zoomScale.toFixed(3))
+        group.style.setProperty('--zoom-blur', blur.toFixed(2) + 'px')
+        group.style.setProperty('--zoom-x', (clampedX * 100).toFixed(2) + '%')
+        group.style.setProperty('--zoom-y', (clampedY * 100).toFixed(2) + '%')
+        group.style.setProperty('--zoom-shine-x', (clampedX * 100).toFixed(2) + '%')
+        group.style.setProperty('--zoom-shine-y', (clampedY * 100).toFixed(2) + '%')
+        group.style.setProperty('--zoom-depth', depth.toFixed(2) + 'px')
 
         if (keepAnimating) {
           rafId = window.requestAnimationFrame(renderFrame)
@@ -1487,7 +1485,7 @@
         queueFrame()
       })
 
-      resetLines()
+      resetGroup()
     })
   }
 
