@@ -984,8 +984,8 @@ main {
   position: absolute;
   left: var(--lens-x, 50px);
   top: var(--lens-y, 50px);
-  width: 210px;
-  height: 210px;
+  width: 148px;
+  height: 148px;
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(var(--lens-scale, 0.82));
   overflow: hidden;
@@ -1038,7 +1038,7 @@ main {
   gap: inherit;
   transform:
     translate3d(var(--lens-content-x, 0px), var(--lens-content-y, 0px), 0)
-    scale(1.22);
+    scale(1.12);
   transform-origin: center center;
   filter: saturate(1.08) contrast(1.04);
 }
