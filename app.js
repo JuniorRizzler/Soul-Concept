@@ -1254,61 +1254,79 @@
 
     tiltTargets.forEach(function (el) {
       let rafId = 0
-      let currentX = 0
-      let currentY = 0
+      let targetX = 0.5
+      let targetY = 0.5
+      let currentX = 0.5
+      let currentY = 0.5
+      let targetStrength = 0
+      let currentStrength = 0
       let isInside = false
 
       function applyTilt() {
-        rafId = 0
-        const rect = el.getBoundingClientRect()
-        const relX = rect.width ? currentX / rect.width : 0.5
-        const relY = rect.height ? currentY / rect.height : 0.5
-        const rotateY = (relX - 0.5) * 12
-        const rotateX = (0.5 - relY) * 10
+        currentX += (targetX - currentX) * 0.16
+        currentY += (targetY - currentY) * 0.16
+        currentStrength += (targetStrength - currentStrength) * 0.14
+        const rotateY = (currentX - 0.5) * 12 * currentStrength
+        const rotateX = (0.5 - currentY) * 10 * currentStrength
         const lift = el.classList.contains('hero-panel') ? -8 : -6
-        const scale = el.classList.contains('hero-panel') ? 1.02 : 1.012
+        const scaleBase = el.classList.contains('hero-panel') ? 0.02 : 0.012
+        const scale = 1 + scaleBase * currentStrength
+        const liftY = lift * currentStrength
         el.style.transform =
           'perspective(1200px) translateY(' +
-          lift +
+          liftY.toFixed(2) +
           'px) rotateX(' +
           rotateX.toFixed(2) +
           'deg) rotateY(' +
           rotateY.toFixed(2) +
           'deg) scale(' +
-          scale +
+          scale.toFixed(4) +
           ')'
+
+        if (
+          isInside ||
+          Math.abs(targetX - currentX) > 0.002 ||
+          Math.abs(targetY - currentY) > 0.002 ||
+          Math.abs(targetStrength - currentStrength) > 0.003
+        ) {
+          rafId = window.requestAnimationFrame(applyTilt)
+        } else {
+          rafId = 0
+          el.style.transform = ''
+          el.style.willChange = ''
+        }
       }
 
       function queueTilt() {
-        if (!isInside || rafId) return
+        if (rafId) return
         rafId = window.requestAnimationFrame(applyTilt)
       }
 
       el.addEventListener('pointermove', function (event) {
         const rect = el.getBoundingClientRect()
-        currentX = event.clientX - rect.left
-        currentY = event.clientY - rect.top
+        targetX = rect.width ? (event.clientX - rect.left) / rect.width : 0.5
+        targetY = rect.height ? (event.clientY - rect.top) / rect.height : 0.5
         isInside = true
+        targetStrength = 1
         queueTilt()
       })
 
       el.addEventListener('pointerenter', function (event) {
         const rect = el.getBoundingClientRect()
-        currentX = event.clientX - rect.left
-        currentY = event.clientY - rect.top
+        targetX = currentX = rect.width ? (event.clientX - rect.left) / rect.width : 0.5
+        targetY = currentY = rect.height ? (event.clientY - rect.top) / rect.height : 0.5
         isInside = true
+        targetStrength = 1
         el.style.willChange = 'transform'
         queueTilt()
       })
 
       el.addEventListener('pointerleave', function () {
         isInside = false
-        if (rafId) {
-          window.cancelAnimationFrame(rafId)
-          rafId = 0
-        }
-        el.style.transform = ''
-        el.style.willChange = ''
+        targetX = 0.5
+        targetY = 0.5
+        targetStrength = 0
+        queueTilt()
       })
     })
   }
