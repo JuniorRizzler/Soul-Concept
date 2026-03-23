@@ -1316,8 +1316,10 @@
       const letters = Array.from(el.querySelectorAll('.hero-letter'))
       if (!letters.length) return
       let rafId = 0
-      let pointerX = 0
-      let pointerY = 0
+      let targetX = 0
+      let targetY = 0
+      let currentX = 0
+      let currentY = 0
       let isInside = false
 
       function resetLetters() {
@@ -1329,51 +1331,57 @@
       }
 
       function renderFrame() {
-        rafId = 0
         const maxDistance = 110
+        currentX += (targetX - currentX) * 0.16
+        currentY += (targetY - currentY) * 0.16
+        let keepAnimating = isInside
+
         letters.forEach(function (letter) {
           const rect = letter.getBoundingClientRect()
           const centerX = rect.left + rect.width / 2
           const centerY = rect.top + rect.height / 2
-          const dx = pointerX - centerX
-          const dy = pointerY - centerY
+          const dx = currentX - centerX
+          const dy = currentY - centerY
           const distance = Math.sqrt(dx * dx + dy * dy)
           const influence = Math.max(0, 1 - distance / maxDistance)
           const eased = influence * influence * (3 - 2 * influence)
-          const rotateY = Math.max(-16, Math.min(16, dx * 0.12))
-          const rotateX = Math.max(-14, Math.min(14, -dy * 0.12))
+          const rotateY = Math.max(-14, Math.min(14, dx * 0.1))
+          const rotateX = Math.max(-12, Math.min(12, -dy * 0.1))
           letter.style.setProperty('--pop', eased.toFixed(3))
           letter.style.setProperty('--rx', rotateX.toFixed(2) + 'deg')
           letter.style.setProperty('--ry', rotateY.toFixed(2) + 'deg')
+          if (eased > 0.01) keepAnimating = true
         })
+
+        if (keepAnimating) {
+          rafId = window.requestAnimationFrame(renderFrame)
+        } else {
+          rafId = 0
+        }
       }
 
       function queueFrame() {
-        if (!isInside || rafId) return
+        if (rafId) return
         rafId = window.requestAnimationFrame(renderFrame)
       }
 
       el.addEventListener('pointerenter', function (event) {
         isInside = true
-        pointerX = event.clientX
-        pointerY = event.clientY
+        targetX = currentX = event.clientX
+        targetY = currentY = event.clientY
         queueFrame()
       })
 
       el.addEventListener('pointermove', function (event) {
-        pointerX = event.clientX
-        pointerY = event.clientY
+        targetX = event.clientX
+        targetY = event.clientY
         isInside = true
         queueFrame()
       })
 
       el.addEventListener('pointerleave', function () {
         isInside = false
-        if (rafId) {
-          window.cancelAnimationFrame(rafId)
-          rafId = 0
-        }
-        resetLetters()
+        queueFrame()
       })
 
       resetLetters()

@@ -985,13 +985,13 @@ main {
   position: absolute;
   inset: -10% -6%;
   background: linear-gradient(112deg, rgba(255,255,255,0) 18%, rgba(255,255,255,0.34) 44%, rgba(255,255,255,0) 68%);
-  transform: translateX(-32%) skewX(-14deg);
+  transform: translateX(-38%) skewX(-14deg);
   opacity: 0;
   pointer-events: none;
   z-index: 2;
   transition:
-    opacity 0.22s ease,
-    transform 0.6s cubic-bezier(0.22, 1, 0.3, 1);
+    opacity 0.32s ease,
+    transform 0.82s cubic-bezier(0.18, 0.9, 0.22, 1);
 }
 
 .hero-title::after {
@@ -1003,12 +1003,12 @@ main {
   opacity: 0;
   pointer-events: none;
   z-index: 1;
-  transition: opacity 0.26s ease;
+  transition: opacity 0.36s ease;
 }
 
 .hero-title:hover::before {
   opacity: 1;
-  transform: translateX(28%) skewX(-14deg);
+  transform: translateX(24%) skewX(-14deg);
 }
 
 .hero-title:hover::after {
@@ -1073,10 +1073,10 @@ main {
     rotateY(var(--ry, 0deg))
     scale(calc(1 + var(--pop, 0) * 0.12));
   transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.3, 1),
-    text-shadow 0.4s ease,
-    filter 0.4s ease,
-    color 0.4s ease;
+    transform 0.52s cubic-bezier(0.18, 0.9, 0.22, 1),
+    text-shadow 0.52s ease,
+    filter 0.52s ease,
+    color 0.52s ease;
   text-shadow:
     0 calc(var(--pop, 0) * 18px) calc(var(--pop, 0) * 24px) rgba(23, 21, 16, calc(var(--pop, 0) * 0.18)),
     0 calc(var(--pop, 0) * 4px) 0 rgba(255, 255, 255, calc(var(--pop, 0) * 0.42));
@@ -1104,7 +1104,7 @@ main {
 
 .hero-title-brand:hover .hero-letter,
 .hero-title-sub:hover .hero-letter {
-  transition-duration: 0.18s;
+  transition-duration: 0.34s;
 }
 
 .hero-title-brand,
