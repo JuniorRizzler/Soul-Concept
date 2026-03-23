@@ -1388,19 +1388,6 @@
 
     const titles = Array.from(document.querySelectorAll('.hero-title'))
     titles.forEach(function (title) {
-      let lens = title.querySelector('.hero-title-magnifier')
-      let lensContent = lens ? lens.querySelector('.hero-title-magnifier-content') : null
-      if (!lens) {
-        lens = document.createElement('div')
-        lens.className = 'hero-title-magnifier'
-        lens.setAttribute('aria-hidden', 'true')
-        lensContent = document.createElement('div')
-        lensContent.className = 'hero-title-magnifier-content'
-        lensContent.innerHTML = title.innerHTML
-        lens.appendChild(lensContent)
-        title.appendChild(lens)
-      }
-
       title.style.setProperty('--lens-opacity', '0')
       title.style.setProperty('--lens-scale', '0.82')
 
@@ -1410,8 +1397,6 @@
         const localY = event.clientY - rect.top
         title.style.setProperty('--lens-x', localX.toFixed(2) + 'px')
         title.style.setProperty('--lens-y', localY.toFixed(2) + 'px')
-        title.style.setProperty('--lens-content-x', (-localX * 0.16).toFixed(2) + 'px')
-        title.style.setProperty('--lens-content-y', (-localY * 0.16).toFixed(2) + 'px')
         title.style.setProperty('--lens-opacity', '1')
         title.style.setProperty('--lens-scale', '1')
       })
@@ -1422,8 +1407,6 @@
         const localY = event.clientY - rect.top
         title.style.setProperty('--lens-x', localX.toFixed(2) + 'px')
         title.style.setProperty('--lens-y', localY.toFixed(2) + 'px')
-        title.style.setProperty('--lens-content-x', (-localX * 0.16).toFixed(2) + 'px')
-        title.style.setProperty('--lens-content-y', (-localY * 0.16).toFixed(2) + 'px')
       })
 
       title.addEventListener('pointerleave', function () {

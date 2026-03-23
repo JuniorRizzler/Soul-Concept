@@ -1030,34 +1030,6 @@ main {
   z-index: 3;
 }
 
-.hero-title-magnifier-content {
-  position: absolute;
-  inset: 0;
-  padding: inherit;
-  display: grid;
-  gap: inherit;
-  transform:
-    translate3d(var(--lens-content-x, 0px), var(--lens-content-y, 0px), 0)
-    scale(1.12);
-  transform-origin: center center;
-  filter: saturate(1.08) contrast(1.04);
-}
-
-.hero-title-magnifier-content .hero-title-brand,
-.hero-title-magnifier-content .hero-title-sub {
-  text-shadow:
-    0 6px 14px rgba(255,255,255,0.22),
-    0 8px 18px rgba(23, 21, 16, 0.1);
-}
-
-.hero-title-magnifier-content .hero-title-brand {
-  color: #111114;
-}
-
-.hero-title-magnifier-content .hero-title-sub {
-  color: rgba(17, 17, 20, 0.92);
-}
-
 .hero-title-brand {
   display: block;
   position: relative;
