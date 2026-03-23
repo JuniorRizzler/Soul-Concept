@@ -1382,42 +1382,6 @@
 
   mountHeroLetterPop()
 
-  function mountHeroGlassLens() {
-    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const titles = Array.from(document.querySelectorAll('.hero-title'))
-    titles.forEach(function (title) {
-      title.style.setProperty('--lens-opacity', '0')
-      title.style.setProperty('--lens-scale', '0.82')
-
-      title.addEventListener('pointerenter', function (event) {
-        const rect = title.getBoundingClientRect()
-        const localX = event.clientX - rect.left
-        const localY = event.clientY - rect.top
-        title.style.setProperty('--lens-x', localX.toFixed(2) + 'px')
-        title.style.setProperty('--lens-y', localY.toFixed(2) + 'px')
-        title.style.setProperty('--lens-opacity', '1')
-        title.style.setProperty('--lens-scale', '1')
-      })
-
-      title.addEventListener('pointermove', function (event) {
-        const rect = title.getBoundingClientRect()
-        const localX = event.clientX - rect.left
-        const localY = event.clientY - rect.top
-        title.style.setProperty('--lens-x', localX.toFixed(2) + 'px')
-        title.style.setProperty('--lens-y', localY.toFixed(2) + 'px')
-      })
-
-      title.addEventListener('pointerleave', function () {
-        title.style.setProperty('--lens-opacity', '0')
-        title.style.setProperty('--lens-scale', '0.82')
-      })
-    })
-  }
-
-  mountHeroGlassLens()
-
   const counters = Array.from(document.querySelectorAll('[data-counter]'))
   if (counters.length) {
     const animateCounter = function (el) {
