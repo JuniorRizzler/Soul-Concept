@@ -1026,28 +1026,53 @@ main {
 .hero-letter {
   display: inline-block;
   transform-origin: 50% 100%;
+  transform:
+    perspective(900px)
+    translate3d(0, calc(var(--pop, 0) * -0.22em), calc(var(--pop, 0) * 34px))
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    scale(calc(1 + var(--pop, 0) * 0.12));
   transition:
-    transform 0.2s cubic-bezier(0.22, 1, 0.3, 1),
-    text-shadow 0.2s ease,
-    filter 0.2s ease,
-    color 0.2s ease;
+    transform 0.32s cubic-bezier(0.22, 1, 0.3, 1),
+    text-shadow 0.32s ease,
+    filter 0.32s ease,
+    color 0.32s ease;
+  text-shadow:
+    0 calc(var(--pop, 0) * 18px) calc(var(--pop, 0) * 24px) rgba(23, 21, 16, calc(var(--pop, 0) * 0.18)),
+    0 calc(var(--pop, 0) * 4px) 0 rgba(255, 255, 255, calc(var(--pop, 0) * 0.42));
+  filter: saturate(calc(1 + var(--pop, 0) * 0.12));
   will-change: transform;
 }
 
-.hero-letter.is-popped {
-  transform: translateY(-0.16em) translateZ(24px) rotateX(-16deg) scale(1.06);
+.hero-title-brand .hero-letter {
+  color: color-mix(in srgb, #111114 calc(100% - (var(--pop, 0) * 12%)), #16392f calc(var(--pop, 0) * 12%));
+}
+
+.hero-title-sub .hero-letter {
+  color: color-mix(in srgb, rgba(27, 27, 31, 0.7) calc(100% - (var(--pop, 0) * 18%)), rgba(17, 17, 20, 0.98) calc(var(--pop, 0) * 18%));
+}
+
+@supports not (color: color-mix(in srgb, white 50%, black 50%)) {
+  .hero-title-brand .hero-letter {
+    color: #111114;
+  }
+
+  .hero-title-sub .hero-letter {
+    color: rgba(27, 27, 31, 0.7);
+  }
+}
+
+.hero-title-brand:hover .hero-letter,
+.hero-title-sub:hover .hero-letter {
+  transition-duration: 0.18s;
+}
+
+.hero-title-brand,
+.hero-title-sub {
+  perspective: 900px;
   text-shadow:
-    0 14px 20px rgba(23, 21, 16, 0.16),
-    0 4px 0 rgba(255, 255, 255, 0.42);
-  filter: saturate(1.08);
-}
-
-.hero-title-brand .hero-letter.is-popped {
-  color: #16392f;
-}
-
-.hero-title-sub .hero-letter.is-popped {
-  color: rgba(17, 17, 20, 0.92);
+    0 10px 28px rgba(255, 255, 255, 0.42),
+    0 16px 34px rgba(33, 92, 75, 0.08);
 }
 
 .hero-copy p {

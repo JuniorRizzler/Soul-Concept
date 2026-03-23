@@ -1315,21 +1315,68 @@
       wrapLetters(el)
       const letters = Array.from(el.querySelectorAll('.hero-letter'))
       if (!letters.length) return
+      let rafId = 0
+      let pointerX = 0
+      let pointerY = 0
+      let isInside = false
 
-      letters.forEach(function (letter) {
-        letter.addEventListener('pointerenter', function () {
-          letter.classList.add('is-popped')
+      function resetLetters() {
+        letters.forEach(function (letter) {
+          letter.style.setProperty('--pop', '0')
+          letter.style.setProperty('--rx', '0deg')
+          letter.style.setProperty('--ry', '0deg')
         })
-        letter.addEventListener('pointerleave', function () {
-          letter.classList.remove('is-popped')
+      }
+
+      function renderFrame() {
+        rafId = 0
+        const maxDistance = 110
+        letters.forEach(function (letter) {
+          const rect = letter.getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const centerY = rect.top + rect.height / 2
+          const dx = pointerX - centerX
+          const dy = pointerY - centerY
+          const distance = Math.sqrt(dx * dx + dy * dy)
+          const influence = Math.max(0, 1 - distance / maxDistance)
+          const eased = influence * influence * (3 - 2 * influence)
+          const rotateY = Math.max(-16, Math.min(16, dx * 0.12))
+          const rotateX = Math.max(-14, Math.min(14, -dy * 0.12))
+          letter.style.setProperty('--pop', eased.toFixed(3))
+          letter.style.setProperty('--rx', rotateX.toFixed(2) + 'deg')
+          letter.style.setProperty('--ry', rotateY.toFixed(2) + 'deg')
         })
+      }
+
+      function queueFrame() {
+        if (!isInside || rafId) return
+        rafId = window.requestAnimationFrame(renderFrame)
+      }
+
+      el.addEventListener('pointerenter', function (event) {
+        isInside = true
+        pointerX = event.clientX
+        pointerY = event.clientY
+        queueFrame()
+      })
+
+      el.addEventListener('pointermove', function (event) {
+        pointerX = event.clientX
+        pointerY = event.clientY
+        isInside = true
+        queueFrame()
       })
 
       el.addEventListener('pointerleave', function () {
-        letters.forEach(function (letter) {
-          letter.classList.remove('is-popped')
-        })
+        isInside = false
+        if (rafId) {
+          window.cancelAnimationFrame(rafId)
+          rafId = 0
+        }
+        resetLetters()
       })
+
+      resetLetters()
     })
   }
 
