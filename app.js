@@ -81,10 +81,46 @@
     observer.observe(document.body, { childList: true, subtree: true })
   }
 
+  function suppressScienceBundleLyneAssistant() {
+    if (currentPage !== 'study-library.html' || !document.body) return
+
+    function removeDuplicateAssistant() {
+      document.querySelectorAll('button, div').forEach(function (node) {
+        const className = typeof node.className === 'string' ? node.className : ''
+        const text = (node.textContent || '').trim()
+        if (
+          className.indexOf('fixed bottom-6 right-6') !== -1 &&
+          text.indexOf('Chat with L.Y.N.E') !== -1
+        ) {
+          node.remove()
+          return
+        }
+        if (
+          className.indexOf('fixed bottom-24 right-6') !== -1 &&
+          (
+            text.indexOf('Logical Yield Neural Engine') !== -1 ||
+            text.indexOf('Your AI Study Companion') !== -1
+          )
+        ) {
+          node.remove()
+        }
+      })
+    }
+
+    removeDuplicateAssistant()
+
+    const observer = new MutationObserver(function () {
+      removeDuplicateAssistant()
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', suppressGlobalLyneWidgetInLibraries, { once: true })
+    document.addEventListener('DOMContentLoaded', suppressScienceBundleLyneAssistant, { once: true })
   } else {
     suppressGlobalLyneWidgetInLibraries()
+    suppressScienceBundleLyneAssistant()
   }
 
   document.querySelectorAll('[data-nav-link]').forEach(function (link) {
