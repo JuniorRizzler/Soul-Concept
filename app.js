@@ -1388,6 +1388,14 @@
 
     const titles = Array.from(document.querySelectorAll('.hero-title'))
     titles.forEach(function (title) {
+      let lens = title.querySelector('.hero-title-lens')
+      if (!lens) {
+        lens = document.createElement('div')
+        lens.className = 'hero-title-lens'
+        lens.setAttribute('aria-hidden', 'true')
+        lens.innerHTML = title.innerHTML
+        title.appendChild(lens)
+      }
       title.style.setProperty('--lens-opacity', '0')
       title.style.setProperty('--lens-scale', '0.78')
 
@@ -1395,8 +1403,12 @@
         const rect = title.getBoundingClientRect()
         const x = ((event.clientX - rect.left) / rect.width) * 100
         const y = ((event.clientY - rect.top) / rect.height) * 100
+        const shiftX = (0.5 - (event.clientX - rect.left) / rect.width) * 18
+        const shiftY = (0.5 - (event.clientY - rect.top) / rect.height) * 12
         title.style.setProperty('--lens-x', x.toFixed(2) + '%')
         title.style.setProperty('--lens-y', y.toFixed(2) + '%')
+        title.style.setProperty('--lens-shift-x', shiftX.toFixed(2) + 'px')
+        title.style.setProperty('--lens-shift-y', shiftY.toFixed(2) + 'px')
         title.style.setProperty('--lens-opacity', '1')
         title.style.setProperty('--lens-scale', '1')
       })
@@ -1405,13 +1417,19 @@
         const rect = title.getBoundingClientRect()
         const x = ((event.clientX - rect.left) / rect.width) * 100
         const y = ((event.clientY - rect.top) / rect.height) * 100
+        const shiftX = (0.5 - (event.clientX - rect.left) / rect.width) * 18
+        const shiftY = (0.5 - (event.clientY - rect.top) / rect.height) * 12
         title.style.setProperty('--lens-x', x.toFixed(2) + '%')
         title.style.setProperty('--lens-y', y.toFixed(2) + '%')
+        title.style.setProperty('--lens-shift-x', shiftX.toFixed(2) + 'px')
+        title.style.setProperty('--lens-shift-y', shiftY.toFixed(2) + 'px')
       })
 
       title.addEventListener('pointerleave', function () {
         title.style.setProperty('--lens-opacity', '0')
         title.style.setProperty('--lens-scale', '0.78')
+        title.style.setProperty('--lens-shift-x', '0px')
+        title.style.setProperty('--lens-shift-y', '0px')
       })
     })
   }
