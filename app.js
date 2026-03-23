@@ -1279,6 +1279,62 @@
 
   mountPointerTilt()
 
+  function mountHeroLetterPop() {
+    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const targets = Array.from(
+      document.querySelectorAll('.hero-title-brand, .hero-title-sub'),
+    )
+
+    function wrapLetters(el) {
+      if (!el || el.dataset.lettersMounted === '1') return
+      const source = el.childNodes[0]
+      if (!source || source.nodeType !== Node.TEXT_NODE) return
+      const text = source.textContent || ''
+      const frag = document.createDocumentFragment()
+
+      Array.from(text).forEach(function (char, index) {
+        if (char === ' ') {
+          frag.appendChild(document.createTextNode(char))
+          return
+        }
+        const span = document.createElement('span')
+        span.className = 'hero-letter'
+        span.style.setProperty('--letter-index', String(index))
+        span.textContent = char
+        frag.appendChild(span)
+      })
+
+      el.insertBefore(frag, source)
+      el.removeChild(source)
+      el.dataset.lettersMounted = '1'
+    }
+
+    targets.forEach(function (el) {
+      wrapLetters(el)
+      const letters = Array.from(el.querySelectorAll('.hero-letter'))
+      if (!letters.length) return
+
+      letters.forEach(function (letter) {
+        letter.addEventListener('pointerenter', function () {
+          letter.classList.add('is-popped')
+        })
+        letter.addEventListener('pointerleave', function () {
+          letter.classList.remove('is-popped')
+        })
+      })
+
+      el.addEventListener('pointerleave', function () {
+        letters.forEach(function (letter) {
+          letter.classList.remove('is-popped')
+        })
+      })
+    })
+  }
+
+  mountHeroLetterPop()
+
   const counters = Array.from(document.querySelectorAll('[data-counter]'))
   if (counters.length) {
     const animateCounter = function (el) {

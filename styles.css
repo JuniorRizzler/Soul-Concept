@@ -986,6 +986,7 @@ main {
   text-wrap: balance;
   color: #111114;
   text-shadow: 0 10px 28px rgba(255, 255, 255, 0.42), 0 16px 34px rgba(33, 92, 75, 0.08);
+  transform-style: preserve-3d;
 }
 
 .hero-title-mark-note {
@@ -1019,6 +1020,34 @@ main {
   letter-spacing: 0.01em;
   color: rgba(27, 27, 31, 0.7);
   text-wrap: balance;
+  transform-style: preserve-3d;
+}
+
+.hero-letter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.3, 1),
+    text-shadow 0.2s ease,
+    filter 0.2s ease,
+    color 0.2s ease;
+  will-change: transform;
+}
+
+.hero-letter.is-popped {
+  transform: translateY(-0.16em) translateZ(24px) rotateX(-16deg) scale(1.06);
+  text-shadow:
+    0 14px 20px rgba(23, 21, 16, 0.16),
+    0 4px 0 rgba(255, 255, 255, 0.42);
+  filter: saturate(1.08);
+}
+
+.hero-title-brand .hero-letter.is-popped {
+  color: #16392f;
+}
+
+.hero-title-sub .hero-letter.is-popped {
+  color: rgba(17, 17, 20, 0.92);
 }
 
 .hero-copy p {
