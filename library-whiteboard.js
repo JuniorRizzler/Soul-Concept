@@ -1844,6 +1844,7 @@
     purgeLibraryAssistants();
     resizeLayerIfNeeded();
     updateContext();
+    createLibraryLyneWidget();
     setScopeLabel();
     try {
       setColor(localStorage.getItem(prefColorKey) || "#e11d48");
