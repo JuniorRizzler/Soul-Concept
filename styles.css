@@ -1765,6 +1765,8 @@ main {
   box-shadow: var(--shadow-card-3d), var(--shadow-inset);
   transform: translateZ(0) rotateX(0deg) rotateY(0deg);
   transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .hero-panel::before {
@@ -2207,6 +2209,17 @@ main {
 .logo-item {
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.analytics-card,
+.page-banner-panel,
+.preview-card,
+.card,
+.contact-panel {
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .quick-nav-card::before,

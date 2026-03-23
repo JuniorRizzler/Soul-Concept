@@ -1195,6 +1195,90 @@
     })
   }
 
+  function mountPointerTilt() {
+    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const tiltTargets = Array.from(
+      document.querySelectorAll(
+        [
+          '.hero-panel',
+          '.quick-nav-card',
+          '.feature-map-card',
+          '.analytics-card',
+          '.page-banner-panel',
+          '.preview-card',
+          '.card',
+          '.contact-panel',
+          '.faq-item',
+          '.roadmap-panel',
+        ].join(','),
+      ),
+    )
+
+    tiltTargets.forEach(function (el) {
+      let rafId = 0
+      let currentX = 0
+      let currentY = 0
+      let isInside = false
+
+      function applyTilt() {
+        rafId = 0
+        const rect = el.getBoundingClientRect()
+        const relX = rect.width ? currentX / rect.width : 0.5
+        const relY = rect.height ? currentY / rect.height : 0.5
+        const rotateY = (relX - 0.5) * 12
+        const rotateX = (0.5 - relY) * 10
+        const lift = el.classList.contains('hero-panel') ? -8 : -6
+        const scale = el.classList.contains('hero-panel') ? 1.02 : 1.012
+        el.style.transform =
+          'perspective(1200px) translateY(' +
+          lift +
+          'px) rotateX(' +
+          rotateX.toFixed(2) +
+          'deg) rotateY(' +
+          rotateY.toFixed(2) +
+          'deg) scale(' +
+          scale +
+          ')'
+      }
+
+      function queueTilt() {
+        if (!isInside || rafId) return
+        rafId = window.requestAnimationFrame(applyTilt)
+      }
+
+      el.addEventListener('pointermove', function (event) {
+        const rect = el.getBoundingClientRect()
+        currentX = event.clientX - rect.left
+        currentY = event.clientY - rect.top
+        isInside = true
+        queueTilt()
+      })
+
+      el.addEventListener('pointerenter', function (event) {
+        const rect = el.getBoundingClientRect()
+        currentX = event.clientX - rect.left
+        currentY = event.clientY - rect.top
+        isInside = true
+        el.style.willChange = 'transform'
+        queueTilt()
+      })
+
+      el.addEventListener('pointerleave', function () {
+        isInside = false
+        if (rafId) {
+          window.cancelAnimationFrame(rafId)
+          rafId = 0
+        }
+        el.style.transform = ''
+        el.style.willChange = ''
+      })
+    })
+  }
+
+  mountPointerTilt()
+
   const counters = Array.from(document.querySelectorAll('[data-counter]'))
   if (counters.length) {
     const animateCounter = function (el) {
