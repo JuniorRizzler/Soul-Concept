@@ -1081,20 +1081,30 @@ main {
   display: inline-block;
   transform-origin: 50% 100%;
   transform:
-    perspective(900px)
-    translate3d(0, calc(var(--pop, 0) * -0.22em), calc(var(--pop, 0) * 34px))
+    perspective(1100px)
+    translate3d(
+      0,
+      calc((var(--pop, 0) * -0.18em) + (var(--wave, 0) * -0.1em)),
+      calc((var(--pop, 0) * 40px) + (var(--glow, 0) * 6px))
+    )
     rotateX(var(--rx, 0deg))
     rotateY(var(--ry, 0deg))
-    scale(calc(1 + var(--pop, 0) * 0.12));
+    rotateZ(calc(var(--wave, 0) * -2.2deg))
+    skewX(calc(var(--wave, 0) * -1.1deg))
+    scale(calc(1 + var(--pop, 0) * 0.08 + var(--glow, 0) * 0.05));
   transition:
-    transform 0.52s cubic-bezier(0.18, 0.9, 0.22, 1),
-    text-shadow 0.52s ease,
-    filter 0.52s ease,
-    color 0.52s ease;
+    transform 0.68s cubic-bezier(0.16, 0.84, 0.22, 1),
+    text-shadow 0.68s cubic-bezier(0.16, 0.84, 0.22, 1),
+    filter 0.68s cubic-bezier(0.16, 0.84, 0.22, 1),
+    color 0.68s cubic-bezier(0.16, 0.84, 0.22, 1);
   text-shadow:
-    0 calc(var(--pop, 0) * 18px) calc(var(--pop, 0) * 24px) rgba(23, 21, 16, calc(var(--pop, 0) * 0.18)),
-    0 calc(var(--pop, 0) * 4px) 0 rgba(255, 255, 255, calc(var(--pop, 0) * 0.42));
-  filter: saturate(calc(1 + var(--pop, 0) * 0.12)) brightness(calc(1 + var(--pop, 0) * 0.03));
+    0 calc(var(--pop, 0) * 18px) calc(var(--pop, 0) * 28px) rgba(23, 21, 16, calc(var(--pop, 0) * 0.16)),
+    0 calc(var(--glow, 0) * 8px) calc(var(--glow, 0) * 16px) rgba(255, 248, 234, calc(var(--glow, 0) * 0.42)),
+    0 calc(var(--wave, 0) * -2px) 0 rgba(255, 255, 255, calc(var(--glow, 0) * 0.28));
+  filter:
+    saturate(calc(1 + var(--glow, 0) * 0.16))
+    brightness(calc(1 + var(--glow, 0) * 0.04))
+    contrast(calc(1 + var(--pop, 0) * 0.03));
   will-change: transform;
 }
 
@@ -1118,7 +1128,7 @@ main {
 
 .hero-title-brand:hover .hero-letter,
 .hero-title-sub:hover .hero-letter {
-  transition-duration: 0.34s;
+  transition-duration: 0.44s;
 }
 
 .hero-title-brand,

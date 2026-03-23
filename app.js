@@ -1320,21 +1320,26 @@
       let targetY = 0
       let currentX = 0
       let currentY = 0
+      let targetStrength = 0
+      let currentStrength = 0
       let isInside = false
 
       function resetLetters() {
         letters.forEach(function (letter) {
           letter.style.setProperty('--pop', '0')
+          letter.style.setProperty('--wave', '0')
+          letter.style.setProperty('--glow', '0')
           letter.style.setProperty('--rx', '0deg')
           letter.style.setProperty('--ry', '0deg')
         })
       }
 
       function renderFrame() {
-        const maxDistance = 110
+        const maxDistance = 132
         currentX += (targetX - currentX) * 0.16
         currentY += (targetY - currentY) * 0.16
-        let keepAnimating = isInside
+        currentStrength += (targetStrength - currentStrength) * 0.12
+        let keepAnimating = isInside || Math.abs(targetStrength - currentStrength) > 0.003
 
         letters.forEach(function (letter) {
           const rect = letter.getBoundingClientRect()
@@ -1344,13 +1349,17 @@
           const dy = currentY - centerY
           const distance = Math.sqrt(dx * dx + dy * dy)
           const influence = Math.max(0, 1 - distance / maxDistance)
-          const eased = influence * influence * (3 - 2 * influence)
-          const rotateY = Math.max(-14, Math.min(14, dx * 0.1))
-          const rotateX = Math.max(-12, Math.min(12, -dy * 0.1))
+          const eased = (influence * influence * (3 - 2 * influence)) * currentStrength
+          const wave = Math.sin((distance / maxDistance) * Math.PI * 1.1) * eased
+          const glow = Math.max(0, 1 - distance / (maxDistance * 0.72)) * currentStrength
+          const rotateY = Math.max(-16, Math.min(16, dx * 0.09 * currentStrength))
+          const rotateX = Math.max(-13, Math.min(13, -dy * 0.08 * currentStrength))
           letter.style.setProperty('--pop', eased.toFixed(3))
+          letter.style.setProperty('--wave', wave.toFixed(3))
+          letter.style.setProperty('--glow', glow.toFixed(3))
           letter.style.setProperty('--rx', rotateX.toFixed(2) + 'deg')
           letter.style.setProperty('--ry', rotateY.toFixed(2) + 'deg')
-          if (eased > 0.01) keepAnimating = true
+          if (eased > 0.01 || Math.abs(wave) > 0.01 || glow > 0.01) keepAnimating = true
         })
 
         if (keepAnimating) {
@@ -1367,6 +1376,7 @@
 
       el.addEventListener('pointerenter', function (event) {
         isInside = true
+        targetStrength = 1
         targetX = currentX = event.clientX
         targetY = currentY = event.clientY
         queueFrame()
@@ -1376,11 +1386,13 @@
         targetX = event.clientX
         targetY = event.clientY
         isInside = true
+        targetStrength = 1
         queueFrame()
       })
 
       el.addEventListener('pointerleave', function () {
         isInside = false
+        targetStrength = 0
         queueFrame()
       })
 
