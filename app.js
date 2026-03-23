@@ -662,6 +662,10 @@
       const toolShare = totalTrackedPageMs > 0 ? pageGroups.tool / totalTrackedPageMs : 0
       const homeShare = totalTrackedPageMs > 0 ? pageGroups.home / totalTrackedPageMs : 0
       const avgVisitMs = totalVisits > 0 ? totalTrackedPageMs / totalVisits : 0
+      const lowSignal =
+        totalUsageMs < 8 * 60 * 1000 ||
+        liveFocus.focusedMs < 5 * 60 * 1000 ||
+        Math.max(0, Number(analytics.sessionsCompleted || 0)) < 1
       const depthScore = Math.max(
         0,
         Math.min(100, Math.round((Math.min(avgFocusSessionMs, 25 * 60000) / (25 * 60000)) * 100)),
@@ -705,15 +709,34 @@
           ),
         ),
       )
-      const burnoutRisk = Math.max(
-        0,
-        Math.min(
-          100,
-          Math.round(
-            Math.min(100, Math.max(0, (1 - focusRatio) * 56 + warningRate * 6 + breakRate * 4 + Math.max(0, homeShare - 0.22) * 120)),
+      const burnoutRisk = lowSignal
+        ? Math.max(
+          8,
+          Math.min(
+            32,
+            Math.round(
+              10 +
+                (1 - Math.min(1, totalUsageMs / (8 * 60 * 1000))) * 10 +
+                Math.max(0, homeShare - 0.35) * 18,
+            ),
           ),
-        ),
-      )
+        )
+        : Math.max(
+          0,
+          Math.min(
+            100,
+            Math.round(
+              Math.max(
+                0,
+                (1 - focusRatio) * 34 +
+                  warningRate * 4.5 +
+                  breakRate * 3 +
+                  Math.max(0, homeShare - 0.35) * 44 +
+                  Math.max(0, 1 - consistencyScore / 100) * 18,
+              ),
+            ),
+          ),
+        )
       const focusScore = Math.max(
         0,
         Math.min(
@@ -751,6 +774,7 @@
         momentumScore: momentumScore,
         retentionScore: retentionScore,
         burnoutRisk: burnoutRisk,
+        lowSignal: lowSignal,
         pageGroups: pageGroups,
         libraryShare: libraryShare,
         toolShare: toolShare,
@@ -790,7 +814,7 @@
         }
       })
 
-      if (snapshot.totalUsageMs < 8 * 60 * 1000) {
+      if (snapshot.lowSignal) {
         summary = 'You do not have enough stable data yet. The next priority is building one real study block so the analysis stops guessing.'
         recommendations.push('Run one uninterrupted 15 minute session in a library page instead of browsing across the app.')
         coachHeadline = 'Not enough signal yet'
@@ -859,12 +883,24 @@
       return {
         summary: summary,
         items: recommendations.slice(0, 4),
-        depthLabel: describeBand(snapshot.depthScore, 'Strong session length', 'Sessions need more depth', 'Too shallow right now'),
-        consistencyLabel: describeBand(snapshot.consistencyScore, 'Good repeat pattern', 'Routine still forming', 'Needs more repetition'),
-        disciplineLabel: describeBand(snapshot.disciplineScore, 'Attention under control', 'Some drift showing', 'Focus is leaking'),
-        momentumLabel: describeBand(snapshot.momentumScore, 'Momentum is building', 'Momentum is uneven', 'Momentum is weak'),
-        retentionLabel: describeBand(snapshot.retentionScore, 'Retention setup is strong', 'Retention is mixed', 'Retention needs structure'),
-        burnoutLabel: describeBand(100 - snapshot.burnoutRisk, 'Burnout risk is low', 'Watch energy management', 'Burnout risk is elevated'),
+        depthLabel: snapshot.lowSignal
+          ? 'Collecting depth signal'
+          : describeBand(snapshot.depthScore, 'Strong session length', 'Sessions need more depth', 'Too shallow right now'),
+        consistencyLabel: snapshot.lowSignal
+          ? 'Collecting routine signal'
+          : describeBand(snapshot.consistencyScore, 'Good repeat pattern', 'Routine still forming', 'Needs more repetition'),
+        disciplineLabel: snapshot.lowSignal
+          ? 'Collecting focus signal'
+          : describeBand(snapshot.disciplineScore, 'Attention under control', 'Some drift showing', 'Focus is leaking'),
+        momentumLabel: snapshot.lowSignal
+          ? 'Collecting signal'
+          : describeBand(snapshot.momentumScore, 'Momentum is building', 'Momentum is uneven', 'Momentum is weak'),
+        retentionLabel: snapshot.lowSignal
+          ? 'Collecting signal'
+          : describeBand(snapshot.retentionScore, 'Retention setup is strong', 'Retention is mixed', 'Retention needs structure'),
+        burnoutLabel: snapshot.lowSignal
+          ? 'Not enough signal yet'
+          : describeBand(100 - snapshot.burnoutRisk, 'Burnout risk is low', 'Watch energy management', 'Burnout risk is elevated'),
         strengths: strengths.slice(0, 3),
         risks: risks.slice(0, 3),
         nextSteps: nextSteps.slice(0, 3),
@@ -997,7 +1033,7 @@
       if (coachWindowEl) coachWindowEl.textContent = ai.coachWindow
       if (coachTargetEl) coachTargetEl.textContent = ai.coachTarget
       if (patternSummaryEl) patternSummaryEl.textContent = ai.patternSummary
-      if (liveLabelEl) liveLabelEl.textContent = isAdvancedPage ? 'Live local analysis' : 'Updated now'
+      if (liveLabelEl) liveLabelEl.textContent = isAdvancedPage ? (snapshot.lowSignal ? 'Building live model' : 'Live local analysis') : 'Updated now'
     }
 
     updateDashboard()

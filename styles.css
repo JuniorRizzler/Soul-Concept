@@ -1434,7 +1434,7 @@ main {
 .analytics-overview {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .analytics-kpi,
@@ -1459,8 +1459,8 @@ main {
 }
 
 .analytics-kpi {
-  padding: 18px;
-  min-height: 180px;
+  padding: 20px;
+  min-height: 172px;
 }
 
 .analytics-kpi-label {
@@ -1470,6 +1470,8 @@ main {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(33, 92, 75, 0.74);
+  position: relative;
+  z-index: 1;
 }
 
 .analytics-kpi strong {
@@ -1480,13 +1482,18 @@ main {
   line-height: 1;
   letter-spacing: -0.05em;
   color: #121317;
+  position: relative;
+  z-index: 1;
 }
 
 .analytics-kpi p {
   margin: 12px 0 0;
   color: var(--text-muted);
-  font-size: 0.91rem;
-  line-height: 1.5;
+  font-size: 0.88rem;
+  line-height: 1.46;
+  max-width: 24ch;
+  position: relative;
+  z-index: 1;
 }
 
 .analytics-grid {
@@ -1498,6 +1505,11 @@ main {
 .analytics-card {
   padding: 20px;
   backdrop-filter: blur(14px);
+}
+
+.analytics-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .analytics-card-head {
