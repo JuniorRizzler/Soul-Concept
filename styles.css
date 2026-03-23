@@ -259,7 +259,7 @@ img {
   position: fixed;
   inset: 0;
   background: transparent;
-  z-index: 1200;
+  z-index: 2147483647;
   display: none;
   pointer-events: none;
 }
@@ -277,6 +277,7 @@ img {
   padding: 12px;
   box-shadow: var(--shadow-sm);
   pointer-events: auto;
+  z-index: 2147483647;
 }
 
 .tour-tooltip h4 {
@@ -302,7 +303,7 @@ img {
   outline-offset: 4px;
   border-radius: 999px;
   position: relative;
-  z-index: 1201;
+  z-index: 2147483647;
 }
 
 img {
