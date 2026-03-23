@@ -726,13 +726,12 @@
           Math.min(
             100,
             Math.round(
-              Math.max(
-                0,
-                (1 - focusRatio) * 34 +
-                  warningRate * 4.5 +
-                  breakRate * 3 +
-                  Math.max(0, homeShare - 0.35) * 44 +
-                  Math.max(0, 1 - consistencyScore / 100) * 18,
+              Math.max(0,
+                Math.min(1, (1 - focusRatio) / 0.72) * 30 +
+                  Math.min(1, warningRate / 14) * 24 +
+                  Math.min(1, breakRate / 10) * 16 +
+                  Math.min(1, Math.max(0, homeShare - 0.35) / 0.45) * 12 +
+                  Math.min(1, (100 - consistencyScore) / 100) * 18
               ),
             ),
           ),
