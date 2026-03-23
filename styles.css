@@ -34,6 +34,8 @@
   --glass-strong: rgba(255, 255, 255, 0.78);
   --glow-primary: rgba(33, 92, 75, 0.18);
   --glow-accent: rgba(243, 106, 61, 0.18);
+  --ease-float: cubic-bezier(0.18, 0.9, 0.22, 1);
+  --dur-float: 0.42s;
   --tracking-tight: -0.035em;
   --tracking-soft: -0.02em;
   --reading-width: 64ch;
@@ -713,7 +715,12 @@ img {
   letter-spacing: -0.015em;
   gap: 8px;
   position: relative;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  transition:
+    transform var(--dur-float) var(--ease-float),
+    box-shadow var(--dur-float) ease,
+    filter var(--dur-float) ease,
+    background var(--dur-float) ease,
+    border-color var(--dur-float) ease;
   transform-style: preserve-3d;
 }
 
@@ -834,12 +841,19 @@ details.dropdown > summary::-webkit-details-marker {
   border: 1px solid var(--line);
   box-shadow: var(--shadow-md), var(--shadow-inset);
   z-index: 20;
+  transform: translateY(6px);
+  opacity: 0;
+  transition:
+    opacity 0.28s ease,
+    transform var(--dur-float) var(--ease-float);
 }
 
 details.dropdown[open] .dropdown-menu,
 details.dropdown:hover .dropdown-menu,
 details.dropdown:focus-within .dropdown-menu {
   display: block;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .dropdown-item {
@@ -1944,7 +1958,10 @@ main {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 238, 228, 0.88));
   box-shadow: var(--shadow-card-3d), var(--shadow-inset);
   transform: translateZ(0) rotateX(0deg) rotateY(0deg);
-  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+  transition:
+    transform var(--dur-float) var(--ease-float),
+    box-shadow var(--dur-float) ease,
+    border-color var(--dur-float) ease;
   transform-style: preserve-3d;
   will-change: transform;
 }
@@ -2058,7 +2075,9 @@ main {
     inset 0 1px 0 rgba(255,255,255,0.82),
     inset 0 -1px 0 rgba(214, 203, 190, 0.22),
     0 10px 20px rgba(23,21,16,0.06);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition:
+    transform var(--dur-float) var(--ease-float),
+    box-shadow var(--dur-float) ease;
 }
 
 .hero-step:hover {
@@ -2265,7 +2284,9 @@ main {
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 20px 40px rgba(23, 21, 16, 0.12), var(--shadow-inset);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform var(--dur-float) var(--ease-float),
+    box-shadow var(--dur-float) ease;
 }
 
 .card::before {
@@ -2391,6 +2412,11 @@ main {
   overflow: hidden;
   transform-style: preserve-3d;
   will-change: transform;
+  transition:
+    transform var(--dur-float) var(--ease-float),
+    box-shadow var(--dur-float) ease,
+    border-color var(--dur-float) ease,
+    background var(--dur-float) ease;
 }
 
 .analytics-card,
@@ -2429,6 +2455,9 @@ main {
   filter: blur(10px);
   opacity: 0.48;
   pointer-events: none;
+  transition:
+    opacity var(--dur-float) ease,
+    transform var(--dur-float) var(--ease-float);
 }
 
 .quick-nav-card:hover,
@@ -3207,7 +3236,9 @@ main {
   backdrop-filter: blur(14px) saturate(125%);
   padding: 20px;
   transform: translateZ(0);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition:
+    transform var(--dur-float) var(--ease-float),
+    box-shadow var(--dur-float) ease;
 }
 
 .page-banner-panel::before {
