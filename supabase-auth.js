@@ -11,7 +11,9 @@
     var style = document.createElement('style')
     style.id = 'sc-supabase-auth-styles'
       style.textContent =
-        '.sc-auth-launch{white-space:nowrap;border-color:rgba(226,216,203,.88);background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(244,236,226,.84));box-shadow:inset 0 1px 0 rgba(255,255,255,.82),0 8px 18px rgba(23,21,16,.08)}' +
+        '.sc-auth-launch{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;padding:9px 14px;border:1px solid rgba(191,201,195,.52);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(237,247,243,.9));color:#004435;box-shadow:inset 0 1px 0 rgba(255,255,255,.88),0 10px 22px rgba(23,21,16,.08);font-weight:800;letter-spacing:.06em;text-transform:uppercase}' +
+        '.sc-auth-launch::before{content:"";width:18px;height:18px;flex:0 0 auto;border-radius:999px;background:linear-gradient(135deg,rgba(0,68,53,.16),rgba(33,92,75,.24)),#fff url("icons/soulconceptflame.png") center/12px 12px no-repeat;box-shadow:inset 0 1px 0 rgba(255,255,255,.86)}' +
+        '.sc-auth-launch:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 14px 28px rgba(23,21,16,.11)}' +
         '.sc-auth-inline{display:inline-flex;align-items:center;flex:0 0 auto;margin-left:0;min-width:0}' +
         '.nav-more{position:relative;display:none;align-items:center}' +
         '.nav-more.is-active{display:inline-flex}' +
@@ -33,18 +35,23 @@
         '.sc-auth-modal-backdrop{position:fixed;inset:0;background:rgba(10,14,20,.48);backdrop-filter:blur(8px);z-index:10020;display:none;align-items:center;justify-content:center;padding:18px}' +
         '.sc-auth-modal-backdrop.open{display:flex}' +
         '.sc-auth-modal-backdrop.locked{background:rgba(10,14,20,.72)}' +
-      '.sc-auth-modal{width:min(460px,92vw);border-radius:24px;border:1px solid rgba(226,216,203,.9);background:linear-gradient(180deg,#fffefb 0%,#f7f1e9 100%);box-shadow:0 24px 60px rgba(23,21,16,.18);padding:22px;position:relative}' +
+      '.sc-auth-modal{width:min(480px,92vw);border-radius:28px;border:1px solid rgba(226,216,203,.9);background:linear-gradient(180deg,#fffefb 0%,#f7f1e9 100%);box-shadow:0 24px 60px rgba(23,21,16,.18);padding:22px;position:relative;overflow:hidden}' +
+      '.sc-auth-modal::before{content:"";position:absolute;inset:auto -60px -70px auto;width:220px;height:220px;border-radius:999px;background:radial-gradient(circle,rgba(33,92,75,.14),rgba(33,92,75,0));pointer-events:none}' +
       '.sc-auth-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:999px;border:1px solid #e2d8cb;background:#fff;cursor:pointer;font-size:1rem;font-weight:800}' +
+      '.sc-auth-hero{display:flex;align-items:flex-start;gap:14px;margin:0 32px 14px 0;position:relative;z-index:1}' +
+      '.sc-auth-logo{width:52px;height:52px;flex:0 0 auto;border-radius:18px;background:linear-gradient(135deg,#004435 0%,#215c4b 100%);padding:8px;box-shadow:0 14px 28px rgba(0,68,53,.18)}' +
+      '.sc-auth-logo img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.16))}' +
+      '.sc-auth-kicker{display:block;margin:2px 0 6px;color:#ae3200;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}' +
       '.sc-auth-title{margin:0 0 8px;font-family:Sora,Segoe UI,sans-serif;font-size:1.55rem;line-height:1.05;color:#1b1b1f}' +
-      '.sc-auth-copy{margin:0 0 16px;color:#5a5863;line-height:1.5;font-size:.95rem}' +
+      '.sc-auth-copy{margin:0;color:#5a5863;line-height:1.5;font-size:.95rem}' +
       '.sc-auth-stack{display:grid;gap:10px}' +
-      '.sc-auth-google{width:100%;justify-content:center}' +
+      '.sc-auth-google{width:100%;justify-content:center;min-height:48px}' +
       '.sc-auth-divider{display:flex;align-items:center;gap:10px;color:#7b746b;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:4px 0}' +
       '.sc-auth-divider:before,.sc-auth-divider:after{content:"";flex:1;height:1px;background:rgba(123,116,107,.28)}' +
       '.sc-auth-field{display:grid;gap:6px}' +
       '.sc-auth-field label{font-size:.83rem;font-weight:800;color:#3d3b46}' +
       '.sc-auth-field input{width:100%;border:1px solid #d8cdbf;border-radius:14px;padding:12px 13px;font:600 .95rem/1.3 Manrope,system-ui,sans-serif;background:#fff;color:#1b1b1f}' +
-      '.sc-auth-submit{width:100%;justify-content:center}' +
+      '.sc-auth-submit{width:100%;justify-content:center;min-height:46px}' +
       '.sc-auth-status{min-height:20px;margin:0;color:#5a5863;font-size:.88rem}' +
       '.sc-auth-status.ok{color:#166534}' +
       '.sc-auth-status.err{color:#b91c1c}' +
@@ -142,9 +149,9 @@
 
   function readReturnPath() {
     try {
-      return localStorage.getItem(RETURN_TO_KEY) || '/index.html'
+      return localStorage.getItem(RETURN_TO_KEY) || '/dashboard.html'
     } catch (_err) {
-      return '/index.html'
+      return '/dashboard.html'
     }
   }
 
@@ -170,17 +177,17 @@
 
   function normalizeReturnPath(path) {
     var value = String(path || '').trim()
-    if (!value) return '/index.html'
+    if (!value) return '/dashboard.html'
     if (value.indexOf('http://') === 0 || value.indexOf('https://') === 0) {
       try {
-        value = new URL(value).pathname || '/index.html'
+        value = new URL(value).pathname || '/dashboard.html'
       } catch (_err) {
-        return '/index.html'
+        return '/dashboard.html'
       }
     }
-    if (value === '/' || value === '') return '/index.html'
+    if (value === '/' || value === '') return '/dashboard.html'
     var lower = value.toLowerCase()
-    if (lower.indexOf(CALLBACK_PATH) !== -1 || lower.indexOf(CALLBACK_CLEAN_PATH) !== -1) return '/index.html'
+    if (lower.indexOf(CALLBACK_PATH) !== -1 || lower.indexOf(CALLBACK_CLEAN_PATH) !== -1) return '/dashboard.html'
     return value
   }
 
@@ -295,8 +302,14 @@
     backdrop.innerHTML =
       '<div class="sc-auth-modal" role="dialog" aria-modal="true" aria-labelledby="sc-auth-title">' +
       '<button class="sc-auth-close" type="button" aria-label="Close sign in">&times;</button>' +
-      '<h2 class="sc-auth-title" id="sc-auth-title">Sign in to Soul Concept</h2>' +
-      '<p class="sc-auth-copy">Use Google or a magic link sent to your email. This keeps your progress and premium access tied to your account.</p>' +
+      '<div class="sc-auth-hero">' +
+      '<div class="sc-auth-logo" aria-hidden="true"><img src="icons/soulconceptflame.png" alt="" /></div>' +
+      '<div>' +
+      '<span class="sc-auth-kicker">Soul Concept</span>' +
+      '<h2 class="sc-auth-title" id="sc-auth-title">Sign in to sync your study space</h2>' +
+      '<p class="sc-auth-copy">Use Google or a magic link sent to your email. This keeps your progress, saved libraries, and premium access tied to your account.</p>' +
+      '</div>' +
+      '</div>' +
       '<p class="sc-auth-status" data-auth-policy></p>' +
       '<div class="sc-auth-stack">' +
       '<button class="btn btn-primary sc-auth-google" type="button" data-auth-google>Continue with Google</button>' +
@@ -568,7 +581,7 @@
 
     var target = normalizeReturnPath(readReturnPath())
     clearReturnPath()
-    location.replace(target || '/index.html')
+    location.replace(target || '/dashboard.html')
   }
 
   async function run() {
@@ -598,7 +611,7 @@
       if (isCallbackPage() && session) {
         var target = normalizeReturnPath(readReturnPath())
         clearReturnPath()
-        location.replace(target || '/index.html')
+        location.replace(target || '/dashboard.html')
       }
     })
   }

@@ -4,7 +4,7 @@ window.SC_AUTH_CONFIG = {
   clientId: "RsQoPHsBmBCAYbVDIYMLnDCR1zjB07fC",
   connection: "blackbaud-k12",
   callbackPath: "/auth/callback.html",
-  logoutReturnTo: "/index.html",
+  logoutReturnTo: "/dashboard.html",
   requireOnPaths: [
     "/",
     "/index.html",

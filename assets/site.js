@@ -1,4 +1,19 @@
 (() => {
+  if (!document.getElementById("sc-shell-critical")) {
+    const criticalStyle = document.createElement("style");
+    criticalStyle.id = "sc-shell-critical";
+    criticalStyle.textContent = `
+      body:not(.sc-shell-ready) > * {
+        opacity: 0;
+      }
+
+      body:not(.sc-shell-ready) {
+        background: linear-gradient(180deg, #fffdfd 0%, #fef7ff 24%, #f6f0f8 100%);
+      }
+    `;
+    document.head.appendChild(criticalStyle);
+  }
+
   const tokenRoutes = {
     "{{DATA:SCREEN:SCREEN_5}}": "curation.html",
     "{{DATA:SCREEN:SCREEN_12}}": "membership.html",
@@ -12,7 +27,7 @@
   };
 
   const exactRoutes = new Map([
-    ["home", "index.html"],
+    ["home", "dashboard.html"],
     ["discover", "discover.html"],
     ["dashboard", "dashboard.html"],
     ["overview", "dashboard.html"],
@@ -52,8 +67,8 @@
     ["open math 10", "grade-10-math.html"],
     ["support", "settings.html#support"],
     ["help center", "settings.html#support"],
-    ["sign out", "index.html"],
-    ["sign in", "index.html"],
+    ["sign out", "dashboard.html"],
+    ["sign in", "dashboard.html"],
     ["contact", "settings.html#support"],
     ["grade 8", "discover.html"],
     ["grade 9", "grade-9.html"],
@@ -64,13 +79,13 @@
     ["start study session", "dashboard.html"],
     ["explore library", "subject-library-2.html"],
     ["enter library", "subject-library-2.html"],
-    ["establish access", "index.html"],
+    ["establish access", "dashboard.html"],
     ["view the manifesto", "discover.html"],
     ["request research assistant", "research.html"],
     ["upgrade to premium", "membership.html"],
     ["upgrade to fellow", "membership.html"],
     ["complete secure checkout", "membership.html"],
-    ["deep dive", "analytics-overview.html"],
+    ["deep dive", "analytics.html"],
     ["view archive", "archive.html"],
     ["clear completed", "dashboard.html"],
     ["terms of knowledge", "membership.html"],
@@ -78,12 +93,12 @@
     ["curator privacy", "settings.html"],
     ["privacy policy", "settings.html"],
     ["institutional access", "membership.html"],
-    ["focus mode", "index.html"],
-    ["tutorial", "index.html"]
+    ["focus mode", "dashboard.html"],
+    ["tutorial", "dashboard.html"]
   ]);
 
   const topLinks = [
-    { href: "index.html", label: "Home" },
+    { href: "dashboard.html", label: "Home" },
     { href: "dashboard.html", label: "Dashboard" },
     { href: "subject-library-2.html", label: "View Libraries" },
     { href: "library.html", label: "Library" },
@@ -91,7 +106,7 @@
   ];
 
   const sideLinks = [
-    { href: "index.html", label: "Home", icon: "home" },
+    { href: "dashboard.html", label: "Home", icon: "home" },
     { href: "dashboard.html", label: "Overview", icon: "dashboard" },
     { href: "subject-library-2.html", label: "Libraries", icon: "auto_stories" },
     { href: "analytics.html", label: "Analytics", icon: "analytics" },
@@ -127,7 +142,6 @@
     "archive-classic.html": { title: "Archive Classic", kicker: "Historical Collection" },
     "curation.html": { title: "Curation", kicker: "Editorial Console" },
     "analytics.html": { title: "Analytics", kicker: "Scholar Metrics" },
-    "analytics-overview.html": { title: "Analytics Deep Dive", kicker: "Performance Review" },
     "achievements.html": { title: "Achievements", kicker: "Scholar Profile" },
     "profile.html": { title: "Profile", kicker: "Academic Identity" },
     "settings.html": { title: "Settings", kicker: "Account Controls" },
@@ -140,14 +154,13 @@
   };
 
   const pageCatalog = [
-    { href: "index.html", title: "Home", kicker: "Soul Concept", summary: "Editorial landing page for discovery and navigation.", keywords: ["home", "discover", "landing", "knowledge"] },
+    { href: "dashboard.html", title: "Home", kicker: "Soul Concept", summary: "Open the live Soul Concept workspace instead of the legacy landing page.", keywords: ["home", "dashboard", "workspace", "knowledge"] },
     { href: "discover.html", title: "Discover", kicker: "Editorial Home", summary: "Browse featured knowledge paths and study tools.", keywords: ["discover", "featured", "manifesto"] },
     { href: "dashboard.html", title: "Dashboard", kicker: "Scholar Workspace", summary: "Track tasks, progress, and learning insights.", keywords: ["dashboard", "overview", "tasks", "flow"] },
     { href: "subject-library-2.html", title: "View Libraries", kicker: "Subject Collections", summary: "Browse the imported libraries hub and jump into the real Soul Concept science, geography, math, quiz, and cards tools.", keywords: ["library", "subjects", "disciplines", "modules", "science", "geography", "math", "view libraries"] },
     { href: "subject-library-2.html", title: "Subject Library", kicker: "Curated Disciplines", summary: "Browse the imported all-subjects screen with searchable discipline cards.", keywords: ["subjects", "all subjects", "subject library", "disciplines"] },
     { href: "research.html", title: "Research", kicker: "Repository", summary: "Search papers, authors, keywords, and DOI references.", keywords: ["research", "papers", "authors", "doi"] },
     { href: "analytics.html", title: "Analytics", kicker: "Scholar Metrics", summary: "Review growth, impact, mastery, and knowledge stream metrics.", keywords: ["analytics", "metrics", "impact", "growth"] },
-    { href: "analytics-overview.html", title: "Analytics Deep Dive", kicker: "Performance Review", summary: "Expanded analytics with deeper performance context.", keywords: ["analytics", "deep dive", "performance"] },
     { href: "curation.html", title: "Curation", kicker: "Editorial Console", summary: "Manage saved artifacts and curated materials.", keywords: ["curation", "artifacts", "saved"] },
     { href: "archive.html", title: "Archive", kicker: "Manuscripts", summary: "Search archived material and references.", keywords: ["archive", "manuscripts", "history"] },
     { href: "membership.html", title: "Membership", kicker: "Plans and Access", summary: "Review access plans and institutional membership.", keywords: ["membership", "plans", "premium"] },
@@ -277,7 +290,7 @@
       } else if (route && genericTargets.includes(href || "")) {
         anchor.setAttribute("href", route);
       } else if (!href || href === "#" || href === "") {
-        anchor.setAttribute("href", route || "index.html");
+        anchor.setAttribute("href", route || "dashboard.html");
       }
     });
 
@@ -303,7 +316,8 @@
 
   function currentPath() {
     const value = window.location.pathname.split("/").pop();
-    return value || "index.html";
+    if (!value || value === "analytics-overview.html") return "analytics.html";
+    return value;
   }
 
   function escapeHtml(text) {
@@ -354,7 +368,7 @@
   }
 
   function activeMatch(href, pathname) {
-    if (pathname === "index.html" && href === "index.html") return true;
+    if (pathname === "index.html" && href === "dashboard.html") return true;
     if (href === pathname) return true;
     if (href === "subject-library-2.html" && ["library.html", "subjects.html", "disciplines.html"].includes(pathname)) return true;
     if (href === "research.html" && ["archive.html", "archive-classic.html", "curation.html"].includes(pathname)) return true;
@@ -386,8 +400,10 @@
       <div class="sc-shell-scrim" data-sc-shell-close></div>
       <aside class="sc-shell-sidebar" aria-label="Primary navigation">
         <div class="sc-shell-sidebar-head">
-          <a class="sc-shell-brand" href="index.html">
-            <span class="sc-shell-brandmark"><span class="material-symbols-outlined">school</span></span>
+          <a class="sc-shell-brand" href="dashboard.html">
+            <span class="sc-shell-brandmark" aria-hidden="true">
+              <img src="icons/soulconceptflame.png" alt="" />
+            </span>
             <span class="sc-shell-brandtext">Soul Concept</span>
           </a>
           <button class="sc-shell-iconbtn sc-shell-close" type="button" aria-label="Close navigation" data-sc-shell-close>
@@ -424,8 +440,9 @@
           <button class="sc-shell-iconbtn" type="button" aria-label="Start tutorial" data-sc-open-tour>
             <span class="material-symbols-outlined">school</span>
           </button>
-          <button class="sc-shell-iconbtn" type="button" aria-label="Open sign in" data-sc-open-auth>
-            <span class="material-symbols-outlined">login</span>
+          <button class="sc-shell-authbtn" type="button" aria-label="Open sign in" data-sc-open-auth>
+            <span class="sc-shell-authbtn-logo" aria-hidden="true"></span>
+            <span>Sign In</span>
           </button>
           <button class="sc-shell-iconbtn" type="button" aria-label="Search This Page" data-sc-page-search>
             <span class="material-symbols-outlined">search</span>
@@ -838,7 +855,7 @@
 
   function setupAnalyticsInteractions() {
     const pathname = currentPath();
-    if (!["analytics.html", "analytics-overview.html"].includes(pathname)) return;
+    if (pathname !== "analytics.html") return;
 
     const periods = [
       { label: "Real-time", path: "M0,250 Q100,240 200,180 T400,140 T600,60 T800,20", peak: "98.4 IQV", depth: "1,240h", retention: "92%", phase: "Advanced Synthesis", citation: "4.8k", delta: "+12.4%", impact: "89", grade: "A+" },
@@ -849,7 +866,6 @@
     let periodIndex = 0;
     const badge = Array.from(document.querySelectorAll("span")).find((node) => (node.textContent || "").trim() === "Real-time");
     const exportButton = Array.from(document.querySelectorAll("button")).find((node) => /export report/i.test(node.textContent || ""));
-    const deepDiveButton = Array.from(document.querySelectorAll("button")).find((node) => /deep dive/i.test(node.textContent || ""));
     const searchInput = document.querySelector('input[placeholder*="Search knowledge"]');
     const chartPath = document.querySelector('svg path[stroke="#004435"]');
     const chartArea = document.querySelector('svg path[fill="url(#line-gradient)"]');
@@ -921,12 +937,6 @@
       });
     }
 
-    if (deepDiveButton && pathname === "analytics-overview.html") {
-      deepDiveButton.addEventListener("click", () => {
-        window.location.href = "research.html";
-      });
-    }
-
     if (searchInput && tableRows.length) {
       searchInput.addEventListener("input", () => {
         const query = normalize(searchInput.value);
@@ -993,7 +1003,7 @@
         { selectors: ['a[href="anki/index.html"]', 'a[href="math-quiz-simulator.html"]'], title: "Tools", body: "Concept cards and quiz practice stay wired to the original Soul Concept tools." }
       ],
       "analytics.html": [
-        { selectors: ['[data-analytics-page]', '[data-home-analytics]'], title: "Live Analytics", body: "These metrics are still powered by the original Soul Concept analytics logic." },
+        { selectors: ['[data-analytics-page]', '[data-home-analytics]'], title: "Live Analytics", body: "This is the current Soul Concept analytics dashboard with the new live metrics layout." },
         { selectors: ['button[data-focus-hero-open]'], title: "Focus Loop", body: "Use Focus Mode before returning here so the dashboard has better data." }
       ],
       "study-library.html": [
@@ -1205,4 +1215,5 @@
   setupHeroParallax();
   document.body.classList.add("sc-shell-ready");
   document.body.classList.add("sc-page-enter");
+  document.getElementById("sc-shell-critical")?.remove();
 })();
