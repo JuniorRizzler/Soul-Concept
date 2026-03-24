@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Soul Concept | Focus Scheduler</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#c8c5cb",
+              "on-tertiary-fixed": "#1b1b1f",
+              "tertiary-fixed": "#e4e1e7",
+              "on-error": "#ffffff",
+              "tertiary-container": "#535256",
+              "surface-dim": "#dfd7e3",
+              "on-secondary-fixed": "#3a0a00",
+              "on-tertiary": "#ffffff",
+              "on-surface": "#1d1a22",
+              "primary": "#004435",
+              "primary-fixed-dim": "#98d3bd",
+              "surface-container-high": "#ede6f1",
+              "secondary-fixed-dim": "#ffb59e",
+              "primary-fixed": "#b3efd8",
+              "on-secondary": "#ffffff",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-highest": "#e7e0eb",
+              "secondary": "#ae3200",
+              "secondary-fixed": "#ffdbd0",
+              "on-surface-variant": "#404945",
+              "on-primary-fixed": "#002118",
+              "surface-bright": "#fef7ff",
+              "background": "#fef7ff",
+              "surface-container-low": "#f9f1fd",
+              "secondary-container": "#fe6432",
+              "on-secondary-fixed-variant": "#852400",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#c8c5ca",
+              "on-background": "#1d1a22",
+              "surface-variant": "#e7e0eb",
+              "surface": "#fef7ff",
+              "surface-tint": "#2f6857",
+              "outline-variant": "#bfc9c3",
+              "on-primary": "#ffffff",
+              "outline": "#707974",
+              "on-primary-fixed-variant": "#125040",
+              "primary-container": "#215c4b",
+              "error": "#ba1a1a",
+              "inverse-on-surface": "#f6eefa",
+              "inverse-surface": "#322f37",
+              "surface-container": "#f3ebf7",
+              "inverse-primary": "#98d3bd",
+              "on-primary-container": "#97d2bc",
+              "on-tertiary-fixed-variant": "#47464b",
+              "on-secondary-container": "#5b1600",
+              "tertiary": "#3b3b3f"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: 80px repeat(5, 1fr);
+        grid-auto-rows: minmax(100px, auto);
+      }
+      .depth-layer-1 { box-shadow: 0 10px 30px rgba(0, 68, 53, 0.04); }
+      .depth-layer-2 { box-shadow: 0 20px 40px rgba(29, 26, 34, 0.06); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body overflow-x-hidden">
+<!-- Left Side Navigation (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-[#fef7ff] dark:bg-slate-900 flex flex-col p-4 border-r border-slate-100 dark:border-slate-800">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-lg font-extrabold text-[#004435] dark:text-emerald-400 font-headline leading-tight">Curator Pro</h1>
+<p class="text-[0.7rem] text-slate-500 font-label tracking-wider uppercase">Precision Study</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="local_library">local_library</span>
+                Library
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 text-[#004435] dark:text-emerald-400 rounded-lg transition-all duration-200 translate-x-1 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem]" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                Scheduler
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Analytics
+            </a>
+</nav>
+<button class="mt-8 mb-auto w-full py-4 bg-primary text-on-primary rounded-xl font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+            New Study Session
+        </button>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-primary font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+                Help
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-secondary font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Sign Out
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar (Shared Component Style) -->
+<header class="fixed top-0 right-0 left-64 z-40 bg-[#fef7ff]/70 backdrop-blur-xl px-8 py-4 flex justify-between items-center shadow-[0_20px_40px_rgba(29,26,34,0.06)]">
+<div class="flex items-center gap-6">
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search curriculum or tasks..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100/50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100/50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<img alt="User profile avatar" class="w-10 h-10 rounded-full border-2 border-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAnT662J9xAbJCPvTxdXVDx2lpxnkv-K6X677IWjisPsLvCB3P3GEbRNAWf6hvtl503IuuPI4PJG9IYsB10WvRQAyqav9mg4yttYDLjMhprYRhY9C_kB7cTLtMWul-UISxKWyYc9Y60TQ239kZFtR8RGJvn9brYsrBMuck3WSLrEI9Y4NVRJxYpHf-zUlXPdnXJylMrZQkG3xG6bcwGCpAz-RRN1A0ygZ8UcY29VtjPNqbtdXf_OM3jIOp_7b0_Qmw8BNV-RXBqkGs"/>
+<div class="hidden lg:block">
+<p class="text-xs font-bold font-headline text-primary">Dr. Julian Vance</p>
+<p class="text-[0.65rem] font-label text-slate-500">Postgrad Fellow</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="pt-24 px-8 pb-12">
+<!-- Page Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
+<div class="space-y-2">
+<h2 class="text-4xl font-headline font-extrabold tracking-tight text-primary leading-tight">Study Scheduler</h2>
+<p class="text-slate-500 max-w-lg font-body text-sm leading-relaxed">
+                        Orchestrate your cognitive energy. Sync seamlessly with Google Calendar and BBK12 to optimize your study flow.
+                    </p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-highest text-primary font-headline font-bold text-sm rounded-xl hover:bg-slate-200 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="sync" style="font-variation-settings: 'FILL' 0;">sync</span>
+                        Sync Study Calendars
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-lg shadow-primary/10 hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                        Initialize Focus Mode
+                    </button>
+</div>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left: 3D Calendar Grid (2/3rds) -->
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-surface-container-low rounded-3xl p-6 depth-layer-1">
+<div class="flex items-center justify-between mb-8 px-2">
+<div class="flex items-center gap-4">
+<h3 class="text-xl font-headline font-bold text-primary">Week 14: Oct 23 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ Oct 27</h3>
+<div class="flex bg-white/50 p-1 rounded-lg">
+<button class="p-1 hover:bg-white rounded transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
+<button class="p-1 hover:bg-white rounded transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[0.65rem] font-label font-bold rounded-full uppercase tracking-widest">Weekly View</span>
+</div>
+</div>
+<!-- 3D Calendar Simulation -->
+<div class="calendar-grid border-t border-slate-200/50">
+<!-- Time Labels -->
+<div class="flex flex-col py-4 gap-20 text-[0.65rem] font-label font-bold text-slate-400 items-end pr-4">
+<span>08:00 AM</span>
+<span>10:00 AM</span>
+<span>12:00 PM</span>
+<span>02:00 PM</span>
+<span>04:00 PM</span>
+<span>06:00 PM</span>
+</div>
+<!-- Column: Mon -->
+<div class="border-l border-slate-200/50 p-2 relative min-h-[600px]">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">MON 23</p>
+<!-- Event Card -->
+<div class="glass-card absolute top-20 left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-primary hover:translate-y-[-2px] transition-transform cursor-pointer">
+<p class="text-[0.6rem] font-label font-bold text-primary-container">09:00 - 10:30</p>
+<h4 class="text-[0.75rem] font-headline font-bold text-primary leading-tight mt-1">Neuroscience Lab</h4>
+<div class="mt-2 flex items-center gap-1">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+<span class="text-[0.55rem] font-label text-slate-500">Main Campus B3</span>
+</div>
+</div>
+<div class="glass-card absolute top-[340px] left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-secondary hover:translate-y-[-2px] transition-transform cursor-pointer">
+<p class="text-[0.6rem] font-label font-bold text-secondary">02:30 - 04:00</p>
+<h4 class="text-[0.75rem] font-headline font-bold text-on-surface leading-tight mt-1">Deep Work: Thesis</h4>
+<span class="mt-2 inline-block px-1.5 py-0.5 bg-secondary/10 text-secondary text-[0.5rem] font-label font-bold rounded">FOCUS</span>
+</div>
+</div>
+<!-- Column: Tue -->
+<div class="border-l border-slate-200/50 p-2 relative">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">TUE 24</p>
+<div class="glass-card absolute top-40 left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-primary hover:translate-y-[-2px] transition-transform cursor-pointer">
+<p class="text-[0.6rem] font-label font-bold text-primary-container">10:30 - 12:00</p>
+<h4 class="text-[0.75rem] font-headline font-bold text-primary leading-tight mt-1">Stochastic Models</h4>
+<div class="mt-2 flex items-center gap-1 text-[0.55rem] font-label text-slate-500">
+<span class="material-symbols-outlined text-[10px]" data-icon="videocam">videocam</span>
+<span>Zoom Link Attached</span>
+</div>
+</div>
+</div>
+<!-- Column: Wed -->
+<div class="border-l border-slate-200/50 p-2 relative bg-surface-container-highest/20">
+<p class="text-[0.6rem] font-label font-bold text-primary mb-4 text-center">WED 25 (Today)</p>
+<div class="glass-card absolute top-[280px] left-2 right-2 p-3 rounded-xl depth-layer-2 ring-2 ring-primary border border-white/40 border-l-4 border-l-primary shadow-xl">
+<p class="text-[0.6rem] font-label font-bold text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                        ACTIVE NOW
+                                    </p>
+<h4 class="text-[0.75rem] font-headline font-bold text-primary leading-tight mt-1">Seminar: Modern Ethics</h4>
+<p class="text-[0.55rem] font-label text-slate-500 mt-1">Reading Room 402</p>
+</div>
+<!-- Time indicator line -->
+<div class="absolute top-[300px] left-0 right-0 border-t-2 border-primary/30 z-10 pointer-events-none"></div>
+</div>
+<!-- Column: Thu -->
+<div class="border-l border-slate-200/50 p-2 relative">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">THU 26</p>
+<div class="glass-card absolute top-20 left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-slate-400 opacity-60">
+<p class="text-[0.6rem] font-label font-bold text-slate-400">09:00 - 10:30</p>
+<h4 class="text-[0.75rem] font-headline font-bold text-slate-600 leading-tight mt-1">Physics Recitation</h4>
+</div>
+</div>
+<!-- Column: Fri -->
+<div class="border-l border-slate-200/50 p-2 relative">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">FRI 27</p>
+<div class="glass-card absolute top-[450px] left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-secondary-container hover:translate-y-[-2px] transition-transform cursor-pointer">
+<p class="text-[0.6rem] font-label font-bold text-on-secondary-container">04:30 - 05:30</p>
+<h4 class="text-[0.75rem] font-headline font-bold text-on-secondary-container leading-tight mt-1">Weekly Peer Review</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Focus Task Feed (1/3rd) -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<!-- BBK12 Task Section -->
+<div class="bg-white rounded-3xl p-6 depth-layer-2 border border-slate-100">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-headline font-extrabold text-primary">Focus Task Feed</h3>
+<span class="text-[0.65rem] font-label font-bold text-slate-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="cloud_sync">cloud_sync</span>
+                                BBK12 LIVE
+                            </span>
+</div>
+<div class="space-y-4">
+<!-- Task Item 1 -->
+<div class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[0.55rem] font-label font-bold rounded">BIOLOGY 302</span>
+<span class="text-secondary text-[0.6rem] font-label font-bold">URGENT</span>
+</div>
+<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Lab Report: Cellular Respiration</h5>
+<div class="mt-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span class="text-[0.65rem] font-label font-semibold">2.5 hrs</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="priority_high">priority_high</span>
+<span class="text-[0.65rem] font-label font-semibold">High</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Task Item 2 -->
+<div class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 bg-slate-200 text-slate-600 text-[0.55rem] font-label font-bold rounded">PHILOSOPHY</span>
+<span class="text-slate-400 text-[0.6rem] font-label font-bold">TOMORROW</span>
+</div>
+<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Reflection Essay: Kantian Duty</h5>
+<div class="mt-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span class="text-[0.65rem] font-label font-semibold">1.0 hr</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="equalizer">equalizer</span>
+<span class="text-[0.65rem] font-label font-semibold">Medium</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Task Item 3 -->
+<div class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 bg-slate-200 text-slate-600 text-[0.55rem] font-label font-bold rounded">ECONOMICS</span>
+<span class="text-slate-400 text-[0.6rem] font-label font-bold">OCT 27</span>
+</div>
+<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Market Analysis Problem Set</h5>
+<div class="mt-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span class="text-[0.65rem] font-label font-semibold">4.0 hrs</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[14px]" data-icon="priority_high">priority_high</span>
+<span class="text-[0.65rem] font-label font-semibold">High</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-slate-100 rounded-xl text-[0.75rem] font-headline font-bold text-slate-500 hover:bg-slate-50 transition-colors">
+                            View All BBK12 Assignments
+                        </button>
+</div>
+<!-- 3D Progress Module -->
+<div class="relative overflow-hidden bg-primary-container rounded-3xl p-6 text-on-primary depth-layer-2 group">
+<div class="relative z-10">
+<p class="text-[0.6rem] font-label font-bold tracking-widest text-primary-fixed mb-1 uppercase">Syllabus Progress</p>
+<h4 class="text-xl font-headline font-bold mb-4">Fall Quarter Mastery</h4>
+<div class="flex items-end gap-2 mb-6">
+<span class="text-4xl font-headline font-extrabold">64%</span>
+<span class="text-[0.7rem] font-label mb-2 opacity-70">+8% from last week</span>
+</div>
+<div class="w-full h-2 bg-primary rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed w-[64%] rounded-full shadow-[0_0_10px_rgba(179,239,216,0.5)]"></div>
+</div>
+</div>
+<!-- Abstract 3D shape decoration -->
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary opacity-30 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700"></div>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/5 rounded-full border border-white/10 group-hover:rotate-45 transition-transform duration-700"></div>
+</div>
+</div>
+</div>
+<!-- Curator's Tip Section -->
+<div class="mt-12 p-8 bg-surface-container-lowest rounded-[2rem] border border-slate-100/50 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+<div class="flex-shrink-0 w-16 h-16 bg-secondary/5 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-secondary" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div class="flex-1 space-y-1">
+<h5 class="text-base font-headline font-extrabold text-primary">Curator's Tip: The Ultradian Rhythm</h5>
+<p class="text-sm text-slate-500 leading-relaxed max-w-2xl font-body">
+                        Studies show that cognitive performance operates in 90-minute "ultradian" cycles. For peak retention during your <span class="text-primary font-bold">Neuroscience Lab</span> session, prioritize a 15-minute complete brain break after every 90 minutes of high-intensity focus.
+                    </p>
+</div>
+<button class="px-6 py-2 rounded-xl text-[0.75rem] font-headline font-extrabold text-primary border-2 border-primary/10 hover:bg-primary hover:text-white transition-all">
+                    Dismiss Tip
+                </button>
+<!-- Decorative element -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full translate-x-1/2 -translate-y-1/2"></div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Hidden on Scheduler as per mandate, but placeholder for structure if needed elsewhere) -->
+<!-- Suppressed: FAB on Task-focused detail screens is prohibited by the shell visibility rule -->  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

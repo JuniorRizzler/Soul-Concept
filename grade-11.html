@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grade 11 Subject Library | Soul Concept</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#404945",
+              "on-primary-fixed": "#002118",
+              "surface-container": "#f3ebf7",
+              "primary-fixed-dim": "#98d3bd",
+              "secondary-container": "#fe6432",
+              "surface-container-highest": "#e7e0eb",
+              "on-tertiary-container": "#c8c5ca",
+              "inverse-on-surface": "#f6eefa",
+              "inverse-primary": "#98d3bd",
+              "inverse-surface": "#322f37",
+              "surface-container-high": "#ede6f1",
+              "on-tertiary-fixed-variant": "#47464b",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed-variant": "#125040",
+              "primary": "#004435",
+              "tertiary-container": "#535256",
+              "surface": "#fef7ff",
+              "error": "#ba1a1a",
+              "surface-bright": "#fef7ff",
+              "on-tertiary-fixed": "#1b1b1f",
+              "background": "#fef7ff",
+              "outline-variant": "#bfc9c3",
+              "tertiary": "#3b3b3f",
+              "on-primary-container": "#97d2bc",
+              "secondary-fixed-dim": "#ffb59e",
+              "primary-container": "#215c4b",
+              "outline": "#707974",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#ffdbd0",
+              "surface-container-low": "#f9f1fd",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#b3efd8",
+              "on-background": "#1d1a22",
+              "on-secondary-fixed": "#3a0a00",
+              "on-error-container": "#93000a",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed-dim": "#c8c5cb",
+              "tertiary-fixed": "#e4e1e7",
+              "on-surface": "#1d1a22",
+              "secondary": "#ae3200",
+              "surface-dim": "#dfd7e3",
+              "surface-tint": "#2f6857",
+              "error-container": "#ffdad6",
+              "surface-variant": "#e7e0eb",
+              "on-secondary-fixed-variant": "#852400",
+              "on-secondary-container": "#5b1600"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fef7ff;
+            color: #1d1a22;
+            font-family: 'Inter', sans-serif;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-extrabold text-emerald-950 tracking-tighter font-headline">Soul Concept</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 9</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 10</a>
+<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-bold tracking-tight" href="#">Grade 11</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 12</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Subjects</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Library</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined text-emerald-900">search</span>
+</button>
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined text-emerald-900">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-5rem)] w-64 border-r border-emerald-900/10 bg-surface-container-low sticky top-20 py-6 px-4 shrink-0">
+<div class="mb-8 px-4">
+<h2 class="text-lg font-bold text-emerald-950 font-headline">Research Desk</h2>
+<p class="text-xs text-emerald-800/70 font-label uppercase tracking-widest">Grade 12 Specialist</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined">functions</span>
+<span>Mathematics</span>
+</a>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span>Sciences</span>
+</a>
+<a class="flex items-center space-x-3 bg-emerald-100 text-emerald-900 rounded-lg px-4 py-2 font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span>Humanities</span>
+</a>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined">translate</span>
+<span>Languages</span>
+</a>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span>Arts</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-1 border-t border-emerald-900/5">
+<button class="w-full mb-4 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-body font-bold text-sm shadow-lg shadow-primary/10 active:scale-95 transition-transform">
+                    New Research Paper
+                </button>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 rounded-lg font-body text-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 rounded-lg font-body text-sm" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 px-8 lg:px-16 py-12 max-w-7xl mx-auto">
+<!-- Hero Header Section -->
+<section class="mb-20">
+<span class="font-label text-secondary font-bold tracking-widest uppercase text-xs mb-4 block">Curated Knowledge</span>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-emerald-950 tracking-tight leading-none mb-8">
+                    Grade 11 <br/><span class="text-emerald-900/40">Subject Library</span>
+</h1>
+<p class="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    A premium repository of foundational knowledge, structured for deep focus and academic rigor. Explore the core disciplines of the Grade 11 curriculum through a lens of curated excellence.
+                </p>
+</section>
+<!-- Subject Bento Grid -->
+<div class="editorial-grid mb-24">
+<!-- Advanced Physics -->
+<div class="col-span-12 md:col-span-8 group cursor-pointer">
+<div class="relative overflow-hidden rounded-full aspect-[16/9] bg-surface-container-low transition-all duration-300 hover:bg-surface-container-highest p-10 flex flex-col justify-end">
+<div class="absolute inset-0 opacity-20 mix-blend-multiply group-hover:scale-105 transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="Abstract visualization of quantum particles colliding in a dark void with neon light streaks and mathematical formulas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0RQ34fM76xwHjwNHI3lUD14wr83j_wLsQvR8Qc3u1hzYnLsGU7l0OA4_qG1GzeycIReX_iSuf-DSQqNvntviSdJUZ47_T6b8VZx3ll850RHhUoLgplcIUVk3u1i5xZqVKObN--6IzkvoFkR_SkFoGxQnEvmU_iCkNoRjnoOdXZzxbQhE2W3-6AOauYTfkmRIlCqdL2dzKsTFT6pI-0NztusEVI8wdskLcKheJ_IUuv_Idts7tUTYR8Tdc9kori-DC-Oq3T9hcwgGl"/>
+</div>
+<div class="relative z-10">
+<div class="flex items-center space-x-3 mb-4">
+<span class="bg-primary-fixed text-on-primary-fixed font-label text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Science &amp; Theory</span>
+<span class="text-on-surface-variant font-label text-[10px] font-bold uppercase tracking-widest">PHS-11A</span>
+</div>
+<h2 class="font-headline text-4xl font-bold text-emerald-950 mb-4">Advanced Physics</h2>
+<p class="font-body text-on-surface-variant max-w-md mb-6">Mastering kinematics, electromagnetism, and the precursors to quantum mechanics through analytical rigor.</p>
+<div class="flex space-x-4">
+<button class="bg-primary text-white font-body font-semibold px-6 py-2 rounded-xl text-sm transition-all hover:bg-primary-container">Enter Module</button>
+<button class="text-emerald-900 font-body font-semibold text-sm underline underline-offset-4 decoration-secondary/30 hover:decoration-secondary">View Syllabus</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Psychology -->
+<div class="col-span-12 md:col-span-4 group cursor-pointer">
+<div class="h-full bg-surface-container-low rounded-full transition-all duration-300 hover:bg-surface-container-highest p-10 flex flex-col">
+<div class="flex-1 mb-10">
+<img class="w-full h-48 object-cover rounded-xl mb-8" data-alt="Minimalist architectural bust carved from white marble against a neutral warm background with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg15m0q_owBFbG1UO7IXjqHnj6CLbRhI88sLWVaMdlmoKANWFf1Dnz_C9lXkC6zt4LGGNCwoOGJLbpKg6lh3eWLbmfJpIAjS0yvyK2O0Q0cYhrwWwp3e-lZnBOj5T_gUG6ofhs_AAMJMnqyGNbVANnHTQPnZpooWlTp2LDTAvcKOpgqLdMBDDgyQevhF1Ye4p0b1WUKwrc6jakGE8aVRoOtiUOt_AJLGeI73Ot__cQkAThRR2uOw4KeZdxL8i37qTn4opI11QkT2oC"/>
+<span class="bg-primary-fixed text-on-primary-fixed font-label text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Social Sciences</span>
+<h2 class="font-headline text-2xl font-bold text-emerald-950 mt-4 mb-2">Psychology</h2>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">The exploration of the human mind, behavioral patterns, and the architecture of cognition.</p>
+</div>
+<div class="mt-auto">
+<div class="h-[2px] w-12 bg-secondary mb-4"></div>
+<span class="font-label text-xs font-bold text-emerald-900 uppercase">12 Sub-topics Available</span>
+</div>
+</div>
+</div>
+<!-- Macroeconomics -->
+<div class="col-span-12 md:col-span-4 group cursor-pointer">
+<div class="h-full bg-surface-container-lowest border border-outline-variant/15 rounded-full transition-all duration-300 hover:bg-surface-container-high p-10 flex flex-col">
+<div class="flex-1">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="text-on-surface-variant font-label text-[10px] font-bold uppercase">ECN-202</span>
+</div>
+<h2 class="font-headline text-2xl font-bold text-emerald-950 mb-2">Macroeconomics</h2>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">Analyzing global markets, fiscal policy, and the complex mechanics of large-scale economies.</p>
+</div>
+<ul class="space-y-3 mb-8">
+<li class="flex items-center text-xs font-body text-emerald-900/70">
+<span class="material-symbols-outlined text-[14px] mr-2">check_circle</span> GDP &amp; Growth Metrics
+                            </li>
+<li class="flex items-center text-xs font-body text-emerald-900/70">
+<span class="material-symbols-outlined text-[14px] mr-2">check_circle</span> Monetary Instruments
+                            </li>
+</ul>
+<button class="w-full py-2 bg-surface-container-highest text-emerald-950 font-label font-bold text-xs uppercase tracking-widest rounded-lg">Access Data Sets</button>
+</div>
+</div>
+<!-- Rhetoric -->
+<div class="col-span-12 md:col-span-8 group cursor-pointer">
+<div class="relative overflow-hidden rounded-full h-full bg-primary-container transition-all duration-300 p-10 flex flex-col md:flex-row items-center gap-10">
+<div class="absolute right-0 top-0 w-1/2 h-full opacity-10">
+<img class="w-full h-full object-cover grayscale" data-alt="Close up of a classic fountain pen nib resting on high texture parchment paper with ink stains" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfAVzlK1JJNNsTJUBZMl1Ufc0PEmN6nZJ7iwBOv-eSZEPOruWRQnNDjzTEMMBxjmDE7CKQ4J5Ta-YWaYp76faBZYCsxer4k3iJpU9wu-_Mp5g5rlpbv_oSwIaVoMH1opatjZhLEgE6tYE0hEvjigrMZs-okFFMdZgWVL4SKdrFAAS1_PVIiLQt1L18HMQaez2ZwBDsr8dNuaVEaYX0DlBna1pSIVwQXbA3Xg5S4yDg9RZ7oNiisMYjc_9sS1jsCHD3yzb9zAQ92IMp"/>
+</div>
+<div class="flex-1 relative z-10">
+<span class="text-primary-fixed font-label text-[10px] font-bold px-3 py-1 border border-primary-fixed/30 rounded-full uppercase tracking-tighter mb-4 inline-block">Classical Arts</span>
+<h2 class="font-headline text-4xl font-bold text-primary-fixed mb-4">Rhetoric &amp; Logic</h2>
+<p class="font-body text-primary-fixed-dim max-w-sm mb-6">The art of persuasion, dialectic reasoning, and the structural integrity of complex argumentation.</p>
+<div class="flex items-center space-x-6">
+<span class="flex items-center text-primary-fixed text-sm font-label">
+<span class="material-symbols-outlined mr-2">history_edu</span> Aristotlean Ethics
+                                </span>
+<span class="flex items-center text-primary-fixed text-sm font-label">
+<span class="material-symbols-outlined mr-2">forum</span> Modern Debate
+                                </span>
+</div>
+</div>
+<div class="shrink-0 relative z-10">
+<div class="w-40 h-40 bg-primary-fixed rounded-full flex items-center justify-center rotate-12 group-hover:rotate-0 transition-transform duration-500 shadow-2xl">
+<span class="material-symbols-outlined text-primary text-6xl">auto_stories</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Saved Guides -->
+<section class="mb-20">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h3 class="font-headline text-3xl font-bold text-emerald-950 mb-2">Recent Research</h3>
+<p class="text-on-surface-variant font-body text-sm">Peer-reviewed papers from the Grade 11 cohort.</p>
+</div>
+<button class="text-secondary font-label font-bold text-xs uppercase tracking-widest border-b border-secondary/20 pb-1">View Archive</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="text-[10px] font-label font-bold text-secondary uppercase block mb-3">Physics</span>
+<h4 class="font-headline font-bold text-emerald-950 mb-4 leading-snug">The Entropy of Information: A Statistical Approach</h4>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-6 h-6 bg-emerald-200 rounded-full mr-2"></div>
+<span class="text-xs font-body text-emerald-900/60">A. Sterling</span>
+</div>
+<span class="text-[10px] font-label text-emerald-900/40">14 MIN READ</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors border-l-4 border-secondary">
+<span class="text-[10px] font-label font-bold text-secondary uppercase block mb-3">Macroeconomics</span>
+<h4 class="font-headline font-bold text-emerald-950 mb-4 leading-snug">Post-Pandemic Fiscal Adjustments in Emerging Markets</h4>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-6 h-6 bg-emerald-200 rounded-full mr-2"></div>
+<span class="text-xs font-body text-emerald-900/60">M. Chen</span>
+</div>
+<span class="text-[10px] font-label text-emerald-900/40">22 MIN READ</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="text-[10px] font-label font-bold text-secondary uppercase block mb-3">Psychology</span>
+<h4 class="font-headline font-bold text-emerald-950 mb-4 leading-snug">Neural Correlates of Cognitive Dissonance in Adolescents</h4>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-6 h-6 bg-emerald-200 rounded-full mr-2"></div>
+<span class="text-xs font-body text-emerald-900/60">E. Vogel</span>
+</div>
+<span class="text-[10px] font-label text-emerald-900/40">18 MIN READ</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer Status Bar -->
+<footer class="bg-surface-container-highest/30 py-4 px-8 flex justify-between items-center text-[10px] font-label text-emerald-900/40 border-t border-emerald-900/5">
+<div class="flex space-x-6">
+<span>SYSTEM STATUS: OPERATIONAL</span>
+<span>DATABASE: 1.2 TB RESEARCH DATA</span>
+<span>LAST CURATED: OCT 24, 2023</span>
+</div>
+<div class="uppercase tracking-widest font-bold">Soul Concept &copy; 2026</div>
+</footer>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

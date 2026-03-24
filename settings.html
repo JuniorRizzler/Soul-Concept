@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | The Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        /* Custom scrollbar for study feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fef7ff;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e7e0eb;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "secondary": "#ae3200",
+                "surface-container-low": "#f9f1fd",
+                "inverse-on-surface": "#f6eefa",
+                "surface-container": "#f3ebf7",
+                "on-primary": "#ffffff",
+                "on-primary-fixed": "#002118",
+                "on-secondary-fixed": "#3a0a00",
+                "inverse-surface": "#322f37",
+                "tertiary": "#3b3b3f",
+                "error": "#ba1a1a",
+                "on-error-container": "#93000a",
+                "surface-dim": "#dfd7e3",
+                "on-primary-fixed-variant": "#125040",
+                "tertiary-container": "#535256",
+                "surface": "#fef7ff",
+                "secondary-fixed-dim": "#ffb59e",
+                "surface-variant": "#e7e0eb",
+                "surface-container-lowest": "#ffffff",
+                "primary-fixed": "#b3efd8",
+                "primary-fixed-dim": "#98d3bd",
+                "on-tertiary": "#ffffff",
+                "tertiary-fixed": "#e4e1e7",
+                "secondary-container": "#fe6432",
+                "on-tertiary-fixed-variant": "#47464b",
+                "on-tertiary-fixed": "#1b1b1f",
+                "background": "#fef7ff",
+                "on-error": "#ffffff",
+                "surface-container-highest": "#e7e0eb",
+                "on-primary-container": "#97d2bc",
+                "on-secondary-fixed-variant": "#852400",
+                "on-background": "#1d1a22",
+                "outline-variant": "#bfc9c3",
+                "on-secondary": "#ffffff",
+                "surface-container-high": "#ede6f1",
+                "secondary-fixed": "#ffdbd0",
+                "primary": "#004435",
+                "inverse-primary": "#98d3bd",
+                "error-container": "#ffdad6",
+                "outline": "#707974",
+                "on-surface": "#1d1a22",
+                "on-surface-variant": "#404945",
+                "primary-container": "#215c4b",
+                "on-tertiary-container": "#c8c5ca",
+                "tertiary-fixed-dim": "#c8c5cb",
+                "surface-tint": "#2f6857",
+                "surface-bright": "#fef7ff",
+                "on-secondary-container": "#5b1600"
+              },
+              fontFamily: {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Manrope"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 glass-header bg-white/70 dark:bg-zinc-950/70 shadow-sm dark:shadow-none">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-emerald-900 dark:text-emerald-50 font-headline">The Curator</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-plus-jakarta text-sm tracking-tight text-zinc-500 dark:text-zinc-400 hover:text-emerald-800 transition-colors duration-200" href="#">Explore</a>
+<a class="font-plus-jakarta text-sm tracking-tight text-zinc-500 dark:text-zinc-400 hover:text-emerald-800 transition-colors duration-200" href="#">Library</a>
+<a class="font-plus-jakarta text-sm tracking-tight text-zinc-500 dark:text-zinc-400 hover:text-emerald-800 transition-colors duration-200" href="#">Insights</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-zinc-500 hover:text-emerald-800 transition-all p-2 rounded-full" data-icon="notifications">notifications</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="Scholarly Profile" class="h-full w-full object-cover" data-alt="Close-up portrait of a professional man with glasses in a minimalist workspace, soft natural light, academic atmosphere" data-auth-avatar src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnwMTSmnGajc1ulj_XuwAJOnxXdC2BzKbc5n_1Q49Ynr87mMDrhr8UQafpGZA0qIhBcYIkhRAo5jctbLLHzlm6H379FgRdpn2IhH9W9A1viGbrLntD0C5zEQ8mzdrihRXOjIUwkeQjKoRrCgzol6iq2kI6NxUk62peY_6uK1I1VlOr-T4uzJGQtxRcg3_lUCL1r9RPcesk2hsdH9F6c0WIVRs5H4XkPxiE3tANIoaFLfRTXuVLmUqvG-uvwE0T5WCmpcfz7KYXzX8q"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200/50 dark:border-zinc-800/50 hidden lg:block">
+<div class="px-6 mb-8">
+<h2 class="font-headline font-bold text-emerald-800 dark:text-emerald-400 text-xs uppercase tracking-widest">Soul Concept Account</h2>
+<p class="text-xs text-zinc-500 mt-1 font-label" data-auth-plan-copy>Starter Member</p>
+</div>
+<nav class="flex flex-col gap-2 px-4 py-6">
+<a class="flex items-center gap-3 text-emerald-900 dark:text-emerald-50 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg px-4 py-2 border-l-4 border-emerald-800 font-plus-jakarta font-medium text-sm active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-plus-jakarta font-medium text-sm transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="military_tech">military_tech</span>
+<span>Achievements</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-plus-jakarta font-medium text-sm transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="card_membership">card_membership</span>
+<span>Subscriptions</span>
+</a>
+<div class="mt-8 pt-8 border-t border-zinc-200/50">
+<a class="flex items-center gap-3 text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-plus-jakarta font-medium text-sm transition-all" data-auth-logout-trigger href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+<span>Help Center</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-plus-jakarta font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</nav>
+<div class="absolute bottom-8 px-8 w-full">
+<button class="w-full py-3 bg-primary text-on-primary rounded-xl font-headline font-bold text-xs tracking-tight shadow-md hover:bg-primary-container transition-all" data-auth-upgrade>
+                Upgrade to Fellow
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 pb-12 px-6 md:px-12 lg:px-20 min-h-screen">
+<div class="max-w-4xl mx-auto">
+<header class="mb-12">
+<h1 class="text-4xl font-headline font-extrabold tracking-tight text-on-background mb-2">Account Settings</h1>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-2xl">Refine your profile and manage your Soul Concept preferences for a more focused study environment.</p>
+</header>
+<!-- Profile Bento Section -->
+<section class="mb-16">
+<h3 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-8 h-1 bg-primary rounded-full"></span>
+                    Profile Management
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Avatar Card -->
+<div class="md:col-span-1 bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center text-center">
+<div class="relative group">
+<div class="h-32 w-32 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-xl mb-4">
+<img alt="Current Profile" class="h-full w-full object-cover" data-alt="Portrait of a scholarly professional with soft lighting and neutral background" data-auth-avatar src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwp7A1NQWkzNoUw7yIfQSx7yLwH8N6OkelqBzVBOl9Z-fNI7h3xXpSi-xJx2P7YC4rB3OX1NGNrds8nsUgARqN-TTgKrQ6-XSFNbVKSHPDSPJQhW8bUAsTgRYCyDwhwU786kJUUtVYfJOPYHdof98-qdtaxug0-Y3VTwEq9O4NLVBltngA6bZHI48n-tKMGnCNOxqulyPNIgMA2tAmzK12lssZhcp2wv9IvPa6RUXdW7a4gHffqJc6EQDMYQZmAhdvuwOZJh_Jo9vJ"/>
+</div>
+<button class="absolute bottom-2 right-2 bg-primary text-on-primary p-2 rounded-full shadow-lg hover:scale-105 transition-transform material-symbols-outlined" data-icon="edit">edit</button>
+</div>
+<h4 class="font-headline font-bold text-on-surface" data-auth-name>Guest Scholar</h4>
+<span class="font-label text-xs bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full mt-2" data-auth-plan>Starter</span>
+</div>
+<!-- Bio Card -->
+<div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant/15 rounded-xl p-8 shadow-sm">
+<div class="space-y-6">
+<div>
+<label class="block font-label text-xs text-on-surface-variant mb-2 uppercase tracking-wider">Full Name</label>
+<input class="w-full bg-surface-container-low border-0 rounded-lg px-4 py-3 font-body text-sm focus:ring-2 focus:ring-primary/50 transition-all" data-auth-name-input type="text" value=""/>
+</div>
+<div>
+<label class="block font-label text-xs text-on-surface-variant mb-2 uppercase tracking-wider">Study Bio</label>
+<textarea class="w-full bg-surface-container-low border-0 rounded-lg px-4 py-3 font-body text-sm focus:ring-2 focus:ring-primary/50 transition-all" data-auth-bio-input rows="3"></textarea>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Grid -->
+<section class="mb-16">
+<h3 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-8 h-1 bg-secondary rounded-full"></span>
+                    Security &amp; Access
+                </h3>
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<div class="p-8 space-y-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h5 class="font-headline font-bold text-on-surface">Password Security</h5>
+<p class="text-sm text-on-surface-variant font-body">Ensure your study progress remains protected with strong credentials.</p>
+</div>
+<button class="px-6 py-2 border border-outline text-primary rounded-xl font-headline font-bold text-xs hover:bg-white transition-all">
+                                Change Password
+                            </button>
+</div>
+<div class="h-px bg-outline-variant/20"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex gap-4">
+<div class="bg-primary-fixed text-primary p-3 rounded-xl h-fit">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<h5 class="font-headline font-bold text-on-surface">Two-Factor Authentication</h5>
+<p class="text-sm text-on-surface-variant font-body">An extra layer of security for your Curated vaults.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-label font-bold text-secondary uppercase tracking-tighter">Status: Inactive</span>
+<button class="bg-secondary text-on-secondary px-6 py-2 rounded-xl font-headline font-bold text-xs shadow-md hover:bg-on-secondary-fixed-variant transition-all">
+                                    Enable 2FA
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Preferences & Accessibility Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+<!-- Notification Preferences -->
+<section>
+<h3 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-8 h-1 bg-primary rounded-full"></span>
+                        Notifications
+                    </h3>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 flex items-center justify-between group hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="alternate_email">alternate_email</span>
+<div>
+<p class="font-body font-semibold text-on-surface text-sm">Email Digest</p>
+<p class="text-xs text-on-surface-variant font-label">Weekly curation summaries</p>
+</div>
+</div>
+<input checked="" class="h-5 w-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 flex items-center justify-between group hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications_active">notifications_active</span>
+<div>
+<p class="font-body font-semibold text-on-surface text-sm">Push Notifications</p>
+<p class="text-xs text-on-surface-variant font-label">Real-time update alerts</p>
+</div>
+</div>
+<input class="h-5 w-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</div>
+</section>
+<!-- Accessibility -->
+<section>
+<h3 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+<span class="w-8 h-1 bg-primary rounded-full"></span>
+                        Accessibility
+                    </h3>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 flex items-center justify-between group hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="text_fields">text_fields</span>
+<div>
+<p class="font-body font-semibold text-on-surface text-sm">Large Text</p>
+<p class="text-xs text-on-surface-variant font-label">Optimized for readability</p>
+</div>
+</div>
+<input class="h-5 w-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/15 flex items-center justify-between group hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="visibility">visibility</span>
+<div>
+<p class="font-body font-semibold text-on-surface text-sm">High Contrast</p>
+<p class="text-xs text-on-surface-variant font-label">Maximum visual distinction</p>
+</div>
+</div>
+<input class="h-5 w-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</div>
+</section>
+</div>
+<!-- Global Actions Footer -->
+<footer class="mt-20 pt-10 border-t border-outline-variant/30 flex items-center justify-end gap-4">
+<button class="px-8 py-3 text-sm font-headline font-bold text-on-surface-variant hover:text-on-surface transition-colors">Discard Changes</button>
+<p class="text-xs text-on-surface-variant font-label mr-auto" data-auth-save-status></p>
+<button class="px-10 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-headline font-extrabold text-sm shadow-xl hover:scale-[1.02] active:scale-95 transition-all" data-auth-save-profile>Save Global Settings</button>
+</footer>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-lg border-t border-outline-variant/10 flex justify-around items-center py-4 px-6 z-50">
+<button class="flex flex-col items-center gap-1 text-zinc-500">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[10px] font-label font-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-emerald-900 font-bold">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] font-label font-bold">Settings</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-zinc-500">
+<span class="material-symbols-outlined" data-icon="book">book</span>
+<span class="text-[10px] font-label font-bold">Library</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-zinc-500">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-label font-bold">Profile</span>
+</button>
+</nav>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="auth-profile-sync.js?v=20260324a"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

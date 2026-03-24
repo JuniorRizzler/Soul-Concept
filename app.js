@@ -578,6 +578,86 @@
     return seconds + 's'
   }
 
+  function mountGlobalUsageTracker() {
+    if (window.__scUsageTracker && typeof window.__scUsageTracker.getSnapshot === 'function') {
+      return window.__scUsageTracker
+    }
+
+    const usage = readUsageData()
+    const analytics = readAnalyticsData()
+    const sessionStartedAt = Date.now()
+    let pendingVisibleMs = 0
+    let activeStartedAt = document.visibilityState === 'visible' ? Date.now() : 0
+    const analyticsPageKey = currentPage || 'index.html'
+
+    analytics.pageVisits[analyticsPageKey] = Math.max(0, Number(analytics.pageVisits[analyticsPageKey] || 0)) + 1
+    applyFocusSessionAnalytics(analytics)
+    saveAnalyticsData(analytics)
+
+    function flushActiveTime() {
+      if (!activeStartedAt) return
+      pendingVisibleMs += Date.now() - activeStartedAt
+      activeStartedAt = 0
+    }
+
+    function persistUsage() {
+      if (pendingVisibleMs <= 0) return
+      usage.totalMs += pendingVisibleMs
+      analytics.pageMs[analyticsPageKey] = Math.max(0, Number(analytics.pageMs[analyticsPageKey] || 0)) + pendingVisibleMs
+      pendingVisibleMs = 0
+      saveUsageData(usage)
+      saveAnalyticsData(analytics)
+    }
+
+    function resumeIfVisible() {
+      if (document.visibilityState === 'visible' && !activeStartedAt) {
+        activeStartedAt = Date.now()
+      }
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') {
+        flushActiveTime()
+        persistUsage()
+      } else {
+        resumeIfVisible()
+      }
+    })
+
+    window.addEventListener('pagehide', function () {
+      flushActiveTime()
+      persistUsage()
+    })
+
+    setInterval(function () {
+      flushActiveTime()
+      persistUsage()
+      resumeIfVisible()
+    }, 5000)
+
+    window.__scUsageTracker = {
+      getSnapshot: function () {
+        applyFocusSessionAnalytics(analytics)
+        const livePageMs = Math.max(0, Number(analytics.pageMs[analyticsPageKey] || 0)) + pendingVisibleMs + (activeStartedAt ? Date.now() - activeStartedAt : 0)
+        const pageMs = Object.assign({}, analytics.pageMs || {})
+        pageMs[analyticsPageKey] = livePageMs
+        return {
+          usage: Object.assign({}, usage, {
+            totalMs: usage.totalMs + pendingVisibleMs + (activeStartedAt ? Date.now() - activeStartedAt : 0),
+          }),
+          analytics: Object.assign({}, analytics, {
+            pageVisits: Object.assign({}, analytics.pageVisits || {}),
+            pageMs: pageMs,
+          }),
+          sessionStartedAt: sessionStartedAt,
+          currentPage: analyticsPageKey,
+        }
+      },
+    }
+
+    return window.__scUsageTracker
+  }
+
   function escapeHtml(value) {
     return String(value || '')
       .replace(/&/g, '&amp;')
@@ -626,9 +706,32 @@
     const coachTargetEl = root.querySelector('[data-analytics-coach-target]')
     const patternSummaryEl = root.querySelector('[data-analytics-pattern-summary]')
     const patternListEl = root.querySelector('[data-analytics-pattern-list]')
+    const heroGrowthEl = root.querySelector('[data-analytics-hero-growth]')
+    const heroTrendEl = root.querySelector('[data-analytics-hero-trend]')
+    const growthPeakEl = root.querySelector('[data-analytics-growth-peak]')
+    const totalDepthEl = root.querySelector('[data-analytics-total-depth]')
+    const retentionHeroEl = root.querySelector('[data-analytics-retention-hero]')
+    const phaseEl = root.querySelector('[data-analytics-phase]')
+    const citationEl = root.querySelector('[data-analytics-citation]')
+    const citationDeltaEl = root.querySelector('[data-analytics-citation-delta]')
+    const impactEl = root.querySelector('[data-analytics-impact]')
+    const impactCopyEl = root.querySelector('[data-analytics-impact-copy]')
+    const linePeakEl = root.querySelector('[data-analytics-line-peak]')
+    const growthLineEl = root.querySelector('[data-analytics-growth-line]')
+    const growthAreaEl = root.querySelector('[data-analytics-growth-area]')
+    const masteryGradeEl = root.querySelector('[data-analytics-mastery-grade]')
+    const masteryLabelEl = root.querySelector('[data-analytics-mastery-label]')
+    const masteryPrimaryRingEl = root.querySelector('[data-analytics-mastery-primary-ring]')
+    const masterySecondaryRingEl = root.querySelector('[data-analytics-mastery-secondary-ring]')
+    const masteryPrimaryEl = root.querySelector('[data-analytics-mastery-primary]')
+    const masterySecondaryEl = root.querySelector('[data-analytics-mastery-secondary]')
+    const masteryTertiaryEl = root.querySelector('[data-analytics-mastery-tertiary]')
+    const networkCoreEl = root.querySelector('[data-analytics-network-core]')
+    const streamRowsEl = root.querySelector('[data-analytics-stream-rows]')
 
-    const mountedAt = Date.now()
     const ringLength = 264
+    const masteryPrimaryLength = 427.26
+    const masterySecondaryLength = 326.73
 
     function classifyPage(key) {
       const page = String(key || '').toLowerCase()
@@ -653,17 +756,15 @@
     }
 
     function getAnalyticsSnapshot() {
-      const analytics = readAnalyticsData()
+      const tracker = window.__scUsageTracker && typeof window.__scUsageTracker.getSnapshot === 'function'
+        ? window.__scUsageTracker.getSnapshot()
+        : null
+      const analytics = tracker ? tracker.analytics : readAnalyticsData()
       applyFocusSessionAnalytics(analytics)
-      const usage = readUsageData()
+      const usage = tracker ? tracker.usage : readUsageData()
       const liveFocus = getLiveFocusStats(analytics)
-      const totalUsageMs =
-        usage.totalMs + (document.visibilityState === 'visible' ? Math.max(0, Date.now() - mountedAt) : 0)
-      const pageMs = Object.assign({}, analytics.pageMs || {})
-      pageMs[currentPage] = Math.max(0, Number(pageMs[currentPage] || 0)) + (document.visibilityState === 'visible'
-        ? Math.max(0, Date.now() - mountedAt)
-        : 0)
-
+      const totalUsageMs = Math.max(0, Number((usage && usage.totalMs) || 0))
+      const pageMs = Object.assign({}, (analytics && analytics.pageMs) || {})
       const pageVisits = Object.assign({}, analytics.pageVisits || {})
       const totalVisits = Object.keys(pageVisits).reduce(function (sum, key) {
         return sum + Math.max(0, Number(pageVisits[key] || 0))
@@ -825,6 +926,42 @@
       if (score >= 75) return highLabel
       if (score >= 45) return midLabel
       return lowLabel
+    }
+
+    function buildAnalyticsCurve(values, width, height, floor) {
+      const safeValues = (values || []).map(function (value) {
+        return Math.max(0, Math.min(100, Number(value) || 0))
+      })
+      if (!safeValues.length) return { line: '', area: '' }
+      if (safeValues.length === 1) safeValues.push(safeValues[0])
+
+      const step = safeValues.length > 1 ? width / (safeValues.length - 1) : width
+      const points = safeValues.map(function (value, index) {
+        return {
+          x: Math.round(index * step),
+          y: Math.round(height - (value / 100) * (height - floor) - floor),
+        }
+      })
+
+      const line = points.reduce(function (path, point, index) {
+        if (index === 0) return 'M' + point.x + ',' + point.y
+        const prev = points[index - 1]
+        const cx = Math.round((prev.x + point.x) / 2)
+        return path + ' C' + cx + ',' + prev.y + ' ' + cx + ',' + point.y + ' ' + point.x + ',' + point.y
+      }, '')
+
+      const area = line + ' L' + width + ',' + height + ' L0,' + height + ' Z'
+      return { line: line, area: area }
+    }
+
+    function getMasteryGrade(score) {
+      if (score >= 92) return 'A+'
+      if (score >= 84) return 'A'
+      if (score >= 76) return 'B+'
+      if (score >= 68) return 'B'
+      if (score >= 58) return 'C+'
+      if (score >= 48) return 'C'
+      return 'D'
     }
 
     function buildAiBreakdown(snapshot) {
@@ -1027,9 +1164,73 @@
       }).join('')
     }
 
+    function renderNewscStream(snapshot) {
+      if (!streamRowsEl) return
+      const rows = Object.keys(snapshot.pageMs)
+        .map(function (key) {
+          return {
+            label: cleanPageName(key),
+            ms: Math.max(0, Number(snapshot.pageMs[key] || 0)),
+          }
+        })
+        .filter(function (entry) {
+          return entry.ms > 0
+        })
+        .sort(function (a, b) {
+          return b.ms - a.ms
+        })
+        .slice(0, 4)
+
+      if (!rows.length) {
+        streamRowsEl.innerHTML =
+          '<div class="analytics-newsc-stream-item"><div class="analytics-newsc-stream-meta"><strong>Waiting for data</strong><span>0%</span></div><div class="analytics-newsc-stream-track"><div class="analytics-newsc-stream-fill" style="width:0%"></div></div></div>'
+        return
+      }
+
+      const top = rows[0].ms || 1
+      streamRowsEl.innerHTML = rows
+        .map(function (row) {
+          const pct = Math.max(8, Math.round((row.ms / top) * 100))
+          return (
+            '<div class="analytics-newsc-stream-item">' +
+            '<div class="analytics-newsc-stream-meta"><strong>' +
+            escapeHtml(row.label) +
+            '</strong><span>' +
+            Math.round((row.ms / Math.max(1, snapshot.totalTrackedPageMs)) * 100) +
+            '%</span></div>' +
+            '<div class="analytics-newsc-stream-track"><div class="analytics-newsc-stream-fill" style="width:' +
+            pct +
+            '%"></div></div>' +
+            '</div>'
+          )
+        })
+        .join('')
+    }
+
     function updateDashboard() {
       const snapshot = getAnalyticsSnapshot()
       const ai = buildAiBreakdown(snapshot)
+      const growthSignal = Math.max(0, Math.min(100, Math.round((snapshot.momentumScore * 0.42) + (snapshot.retentionScore * 0.34) + (snapshot.focusScore * 0.24))))
+      const growthDelta = Math.max(4, Math.round(((snapshot.momentumScore + snapshot.retentionScore) / 2 - 50) / 2))
+      const curve = buildAnalyticsCurve(
+        [
+          snapshot.depthScore,
+          snapshot.consistencyScore,
+          snapshot.disciplineScore,
+          snapshot.momentumScore,
+          snapshot.retentionScore,
+          snapshot.focusScore,
+        ],
+        800,
+        320,
+        24,
+      )
+      const impactBand = describeBand(
+        snapshot.focusScore,
+        'Focus, progress, and consistency are compounding into a strong study rhythm.',
+        'The core pattern is usable, but there is still leak in the study loop.',
+        'The study loop is still fragile. Build one stronger uninterrupted block.',
+      )
 
       if (focusEl) focusEl.textContent = formatDuration(snapshot.liveFocus.focusedMs)
       if (sessionsEl) sessionsEl.textContent = String(Math.max(0, Number(snapshot.analytics.sessionsCompleted || 0)))
@@ -1072,6 +1273,34 @@
       if (coachTargetEl) coachTargetEl.textContent = ai.coachTarget
       if (patternSummaryEl) patternSummaryEl.textContent = ai.patternSummary
       if (liveLabelEl) liveLabelEl.textContent = isAdvancedPage ? (snapshot.lowSignal ? 'Building live model' : 'Live local analysis') : 'Updated now'
+
+      if (heroGrowthEl) heroGrowthEl.innerHTML = String(growthDelta) + '<span>%</span>'
+      if (heroTrendEl) heroTrendEl.textContent = ai.summary
+      if (growthPeakEl) growthPeakEl.textContent = String(growthSignal) + '%'
+      if (linePeakEl) linePeakEl.textContent = String(snapshot.momentumScore)
+      if (totalDepthEl) totalDepthEl.textContent = formatDuration(snapshot.totalTrackedPageMs)
+      if (retentionHeroEl) retentionHeroEl.textContent = String(snapshot.retentionScore) + '%'
+      if (phaseEl) phaseEl.textContent = ai.coachHeadline
+      if (citationEl) citationEl.textContent = String(Math.max(1, snapshot.totalVisits * Math.max(1, snapshot.visitedPageCount)))
+      if (citationDeltaEl) citationDeltaEl.textContent = '+' + Math.max(3, Math.round((snapshot.consistencyScore / 8) + (snapshot.toolShare * 20))) + '%'
+      if (impactEl) impactEl.textContent = String(snapshot.focusScore) + '/100'
+      if (impactCopyEl) impactCopyEl.textContent = impactBand
+      if (growthLineEl && curve.line) growthLineEl.setAttribute('d', curve.line)
+      if (growthAreaEl && curve.area) growthAreaEl.setAttribute('d', curve.area)
+      if (masteryGradeEl) masteryGradeEl.textContent = getMasteryGrade(Math.round((snapshot.retentionScore + snapshot.focusScore + snapshot.disciplineScore) / 3))
+      if (masteryLabelEl) masteryLabelEl.textContent = ai.retentionLabel
+      if (masteryPrimaryEl) masteryPrimaryEl.textContent = 'Retention depth'
+      if (masterySecondaryEl) masterySecondaryEl.textContent = 'Attention control'
+      if (masteryTertiaryEl) masteryTertiaryEl.textContent = snapshot.topPageLabel + ' priority'
+      if (masteryPrimaryRingEl) {
+        masteryPrimaryRingEl.style.strokeDashoffset = String(masteryPrimaryLength - masteryPrimaryLength * (snapshot.retentionScore / 100))
+      }
+      if (masterySecondaryRingEl) {
+        masterySecondaryRingEl.style.strokeDashoffset = String(masterySecondaryLength - masterySecondaryLength * (snapshot.disciplineScore / 100))
+      }
+      if (networkCoreEl) networkCoreEl.textContent = snapshot.topPageLabel
+
+      renderNewscStream(snapshot)
     }
 
     updateDashboard()
@@ -1124,6 +1353,89 @@
     const topPageEl = wrapper.querySelector('[data-stats-top-page]')
     const visitsEl = wrapper.querySelector('[data-stats-visits]')
     const notifsEl = wrapper.querySelector('[data-stats-notifs]')
+
+    const tracker = window.__scUsageTracker && typeof window.__scUsageTracker.getSnapshot === 'function'
+      ? window.__scUsageTracker
+      : null
+
+    if (tracker) {
+      function getNotificationStatus() {
+        const pushSupported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
+        if (!pushSupported) return 'Not supported'
+        if (Notification.permission === 'granted') return 'Enabled'
+        if (Notification.permission === 'denied') return 'Blocked'
+        return 'Available'
+      }
+
+      function setPanelOpen(open) {
+        if (!panel || !toggleBtn) return
+        panel.classList.toggle('open', !!open)
+        toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false')
+      }
+
+      function updateStatsUI() {
+        const snapshot = tracker.getSnapshot()
+        const analytics = snapshot.analytics || readAnalyticsData()
+        const usage = snapshot.usage || readUsageData()
+        const liveFocus = getLiveFocusStats(analytics)
+        const streak = Math.max(0, Number((streakData && streakData.streak) || 0))
+
+        let winner = snapshot.currentPage || currentPage
+        let winnerMs = -1
+        Object.keys((analytics && analytics.pageMs) || {}).forEach(function (page) {
+          const ms = Math.max(0, Number(analytics.pageMs[page] || 0))
+          if (ms > winnerMs) {
+            winner = page
+            winnerMs = ms
+          }
+        })
+
+        if (streakEl) streakEl.textContent = streak + (streak === 1 ? ' day' : ' days')
+        if (spentEl) spentEl.textContent = formatDuration(usage.totalMs || 0)
+        if (sessionEl) sessionEl.textContent = formatDuration(Date.now() - snapshot.sessionStartedAt)
+        if (focusEl) focusEl.textContent = formatDuration(liveFocus.focusedMs || 0)
+        if (breaksEl) breaksEl.textContent = String(Math.max(0, Number(liveFocus.breakCount || 0)))
+        if (warningsEl) warningsEl.textContent = String(Math.max(0, Number(liveFocus.warningCount || 0)))
+        if (topPageEl) topPageEl.textContent = cleanPageName(winner)
+        if (visitsEl) visitsEl.textContent = String(Math.max(0, Number(analytics.pageVisits[snapshot.currentPage] || 0)))
+        if (notifsEl) notifsEl.textContent = getNotificationStatus()
+      }
+
+      if (toggleBtn && panel) {
+        toggleBtn.addEventListener('click', function () {
+          const isOpen = panel.classList.contains('open')
+          setPanelOpen(!isOpen)
+          playAppSound(isOpen ? 'tap' : 'panel')
+          if (!isOpen) updateStatsUI()
+        })
+      }
+
+      if (window.matchMedia('(hover: hover)').matches && panel) {
+        wrapper.addEventListener('mouseenter', function () {
+          setPanelOpen(true)
+          updateStatsUI()
+        })
+        wrapper.addEventListener('mouseleave', function () {
+          setPanelOpen(false)
+        })
+      }
+
+      document.addEventListener('click', function (event) {
+        if (!panel || !panel.classList.contains('open')) return
+        if (wrapper.contains(event.target)) return
+        setPanelOpen(false)
+      })
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key !== 'Escape' || !panel || !panel.classList.contains('open')) return
+        setPanelOpen(false)
+      })
+
+      document.addEventListener('sc:push-state-changed', updateStatsUI)
+      setInterval(updateStatsUI, 1000)
+      updateStatsUI()
+      return
+    }
 
     const usage = readUsageData()
     const analytics = readAnalyticsData()
@@ -1250,6 +1562,7 @@
   const streakData = updateDailyStreak()
   mountStreakPill(streakData)
   mountStatsButton(streakData)
+  mountGlobalUsageTracker()
   mountAnalyticsDashboard()
 
   // Sign-in feature removed by request.

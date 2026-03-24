@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#3b3b3f",
+              "primary-fixed": "#b3efd8",
+              "on-error": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed-variant": "#852400",
+              "on-tertiary-container": "#c8c5ca",
+              "on-background": "#1d1a22",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#98d3bd",
+              "surface-container-high": "#ede6f1",
+              "surface-container-highest": "#e7e0eb",
+              "primary": "#004435",
+              "primary-fixed-dim": "#98d3bd",
+              "inverse-surface": "#322f37",
+              "on-tertiary-fixed-variant": "#47464b",
+              "tertiary-fixed": "#e4e1e7",
+              "secondary-container": "#fe6432",
+              "on-surface": "#1d1a22",
+              "surface-bright": "#fef7ff",
+              "error-container": "#ffdad6",
+              "surface": "#fef7ff",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#404945",
+              "on-primary-container": "#97d2bc",
+              "on-tertiary-fixed": "#1b1b1f",
+              "surface-dim": "#dfd7e3",
+              "tertiary-fixed-dim": "#c8c5cb",
+              "inverse-on-surface": "#f6eefa",
+              "error": "#ba1a1a",
+              "surface-container-low": "#f9f1fd",
+              "primary-container": "#215c4b",
+              "secondary-fixed-dim": "#ffb59e",
+              "on-secondary-fixed": "#3a0a00",
+              "surface-container": "#f3ebf7",
+              "on-secondary-container": "#5b1600",
+              "on-primary-fixed-variant": "#125040",
+              "secondary-fixed": "#ffdbd0",
+              "on-primary-fixed": "#002118",
+              "surface-variant": "#e7e0eb",
+              "background": "#fef7ff",
+              "on-error-container": "#93000a",
+              "secondary": "#ae3200",
+              "surface-tint": "#2f6857",
+              "tertiary-container": "#535256",
+              "outline": "#707974",
+              "outline-variant": "#bfc9c3"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<header class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 backdrop-blur-xl transition-all duration-200">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-emerald-950 font-headline">Soul Concept</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-semibold tracking-tight" href="#">Library</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-semibold tracking-tight" href="#">Research</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-semibold tracking-tight" href="#">Curations</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-semibold tracking-tight" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:opacity-80 scale-95">
+<span class="material-symbols-outlined text-emerald-900">search</span>
+</button>
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:opacity-80 scale-95">
+<span class="material-symbols-outlined text-emerald-900">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+<div class="mb-16">
+<h1 class="text-5xl md:text-7xl font-extrabold font-headline tracking-tighter text-primary mb-6">Subject Library</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl font-body leading-relaxed">
+            Explore our meticulously curated collection of academic disciplines. Each module is designed for deep intellectual focus and comprehensive understanding across secondary levels.
+        </p>
+</div>
+<div class="mb-12 flex flex-col md:flex-row gap-4 items-center">
+<div class="relative w-full md:max-w-md group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border-none ring-1 ring-outline-variant/15 focus:ring-primary/50 focus:ring-2 rounded-xl transition-all font-body outline-none" placeholder="Search subjects..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto no-scrollbar">
+<button class="px-6 py-2 bg-primary text-white rounded-full font-label text-sm font-semibold whitespace-nowrap">All Subjects</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-full font-label text-sm font-semibold whitespace-nowrap">Grade 9</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-full font-label text-sm font-semibold whitespace-nowrap">Grade 10</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-full font-label text-sm font-semibold whitespace-nowrap">Grade 11</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-full font-label text-sm font-semibold whitespace-nowrap">Grade 12</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Sophisticated infographic of chemical reaction kinetics with energy potential diagrams and precise vector paths" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb5Oyj7r4i0oqGIWmVZcGDmoX2J_qfBwe35Xz098sbprufow6SHl4AJHyJVGnGs_VUNXJxh0BF2Q5OpEkLwB8r4ItVhtHKOPDD9ve2xFSDD8agv9O_pYGVVTTCDdRXCEcGaPZkO_5lyKOtifTCnF8u7FKQ5mNWwAw1bwpciUcGEGOlnM41ZG7u5nqTm_6fH9zMpHW7ePpl3ZR5R_7puhZzZKyPRTajdQhRCDMF0UDDaLK0t1mD10qUpwVgmEmihMwMKcPWpNgojWiA"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 10 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Application</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Science</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Advancing scientific understanding through environmental systems, chemical reactions, and physical forces.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">Core Curriculum</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Detailed geometric visualization of parabolic functions and quadratic equations on a technical grid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVmw04j1fpkUMEnTslN1mJlmYEGBPJcTj9jc9D_l_8abOXl28U9nq-VmxZk9qm1MHv-9MhAKJaQzZNqmfQpm-W3N9As-2LKgjPEhftdfpC6Y5pDQtnh4qVeF7ZXnLBKj7-0kF8lvd4F3lyEOeHdIBTQduzoTfcN9CZ2lu6-vN-DXFcGX9b5DxQ2g5Y9buHsKOxMWV4llVxKarTcRRaxZROVmR-HOYUYDcH71YYOtPfEoArdQ62h9SAgVll0CWC7aTMD26MhdO5Jx3L"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 10 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Analysis</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Mathematics</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Exploring quadratic relations, trigonometric functions, and analytical geometry with technical precision.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">Core Curriculum</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="High-level data visualization of linguistic morphology and Spanish syntax structures with analytical labels" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Yui0IWPmdlVuWuTYWqj36Kxj7bgzmhgDxAVT7RGuOqlyfS7oSKFkvUwl1WapkJ2rUzAhJ-tJOhvq4JJlmoIPPtHX8bh6gOp1bLc4rBTPlz01o3doaXdY-lQS92OsMNBkQ-Coll23H3C_Vm2M4THqH-fRyjBCwB9RfSvuyUkgaRaiYpmwyMfzcT6Blo5lj9TNXUQmIyb4VO1Tl65GUAFCr3VUbaLAg6G_XmVTByUvJvtbDzOB2ZTQs_N9uwuZ_odT9zTgTRYawPUu"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 10 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Languages</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Spanish</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Advanced grammatical structures and literary analysis of significant Hispanic texts and cultural movements.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">Core Curriculum</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Infographic detailing the phonological evolution and lexical nodes of the French language" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOC2pD4uwtqFGLOnLQP3ksykRZ2bclVpm03OmBi1dR5bAqO6HvGHlnyMPnRIdSBO6a4B5Gbpa0UbX8O3fFwg1ubbiYhHTt7gAQGTDiN9odcHqiyZMNQ-qu9iuKsrU2cuy49VQ57BPdy54YGhB8nY2q07UX8w_ilZuZL7tzhMaWuqmzSRd5i9TgjduqAV4XJVGU92R3TToJybUCOKPaxoxS6ye6QihDj1teCHP5z91gnjYXgtds_gLxuOEhWZJ5P0tj1wJAK6SVTiSI"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 10 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Languages</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">French</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Synthesizing complex verb tenses and conversational nuances through the study of Francophone global influence.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">Core Curriculum</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="GIS data visualization of tectonic plate movements and seismic activity patterns" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQzQBKCsaod64k3NWbU6ciOfF2_kt25OQsbm1H0MB-I4s331RemJDSY1fSvPim0k9f9fwUreXVtS-0We-ZTsf6baqUmH3CdWROdLQtcvp-oGryXzXBICxxysJuDbeOEOEavYgxEhYrS601XLXRW1H3MHYZLMZTdkj8whc6tSGzgYcWCRCjL6GWnNmzxg9bHG8CFv_BTEk3bXb2gLjSa0PRoWnduxL5XISzhwsUIInvlFDJ_kQ2PMw4wI2-ILrCErQP0MFGWX5uBHks"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 10 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Earth Sciences</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Geography</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Investigating the interactions between natural environments and human systems through spatial analysis.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">Core Curriculum</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Semantic map visualization of Victorian era literary themes and rhetorical devices" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2dXxcdECnUdw1FjR5NKs31gYASYGkddNfjRnN6FJgNg8MxwSt8ZV9jRWZVThpJDlBNM07TnjN3KrI0V2hbfvYM-rZjHfty_PrmoZkUzHHZWzxbJLqcdys9oPi4no0jEHKKFiNhcSnH6YjGeJcd6apzLvrNE44qxZrYV1BugdT4aNDO6fFTDp3EI-vz6CI4LSUP4kc5rgUed3XVxsddHd-PqqhZOedwezJuaNRfaFyfivxY2xf_PfmJyoIDBVv7IXWYDt4S7dq2Cfo"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 10 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Literacy</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">English</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Critical exploration of narrative structures, poetic forms, and persuasive writing techniques.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">Core Curriculum</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Molecular kinetic theory visualization with heat maps and particle vector lines" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1GLkcY4KYM1bvU33BeeBGMMjG02xAEdRVWaLyXkSpJISq1y7go4U-pqb-kOBJtp_Khe0laIQ1zxJZGRplzX23P_k7fmU5UUtOeWm7dmG3gvklLzaII5ZuK8Y9b7tS6l7grY0bIiFWzVBTYMYXvJoIpbxHGk6EI2mEUS_oUBhGlKUNLdaxhMZVzhZdMV03RCn1aerFBZfGB3I0nZX4KAvqzHcSHEwnNuqbS2qsls2seky3QtolWbFke4Dt711oqp6D8vCCUj31CdiP"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 11 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Specialization</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Science</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">In-depth exploration of advanced chemical bonding, stoichiometry, and metabolic biological processes.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Prep</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="3D visualization of complex functions and derivative slope fields on a grid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2vilYweGuWW6wI2TI1uYZxjD6Csyj2R0x-_A1qUPW8P7ayVFDcpX_bNM_UbMDtWS-QMq0KyupWPRxa4OYXgOoDoD35p5KW8sBJ2refTDS8RnFcKZ5W_W4fDZD95tR3wMNf-PchrtHXPGypban3BH9lleQKl7LmkDJtJI7qzCPC4l3ll9zJR-JDDIDPMCU5U6yoUK-jVcbGUxA9d4Ax3qqAb9C0iH9KFZk2EGOcN5rW-tmA3-e7WQ8IlO-vA4ndzSz5yk4nRE9RC_Z"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 11 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Functions</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Mathematics</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Introduction to functions, sequences, series, and advanced trigonometry as a foundation for calculus.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Prep</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Sophisticated infographic of Spanish Golden Age literary structure and thematic motifs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjlr-VTsxoSFByCHIc5wIDyxNX6J2c0xCdYCs0cA3KOzCT48hh5tcc8j6eHhgdwGEGDgc6P5Doy3sFReIZ9WY0xFFPbxbYYFy2EiZIMFPn9KOfP5KUOVu4sBB0EAVnbKNjcKLIKLv6UgahPwEhfD8etuWgAYcystM-eNP-NFyHT9vjKyGJNcal7kGCQEh1FvN1E3iMnNRRGyiwKI37uCO_IbsIYc_jC2pEJZ-VUc1ZYO0JPLfqbCfPLHwlHGHCK3VgMH70ZdvDa7As"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 11 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Languages</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Spanish</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Analytical study of Hispanic literature and film, focusing on sociopolitical themes and advanced linguistics.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Prep</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Data visualization of French Enlightenment philosophy connections and intellectual networks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3PMm8ZvDfLqvxFYj5C67W9VyHyTC0ILutJuR23uphuMEDybKGRdKhQbTAddWsZ1n0yAKY92TkI0Tz8YECr8vmcs48KlagnZaEvMgdMvDEadAfu6BgTNufBeZxXKoBM-MT5O-dS84pyd6YL9IinjodYWv69ngau9_Sj_EMo2uxa5y3aUB6vNZ-OaZ0cgmUnBlM9Tc_9WfFp9PSBHOzgwifjq49Tuod8-3cUOygkivCMjYcf7gc9-J7ZKNJhpOXl7lwt1Qxg1Sz6V8F"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 11 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Languages</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">French</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Exploration of contemporary Francophone culture and advanced rhetorical analysis of media and literature.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Prep</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Complex infographic of global supply chains and demographic transition models" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-VUomq4xNbw43-op4nSM3q4mxS22vuWRIXvsApT_7rSwxC-fX7aIpqZo095olNEvtwqoIwoEpz3_6gv81tOgWAn5Oo0xjNuac7u15wVsZm9weV02qXRKFNuuX9A3Yw54Gl3Bb1F3o7WvBIqu0p9pL891IBCfNoEW7-0e0DkmdIHVpFZAAXavkVvRaX0sR6esEZ45sUPJPPw9Hy71K-3l1ie277R1M2WrFKmeoHV_AcTrdSm9PzXlvrYME8exrI1JOk5QU6mV5Hstx"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 11 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Human Systems</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Geography</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Analyzing global patterns of population, resources, and economic development through advanced mapping.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Prep</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Chronological timeline of literary movements with key thematic clusters and author influences" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZdIWWcslkbZE1k2NDqW3lvs11nr11pMCRLiLSZgDhIRFoVn8IjGNiwGmrggL0wZd_ka8uZYLhfAMOslW0Qn6xPzovz7fS49K5ojbcFh7lNyrpJfXz38zTqdGCbVHLSpJV_oytAgjY2xlWgZHU04qLPpmnCJAqnOvQPnD-5Im033W3LeK5KSnPBNZYL5wDnPgpJTffCVz0dXlEIn-I2ZAzt1zFKVFdLQX1FFwMykYjqykn3bP8gTXf0nPyE3OBva0kgX9FtHXCsE2X"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 11 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Humanities</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">English</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Analytical study of contemporary and classical texts, focusing on rhetorical devices and critical theories.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Prep</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Quantum entanglement visualization with probability density clouds and wave function interference" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCON9kdOY9pjvvM3eI6-BgBK-GBVahf4cvmT5Ax3moZlYMlTpmeCO7rlTDSzajE-JFHxFQENZA-UTbFqNaYOi0aJL_EVowgjKk9JBOvrxj5qFtXaHbsdlBgNgPz2OxNVFCiUQNs1hGgYLHI8XIVyHDR9-YAGN5FGgQparcJ9VX9N-uw49KTfBHwu8itg-VGr45Nsfsjr5R9QfxOrJOL8P40g9E9SXP3jf_uPjZqe46BHCrJDZtIbKd867ILFW5pSZF19BEtaIB9egnW"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 12 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Mastery</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Science</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Mastery of university-level physics and chemistry, exploring quantum mechanics and advanced organic chemistry.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Level</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Abstract visualization of the Fundamental Theorem of Calculus with area-under-curve integrals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC31CzyqU0xeOtT5GlwM8lhvfmxKVMZg5l4SvAptqn7oJzoExWyfym6CdKb8ppEDUOxPN3HgQP4fyivObj1Oer9uV3DMMFZSN50UJoHusyJnSPWq3NRi9ke5SV1uOLUoRbNld0aHUQ5wNyts0PiJZHUh884RONOK4w8-EEcP4SU2oqldOruRvD5drm3Z8mWN3gcrG57YKvAHOshBNkj_dF1W-q4xEHIpaipkXSl5M-gDyLp2NGAm31AJTD_cr1jC2vLftmu7sFwHBsD"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 12 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Advanced</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Mathematics</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Rigorous study of Calculus and Vectors, including differentiation, integration, and multidimensional geometry.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Level</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="High-level visualization of linguistic shifts in modern Spanish literature and sociolinguistic data" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjU9ZPoyjK3WESm9wKDoe9nqWE-GwiWQ-lMpvBDxYWe0H8TCZvMG9jINH2i-FeoSpBqJyErBRPuVaRD0t6akCedjwH8VqjrgMj63fPGf2zaleFGIUhuAtKXIao1C9I8hpA7LkmlWY-gs_dmhHOizczcest9iFjqkXxB9LdAkaSPIAWK61GB2Tqbb1gGkTW1WXfB21oahnsUM72ZeewO76kqvwWyJGJgULsktGOOvccMLyBVWokD5CDDeMTljEG5N8bcjt5quy4KBRc"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 12 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Mastery</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Spanish</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Mastery of academic Spanish through the study of philosophy, modernism, and complex linguistic research.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Level</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Network diagram of Francophone cultural influences and linguistic variations across continents" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFR5ZudDFhuUWlOcnXfMMRR-KrAztMe-NmxX0CF2TH5-lllfbNmNEJj3GNi1R_FWPYQhKZGuUK5VHP9B4nBDzWFCbbeYLhuxQUDE22zKAhoPIVpVmztuAtVgtLOG_YZGqFpE2KQL46TidNSpKqryagG0BmAjUxRf_Vv4a6NBTSpfkUB3ZDzDnRqj16_7uBjwkBlApKRIR0kpopgHT7DvFNebNE5-QSYC6bdJMhkswhl2LZFTufwHYjLOOQjg8OvEmplMckG1DuGYnv"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 12 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Languages</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">French</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Advanced proficiency through the critique of French literature, philosophy, and global socio-political discourse.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Level</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Advanced spatial analysis visualization of climate modeling and ecological succession" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ9vLMUJS_xFguUrz5GVokafQMRjb7Y2bFZbiti63ORP8s-_47o5RMetd07lLGRi6k6Pf1Kic6JzJAUyntA-QHBRaUnKaroPOdjF4_emawoj2Z8B5jsdFUI0D7MtbfjM2hHSori_Ha_D8PvGIckDcK24O3RCQ8HVLfeUVAVTBBdGD7H1zCO2QxiP3uOHU17QKBxWSWNyLWH6bCXXp_2w-mwMJp6fIDQbCKCCOw4f79bv5NhdSWzOWGmdATWOQXtabALDl2a4I7ZAzA"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 12 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Global Issues</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">Geography</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Synthesizing geographical theories to address complex global challenges like climate change and urbanization.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Level</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300">
+<div class="aspect-[16/10] overflow-hidden bg-slate-900">
+<img alt="Visual diagram of post-structuralist literary theory and deconstructionist frameworks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIeQvZlBVYRn2EJHdPg5aTljkPv7nD2Lyh58Luzc85QdSZG6RaKxvCfdMnopPzqi9wWv-_ew5T3VHx7WCMlYDW2FL7LVyUK1z9k6YmoaOgjZlOM-gxAYB79sSo2stpQBpdnMsT_XZrtFEsi6T-JoGrtdCQmr63-olatXnr_ptczu5W0P0-Y4pQwpJHjnNJTlLGqIcyBEr_0guTUwP4Va9CuDpdPTx9YkhZGodnzKA2bti9QRJxjVJvQhZ5bSZusa7IsRQe35recpJ1"/>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-3">Grade 12 ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Critical Theory</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-primary mb-3">English</h3>
+<p class="text-on-surface-variant font-body mb-6 flex-grow leading-relaxed">Advanced textual analysis through the lens of critical theory, focusing on post-colonial and structuralist perspectives.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-label text-sm text-on-surface-variant">University Level</span>
+<a class="flex items-center gap-2 text-primary font-bold group/link" href="#"><span class="font-body text-sm uppercase tracking-wider">Enter Library</span><span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="w-full border-t border-emerald-200/20 bg-emerald-50 py-12 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline font-bold text-emerald-900 text-lg">Soul Concept</span>
+<p class="font-body text-sm text-emerald-800/70">Ãƒâ€šÃ‚Â© 2024 Soul Concept. Curated Academic Excellence.</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-8">
+<a class="font-body text-sm text-emerald-800/70 hover:text-emerald-600 transition-colors" href="#">Privacy Policy</a>
+<a class="font-body text-sm text-emerald-800/70 hover:text-emerald-600 transition-colors" href="#">Terms of Service</a>
+<a class="font-body text-sm text-emerald-800/70 hover:text-emerald-600 transition-colors" href="#">Institutional Access</a>
+<a class="font-body text-sm text-emerald-800/70 hover:text-emerald-600 transition-colors" href="#">Contact</a>
+</nav>
+</div>
+</footer>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

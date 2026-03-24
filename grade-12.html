@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Soul Concept | Grade 12 Advanced Placement Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#404945",
+              "on-primary-fixed": "#002118",
+              "surface-container": "#f3ebf7",
+              "primary-fixed-dim": "#98d3bd",
+              "secondary-container": "#fe6432",
+              "surface-container-highest": "#e7e0eb",
+              "on-tertiary-container": "#c8c5ca",
+              "inverse-on-surface": "#f6eefa",
+              "inverse-primary": "#98d3bd",
+              "inverse-surface": "#322f37",
+              "surface-container-high": "#ede6f1",
+              "on-tertiary-fixed-variant": "#47464b",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed-variant": "#125040",
+              "primary": "#004435",
+              "tertiary-container": "#535256",
+              "surface": "#fef7ff",
+              "error": "#ba1a1a",
+              "surface-bright": "#fef7ff",
+              "on-tertiary-fixed": "#1b1b1f",
+              "background": "#fef7ff",
+              "outline-variant": "#bfc9c3",
+              "tertiary": "#3b3b3f",
+              "on-primary-container": "#97d2bc",
+              "secondary-fixed-dim": "#ffb59e",
+              "primary-container": "#215c4b",
+              "outline": "#707974",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#ffdbd0",
+              "surface-container-low": "#f9f1fd",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#b3efd8",
+              "on-background": "#1d1a22",
+              "on-secondary-fixed": "#3a0a00",
+              "on-error-container": "#93000a",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed-dim": "#c8c5cb",
+              "tertiary-fixed": "#e4e1e7",
+              "on-surface": "#1d1a22",
+              "secondary": "#ae3200",
+              "surface-dim": "#dfd7e3",
+              "surface-tint": "#2f6857",
+              "error-container": "#ffdad6",
+              "surface-variant": "#e7e0eb",
+              "on-secondary-fixed-variant": "#852400",
+              "on-secondary-container": "#5b1600"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl transition-all duration-300">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-extrabold text-emerald-950 tracking-tighter font-headline">
+                Soul Concept
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 9</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 10</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 11</a>
+<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-bold tracking-tight" href="#">Grade 12</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Subjects</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Library</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-emerald-900">search</span>
+</button>
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-emerald-900" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-5rem)] w-64 bg-surface-container-low fixed left-0 py-6 px-4 border-r border-emerald-900/10 font-label">
+<div class="mb-8 px-4">
+<h3 class="text-lg font-bold text-emerald-950 font-headline">Research Desk</h3>
+<p class="text-xs text-emerald-800/70">Grade 12 Specialist</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 bg-emerald-100 text-emerald-900 rounded-lg px-4 py-2 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="functions">functions</span>
+<span class="font-medium">Mathematics</span>
+</a>
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span class="font-medium">Sciences</span>
+</a>
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-medium">Humanities</span>
+</a>
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+<span class="font-medium">Languages</span>
+</a>
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span class="font-medium">Arts</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-4">
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold py-3 rounded-xl shadow-none hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_note</span>
+                    New Research Paper
+                </button>
+<div class="pt-4 border-t border-emerald-900/5 flex flex-col gap-1">
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 p-8 max-w-screen-2xl mx-auto">
+<!-- Hero Section: Editorial Header -->
+<header class="mb-16">
+<div class="max-w-4xl">
+<div class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] uppercase tracking-widest font-bold mb-6 font-label">
+                        Advanced Placement ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 2024 Collection
+                    </div>
+<h1 class="text-6xl md:text-7xl font-extrabold font-headline text-emerald-950 leading-[0.9] tracking-tighter mb-8">
+                        The Library of <br/><span class="text-secondary italic">Higher Cognition.</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed font-body">
+                        A curated repository of Grade 12 Advanced Placement resources, designed for the rigorous pursuit of knowledge across the frontiers of modern thought.
+                    </p>
+</div>
+</header>
+<!-- Featured Research Modules: Bento Grid Layout -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
+<!-- Quantum Mechanics Card -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low aspect-[16/9] md:aspect-auto">
+<img class="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="abstract visual representation of quantum superposition with glowing particles and interconnected nodes in deep emerald and teal tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe0ECPa8gkSOuVgpntp_edgBvwLFCIAAtqRto82lBrBeaI29IyACHM27gQPfZkBCwx5qlDmvw6vLVY1rnCDgrW0mIkFKHbC8ialYKwavfBldTpr7gzTiNTa2D3DRxhCI6GNw-pjy8vTIp07EsHeBbzf90LljwgrPWQ5lIfFM27T25uki7Ghmxq_apkGbwe6qk-Vrb971gfGQ6yTYDb6z1iaUqzCb1-3jvQeMDrPT1ZtwaEnzqCKrf83Wn38-fha-SPYhZxNnJkFBFS"/>
+<div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-emerald-950/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 text-on-primary">
+<span class="label-md font-label uppercase tracking-widest text-primary-fixed-dim mb-2 block">Theoretical Physics</span>
+<h2 class="text-4xl font-headline font-bold mb-4 tracking-tight">Quantum Mechanics</h2>
+<p class="text-on-primary/80 max-w-md mb-6 leading-relaxed">Exploring non-locality, wave-particle duality, and the foundations of computational physics.</p>
+<button class="flex items-center gap-2 group/btn">
+<span class="font-bold border-b border-white pb-1">Enter Laboratory</span>
+<span class="material-symbols-outlined transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Bio-Ethics Card -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between border-b-4 border-secondary transition-all hover:bg-surface-container-high">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">science</span>
+<h3 class="text-2xl font-headline font-bold text-emerald-950 mb-4">Bio-Ethics</h3>
+<p class="text-on-surface-variant leading-relaxed mb-4">The intersection of genetic engineering, autonomous medical agents, and human dignity.</p>
+<ul class="space-y-2 text-sm text-on-surface font-medium">
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-secondary rounded-full"></span>
+                                CRISPR-Cas9 Legislation
+                            </li>
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-secondary rounded-full"></span>
+                                Neuralink Frameworks
+                            </li>
+</ul>
+</div>
+<button class="mt-8 text-secondary font-bold flex items-center gap-2 group">
+                        View Dossier 
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">north_east</span>
+</button>
+</div>
+<!-- Political Philosophy Card -->
+<div class="md:col-span-5 bg-surface-container-low rounded-xl overflow-hidden group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="stately classical marble columns of a library corridor with atmospheric shadows and cinematic soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWMZNojD4GfFUgIOdEi9zg10W48bWu7s9tQ0sEJxFeCdDoWdpz8qM3pSExU7odoTELLyhKilq4zL-thfhBC9bIxvbsRqmVvjD6SOT7CSxF-1uuEmPpBv_i6CxD2_M_FE_D0st9ldAeNKlCx9YOKhzKY8ZOKUwJhkNvrYSbu33qqEireSngjpOpZ7x_5JFSaBPMnbnJyBVUx9W0y3IewTJRWn0FkNlfogtDKx4DE_OgdtTKjsj4z2jEuYxRG_0012S_n81pJSsnBKaD"/>
+<div class="absolute top-4 left-4">
+<span class="bg-surface/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter text-emerald-950">Seminar Series</span>
+</div>
+</div>
+<div class="p-8">
+<h3 class="text-2xl font-headline font-bold text-emerald-950 mb-4">Political Philosophy</h3>
+<p class="text-on-surface-variant leading-relaxed">From Social Contract theory to Post-Modern Governance and the digital state.</p>
+</div>
+</div>
+<!-- Advanced Linguistics Card -->
+<div class="md:col-span-7 bg-surface-container-lowest rounded-xl p-8 shadow-sm flex flex-col md:flex-row gap-8 items-center border border-outline-variant/15">
+<div class="flex-1">
+<div class="flex gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] font-bold">MORPHOLOGY</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] font-bold">SYNTAX</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-emerald-950 mb-4">Advanced Linguistics</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">Analyzing the cognitive structures of language, computational semantics, and the evolution of digital dialects.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container rounded-lg">
+<div class="text-xs text-on-surface-variant uppercase mb-1">Active Modules</div>
+<div class="text-xl font-bold text-emerald-900">12</div>
+</div>
+<div class="p-4 bg-surface-container rounded-lg">
+<div class="text-xs text-on-surface-variant uppercase mb-1">Thesis Papers</div>
+<div class="text-xl font-bold text-emerald-900">450+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/3 aspect-square bg-emerald-50 rounded-full flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-60" data-alt="macro close-up of old typography stamps with ink texture and cinematic shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-nN-GBzixxLCbEJknQhQ0LSgLnc1xYZjc-cBHtIRz4ZifWbi7P_2q2m3pt13Wmwkm9nXOSLDHNB1aQkdGm1SkCDsB_mIVRP3qaJEngaxKADMwQFyg8TMfDbFIk7q2_rNgSZkLK1wRn-OZBQuWQGKz1TE2l8tNN7cNavRNjVwvCM0fpa9WviCyMaelDhpDJ5AL7y9H8NcQVSo9ycL_ut0NerVPZZTdoDJCKOoDALc6NbKoe-jrwola8WtExkt4bGCXL6rAReWbFs1Q"/>
+<span class="material-symbols-outlined text-6xl text-primary relative z-10" style="font-variation-settings: 'FILL' 1;">translate</span>
+</div>
+</div>
+</section>
+<!-- Curated Reading List (Gallery Style) -->
+<section class="mb-24">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-3xl font-headline font-bold text-emerald-950 tracking-tight">Required Reading</h2>
+<p class="text-on-surface-variant">Selected texts for the Fall Semester</p>
+</div>
+<button class="text-emerald-900 font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                        Full Catalog <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+<!-- Book 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="aesthetic book cover design with minimalist geometric shapes and elegant serif typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDslOY6KMisRFdLb-GkqMzt-6q-Px93JdoA0Q6-WEUfUOc3VYbpglZYFKpZ_QmmiK4jczgqj_vncKTKVRgzfh984XN5ziLXsjfoc-_I90t7Gv-4BZ8eSImy34tPLCQKiwio1KP51DrEVO4k35xmcz0XhgiSisjTNMHI3lWyrrR5uN96SduiOBEN3ns4Tv6K8XE0GtDeImbAAfIQ-2zShZboEiJ5sbtkgvvaZStgLInHoIaSwOrD-klvstsOS-b8NzyafUWExrsTUhYv"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">The Quantum Paradox</h4>
+<p class="text-xs text-on-surface-variant">Dr. Helena Vance</p>
+</div>
+<!-- Book 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="conceptual dark academic book cover featuring a golden ratio spiral and marble textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd5fDMeqrlqVAG6SEkWx1qMtvu-w6PvAzCint7AWPsa6Re_rNWcG2c0U5EOiym-EaKqL3ZvCLgi9NqIY2WstlIaBVCLGo6TsEJ2aXv-04W6-xKoLKCfrH6qTJhdjhQjx9jSyXchnDj-irlVgFLqGhyBJR4kFttCwR0RaVka_BPHu5ycQf0SQStnIVDe5Txjmu_RKS21ZA9cxK_2wavIRyqzIo6yyY0dyxA-ipokXlbPh3zueVzFoL6PJQHvGc5CzaOVT4uWLe_mnGN"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">Ethics of Artificial Life</h4>
+<p class="text-xs text-on-surface-variant">S. J. Marrow</p>
+</div>
+<!-- Book 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="minimalist architectural photography used as a book cover with clean lines and soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaKawrK_Fj2QwS2go0qRofx7I0lHJw16p-mZs0piCcKVOiTwQ1RUAYCcViafqEwRUd8xhPkqyLRXtxfgNDPI-gOrK83oiMTCK0Uynqp8w4qckgmkDXxQ_UYSpeTPUz-ydLKdMR0g3ExKz-MCjySnrUyPHivmD9z0myktPXCLg9-NTy19fpOqB8UQWZFG7Hee5NodIvG3ZifKq3o3VR1Xfc2aHtdpO09sdwQP0LusWG3zTeflqPf6NEKw1z5eR120jYRWIm9kaqIG-8"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">Modern Sovereignty</h4>
+<p class="text-xs text-on-surface-variant">Prof. Arthur Thorne</p>
+</div>
+<!-- Book 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="old dictionary pages showing microscopic detail of paper grain and ink bleed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCf6Y6cUKu4GVWZJ9s67LzUoxLW9MsoSpQCCwC1joc9NeA-Kw_MflOznWnoPaSCk55x5PdQ2YWw7OpXOoT3Qa3IUyy4XsGYX3VFMxLkBSW3T-24mTpYm7iydy14IZYrqN5_-6L2tXEQUq49aA2HG004wCajoeN53PgQSQFuMRbEuXRFZNG1LFlI1NSYIsKU60L8HM_jaRpJOnJZjCJUiLVQ_0FpfMbIGSa5KhQOSz1saoOEF2324SEOUqytDBoIhbrAZo4RsHpVFqc"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">Syntactic structures</h4>
+<p class="text-xs text-on-surface-variant">Revisionist Edition</p>
+</div>
+<!-- Book 5 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="classic leather bound book sitting on a mahogany table with dramatic library lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIgkUW1EjGOueAZtg-1MSRGPywl5WdgBMOppav4D5BTLVlzn-KjwuyshkopzdkQZnFKNlH85GGClGbCC0LWBwXHqumggPhtHWu0iCOaj7pBtrxvUoc3lVFYjgp3NovCP1T7C22cD9iK1CtD76fv72P02x_g22bBKO5hdMwQrLOSP1gxmz5p8tmJSpWarvfpKnJ7hywy4jnckTITqaTMEnkCnqM9FqMigFnnj88UiT6HvggqoMg9Agh5p1U6BONWUed6SvBfCP3IbHp"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">The Neo-Aristotelian</h4>
+<p class="text-xs text-on-surface-variant">Archive Collective</p>
+</div>
+</div>
+</section>
+<!-- Faculty Insight Section (Asymmetric) -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+<div class="relative">
+<div class="w-full aspect-square bg-surface-container-highest rounded-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="portrait of a distinguished academic scholar with glasses in a wood-paneled office environment, soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe8IrJWduKGEeaMY7o8zUFTIBAGZhs9VaFtRpMCniX7UbpYJ3L33wyGEob_3K_ev1C2fogTMNLUgVR0NdYXO4-J-IU0L23FiGyXptGxjr_H0hUjL2cSBbEhmddbVcC-yIOnCgAV4WQQIfnaT2gf2R24ykIuKQT7PCWu9G9JM9i_tNxRr5F2eUtC2ec1gUaehMyT2gcDh4HvYY5fR6oi3xDA709WKoNw1GbzfjNqQZyLGbTT7Dou2_Cl_FwNrZFIGaMYu6JpXTMlEX_"/>
+</div>
+<div class="absolute -bottom-6 -right-6 bg-secondary text-on-secondary p-8 rounded-xl max-w-xs shadow-2xl">
+<span class="material-symbols-outlined text-4xl mb-4">format_quote</span>
+<p class="italic text-lg font-body leading-tight">"Information is a commodity; knowledge is a curation."</p>
+<div class="mt-4 font-bold font-headline text-sm uppercase tracking-widest">Dr. Julian Vane</div>
+</div>
+</div>
+<div class="space-y-8 pl-8 border-l border-emerald-900/10">
+<h2 class="text-4xl font-headline font-bold text-emerald-950 leading-tight">Curator's Note for <br/>The Class of 2024</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+                        Our Grade 12 Advanced Placement library has been redesigned to reflect the maturity and intellectual rigor expected of our senior students. We have removed the noise of standard educational interfaces to provide a canvas for deep, uninterrupted research.
+                    </p>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="p-2 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<div>
+<h4 class="font-bold text-emerald-950">Deep Reading Protocols</h4>
+<p class="text-sm text-on-surface-variant">Access distraction-free manuscript viewers for primary sources.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="p-2 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<div>
+<h4 class="font-bold text-emerald-950">Computational Workbench</h4>
+<p class="text-sm text-on-surface-variant">Integrated environments for Python and R statistical analysis.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface-container border-t border-outline-variant/30 flex justify-around py-3 px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">book_4</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Library</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Seminars</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
+</button>
+</nav>
+<!-- Contextual FAB (Only for specific research actions) -->
+<button class="fixed bottom-24 right-8 bg-gradient-to-br from-primary to-primary-container text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined">add</span>
+<span class="absolute right-16 bg-emerald-950 text-white px-4 py-2 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">New Research Paper</span>
+</button>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

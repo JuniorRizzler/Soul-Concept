@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#e4e1e7",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#98d3bd",
+              "secondary-container": "#fe6432",
+              "background": "#fef7ff",
+              "on-tertiary-fixed-variant": "#47464b",
+              "on-tertiary-fixed": "#1b1b1f",
+              "on-primary-container": "#97d2bc",
+              "surface-container-highest": "#e7e0eb",
+              "on-error": "#ffffff",
+              "on-secondary": "#ffffff",
+              "outline-variant": "#bfc9c3",
+              "on-secondary-fixed-variant": "#852400",
+              "on-background": "#1d1a22",
+              "surface-container-high": "#ede6f1",
+              "outline": "#707974",
+              "on-surface": "#1d1a22",
+              "inverse-primary": "#98d3bd",
+              "error-container": "#ffdad6",
+              "secondary-fixed": "#ffdbd0",
+              "primary": "#004435",
+              "surface-tint": "#2f6857",
+              "surface-bright": "#fef7ff",
+              "on-secondary-container": "#5b1600",
+              "tertiary-fixed-dim": "#c8c5cb",
+              "primary-container": "#215c4b",
+              "on-tertiary-container": "#c8c5ca",
+              "on-surface-variant": "#404945",
+              "surface-container-low": "#f9f1fd",
+              "secondary": "#ae3200",
+              "inverse-on-surface": "#f6eefa",
+              "surface-container": "#f3ebf7",
+              "on-primary": "#ffffff",
+              "inverse-surface": "#322f37",
+              "on-secondary-fixed": "#3a0a00",
+              "on-primary-fixed": "#002118",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "tertiary": "#3b3b3f",
+              "surface-variant": "#e7e0eb",
+              "surface": "#fef7ff",
+              "secondary-fixed-dim": "#ffb59e",
+              "tertiary-container": "#535256",
+              "surface-dim": "#dfd7e3",
+              "on-primary-fixed-variant": "#125040",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#b3efd8"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-header {
+            background: rgba(254, 247, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .text-gradient-primary {
+            background: linear-gradient(to right, #004435, #215c4b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 w-full z-50 bg-[#fef7ff]/70 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<img alt="Soul Concept Logo" class="h-8 w-auto" data-alt="minimalist professional logo for an academic institution featuring clean geometric lines in deep emerald green" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-jSwOhIMB8s-AEvPHLDUSw5eEuD26HXbxywzRZ1Cpjz_cM6_YIzjUe58UqXdKHDNrSH6ldMH_eo78iNZVCFK10aOYNJYAlr-D3Ey54rocj-O-V4m5QZLZuOM4JSvWsdxFr9mppy2wj7-2Y9fZvNOdgTYy0TG5AVvRSH-vy74BdMnULtPHk72I3DlZRcx7MrmryEKJLXRJloaDT3zxikmzP4H3zQF-BsaDl80Erurat_h2WZLfHCYHzzGng5VRvtDQjORojD9t6X0q"/>
+<span class="text-2xl font-bold text-primary tracking-tight font-headline">Soul Concept</span>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1 font-headline tracking-tight" href="#">Research</a>
+<a class="text-stone-600 hover:text-primary transition-colors duration-200 font-headline tracking-tight" href="#">Archive</a>
+<a class="text-stone-600 hover:text-primary transition-colors duration-200 font-headline tracking-tight" href="#">Curation</a>
+<a class="text-stone-600 hover:text-primary transition-colors duration-200 font-headline tracking-tight" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-stone-100 rounded-md transition-all">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Scholar Profile" data-alt="professional portrait of a senior academic researcher with neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn2cOGFdXNITcLVdoS56AH75rQkAolQ9q9bpXS81OIn1DuqEqSVSTuw_GHi_33HLtG90d1DGB3CNFsRCDuiHAxDHRcmnx-ruJ4auP46jsmqzrxZ92WDYUVxQKdzOkYgCQWPUX1vjQVOvI0se1uhvMeNURImh46pMuLSRr59k-RrdmxZo2LkDZGuVqxQWPV2ZmIHbNwHe8K7U37FwqyYy1O4fFeXt7JDcpHetOEbVDL9-L3CGDfOBPABpJIY5EtYNXHPi-xJeckRYSL"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow max-w-screen-2xl mx-auto w-full px-8 py-12 space-y-20">
+<!-- Hero & Advanced Search -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+<div class="lg:col-span-7 space-y-6">
+<span class="font-label text-secondary uppercase tracking-[0.2em] font-bold text-xs">Study Library</span>
+<h1 class="font-headline text-5xl font-extrabold text-primary tracking-tight leading-tight">
+                    Advancing Human Knowledge through <span class="text-gradient-primary italic">Systematic Curation</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+                    Access guides, notes, and reference material curated to support better study sessions and stronger long-term recall.
+                </p>
+</div>
+<div class="lg:col-span-5 bg-surface-container-low p-8 rounded-xl space-y-6">
+<div class="space-y-2">
+<label class="font-label text-xs font-bold text-outline uppercase tracking-wider">Search Knowledge Base</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-0 ring-1 ring-outline-variant/30 focus:ring-2 focus:ring-primary/50 rounded-xl px-4 py-3 text-sm transition-all duration-200" placeholder="Keywords, Authors, or DOI..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-3 text-outline">search</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-label text-[10px] font-bold text-outline uppercase">Methodology</label>
+<select class="w-full bg-surface-container-lowest border-0 ring-1 ring-outline-variant/30 rounded-lg text-xs py-2 focus:ring-primary/30">
+<option>Quantitative</option>
+<option>Qualitative</option>
+<option>Meta-Analysis</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label text-[10px] font-bold text-outline uppercase">Field of Study</label>
+<select class="w-full bg-surface-container-lowest border-0 ring-1 ring-outline-variant/30 rounded-lg text-xs py-2 focus:ring-primary/30">
+<option>Cognitive Science</option>
+<option>Sociology</option>
+<option>Theology</option>
+</select>
+</div>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-white font-body font-bold py-3 rounded-xl shadow-sm hover:opacity-95 transition-opacity">
+                    Execute Advanced Query
+                </button>
+</div>
+</section>
+<!-- Main Content Area: Bento Layout -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Recent Publications (Left Column) -->
+<div class="md:col-span-8 space-y-10">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<h2 class="font-headline text-2xl font-bold text-primary">Recent Publications</h2>
+<a class="font-label text-xs font-bold text-secondary flex items-center gap-1 group" href="#">
+                        VIEW FULL ARCHIVE 
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="space-y-8">
+<!-- Publication Card 1 -->
+<article class="group bg-surface-container-lowest p-6 rounded-xl hover:bg-surface-container transition-colors duration-200 cursor-pointer">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-grow space-y-3">
+<div class="flex gap-2">
+<span class="bg-primary-fixed text-on-primary-fixed font-label text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Metaphysics</span>
+<span class="text-outline font-label text-[10px] uppercase font-bold tracking-wider pt-0.5">May 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface group-hover:text-primary transition-colors">The Ontological Framework of Digital Consciousness: A Longitudinal Study</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 leading-relaxed">This paper explores the intersection of recursive neural architectures and the phenomenology of subjective experience within isolated computational environments...</p>
+<div class="flex items-center gap-6 pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-outline">description</span>
+<span class="font-label text-xs text-on-surface-variant font-medium">DOI: 10.1042/soul.2024.089</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-outline" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<span class="font-label text-xs text-on-surface-variant font-medium">1.2k Citations</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Publication Card 2 -->
+<article class="group bg-surface-container-lowest p-6 rounded-xl hover:bg-surface-container transition-colors duration-200 cursor-pointer">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-grow space-y-3">
+<div class="flex gap-2">
+<span class="bg-primary-fixed text-on-primary-fixed font-label text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Ethics</span>
+<span class="text-outline font-label text-[10px] uppercase font-bold tracking-wider pt-0.5">April 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface group-hover:text-primary transition-colors">Normative Anchors in Decentralized Social Ecosystems</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 leading-relaxed">An analysis of trust-less verification protocols and their impact on inter-generational knowledge transfer within community-governed research nodes...</p>
+<div class="flex items-center gap-6 pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-outline">description</span>
+<span class="font-label text-xs text-on-surface-variant font-medium">DOI: 10.1042/soul.2024.112</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-outline" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<span class="font-label text-xs text-on-surface-variant font-medium">842 Citations</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Publication Card 3 -->
+<article class="group bg-surface-container-lowest p-6 rounded-xl hover:bg-surface-container transition-colors duration-200 cursor-pointer">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-grow space-y-3">
+<div class="flex gap-2">
+<span class="bg-primary-fixed text-on-primary-fixed font-label text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Sociology</span>
+<span class="text-outline font-label text-[10px] uppercase font-bold tracking-wider pt-0.5">March 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface group-hover:text-primary transition-colors">Building Better Focus in Distracted Environments</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 leading-relaxed">Mapping the migration of intellectual capital toward self-sustaining urban micro-campus models in the late 21st century...</p>
+<div class="flex items-center gap-6 pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-outline">description</span>
+<span class="font-label text-xs text-on-surface-variant font-medium">DOI: 10.1042/soul.2024.054</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-outline" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<span class="font-label text-xs text-on-surface-variant font-medium">3.1k Citations</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- Sidebar (Right Column) -->
+<aside class="md:col-span-4 space-y-12">
+<!-- Member Spotlight -->
+<div class="bg-primary text-white p-8 rounded-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container opacity-20 -mr-10 -mt-10 rounded-full"></div>
+<div class="relative z-10 space-y-6">
+<span class="font-label text-[10px] uppercase font-bold tracking-widest text-primary-fixed">Member of the Month</span>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full border-2 border-primary-fixed overflow-hidden">
+<img alt="Dr. Elara Vance" data-alt="close-up portrait of a female scientist in her late 40s with glasses, intelligent expression, in a modern laboratory setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa114riu5hAfIclfKoV5d5eNVRkSPUqkmnolEmKazVKSZDQav0kEX1ZZ3V6oQ8R9KI75mKwhwXDSX7fYr_hl-M8eH73IRq8sh0-VEJm31_gEQXNv5oqjKLD5qMMr5pfvTZKTxxS4KD03GWE1q9VEs6H3Hbii9qjg3-6SNUFSbaIsdhXvYG3s13FGfPNhm8smk5EEfk0rvHFLyPw8FT5GcM9XJ24vi0z38BlxGtL0KerbkT1Gxz-czFTM_zaF-rGdbIddM2WtXy6uDD"/>
+</div>
+<div>
+<h4 class="font-headline text-lg font-bold">Dr. Elara Vance</h4>
+<p class="text-primary-fixed-dim text-xs font-medium">Senior Fellow, Cognitive Neuro-Ethics</p>
+</div>
+</div>
+<p class="text-sm leading-relaxed text-surface/90 italic">
+                            "The pursuit of knowledge is not merely a collection of data, but the architectural framing of meaning within the void."
+                        </p>
+<button class="text-xs font-bold border-b border-primary-fixed pb-0.5 hover:text-primary-fixed transition-colors">
+                            READ BIOGRAPHY &amp; WORKS
+                        </button>
+</div>
+</div>
+<!-- Groundbreaking Papers -->
+<div class="space-y-6">
+<h2 class="font-headline text-xl font-bold text-primary border-b border-outline-variant/20 pb-4">Classic Foundations</h2>
+<div class="space-y-6">
+<div class="space-y-2 border-l-2 border-secondary pl-4 py-1">
+<h5 class="text-sm font-bold leading-snug">Neural Topography of Collective Empathy (2018)</h5>
+<p class="text-xs text-outline">The definitive study on network-wide emotional synchronization in digital cohorts.</p>
+<span class="text-[10px] font-bold text-secondary">CITED BY 14,200</span>
+</div>
+<div class="space-y-2 border-l-2 border-outline-variant/30 pl-4 py-1 hover:border-secondary transition-colors">
+<h5 class="text-sm font-bold leading-snug">Algorithmic Bias in Moral Intuition (2021)</h5>
+<p class="text-xs text-outline">Investigating how automated decision trees restructure human ethical priorities.</p>
+<span class="text-[10px] font-bold text-secondary">CITED BY 8,900</span>
+</div>
+<div class="space-y-2 border-l-2 border-outline-variant/30 pl-4 py-1 hover:border-secondary transition-colors">
+<h5 class="text-sm font-bold leading-snug">The End of Scarcity-Based Economics (2015)</h5>
+<p class="text-xs text-outline">A foundational framework for understanding post-industrial resource management.</p>
+<span class="text-[10px] font-bold text-secondary">CITED BY 22,400</span>
+</div>
+</div>
+</div>
+<!-- Tags & Keywords -->
+<div class="space-y-4">
+<h2 class="font-headline text-xs font-bold text-outline uppercase tracking-widest">Trending Categories</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label text-[10px] font-bold text-on-surface-variant hover:bg-primary hover:text-white cursor-pointer transition-colors">Neuro-computation</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label text-[10px] font-bold text-on-surface-variant hover:bg-primary hover:text-white cursor-pointer transition-colors">Bio-informatics</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label text-[10px] font-bold text-on-surface-variant hover:bg-primary hover:text-white cursor-pointer transition-colors">Meta-Philosophy</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label text-[10px] font-bold text-on-surface-variant hover:bg-primary hover:text-white cursor-pointer transition-colors">Digital Agronomics</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label text-[10px] font-bold text-on-surface-variant hover:bg-primary hover:text-white cursor-pointer transition-colors">Systems Theory</span>
+</div>
+</div>
+</aside>
+</section>
+</main>
+<!-- Minimal Footer -->
+<footer class="w-full border-t border-stone-200 bg-[#fef7ff] mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-8 max-w-screen-2xl mx-auto">
+<span class="text-xs font-manrope uppercase tracking-widest text-stone-500 mb-4 md:mb-0">
+                Ãƒâ€šÃ‚Â© 2024 Soul Concept Institutional Research. All rights rights reserved.
+            </span>
+<div class="flex gap-8">
+<a class="text-xs font-manrope uppercase tracking-widest text-stone-500 hover:text-[#004435] transition-opacity underline-offset-4 decoration-[#ae3200] hover:underline" href="#">Platform Access</a>
+<a class="text-xs font-manrope uppercase tracking-widest text-stone-500 hover:text-[#004435] transition-opacity underline-offset-4 decoration-[#ae3200] hover:underline" href="#">Privacy Protocol</a>
+<a class="text-xs font-manrope uppercase tracking-widest text-stone-500 hover:text-[#004435] transition-opacity underline-offset-4 decoration-[#ae3200] hover:underline" href="#">Terms of Curation</a>
+<a class="text-xs font-manrope uppercase tracking-widest text-stone-500 hover:text-[#004435] transition-opacity underline-offset-4 decoration-[#ae3200] hover:underline" href="#">Contact Support</a>
+</div>
+</div>
+</footer>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

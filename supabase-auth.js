@@ -3,6 +3,7 @@
   var CALLBACK_CLEAN_PATH = '/auth/callback'
   var RETURN_TO_KEY = 'sc_auth_return_to'
   var DISMISS_KEY = 'sc_auth_prompt_dismissed_v1'
+  var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
   var REQUIRE_AUTH = true
 
   function injectStyles() {
@@ -189,6 +190,67 @@
     btn.className = className
     btn.textContent = label
     return btn
+  }
+
+  function normalizeProfile(session) {
+    var user = session && session.user ? session.user : null
+    if (!user) return null
+    var email = user.email || ''
+    var metadata = user.user_metadata || {}
+    var name =
+      metadata.display_name ||
+      metadata.full_name ||
+      metadata.name ||
+      (email ? email.split('@')[0] : '') ||
+      'Scholar'
+    var bio =
+      metadata.study_bio ||
+      metadata.bio ||
+      'Using Soul Concept to turn scattered notes into focused, repeatable study sessions.'
+    var plan =
+      metadata.plan ||
+      metadata.tier ||
+      metadata.membership ||
+      metadata.role ||
+      'Starter'
+    var avatar =
+      metadata.avatar_url ||
+      user.user_metadata && user.user_metadata.picture ||
+      user.user_metadata && user.user_metadata.avatar ||
+      ''
+    return {
+      id: user.id,
+      email: email,
+      name: name,
+      bio: bio,
+      plan: plan,
+      avatarUrl: avatar,
+      initials: String(name || 'S').trim().charAt(0).toUpperCase(),
+      session: session,
+    }
+  }
+
+  function writeProfileCache(profile) {
+    try {
+      if (!profile) {
+        localStorage.removeItem(PROFILE_CACHE_KEY)
+        return
+      }
+      localStorage.setItem(PROFILE_CACHE_KEY, JSON.stringify(profile))
+    } catch (_err) {}
+  }
+
+  function publishProfile(session) {
+    var profile = normalizeProfile(session)
+    window.scAuthSession = session || null
+    window.scAuthProfile = profile
+    writeProfileCache(profile)
+    window.dispatchEvent(new CustomEvent('sc:auth-state-changed', {
+      detail: {
+        session: session || null,
+        profile: profile,
+      },
+    }))
   }
 
   function isStandaloneMode() {
@@ -522,12 +584,14 @@
 
     var sessionResult = await client.auth.getSession()
     var session = sessionResult && sessionResult.data ? sessionResult.data.session : null
+    publishProfile(session)
     mountAuthUi(client, session)
     setGateMode(REQUIRE_AUTH && !session)
     syncNavMoreMenu()
     window.addEventListener('resize', syncNavMoreMenu)
 
     client.auth.onAuthStateChange(function (_event, session) {
+      publishProfile(session || null)
       mountAuthUi(client, session || null)
       setGateMode(REQUIRE_AUTH && !session)
       syncNavMoreMenu()

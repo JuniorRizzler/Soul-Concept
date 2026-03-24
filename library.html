@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#dfd7e3",
+              "outline": "#707974",
+              "on-secondary-fixed": "#3a0a00",
+              "on-background": "#1d1a22",
+              "primary-container": "#215c4b",
+              "surface-container-low": "#f9f1fd",
+              "surface-container-highest": "#e7e0eb",
+              "inverse-surface": "#322f37",
+              "inverse-on-surface": "#f6eefa",
+              "background": "#fef7ff",
+              "on-secondary-fixed-variant": "#852400",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e7e0eb",
+              "surface-tint": "#2f6857",
+              "secondary-container": "#fe6432",
+              "on-secondary-container": "#5b1600",
+              "primary": "#004435",
+              "secondary-fixed": "#ffdbd0",
+              "surface-container": "#f3ebf7",
+              "on-tertiary-fixed-variant": "#47464b",
+              "on-surface": "#1d1a22",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#e4e1e7",
+              "on-tertiary-fixed": "#1b1b1f",
+              "on-tertiary-container": "#c8c5ca",
+              "surface-bright": "#fef7ff",
+              "outline-variant": "#bfc9c3",
+              "tertiary-container": "#535256",
+              "on-error": "#ffffff",
+              "secondary": "#ae3200",
+              "on-surface-variant": "#404945",
+              "tertiary": "#3b3b3f",
+              "surface": "#fef7ff",
+              "primary-fixed-dim": "#98d3bd",
+              "on-primary-container": "#97d2bc",
+              "primary-fixed": "#b3efd8",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#125040",
+              "inverse-primary": "#98d3bd",
+              "error": "#ba1a1a",
+              "surface-container-high": "#ede6f1",
+              "on-primary-fixed": "#002118",
+              "secondary-fixed-dim": "#ffb59e",
+              "tertiary-fixed-dim": "#c8c5cb"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-header {
+        background: rgba(254, 247, 255, 0.7);
+        backdrop-filter: blur(20px);
+      }
+      .primary-gradient {
+        background: linear-gradient(135deg, #004435 0%, #215c4b 100%);
+      }
+      .subject-card-overlay {
+        background: linear-gradient(to top, rgba(0, 68, 53, 0.9) 0%, rgba(0, 68, 53, 0) 60%);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-header shadow-[0_20px_40px_rgba(29,26,34,0.06)]">
+<div class="flex justify-between items-center px-8 h-16 w-full max-w-none">
+<div class="flex items-center gap-4">
+<img alt="Soul Concept Logo" class="h-8 w-auto" data-alt="minimalist professional logo for an academic institution featuring clean geometric lines in deep emerald" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCysBKv8axTuRiz5RY-q9VAVWgmyo5yd2HP8_EfoAhEaGpsh3hRhJZMjMILsA87_rFeWr3HcvoWX1UzwuGimHeZtqBS27i9iCaAwlmMw4t_QNgkzjntV7K6jd5hGH8l7xtOgyHX8e3S6Etrj8q35q-C4hMTqjAU1MKfCNEyfobTMhx0nnub2gXa5O_nZYqvHQlax05-lni_CUI-Wz1DEZJFG4c-MNtmTqkP5XMWvN37Fkfq8jrJFgMJIUJ4T3i2Wl-DXLUW1QtDnD9X"/>
+<span class="text-xl font-headline font-bold text-emerald-900 tracking-tighter">Soul Concept</span>
+</div>
+<div class="hidden md:flex items-center gap-8 font-headline font-bold tracking-tight">
+<a class="text-zinc-500 hover:text-emerald-800 transition-colors" href="#">Grade 8</a>
+<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1" href="#">Grade 9</a>
+<a class="text-zinc-500 hover:text-emerald-800 transition-colors" href="#">Grade 10</a>
+<a class="text-zinc-500 hover:text-emerald-800 transition-colors" href="#">Grade 11</a>
+<a class="text-zinc-500 hover:text-emerald-800 transition-colors" href="#">Grade 12</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined text-emerald-900">search</span>
+</button>
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined text-emerald-900">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Contextual for Curriculum) -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-16 flex-col p-6 gap-2 bg-zinc-100 dark:bg-zinc-800/50 font-label text-sm font-medium">
+<div class="mb-6 px-2">
+<h3 class="font-headline font-bold text-emerald-900 text-lg">Subject Library</h3>
+<p class="text-zinc-500 text-xs">Explore Curated Disciplines</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 p-3 bg-emerald-100/50 text-emerald-900 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+                All Subjects
+            </a>
+<a class="flex items-center gap-3 p-3 text-zinc-600 hover:bg-zinc-200/50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-xl">star</span>
+                Featured
+            </a>
+<a class="flex items-center gap-3 p-3 text-zinc-600 hover:bg-zinc-200/50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-xl">history</span>
+                Recent Activity
+            </a>
+<a class="flex items-center gap-3 p-3 text-zinc-600 hover:bg-zinc-200/50 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+                Saved Modules
+            </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-zinc-200/50">
+<button class="w-full py-3 px-4 mb-4 primary-gradient text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 scale-98 active:opacity-80 transition-transform">
+                Open Study Assistant
+            </button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 p-2 text-zinc-500 hover:text-zinc-800 text-xs" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-3 p-2 text-zinc-500 hover:text-zinc-800 text-xs" href="#">
+<span class="material-symbols-outlined text-lg">help_outline</span>
+                    Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-16 min-h-screen">
+<!-- Hero Section: Library Welcome -->
+<section class="relative h-[480px] w-full overflow-hidden bg-primary overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="University Library" class="w-full h-full object-cover opacity-30 mix-blend-overlay" data-alt="grand classical library with soaring bookshelves and soft ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiUEuH9OaLWob2WMFdcavrYU58hZbHtcZSqwCA414hWTGxtQ4MEfj0ReS-rA3iZ3txEPo9IXU-ocbtNTSflfSUuHHLe0RI5w5omcjdYYB2SP2KKAkDBTtNF5Oi5kTKjJCIuoBHQDDSoCYfP14YAL8WsJoYVpvflKgS3u5M0vx5GgLeqN4LJ_G3Mi6qeSdeEsFXwdm2BW9Reyx4_6JiMiFoK1GbnJYlqrlrbnxfa-llfZ3HWmDo2W7CMXZa_7Z2BbXsJQEnLVQKqQ0J"/>
+</div>
+<div class="relative z-20 h-full flex flex-col justify-center px-12 lg:px-24">
+<div class="max-w-4xl">
+<span class="inline-block px-3 py-1 mb-6 rounded-full bg-primary-fixed text-on-primary-fixed font-label text-xs font-bold uppercase tracking-widest">
+                        Study Year 2024
+                    </span>
+<h1 class="font-headline font-extrabold text-5xl lg:text-7xl text-white leading-tight tracking-tighter mb-8">
+                        The Subject Library.
+                    </h1>
+<div class="relative max-w-2xl group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-emerald-200">search</span>
+<input class="w-full bg-white/10 border-white/20 text-white placeholder:text-emerald-100/50 py-4 pl-12 pr-6 rounded-2xl focus:ring-2 focus:ring-primary-fixed focus:border-transparent backdrop-blur-sm transition-all text-lg font-body" placeholder="Search disciplines, modules, or research papers..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Subject Library Grid -->
+<section class="py-24 px-12 lg:px-24 bg-surface">
+<div class="flex items-baseline justify-between mb-16">
+<div>
+<h2 class="font-headline font-bold text-3xl text-primary mb-2">Study Subjects</h2>
+<p class="text-on-surface-variant font-body">Browse our curated collection of study subjects.</p>
+</div>
+<div class="h-px flex-grow mx-12 bg-outline-variant/20 hidden md:block"></div>
+<div class="flex gap-4">
+<button class="p-2 border border-outline-variant/30 rounded-lg hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 border border-outline-variant/30 rounded-lg hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">sort_by_alpha</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Science Card -->
+<a class="group relative overflow-hidden rounded-2xl aspect-[4/5] bg-zinc-900 cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 block" href="study-library.html">
+<img alt="Science Subject" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="scientific laboratory close up with turquoise and emerald lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZVLrB_iABfBinJoucrcKy0GTbnLORYyYxWhJ_K_E2fvTz7PT-xIzkU-oIa4jq-wSz0lmNlaWXLsptXLVgbXVRisKJViv1KyZNCle68UHeweICoSCuRN93pBdrU61pssHxAkCKqpXVK-_XaDLCcVWVRzneCvohrA81M0ZMzvaVeyzZBZALi0WEbQRgTltuwO0Vnpvafh4QXPCwZ8BLgnUwhooFa7gqIjDdbd1uMBQmwkm-ZLtMCVRuar5M6QmBI_adpGdRl4MzoW8a"/>
+<div class="absolute inset-0 subject-card-overlay"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<span class="font-label text-xs text-primary-fixed font-bold uppercase tracking-widest mb-2 block">Foundational Inquiry</span>
+<h3 class="font-headline font-bold text-3xl text-white mb-4">Sciences</h3>
+<p class="text-emerald-50/80 font-body text-sm mb-6 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">From cellular biology to quantum mechanics, explore the laws governing the physical universe.</p>
+<div class="flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all">
+                            View Curriculum <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Mathematics Card -->
+<a class="group relative overflow-hidden rounded-2xl aspect-[4/5] bg-zinc-900 cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 block" href="grade-10-math.html">
+<img alt="Mathematics Subject" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="complex mathematical formulas and geometric diagrams in a clean architectural style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwbtkbXfmO5aCruANhZ4NwPIxVYTr2KoIMsCZLUY0qNY06XhBpwDrDxzqjt5aGYAHhdrchBOjcLQTcLitb27I1j1l41eZTEPhsago2Xyv_CdA6lelPd7W8e11weRCyJNHsu1tgyEzu85pX6l1F8DDIPxz-lydIBFq1zaPF034fGsEQd0hMErtK0ggkn4npOxuk3gW3HOUnyoEmaAS1EzMeV3BFecWSXbDZdj1XGIh7kbtfG3vu_GmEj2mi10X3RV6AVYs_9NxvQ4Nm"/>
+<div class="absolute inset-0 subject-card-overlay"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<span class="font-label text-xs text-primary-fixed font-bold uppercase tracking-widest mb-2 block">Structural Logic</span>
+<h3 class="font-headline font-bold text-3xl text-white mb-4">Mathematics</h3>
+<p class="text-emerald-50/80 font-body text-sm mb-6 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Mastering the universal language of pattern, sequence, and quantitative reasoning.</p>
+<div class="flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all">
+                            View Curriculum <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- History Card -->
+<a class="group relative overflow-hidden rounded-2xl aspect-[4/5] bg-zinc-900 cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 block" href="geography-library.html">
+<img alt="History Subject" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="antique navigation tools and aged maps on a dark oak desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiUEuH9OaLWob2WMFdcavrYU58hZbHtcZSqwCA414hWTGxtQ4MEfj0ReS-rA3iZ3txEPo9IXU-ocbtNTSflfSUuHHLe0RI5w5omcjdYYB2SP2KKAkDBTtNF5Oi5kTKjJCIuoBHQDDSoCYfP14YAL8WsJoYVpvflKgS3u5M0vx5GgLeqN4LJ_G3Mi6qeSdeEsFXwdm2BW9Reyx4_6JiMiFoK1GbnJYlqrlrbnxfa-llfZ3HWmDo2W7CMXZa_7Z2BbXsJQEnLVQKqQ0J"/>
+<div class="absolute inset-0 subject-card-overlay"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<span class="font-label text-xs text-primary-fixed font-bold uppercase tracking-widest mb-2 block">Global Heritage</span>
+<h3 class="font-headline font-bold text-3xl text-white mb-4">Humanities</h3>
+<p class="text-emerald-50/80 font-body text-sm mb-6 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">A journey through the narrative of human civilization, philosophy, and collective memory.</p>
+<div class="flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all">
+                            View Curriculum <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Literature Card -->
+<a class="group relative overflow-hidden rounded-2xl aspect-[4/5] bg-zinc-900 cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 block" href="subject-library-2.html">
+<img alt="Literature Subject" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="minimalist close up of stack of classic books with elegant typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG9VmmwFMh-iCw6p5oV9FeqhGBQFMe2LPxwTMizZXG-UJhFAsOci_nL8qCPPhc4AI2hG8TsciQ4KymzJytgTvJcxWAYz9naoyDItLRhKp_io0ZlKWOzhMAAyYF7hc8ccs--CUIeiotZ2CCKlbTUF24XRcHLsjheqqj5TLeRv1Gnt8kbAMY26MmaVegfsxD9r6o7tI-G7R16MKe899vmV_N56OGcJGyeiSzHppCk8r5XSPEx2g2cvF_67dRfBmUDF9rnHKIZ50wNcsC"/>
+<div class="absolute inset-0 subject-card-overlay"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<span class="font-label text-xs text-primary-fixed font-bold uppercase tracking-widest mb-2 block">Narrative Analysis</span>
+<h3 class="font-headline font-bold text-3xl text-white mb-4">Languages</h3>
+<p class="text-emerald-50/80 font-body text-sm mb-6 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Unlocking the power of rhetoric, syntax, and global communication through text and speech.</p>
+<div class="flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all">
+                            View Curriculum <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Arts Card -->
+<a class="group relative overflow-hidden rounded-2xl aspect-[4/5] bg-zinc-900 cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 block" href="subject-library-2.html">
+<img alt="Arts Subject" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="artistic textures of paint and brushstrokes in moody emerald tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCqP3T0d6DBQtnKZXgGabh0fsEkLldTfvMOr887M-io6h5Fy7sUmsQVnQ1_PKuZNxwddcolEjsDL7GsgFScudzDWt9f4bF0HkCJ2meUXwOir0lmgPmp_WwWl3H9IBh7Aa1AGUJ1EGfRmR0YVx2TwHV9mmtXZfhseGgc5uCa4dscqB_yUCUZHoJR2dokh21_wIeJ1ZvIIWbGdcD4NV5KFH93IQQxnJ8oQ027-Br68O8ie0qYa_J8u6IS7Mm--l7tx4BCVie0OcekVR5"/>
+<div class="absolute inset-0 subject-card-overlay"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<span class="font-label text-xs text-primary-fixed font-bold uppercase tracking-widest mb-2 block">Creative Expression</span>
+<h3 class="font-headline font-bold text-3xl text-white mb-4">Visual Arts</h3>
+<p class="text-emerald-50/80 font-body text-sm mb-6 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Cultivating the aesthetic senses and understanding the history of visual culture.</p>
+<div class="flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all">
+                            View Curriculum <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Technology Card -->
+<a class="group relative overflow-hidden rounded-2xl aspect-[4/5] bg-zinc-900 cursor-pointer shadow-xl transition-all duration-500 hover:-translate-y-2 block" href="subject-library-2.html">
+<img alt="Technology Subject" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="abstract technological circuit lines glowing in deep teal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZVLrB_iABfBinJoucrcKy0GTbnLORYyYxWhJ_K_E2fvTz7PT-xIzkU-oIa4jq-wSz0lmNlaWXLsptXLVgbXVRisKJViv1KyZNCle68UHeweICoSCuRN93pBdrU61pssHxAkCKqpXVK-_XaDLCcVWVRzneCvohrA81M0ZMzvaVeyzZBZALi0WEbQRgTltuwO0Vnpvafh4QXPCwZ8BLgnUwhooFa7gqIjDdbd1uMBQmwkm-ZLtMCVRuar5M6QmBI_adpGdRl4MzoW8a"/>
+<div class="absolute inset-0 subject-card-overlay"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<span class="font-label text-xs text-primary-fixed font-bold uppercase tracking-widest mb-2 block">Applied Innovation</span>
+<h3 class="font-headline font-bold text-3xl text-white mb-4">Technology</h3>
+<p class="text-emerald-50/80 font-body text-sm mb-6 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Exploring the intersection of engineering, design, and computational theory.</p>
+<div class="flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all">
+                            View Curriculum <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Classics Section (Reused from existing but simplified) -->
+<section class="py-24 px-12 lg:px-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<h2 class="font-headline font-bold text-4xl text-primary mb-4">Essential Reading</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">A curated selection of literature that serves as the bedrock of intellectual development.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-12">
+<!-- Book 1 -->
+<div class="flex flex-col items-center w-64 group">
+<div class="relative w-48 h-72 shadow-2xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:rotate-2">
+<img alt="The Odyssey" class="w-full h-full object-cover" data-alt="elegant book cover for The Odyssey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG9VmmwFMh-iCw6p5oV9FeqhGBQFMe2LPxwTMizZXG-UJhFAsOci_nL8qCPPhc4AI2hG8TsciQ4KymzJytgTvJcxWAYz9naoyDItLRhKp_io0ZlKWOzhMAAyYF7hc8ccs--CUIeiotZ2CCKlbTUF24XRcHLsjheqqj5TLeRv1Gnt8kbAMY26MmaVegfsxD9r6o7tI-G7R16MKe899vmV_N56OGcJGyeiSzHppCk8r5XSPEx2g2cvF_67dRfBmUDF9rnHKIZ50wNcsC"/>
+</div>
+<div class="mt-8 text-center">
+<h4 class="font-headline font-bold text-lg text-primary">The Odyssey</h4>
+<p class="font-label text-xs text-zinc-500 uppercase tracking-widest mt-1">Homer</p>
+</div>
+</div>
+<!-- Book 2 -->
+<div class="flex flex-col items-center w-64 group">
+<div class="relative w-48 h-72 shadow-2xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:-rotate-2">
+<img alt="Silent Spring" class="w-full h-full object-cover" data-alt="botanical book cover for Silent Spring" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCynZAh3Y0TBuGqqQHOTiSRjjnN7IGUMJxzMmwhLNqBxdNoNU9qipUZJ_m6OmkDhjtZPtt6DCnIHiQIif_j-tfqKJy02ks704Bn1vVkH2O2WS6uWD7KjPXmVMfO8zd3713Y5i29TNoo9k0WbMaYshbg_jQjaUxoFCLESzDoZ_Yuk-fAuBMPJHvUYu-97rr37Ad5At0sA1JESE-SS85m6Nc7xm3hGwPTl6fLQzdpUzhqlYWXJrZ0TzlDZvvlIIqqY-hH58Threkk-thg"/>
+</div>
+<div class="mt-8 text-center">
+<h4 class="font-headline font-bold text-lg text-primary">Silent Spring</h4>
+<p class="font-label text-xs text-zinc-500 uppercase tracking-widest mt-1">Rachel Carson</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 mt-auto bg-zinc-100 dark:bg-zinc-950 font-label text-xs tracking-wide border-t border-zinc-200 dark:border-zinc-800">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="font-headline font-semibold text-zinc-900 text-lg block mb-4">Soul Concept</span>
+<p class="text-zinc-500 leading-relaxed">Defining the standard for digital study tools through curation and intentionality.</p>
+</div>
+<div class="col-span-1">
+<h5 class="font-bold text-zinc-900 mb-4 uppercase tracking-widest">Resources</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-zinc-500 hover:text-zinc-800 transition-colors" href="subject-library-2.html">Study Library</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-800 transition-colors" href="#">Focus Paths</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-800 transition-colors" href="subject-library-2.html">Tool Library</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h5 class="font-bold text-zinc-900 mb-4 uppercase tracking-widest">Legal</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-zinc-500 hover:text-zinc-800 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-800 transition-colors" href="#">Accessibility Statement</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-800 transition-colors" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h5 class="font-bold text-zinc-900 mb-4 uppercase tracking-widest">Contact</h5>
+<ul class="flex flex-col gap-2">
+<li class="text-zinc-500 italic">hello@soulconcept.ai</li>
+<li class="text-zinc-500">+1 (555) 890-2341</li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-zinc-200/50 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-400">
+<p>Ãƒâ€šÃ‚Â© 2024 Soul Concept. All Rights Reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-emerald-700 transition-colors underline" href="#">Terms of Use</a>
+<a class="hover:text-emerald-700 transition-colors underline" href="#">Community Guidelines</a>
+</div>
+</div>
+</footer>
+</main>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grade 9 Subject Library | Soul Concept</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#404945",
+              "on-primary-fixed": "#002118",
+              "surface-container": "#f3ebf7",
+              "primary-fixed-dim": "#98d3bd",
+              "secondary-container": "#fe6432",
+              "surface-container-highest": "#e7e0eb",
+              "on-tertiary-container": "#c8c5ca",
+              "inverse-on-surface": "#f6eefa",
+              "inverse-primary": "#98d3bd",
+              "inverse-surface": "#322f37",
+              "surface-container-high": "#ede6f1",
+              "on-tertiary-fixed-variant": "#47464b",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed-variant": "#125040",
+              "primary": "#004435",
+              "tertiary-container": "#535256",
+              "surface": "#fef7ff",
+              "error": "#ba1a1a",
+              "surface-bright": "#fef7ff",
+              "on-tertiary-fixed": "#1b1b1f",
+              "background": "#fef7ff",
+              "outline-variant": "#bfc9c3",
+              "tertiary": "#3b3b3f",
+              "on-primary-container": "#97d2bc",
+              "secondary-fixed-dim": "#ffb59e",
+              "primary-container": "#215c4b",
+              "outline": "#707974",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#ffdbd0",
+              "surface-container-low": "#f9f1fd",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#b3efd8",
+              "on-background": "#1d1a22",
+              "on-secondary-fixed": "#3a0a00",
+              "on-error-container": "#93000a",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed-dim": "#c8c5cb",
+              "tertiary-fixed": "#e4e1e7",
+              "on-surface": "#1d1a22",
+              "secondary": "#ae3200",
+              "surface-dim": "#dfd7e3",
+              "surface-tint": "#2f6857",
+              "error-container": "#ffdad6",
+              "surface-variant": "#e7e0eb",
+              "on-secondary-fixed-variant": "#852400",
+              "on-secondary-container": "#5b1600"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 dark:bg-slate-900/70 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-extrabold text-emerald-950 dark:text-emerald-400 tracking-tighter font-headline">
+                Soul Concept
+            </div>
+<nav class="hidden md:flex items-center space-x-8 font-headline font-bold tracking-tight">
+<a class="text-emerald-900 dark:text-emerald-400 border-b-2 border-emerald-900 dark:border-emerald-400 pb-1" href="#">Grade 9</a>
+<a class="text-emerald-800/60 dark:text-slate-400 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors" href="#">Grade 10</a>
+<a class="text-emerald-800/60 dark:text-slate-400 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors" href="#">Grade 11</a>
+<a class="text-emerald-800/60 dark:text-slate-400 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors" href="#">Grade 12</a>
+<a class="text-emerald-800/60 dark:text-slate-400 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors" href="#">Subjects</a>
+<a class="text-emerald-800/60 dark:text-slate-400 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors" href="#">Library</a>
+</nav>
+<div class="flex items-center space-x-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 rounded-xl focus:ring-primary/50 transition-all text-sm w-64" placeholder="Search curated library..." type="text"/>
+</div>
+<button class="text-emerald-900 dark:text-emerald-400 hover:bg-emerald-50/50 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-5rem)] w-64 sticky top-20 bg-surface-container-low dark:bg-slate-900 py-6 px-4 border-r border-emerald-900/10 font-label text-sm font-medium">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Curator Profile" class="w-full h-full object-cover" data-alt="portrait of a professional academic curator with glasses in a library setting with warm cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc86FaOGmdWIVDPbVmRtSiBVkNv4P652zqSWNVm4Bam8f-8KaERSJQz-5sZUa8vQgC-aatrJNK_a70F7JIjJU-UTnjZEtj7V1cmhpmHWDRh3yPHbxYp5ymD8Fo5qUaxH_PgF69rlTgfnui4qa57KTcV6jQL39py-z827WpbXeRd5nMtzjHbigrD-K0V4Wh5jisLBTuRWrAdmPnu_28SBsySjx7mefl2wBLVLXEPEj2eENaH4GJtfNqG2L1AGEmPrPe5mt9-8DxlfXY"/>
+</div>
+<div>
+<h3 class="text-emerald-950 dark:text-emerald-400 font-bold leading-none">Research Desk</h3>
+<p class="text-[10px] text-emerald-800/60 uppercase tracking-widest mt-1">Grade 12 Specialist</p>
+</div>
+</div>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 rounded-xl font-body font-semibold text-xs tracking-wide shadow-lg shadow-primary/10 hover:scale-[0.98] transition-transform">
+                    New Research Paper
+                </button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-900 dark:text-emerald-300 rounded-lg group transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="functions">functions</span>
+<span>Mathematics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-800/70 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="biotech">biotech</span>
+<span>Sciences</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-800/70 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="menu_book">menu_book</span>
+<span>Humanities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-800/70 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="translate">translate</span>
+<span>Languages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-800/70 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="palette">palette</span>
+<span>Arts</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-emerald-900/5 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-emerald-800/60 hover:text-emerald-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-emerald-800/60 hover:text-emerald-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help_outline">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-8 py-12 max-w-7xl mx-auto">
+<!-- Editorial Header -->
+<section class="mb-20 flex flex-col md:flex-row justify-between items-end gap-8">
+<div class="max-w-2xl">
+<div class="flex items-center gap-3 mb-4">
+<span class="h-[1px] w-12 bg-secondary"></span>
+<span class="font-label text-secondary uppercase tracking-[0.3em] font-bold text-[10px]">The Curriculum Collection</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary tracking-tighter leading-[1.1] mb-6">
+                        Grade 9 <br/><span class="text-outline-variant italic font-medium">Subject Library</span>
+</h1>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed opacity-80">
+                        A curated sanctuary for fundamental inquiries. From the rhythmic logic of mathematics to the tonal nuances of Mandarin, explore the foundations of modern knowledge.
+                    </p>
+</div>
+<div class="flex gap-4">
+<button class="p-4 rounded-full border border-outline-variant hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-4 rounded-full border border-outline-variant hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+</div>
+</section>
+<!-- Bento/Editorial Grid -->
+<div class="editorial-grid">
+<!-- Main Featured: Sciences -->
+<div class="col-span-12 md:col-span-8 row-span-2 group relative overflow-hidden rounded-xl bg-surface-container-low min-h-[500px]">
+<img alt="Sciences Section" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="cinematic close-up of vintage laboratory equipment with soft green glowing chemical reactions and dust motes dancing in sunbeams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhoOcRd0Q_CVHGtQ6Q498FhZuRltMZjDESShB_aKQmngE-mqoZGNxsGMNu-vZyO-r1YBs_bSWg1WRUGu1rFZKE80Dp6sSUyclULR1wSqQnNLDWQj5ata_Atd-OWTZIXirjFhGQ-nSX5ruZMbSlCd_WgIrRtJACYHywUdsF7kaC1KR_XaflYFib0LNRM2kQQ2JFswg0OdSVFxfg-tUUuT-W8gfNS_pghDnDVjloRaa0dNz__ugFLJ4rij1HRs5dnJ08HPtq4gqWRQB-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-10 w-full">
+<div class="flex items-center gap-4 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] font-label font-bold tracking-widest uppercase">Core Science</span>
+<span class="text-white/60 text-xs font-label">24 Curated Modules</span>
+</div>
+<h2 class="text-4xl font-headline font-bold text-white mb-4">Sciences: The Living System</h2>
+<p class="text-white/80 max-w-lg font-body mb-8">Investigating the intricate biological and physical laws that govern our environment, from cellular respiration to atomic bonding.</p>
+<button class="bg-white text-primary px-8 py-3 rounded-xl font-bold font-body text-sm hover:bg-primary-fixed transition-all flex items-center gap-2">
+                            Enter Laboratory <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Secondary: Mathematics -->
+<div class="col-span-12 md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low h-[320px]">
+<div class="absolute inset-0 bg-primary-container">
+<div class="absolute inset-0 opacity-20 mix-blend-overlay" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGBSfZcUjIP5ZaO4oqIhrCJ2iiyyzvqvG2xpqBQe8pkZpR55LvXmIWu49jFyiLVGcHjNEPeR3wFexUoULroaeNvqqTgfQN_dD-2jOvS577sDzivSwJNI2fAxB6rR_mcjetmAdNpnk_SrNdBppCDEdI1z6KY9RKRKQVmT4GwdsJUzp2prD23X11BQgmadxdFFPZXvSA43DXi9pMK23TZzWHXB8F1jAxFu-w-GCd6ZXbaL5xQbK9sVn21bzVc1phobiZK5GAMxaGC8qG');"></div>
+</div>
+<div class="relative p-8 h-full flex flex-col">
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-4" data-icon="functions">functions</span>
+<h3 class="text-2xl font-headline font-bold text-white mb-2">Mathematics</h3>
+<p class="text-primary-fixed/70 text-sm font-body mb-auto">Abstract structures and the geometry of logic.</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-[10px] font-label font-bold text-primary-fixed/50 uppercase tracking-widest">Calculus &amp; Algebra</span>
+<span class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-primary transition-all">
+<span class="material-symbols-outlined">north_east</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Tertiary: Mandarin (New) -->
+<div class="col-span-12 md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low h-[320px]">
+<img alt="Mandarin Section" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="cinematic shot of traditional chinese calligraphy brushes and red ink stamps on parchment paper in soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1e9IcczIg1UJfznwhLub6ZEWK5RZUILCTHlTRVhJeSTvunf6T8b56DIr7MORFK5KHRba6LOCm5OoaSzprddbnFTCdEZhGPBsHXWyvkgFcU1fT7Rm3lpfSmcBF6PSf1Svh6CLUGnMvTae2U5Ft4JwyU97SrUTuEwmuf4YqOqqUHygRkHxZixowAnwWnvyrN2t3tmoVhheXBu0qNqZfEUvqrzE7BTkRAo31WK4lDRE5bo3ywHLNkmwPVUoMjyrE_jNGLLUogj1EMyJN"/>
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/80 to-transparent opacity-60"></div>
+<div class="relative p-8 h-full flex flex-col justify-end">
+<span class="px-2 py-1 bg-secondary text-white w-fit text-[9px] font-label font-black tracking-tighter uppercase mb-3">Asian Languages</span>
+<h3 class="text-2xl font-headline font-bold text-white leading-none mb-1">Mandarin</h3>
+<p class="text-white/80 text-xs font-body">Tonal systems and cultural philology.</p>
+</div>
+</div>
+<!-- Quaternary: Humanities -->
+<div class="col-span-12 md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low h-[380px]">
+<div class="p-8 flex flex-col h-full bg-surface-container-highest/30 border border-outline-variant/10">
+<h3 class="text-2xl font-headline font-bold text-primary mb-4">Humanities</h3>
+<div class="space-y-4 mb-auto">
+<div class="flex items-center gap-4 p-3 rounded-lg bg-white/50 group-hover:bg-white transition-colors">
+<span class="w-8 h-8 rounded bg-primary-fixed/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+</span>
+<div>
+<p class="text-xs font-bold font-headline">Civilization Historiography</p>
+<p class="text-[10px] text-on-surface-variant/60">6 Case Studies</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-lg bg-white/50 group-hover:bg-white transition-colors">
+<span class="w-8 h-8 rounded bg-primary-fixed/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">public</span>
+</span>
+<div>
+<p class="text-xs font-bold font-headline">Economic Geography</p>
+<p class="text-[10px] text-on-surface-variant/60">4 Data Visualizations</p>
+</div>
+</div>
+</div>
+<p class="text-[11px] font-label text-on-surface-variant/70 leading-relaxed mb-6">Critical analysis of human society, evolution, and the artifacts of civilization.</p>
+<button class="text-primary font-bold text-xs font-body flex items-center gap-1 group/btn">
+                            Explore Archives <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_right_alt</span>
+</button>
+</div>
+</div>
+<!-- Quinary: German (New) -->
+<div class="col-span-12 md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low h-[380px]">
+<div class="absolute inset-0 flex">
+<div class="w-1/3 h-full overflow-hidden">
+<img alt="German Culture" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="black and white cinematic moody street shot of Berlin architecture with sharp angles and dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjDadRMeSMcO44Tk8x9OWLOMbrR_wtkmASdLWYLK55F4Z2rd4cchcf_9tWBTqjbfA7UMlPRt-eKRks8YKSc14EdOTN1E3UO-k2cv_eLxpmNftWbuqsNPLP038wt852xpxgY0vf7AZHclUDVEoOUNkOd8LpFBjcKYG1qUMIAtyKoSZhIhmJJfv9lWT8qDDvUb4KIt_IVq_bkuIjZ3nfy_rkgvlfNTM8vRFUsFv-6GtdFkMThaRQ1UBnvwIxufofL39yX7CZ5legPsvc"/>
+</div>
+<div class="w-2/3 h-full bg-on-background p-10 flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-secondary font-label text-[10px] font-bold tracking-[0.2em] uppercase">European Philosophy</span>
+</div>
+<h3 class="text-4xl font-headline font-bold text-white mb-4 tracking-tight">German: <span class="italic font-medium text-outline-variant">The Language of Logic</span></h3>
+<p class="text-white/60 font-body text-sm leading-relaxed mb-8 max-w-md">
+                                From Kant to Kafka, delve into the syntax that defined continental philosophy and modern scientific inquiry.
+                            </p>
+<div class="flex gap-4">
+<span class="px-4 py-2 border border-white/10 rounded-full text-white/40 text-[10px] font-label hover:border-white/40 cursor-default">Phonetics</span>
+<span class="px-4 py-2 border border-white/10 rounded-full text-white/40 text-[10px] font-label hover:border-white/40 cursor-default">Syntax</span>
+<span class="px-4 py-2 border border-white/10 rounded-full text-white/40 text-[10px] font-label hover:border-white/40 cursor-default">Dialectics</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Narrative -->
+<footer class="mt-32 pt-16 border-t border-outline-variant/10 text-center">
+<div class="max-w-xl mx-auto">
+<h4 class="font-headline text-2xl font-bold text-primary mb-4 tracking-tight">Curating your path?</h4>
+<p class="font-body text-sm text-on-surface-variant/70 mb-8">Our algorithm analyzes your research patterns to suggest the next interdisciplinary leap. Your intellectual journey is unique.</p>
+<button class="px-10 py-4 bg-primary text-white rounded-full font-bold font-body text-xs tracking-widest uppercase hover:shadow-2xl hover:shadow-primary/20 transition-all">
+                        Personalize Curriculum
+                    </button>
+</div>
+<div class="mt-20 flex justify-between items-center opacity-40">
+<span class="text-[10px] font-label uppercase tracking-widest">&copy; 2026 Soul Concept</span>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-sm">language</span>
+<span class="material-symbols-outlined text-sm">policy</span>
+<span class="material-symbols-outlined text-sm">share</span>
+</div>
+</div>
+</footer>
+</main>
+</div>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>

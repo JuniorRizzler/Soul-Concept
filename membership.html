@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#ae3200",
+              "surface-container-low": "#f9f1fd",
+              "inverse-on-surface": "#f6eefa",
+              "surface-container": "#f3ebf7",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#002118",
+              "on-secondary-fixed": "#3a0a00",
+              "inverse-surface": "#322f37",
+              "tertiary": "#3b3b3f",
+              "error": "#ba1a1a",
+              "on-error-container": "#93000a",
+              "surface-dim": "#dfd7e3",
+              "on-primary-fixed-variant": "#125040",
+              "tertiary-container": "#535256",
+              "surface": "#fef7ff",
+              "secondary-fixed-dim": "#ffb59e",
+              "surface-variant": "#e7e0eb",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#b3efd8",
+              "primary-fixed-dim": "#98d3bd",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed": "#e4e1e7",
+              "secondary-container": "#fe6432",
+              "on-tertiary-fixed-variant": "#47464b",
+              "on-tertiary-fixed": "#1b1b1f",
+              "background": "#fef7ff",
+              "on-error": "#ffffff",
+              "surface-container-highest": "#e7e0eb",
+              "on-primary-container": "#97d2bc",
+              "on-secondary-fixed-variant": "#852400",
+              "on-background": "#1d1a22",
+              "outline-variant": "#bfc9c3",
+              "on-secondary": "#ffffff",
+              "surface-container-high": "#ede6f1",
+              "secondary-fixed": "#ffdbd0",
+              "primary": "#004435",
+              "inverse-primary": "#98d3bd",
+              "error-container": "#ffdad6",
+              "outline": "#707974",
+              "on-surface": "#1d1a22",
+              "on-surface-variant": "#404945",
+              "primary-container": "#215c4b",
+              "on-tertiary-container": "#c8c5ca",
+              "tertiary-fixed-dim": "#c8c5cb",
+              "surface-tint": "#2f6857",
+              "surface-bright": "#fef7ff",
+              "on-secondary-container": "#5b1600"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-header {
+        background: rgba(254, 247, 255, 0.7);
+        backdrop-filter: blur(12px);
+      }
+      .academic-gradient {
+        background: linear-gradient(135deg, #004435 0%, #215c4b 100%);
+      }
+      .ghost-border {
+        border: 1px solid rgba(191, 201, 195, 0.15);
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md shadow-sm dark:shadow-none">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-emerald-900 dark:text-emerald-50 font-headline">Soul Concept</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="library.html">Library</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Visualizations</a>
+<a class="text-emerald-900 dark:text-emerald-50 font-semibold font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Subscriptions</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-zinc-500 hover:text-emerald-800 cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-zinc-500 hover:text-emerald-800 cursor-pointer">account_circle</span>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200/50 dark:border-zinc-800/50 hidden lg:flex flex-col gap-2 px-4 py-6">
+<div class="mb-8 px-4">
+<h2 class="font-headline font-bold text-emerald-800 text-sm">Soul Concept Account</h2>
+<p class="font-label text-xs text-zinc-500" data-auth-plan-copy>Starter Member</p>
+</div>
+<nav class="flex flex-col gap-1 flex-grow">
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 active:translate-x-1 transition-transform" href="settings.html">
+<span class="material-symbols-outlined text-lg">settings</span> Settings
+            </a>
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 active:translate-x-1 transition-transform" href="dashboard.html">
+<span class="material-symbols-outlined text-lg">military_tech</span> Achievements
+            </a>
+<a class="text-emerald-900 dark:text-emerald-50 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg px-4 py-2 border-l-4 border-emerald-800 font-medium text-sm flex items-center gap-3 active:translate-x-1 transition-transform" href="membership.html">
+<span class="material-symbols-outlined text-lg">card_membership</span> Subscriptions
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 border-t border-zinc-200/50 pt-4">
+<a class="mb-4 academic-gradient text-white rounded-xl py-2.5 px-4 text-sm font-semibold flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-all" data-auth-upgrade href="dashboard.html">Upgrade to Fellow</a>
+<a class="text-zinc-600 px-4 py-2 hover:bg-zinc-100 rounded-lg text-sm flex items-center gap-3" data-auth-logout-trigger href="#">
+<span class="material-symbols-outlined text-lg">help</span> Help Center
+            </a>
+<a class="text-zinc-600 px-4 py-2 hover:bg-zinc-100 rounded-lg text-sm flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-lg">logout</span> Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-16">
+<span class="font-label text-secondary font-semibold tracking-widest uppercase text-[10px] mb-4 block">Membership Tiers</span>
+<h1 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tight text-primary mb-6 max-w-2xl leading-tight">
+                Curate your <span class="text-secondary italic">intellectual</span> legacy.
+            </h1>
+<p class="text-on-surface-variant text-lg max-w-xl font-light leading-relaxed">
+                Choose a plan designed for deep focus, stronger organization, and premium study support.
+            </p>
+</section>
+<!-- Pricing Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+<!-- Tier: Starter -->
+<div class="bg-surface-container-low p-8 flex flex-col relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<div class="mb-8">
+<h3 class="font-headline text-2xl font-bold text-primary mb-1">Starter</h3>
+<p class="text-sm text-on-surface-variant font-medium">The Foundation Plan</p>
+</div>
+<div class="mb-10 flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-primary">$0</span>
+<span class="text-on-surface-variant text-sm">/ forever</span>
+</div>
+<ul class="space-y-4 mb-12 flex-grow">
+<li class="flex items-start gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Personal workspace for up to 5 projects</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Basic 2D data visualizations</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Community support forums</span>
+</li>
+</ul>
+<button class="w-full py-4 text-sm font-bold bg-surface-container-lowest text-primary rounded-xl border border-outline-variant hover:bg-white transition-colors">
+                    Current Plan
+                </button>
+</div>
+<!-- Tier: Fellow (Featured) -->
+<div class="bg-primary text-white p-8 flex flex-col relative overflow-hidden shadow-2xl scale-105 z-10">
+<div class="absolute top-0 right-0">
+<div class="bg-secondary text-white text-[10px] font-bold py-1 px-4 tracking-tighter uppercase">Most Professional</div>
+</div>
+<div class="mb-8">
+<h3 class="font-headline text-2xl font-bold mb-1">Fellow</h3>
+<p class="text-emerald-100/80 text-sm font-medium">Advanced Study Core</p>
+</div>
+<div class="mb-10 flex items-baseline gap-1">
+<span class="text-4xl font-extrabold">$24</span>
+<span class="text-emerald-100/60 text-sm">/ month</span>
+</div>
+<ul class="space-y-4 mb-12 flex-grow">
+<li class="flex items-start gap-3 text-sm text-emerald-50">
+<span class="material-symbols-outlined text-emerald-300 text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span>Unlimited library storage capacity</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-emerald-50">
+<span class="material-symbols-outlined text-emerald-300 text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span>Advanced 3D visualizations engine</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-emerald-50">
+<span class="material-symbols-outlined text-emerald-300 text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span>AI-assisted citation &amp; archival matching</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-emerald-50">
+<span class="material-symbols-outlined text-emerald-300 text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span>Priority server access during peak hours</span>
+</li>
+</ul>
+<a class="w-full py-4 text-sm font-bold bg-secondary text-white rounded-xl hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center" data-auth-upgrade href="dashboard.html">Upgrade to Fellow</a>
+</div>
+<!-- Tier: Institution -->
+<div class="bg-surface-container-low p-8 flex flex-col relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<div class="mb-8">
+<h3 class="font-headline text-2xl font-bold text-primary mb-1">Institution</h3>
+<p class="text-sm text-on-surface-variant font-medium">For Study Teams</p>
+</div>
+<div class="mb-10 flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-primary">$199</span>
+<span class="text-on-surface-variant text-sm">/ month</span>
+</div>
+<ul class="space-y-4 mb-12 flex-grow">
+<li class="flex items-start gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Up to 50 active research seats</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Enterprise SSO &amp; SAML integration</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Custom API access for data export</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Dedicated support manager</span>
+</li>
+</ul>
+<button class="w-full py-4 text-sm font-bold bg-surface-container-lowest text-primary rounded-xl border border-outline-variant hover:bg-white transition-colors">
+                    Contact Sales
+                </button>
+</div>
+</div>
+<!-- Premium Feature Highlights -->
+<section class="mt-24">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="md:w-1/2">
+<h2 class="font-headline text-3xl font-bold text-primary mb-8 tracking-tight">The Fellow Advantage</h2>
+<div class="space-y-8">
+<div class="flex gap-4">
+<div class="bg-primary-fixed w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">view_in_ar</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-primary text-lg">3D Spatiotemporal Mapping</h4>
+<p class="text-on-surface-variant text-sm mt-1 leading-relaxed">Visualize your data across dimensions. Our engine supports complex topological nodes for historical and scientific data curation.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="bg-primary-fixed w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">cached</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-primary text-lg">Infinite Archival Capacity</h4>
+<p class="text-on-surface-variant text-sm mt-1 leading-relaxed">Never delete a reference. Our distributed cloud ensures high-redundancy storage for multi-terabyte research libraries.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="bg-primary-fixed w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-primary text-lg">Priority Research Concierge</h4>
+<p class="text-on-surface-variant text-sm mt-1 leading-relaxed">Get 24/7 access to our technical academic support team. Most queries are resolved within 2 hours.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 relative">
+<div class="aspect-square bg-surface-container-high rounded-[2rem] overflow-hidden ghost-border">
+<img alt="Advanced UI concept" class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" data-alt="Monochromatic high-contrast architectural detail of a modern library with clean lines and sophisticated lighting shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi2FBMdhfrIbFZWCyHz682Yq5Hb2K7mvLS_E2NS-orjhDZYyserZ-ESNi_LI_QNiAWxSi4z4Fym36cN6gdCgswrMw88w6swFY3IF2Dld9-SAfv8bVGWbsijwhO2D5emSiThnPGynhSX1dtjd0Mtdm3uSiyy73-HxMCzozAJVwgV9vvJa7LwZAjEc4qufO_bG1i0L6SxgepmkxLGwZFKrfz6IO2ScKTQi0ABEhMWq3yFwbcZyrbBSnTLhhUyW4bXXOv7IWb6nn7u3NQ"/>
+</div>
+<!-- Overlapping element for asymmetry -->
+<div class="absolute -bottom-6 -left-6 bg-secondary p-6 rounded-xl shadow-xl max-w-[240px]">
+<p class="text-white text-xs font-label uppercase tracking-widest mb-2">Member Impact</p>
+<p class="text-white text-sm font-medium italic">"The 3D visualization suite transformed how we present our longitudinal climate data."</p>
+<p class="text-white/70 text-[10px] mt-4">ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Dr. Elena Rostova, Oxford Research Fellow</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Secure Checkout CTA Section -->
+<section class="mt-32 mb-16 bg-white p-12 md:p-20 rounded-[3rem] text-center ghost-border shadow-sm">
+<div class="max-w-2xl mx-auto">
+<span class="material-symbols-outlined text-4xl text-emerald-800 mb-6" style="font-variation-settings: 'FILL' 1;">verified</span>
+<h2 class="font-headline text-4xl font-extrabold text-primary mb-4">Enterprise-Grade Security</h2>
+<p class="text-on-surface-variant mb-10 leading-relaxed">
+                    Every transaction is protected by 256-bit SSL encryption. We adhere to GDPR, CCPA, and SOC2 compliance standards to ensure your research data remains private and sovereign.
+                </p>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="academic-gradient px-10 py-5 rounded-xl text-white font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all inline-block" href="dashboard.html">Complete Secure Checkout</a>
+<button class="bg-surface-container px-10 py-5 rounded-xl text-primary font-bold text-lg hover:bg-surface-container-highest transition-all">
+                        Review Safety Protocols
+                    </button>
+</div>
+<div class="mt-12 flex items-center justify-center gap-8 opacity-40 grayscale">
+<img alt="Visa" class="h-6" data-alt="visa credit card logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1ADtno-hbQXDziqunh1pk6SYP7kgTE4_bWTgjdehXlJQ7vZ7ZqvUd6Iy_RMZpyTE9yMdOmUnW9dPj-5fOFOfouBFW3xo31kwPddUdJHntCL09j5WmMSvNFJOo9o9L8WACuskWK4dfEqL7kxMyNvJdPSnEByKXu7UfZNtYb3nGf_01KvcYA4szn3xnrzSnQcLAS_wcfwyBDMY8NFJZrobd8oC4ElOssRc7Jgob2cOHxAV3U8mi3oANqmJnPl1RCU3kQOG6lXy0amGh"/>
+<img alt="Mastercard" class="h-6" data-alt="mastercard credit card logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFdt0f3Fa1wUpK4ew5BIHFzT6gZOFKWwK5zgm7R6MgupJKu2h_t3wt_zLnFK5lCS5kWT7SYZ7KZ1K-EEGzDDOoMcRokWUs3Zqddbgvdy0ukU4RGli3QZQEA8beix5rOIil2Z8V55S-1RQv4HjnCewtpA6fX6gCyXUf3OsSOnuhmd13VagsC7Z17r_eagJesYRf7ZIZK4OFqOxxKJ-INlnYTbZo0N31gaPc0BNEVuX6vmIRcYbw0lbQGkOwiPWlyr2JpDh2S3MZhVjZ"/>
+<img alt="Stripe" class="h-6" data-alt="stripe payments logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB7V6MHA-7q3HqKO661SxdhzURlVZ7gEwDt-VU7GsYH_NhLDaWyCweHRrC6Fr-hmM___LWItj2W_u7iWTE0tBb8MKxOygy-G_PhHW2ajg6JmSFqnKHBrrrHwQok-5eqCCsKO5Jw5Vd2kHQUhMnJP2y10y26Su7D5-2sQ3gQ_8cqiJyMMjihrHg6bkgX3924TcYravvsvwUlGqL3AuVr7s9-ujOmNlbNtqICSDRgtBQPKQrJwRaDhq7jl8-Hatf2sSTxpA_Lv0ONAje"/>
+<img alt="ApplePay" class="h-6" data-alt="apple pay logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWnXGuRCN-Zwc0QSFPEUCOF58pImueCJ56GYMIvEmw8BonKJj2OyHL3jBGKaRdJrlChzjFzTeq3iBSECQNQqP6aeZSFjb_7FINWE4uLNU-GD-BMjDqVVNBr1HH0j_MCQLefGZbFv8jOsCFLj4emLVZki7XKbMTh4MAYb5dcLqGSLwWjnQBavODgqaRVLxmK3j5neERwj81uoYvWHQfMTmMFdd-U4JWx-ODChEFF8ANwixrRVh44ju6TJb1x3yIhgiJXoCcmJBNRgTH"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low/80 backdrop-blur-md px-6 h-16 flex items-center justify-between z-50">
+<a class="flex flex-col items-center gap-1 text-zinc-500" href="library.html">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-[10px] font-label">Library</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-zinc-500" href="dashboard.html">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-[10px] font-label">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-emerald-900 font-bold" href="membership.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">card_membership</span>
+<span class="text-[10px] font-label">Plans</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-zinc-500" href="settings.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-label">Account</span>
+</a>
+</nav>  <script src="/supabase-client.js?v=20260312a"></script>
+  <script src="/supabase-auth.js?v=20260326h"></script>
+  <script src="/vercel-speed-insights.js?v=20260313a"></script>
+  <script src="focus-mode.js?v=20260321d"></script>
+  <script src="lyne-widget.js?v=20260321c"></script>
+  <script src="app.js?v=20260326h"></script>
+  <script src="auth-profile-sync.js?v=20260324a"></script>
+  <script src="assets/site.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body></html>
