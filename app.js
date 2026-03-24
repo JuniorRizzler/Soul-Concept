@@ -2155,14 +2155,53 @@
     })
   }
 
+  const SW_RELOAD_KEY = 'sc_sw_reloaded_v20260324'
   let serviceWorkerRegistrationPromise = null
+
+  function scheduleReloadForUpdatedServiceWorker() {
+    if (!('serviceWorker' in navigator)) return
+
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      try {
+        if (sessionStorage.getItem(SW_RELOAD_KEY) === '1') return
+        sessionStorage.setItem(SW_RELOAD_KEY, '1')
+      } catch (_err) {}
+      window.location.reload()
+    })
+  }
+
+  function wireServiceWorkerUpdates(registration) {
+    if (!registration) return
+
+    if (registration.waiting) {
+      registration.waiting.postMessage({ type: 'SKIP_WAITING' })
+    }
+
+    registration.addEventListener('updatefound', function () {
+      const installingWorker = registration.installing
+      if (!installingWorker) return
+      installingWorker.addEventListener('statechange', function () {
+        if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          installingWorker.postMessage({ type: 'SKIP_WAITING' })
+        }
+      })
+    })
+  }
+
   function ensureServiceWorkerRegistration() {
     if (!('serviceWorker' in navigator)) {
       return Promise.reject(new Error('Service workers are not supported in this browser.'))
     }
     if (!serviceWorkerRegistrationPromise) {
       serviceWorkerRegistrationPromise = navigator.serviceWorker
-        .register('/sw.js')
+        .register('/sw.js', { updateViaCache: 'none' })
+        .then(function (registration) {
+          wireServiceWorkerUpdates(registration)
+          registration.update().catch(function () {
+            // best-effort update check only
+          })
+          return registration
+        })
         .catch(function (err) {
           serviceWorkerRegistrationPromise = null
           console.warn('Service worker registration failed:', err)
@@ -2172,6 +2211,7 @@
     return serviceWorkerRegistrationPromise
   }
   if ('serviceWorker' in navigator) {
+    scheduleReloadForUpdatedServiceWorker()
     ensureServiceWorkerRegistration().catch(function () {
       // handled when notifications are enabled explicitly
     })
