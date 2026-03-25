@@ -2310,12 +2310,7 @@
     } catch (err) {
       // ignore storage errors
     }
-    function hasVisibleAuthPrompt() {
-      return !!document.querySelector(
-        '#sc-auth-modal-backdrop.open, #sc-auth-modal-backdrop.locked, [data-sc-auth-mount] .sc-auth-launch, [data-sc-auth-floating] .sc-auth-launch'
-      )
-    }
-    const shouldShowWidget = !pushAlreadyEnabled && !pushWidgetDismissed && !hasVisibleAuthPrompt()
+    const shouldShowWidget = !pushAlreadyEnabled && !pushWidgetDismissed
     if (!shouldShowWidget) {
       // do not show repeated widget once push has already been enabled
     } else {
