@@ -19,25 +19,25 @@
     "{{DATA:SCREEN:SCREEN_12}}": "membership.html",
     "{{DATA:SCREEN:SCREEN_13}}": "profile.html",
     "{{DATA:SCREEN:SCREEN_18}}": "settings.html",
-    "{{DATA:SCREEN:SCREEN_21}}": "dashboard-live.html",
+    "{{DATA:SCREEN:SCREEN_21}}": "dashboard.html",
     "{{DATA:SCREEN:SCREEN_24}}": "research.html",
     "{{DATA:SCREEN:SCREEN_32}}": "discover.html",
     "{{DATA:SCREEN:SCREEN_33}}": "library.html",
-    "{{DATA:SCREEN:SCREEN_37}}": "analytics.html#analytics-dashboard"
+    "{{DATA:SCREEN:SCREEN_37}}": "analytics.html"
   };
 
   const exactRoutes = new Map([
-    ["home", "dashboard-live.html"],
+    ["home", "dashboard.html"],
     ["discover", "discover.html"],
-    ["dashboard", "dashboard-live.html"],
-    ["overview", "dashboard-live.html"],
+    ["dashboard", "dashboard.html"],
+    ["overview", "dashboard.html"],
     ["library", "subject-library-2.html"],
     ["subjects", "subject-library-2.html"],
     ["subject library", "subject-library-2.html"],
     ["all subjects", "subject-library-2.html"],
     ["view libraries", "subject-library-2.html"],
     ["featured", "disciplines.html"],
-    ["recent activity", "dashboard-live.html"],
+    ["recent activity", "dashboard.html"],
     ["saved modules", "library.html"],
     ["research", "research.html"],
     ["network", "profile.html"],
@@ -49,8 +49,8 @@
     ["achievements", "achievements.html"],
     ["subscriptions", "membership.html"],
     ["membership", "membership.html"],
-    ["insights", "analytics.html#analytics-dashboard"],
-    ["analytics", "analytics.html#analytics-dashboard"],
+    ["insights", "analytics.html"],
+    ["analytics", "analytics.html"],
     ["academic precision", "concept-academic-precision.html"],
     ["anthemis pro", "concept-anthemis-pro.html"],
     ["scholar vibrant", "concept-scholar-vibrant.html"],
@@ -62,13 +62,13 @@
     ["open geography", "geography-library.html"],
     ["open cards", "anki/index.html"],
     ["open quiz tool", "math-quiz-simulator.html"],
-    ["open analytics", "analytics.html#analytics-dashboard"],
+    ["open analytics", "analytics.html"],
     ["open math 9", "math/index.html"],
     ["open math 10", "grade-10-math.html"],
     ["support", "settings.html#support"],
     ["help center", "settings.html#support"],
-    ["sign out", "dashboard-live.html"],
-    ["sign in", "dashboard-live.html"],
+    ["sign out", "dashboard.html"],
+    ["sign in", "dashboard.html"],
     ["contact", "settings.html#support"],
     ["grade 8", "discover.html"],
     ["grade 9", "grade-9.html"],
@@ -76,40 +76,40 @@
     ["grade 11", "grade-11.html"],
     ["grade 12", "grade-12.html"],
     ["view all subjects", "subject-library-2.html"],
-    ["start study session", "dashboard-live.html"],
+    ["start study session", "dashboard.html"],
     ["explore library", "subject-library-2.html"],
     ["enter library", "subject-library-2.html"],
-    ["establish access", "dashboard-live.html"],
+    ["establish access", "dashboard.html"],
     ["view the manifesto", "discover.html"],
     ["request research assistant", "research.html"],
     ["upgrade to premium", "membership.html"],
     ["upgrade to fellow", "membership.html"],
     ["complete secure checkout", "membership.html"],
-    ["deep dive", "analytics.html#analytics-dashboard"],
+    ["deep dive", "analytics.html"],
     ["view archive", "archive.html"],
-    ["clear completed", "dashboard-live.html"],
+    ["clear completed", "dashboard.html"],
     ["terms of knowledge", "membership.html"],
     ["terms of research", "membership.html"],
     ["curator privacy", "settings.html"],
     ["privacy policy", "settings.html"],
     ["institutional access", "membership.html"],
-    ["focus mode", "dashboard-live.html"],
-    ["tutorial", "dashboard-live.html"]
+    ["focus mode", "dashboard.html"],
+    ["tutorial", "dashboard.html"]
   ]);
 
   const topLinks = [
-    { href: "dashboard-live.html", label: "Home" },
-    { href: "dashboard-live.html", label: "Dashboard" },
+    { href: "dashboard.html", label: "Home" },
+    { href: "dashboard.html", label: "Dashboard" },
     { href: "subject-library-2.html", label: "View Libraries" },
     { href: "library.html", label: "Library" },
-    { href: "analytics.html#analytics-dashboard", label: "Analytics" }
+    { href: "analytics.html", label: "Analytics" }
   ];
 
   const sideLinks = [
-    { href: "dashboard-live.html", label: "Home", icon: "home" },
-    { href: "dashboard-live.html", label: "Overview", icon: "dashboard" },
+    { href: "dashboard.html", label: "Home", icon: "home" },
+    { href: "dashboard.html", label: "Overview", icon: "dashboard" },
     { href: "subject-library-2.html", label: "Libraries", icon: "auto_stories" },
-    { href: "analytics.html#analytics-dashboard", label: "Analytics", icon: "analytics" },
+    { href: "analytics.html", label: "Analytics", icon: "analytics" },
     { href: "research.html", label: "Research", icon: "biotech" },
     { href: "curriculum.html", label: "Curriculum", icon: "school" },
     { href: "schedule.html", label: "Planner", icon: "event_note" },
@@ -126,7 +126,6 @@
     "index.html": { title: "Home", kicker: "Soul Concept" },
     "discover.html": { title: "Discover", kicker: "Editorial Home" },
     "dashboard.html": { title: "Dashboard", kicker: "Scholar Workspace" },
-    "dashboard-live.html": { title: "Dashboard", kicker: "Scholar Workspace" },
     "library.html": { title: "Library", kicker: "Subject Collections" },
     "subjects.html": { title: "Subjects", kicker: "Library Index" },
     "subject-library-2.html": { title: "Subject Library", kicker: "Curated Disciplines" },
@@ -155,13 +154,13 @@
   };
 
   const pageCatalog = [
-    { href: "dashboard-live.html", title: "Home", kicker: "Soul Concept", summary: "Open the live Soul Concept workspace instead of the legacy landing page.", keywords: ["home", "dashboard", "workspace", "knowledge"] },
+    { href: "dashboard.html", title: "Home", kicker: "Soul Concept", summary: "Open the live Soul Concept workspace instead of the legacy landing page.", keywords: ["home", "dashboard", "workspace", "knowledge"] },
     { href: "discover.html", title: "Discover", kicker: "Editorial Home", summary: "Browse featured knowledge paths and study tools.", keywords: ["discover", "featured", "manifesto"] },
-    { href: "dashboard-live.html", title: "Dashboard", kicker: "Scholar Workspace", summary: "Track tasks, progress, and learning insights.", keywords: ["dashboard", "overview", "tasks", "flow"] },
+    { href: "dashboard.html", title: "Dashboard", kicker: "Scholar Workspace", summary: "Track tasks, progress, and learning insights.", keywords: ["dashboard", "overview", "tasks", "flow"] },
     { href: "subject-library-2.html", title: "View Libraries", kicker: "Subject Collections", summary: "Browse the imported libraries hub and jump into the real Soul Concept science, geography, math, quiz, and cards tools.", keywords: ["library", "subjects", "disciplines", "modules", "science", "geography", "math", "view libraries"] },
     { href: "subject-library-2.html", title: "Subject Library", kicker: "Curated Disciplines", summary: "Browse the imported all-subjects screen with searchable discipline cards.", keywords: ["subjects", "all subjects", "subject library", "disciplines"] },
     { href: "research.html", title: "Research", kicker: "Repository", summary: "Search papers, authors, keywords, and DOI references.", keywords: ["research", "papers", "authors", "doi"] },
-    { href: "analytics.html#analytics-dashboard", title: "Analytics", kicker: "Scholar Metrics", summary: "Review growth, impact, mastery, and knowledge stream metrics.", keywords: ["analytics", "metrics", "impact", "growth"] },
+    { href: "analytics.html", title: "Analytics", kicker: "Scholar Metrics", summary: "Review growth, impact, mastery, and knowledge stream metrics.", keywords: ["analytics", "metrics", "impact", "growth"] },
     { href: "curation.html", title: "Curation", kicker: "Editorial Console", summary: "Manage saved artifacts and curated materials.", keywords: ["curation", "artifacts", "saved"] },
     { href: "archive.html", title: "Archive", kicker: "Manuscripts", summary: "Search archived material and references.", keywords: ["archive", "manuscripts", "history"] },
     { href: "membership.html", title: "Membership", kicker: "Plans and Access", summary: "Review access plans and institutional membership.", keywords: ["membership", "plans", "premium"] },
@@ -244,7 +243,7 @@
     if (label.includes("history")) return "curriculum.html";
     if (label.includes("research")) return "research.html";
     if (label.includes("archive")) return "archive.html";
-    if (label.includes("analytics")) return "analytics.html#analytics-dashboard";
+    if (label.includes("analytics")) return "analytics.html";
     if (label.includes("profile")) return "profile.html";
     if (label.includes("settings")) return "settings.html";
     if (label.includes("membership") || label.includes("premium") || label.includes("checkout")) return "membership.html";
@@ -281,7 +280,7 @@
   }
 
   function wireRoutes() {
-    const genericTargets = ["library.html", "research.html", "dashboard.html", "dashboard-live.html", "discover.html", "schedule.html"];
+    const genericTargets = ["library.html", "research.html", "dashboard.html", "discover.html", "schedule.html"];
 
     document.querySelectorAll("a").forEach((anchor) => {
       const href = anchor.getAttribute("href");
@@ -291,7 +290,7 @@
       } else if (route && genericTargets.includes(href || "")) {
         anchor.setAttribute("href", route);
       } else if (!href || href === "#" || href === "") {
-        anchor.setAttribute("href", route || "dashboard-live.html");
+        anchor.setAttribute("href", route || "dashboard.html");
       }
     });
 
@@ -369,7 +368,7 @@
   }
 
   function activeMatch(href, pathname) {
-    if (pathname === "index.html" && (href === "dashboard.html" || href === "dashboard-live.html")) return true;
+    if (pathname === "index.html" && href === "dashboard.html") return true;
     if (href === pathname) return true;
     if (href === "subject-library-2.html" && ["library.html", "subjects.html", "disciplines.html"].includes(pathname)) return true;
     if (href === "research.html" && ["archive.html", "archive-classic.html", "curation.html"].includes(pathname)) return true;
@@ -401,7 +400,7 @@
       <div class="sc-shell-scrim" data-sc-shell-close></div>
       <aside class="sc-shell-sidebar" aria-label="Primary navigation">
         <div class="sc-shell-sidebar-head">
-          <a class="sc-shell-brand" href="dashboard-live.html">
+          <a class="sc-shell-brand" href="dashboard.html">
             <span class="sc-shell-brandmark" aria-hidden="true">
               <img src="icons/soulconceptflame.png" alt="" />
             </span>
@@ -419,7 +418,7 @@
         <div class="sc-shell-sidebar-foot">
           <nav class="sc-shell-nav-secondary">${secondaryLinksHtml}</nav>
           <div style="padding:0.75rem;">
-            <a class="sc-shell-cta" href="dashboard-live.html">Start Study Session</a>
+            <a class="sc-shell-cta" href="dashboard.html">Start Study Session</a>
           </div>
         </div>
       </aside>
@@ -524,8 +523,6 @@
   }
 
   function addMotionOrbs() {
-    const pathname = currentPath()
-    if (pathname === "dashboard.html" || pathname === "analytics.html") return;
     const layer = document.createElement("div");
     layer.setAttribute("aria-hidden", "true");
     layer.innerHTML = `
