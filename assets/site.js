@@ -27,7 +27,7 @@
   };
 
   const exactRoutes = new Map([
-    ["home", "dashboard.html"],
+    ["home", "index.html"],
     ["discover", "discover.html"],
     ["dashboard", "dashboard.html"],
     ["overview", "dashboard.html"],
@@ -98,7 +98,7 @@
   ]);
 
   const topLinks = [
-    { href: "dashboard.html", label: "Home" },
+    { href: "index.html", label: "Home" },
     { href: "dashboard.html", label: "Dashboard" },
     { href: "subject-library-2.html", label: "View Libraries" },
     { href: "library.html", label: "Library" },
@@ -106,7 +106,7 @@
   ];
 
   const sideLinks = [
-    { href: "dashboard.html", label: "Home", icon: "home" },
+    { href: "index.html", label: "Home", icon: "home" },
     { href: "dashboard.html", label: "Overview", icon: "dashboard" },
     { href: "subject-library-2.html", label: "Libraries", icon: "auto_stories" },
     { href: "analytics.html", label: "Analytics", icon: "analytics" },
