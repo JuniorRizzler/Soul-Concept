@@ -1,901 +1,693 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Soul Concept Analytics | Study Performance Lab</title>
-    <meta
-      name="description"
-      content="Advanced local study analytics for Soul Concept with performance breakdowns, live charts, and AI-style coaching."
-    />
-    <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="https://soulconcept.vercel.app/analytics.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/icons/icon.svg?v=2" type="image/svg+xml" />
-    <link rel="icon" href="/icons/icon-192.png?v=2" sizes="192x192" type="image/png" />
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2" />
-    <meta name="theme-color" content="#0b0d10" />
-    <link rel="stylesheet" href="styles.css?v=20260326i" />
-    <style>
-      .analytics-newsc-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
-        gap: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
+<!DOCTYPE html>
 
-      .analytics-newsc-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 2rem;
-        border: 1px solid rgba(191, 201, 195, 0.28);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 238, 247, 0.94));
-        box-shadow: 0 24px 54px rgba(29, 26, 34, 0.08);
-      }
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scholarly | Advanced Knowledge Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#c8c5cb",
+                        "secondary-fixed-dim": "#ffb59e",
+                        "on-error-container": "#93000a",
+                        "primary": "#004435",
+                        "primary-fixed": "#b3efd8",
+                        "surface-container": "#f3ebf7",
+                        "primary-container": "#215c4b",
+                        "outline": "#707974",
+                        "primary-fixed-dim": "#98d3bd",
+                        "surface-tint": "#2f6857",
+                        "on-tertiary-fixed-variant": "#47464b",
+                        "inverse-primary": "#98d3bd",
+                        "tertiary": "#3b3b3f",
+                        "outline-variant": "#bfc9c3",
+                        "on-primary-fixed-variant": "#125040",
+                        "surface-variant": "#e7e0eb",
+                        "on-tertiary-fixed": "#1b1b1f",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdbd0",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#ae3200",
+                        "on-secondary-fixed-variant": "#852400",
+                        "inverse-surface": "#322f37",
+                        "on-background": "#1d1a22",
+                        "on-tertiary-container": "#c8c5ca",
+                        "surface-container-high": "#ede6f1",
+                        "background": "#fef7ff",
+                        "surface-container-low": "#f9f1fd",
+                        "on-surface": "#1d1a22",
+                        "surface-bright": "#fef7ff",
+                        "secondary-container": "#fe6432",
+                        "on-primary-fixed": "#002118",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dfd7e3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e7e0eb",
+                        "on-primary-container": "#97d2bc",
+                        "tertiary-container": "#535256",
+                        "on-secondary-fixed": "#3a0a00",
+                        "inverse-on-surface": "#f6eefa",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#e4e1e7",
+                        "surface": "#fef7ff",
+                        "on-secondary-container": "#5b1600",
+                        "on-surface-variant": "#404945",
+                        "error": "#ba1a1a"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-morphism {
+            background: rgba(254, 247, 255, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .perspective-lg { perspective: 1500px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .rotate-y-12 { transform: rotateY(12deg); }
+        .rotate-x-12 { transform: rotateX(12deg); }
+        
+        .glow-pulse-teal { box-shadow: 0 0 30px rgba(0, 68, 53, 0.3); }
+        .glow-pulse-purple { box-shadow: 0 0 30px rgba(59, 59, 63, 0.2); }
+        .glow-pulse-orange { box-shadow: 0 0 30px rgba(174, 50, 0, 0.3); }
 
-      .analytics-newsc-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background: radial-gradient(circle at top right, rgba(152, 211, 189, 0.2), transparent 34%);
-      }
-
-      .analytics-newsc-card > * {
-        position: relative;
-        z-index: 1;
-      }
-
-      .analytics-newsc-card--chart {
-        padding: 1.75rem;
-      }
-
-      .analytics-newsc-card--impact {
-        padding: 1.75rem;
-        background: linear-gradient(135deg, #004435 0%, #215c4b 100%);
-      }
-
-      .analytics-newsc-stack {
-        display: grid;
-        gap: 1.25rem;
-      }
-
-      .analytics-newsc-head {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .analytics-newsc-kicker {
-        margin: 0 0 0.45rem;
-        color: #ae3200;
-        font-size: 0.72rem;
-        font-weight: 800;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
-      .analytics-newsc-title {
-        margin: 0;
-        color: #004435;
-        font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
-        font-size: 1.8rem;
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .analytics-newsc-subtitle {
-        margin: 0.55rem 0 0;
-        max-width: 38rem;
-        color: #5a5863;
-        font-size: 0.96rem;
-        line-height: 1.5;
-      }
-
-      .analytics-newsc-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.45rem 0.7rem;
-        border-radius: 999px;
-        background: rgba(33, 92, 75, 0.1);
-        color: #125040;
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .analytics-newsc-hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) 12rem;
-        gap: 1rem;
-        align-items: end;
-        margin-bottom: 1.25rem;
-      }
-
-      .analytics-newsc-growth {
-        font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
-        font-size: clamp(2.8rem, 6vw, 4.8rem);
-        font-weight: 800;
-        line-height: 0.9;
-        letter-spacing: -0.05em;
-        color: #004435;
-      }
-
-      .analytics-newsc-growth span {
-        color: #ae3200;
-        font-size: 0.42em;
-        letter-spacing: -0.02em;
-      }
-
-      .analytics-newsc-chart {
-        position: relative;
-        height: 17rem;
-        border-radius: 1.75rem;
-        background: linear-gradient(180deg, rgba(254, 247, 255, 0.98), rgba(236, 247, 242, 0.9));
-        border: 1px solid rgba(191, 201, 195, 0.22);
-        overflow: hidden;
-      }
-
-      .analytics-newsc-chart svg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .analytics-newsc-peak {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        min-width: 8.5rem;
-        padding: 0.85rem 0.95rem;
-        border-radius: 1.2rem;
-        background: rgba(255, 255, 255, 0.76);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 16px 32px rgba(29, 26, 34, 0.08);
-      }
-
-      .analytics-newsc-peak small {
-        display: block;
-        margin-bottom: 0.25rem;
-        color: #707974;
-        font-size: 0.65rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .analytics-newsc-peak strong {
-        color: #004435;
-        font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
-        font-size: 1.25rem;
-        font-weight: 800;
-      }
-
-      .analytics-newsc-foot {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        margin-top: 1.2rem;
-        padding-top: 1.2rem;
-        border-top: 1px solid rgba(191, 201, 195, 0.24);
-      }
-
-      .analytics-newsc-foot span,
-      .analytics-newsc-mini span {
-        display: block;
-        margin-bottom: 0.3rem;
-        color: #707974;
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .analytics-newsc-foot strong,
-      .analytics-newsc-mini strong {
-        color: #1d1a22;
-        font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
-        font-size: 1.15rem;
-        font-weight: 800;
-      }
-
-      .analytics-newsc-mini {
-        padding: 1.35rem 1.45rem;
-      }
-
-      .analytics-newsc-mini p,
-      .analytics-newsc-network p {
-        margin: 0.45rem 0 0;
-        color: #5a5863;
-        font-size: 0.92rem;
-        line-height: 1.45;
-      }
-
-      .analytics-newsc-impact-value {
-        margin-top: 1rem;
-        color: #fff;
-        font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
-        font-size: clamp(3rem, 7vw, 4.8rem);
-        font-weight: 800;
-        line-height: 0.9;
-        letter-spacing: -0.05em;
-      }
-
-      .analytics-newsc-impact-copy {
-        max-width: 14rem;
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .analytics-newsc-orb {
-        position: absolute;
-        right: -1rem;
-        top: -1rem;
-        width: 8rem;
-        height: 8rem;
-        border-radius: 999px;
-        background: rgba(151, 210, 188, 0.24);
-        filter: blur(12px);
-        transition: transform 500ms ease;
-      }
-
-      .analytics-newsc-card--impact:hover .analytics-newsc-orb {
-        transform: scale(1.35);
-      }
-
-      .analytics-newsc-mastery {
-        display: grid;
-        grid-template-columns: 13rem minmax(0, 1fr);
-        gap: 1rem;
-        align-items: center;
-        padding: 1.5rem;
-      }
-
-      .analytics-newsc-ring {
-        position: relative;
-        width: 13rem;
-        height: 13rem;
-        margin: 0 auto;
-      }
-
-      .analytics-newsc-ring::before,
-      .analytics-newsc-ring::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 999px;
-      }
-
-      .analytics-newsc-ring::before {
-        border: 16px solid rgba(0, 68, 53, 0.08);
-      }
-
-      .analytics-newsc-ring::after {
-        inset: 0.8rem;
-        background: rgba(255, 255, 255, 0.68);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      }
-
-      .analytics-newsc-ring svg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        transform: rotate(-90deg);
-      }
-
-      .analytics-newsc-ring-track {
-        fill: none;
-        stroke: rgba(0, 68, 53, 0.1);
-        stroke-width: 14;
-      }
-
-      .analytics-newsc-ring-primary,
-      .analytics-newsc-ring-secondary {
-        fill: none;
-        stroke-width: 14;
-        stroke-linecap: round;
-        transition: stroke-dashoffset 450ms ease;
-      }
-
-      .analytics-newsc-ring-primary {
-        stroke: #004435;
-      }
-
-      .analytics-newsc-ring-secondary {
-        stroke: #ae3200;
-      }
-
-      .analytics-newsc-ring-copy {
-        position: absolute;
-        inset: 2rem;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-
-      .analytics-newsc-ring-copy strong {
-        color: #004435;
-        font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
-        font-size: 2.5rem;
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .analytics-newsc-ring-copy span {
-        margin-top: 0.35rem;
-        color: #707974;
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
-      .analytics-newsc-legend {
-        display: grid;
-        gap: 0.9rem;
-      }
-
-      .analytics-newsc-legend-item {
-        display: flex;
-        align-items: center;
-        gap: 0.65rem;
-      }
-
-      .analytics-newsc-dot {
-        width: 0.65rem;
-        height: 0.65rem;
-        border-radius: 999px;
-      }
-
-      .analytics-newsc-network {
-        padding: 1.5rem;
-      }
-
-      .analytics-newsc-stream {
-        display: grid;
-        gap: 0.85rem;
-        margin-top: 1rem;
-      }
-
-      .analytics-newsc-stream-item {
-        display: grid;
-        gap: 0.45rem;
-      }
-
-      .analytics-newsc-stream-meta {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.8rem;
-        color: #1d1a22;
-        font-size: 0.88rem;
-        font-weight: 700;
-      }
-
-      .analytics-newsc-stream-meta span:last-child {
-        color: #707974;
-        font-size: 0.72rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .analytics-newsc-stream-track {
-        height: 0.55rem;
-        border-radius: 999px;
-        background: rgba(191, 201, 195, 0.25);
-        overflow: hidden;
-      }
-
-      .analytics-newsc-stream-fill {
-        height: 100%;
-        border-radius: inherit;
-        background: linear-gradient(90deg, #004435, #215c4b);
-        transform-origin: left center;
-        animation: analytics-newsc-grow 700ms ease;
-      }
-
-      .analytics-newsc-surface {
-        animation: analytics-newsc-float 700ms ease;
-      }
-
-      @keyframes analytics-newsc-grow {
-        from { transform: scaleX(0); }
-        to { transform: scaleX(1); }
-      }
-
-      @keyframes analytics-newsc-float {
-        from { opacity: 0; transform: translateY(12px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      @media (max-width: 1024px) {
-        .analytics-newsc-grid {
-          grid-template-columns: 1fr;
+        .burnout-gauge {
+            background: conic-gradient(from 180deg at 50% 100%, #10b981 0deg, #f59e0b 90deg, #ef4444 180deg);
+            mask: radial-gradient(circle at 50% 100%, transparent 60%, black 61%);
+            -webkit-mask: radial-gradient(circle at 50% 100%, transparent 60%, black 61%);
         }
 
-        .analytics-newsc-mastery,
-        .analytics-newsc-hero {
-          grid-template-columns: 1fr;
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
+        .float-animation { animation: float 6s ease-in-out infinite; }
 
-        .analytics-newsc-foot {
-          grid-template-columns: 1fr;
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-      }
+        @keyframes reverse-spin {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-reverse-spin { animation: reverse-spin 10s linear infinite; }
     </style>
-  </head>
-  <body class="home analytics-body">
-    <div class="site-wrap">
-      <header class="topbar">
-        <div class="container topbar-inner">
-          <a class="brand" href="index.html">
-            <span class="brand-mark" aria-hidden="true"></span>
-            <span class="brand-name">Soul Concept</span>
-          </a>
-          <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
-          <nav class="nav-menu" data-nav-menu aria-label="Primary">
-            <a href="index.html" data-nav-link>Home</a>
-            <a href="services.html" data-nav-link>Tools</a>
-            <a href="work.html" data-nav-link>Library</a>
-            <a href="subjects.html" data-nav-link>Subjects</a>
-            <a href="analytics.html" data-nav-link>Analytics</a>
-            <a href="about.html" data-nav-link>About</a>
-            <a href="contact.html" data-nav-link>Feedback</a>
-            <button class="btn btn-secondary install-btn" type="button" data-install-btn>Install App</button>
-            <span class="install-hint" data-install-hint>iOS: Share -> Add to Home Screen</span>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section class="hero analytics-hero">
-          <div class="container analytics-hero-grid">
-            <div class="hero-copy reveal">
-              <p class="eyebrow">Performance Lab</p>
-              <h1 class="hero-title">
-                <span class="hero-title-brand">Analytics</span>
-                <span class="hero-title-stack">
-                  <span class="hero-title-sub">Study Intelligence</span>
-                </span>
-              </h1>
-              <p>
-                This page turns your real Soul Concept behavior into a stronger diagnosis: momentum, retention quality,
-                burnout risk, focus discipline, and what to fix next.
-              </p>
-              <p>
-                Everything here is built from your local study data. The coaching is only as good as the sessions you
-                actually complete.
-              </p>
-              <div class="hero-jump-links">
-                <a class="jump-link is-primary" href="#analytics-dashboard">Open Dashboard</a>
-                <a class="jump-link" href="study-library.html">Open Science</a>
-                <button class="jump-link" type="button" data-focus-hero-open>Start Focus Mode</button>
-              </div>
-            </div>
-            <div class="hero-visual reveal">
-              <div class="hero-panel hero-panel-primary">
-                <p class="hero-panel-eyebrow">What It Reads</p>
-                <h3>Live study signals.</h3>
-                <p>Page time, focus sessions, warnings, break behavior, repetition, and how your study mix is shifting.</p>
-              </div>
-              <div class="hero-panel hero-panel-glass">
-                <p class="hero-panel-eyebrow">Best Use</p>
-                <div class="hero-steps">
-                  <div class="hero-step">
-                    <span>1</span>
-                    <p>Study first</p>
-                  </div>
-                  <div class="hero-step">
-                    <span>2</span>
-                    <p>Review analysis</p>
-                  </div>
-                  <div class="hero-step">
-                    <span>3</span>
-                    <p>Fix the bottleneck</p>
-                  </div>
-                </div>
-              </div>
-              <div class="hero-panel hero-panel-outline">
-                <p class="hero-panel-eyebrow">Outputs</p>
-                <div class="hero-metrics">
-                  <div>
-                    <strong>6</strong>
-                    <span>Core scores</span>
-                  </div>
-                  <div>
-                    <strong>3</strong>
-                    <span>Risk views</span>
-                  </div>
-                  <div>
-                    <strong>1</strong>
-                    <span>Priority target</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section analytics-section" id="analytics-dashboard">
-          <div class="container reveal">
-            <p class="eyebrow">Dashboard</p>
-            <h2 class="section-title">A sharper read on how you study</h2>
-            <p class="section-lead">
-              This analysis is local and updates live. It is designed to tell you where your time is actually helping,
-              where it is leaking, and what action would improve the next session most.
-            </p>
-            <div class="analytics-shell analytics-shell-advanced" data-analytics-page>
-              <div class="analytics-newsc-grid analytics-newsc-surface">
-                <article class="analytics-newsc-card analytics-newsc-card--chart">
-                  <div class="analytics-newsc-head">
-                    <div>
-                      <p class="analytics-newsc-kicker">NewSC Analytics</p>
-                      <h3 class="analytics-newsc-title">Knowledge Growth</h3>
-                      <p class="analytics-newsc-subtitle">
-                        The imported `newsc` analytics layer now reads real Soul Concept study data instead of static demo values.
-                      </p>
-                    </div>
-                    <span class="analytics-newsc-chip">Live local model</span>
-                  </div>
-                  <div class="analytics-newsc-hero">
-                    <div>
-                      <div class="analytics-newsc-growth" data-analytics-hero-growth>0<span>%</span></div>
-                      <p class="analytics-newsc-subtitle" style="margin-top:0.75rem">
-                        Momentum and retention blended into one growth signal for the current study cycle.
-                      </p>
-                    </div>
-                    <div class="analytics-newsc-mini">
-                      <span>Peak Momentum</span>
-                      <strong data-analytics-line-peak>0</strong>
-                      <p data-analytics-hero-trend>Building live signal.</p>
-                    </div>
-                  </div>
-                  <div class="analytics-newsc-chart" aria-hidden="true">
-                    <svg viewBox="0 0 800 320" preserveAspectRatio="none">
-                      <defs>
-                        <linearGradient id="analytics-newsc-area" x1="0" x2="0" y1="0" y2="1">
-                          <stop offset="0%" stop-color="#004435" stop-opacity="0.28"></stop>
-                          <stop offset="100%" stop-color="#004435" stop-opacity="0.02"></stop>
-                        </linearGradient>
-                        <filter id="analytics-newsc-glow">
-                          <feGaussianBlur stdDeviation="8" result="blur"></feGaussianBlur>
-                          <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
-                        </filter>
-                      </defs>
-                      <path data-analytics-growth-area fill="url(#analytics-newsc-area)" d="M0,280 L800,280 L800,320 L0,320 Z"></path>
-                      <path data-analytics-growth-line fill="none" stroke="#004435" stroke-width="5" stroke-linecap="round" filter="url(#analytics-newsc-glow)" d="M0,280 L800,280"></path>
-                    </svg>
-                    <div class="analytics-newsc-peak">
-                      <small>Peak Signal</small>
-                      <strong data-analytics-growth-peak>0%</strong>
-                    </div>
-                  </div>
-                  <div class="analytics-newsc-foot">
-                    <div>
-                      <span>Total Depth</span>
-                      <strong data-analytics-total-depth>0m</strong>
-                    </div>
-                    <div>
-                      <span>Retention</span>
-                      <strong data-analytics-retention-hero>0%</strong>
-                    </div>
-                    <div>
-                      <span>Current Phase</span>
-                      <strong data-analytics-phase>Building model</strong>
-                    </div>
-                  </div>
-                </article>
-
-                <div class="analytics-newsc-stack">
-                  <article class="analytics-newsc-card analytics-newsc-mini">
-                    <span>Citation Velocity</span>
-                    <strong data-analytics-citation>0</strong>
-                    <p>Live reference signal based on visits, repeated sessions, and subject spread.</p>
-                    <p class="analytics-newsc-kicker" style="margin-top:0.85rem;margin-bottom:0" data-analytics-citation-delta>+0%</p>
-                  </article>
-
-                  <article class="analytics-newsc-card analytics-newsc-card--impact">
-                    <div class="analytics-newsc-orb" aria-hidden="true"></div>
-                    <p class="analytics-newsc-kicker" style="color:rgba(255,255,255,0.74)">Learning Impact</p>
-                    <h3 style="margin:0;color:#fff;font-family:'Outfit','Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:800">Focus-weighted score</h3>
-                    <div class="analytics-newsc-impact-value" data-analytics-impact>0/100</div>
-                    <p class="analytics-newsc-impact-copy" data-analytics-impact-copy>
-                      Waiting for enough study signal to model impact properly.
-                    </p>
-                  </article>
-                </div>
-              </div>
-
-              <div class="analytics-newsc-grid analytics-newsc-surface">
-                <article class="analytics-newsc-card analytics-newsc-mastery">
-                  <div class="analytics-newsc-ring">
-                    <div class="analytics-newsc-ring-copy">
-                      <strong data-analytics-mastery-grade>B</strong>
-                      <span data-analytics-mastery-label>Global tier</span>
-                    </div>
-                    <svg viewBox="0 0 200 200" aria-hidden="true">
-                      <circle class="analytics-newsc-ring-track" cx="100" cy="100" r="68"></circle>
-                      <circle class="analytics-newsc-ring-primary" data-analytics-mastery-primary-ring cx="100" cy="100" r="68" stroke-dasharray="427.26" stroke-dashoffset="427.26"></circle>
-                      <circle class="analytics-newsc-ring-secondary" data-analytics-mastery-secondary-ring cx="100" cy="100" r="52" stroke-dasharray="326.73" stroke-dashoffset="326.73"></circle>
-                    </svg>
-                  </div>
-                  <div class="analytics-newsc-legend">
-                    <div>
-                      <p class="analytics-newsc-kicker">Subject Mastery</p>
-                      <h3 class="analytics-newsc-title" style="font-size:1.65rem">Holistic competency matrix</h3>
-                    </div>
-                    <div class="analytics-newsc-legend-item">
-                      <span class="analytics-newsc-dot" style="background:#004435"></span>
-                      <div>
-                        <strong data-analytics-mastery-primary>Retention depth</strong>
-                        <p>Primary mastery ring</p>
-                      </div>
-                    </div>
-                    <div class="analytics-newsc-legend-item">
-                      <span class="analytics-newsc-dot" style="background:#ae3200"></span>
-                      <div>
-                        <strong data-analytics-mastery-secondary>Attention control</strong>
-                        <p>Secondary mastery ring</p>
-                      </div>
-                    </div>
-                    <div class="analytics-newsc-legend-item">
-                      <span class="analytics-newsc-dot" style="background:#404945"></span>
-                      <div>
-                        <strong data-analytics-mastery-tertiary>Library priority</strong>
-                        <p>The lane carrying the strongest live signal.</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="analytics-newsc-card analytics-newsc-network">
-                  <p class="analytics-newsc-kicker">Learning Network</p>
-                  <h3 class="analytics-newsc-title" style="font-size:1.65rem">Cross-topic synaptic map</h3>
-                  <p>The strongest current node is <strong data-analytics-network-core>Home</strong>. The bars below animate from real tracked study distribution.</p>
-                  <div class="analytics-newsc-stream" data-analytics-stream-rows>
-                    <div class="analytics-newsc-stream-item">
-                      <div class="analytics-newsc-stream-meta"><strong>Waiting for data</strong><span>0%</span></div>
-                      <div class="analytics-newsc-stream-track"><div class="analytics-newsc-stream-fill" style="width:0%"></div></div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-
-              <div class="analytics-overview analytics-overview-advanced">
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Focused Time</span>
-                  <strong data-analytics-focus>0m</strong>
-                  <p>Tracked from focus sessions and active study time.</p>
-                </article>
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Sessions Closed</span>
-                  <strong data-analytics-sessions>0</strong>
-                  <p>Completed focus blocks and review cycles.</p>
-                </article>
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Top Zone</span>
-                  <strong data-analytics-top-page>Home</strong>
-                  <p>The area carrying the strongest momentum right now.</p>
-                </article>
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Focus Score</span>
-                  <strong data-analytics-score>0%</strong>
-                  <p>How efficiently your time converts into focused work.</p>
-                </article>
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Momentum</span>
-                  <strong data-analytics-momentum-score>0</strong>
-                  <p data-analytics-momentum-label>Momentum is weak</p>
-                </article>
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Retention</span>
-                  <strong data-analytics-retention-score>0</strong>
-                  <p data-analytics-retention-label>Retention needs structure</p>
-                </article>
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Burnout Risk</span>
-                  <strong data-analytics-burnout-score>0%</strong>
-                  <p data-analytics-burnout-label>Burnout risk is low</p>
-                </article>
-                <article class="analytics-kpi">
-                  <span class="analytics-kpi-label">Live Status</span>
-                  <strong data-analytics-live-label>Live local analysis</strong>
-                  <p>Refreshes automatically as you study.</p>
-                </article>
-              </div>
-
-              <div class="analytics-grid analytics-grid-advanced">
-                <article class="analytics-card analytics-card-chart">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Time By Page</p>
-                      <h3>Where your study hours are going</h3>
-                    </div>
-                    <span class="analytics-card-chip">Real time</span>
-                  </div>
-                  <div class="analytics-bars" data-analytics-bars></div>
-                </article>
-
-                <article class="analytics-card analytics-card-ring">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Focus Mix</p>
-                      <h3>Focused work vs drift</h3>
-                    </div>
-                    <span class="analytics-card-chip">Core signal</span>
-                  </div>
-                  <div class="analytics-ring-wrap">
-                    <svg class="analytics-ring" viewBox="0 0 120 120" aria-hidden="true">
-                      <circle cx="60" cy="60" r="42" class="analytics-ring-track"></circle>
-                      <circle cx="60" cy="60" r="42" class="analytics-ring-progress" data-analytics-ring-progress></circle>
-                    </svg>
-                    <div class="analytics-ring-copy">
-                      <strong data-analytics-ring-value>0%</strong>
-                      <span>focus ratio</span>
-                    </div>
-                  </div>
-                  <div class="analytics-mini-grid">
-                    <div>
-                      <span>Warnings</span>
-                      <strong data-analytics-warnings>0</strong>
-                    </div>
-                    <div>
-                      <span>Breaks</span>
-                      <strong data-analytics-breaks>0</strong>
-                    </div>
-                    <div>
-                      <span>Visits</span>
-                      <strong data-analytics-visits>0</strong>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="analytics-card analytics-card-ai">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">AI Breakdown</p>
-                      <h3>What to fix next</h3>
-                    </div>
-                    <span class="analytics-card-chip analytics-card-chip-ai">Local coach</span>
-                  </div>
-                  <p class="analytics-ai-summary" data-analytics-ai-summary>
-                    Build one solid study block first so the dashboard has enough data to coach you properly.
-                  </p>
-                  <div class="analytics-diagnostic-grid">
-                    <div class="analytics-diagnostic">
-                      <span>Depth</span>
-                      <strong data-analytics-depth-score>0</strong>
-                      <p data-analytics-depth-label>Session strength</p>
-                    </div>
-                    <div class="analytics-diagnostic">
-                      <span>Consistency</span>
-                      <strong data-analytics-consistency-score>0</strong>
-                      <p data-analytics-consistency-label>Routine signal</p>
-                    </div>
-                    <div class="analytics-diagnostic">
-                      <span>Discipline</span>
-                      <strong data-analytics-discipline-score>0</strong>
-                      <p data-analytics-discipline-label>Attention control</p>
-                    </div>
-                  </div>
-                  <ul class="analytics-ai-list" data-analytics-ai-list>
-                    <li>Open a library and stay active for a few minutes.</li>
-                    <li>Use Focus Mode once to generate real focus metrics.</li>
-                    <li>Come back here to see a sharper breakdown.</li>
-                  </ul>
-                </article>
-              </div>
-
-              <div class="analytics-advanced-grid">
-                <article class="analytics-card analytics-coach-card">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Coach Target</p>
-                      <h3 data-analytics-coach-headline>Build a stronger study cycle</h3>
-                    </div>
-                    <span class="analytics-card-chip analytics-card-chip-ai" data-analytics-coach-window>Next 20 minutes</span>
-                  </div>
-                  <p class="analytics-coach-target" data-analytics-coach-target>
-                    Complete one focused block before switching pages.
-                  </p>
-                  <div class="analytics-ai-footer">
-                    <a class="btn btn-primary" href="study-library.html">Open Science</a>
-                    <button class="btn btn-secondary" type="button" data-focus-hero-open>Start Focus Mode</button>
-                  </div>
-                </article>
-
-                <article class="analytics-card">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Study Mix</p>
-                      <h3>How your time is split</h3>
-                    </div>
-                  </div>
-                  <div class="analytics-bars" data-analytics-group-bars></div>
-                </article>
-
-                <article class="analytics-card">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Pattern Read</p>
-                      <h3>What the system sees</h3>
-                    </div>
-                  </div>
-                  <p class="analytics-pattern-summary" data-analytics-pattern-summary>
-                    Your strongest lane is still forming.
-                  </p>
-                  <ul class="analytics-ai-list analytics-compact-list" data-analytics-pattern-list>
-                    <li>Study pattern data will appear here after a stronger session.</li>
-                  </ul>
-                </article>
-              </div>
-
-              <div class="analytics-advanced-grid analytics-advanced-grid-bottom">
-                <article class="analytics-card">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Strengths</p>
-                      <h3>What is working</h3>
-                    </div>
-                  </div>
-                  <ul class="analytics-ai-list analytics-good-list" data-analytics-strengths>
-                    <li>Healthy study signals will appear here.</li>
-                  </ul>
-                </article>
-
-                <article class="analytics-card">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Risks</p>
-                      <h3>What is holding you back</h3>
-                    </div>
-                  </div>
-                  <ul class="analytics-ai-list analytics-risk-list" data-analytics-risks>
-                    <li>Current weak points will appear here.</li>
-                  </ul>
-                </article>
-
-                <article class="analytics-card">
-                  <div class="analytics-card-head">
-                    <div>
-                      <p class="analytics-card-kicker">Action Plan</p>
-                      <h3>What to do next</h3>
-                    </div>
-                  </div>
-                  <ul class="analytics-ai-list analytics-compact-list" data-analytics-next-steps>
-                    <li>Next-step actions will appear here.</li>
-                  </ul>
-                </article>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-
-    <script src="/supabase-client.js?v=20260312a"></script>
-    <script src="/supabase-auth.js?v=20260326h"></script>
-    <script src="/vercel-speed-insights.js?v=20260313a"></script>
-    <script src="focus-mode.js?v=20260321d"></script>
-    <script src="lyne-widget.js?v=20260321c"></script>
-    <script src="app.js?v=20260324b"></script>
-    <script defer src="/_vercel/insights/script.js"></script>
-</body>
-</html>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="fixed left-0 top-0 hidden lg:flex flex-col p-6 space-y-6 h-screen w-64 border-r border-slate-100 dark:border-slate-800 bg-slate-50/50 backdrop-blur-md z-40">
+<div class="flex flex-col space-y-1">
+<span class="text-xl font-black text-primary tracking-tighter">Soul Concept</span>
+<span class="font-plus-jakarta text-[10px] uppercase tracking-[0.2em] text-primary/60">Academic Ecosystem</span>
+</div>
+<div class="flex flex-col space-y-1.5 flex-grow pt-6">
+<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Overview</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="library_books">library_books</span>
+<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Subjects</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="style">style</span>
+<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Concept Cards</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="emoji_events">emoji_events</span>
+<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Achievements</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="payments">payments</span>
+<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Subscriptions</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="model_training">model_training</span>
+<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Exam Simulator</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2.5 bg-primary text-white rounded-xl shadow-lg shadow-primary/20 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="insights">insights</span>
+<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Insights</span>
+</a>
+</div>
+<button class="bg-gradient-to-br from-primary via-primary-container to-primary text-white px-4 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
+            Initiate Session
+        </button>
+<div class="pt-6 border-t border-slate-200/50 flex flex-col space-y-2">
+<a class="flex items-center space-x-3 px-4 py-2 text-slate-400 text-[10px] uppercase tracking-widest hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+<span>Concierge</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2 text-slate-400 text-[10px] uppercase tracking-widest hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+<span>Exit</span>
+</a>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100">
+<div class="flex justify-between items-center px-8 py-3 max-w-full mx-auto"><div class="flex items-center space-x-12">
+<div class="flex items-center">
+<h1 class="text-xl font-bold text-primary tracking-tight">Soul Concept</h1>
+</div>
+<nav class="hidden md:flex items-center space-x-6">
+<a class="text-slate-500 font-semibold hover:text-primary transition-colors py-1 text-sm" href="#">Dashboard</a>
+<a class="text-slate-500 font-semibold hover:text-primary transition-colors py-1 text-sm" href="#">Grades</a>
+<a class="text-slate-500 font-semibold hover:text-primary transition-colors py-1 text-sm" href="#">Analytics</a>
+<a class="text-slate-500 font-semibold hover:text-primary transition-colors py-1 text-sm" href="#">Schedule</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative group">
+<div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 text-xl">search</span>
+</div>
+<input class="block w-64 pl-10 pr-4 py-1.5 text-sm bg-slate-50 border border-slate-100 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary placeholder-slate-400" placeholder="Search knowledge..." type="text"/>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative p-2 text-slate-600 cursor-pointer hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+</div>
+<div class="p-1 text-slate-600 cursor-pointer hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined text-3xl">account_circle</span>
+</div>
+</div>
+</div></div>
+</header>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 min-h-screen p-6 md:p-12 space-y-16">
+<!-- Hero: 3D Visualization & Energy Matrix -->
+<section class="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-3 gap-8">
+<div class="xl:col-span-2 space-y-8">
+<div>
+<span class="font-label text-secondary uppercase tracking-[0.3em] text-[10px] font-extrabold px-3 py-1 bg-secondary/10 rounded-full">Neural Synthesis Engine</span>
+<h2 class="font-headline text-5xl md:text-6xl font-black tracking-tight text-primary mt-4">Cognitive Evolution</h2>
+<p class="font-body text-slate-500 mt-4 leading-relaxed max-w-xl">Deep mapping of your semantic reach. Your architecture is maturing in <span class="text-primary font-bold">Abstract Logic</span> while showing rapid expansion in <span class="text-secondary font-bold">Complex Systems</span>.</p>
+</div>
+<!-- Main Visualization -->
+<div class="relative w-full aspect-[21/10] bg-slate-900 rounded-[2.5rem] overflow-hidden group shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-secondary/30 mix-blend-overlay"></div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none perspective-lg">
+<div class="relative preserve-3d rotate-x-12 rotate-y-12 flex items-center justify-center float-animation">
+<!-- 3D Geometric Nodes -->
+<div class="w-72 h-72 rounded-[3rem] border border-primary/40 bg-primary/5 flex items-center justify-center glow-pulse-teal rotate-45 group-hover:rotate-[60deg] transition-transform duration-1000">
+<div class="w-48 h-48 rounded-[2rem] border-2 border-secondary/50 bg-secondary/5 flex items-center justify-center glow-pulse-orange -rotate-12 group-hover:rotate-12 transition-transform duration-1000">
+<div class="w-24 h-24 rounded-full border-4 border-tertiary/60 bg-white/10 backdrop-blur-xl glow-pulse-purple"></div>
+</div>
+</div>
+<!-- Digital Grid Elements -->
+<div class="absolute w-[1000px] h-[1000px] border border-white/5 rounded-full scale-150 opacity-20"></div>
+<div class="absolute w-[800px] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent rotate-12"></div>
+<div class="absolute w-[800px] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent -rotate-45"></div>
+</div>
+</div>
+<!-- Stats Overlays -->
+<div class="absolute top-8 right-8 glass-morphism p-5 rounded-3xl space-y-1">
+<span class="block text-[10px] uppercase font-black text-primary/40 tracking-widest">Node Density</span>
+<div class="text-2xl font-black text-primary">842 <span class="text-xs font-normal text-slate-400">/ 1.2k</span></div>
+</div>
+<div class="absolute bottom-8 left-8 glass-morphism p-6 rounded-3xl max-w-xs border border-white/40">
+<h4 class="font-headline text-sm font-black text-primary uppercase tracking-widest mb-1">Active Synapses</h4>
+<p class="text-[11px] text-slate-600 font-medium leading-relaxed opacity-80 italic">"92% correlation increase between Applied Ethics and Computational Models detected."</p>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-color-dodge opacity-30 pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-0K-zS8-jMZh5j3LOYQhfJAnkavQou2eSjq1UCJVka3iEXQRiYLFG-YKBYx5DxGdqRC-4oaDdndv41t2hPhhwTUPflSEpJ51112ccMuoy06WdQRYN7BxesLkfTTrDZabwN7dItlVmfhiO3qQl_GgDajtSBmxm-jTfeuFbLsNM7RcMqPv6jETtxz4ZNg1EYbzjujmgw_fm2CC8qGzyBkfq8fNvH1zY7sYVP246n-QRB7DgfEVWieaZDvr2DRkPx0iPikqh8EHCc6UI"/>
+</div>
+</div>
+<!-- Energy & Burnout (New Feature) -->
+<div class="space-y-8 flex flex-col justify-end">
+<div class="bg-white rounded-[2.5rem] p-8 shadow-2xl shadow-slate-200/50 border border-slate-100 flex-grow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-slate-200 group-hover:text-primary transition-colors text-4xl" data-icon="bolt">bolt</span>
+</div>
+<h3 class="font-headline text-xl font-black text-primary mb-8 tracking-tight">Wellbeing Matrix</h3>
+<!-- Burnout Gauge -->
+<div class="relative w-full aspect-square flex items-center justify-center">
+<div class="burnout-gauge w-48 h-24 absolute bottom-0"></div>
+<div class="absolute bottom-0 w-1 h-20 bg-primary origin-bottom -rotate-45 transition-transform duration-1000 group-hover:rotate-[30deg]"></div>
+<div class="absolute bottom-0 text-center pb-2">
+<span class="block text-4xl font-black text-primary">32%</span>
+<span class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Risk Level</span>
+</div>
+</div>
+<div class="mt-12 space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="text-xs font-black text-primary uppercase tracking-widest">Mental Reserve</h4>
+<p class="text-[10px] text-slate-400">Optimal for deep research</p>
+</div>
+<span class="text-primary font-black">High</span>
+</div>
+<div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="w-[78%] h-full bg-gradient-to-r from-primary to-primary-container rounded-full"></div>
+</div>
+<div class="p-4 bg-orange-50 rounded-2xl border border-orange-100">
+<p class="text-[10px] text-secondary font-bold leading-relaxed">
+<span class="material-symbols-outlined text-xs align-middle mr-1" data-icon="warning">warning</span>
+                                Predicted fatigue spike in 3 hours. Recommendation: 15min cognitive reset.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Productivity & Progress Analytics Section -->
+<section class="max-w-7xl mx-auto space-y-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="font-label text-tertiary uppercase tracking-[0.4em] text-[10px] font-extrabold px-3 py-1 bg-tertiary/10 rounded-full">Efficiency Core</span>
+<h2 class="font-headline text-4xl font-black tracking-tight text-primary mt-4">Productivity &amp; Progress</h2>
+</div>
+<div class="flex gap-3">
+<div class="glass-morphism px-6 py-3 rounded-2xl border border-slate-200 flex items-center space-x-3">
+<span class="material-symbols-outlined text-secondary" data-icon="local_fire_department">local_fire_department</span>
+<div>
+<span class="block text-[10px] font-black uppercase text-slate-400 tracking-widest">Day Streak</span>
+<span class="text-xl font-black text-primary">12 Days</span>
+</div>
+</div>
+<div class="glass-morphism px-6 py-3 rounded-2xl border border-slate-200 flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+<div>
+<span class="block text-[10px] font-black uppercase text-slate-400 tracking-widest">Success Rate</span>
+<span class="text-xl font-black text-primary">94.2%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- 1. Focus Velocity Chart -->
+<div class="lg:col-span-7 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl shadow-slate-200/40 relative overflow-hidden flex flex-col">
+<div class="flex justify-between items-center mb-10">
+<h3 class="font-headline text-xl font-black text-primary uppercase tracking-tight">Focus Velocity</h3>
+<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Deep Work Hours / Week</span>
+</div>
+<div class="flex-grow flex items-end justify-between gap-2 h-48 px-4">
+<div class="flex flex-col items-center gap-3 w-full group">
+<div class="w-full bg-slate-50 rounded-xl relative h-24 overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary/20 h-[45%] rounded-t-lg transition-all group-hover:h-[55%]"></div>
+</div>
+<span class="text-[9px] font-black text-slate-400 uppercase">Mon</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full group">
+<div class="w-full bg-slate-50 rounded-xl relative h-32 overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary/40 h-[70%] rounded-t-lg transition-all group-hover:h-[80%]"></div>
+</div>
+<span class="text-[9px] font-black text-slate-400 uppercase">Tue</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full group">
+<div class="w-full bg-slate-50 rounded-xl relative h-40 overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary h-[90%] rounded-t-lg shadow-lg shadow-primary/20 transition-all group-hover:scale-y-105"></div>
+<div class="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] font-black text-white">8.4h</div>
+</div>
+<span class="text-[9px] font-black text-primary uppercase">Wed</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full group">
+<div class="w-full bg-slate-50 rounded-xl relative h-28 overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary/30 h-[60%] rounded-t-lg transition-all group-hover:h-[70%]"></div>
+</div>
+<span class="text-[9px] font-black text-slate-400 uppercase">Thu</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full group">
+<div class="w-full bg-slate-50 rounded-xl relative h-36 overflow-hidden">
+<div class="absolute bottom-0 w-full bg-secondary/80 h-[82%] rounded-t-lg transition-all group-hover:bg-secondary"></div>
+</div>
+<span class="text-[9px] font-black text-slate-400 uppercase">Fri</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full group">
+<div class="w-full bg-slate-50 rounded-xl relative h-20 overflow-hidden">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[30%] rounded-t-lg transition-all group-hover:h-[40%]"></div>
+</div>
+<span class="text-[9px] font-black text-slate-400 uppercase">Sat</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-full group">
+<div class="w-full bg-slate-50 rounded-xl relative h-16 overflow-hidden">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[20%] rounded-t-lg transition-all group-hover:h-[30%]"></div>
+</div>
+<span class="text-[9px] font-black text-slate-400 uppercase">Sun</span>
+</div>
+</div>
+<div class="mt-8 p-4 bg-primary/5 rounded-2xl border border-primary/10">
+<p class="text-[11px] text-primary/80 font-medium italic">"Velocity has increased by <span class="font-black">12%</span> compared to last week. Your peak focus window has shifted to 9:30 AM."</p>
+</div>
+</div>
+<!-- 2. Learning Momentum -->
+<div class="lg:col-span-5 space-y-8">
+<div class="bg-gradient-to-br from-primary to-primary-container rounded-[2.5rem] p-8 text-white shadow-2xl shadow-primary/30 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div>
+<h3 class="font-headline text-xl font-bold">Learning Momentum</h3>
+<p class="text-[10px] text-white/60 uppercase tracking-widest font-black mt-1">Real-time Progression</p>
+</div>
+<div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined text-white animate-pulse" data-icon="speed">speed</span>
+</div>
+</div>
+<div class="space-y-6 relative z-10">
+<div>
+<div class="flex justify-between text-[11px] font-bold mb-2 uppercase tracking-tighter">
+<span>Daily Quota Progress</span>
+<span>85%</span>
+</div>
+<div class="w-full h-3 bg-white/10 rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-white rounded-full transition-all duration-1000" style="width: 85%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+<span class="block text-[9px] font-black text-white/50 uppercase tracking-widest mb-1">Concepts Today</span>
+<span class="text-2xl font-black">24</span>
+</div>
+<div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+<span class="block text-[9px] font-black text-white/50 uppercase tracking-widest mb-1">Retention Rate</span>
+<span class="text-2xl font-black">91%</span>
+</div>
+</div>
+<button class="w-full py-4 bg-white text-primary font-black text-[10px] uppercase tracking-[0.2em] rounded-2xl shadow-xl shadow-black/10 hover:scale-[1.02] transition-transform active:scale-95">
+                        Boost Session Energy
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Knowledge Stream / Archival Progress -->
+<div class="bg-white rounded-[3rem] p-12 border border-slate-100 shadow-xl shadow-slate-200/40">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h3 class="font-headline text-2xl font-black text-primary tracking-tight">Knowledge Stream</h3>
+<p class="text-xs text-slate-500 font-medium">Recent academic milestones and consolidation status</p>
+</div>
+<button class="text-xs font-black text-primary uppercase tracking-widest border-b-2 border-primary/20 hover:border-primary transition-all">View Full Archive</button>
+</div>
+<div class="space-y-6">
+<!-- Milestone 1 -->
+<div class="group flex flex-col md:flex-row md:items-center gap-6 p-6 rounded-[2rem] hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="neurology">neurology</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-headline font-bold text-primary">Advanced Neural Architectures</h4>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Mastery Level: Scholar</p>
+</div>
+<span class="text-[10px] font-black text-slate-300">2h ago</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-grow h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 92%"></div>
+</div>
+<span class="text-xs font-black text-primary w-10 text-right">92%</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-emerald-50 text-emerald-600 text-[9px] font-black rounded-full uppercase tracking-widest">Consolidated</span>
+<span class="material-symbols-outlined text-slate-300 text-xl cursor-pointer hover:text-primary" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Milestone 2 -->
+<div class="group flex flex-col md:flex-row md:items-center gap-6 p-6 rounded-[2rem] hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="functions">functions</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-headline font-bold text-primary">Quantum Probability Distributions</h4>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Mastery Level: Intermediate</p>
+</div>
+<span class="text-[10px] font-black text-slate-300">Yesterday</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-grow h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 64%"></div>
+</div>
+<span class="text-xs font-black text-primary w-10 text-right">64%</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-amber-50 text-amber-600 text-[9px] font-black rounded-full uppercase tracking-widest">In Progress</span>
+<span class="material-symbols-outlined text-slate-300 text-xl cursor-pointer hover:text-primary" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Milestone 3 -->
+<div class="group flex flex-col md:flex-row md:items-center gap-6 p-6 rounded-[2rem] hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+<div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary" data-icon="account_balance">account_balance</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-headline font-bold text-primary">Socio-Economic Game Theory</h4>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Mastery Level: Advanced</p>
+</div>
+<span class="text-[10px] font-black text-slate-300">3 days ago</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-grow h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 88%"></div>
+</div>
+<span class="text-xs font-black text-primary w-10 text-right">88%</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-emerald-50 text-emerald-600 text-[9px] font-black rounded-full uppercase tracking-widest">Consolidated</span>
+<span class="material-symbols-outlined text-slate-300 text-xl cursor-pointer hover:text-primary" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Diverse Visualizations -->
+<section class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Focus vs Productivity Scatter Plot -->
+<div class="lg:col-span-8 bg-surface-container-low rounded-[2.5rem] p-10 relative overflow-hidden border border-white">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h3 class="font-headline text-2xl font-black text-primary tracking-tight">Performance Scatter</h3>
+<p class="text-xs text-slate-500 font-medium tracking-wide">Flow state duration vs. Knowledge Retention Rate</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm border border-slate-100">Weekly</button>
+<button class="px-4 py-2 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-primary/20">Monthly</button>
+</div>
+</div>
+<!-- Scatter Plot Simulation -->
+<div class="h-64 relative border-l-2 border-b-2 border-slate-200 flex items-end">
+<!-- Simulated Data Points -->
+<div class="absolute left-[20%] bottom-[30%] w-3 h-3 bg-secondary rounded-full blur-[2px] opacity-60"></div>
+<div class="absolute left-[40%] bottom-[50%] w-4 h-4 bg-primary rounded-full glow-pulse-teal"></div>
+<div class="absolute left-[60%] bottom-[75%] w-3 h-3 bg-secondary rounded-full animate-pulse"></div>
+<div class="absolute left-[80%] bottom-[90%] w-5 h-5 bg-primary-container rounded-full shadow-lg shadow-primary/30"></div>
+<div class="absolute left-[15%] bottom-[15%] w-2 h-2 bg-tertiary rounded-full opacity-40"></div>
+<div class="absolute left-[45%] bottom-[60%] w-3 h-3 bg-primary rounded-full opacity-70"></div>
+<div class="absolute left-[70%] bottom-[40%] w-4 h-4 bg-secondary rounded-full blur-[1px]"></div>
+<!-- Trend Line -->
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none">
+<path d="M 0 256 L 100 200 L 300 150 L 500 50" fill="none" opacity="0.3" stroke="url(#line-grad)" stroke-dasharray="8 4" stroke-width="3"></path>
+<defs>
+<lineargradient id="line-grad" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#ae3200"></stop>
+<stop offset="100%" stop-color="#004435"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Grid Lines -->
+<div class="absolute inset-0 grid grid-cols-4 grid-rows-4 pointer-events-none opacity-20">
+<div class="border-t border-slate-300 border-r"></div>
+<div class="border-t border-slate-300 border-r"></div>
+<div class="border-t border-slate-300 border-r"></div>
+<div class="border-t border-slate-300"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Casual Learning</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mastery Threshold</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-white/20 backdrop-blur-[2px]"></div>
+</div>
+<!-- Focus Momentum / Subject Velocity Heatmap -->
+<div class="lg:col-span-4 space-y-8">
+<div class="bg-primary rounded-[2.5rem] p-8 text-white shadow-2xl shadow-primary/30 relative overflow-hidden h-full flex flex-col">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+<h3 class="font-headline text-xl font-bold mb-8">Subject Velocity</h3>
+<!-- Heatmap Simulation -->
+<div class="grid grid-cols-6 gap-2 flex-grow">
+<div class="aspect-square bg-white/20 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/40 rounded-lg border border-white/20 shadow-inner"></div>
+<div class="aspect-square bg-secondary rounded-lg border border-white/20 shadow-lg scale-110"></div>
+<div class="aspect-square bg-white/10 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/30 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/60 rounded-lg border border-white/20 shadow-lg"></div>
+<div class="aspect-square bg-white/5 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/20 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/10 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/50 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/20 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/10 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/20 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-secondary/80 rounded-lg border border-white/20 shadow-lg"></div>
+<div class="aspect-square bg-white/10 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/5 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/70 rounded-lg border border-white/20"></div>
+<div class="aspect-square bg-white/40 rounded-lg border border-white/20"></div>
+</div>
+<div class="mt-8">
+<p class="text-[11px] font-medium opacity-80 leading-relaxed italic">Peak intensity detected in <span class="font-bold underline">Cognitive Psychology</span> between 10 AM - 12 PM.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Advanced Visualizations: Structural Depth -->
+<section class="max-w-7xl mx-auto space-y-12">
+<div class="text-center space-y-3">
+<span class="text-secondary font-black text-[10px] uppercase tracking-[0.4em]">Multi-Dimensional Mapping</span>
+<h3 class="font-headline text-4xl font-black text-primary tracking-tight">Structural Knowledge Integrity</h3>
+<p class="text-slate-500 max-w-lg mx-auto font-medium">Quantifying the stability and interconnectedness of your academic network.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Scholarly Network 3D Graph (Enhanced) -->
+<div class="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-b from-slate-50/50 to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-center mb-10 relative z-10">
+<h4 class="font-headline font-black text-primary uppercase tracking-widest text-sm">Inter-Disciplinary Flux</h4>
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Active Link</span>
+</div>
+</div>
+<div class="relative h-72 flex items-center justify-center">
+<svg class="w-full h-full opacity-80 group-hover:scale-105 transition-transform duration-700" viewbox="0 0 200 120">
+<path d="M40,90 Q100,20 160,90" fill="none" opacity="0.3" stroke="#004435" stroke-dasharray="4 2" stroke-width="0.5"></path>
+<path d="M20,60 Q100,100 180,60" fill="none" opacity="0.2" stroke="#ae3200" stroke-dasharray="2 1" stroke-width="0.5"></path>
+<circle class="animate-pulse" cx="40" cy="90" fill="#004435" r="5"></circle>
+<circle cx="160" cy="90" fill="#004435" r="7"></circle>
+<circle cx="100" cy="30" fill="#ae3200" r="10"></circle>
+<circle cx="50" cy="40" fill="#3b3b3f" r="4"></circle>
+<circle cx="150" cy="40" fill="#3b3b3f" r="6"></circle>
+<circle cx="100" cy="100" fill="#004435" opacity="0.5" r="4"></circle>
+<text class="font-manrope font-bold text-[6px]" fill="#004435" x="35" y="105">LOGIC</text>
+<text class="font-manrope font-bold text-[6px]" fill="#ae3200" x="90" y="15">ETHICS</text>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-32 h-32 border border-primary/10 rounded-3xl animate-spin-slow rotate-12 flex items-center justify-center">
+<div class="w-20 h-20 border border-secondary/10 rounded-2xl animate-reverse-spin"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-between">
+<span class="px-4 py-2 bg-slate-50 rounded-xl text-[10px] font-black text-primary uppercase tracking-widest">Stability: 94%</span>
+<span class="material-symbols-outlined text-slate-300 cursor-pointer hover:text-primary transition-colors" data-icon="open_in_full">open_in_full</span>
+</div>
+</div>
+<!-- Subject Mastery Radar Chart (Enhanced) -->
+<div class="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+<div class="flex justify-between items-center mb-10 relative z-10">
+<h4 class="font-headline font-black text-primary uppercase tracking-widest text-sm">Polymath Quotient</h4>
+<span class="material-symbols-outlined text-primary/40 text-xl" data-icon="token">token</span>
+</div>
+<div class="relative h-72 flex items-center justify-center">
+<div class="relative w-56 h-56 border-[1px] border-slate-100 rounded-full flex items-center justify-center">
+<div class="w-40 h-40 border-[1px] border-slate-100 rounded-full flex items-center justify-center">
+<div class="w-24 h-24 border-[1px] border-slate-100 rounded-full flex items-center justify-center"></div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center"><div class="h-full w-[1px] bg-slate-50"></div></div>
+<div class="absolute inset-0 flex items-center justify-center"><div class="h-full w-[1px] bg-slate-50 rotate-90"></div></div>
+<div class="absolute inset-0 flex items-center justify-center"><div class="h-full w-[1px] bg-slate-50 rotate-45"></div></div>
+<div class="absolute inset-0 flex items-center justify-center"><div class="h-full w-[1px] bg-slate-50 -rotate-45"></div></div>
+<div class="absolute inset-0 bg-primary/20 backdrop-blur-[1px] border-2 border-primary/50 group-hover:bg-primary/30 transition-all duration-500" style="clip-path: polygon(50% 10%, 90% 40%, 80% 85%, 20% 80%, 10% 30%);"></div>
+<div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full ring-4 ring-white shadow-md"></div>
+<div class="absolute right-[10%] top-[40%] w-3 h-3 bg-secondary rounded-full ring-4 ring-white shadow-md"></div>
+</div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 font-black text-[9px] text-primary uppercase tracking-widest">Theoretical</div>
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 font-black text-[9px] text-primary uppercase tracking-widest">Applied</div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 font-black text-[9px] text-primary uppercase tracking-widest -rotate-90 origin-center">Axiomatic</div>
+<div class="absolute right-0 top-1/2 -translate-y-1/2 font-black text-[9px] text-primary uppercase tracking-widest rotate-90 origin-center">Empirical</div>
+</div>
+<div class="mt-8 flex justify-center">
+<div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-primary-container rounded-2xl shadow-lg shadow-primary/20">
+<span class="text-white text-[10px] font-black uppercase tracking-widest">Growth Forecast: +4.2%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Insights Feed -->
+<section class="max-w-7xl mx-auto">
+<div class="bg-slate-900 rounded-[3rem] p-12 text-white relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/40 to-secondary/20"></div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+<div class="space-y-6">
+<div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+<span class="material-symbols-outlined text-white" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h4 class="text-2xl font-black tracking-tight">AI Curated Focus</h4>
+<p class="text-sm text-slate-300 leading-relaxed font-medium">Your cognitive load suggests shifting to <span class="text-white font-bold">Linguistic Analysis</span> for the next 45 minutes to optimize neuroplasticity.</p>
+<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">Optimize Path →</button>
+</div>
+<div class="space-y-6">
+<div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+<span class="material-symbols-outlined text-white" data-icon="history_edu">history_edu</span>
+</div>
+<h4 class="text-2xl font-black tracking-tight">Memory Consolidation</h4>
+<p class="text-sm text-slate-300 leading-relaxed font-medium">Retention for <span class="text-white font-bold">Quantum Mechanics</span> is dipping. 3 critical flashcards have reached scheduled review window.</p>
+<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">Launch Review →</button>
+</div>
+<div class="space-y-6">
+<div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+<span class="material-symbols-outlined text-white" data-icon="school">school</span>
+</div>
+<h4 class="text-2xl font-black tracking-tight">Scholarly Milestone</h4>
+<p class="text-sm text-slate-300 leading-relaxed font-medium">You've reached the top <span class="text-white font-bold">1% globally</span> in Interdisciplinary Synthesis this month.</p>
+<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">View Certificate →</button>
+</div>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNei8U5yBAoAT1NHO53BsQLiK7rxnCIlbZ4Wyqaez9YUqzVVmxt36kFB2Ww3oBDGX3s35Eid1a5_H1EsWeVljBSAAFytiBJmNDPaGm8aevHasaM7hs6IwQz2nyBSvMrvo1M4iCpuiFcYpHVLodm3vJK9lLQbPaTxhFCQCynMUcnkqiJNZSMWI3erUqp3XJ7k_Y2r6iLxJ-naDe8WwTaYa1OFgSbaoT5UToNS5aqKDWNQJ6WzDCAMOzhbmRjf_IVrDv3D9QXZDio-N4"/>
+</div>
+</section>
+<!-- Footer Padding for Mobile Nav -->
+<div class="h-24 lg:hidden"></div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-6 left-6 right-6 z-50 flex justify-around items-center px-4 py-4 bg-white/60 backdrop-blur-2xl shadow-2xl rounded-3xl border border-white/20">
+<a class="p-2 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+</a>
+<a class="bg-primary text-white rounded-2xl p-4 shadow-xl shadow-primary/30 -translate-y-6 scale-110" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="insights">insights</span>
+</a>
+<a class="p-2 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="timer">timer</span>
+</a>
+<a class="p-2 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+</a>
+</nav>
+<script defer src="assets/stitch-router.js"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
+</body></html>

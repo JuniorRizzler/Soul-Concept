@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
 <!-- Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -86,7 +85,7 @@
 <!-- Sidebar Navigation -->
 <aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/15 bg-surface flex flex-col p-4 gap-2 z-40 hidden md:flex">
 <div class="mb-8 px-2 flex items-center gap-3">
-<div class="w-8 h-8 bg-primary rounded-xl flex items-center justify-center">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
 <span class="material-symbols-outlined text-white text-sm" data-icon="menu_book">menu_book</span>
 </div>
 <span class="text-lg font-black text-primary font-headline tracking-tight">Soul Concept</span>
@@ -94,69 +93,89 @@
 <div class="mb-6 px-2 py-4 rounded-xl bg-surface-container-low">
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
-<img alt="Student Profile" class="w-full h-full object-cover" data-alt="professional portrait of a young male student with glasses and a friendly expression, soft studio lighting" data-auth-avatar src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJHF1E2P5oWrVzJuja7lpIOv66tsw9qZCZqgXbOS1I9Z7GuKDXdyUA75BIjg2YUsfLGvtjwAtuT-sIB7Y-0XLTb_bRz3zHIBrAKD05qGgpdAtd_j8GbILYKOlveYkQ-IZVa8Q-DsFGT53P2jo-n_Eys8sr8RW7oUtVPkUYSjt1zhnPJzcQX_oS3iEoEIQH5atgN8Sl3K6Igyyep29rKtli1yPC94cR7636T1OMGj38T3l4KlX69YfB7IDhnHRFWTh3wF24umvWoSr7"/>
+<img alt="Student Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJHF1E2P5oWrVzJuja7lpIOv66tsw9qZCZqgXbOS1I9Z7GuKDXdyUA75BIjg2YUsfLGvtjwAtuT-sIB7Y-0XLTb_bRz3zHIBrAKD05qGgpdAtd_j8GbILYKOlveYkQ-IZVa8Q-DsFGT53P2jo-n_Eys8sr8RW7oUtVPkUYSjt1zhnPJzcQX_oS3iEoEIQH5atgN8Sl3K6Igyyep29rKtli1yPC94cR7636T1OMGj38T3l4KlX69YfB7IDhnHRFWTh3wF24umvWoSr7"/>
 </div>
 <div>
-<p class="font-headline font-bold text-sm text-primary" data-auth-name>Guest Scholar</p>
-<p class="font-label text-[10px] uppercase tracking-wider text-outline" data-auth-plan-copy>Starter Member</p>
+<p class="font-headline font-bold text-sm text-primary">Academic Curator</p>
+<p class="font-label text-[10px] uppercase tracking-wider text-outline">Level 4 Scholar</p>
 </div>
 </div>
 </div>
 <nav class="flex-grow space-y-1">
-<!-- Dashboard Active -->
-<a class="flex items-center gap-3 px-3 py-2.5 bg-primary text-white rounded-lg shadow-lg shadow-emerald-900/20 font-medium text-sm transition-transform duration-200" href="#">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                Overview
-            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary text-white rounded-lg shadow-lg shadow-emerald-900/20 font-medium text-sm transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+            Overview
+        </a>
 <a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="#">
 <span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
-                Subjects
-            </a>
+            Subjects
+        </a>
 <a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="#">
 <span class="material-symbols-outlined" data-icon="style">style</span>
-                Flashcards
-            </a>
+            Concept Cards
+        </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="emoji_events">emoji_events</span>
+            Achievements
+        </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="subscriptions">subscriptions</span>
+            Subscriptions
+        </a>
 <a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="#">
 <span class="material-symbols-outlined" data-icon="quiz">quiz</span>
-                Exam Prep
-            </a>
+            Exam Simulator
+        </a>
 <a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="#">
 <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
-                Insights
-            </a>
+            Insights
+        </a>
 </nav>
 <div class="mt-auto pt-4 border-t border-outline-variant/15 space-y-1">
 <button class="w-full flex items-center gap-3 px-3 py-2 text-outline hover:bg-surface-container transition-all text-sm font-medium">
 <span class="material-symbols-outlined" data-icon="settings">settings</span>
-                Settings
-            </button>
+            Settings
+        </button>
 <button class="w-full flex items-center gap-3 px-3 py-2 text-outline hover:bg-surface-container transition-all text-sm font-medium">
 <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
-                Support
-            </button>
+            Support
+        </button>
 <div class="mt-4">
-<button class="w-full py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-xl font-headline font-bold text-xs flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all">
-                    Start Study Session
-                </button>
+<button class="w-full py-3 bg-primary text-white rounded-xl font-headline font-bold text-xs flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all">
+                Start Study Session
+            </button>
 </div>
 </div>
 </aside>
-<!-- Top AppBar (Mobile/Global Actions) -->
-<header class="fixed top-0 right-0 left-0 md:left-64 z-30 glass-header px-6 py-4 flex justify-between items-center">
-<div>
-<h1 class="font-headline font-extrabold text-xl text-primary tracking-tight">Curator Dashboard</h1>
+<!-- Top AppBar -->
+<header class="fixed top-0 right-0 left-0 md:left-64 z-30 glass-header px-8 py-4 flex justify-between items-center border-b border-outline-variant/5">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 md:hidden">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="menu_book">menu_book</span>
 </div>
-<div class="flex items-center gap-4">
+<span class="text-lg font-black text-primary font-headline tracking-tight">Soul Concept</span>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-medium text-primary" href="#">Dashboard</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Grades</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Schedule</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
 <div class="relative hidden sm:block">
-<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/15 rounded-full text-xs focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-all outline-none w-48 lg:w-64" placeholder="Search archive..." type="text"/>
+<input class="pl-10 pr-4 py-2 bg-white/50 border border-outline-variant/15 rounded-lg text-sm focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-all outline-none w-64" placeholder="Search knowledge..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm" data-icon="search">search</span>
 </div>
+<div class="flex items-center gap-3">
 <button class="p-2 hover:bg-surface-container rounded-full text-outline transition-all">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
 <button class="p-2 hover:bg-surface-container rounded-full text-outline transition-all">
 <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
 </button>
+</div>
 </div>
 </header>
 <!-- Main Content Area -->
@@ -165,7 +184,7 @@
 <!-- Hero Section / Welcome -->
 <section class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-outline-variant/10 pb-10">
 <div class="space-y-2 max-w-2xl">
-<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold">Good morning, focus builder</span>
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold">Good morning, Scholar</span>
 <h2 class="font-headline text-5xl font-extrabold text-primary leading-tight tracking-tighter">Cultivate your mind with <span class="italic">intention</span> today.</h2>
 <p class="text-on-surface-variant font-body text-sm max-w-md">Your current focus path is set to <span class="font-bold text-primary">Quantum Mechanics</span>. You have 3 pending reviews in your curator stack.</p>
 </div>
@@ -178,9 +197,9 @@
 </section>
 <!-- Grid Layout -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-<!-- Left Column: Momentum & Flow -->
+<!-- Left Column -->
 <div class="lg:col-span-8 space-y-8">
-<!-- Momentum Metrics (Bento Style) -->
+<!-- Momentum Metrics -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div class="bg-surface-container-low p-6 rounded-3xl group hover:bg-surface-container-high transition-all duration-300">
 <span class="material-symbols-outlined text-primary mb-4" data-icon="library_books">library_books</span>
@@ -220,7 +239,7 @@
 </div>
 <div class="flex-grow">
 <p class="font-headline font-semibold text-primary">Review Molecular Biology Quiz</p>
-<p class="text-xs text-outline">Scheduled for 10:30 AM ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 15 mins</p>
+<p class="text-xs text-outline">Scheduled for 10:30 AM • 15 mins</p>
 </div>
 <span class="font-label text-[10px] px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full">Critical</span>
 </div>
@@ -240,39 +259,39 @@
 </div>
 <div class="flex-grow">
 <p class="font-headline font-semibold text-primary">Practice Flashcards: Neuroanatomy</p>
-<p class="text-xs text-outline">End of day routine ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 40 mins</p>
+<p class="text-xs text-outline">End of day routine • 40 mins</p>
 </div>
 <span class="font-label text-[10px] px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full">Momentum</span>
 </div>
 </div>
 </div>
-<!-- Subjects Row -->
+<!-- Subjects Gallery -->
 <div class="space-y-6">
 <div class="flex justify-between items-center">
 <h3 class="font-headline text-2xl font-bold text-primary">Subject Galleries</h3>
-<a class="text-sm font-medium text-primary flex items-center gap-2 hover:gap-3 transition-all" href="subject-library-2.html">View all <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></a>
+<a class="text-sm font-medium text-primary flex items-center gap-2 hover:gap-3 transition-all" href="#">View all <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></a>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<a class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer block" href="subject-library-2.html">
-<img alt="Literature subject" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="atmospheric photo of old leather-bound books stacked in a dark oak library with dust motes dancing in sunbeams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvGItRaKa_QnRns_rB8SGW1oZUmBtVNemh94I7W8keRWdBWQ9U-dQhW8ucB4IhcU8hgTFcQz8Kcb5yGsQRCtVCXaOLmRQ_PCyC0yvIbXcmNv10xogZT61M_VWCe6NcymlWwlYQD-jR9WEhoPCZTUcV5Xn1MxDnb8shNOdEj-s9xSkmpyCJoa1Cf3j4jJ46Ml6vpgmf8IduHnXwtGdS-7zOwttMf3Z7zpFCigDib3VBIga6dvzbki3EcMRGG2lQ9lLJnYZ8gHQk7oXR"/>
+<div class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer">
+<img alt="Literature subject" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvGItRaKa_QnRns_rB8SGW1oZUmBtVNemh94I7W8keRWdBWQ9U-dQhW8ucB4IhcU8hgTFcQz8Kcb5yGsQRCtVCXaOLmRQ_PCyC0yvIbXcmNv10xogZT61M_VWCe6NcymlWwlYQD-jR9WEhoPCZTUcV5Xn1MxDnb8shNOdEj-s9xSkmpyCJoa1Cf3j4jJ46Ml6vpgmf8IduHnXwtGdS-7zOwttMf3Z7zpFCigDib3VBIga6dvzbki3EcMRGG2lQ9lLJnYZ8gHQk7oXR"/>
 <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
 <span class="font-label text-[10px] text-primary-fixed uppercase tracking-widest mb-1">Humanities</span>
 <h4 class="text-xl font-headline font-bold text-white">English Literature</h4>
-<p class="text-white/70 text-xs">Modernism Focus ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 12 Modules</p>
-</a>
+<p class="text-white/70 text-xs">Modernism Focus • 12 Modules</p>
 </div>
-<a class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer block" href="study-library.html">
-<img alt="Chemistry subject" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up of blue glowing chemical reaction in a glass flask inside a modern laboratory laboratory setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb7k7Kdp8hroR_mL8gnk_S0nOUMWXl-LZm-wt1Skk8xxXFjsr7pfXhwqvWoJU6BhWWG5pdvyLMlvZEoQh1NV3eC5dU7JeXx0zdDfq61lmwFK6aQFHj52lD0rt5bH2ALyPnF7y5zF6prxe-ucsZsOV9TKj-gzEiXo-LQL5KxqXbd6xFzKC72lgY3O7JivN1cVFMW4rUz8c8Iae5oyiuGVL-ln6aYz5OCkFKQZnbJszXlJplRCOW5vgxB9G51ZUZkxCzVTBbMULGMuEr"/>
+</div>
+<div class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer">
+<img alt="Chemistry subject" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb7k7Kdp8hroR_mL8gnk_S0nOUMWXl-LZm-wt1Skk8xxXFjsr7pfXhwqvWoJU6BhWWG5pdvyLMlvZEoQh1NV3eC5dU7JeXx0zdDfq61lmwFK6aQFHj52lD0rt5bH2ALyPnF7y5zF6prxe-ucsZsOV9TKj-gzEiXo-LQL5KxqXbd6xFzKC72lgY3O7JivN1cVFMW4rUz8c8Iae5oyiuGVL-ln6aYz5OCkFKQZnbJszXlJplRCOW5vgxB9G51ZUZkxCzVTBbMULGMuEr"/>
 <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-transparent flex flex-col justify-end p-6">
 <span class="font-label text-[10px] text-secondary-fixed uppercase tracking-widest mb-1">Sciences</span>
 <h4 class="text-xl font-headline font-bold text-white">Organic Chemistry</h4>
-<p class="text-white/70 text-xs">Synthesis Pathways ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 8 Modules</p>
-</a>
+<p class="text-white/70 text-xs">Synthesis Pathways • 8 Modules</p>
 </div>
 </div>
 </div>
 </div>
-<!-- Right Column: Sidebar Stats -->
+</div>
+<!-- Right Column -->
 <div class="lg:col-span-4 space-y-8">
 <!-- Performance Insight -->
 <div class="bg-surface-container-low p-8 rounded-3xl space-y-6">
@@ -300,8 +319,8 @@
 </div>
 <div class="pt-4">
 <button class="w-full py-3 bg-surface-container-highest text-primary font-headline font-bold text-xs rounded-xl hover:bg-outline-variant/20 transition-all">
-                                View Full Report
-                            </button>
+                            View Full Report
+                        </button>
 </div>
 </div>
 <!-- Upcoming Deadlines -->
@@ -315,7 +334,7 @@
 </div>
 <div class="flex-grow">
 <p class="text-sm font-bold text-primary">Thesis Proposal Due</p>
-<p class="text-[10px] text-outline uppercase tracking-tight">Deep Work</p>
+<p class="text-[10px] text-outline uppercase tracking-tight">Academic Writing</p>
 </div>
 </div>
 <div class="p-4 bg-surface rounded-2xl border border-outline-variant/10 flex gap-4 hover:shadow-md transition-shadow">
@@ -336,10 +355,9 @@
 <h3 class="text-white font-headline font-extrabold text-2xl leading-tight">Ready for a Deep Focus session?</h3>
 <p class="text-primary-fixed/70 text-xs">Enter a 50-minute curated flow with binaural beats.</p>
 <button class="px-6 py-3 bg-white text-primary rounded-full font-headline font-bold text-xs active:scale-95 transition-all">
-                                Launch Focus Mode
-                            </button>
+                            Launch Focus Mode
+                        </button>
 </div>
-<!-- Decorative element -->
 <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary-container rounded-full opacity-20 blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
 </div>
 </div>
@@ -351,19 +369,19 @@
 <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-8">
 <div class="space-y-4 text-center md:text-left">
 <p class="font-headline font-bold text-primary">Soul Concept</p>
-<p class="font-label text-xs uppercase tracking-widest text-outline max-w-xs">Ãƒâ€šÃ‚Â© 2024 Soul Concept Academic Gallery. All rights reserved.</p>
+<p class="font-label text-xs uppercase tracking-widest text-outline max-w-xs">© 2024 Soul Concept Academic Gallery. All rights reserved.</p>
 </div>
 <div class="flex flex-wrap justify-center gap-8">
 <a class="font-label text-xs uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">Terms of Knowledge</a>
-<a class="font-label text-xs uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
-<a class="font-label text-xs uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">Platform Access</a>
+<a class="font-label text-xs uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">Curator Privacy</a>
+<a class="font-label text-xs uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">Institutional Access</a>
 </div>
 </div>
 </footer>
 <!-- Mobile Navigation (Bottom) -->
 <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant/10 px-6 py-3 flex justify-between items-center z-50">
 <button class="p-2 text-primary">
-<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
 </button>
 <button class="p-2 text-outline">
 <span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
@@ -377,13 +395,8 @@
 <button class="p-2 text-outline">
 <span class="material-symbols-outlined" data-icon="person">person</span>
 </button>
-</nav>  <script src="/supabase-client.js?v=20260312a"></script>
-  <script src="/supabase-auth.js?v=20260326h"></script>
-  <script src="/vercel-speed-insights.js?v=20260313a"></script>
-  <script src="focus-mode.js?v=20260321d"></script>
-  <script src="lyne-widget.js?v=20260321c"></script>
-  <script src="app.js?v=20260326h"></script>
-  <script src="auth-profile-sync.js?v=20260324a"></script>
-  <script src="assets/site.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+</nav>
+<script defer src="assets/stitch-router.js"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
 </body></html>

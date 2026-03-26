@@ -3,10 +3,9 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Grade 11 Subject Library | Soul Concept</title>
+<title>Grade 11 Subject Library | The Academic Curator</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -89,54 +88,64 @@
 </head>
 <body class="antialiased">
 <!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl">
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-emerald-900/5">
 <div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
-<div class="text-2xl font-extrabold text-emerald-950 tracking-tighter font-headline">Soul Concept</div>
+<div class="flex items-center space-x-4">
+<div class="text-2xl font-extrabold text-emerald-950 tracking-tighter font-headline">The Academic Curator</div>
+</div>
 <nav class="hidden md:flex items-center space-x-8">
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 9</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 10</a>
-<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-bold tracking-tight" href="#">Grade 11</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 12</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Subjects</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Library</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Dashboard</a>
+<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-bold tracking-tight text-sm" href="#">Library</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Grades</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Schedule</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Analytics</a>
 </nav>
 <div class="flex items-center space-x-4">
 <button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all duration-200">
-<span class="material-symbols-outlined text-emerald-900">search</span>
+<span class="material-symbols-outlined text-emerald-900 text-[20px]">search</span>
 </button>
-<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all duration-200">
-<span class="material-symbols-outlined text-emerald-900">account_circle</span>
+<div class="h-8 w-[1px] bg-emerald-900/10 mx-2"></div>
+<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all duration-200 flex items-center space-x-2">
+<span class="material-symbols-outlined text-emerald-900 text-[20px]">account_circle</span>
 </button>
 </div>
 </div>
 </header>
 <div class="flex min-h-screen pt-20">
 <!-- SideNavBar -->
-<aside class="hidden lg:flex flex-col h-[calc(100vh-5rem)] w-64 border-r border-emerald-900/10 bg-surface-container-low sticky top-20 py-6 px-4 shrink-0">
+<aside class="hidden lg:flex flex-col h-[calc(100vh-5rem)] w-64 border-r border-emerald-900/10 bg-surface-container-low sticky top-20 py-6 px-4 shrink-0 overflow-y-auto">
 <div class="mb-8 px-4">
 <h2 class="text-lg font-bold text-emerald-950 font-headline">Research Desk</h2>
-<p class="text-xs text-emerald-800/70 font-label uppercase tracking-widest">Grade 12 Specialist</p>
+<p class="text-xs text-emerald-800/70 font-label uppercase tracking-widest">Grade 11 Specialist</p>
 </div>
 <nav class="flex-1 space-y-1">
 <a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
-<span class="material-symbols-outlined">functions</span>
-<span>Mathematics</span>
-</a>
-<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
-<span class="material-symbols-outlined">biotech</span>
-<span>Sciences</span>
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Overview</span>
 </a>
 <a class="flex items-center space-x-3 bg-emerald-100 text-emerald-900 rounded-lg px-4 py-2 font-body text-sm font-medium" href="#">
-<span class="material-symbols-outlined">menu_book</span>
-<span>Humanities</span>
+<span class="material-symbols-outlined text-[20px]">auto_stories</span>
+<span>Subjects</span>
 </a>
 <a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
-<span class="material-symbols-outlined">translate</span>
-<span>Languages</span>
+<span class="material-symbols-outlined text-[20px]">style</span>
+<span>Concept Cards</span>
 </a>
 <a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
-<span class="material-symbols-outlined">palette</span>
-<span>Arts</span>
+<span class="material-symbols-outlined text-[20px]">military_tech</span>
+<span>Achievements</span>
+</a>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">card_membership</span>
+<span>Subscriptions</span>
+</a>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">model_training</span>
+<span>Exam Simulator</span>
+</a>
+<a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 hover:translate-x-1 rounded-lg font-body text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span>Insights</span>
 </a>
 </nav>
 <div class="mt-auto pt-6 space-y-1 border-t border-emerald-900/5">
@@ -144,11 +153,11 @@
                     New Research Paper
                 </button>
 <a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 rounded-lg font-body text-sm" href="#">
-<span class="material-symbols-outlined">settings</span>
+<span class="material-symbols-outlined text-[20px]">settings</span>
 <span>Settings</span>
 </a>
 <a class="flex items-center space-x-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-transform duration-200 rounded-lg font-body text-sm" href="#">
-<span class="material-symbols-outlined">help_outline</span>
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
 <span>Support</span>
 </a>
 </div>
@@ -250,8 +259,46 @@
 </div>
 </div>
 </div>
+<!-- Cognitive Neuroscience (New Module) -->
+<div class="col-span-12 md:col-span-6 group cursor-pointer">
+<div class="relative overflow-hidden rounded-full aspect-[16/9] bg-surface-container-low transition-all duration-300 hover:bg-surface-container-highest p-10 flex flex-col justify-end">
+<div class="absolute inset-0 opacity-20 mix-blend-overlay group-hover:scale-105 transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="Abstract brain scan visualization with neural networks firing in neon blue and violet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdqHZdwCRkqQlIPX0Av3uweUitDDGVAXjz894BHslPhw1tt65IrVUXRDAAZbKT0n7w658K2GMIiHcohqEcKXGlKkCp7-ZDnh1DfeRR_kXUqZLREmy06uim7BnDyHzPHy5bKYXFhG622g63lJ-RsDOvA_PzeQ_-1a3CdeyLm-kyuYM5kgftzU240SVpReO8AL-6-WoVeOTi5W4cGm-E1iJTkGUfsyiVPV3G3wgeVnTVsGwFmertX6ybArOsh8HUVgB8P3e5cpyYu-vb"/>
 </div>
-<!-- Recent Saved Guides -->
+<div class="relative z-10">
+<div class="flex items-center space-x-3 mb-4">
+<span class="bg-primary-fixed text-on-primary-fixed font-label text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Bio-Sciences</span>
+<span class="text-on-surface-variant font-label text-[10px] font-bold uppercase tracking-widest">NEU-301</span>
+</div>
+<h2 class="font-headline text-3xl font-bold text-emerald-950 mb-4">Cognitive Neuroscience</h2>
+<p class="font-body text-on-surface-variant max-w-md mb-6">Investigating the biological processes that underlie cognition, focusing on neural circuits.</p>
+<div class="flex space-x-4">
+<button class="bg-primary text-white font-body font-semibold px-6 py-2 rounded-xl text-sm transition-all hover:bg-primary-container">Enter Module</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Analytical Macroeconomics (New Module) -->
+<div class="col-span-12 md:col-span-6 group cursor-pointer">
+<div class="h-full bg-surface-container-low rounded-full transition-all duration-300 hover:bg-surface-container-highest p-10 flex flex-col justify-center border-2 border-emerald-900/5">
+<div class="flex items-center space-x-4 mb-6">
+<div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-3xl">analytics</span>
+</div>
+<div>
+<span class="bg-primary-fixed text-on-primary-fixed font-label text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Finance</span>
+<h2 class="font-headline text-2xl font-bold text-emerald-950">Analytical Macroeconomics</h2>
+</div>
+</div>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">Mathematical modeling of economic systems, focusing on dynamic equilibrium and stochastic variables.</p>
+<div class="flex items-center justify-between">
+<span class="font-label text-xs font-bold text-emerald-900 uppercase">Advanced Level</span>
+<button class="text-emerald-900 font-body font-semibold text-sm underline underline-offset-4 decoration-secondary/30 hover:decoration-secondary">View Case Studies</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Research Papers -->
 <section class="mb-20">
 <div class="flex justify-between items-end mb-10">
 <div>
@@ -260,7 +307,7 @@
 </div>
 <button class="text-secondary font-label font-bold text-xs uppercase tracking-widest border-b border-secondary/20 pb-1">View Archive</button>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 <div class="p-6 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
 <span class="text-[10px] font-label font-bold text-secondary uppercase block mb-3">Physics</span>
 <h4 class="font-headline font-bold text-emerald-950 mb-4 leading-snug">The Entropy of Information: A Statistical Approach</h4>
@@ -295,6 +342,42 @@
 </div>
 </div>
 </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- New Research Cards -->
+<div class="p-6 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="text-[10px] font-label font-bold text-secondary uppercase block mb-3">Neuroscience</span>
+<h4 class="font-headline font-bold text-emerald-950 mb-4 leading-snug">Synaptic Plasticity and Memory Retention in Sleep Cycles</h4>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-6 h-6 bg-emerald-200 rounded-full mr-2"></div>
+<span class="text-xs font-body text-emerald-900/60">J. Aris</span>
+</div>
+<span class="text-[10px] font-label text-emerald-900/40">25 MIN READ</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="text-[10px] font-label font-bold text-secondary uppercase block mb-3">Rhetoric</span>
+<h4 class="font-headline font-bold text-emerald-950 mb-4 leading-snug">Digital Dialectics: The Evolution of Online Argumentation</h4>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-6 h-6 bg-emerald-200 rounded-full mr-2"></div>
+<span class="text-xs font-body text-emerald-900/60">S. Gupta</span>
+</div>
+<span class="text-[10px] font-label text-emerald-900/40">15 MIN READ</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors border-l-4 border-primary">
+<span class="text-[10px] font-label font-bold text-secondary uppercase block mb-3">Required Reading</span>
+<h4 class="font-headline font-bold text-emerald-950 mb-4 leading-snug">Foundations of Modern Logic: A Critical Review</h4>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-6 h-6 bg-emerald-200 rounded-full mr-2"></div>
+<span class="text-xs font-body text-emerald-900/60">Prof. H. Miller</span>
+</div>
+<span class="text-[10px] font-label text-emerald-900/40">ESSENTIAL</span>
+</div>
+</div>
+</div>
 </section>
 </main>
 </div>
@@ -305,13 +388,11 @@
 <span>DATABASE: 1.2 TB RESEARCH DATA</span>
 <span>LAST CURATED: OCT 24, 2023</span>
 </div>
-<div class="uppercase tracking-widest font-bold">Soul Concept &copy; 2026</div>
-</footer>  <script src="/supabase-client.js?v=20260312a"></script>
-  <script src="/supabase-auth.js?v=20260326h"></script>
-  <script src="/vercel-speed-insights.js?v=20260313a"></script>
-  <script src="focus-mode.js?v=20260321d"></script>
-  <script src="lyne-widget.js?v=20260321c"></script>
-  <script src="app.js?v=20260326h"></script>
-  <script src="assets/site.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+<div class="uppercase tracking-widest font-bold">The Academic Curator © 2024</div>
+</footer>
+<script defer src="assets/stitch-router.js"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+

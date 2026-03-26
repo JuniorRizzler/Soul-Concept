@@ -3,10 +3,9 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Soul Concept | Grade 12 Advanced Placement Library</title>
+<title>The Academic Curator | Grade 12 Advanced Placement Library</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -82,25 +81,26 @@
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- TopAppBar Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl transition-all duration-300">
-<div class="flex justify-between items-center px-8 py-4 w-full max-w-screen-2xl mx-auto">
-<div class="text-2xl font-extrabold text-emerald-950 tracking-tighter font-headline">
-                Soul Concept
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-emerald-900/10">
+<div class="flex items-center px-8 py-4 w-full max-w-screen-2xl mx-auto gap-12">
+<div class="text-2xl font-extrabold text-emerald-950 tracking-tighter font-headline shrink-0">
+                The Academic Curator
             </div>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 9</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 10</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Grade 11</a>
-<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-bold tracking-tight" href="#">Grade 12</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Subjects</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight" href="#">Library</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Dashboard</a>
+<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-bold tracking-tight text-sm" href="#">Library</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Grades</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Schedule</a>
+<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-bold tracking-tight text-sm" href="#">Analytics</a>
 </div>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 ml-auto">
 <button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:scale-95">
 <span class="material-symbols-outlined text-emerald-900">search</span>
 </button>
-<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:scale-95">
-<span class="material-symbols-outlined text-emerald-900" data-icon="account_circle">account_circle</span>
+<div class="h-8 w-[1px] bg-outline-variant/30 mx-2"></div>
+<button class="flex items-center gap-2 p-1.5 hover:bg-emerald-50/50 rounded-full transition-all">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">JV</div>
+<span class="material-symbols-outlined text-emerald-900 text-sm">expand_more</span>
 </button>
 </div>
 </div>
@@ -108,47 +108,52 @@
 <div class="flex min-h-screen pt-20">
 <!-- SideNavBar -->
 <aside class="hidden lg:flex flex-col h-[calc(100vh-5rem)] w-64 bg-surface-container-low fixed left-0 py-6 px-4 border-r border-emerald-900/10 font-label">
-<div class="mb-8 px-4">
-<h3 class="text-lg font-bold text-emerald-950 font-headline">Research Desk</h3>
-<p class="text-xs text-emerald-800/70">Grade 12 Specialist</p>
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<h3 class="text-sm font-bold text-emerald-950 font-headline">Julian Deems</h3>
+<p class="text-[10px] text-emerald-800/70 uppercase tracking-widest font-bold">Scholarly Tier</p>
 </div>
-<nav class="flex-1 flex flex-col gap-1">
+</div>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto hide-scrollbar">
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+<span class="font-medium text-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-xl">book_5</span>
+<span class="font-medium text-sm">Subjects</span>
+</a>
 <a class="flex items-center gap-3 bg-emerald-100 text-emerald-900 rounded-lg px-4 py-2 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined" data-icon="functions">functions</span>
-<span class="font-medium">Mathematics</span>
+<span class="material-symbols-outlined text-xl">style</span>
+<span class="font-medium text-sm">Concept Cards</span>
 </a>
 <a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
-<span class="font-medium">Sciences</span>
+<span class="material-symbols-outlined text-xl">military_tech</span>
+<span class="font-medium text-sm">Achievements</span>
 </a>
 <a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
-<span class="font-medium">Humanities</span>
+<span class="material-symbols-outlined text-xl">loyalty</span>
+<span class="font-medium text-sm">Subscriptions</span>
 </a>
 <a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined" data-icon="translate">translate</span>
-<span class="font-medium">Languages</span>
+<span class="material-symbols-outlined text-xl">model_training</span>
+<span class="font-medium text-sm">Exam Simulator</span>
 </a>
 <a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 hover:translate-x-1 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined" data-icon="palette">palette</span>
-<span class="font-medium">Arts</span>
+<span class="material-symbols-outlined text-xl">insights</span>
+<span class="font-medium text-sm">Insights</span>
 </a>
 </nav>
-<div class="mt-auto flex flex-col gap-4">
-<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold py-3 rounded-xl shadow-none hover:opacity-90 transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-sm">edit_note</span>
-                    New Research Paper
-                </button>
-<div class="pt-4 border-t border-emerald-900/5 flex flex-col gap-1">
+<div class="mt-auto pt-4 border-t border-emerald-900/5 flex flex-col gap-1">
 <a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-colors" href="#">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span>Settings</span>
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-sm">Settings</span>
 </a>
 <a class="flex items-center gap-3 text-emerald-800/70 px-4 py-2 hover:bg-emerald-50 transition-colors" href="#">
-<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
-<span>Support</span>
+<span class="material-symbols-outlined text-xl">logout</span>
+<span class="text-sm">Sign Out</span>
 </a>
-</div>
 </div>
 </aside>
 <!-- Main Content Canvas -->
@@ -157,7 +162,7 @@
 <header class="mb-16">
 <div class="max-w-4xl">
 <div class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] uppercase tracking-widest font-bold mb-6 font-label">
-                        Advanced Placement ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ 2024 Collection
+                        Advanced Placement • 2024 Collection
                     </div>
 <h1 class="text-6xl md:text-7xl font-extrabold font-headline text-emerald-950 leading-[0.9] tracking-tighter mb-8">
                         The Library of <br/><span class="text-secondary italic">Higher Cognition.</span>
@@ -174,7 +179,7 @@
 <img class="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="abstract visual representation of quantum superposition with glowing particles and interconnected nodes in deep emerald and teal tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe0ECPa8gkSOuVgpntp_edgBvwLFCIAAtqRto82lBrBeaI29IyACHM27gQPfZkBCwx5qlDmvw6vLVY1rnCDgrW0mIkFKHbC8ialYKwavfBldTpr7gzTiNTa2D3DRxhCI6GNw-pjy8vTIp07EsHeBbzf90LljwgrPWQ5lIfFM27T25uki7Ghmxq_apkGbwe6qk-Vrb971gfGQ6yTYDb6z1iaUqzCb1-3jvQeMDrPT1ZtwaEnzqCKrf83Wn38-fha-SPYhZxNnJkFBFS"/>
 <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-emerald-950/20 to-transparent"></div>
 <div class="absolute bottom-0 left-0 p-8 text-on-primary">
-<span class="label-md font-label uppercase tracking-widest text-primary-fixed-dim mb-2 block">Theoretical Physics</span>
+<span class="label-md font-label uppercase tracking-widest text-primary-fixed-dim mb-2 block text-xs">Theoretical Physics</span>
 <h2 class="text-4xl font-headline font-bold mb-4 tracking-tight">Quantum Mechanics</h2>
 <p class="text-on-primary/80 max-w-md mb-6 leading-relaxed">Exploring non-locality, wave-particle duality, and the foundations of computational physics.</p>
 <button class="flex items-center gap-2 group/btn">
@@ -243,6 +248,48 @@
 <span class="material-symbols-outlined text-6xl text-primary relative z-10" style="font-variation-settings: 'FILL' 1;">translate</span>
 </div>
 </div>
+<!-- NEW: Computational Linguistics Card -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between border-b-4 border-emerald-800 transition-all hover:bg-surface-container-high group">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<div class="p-3 bg-emerald-100 rounded-lg text-emerald-900">
+<span class="material-symbols-outlined text-2xl">code_blocks</span>
+</div>
+<span class="bg-emerald-950 text-white px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest">New Module</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-emerald-950 mb-4">Computational Linguistics</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">Bridging neural networks and human syntax. Deep dive into Large Language Models and semantic vector spaces.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-bold text-emerald-800/60 border border-emerald-900/10 px-2 py-1 rounded">NLP</span>
+<span class="text-[10px] font-bold text-emerald-800/60 border border-emerald-900/10 px-2 py-1 rounded">TRANSFORMERS</span>
+<span class="text-[10px] font-bold text-emerald-800/60 border border-emerald-900/10 px-2 py-1 rounded">STOCHASTIC PARSING</span>
+</div>
+</div>
+<button class="mt-8 text-emerald-900 font-bold flex items-center gap-2 group/link">
+                        Access Repository 
+                        <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_right_alt</span>
+</button>
+</div>
+<!-- NEW: Quantum Ethics Card -->
+<div class="md:col-span-6 bg-surface-container-lowest border border-outline-variant/15 rounded-xl overflow-hidden group">
+<div class="grid grid-cols-2 h-full">
+<div class="p-8 flex flex-col justify-center">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">Interdisciplinary</span>
+<h3 class="text-2xl font-headline font-bold text-emerald-950 mb-3">Quantum Ethics</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Moral implications of quantum computing, encryption, and the surveillance paradox.</p>
+<div class="mt-6 flex items-center gap-4 text-xs font-bold text-emerald-900">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 14h</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">menu_book</span> 8 Texts</div>
+</div>
+</div>
+<div class="bg-emerald-900 relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay group-hover:scale-110 transition-transform duration-1000" data-alt="abstract digital mesh with glowing connection points representing quantum entanglement" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3ODh8P6Qsd5lkUnOs9Rv5YiEvMiOmyUUsPzdll9GVVxcxUqsx5dHHeO9VynznvNZhGJ1FJQO8OrMt5OMPH1dWPZWdporUp2iUSpWx6GkbyB2bUddNP1jsWor6Fcv7Rd_hR02ryGEStPs82laFKMClpCpX6h7CCZhEKAR5nEIAfvzvQKB4IJGjAG-tA0JL588Dl_cKuxNgsJlJALRFUCwwXmtq3v1A1udg6CU6VpmbNCpJw0z8axChvTdVNuBFj5Qf-9CZo4syjAqQ"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-6xl opacity-20">balance</span>
+</div>
+</div>
+</div>
+</div>
 </section>
 <!-- Curated Reading List (Gallery Style) -->
 <section class="mb-24">
@@ -255,7 +302,7 @@
                         Full Catalog <span class="material-symbols-outlined">chevron_right</span>
 </button>
 </div>
-<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-8">
 <!-- Book 1 -->
 <div class="group cursor-pointer">
 <div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
@@ -321,6 +368,45 @@
 <h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">The Neo-Aristotelian</h4>
 <p class="text-xs text-on-surface-variant">Archive Collective</p>
 </div>
+<!-- NEW: Book 6 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="abstract book cover with ink wash textures and bold sans-serif typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNGOSVCXqyj0YtGBwKGdSH6fg_kDJq7Vp7cw2Sh6YSlj5uiILtaaRjKue4Rc4ErZdOlvGSU8qTineTrcR3c4ViLfb1ZP0C56v6EXovFfSj5v-Lz3mT6bbEcK4XRCGExbD9gAay_tc6ZLus17j52z95oUGJ9Cs_DT9jihYhHpsEB800vQPiKg-NEG02yjCN33sQNTnFxWqySuAdQ0jM0A8hptgbi8-T7lelTxVcgPCQXR4bwtjiVu3IvF_Mnl4DZvBdWCH8ajgbEi1I"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">Ghost in the Machine</h4>
+<p class="text-xs text-on-surface-variant">L. K. Sterling</p>
+</div>
+<!-- NEW: Book 7 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="minimalist book cover with a single embossed circle on textured cream paper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp3Aerl3ca63TP-KnUWK44p-3Pe7gCqjusDW74Sc58Gp6OIf9xdReTv9Shf7TyKDE-y0OYcc59YUqWSoLEM0ctqG0Cob2lGNb9tc-syu9eamsZ798yIIwSPmv80_uyfavcb-Zyw_YwewkNvX5hA0jGEmo4T6fkanSXmhPS4ocRL4vDVK3uuEzjqiYFT5j8UQJLCUFfQ7f3BmClXOJV1v7JcozJBlzq6D9M3dR349dtINHsq246o5WpltjF4FMibsvuVqHOC_mRnhgI"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">Circular Logic</h4>
+<p class="text-xs text-on-surface-variant">N. O. Rhodes</p>
+</div>
+<!-- NEW: Book 8 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-high rounded-sm mb-4 overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+<img class="w-full h-full object-cover" data-alt="vibrant modernist book cover with blue and orange color blocking" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdD2EwLwEsvFumhLEcq4HJ74rfl5GxtzzP6eEA-ub9RRP_qNRKckafCIPMCTMQIx1rakWy7B9KeKpnPFeAJS-CfJyqRwkJJ_x9WSuAEdXs8qaFKLbcfcgOKBAetiKIZuhsS65z8XzL4Lj9tuKkiHa5kUtB5Sl2tLeu4BJtSQb-_F0vCHAgTX6z9MU2NASVT0LX3Dg2m0GazBLt9hT6z8aUPHVTeTnidUCcaN9wF-J-Fuw0SW462hIYtfD_Nnt76tkHgtFrb1cBa970"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</span>
+</div>
+</div>
+<h4 class="font-bold text-emerald-950 group-hover:text-secondary transition-colors truncate">Neural Synthesis</h4>
+<p class="text-xs text-on-surface-variant">Dr. Elias Vance</p>
+</div>
 </div>
 </section>
 <!-- Faculty Insight Section (Asymmetric) -->
@@ -383,16 +469,14 @@
 <span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
 </button>
 </nav>
-<!-- Contextual FAB (Only for specific research actions) -->
+<!-- Contextual FAB -->
 <button class="fixed bottom-24 right-8 bg-gradient-to-br from-primary to-primary-container text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 active:scale-95 transition-all z-40">
 <span class="material-symbols-outlined">add</span>
 <span class="absolute right-16 bg-emerald-950 text-white px-4 py-2 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">New Research Paper</span>
-</button>  <script src="/supabase-client.js?v=20260312a"></script>
-  <script src="/supabase-auth.js?v=20260326h"></script>
-  <script src="/vercel-speed-insights.js?v=20260313a"></script>
-  <script src="focus-mode.js?v=20260321d"></script>
-  <script src="lyne-widget.js?v=20260321c"></script>
-  <script src="app.js?v=20260326h"></script>
-  <script src="assets/site.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+</button>
+<script defer src="assets/stitch-router.js"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+

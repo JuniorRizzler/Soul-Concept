@@ -3,14 +3,13 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Soul Concept | Focused Learning for Students</title>
+<title>Soul Concept | Focused Learning for Scholars</title>
 <!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Inter:wght@100..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -97,6 +96,10 @@
         .cta-gradient {
             background: linear-gradient(135deg, #004435 0%, #215c4b 100%);
         }
+        .sidebar-link-active {
+            background-color: #215c4b;
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface">
@@ -107,10 +110,11 @@
                 Soul Concept
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="library.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="dashboard.html">Quiz</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
+<a class="text-[#004435] transition-all duration-200" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Schedule</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Analytics</a>
 </div>
 <div class="flex items-center gap-4">
 <div class="relative hidden lg:block">
@@ -122,22 +126,67 @@
 </div>
 </div>
 </nav>
-<main class="pt-24">
+<!-- Sidebar (Persistent on Desktop) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-surface-container-low border-r border-outline-variant/10 hidden lg:flex flex-col p-6 z-40">
+<div class="space-y-1 mb-8">
+<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl sidebar-link-active transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-label text-sm font-bold">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span class="font-label text-sm font-semibold">Subjects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">style</span>
+<span class="font-label text-sm font-semibold">Concept Cards</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">military_tech</span>
+<span class="font-label text-sm font-semibold">Achievements</span>
+</a>
+</div>
+<div class="space-y-1 mb-8">
+<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Account &amp; Tools</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="font-label text-sm font-semibold">Subscriptions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">model_training</span>
+<span class="font-label text-sm font-semibold">Exam Simulator</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span class="font-label text-sm font-semibold">Insights</span>
+</a>
+</div>
+<div class="mt-auto bg-primary-container p-4 rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<p class="text-primary-fixed text-xs font-bold mb-1">PRO ACCESS</p>
+<p class="text-white text-[11px] leading-tight opacity-90 mb-3">Unlock advanced retention modeling tools.</p>
+<button class="bg-primary-fixed text-on-primary-fixed-variant w-full py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider">Upgrade</button>
+</div>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
+</div>
+</aside>
+<main class="pt-24 lg:pl-64">
 <!-- Hero Section -->
 <section class="max-w-7xl mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center gap-16">
 <div class="w-full md:w-1/2 space-y-8">
-<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold">Soul Concept</span>
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold">The Academic Curator</span>
 <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary leading-tight -tracking-[0.03em]">
                     Built for <br/>focused learning.
                 </h1>
 <p class="font-body text-lg text-on-surface-variant max-w-lg leading-relaxed">
-                    A focused digital study space built to help students learn with clarity, consistency, and intention.
+                    A premium digital gallery for scholars. Move beyond superficial study with intentional layouts designed for deep cognitive resonance and academic mastery.
                 </p>
 <div class="flex flex-wrap gap-4 pt-4">
-<button class="cta-gradient text-white px-8 py-4 rounded-xl font-body font-bold text-md shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-all" onclick="window.location.href='subject-library-2.html'">
+<button class="cta-gradient text-white px-8 py-4 rounded-xl font-body font-bold text-md shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-all">
                         Start Study Session
                     </button>
-<button class="bg-surface-container-highest text-on-surface px-8 py-4 rounded-xl font-body font-bold text-md hover:bg-surface-container-high transition-all" onclick="window.location.href='subject-library-2.html'">
+<button class="bg-surface-container-highest text-on-surface px-8 py-4 rounded-xl font-body font-bold text-md hover:bg-surface-container-high transition-all">
                         Explore Library
                     </button>
 </div>
@@ -161,7 +210,7 @@
 <h2 class="font-headline text-3xl font-bold text-primary mb-4 tracking-tight">Elegant Libraries</h2>
 <p class="font-body text-on-surface-variant max-w-md">Structured repositories of knowledge, meticulously organized for high-performance learners.</p>
 </div>
-<a class="font-label text-sm font-bold text-secondary flex items-center gap-2 group" href="subject-library-2.html">
+<a class="font-label text-sm font-bold text-secondary flex items-center gap-2 group" href="#">
                         VIEW ALL SUBJECTS 
                         <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </a>
@@ -174,13 +223,13 @@
 <div class="absolute bottom-0 p-10 w-full">
 <span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-[10px] font-label font-bold uppercase tracking-wider mb-4 inline-block">Core Discipline</span>
 <h3 class="font-headline text-4xl text-white font-bold mb-4">Advanced Sciences</h3>
-<p class="text-white/80 font-body max-w-md mb-6">From biology to physics, built for students who want stronger understanding and better study flow.</p>
-<button class="bg-white text-primary px-6 py-3 rounded-xl font-bold font-label text-xs tracking-widest hover:bg-primary-fixed transition-colors" onclick="window.location.href='study-library.html'">ENTER LIBRARY</button>
+<p class="text-white/80 font-body max-w-md mb-6">From Molecular Biology to Theoretical Physics, curated by top-tier academic researchers.</p>
+<button class="bg-white text-primary px-6 py-3 rounded-xl font-bold font-label text-xs tracking-widest hover:bg-primary-fixed transition-colors">ENTER LIBRARY</button>
 </div>
 </div>
 <!-- Geography -->
 <div class="md:col-span-4 flex flex-col gap-8">
-<div class="flex-1 group relative overflow-hidden rounded-2xl bg-surface-container-lowest editorial-shadow min-h-[234px] cursor-pointer" onclick="window.location.href='geography-library.html'">
+<div class="flex-1 group relative overflow-hidden rounded-2xl bg-surface-container-lowest editorial-shadow min-h-[234px]">
 <img class="absolute inset-0 w-full h-full object-cover grayscale opacity-40" data-alt="Topographic map patterns with elegant gold and deep green lines, minimalist cartography art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA26M0PwMO790AAz47vnxfp7A0mlKWox-ewZMjKUEdjaNWSB57s2VmNICTnylxxtDkliGzhTQwXr6wFloQMftZlDh5FWTETOxWE6MVljgbi3JIlS5BV6N1am9N8R3TlTlWZxUl3KpXTQe7CasxlAb1VhvS64U35m47PLya2VmBbkoX7axLayJIV7KKNmUJFQ2wrZorWHJB3X6lqWtpZzRDwU84pIxxJ7Y3l3n6stEaDtGfJiw0ir_4q60Magaebd1RtRXmJlyWvEBg"/>
 <div class="relative p-8 h-full flex flex-col justify-end">
 <h3 class="font-headline text-2xl text-primary font-bold mb-2">Geography</h3>
@@ -189,9 +238,9 @@
 </div>
 </div>
 <!-- Math -->
-<div class="flex-1 group relative overflow-hidden rounded-2xl bg-primary editorial-shadow min-h-[234px] cursor-pointer" onclick="window.location.href='grade-10-math.html'">
+<div class="flex-1 group relative overflow-hidden rounded-2xl bg-primary editorial-shadow min-h-[234px]">
 <div class="absolute inset-0 opacity-10 font-mono text-[10px] p-4 text-white overflow-hidden leading-tight">
-                                ÃƒÂ¢Ã‹â€ Ã‚Â« f(x)dx = F(x) + C | e = mcÃƒâ€šÃ‚Â² | aÃƒâ€šÃ‚Â² + bÃƒâ€šÃ‚Â² = cÃƒâ€šÃ‚Â² | ÃƒÅ½Ã‚Â£ x/n | ÃƒÂ¢Ã‹â€ Ã¢â‚¬Å¡u/ÃƒÂ¢Ã‹â€ Ã¢â‚¬Å¡t = ÃƒÅ½Ã‚Â±ÃƒÂ¢Ã‹â€ Ã¢â‚¬Â¡Ãƒâ€šÃ‚Â²u | ÃƒÅ½Ã‚Â¦ = (1+ÃƒÂ¢Ã‹â€ Ã…Â¡5)/2
+                                ∫ f(x)dx = F(x) + C | e = mc² | a² + b² = c² | Σ x/n | ∂u/∂t = α∇²u | Φ = (1+√5)/2
                             </div>
 <div class="relative p-8 h-full flex flex-col justify-end">
 <h3 class="font-headline text-2xl text-white font-bold mb-2">Mathematics</h3>
@@ -279,7 +328,7 @@
 </div>
 <div>
 <p class="text-white font-bold font-label text-sm uppercase">Marcus Aurelius V.</p>
-<p class="text-primary-fixed/60 font-label text-xs">Focused Member</p>
+<p class="text-primary-fixed/60 font-label text-xs">Post-Grad Scholar</p>
 </div>
 </div>
 </div>
@@ -299,7 +348,7 @@
 </div>
 <div class="p-8 border-l border-white/10 hover:border-secondary transition-colors group">
 <p class="text-white/80 font-body text-lg mb-8 leading-relaxed">
-                            "The Concept Cards made my prep finally feel organized. It's the first study system that actually keeps me locked in."
+                            "The Concept Cards transformed my preparation for the Bar exam. It's the highest-end academic experience available online."
                         </p>
 <div class="flex items-center gap-4">
 <div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden">
@@ -319,26 +368,26 @@
 <div class="max-w-3xl mx-auto space-y-10">
 <h2 class="font-headline text-4xl md:text-5xl font-extrabold text-primary -tracking-wide">Elevate your cognition.</h2>
 <p class="font-body text-on-surface-variant text-xl leading-relaxed">
-                    Join a serious community of students prioritizing depth over distraction. Your first curated module is ready.
+                    Join an elite community of scholars prioritizing depth over distraction. Your first curated module is ready for collection.
                 </p>
 <div class="flex flex-col sm:flex-row justify-center gap-6 pt-6">
-<button class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all" onclick="window.location.href='subject-library-2.html'">ESTABLISH ACCESS</button>
+<button class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">ESTABLISH ACCESS</button>
 <button class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all">VIEW THE MANIFESTO</button>
 </div>
 </div>
 </section>
 </main>
 <!-- Footer -->
-<footer class="w-full border-t border-slate-100 dark:border-slate-800 mt-auto bg-[#fef7ff] dark:bg-slate-950">
+<footer class="w-full border-t border-slate-100 dark:border-slate-800 mt-auto bg-[#fef7ff] dark:bg-slate-950 lg:pl-64">
 <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto">
 <div class="mb-8 md:mb-0">
 <p class="font-bold text-[#004435] mb-2 font-headline">Soul Concept</p>
-<p class="font-['Manrope'] text-xs uppercase tracking-widest text-slate-400">Ãƒâ€šÃ‚Â© 2024 Soul Concept Academic Gallery. All rights reserved.</p>
+<p class="font-['Manrope'] text-xs uppercase tracking-widest text-slate-400">© 2024 Soul Concept Academic Gallery. All rights reserved.</p>
 </div>
 <div class="flex gap-12 font-['Manrope'] text-xs uppercase tracking-widest">
-<a class="text-slate-400 hover:text-[#004435] transition-colors" href="research.html">Terms of Knowledge</a>
-<a class="text-slate-400 hover:text-[#004435] transition-colors" href="research.html">Privacy Policy</a>
-<a class="text-slate-400 hover:text-[#004435] transition-colors" href="research.html">Platform Access</a>
+<a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Terms of Knowledge</a>
+<a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Curator Privacy</a>
+<a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Institutional Access</a>
 </div>
 <div class="mt-8 md:mt-0 flex gap-4">
 <span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-secondary">public</span>
@@ -346,12 +395,10 @@
 <span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-secondary">school</span>
 </div>
 </div>
-</footer>  <script src="/supabase-client.js?v=20260312a"></script>
-  <script src="/supabase-auth.js?v=20260326h"></script>
-  <script src="/vercel-speed-insights.js?v=20260313a"></script>
-  <script src="focus-mode.js?v=20260321d"></script>
-  <script src="lyne-widget.js?v=20260321c"></script>
-  <script src="app.js?v=20260326h"></script>
-  <script src="assets/site.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+</footer>
+<script defer src="assets/stitch-router.js"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+

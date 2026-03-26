@@ -3,12 +3,11 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Soul Concept | Focus Scheduler</title>
+<title>Academic Curator | Study Scheduler</title>
 <!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Theme Config -->
@@ -94,7 +93,7 @@
     </style>
 </head>
 <body class="bg-background text-on-surface font-body overflow-x-hidden">
-<!-- Left Side Navigation (Shared Component) -->
+<!-- SideNavBar (Synchronized) -->
 <aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-[#fef7ff] dark:bg-slate-900 flex flex-col p-4 border-r border-slate-100 dark:border-slate-800">
 <div class="mb-10 px-2 flex items-center gap-3">
 <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary">
@@ -105,22 +104,34 @@
 <p class="text-[0.7rem] text-slate-500 font-label tracking-wider uppercase">Precision Study</p>
 </div>
 </div>
-<nav class="flex-1 space-y-2">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="local_library">local_library</span>
-                Library
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+                Overview
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                Dashboard
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="book_2">book_2</span>
+                Subjects
             </a>
-<a class="flex items-center gap-3 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 text-[#004435] dark:text-emerald-400 rounded-lg transition-all duration-200 translate-x-1 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem]" href="#">
-<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
-                Scheduler
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="style">style</span>
+                Concept Cards
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
-                Analytics
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+                Achievements
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="card_membership">card_membership</span>
+                Subscriptions
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="model_training">model_training</span>
+                Exam Simulator
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+                Insights
             </a>
 </nav>
 <button class="mt-8 mb-auto w-full py-4 bg-primary text-on-primary rounded-xl font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">
@@ -128,11 +139,11 @@
             New Study Session
         </button>
 <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 space-y-1">
-<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-primary font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] transition-colors" href="#">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-primary font-headline font-semibold text-[0.875rem] transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
                 Help
             </a>
-<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-secondary font-['Plus_Jakarta_Sans'] font-semibold text-[0.875rem] transition-colors" href="#">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-secondary font-headline font-semibold text-[0.875rem] transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="logout">logout</span>
                 Sign Out
             </a>
@@ -140,15 +151,22 @@
 </aside>
 <!-- Main Content Canvas -->
 <main class="ml-64 min-h-screen">
-<!-- Top App Bar (Shared Component Style) -->
-<header class="fixed top-0 right-0 left-64 z-40 bg-[#fef7ff]/70 backdrop-blur-xl px-8 py-4 flex justify-between items-center shadow-[0_20px_40px_rgba(29,26,34,0.06)]">
-<div class="flex items-center gap-6">
-<div class="relative w-80">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
-<input class="w-full bg-surface-container-lowest border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search curriculum or tasks..." type="text"/>
-</div>
+<!-- TopNavBar (Synchronized) -->
+<header class="fixed top-0 right-0 left-64 z-40 bg-[#fef7ff]/70 backdrop-blur-xl px-8 py-4 flex justify-between items-center shadow-[0_20px_40px_rgba(29,26,34,0.06)] border-b border-slate-100">
+<div class="flex items-center gap-10">
+<nav class="flex items-center gap-8">
+<a class="text-sm font-headline font-bold text-slate-400 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-headline font-bold text-slate-400 hover:text-primary transition-colors" href="#">Library</a>
+<a class="text-sm font-headline font-bold text-slate-400 hover:text-primary transition-colors" href="#">Grades</a>
+<a class="text-sm font-headline font-bold text-primary border-b-2 border-primary pb-1" href="#">Schedule</a>
+<a class="text-sm font-headline font-bold text-slate-400 hover:text-primary transition-colors" href="#">Analytics</a>
+</nav>
 </div>
 <div class="flex items-center gap-4">
+<div class="relative w-64 mr-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl pl-10 pr-4 py-2 text-xs focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search curriculum..." type="text"/>
+</div>
 <button class="p-2 text-slate-500 hover:bg-slate-100/50 rounded-lg transition-all">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
@@ -158,7 +176,7 @@
 <div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
 <div class="flex items-center gap-3 pl-2">
 <img alt="User profile avatar" class="w-10 h-10 rounded-full border-2 border-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAnT662J9xAbJCPvTxdXVDx2lpxnkv-K6X677IWjisPsLvCB3P3GEbRNAWf6hvtl503IuuPI4PJG9IYsB10WvRQAyqav9mg4yttYDLjMhprYRhY9C_kB7cTLtMWul-UISxKWyYc9Y60TQ239kZFtR8RGJvn9brYsrBMuck3WSLrEI9Y4NVRJxYpHf-zUlXPdnXJylMrZQkG3xG6bcwGCpAz-RRN1A0ygZ8UcY29VtjPNqbtdXf_OM3jIOp_7b0_Qmw8BNV-RXBqkGs"/>
-<div class="hidden lg:block">
+<div class="hidden lg:block text-left">
 <p class="text-xs font-bold font-headline text-primary">Dr. Julian Vance</p>
 <p class="text-[0.65rem] font-label text-slate-500">Postgrad Fellow</p>
 </div>
@@ -172,13 +190,13 @@
 <div class="space-y-2">
 <h2 class="text-4xl font-headline font-extrabold tracking-tight text-primary leading-tight">Study Scheduler</h2>
 <p class="text-slate-500 max-w-lg font-body text-sm leading-relaxed">
-                        Orchestrate your cognitive energy. Sync seamlessly with Google Calendar and BBK12 to optimize your study flow.
+                        Orchestrate your cognitive energy. Syncing seamlessly with Google Calendar and BBK12 to optimize your academic flow.
                     </p>
 </div>
 <div class="flex gap-4">
 <button class="flex items-center gap-2 px-6 py-3 bg-surface-container-highest text-primary font-headline font-bold text-sm rounded-xl hover:bg-slate-200 transition-all">
 <span class="material-symbols-outlined text-lg" data-icon="sync" style="font-variation-settings: 'FILL' 0;">sync</span>
-                        Sync Study Calendars
+                        Sync Academic Calendars
                     </button>
 <button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-lg shadow-primary/10 hover:scale-[1.02] active:scale-95 transition-all">
 <span class="material-symbols-outlined text-lg" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
@@ -193,7 +211,7 @@
 <div class="bg-surface-container-low rounded-3xl p-6 depth-layer-1">
 <div class="flex items-center justify-between mb-8 px-2">
 <div class="flex items-center gap-4">
-<h3 class="text-xl font-headline font-bold text-primary">Week 14: Oct 23 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ Oct 27</h3>
+<h3 class="text-xl font-headline font-bold text-primary">Week 14: Oct 23 – Oct 27</h3>
 <div class="flex bg-white/50 p-1 rounded-lg">
 <button class="p-1 hover:bg-white rounded transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
 <button class="p-1 hover:bg-white rounded transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
@@ -277,12 +295,12 @@
 </div>
 </div>
 </div>
-<!-- Right: Focus Task Feed (1/3rd) -->
+<!-- Right: Scholarly Task Feed (1/3rd) -->
 <div class="col-span-12 lg:col-span-4 space-y-8">
 <!-- BBK12 Task Section -->
 <div class="bg-white rounded-3xl p-6 depth-layer-2 border border-slate-100">
 <div class="flex items-center justify-between mb-6">
-<h3 class="text-lg font-headline font-extrabold text-primary">Focus Task Feed</h3>
+<h3 class="text-lg font-headline font-extrabold text-primary">Scholarly Task Feed</h3>
 <span class="text-[0.65rem] font-label font-bold text-slate-400 flex items-center gap-1">
 <span class="material-symbols-outlined text-xs" data-icon="cloud_sync">cloud_sync</span>
                                 BBK12 LIVE
@@ -395,13 +413,9 @@
 </div>
 </div>
 </main>
-<!-- Contextual FAB (Hidden on Scheduler as per mandate, but placeholder for structure if needed elsewhere) -->
-<!-- Suppressed: FAB on Task-focused detail screens is prohibited by the shell visibility rule -->  <script src="/supabase-client.js?v=20260312a"></script>
-  <script src="/supabase-auth.js?v=20260326h"></script>
-  <script src="/vercel-speed-insights.js?v=20260313a"></script>
-  <script src="focus-mode.js?v=20260321d"></script>
-  <script src="lyne-widget.js?v=20260321c"></script>
-  <script src="app.js?v=20260326h"></script>
-  <script src="assets/site.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="assets/stitch-router.js"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+

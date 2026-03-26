@@ -6,7 +6,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -78,8 +77,8 @@
             vertical-align: middle;
         }
         .glass-header {
-            background: rgba(254, 247, 255, 0.7);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
         }
         .editorial-shadow {
             box-shadow: 0 20px 40px rgba(29, 26, 34, 0.06);
@@ -88,66 +87,91 @@
 </head>
 <body class="bg-surface font-body text-on-surface">
 <!-- Top Navigation Shell -->
-<header class="fixed top-0 w-full z-50 glass-header shadow-2xl shadow-primary/10 h-16 flex justify-between items-center px-8 border-b border-outline-variant/15">
-<div class="flex items-center space-x-8">
-<span class="text-xl font-bold text-primary tracking-tighter font-headline">The Curator</span>
-<nav class="hidden md:flex space-x-6">
-<a class="text-on-surface-variant hover:text-primary transition-all duration-200 font-label text-xs uppercase tracking-widest" href="discover.html">Discover</a>
-<a class="text-on-surface-variant hover:text-primary transition-all duration-200 font-label text-xs uppercase tracking-widest" href="library.html">Library</a>
-<a class="text-on-surface-variant hover:text-primary transition-all duration-200 font-label text-xs uppercase tracking-widest" href="#">Network</a>
+<header class="fixed top-0 w-full z-50 glass-header border-b border-outline-variant/15 h-16 flex justify-between items-center px-6">
+<div class="flex items-center space-x-12">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-base" data-icon="menu_book">menu_book</span>
+</div>
+<span class="text-xl font-bold text-primary tracking-tight font-headline">Soul Concept</span>
+</div>
+<nav class="hidden md:flex space-x-8">
+<a class="text-primary font-bold font-label text-[11px] uppercase tracking-[0.15em]" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="{{DATA:SCREEN:SCREEN_33}}">Library</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="#">Grades</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="#">Schedule</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="#">Analytics</a>
 </nav>
 </div>
-<div class="flex items-center space-x-4">
-<button class="p-2 hover:bg-surface-container-high rounded-full transition-all">
-<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+<div class="flex items-center space-x-6">
+<div class="relative hidden sm:block">
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-[11px] focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-all outline-none w-64" placeholder="Search archive..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="search">search</span>
+</div>
+<button class="p-1 text-primary relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full border-2 border-white"></span>
 </button>
-<button class="p-2 hover:bg-surface-container-high rounded-full transition-all">
-<span class="material-symbols-outlined text-primary" data-icon="bookmark">bookmark</span>
-</button>
-<div class="h-8 w-8 rounded-full bg-primary-fixed overflow-hidden border border-outline-variant/30">
-<img alt="Scholar profile avatar" class="h-full w-full object-cover" data-alt="Close-up professional portrait of a senior academic man with glasses and a refined expression, soft library lighting" data-auth-avatar src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUh8RjxtzWpcYJsiM18no7DpcgQBzju7bXwPMu-Auy__cVxEvLUegeGjcJt41NsO1-d1h1L2aTgg-CUEmwKD1lJjEZp8jNcMdkaJysUHhmZfou9C0ytt-fsmRj-wgS5LjxfjJ27spDITHVF8q--XIunuADh-1T63DrpflcH749cWamRhyd932_vimqaeXMsKNMM1xfL-leF6OXwIhOh0fArKGf-F9r5FcRQnjec-Dihhe_OnvEQhnOY7byLJjDvZQRMSVirQoD6Fek"/>
+<div class="h-9 w-9 rounded-lg bg-primary-fixed overflow-hidden border border-outline-variant/30">
+<img alt="Scholar profile avatar" class="h-full w-full object-cover" data-auth-avatar="" data-alt="Close-up professional portrait of a senior academic man with glasses and a refined expression, soft library lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUh8RjxtzWpcYJsiM18no7DpcgQBzju7bXwPMu-Auy__cVxEvLUegeGjcJt41NsO1-d1h1L2aTgg-CUEmwKD1lJjEZp8jNcMdkaJysUHhmZfou9C0ytt-fsmRj-wgS5LjxfjJ27spDITHVF8q--XIunuADh-1T63DrpflcH749cWamRhyd932_vimqaeXMsKNMM1xfL-leF6OXwIhOh0fArKGf-F9r5FcRQnjec-Dihhe_OnvEQhnOY7byLJjDvZQRMSVirQoD6Fek"/>
 </div>
 </div>
 </header>
 <div class="flex pt-16 min-h-screen">
 <!-- Sidebar Navigation -->
-<aside class="h-[calc(100vh-4rem)] w-64 border-r border-outline-variant/15 flex flex-col p-6 sticky top-16 bg-surface-container-lowest">
-<div class="mb-10 text-center">
-<div class="w-20 h-20 rounded-full mx-auto mb-4 bg-primary-fixed p-1 border border-primary/10">
-<img alt="Academic user avatar" class="w-full h-full object-cover rounded-full" data-alt="Detailed portrait of an elderly professor with graying hair and a thoughtful gaze, classic academic aesthetic" data-auth-avatar src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsFOm4QMyN_-sRbBKfLhhdSHKGmke-ifAm9XdCI35ybaAEXxZ3RF88VHlot8gHCbkf9vt2kQA959LacZhbFiWWgNVVH6d0u_JMnl2Y_duNeVzBglQB8UWbS2gRV0nnKDhj_kr_mx90oaJDg9kRB62eiPBil0OfWWYmvNSEu8jjIc5h5CrCnUNIoDZCUD5N-C0tpj8Hs01nlQg--ms5uH-8iuyDMgfC4LqnmQtodsA9xupfFxsBT30C4u_BHBwZTi1tcifAtJvsSCaU"/>
+<aside class="h-[calc(100vh-4rem)] w-64 border-r border-outline-variant/15 flex flex-col p-4 sticky top-16 bg-surface-container-lowest">
+<div class="mb-6 p-4 rounded-xl bg-surface-container-low">
+<div class="w-12 h-12 rounded-lg mx-auto mb-3 bg-primary-fixed p-0.5 border border-primary/10 overflow-hidden">
+<img alt="Academic user avatar" class="w-full h-full object-cover rounded-md" data-auth-avatar="" data-alt="Detailed portrait of an elderly professor with graying hair and a thoughtful gaze, classic academic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsFOm4QMyN_-sRbBKfLhhdSHKGmke-ifAm9XdCI35ybaAEXxZ3RF88VHlot8gHCbkf9vt2kQA959LacZhbFiWWgNVVH6d0u_JMnl2Y_duNeVzBglQB8UWbS2gRV0nnKDhj_kr_mx90oaJDg9kRB62eiPBil0OfWWYmvNSEu8jjIc5h5CrCnUNIoDZCUD5N-C0tpj8Hs01nlQg--ms5uH-8iuyDMgfC4LqnmQtodsA9xupfFxsBT30C4u_BHBwZTi1tcifAtJvsSCaU"/>
 </div>
-<h2 class="font-headline font-bold text-primary text-lg leading-tight" data-auth-name>Guest Scholar</h2>
-<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-1" data-auth-plan-copy>Starter Member</p>
+<h2 class="font-headline font-bold text-primary text-[13px] text-center leading-tight" data-auth-name="">Dr. Julian Vane</h2>
+<p class="font-label text-[9px] text-on-surface-variant text-center uppercase tracking-wider mt-1" data-auth-plan-copy="">Level 4 Scholar</p>
 </div>
 <nav class="flex-1 space-y-1">
-<a class="flex items-center px-4 py-3 text-primary font-bold bg-primary-fixed/30 rounded-lg transition-all duration-200" href="#">
-<span class="material-symbols-outlined mr-3" data-icon="person_book" style="font-variation-settings: 'FILL' 1;">person_book</span>
-<span class="font-medium text-sm">Profile</span>
+<a class="flex items-center px-3 py-2 text-primary font-bold bg-primary-fixed/30 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-sm">Overview</span>
 </a>
-<a class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all duration-200" href="settings.html">
-<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
-<span class="font-medium text-sm">Settings</span>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="menu_book">menu_book</span>
+<span class="text-sm font-medium">Subjects</span>
 </a>
-<a class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all duration-200" href="dashboard.html">
-<span class="material-symbols-outlined mr-3" data-icon="military_tech">military_tech</span>
-<span class="font-medium text-sm">Achievements</span>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="style">style</span>
+<span class="text-sm font-medium">Concept Cards</span>
 </a>
-<a class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all duration-200" href="membership.html">
-<span class="material-symbols-outlined mr-3" data-icon="card_membership">card_membership</span>
-<span class="font-medium text-sm">Subscriptions</span>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="{{DATA:SCREEN:SCREEN_21}}">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="workspace_premium">workspace_premium</span>
+<span class="text-sm font-medium">Achievements</span>
+</a>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="{{DATA:SCREEN:SCREEN_12}}">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="credit_card">credit_card</span>
+<span class="text-sm font-medium">Subscriptions</span>
+</a>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="quiz">quiz</span>
+<span class="text-sm font-medium">Exam Simulator</span>
+</a>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="bar_chart">bar_chart</span>
+<span class="text-sm font-medium">Insights</span>
 </a>
 </nav>
 <div class="mt-auto space-y-4">
-<button class="w-full py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-all" data-auth-upgrade onclick="window.location.href='membership.html'">
-                    Upgrade to Premium
+<button class="w-full py-2.5 bg-primary text-white rounded-lg font-bold text-[11px] uppercase tracking-wider shadow-lg shadow-primary/20 hover:opacity-95 transition-all">
+                    Start Study Session
                 </button>
-<div class="pt-4 border-t border-outline-variant/15 space-y-1">
-<a class="flex items-center px-4 py-2 text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">
-<span class="material-symbols-outlined mr-3 text-lg" data-icon="help">help</span>
-                        Help Center
+<div class="pt-4 border-t border-outline-variant/15 space-y-2">
+<a class="flex items-center px-3 py-1.5 text-on-surface-variant hover:text-primary transition-colors text-[13px]" href="{{DATA:SCREEN:SCREEN_18}}">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="settings">settings</span>
+                        Settings
                     </a>
-<a class="flex items-center px-4 py-2 text-on-surface-variant hover:text-error transition-colors text-sm" data-auth-logout-trigger href="#">
-<span class="material-symbols-outlined mr-3 text-lg" data-icon="logout">logout</span>
+<a class="flex items-center px-3 py-1.5 text-on-surface-variant hover:text-primary transition-colors text-[13px]" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="help">help</span>
+                        Support
+                    </a>
+<a class="flex items-center px-3 py-1.5 text-on-surface-variant hover:text-error transition-colors text-[13px]" data-auth-logout-trigger="" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="logout">logout</span>
                         Sign Out
                     </a>
 </div>
@@ -159,11 +183,12 @@
 <section class="mb-16">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
 <div class="max-w-2xl">
+<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-4 block">Good morning, Scholar</span>
 <h1 class="text-5xl font-headline font-extrabold text-primary tracking-tighter mb-6 leading-[1.1]">
                             Curating the intersection of <span class="text-secondary">ethics</span> and emerging <span class="italic">quantums</span>.
                         </h1>
-<p class="text-lg text-on-surface-variant leading-relaxed font-body mb-8">
-<span data-auth-bio>Sign in to connect your study profile, saved progress, and premium features.</span>
+<p class="text-lg text-on-surface-variant leading-relaxed font-body mb-8" data-auth-bio="">
+                            Dr. Julian Vane is a Senior Fellow specializing in the sociopolitical implications of quantum computing. His work bridges the gap between theoretical physics and normative ethics, fostering a global dialogue on algorithmic responsibility.
                         </p>
 <div class="flex gap-12">
 <div>
@@ -176,7 +201,7 @@
 </div>
 <div>
 <span class="block text-3xl font-headline font-bold text-primary">32</span>
-<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Saved Guides</span>
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Research Papers</span>
 </div>
 </div>
 </div>
@@ -187,11 +212,11 @@
 </section>
 <!-- Grid Layout for Activity & Achievements -->
 <div class="grid grid-cols-1 xl:grid-cols-3 gap-12 mb-16">
-<!-- Recent Study Activity (Col 1 & 2) -->
+<!-- Recent Research Activity (Col 1 & 2) -->
 <div class="xl:col-span-2">
 <div class="flex items-center justify-between mb-8">
-<h3 class="text-2xl font-headline font-bold text-primary">Recent Study Activity</h3>
-<a class="text-sm font-bold text-secondary border-b-2 border-secondary/20 hover:border-secondary transition-all" href="research.html">View Archive</a>
+<h3 class="text-2xl font-headline font-bold text-primary">Recent Research Activity</h3>
+<a class="text-sm font-bold text-secondary border-b-2 border-secondary/20 hover:border-secondary transition-all" href="{{DATA:SCREEN:SCREEN_24}}">View Archive</a>
 </div>
 <div class="space-y-4">
 <!-- Activity Item 1 -->
@@ -217,7 +242,7 @@
 <span class="text-xs text-on-surface-variant font-label">Accessed 2 days ago</span>
 </div>
 <h4 class="text-lg font-headline font-bold text-on-surface group-hover:text-primary transition-colors">The Algorithmic Commons: Data Sovereignty in the 22nd Century</h4>
-<p class="text-sm text-on-surface-variant mt-1">Study Guide | Soul Concept Library</p>
+<p class="text-sm text-on-surface-variant mt-1">Research Paper | Oxford Academic Press</p>
 </div>
 <span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors" data-icon="open_in_new">open_in_new</span>
 </div>
@@ -252,7 +277,7 @@
 </div>
 <div>
 <p class="font-bold text-sm text-on-surface">Community Fellow</p>
-<p class="text-xs text-on-surface-variant">Helping 500+ students build stronger study habits</p>
+<p class="text-xs text-on-surface-variant">Mentor to 500+ aspiring scholars</p>
 </div>
 </div>
 </div>
@@ -305,22 +330,23 @@
 <footer class="w-full py-12 border-t border-outline-variant/30 bg-surface-container-lowest">
 <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
 <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant">
-                &copy; 2026 Soul Concept. All rights reserved.
+                © 2024 Soul Concept Academic Gallery. All rights reserved.
             </p>
 <nav class="flex flex-wrap justify-center gap-8">
 <a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-opacity" href="#">Privacy Policy</a>
-<a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-opacity" href="#">Terms of Use</a>
-<a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-opacity" href="#">Platform Access</a>
+<a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-opacity" href="#">Terms of Research</a>
+<a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-opacity" href="#">Institutional Access</a>
 <a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-opacity" href="#">Contact</a>
 </nav>
 </div>
-</footer>  <script src="/supabase-client.js?v=20260312a"></script>
-  <script src="/supabase-auth.js?v=20260326h"></script>
-  <script src="/vercel-speed-insights.js?v=20260313a"></script>
-  <script src="focus-mode.js?v=20260321d"></script>
-  <script src="lyne-widget.js?v=20260321c"></script>
-  <script src="app.js?v=20260326h"></script>
-  <script src="auth-profile-sync.js?v=20260324a"></script>
-  <script src="assets/site.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+</footer>
+<script defer src="assets/stitch-router.js"></script>
+<script src="supabase-client.js?v=20260326a"></script>
+<script src="supabase-auth.js?v=20260326a"></script>
+<script src="auth-profile-sync.js?v=20260326a"></script>
+<script src="assets/account-pages.js?v=20260326a"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+

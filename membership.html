@@ -5,7 +5,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -89,14 +88,19 @@
 </head>
 <body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md shadow-sm dark:shadow-none">
+<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md shadow-sm dark:shadow-none border-b border-zinc-200/50">
 <div class="flex items-center justify-between px-6 h-16 w-full">
 <div class="flex items-center gap-8">
-<span class="text-xl font-bold tracking-tighter text-emerald-900 dark:text-emerald-50 font-headline">Soul Concept</span>
+<span class="text-xl font-bold tracking-tighter text-emerald-900 dark:text-emerald-50 font-headline flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-800">account_balance</span>
+        The Curator
+      </span>
 <nav class="hidden md:flex gap-6 items-center">
-<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="library.html">Library</a>
-<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Visualizations</a>
-<a class="text-emerald-900 dark:text-emerald-50 font-semibold font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Subscriptions</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_33}}">Library</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Grades</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Schedule</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-plus-jakarta text-sm tracking-tight hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors duration-200" href="#">Analytics</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
@@ -107,29 +111,45 @@
 </header>
 <!-- SideNavBar -->
 <aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200/50 dark:border-zinc-800/50 hidden lg:flex flex-col gap-2 px-4 py-6">
-<div class="mb-8 px-4">
-<h2 class="font-headline font-bold text-emerald-800 text-sm">Soul Concept Account</h2>
-<p class="font-label text-xs text-zinc-500" data-auth-plan-copy>Starter Member</p>
+<div class="mb-6 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" data-auth-avatar="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHpI71-Y6YjMvI7nLzYJ1r_u4m9I_Z7vH8X_f5y6p7w8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3"/>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline font-bold text-emerald-900 text-sm leading-none" data-auth-name="">Alex Sterling</h2>
+<p class="font-label text-[10px] text-zinc-500 mt-1 uppercase tracking-wider" data-auth-plan="">Senior Research Fellow</p>
+</div>
 </div>
 <nav class="flex flex-col gap-1 flex-grow">
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 active:translate-x-1 transition-transform" href="settings.html">
-<span class="material-symbols-outlined text-lg">settings</span> Settings
-            </a>
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 active:translate-x-1 transition-transform" href="dashboard.html">
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">grid_view</span> Overview
+      </a>
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">menu_book</span> Subjects
+      </a>
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">style</span> Concept Cards
+      </a>
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="{{DATA:SCREEN:SCREEN_21}}">
 <span class="material-symbols-outlined text-lg">military_tech</span> Achievements
-            </a>
-<a class="text-emerald-900 dark:text-emerald-50 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg px-4 py-2 border-l-4 border-emerald-800 font-medium text-sm flex items-center gap-3 active:translate-x-1 transition-transform" href="membership.html">
+      </a>
+<a class="text-emerald-900 dark:text-emerald-50 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg px-4 py-2 border-l-4 border-emerald-800 font-medium text-sm flex items-center gap-3 transition-colors" href="{{DATA:SCREEN:SCREEN_12}}">
 <span class="material-symbols-outlined text-lg">card_membership</span> Subscriptions
-            </a>
+      </a>
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">model_training</span> Exam Simulator
+      </a>
+<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">monitoring</span> Insights
+      </a>
 </nav>
 <div class="mt-auto flex flex-col gap-1 border-t border-zinc-200/50 pt-4">
-<a class="mb-4 academic-gradient text-white rounded-xl py-2.5 px-4 text-sm font-semibold flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-all" data-auth-upgrade href="dashboard.html">Upgrade to Fellow</a>
-<a class="text-zinc-600 px-4 py-2 hover:bg-zinc-100 rounded-lg text-sm flex items-center gap-3" data-auth-logout-trigger href="#">
-<span class="material-symbols-outlined text-lg">help</span> Help Center
-            </a>
+<a class="text-zinc-600 px-4 py-2 hover:bg-zinc-100 rounded-lg text-sm flex items-center gap-3" href="{{DATA:SCREEN:SCREEN_18}}">
+<span class="material-symbols-outlined text-lg">settings</span> Settings
+      </a>
 <a class="text-zinc-600 px-4 py-2 hover:bg-zinc-100 rounded-lg text-sm flex items-center gap-3" href="#">
 <span class="material-symbols-outlined text-lg">logout</span> Logout
-            </a>
+      </a>
 </div>
 </aside>
 <!-- Main Content -->
@@ -141,15 +161,15 @@
                 Curate your <span class="text-secondary italic">intellectual</span> legacy.
             </h1>
 <p class="text-on-surface-variant text-lg max-w-xl font-light leading-relaxed">
-                Choose a plan designed for deep focus, stronger organization, and premium study support.
+                Choose a plan designed for deep focus, advanced archival capabilities, and a global network of scholarly excellence.
             </p>
 </section>
 <!-- Pricing Bento Grid -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-<!-- Tier: Starter -->
-<div class="bg-surface-container-low p-8 flex flex-col relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<!-- Tier: Scholar -->
+<div class="bg-surface-container-low p-8 flex flex-col relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300" data-plan-card="starter">
 <div class="mb-8">
-<h3 class="font-headline text-2xl font-bold text-primary mb-1">Starter</h3>
+<h3 class="font-headline text-2xl font-bold text-primary mb-1">Scholar</h3>
 <p class="text-sm text-on-surface-variant font-medium">The Foundation Plan</p>
 </div>
 <div class="mb-10 flex items-baseline gap-1">
@@ -170,18 +190,18 @@
 <span>Community support forums</span>
 </li>
 </ul>
-<button class="w-full py-4 text-sm font-bold bg-surface-container-lowest text-primary rounded-xl border border-outline-variant hover:bg-white transition-colors">
+<button class="w-full py-4 text-sm font-bold bg-surface-container-lowest text-primary rounded-xl border border-outline-variant hover:bg-white transition-colors" data-plan-action="starter">
                     Current Plan
                 </button>
 </div>
 <!-- Tier: Fellow (Featured) -->
-<div class="bg-primary text-white p-8 flex flex-col relative overflow-hidden shadow-2xl scale-105 z-10">
+<div class="bg-primary text-white p-8 flex flex-col relative overflow-hidden shadow-2xl scale-105 z-10" data-plan-card="fellow">
 <div class="absolute top-0 right-0">
 <div class="bg-secondary text-white text-[10px] font-bold py-1 px-4 tracking-tighter uppercase">Most Professional</div>
 </div>
 <div class="mb-8">
 <h3 class="font-headline text-2xl font-bold mb-1">Fellow</h3>
-<p class="text-emerald-100/80 text-sm font-medium">Advanced Study Core</p>
+<p class="text-emerald-100/80 text-sm font-medium">Advanced Research Core</p>
 </div>
 <div class="mb-10 flex items-baseline gap-1">
 <span class="text-4xl font-extrabold">$24</span>
@@ -205,13 +225,13 @@
 <span>Priority server access during peak hours</span>
 </li>
 </ul>
-<a class="w-full py-4 text-sm font-bold bg-secondary text-white rounded-xl hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center" data-auth-upgrade href="dashboard.html">Upgrade to Fellow</a>
+<a class="w-full py-4 text-sm font-bold bg-secondary text-white rounded-xl hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center" data-auth-upgrade="" data-plan-action="fellow" href="{{DATA:SCREEN:SCREEN_21}}">Upgrade to Fellow</a>
 </div>
 <!-- Tier: Institution -->
-<div class="bg-surface-container-low p-8 flex flex-col relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<div class="bg-surface-container-low p-8 flex flex-col relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300" data-plan-card="institution">
 <div class="mb-8">
 <h3 class="font-headline text-2xl font-bold text-primary mb-1">Institution</h3>
-<p class="text-sm text-on-surface-variant font-medium">For Study Teams</p>
+<p class="text-sm text-on-surface-variant font-medium">For Research Collectives</p>
 </div>
 <div class="mb-10 flex items-baseline gap-1">
 <span class="text-4xl font-extrabold text-primary">$199</span>
@@ -232,10 +252,10 @@
 </li>
 <li class="flex items-start gap-3 text-sm text-on-surface-variant">
 <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
-<span>Dedicated support manager</span>
+<span>Dedicated academic account manager</span>
 </li>
 </ul>
-<button class="w-full py-4 text-sm font-bold bg-surface-container-lowest text-primary rounded-xl border border-outline-variant hover:bg-white transition-colors">
+<button class="w-full py-4 text-sm font-bold bg-surface-container-lowest text-primary rounded-xl border border-outline-variant hover:bg-white transition-colors" data-plan-action="institution">
                     Contact Sales
                 </button>
 </div>
@@ -283,7 +303,7 @@
 <div class="absolute -bottom-6 -left-6 bg-secondary p-6 rounded-xl shadow-xl max-w-[240px]">
 <p class="text-white text-xs font-label uppercase tracking-widest mb-2">Member Impact</p>
 <p class="text-white text-sm font-medium italic">"The 3D visualization suite transformed how we present our longitudinal climate data."</p>
-<p class="text-white/70 text-[10px] mt-4">ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Dr. Elena Rostova, Oxford Research Fellow</p>
+<p class="text-white/70 text-[10px] mt-4">— Dr. Elena Rostova, Oxford Research Fellow</p>
 </div>
 </div>
 </div>
@@ -297,45 +317,47 @@
                     Every transaction is protected by 256-bit SSL encryption. We adhere to GDPR, CCPA, and SOC2 compliance standards to ensure your research data remains private and sovereign.
                 </p>
 <div class="flex flex-wrap justify-center gap-4">
-<a class="academic-gradient px-10 py-5 rounded-xl text-white font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all inline-block" href="dashboard.html">Complete Secure Checkout</a>
+<a class="academic-gradient px-10 py-5 rounded-xl text-white font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all inline-block" data-plan-action="fellow" href="{{DATA:SCREEN:SCREEN_21}}">Complete Secure Checkout</a>
 <button class="bg-surface-container px-10 py-5 rounded-xl text-primary font-bold text-lg hover:bg-surface-container-highest transition-all">
                         Review Safety Protocols
                     </button>
 </div>
 <div class="mt-12 flex items-center justify-center gap-8 opacity-40 grayscale">
-<img alt="Visa" class="h-6" data-alt="visa credit card logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1ADtno-hbQXDziqunh1pk6SYP7kgTE4_bWTgjdehXlJQ7vZ7ZqvUd6Iy_RMZpyTE9yMdOmUnW9dPj-5fOFOfouBFW3xo31kwPddUdJHntCL09j5WmMSvNFJOo9o9L8WACuskWK4dfEqL7kxMyNvJdPSnEByKXu7UfZNtYb3nGf_01KvcYA4szn3xnrzSnQcLAS_wcfwyBDMY8NFJZrobd8oC4ElOssRc7Jgob2cOHxAV3U8mi3oANqmJnPl1RCU3kQOG6lXy0amGh"/>
-<img alt="Mastercard" class="h-6" data-alt="mastercard credit card logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFdt0f3Fa1wUpK4ew5BIHFzT6gZOFKWwK5zgm7R6MgupJKu2h_t3wt_zLnFK5lCS5kWT7SYZ7KZ1K-EEGzDDOoMcRokWUs3Zqddbgvdy0ukU4RGli3QZQEA8beix5rOIil2Z8V55S-1RQv4HjnCewtpA6fX6gCyXUf3OsSOnuhmd13VagsC7Z17r_eagJesYRf7ZIZK4OFqOxxKJ-INlnYTbZo0N31gaPc0BNEVuX6vmIRcYbw0lbQGkOwiPWlyr2JpDh2S3MZhVjZ"/>
-<img alt="Stripe" class="h-6" data-alt="stripe payments logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB7V6MHA-7q3HqKO661SxdhzURlVZ7gEwDt-VU7GsYH_NhLDaWyCweHRrC6Fr-hmM___LWItj2W_u7iWTE0tBb8MKxOygy-G_PhHW2ajg6JmSFqnKHBrrrHwQok-5eqCCsKO5Jw5Vd2kHQUhMnJP2y10y26Su7D5-2sQ3gQ_8cqiJyMMjihrHg6bkgX3924TcYravvsvwUlGqL3AuVr7s9-ujOmNlbNtqICSDRgtBQPKQrJwRaDhq7jl8-Hatf2sSTxpA_Lv0ONAje"/>
-<img alt="ApplePay" class="h-6" data-alt="apple pay logo minimalist icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWnXGuRCN-Zwc0QSFPEUCOF58pImueCJ56GYMIvEmw8BonKJj2OyHL3jBGKaRdJrlChzjFzTeq3iBSECQNQqP6aeZSFjb_7FINWE4uLNU-GD-BMjDqVVNBr1HH0j_MCQLefGZbFv8jOsCFLj4emLVZki7XKbMTh4MAYb5dcLqGSLwWjnQBavODgqaRVLxmK3j5neERwj81uoYvWHQfMTmMFdd-U4JWx-ODChEFF8ANwixrRVh44ju6TJb1x3yIhgiJXoCcmJBNRgTH"/>
+<img alt="Visa" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1ADtno-hbQXDziqunh1pk6SYP7kgTE4_bWTgjdehXlJQ7vZ7ZqvUd6Iy_RMZpyTE9yMdOmUnW9dPj-5fOFOfouBFW3xo31kwPddUdJHntCL09j5WmMSvNFJOo9o9L8WACuskWK4dfEqL7kxMyNvJdPSnEByKXu7UfZNtYb3nGf_01KvcYA4szn3xnrzSnQcLAS_wcfwyBDMY8NFJZrobd8oC4ElOssRc7Jgob2cOHxAV3U8mi3oANqmJnPl1RCU3kQOG6lXy0amGh"/>
+<img alt="Mastercard" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFdt0f3Fa1wUpK4ew5BIHFzT6gZOFKWwK5zgm7R6MgupJKu2h_t3wt_zLnFK5lCS5kWT7SYZ7KZ1K-EEGzDDOoMcRokWUs3Zqddbgvdy0ukU4RGli3QZQEA8beix5rOIil2Z8V55S-1RQv4HjnCewtpA6fX6gCyXUf3OsSOnuhmd13VagsC7Z17r_eagJesYRf7ZIZK4OFqOxxKJ-INlnYTbZo0N31gaPc0BNEVuX6vmIRcYbw0lbQGkOwiPWlyr2JpDh2S3MZhVjZ"/>
+<img alt="Stripe" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB7V6MHA-7q3HqKO661SxdhzURlVZ7gEwDt-VU7GsYH_NhLDaWyCweHRrC6Fr-hmM___LWItj2W_u7iWTE0tBb8MKxOygy-G_PhHW2ajg6JmSFqnKHBrrrHwQok-5eqCCsKO5Jw5Vd2kHQUhMnJP2y10y26Su7D5-2sQ3gQ_8cqiJyMMjihrHg6bkgX3924TcYravvsvwUlGqL3AuVr7s9-ujOmNlbNtqICSDRgtBQPKQrJwRaDhq7jl8-Hatf2sSTxpA_Lv0ONAje"/>
+<img alt="ApplePay" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWnXGuRCN-Zwc0QSFPEUCOF58pImueCJ56GYMIvEmw8BonKJj2OyHL3jBGKaRdJrlChzjFzTeq3iBSECQNQqP6aeZSFjb_7FINWE4uLNU-GD-BMjDqVVNBr1HH0j_MCQLefGZbFv8jOsCFLj4emLVZki7XKbMTh4MAYb5dcLqGSLwWjnQBavODgqaRVLxmK3j5neERwj81uoYvWHQfMTmMFdd-U4JWx-ODChEFF8ANwixrRVh44ju6TJb1x3yIhgiJXoCcmJBNRgTH"/>
 </div>
 </div>
 </section>
+<p class="mt-10 text-sm font-semibold text-on-surface-variant" data-account-status=""></p>
 </main>
 <!-- Bottom Navigation (Mobile Only) -->
 <nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low/80 backdrop-blur-md px-6 h-16 flex items-center justify-between z-50">
-<a class="flex flex-col items-center gap-1 text-zinc-500" href="library.html">
+<a class="flex flex-col items-center gap-1 text-zinc-500" href="{{DATA:SCREEN:SCREEN_33}}">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-zinc-500" href="dashboard.html">
+<a class="flex flex-col items-center gap-1 text-zinc-500" href="{{DATA:SCREEN:SCREEN_21}}">
 <span class="material-symbols-outlined">hub</span>
 <span class="text-[10px] font-label">Explore</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-emerald-900 font-bold" href="membership.html">
+<a class="flex flex-col items-center gap-1 text-emerald-900 font-bold" href="{{DATA:SCREEN:SCREEN_12}}">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">card_membership</span>
 <span class="text-[10px] font-label">Plans</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-zinc-500" href="settings.html">
+<a class="flex flex-col items-center gap-1 text-zinc-500" href="{{DATA:SCREEN:SCREEN_18}}">
 <span class="material-symbols-outlined">settings</span>
 <span class="text-[10px] font-label">Account</span>
 </a>
-</nav>  <script src="/supabase-client.js?v=20260312a"></script>
-  <script src="/supabase-auth.js?v=20260326h"></script>
-  <script src="/vercel-speed-insights.js?v=20260313a"></script>
-  <script src="focus-mode.js?v=20260321d"></script>
-  <script src="lyne-widget.js?v=20260321c"></script>
-  <script src="app.js?v=20260326h"></script>
-  <script src="auth-profile-sync.js?v=20260324a"></script>
-  <script src="assets/site.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+</nav>
+<script defer src="assets/stitch-router.js"></script>
+<script src="supabase-client.js?v=20260326a"></script>
+<script src="supabase-auth.js?v=20260326a"></script>
+<script src="auth-profile-sync.js?v=20260326a"></script>
+<script src="assets/account-pages.js?v=20260326a"></script>
+<script src="lyne-widget.js?v=20260321c"></script>
+<script src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+
