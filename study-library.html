@@ -367,6 +367,113 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
         window.addEventListener('scroll', update, { passive: true })
       })()
     </script>
+    <script>
+      (function () {
+        var shortcutsMounted = false
+
+        function normalize(text) {
+          return (text || '').replace(/\s+/g, ' ').trim().toLowerCase()
+        }
+
+        function findClickableByText(text) {
+          var target = normalize(text)
+          var nodes = document.querySelectorAll('button, a, div')
+          for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i]
+            if (normalize(node.textContent || '') !== target) continue
+            var clickable = node.closest('.cursor-pointer') || node.closest('button') || node.closest('a') || node
+            if (clickable) return clickable
+          }
+          return null
+        }
+
+        function openSubject(label) {
+          var card = findClickableByText(label)
+          if (!card) return false
+          card.click()
+          return true
+        }
+
+        function mountShortcuts() {
+          if (shortcutsMounted) return true
+          if (!document.body || !document.getElementById('root')) return false
+
+          var tray = document.createElement('div')
+          tray.id = 'science-library-shortcuts'
+          tray.setAttribute('aria-label', 'Science library shortcuts')
+          tray.style.position = 'fixed'
+          tray.style.right = '14px'
+          tray.style.bottom = '14px'
+          tray.style.zIndex = '9998'
+          tray.style.display = 'flex'
+          tray.style.flexWrap = 'wrap'
+          tray.style.gap = '8px'
+          tray.style.maxWidth = 'min(92vw, 360px)'
+          tray.style.justifyContent = 'flex-end'
+
+          ;[
+            { label: 'Biology', target: 'Biology: Biodiversity' },
+            { label: 'Chemistry', target: 'Chemistry: Matter' },
+            { label: 'Electricity', target: 'Physics: Electricity' },
+            { label: 'Space', target: 'Space Science' }
+          ].forEach(function (item) {
+            var button = document.createElement('button')
+            button.type = 'button'
+            button.textContent = item.label
+            button.style.border = '1px solid rgba(18, 64, 47, 0.18)'
+            button.style.background = 'rgba(255,255,255,0.94)'
+            button.style.color = '#143126'
+            button.style.borderRadius = '999px'
+            button.style.padding = '8px 12px'
+            button.style.font = '700 0.76rem/1.1 Inter, system-ui, sans-serif'
+            button.style.boxShadow = '0 12px 24px rgba(12,18,14,0.12)'
+            button.style.cursor = 'pointer'
+            button.addEventListener('click', function () {
+              openSubject(item.target)
+            })
+            tray.appendChild(button)
+          })
+
+          document.body.appendChild(tray)
+          shortcutsMounted = true
+          return true
+        }
+
+        function tryOpenRequestedSubject() {
+          var params = new URLSearchParams(window.location.search)
+          var requested = normalize(params.get('subject') || window.location.hash.replace(/^#/, ''))
+          if (!requested) return true
+
+          var target = ''
+          if (requested === 'physics' || requested === 'electricity') target = 'Physics: Electricity'
+          if (requested === 'biology') target = 'Biology: Biodiversity'
+          if (requested === 'chemistry') target = 'Chemistry: Matter'
+          if (requested === 'space') target = 'Space Science'
+          if (!target) return true
+
+          return openSubject(target)
+        }
+
+        function init() {
+          mountShortcuts()
+          if (tryOpenRequestedSubject()) return
+
+          var attempts = 0
+          var obs = new MutationObserver(function () {
+            attempts += 1
+            mountShortcuts()
+            if (tryOpenRequestedSubject() || attempts > 120) obs.disconnect()
+          })
+          obs.observe(document.body, { childList: true, subtree: true })
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init)
+        } else {
+          init()
+        }
+      })()
+    </script>
   
   <style>
     .exit-btn {
