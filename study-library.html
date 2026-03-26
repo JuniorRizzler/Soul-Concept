@@ -377,10 +377,12 @@ html.compact-mobile .pro-tips-compact{margin-top:.4rem}html.compact-mobile .pro-
 
         function findClickableByText(text) {
           var target = normalize(text)
-          var nodes = document.querySelectorAll('button, a, div')
+          var nodes = document.querySelectorAll('h1, h2, h3, h4, button, a, div, span, p')
           for (var i = 0; i < nodes.length; i++) {
             var node = nodes[i]
-            if (normalize(node.textContent || '') !== target) continue
+            var content = normalize(node.textContent || '')
+            if (!content) continue
+            if (content !== target && !content.includes(target)) continue
             var clickable = node.closest('.cursor-pointer') || node.closest('button') || node.closest('a') || node
             if (clickable) return clickable
           }

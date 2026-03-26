@@ -75,7 +75,7 @@
     const titleText = normalize((card.querySelector("h3") || {}).textContent || "");
 
     if (gradeText.includes("grade 9") && titleText.includes("mathematics")) return "math/index.html";
-    if (gradeText.includes("grade 9") && titleText.includes("science")) return "study-library.html";
+    if (gradeText.includes("grade 9") && titleText.includes("science")) return "study-library.html#physics";
     if (gradeText.includes("grade 10") && titleText.includes("mathematics")) return "grade-10-math.html";
     if (gradeText.includes("grade 10") && titleText.includes("geography")) return "geography-library.html";
     if (gradeText.includes("grade 10")) return "grade-10.html";
@@ -104,7 +104,7 @@
 
       const galleries = Array.from(document.querySelectorAll(".relative.h-48.rounded-3xl.overflow-hidden.group.cursor-pointer"));
       if (galleries[0]) galleries[0].addEventListener("click", () => { location.href = "grade-11.html"; });
-      if (galleries[1]) galleries[1].addEventListener("click", () => { location.href = "study-library.html"; });
+      if (galleries[1]) galleries[1].addEventListener("click", () => { location.href = "study-library.html#physics"; });
     }
   }
 
