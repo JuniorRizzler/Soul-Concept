@@ -28432,7 +28432,8 @@
     const [currentFlashcard, setCurrentFlashcard] = (0, import_react3.useState)(0);
     const [isFlipped, setIsFlipped] = (0, import_react3.useState)(false);
     const [flashcardStats, setFlashcardStats] = (0, import_react3.useState)({ known: 0, learning: 0 });
-    const [showFeatureHighlights, setShowFeatureHighlights] = (0, import_react3.useState)(true);
+    const [showFeatureHighlights, setShowFeatureHighlights] = (0, import_react3.useState)(false);
+    const internalAIAssistantEnabled = false;
     const [unlockedAchievements, setUnlockedAchievements] = (0, import_react3.useState)(/* @__PURE__ */ new Set());
     const [newAchievement, setNewAchievement] = (0, import_react3.useState)(null);
     const [showAchievements, setShowAchievements] = (0, import_react3.useState)(false);
@@ -29497,7 +29498,7 @@ Student question: ${userMessage}`
       return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "h-screen flex flex-col bg-gradient-to-br from-[#0a0a12] to-[#111118]", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AchievementPopup, { achievement: newAchievement }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AchievementsModal, {}),
-        showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+        internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -29556,7 +29557,7 @@ Student question: ${userMessage}`
             )
           ] }) })
         ] }),
-        !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+        internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: () => setShowAIAssistant(true),
@@ -29665,7 +29666,7 @@ Student question: ${userMessage}`
       const progress = (currentFlashcard + 1) / selectedSection.flashcards.length * 100;
       return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "min-h-screen bg-[#f5f4f0] soul-grid", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SoulStyles, {}),
-        showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+        internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -29724,7 +29725,7 @@ Student question: ${userMessage}`
             )
           ] }) })
         ] }),
-        !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+        internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: () => setShowAIAssistant(true),
@@ -29890,7 +29891,7 @@ Student question: ${userMessage}`
       const progress = (currentQuestion + 1) / currentQuiz.quiz.length * 100;
       return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "min-h-screen bg-[#f5f4f0] soul-grid", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SoulStyles, {}),
-        showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+        internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -29949,7 +29950,7 @@ Student question: ${userMessage}`
             )
           ] }) })
         ] }),
-        !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+        internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: () => setShowAIAssistant(true),
@@ -30086,7 +30087,7 @@ Student question: ${userMessage}`
       if (hasQuiz && !currentQuiz) {
         return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "min-h-screen bg-[#f5f4f0] soul-grid", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SoulStyles, {}),
-          showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+          internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -30145,7 +30146,7 @@ Student question: ${userMessage}`
               )
             ] }) })
           ] }),
-          !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+          internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
             "button",
             {
               onClick: () => setShowAIAssistant(true),
@@ -30644,8 +30645,8 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-teal-50 rounded-xl", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold flex-shrink-0", children: "5" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-semibold text-gray-800 mb-1", children: "Use AI Assistant & Study Planner" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700 text-sm", children: "Ask L.Y.N.E AI for help (blue sparkle button), and use the Study Planner to schedule sessions with automatic time tracking." })
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-semibold text-gray-800 mb-1", children: "Use Annotation & Study Planner" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700 text-sm", children: "Use the annotation tools for quick markup, and the Study Planner to schedule sessions with automatic time tracking." })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-purple-50 rounded-xl", children: [
@@ -30668,9 +30669,9 @@ Student question: ${userMessage}`
                   ' Click "+ Add to Plan" on sections to build your custom schedule with time estimates'
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-                  "\u{1F916} ",
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "AI Help:" }),
-                  " Stuck? Ask L.Y.N.E AI (blue sparkle button) to explain concepts or create practice questions"
+                  "\u270D\uFE0F ",
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Annotation:" }),
+                  " Mark up diagrams and notes directly while you study difficult sections"
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
                   "\u{1F4F1} ",
@@ -30737,10 +30738,10 @@ Student question: ${userMessage}`
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-100 hover:border-blue-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-5 h-5 text-blue-500" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "L.Y.N.E AI Assistant" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "Annotation Tools" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Chat with AI for explanations, practice questions, and help" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-blue-600 font-semibold", children: "\u2192 Click the blue sparkle button (bottom-right corner)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Mark diagrams, sketch ideas, and write quick reminders while you study" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-blue-600 font-semibold", children: "\u2192 Use the annotation controls on the page" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-indigo-100 hover:border-indigo-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -30796,9 +30797,9 @@ Student question: ${userMessage}`
             " to organize sessions with automatic time tracking"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90 mb-2", children: [
-            "\u2022 Ask ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "L.Y.N.E AI" }),
-            " to explain tricky concepts or create custom practice questions"
+            "\u2022 Use ",
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "annotation tools" }),
+            " to mark diagrams and keep quick study notes in context"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90", children: [
             "\u2022 Enable ",
@@ -30814,7 +30815,7 @@ Student question: ${userMessage}`
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AchievementsModal, {}),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(StudyPlannerModal, {}),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PremiumInterestModal, {}),
-      showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+      internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -30873,7 +30874,7 @@ Student question: ${userMessage}`
           )
         ] }) })
       ] }),
-      !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+      internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
         "button",
         {
           onClick: () => setShowAIAssistant(true),

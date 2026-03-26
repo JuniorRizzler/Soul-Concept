@@ -7430,7 +7430,8 @@ export default function ScienceStudyLibrary() {
   const [flashcardStats, setFlashcardStats] = useState({ known: 0, learning: 0 });
   
   // Feature highlights visibility
-  const [showFeatureHighlights, setShowFeatureHighlights] = useState(true);
+  const [showFeatureHighlights, setShowFeatureHighlights] = useState(false);
+  const internalAIAssistantEnabled = false;
   
   // Achievement tracking
   const [unlockedAchievements, setUnlockedAchievements] = useState(new Set());
@@ -8793,7 +8794,7 @@ Student question: ${userMessage}`
         <AchievementsModal />
         
         {/* L.Y.N.E AI Assistant Widget */}
-        {showAIAssistant && (
+        {internalAIAssistantEnabled && showAIAssistant && (
           <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -8878,7 +8879,7 @@ Student question: ${userMessage}`
         )}
 
         {/* L.Y.N.E AI Assistant Toggle Button */}
-        {!showAIAssistant && (
+        {internalAIAssistantEnabled && !showAIAssistant && (
           <button
             onClick={() => setShowAIAssistant(true)}
             className="fixed bottom-6 right-6 group z-50"
@@ -9043,7 +9044,7 @@ Student question: ${userMessage}`
       <div className="min-h-screen bg-[#f5f4f0] soul-grid">
       <SoulStyles />
         {/* L.Y.N.E AI Assistant Widget */}
-        {showAIAssistant && (
+        {internalAIAssistantEnabled && showAIAssistant && (
           <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -9128,7 +9129,7 @@ Student question: ${userMessage}`
         )}
 
         {/* L.Y.N.E AI Assistant Toggle Button */}
-        {!showAIAssistant && (
+        {internalAIAssistantEnabled && !showAIAssistant && (
           <button
             onClick={() => setShowAIAssistant(true)}
             className="fixed bottom-6 right-6 group z-50"
@@ -9296,7 +9297,7 @@ Student question: ${userMessage}`
       <div className="min-h-screen bg-[#f5f4f0] soul-grid">
       <SoulStyles />
         {/* L.Y.N.E AI Assistant Widget */}
-        {showAIAssistant && (
+        {internalAIAssistantEnabled && showAIAssistant && (
           <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -9381,7 +9382,7 @@ Student question: ${userMessage}`
         )}
 
         {/* L.Y.N.E AI Assistant Toggle Button */}
-        {!showAIAssistant && (
+        {internalAIAssistantEnabled && !showAIAssistant && (
           <button
             onClick={() => setShowAIAssistant(true)}
             className="fixed bottom-6 right-6 group z-50"
@@ -9546,7 +9547,7 @@ Student question: ${userMessage}`
         <div className="min-h-screen bg-[#f5f4f0] soul-grid">
       <SoulStyles />
           {/* L.Y.N.E AI Assistant Widget */}
-          {showAIAssistant && (
+          {internalAIAssistantEnabled && showAIAssistant && (
             <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
               {/* Header */}
               <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -9631,7 +9632,7 @@ Student question: ${userMessage}`
           )}
 
           {/* L.Y.N.E AI Assistant Toggle Button */}
-          {!showAIAssistant && (
+          {internalAIAssistantEnabled && !showAIAssistant && (
             <button
               onClick={() => setShowAIAssistant(true)}
               className="fixed bottom-6 right-6 group z-50"
@@ -10219,8 +10220,8 @@ Student question: ${userMessage}`
                 <div className="flex items-start gap-3 p-4 bg-teal-50 rounded-xl">
                   <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Use AI Assistant & Study Planner</h3>
-                    <p className="text-gray-700 text-sm">Ask L.Y.N.E AI for help (blue sparkle button), and use the Study Planner to schedule sessions with automatic time tracking.</p>
+                    <h3 className="font-semibold text-gray-800 mb-1">Use Annotation & Study Planner</h3>
+                    <p className="text-gray-700 text-sm">Use the annotation tools for quick markup, and the Study Planner to schedule sessions with automatic time tracking.</p>
                   </div>
                 </div>
 
@@ -10241,7 +10242,7 @@ Student question: ${userMessage}`
                   <h3 className="font-bold mb-2">Pro Tips for Efficient Studying</h3>
                   <div className="space-y-2 text-white/90 text-sm">
                     <p>💡 <strong>Study Planner:</strong> Click "+ Add to Plan" on sections to build your custom schedule with time estimates</p>
-                    <p>🤖 <strong>AI Help:</strong> Stuck? Ask L.Y.N.E AI (blue sparkle button) to explain concepts or create practice questions</p>
+                    <p>✍️ <strong>Annotation:</strong> Mark up diagrams and notes directly while you study difficult sections</p>
                     <p>📱 <strong>Split Screen:</strong> Use dual-panel view to reference notes while taking quizzes simultaneously</p>
                     <p>🏆 <strong>Achievements:</strong> Unlock all 10 badges by completing sections and maintaining study streaks</p>
                   </div>
@@ -10316,17 +10317,17 @@ Student question: ${userMessage}`
       </div>
 
       <div className="grid md:grid-cols-3 gap-4">
-        {/* Feature 1: AI Assistant */}
+        {/* Feature 1: Annotation */}
         <div className="bg-white rounded-xl p-4 border-2 border-blue-100 hover:border-blue-300 transition-all hover:shadow-md">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="w-5 h-5 text-blue-500" />
-            <h3 className="font-bold text-gray-800">L.Y.N.E AI Assistant</h3>
+            <h3 className="font-bold text-gray-800">Annotation Tools</h3>
           </div>
           <p className="text-sm text-gray-600 mb-2">
-            Chat with AI for explanations, practice questions, and help
+            Mark diagrams, sketch ideas, and write quick reminders while you study
           </p>
           <div className="text-xs text-blue-600 font-semibold">
-            → Click the blue sparkle button (bottom-right corner)
+            → Use the annotation controls on the page
           </div>
         </div>
 
@@ -10415,7 +10416,7 @@ Student question: ${userMessage}`
               • Use the <span className="font-bold">Study Planner</span> to organize sessions with automatic time tracking
             </p>
             <p className="text-sm text-white/90 mb-2">
-              • Ask <span className="font-bold">L.Y.N.E AI</span> to explain tricky concepts or create custom practice questions
+              • Use <span className="font-bold">annotation tools</span> to mark diagrams and keep quick study notes in context
             </p>
             <p className="text-sm text-white/90">
               • Enable <span className="font-bold">Split Screen</span> to quiz yourself while referencing notes simultaneously
@@ -10435,7 +10436,7 @@ Student question: ${userMessage}`
       <PremiumInterestModal />
       
       {/* AI Assistant Widget */}
-      {showAIAssistant && (
+      {internalAIAssistantEnabled && showAIAssistant && (
         <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -10520,7 +10521,7 @@ Student question: ${userMessage}`
       )}
 
       {/* L.Y.N.E AI Assistant Toggle Button */}
-      {!showAIAssistant && (
+      {internalAIAssistantEnabled && !showAIAssistant && (
         <button
           onClick={() => setShowAIAssistant(true)}
           className="fixed bottom-6 right-6 group z-50"
