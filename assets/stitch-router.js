@@ -1,6 +1,6 @@
 (function () {
   const gradeLinks = [
-    { label: "Grade 9", href: "grade-9.html" },
+    { label: "Grade 9", href: "grade-9-advanced.html" },
     { label: "Grade 10", href: "grade-10.html" },
     { label: "Grade 11", href: "grade-11.html" },
     { label: "Grade 12", href: "grade-12.html" }
@@ -13,8 +13,8 @@
     ["library", "grade-9.html"],
     ["subjects", "grade-9.html"],
     ["subject library", "grade-9.html"],
-    ["grades", "grade-9.html"],
-    ["grade 9", "grade-9.html"],
+    ["grades", "grade-9-advanced.html"],
+    ["grade 9", "grade-9-advanced.html"],
     ["grade 10", "grade-10.html"],
     ["grade 11", "grade-11.html"],
     ["grade 12", "grade-12.html"],
@@ -75,7 +75,7 @@
     const titleText = normalize((card.querySelector("h3") || {}).textContent || "");
 
     if (gradeText.includes("grade 9") && titleText.includes("mathematics")) return "math/index.html";
-    if (gradeText.includes("grade 9") && titleText.includes("science")) return "study-library.html#physics";
+    if (gradeText.includes("grade 9") && titleText.includes("science")) return "study-library.html";
     if (gradeText.includes("grade 10") && titleText.includes("mathematics")) return "grade-10-math.html";
     if (gradeText.includes("grade 10") && titleText.includes("geography")) return "geography-library.html";
     if (gradeText.includes("grade 10")) return "grade-10.html";
@@ -104,7 +104,7 @@
 
       const galleries = Array.from(document.querySelectorAll(".relative.h-48.rounded-3xl.overflow-hidden.group.cursor-pointer"));
       if (galleries[0]) galleries[0].addEventListener("click", () => { location.href = "grade-11.html"; });
-      if (galleries[1]) galleries[1].addEventListener("click", () => { location.href = "study-library.html#physics"; });
+      if (galleries[1]) galleries[1].addEventListener("click", () => { location.href = "study-library.html"; });
     }
   }
 
@@ -166,7 +166,16 @@
     wrapper.appendChild(anchor);
     wrapper.appendChild(menu);
 
+    let closeTimer = null;
+
+    function clearCloseTimer() {
+      if (!closeTimer) return;
+      window.clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
     function openMenu() {
+      clearCloseTimer();
       menu.style.display = "block";
       anchor.setAttribute("aria-expanded", "true");
     }
@@ -176,6 +185,11 @@
       anchor.setAttribute("aria-expanded", "false");
     }
 
+    function scheduleCloseMenu() {
+      clearCloseTimer();
+      closeTimer = window.setTimeout(closeMenu, 220);
+    }
+
     anchor.addEventListener("click", (event) => {
       event.preventDefault();
       if (menu.style.display === "block") closeMenu();
@@ -183,7 +197,9 @@
     });
 
     wrapper.addEventListener("mouseenter", openMenu);
-    wrapper.addEventListener("mouseleave", closeMenu);
+    wrapper.addEventListener("mouseleave", scheduleCloseMenu);
+    menu.addEventListener("mouseenter", openMenu);
+    menu.addEventListener("mouseleave", scheduleCloseMenu);
     document.addEventListener("click", (event) => {
       if (!wrapper.contains(event.target)) closeMenu();
     });
@@ -203,9 +219,9 @@
       if (!target) return;
       button.dataset.stitchRouteBound = "true";
       button.style.cursor = "pointer";
-      if (target === "grades") {
+        if (target === "grades") {
         button.addEventListener("click", () => {
-          location.href = "grade-9.html";
+          location.href = "grade-9-advanced.html";
         });
         return;
       }

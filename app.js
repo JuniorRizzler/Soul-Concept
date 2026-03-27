@@ -67,6 +67,9 @@
 
   function suppressScienceBundleLyneAssistant() {
     if (currentPage !== 'study-library.html' || !document.body) return
+    // The science library is now a React app. Removing nodes from inside its tree
+    // causes React reconciliation to crash on subject navigation.
+    return
 
     function removeDuplicateAssistant() {
       document.querySelectorAll('button, div').forEach(function (node) {

@@ -25,9 +25,9 @@
     mod
   ));
 
-  // acelabs/grade9-science-vite/node_modules/react/cjs/react.development.js
+  // node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react/cjs/react.development.js"(exports, module) {
+    "node_modules/react/cjs/react.development.js"(exports, module) {
       "use strict";
       (function() {
         function defineDeprecationWarning(methodName, info) {
@@ -997,9 +997,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react/index.js
+  // node_modules/react/index.js
   var require_react = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react/index.js"(exports, module) {
+    "node_modules/react/index.js"(exports, module) {
       "use strict";
       if (false) {
         module.exports = null;
@@ -1009,9 +1009,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/scheduler/cjs/scheduler.development.js
+  // node_modules/scheduler/cjs/scheduler.development.js
   var require_scheduler_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+    "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
       "use strict";
       (function() {
         function performWorkUntilDeadline() {
@@ -1268,9 +1268,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/scheduler/index.js
+  // node_modules/scheduler/index.js
   var require_scheduler = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/scheduler/index.js"(exports, module) {
+    "node_modules/scheduler/index.js"(exports, module) {
       "use strict";
       if (false) {
         module.exports = null;
@@ -1280,9 +1280,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom.development.js
+  // node_modules/react-dom/cjs/react-dom.development.js
   var require_react_dom_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom.development.js"(exports) {
+    "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
       "use strict";
       (function() {
         function noop() {
@@ -1524,9 +1524,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/index.js
+  // node_modules/react-dom/index.js
   var require_react_dom = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/index.js"(exports, module) {
+    "node_modules/react-dom/index.js"(exports, module) {
       "use strict";
       if (false) {
         checkDCE();
@@ -1537,9 +1537,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom-client.development.js
+  // node_modules/react-dom/cjs/react-dom-client.development.js
   var require_react_dom_client_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/cjs/react-dom-client.development.js"(exports) {
+    "node_modules/react-dom/cjs/react-dom-client.development.js"(exports) {
       "use strict";
       (function() {
         function findHook(fiber, id) {
@@ -21436,9 +21436,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react-dom/client.js
+  // node_modules/react-dom/client.js
   var require_client = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react-dom/client.js"(exports, module) {
+    "node_modules/react-dom/client.js"(exports, module) {
       "use strict";
       if (false) {
         checkDCE();
@@ -21449,9 +21449,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react/cjs/react-jsx-runtime.development.js
+  // node_modules/react/cjs/react-jsx-runtime.development.js
   var require_react_jsx_runtime_development = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
+    "node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
       "use strict";
       (function() {
         function getComponentNameFromType(type) {
@@ -21706,9 +21706,9 @@
     }
   });
 
-  // acelabs/grade9-science-vite/node_modules/react/jsx-runtime.js
+  // node_modules/react/jsx-runtime.js
   var require_jsx_runtime = __commonJS({
-    "acelabs/grade9-science-vite/node_modules/react/jsx-runtime.js"(exports, module) {
+    "node_modules/react/jsx-runtime.js"(exports, module) {
       "use strict";
       if (false) {
         module.exports = null;
@@ -21718,17 +21718,17 @@
     }
   });
 
-  // acelabs/grade9-science-vite/science-study-entry.tsx
+  // science-study-entry.tsx
   var import_react4 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
-  // acelabs/grade9-science-vite/science_study_redesign.tsx
+  // science_study_redesign.tsx
   var import_react3 = __toESM(require_react(), 1);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/createLucideIcon.js
+  // node_modules/lucide-react/dist/esm/createLucideIcon.js
   var import_react2 = __toESM(require_react());
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/shared/src/utils.js
+  // node_modules/lucide-react/dist/esm/shared/src/utils.js
   var toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
   var toCamelCase = (string) => string.replace(
     /^([A-Z])|[\s-_]+(\w)/g,
@@ -21749,10 +21749,10 @@
     }
   };
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/Icon.js
+  // node_modules/lucide-react/dist/esm/Icon.js
   var import_react = __toESM(require_react());
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/defaultAttributes.js
+  // node_modules/lucide-react/dist/esm/defaultAttributes.js
   var defaultAttributes = {
     xmlns: "http://www.w3.org/2000/svg",
     width: 24,
@@ -21765,7 +21765,7 @@
     strokeLinejoin: "round"
   };
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/Icon.js
+  // node_modules/lucide-react/dist/esm/Icon.js
   var Icon = (0, import_react.forwardRef)(
     ({
       color = "currentColor",
@@ -21796,7 +21796,7 @@
     )
   );
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/createLucideIcon.js
+  // node_modules/lucide-react/dist/esm/createLucideIcon.js
   var createLucideIcon = (iconName, iconNode) => {
     const Component = (0, import_react2.forwardRef)(
       ({ className, ...props }, ref) => (0, import_react2.createElement)(Icon, {
@@ -21814,14 +21814,14 @@
     return Component;
   };
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/arrow-left.js
+  // node_modules/lucide-react/dist/esm/icons/arrow-left.js
   var __iconNode = [
     ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
     ["path", { d: "M19 12H5", key: "x3x0zl" }]
   ];
   var ArrowLeft = createLucideIcon("arrow-left", __iconNode);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/award.js
+  // node_modules/lucide-react/dist/esm/icons/award.js
   var __iconNode2 = [
     [
       "path",
@@ -21834,7 +21834,7 @@
   ];
   var Award = createLucideIcon("award", __iconNode2);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/beaker.js
+  // node_modules/lucide-react/dist/esm/icons/beaker.js
   var __iconNode3 = [
     ["path", { d: "M4.5 3h15", key: "c7n0jr" }],
     ["path", { d: "M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3", key: "m1uhx7" }],
@@ -21842,7 +21842,7 @@
   ];
   var Beaker = createLucideIcon("beaker", __iconNode3);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/book-open.js
+  // node_modules/lucide-react/dist/esm/icons/book-open.js
   var __iconNode4 = [
     ["path", { d: "M12 7v14", key: "1akyts" }],
     [
@@ -21855,7 +21855,7 @@
   ];
   var BookOpen = createLucideIcon("book-open", __iconNode4);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/brain.js
+  // node_modules/lucide-react/dist/esm/icons/brain.js
   var __iconNode5 = [
     ["path", { d: "M12 18V5", key: "adv99a" }],
     ["path", { d: "M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4", key: "1e3is1" }],
@@ -21868,22 +21868,22 @@
   ];
   var Brain = createLucideIcon("brain", __iconNode5);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/chevron-right.js
+  // node_modules/lucide-react/dist/esm/icons/chevron-right.js
   var __iconNode6 = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
   var ChevronRight = createLucideIcon("chevron-right", __iconNode6);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/circle-check-big.js
+  // node_modules/lucide-react/dist/esm/icons/circle-check-big.js
   var __iconNode7 = [
     ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
     ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
   ];
   var CircleCheckBig = createLucideIcon("circle-check-big", __iconNode7);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/circle.js
+  // node_modules/lucide-react/dist/esm/icons/circle.js
   var __iconNode8 = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
   var Circle = createLucideIcon("circle", __iconNode8);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/clipboard-list.js
+  // node_modules/lucide-react/dist/esm/icons/clipboard-list.js
   var __iconNode9 = [
     ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
     [
@@ -21900,7 +21900,7 @@
   ];
   var ClipboardList = createLucideIcon("clipboard-list", __iconNode9);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/file-text.js
+  // node_modules/lucide-react/dist/esm/icons/file-text.js
   var __iconNode10 = [
     ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
     ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
@@ -21910,7 +21910,7 @@
   ];
   var FileText = createLucideIcon("file-text", __iconNode10);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/flame.js
+  // node_modules/lucide-react/dist/esm/icons/flame.js
   var __iconNode11 = [
     [
       "path",
@@ -21922,7 +21922,7 @@
   ];
   var Flame = createLucideIcon("flame", __iconNode11);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/globe.js
+  // node_modules/lucide-react/dist/esm/icons/globe.js
   var __iconNode12 = [
     ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
     ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
@@ -21930,7 +21930,7 @@
   ];
   var Globe = createLucideIcon("globe", __iconNode12);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/leaf.js
+  // node_modules/lucide-react/dist/esm/icons/leaf.js
   var __iconNode13 = [
     [
       "path",
@@ -21943,7 +21943,7 @@
   ];
   var Leaf = createLucideIcon("leaf", __iconNode13);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/lightbulb.js
+  // node_modules/lucide-react/dist/esm/icons/lightbulb.js
   var __iconNode14 = [
     [
       "path",
@@ -21957,14 +21957,14 @@
   ];
   var Lightbulb = createLucideIcon("lightbulb", __iconNode14);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/search.js
+  // node_modules/lucide-react/dist/esm/icons/search.js
   var __iconNode15 = [
     ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
     ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
   ];
   var Search = createLucideIcon("search", __iconNode15);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/sparkles.js
+  // node_modules/lucide-react/dist/esm/icons/sparkles.js
   var __iconNode16 = [
     [
       "path",
@@ -21979,7 +21979,7 @@
   ];
   var Sparkles = createLucideIcon("sparkles", __iconNode16);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/star.js
+  // node_modules/lucide-react/dist/esm/icons/star.js
   var __iconNode17 = [
     [
       "path",
@@ -21991,7 +21991,7 @@
   ];
   var Star = createLucideIcon("star", __iconNode17);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/target.js
+  // node_modules/lucide-react/dist/esm/icons/target.js
   var __iconNode18 = [
     ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
     ["circle", { cx: "12", cy: "12", r: "6", key: "1vlfrh" }],
@@ -21999,7 +21999,7 @@
   ];
   var Target = createLucideIcon("target", __iconNode18);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/trophy.js
+  // node_modules/lucide-react/dist/esm/icons/trophy.js
   var __iconNode19 = [
     ["path", { d: "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978", key: "1n3hpd" }],
     ["path", { d: "M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978", key: "rfe1zi" }],
@@ -22010,14 +22010,14 @@
   ];
   var Trophy = createLucideIcon("trophy", __iconNode19);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/x.js
+  // node_modules/lucide-react/dist/esm/icons/x.js
   var __iconNode20 = [
     ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
     ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
   ];
   var X = createLucideIcon("x", __iconNode20);
 
-  // acelabs/grade9-science-vite/node_modules/lucide-react/dist/esm/icons/zap.js
+  // node_modules/lucide-react/dist/esm/icons/zap.js
   var __iconNode21 = [
     [
       "path",
@@ -22029,7 +22029,7 @@
   ];
   var Zap = createLucideIcon("zap", __iconNode21);
 
-  // acelabs/grade9-science-vite/science_study_redesign.tsx
+  // science_study_redesign.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
   var SoulStyles = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: `
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
@@ -22116,6 +22116,10 @@
 
     /* Backgrounds -- undo dark overrides */
     .bg-white    { background-color: #ffffff !important; }
+    .bg-white/5 { background-color: rgba(255,255,255,0.05) !important; }
+    .bg-white/10 { background-color: rgba(255,255,255,0.10) !important; }
+    .bg-white/20 { background-color: rgba(255,255,255,0.20) !important; }
+    .bg-white/30 { background-color: rgba(255,255,255,0.30) !important; }
     .bg-gray-50  { background-color: #f9fafb !important; }
     .bg-gray-100 { background-color: #f3f4f6 !important; }
     .bg-gray-200 { background-color: #e5e7eb !important; }
@@ -22138,6 +22142,9 @@
     }
 
     /* Text -- restore dark text */
+    .text-white { color: #ffffff !important; }
+    .text-white/90 { color: rgba(255,255,255,0.90) !important; }
+    .text-white/80 { color: rgba(255,255,255,0.80) !important; }
     .text-gray-800 { color: #111827 !important; }
     .text-gray-200 { color: #1f2937 !important; }
     .text-gray-700 { color: #374151 !important; }
@@ -22145,23 +22152,26 @@
     .text-gray-500 { color: #6b7280 !important; }
 
     /* Colored text -- keep vivid (these are fine already) */
-    .text-blue-300   { color: #2563eb !important; }
-    .text-green-300  { color: #059669 !important; }
-    .text-red-300    { color: #dc2626 !important; }
-    .text-amber-300  { color: #d97706 !important; }
-    .text-purple-300 { color: #7c3aed !important; }
-    .text-indigo-300 { color: #4f46e5 !important; }
-    .text-teal-300   { color: #0d9488 !important; }
-    .text-cyan-300   { color: #0891b2 !important; }
-    .text-orange-300 { color: #ea580c !important; }
-    .text-yellow-300 { color: #ca8a04 !important; }
-    .text-pink-300   { color: #db2777 !important; }
+    .text-blue-700   { color: #2563eb !important; }
+    .text-green-700  { color: #059669 !important; }
+    .text-red-700    { color: #dc2626 !important; }
+    .text-amber-700  { color: #d97706 !important; }
+    .text-purple-700 { color: #7c3aed !important; }
+    .text-indigo-700 { color: #4f46e5 !important; }
+    .text-teal-700   { color: #0d9488 !important; }
+    .text-cyan-700   { color: #0891b2 !important; }
+    .text-orange-700 { color: #ea580c !important; }
+    .text-yellow-700 { color: #ca8a04 !important; }
+    .text-pink-700   { color: #db2777 !important; }
 
     /* Borders -- restore subtle light borders */
     [class*="border-gray-100"],  [class*="border-white/8"]  { border-color: rgba(0,0,0,0.07) !important; }
     [class*="border-gray-200"], [class*="border-white/10"] { border-color: rgba(0,0,0,0.08) !important; }
     [class*="border-gray-200"], [class*="border-white/15"] { border-color: rgba(0,0,0,0.10) !important; }
     [class*="border-gray-300"], [class*="border-white/20"] { border-color: rgba(0,0,0,0.12) !important; }
+    .border-white/20 { border-color: rgba(255,255,255,0.20) !important; }
+    .border-white/30 { border-color: rgba(255,255,255,0.30) !important; }
+    .border-white/40 { border-color: rgba(255,255,255,0.40) !important; }
 
     /* Progress bars */
     [class*="bg-gray-200"], [class*="bg-white/10"] { background-color: rgba(0,0,0,0.08) !important; }
@@ -22265,6 +22275,36 @@
 
     /* SVG text -- back to dark */
     svg text { fill: #374151 !important; }
+    .lucide {
+      display: inline-block;
+      flex-shrink: 0;
+      color: currentColor !important;
+      stroke: currentColor !important;
+      fill: none !important;
+      stroke-width: 2.25 !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .lucide * { vector-effect: non-scaling-stroke; }
+    .text-white .lucide,
+    .lucide.text-white,
+    .text-white/90 .lucide,
+    .lucide.text-white/90 { color: #ffffff !important; }
+    .text-gray-600 .lucide,
+    .lucide.text-gray-600 { color: #4b5563 !important; }
+    .text-gray-700 .lucide,
+    .lucide.text-gray-700 { color: #374151 !important; }
+
+    /* Preserve the glassmorphism pills used behind icons */
+    [class*="bg-white\\/20"][class*="backdrop-blur"] {
+      background-color: rgba(255,255,255,0.20) !important;
+    }
+    [class*="bg-white\\/10"][class*="backdrop-blur"] {
+      background-color: rgba(255,255,255,0.10) !important;
+    }
+    [class*="hover:bg-white\\/20"]:hover {
+      background-color: rgba(255,255,255,0.20) !important;
+    }
 
     /* Hover states */
     .hover:bg-gray-50:hover  { background-color: #f9fafb !important; }
@@ -22287,7 +22327,7 @@
     /* Floating AI button -- vivid blue for light mode */
     .glow-cyan { box-shadow: 0 4px 20px rgba(0,102,255,0.2), 0 0 0 1px rgba(0,102,255,0.15) !important; }
   ` });
-  var LewisDotDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8", children: [
+  var LewisDotDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-100", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Lewis Dot Diagram Examples" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex justify-around items-center flex-wrap gap-8", children: [
       { symbol: "H", dots: 1, name: "Hydrogen", group: 1 },
@@ -22324,12 +22364,12 @@
         element.group
       ] })
     ] }, element.symbol)) }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-800 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Key Point:" }),
       " The number of dots = number of valence electrons = group number (for main groups)"
     ] }) })
   ] });
-  var PhotosynthesisDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8", children: [
+  var PhotosynthesisDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-100", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Photosynthesis Equation" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-4 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
@@ -22368,12 +22408,12 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "Released to Air" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-green-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-green-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-green-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-green-800 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Key Point:" }),
       " Plants use sunlight energy to convert CO\u2082 and water into glucose (their food) and oxygen (which we breathe)!"
     ] }) })
   ] });
-  var CellRespirationDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#150808] to-[#180d04] rounded-xl p-8", children: [
+  var CellRespirationDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8 border border-red-100", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Cellular Respiration Equation" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-4 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
@@ -22416,17 +22456,17 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "For Life!" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-red-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-red-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-red-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-red-800 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Key Point:" }),
       " Opposite of photosynthesis! Organisms break down glucose with oxygen to release energy (ATP) for living."
     ] }) })
   ] });
-  var FoodChainDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#181208] to-[#180f04] rounded-xl p-8", children: [
+  var FoodChainDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8 border border-amber-100", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Terrestrial Food Chain Example" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-3 mb-6 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-green-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F33E}" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300", children: "Grass" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-700", children: "Grass" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Producer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-600 font-bold mt-1", children: "10,000 kcal" })
       ] }),
@@ -22447,12 +22487,12 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-gray-600", children: "\u2192" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-red-500 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F40D}" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300", children: "Snake" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-700", children: "Snake" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Tertiary Consumer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-600 font-bold mt-1", children: "10 kcal" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-amber-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-amber-800 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Energy Flow:" }),
       " Notice how only 10% of energy transfers to each level (10,000 \u2192 1,000 \u2192 100 \u2192 10)"
     ] }) })
@@ -22462,7 +22502,7 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-3 mb-6 flex-wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-green-400 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F9A0}" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300", children: "Phytoplankton" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-700", children: "Phytoplankton" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Producer" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-600 font-bold mt-1", children: "50,000 kcal" })
       ] }),
@@ -22483,17 +22523,17 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl text-blue-600", children: "\u2192" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-32 h-32 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg mb-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-6xl", children: "\u{1F988}" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-100", children: "Shark" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-200", children: "Tertiary Consumer" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-100 font-bold mt-1", children: "50 kcal" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-800", children: "Shark" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Tertiary Consumer" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-700 font-bold mt-1", children: "50 kcal" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-800 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Ocean Food Chain:" }),
       " Starts with microscopic phytoplankton that use sunlight to make food through photosynthesis"
     ] }) })
   ] });
-  var NitrogenCycleDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0d0a1e] to-[#120a1e] rounded-xl p-8", children: [
+  var NitrogenCycleDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8 border border-indigo-100", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "The Nitrogen Cycle" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative h-96", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 500 400", className: "w-full h-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "200", y: "10", width: "100", height: "60", rx: "10", fill: "#93C5FD", stroke: "#3B82F6", strokeWidth: "2" }),
@@ -22536,37 +22576,37 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-4 grid grid-cols-2 gap-3 text-xs", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "Fixation:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-300", children: "N\u2082 \u2192 NH\u2083 (bacteria/lightning)" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-700", children: "Fixation:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-700", children: "N\u2082 \u2192 NH\u2083 (bacteria/lightning)" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-2", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-orange-800", children: "Nitrification:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-orange-300", children: "NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (bacteria)" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-orange-700", children: "NH\u2083 \u2192 NO\u2082\u207B \u2192 NO\u2083\u207B (bacteria)" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-lg p-2", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-purple-800", children: "Ammonification:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-purple-300", children: "Dead matter \u2192 NH\u2084\u207A" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-purple-700", children: "Dead matter \u2192 NH\u2084\u207A" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "Denitrification:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "NO\u2083\u207B \u2192 N\u2082 (back to air)" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-700", children: "Denitrification:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-700", children: "NO\u2083\u207B \u2192 N\u2082 (back to air)" })
       ] })
     ] })
   ] });
-  var DensityComparisonDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8", children: [
+  var DensityComparisonDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Density Comparison - Floating vs Sinking" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-300", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-blue-300 mb-4", children: "Object Floats \u2B06\uFE0F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-blue-700 mb-4", children: "Object Floats \u2B06\uFE0F" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-1/3 left-1/2 -translate-x-1/2 w-20 h-20 bg-yellow-400 rounded-lg border-2 border-yellow-600 flex items-center justify-center shadow-lg", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold", children: "Wood" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "0.6 g/cm\xB3" })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-300 font-bold text-sm", children: "Water: 1.0 g/cm\xB3" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-700 font-bold text-sm", children: "Water: 1.0 g/cm\xB3" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-green-100 rounded-lg p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-green-300 text-center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-green-100 rounded-lg p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-green-700 text-center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "0.6 < 1.0" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
           "Object density < Water density",
@@ -22575,16 +22615,16 @@
         ] }) })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-red-300", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-red-300 mb-4", children: "Object Sinks \u2B07\uFE0F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-red-700 mb-4", children: "Object Sinks \u2B07\uFE0F" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-8 left-1/2 -translate-x-1/2 w-20 h-20 bg-gray-600 rounded-lg border-2 border-gray-800 flex items-center justify-center shadow-lg", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center text-white", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold", children: "Rock" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs", children: "2.5 g/cm\xB3" })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-300 font-bold text-sm", children: "Water: 1.0 g/cm\xB3" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-4 right-4 text-blue-700 font-bold text-sm", children: "Water: 1.0 g/cm\xB3" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-red-100 rounded-lg p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-red-300 text-center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-red-100 rounded-lg p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-red-700 text-center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "2.5 > 1.0" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
           "Object density > Water density",
@@ -22593,12 +22633,12 @@
         ] }) })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-indigo-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-indigo-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-indigo-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-indigo-700 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Rule:" }),
       " If object density is less than liquid density \u2192 floats. If greater \u2192 sinks!"
     ] }) })
   ] });
-  var IonDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8", children: [
+  var IonDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ion Formation Examples" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mb-8 bg-white rounded-xl p-6 shadow-md", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-lg font-bold text-gray-800 mb-4 text-center", children: "Cation (Positive Ion) - Sodium" }),
@@ -22648,7 +22688,7 @@
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-2", children: "11 protons, 10 electrons" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold text-red-600", children: "Charge: +1 (cation)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-red-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-300 font-bold", children: "11p\u207A - 10e\u207B = +1" }) })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-red-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-700 font-bold", children: "11p\u207A - 10e\u207B = +1" }) })
         ] })
       ] })
     ] }),
@@ -22712,7 +22752,7 @@
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-2", children: "17 protons, 18 electrons" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs font-bold text-green-600", children: "Charge: -1 (anion)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-green-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300 font-bold", children: "17p\u207A - 18e\u207B = -1" }) })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 inline-block bg-green-100 px-3 py-1 rounded-full", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-700 font-bold", children: "17p\u207A - 18e\u207B = -1" }) })
         ] })
       ] })
     ] }),
@@ -22731,7 +22771,7 @@
       ] })
     ] }) })
   ] });
-  var BohrDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8", children: [
+  var BohrDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Bohr Diagram - Oxygen (8 protons, 8 neutrons, 8 electrons)" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative w-80 h-80", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gradient-to-br from-red-400 to-orange-400 flex items-center justify-center shadow-lg z-10", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center text-white", children: [
@@ -22770,7 +22810,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -right-12 bottom-1/4 text-xs font-semibold text-green-600", children: "Shell 2: 6e\u207B" })
     ] }) })
   ] });
-  var EnergyPyramid = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8", children: [
+  var EnergyPyramid = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Energy Pyramid (10% Energy Transfer)" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex flex-col items-center gap-3", children: [
       { level: "Tertiary Consumers", energy: "54.7 kcal", width: "w-32", color: "from-red-400 to-red-500" },
@@ -22782,11 +22822,11 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs", children: tier.energy })
     ] }, i)) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "inline-block bg-blue-100 rounded-lg px-4 py-2", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-300", children: "\u26A1 Only 10% of energy passes to the next level" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-700", children: "\u26A1 Only 10% of energy passes to the next level" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-600 mt-1", children: "90% lost as heat, movement, and waste" })
     ] }) })
   ] });
-  var CarbonCycle = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#060e18] to-[#080e18] rounded-xl p-8", children: [
+  var CarbonCycle = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "The Carbon Cycle" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative h-80", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 400 300", className: "w-full h-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "200", cy: "60", r: "40", fill: "#93C5FD", stroke: "#3B82F6", strokeWidth: "2" }),
@@ -22822,16 +22862,16 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-4 grid grid-cols-2 gap-3 text-xs", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "Photosynthesis:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-300", children: "CO\u2082 + H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + O\u2082" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-700", children: "Photosynthesis:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-green-700", children: "CO\u2082 + H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + O\u2082" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "Respiration:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "C\u2086H\u2081\u2082O\u2086 + O\u2082 \u2192 CO\u2082 + H\u2082O" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-700", children: "Respiration:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-700", children: "C\u2086H\u2081\u2082O\u2086 + O\u2082 \u2192 CO\u2082 + H\u2082O" })
       ] })
     ] })
   ] });
-  var CircuitSymbolsDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#181208] to-[#181408] rounded-xl p-8", children: [
+  var CircuitSymbolsDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Circuit Symbols Reference" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 md:grid-cols-3 gap-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
@@ -22916,7 +22956,7 @@
       ] })
     ] })
   ] });
-  var SeriesCircuitDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8", children: [
+  var SeriesCircuitDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Series Circuit" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-white rounded-xl p-6 mb-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 400 250", className: "w-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "50", y: "50", width: "300", height: "150", fill: "none", stroke: "#3B82F6", strokeWidth: "3", rx: "10" }),
@@ -22946,24 +22986,24 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-3", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-blue-300 mb-1", children: "\u2713 Current" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-300", children: "Same everywhere (0.5A)" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-blue-700 mb-1", children: "\u2713 Current" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-700", children: "Same everywhere (0.5A)" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-lg p-3", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-1", children: "\u2713 Voltage" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-300", children: "Divides: 6V = 2V + 2V + 2V" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-700", children: "Divides: 6V = 2V + 2V + 2V" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-3", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-orange-800 mb-1", children: "\u2713 Path" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300", children: "One route only" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-700", children: "One route only" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-red-300 mb-1", children: "\u2717 One Fails" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-300", children: "All stop working" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-red-700 mb-1", children: "\u2717 One Fails" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-700", children: "All stop working" })
       ] })
     ] })
   ] });
-  var ParallelCircuitDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8", children: [
+  var ParallelCircuitDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Parallel Circuit" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-white rounded-xl p-6 mb-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 400 280", className: "w-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "50", y1: "140", x2: "70", y2: "140", stroke: "#1F2937", strokeWidth: "3" }),
@@ -23010,24 +23050,24 @@
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-3", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-300 mb-1", children: "\u2713 Voltage" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300", children: "Same across all (12V)" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-700 mb-1", children: "\u2713 Voltage" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-700", children: "Same across all (12V)" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-lg p-3", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-1", children: "\u2713 Current" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-300", children: "Divides: 3A = 1A + 1A + 1A" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-700", children: "Divides: 3A = 1A + 1A + 1A" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-3", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-orange-800 mb-1", children: "\u2713 Paths" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300", children: "Multiple routes" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-700", children: "Multiple routes" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-100 rounded-lg p-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-300 mb-1", children: "\u2713 One Fails" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300", children: "Others keep working!" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-green-700 mb-1", children: "\u2713 One Fails" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-700", children: "Others keep working!" })
       ] })
     ] })
   ] });
-  var OhmsLawTriangle = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8", children: [
+  var OhmsLawTriangle = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ohm's Law Triangle" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex justify-center mb-6", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 200 200", className: "w-64 h-64", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 100 20 L 180 180 L 20 180 Z", fill: "#8B5CF6", stroke: "#6D28D9", strokeWidth: "4" }),
@@ -23040,7 +23080,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-100 rounded-xl p-4 text-center border-2 border-purple-300", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-purple-800 mb-2", children: "Find Voltage" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-purple-900 mb-1", children: "V = I \xD7 R" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-300", children: "Cover V" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-700", children: "Cover V" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-pink-100 rounded-xl p-4 text-center border-2 border-pink-300", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-pink-800 mb-2", children: "Find Current" }),
@@ -23048,18 +23088,18 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-pink-700", children: "Cover I" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-indigo-100 rounded-xl p-4 text-center border-2 border-indigo-300", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-indigo-300 mb-2", children: "Find Resistance" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-indigo-700 mb-2", children: "Find Resistance" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-2xl font-bold text-indigo-900 mb-1", children: "R = V \xF7 I" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-indigo-300", children: "Cover R" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-indigo-700", children: "Cover R" })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-4 text-white", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold mb-2", children: "Example Problem:" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm mb-2", children: "A circuit has 12V battery and 4\u03A9 resistor. Find current." }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-mono bg-white/20 rounded p-2", children: "I = V \xF7 R = 12V \xF7 4\u03A9 = 3A" })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-mono bg-gray-100 rounded p-2 text-gray-800", children: "I = V \xF7 R = 12V \xF7 4\u03A9 = 3A" })
     ] })
   ] });
-  var CircuitDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8", children: [
+  var CircuitDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Complete Circuit Components" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-white rounded-xl p-6 mb-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 500 300", className: "w-full", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "50", y: "50", width: "400", height: "200", fill: "none", stroke: "#3B82F6", strokeWidth: "4", rx: "20" }),
@@ -23096,16 +23136,16 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 100 50 L 120 50", stroke: "#DC2626", strokeWidth: "2", fill: "none", markerEnd: "url(#arrowred)" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "105", y: "40", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "Current flow" })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-700 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Complete Circuit:" }),
       " All components connected in a closed loop allowing current to flow"
     ] }) })
   ] });
-  var StaticElectricityDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#181208] to-[#180f04] rounded-xl p-8", children: [
+  var StaticElectricityDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Static Electricity - Charge Interactions" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-6 border-2 border-red-200", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-red-300 mb-4", children: "Like Charges REPEL" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-red-700 mb-4", children: "Like Charges REPEL" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex justify-center items-center gap-8 mb-4", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-red-400 border-4 border-red-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "+" }) }),
@@ -23138,10 +23178,10 @@
             ] }) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-red-300 font-semibold mt-4", children: "+ repels + | \u2212 repels \u2212" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-red-700 font-semibold mt-4", children: "+ repels + | \u2212 repels \u2212" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-6 border-2 border-green-200", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-green-300 mb-4", children: "Opposite Charges ATTRACT" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "text-center font-bold text-green-700 mb-4", children: "Opposite Charges ATTRACT" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex justify-center items-center gap-8 mb-8 mt-12", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "relative", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-full bg-red-400 border-4 border-red-600 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-3xl font-bold text-white", children: "+" }) }),
@@ -23158,14 +23198,14 @@
             ] }) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-green-300 font-semibold mt-12", children: "+ attracts \u2212 | \u2212 attracts +" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-green-700 font-semibold mt-12", children: "+ attracts \u2212 | \u2212 attracts +" })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 rounded-xl p-4 border-2 border-amber-300", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lightbulb, { className: "w-6 h-6 text-amber-600 flex-shrink-0 mt-1" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-1", children: "Remember:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-amber-300", children: "Only ELECTRONS move in static electricity! Protons stay in the nucleus. When you rub a balloon on your hair, electrons transfer from your hair to the balloon." })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-700 mb-1", children: "Remember:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-amber-700", children: "Only ELECTRONS move in static electricity! Protons stay in the nucleus. When you rub a balloon on your hair, electrons transfer from your hair to the balloon." })
       ] })
     ] }) })
   ] });
@@ -23179,17 +23219,17 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-100 rounded-lg p-4 text-center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-orange-800 mb-2", children: "Power (P)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300", children: "Measured in Watts (W)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-700", children: "Measured in Watts (W)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-600 mt-2", children: "How fast energy is used" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-100 rounded-lg p-4 text-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-red-300 mb-2", children: "Voltage (V)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-300", children: "Measured in Volts (V)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-red-700 mb-2", children: "Voltage (V)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-700", children: "Measured in Volts (V)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-600 mt-2", children: 'Electrical "pressure"' })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-yellow-100 rounded-lg p-4 text-center", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold text-yellow-800 mb-2", children: "Current (I)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-300", children: "Measured in Amperes (A)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-700", children: "Measured in Amperes (A)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-600 mt-2", children: "Flow of electrons" })
         ] })
       ] })
@@ -23201,20 +23241,20 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Given: V = 120V, I = 0.5A" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Find: P = ?" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-100 rounded p-3 mt-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-300", children: "P = V \xD7 I" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-300", children: "P = 120V \xD7 0.5A" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-700", children: "P = V \xD7 I" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-orange-700", children: "P = 120V \xD7 0.5A" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono font-bold text-orange-900", children: "P = 60W" })
           ] })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-red-100 to-pink-100 rounded-xl p-4 border-2 border-red-300", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-3", children: "Example 2: Heater" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-700 mb-3", children: "Example 2: Heater" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-2 text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Given: P = 1500W, V = 120V" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "Find: I = ?" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gray-100 rounded p-3 mt-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-300", children: "I = P \xF7 V" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-300", children: "I = 1500W \xF7 120V" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-700", children: "I = P \xF7 V" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-red-700", children: "I = 1500W \xF7 120V" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono font-bold text-red-900", children: "I = 12.5A" })
           ] })
         ] })
@@ -23241,10 +23281,10 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M5 20 Q10 10 20 20 Q30 30 35 20", stroke: "white", strokeWidth: "3", fill: "none" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "12", y: "38", fontSize: "10", fill: "white", fontWeight: "bold", children: "V" })
         ] }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300 text-lg mb-2", children: "VOLTAGE (V)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300 text-sm font-semibold", children: "= Water Pressure" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-700 text-lg mb-2", children: "VOLTAGE (V)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-700 text-sm font-semibold", children: "= Water Pressure" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs mt-2", children: 'The "push" that forces water through the pipe. Higher pressure = more force. Measured in Volts (V).' }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-blue-100 rounded-lg px-3 py-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-300 font-bold", children: "Think: Pump pushing water" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-blue-100 rounded-lg px-3 py-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-700 font-bold", children: "Think: Pump pushing water" }) })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-cyan-300 shadow-md text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 mx-auto mb-3 bg-cyan-500 rounded-full flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 40 40", className: "w-10 h-10", children: [
@@ -23253,7 +23293,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "12", y: "38", fontSize: "10", fill: "white", fontWeight: "bold", children: "I" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-cyan-800 text-lg mb-2", children: "CURRENT (I)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-cyan-300 text-sm font-semibold", children: "= Flow Rate of Water" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-cyan-700 text-sm font-semibold", children: "= Flow Rate of Water" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs mt-2", children: "How much water flows past a point each second. More flow = higher current. Measured in Amperes (A)." }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-cyan-100 rounded-lg px-3 py-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-cyan-800 font-bold", children: "Think: Litres per second" }) })
       ] }),
@@ -23264,7 +23304,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "12", y: "38", fontSize: "10", fill: "white", fontWeight: "bold", children: "R" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-orange-800 text-lg mb-2", children: "RESISTANCE (R)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-orange-300 text-sm font-semibold", children: "= Pipe Narrowing" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-orange-700 text-sm font-semibold", children: "= Pipe Narrowing" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs mt-2", children: "A narrower pipe restricts flow. More resistance = less current for same pressure. Measured in Ohms (\u03A9)." }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-3 bg-orange-100 rounded-lg px-3 py-2", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-800 font-bold", children: "Think: Narrow kink in pipe" }) })
       ] })
@@ -23273,22 +23313,22 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-center gap-4 flex-wrap text-center", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-purple-800 font-bold text-lg", children: "More Pressure (V\u2191)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-2xl", children: "\u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-300 font-bold text-lg", children: "More Flow (I\u2191)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-700 font-bold text-lg", children: "More Flow (I\u2191)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mx-4 text-gray-600 font-bold", children: "|" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-orange-300 font-bold text-lg", children: "Narrower Pipe (R\u2191)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-orange-700 font-bold text-lg", children: "Narrower Pipe (R\u2191)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-2xl", children: "\u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-300 font-bold text-lg", children: "Less Flow (I\u2193)" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-cyan-700 font-bold text-lg", children: "Less Flow (I\u2193)" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center text-sm text-gray-600 mt-3 font-semibold", children: "This is exactly how V = I \xD7 R works in Ohm's Law!" })
     ] })
   ] });
-  var OhmsLawWorkedExamples = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8", children: [
+  var OhmsLawWorkedExamples = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ohm's Law \u2014 Worked Examples" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-5 mb-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm", children: "1" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-300", children: "Find Current" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-700", children: "Find Current" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-50 rounded-lg p-3 mb-3 font-mono text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Given: V = 12V, R = 4\u03A9" }),
@@ -23297,16 +23337,16 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
             "Formula: ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "I = V \xF7 R" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-700", children: "I = V \xF7 R" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I = 12 \xF7 4" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-green-300 text-center mt-2", children: "I = 3 A" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-green-700 text-center mt-2", children: "I = 3 A" })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-blue-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm", children: "2" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300", children: "Find Voltage" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-700", children: "Find Voltage" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3 mb-3 font-mono text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Given: I = 2A, R = 6\u03A9" }),
@@ -23315,10 +23355,10 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
             "Formula: ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "V = I \xD7 R" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-700", children: "V = I \xD7 R" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "V = 2 \xD7 6" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-blue-300 text-center mt-2", children: "V = 12 V" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-blue-700 text-center mt-2", children: "V = 12 V" })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-orange-300 shadow-md", children: [
@@ -23333,10 +23373,10 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
             "Formula: ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-orange-300", children: "R = V \xF7 I" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-orange-700", children: "R = V \xF7 I" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "R = 24 \xF7 3" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-orange-300 text-center mt-2", children: "R = 8 \u03A9" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xl font-bold text-orange-700 text-center mt-2", children: "R = 8 \u03A9" })
         ] })
       ] })
     ] }),
@@ -23354,10 +23394,10 @@
       ] }) })
     ] })
   ] });
-  var SeriesCircuitCalculations = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8", children: [
+  var SeriesCircuitCalculations = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Series Circuit \u2014 Step-by-Step Calculations" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-green-300 mb-4", children: "Example: 12V battery, 3 resistors in series (R\u2081=2\u03A9, R\u2082=3\u03A9, R\u2083=7\u03A9)" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-green-700 mb-4", children: "Example: 12V battery, 3 resistors in series (R\u2081=2\u03A9, R\u2082=3\u03A9, R\u2083=7\u03A9)" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 480 120", className: "w-full mb-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "30", x2: "40", y2: "90", stroke: "#1F2937", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "30", x2: "110", y2: "30", stroke: "#1F2937", strokeWidth: "3" }),
@@ -23382,16 +23422,16 @@
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-4 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-50 rounded-lg p-3 border border-green-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "\u2460 Total Resistance" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-700 mb-2", children: "\u2460 Total Resistance" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "R_total = R\u2081+R\u2082+R\u2083" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "= 2+3+7" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 text-lg", children: "= 12 \u03A9" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-700 text-lg", children: "= 12 \u03A9" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3 border border-blue-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u2461 Total Current" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700 mb-2", children: "\u2461 Total Current" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I = V \xF7 R_total" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "= 12 \xF7 12" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 text-lg", children: "= 1 A (same everywhere)" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700 text-lg", children: "= 1 A (same everywhere)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-orange-50 rounded-lg p-3 border border-orange-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800 mb-2", children: "\u2462 Voltage Drops" }),
@@ -23413,25 +23453,25 @@
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4 text-sm", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-xl p-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u{1F4CC} Series Rules to Memorize:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 Current: I\u2081 = I\u2082 = I\u2083 (same everywhere)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 Voltage: V_total = V\u2081 + V\u2082 + V\u2083" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 Resistance: R_total = R\u2081 + R\u2082 + R\u2083" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-300", children: "\u2022 One break \u2192 all stop" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700 mb-2", children: "\u{1F4CC} Series Rules to Memorize:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-700", children: "\u2022 Current: I\u2081 = I\u2082 = I\u2083 (same everywhere)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-700", children: "\u2022 Voltage: V_total = V\u2081 + V\u2082 + V\u2083" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-700", children: "\u2022 Resistance: R_total = R\u2081 + R\u2082 + R\u2083" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-blue-700", children: "\u2022 One break \u2192 all stop" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-950/30 rounded-xl p-4 border border-red-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-2", children: "\u26A0\uFE0F Common Exam Mistakes:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Forgetting current is the SAME in series" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Adding voltages wrong" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Not checking: \u03A3V = battery V" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "\u2022 Mixing up series and parallel rules" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-700 mb-2", children: "\u26A0\uFE0F Common Exam Mistakes:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-700", children: "\u2022 Forgetting current is the SAME in series" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-700", children: "\u2022 Adding voltages wrong" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-700", children: "\u2022 Not checking: \u03A3V = battery V" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-700", children: "\u2022 Mixing up series and parallel rules" })
       ] })
     ] })
   ] });
-  var ParallelCircuitCalculations = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8", children: [
+  var ParallelCircuitCalculations = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Parallel Circuit \u2014 Step-by-Step Calculations" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-blue-300 mb-5 shadow-md", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-blue-300 mb-4", children: "Example: 12V battery, 3 resistors in parallel (R\u2081=6\u03A9, R\u2082=4\u03A9, R\u2083=12\u03A9)" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-blue-700 mb-4", children: "Example: 12V battery, 3 resistors in parallel (R\u2081=6\u03A9, R\u2082=4\u03A9, R\u2083=12\u03A9)" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 480 160", className: "w-full mb-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "20", x2: "40", y2: "140", stroke: "#1F2937", strokeWidth: "3" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "40", y1: "20", x2: "440", y2: "20", stroke: "#1F2937", strokeWidth: "3" }),
@@ -23458,12 +23498,12 @@
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-4 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3 border border-blue-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u2460 Voltage (easy!)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700 mb-2", children: "\u2460 Voltage (easy!)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "All branches = battery V" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300", children: "V\u2081=V\u2082=V\u2083= 12V" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700", children: "V\u2081=V\u2082=V\u2083= 12V" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-50 rounded-lg p-3 border border-green-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "\u2461 Branch Currents" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-700 mb-2", children: "\u2461 Branch Currents" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-gray-700", children: [
             "I\u2081=12\xF76 = ",
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "2A" })
@@ -23481,28 +23521,28 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-800 mb-2", children: "\u2462 Total Current" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "I_total = I\u2081+I\u2082+I\u2083" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: "= 2+3+1" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-300 text-lg", children: "= 6 A" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-orange-700 text-lg", children: "= 6 A" })
         ] })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4 text-sm", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-indigo-950/30 rounded-xl p-4 border border-indigo-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-2", children: "\u{1F4CC} Parallel Rules to Memorize:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 Voltage: V\u2081 = V\u2082 = V\u2083 (same everywhere)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 Current: I_total = I\u2081 + I\u2082 + I\u2083" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 Each branch: I = V \xF7 R (that branch's R)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-300", children: "\u2022 One break \u2192 others keep working" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-700 mb-2", children: "\u{1F4CC} Parallel Rules to Memorize:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-700", children: "\u2022 Voltage: V\u2081 = V\u2082 = V\u2083 (same everywhere)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-700", children: "\u2022 Current: I_total = I\u2081 + I\u2082 + I\u2083" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-700", children: "\u2022 Each branch: I = V \xF7 R (that branch's R)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-indigo-700", children: "\u2022 One break \u2192 others keep working" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-amber-950/30 rounded-xl p-4 border border-amber-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-2", children: "\u{1F3E0} Real-Life Parallel:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Home outlets all wired in parallel" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Each device gets full 120V" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Turning one device off doesn't affect others" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-300", children: "\u2022 Adding devices draws more total current" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-700 mb-2", children: "\u{1F3E0} Real-Life Parallel:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-700", children: "\u2022 Home outlets all wired in parallel" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-700", children: "\u2022 Each device gets full 120V" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-700", children: "\u2022 Turning one device off doesn't affect others" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-amber-700", children: "\u2022 Adding devices draws more total current" })
       ] })
     ] })
   ] });
-  var ChargingMethodsDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#181208] to-[#180f04] rounded-xl p-8", children: [
+  var ChargingMethodsDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Three Methods of Charging Objects" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-yellow-300 shadow-md", children: [
@@ -23622,11 +23662,11 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "10", y1: "80", x2: "220", y2: "80", stroke: "#DC2626", strokeWidth: "6", strokeLinecap: "round" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "97", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "R = high \u2717" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-orange-300 text-center font-semibold", children: "Longer wire = MORE resistance" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-orange-700 text-center font-semibold", children: "Longer wire = MORE resistance" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center mt-1", children: "More collisions between electrons and atoms" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-red-300 shadow-md", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-red-300 mb-4 text-center", children: "Thickness of Wire" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-red-700 mb-4 text-center", children: "Thickness of Wire" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 240 100", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "20", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Thick wire (Low R)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "10", y1: "35", x2: "170", y2: "35", stroke: "#10B981", strokeWidth: "14", strokeLinecap: "round" }),
@@ -23635,7 +23675,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "10", y1: "85", x2: "170", y2: "85", stroke: "#DC2626", strokeWidth: "3", strokeLinecap: "round" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "175", y: "89", fontSize: "10", fill: "#DC2626", fontWeight: "bold", children: "R = high" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-red-300 text-center font-semibold", children: "Thinner wire = MORE resistance" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-red-700 text-center font-semibold", children: "Thinner wire = MORE resistance" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center mt-1", children: "Less space for electrons to flow through" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-yellow-300 shadow-md", children: [
@@ -23653,7 +23693,7 @@
         ] }, i)) })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-blue-300 shadow-md", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300 mb-4 text-center", children: "Temperature Effect" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-700 mb-4 text-center", children: "Temperature Effect" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 240 110", className: "w-full", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M 30 90 Q 80 85 130 70 Q 180 55 210 30", fill: "none", stroke: "#DC2626", strokeWidth: "3" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "30", y: "105", fontSize: "9", fill: "#374151", children: "Cold (0\xB0C)" }),
@@ -23664,11 +23704,11 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "5", y: "60", fontSize: "9", fill: "#374151", children: "R" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "108", fontSize: "9", fill: "#374151", children: "Temperature \u2192" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-blue-300 text-center font-semibold mt-2", children: "Hotter = MORE resistance (for metals)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-blue-700 text-center font-semibold mt-2", children: "Hotter = MORE resistance (for metals)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center mt-1", children: "Atoms vibrate more, blocking electron flow" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 rounded-xl p-4 border-2 border-amber-300", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 text-center", children: "Summary: R increases with \u2192 longer length, thinner wire, certain materials, higher temperature" }) })
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 rounded-xl p-4 border-2 border-amber-300", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-700 text-center", children: "Summary: R increases with \u2192 longer length, thinner wire, certain materials, higher temperature" }) })
   ] });
   var ElectricalSafetyDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-red-50 to-rose-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Electrical Safety & Protection Devices" }),
@@ -23732,7 +23772,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-3xl mb-1", children: "\u{1F30D}" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-300", children: "GROUNDING" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-700", children: "GROUNDING" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 80", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "50", y: "5", width: "60", height: "35", rx: "5", fill: "#DCFCE7", stroke: "#16A34A", strokeWidth: "2" }),
@@ -23756,9 +23796,9 @@
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-100 rounded-xl p-4 border-2 border-red-400", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 text-center mb-3", children: "\u26A0\uFE0F Current Danger Levels \u2014 Know These!" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-700 text-center mb-3", children: "\u26A0\uFE0F Current Danger Levels \u2014 Know These!" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid grid-cols-4 gap-3 text-center text-xs", children: [
-        { mA: "1 mA", effect: "Barely felt", color: "bg-green-100 border-green-400 text-green-300" },
+        { mA: "1 mA", effect: "Barely felt", color: "bg-green-100 border-green-400 text-green-700" },
         { mA: "10 mA", effect: "Painful, muscle contraction", color: "bg-yellow-100 border-yellow-400 text-yellow-800" },
         { mA: "100 mA", effect: "\u26A0\uFE0F FATAL \u2014 ventricular fibrillation", color: "bg-orange-100 border-orange-400 text-orange-800" },
         { mA: "1000 mA", effect: "\u{1F480} Certain death, severe burns", color: "bg-red-200 border-red-500 text-red-900" }
@@ -23768,44 +23808,44 @@
       ] }, i)) })
     ] })
   ] });
-  var PowerCostCalculatorDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8", children: [
+  var PowerCostCalculatorDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Electrical Energy Cost \u2014 Worked Examples" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-center font-bold text-gray-700 mb-4", children: [
         "Formula Chain: ",
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-green-300", children: "P = V \xD7 I" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-green-700", children: "P = V \xD7 I" }),
         " \u2192 ",
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-300", children: "E = P \xD7 t" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-blue-700", children: "E = P \xD7 t" }),
         " \u2192 ",
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-purple-300", children: "Cost = E \xD7 rate" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-purple-700", children: "Cost = E \xD7 rate" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-4 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-950/30 rounded-xl p-4 border border-green-500/20", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "Example 1 \u2014 Light Bulb" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-700 mb-2", children: "Example 1 \u2014 Light Bulb" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-gray-600 text-xs", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "60W bulb, 5 hours/day, 30 days" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Rate: $0.13/kWh" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "E = 0.06 kW \xD7 5h \xD7 30" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
               "E = ",
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-300", children: "9 kWh" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-green-700", children: "9 kWh" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 9 \xD7 $0.13" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-green-300", children: "= $1.17/month" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-green-700", children: "= $1.17/month" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-xl p-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "Example 2 \u2014 Heater" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700 mb-2", children: "Example 2 \u2014 Heater" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-gray-600 text-xs", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "1500W heater, 8 hours" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Rate: $0.12/kWh" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "E = 1.5 kW \xD7 8h" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
               "E = ",
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "12 kWh" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-700", children: "12 kWh" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 12 \xD7 $0.12" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-blue-300", children: "= $1.44" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-blue-700", children: "= $1.44" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-50 rounded-xl p-4 border border-purple-200", children: [
@@ -23816,17 +23856,17 @@
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "border-t pt-1", children: "P = 120 \xD7 2.5 = 300W" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
               "E = 0.3 kW \xD7 4h = ",
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-purple-300", children: "1.2 kWh" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-purple-700", children: "1.2 kWh" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Cost = 1.2 \xD7 $0.10" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-purple-300", children: "= $0.12" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-lg font-bold text-purple-700", children: "= $0.12" })
           ] })
         ] })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-amber-200", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-3", children: "\u{1F3E0} Common Appliance Wattages" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-700 mb-3", children: "\u{1F3E0} Common Appliance Wattages" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "space-y-2", children: [
           { name: "LED Bulb", w: 10, bar: 1 },
           { name: "Laptop", w: 50, bar: 3 },
@@ -23897,7 +23937,7 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
             "\u2022 Charge ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-yellow-300", children: "builds up" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-yellow-700", children: "builds up" }),
             " on surface of object"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
@@ -23913,7 +23953,7 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-blue-400 shadow-md", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3 mb-4", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-2xl", children: "\u{1F50B}" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300 text-xl", children: "CURRENT Electricity" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-700 text-xl", children: "CURRENT Electricity" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 220 90", className: "w-full mb-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "10", y: "30", width: "200", height: "30", rx: "5", fill: "#DBEAFE", stroke: "#3B82F6", strokeWidth: "2" }),
@@ -23923,7 +23963,7 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
             "\u2022 Electrons ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-300", children: "flow continuously" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-blue-700", children: "flow continuously" }),
             " in a circuit"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Requires a closed loop (circuit)" }),
@@ -23936,8 +23976,8 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-200", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grid grid-cols-4 gap-3 text-center text-xs font-semibold", children: [["Property", "Static", "Current", "Winner"], ["Motion", "Charges stay", "Charges flow", "Current"], ["Path needed", "No", "Yes (circuit)", "\u2014"], ["Continuous?", "No (one burst)", "Yes", "Current"], ["Powers devices?", "No", "Yes", "Current"], ["Example", "Doorknob shock", "LED bulb", "\u2014"]].map((row, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_react3.default.Fragment, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-purple-100 text-purple-800" : i % 2 === 0 ? "bg-gray-50" : "bg-white"} col-span-1`, children: row[0] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-yellow-100 text-yellow-800" : i % 2 === 0 ? "bg-gray-50" : "bg-white"}`, children: row[1] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-blue-100 text-blue-300" : i % 2 === 0 ? "bg-gray-50" : "bg-white"}`, children: row[2] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-green-100 text-green-300" : i % 2 === 0 ? "bg-gray-50" : "bg-white"}`, children: row[3] })
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-blue-100 text-blue-700" : i % 2 === 0 ? "bg-gray-50" : "bg-white"}`, children: row[2] }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-2 rounded ${i === 0 ? "bg-green-100 text-green-700" : i % 2 === 0 ? "bg-gray-50" : "bg-white"}`, children: row[3] })
     ] }, i)) }) })
   ] });
   var ElectroscopeDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-8", children: [
@@ -23965,14 +24005,14 @@
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: state.desc })
     ] }, i)) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-amber-950/30 rounded-xl p-4 border border-amber-500/20", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-2 text-center", children: "Key Rule: Leaves spread = charged. Leaves collapse = neutral or opposite charge nearby" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-700 mb-2 text-center", children: "Key Rule: Leaves spread = charged. Leaves collapse = neutral or opposite charge nearby" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-3 text-sm", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-lg p-3 border border-amber-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-1", children: "Using Induction with Electroscope:" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-700 mb-1", children: "Using Induction with Electroscope:" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Bring charged rod near (don't touch) \u2192 leaves spread. Touch your finger to plate while rod is near \u2192 ground it. Remove finger, then rod \u2192 leaves stay slightly spread (opposite charge induced)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-lg p-3 border border-amber-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-300 mb-1", children: "Using Conduction with Electroscope:" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-amber-700 mb-1", children: "Using Conduction with Electroscope:" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600 text-xs", children: "Touch charged rod to plate \u2192 charge transfers directly. Leaves spread and STAY spread even after rod is removed. Object now holds same type of charge as rod that touched it." })
         ] })
       ] })
@@ -24018,7 +24058,7 @@
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ohm's Law \u2014 Graphical Relationships" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-3 gap-5 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-300 shadow-md", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-300 text-center mb-3", children: "V vs I (R constant)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-700 text-center mb-3", children: "V vs I (R constant)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 140", className: "w-full mb-2", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "25", y1: "10", x2: "25", y2: "115", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "20", y1: "110", x2: "150", y2: "110", stroke: "#374151", strokeWidth: "2" }),
@@ -24031,11 +24071,11 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "95", cy: "56", r: "3", fill: "#3B82F6" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "130", cy: "29", r: "3", fill: "#3B82F6" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-300 text-center font-semibold", children: "Straight line through origin \u2192 V \u221D I" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-700 text-center font-semibold", children: "Straight line through origin \u2192 V \u221D I" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center", children: "Steeper slope = higher resistance" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-green-300 shadow-md", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-300 text-center mb-3", children: "I vs R (V constant)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-green-700 text-center mb-3", children: "I vs R (V constant)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 160 140", className: "w-full mb-2", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "25", y1: "10", x2: "25", y2: "115", stroke: "#374151", strokeWidth: "2" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", { x1: "20", y1: "110", x2: "150", y2: "110", stroke: "#374151", strokeWidth: "2" }),
@@ -24045,7 +24085,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "90", y: "38", fontSize: "10", fill: "#10B981", fontWeight: "bold", children: "I = V/R" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "100", y: "50", fontSize: "9", fill: "#10B981", children: "(hyperbola)" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-300 text-center font-semibold", children: "Curve \u2192 as R\u2191, I\u2193 (inverse)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-green-700 text-center font-semibold", children: "Curve \u2192 as R\u2191, I\u2193 (inverse)" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center", children: "Double R \u2192 halve I" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-orange-300 shadow-md", children: [
@@ -24062,29 +24102,29 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "80", y: "130", textAnchor: "middle", fontSize: "11", fill: "#374151", fontWeight: "bold", children: "Current (I) \u2192" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { x: "10", y: "70", fontSize: "11", fill: "#374151", fontWeight: "bold", transform: "rotate(-90,10,70)", children: "Voltage (V)" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300 text-center font-semibold", children: "All lines through origin" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-700 text-center font-semibold", children: "All lines through origin" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 text-center", children: "Higher R = steeper slope" })
       ] })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-indigo-200", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-3 text-center", children: "\u{1F4CA} Reading V-I Graphs on Tests" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-700 mb-3 text-center", children: "\u{1F4CA} Reading V-I Graphs on Tests" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-3 gap-3 text-xs", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-indigo-50 rounded-lg p-3", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-300 mb-1", children: "Finding Resistance:" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-indigo-700 mb-1", children: "Finding Resistance:" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Pick any point on the line. R = V \xF7 I using those coordinates. Steeper slope = higher R." })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-50 rounded-lg p-3", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-300 mb-1", children: "Ohmic vs Non-Ohmic:" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-700 mb-1", children: "Ohmic vs Non-Ohmic:" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "Straight line through origin = Ohmic (follows V=IR). Curved line = Non-Ohmic (e.g. light bulb filament heats up)." })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-lg p-3", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-1", children: "Exam Tip:" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700 mb-1", children: "Exam Tip:" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-600", children: "If graph is curved at high I \u2192 resistance is increasing (filament getting hot). Always check if line passes through origin!" })
         ] })
       ] })
     ] })
   ] });
-  var AmpmeterVoltmeterDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#060f10] to-[#061014] rounded-xl p-8", children: [
+  var AmpmeterVoltmeterDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Ammeter & Voltmeter \u2014 How to Connect Them" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-teal-300 shadow-md", children: [
@@ -24112,7 +24152,7 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
             "\u2022 Connected ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-teal-300", children: "IN SERIES" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-teal-700", children: "IN SERIES" }),
             " \u2014 current flows THROUGH it"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Must be in the same wire/path as what you're measuring" }),
@@ -24145,7 +24185,7 @@
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-sm text-gray-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
             "\u2022 Connected ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-cyan-300", children: "IN PARALLEL" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold text-cyan-700", children: "IN PARALLEL" }),
             " \u2014 bridges across the component"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u2022 Placed across (in parallel with) the component to measure" }),
@@ -24157,13 +24197,13 @@
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-white rounded-xl p-4 border border-gray-200", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "font-bold text-gray-700 text-center mb-3", children: [
       "Memory Trick: ",
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-teal-300", children: "A" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-teal-700", children: "A" }),
       "mmeter in series = ",
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-teal-300", children: "A" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-teal-700", children: "A" }),
       "long the path | ",
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-cyan-300", children: "V" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-cyan-700", children: "V" }),
       "oltmeter in parallel = ",
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-cyan-300", children: "V" }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-cyan-700", children: "V" }),
       "ertical bridge"
     ] }) })
   ] });
@@ -24185,14 +24225,14 @@
         ["Formula check", "V\u2081+V\u2082+V\u2083 = battery V", "I\u2081+I\u2082+I\u2083 = total I"]
       ].map((row, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", { className: i % 2 === 0 ? "bg-white" : "bg-gray-50", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { className: "p-3 font-semibold text-purple-800 border-b border-gray-100", children: row[0] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { className: "p-3 text-blue-300 border-b border-gray-100 text-center whitespace-pre-line text-xs", children: row[1] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { className: "p-3 text-green-300 border-b border-gray-100 text-center whitespace-pre-line text-xs", children: row[2] })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { className: "p-3 text-blue-700 border-b border-gray-100 text-center whitespace-pre-line text-xs", children: row[1] }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { className: "p-3 text-green-700 border-b border-gray-100 text-center whitespace-pre-line text-xs", children: row[2] })
       ] }, i)) })
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-50 rounded-xl p-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-300 mb-2", children: "\u{1F4CC} Series Exam Checklist:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-blue-300", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-blue-700 mb-2", children: "\u{1F4CC} Series Exam Checklist:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-blue-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 R_total = sum of all resistors" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 I = V_battery \xF7 R_total (same everywhere)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Each V = I \xD7 that R (voltage divider)" }),
@@ -24200,8 +24240,8 @@
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-green-950/30 rounded-xl p-4 border border-green-500/20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-300 mb-2", children: "\u{1F4CC} Parallel Exam Checklist:" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-green-300", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-green-700 mb-2", children: "\u{1F4CC} Parallel Exam Checklist:" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "space-y-1 text-xs text-green-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Each branch: V = battery voltage" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 Each branch: I = V \xF7 that branch's R" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "\u25A1 I_total = sum of all branch currents" }),
@@ -24210,11 +24250,11 @@
       ] })
     ] })
   ] });
-  var EnergyConversionDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#181208] to-[#181408] rounded-xl p-8", children: [
+  var EnergyConversionDiagram = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-6", children: "Energy Conversions in Electrical Devices" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-6 mb-5", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-amber-300 mb-4 text-center", children: "Input \u2192 Process \u2192 Output" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-amber-700 mb-4 text-center", children: "Input \u2192 Process \u2192 Output" }),
         [
           { device: "\u{1F4A1} Light Bulb", input: "Electrical", arrow: "\u2192", output: "Light + Heat", eff: "~5%", color: "border-yellow-300 bg-yellow-50" },
           { device: "\u{1F4A1} LED Bulb", input: "Electrical", arrow: "\u2192", output: "Light + tiny Heat", eff: "~40%", color: "border-green-300 bg-green-50" },
@@ -24237,9 +24277,9 @@
         ] }, i))
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-amber-300 mb-4 text-center", children: "Law of Conservation of Energy" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-amber-700 mb-4 text-center", children: "Law of Conservation of Energy" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-5 border-2 border-amber-300 mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-amber-300 text-lg mb-3", children: "Energy is NEVER created or destroyed \u2014 only CONVERTED" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-center font-bold text-amber-700 text-lg mb-3", children: "Energy is NEVER created or destroyed \u2014 only CONVERTED" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { viewBox: "0 0 220 140", className: "w-full", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "110", cy: "70", r: "55", fill: "none", stroke: "#F59E0B", strokeWidth: "2", strokeDasharray: "8" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "75", y: "50", width: "70", height: "40", rx: "8", fill: "#FEF3C7", stroke: "#D97706", strokeWidth: "2" }),
@@ -24262,8 +24302,8 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-center text-gray-600 mt-2", children: 'Total energy out = total energy in. "Lost" energy just became heat!' })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-950/30 rounded-xl p-4 border border-red-500/20", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-2", children: "Efficiency Formula:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-red-300 mb-1", children: "Efficiency = (Useful Output \xF7 Total Input) \xD7 100%" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-700 mb-2", children: "Efficiency Formula:" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-red-700 mb-1", children: "Efficiency = (Useful Output \xF7 Total Input) \xD7 100%" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Example: motor uses 200J electricity, produces 170J motion \u2192 efficiency = (170\xF7200)\xD7100 = 85%" })
         ] })
       ] })
@@ -24297,11 +24337,11 @@
             { mistake: "Confusing ammeter and voltmeter connections", fix: "Ammeter: break circuit, insert IN SERIES. Voltmeter: connect ACROSS (parallel)." },
             { mistake: "Forgetting to verify: voltages must add up in series", fix: "Always check: V\u2081 + V\u2082 + V\u2083 = V_battery as a final sanity check." }
           ].map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mb-3 p-3 bg-pink-50 rounded-lg border border-pink-200", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-red-300 font-semibold", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-red-700 font-semibold", children: [
               "\u2717 Mistake: ",
               item.mistake
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-green-300 font-semibold mt-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-green-700 font-semibold mt-1", children: [
               "\u2713 Fix: ",
               item.fix
             ] })
@@ -24309,14 +24349,14 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-purple-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-800 mb-2", children: "2-Resistor Parallel Shortcut:" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-purple-300 my-2", children: "R_total = (R\u2081 \xD7 R\u2082) \xF7 (R\u2081 + R\u2082)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-mono text-center text-sm font-bold text-purple-700 my-2", children: "R_total = (R\u2081 \xD7 R\u2082) \xF7 (R\u2081 + R\u2082)" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600", children: "Example: R\u2081=6\u03A9, R\u2082=12\u03A9 \u2192 R_t = (6\xD712)\xF7(6+12) = 72\xF718 = 4\u03A9" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-500 mt-1", children: "Note: R_total is always LESS than either individual resistor" })
         ] })
       ] })
     ] })
   ] });
-  var AtomicModels = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0d0a1e] to-[#120a1e] rounded-xl p-8", children: [
+  var AtomicModels = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-8", children: "Evolution of Atomic Models" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
@@ -24325,7 +24365,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "50", cy: "50", r: "35", fill: "none", stroke: "#7C3AED", strokeWidth: "2" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-purple-900 mb-1", children: "Dalton (1803)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-300", children: "Solid Sphere" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-purple-700", children: "Solid Sphere" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-1", children: "Indivisible ball" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
@@ -24344,7 +24384,7 @@
           ].map((pos, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: pos.x, cy: pos.y, r: "3", fill: "#DC2626" }, i))
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-orange-900 mb-1", children: "Thomson (1897)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-300", children: "Plum Pudding" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-orange-700", children: "Plum Pudding" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-1", children: "Electrons in positive" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
@@ -24358,7 +24398,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "50", cy: "80", r: "3", fill: "#3B82F6" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-red-900 mb-1", children: "Rutherford (1911)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-300", children: "Nuclear Model" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-red-700", children: "Nuclear Model" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-1", children: "Dense nucleus" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-center", children: [
@@ -24371,11 +24411,11 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "22", cy: "50", r: "2.5", fill: "#10B981" })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", { className: "font-bold text-blue-900 mb-1", children: "Bohr (1913)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-300", children: "Planetary Model" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-blue-700", children: "Planetary Model" }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-gray-600 mt-1", children: "Energy levels" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-300 text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-6 bg-blue-100 rounded-lg p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-blue-700 text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "Evolution:" }),
       " From solid ball \u2192 embedded electrons \u2192 nuclear center \u2192 specific orbits"
     ] }) })
@@ -24534,7 +24574,7 @@
         size !== "small" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-[9px] text-gray-700 leading-tight px-0.5", children: el.name })
       ] });
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-[#0a0a12] to-[#0c0c14] rounded-xl p-4", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl p-4", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "text-center font-semibold text-gray-700 mb-4", children: "Complete Periodic Table of Elements" }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex flex-wrap justify-center gap-2 mb-4 text-xs", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1", children: [
@@ -24619,12 +24659,12 @@
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-4 grid grid-cols-2 gap-2 text-xs", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-red-50 rounded-lg p-2 border border-red-200", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-300 mb-1", children: "Group 1: Alkali Metals" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-300", children: "Soft, highly reactive, 1 valence e\u207B" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-red-700 mb-1", children: "Group 1: Alkali Metals" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-red-700", children: "Soft, highly reactive, 1 valence e\u207B" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-purple-50 rounded-lg p-2 border border-purple-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "font-bold text-purple-800 mb-1", children: "Group 18: Noble Gases" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-purple-300", children: "Unreactive, full outer shell" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-purple-700", children: "Unreactive, full outer shell" })
         ] })
       ] })
     ] });
@@ -28399,7 +28439,8 @@
     }
   ];
   function ScienceStudyLibrary() {
-    const [showIntro, setShowIntro] = (0, import_react3.useState)(true);
+    const scienceAiEnabled = false;
+    const [showIntro, setShowIntro] = (0, import_react3.useState)(false);
     const [selectedSubject, setSelectedSubject] = (0, import_react3.useState)(null);
     const [selectedSection, setSelectedSection] = (0, import_react3.useState)(null);
     const [searchTerm, setSearchTerm] = (0, import_react3.useState)("");
@@ -28432,8 +28473,7 @@
     const [currentFlashcard, setCurrentFlashcard] = (0, import_react3.useState)(0);
     const [isFlipped, setIsFlipped] = (0, import_react3.useState)(false);
     const [flashcardStats, setFlashcardStats] = (0, import_react3.useState)({ known: 0, learning: 0 });
-    const [showFeatureHighlights, setShowFeatureHighlights] = (0, import_react3.useState)(false);
-    const internalAIAssistantEnabled = false;
+    const [showFeatureHighlights, setShowFeatureHighlights] = (0, import_react3.useState)(true);
     const [unlockedAchievements, setUnlockedAchievements] = (0, import_react3.useState)(/* @__PURE__ */ new Set());
     const [newAchievement, setNewAchievement] = (0, import_react3.useState)(null);
     const [showAchievements, setShowAchievements] = (0, import_react3.useState)(false);
@@ -28461,6 +28501,14 @@
     ]);
     const [aiInput, setAiInput] = (0, import_react3.useState)("");
     const [isAiThinking, setIsAiThinking] = (0, import_react3.useState)(false);
+    (0, import_react3.useEffect)(() => {
+      setShowIntro(false);
+      setSelectedSubject(null);
+      setSelectedSection(null);
+      if (window.location.hash) {
+        window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+      }
+    }, []);
     (0, import_react3.useEffect)(() => {
       let interval;
       if (isTimerRunning && currentStudySession) {
@@ -28511,7 +28559,7 @@
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs text-gray-700 leading-relaxed", children: row })
             ] }, j)) })
           ] }, i)) }),
-          typeof summary === "string" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 border border-amber-200 rounded-xl p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-amber-300 leading-relaxed", children: summary }) })
+          typeof summary === "string" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-amber-50 border border-amber-200 rounded-xl p-3", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-amber-700 leading-relaxed", children: summary }) })
         ] });
       }
       if (layout === "formula" && items.length > 0) {
@@ -28528,7 +28576,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-1", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg", children: item.icon }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-semibold text-sm text-gray-800", children: item.label }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "ml-auto text-xs font-bold text-red-300", children: item.value })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "ml-auto text-xs font-bold text-red-700", children: item.value })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-full bg-gray-200 rounded-full h-2 overflow-hidden", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `h-full rounded-full ${item.barColor || "bg-red-500"}`, style: { width: `${item.pct || 50}%` } }) })
         ] }, i)) });
@@ -28927,21 +28975,21 @@ Student question: ${userMessage}`
               "What's Included in Premium?"
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "grid md:grid-cols-2 gap-4 mb-6", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl border-2 border-blue-200", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Advanced Quiz Library" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "4 premium quizzes with 50+ advanced questions personally crafted by Dean" })
                 ] })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl border-2 border-green-200", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Exclusive Flashcard Sets" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: "50+ additional flashcards with expert explanations" })
                 ] })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl border-2 border-purple-200", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center flex-shrink-0 font-bold", children: "\u2713" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-gray-800 mb-1", children: "Detailed Study Guides" }),
@@ -28983,7 +29031,7 @@ Student question: ${userMessage}`
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-20 h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trophy, { className: "w-10 h-10" }) })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-2xl p-6 border-2 border-blue-200 mb-6", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-4", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 mb-6", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-4", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Brain, { className: "w-6 h-6 text-white" }) }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "text-lg font-bold text-gray-800 mb-2", children: "Why Premium is Worth It" }),
@@ -29133,14 +29181,14 @@ Student question: ${userMessage}`
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800 mb-1", children: item.section.title }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600", children: item.subject.name })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-right flex-shrink-0 ml-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `px-3 py-1 rounded-lg text-sm font-semibold ${item.completed ? "bg-green-100 text-green-300" : (currentStudySession == null ? void 0 : currentStudySession.id) === item.id ? "bg-blue-100 text-blue-300" : "bg-gray-100 text-gray-700"}`, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-right flex-shrink-0 ml-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: `px-3 py-1 rounded-lg text-sm font-semibold ${item.completed ? "bg-green-100 text-green-700" : (currentStudySession == null ? void 0 : currentStudySession.id) === item.id ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-700"}`, children: [
                     item.estimatedTime,
                     " min"
                   ] }) })
                 ] }),
                 (currentStudySession == null ? void 0 : currentStudySession.id) === item.id && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-blue-100 rounded-lg p-3 mb-3", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-between", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-sm font-semibold text-blue-300", children: "Time Elapsed:" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-sm font-semibold text-blue-700", children: "Time Elapsed:" }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-2xl font-bold text-blue-600", children: formatTime(studyTimer) })
                   ] }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 w-full bg-blue-200 rounded-full h-2 overflow-hidden", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
@@ -29386,7 +29434,7 @@ Student question: ${userMessage}`
             );
           }) }),
           quizState.showExplanation && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "p-3 rounded-lg mb-4 bg-blue-50 border-2 border-blue-200", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-300 mb-1", children: quizState.selectedAnswer === question.correct ? "\u2713 Correct!" : "Explanation:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-semibold text-blue-700 mb-1", children: quizState.selectedAnswer === question.correct ? "\u2713 Correct!" : "Explanation:" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-700", children: question.explanation })
           ] }),
           !quizState.showExplanation ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
@@ -29438,7 +29486,7 @@ Student question: ${userMessage}`
         ] });
       }
       const isWorksheet = subject.id === "worksheets";
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "h-full overflow-y-auto p-6 bg-gradient-to-br from-[#0a0a12] to-[#111118]", children: [
+      return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "h-full overflow-y-auto p-6 bg-gradient-to-br from-slate-50 to-gray-50", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-between mb-4", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "text-xl font-bold text-gray-800", children: section.title }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
@@ -29495,10 +29543,10 @@ Student question: ${userMessage}`
       ] });
     };
     if (splitScreenMode) {
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "h-screen flex flex-col bg-gradient-to-br from-[#0a0a12] to-[#111118]", children: [
+      return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "h-screen flex flex-col bg-gradient-to-br from-slate-50 to-gray-50", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AchievementPopup, { achievement: newAchievement }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AchievementsModal, {}),
-        internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+        scienceAiEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -29557,7 +29605,7 @@ Student question: ${userMessage}`
             )
           ] }) })
         ] }),
-        internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+        scienceAiEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: () => setShowAIAssistant(true),
@@ -29577,7 +29625,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, { className: "w-5 h-5" }) }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { className: "text-xl font-bold", children: "Split Screen Study Mode" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-300", children: "View notes and quizzes side by side" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-600", children: "View notes and quizzes side by side" })
             ] })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
@@ -29619,7 +29667,7 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)(subject.icon, { className: "w-5 h-5 text-white" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", { className: "font-bold text-white text-sm", children: subject.name })
               ] }) }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "p-2 space-y-1", children: subject.sections.map((section) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "p-2 space-y-1", children: subject.sections.map((section, sectionIndex) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
                 "button",
                 {
                   onClick: () => {
@@ -29650,7 +29698,7 @@ Student question: ${userMessage}`
                     section.locked && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "ml-auto text-xs text-gray-600", children: "(Premium)" })
                   ] })
                 },
-                section.id
+                `${subject.id}-${section.id}-${sectionIndex}`
               )) })
             ] }, subject.id)) })
           ] }),
@@ -29666,7 +29714,7 @@ Student question: ${userMessage}`
       const progress = (currentFlashcard + 1) / selectedSection.flashcards.length * 100;
       return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "min-h-screen bg-[#f5f4f0] soul-grid", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SoulStyles, {}),
-        internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+        scienceAiEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -29725,7 +29773,7 @@ Student question: ${userMessage}`
             )
           ] }) })
         ] }),
-        internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+        scienceAiEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: () => setShowAIAssistant(true),
@@ -29891,7 +29939,7 @@ Student question: ${userMessage}`
       const progress = (currentQuestion + 1) / currentQuiz.quiz.length * 100;
       return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "min-h-screen bg-[#f5f4f0] soul-grid", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SoulStyles, {}),
-        internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+        scienceAiEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -29950,7 +29998,7 @@ Student question: ${userMessage}`
             )
           ] }) })
         ] }),
-        internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+        scienceAiEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: () => setShowAIAssistant(true),
@@ -30055,7 +30103,7 @@ Student question: ${userMessage}`
             showExplanation && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `p-4 rounded-xl mb-6 ${isCorrect ? "bg-green-50 border-2 border-green-200" : "bg-blue-50 border-2 border-blue-200"}`, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lightbulb, { className: `w-6 h-6 flex-shrink-0 ${isCorrect ? "text-green-600" : "text-blue-600"}` }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: `font-semibold mb-1 ${isCorrect ? "text-green-300" : "text-blue-300"}`, children: isCorrect ? "\u2713 Correct!" : "Explanation:" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: `font-semibold mb-1 ${isCorrect ? "text-green-700" : "text-blue-700"}`, children: isCorrect ? "\u2713 Correct!" : "Explanation:" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700", children: question.explanation })
               ] })
             ] }) }),
@@ -30087,7 +30135,7 @@ Student question: ${userMessage}`
       if (hasQuiz && !currentQuiz) {
         return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "min-h-screen bg-[#f5f4f0] soul-grid", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SoulStyles, {}),
-          internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+          scienceAiEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -30146,7 +30194,7 @@ Student question: ${userMessage}`
               )
             ] }) })
           ] }),
-          internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+          scienceAiEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
             "button",
             {
               onClick: () => setShowAIAssistant(true),
@@ -30285,7 +30333,7 @@ Student question: ${userMessage}`
             "button",
             {
               onClick: () => toggleRead(section.id),
-              className: `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${isRead ? "bg-green-100 text-green-300 hover:bg-green-200" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"}`,
+              className: `flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${isRead ? "bg-green-100 text-green-700 hover:bg-green-200" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"}`,
               children: [
                 isRead ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheckBig, { className: "w-5 h-5" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Circle, { className: "w-5 h-5" }),
                 isRead ? "Completed" : "Mark as Complete"
@@ -30349,7 +30397,7 @@ Student question: ${userMessage}`
               ),
               (!isCollapsible || isExpanded) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "p-6 bg-gray-50", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: renderNotePoints(note, selectedSubject.gradient) }),
-                note.diagram && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-6 p-4 bg-gradient-to-br from-[#0a0a12] to-[#111118] rounded-xl border border-gray-200 shadow-inner", children: [
+                note.diagram && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-6 p-4 bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl border border-gray-200 shadow-inner", children: [
                   note.diagram === "lewis" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LewisDotDiagram, {}),
                   note.diagram === "bohr" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BohrDiagram, {}),
                   note.diagram === "energy-pyramid" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EnergyPyramid, {}),
@@ -30455,7 +30503,7 @@ Student question: ${userMessage}`
               }
             ) }) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `grid md:grid-cols-2 lg:grid-cols-3 gap-4 ${mobileMode ? "grid-cols-1" : ""}`, children: subject.sections.map((section) => {
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `grid md:grid-cols-2 lg:grid-cols-3 gap-4 ${mobileMode ? "grid-cols-1" : ""}`, children: subject.sections.map((section, sectionIndex) => {
             const isRead = readSections.has(section.id);
             const hasQuiz = section.quiz && section.quiz.length > 0;
             const hasFlashcards = section.flashcards && section.flashcards.length > 0;
@@ -30477,7 +30525,7 @@ Student question: ${userMessage}`
                     ] })
                   ] })
                 },
-                section.id
+                `${subject.id}-${section.id}-${sectionIndex}-header`
               );
             }
             return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
@@ -30502,14 +30550,14 @@ Student question: ${userMessage}`
                     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
                       hasQuiz && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1 px-2 py-1 bg-indigo-50 rounded-md", children: [
                         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, { className: "w-3 h-3 text-indigo-600" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs font-medium text-indigo-300", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs font-medium text-indigo-700", children: [
                           section.quiz.length,
                           " questions"
                         ] })
                       ] }),
                       hasFlashcards && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1 px-2 py-1 bg-cyan-50 rounded-md", children: [
                         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Brain, { className: "w-3 h-3 text-cyan-600" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs font-medium text-cyan-300", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs font-medium text-cyan-700", children: [
                           section.flashcards.length,
                           " cards"
                         ] })
@@ -30523,7 +30571,7 @@ Student question: ${userMessage}`
                       ] }),
                       isLocked && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1 px-2 py-1 bg-yellow-50 rounded-md", children: [
                         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Award, { className: "w-3 h-3 text-yellow-600" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs font-medium text-yellow-300", children: "Premium" })
+                        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs font-medium text-yellow-700", children: "Premium" })
                       ] })
                     ] }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-between text-xs text-gray-500", children: [
@@ -30533,7 +30581,7 @@ Student question: ${userMessage}`
                   ] })
                 ]
               },
-              section.id
+              `${subject.id}-${section.id}-${sectionIndex}`
             );
           }) }),
           subject.sections.some((s) => s.locked) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-8 bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 rounded-2xl p-8 text-white shadow-2xl relative overflow-hidden", children: [
@@ -30590,7 +30638,7 @@ Student question: ${userMessage}`
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center animate-bounce", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, { className: "w-8 h-8" }) }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { className: "text-3xl font-bold soul-font-display", children: "Welcome to Soul Study" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-slate-300", children: "Grade 9 Science \u2022 Appleby College" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-slate-600", children: "Grade 9 Science \u2022 Appleby College" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-slate-400 text-sm mt-1", children: "Created by Dean Concepcion" })
             ] })
           ] })
@@ -30645,8 +30693,8 @@ Student question: ${userMessage}`
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-teal-50 rounded-xl", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold flex-shrink-0", children: "5" }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-semibold text-gray-800 mb-1", children: "Use Annotation & Study Planner" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700 text-sm", children: "Use the annotation tools for quick markup, and the Study Planner to schedule sessions with automatic time tracking." })
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-semibold text-gray-800 mb-1", children: "Use AI Assistant & Study Planner" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-gray-700 text-sm", children: "Ask L.Y.N.E AI for help (blue sparkle button), and use the Study Planner to schedule sessions with automatic time tracking." })
                 ] })
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-start gap-3 p-4 bg-purple-50 rounded-xl", children: [
@@ -30669,9 +30717,9 @@ Student question: ${userMessage}`
                   ' Click "+ Add to Plan" on sections to build your custom schedule with time estimates'
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-                  "\u270D\uFE0F ",
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Annotation:" }),
-                  " Mark up diagrams and notes directly while you study difficult sections"
+                  "\u{1F916} ",
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "AI Help:" }),
+                  " Stuck? Ask L.Y.N.E AI (blue sparkle button) to explain concepts or create practice questions"
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
                   "\u{1F4F1} ",
@@ -30717,7 +30765,7 @@ Student question: ${userMessage}`
       if (hasMatchingContent) return true;
       return false;
     });
-    const FeatureHighlights = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mb-8 bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-2xl p-6 border-2 border-blue-200 relative", children: [
+    const FeatureHighlights = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 relative", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
         "button",
         {
@@ -30738,10 +30786,10 @@ Student question: ${userMessage}`
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-blue-100 hover:border-blue-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-5 h-5 text-blue-500" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "Annotation Tools" })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { className: "font-bold text-gray-800", children: "L.Y.N.E AI Assistant" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Mark diagrams, sketch ideas, and write quick reminders while you study" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-blue-600 font-semibold", children: "\u2192 Use the annotation controls on the page" })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-2", children: "Chat with AI for explanations, practice questions, and help" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-blue-600 font-semibold", children: "\u2192 Click the blue sparkle button (bottom-right corner)" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-white rounded-xl p-4 border-2 border-indigo-100 hover:border-indigo-300 transition-all hover:shadow-md", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -30797,9 +30845,9 @@ Student question: ${userMessage}`
             " to organize sessions with automatic time tracking"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90 mb-2", children: [
-            "\u2022 Use ",
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "annotation tools" }),
-            " to mark diagrams and keep quick study notes in context"
+            "\u2022 Ask ",
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "font-bold", children: "L.Y.N.E AI" }),
+            " to explain tricky concepts or create custom practice questions"
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-sm text-white/90", children: [
             "\u2022 Enable ",
@@ -30815,7 +30863,7 @@ Student question: ${userMessage}`
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AchievementsModal, {}),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(StudyPlannerModal, {}),
       /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PremiumInterestModal, {}),
-      internalAIAssistantEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
+      scienceAiEnabled && showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden", children: [
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center relative", children: [
@@ -30874,7 +30922,7 @@ Student question: ${userMessage}`
           )
         ] }) })
       ] }),
-      internalAIAssistantEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+      scienceAiEnabled && !showAIAssistant && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
         "button",
         {
           onClick: () => setShowAIAssistant(true),
@@ -30931,11 +30979,11 @@ Student question: ${userMessage}`
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { className: "soul-font-display text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-cyan-400 via-[#7c5cfc] to-[#00ff9d] bg-clip-text text-transparent tracking-tight animate-soul-gradient drop-shadow-2xl animate-gradient", style: { backgroundSize: "200% 200%" }, children: "Science Study Library" }),
                   /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3 flex-wrap", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-700 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000" }),
                       "Grade 9"
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-700 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000" }),
                       "Appleby College"
                     ] })
@@ -30962,7 +31010,7 @@ Student question: ${userMessage}`
               )
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mb-6", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "inline-block bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-2xl p-1 shadow-2xl hover:shadow-emerald-500/50 transition-all group", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bg-slate-900/80 backdrop-blur-xl rounded-xl px-6 py-3 group-hover:bg-slate-900/90 transition-all", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-white font-black text-xl md:text-2xl tracking-wide text-center bg-gradient-to-r from-white via-emerald-200 to-white bg-clip-text", children: "\u{1F50C} Plug In. \u{1F4DA} Study Smart. \u{1F680} Succeed Fast." }) }) }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-slate-300 text-lg max-w-3xl", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-slate-600 text-lg max-w-3xl", children: [
               "Your complete science companion with ",
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-emerald-400 font-bold", children: "70+ flashcards" }),
               ",",
@@ -30979,7 +31027,7 @@ Student question: ${userMessage}`
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "group-hover/stat:translate-x-1 transition-all duration-300", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-green-400 transition-colors", children: readSections.size }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors", children: "Sections Completed" })
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-400 group-hover/stat:text-slate-600 transition-colors", children: "Sections Completed" })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-green-500/0 group-hover/stat:bg-green-500/10 rounded-lg blur-xl transition-colors duration-500" })
               ] }),
@@ -30992,7 +31040,7 @@ Student question: ${userMessage}`
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "group-hover/stat:translate-x-1 transition-all duration-300", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-yellow-400 transition-colors", children: unlockedAchievements.size }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors", children: "Achievements Unlocked" })
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-400 group-hover/stat:text-slate-600 transition-colors", children: "Achievements Unlocked" })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-yellow-500/0 group-hover/stat:bg-yellow-500/10 rounded-lg blur-xl transition-colors duration-500" })
               ] }),
@@ -31005,7 +31053,7 @@ Student question: ${userMessage}`
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "group-hover/stat:translate-x-1 transition-all duration-300", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-blue-400 transition-colors", children: stats.quizCorrect }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors", children: "Quiz Questions Correct" })
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-slate-400 group-hover/stat:text-slate-600 transition-colors", children: "Quiz Questions Correct" })
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-blue-500/0 group-hover/stat:bg-blue-500/10 rounded-lg blur-xl transition-colors duration-500" })
               ] }),
@@ -31020,7 +31068,7 @@ Student question: ${userMessage}`
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", { className: "w-5 h-5 group-hover/planner:rotate-12 transition-transform duration-300 relative z-10", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-left relative z-10", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold", children: "Study Planner" }),
-                      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-slate-300", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-xs text-slate-600", children: [
                         studyPlan.length,
                         " sessions"
                       ] })
@@ -31039,7 +31087,7 @@ Student question: ${userMessage}`
                     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", { className: "w-5 h-5", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-left", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold", children: "Dark Mode" }),
-                      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-300 font-semibold", children: "Premium" })
+                      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-700 font-semibold", children: "Premium" })
                     ] })
                   ]
                 }
@@ -31056,7 +31104,7 @@ Student question: ${userMessage}`
                       /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", { className: "w-5 h-5", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" }) }),
                       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-left", children: [
                         /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm font-bold", children: "View Mode" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-300 font-semibold", children: "Premium" })
+                        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-xs text-yellow-700 font-semibold", children: "Premium" })
                       ] })
                     ] })
                   ]
@@ -31130,7 +31178,7 @@ Student question: ${userMessage}`
             ]
           }
         ),
-        searchTerm && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mb-6 bg-blue-50 border-2 border-blue-200 rounded-xl p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-blue-300", children: [
+        searchTerm && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mb-6 bg-blue-50 border-2 border-blue-200 rounded-xl p-4", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { className: "text-blue-700", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "font-semibold", children: [
             "Found ",
             filteredSubjects.length,
@@ -31288,7 +31336,7 @@ Student question: ${userMessage}`
             }) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-12 mb-8 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "inline-block bg-gradient-to-r from-[#181208] to-[#181408] rounded-2xl px-8 py-4 border-2 border-amber-200", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-12 mb-8 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "inline-block bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl px-8 py-4 border-2 border-amber-200", children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm text-gray-600 mb-1", children: "Special Thanks to Our Sponsors" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3 justify-center flex-wrap", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg font-bold text-amber-600", children: "\u2B50" }),
@@ -31308,7 +31356,7 @@ Student question: ${userMessage}`
     ] });
   }
 
-  // acelabs/grade9-science-vite/science-study-entry.tsx
+  // science-study-entry.tsx
   var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
   var rootElement = document.getElementById("root");
   if (!rootElement) {
@@ -31317,44 +31365,6 @@ Student question: ${userMessage}`
   (0, import_client.createRoot)(rootElement).render(
     /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react4.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ScienceStudyLibrary, {}) })
   );
-  function normalize(value) {
-    return (value || "").replace(/\s+/g, " ").trim().toLowerCase();
-  }
-  function getSubjectLabel() {
-    const params = new URLSearchParams(window.location.search);
-    const requested = normalize(params.get("subject") || window.location.hash.replace(/^#/, ""));
-    if (requested === "physics" || requested === "electricity") return "Physics: Electricity";
-    if (requested === "biology") return "Biology: Biodiversity";
-    if (requested === "chemistry") return "Chemistry: Matter";
-    if (requested === "space") return "Space Science";
-    return "";
-  }
-  function openRequestedSubject() {
-    const target = normalize(getSubjectLabel());
-    if (!target) return true;
-    const nodes = document.querySelectorAll("h1, h2, h3, h4, button, a, div, span, p");
-    for (const node of nodes) {
-      const text = normalize(node.textContent || "");
-      if (!text || text !== target && !text.includes(target)) continue;
-      const clickable = node.closest(".cursor-pointer");
-      if (clickable) {
-        clickable.click();
-        return true;
-      }
-    }
-    return false;
-  }
-  function mountSubjectRouting() {
-    if (openRequestedSubject()) return;
-    let attempts = 0;
-    const observer = new MutationObserver(() => {
-      attempts += 1;
-      if (openRequestedSubject() || attempts > 150) observer.disconnect();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  }
-  mountSubjectRouting();
-  window.addEventListener("hashchange", mountSubjectRouting);
 })();
 /*! Bundled license information:
 

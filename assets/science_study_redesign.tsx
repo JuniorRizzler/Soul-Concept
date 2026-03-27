@@ -88,6 +88,10 @@ const SoulStyles = () => (
 
     /* Backgrounds -- undo dark overrides */
     .bg-white    { background-color: #ffffff !important; }
+    .bg-white\/5 { background-color: rgba(255,255,255,0.05) !important; }
+    .bg-white\/10 { background-color: rgba(255,255,255,0.10) !important; }
+    .bg-white\/20 { background-color: rgba(255,255,255,0.20) !important; }
+    .bg-white\/30 { background-color: rgba(255,255,255,0.30) !important; }
     .bg-gray-50  { background-color: #f9fafb !important; }
     .bg-gray-100 { background-color: #f3f4f6 !important; }
     .bg-gray-200 { background-color: #e5e7eb !important; }
@@ -110,6 +114,9 @@ const SoulStyles = () => (
     }
 
     /* Text -- restore dark text */
+    .text-white { color: #ffffff !important; }
+    .text-white\/90 { color: rgba(255,255,255,0.90) !important; }
+    .text-white\/80 { color: rgba(255,255,255,0.80) !important; }
     .text-gray-800 { color: #111827 !important; }
     .text-gray-200 { color: #1f2937 !important; }
     .text-gray-700 { color: #374151 !important; }
@@ -117,23 +124,26 @@ const SoulStyles = () => (
     .text-gray-500 { color: #6b7280 !important; }
 
     /* Colored text -- keep vivid (these are fine already) */
-    .text-blue-300   { color: #2563eb !important; }
-    .text-green-300  { color: #059669 !important; }
-    .text-red-300    { color: #dc2626 !important; }
-    .text-amber-300  { color: #d97706 !important; }
-    .text-purple-300 { color: #7c3aed !important; }
-    .text-indigo-300 { color: #4f46e5 !important; }
-    .text-teal-300   { color: #0d9488 !important; }
-    .text-cyan-300   { color: #0891b2 !important; }
-    .text-orange-300 { color: #ea580c !important; }
-    .text-yellow-300 { color: #ca8a04 !important; }
-    .text-pink-300   { color: #db2777 !important; }
+    .text-blue-700   { color: #2563eb !important; }
+    .text-green-700  { color: #059669 !important; }
+    .text-red-700    { color: #dc2626 !important; }
+    .text-amber-700  { color: #d97706 !important; }
+    .text-purple-700 { color: #7c3aed !important; }
+    .text-indigo-700 { color: #4f46e5 !important; }
+    .text-teal-700   { color: #0d9488 !important; }
+    .text-cyan-700   { color: #0891b2 !important; }
+    .text-orange-700 { color: #ea580c !important; }
+    .text-yellow-700 { color: #ca8a04 !important; }
+    .text-pink-700   { color: #db2777 !important; }
 
     /* Borders -- restore subtle light borders */
     [class*="border-gray-100"],  [class*="border-white\/8"]  { border-color: rgba(0,0,0,0.07) !important; }
     [class*="border-gray-200"], [class*="border-white\/10"] { border-color: rgba(0,0,0,0.08) !important; }
     [class*="border-gray-200"], [class*="border-white\/15"] { border-color: rgba(0,0,0,0.10) !important; }
     [class*="border-gray-300"], [class*="border-white\/20"] { border-color: rgba(0,0,0,0.12) !important; }
+    .border-white\/20 { border-color: rgba(255,255,255,0.20) !important; }
+    .border-white\/30 { border-color: rgba(255,255,255,0.30) !important; }
+    .border-white\/40 { border-color: rgba(255,255,255,0.40) !important; }
 
     /* Progress bars */
     [class*="bg-gray-200"], [class*="bg-white\/10"] { background-color: rgba(0,0,0,0.08) !important; }
@@ -237,6 +247,36 @@ const SoulStyles = () => (
 
     /* SVG text -- back to dark */
     svg text { fill: #374151 !important; }
+    .lucide {
+      display: inline-block;
+      flex-shrink: 0;
+      color: currentColor !important;
+      stroke: currentColor !important;
+      fill: none !important;
+      stroke-width: 2.25 !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .lucide * { vector-effect: non-scaling-stroke; }
+    .text-white .lucide,
+    .lucide.text-white,
+    .text-white\/90 .lucide,
+    .lucide.text-white\/90 { color: #ffffff !important; }
+    .text-gray-600 .lucide,
+    .lucide.text-gray-600 { color: #4b5563 !important; }
+    .text-gray-700 .lucide,
+    .lucide.text-gray-700 { color: #374151 !important; }
+
+    /* Preserve the glassmorphism pills used behind icons */
+    [class*="bg-white\\/20"][class*="backdrop-blur"] {
+      background-color: rgba(255,255,255,0.20) !important;
+    }
+    [class*="bg-white\\/10"][class*="backdrop-blur"] {
+      background-color: rgba(255,255,255,0.10) !important;
+    }
+    [class*="hover:bg-white\\/20"]:hover {
+      background-color: rgba(255,255,255,0.20) !important;
+    }
 
     /* Hover states */
     .hover\:bg-gray-50:hover  { background-color: #f9fafb !important; }
@@ -262,7 +302,7 @@ const SoulStyles = () => (
 );
 // Diagram Components
 const LewisDotDiagram = () => (
-  <div className="bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-100">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Lewis Dot Diagram Examples</h4>
     <div className="flex justify-around items-center flex-wrap gap-8">
       {[
@@ -302,7 +342,7 @@ const LewisDotDiagram = () => (
       ))}
     </div>
     <div className="mt-6 bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-300 text-center">
+      <p className="text-sm text-blue-800 text-center">
         <span className="font-bold">Key Point:</span> The number of dots = number of valence electrons = group number (for main groups)
       </p>
     </div>
@@ -310,7 +350,7 @@ const LewisDotDiagram = () => (
 );
 
 const PhotosynthesisDiagram = () => (
-  <div className="bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-100">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Photosynthesis Equation</h4>
     <div className="flex items-center justify-center gap-4 flex-wrap">
       {/* Reactants */}
@@ -370,7 +410,7 @@ const PhotosynthesisDiagram = () => (
     </div>
 
     <div className="mt-6 bg-green-100 rounded-lg p-4">
-      <p className="text-sm text-green-300 text-center">
+      <p className="text-sm text-green-800 text-center">
         <span className="font-bold">Key Point:</span> Plants use sunlight energy to convert CO₂ and water into glucose (their food) and oxygen (which we breathe)!
       </p>
     </div>
@@ -378,7 +418,7 @@ const PhotosynthesisDiagram = () => (
 );
 
 const CellRespirationDiagram = () => (
-  <div className="bg-gradient-to-br from-[#150808] to-[#180d04] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8 border border-red-100">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Cellular Respiration Equation</h4>
     <div className="flex items-center justify-center gap-4 flex-wrap">
       {/* Reactants */}
@@ -443,7 +483,7 @@ const CellRespirationDiagram = () => (
     </div>
 
     <div className="mt-6 bg-red-100 rounded-lg p-4">
-      <p className="text-sm text-red-300 text-center">
+      <p className="text-sm text-red-800 text-center">
         <span className="font-bold">Key Point:</span> Opposite of photosynthesis! Organisms break down glucose with oxygen to release energy (ATP) for living.
       </p>
     </div>
@@ -451,7 +491,7 @@ const CellRespirationDiagram = () => (
 );
 
 const FoodChainDiagram = () => (
-  <div className="bg-gradient-to-br from-[#181208] to-[#180f04] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8 border border-amber-100">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Terrestrial Food Chain Example</h4>
     
     <div className="flex items-center justify-center gap-3 mb-6 flex-wrap">
@@ -460,7 +500,7 @@ const FoodChainDiagram = () => (
         <div className="w-32 h-32 rounded-xl bg-green-500 flex items-center justify-center shadow-lg mb-2">
           <span className="text-6xl">🌾</span>
         </div>
-        <p className="font-bold text-green-300">Grass</p>
+        <p className="font-bold text-green-700">Grass</p>
         <p className="text-xs text-gray-600">Producer</p>
         <p className="text-xs text-green-600 font-bold mt-1">10,000 kcal</p>
       </div>
@@ -496,14 +536,14 @@ const FoodChainDiagram = () => (
         <div className="w-32 h-32 rounded-xl bg-red-500 flex items-center justify-center shadow-lg mb-2">
           <span className="text-6xl">🐍</span>
         </div>
-        <p className="font-bold text-red-300">Snake</p>
+        <p className="font-bold text-red-700">Snake</p>
         <p className="text-xs text-gray-600">Tertiary Consumer</p>
         <p className="text-xs text-red-600 font-bold mt-1">10 kcal</p>
       </div>
     </div>
 
     <div className="bg-amber-100 rounded-lg p-4">
-      <p className="text-sm text-amber-300 text-center">
+      <p className="text-sm text-amber-800 text-center">
         <span className="font-bold">Energy Flow:</span> Notice how only 10% of energy transfers to each level (10,000 → 1,000 → 100 → 10)
       </p>
     </div>
@@ -520,7 +560,7 @@ const AquaticFoodChainDiagram = () => (
         <div className="w-32 h-32 rounded-xl bg-green-400 flex items-center justify-center shadow-lg mb-2">
           <span className="text-6xl">🦠</span>
         </div>
-        <p className="font-bold text-green-300">Phytoplankton</p>
+        <p className="font-bold text-green-700">Phytoplankton</p>
         <p className="text-xs text-gray-600">Producer</p>
         <p className="text-xs text-green-600 font-bold mt-1">50,000 kcal</p>
       </div>
@@ -556,14 +596,14 @@ const AquaticFoodChainDiagram = () => (
         <div className="w-32 h-32 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg mb-2">
           <span className="text-6xl">🦈</span>
         </div>
-        <p className="font-bold text-blue-100">Shark</p>
-        <p className="text-xs text-blue-200">Tertiary Consumer</p>
-        <p className="text-xs text-blue-100 font-bold mt-1">50 kcal</p>
+        <p className="font-bold text-blue-800">Shark</p>
+        <p className="text-xs text-gray-600">Tertiary Consumer</p>
+        <p className="text-xs text-blue-700 font-bold mt-1">50 kcal</p>
       </div>
     </div>
 
     <div className="bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-300 text-center">
+      <p className="text-sm text-blue-800 text-center">
         <span className="font-bold">Ocean Food Chain:</span> Starts with microscopic phytoplankton that use sunlight to make food through photosynthesis
       </p>
     </div>
@@ -571,7 +611,7 @@ const AquaticFoodChainDiagram = () => (
 );
 
 const NitrogenCycleDiagram = () => (
-  <div className="bg-gradient-to-br from-[#0d0a1e] to-[#120a1e] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8 border border-indigo-100">
     <h4 className="text-center font-semibold text-gray-700 mb-6">The Nitrogen Cycle</h4>
     <div className="relative h-96">
       <svg viewBox="0 0 500 400" className="w-full h-full">
@@ -650,33 +690,33 @@ const NitrogenCycleDiagram = () => (
 
     <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
       <div className="bg-green-100 rounded-lg p-2">
-        <span className="font-bold text-green-300">Fixation:</span>
-        <p className="text-green-300">N₂ → NH₃ (bacteria/lightning)</p>
+        <span className="font-bold text-green-700">Fixation:</span>
+        <p className="text-green-700">N₂ → NH₃ (bacteria/lightning)</p>
       </div>
       <div className="bg-orange-100 rounded-lg p-2">
         <span className="font-bold text-orange-800">Nitrification:</span>
-        <p className="text-orange-300">NH₃ → NO₂⁻ → NO₃⁻ (bacteria)</p>
+        <p className="text-orange-700">NH₃ → NO₂⁻ → NO₃⁻ (bacteria)</p>
       </div>
       <div className="bg-purple-100 rounded-lg p-2">
         <span className="font-bold text-purple-800">Ammonification:</span>
-        <p className="text-purple-300">Dead matter → NH₄⁺</p>
+        <p className="text-purple-700">Dead matter → NH₄⁺</p>
       </div>
       <div className="bg-blue-100 rounded-lg p-2">
-        <span className="font-bold text-blue-300">Denitrification:</span>
-        <p className="text-blue-300">NO₃⁻ → N₂ (back to air)</p>
+        <span className="font-bold text-blue-700">Denitrification:</span>
+        <p className="text-blue-700">NO₃⁻ → N₂ (back to air)</p>
       </div>
     </div>
   </div>
 );
 
 const DensityComparisonDiagram = () => (
-  <div className="bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Density Comparison - Floating vs Sinking</h4>
     
     <div className="grid md:grid-cols-2 gap-6">
       {/* Object Floats */}
       <div className="bg-white rounded-xl p-4 border-2 border-blue-300">
-        <h5 className="text-center font-bold text-blue-300 mb-4">Object Floats ⬆️</h5>
+        <h5 className="text-center font-bold text-blue-700 mb-4">Object Floats ⬆️</h5>
         <div className="relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400">
           {/* Water level */}
           <div className="absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500"></div>
@@ -690,12 +730,12 @@ const DensityComparisonDiagram = () => (
           </div>
           
           {/* Water label */}
-          <div className="absolute bottom-4 right-4 text-blue-300 font-bold text-sm">
+          <div className="absolute bottom-4 right-4 text-blue-700 font-bold text-sm">
             Water: 1.0 g/cm³
           </div>
         </div>
         <div className="mt-3 bg-green-100 rounded-lg p-3">
-          <p className="text-sm text-green-300 text-center">
+          <p className="text-sm text-green-700 text-center">
             <span className="font-bold">0.6 &lt; 1.0</span><br/>
             Object density &lt; Water density<br/>
             = FLOATS! 🎈
@@ -705,7 +745,7 @@ const DensityComparisonDiagram = () => (
 
       {/* Object Sinks */}
       <div className="bg-white rounded-xl p-4 border-2 border-red-300">
-        <h5 className="text-center font-bold text-red-300 mb-4">Object Sinks ⬇️</h5>
+        <h5 className="text-center font-bold text-red-700 mb-4">Object Sinks ⬇️</h5>
         <div className="relative h-64 bg-gradient-to-b from-blue-100 to-blue-300 rounded-lg border-2 border-blue-400">
           {/* Water level */}
           <div className="absolute top-0 left-0 right-0 h-3/4 bg-blue-400/30 border-b-2 border-blue-500"></div>
@@ -719,12 +759,12 @@ const DensityComparisonDiagram = () => (
           </div>
           
           {/* Water label */}
-          <div className="absolute bottom-4 right-4 text-blue-300 font-bold text-sm">
+          <div className="absolute bottom-4 right-4 text-blue-700 font-bold text-sm">
             Water: 1.0 g/cm³
           </div>
         </div>
         <div className="mt-3 bg-red-100 rounded-lg p-3">
-          <p className="text-sm text-red-300 text-center">
+          <p className="text-sm text-red-700 text-center">
             <span className="font-bold">2.5 &gt; 1.0</span><br/>
             Object density &gt; Water density<br/>
             = SINKS! ⚓
@@ -734,7 +774,7 @@ const DensityComparisonDiagram = () => (
     </div>
 
     <div className="mt-6 bg-indigo-100 rounded-lg p-4">
-      <p className="text-sm text-indigo-300 text-center">
+      <p className="text-sm text-indigo-700 text-center">
         <span className="font-bold">Rule:</span> If object density is less than liquid density → floats. If greater → sinks!
       </p>
     </div>
@@ -742,7 +782,7 @@ const DensityComparisonDiagram = () => (
 );
 
 const IonDiagram = () => (
-  <div className="bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Ion Formation Examples</h4>
     
     {/* Cation Example - Sodium */}
@@ -814,7 +854,7 @@ const IonDiagram = () => (
           <p className="text-xs text-gray-600 mt-2">11 protons, 10 electrons</p>
           <p className="text-xs font-bold text-red-600">Charge: +1 (cation)</p>
           <div className="mt-2 inline-block bg-red-100 px-3 py-1 rounded-full">
-            <p className="text-xs text-red-300 font-bold">11p⁺ - 10e⁻ = +1</p>
+            <p className="text-xs text-red-700 font-bold">11p⁺ - 10e⁻ = +1</p>
           </div>
         </div>
       </div>
@@ -901,7 +941,7 @@ const IonDiagram = () => (
           <p className="text-xs text-gray-600 mt-2">17 protons, 18 electrons</p>
           <p className="text-xs font-bold text-green-600">Charge: -1 (anion)</p>
           <div className="mt-2 inline-block bg-green-100 px-3 py-1 rounded-full">
-            <p className="text-xs text-green-300 font-bold">17p⁺ - 18e⁻ = -1</p>
+            <p className="text-xs text-green-700 font-bold">17p⁺ - 18e⁻ = -1</p>
           </div>
         </div>
       </div>
@@ -918,7 +958,7 @@ const IonDiagram = () => (
 );
 
 const BohrDiagram = () => (
-  <div className="bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Bohr Diagram - Oxygen (8 protons, 8 neutrons, 8 electrons)</h4>
     <div className="flex justify-center">
       <div className="relative w-80 h-80">
@@ -969,7 +1009,7 @@ const BohrDiagram = () => (
 );
 
 const EnergyPyramid = () => (
-  <div className="bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Energy Pyramid (10% Energy Transfer)</h4>
     <div className="flex flex-col items-center gap-3">
       {[
@@ -986,7 +1026,7 @@ const EnergyPyramid = () => (
     </div>
     <div className="mt-6 text-center">
       <div className="inline-block bg-blue-100 rounded-lg px-4 py-2">
-        <p className="text-sm font-semibold text-blue-300">⚡ Only 10% of energy passes to the next level</p>
+        <p className="text-sm font-semibold text-blue-700">⚡ Only 10% of energy passes to the next level</p>
         <p className="text-xs text-blue-600 mt-1">90% lost as heat, movement, and waste</p>
       </div>
     </div>
@@ -994,7 +1034,7 @@ const EnergyPyramid = () => (
 );
 
 const CarbonCycle = () => (
-  <div className="bg-gradient-to-br from-[#060e18] to-[#080e18] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">The Carbon Cycle</h4>
     <div className="relative h-80">
       {/* Central cycle */}
@@ -1063,12 +1103,12 @@ const CarbonCycle = () => (
     </div>
     <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
       <div className="bg-green-100 rounded-lg p-2">
-        <span className="font-bold text-green-300">Photosynthesis:</span>
-        <p className="text-green-300">CO₂ + H₂O → C₆H₁₂O₆ + O₂</p>
+        <span className="font-bold text-green-700">Photosynthesis:</span>
+        <p className="text-green-700">CO₂ + H₂O → C₆H₁₂O₆ + O₂</p>
       </div>
       <div className="bg-blue-100 rounded-lg p-2">
-        <span className="font-bold text-blue-300">Respiration:</span>
-        <p className="text-blue-300">C₆H₁₂O₆ + O₂ → CO₂ + H₂O</p>
+        <span className="font-bold text-blue-700">Respiration:</span>
+        <p className="text-blue-700">C₆H₁₂O₆ + O₂ → CO₂ + H₂O</p>
       </div>
     </div>
   </div>
@@ -1076,7 +1116,7 @@ const CarbonCycle = () => (
 
 // Electricity Diagrams
 const CircuitSymbolsDiagram = () => (
-  <div className="bg-gradient-to-br from-[#181208] to-[#181408] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Circuit Symbols Reference</h4>
     <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
       {/* Battery/Cell */}
@@ -1197,7 +1237,7 @@ const CircuitSymbolsDiagram = () => (
 );
 
 const SeriesCircuitDiagram = () => (
-  <div className="bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Series Circuit</h4>
     <div className="bg-white rounded-xl p-6 mb-4">
       <svg viewBox="0 0 400 250" className="w-full">
@@ -1246,27 +1286,27 @@ const SeriesCircuitDiagram = () => (
     
     <div className="grid grid-cols-2 gap-3">
       <div className="bg-blue-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-blue-300 mb-1">✓ Current</p>
-        <p className="text-xs text-blue-300">Same everywhere (0.5A)</p>
+        <p className="text-sm font-bold text-blue-700 mb-1">✓ Current</p>
+        <p className="text-xs text-blue-700">Same everywhere (0.5A)</p>
       </div>
       <div className="bg-purple-100 rounded-lg p-3">
         <p className="text-sm font-bold text-purple-800 mb-1">✓ Voltage</p>
-        <p className="text-xs text-purple-300">Divides: 6V = 2V + 2V + 2V</p>
+        <p className="text-xs text-purple-700">Divides: 6V = 2V + 2V + 2V</p>
       </div>
       <div className="bg-orange-100 rounded-lg p-3">
         <p className="text-sm font-bold text-orange-800 mb-1">✓ Path</p>
-        <p className="text-xs text-orange-300">One route only</p>
+        <p className="text-xs text-orange-700">One route only</p>
       </div>
       <div className="bg-red-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-red-300 mb-1">✗ One Fails</p>
-        <p className="text-xs text-red-300">All stop working</p>
+        <p className="text-sm font-bold text-red-700 mb-1">✗ One Fails</p>
+        <p className="text-xs text-red-700">All stop working</p>
       </div>
     </div>
   </div>
 );
 
 const ParallelCircuitDiagram = () => (
-  <div className="bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Parallel Circuit</h4>
     <div className="bg-white rounded-xl p-6 mb-4">
       <svg viewBox="0 0 400 280" className="w-full">
@@ -1335,27 +1375,27 @@ const ParallelCircuitDiagram = () => (
     
     <div className="grid grid-cols-2 gap-3">
       <div className="bg-green-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-green-300 mb-1">✓ Voltage</p>
-        <p className="text-xs text-green-300">Same across all (12V)</p>
+        <p className="text-sm font-bold text-green-700 mb-1">✓ Voltage</p>
+        <p className="text-xs text-green-700">Same across all (12V)</p>
       </div>
       <div className="bg-purple-100 rounded-lg p-3">
         <p className="text-sm font-bold text-purple-800 mb-1">✓ Current</p>
-        <p className="text-xs text-purple-300">Divides: 3A = 1A + 1A + 1A</p>
+        <p className="text-xs text-purple-700">Divides: 3A = 1A + 1A + 1A</p>
       </div>
       <div className="bg-orange-100 rounded-lg p-3">
         <p className="text-sm font-bold text-orange-800 mb-1">✓ Paths</p>
-        <p className="text-xs text-orange-300">Multiple routes</p>
+        <p className="text-xs text-orange-700">Multiple routes</p>
       </div>
       <div className="bg-green-100 rounded-lg p-3">
-        <p className="text-sm font-bold text-green-300 mb-1">✓ One Fails</p>
-        <p className="text-xs text-green-300">Others keep working!</p>
+        <p className="text-sm font-bold text-green-700 mb-1">✓ One Fails</p>
+        <p className="text-xs text-green-700">Others keep working!</p>
       </div>
     </div>
   </div>
 );
 
 const OhmsLawTriangle = () => (
-  <div className="bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Ohm's Law Triangle</h4>
     
     <div className="flex justify-center mb-6">
@@ -1377,7 +1417,7 @@ const OhmsLawTriangle = () => (
       <div className="bg-purple-100 rounded-xl p-4 text-center border-2 border-purple-300">
         <p className="text-sm font-bold text-purple-800 mb-2">Find Voltage</p>
         <p className="text-2xl font-bold text-purple-900 mb-1">V = I × R</p>
-        <p className="text-xs text-purple-300">Cover V</p>
+        <p className="text-xs text-purple-700">Cover V</p>
       </div>
       
       <div className="bg-pink-100 rounded-xl p-4 text-center border-2 border-pink-300">
@@ -1387,22 +1427,22 @@ const OhmsLawTriangle = () => (
       </div>
       
       <div className="bg-indigo-100 rounded-xl p-4 text-center border-2 border-indigo-300">
-        <p className="text-sm font-bold text-indigo-300 mb-2">Find Resistance</p>
+        <p className="text-sm font-bold text-indigo-700 mb-2">Find Resistance</p>
         <p className="text-2xl font-bold text-indigo-900 mb-1">R = V ÷ I</p>
-        <p className="text-xs text-indigo-300">Cover R</p>
+        <p className="text-xs text-indigo-700">Cover R</p>
       </div>
     </div>
     
     <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-4 text-white">
       <p className="font-bold mb-2">Example Problem:</p>
       <p className="text-sm mb-2">A circuit has 12V battery and 4Ω resistor. Find current.</p>
-      <p className="text-sm font-mono bg-white/20 rounded p-2">I = V ÷ R = 12V ÷ 4Ω = 3A</p>
+      <p className="text-sm font-mono bg-gray-100 rounded p-2 text-gray-800">I = V ÷ R = 12V ÷ 4Ω = 3A</p>
     </div>
   </div>
 );
 
 const CircuitDiagram = () => (
-  <div className="bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Complete Circuit Components</h4>
     <div className="bg-white rounded-xl p-6 mb-4">
       <svg viewBox="0 0 500 300" className="w-full">
@@ -1452,7 +1492,7 @@ const CircuitDiagram = () => (
       </svg>
     </div>
     <div className="bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-300 text-center">
+      <p className="text-sm text-blue-700 text-center">
         <span className="font-bold">Complete Circuit:</span> All components connected in a closed loop allowing current to flow
       </p>
     </div>
@@ -1460,13 +1500,13 @@ const CircuitDiagram = () => (
 );
 
 const StaticElectricityDiagram = () => (
-  <div className="bg-gradient-to-br from-[#181208] to-[#180f04] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Static Electricity - Charge Interactions</h4>
     
     <div className="grid md:grid-cols-2 gap-6 mb-6">
       {/* Like Charges Repel */}
       <div className="bg-white rounded-xl p-6 border-2 border-red-200">
-        <h5 className="text-center font-bold text-red-300 mb-4">Like Charges REPEL</h5>
+        <h5 className="text-center font-bold text-red-700 mb-4">Like Charges REPEL</h5>
         
         <div className="flex justify-center items-center gap-8 mb-4">
           <div className="relative">
@@ -1536,12 +1576,12 @@ const StaticElectricityDiagram = () => (
           </div>
         </div>
         
-        <p className="text-center text-sm text-red-300 font-semibold mt-4">+ repels + | − repels −</p>
+        <p className="text-center text-sm text-red-700 font-semibold mt-4">+ repels + | − repels −</p>
       </div>
       
       {/* Opposite Charges Attract */}
       <div className="bg-white rounded-xl p-6 border-2 border-green-200">
-        <h5 className="text-center font-bold text-green-300 mb-4">Opposite Charges ATTRACT</h5>
+        <h5 className="text-center font-bold text-green-700 mb-4">Opposite Charges ATTRACT</h5>
         
         <div className="flex justify-center items-center gap-8 mb-8 mt-12">
           <div className="relative">
@@ -1577,7 +1617,7 @@ const StaticElectricityDiagram = () => (
           </div>
         </div>
         
-        <p className="text-center text-sm text-green-300 font-semibold mt-12">+ attracts − | − attracts +</p>
+        <p className="text-center text-sm text-green-700 font-semibold mt-12">+ attracts − | − attracts +</p>
       </div>
     </div>
     
@@ -1585,8 +1625,8 @@ const StaticElectricityDiagram = () => (
       <div className="flex items-start gap-3">
         <Lightbulb className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
         <div>
-          <p className="font-bold text-amber-300 mb-1">Remember:</p>
-          <p className="text-sm text-amber-300">Only ELECTRONS move in static electricity! Protons stay in the nucleus. When you rub a balloon on your hair, electrons transfer from your hair to the balloon.</p>
+          <p className="font-bold text-amber-700 mb-1">Remember:</p>
+          <p className="text-sm text-amber-700">Only ELECTRONS move in static electricity! Protons stay in the nucleus. When you rub a balloon on your hair, electrons transfer from your hair to the balloon.</p>
         </div>
       </div>
     </div>
@@ -1606,19 +1646,19 @@ const PowerFormulaDiagram = () => (
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-orange-100 rounded-lg p-4 text-center">
           <p className="text-sm font-bold text-orange-800 mb-2">Power (P)</p>
-          <p className="text-xs text-orange-300">Measured in Watts (W)</p>
+          <p className="text-xs text-orange-700">Measured in Watts (W)</p>
           <p className="text-xs text-orange-600 mt-2">How fast energy is used</p>
         </div>
         
         <div className="bg-red-100 rounded-lg p-4 text-center">
-          <p className="text-sm font-bold text-red-300 mb-2">Voltage (V)</p>
-          <p className="text-xs text-red-300">Measured in Volts (V)</p>
+          <p className="text-sm font-bold text-red-700 mb-2">Voltage (V)</p>
+          <p className="text-xs text-red-700">Measured in Volts (V)</p>
           <p className="text-xs text-red-600 mt-2">Electrical "pressure"</p>
         </div>
         
         <div className="bg-yellow-100 rounded-lg p-4 text-center">
           <p className="text-sm font-bold text-yellow-800 mb-2">Current (I)</p>
-          <p className="text-xs text-yellow-300">Measured in Amperes (A)</p>
+          <p className="text-xs text-yellow-700">Measured in Amperes (A)</p>
           <p className="text-xs text-yellow-600 mt-2">Flow of electrons</p>
         </div>
       </div>
@@ -1631,21 +1671,21 @@ const PowerFormulaDiagram = () => (
           <p className="text-gray-700">Given: V = 120V, I = 0.5A</p>
           <p className="text-gray-700">Find: P = ?</p>
           <div className="bg-gray-100 rounded p-3 mt-2">
-            <p className="font-mono text-orange-300">P = V × I</p>
-            <p className="font-mono text-orange-300">P = 120V × 0.5A</p>
+            <p className="font-mono text-orange-700">P = V × I</p>
+            <p className="font-mono text-orange-700">P = 120V × 0.5A</p>
             <p className="font-mono font-bold text-orange-900">P = 60W</p>
           </div>
         </div>
       </div>
       
       <div className="bg-gradient-to-br from-red-100 to-pink-100 rounded-xl p-4 border-2 border-red-300">
-        <p className="font-bold text-red-300 mb-3">Example 2: Heater</p>
+        <p className="font-bold text-red-700 mb-3">Example 2: Heater</p>
         <div className="space-y-2 text-sm">
           <p className="text-gray-700">Given: P = 1500W, V = 120V</p>
           <p className="text-gray-700">Find: I = ?</p>
           <div className="bg-gray-100 rounded p-3 mt-2">
-            <p className="font-mono text-red-300">I = P ÷ V</p>
-            <p className="font-mono text-red-300">I = 1500W ÷ 120V</p>
+            <p className="font-mono text-red-700">I = P ÷ V</p>
+            <p className="font-mono text-red-700">I = 1500W ÷ 120V</p>
             <p className="font-mono font-bold text-red-900">I = 12.5A</p>
           </div>
         </div>
@@ -1680,11 +1720,11 @@ const WaterAnalogyDiagram = () => (
             <text x="12" y="38" fontSize="10" fill="white" fontWeight="bold">V</text>
           </svg>
         </div>
-        <h5 className="font-bold text-blue-300 text-lg mb-2">VOLTAGE (V)</h5>
-        <p className="text-blue-300 text-sm font-semibold">= Water Pressure</p>
+        <h5 className="font-bold text-blue-700 text-lg mb-2">VOLTAGE (V)</h5>
+        <p className="text-blue-700 text-sm font-semibold">= Water Pressure</p>
         <p className="text-gray-600 text-xs mt-2">The "push" that forces water through the pipe. Higher pressure = more force. Measured in Volts (V).</p>
         <div className="mt-3 bg-blue-100 rounded-lg px-3 py-2">
-          <p className="text-xs text-blue-300 font-bold">Think: Pump pushing water</p>
+          <p className="text-xs text-blue-700 font-bold">Think: Pump pushing water</p>
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-cyan-300 shadow-md text-center">
@@ -1696,7 +1736,7 @@ const WaterAnalogyDiagram = () => (
           </svg>
         </div>
         <h5 className="font-bold text-cyan-800 text-lg mb-2">CURRENT (I)</h5>
-        <p className="text-cyan-300 text-sm font-semibold">= Flow Rate of Water</p>
+        <p className="text-cyan-700 text-sm font-semibold">= Flow Rate of Water</p>
         <p className="text-gray-600 text-xs mt-2">How much water flows past a point each second. More flow = higher current. Measured in Amperes (A).</p>
         <div className="mt-3 bg-cyan-100 rounded-lg px-3 py-2">
           <p className="text-xs text-cyan-800 font-bold">Think: Litres per second</p>
@@ -1711,7 +1751,7 @@ const WaterAnalogyDiagram = () => (
           </svg>
         </div>
         <h5 className="font-bold text-orange-800 text-lg mb-2">RESISTANCE (R)</h5>
-        <p className="text-orange-300 text-sm font-semibold">= Pipe Narrowing</p>
+        <p className="text-orange-700 text-sm font-semibold">= Pipe Narrowing</p>
         <p className="text-gray-600 text-xs mt-2">A narrower pipe restricts flow. More resistance = less current for same pressure. Measured in Ohms (Ω).</p>
         <div className="mt-3 bg-orange-100 rounded-lg px-3 py-2">
           <p className="text-xs text-orange-800 font-bold">Think: Narrow kink in pipe</p>
@@ -1722,11 +1762,11 @@ const WaterAnalogyDiagram = () => (
       <div className="flex items-center justify-center gap-4 flex-wrap text-center">
         <div className="text-purple-800 font-bold text-lg">More Pressure (V↑)</div>
         <div className="text-2xl">→</div>
-        <div className="text-cyan-300 font-bold text-lg">More Flow (I↑)</div>
+        <div className="text-cyan-700 font-bold text-lg">More Flow (I↑)</div>
         <div className="mx-4 text-gray-600 font-bold">|</div>
-        <div className="text-orange-300 font-bold text-lg">Narrower Pipe (R↑)</div>
+        <div className="text-orange-700 font-bold text-lg">Narrower Pipe (R↑)</div>
         <div className="text-2xl">→</div>
-        <div className="text-cyan-300 font-bold text-lg">Less Flow (I↓)</div>
+        <div className="text-cyan-700 font-bold text-lg">Less Flow (I↓)</div>
       </div>
       <p className="text-center text-sm text-gray-600 mt-3 font-semibold">This is exactly how V = I × R works in Ohm's Law!</p>
     </div>
@@ -1734,37 +1774,37 @@ const WaterAnalogyDiagram = () => (
 );
 
 const OhmsLawWorkedExamples = () => (
-  <div className="bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Ohm's Law — Worked Examples</h4>
     <div className="grid md:grid-cols-3 gap-5 mb-6">
       <div className="bg-white rounded-xl p-5 border-2 border-green-300 shadow-md">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
-          <h5 className="font-bold text-green-300">Find Current</h5>
+          <h5 className="font-bold text-green-700">Find Current</h5>
         </div>
         <div className="bg-green-50 rounded-lg p-3 mb-3 font-mono text-sm">
           <p className="text-gray-600">Given: V = 12V, R = 4Ω</p>
           <p className="text-gray-600">Find: I = ?</p>
         </div>
         <div className="space-y-1 text-sm">
-          <p className="text-gray-700">Formula: <span className="font-bold text-green-300">I = V ÷ R</span></p>
+          <p className="text-gray-700">Formula: <span className="font-bold text-green-700">I = V ÷ R</span></p>
           <p className="text-gray-700">I = 12 ÷ 4</p>
-          <p className="text-xl font-bold text-green-300 text-center mt-2">I = 3 A</p>
+          <p className="text-xl font-bold text-green-700 text-center mt-2">I = 3 A</p>
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-blue-300 shadow-md">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
-          <h5 className="font-bold text-blue-300">Find Voltage</h5>
+          <h5 className="font-bold text-blue-700">Find Voltage</h5>
         </div>
         <div className="bg-blue-50 rounded-lg p-3 mb-3 font-mono text-sm">
           <p className="text-gray-600">Given: I = 2A, R = 6Ω</p>
           <p className="text-gray-600">Find: V = ?</p>
         </div>
         <div className="space-y-1 text-sm">
-          <p className="text-gray-700">Formula: <span className="font-bold text-blue-300">V = I × R</span></p>
+          <p className="text-gray-700">Formula: <span className="font-bold text-blue-700">V = I × R</span></p>
           <p className="text-gray-700">V = 2 × 6</p>
-          <p className="text-xl font-bold text-blue-300 text-center mt-2">V = 12 V</p>
+          <p className="text-xl font-bold text-blue-700 text-center mt-2">V = 12 V</p>
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-orange-300 shadow-md">
@@ -1777,9 +1817,9 @@ const OhmsLawWorkedExamples = () => (
           <p className="text-gray-600">Find: R = ?</p>
         </div>
         <div className="space-y-1 text-sm">
-          <p className="text-gray-700">Formula: <span className="font-bold text-orange-300">R = V ÷ I</span></p>
+          <p className="text-gray-700">Formula: <span className="font-bold text-orange-700">R = V ÷ I</span></p>
           <p className="text-gray-700">R = 24 ÷ 3</p>
-          <p className="text-xl font-bold text-orange-300 text-center mt-2">R = 8 Ω</p>
+          <p className="text-xl font-bold text-orange-700 text-center mt-2">R = 8 Ω</p>
         </div>
       </div>
     </div>
@@ -1802,10 +1842,10 @@ const OhmsLawWorkedExamples = () => (
 );
 
 const SeriesCircuitCalculations = () => (
-  <div className="bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Series Circuit — Step-by-Step Calculations</h4>
     <div className="bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md">
-      <p className="text-center font-bold text-green-300 mb-4">Example: 12V battery, 3 resistors in series (R₁=2Ω, R₂=3Ω, R₃=7Ω)</p>
+      <p className="text-center font-bold text-green-700 mb-4">Example: 12V battery, 3 resistors in series (R₁=2Ω, R₂=3Ω, R₃=7Ω)</p>
       <svg viewBox="0 0 480 120" className="w-full mb-4">
         <line x1="40" y1="30" x2="40" y2="90" stroke="#1F2937" strokeWidth="3"/>
         <line x1="40" y1="30" x2="110" y2="30" stroke="#1F2937" strokeWidth="3"/>
@@ -1830,16 +1870,16 @@ const SeriesCircuitCalculations = () => (
       </svg>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div className="bg-green-50 rounded-lg p-3 border border-green-200">
-          <p className="font-bold text-green-300 mb-2">① Total Resistance</p>
+          <p className="font-bold text-green-700 mb-2">① Total Resistance</p>
           <p className="text-gray-700">R_total = R₁+R₂+R₃</p>
           <p className="text-gray-700">= 2+3+7</p>
-          <p className="font-bold text-green-300 text-lg">= 12 Ω</p>
+          <p className="font-bold text-green-700 text-lg">= 12 Ω</p>
         </div>
         <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-          <p className="font-bold text-blue-300 mb-2">② Total Current</p>
+          <p className="font-bold text-blue-700 mb-2">② Total Current</p>
           <p className="text-gray-700">I = V ÷ R_total</p>
           <p className="text-gray-700">= 12 ÷ 12</p>
-          <p className="font-bold text-blue-300 text-lg">= 1 A (same everywhere)</p>
+          <p className="font-bold text-blue-700 text-lg">= 1 A (same everywhere)</p>
         </div>
         <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
           <p className="font-bold text-orange-800 mb-2">③ Voltage Drops</p>
@@ -1852,28 +1892,28 @@ const SeriesCircuitCalculations = () => (
     </div>
     <div className="grid grid-cols-2 gap-4 text-sm">
       <div className="bg-blue-50 rounded-xl p-4">
-        <p className="font-bold text-blue-300 mb-2">📌 Series Rules to Memorize:</p>
-        <p className="text-blue-300">• Current: I₁ = I₂ = I₃ (same everywhere)</p>
-        <p className="text-blue-300">• Voltage: V_total = V₁ + V₂ + V₃</p>
-        <p className="text-blue-300">• Resistance: R_total = R₁ + R₂ + R₃</p>
-        <p className="text-blue-300">• One break → all stop</p>
+        <p className="font-bold text-blue-700 mb-2">📌 Series Rules to Memorize:</p>
+        <p className="text-blue-700">• Current: I₁ = I₂ = I₃ (same everywhere)</p>
+        <p className="text-blue-700">• Voltage: V_total = V₁ + V₂ + V₃</p>
+        <p className="text-blue-700">• Resistance: R_total = R₁ + R₂ + R₃</p>
+        <p className="text-blue-700">• One break → all stop</p>
       </div>
       <div className="bg-red-950/30 rounded-xl p-4 border border-red-500/20">
-        <p className="font-bold text-red-300 mb-2">⚠️ Common Exam Mistakes:</p>
-        <p className="text-red-300">• Forgetting current is the SAME in series</p>
-        <p className="text-red-300">• Adding voltages wrong</p>
-        <p className="text-red-300">• Not checking: ΣV = battery V</p>
-        <p className="text-red-300">• Mixing up series and parallel rules</p>
+        <p className="font-bold text-red-700 mb-2">⚠️ Common Exam Mistakes:</p>
+        <p className="text-red-700">• Forgetting current is the SAME in series</p>
+        <p className="text-red-700">• Adding voltages wrong</p>
+        <p className="text-red-700">• Not checking: ΣV = battery V</p>
+        <p className="text-red-700">• Mixing up series and parallel rules</p>
       </div>
     </div>
   </div>
 );
 
 const ParallelCircuitCalculations = () => (
-  <div className="bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Parallel Circuit — Step-by-Step Calculations</h4>
     <div className="bg-white rounded-xl p-5 border-2 border-blue-300 mb-5 shadow-md">
-      <p className="text-center font-bold text-blue-300 mb-4">Example: 12V battery, 3 resistors in parallel (R₁=6Ω, R₂=4Ω, R₃=12Ω)</p>
+      <p className="text-center font-bold text-blue-700 mb-4">Example: 12V battery, 3 resistors in parallel (R₁=6Ω, R₂=4Ω, R₃=12Ω)</p>
       <svg viewBox="0 0 480 160" className="w-full mb-4">
         <line x1="40" y1="20" x2="40" y2="140" stroke="#1F2937" strokeWidth="3"/>
         <line x1="40" y1="20" x2="440" y2="20" stroke="#1F2937" strokeWidth="3"/>
@@ -1900,12 +1940,12 @@ const ParallelCircuitCalculations = () => (
       </svg>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-          <p className="font-bold text-blue-300 mb-2">① Voltage (easy!)</p>
+          <p className="font-bold text-blue-700 mb-2">① Voltage (easy!)</p>
           <p className="text-gray-700">All branches = battery V</p>
-          <p className="font-bold text-blue-300">V₁=V₂=V₃= 12V</p>
+          <p className="font-bold text-blue-700">V₁=V₂=V₃= 12V</p>
         </div>
         <div className="bg-green-50 rounded-lg p-3 border border-green-200">
-          <p className="font-bold text-green-300 mb-2">② Branch Currents</p>
+          <p className="font-bold text-green-700 mb-2">② Branch Currents</p>
           <p className="text-gray-700">I₁=12÷6 = <span className="font-bold">2A</span></p>
           <p className="text-gray-700">I₂=12÷4 = <span className="font-bold">3A</span></p>
           <p className="text-gray-700">I₃=12÷12 = <span className="font-bold">1A</span></p>
@@ -1914,31 +1954,31 @@ const ParallelCircuitCalculations = () => (
           <p className="font-bold text-orange-800 mb-2">③ Total Current</p>
           <p className="text-gray-700">I_total = I₁+I₂+I₃</p>
           <p className="text-gray-700">= 2+3+1</p>
-          <p className="font-bold text-orange-300 text-lg">= 6 A</p>
+          <p className="font-bold text-orange-700 text-lg">= 6 A</p>
         </div>
       </div>
     </div>
     <div className="grid grid-cols-2 gap-4 text-sm">
       <div className="bg-indigo-950/30 rounded-xl p-4 border border-indigo-500/20">
-        <p className="font-bold text-indigo-300 mb-2">📌 Parallel Rules to Memorize:</p>
-        <p className="text-indigo-300">• Voltage: V₁ = V₂ = V₃ (same everywhere)</p>
-        <p className="text-indigo-300">• Current: I_total = I₁ + I₂ + I₃</p>
-        <p className="text-indigo-300">• Each branch: I = V ÷ R (that branch's R)</p>
-        <p className="text-indigo-300">• One break → others keep working</p>
+        <p className="font-bold text-indigo-700 mb-2">📌 Parallel Rules to Memorize:</p>
+        <p className="text-indigo-700">• Voltage: V₁ = V₂ = V₃ (same everywhere)</p>
+        <p className="text-indigo-700">• Current: I_total = I₁ + I₂ + I₃</p>
+        <p className="text-indigo-700">• Each branch: I = V ÷ R (that branch's R)</p>
+        <p className="text-indigo-700">• One break → others keep working</p>
       </div>
       <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/20">
-        <p className="font-bold text-amber-300 mb-2">🏠 Real-Life Parallel:</p>
-        <p className="text-amber-300">• Home outlets all wired in parallel</p>
-        <p className="text-amber-300">• Each device gets full 120V</p>
-        <p className="text-amber-300">• Turning one device off doesn't affect others</p>
-        <p className="text-amber-300">• Adding devices draws more total current</p>
+        <p className="font-bold text-amber-700 mb-2">🏠 Real-Life Parallel:</p>
+        <p className="text-amber-700">• Home outlets all wired in parallel</p>
+        <p className="text-amber-700">• Each device gets full 120V</p>
+        <p className="text-amber-700">• Turning one device off doesn't affect others</p>
+        <p className="text-amber-700">• Adding devices draws more total current</p>
       </div>
     </div>
   </div>
 );
 
 const ChargingMethodsDiagram = () => (
-  <div className="bg-gradient-to-br from-[#181208] to-[#180f04] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Three Methods of Charging Objects</h4>
     <div className="grid md:grid-cols-3 gap-6">
       <div className="bg-white rounded-xl p-5 border-2 border-yellow-300 shadow-md">
@@ -2045,11 +2085,11 @@ const ResistanceFactorsDiagram = () => (
           <line x1="10" y1="80" x2="220" y2="80" stroke="#DC2626" strokeWidth="6" strokeLinecap="round"/>
           <text x="10" y="97" fontSize="10" fill="#DC2626" fontWeight="bold">R = high ✗</text>
         </svg>
-        <p className="text-sm text-orange-300 text-center font-semibold">Longer wire = MORE resistance</p>
+        <p className="text-sm text-orange-700 text-center font-semibold">Longer wire = MORE resistance</p>
         <p className="text-xs text-gray-600 text-center mt-1">More collisions between electrons and atoms</p>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-red-300 shadow-md">
-        <h5 className="font-bold text-red-300 mb-4 text-center">Thickness of Wire</h5>
+        <h5 className="font-bold text-red-700 mb-4 text-center">Thickness of Wire</h5>
         <svg viewBox="0 0 240 100" className="w-full mb-3">
           <text x="10" y="20" fontSize="11" fill="#374151" fontWeight="bold">Thick wire (Low R)</text>
           <line x1="10" y1="35" x2="170" y2="35" stroke="#10B981" strokeWidth="14" strokeLinecap="round"/>
@@ -2058,7 +2098,7 @@ const ResistanceFactorsDiagram = () => (
           <line x1="10" y1="85" x2="170" y2="85" stroke="#DC2626" strokeWidth="3" strokeLinecap="round"/>
           <text x="175" y="89" fontSize="10" fill="#DC2626" fontWeight="bold">R = high</text>
         </svg>
-        <p className="text-sm text-red-300 text-center font-semibold">Thinner wire = MORE resistance</p>
+        <p className="text-sm text-red-700 text-center font-semibold">Thinner wire = MORE resistance</p>
         <p className="text-xs text-gray-600 text-center mt-1">Less space for electrons to flow through</p>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-yellow-300 shadow-md">
@@ -2082,7 +2122,7 @@ const ResistanceFactorsDiagram = () => (
         </div>
       </div>
       <div className="bg-white rounded-xl p-5 border-2 border-blue-300 shadow-md">
-        <h5 className="font-bold text-blue-300 mb-4 text-center">Temperature Effect</h5>
+        <h5 className="font-bold text-blue-700 mb-4 text-center">Temperature Effect</h5>
         <svg viewBox="0 0 240 110" className="w-full">
           <path d="M 30 90 Q 80 85 130 70 Q 180 55 210 30" fill="none" stroke="#DC2626" strokeWidth="3"/>
           <text x="30" y="105" fontSize="9" fill="#374151">Cold (0°C)</text>
@@ -2093,12 +2133,12 @@ const ResistanceFactorsDiagram = () => (
           <text x="5" y="60" fontSize="9" fill="#374151">R</text>
           <text x="100" y="108" fontSize="9" fill="#374151">Temperature →</text>
         </svg>
-        <p className="text-sm text-blue-300 text-center font-semibold mt-2">Hotter = MORE resistance (for metals)</p>
+        <p className="text-sm text-blue-700 text-center font-semibold mt-2">Hotter = MORE resistance (for metals)</p>
         <p className="text-xs text-gray-600 text-center mt-1">Atoms vibrate more, blocking electron flow</p>
       </div>
     </div>
     <div className="bg-amber-50 rounded-xl p-4 border-2 border-amber-300">
-      <p className="font-bold text-amber-300 text-center">Summary: R increases with → longer length, thinner wire, certain materials, higher temperature</p>
+      <p className="font-bold text-amber-700 text-center">Summary: R increases with → longer length, thinner wire, certain materials, higher temperature</p>
     </div>
   </div>
 );
@@ -2150,7 +2190,7 @@ const ElectricalSafetyDiagram = () => (
       <div className="bg-white rounded-xl p-5 border-2 border-green-300 shadow-md">
         <div className="text-center mb-3">
           <div className="text-3xl mb-1">🌍</div>
-          <h5 className="font-bold text-green-300">GROUNDING</h5>
+          <h5 className="font-bold text-green-700">GROUNDING</h5>
         </div>
         <svg viewBox="0 0 160 80" className="w-full mb-3">
           <rect x="50" y="5" width="60" height="35" rx="5" fill="#DCFCE7" stroke="#16A34A" strokeWidth="2"/>
@@ -2171,10 +2211,10 @@ const ElectricalSafetyDiagram = () => (
       </div>
     </div>
     <div className="bg-red-100 rounded-xl p-4 border-2 border-red-400">
-      <p className="font-bold text-red-300 text-center mb-3">⚠️ Current Danger Levels — Know These!</p>
+      <p className="font-bold text-red-700 text-center mb-3">⚠️ Current Danger Levels — Know These!</p>
       <div className="grid grid-cols-4 gap-3 text-center text-xs">
         {[
-          { mA: '1 mA', effect: 'Barely felt', color: 'bg-green-100 border-green-400 text-green-300' },
+          { mA: '1 mA', effect: 'Barely felt', color: 'bg-green-100 border-green-400 text-green-700' },
           { mA: '10 mA', effect: 'Painful, muscle contraction', color: 'bg-yellow-100 border-yellow-400 text-yellow-800' },
           { mA: '100 mA', effect: '⚠️ FATAL — ventricular fibrillation', color: 'bg-orange-100 border-orange-400 text-orange-800' },
           { mA: '1000 mA', effect: '💀 Certain death, severe burns', color: 'bg-red-200 border-red-500 text-red-900' },
@@ -2190,31 +2230,31 @@ const ElectricalSafetyDiagram = () => (
 );
 
 const PowerCostCalculatorDiagram = () => (
-  <div className="bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Electrical Energy Cost — Worked Examples</h4>
     <div className="bg-white rounded-xl p-5 border-2 border-green-300 mb-5 shadow-md">
-      <p className="text-center font-bold text-gray-700 mb-4">Formula Chain: <span className="text-green-300">P = V × I</span> → <span className="text-blue-300">E = P × t</span> → <span className="text-purple-300">Cost = E × rate</span></p>
+      <p className="text-center font-bold text-gray-700 mb-4">Formula Chain: <span className="text-green-700">P = V × I</span> → <span className="text-blue-700">E = P × t</span> → <span className="text-purple-700">Cost = E × rate</span></p>
       <div className="grid md:grid-cols-3 gap-4 text-sm">
         <div className="bg-green-950/30 rounded-xl p-4 border border-green-500/20">
-          <p className="font-bold text-green-300 mb-2">Example 1 — Light Bulb</p>
+          <p className="font-bold text-green-700 mb-2">Example 1 — Light Bulb</p>
           <div className="space-y-1 text-gray-600 text-xs">
             <p>60W bulb, 5 hours/day, 30 days</p>
             <p>Rate: $0.13/kWh</p>
             <p className="border-t pt-1">E = 0.06 kW × 5h × 30</p>
-            <p>E = <span className="font-bold text-green-300">9 kWh</span></p>
+            <p>E = <span className="font-bold text-green-700">9 kWh</span></p>
             <p>Cost = 9 × $0.13</p>
-            <p className="text-lg font-bold text-green-300">= $1.17/month</p>
+            <p className="text-lg font-bold text-green-700">= $1.17/month</p>
           </div>
         </div>
         <div className="bg-blue-50 rounded-xl p-4">
-          <p className="font-bold text-blue-300 mb-2">Example 2 — Heater</p>
+          <p className="font-bold text-blue-700 mb-2">Example 2 — Heater</p>
           <div className="space-y-1 text-gray-600 text-xs">
             <p>1500W heater, 8 hours</p>
             <p>Rate: $0.12/kWh</p>
             <p className="border-t pt-1">E = 1.5 kW × 8h</p>
-            <p>E = <span className="font-bold text-blue-300">12 kWh</span></p>
+            <p>E = <span className="font-bold text-blue-700">12 kWh</span></p>
             <p>Cost = 12 × $0.12</p>
-            <p className="text-lg font-bold text-blue-300">= $1.44</p>
+            <p className="text-lg font-bold text-blue-700">= $1.44</p>
           </div>
         </div>
         <div className="bg-purple-50 rounded-xl p-4 border border-purple-200">
@@ -2223,16 +2263,16 @@ const PowerCostCalculatorDiagram = () => (
             <p>Device: 120V, draws 2.5A, 4 hours</p>
             <p>Rate: $0.10/kWh</p>
             <p className="border-t pt-1">P = 120 × 2.5 = 300W</p>
-            <p>E = 0.3 kW × 4h = <span className="font-bold text-purple-300">1.2 kWh</span></p>
+            <p>E = 0.3 kW × 4h = <span className="font-bold text-purple-700">1.2 kWh</span></p>
             <p>Cost = 1.2 × $0.10</p>
-            <p className="text-lg font-bold text-purple-300">= $0.12</p>
+            <p className="text-lg font-bold text-purple-700">= $0.12</p>
           </div>
         </div>
       </div>
     </div>
     <div className="grid grid-cols-2 gap-4">
       <div className="bg-white rounded-xl p-4 border-2 border-amber-200">
-        <p className="font-bold text-amber-300 mb-3">🏠 Common Appliance Wattages</p>
+        <p className="font-bold text-amber-700 mb-3">🏠 Common Appliance Wattages</p>
         <div className="space-y-2">
           {[
             { name: 'LED Bulb', w: 10, bar: 1 },
@@ -2296,7 +2336,7 @@ const StaticVsCurrentDiagram = () => (
           <text x="70" y="78" fontSize="10" fill="#92400E" fontWeight="bold">charges STAY in place</text>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Charge <span className="font-bold text-yellow-300">builds up</span> on surface of object</p>
+          <p>• Charge <span className="font-bold text-yellow-700">builds up</span> on surface of object</p>
           <p>• Electrons do <span className="font-bold">not</span> flow continuously</p>
           <p>• Discharge happens suddenly (spark!)</p>
           <p>• Examples: balloon, walking on carpet, lightning</p>
@@ -2306,7 +2346,7 @@ const StaticVsCurrentDiagram = () => (
       <div className="bg-white rounded-xl p-5 border-2 border-blue-400 shadow-md">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-2xl">🔋</div>
-          <h5 className="font-bold text-blue-300 text-xl">CURRENT Electricity</h5>
+          <h5 className="font-bold text-blue-700 text-xl">CURRENT Electricity</h5>
         </div>
         <svg viewBox="0 0 220 90" className="w-full mb-3">
           <rect x="10" y="30" width="200" height="30" rx="5" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="2"/>
@@ -2314,7 +2354,7 @@ const StaticVsCurrentDiagram = () => (
           <text x="55" y="75" fontSize="10" fill="#1E40AF" fontWeight="bold">electrons FLOW in a loop</text>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Electrons <span className="font-bold text-blue-300">flow continuously</span> in a circuit</p>
+          <p>• Electrons <span className="font-bold text-blue-700">flow continuously</span> in a circuit</p>
           <p>• Requires a closed loop (circuit)</p>
           <p>• Needs an energy source (battery, outlet)</p>
           <p>• Examples: lights, phone charger, TV</p>
@@ -2328,8 +2368,8 @@ const StaticVsCurrentDiagram = () => (
           <React.Fragment key={i}>
             <div className={`p-2 rounded ${i===0?'bg-purple-100 text-purple-800':i%2===0?'bg-gray-50':'bg-white'} col-span-1`}>{row[0]}</div>
             <div className={`p-2 rounded ${i===0?'bg-yellow-100 text-yellow-800':i%2===0?'bg-gray-50':'bg-white'}`}>{row[1]}</div>
-            <div className={`p-2 rounded ${i===0?'bg-blue-100 text-blue-300':i%2===0?'bg-gray-50':'bg-white'}`}>{row[2]}</div>
-            <div className={`p-2 rounded ${i===0?'bg-green-100 text-green-300':i%2===0?'bg-gray-50':'bg-white'}`}>{row[3]}</div>
+            <div className={`p-2 rounded ${i===0?'bg-blue-100 text-blue-700':i%2===0?'bg-gray-50':'bg-white'}`}>{row[2]}</div>
+            <div className={`p-2 rounded ${i===0?'bg-green-100 text-green-700':i%2===0?'bg-gray-50':'bg-white'}`}>{row[3]}</div>
           </React.Fragment>
         ))}
       </div>
@@ -2373,14 +2413,14 @@ const ElectroscopeDiagram = () => (
       ))}
     </div>
     <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/20">
-      <p className="font-bold text-amber-300 mb-2 text-center">Key Rule: Leaves spread = charged. Leaves collapse = neutral or opposite charge nearby</p>
+      <p className="font-bold text-amber-700 mb-2 text-center">Key Rule: Leaves spread = charged. Leaves collapse = neutral or opposite charge nearby</p>
       <div className="grid grid-cols-2 gap-3 text-sm">
         <div className="bg-white rounded-lg p-3 border border-amber-200">
-          <p className="font-bold text-amber-300 mb-1">Using Induction with Electroscope:</p>
+          <p className="font-bold text-amber-700 mb-1">Using Induction with Electroscope:</p>
           <p className="text-gray-600 text-xs">Bring charged rod near (don't touch) → leaves spread. Touch your finger to plate while rod is near → ground it. Remove finger, then rod → leaves stay slightly spread (opposite charge induced)</p>
         </div>
         <div className="bg-white rounded-lg p-3 border border-amber-200">
-          <p className="font-bold text-amber-300 mb-1">Using Conduction with Electroscope:</p>
+          <p className="font-bold text-amber-700 mb-1">Using Conduction with Electroscope:</p>
           <p className="text-gray-600 text-xs">Touch charged rod to plate → charge transfers directly. Leaves spread and STAY spread even after rod is removed. Object now holds same type of charge as rod that touched it.</p>
         </div>
       </div>
@@ -2440,7 +2480,7 @@ const OhmsLawGraph = () => (
     <h4 className="text-center font-semibold text-gray-700 mb-6">Ohm's Law — Graphical Relationships</h4>
     <div className="grid md:grid-cols-3 gap-5 mb-5">
       <div className="bg-white rounded-xl p-4 border-2 border-blue-300 shadow-md">
-        <h5 className="font-bold text-blue-300 text-center mb-3">V vs I (R constant)</h5>
+        <h5 className="font-bold text-blue-700 text-center mb-3">V vs I (R constant)</h5>
         <svg viewBox="0 0 160 140" className="w-full mb-2">
           <line x1="25" y1="10" x2="25" y2="115" stroke="#374151" strokeWidth="2"/>
           <line x1="20" y1="110" x2="150" y2="110" stroke="#374151" strokeWidth="2"/>
@@ -2453,11 +2493,11 @@ const OhmsLawGraph = () => (
           <circle cx="95" cy="56" r="3" fill="#3B82F6"/>
           <circle cx="130" cy="29" r="3" fill="#3B82F6"/>
         </svg>
-        <p className="text-xs text-blue-300 text-center font-semibold">Straight line through origin → V ∝ I</p>
+        <p className="text-xs text-blue-700 text-center font-semibold">Straight line through origin → V ∝ I</p>
         <p className="text-xs text-gray-600 text-center">Steeper slope = higher resistance</p>
       </div>
       <div className="bg-white rounded-xl p-4 border-2 border-green-300 shadow-md">
-        <h5 className="font-bold text-green-300 text-center mb-3">I vs R (V constant)</h5>
+        <h5 className="font-bold text-green-700 text-center mb-3">I vs R (V constant)</h5>
         <svg viewBox="0 0 160 140" className="w-full mb-2">
           <line x1="25" y1="10" x2="25" y2="115" stroke="#374151" strokeWidth="2"/>
           <line x1="20" y1="110" x2="150" y2="110" stroke="#374151" strokeWidth="2"/>
@@ -2467,7 +2507,7 @@ const OhmsLawGraph = () => (
           <text x="90" y="38" fontSize="10" fill="#10B981" fontWeight="bold">I = V/R</text>
           <text x="100" y="50" fontSize="9" fill="#10B981">(hyperbola)</text>
         </svg>
-        <p className="text-xs text-green-300 text-center font-semibold">Curve → as R↑, I↓ (inverse)</p>
+        <p className="text-xs text-green-700 text-center font-semibold">Curve → as R↑, I↓ (inverse)</p>
         <p className="text-xs text-gray-600 text-center">Double R → halve I</p>
       </div>
       <div className="bg-white rounded-xl p-4 border-2 border-orange-300 shadow-md">
@@ -2484,23 +2524,23 @@ const OhmsLawGraph = () => (
           <text x="80" y="130" textAnchor="middle" fontSize="11" fill="#374151" fontWeight="bold">Current (I) →</text>
           <text x="10" y="70" fontSize="11" fill="#374151" fontWeight="bold" transform="rotate(-90,10,70)">Voltage (V)</text>
         </svg>
-        <p className="text-xs text-orange-300 text-center font-semibold">All lines through origin</p>
+        <p className="text-xs text-orange-700 text-center font-semibold">All lines through origin</p>
         <p className="text-xs text-gray-600 text-center">Higher R = steeper slope</p>
       </div>
     </div>
     <div className="bg-white rounded-xl p-4 border-2 border-indigo-200">
-      <p className="font-bold text-indigo-300 mb-3 text-center">📊 Reading V-I Graphs on Tests</p>
+      <p className="font-bold text-indigo-700 mb-3 text-center">📊 Reading V-I Graphs on Tests</p>
       <div className="grid grid-cols-3 gap-3 text-xs">
         <div className="bg-indigo-50 rounded-lg p-3">
-          <p className="font-bold text-indigo-300 mb-1">Finding Resistance:</p>
+          <p className="font-bold text-indigo-700 mb-1">Finding Resistance:</p>
           <p className="text-gray-600">Pick any point on the line. R = V ÷ I using those coordinates. Steeper slope = higher R.</p>
         </div>
         <div className="bg-purple-50 rounded-lg p-3">
-          <p className="font-bold text-purple-300 mb-1">Ohmic vs Non-Ohmic:</p>
+          <p className="font-bold text-purple-700 mb-1">Ohmic vs Non-Ohmic:</p>
           <p className="text-gray-600">Straight line through origin = Ohmic (follows V=IR). Curved line = Non-Ohmic (e.g. light bulb filament heats up).</p>
         </div>
         <div className="bg-blue-50 rounded-lg p-3">
-          <p className="font-bold text-blue-300 mb-1">Exam Tip:</p>
+          <p className="font-bold text-blue-700 mb-1">Exam Tip:</p>
           <p className="text-gray-600">If graph is curved at high I → resistance is increasing (filament getting hot). Always check if line passes through origin!</p>
         </div>
       </div>
@@ -2509,7 +2549,7 @@ const OhmsLawGraph = () => (
 );
 
 const AmpmeterVoltmeterDiagram = () => (
-  <div className="bg-gradient-to-br from-[#060f10] to-[#061014] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Ammeter & Voltmeter — How to Connect Them</h4>
     <div className="grid md:grid-cols-2 gap-6 mb-5">
       <div className="bg-white rounded-xl p-5 border-2 border-teal-300 shadow-md">
@@ -2535,7 +2575,7 @@ const AmpmeterVoltmeterDiagram = () => (
           <defs><marker id="tarr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0D9488"/></marker></defs>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Connected <span className="font-bold text-teal-300">IN SERIES</span> — current flows THROUGH it</p>
+          <p>• Connected <span className="font-bold text-teal-700">IN SERIES</span> — current flows THROUGH it</p>
           <p>• Must be in the same wire/path as what you're measuring</p>
           <p>• Has very LOW resistance (doesn't disturb circuit)</p>
           <p>• Breaking circuit and inserting ammeter in the gap</p>
@@ -2564,7 +2604,7 @@ const AmpmeterVoltmeterDiagram = () => (
           <text x="162" y="118" textAnchor="middle" fontSize="9" fill="#0891B2" fontWeight="bold">V in PARALLEL across R</text>
         </svg>
         <div className="space-y-1 text-sm text-gray-700">
-          <p>• Connected <span className="font-bold text-cyan-300">IN PARALLEL</span> — bridges across the component</p>
+          <p>• Connected <span className="font-bold text-cyan-700">IN PARALLEL</span> — bridges across the component</p>
           <p>• Placed across (in parallel with) the component to measure</p>
           <p>• Has very HIGH resistance (barely any current flows through it)</p>
           <p>• Does NOT break the circuit — just connects across</p>
@@ -2573,7 +2613,7 @@ const AmpmeterVoltmeterDiagram = () => (
       </div>
     </div>
     <div className="bg-white rounded-xl p-4 border border-gray-200">
-      <p className="font-bold text-gray-700 text-center mb-3">Memory Trick: <span className="text-teal-300">A</span>mmeter in series = <span className="text-teal-300">A</span>long the path | <span className="text-cyan-300">V</span>oltmeter in parallel = <span className="text-cyan-300">V</span>ertical bridge</p>
+      <p className="font-bold text-gray-700 text-center mb-3">Memory Trick: <span className="text-teal-700">A</span>mmeter in series = <span className="text-teal-700">A</span>long the path | <span className="text-cyan-700">V</span>oltmeter in parallel = <span className="text-cyan-700">V</span>ertical bridge</p>
     </div>
   </div>
 );
@@ -2602,8 +2642,8 @@ const SeriesParallelComparisonTable = () => (
           ].map((row, i) => (
             <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               <td className="p-3 font-semibold text-purple-800 border-b border-gray-100">{row[0]}</td>
-              <td className="p-3 text-blue-300 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[1]}</td>
-              <td className="p-3 text-green-300 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[2]}</td>
+              <td className="p-3 text-blue-700 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[1]}</td>
+              <td className="p-3 text-green-700 border-b border-gray-100 text-center whitespace-pre-line text-xs">{row[2]}</td>
             </tr>
           ))}
         </tbody>
@@ -2611,8 +2651,8 @@ const SeriesParallelComparisonTable = () => (
     </div>
     <div className="grid grid-cols-2 gap-4">
       <div className="bg-blue-50 rounded-xl p-4">
-        <p className="font-bold text-blue-300 mb-2">📌 Series Exam Checklist:</p>
-        <div className="space-y-1 text-xs text-blue-300">
+        <p className="font-bold text-blue-700 mb-2">📌 Series Exam Checklist:</p>
+        <div className="space-y-1 text-xs text-blue-700">
           <p>□ R_total = sum of all resistors</p>
           <p>□ I = V_battery ÷ R_total (same everywhere)</p>
           <p>□ Each V = I × that R (voltage divider)</p>
@@ -2620,8 +2660,8 @@ const SeriesParallelComparisonTable = () => (
         </div>
       </div>
       <div className="bg-green-950/30 rounded-xl p-4 border border-green-500/20">
-        <p className="font-bold text-green-300 mb-2">📌 Parallel Exam Checklist:</p>
-        <div className="space-y-1 text-xs text-green-300">
+        <p className="font-bold text-green-700 mb-2">📌 Parallel Exam Checklist:</p>
+        <div className="space-y-1 text-xs text-green-700">
           <p>□ Each branch: V = battery voltage</p>
           <p>□ Each branch: I = V ÷ that branch's R</p>
           <p>□ I_total = sum of all branch currents</p>
@@ -2633,11 +2673,11 @@ const SeriesParallelComparisonTable = () => (
 );
 
 const EnergyConversionDiagram = () => (
-  <div className="bg-gradient-to-br from-[#181208] to-[#181408] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-6">Energy Conversions in Electrical Devices</h4>
     <div className="grid md:grid-cols-2 gap-6 mb-5">
       <div>
-        <h5 className="font-bold text-amber-300 mb-4 text-center">Input → Process → Output</h5>
+        <h5 className="font-bold text-amber-700 mb-4 text-center">Input → Process → Output</h5>
         {[
           { device: '💡 Light Bulb', input: 'Electrical', arrow: '→', output: 'Light + Heat', eff: '~5%', color: 'border-yellow-300 bg-yellow-50' },
           { device: '💡 LED Bulb', input: 'Electrical', arrow: '→', output: 'Light + tiny Heat', eff: '~40%', color: 'border-green-300 bg-green-50' },
@@ -2655,9 +2695,9 @@ const EnergyConversionDiagram = () => (
         ))}
       </div>
       <div>
-        <h5 className="font-bold text-amber-300 mb-4 text-center">Law of Conservation of Energy</h5>
+        <h5 className="font-bold text-amber-700 mb-4 text-center">Law of Conservation of Energy</h5>
         <div className="bg-white rounded-xl p-5 border-2 border-amber-300 mb-4">
-          <p className="text-center font-bold text-amber-300 text-lg mb-3">Energy is NEVER created or destroyed — only CONVERTED</p>
+          <p className="text-center font-bold text-amber-700 text-lg mb-3">Energy is NEVER created or destroyed — only CONVERTED</p>
           <svg viewBox="0 0 220 140" className="w-full">
             <circle cx="110" cy="70" r="55" fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="8"/>
             <rect x="75" y="50" width="70" height="40" rx="8" fill="#FEF3C7" stroke="#D97706" strokeWidth="2"/>
@@ -2680,8 +2720,8 @@ const EnergyConversionDiagram = () => (
           <p className="text-xs text-center text-gray-600 mt-2">Total energy out = total energy in. "Lost" energy just became heat!</p>
         </div>
         <div className="bg-red-950/30 rounded-xl p-4 border border-red-500/20">
-          <p className="font-bold text-red-300 mb-2">Efficiency Formula:</p>
-          <p className="font-mono text-center text-sm font-bold text-red-300 mb-1">Efficiency = (Useful Output ÷ Total Input) × 100%</p>
+          <p className="font-bold text-red-700 mb-2">Efficiency Formula:</p>
+          <p className="font-mono text-center text-sm font-bold text-red-700 mb-1">Efficiency = (Useful Output ÷ Total Input) × 100%</p>
           <p className="text-xs text-gray-600">Example: motor uses 200J electricity, produces 170J motion → efficiency = (170÷200)×100 = 85%</p>
         </div>
       </div>
@@ -2721,14 +2761,14 @@ const CircuitTroubleshootingDiagram = () => (
             { mistake: 'Forgetting to verify: voltages must add up in series', fix: 'Always check: V₁ + V₂ + V₃ = V_battery as a final sanity check.' },
           ].map((item, i) => (
             <div key={i} className="mb-3 p-3 bg-pink-50 rounded-lg border border-pink-200">
-              <p className="text-xs text-red-300 font-semibold">✗ Mistake: {item.mistake}</p>
-              <p className="text-xs text-green-300 font-semibold mt-1">✓ Fix: {item.fix}</p>
+              <p className="text-xs text-red-700 font-semibold">✗ Mistake: {item.mistake}</p>
+              <p className="text-xs text-green-700 font-semibold mt-1">✓ Fix: {item.fix}</p>
             </div>
           ))}
         </div>
         <div className="bg-white rounded-xl p-4 border-2 border-purple-200">
           <p className="font-bold text-purple-800 mb-2">2-Resistor Parallel Shortcut:</p>
-          <p className="font-mono text-center text-sm font-bold text-purple-300 my-2">R_total = (R₁ × R₂) ÷ (R₁ + R₂)</p>
+          <p className="font-mono text-center text-sm font-bold text-purple-700 my-2">R_total = (R₁ × R₂) ÷ (R₁ + R₂)</p>
           <p className="text-xs text-gray-600">Example: R₁=6Ω, R₂=12Ω → R_t = (6×12)÷(6+12) = 72÷18 = 4Ω</p>
           <p className="text-xs text-gray-500 mt-1">Note: R_total is always LESS than either individual resistor</p>
         </div>
@@ -2741,7 +2781,7 @@ const CircuitTroubleshootingDiagram = () => (
 // ── NEW PHYSICS DIAGRAMS ──────────────────────────────────────────────────────
 
 const ElectricChargesDiagram = () => (
-  <div className="bg-gradient-to-br from-[#181208] to-[#180f04] rounded-xl p-6">
+  <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6">
     <h4 className="text-center font-bold text-gray-700 mb-5 text-lg">⚡ Law of Electric Charges</h4>
     <div className="grid grid-cols-3 gap-4 mb-5">
       {/* Like + repel */}
@@ -2800,19 +2840,19 @@ const ElectricChargesDiagram = () => (
       </div>
     </div>
     <div className="bg-amber-100 rounded-lg p-3 text-center">
-      <p className="text-sm font-bold text-amber-300">🧠 Memory Trick: "Opposites attract, likes repel" — just like magnets!</p>
+      <p className="text-sm font-bold text-amber-700">🧠 Memory Trick: "Opposites attract, likes repel" — just like magnets!</p>
     </div>
   </div>
 );
 
 const ConductorInsulatorDiagram = () => (
-  <div className="bg-gradient-to-br from-[#0a0a12] to-[#0a0e18] rounded-xl p-6">
+  <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl p-6">
     <h4 className="text-center font-bold text-gray-700 mb-5 text-lg">🔌 Conductors vs Insulators</h4>
     <div className="grid grid-cols-2 gap-5 mb-4">
       <div className="bg-white rounded-xl p-4 border-2 border-yellow-300 shadow-sm">
         <div className="text-center mb-3">
           <span className="text-3xl">🔩</span>
-          <h5 className="font-bold text-yellow-300 mt-1">CONDUCTOR</h5>
+          <h5 className="font-bold text-yellow-700 mt-1">CONDUCTOR</h5>
           <p className="text-xs text-gray-500">Electrons move FREELY</p>
         </div>
         <svg viewBox="0 0 160 50" className="w-full h-12 mb-2">
@@ -2836,7 +2876,7 @@ const ConductorInsulatorDiagram = () => (
       <div className="bg-white rounded-xl p-4 border-2 border-purple-300 shadow-sm">
         <div className="text-center mb-3">
           <span className="text-3xl">🔒</span>
-          <h5 className="font-bold text-purple-300 mt-1">INSULATOR</h5>
+          <h5 className="font-bold text-purple-700 mt-1">INSULATOR</h5>
           <p className="text-xs text-gray-500">Electrons are LOCKED in place</p>
         </div>
         <svg viewBox="0 0 160 50" className="w-full h-12 mb-2">
@@ -2855,7 +2895,7 @@ const ConductorInsulatorDiagram = () => (
       </div>
     </div>
     <div className="bg-blue-100 rounded-lg p-3 text-center">
-      <p className="text-sm text-blue-300"><span className="font-bold">Real-world example:</span> Copper wire (conductor) coated in rubber (insulator) = safe electrical cable!</p>
+      <p className="text-sm text-blue-700"><span className="font-bold">Real-world example:</span> Copper wire (conductor) coated in rubber (insulator) = safe electrical cable!</p>
     </div>
   </div>
 );
@@ -2889,25 +2929,25 @@ const VIRTriangleDiagram = () => (
       </div>
       <div className="space-y-3 flex-1 min-w-48">
         <div className="bg-indigo-100 rounded-lg p-3 border-l-4 border-indigo-500">
-          <p className="font-bold text-indigo-300 text-sm">Find Voltage:</p>
-          <p className="text-indigo-300 text-sm font-mono">V = I × R</p>
+          <p className="font-bold text-indigo-700 text-sm">Find Voltage:</p>
+          <p className="text-indigo-700 text-sm font-mono">V = I × R</p>
           <p className="text-indigo-600 text-xs mt-1">Cover V → I × R</p>
         </div>
         <div className="bg-green-100 rounded-lg p-3 border-l-4 border-green-500">
-          <p className="font-bold text-green-300 text-sm">Find Current:</p>
-          <p className="text-green-300 text-sm font-mono">I = V ÷ R</p>
+          <p className="font-bold text-green-700 text-sm">Find Current:</p>
+          <p className="text-green-700 text-sm font-mono">I = V ÷ R</p>
           <p className="text-green-600 text-xs mt-1">Cover I → V on top, R below</p>
         </div>
         <div className="bg-amber-100 rounded-lg p-3 border-l-4 border-amber-500">
-          <p className="font-bold text-amber-300 text-sm">Find Resistance:</p>
-          <p className="text-amber-300 text-sm font-mono">R = V ÷ I</p>
+          <p className="font-bold text-amber-700 text-sm">Find Resistance:</p>
+          <p className="text-amber-700 text-sm font-mono">R = V ÷ I</p>
           <p className="text-amber-600 text-xs mt-1">Cover R → V on top, I below</p>
         </div>
         <div className="bg-gray-100 rounded-lg p-3">
           <p className="text-xs font-bold text-gray-700 mb-1">⚡ Quick Examples:</p>
-          <p className="text-xs text-gray-600">V=12V, R=4Ω → <span className="font-bold text-green-300">I = 3A</span></p>
-          <p className="text-xs text-gray-600">I=2A, R=6Ω → <span className="font-bold text-indigo-300">V = 12V</span></p>
-          <p className="text-xs text-gray-600">V=24V, I=3A → <span className="font-bold text-amber-300">R = 8Ω</span></p>
+          <p className="text-xs text-gray-600">V=12V, R=4Ω → <span className="font-bold text-green-700">I = 3A</span></p>
+          <p className="text-xs text-gray-600">I=2A, R=6Ω → <span className="font-bold text-indigo-700">V = 12V</span></p>
+          <p className="text-xs text-gray-600">V=24V, I=3A → <span className="font-bold text-amber-700">R = 8Ω</span></p>
         </div>
       </div>
     </div>
@@ -2915,12 +2955,12 @@ const VIRTriangleDiagram = () => (
 );
 
 const SeriesVsParallelVisual = () => (
-  <div className="bg-gradient-to-br from-[#0a0a12] to-[#111118] rounded-xl p-6">
+  <div className="bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl p-6">
     <h4 className="text-center font-bold text-gray-700 mb-5 text-lg">⚖️ Series vs Parallel — Side by Side</h4>
     <div className="grid grid-cols-2 gap-4 mb-4">
       {/* Series */}
       <div className="bg-white rounded-xl p-4 border-2 border-blue-300 shadow-sm">
-        <h5 className="font-bold text-blue-300 text-center mb-3">➡️ SERIES</h5>
+        <h5 className="font-bold text-blue-700 text-center mb-3">➡️ SERIES</h5>
         <svg viewBox="0 0 200 80" className="w-full h-20 mb-3">
           {/* Battery */}
           <line x1="10" y1="20" x2="10" y2="60" stroke="#374151" strokeWidth="3"/>
@@ -2948,15 +2988,15 @@ const SeriesVsParallelVisual = () => (
         </svg>
         <div className="space-y-1.5 text-xs">
           <div className="flex items-center gap-2 bg-blue-50 rounded p-1.5">
-            <span className="font-bold text-blue-300 w-12">Current:</span>
+            <span className="font-bold text-blue-700 w-12">Current:</span>
             <span className="text-blue-600">Same everywhere (I₁=I₂)</span>
           </div>
           <div className="flex items-center gap-2 bg-blue-50 rounded p-1.5">
-            <span className="font-bold text-blue-300 w-12">Voltage:</span>
+            <span className="font-bold text-blue-700 w-12">Voltage:</span>
             <span className="text-blue-600">Splits (V₁+V₂=V_bat)</span>
           </div>
           <div className="flex items-center gap-2 bg-blue-50 rounded p-1.5">
-            <span className="font-bold text-blue-300 w-12">Resistance:</span>
+            <span className="font-bold text-blue-700 w-12">Resistance:</span>
             <span className="text-blue-600">Adds up (R₁+R₂)</span>
           </div>
           <div className="flex items-center gap-2 bg-red-50 rounded p-1.5 border border-red-200">
@@ -2966,7 +3006,7 @@ const SeriesVsParallelVisual = () => (
       </div>
       {/* Parallel */}
       <div className="bg-white rounded-xl p-4 border-2 border-orange-300 shadow-sm">
-        <h5 className="font-bold text-orange-300 text-center mb-3">🔀 PARALLEL</h5>
+        <h5 className="font-bold text-orange-700 text-center mb-3">🔀 PARALLEL</h5>
         <svg viewBox="0 0 200 80" className="w-full h-20 mb-3">
           {/* Battery */}
           <line x1="10" y1="20" x2="10" y2="60" stroke="#374151" strokeWidth="3"/>
@@ -2992,15 +3032,15 @@ const SeriesVsParallelVisual = () => (
         </svg>
         <div className="space-y-1.5 text-xs">
           <div className="flex items-center gap-2 bg-orange-50 rounded p-1.5">
-            <span className="font-bold text-orange-300 w-12">Voltage:</span>
+            <span className="font-bold text-orange-700 w-12">Voltage:</span>
             <span className="text-orange-600">Same everywhere (V₁=V₂)</span>
           </div>
           <div className="flex items-center gap-2 bg-orange-50 rounded p-1.5">
-            <span className="font-bold text-orange-300 w-12">Current:</span>
+            <span className="font-bold text-orange-700 w-12">Current:</span>
             <span className="text-orange-600">Splits (I₁+I₂=I_total)</span>
           </div>
           <div className="flex items-center gap-2 bg-orange-50 rounded p-1.5">
-            <span className="font-bold text-orange-300 w-12">Resistance:</span>
+            <span className="font-bold text-orange-700 w-12">Resistance:</span>
             <span className="text-orange-600">Decreases (less than R₁)</span>
           </div>
           <div className="flex items-center gap-2 bg-green-50 rounded p-1.5 border border-green-200">
@@ -3010,7 +3050,7 @@ const SeriesVsParallelVisual = () => (
       </div>
     </div>
     <div className="bg-indigo-50 rounded-lg p-3 text-center border border-indigo-200">
-      <p className="text-sm text-indigo-300"><span className="font-bold">🏠 Real life:</span> Your home outlets are PARALLEL — every device gets full 120V independently!</p>
+      <p className="text-sm text-indigo-700"><span className="font-bold">🏠 Real life:</span> Your home outlets are PARALLEL — every device gets full 120V independently!</p>
     </div>
   </div>
 );
@@ -3022,7 +3062,7 @@ const PowerTriangleDiagram = () => (
       {[
         { formula: 'P = V × I', label: 'Use when you know\nVoltage & Current', color: 'bg-yellow-100 border-yellow-400', text: 'text-yellow-800', example: '120V × 0.5A = 60W' },
         { formula: 'P = I² × R', label: 'Use when you know\nCurrent & Resistance', color: 'bg-orange-100 border-orange-400', text: 'text-orange-800', example: '2² × 10 = 40W' },
-        { formula: 'P = V² ÷ R', label: 'Use when you know\nVoltage & Resistance', color: 'bg-red-100 border-red-400', text: 'text-red-300', example: '12² ÷ 6 = 24W' },
+        { formula: 'P = V² ÷ R', label: 'Use when you know\nVoltage & Resistance', color: 'bg-red-100 border-red-400', text: 'text-red-700', example: '12² ÷ 6 = 24W' },
       ].map((item, i) => (
         <div key={i} className={`${item.color} border-2 rounded-xl p-3 text-center`}>
           <p className={`font-bold font-mono text-base ${item.text} mb-1`}>{item.formula}</p>
@@ -3041,7 +3081,7 @@ const PowerTriangleDiagram = () => (
           { arrow: '× time (hrs) ÷ 1000' },
           { label: 'Energy', sub: 'kWh', color: 'bg-orange-200 text-orange-800' },
           { arrow: '× rate ($/kWh)' },
-          { label: 'Cost', sub: '$$$', color: 'bg-green-200 text-green-300' },
+          { label: 'Cost', sub: '$$$', color: 'bg-green-200 text-green-700' },
         ].map((item, i) => item.arrow
           ? <div key={i} className="text-gray-500 font-bold mx-1 text-center"><p>→</p><p className="text-gray-600" style={{fontSize:'9px'}}>{item.arrow}</p></div>
           : <div key={i} className={`${item.color} rounded-lg px-3 py-2 text-center font-bold`}>
@@ -3051,14 +3091,14 @@ const PowerTriangleDiagram = () => (
         )}
       </div>
       <div className="mt-3 bg-gray-50 rounded-lg p-2 text-xs text-center text-gray-600">
-        <span className="font-bold">Example:</span> 1500W heater × 8h ÷ 1000 = 12 kWh × $0.12 = <span className="font-bold text-green-300">$1.44</span>
+        <span className="font-bold">Example:</span> 1500W heater × 8h ÷ 1000 = 12 kWh × $0.12 = <span className="font-bold text-green-700">$1.44</span>
       </div>
     </div>
   </div>
 );
 
 const CurrentDangerDiagram = () => (
-  <div className="bg-gradient-to-br from-[#150808] to-[#180d04] rounded-xl p-6">
+  <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-6">
     <h4 className="text-center font-bold text-gray-700 mb-4 text-lg">⚠️ Current Through the Body — Danger Levels</h4>
     <div className="space-y-2 mb-4">
       {[
@@ -3081,15 +3121,15 @@ const CurrentDangerDiagram = () => (
       ))}
     </div>
     <div className="bg-red-100 rounded-lg p-3 border-2 border-red-300">
-      <p className="text-xs text-red-300 font-bold text-center">⚠️ It's the CURRENT, not the voltage, that kills you.</p>
-      <p className="text-xs text-red-300 text-center mt-1">BUT: high voltage → forces more current through body → more dangerous!</p>
-      <p className="text-xs text-red-300 text-center mt-1">Water lowers skin resistance 1000× → same voltage = much more current!</p>
+      <p className="text-xs text-red-700 font-bold text-center">⚠️ It's the CURRENT, not the voltage, that kills you.</p>
+      <p className="text-xs text-red-700 text-center mt-1">BUT: high voltage → forces more current through body → more dangerous!</p>
+      <p className="text-xs text-red-700 text-center mt-1">Water lowers skin resistance 1000× → same voltage = much more current!</p>
     </div>
   </div>
 );
 
 const AppliancePowerDiagram = () => (
-  <div className="bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl p-6">
+  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6">
     <h4 className="text-center font-bold text-gray-700 mb-4 text-lg">🏠 Appliance Power Comparison</h4>
     <div className="space-y-2">
       {[
@@ -3113,7 +3153,7 @@ const AppliancePowerDiagram = () => (
         </div>
       ))}
     </div>
-    <div className="mt-4 bg-indigo-100 rounded-lg p-3 text-xs text-center text-indigo-300">
+    <div className="mt-4 bg-indigo-100 rounded-lg p-3 text-xs text-center text-indigo-700">
       <span className="font-bold">💡 Tip:</span> Devices with heating elements (kettle, dryer, oven) use the MOST power!
     </div>
   </div>
@@ -3126,7 +3166,7 @@ const FuseCircuitBreakerDiagram = () => (
       <div className="bg-white rounded-xl p-4 border-2 border-red-200">
         <div className="text-center mb-3">
           <span className="text-3xl">🔥</span>
-          <h5 className="font-bold text-red-300 mt-1">FUSE</h5>
+          <h5 className="font-bold text-red-700 mt-1">FUSE</h5>
         </div>
         <svg viewBox="0 0 160 60" className="w-full h-14 mb-3">
           <line x1="5" y1="30" x2="30" y2="30" stroke="#374151" strokeWidth="3"/>
@@ -3146,7 +3186,7 @@ const FuseCircuitBreakerDiagram = () => (
       <div className="bg-white rounded-xl p-4 border-2 border-green-200">
         <div className="text-center mb-3">
           <span className="text-3xl">⚡</span>
-          <h5 className="font-bold text-green-300 mt-1">CIRCUIT BREAKER</h5>
+          <h5 className="font-bold text-green-700 mt-1">CIRCUIT BREAKER</h5>
         </div>
         <svg viewBox="0 0 160 60" className="w-full h-14 mb-3">
           <line x1="5" y1="30" x2="40" y2="30" stroke="#374151" strokeWidth="3"/>
@@ -3166,23 +3206,23 @@ const FuseCircuitBreakerDiagram = () => (
       </div>
     </div>
     <div className="bg-amber-100 rounded-lg p-3 border border-amber-300 text-xs text-center">
-      <p className="font-bold text-amber-300">Both are rated in AMPERES (e.g. 15A breaker trips when current exceeds 15A)</p>
-      <p className="text-amber-300 mt-1">GFCI outlets: cut power in 0.025 seconds if they detect tiny current leaks — used in bathrooms & kitchens</p>
+      <p className="font-bold text-amber-700">Both are rated in AMPERES (e.g. 15A breaker trips when current exceeds 15A)</p>
+      <p className="text-amber-700 mt-1">GFCI outlets: cut power in 0.025 seconds if they detect tiny current leaks — used in bathrooms & kitchens</p>
     </div>
   </div>
 );
 
 const EnergyTransformationsDiagram = () => (
-  <div className="bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl p-6">
+  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6">
     <h4 className="text-center font-bold text-gray-700 mb-4 text-lg">🔄 Energy Transformations in Circuits</h4>
     <div className="grid grid-cols-2 gap-3 mb-4">
       {[
-        { device: '🔋 Battery', from: 'Chemical', to: 'Electrical', fromColor: 'bg-green-100 text-green-300', toColor: 'bg-yellow-100 text-yellow-300' },
-        { device: '💡 Light Bulb', from: 'Electrical', to: 'Light + Heat', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-orange-100 text-orange-300' },
-        { device: '⚙️ Motor', from: 'Electrical', to: 'Mechanical', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-blue-100 text-blue-300' },
-        { device: '🔊 Speaker', from: 'Electrical', to: 'Sound', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-purple-100 text-purple-300' },
-        { device: '🌡️ Toaster', from: 'Electrical', to: 'Heat', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-red-100 text-red-300' },
-        { device: '📱 Charging', from: 'Electrical', to: 'Chemical', fromColor: 'bg-yellow-100 text-yellow-300', toColor: 'bg-green-100 text-green-300' },
+        { device: '🔋 Battery', from: 'Chemical', to: 'Electrical', fromColor: 'bg-green-100 text-green-700', toColor: 'bg-yellow-100 text-yellow-700' },
+        { device: '💡 Light Bulb', from: 'Electrical', to: 'Light + Heat', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-orange-100 text-orange-700' },
+        { device: '⚙️ Motor', from: 'Electrical', to: 'Mechanical', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-blue-100 text-blue-700' },
+        { device: '🔊 Speaker', from: 'Electrical', to: 'Sound', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-purple-100 text-purple-700' },
+        { device: '🌡️ Toaster', from: 'Electrical', to: 'Heat', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-red-100 text-red-700' },
+        { device: '📱 Charging', from: 'Electrical', to: 'Chemical', fromColor: 'bg-yellow-100 text-yellow-700', toColor: 'bg-green-100 text-green-700' },
       ].map((item, i) => (
         <div key={i} className="bg-white rounded-xl p-3 border border-gray-200 shadow-sm">
           <p className="text-sm font-bold text-gray-700 mb-2">{item.device}</p>
@@ -3196,7 +3236,7 @@ const EnergyTransformationsDiagram = () => (
     </div>
     <div className="bg-purple-100 rounded-lg p-3 text-center text-xs border border-purple-300">
       <p className="font-bold text-purple-800">♾️ Law of Conservation of Energy:</p>
-      <p className="text-purple-300 mt-1">Energy is NEVER created or destroyed — it only changes form. Total energy in = total energy out!</p>
+      <p className="text-purple-700 mt-1">Energy is NEVER created or destroyed — it only changes form. Total energy in = total energy out!</p>
     </div>
   </div>
 );
@@ -3208,7 +3248,7 @@ const EfficiencyDiagram = () => (
       <p className="text-center font-bold text-gray-700 mb-3 text-sm">Efficiency (%) = (Useful Output ÷ Total Input) × 100</p>
       {/* Sankey-style diagram */}
       <div className="flex items-center gap-3 justify-center mb-4">
-        <div className="bg-blue-200 rounded-lg p-3 text-center text-sm font-bold text-blue-300">100J<br/><span className="text-xs font-normal">IN</span></div>
+        <div className="bg-blue-200 rounded-lg p-3 text-center text-sm font-bold text-blue-700">100J<br/><span className="text-xs font-normal">IN</span></div>
         <svg viewBox="0 0 80 60" className="w-20 h-14">
           <path d="M 0 20 L 45 20 L 80 5" stroke="#10B981" strokeWidth="6" fill="none" strokeLinecap="round"/>
           <path d="M 0 40 L 45 40 L 80 55" stroke="#EF4444" strokeWidth="6" fill="none" strokeLinecap="round"/>
@@ -3216,8 +3256,8 @@ const EfficiencyDiagram = () => (
           <text x="62" y="59" fontSize="9" fill="#DC2626" fontWeight="bold">Waste</text>
         </svg>
         <div className="space-y-2">
-          <div className="bg-green-100 rounded p-2 text-center text-xs font-bold text-green-300">Useful Output</div>
-          <div className="bg-red-100 rounded p-2 text-center text-xs font-bold text-red-300">Heat (Wasted)</div>
+          <div className="bg-green-100 rounded p-2 text-center text-xs font-bold text-green-700">Useful Output</div>
+          <div className="bg-red-100 rounded p-2 text-center text-xs font-bold text-red-700">Heat (Wasted)</div>
         </div>
       </div>
     </div>
@@ -3245,7 +3285,7 @@ const EfficiencyDiagram = () => (
 // ── END NEW PHYSICS DIAGRAMS ──────────────────────────────────────────────────
 
 const AtomicModels = () => (
-  <div className="bg-gradient-to-br from-[#0d0a1e] to-[#120a1e] rounded-xl p-8">
+  <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8">
     <h4 className="text-center font-semibold text-gray-700 mb-8">Evolution of Atomic Models</h4>
     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
       {/* Dalton - Solid Sphere */}
@@ -3257,7 +3297,7 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-purple-900 mb-1">Dalton (1803)</h5>
-        <p className="text-xs text-purple-300">Solid Sphere</p>
+        <p className="text-xs text-purple-700">Solid Sphere</p>
         <p className="text-xs text-gray-600 mt-1">Indivisible ball</p>
       </div>
 
@@ -3278,7 +3318,7 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-orange-900 mb-1">Thomson (1897)</h5>
-        <p className="text-xs text-orange-300">Plum Pudding</p>
+        <p className="text-xs text-orange-700">Plum Pudding</p>
         <p className="text-xs text-gray-600 mt-1">Electrons in positive</p>
       </div>
 
@@ -3298,7 +3338,7 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-red-900 mb-1">Rutherford (1911)</h5>
-        <p className="text-xs text-red-300">Nuclear Model</p>
+        <p className="text-xs text-red-700">Nuclear Model</p>
         <p className="text-xs text-gray-600 mt-1">Dense nucleus</p>
       </div>
 
@@ -3318,12 +3358,12 @@ const AtomicModels = () => (
           </svg>
         </div>
         <h5 className="font-bold text-blue-900 mb-1">Bohr (1913)</h5>
-        <p className="text-xs text-blue-300">Planetary Model</p>
+        <p className="text-xs text-blue-700">Planetary Model</p>
         <p className="text-xs text-gray-600 mt-1">Energy levels</p>
       </div>
     </div>
     <div className="mt-6 bg-blue-100 rounded-lg p-4">
-      <p className="text-sm text-blue-300 text-center">
+      <p className="text-sm text-blue-700 text-center">
         <span className="font-bold">Evolution:</span> From solid ball → embedded electrons → nuclear center → specific orbits
       </p>
     </div>
@@ -3491,7 +3531,7 @@ const PeriodicTableDiagram = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#0a0a12] to-[#0c0c14] rounded-xl p-4">
+    <div className="bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl p-4">
       <h4 className="text-center font-semibold text-gray-700 mb-4">Complete Periodic Table of Elements</h4>
       
       {/* Legend */}
@@ -3602,12 +3642,12 @@ const PeriodicTableDiagram = () => {
 
       <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
         <div className="bg-red-50 rounded-lg p-2 border border-red-200">
-          <p className="font-bold text-red-300 mb-1">Group 1: Alkali Metals</p>
-          <p className="text-red-300">Soft, highly reactive, 1 valence e⁻</p>
+          <p className="font-bold text-red-700 mb-1">Group 1: Alkali Metals</p>
+          <p className="text-red-700">Soft, highly reactive, 1 valence e⁻</p>
         </div>
         <div className="bg-purple-50 rounded-lg p-2 border border-purple-200">
           <p className="font-bold text-purple-800 mb-1">Group 18: Noble Gases</p>
-          <p className="text-purple-300">Unreactive, full outer shell</p>
+          <p className="text-purple-700">Unreactive, full outer shell</p>
         </div>
       </div>
     </div>
@@ -7387,7 +7427,8 @@ const achievements = [
 ];
 
 export default function ScienceStudyLibrary() {
-  const [showIntro, setShowIntro] = useState(true);
+  const scienceAiEnabled = false;
+  const [showIntro, setShowIntro] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -7430,8 +7471,7 @@ export default function ScienceStudyLibrary() {
   const [flashcardStats, setFlashcardStats] = useState({ known: 0, learning: 0 });
   
   // Feature highlights visibility
-  const [showFeatureHighlights, setShowFeatureHighlights] = useState(false);
-  const internalAIAssistantEnabled = false;
+  const [showFeatureHighlights, setShowFeatureHighlights] = useState(true);
   
   // Achievement tracking
   const [unlockedAchievements, setUnlockedAchievements] = useState(new Set());
@@ -7469,6 +7509,16 @@ export default function ScienceStudyLibrary() {
   ]);
   const [aiInput, setAiInput] = useState('');
   const [isAiThinking, setIsAiThinking] = useState(false);
+
+  useEffect(() => {
+    setShowIntro(false);
+    setSelectedSubject(null);
+    setSelectedSection(null);
+
+    if (window.location.hash) {
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    }
+  }, []);
 
   // Timer effect for study sessions
   useEffect(() => {
@@ -7560,7 +7610,7 @@ export default function ScienceStudyLibrary() {
           </div>
           {typeof summary === 'string' && (
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
-              <p className="text-xs text-amber-300 leading-relaxed">{summary}</p>
+              <p className="text-xs text-amber-700 leading-relaxed">{summary}</p>
             </div>
           )}
         </div>
@@ -7593,7 +7643,7 @@ export default function ScienceStudyLibrary() {
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-lg">{item.icon}</span>
                 <span className="font-semibold text-sm text-gray-800">{item.label}</span>
-                <span className="ml-auto text-xs font-bold text-red-300">{item.value}</span>
+                <span className="ml-auto text-xs font-bold text-red-700">{item.value}</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                 <div className={`h-full rounded-full ${item.barColor || 'bg-red-500'}`} style={{width: `${item.pct || 50}%`}} />
@@ -8115,7 +8165,7 @@ Student question: ${userMessage}`
               </h3>
               
               <div className="grid md:grid-cols-2 gap-4 mb-6">
-                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-xl border-2 border-blue-200">
+                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200">
                   <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center flex-shrink-0 font-bold">✓</div>
                   <div>
                     <h4 className="font-bold text-gray-800 mb-1">Advanced Quiz Library</h4>
@@ -8123,7 +8173,7 @@ Student question: ${userMessage}`
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-[#060f0a] to-[#081408] rounded-xl border-2 border-green-200">
+                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200">
                   <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 font-bold">✓</div>
                   <div>
                     <h4 className="font-bold text-gray-800 mb-1">Exclusive Flashcard Sets</h4>
@@ -8131,7 +8181,7 @@ Student question: ${userMessage}`
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-[#120a1e] to-[#180a14] rounded-xl border-2 border-purple-200">
+                <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
                   <div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center flex-shrink-0 font-bold">✓</div>
                   <div>
                     <h4 className="font-bold text-gray-800 mb-1">Detailed Study Guides</h4>
@@ -8182,7 +8232,7 @@ Student question: ${userMessage}`
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-2xl p-6 border-2 border-blue-200 mb-6">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 mb-6">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
                   <Brain className="w-6 h-6 text-white" />
@@ -8356,9 +8406,9 @@ Student question: ${userMessage}`
                             <div className="text-right flex-shrink-0 ml-4">
                               <div className={`px-3 py-1 rounded-lg text-sm font-semibold ${
                                 item.completed
-                                  ? 'bg-green-100 text-green-300'
+                                  ? 'bg-green-100 text-green-700'
                                   : currentStudySession?.id === item.id
-                                  ? 'bg-blue-100 text-blue-300'
+                                  ? 'bg-blue-100 text-blue-700'
                                   : 'bg-gray-100 text-gray-700'
                               }`}>
                                 {item.estimatedTime} min
@@ -8370,7 +8420,7 @@ Student question: ${userMessage}`
                           {currentStudySession?.id === item.id && (
                             <div className="bg-blue-100 rounded-lg p-3 mb-3">
                               <div className="flex items-center justify-between">
-                                <span className="text-sm font-semibold text-blue-300">Time Elapsed:</span>
+                                <span className="text-sm font-semibold text-blue-700">Time Elapsed:</span>
                                 <span className="text-2xl font-bold text-blue-600">{formatTime(studyTimer)}</span>
                               </div>
                               <div className="mt-2 w-full bg-blue-200 rounded-full h-2 overflow-hidden">
@@ -8655,7 +8705,7 @@ Student question: ${userMessage}`
 
           {quizState.showExplanation && (
             <div className="p-3 rounded-lg mb-4 bg-blue-50 border-2 border-blue-200">
-              <p className="text-sm font-semibold text-blue-300 mb-1">
+              <p className="text-sm font-semibold text-blue-700 mb-1">
                 {quizState.selectedAnswer === question.correct ? '✓ Correct!' : 'Explanation:'}
               </p>
               <p className="text-sm text-gray-700">{question.explanation}</p>
@@ -8717,7 +8767,7 @@ Student question: ${userMessage}`
     const isWorksheet = subject.id === 'worksheets';
     
     return (
-      <div className="h-full overflow-y-auto p-6 bg-gradient-to-br from-[#0a0a12] to-[#111118]">
+      <div className="h-full overflow-y-auto p-6 bg-gradient-to-br from-slate-50 to-gray-50">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-bold text-gray-800">{section.title}</h3>
           <button
@@ -8789,12 +8839,12 @@ Student question: ${userMessage}`
   // Split screen mode
   if (splitScreenMode) {
     return (
-      <div className="h-screen flex flex-col bg-gradient-to-br from-[#0a0a12] to-[#111118]">
+      <div className="h-screen flex flex-col bg-gradient-to-br from-slate-50 to-gray-50">
         <AchievementPopup achievement={newAchievement} />
         <AchievementsModal />
         
         {/* L.Y.N.E AI Assistant Widget */}
-        {internalAIAssistantEnabled && showAIAssistant && (
+        {scienceAiEnabled && showAIAssistant && (
           <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -8879,7 +8929,7 @@ Student question: ${userMessage}`
         )}
 
         {/* L.Y.N.E AI Assistant Toggle Button */}
-        {internalAIAssistantEnabled && !showAIAssistant && (
+        {scienceAiEnabled && !showAIAssistant && (
           <button
             onClick={() => setShowAIAssistant(true)}
             className="fixed bottom-6 right-6 group z-50"
@@ -8913,7 +8963,7 @@ Student question: ${userMessage}`
               </div>
               <div>
                 <h1 className="text-xl font-bold">Split Screen Study Mode</h1>
-                <p className="text-xs text-slate-300">View notes and quizzes side by side</p>
+                <p className="text-xs text-slate-600">View notes and quizzes side by side</p>
               </div>
             </div>
             
@@ -8960,9 +9010,9 @@ Student question: ${userMessage}`
                   </div>
                   
                   <div className="p-2 space-y-1">
-                    {subject.sections.map(section => (
+                    {subject.sections.map((section, sectionIndex) => (
                       <button
-                        key={section.id}
+                        key={`${subject.id}-${section.id}-${sectionIndex}`}
                         onClick={() => {
                           // Skip flashcards and locked sections in split screen
                           if (section.flashcards && section.flashcards.length > 0) {
@@ -9044,7 +9094,7 @@ Student question: ${userMessage}`
       <div className="min-h-screen bg-[#f5f4f0] soul-grid">
       <SoulStyles />
         {/* L.Y.N.E AI Assistant Widget */}
-        {internalAIAssistantEnabled && showAIAssistant && (
+        {scienceAiEnabled && showAIAssistant && (
           <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -9129,7 +9179,7 @@ Student question: ${userMessage}`
         )}
 
         {/* L.Y.N.E AI Assistant Toggle Button */}
-        {internalAIAssistantEnabled && !showAIAssistant && (
+        {scienceAiEnabled && !showAIAssistant && (
           <button
             onClick={() => setShowAIAssistant(true)}
             className="fixed bottom-6 right-6 group z-50"
@@ -9297,7 +9347,7 @@ Student question: ${userMessage}`
       <div className="min-h-screen bg-[#f5f4f0] soul-grid">
       <SoulStyles />
         {/* L.Y.N.E AI Assistant Widget */}
-        {internalAIAssistantEnabled && showAIAssistant && (
+        {scienceAiEnabled && showAIAssistant && (
           <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -9382,7 +9432,7 @@ Student question: ${userMessage}`
         )}
 
         {/* L.Y.N.E AI Assistant Toggle Button */}
-        {internalAIAssistantEnabled && !showAIAssistant && (
+        {scienceAiEnabled && !showAIAssistant && (
           <button
             onClick={() => setShowAIAssistant(true)}
             className="fixed bottom-6 right-6 group z-50"
@@ -9503,7 +9553,7 @@ Student question: ${userMessage}`
                 <div className="flex items-start gap-3">
                   <Lightbulb className={`w-6 h-6 flex-shrink-0 ${isCorrect ? 'text-green-600' : 'text-blue-600'}`} />
                   <div>
-                    <p className={`font-semibold mb-1 ${isCorrect ? 'text-green-300' : 'text-blue-300'}`}>
+                    <p className={`font-semibold mb-1 ${isCorrect ? 'text-green-700' : 'text-blue-700'}`}>
                       {isCorrect ? '✓ Correct!' : 'Explanation:'}
                     </p>
                     <p className="text-gray-700">{question.explanation}</p>
@@ -9547,7 +9597,7 @@ Student question: ${userMessage}`
         <div className="min-h-screen bg-[#f5f4f0] soul-grid">
       <SoulStyles />
           {/* L.Y.N.E AI Assistant Widget */}
-          {internalAIAssistantEnabled && showAIAssistant && (
+          {scienceAiEnabled && showAIAssistant && (
             <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
               {/* Header */}
               <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -9632,7 +9682,7 @@ Student question: ${userMessage}`
           )}
 
           {/* L.Y.N.E AI Assistant Toggle Button */}
-          {internalAIAssistantEnabled && !showAIAssistant && (
+          {scienceAiEnabled && !showAIAssistant && (
             <button
               onClick={() => setShowAIAssistant(true)}
               className="fixed bottom-6 right-6 group z-50"
@@ -9768,7 +9818,7 @@ Student question: ${userMessage}`
               onClick={() => toggleRead(section.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                 isRead
-                  ? 'bg-green-100 text-green-300 hover:bg-green-200'
+                  ? 'bg-green-100 text-green-700 hover:bg-green-200'
                   : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
               }`}
             >
@@ -9867,7 +9917,7 @@ Student question: ${userMessage}`
                       </div>
                       
                       {note.diagram && (
-                        <div className="mt-6 p-4 bg-gradient-to-br from-[#0a0a12] to-[#111118] rounded-xl border border-gray-200 shadow-inner">
+                        <div className="mt-6 p-4 bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl border border-gray-200 shadow-inner">
                           {note.diagram === 'lewis' && <LewisDotDiagram />}
                           {note.diagram === 'bohr' && <BohrDiagram />}
                           {note.diagram === 'energy-pyramid' && <EnergyPyramid />}
@@ -9985,7 +10035,7 @@ Student question: ${userMessage}`
           </div>
 
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-4 ${mobileMode ? 'grid-cols-1' : ''}`}>
-            {subject.sections.map((section) => {
+            {subject.sections.map((section, sectionIndex) => {
               const isRead = readSections.has(section.id);
               const hasQuiz = section.quiz && section.quiz.length > 0;
               const hasFlashcards = section.flashcards && section.flashcards.length > 0;
@@ -9996,7 +10046,7 @@ Student question: ${userMessage}`
               if (isSectionHeader) {
                 return (
                   <div
-                    key={section.id}
+                    key={`${subject.id}-${section.id}-${sectionIndex}-header`}
                     className={`col-span-full bg-gradient-to-r ${section.headerColor} rounded-xl p-6 text-white shadow-lg border-2 border-gray-300`}
                   >
                     <div className="flex items-center justify-between">
@@ -10016,7 +10066,7 @@ Student question: ${userMessage}`
               
               return (
                 <div
-                  key={section.id}
+                  key={`${subject.id}-${section.id}-${sectionIndex}`}
                   onClick={() => !isLocked && setSelectedSection(section)}
                   className={`bg-white rounded-xl overflow-hidden ${isLocked ? 'cursor-not-allowed opacity-75' : 'cursor-pointer hover:shadow-lg'} group transition-all border border-gray-100 ${!isLocked && 'hover:border-gray-200'} relative`}
                 >
@@ -10052,13 +10102,13 @@ Student question: ${userMessage}`
                       {hasQuiz && (
                         <div className="flex items-center gap-1 px-2 py-1 bg-indigo-50 rounded-md">
                           <FileText className="w-3 h-3 text-indigo-600" />
-                          <span className="text-xs font-medium text-indigo-300">{section.quiz.length} questions</span>
+                          <span className="text-xs font-medium text-indigo-700">{section.quiz.length} questions</span>
                         </div>
                       )}
                       {hasFlashcards && (
                         <div className="flex items-center gap-1 px-2 py-1 bg-cyan-50 rounded-md">
                           <Brain className="w-3 h-3 text-cyan-600" />
-                          <span className="text-xs font-medium text-cyan-300">{section.flashcards.length} cards</span>
+                          <span className="text-xs font-medium text-cyan-700">{section.flashcards.length} cards</span>
                         </div>
                       )}
                       {!hasQuiz && !hasFlashcards && section.notes && (
@@ -10070,7 +10120,7 @@ Student question: ${userMessage}`
                       {isLocked && (
                         <div className="flex items-center gap-1 px-2 py-1 bg-yellow-50 rounded-md">
                           <Award className="w-3 h-3 text-yellow-600" />
-                          <span className="text-xs font-medium text-yellow-300">Premium</span>
+                          <span className="text-xs font-medium text-yellow-700">Premium</span>
                         </div>
                       )}
                     </div>
@@ -10159,7 +10209,7 @@ Student question: ${userMessage}`
               </div>
               <div>
                 <h1 className="text-3xl font-bold soul-font-display">Welcome to Soul Study</h1>
-                <p className="text-slate-300">Grade 9 Science • Appleby College</p>
+                <p className="text-slate-600">Grade 9 Science • Appleby College</p>
                 <p className="text-slate-400 text-sm mt-1">Created by Dean Concepcion</p>
               </div>
             </div>
@@ -10220,8 +10270,8 @@ Student question: ${userMessage}`
                 <div className="flex items-start gap-3 p-4 bg-teal-50 rounded-xl">
                   <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-1">Use Annotation & Study Planner</h3>
-                    <p className="text-gray-700 text-sm">Use the annotation tools for quick markup, and the Study Planner to schedule sessions with automatic time tracking.</p>
+                    <h3 className="font-semibold text-gray-800 mb-1">Use AI Assistant & Study Planner</h3>
+                    <p className="text-gray-700 text-sm">Ask L.Y.N.E AI for help (blue sparkle button), and use the Study Planner to schedule sessions with automatic time tracking.</p>
                   </div>
                 </div>
 
@@ -10242,7 +10292,7 @@ Student question: ${userMessage}`
                   <h3 className="font-bold mb-2">Pro Tips for Efficient Studying</h3>
                   <div className="space-y-2 text-white/90 text-sm">
                     <p>💡 <strong>Study Planner:</strong> Click "+ Add to Plan" on sections to build your custom schedule with time estimates</p>
-                    <p>✍️ <strong>Annotation:</strong> Mark up diagrams and notes directly while you study difficult sections</p>
+                    <p>🤖 <strong>AI Help:</strong> Stuck? Ask L.Y.N.E AI (blue sparkle button) to explain concepts or create practice questions</p>
                     <p>📱 <strong>Split Screen:</strong> Use dual-panel view to reference notes while taking quizzes simultaneously</p>
                     <p>🏆 <strong>Achievements:</strong> Unlock all 10 badges by completing sections and maintaining study streaks</p>
                   </div>
@@ -10297,7 +10347,7 @@ Student question: ${userMessage}`
 
   // Feature highlights section
   const FeatureHighlights = () => (
-    <div className="mb-8 bg-gradient-to-br from-[#0a0f1e] to-[#0d0a1e] rounded-2xl p-6 border-2 border-blue-200 relative">
+    <div className="mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 relative">
       <button
         onClick={() => setShowFeatureHighlights(false)}
         className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-colors shadow-sm border border-gray-200"
@@ -10317,17 +10367,17 @@ Student question: ${userMessage}`
       </div>
 
       <div className="grid md:grid-cols-3 gap-4">
-        {/* Feature 1: Annotation */}
+        {/* Feature 1: AI Assistant */}
         <div className="bg-white rounded-xl p-4 border-2 border-blue-100 hover:border-blue-300 transition-all hover:shadow-md">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="w-5 h-5 text-blue-500" />
-            <h3 className="font-bold text-gray-800">Annotation Tools</h3>
+            <h3 className="font-bold text-gray-800">L.Y.N.E AI Assistant</h3>
           </div>
           <p className="text-sm text-gray-600 mb-2">
-            Mark diagrams, sketch ideas, and write quick reminders while you study
+            Chat with AI for explanations, practice questions, and help
           </p>
           <div className="text-xs text-blue-600 font-semibold">
-            → Use the annotation controls on the page
+            → Click the blue sparkle button (bottom-right corner)
           </div>
         </div>
 
@@ -10416,7 +10466,7 @@ Student question: ${userMessage}`
               • Use the <span className="font-bold">Study Planner</span> to organize sessions with automatic time tracking
             </p>
             <p className="text-sm text-white/90 mb-2">
-              • Use <span className="font-bold">annotation tools</span> to mark diagrams and keep quick study notes in context
+              • Ask <span className="font-bold">L.Y.N.E AI</span> to explain tricky concepts or create custom practice questions
             </p>
             <p className="text-sm text-white/90">
               • Enable <span className="font-bold">Split Screen</span> to quiz yourself while referencing notes simultaneously
@@ -10436,7 +10486,7 @@ Student question: ${userMessage}`
       <PremiumInterestModal />
       
       {/* AI Assistant Widget */}
-      {internalAIAssistantEnabled && showAIAssistant && (
+      {scienceAiEnabled && showAIAssistant && (
         <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex items-center justify-between">
@@ -10521,7 +10571,7 @@ Student question: ${userMessage}`
       )}
 
       {/* L.Y.N.E AI Assistant Toggle Button */}
-      {internalAIAssistantEnabled && !showAIAssistant && (
+      {scienceAiEnabled && !showAIAssistant && (
         <button
           onClick={() => setShowAIAssistant(true)}
           className="fixed bottom-6 right-6 group z-50"
@@ -10610,11 +10660,11 @@ Student question: ${userMessage}`
                       Science Study Library
                     </h1>
                     <div className="flex items-center gap-3 flex-wrap">
-                      <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
+                      <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-700 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
                         Grade 9
                       </span>
-                      <span className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
+                      <span className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-700 text-sm font-semibold backdrop-blur-xl relative overflow-hidden group/badge">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
                         Appleby College
                       </span>
@@ -10651,7 +10701,7 @@ Student question: ${userMessage}`
                 </div>
               </div>
               
-              <p className="text-slate-300 text-lg max-w-3xl">
+              <p className="text-slate-600 text-lg max-w-3xl">
                 Your complete science companion with <span className="text-emerald-400 font-bold">70+ flashcards</span>, 
                 <span className="text-blue-400 font-bold"> 80+ quiz questions</span>, and 
                 <span className="text-purple-400 font-bold"> interactive diagrams</span>
@@ -10667,7 +10717,7 @@ Student question: ${userMessage}`
                   </div>
                   <div className="group-hover/stat:translate-x-1 transition-all duration-300">
                     <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-green-400 transition-colors">{readSections.size}</p>
-                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Sections Completed</p>
+                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-600 transition-colors">Sections Completed</p>
                   </div>
                   {/* Hover glow */}
                   <div className="absolute inset-0 bg-green-500/0 group-hover/stat:bg-green-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
@@ -10685,7 +10735,7 @@ Student question: ${userMessage}`
                   </div>
                   <div className="group-hover/stat:translate-x-1 transition-all duration-300">
                     <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-yellow-400 transition-colors">{unlockedAchievements.size}</p>
-                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Achievements Unlocked</p>
+                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-600 transition-colors">Achievements Unlocked</p>
                   </div>
                   <div className="absolute inset-0 bg-yellow-500/0 group-hover/stat:bg-yellow-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
                 </div>
@@ -10702,7 +10752,7 @@ Student question: ${userMessage}`
                   </div>
                   <div className="group-hover/stat:translate-x-1 transition-all duration-300">
                     <p className="text-3xl font-bold text-white drop-shadow-lg group-hover/stat:text-blue-400 transition-colors">{stats.quizCorrect}</p>
-                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-300 transition-colors">Quiz Questions Correct</p>
+                    <p className="text-xs text-slate-400 group-hover/stat:text-slate-600 transition-colors">Quiz Questions Correct</p>
                   </div>
                   <div className="absolute inset-0 bg-blue-500/0 group-hover/stat:bg-blue-500/10 rounded-lg blur-xl transition-colors duration-500"></div>
                 </div>
@@ -10723,7 +10773,7 @@ Student question: ${userMessage}`
                   </svg>
                   <div className="text-left relative z-10">
                     <p className="text-sm font-bold">Study Planner</p>
-                    <p className="text-xs text-slate-300">{studyPlan.length} sessions</p>
+                    <p className="text-xs text-slate-600">{studyPlan.length} sessions</p>
                   </div>
                 </button>
                 
@@ -10742,7 +10792,7 @@ Student question: ${userMessage}`
                   </svg>
                   <div className="text-left">
                     <p className="text-sm font-bold">Dark Mode</p>
-                    <p className="text-xs text-yellow-300 font-semibold">Premium</p>
+                    <p className="text-xs text-yellow-700 font-semibold">Premium</p>
                   </div>
                 </button>
                 
@@ -10762,7 +10812,7 @@ Student question: ${userMessage}`
                     </svg>
                     <div className="text-left">
                       <p className="text-sm font-bold">View Mode</p>
-                      <p className="text-xs text-yellow-300 font-semibold">Premium</p>
+                      <p className="text-xs text-yellow-700 font-semibold">Premium</p>
                     </div>
                   </>
                 </button>
@@ -10857,7 +10907,7 @@ Student question: ${userMessage}`
 
         {searchTerm && (
           <div className="mb-6 bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
-            <p className="text-blue-300">
+            <p className="text-blue-700">
               <span className="font-semibold">Found {filteredSubjects.length} subject(s)</span> matching "{searchTerm}"
             </p>
           </div>
@@ -11041,7 +11091,7 @@ Student question: ${userMessage}`
 
         {/* Special Thanks Section */}
         <div className="mt-12 mb-8 text-center">
-          <div className="inline-block bg-gradient-to-r from-[#181208] to-[#181408] rounded-2xl px-8 py-4 border-2 border-amber-200">
+          <div className="inline-block bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl px-8 py-4 border-2 border-amber-200">
             <p className="text-sm text-gray-600 mb-1">Special Thanks to Our Sponsors</p>
             <div className="flex items-center gap-3 justify-center flex-wrap">
               <span className="text-lg font-bold text-amber-600">⭐</span>
