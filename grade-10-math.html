@@ -25573,7 +25573,11 @@ The parabola doesn't cross the x-axis`));
     ))), /* @__PURE__ */ import_react3.default.createElement("div", { style: { position: "absolute", top: 16, left: "50%", transform: "translateX(-50%)", pointerEvents: "none" } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, padding: "5px 12px", borderRadius: 999, background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", color: "#6366f1", fontSize: 11, fontWeight: 700 } }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { width: 5, height: 5, borderRadius: "50%", background: "#6366f1" }, className: "pulse-ring" }), eraser ? "Eraser" : "Drawing", " mode"))));
   }
   function MathStudyLibrary() {
-    const [showIntro, setShowIntro] = (0, import_react3.useState)(true);
+    const [showIntro, setShowIntro] = (0, import_react3.useState)(() => {
+      if (typeof window === "undefined")
+        return false;
+      return window.innerWidth < 768;
+    });
     const [selectedSubject, setSelectedSubject] = (0, import_react3.useState)(null);
     const [selectedSection, setSelectedSection] = (0, import_react3.useState)(null);
     const [searchTerm, setSearchTerm] = (0, import_react3.useState)("");

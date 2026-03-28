@@ -4897,7 +4897,10 @@ function DrawingCanvas({ pageKey, isActive, onClose }) {
 
 
 export default function MathStudyLibrary() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
