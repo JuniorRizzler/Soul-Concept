@@ -100,66 +100,6 @@
             background-color: #215c4b;
             color: white;
         }
-        .hero-3d-stage {
-            perspective: 1800px;
-        }
-        .hero-3d-card {
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 180ms ease-out, box-shadow 180ms ease-out, filter 180ms ease-out;
-            will-change: transform;
-        }
-        .hero-3d-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 1rem;
-            background:
-                radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.34), transparent 28%),
-                linear-gradient(135deg, rgba(255,255,255,0.18), transparent 35%, rgba(255,255,255,0.08) 52%, transparent 78%);
-            mix-blend-mode: screen;
-            opacity: var(--shine-opacity, 0.68);
-            pointer-events: none;
-            transition: opacity 220ms ease;
-            z-index: 3;
-        }
-        .hero-3d-card::after {
-            content: "";
-            position: absolute;
-            inset: -10%;
-            border-radius: 1.5rem;
-            background: radial-gradient(circle at 50% 50%, rgba(152, 211, 189, 0.34), rgba(0, 68, 53, 0.1) 48%, transparent 74%);
-            filter: blur(28px);
-            transform: translateZ(-40px);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .hero-3d-image {
-            transform: translateZ(0);
-            transition: transform 220ms ease-out, filter 220ms ease-out;
-            will-change: transform;
-        }
-        .hero-3d-panel {
-            transform: translateZ(34px);
-            backface-visibility: hidden;
-        }
-        .hero-3d-orb {
-            animation: hero-orb-float 9s ease-in-out infinite;
-            will-change: transform;
-        }
-        @keyframes hero-orb-float {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(-10px, 12px, 0) scale(1.06); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .hero-3d-card,
-            .hero-3d-image,
-            .hero-3d-orb {
-                transition: none !important;
-                animation: none !important;
-                transform: none !important;
-            }
-        }
     </style>
 </head>
 <body class="bg-background text-on-surface">
@@ -251,15 +191,15 @@
                     </button>
 </div>
 </div>
-<div class="w-full md:w-1/2 relative hero-3d-stage">
-<div class="hero-3d-card aspect-[4/5] bg-surface-container-low rounded-2xl overflow-hidden editorial-shadow relative z-10" id="hero-3d-card">
-<img class="hero-3d-image w-full h-full object-cover grayscale-[20%] contrast-[1.1]" data-alt="Minimalist modern study space with a clean wooden desk, a sleek lamp, and a single open notebook, soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF9jBHYIKR_xf6pw1tS5YTvxK5lEKNfAg3PbvggesEkSsgvOctLkxQ8KEodDcYXWxoyRL9GufRF8PQz9APR1fKhHNGC75h28RJx9_JiDetw44Ws2Zpy5YdkQiUpYtUnBsNcaocA_T5uKqPaXc8jJYnC2Y2JG7TXuM7pSV0kELe70DnLls8gzZbpv3R4OF8DjcxYtjRzjpSFAW-rp2GbReEYouTSDLEuqhyJ09-KlLNhUv1znzD4vyaPWahEfYGbfSXjxQvi-_YoWTH"/>
-<div class="hero-3d-panel absolute bottom-6 left-6 right-6 p-6 glass-header rounded-xl border border-white/20">
+<div class="w-full md:w-1/2 relative">
+<div class="aspect-[4/5] bg-surface-container-low rounded-2xl overflow-hidden editorial-shadow relative z-10">
+<img class="w-full h-full object-cover grayscale-[20%] contrast-[1.1]" data-alt="Minimalist modern study space with a clean wooden desk, a sleek lamp, and a single open notebook, soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF9jBHYIKR_xf6pw1tS5YTvxK5lEKNfAg3PbvggesEkSsgvOctLkxQ8KEodDcYXWxoyRL9GufRF8PQz9APR1fKhHNGC75h28RJx9_JiDetw44Ws2Zpy5YdkQiUpYtUnBsNcaocA_T5uKqPaXc8jJYnC2Y2JG7TXuM7pSV0kELe70DnLls8gzZbpv3R4OF8DjcxYtjRzjpSFAW-rp2GbReEYouTSDLEuqhyJ09-KlLNhUv1znzD4vyaPWahEfYGbfSXjxQvi-_YoWTH"/>
+<div class="absolute bottom-6 left-6 right-6 p-6 glass-header rounded-xl border border-white/20">
 <p class="font-label text-xs text-secondary font-bold mb-2">NOW CURATING</p>
 <h3 class="font-headline text-xl text-primary font-bold">Quantum Mechanics: Foundations</h3>
 </div>
 </div>
-<div class="hero-3d-orb absolute -top-10 -right-10 w-48 h-48 bg-primary-fixed/30 rounded-full blur-3xl -z-0"></div>
+<div class="absolute -top-10 -right-10 w-48 h-48 bg-primary-fixed/30 rounded-full blur-3xl -z-0"></div>
 </div>
 </section>
 <!-- Study Libraries: Bento Grid -->
@@ -444,13 +384,11 @@
 <p class="font-bold text-[#004435] mb-2 font-headline">Soul Concept</p>
 <p class="font-['Manrope'] text-xs uppercase tracking-widest text-slate-400">© 2024 Soul Concept Academic Gallery. All rights reserved.</p>
 </div>
-          <div class="flex gap-12 font-['Manrope'] text-xs uppercase tracking-widest">
-            <a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Terms of Knowledge</a>
-            <a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Curator Privacy</a>
-            <a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Institutional Access</a>
-            <a class="text-slate-400 hover:text-[#004435] transition-colors" href="https://www.instagram.com/deanacious/" target="_blank" rel="noreferrer">Instagram</a>
-            <a class="text-slate-400 hover:text-[#004435] transition-colors" href="https://www.linkedin.com/in/deanconcepcion" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
+<div class="flex gap-12 font-['Manrope'] text-xs uppercase tracking-widest">
+<a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Terms of Knowledge</a>
+<a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Curator Privacy</a>
+<a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Institutional Access</a>
+</div>
 <div class="mt-8 md:mt-0 flex gap-4">
 <span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-secondary">public</span>
 <span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-secondary">local_library</span>
@@ -458,60 +396,9 @@
 </div>
 </div>
 </footer>
-<script defer src="assets/stitch-router.js?v=20260327g"></script>
+<script defer src="assets/stitch-router.js?v=20260327f"></script>
 <script src="lyne-widget.js?v=20260321c"></script>
 <script src="focus-mode.js?v=20260321d"></script>
-<script>
-  (function () {
-    const card = document.getElementById("hero-3d-card");
-    if (!card) return;
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const image = card.querySelector(".hero-3d-image");
-    let rafId = 0;
-
-    function updateCard(event) {
-      const rect = card.getBoundingClientRect();
-      const px = (event.clientX - rect.left) / rect.width;
-      const py = (event.clientY - rect.top) / rect.height;
-      const rotateY = (px - 0.5) * 18;
-      const rotateX = (0.5 - py) * 16;
-
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        card.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translate3d(0,-6px,20px)";
-        card.style.boxShadow = "0 34px 72px rgba(29, 26, 34, 0.18)";
-        card.style.filter = "saturate(1.04)";
-        card.style.setProperty("--shine-x", (px * 100).toFixed(2) + "%");
-        card.style.setProperty("--shine-y", (py * 100).toFixed(2) + "%");
-        card.style.setProperty("--shine-opacity", "0.9");
-        if (image) {
-          image.style.transform = "scale(1.045) translate3d(" + ((px - 0.5) * 10).toFixed(2) + "px," + ((py - 0.5) * 10).toFixed(2) + "px,18px)";
-          image.style.filter = "grayscale(12%) contrast(1.12)";
-        }
-      });
-    }
-
-    function resetCard() {
-      cancelAnimationFrame(rafId);
-      card.style.transform = "";
-      card.style.boxShadow = "";
-      card.style.filter = "";
-      card.style.setProperty("--shine-x", "50%");
-      card.style.setProperty("--shine-y", "50%");
-      card.style.setProperty("--shine-opacity", "0.68");
-      if (image) {
-        image.style.transform = "";
-        image.style.filter = "";
-      }
-    }
-
-    card.addEventListener("pointermove", updateCard);
-    card.addEventListener("pointerleave", resetCard);
-    card.addEventListener("pointercancel", resetCard);
-    window.addEventListener("blur", resetCard);
-  })();
-</script>
 </body></html>
 
 
