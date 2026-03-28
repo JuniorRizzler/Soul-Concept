@@ -169,6 +169,10 @@
     location.href = url
   }
 
+  function openProfileSettingsPage() {
+    location.href = '/settings.html'
+  }
+
   function isPromptDismissed() {
     try {
       return localStorage.getItem(DISMISS_KEY) === '1'
@@ -645,9 +649,12 @@
       target.setAttribute('data-auth-avatar-bound', '1')
       target.style.cursor = 'pointer'
       target.addEventListener('click', function (event) {
-        if (window.scAuthSession && window.scAuthSession.user) return
         event.preventDefault()
         event.stopPropagation()
+        if (window.scAuthSession && window.scAuthSession.user) {
+          openProfileSettingsPage()
+          return
+        }
         openVerificationPage('returning', 'Sign in to view your profile, saved progress, and premium access.')
       })
     })
