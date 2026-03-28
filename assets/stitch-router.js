@@ -33,6 +33,31 @@
     ["read now", "study-library.html"]
   ]);
 
+  const iconRouteMap = new Map([
+    ["home", "index.html"],
+    ["grid_view", "dashboard.html"],
+    ["dashboard", "dashboard.html"],
+    ["auto_stories", "grade-9.html"],
+    ["style", "grade-9.html"],
+    ["analytics", "analytics.html"],
+    ["insights", "analytics.html"],
+    ["biotech", "research.html"],
+    ["school", "curriculum.html"],
+    ["event_note", "schedule.html"],
+    ["timer", "schedule.html"],
+    ["military_tech", "achievements.html"],
+    ["trophy", "achievements.html"],
+    ["workspace_premium", "membership.html"],
+    ["card_membership", "membership.html"],
+    ["payments", "membership.html"],
+    ["account_circle", "profile.html"],
+    ["person", "profile.html"],
+    ["settings", "settings.html"],
+    ["quiz", "math-quiz-simulator.html"],
+    ["model_training", "math-quiz-simulator.html"],
+    ["help_outline", "settings.html#support"]
+  ]);
+
   function normalize(text) {
     return text.replace(/\s+/g, " ").trim().toLowerCase();
   }
@@ -65,9 +90,41 @@
       if (mapped) return mapped;
     }
     const icon = normalize(node.getAttribute("data-icon") || "");
-    if (icon === "account_circle") return "settings.html";
-    if (icon === "settings") return "settings.html";
+    if (iconRouteMap.has(icon)) return iconRouteMap.get(icon);
+    const symbolIcon = normalize(node.textContent || "");
+    if (iconRouteMap.has(symbolIcon)) return iconRouteMap.get(symbolIcon);
     return "";
+  }
+
+  function bindNavigationTarget(node, target) {
+    if (!node || !target) return;
+    if (node.dataset.stitchRouteBound === "true") return;
+    node.dataset.stitchRouteBound = "true";
+    node.style.cursor = "pointer";
+
+    if (node.tagName === "A") {
+      node.setAttribute("href", target);
+      return;
+    }
+
+    node.addEventListener("click", () => {
+      location.href = target;
+    });
+  }
+
+  function wireShellNavigation() {
+    document.querySelectorAll(".sc-shell-link, .sc-shell-iconbtn, .material-symbols-outlined, [data-icon]").forEach((node) => {
+      const directTarget = getInteractiveTarget(node);
+      if (directTarget) {
+        bindNavigationTarget(node, directTarget);
+        return;
+      }
+
+      const parentButton = node.closest("button, a");
+      if (!parentButton || parentButton === node) return;
+      const parentTarget = getInteractiveTarget(parentButton);
+      if (parentTarget) bindNavigationTarget(parentButton, parentTarget);
+    });
   }
 
   function resolveSubjectCardTarget(card) {
@@ -214,35 +271,29 @@
     });
 
     document.querySelectorAll("button").forEach((button) => {
-      if (button.dataset.stitchRouteBound === "true") return;
       const target = getInteractiveTarget(button);
       if (!target) return;
-      button.dataset.stitchRouteBound = "true";
-      button.style.cursor = "pointer";
-        if (target === "grades") {
+      if (target === "grades") {
+        if (button.dataset.stitchRouteBound === "true") return;
+        button.dataset.stitchRouteBound = "true";
+        button.style.cursor = "pointer";
         button.addEventListener("click", () => {
           location.href = "grade-9-advanced.html";
         });
         return;
       }
-      button.addEventListener("click", () => {
-        location.href = target;
-      });
+      bindNavigationTarget(button, target);
     });
 
-    document.querySelectorAll('[data-icon="account_circle"], [data-icon="settings"]').forEach((node) => {
+    document.querySelectorAll('[data-icon="account_circle"], [data-icon="settings"], [data-icon="person"], [data-icon="home"], [data-icon="grid_view"], [data-icon="style"], [data-icon="analytics"], [data-icon="insights"], [data-icon="timer"], [data-icon="school"], [data-icon="event_note"], [data-icon="military_tech"], [data-icon="workspace_premium"]').forEach((node) => {
       const button = node.closest("button");
       if (button) return;
-      if (node.dataset.stitchRouteBound === "true") return;
       const target = getInteractiveTarget(node);
       if (!target) return;
-      node.dataset.stitchRouteBound = "true";
-      node.style.cursor = "pointer";
-      node.addEventListener("click", () => {
-        location.href = target;
-      });
+      bindNavigationTarget(node, target);
     });
 
+    wireShellNavigation();
     wireSubjectSections();
     wireHomeLogo();
   });
