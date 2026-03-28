@@ -629,11 +629,22 @@
   }
 
   function bindProfileIconPrompts() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-auth-avatar]'), function (node) {
-      if (node.getAttribute('data-auth-avatar-bound') === '1') return
-      node.setAttribute('data-auth-avatar-bound', '1')
-      node.style.cursor = 'pointer'
-      node.addEventListener('click', function (event) {
+    var selectors = [
+      '[data-auth-avatar]',
+      'a[href="profile.html"]',
+      'button[onclick*="profile.html"]',
+      '[data-icon="account_circle"]',
+      '[data-icon="person"]'
+    ]
+    var seen = []
+    Array.prototype.forEach.call(document.querySelectorAll(selectors.join(',')), function (node) {
+      var target = node.closest('a,button') || node
+      if (!target || seen.indexOf(target) !== -1) return
+      seen.push(target)
+      if (target.getAttribute('data-auth-avatar-bound') === '1') return
+      target.setAttribute('data-auth-avatar-bound', '1')
+      target.style.cursor = 'pointer'
+      target.addEventListener('click', function (event) {
         if (window.scAuthSession && window.scAuthSession.user) return
         event.preventDefault()
         event.stopPropagation()
