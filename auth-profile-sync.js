@@ -34,9 +34,9 @@
 
   function getPlanTone(plan) {
     var value = String(plan || '').toLowerCase()
-    if (value.indexOf('fellow') !== -1 || value.indexOf('premium') !== -1) return 'Premium Member'
-    if (value.indexOf('institution') !== -1) return 'Institution Plan'
-    return 'Starter Member'
+    if (value.indexOf('fellow') !== -1 || value.indexOf('premium') !== -1) return 'Premium'
+    if (value.indexOf('institution') !== -1) return 'Institution'
+    return 'Starter'
   }
 
   function getPlanDisplay(plan) {
@@ -70,13 +70,72 @@
     })
   }
 
+  function readAchievementMeta(profile) {
+    var points = 0
+    var count = 0
+
+    if (profile) {
+      points = Number(
+        profile.achievementPoints ||
+        profile.points ||
+        profile.score ||
+        0
+      ) || 0
+      count = Number(
+        profile.achievementCount ||
+        profile.unlockedAchievements ||
+        0
+      ) || 0
+    }
+
+    var pointKeys = [
+      'sc_achievement_points_v1',
+      'sc_profile_points_v1',
+      'sc_points_v1'
+    ]
+    for (var i = 0; i < pointKeys.length; i++) {
+      try {
+        var pointRaw = localStorage.getItem(pointKeys[i])
+        if (pointRaw != null) {
+          points = Math.max(points, Number(pointRaw) || 0)
+        }
+      } catch (_errPoint) {}
+    }
+
+    var countKeys = [
+      'sc_achievement_count_v1',
+      'sc_unlocked_achievements_v1'
+    ]
+    for (var j = 0; j < countKeys.length; j++) {
+      try {
+        var countRaw = localStorage.getItem(countKeys[j])
+        if (countRaw != null) {
+          count = Math.max(count, Number(countRaw) || 0)
+        }
+      } catch (_errCount) {}
+    }
+
+    return { points: points, count: count }
+  }
+
+  function getSidebarTier(profile) {
+    var plan = String((profile && profile.plan) || '').toLowerCase()
+    var achievementMeta = readAchievementMeta(profile)
+
+    if (plan.indexOf('fellow') !== -1 || plan.indexOf('premium') !== -1) return 'Premium'
+    if (plan.indexOf('institution') !== -1) return 'Institution'
+    if (achievementMeta.points >= 1000 || achievementMeta.count >= 12) return 'Top Scholar'
+    if (achievementMeta.points >= 300 || achievementMeta.count >= 6) return 'Achiever'
+    return 'Starter'
+  }
+
   function applyProfile(profile) {
     var active = !!profile
     applyText('[data-auth-name]', active ? profile.name : 'Guest Scholar')
     applyText('[data-auth-email]', active ? profile.email : 'Not signed in')
     applyText('[data-auth-bio]', active ? profile.bio : 'Sign in to connect your study profile, saved progress, and premium features.')
     applyText('[data-auth-plan]', active ? getPlanDisplay(profile.plan) : 'Starter')
-    applyText('[data-auth-plan-copy]', active ? getPlanTone(profile.plan) : 'Starter Member')
+    applyText('[data-auth-plan-copy]', active ? getSidebarTier(profile) : 'Starter')
     applyInput('[data-auth-name-input]', active ? profile.name : '')
     applyInput('[data-auth-bio-input]', active ? profile.bio : '')
     applyAvatar('[data-auth-avatar]', profile)

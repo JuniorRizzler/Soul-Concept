@@ -107,14 +107,14 @@
 <div class="flex pt-[73px]">
 <!-- SideNavBar -->
 <aside class="fixed hidden md:flex flex-col h-[calc(100vh-73px)] py-6 px-4 bg-surface-container-low dark:bg-slate-900 w-64 border-r border-emerald-900/10 dark:border-slate-800 transition-all">
-<div class="px-4 mb-8">
-<div class="flex items-center gap-3 mb-6">
-<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center overflow-hidden">
-<img alt="Student Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpvxZD5BhkZAZ1e0znzdyLpjEQK8pSh9BuYbSlBfJhJl0sN1WGdISg4fx2Stq4tzUPPydbeC4O9le2SOxyUUTjCcHgPy9Llz4tohWzUZcLGrx1RA1Wksp4n4Px1e82KskH_Bd99zb47DU0_aHK9tofVWR-AZ8gxN4mdMASY6OTLWj-Buk28fLSHDTFi2lWPVnLvvanvx4TwzTEEKeJ8dCbvhD_DN1_3IYRGdFU3q-S3ToVWj5LhjsiDQMejCKdC6bMe6L4nB4tJisl"/>
+<div class="mb-8 p-4 rounded-2xl bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Student Profile" class="w-full h-full object-cover" data-auth-avatar="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpvxZD5BhkZAZ1e0znzdyLpjEQK8pSh9BuYbSlBfJhJl0sN1WGdISg4fx2Stq4tzUPPydbeC4O9le2SOxyUUTjCcHgPy9Llz4tohWzUZcLGrx1RA1Wksp4n4Px1e82KskH_Bd99zb47DU0_aHK9tofVWR-AZ8gxN4mdMASY6OTLWj-Buk28fLSHDTFi2lWPVnLvvanvx4TwzTEEKeJ8dCbvhD_DN1_3IYRGdFU3q-S3ToVWj5LhjsiDQMejCKdC6bMe6L4nB4tJisl"/>
 </div>
 <div>
-<p class="text-sm font-bold text-emerald-950 dark:text-emerald-400 font-headline truncate">Guest Scholar</p>
-<p class="text-[10px] text-emerald-800/60 dark:text-slate-400 font-label uppercase tracking-wider">Starter</p>
+<p class="text-sm font-bold text-emerald-950 dark:text-emerald-400 font-headline truncate" data-auth-name="">Guest Scholar</p>
+<p class="text-[10px] text-emerald-800/60 dark:text-slate-400 font-label uppercase tracking-wider" data-auth-plan-copy="">Starter</p>
 </div>
 </div>
 <button class="w-full py-3 px-4 bg-primary text-on-primary font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-all">
@@ -443,6 +443,9 @@
 </main>
 </div>
 <script defer src="assets/stitch-router.js?v=20260327f"></script>
+<script src="supabase-client.js?v=20260312a"></script>
+<script src="supabase-auth.js?v=20260321b"></script>
+<script src="auth-profile-sync.js?v=20260328b"></script>
 <script src="lyne-widget.js?v=20260321c"></script>
 <script src="focus-mode.js?v=20260321d"></script>
 </body></html>

@@ -169,12 +169,16 @@
 </header>
 <!-- Sidebar Navigation Shell (from SCREEN_40) -->
 <aside class="fixed left-0 top-0 h-full flex flex-col p-4 z-40 w-64 bg-surface dark:bg-slate-950 pt-20 hidden lg:flex border-r border-outline-variant/10">
-<div class="flex flex-col items-center mb-8 px-4">
-<div class="w-16 h-16 rounded-2xl bg-surface-container-highest flex items-center justify-center mb-3 overflow-hidden">
-<img alt="Student Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM082mPPgm7FO-2MEQDW0ireQD7KKpKNCd4sQJNNcelZCnYcBKWVr_Mxudcrvus8Zo4BrlEDo7KKLP8_MunCldzUk1ubZ2KLsKZRiGhNHEV-IdVVJ3Z4pnHNQj001mlIjeMnYomMXcBsyM6ui-tJIE1e7Vqp9O5vXQBlkqZa3cKyluOhulwB-kX95RPgDT3CVvr-WA2zkEW7NPok79MXX4nWqNk-OuUSkd2a1sve1tkn74zYQzwzkReMMnN-3QPlM2RcPrCSlHfu47"/>
+<div class="mb-8 p-4 rounded-2xl bg-surface-container-low">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Student Profile" class="w-full h-full object-cover" data-auth-avatar="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM082mPPgm7FO-2MEQDW0ireQD7KKpKNCd4sQJNNcelZCnYcBKWVr_Mxudcrvus8Zo4BrlEDo7KKLP8_MunCldzUk1ubZ2KLsKZRiGhNHEV-IdVVJ3Z4pnHNQj001mlIjeMnYomMXcBsyM6ui-tJIE1e7Vqp9O5vXQBlkqZa3cKyluOhulwB-kX95RPgDT3CVvr-WA2zkEW7NPok79MXX4nWqNk-OuUSkd2a1sve1tkn74zYQzwzkReMMnN-3QPlM2RcPrCSlHfu47"/>
 </div>
-<h2 class="text-lg font-black text-emerald-900 font-headline">Guest Scholar</h2>
-<p class="text-xs text-slate-500 font-label">Starter</p>
+<div>
+<p class="font-headline font-bold text-sm text-primary" data-auth-name="">Guest Scholar</p>
+<p class="font-label text-[10px] uppercase tracking-wider text-outline" data-auth-plan-copy="">Starter</p>
+</div>
+</div>
 </div>
 <nav class="flex flex-col gap-1 flex-1">
 <a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-emerald-800 hover:bg-emerald-50 transition-all duration-200 ease-out font-inter text-sm font-medium" href="../dashboard.html">
@@ -1066,6 +1070,9 @@
 })();
 </script>
 <script defer src="../assets/stitch-router.js?v=20260327f"></script>
+<script src="../supabase-client.js?v=20260312a"></script>
+<script src="../supabase-auth.js?v=20260321b"></script>
+<script src="../auth-profile-sync.js?v=20260328b"></script>
 <script src="../lyne-widget.js?v=20260321c"></script>
 <script src="../focus-mode.js?v=20260321d"></script>
 </body></html>
