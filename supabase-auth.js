@@ -161,6 +161,14 @@
     } catch (_err) {}
   }
 
+  function openVerificationPage(mode, message) {
+    saveReturnPath(currentReturnPath())
+    var url = '/auth/verification.html?returnTo=' + encodeURIComponent(currentReturnPath())
+    if (mode) url += '&mode=' + encodeURIComponent(mode)
+    if (message) url += '&message=' + encodeURIComponent(message)
+    location.href = url
+  }
+
   function isPromptDismissed() {
     try {
       return localStorage.getItem(DISMISS_KEY) === '1'
@@ -479,7 +487,9 @@
       mount.appendChild(buildSignedInUi(client, session))
     } else {
       var btn = createButton('Sign In', 'btn btn-secondary sc-auth-launch')
-      btn.addEventListener('click', openModal)
+      btn.addEventListener('click', function () {
+        openVerificationPage('returning')
+      })
       mount.appendChild(btn)
     }
 
@@ -495,15 +505,15 @@
       syncNavMoreMenu()
     }
 
-    function setGateMode(locked) {
-      var backdrop = ensureModal()
-      var shouldLock = !!locked && !isPromptDismissed()
-      backdrop.classList.toggle('locked', shouldLock)
-      if (shouldLock) {
-        openModal()
-        document.documentElement.style.overflow = 'hidden'
-        document.body.style.overflow = 'hidden'
-      } else {
+  function setGateMode(locked) {
+    var backdrop = ensureModal()
+    var shouldLock = !!locked && !isPromptDismissed()
+    backdrop.classList.toggle('locked', shouldLock)
+    if (shouldLock) {
+      openVerificationPage('returning')
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden'
+    } else {
         backdrop.classList.remove('locked')
         if (document.body) document.body.classList.remove('auth-modal-open')
         document.documentElement.style.overflow = ''
@@ -600,6 +610,7 @@
     publishProfile(session)
     mountAuthUi(client, session)
     setGateMode(REQUIRE_AUTH && !session)
+    bindProfileIconPrompts()
     syncNavMoreMenu()
     window.addEventListener('resize', syncNavMoreMenu)
 
@@ -607,12 +618,27 @@
       publishProfile(session || null)
       mountAuthUi(client, session || null)
       setGateMode(REQUIRE_AUTH && !session)
+      bindProfileIconPrompts()
       syncNavMoreMenu()
       if (isCallbackPage() && session) {
         var target = normalizeReturnPath(readReturnPath())
         clearReturnPath()
         location.replace(target || '/dashboard.html')
       }
+    })
+  }
+
+  function bindProfileIconPrompts() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-auth-avatar]'), function (node) {
+      if (node.getAttribute('data-auth-avatar-bound') === '1') return
+      node.setAttribute('data-auth-avatar-bound', '1')
+      node.style.cursor = 'pointer'
+      node.addEventListener('click', function (event) {
+        if (window.scAuthSession && window.scAuthSession.user) return
+        event.preventDefault()
+        event.stopPropagation()
+        openVerificationPage('returning', 'Sign in to view your profile, saved progress, and premium access.')
+      })
     })
   }
 

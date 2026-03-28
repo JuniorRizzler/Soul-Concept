@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Soul Concept - Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{colors:{surface:"#fef7ff",secondary:"#ae3200",primary:"#004435","primary-fixed-dim":"#98d3bd","secondary-fixed-dim":"#ffb59e","tertiary-fixed":"#e4e1e7"} ,fontFamily:{headline:["Plus Jakarta Sans"],body:["Inter"],label:["Manrope"]}}}}
+</script>
+<style>
+body{font-family:'Inter',sans-serif}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.glass-morphism-v3{background:rgba(255,255,255,.15);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border:1px solid rgba(255,255,255,.4);box-shadow:0 40px 100px -20px rgba(0,0,0,.1),inset 0 0 0 1px rgba(255,255,255,.3)}
+.cinematic-bg{background:#f8f9fc;overflow:hidden;position:fixed;inset:0;z-index:-1}
+.mesh-gradient{position:absolute;width:140%;height:140%;top:-20%;left:-20%;background-image:radial-gradient(at 0% 0%, hsla(168,100%,85%,.4) 0px, transparent 50%),radial-gradient(at 100% 0%, hsla(272,85%,90%,.4) 0px, transparent 50%),radial-gradient(at 100% 100%, hsla(15,95%,90%,.4) 0px, transparent 50%),radial-gradient(at 0% 100%, hsla(190,80%,90%,.4) 0px, transparent 50%);filter:blur(100px)}
+.glow-button{position:relative;overflow:hidden;transition:all .4s cubic-bezier(.23,1,.32,1)}
+.glow-button::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent,rgba(255,255,255,.1),transparent);transform:translateX(-100%);transition:transform .6s ease}
+.glow-button:hover::before{transform:translateX(100%)}
+.glow-button:hover{box-shadow:0 0 20px rgba(0,68,53,.2);transform:translateY(-1px)}
+.toggle-slider{position:absolute;height:100%;width:50%;top:0;background:white;border-radius:9999px;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:all .5s cubic-bezier(.19,1,.22,1);z-index:0}
+#toggle-container[data-active="returning"] .toggle-slider{left:0}
+#toggle-container[data-active="new"] .toggle-slider{left:50%}
+[data-view]{display:none;opacity:0;transform:translateY(10px);transition:all .5s ease}
+[data-view].active{display:block;opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body class="bg-surface text-slate-900 antialiased overflow-hidden min-h-screen flex flex-col">
+<div class="cinematic-bg">
+<div class="mesh-gradient"></div>
+<div class="absolute bg-primary-fixed-dim/30 w-[600px] h-[600px] -top-48 -left-48 animate-pulse rounded-full"></div>
+<div class="absolute bg-secondary-fixed-dim/20 w-[500px] h-[500px] bottom-0 -right-24 animate-pulse rounded-full"></div>
+<div class="absolute bg-tertiary-fixed/20 w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full"></div>
+</div>
+<header class="fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-8 py-8 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<div class="bg-primary/5 p-2 rounded-xl border border-primary/10"><span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings:'FILL' 1">auto_stories</span></div>
+<span class="text-xl font-extrabold text-primary font-headline tracking-tight">Soul Concept</span>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-4 py-20 relative z-10">
+<div class="w-full max-w-xl glass-morphism-v3 rounded-[3.5rem] p-10 md:p-14 relative overflow-hidden backdrop-blur-3xl">
+<div class="flex flex-col items-center mb-8">
+<div class="w-16 h-16 bg-white/60 rounded-[1.75rem] flex items-center justify-center mb-6 shadow-sm border border-white/50 ring-4 ring-white/20"><span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1">auto_stories</span></div>
+<p class="text-center text-sm text-slate-500 font-medium mb-6" id="prompt-copy">Sign in or create your account to continue.</p>
+<div class="relative w-full max-w-[320px] bg-slate-900/5 p-1.5 rounded-full flex" data-active="returning" id="toggle-container">
+<div class="toggle-slider"></div>
+<button class="relative z-10 flex-1 py-3 text-[11px] font-extrabold tracking-widest uppercase transition-all duration-300 text-primary" id="tab-returning" type="button">Returning</button>
+<button class="relative z-10 flex-1 py-3 text-[11px] font-extrabold tracking-widest uppercase transition-all duration-300 text-slate-400" id="tab-new" type="button">New User</button>
+</div>
+</div>
+<div class="active space-y-8" data-view id="view-returning">
+<div class="space-y-4">
+<button class="w-full flex items-center justify-center gap-3 py-4.5 bg-white/50 hover:bg-white/80 border border-white/60 rounded-2xl transition-all duration-300 shadow-sm hover:scale-[1.01]" id="google-signin" type="button">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWwTeeR_I577jvMGrycjqOaq5rXW_o-0ZQjRb8P2EkQTF4l3NfmQCOtBUyix06qYhP6vyCy8PxfXHBKQu8SQEd2ERTwtexwZjJ_FTWCrJPrwRAQzxADd2ZQq1CVmT8TVD_d3Rs8qfi5GF2pDzo4JzH9N51IApXjypqbl6UYUSTHOaacWoOTniU3R2-4Xey50yRgtG7eRhkgpi8tcRhzT7u6YaSOZBbkWssH_EXbEEJESoV1GOi3xMQoCdujltjLegHQdD_v52fgDY7"/>
+<span class="text-sm font-bold text-slate-700">Sign in with Google</span>
+</button>
+</div>
+<div class="relative flex items-center py-2"><div class="flex-grow border-t border-slate-900/10"></div><span class="flex-shrink mx-4 text-slate-400 text-[9px] font-black uppercase tracking-[0.3em]">Email Sign In</span><div class="flex-grow border-t border-slate-900/10"></div></div>
+<form class="space-y-6" id="signin-form">
+<div class="space-y-2"><label class="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Email</label><input class="w-full bg-white/30 border-none rounded-2xl px-6 py-4.5 text-sm" name="email" placeholder="you@school.com" required type="email"/></div>
+<div class="space-y-2"><label class="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Password</label><input class="w-full bg-white/30 border-none rounded-2xl px-6 py-4.5 text-sm" name="password" placeholder="Password" required type="password"/></div>
+<div class="flex items-center justify-between pt-2"><button class="text-[11px] font-black text-secondary uppercase tracking-widest" id="magic-link" type="button">Use Magic Link</button></div>
+<button class="glow-button w-full py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest transition-all shadow-lg" type="submit">Sign In</button>
+</form>
+</div>
+<div class="space-y-8" data-view id="view-new">
+<div class="space-y-4">
+<button class="w-full flex items-center justify-center gap-3 py-4.5 bg-white/50 hover:bg-white/80 border border-white/60 rounded-2xl transition-all duration-300 shadow-sm hover:scale-[1.01]" id="google-signup" type="button">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWwTeeR_I577jvMGrycjqOaq5rXW_o-0ZQjRb8P2EkQTF4l3NfmQCOtBUyix06qYhP6vyCy8PxfXHBKQu8SQEd2ERTwtexwZjJ_FTWCrJPrwRAQzxADd2ZQq1CVmT8TVD_d3Rs8qfi5GF2pDzo4JzH9N51IApXjypqbl6UYUSTHOaacWoOTniU3R2-4Xey50yRgtG7eRhkgpi8tcRhzT7u6YaSOZBbkWssH_EXbEEJESoV1GOi3xMQoCdujltjLegHQdD_v52fgDY7"/>
+<span class="text-sm font-bold text-slate-700">Join with Google</span>
+</button>
+</div>
+<div class="relative flex items-center py-2"><div class="flex-grow border-t border-slate-900/10"></div><span class="flex-shrink mx-4 text-slate-400 text-[9px] font-black uppercase tracking-[0.3em]">New Account</span><div class="flex-grow border-t border-slate-900/10"></div></div>
+<form class="space-y-5" id="signup-form">
+<div class="space-y-1.5"><label class="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Full Name</label><input class="w-full bg-white/30 border-none rounded-2xl px-6 py-4 text-sm" name="full_name" placeholder="Ava Martinez" required type="text"/></div>
+<div class="space-y-1.5"><label class="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Email</label><input class="w-full bg-white/30 border-none rounded-2xl px-6 py-4 text-sm" name="email" placeholder="you@school.com" required type="email"/></div>
+<div class="space-y-1.5"><label class="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Create Password</label><input class="w-full bg-white/30 border-none rounded-2xl px-6 py-4 text-sm" name="password" placeholder="Create a password" required type="password"/></div>
+<button class="glow-button w-full py-5 bg-secondary text-white rounded-2xl font-black text-sm uppercase tracking-widest transition-all shadow-lg" type="submit">Begin Journey</button>
+</form>
+</div>
+<p class="text-center text-sm min-h-6 mt-6 text-slate-600" id="auth-status"></p>
+</div>
+</main>
+<script src="/supabase-client.js?v=20260312a"></script>
+<script>
+(function(){
+  var RETURN_TO_KEY='sc_auth_return_to';
+  var params=new URLSearchParams(location.search);
+  var prompt=params.get('message')||'Sign in or create your account to continue.';
+  var initialMode=params.get('mode')==='new'?'new':'returning';
+  var promptCopy=document.getElementById('prompt-copy');
+  var status=document.getElementById('auth-status');
+  var toggle=document.getElementById('toggle-container');
+  var tabReturning=document.getElementById('tab-returning');
+  var tabNew=document.getElementById('tab-new');
+  var viewReturning=document.getElementById('view-returning');
+  var viewNew=document.getElementById('view-new');
+  promptCopy.textContent=prompt;
+  function setStatus(message,kind){status.textContent=message||'';status.className='text-center text-sm min-h-6 mt-6 '+(kind==='err'?'text-red-600':kind==='ok'?'text-green-700':'text-slate-600')}
+  function switchView(view){
+    toggle.setAttribute('data-active',view);
+    var isReturning=view==='returning';
+    tabReturning.classList.toggle('text-primary',isReturning);
+    tabReturning.classList.toggle('text-slate-400',!isReturning);
+    tabNew.classList.toggle('text-primary',!isReturning);
+    tabNew.classList.toggle('text-slate-400',isReturning);
+    viewReturning.classList.toggle('active',isReturning);
+    viewNew.classList.toggle('active',!isReturning);
+  }
+  tabReturning.addEventListener('click',function(){switchView('returning')});
+  tabNew.addEventListener('click',function(){switchView('new')});
+  function currentReturn(){return localStorage.getItem(RETURN_TO_KEY)||'/dashboard.html'}
+  function saveReturn(){try{if(params.get('returnTo'))localStorage.setItem(RETURN_TO_KEY,params.get('returnTo'))}catch(_err){}}
+  function goBack(){location.href=currentReturn()}
+  async function client(){return window.scSupabaseReady()}
+  async function googleAuth(){
+    saveReturn();
+    setStatus('Redirecting to Google...','');
+    var c=await client();
+    var result=await c.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+'/auth/callback.html',queryParams:{access_type:'offline',prompt:'select_account'}}});
+    if(result&&result.error)setStatus(result.error.message||'Google sign-in failed.','err');
+  }
+  document.getElementById('google-signin').addEventListener('click',googleAuth);
+  document.getElementById('google-signup').addEventListener('click',googleAuth);
+  document.getElementById('magic-link').addEventListener('click',async function(){
+    var form=new FormData(document.getElementById('signin-form')); var email=String(form.get('email')||'').trim();
+    if(!email){setStatus('Enter your email first for a magic link.','err');return}
+    saveReturn(); setStatus('Sending magic link...','');
+    var c=await client(); var result=await c.auth.signInWithOtp({email:email,options:{emailRedirectTo:location.origin+'/auth/callback.html'}});
+    if(result&&result.error){setStatus(result.error.message||'Could not send magic link.','err');return}
+    setStatus('Magic link sent. Check your email.','ok');
+  });
+  document.getElementById('signin-form').addEventListener('submit',async function(event){
+    event.preventDefault(); var form=new FormData(event.target); setStatus('Signing you in...','');
+    var c=await client(); var result=await c.auth.signInWithPassword({email:String(form.get('email')||'').trim(),password:String(form.get('password')||'')});
+    if(result&&result.error){setStatus(result.error.message||'Sign in failed.','err');return}
+    setStatus('Signed in. Redirecting...','ok'); setTimeout(goBack,500);
+  });
+  document.getElementById('signup-form').addEventListener('submit',async function(event){
+    event.preventDefault(); var form=new FormData(event.target); setStatus('Creating your account...','');
+    var c=await client(); var result=await c.auth.signUp({email:String(form.get('email')||'').trim(),password:String(form.get('password')||''),options:{emailRedirectTo:location.origin+'/auth/callback.html',data:{full_name:String(form.get('full_name')||'').trim(),display_name:String(form.get('full_name')||'').trim(),name:String(form.get('full_name')||'').trim(),plan:'Starter'}}});
+    if(result&&result.error){setStatus(result.error.message||'Could not create account.','err');return}
+    if(result&&result.data&&result.data.session){setStatus('Account created. Redirecting...','ok');setTimeout(goBack,500);return}
+    setStatus('Account created. Check your email to verify your account.','ok');
+  });
+  switchView(initialMode);
+})();
+</script>
+</body></html>
