@@ -12,6 +12,7 @@
     ["home", "index.html"],
     ["library", "grade-9.html"],
     ["subjects", "grade-9.html"],
+    ["subjects library", "grade-9.html"],
     ["subject library", "grade-9.html"],
     ["grades", "grade-9-advanced.html"],
     ["grade 9", "grade-9-advanced.html"],
@@ -23,11 +24,15 @@
     ["analytics", "analytics.html"],
     ["profile", "profile.html"],
     ["membership", "membership.html"],
+    ["subscriptions", "membership.html"],
     ["settings", "settings.html"],
     ["concept cards", "anki/index.html"],
     ["view all", "grade-9.html"],
     ["view archive", "grade-9.html"],
     ["archives", "grade-9.html"],
+    ["support", "settings.html#support"],
+    ["help", "settings.html#support"],
+    ["exam simulator", "math-quiz-simulator.html"],
     ["upgrade to fellow", "membership.html"],
     ["complete secure checkout", "membership.html"],
     ["read now", "study-library.html"]
@@ -38,18 +43,26 @@
     ["grid_view", "dashboard.html"],
     ["dashboard", "dashboard.html"],
     ["auto_stories", "grade-9.html"],
+    ["subject", "grade-9.html"],
+    ["book", "grade-9.html"],
+    ["library_books", "grade-9.html"],
+    ["import_contacts", "grade-9.html"],
     ["style", "grade-9.html"],
     ["analytics", "analytics.html"],
     ["insights", "analytics.html"],
     ["biotech", "research.html"],
     ["school", "curriculum.html"],
     ["event_note", "schedule.html"],
+    ["calendar_today", "schedule.html"],
+    ["schedule", "schedule.html"],
     ["timer", "schedule.html"],
     ["military_tech", "achievements.html"],
     ["trophy", "achievements.html"],
     ["workspace_premium", "membership.html"],
+    ["subscriptions", "membership.html"],
     ["card_membership", "membership.html"],
     ["payments", "membership.html"],
+    ["grade", "grade-9-advanced.html"],
     ["account_circle", "profile.html"],
     ["person", "profile.html"],
     ["settings", "settings.html"],
@@ -77,7 +90,8 @@
       return;
     }
     if (!href || href === "#" || href.includes("{{DATA:SCREEN:")) {
-      const target = findTarget(anchor.textContent || "");
+      const iconNode = anchor.querySelector(".material-symbols-outlined, [data-icon]");
+      const target = findTarget(anchor.textContent || "") || getInteractiveTarget(iconNode || anchor);
       if (target) anchor.setAttribute("href", target);
     }
   }
@@ -285,7 +299,7 @@
       bindNavigationTarget(button, target);
     });
 
-    document.querySelectorAll('[data-icon="account_circle"], [data-icon="settings"], [data-icon="person"], [data-icon="home"], [data-icon="grid_view"], [data-icon="style"], [data-icon="analytics"], [data-icon="insights"], [data-icon="timer"], [data-icon="school"], [data-icon="event_note"], [data-icon="military_tech"], [data-icon="workspace_premium"]').forEach((node) => {
+    document.querySelectorAll('[data-icon="account_circle"], [data-icon="settings"], [data-icon="person"], [data-icon="home"], [data-icon="grid_view"], [data-icon="style"], [data-icon="analytics"], [data-icon="insights"], [data-icon="timer"], [data-icon="school"], [data-icon="event_note"], [data-icon="calendar_today"], [data-icon="schedule"], [data-icon="military_tech"], [data-icon="workspace_premium"], [data-icon="library_books"], [data-icon="import_contacts"], [data-icon="grade"]').forEach((node) => {
       const button = node.closest("button");
       if (button) return;
       const target = getInteractiveTarget(node);
