@@ -1,4 +1,93 @@
 (function () {
+  function ensureGlobalMotionStyles() {
+    if (document.getElementById("stitch-motion-styles")) return;
+    const style = document.createElement("style");
+    style.id = "stitch-motion-styles";
+    style.textContent = `
+      .stitch-motion-root {
+        perspective: 1600px;
+        transform-style: preserve-3d;
+      }
+
+      [data-stitch-reveal] {
+        opacity: 0;
+        transform: translate3d(0, 26px, 0) scale(0.985);
+        transition:
+          opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 720ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 320ms ease,
+          filter 320ms ease;
+        transition-delay: var(--stitch-delay, 0ms);
+        will-change: transform, opacity;
+      }
+
+      [data-stitch-reveal="left"] {
+        transform: translate3d(-34px, 18px, 0) scale(0.985) rotateY(4deg);
+      }
+
+      [data-stitch-reveal="right"] {
+        transform: translate3d(34px, 18px, 0) scale(0.985) rotateY(-4deg);
+      }
+
+      [data-stitch-reveal="up"] {
+        transform: translate3d(0, 38px, 0) scale(0.97) rotateX(6deg);
+      }
+
+      [data-stitch-reveal].is-visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1) rotateX(0) rotateY(0);
+      }
+
+      [data-stitch-tilt] {
+        transform-style: preserve-3d;
+        transition:
+          transform 220ms ease,
+          box-shadow 220ms ease,
+          filter 220ms ease,
+          background-color 220ms ease,
+          border-color 220ms ease;
+        will-change: transform, box-shadow, filter;
+      }
+
+      [data-stitch-tilt]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        opacity: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent 42%, rgba(255,255,255,0.08));
+        transition: opacity 220ms ease;
+      }
+
+      [data-stitch-tilt].is-hovering::before {
+        opacity: 1;
+      }
+
+      [data-stitch-float] {
+        animation: stitch-float-drift 10s ease-in-out infinite;
+      }
+
+      @keyframes stitch-float-drift {
+        0%, 100% { transform: translate3d(0, 0, 0); }
+        50% { transform: translate3d(0, -6px, 0); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-stitch-reveal],
+        [data-stitch-tilt],
+        [data-stitch-float] {
+          transition: none !important;
+          animation: none !important;
+          transform: none !important;
+          opacity: 1 !important;
+        }
+      }
+
+    `;
+    document.head.appendChild(style);
+  }
+
   const gradeLinks = [
     { label: "Grade 9", href: "grade-9-advanced.html" },
     { label: "Grade 10", href: "grade-10.html" },
@@ -193,6 +282,95 @@
     });
   }
 
+  function setupGlobalMotion() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    document.body.classList.add("stitch-motion-root");
+
+    const revealTargets = [];
+    const revealSelectors = [
+      "main > section",
+      "main > div",
+      "section > div",
+      "article",
+      "[class*='rounded-2xl']",
+      "[class*='rounded-3xl']",
+      "[class*='glass-card']",
+      "[class*='editorial-shadow']"
+    ];
+
+    const seen = new Set();
+    let order = 0;
+
+    revealSelectors.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((node) => {
+        if (seen.has(node)) return;
+        if (node.closest("header, nav, aside, footer")) return;
+        if (node.offsetWidth < 120 || node.offsetHeight < 60) return;
+        seen.add(node);
+        const mode = order % 3 === 0 ? "left" : order % 3 === 1 ? "right" : "up";
+        node.setAttribute("data-stitch-reveal", mode);
+        node.style.setProperty("--stitch-delay", `${Math.min(order * 45, 260)}ms`);
+        revealTargets.push(node);
+        order += 1;
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+
+    revealTargets.forEach((node) => revealObserver.observe(node));
+
+    const tiltTargets = Array.from(document.querySelectorAll(
+      "main article, main a[href], main button, main [class*='rounded-2xl'], main [class*='rounded-3xl']"
+    )).filter((node) => {
+      if (node.closest("header, nav, aside, footer")) return false;
+      if (node.offsetWidth < 120 || node.offsetHeight < 48) return false;
+      return true;
+    });
+
+    tiltTargets.forEach((node, index) => {
+      if (node.hasAttribute("data-stitch-tilt")) return;
+      node.setAttribute("data-stitch-tilt", "");
+      if (index < 8) node.setAttribute("data-stitch-float", "");
+
+      let rafId = 0;
+
+      const updateTilt = (event) => {
+        const rect = node.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width - 0.5;
+        const py = (event.clientY - rect.top) / rect.height - 0.5;
+        const rotateX = py * -8;
+        const rotateY = px * 10;
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          node.classList.add("is-hovering");
+          node.style.transform = `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(0,-4px,18px)`;
+          node.style.boxShadow = "0 22px 44px rgba(20, 18, 25, 0.14)";
+          node.style.filter = "saturate(1.03)";
+        });
+      };
+
+      const resetTilt = () => {
+        cancelAnimationFrame(rafId);
+        node.classList.remove("is-hovering");
+        node.style.transform = "";
+        node.style.boxShadow = "";
+        node.style.filter = "";
+      };
+
+      node.addEventListener("pointermove", updateTilt);
+      node.addEventListener("pointerleave", resetTilt);
+      node.addEventListener("blur", resetTilt, true);
+    });
+  }
+
   function buildGradesDropdown(anchor) {
     if (anchor.dataset.gradesDropdown === "true") return;
 
@@ -277,6 +455,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    ensureGlobalMotionStyles();
     document.querySelectorAll("a").forEach((anchor) => {
       setHref(anchor);
       if (normalize(anchor.textContent || "") === "grades") {
@@ -310,5 +489,6 @@
     wireShellNavigation();
     wireSubjectSections();
     wireHomeLogo();
+    setupGlobalMotion();
   });
 })();
