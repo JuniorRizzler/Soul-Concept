@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v91";
+const CACHE_NAME = "soulconcept-v92";
 const ASSETS = [
   "/",
   "/index.html",
@@ -20,6 +20,7 @@ const ASSETS = [
   "/supabase-client.js",
   "/supabase-auth.js",
   "/vercel-speed-insights.js",
+  "/focus-mode.js",
   "/library-whiteboard.js",
   "/manifest.json",
   "/icons/icon.svg",
@@ -95,6 +96,7 @@ self.addEventListener("fetch", (event) => {
       url.pathname === "/supabase-auth.js" ||
       url.pathname === "/vercel-speed-insights.js" ||
       url.pathname === "/ai-bridge.js" ||
+      url.pathname === "/focus-mode.js" ||
       url.pathname === "/library-whiteboard.js" ||
       url.pathname === "/styles.css"
     )
