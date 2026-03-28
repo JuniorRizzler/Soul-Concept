@@ -5563,7 +5563,7 @@ export default function MathStudyLibrary() {
           </div>
 
           {/* Section cards */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {subject.sections.map((section, i) => {
               const isRead = readSections.has(section.id);
               return (
@@ -5676,7 +5676,7 @@ export default function MathStudyLibrary() {
 
       {/* Top nav bar */}
       <div className="glass sticky top-0 z-40" style={{borderBottom:'1px solid var(--border)'}}>
-        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center glow-i">
               <Calculator className="w-3.5 h-3.5 text-white" />
@@ -5692,7 +5692,7 @@ export default function MathStudyLibrary() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-14">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8 py-14">
         {/* Hero */}
         <div className="mb-14 relative anim-up">
           <div className="rounded-3xl p-8 md:p-12 overflow-hidden relative card-shadow" style={{background:'linear-gradient(135deg, #eef2ff 0%, #f0fdf4 50%, #faf5ff 100%)', border:'1px solid rgba(99,102,241,0.12)'}}>
@@ -5731,7 +5731,7 @@ export default function MathStudyLibrary() {
           <span className="syne text-xs font-black uppercase tracking-widest" style={{color:'var(--muted)'}}>Study Tools</span>
           <div className="flex-1 h-px" style={{background:'var(--border)'}} />
         </div>
-        <div className="grid md:grid-cols-2 gap-4 mb-12">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mb-12">
           {subjects.slice(0, 4).map((subject, i) => {
             const completedCount = subject.sections.filter(s => readSections.has(s.id)).length;
             const progress = (completedCount / subject.sections.length) * 100;
@@ -5765,7 +5765,7 @@ export default function MathStudyLibrary() {
           <span className="syne text-xs font-black uppercase tracking-widest" style={{color:'var(--muted)'}}>Notes</span>
           <div className="flex-1 h-px" style={{background:'var(--border)'}} />
         </div>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
           {subjects.slice(4).map((subject, i) => {
             const completedCount = subject.sections.filter(s => readSections.has(s.id)).length;
             const progress = (completedCount / subject.sections.length) * 100;
