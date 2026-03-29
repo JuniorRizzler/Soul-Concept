@@ -98,26 +98,28 @@
   ]);
 
   const topLinks = [
+    { href: "index.html", label: "Home" },
     { href: "dashboard.html", label: "Dashboard" },
+    { href: "grade-9.html", label: "View Libraries" },
     { href: "grade-9.html", label: "Library" },
-    { href: "grade-10.html", label: "Grades" },
-    { href: "schedule.html", label: "Schedule" },
     { href: "analytics.html", label: "Analytics" }
   ];
 
   const sideLinks = [
+    { href: "index.html", label: "Home", icon: "home" },
     { href: "dashboard.html", label: "Overview", icon: "dashboard" },
-    { href: "grade-9.html", label: "Subjects", icon: "library_books" },
-    { href: "anki/index.html", label: "Concept Cards", icon: "style" },
+    { href: "grade-9.html", label: "Libraries", icon: "auto_stories" },
+    { href: "analytics.html", label: "Analytics", icon: "analytics" },
+    { href: "research.html", label: "Research", icon: "biotech" },
+    { href: "curriculum.html", label: "Curriculum", icon: "school" },
+    { href: "schedule.html", label: "Planner", icon: "event_note" },
     { href: "achievements.html", label: "Achievements", icon: "military_tech" },
-    { href: "membership.html", label: "Subscriptions", icon: "credit_card" },
-    { href: "math/auto-quiz.html", label: "Exam Simulator", icon: "quiz" },
-    { href: "analytics.html", label: "Insights", icon: "insights" }
+    { href: "membership.html", label: "Membership", icon: "workspace_premium" }
   ];
 
   const secondaryLinks = [
-    { href: "settings.html", label: "Settings", icon: "settings" },
-    { href: "settings.html#support", label: "Support", icon: "help" }
+    { href: "profile.html", label: "Profile", icon: "account_circle" },
+    { href: "settings.html", label: "Settings", icon: "settings" }
   ];
 
   const pageMeta = {
@@ -318,14 +320,6 @@
     return value;
   }
 
-  function shellHref(target) {
-    const path = String(window.location.pathname || "").toLowerCase();
-    if (path.includes("/anki/") || path.includes("/math/") || path.includes("/auth/")) {
-      return "../" + String(target || "").replace(/^\/+/, "");
-    }
-    return String(target || "").replace(/^\/+/, "");
-  }
-
   function escapeHtml(text) {
     return String(text)
       .replaceAll("&", "&amp;")
@@ -376,27 +370,29 @@
   function activeMatch(href, pathname) {
     if (pathname === "index.html" && href === "dashboard.html") return true;
     if (href === pathname) return true;
-    if (href === "grade-9.html" && ["study-library.html", "geography-library.html", "grade-9-advanced.html"].includes(pathname)) return true;
-    if (href === "grade-10.html" && ["grade-10-math.html", "grade-11.html", "grade-12.html"].includes(pathname)) return true;
+    if (href === "subject-library-2.html" && ["library.html", "subjects.html", "disciplines.html"].includes(pathname)) return true;
+    if (href === "research.html" && ["archive.html", "archive-classic.html", "curation.html"].includes(pathname)) return true;
     if (href === "membership.html" && pathname === "settings.html") return false;
-    if (href === "math/auto-quiz.html" && pathname === "auto-quiz.html") return true;
-    if (href === "anki/index.html" && pathname === "index.html" && window.location.pathname.toLowerCase().includes("/anki/")) return true;
     return false;
   }
 
   function buildShell() {
     const pathname = currentPath();
+    const meta = pageMeta[pathname] || {
+      title: document.title.replace(/^Soul Concept\s*\|\s*/i, "") || "Soul Concept",
+      kicker: "Connected Site"
+    };
 
     const topLinksHtml = topLinks
-      .map((item) => `<a href="${shellHref(item.href)}"${activeMatch(item.href, pathname) ? ' aria-current="page"' : ""}>${escapeHtml(item.label)}</a>`)
+      .map((item) => `<a href="${item.href}"${activeMatch(item.href, pathname) ? ' aria-current="page"' : ""}>${escapeHtml(item.label)}</a>`)
       .join("");
 
     const sideLinksHtml = sideLinks
-      .map((item) => `<a class="sc-shell-link" href="${shellHref(item.href)}" data-active="${activeMatch(item.href, pathname)}"><span class="material-symbols-outlined">${item.icon}</span><span>${escapeHtml(item.label)}</span></a>`)
+      .map((item) => `<a class="sc-shell-link" href="${item.href}" data-active="${activeMatch(item.href, pathname)}"><span class="material-symbols-outlined">${item.icon}</span><span>${escapeHtml(item.label)}</span></a>`)
       .join("");
 
     const secondaryLinksHtml = secondaryLinks
-      .map((item) => `<a class="sc-shell-link" href="${shellHref(item.href)}" data-active="${activeMatch(item.href, pathname)}"><span class="material-symbols-outlined">${item.icon}</span><span>${escapeHtml(item.label)}</span></a>`)
+      .map((item) => `<a class="sc-shell-link" href="${item.href}" data-active="${activeMatch(item.href, pathname)}"><span class="material-symbols-outlined">${item.icon}</span><span>${escapeHtml(item.label)}</span></a>`)
       .join("");
 
     const shell = document.createElement("div");
@@ -404,35 +400,54 @@
       <div class="sc-shell-scrim" data-sc-shell-close></div>
       <aside class="sc-shell-sidebar" aria-label="Primary navigation">
         <div class="sc-shell-sidebar-head">
-          <span aria-hidden="true"></span>
+          <a class="sc-shell-brand" href="dashboard.html">
+            <span class="sc-shell-brandmark" aria-hidden="true">
+              <img src="icons/soulconceptflame.png" alt="" />
+            </span>
+            <span class="sc-shell-brandtext">Soul Concept</span>
+          </a>
           <button class="sc-shell-iconbtn sc-shell-close" type="button" aria-label="Close navigation" data-sc-shell-close>
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
+        <div class="sc-shell-profile">
+          <span class="sc-shell-profile-name">Academic Curator</span>
+          <span class="sc-shell-profile-meta">Unified Scholar Portal</span>
+        </div>
         <nav class="sc-shell-nav">${sideLinksHtml}</nav>
         <div class="sc-shell-sidebar-foot">
           <nav class="sc-shell-nav-secondary">${secondaryLinksHtml}</nav>
+          <div style="padding:0.75rem;">
+            <a class="sc-shell-cta" href="dashboard.html">Start Study Session</a>
+          </div>
         </div>
       </aside>
       <header class="sc-shell-topbar">
-        <div class="sc-shell-topbar-left">
+        <div style="display:flex;align-items:center;gap:1rem;min-width:0;">
+          <button class="sc-shell-iconbtn sc-shell-collapse" type="button" aria-label="Collapse sidebar" data-sc-shell-collapse>
+            <span class="material-symbols-outlined">left_panel_close</span>
+          </button>
           <button class="sc-shell-iconbtn sc-shell-toggle" type="button" aria-label="Open navigation" data-sc-shell-open>
             <span class="material-symbols-outlined">menu</span>
           </button>
-          <a class="sc-shell-brand sc-shell-brand-top" href="${shellHref("index.html")}">
-            <span class="sc-shell-brandtext">Soul Concept</span>
-          </a>
-          <nav class="sc-shell-toplinks">${topLinksHtml}</nav>
+          <div class="sc-shell-page">
+            <span class="sc-shell-kicker">${escapeHtml(meta.kicker)}</span>
+            <span class="sc-shell-title">${escapeHtml(meta.title)}</span>
+          </div>
         </div>
+        <nav class="sc-shell-toplinks">${topLinksHtml}</nav>
         <div class="sc-shell-actions">
-          <label class="sc-shell-search" aria-label="Search knowledge">
-            <span class="material-symbols-outlined">search</span>
-            <input type="text" placeholder="Search knowledge..." />
-          </label>
-          <button class="sc-shell-iconbtn" type="button" aria-label="Notifications">
-            <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+          <button class="sc-shell-iconbtn" type="button" aria-label="Start tutorial" data-sc-open-tour>
+            <span class="material-symbols-outlined">school</span>
           </button>
-          <a class="sc-shell-iconbtn" href="${shellHref("profile.html")}" aria-label="Profile">
+          <button class="sc-shell-authbtn" type="button" aria-label="Open sign in" data-sc-open-auth>
+            <span class="sc-shell-authbtn-logo" aria-hidden="true"></span>
+            <span>Sign In</span>
+          </button>
+          <button class="sc-shell-iconbtn" type="button" aria-label="Search This Page" data-sc-page-search>
+            <span class="material-symbols-outlined">search</span>
+          </button>
+          <a class="sc-shell-iconbtn" href="profile.html" aria-label="Profile">
             <span class="material-symbols-outlined">account_circle</span>
           </a>
         </div>
@@ -449,6 +464,30 @@
       button.addEventListener("click", () => document.body.classList.remove("sc-shell-open"));
     });
 
+    const collapseButton = shell.querySelector("[data-sc-shell-collapse]");
+    const collapseIcon = collapseButton && collapseButton.querySelector(".material-symbols-outlined");
+    const storageKey = "sc-sidebar-collapsed";
+
+    function syncCollapsedState(collapsed) {
+      document.body.classList.toggle("sc-sidebar-collapsed", collapsed);
+      if (collapseIcon) {
+        collapseIcon.textContent = collapsed ? "left_panel_open" : "left_panel_close";
+      }
+      if (collapseButton) {
+        collapseButton.setAttribute("aria-label", collapsed ? "Expand sidebar" : "Collapse sidebar");
+      }
+    }
+
+    const persisted = localStorage.getItem(storageKey) === "true";
+    syncCollapsedState(persisted);
+
+    if (collapseButton) {
+      collapseButton.addEventListener("click", () => {
+        const collapsed = !document.body.classList.contains("sc-sidebar-collapsed");
+        localStorage.setItem(storageKey, String(collapsed));
+        syncCollapsedState(collapsed);
+      });
+    }
   }
 
   function hideLegacyShell() {
