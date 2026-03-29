@@ -103,6 +103,21 @@
         .home-notifications-panel[hidden] {
             display: none;
         }
+        .glass-dropdown {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 201, 195, 0.2);
+        }
+        .activity-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .activity-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .activity-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 68, 53, 0.1);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface" data-sc-auth-required="false" data-sc-auth-mount="false">
@@ -127,67 +142,72 @@
 <div class="relative" data-home-notifications="">
 <button aria-expanded="false" aria-haspopup="true" class="text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all relative inline-flex items-center justify-center" data-home-notifications-toggle="" type="button">
 <span class="material-symbols-outlined">notifications</span>
-<span class="absolute -right-1 -top-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
+<span class="absolute -right-1 -top-1 inline-flex min-w-5 h-5 items-center justify-center px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
 </button>
-<div class="home-notifications-panel absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" hidden="" style="display:none; background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border:1px solid rgba(191,201,195,0.2);">
-<div class="flex items-center justify-between border-b border-outline-variant/10 bg-white/50 p-5">
-<h4 class="font-headline text-[11px] font-bold uppercase tracking-widest text-primary/80">Recent Activity</h4>
-<button class="font-label text-[10px] font-bold uppercase tracking-widest text-outline transition-colors hover:text-primary" type="button">Clear</button>
+<div class="home-notifications-panel glass-dropdown absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" hidden="" style="display:none;">
+<div class="p-5 border-b border-outline-variant/10 flex justify-between items-center bg-white/50">
+<h4 class="font-headline font-bold text-primary/80 text-[11px] tracking-widest uppercase">Recent Activity</h4>
+<button class="text-[10px] font-label font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors" type="button">Clear</button>
 <span class="hidden" data-home-notifications-count="">4</span>
 </div>
-<div class="max-h-[440px] overflow-y-auto" data-home-notifications-list="">
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
+<div class="max-h-[440px] overflow-y-auto activity-scrollbar" data-home-notifications-list="">
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5">
 <div class="flex gap-4">
-<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5">
-<span class="material-symbols-outlined text-xl text-primary/60">timer</span>
+<div class="w-9 h-9 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary/60 text-xl" data-icon="timer">timer</span>
 </div>
-<div class="min-w-0 flex-1">
-<p class="font-headline text-xs font-bold text-primary">Time for a zen break</p>
-<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">90 mins of deep focus reached. Stretch and hydrate.</p>
-<span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">Just now</span>
+<div class="flex-grow min-w-0">
+<p class="font-headline font-bold text-primary text-xs">Time for a zen break</p>
+<p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">90 mins of deep focus reached. Stretch and hydrate.</p>
+<span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">Just now</span>
 </div>
 </div>
 </div>
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5">
 <div class="flex gap-4">
-<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary/5">
-<span class="material-symbols-outlined text-xl text-secondary/60">person</span>
+<div class="w-9 h-9 rounded-full bg-secondary/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary/60 text-xl" data-icon="person">person</span>
 </div>
-<div class="min-w-0 flex-1">
-<p class="font-headline text-xs font-bold text-primary">Sync your progress</p>
-<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Sign into your account to back up your curator stack.</p>
-<a class="mt-2.5 inline-flex text-[9px] font-black uppercase tracking-widest text-secondary hover:underline" href="/auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.">Sign In Now</a>
+<div class="flex-grow min-w-0">
+<p class="font-headline font-bold text-primary text-xs">Sync your progress</p>
+<p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Sign into your account to back up your curator stack.</p>
+<a class="mt-2.5 inline-flex text-[9px] font-black text-secondary uppercase tracking-widest hover:underline" href="/auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.">Sign In Now</a>
 </div>
 </div>
 </div>
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5">
 <div class="flex gap-4">
-<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5">
-<span class="material-symbols-outlined text-xl text-primary/60">workspace_premium</span>
+<div class="w-9 h-9 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary/60 text-xl" data-icon="workspace_premium">workspace_premium</span>
 </div>
-<div class="min-w-0 flex-1">
-<p class="font-headline text-xs font-bold text-primary">Research Badge Earned</p>
-<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Top-tier analysis on Quantum Mechanics.</p>
-<span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">2 mins ago</span>
+<div class="flex-grow min-w-0">
+<p class="font-headline font-bold text-primary text-xs">Research Badge Earned</p>
+<p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Top-tier analysis on Quantum Mechanics.</p>
+<span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">2 mins ago</span>
 </div>
 </div>
 </div>
-<div class="p-5 transition-colors hover:bg-white/60">
+<div class="p-5 hover:bg-white/60 transition-colors group">
 <div class="flex gap-4">
-<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container">
-<span class="material-symbols-outlined text-xl text-outline">calendar_today</span>
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline text-xl" data-icon="calendar_today">calendar_today</span>
 </div>
-<div class="min-w-0 flex-1">
-<p class="font-headline text-xs font-bold text-primary">Curator Session Updated</p>
-<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Molecular Biology Quiz moved to 10:30 AM.</p>
-<span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">15 mins ago</span>
-</div>
-</div>
+<div class="flex-grow min-w-0">
+<p class="font-headline font-bold text-primary text-xs">Curator Session Updated</p>
+<p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Molecular Biology Quiz moved to 10:30 AM.</p>
+<span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">15 mins ago</span>
 </div>
 </div>
 </div>
 </div>
-<button class="material-symbols-outlined text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all" data-icon="account_circle">account_circle</button>
+<div class="p-4 text-center bg-white/30 border-t border-outline-variant/5">
+<button class="w-full py-2.5 text-[10px] font-headline font-extrabold text-primary uppercase tracking-widest hover:bg-primary hover:text-white rounded-xl transition-all duration-300">
+                View Full Activity Log
+            </button>
+</div>
+</div>
+</div>
+<a class="material-symbols-outlined text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all inline-flex items-center justify-center" data-icon="account_circle" href="settings.html">account_circle</a>
 </div>
 </div>
 </nav>
@@ -469,26 +489,14 @@
 <script src="focus-mode.js?v=20260321d"></script>
 <script>
   (function () {
-    var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
-    var READ_KEY = 'sc_home_notifications_read_v2'
+    var READ_KEY = 'sc_home_notifications_read_v3'
     var RETURN_OPEN_KEY = 'sc_open_notifications_on_return_v1'
     var toggle = document.querySelector('[data-home-notifications-toggle]')
     var panel = document.querySelector('[data-home-notifications-panel]')
-    var list = document.querySelector('[data-home-notifications-list]')
     var count = document.querySelector('[data-home-notifications-count]')
     var badge = document.querySelector('[data-home-notifications-badge]')
 
-    if (!toggle || !panel || !list || !count || !badge) return
-
-    function readProfile() {
-      if (window.scAuthProfile) return window.scAuthProfile
-      try {
-        var raw = localStorage.getItem(PROFILE_CACHE_KEY)
-        return raw ? JSON.parse(raw) : null
-      } catch (_err) {
-        return null
-      }
-    }
+    if (!toggle || !panel || !count || !badge) return
 
     function readSeenMap() {
       try {
@@ -505,90 +513,11 @@
       } catch (_err) {}
     }
 
-    function buildNotifications(profile) {
-      if (profile && profile.email) {
-        var name = String(profile.name || profile.email || 'Scholar')
-        var email = String(profile.email || '')
-        return [{
-          id: 'account-ready-v2',
-          kicker: 'Account ready',
-          title: 'Welcome back, ' + name,
-          body: 'Your Soul Concept profile is connected as ' + email + '.',
-          icon: 'verified_user',
-          tone: 'emerald',
-          hrefPrimary: '/dashboard.html',
-          labelPrimary: 'Open dashboard',
-          hrefSecondary: '/settings.html',
-          labelSecondary: 'Profile settings',
-        }]
-      }
-
-      return [{
-        id: 'signin-reminder-v2',
-        kicker: 'Sign-in reminder',
-        title: 'Sign in to save your study space',
-        body: 'Connect your account to keep progress, saved libraries, and premium access attached to your profile.',
-        icon: 'notifications_active',
-        tone: 'amber',
-        hrefPrimary: '/auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.',
-        labelPrimary: 'Sign in now',
-        hrefSecondary: '/membership.html',
-        labelSecondary: 'View benefits',
-      }]
-    }
-
-    function escapeHtml(value) {
-      return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-    }
-
-    function notificationMarkup(item, unread) {
-      var toneClass = item.tone === 'emerald'
-        ? 'border-emerald-200/70 bg-emerald-50'
-        : 'border-amber-200/80 bg-gradient-to-br from-white to-amber-50'
-      var iconClass = item.tone === 'emerald' ? 'bg-primary text-white' : 'bg-secondary text-white'
-      var meta = unread
-        ? '<span class="font-label text-[10px] font-bold uppercase tracking-[0.18em] text-red-600">New</span>'
-        : '<span class="font-label text-[10px] font-bold uppercase tracking-[0.18em] text-outline">Read</span>'
-      return (
-        '<article class="rounded-2xl border px-4 py-4 ' + toneClass + '">' +
-          '<div class="flex items-start gap-3">' +
-            '<div class="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl ' + iconClass + '">' +
-              '<span class="material-symbols-outlined text-[20px]">' + escapeHtml(item.icon) + '</span>' +
-            '</div>' +
-            '<div class="min-w-0 flex-1">' +
-              '<div class="flex items-center justify-between gap-3">' +
-                '<p class="font-label text-xs font-bold uppercase tracking-[0.2em] ' + (item.tone === 'emerald' ? 'text-primary' : 'text-secondary') + '">' + escapeHtml(item.kicker) + '</p>' +
-                meta +
-              '</div>' +
-              '<p class="mt-1 font-headline text-sm font-bold text-primary">' + escapeHtml(item.title) + '</p>' +
-              '<p class="mt-1 font-body text-sm leading-relaxed text-on-surface-variant">' + escapeHtml(item.body) + '</p>' +
-              '<div class="mt-4 flex flex-wrap gap-2">' +
-                '<a class="inline-flex items-center justify-center rounded-xl bg-primary px-3 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition-all hover:scale-[1.02]" href="' + escapeHtml(item.hrefPrimary) + '">' + escapeHtml(item.labelPrimary) + '</a>' +
-                '<a class="inline-flex items-center justify-center rounded-xl border border-outline-variant/40 bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-primary transition-all hover:border-primary/40" href="' + escapeHtml(item.hrefSecondary) + '">' + escapeHtml(item.labelSecondary) + '</a>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-        '</article>'
-      )
-    }
-
     function render() {
-      var profile = readProfile()
-      var items = buildNotifications(profile)
       var seenMap = readSeenMap()
-      var unread = items.filter(function (item) { return !seenMap[item.id] }).length
-
-      list.innerHTML = items.map(function (item) {
-        return notificationMarkup(item, !seenMap[item.id])
-      }).join('')
-
-      count.textContent = String(items.length)
-      badge.textContent = String(unread)
+      var unread = seenMap.staticZipDropdown === true ? 0 : 1
+      count.textContent = '4'
+      badge.textContent = '1'
       badge.classList.toggle('hidden', unread < 1)
     }
 
@@ -598,9 +527,8 @@
       else panel.setAttribute('hidden', '')
       toggle.setAttribute('aria-expanded', next ? 'true' : 'false')
       if (next) {
-        var items = buildNotifications(readProfile())
         var seenMap = readSeenMap()
-        items.forEach(function (item) { seenMap[item.id] = true })
+        seenMap.staticZipDropdown = true
         writeSeenMap(seenMap)
         render()
       }
@@ -617,10 +545,6 @@
 
     window.addEventListener('focus', render)
     window.addEventListener('storage', render)
-    window.addEventListener('sc:auth-state-changed', function () {
-      writeSeenMap({})
-      render()
-    })
 
     render()
     try {

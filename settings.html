@@ -28,6 +28,21 @@
             background: #e7e0eb;
             border-radius: 10px;
         }
+        .glass-dropdown {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 201, 195, 0.2);
+        }
+        .activity-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .activity-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .activity-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 68, 53, 0.1);
+            border-radius: 10px;
+        }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -96,38 +111,43 @@
 </head>
 <body class="bg-surface font-body text-on-surface antialiased">
 <!-- TopAppBar -->
-<header class="fixed top-0 right-0 left-0 lg:left-64 z-50 glass-header px-8 py-4 flex justify-between items-center border-b border-outline-variant/10">
-<div class="flex items-center gap-10">
-<nav class="hidden lg:flex items-center gap-8">
-<a class="text-sm font-semibold text-outline hover:text-primary transition-all duration-200" href="#">Dashboard</a>
-<a class="text-sm font-semibold text-outline hover:text-primary transition-all duration-200" href="#">Library</a>
-<a class="text-sm font-semibold text-outline hover:text-primary transition-all duration-200" href="#">Grades</a>
-<a class="text-sm font-semibold text-outline hover:text-primary transition-all duration-200" href="#">Schedule</a>
-<a class="text-sm font-semibold text-outline hover:text-primary transition-all duration-200" href="#">Analytics</a>
-</nav>
+<nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
+<div class="topbar-inner flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-[#004435] dark:text-emerald-500 font-['Plus_Jakarta_Sans'] tracking-tight">
+                Soul Concept
+            </div>
+<div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
+<a class="text-[#004435] transition-all duration-200" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Schedule</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Analytics</a>
 </div>
-<div class="flex items-center gap-6">
-<div class="relative hidden sm:block">
-<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-xs focus:ring-1 focus:ring-primary/20 transition-all outline-none w-64" placeholder="Search archive..." type="text"/>
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline/60 text-lg" data-icon="search">search</span>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="bg-surface-container-lowest border border-outline-variant/15 rounded-xl pl-10 pr-4 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 w-64 font-label" placeholder="Search knowledge..." type="text"/>
 </div>
 <div class="relative" data-home-notifications="">
-<button aria-expanded="false" aria-haspopup="true" class="material-symbols-outlined text-outline hover:text-primary transition-all relative" data-home-notifications-toggle="" onclick="var shell=this.closest('[data-home-notifications]'); var panel=shell&&shell.querySelector('[data-home-notifications-panel]'); var badge=shell&&shell.querySelector('[data-home-notifications-badge]'); if(panel){ var isOpen=panel.style.display==='block'; if(isOpen){ panel.style.display='none'; this.setAttribute('aria-expanded','false'); } else { panel.style.display='block'; this.setAttribute('aria-expanded','true'); if(badge){ badge.classList.add('hidden'); } } }" type="button">notifications<span class="absolute -right-1 -top-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center not-italic" data-home-notifications-badge="">1</span></button>
-<div class="absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" style="display:none; background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border:1px solid rgba(191,201,195,0.2);">
-<div class="flex items-center justify-between border-b border-outline-variant/10 bg-white/50 p-5"><h4 class="font-headline text-[11px] font-bold uppercase tracking-widest text-primary/80">Recent Activity</h4><button class="font-label text-[10px] font-bold uppercase tracking-widest text-outline transition-colors hover:text-primary" type="button">Clear</button></div>
-<div class="max-h-[440px] overflow-y-auto">
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5"><span class="material-symbols-outlined text-xl text-primary/60">timer</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Time for a zen break</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">90 mins of deep focus reached. Stretch and hydrate.</p><span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">Just now</span></div></div></div>
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary/5"><span class="material-symbols-outlined text-xl text-secondary/60">person</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Sync your progress</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Sign into your account to back up your curator stack.</p><a class="mt-2.5 inline-flex text-[9px] font-black uppercase tracking-widest text-secondary hover:underline" href="/auth/verification.html?returnTo=%2Findex.html">Sign In Now</a></div></div></div>
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5"><span class="material-symbols-outlined text-xl text-primary/60">workspace_premium</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Research Badge Earned</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Top-tier analysis on Quantum Mechanics.</p><span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">2 mins ago</span></div></div></div>
-<div class="p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container"><span class="material-symbols-outlined text-xl text-outline">calendar_today</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Curator Session Updated</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Molecular Biology Quiz moved to 10:30 AM.</p><span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">15 mins ago</span></div></div></div>
+<button aria-expanded="false" aria-haspopup="true" class="text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all relative inline-flex items-center justify-center" data-home-notifications-toggle="" type="button">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -right-1 -top-1 inline-flex min-w-5 h-5 items-center justify-center px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
+</button>
+<div class="home-notifications-panel glass-dropdown absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" hidden="" style="display:none;">
+<div class="p-5 border-b border-outline-variant/10 flex justify-between items-center bg-white/50"><h4 class="font-headline font-bold text-primary/80 text-[11px] tracking-widest uppercase">Recent Activity</h4><button class="text-[10px] font-label font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors" type="button">Clear</button><span class="hidden" data-home-notifications-count="">4</span></div>
+<div class="max-h-[440px] overflow-y-auto activity-scrollbar" data-home-notifications-list="">
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-primary/5 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary/60 text-xl" data-icon="timer">timer</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Time for a zen break</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">90 mins of deep focus reached. Stretch and hydrate.</p><span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">Just now</span></div></div></div>
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-secondary/5 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-secondary/60 text-xl" data-icon="person">person</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Sync your progress</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Sign into your account to back up your curator stack.</p><a class="mt-2.5 inline-flex text-[9px] font-black text-secondary uppercase tracking-widest hover:underline" href="/auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.">Sign In Now</a></div></div></div>
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-primary/5 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary/60 text-xl" data-icon="workspace_premium">workspace_premium</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Research Badge Earned</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Top-tier analysis on Quantum Mechanics.</p><span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">2 mins ago</span></div></div></div>
+<div class="p-5 hover:bg-white/60 transition-colors group"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-outline text-xl" data-icon="calendar_today">calendar_today</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Curator Session Updated</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Molecular Biology Quiz moved to 10:30 AM.</p><span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">15 mins ago</span></div></div></div>
+</div>
+<div class="p-4 text-center bg-white/30 border-t border-outline-variant/5"><button class="w-full py-2.5 text-[10px] font-headline font-extrabold text-primary uppercase tracking-widest hover:bg-primary hover:text-white rounded-xl transition-all duration-300">View Full Activity Log</button></div>
 </div>
 </div>
-</div>
-<div class="h-9 w-9 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm">
-<img alt="Scholarly Profile" class="h-full w-full object-cover" data-auth-avatar="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnwMTSmnGajc1ulj_XuwAJOnxXdC2BzKbc5n_1Q49Ynr87mMDrhr8UQafpGZA0qIhBcYIkhRAo5jctbLLHzlm6H379FgRdpn2IhH9W9A1viGbrLntD0C5zEQ8mzdrihRXOjIUwkeQjKoRrCgzol6iq2kI6NxUk62peY_6uK1I1VlOr-T4uzJGQtxRcg3_lUCL1r9RPcesk2hsdH9F6c0WIVRs5H4XkPxiE3tANIoaFLfRTXuVLmUqvG-uvwE0T5WCmpcfz7KYXzX8q"/>
+<a class="material-symbols-outlined text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all inline-flex items-center justify-center" data-icon="account_circle" href="settings.html">account_circle</a>
 </div>
 </div>
-</header>
+</nav>
 <!-- SideNavBar -->
 <aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/15 bg-surface flex flex-col p-6 gap-2 z-40 hidden lg:flex">
 <div class="mb-10 flex items-center gap-3">
@@ -360,6 +380,58 @@
 </button>
 </nav>
 <script defer src="assets/stitch-router.js?v=20260327f"></script>
+<script>
+  (function () {
+    var READ_KEY = 'sc_home_notifications_read_v3'
+    var toggle = document.querySelector('[data-home-notifications-toggle]')
+    var panel = document.querySelector('[data-home-notifications-panel]')
+    var count = document.querySelector('[data-home-notifications-count]')
+    var badge = document.querySelector('[data-home-notifications-badge]')
+    if (!toggle || !panel || !count || !badge) return
+    function readSeenMap() {
+      try {
+        var raw = localStorage.getItem(READ_KEY)
+        return raw ? JSON.parse(raw) : {}
+      } catch (_err) {
+        return {}
+      }
+    }
+    function writeSeenMap(value) {
+      try {
+        localStorage.setItem(READ_KEY, JSON.stringify(value || {}))
+      } catch (_err) {}
+    }
+    function render() {
+      var seenMap = readSeenMap()
+      var unread = seenMap.staticZipDropdown === true ? 0 : 1
+      count.textContent = '4'
+      badge.textContent = '1'
+      badge.classList.toggle('hidden', unread < 1)
+    }
+    function setOpen(next) {
+      panel.style.display = next ? 'block' : 'none'
+      if (next) panel.removeAttribute('hidden')
+      else panel.setAttribute('hidden', '')
+      toggle.setAttribute('aria-expanded', next ? 'true' : 'false')
+      if (next) {
+        var seenMap = readSeenMap()
+        seenMap.staticZipDropdown = true
+        writeSeenMap(seenMap)
+        render()
+      }
+    }
+    toggle.addEventListener('click', function () {
+      setOpen(panel.hidden)
+    })
+    document.addEventListener('click', function (event) {
+      var shell = document.querySelector('[data-home-notifications]')
+      if (shell && !shell.contains(event.target)) setOpen(false)
+    })
+    window.addEventListener('focus', render)
+    window.addEventListener('storage', render)
+    render()
+  })()
+</script>
 <script src="supabase-client.js?v=20260326a"></script>
 <script src="supabase-auth.js?v=20260329b"></script>
 <script src="auth-profile-sync.js?v=20260326a"></script>

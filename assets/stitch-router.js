@@ -63,7 +63,7 @@
     ["card_membership", "membership.html"],
     ["payments", "membership.html"],
     ["grade", "grade-9-advanced.html"],
-    ["account_circle", "profile.html"],
+    ["account_circle", "settings.html"],
     ["person", "profile.html"],
     ["settings", "settings.html"],
     ["quiz", "math-quiz-simulator.html"],

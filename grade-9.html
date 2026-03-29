@@ -93,31 +93,93 @@
     </script>
 </head>
 <body class="bg-surface font-body text-on-surface antialiased" data-mode="connect">
-<header class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 backdrop-blur-xl transition-all duration-200 border-b border-outline-variant/10">
-<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-<div class="flex items-center gap-8">
-<span class="text-xl font-bold tracking-tighter text-emerald-950 font-headline">Soul Concept</span>
-<nav class="hidden md:flex items-center gap-6">
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-semibold tracking-tight text-sm" href="#">Dashboard</a>
-<a class="text-emerald-900 border-b-2 border-emerald-900 pb-1 font-headline font-semibold tracking-tight text-sm" href="#">Library</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-semibold tracking-tight text-sm" href="#">Grades</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-semibold tracking-tight text-sm" href="#">Schedule</a>
-<a class="text-emerald-800/60 hover:text-emerald-900 transition-colors font-headline font-semibold tracking-tight text-sm" href="#">Analytics</a>
-</nav>
+<nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
+<div class="topbar-inner flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-[#004435] dark:text-emerald-500 font-['Plus_Jakarta_Sans'] tracking-tight">
+                Soul Concept
+            </div>
+<div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
+<a class="text-[#004435] transition-all duration-200" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Schedule</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="#">Analytics</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:opacity-80 scale-95">
-<span class="material-symbols-outlined text-emerald-900">search</span>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="bg-surface-container-lowest border border-outline-variant/15 rounded-xl pl-10 pr-4 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 w-64 font-label" placeholder="Search knowledge..." type="text"/>
+</div>
+<div class="relative" data-home-notifications="">
+<button aria-expanded="false" aria-haspopup="true" class="text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all relative inline-flex items-center justify-center" data-home-notifications-toggle="" type="button">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -right-1 -top-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
 </button>
-<button class="p-2 hover:bg-emerald-50/50 rounded-full transition-all active:opacity-80 scale-95">
-<span class="material-symbols-outlined text-emerald-900">account_circle</span>
-</button>
+<div class="home-notifications-panel absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" hidden="" style="display:none; background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border:1px solid rgba(191,201,195,0.2);">
+<div class="flex items-center justify-between border-b border-outline-variant/10 bg-white/50 p-5">
+<h4 class="font-headline text-[11px] font-bold uppercase tracking-widest text-primary/80">Recent Activity</h4>
+<button class="font-label text-[10px] font-bold uppercase tracking-widest text-outline transition-colors hover:text-primary" type="button">Clear</button>
+<span class="hidden" data-home-notifications-count="">4</span>
+</div>
+<div class="max-h-[440px] overflow-y-auto" data-home-notifications-list="">
+<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
+<div class="flex gap-4">
+<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5">
+<span class="material-symbols-outlined text-xl text-primary/60">timer</span>
+</div>
+<div class="min-w-0 flex-1">
+<p class="font-headline text-xs font-bold text-primary">Time for a zen break</p>
+<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">90 mins of deep focus reached. Stretch and hydrate.</p>
+<span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">Just now</span>
 </div>
 </div>
-</header>
+</div>
+<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
+<div class="flex gap-4">
+<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary/5">
+<span class="material-symbols-outlined text-xl text-secondary/60">person</span>
+</div>
+<div class="min-w-0 flex-1">
+<p class="font-headline text-xs font-bold text-primary">Sync your progress</p>
+<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Sign into your account to back up your curator stack.</p>
+<a class="mt-2.5 inline-flex text-[9px] font-black uppercase tracking-widest text-secondary hover:underline" href="/auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.">Sign In Now</a>
+</div>
+</div>
+</div>
+<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
+<div class="flex gap-4">
+<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5">
+<span class="material-symbols-outlined text-xl text-primary/60">workspace_premium</span>
+</div>
+<div class="min-w-0 flex-1">
+<p class="font-headline text-xs font-bold text-primary">Research Badge Earned</p>
+<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Top-tier analysis on Quantum Mechanics.</p>
+<span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">2 mins ago</span>
+</div>
+</div>
+</div>
+<div class="p-5 transition-colors hover:bg-white/60">
+<div class="flex gap-4">
+<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container">
+<span class="material-symbols-outlined text-xl text-outline">calendar_today</span>
+</div>
+<div class="min-w-0 flex-1">
+<p class="font-headline text-xs font-bold text-primary">Curator Session Updated</p>
+<p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Molecular Biology Quiz moved to 10:30 AM.</p>
+<span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">15 mins ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<a class="material-symbols-outlined text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all inline-flex items-center justify-center" data-icon="account_circle" href="settings.html">account_circle</a>
+</div>
+</div>
+</nav>
 <div class="flex pt-16">
 <!-- Sidebar -->
-<aside class="hidden lg:flex flex-col w-64 fixed left-0 h-[calc(100vh-4rem)] border-r border-outline-variant/15 bg-surface-container-low p-6 overflow-y-auto no-scrollbar">
+<aside class="hidden lg:flex flex-col w-64 fixed left-0 top-16 h-[calc(100vh-4rem)] border-r border-outline-variant/15 bg-surface-container-low p-6 overflow-y-auto no-scrollbar">
 <nav class="flex flex-col gap-1 mb-8">
 <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-highest text-on-surface-variant transition-all group" href="#">
 <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">grid_view</span>
@@ -161,7 +223,7 @@
 </aside>
 <!-- Main Content Area -->
 <main class="flex-grow lg:pl-64">
-<div class="pt-16 pb-24 px-6 max-w-7xl mx-auto">
+<div class="pt-14 pb-24 px-6 max-w-7xl mx-auto">
 <div class="mb-16">
 <h1 class="text-5xl md:text-7xl font-extrabold font-headline tracking-tighter text-primary mb-6">Subject Library</h1>
 <p class="text-lg text-on-surface-variant max-w-2xl font-body leading-relaxed">
