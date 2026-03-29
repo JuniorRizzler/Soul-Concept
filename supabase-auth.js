@@ -4,7 +4,22 @@
   var RETURN_TO_KEY = 'sc_auth_return_to'
   var DISMISS_KEY = 'sc_auth_prompt_dismissed_v1'
   var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
-  var REQUIRE_AUTH = true
+  var REQUIRE_AUTH = false
+
+  function isAuthRequired() {
+    var body = document.body
+    if (!body) return REQUIRE_AUTH
+    var value = body.getAttribute('data-sc-auth-required')
+    if (value === 'false') return false
+    if (value === 'true') return true
+    return REQUIRE_AUTH
+  }
+
+  function shouldMountAuthUi() {
+    var body = document.body
+    if (!body) return false
+    return body.getAttribute('data-sc-auth-mount') === 'true'
+  }
 
   function injectStyles() {
     if (document.getElementById('sc-supabase-auth-styles')) return
@@ -483,6 +498,11 @@
       var existing = document.querySelector('[data-sc-auth-mount]')
       if (existing) existing.remove()
 
+      if (!shouldMountAuthUi()) {
+        syncNavMoreMenu()
+        return
+      }
+
       var mount = document.createElement('div')
       mount.setAttribute('data-sc-auth-mount', '1')
       mount.className = 'sc-auth-inline'
@@ -613,7 +633,7 @@
     var session = sessionResult && sessionResult.data ? sessionResult.data.session : null
     publishProfile(session)
     mountAuthUi(client, session)
-    setGateMode(REQUIRE_AUTH && !session)
+    setGateMode(isAuthRequired() && !session)
     bindProfileIconPrompts()
     syncNavMoreMenu()
     window.addEventListener('resize', syncNavMoreMenu)
@@ -621,7 +641,7 @@
     client.auth.onAuthStateChange(function (_event, session) {
       publishProfile(session || null)
       mountAuthUi(client, session || null)
-      setGateMode(REQUIRE_AUTH && !session)
+      setGateMode(isAuthRequired() && !session)
       bindProfileIconPrompts()
       syncNavMoreMenu()
       if (isCallbackPage() && session) {

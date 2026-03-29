@@ -276,6 +276,238 @@
     });
   }
 
+  function readNotificationProfile() {
+    if (window.scAuthProfile) return window.scAuthProfile;
+    try {
+      const raw = window.localStorage.getItem("sc_auth_profile_v1");
+      return raw ? JSON.parse(raw) : null;
+    } catch (_err) {
+      return null;
+    }
+  }
+
+  function buildNotificationItems() {
+    const profile = readNotificationProfile();
+    const items = [
+      {
+        icon: "timer",
+        tone: "primary",
+        title: "Time for a zen break",
+        body: "90 mins of deep focus reached. Stretch and hydrate.",
+        meta: "Just now",
+        actionLabel: "",
+        actionHref: ""
+      }
+    ];
+
+    if (profile && profile.email) {
+      items.push({
+        icon: "verified_user",
+        tone: "primary",
+        title: "Account synced",
+        body: "Signed in as " + String(profile.email || ""),
+        meta: "Account ready",
+        actionLabel: "Open profile",
+        actionHref: "settings.html"
+      });
+    } else {
+      items.push({
+        icon: "person",
+        tone: "secondary",
+        title: "Sync your progress",
+        body: "Sign into your account to back up your curator stack.",
+        meta: "Sign-in reminder",
+        actionLabel: "Sign In Now",
+        actionHref: "auth/verification.html?returnTo=%2Findex.html"
+      });
+    }
+
+    items.push({
+      icon: "workspace_premium",
+      tone: "primary",
+      title: "Research Badge Earned",
+      body: "Top-tier analysis on Quantum Mechanics.",
+      meta: "2 mins ago",
+      actionLabel: "",
+      actionHref: ""
+    });
+
+    return items;
+  }
+
+  function notificationItemMarkup(item) {
+    const toneClass = item.tone === "secondary" ? "text-secondary/60 bg-secondary/5" : "text-primary/60 bg-primary/5";
+    const actionMarkup = item.actionLabel && item.actionHref
+      ? `<a class="mt-2 inline-flex text-[10px] font-bold text-secondary uppercase tracking-widest" href="${item.actionHref}">${item.actionLabel}</a>`
+      : `<span class="text-[9px] text-outline/60 mt-2 block uppercase tracking-wider">${item.meta}</span>`;
+
+    return `
+      <div class="p-5 hover:bg-surface-container-low transition-colors group border-b border-outline-variant/5">
+        <div class="flex gap-4">
+          <div class="w-8 h-8 rounded-full ${toneClass} flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-lg">${item.icon}</span>
+          </div>
+          <div class="flex-grow min-w-0">
+            <p class="font-headline font-semibold text-primary text-xs">${item.title}</p>
+            <p class="text-[10px] text-outline mt-0.5 leading-relaxed">${item.body}</p>
+            ${actionMarkup}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function buildNotificationPanel(items) {
+    const panel = document.createElement("div");
+    panel.className = "stitch-notification-panel";
+    panel.style.position = "fixed";
+    panel.style.left = "12px";
+    panel.style.top = "72px";
+    panel.style.width = "320px";
+    panel.style.maxWidth = "min(92vw, 320px)";
+    panel.style.background = "#ffffff";
+    panel.style.border = "1px solid rgba(191, 201, 195, 0.22)";
+    panel.style.borderRadius = "24px";
+    panel.style.boxShadow = "0 24px 48px rgba(29, 26, 34, 0.12)";
+    panel.style.zIndex = "80";
+    panel.style.overflow = "hidden";
+    panel.style.display = "none";
+    panel.innerHTML = `
+      <div class="p-4 flex justify-between items-center">
+        <h4 class="font-headline font-semibold text-primary/80 text-xs tracking-wide uppercase">Recent Activity</h4>
+        <button class="text-[10px] font-label uppercase tracking-widest text-outline hover:text-primary transition-colors" type="button" data-stitch-notification-clear>Clear</button>
+      </div>
+      <div class="max-h-[400px] overflow-y-auto" data-stitch-notification-list>${items.map(notificationItemMarkup).join("")}</div>
+      <div class="p-3 text-center">
+        <a class="text-[10px] font-headline font-bold text-outline uppercase tracking-widest hover:text-primary transition-colors py-2 inline-flex" href="analytics.html">View Full Activity Log</a>
+      </div>
+    `;
+    return panel;
+  }
+
+  function updateNotificationWidget(widget) {
+    if (!widget) return;
+    const items = buildNotificationItems();
+    const list = widget.querySelector("[data-stitch-notification-list]");
+    const badge = widget.querySelector("[data-stitch-notification-badge]");
+    if (list) list.innerHTML = items.map(notificationItemMarkup).join("");
+    if (badge) badge.textContent = String(items.length);
+  }
+
+  function initNotificationWidgets() {
+    const selectors = [
+      'button:has([data-icon="notifications"])',
+      'a:has([data-icon="notifications"])',
+      'button:has(.material-symbols-outlined)',
+      'a:has(.material-symbols-outlined)'
+    ];
+
+    let candidates = [];
+    try {
+      candidates = Array.from(document.querySelectorAll(selectors.join(","))).filter((node) => {
+        if (node.closest("[data-home-notifications]")) return false;
+        const icon = node.querySelector('[data-icon="notifications"], .material-symbols-outlined');
+        return icon && normalize(icon.textContent || icon.getAttribute("data-icon") || "") === "notifications";
+      });
+    } catch (_err) {
+      candidates = Array.from(document.querySelectorAll('[data-icon="notifications"], .material-symbols-outlined')).map((node) => node.closest("button, a") || node).filter((node, index, arr) => {
+        if (!node || arr.indexOf(node) !== index) return false;
+        if (node.closest("[data-home-notifications]")) return false;
+        const text = normalize(node.textContent || node.getAttribute("data-icon") || "");
+        return text.includes("notifications");
+      });
+    }
+
+    candidates.forEach((control) => {
+      if (!control || control.dataset.stitchNotificationBound === "true") return;
+      control.dataset.stitchNotificationBound = "true";
+      control.removeAttribute("onclick");
+      if (control.tagName === "A") control.setAttribute("href", "#");
+
+      const wrapper = document.createElement("span");
+      wrapper.className = "stitch-notification-wrap";
+      wrapper.style.position = "relative";
+      wrapper.style.display = "inline-flex";
+      wrapper.style.alignItems = "center";
+
+      const badge = document.createElement("span");
+      badge.className = "stitch-notification-badge";
+      badge.setAttribute("data-stitch-notification-badge", "1");
+      badge.textContent = String(buildNotificationItems().length);
+      badge.style.position = "absolute";
+      badge.style.top = "6px";
+      badge.style.right = "6px";
+      badge.style.minWidth = "16px";
+      badge.style.height = "16px";
+      badge.style.padding = "0 4px";
+      badge.style.borderRadius = "999px";
+      badge.style.background = "#ae3200";
+      badge.style.color = "#ffffff";
+      badge.style.fontSize = "10px";
+      badge.style.fontWeight = "800";
+      badge.style.lineHeight = "16px";
+      badge.style.textAlign = "center";
+      badge.style.border = "1px solid #ffffff";
+
+      const panel = buildNotificationPanel(buildNotificationItems());
+
+      const parent = control.parentNode;
+      if (!parent) return;
+      parent.insertBefore(wrapper, control);
+      wrapper.appendChild(control);
+      wrapper.appendChild(badge);
+      document.body.appendChild(panel);
+
+      function positionPanel() {
+        const rect = control.getBoundingClientRect();
+        const panelWidth = Math.min(320, Math.max(280, window.innerWidth - 24));
+        panel.style.width = panelWidth + "px";
+        panel.style.left = Math.max(12, Math.min(rect.right - panelWidth, window.innerWidth - panelWidth - 12)) + "px";
+        panel.style.top = Math.min(rect.bottom + 12, window.innerHeight - panel.offsetHeight - 12) + "px";
+      }
+
+      const clear = panel.querySelector("[data-stitch-notification-clear]");
+      if (clear) {
+        clear.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const list = panel.querySelector("[data-stitch-notification-list]");
+          if (list) list.innerHTML = "";
+          badge.style.display = "none";
+        });
+      }
+
+      control.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const next = panel.style.display !== "block";
+        if (next) {
+          panel.style.display = "block";
+          positionPanel();
+        } else {
+          panel.style.display = "none";
+        }
+        control.setAttribute("aria-expanded", next ? "true" : "false");
+        if (next) badge.style.display = "none";
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!wrapper.contains(event.target)) {
+          panel.style.display = "none";
+          control.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (panel.style.display === "block") positionPanel();
+      });
+    });
+
+    window.addEventListener("sc:auth-state-changed", () => {
+      document.querySelectorAll(".stitch-notification-wrap").forEach(updateNotificationWidget);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("a").forEach((anchor) => {
       setHref(anchor);
@@ -310,5 +542,6 @@
     wireShellNavigation();
     wireSubjectSections();
     wireHomeLogo();
+    initNotificationWidgets();
   });
 })();

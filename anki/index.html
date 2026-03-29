@@ -156,9 +156,16 @@
 <input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all duration-300" placeholder="Search knowledge..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
 </div>
-<button class="p-2 rounded-full hover:bg-emerald-50/50 transition-all active:scale-95" onclick="window.location.href='../analytics.html'">
+<div class="relative" data-home-notifications="">
+<button aria-expanded="false" aria-haspopup="true" class="p-2 rounded-full hover:bg-emerald-50/50 transition-all active:scale-95 relative inline-flex items-center justify-center" data-home-notifications-toggle="" onclick="var shell=this.closest('[data-home-notifications]'); var panel=shell&&shell.querySelector('[data-home-notifications-panel]'); var badge=shell&&shell.querySelector('[data-home-notifications-badge]'); if(panel){ var isOpen=panel.style.display==='block'; if(isOpen){ panel.style.display='none'; this.setAttribute('aria-expanded','false'); } else { panel.style.display='block'; this.setAttribute('aria-expanded','true'); if(badge){ badge.classList.add('hidden'); } } }" type="button">
 <span class="material-symbols-outlined text-emerald-900">notifications</span>
+<span class="absolute -right-1 -top-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
 </button>
+<div class="absolute right-0 top-full z-[70] mt-3 hidden w-[min(92vw,24rem)] rounded-3xl border border-outline-variant/20 bg-white/95 backdrop-blur-xl shadow-2xl shadow-slate-900/10 p-3" data-home-notifications-panel="" style="display:none;">
+<div class="flex items-center justify-between px-3 py-2"><div><p class="font-label text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">Recent Activity</p><p class="font-body text-xs text-on-surface-variant">Header notifications and account reminders.</p></div><span class="inline-flex items-center justify-center min-w-6 h-6 px-2 rounded-full bg-primary text-white text-[10px] font-bold">1</span></div>
+<div class="space-y-2"><article class="rounded-2xl border border-amber-200/80 bg-gradient-to-br from-white to-amber-50 px-4 py-4"><div class="flex items-start gap-3"><div class="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-secondary text-white"><span class="material-symbols-outlined text-[20px]">person</span></div><div class="min-w-0 flex-1"><p class="font-headline font-semibold text-primary text-xs">Sync your progress</p><p class="text-[10px] text-outline mt-0.5 leading-relaxed">Sign into your account to back up your curator stack.</p><a class="mt-2 inline-flex text-[10px] font-bold text-secondary uppercase tracking-widest" href="/auth/verification.html?returnTo=%2Findex.html">Sign In Now</a></div></div></article></div>
+</div>
+</div>
 <button class="p-2 rounded-full hover:bg-emerald-50/50 transition-all active:scale-95" onclick="window.location.href='../settings.html'">
 <span class="material-symbols-outlined text-emerald-900">settings</span>
 </button>
