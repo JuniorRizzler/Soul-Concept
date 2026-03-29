@@ -105,7 +105,7 @@
         }
     </style>
 </head>
-<body class="bg-background text-on-surface" data-sc-auth-required="false" data-sc-auth-mount="true">
+<body class="bg-background text-on-surface" data-sc-auth-required="false" data-sc-auth-mount="false">
 <!-- Top Navigation Bar -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
 <div class="topbar-inner flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
@@ -125,11 +125,11 @@
 <input class="bg-surface-container-lowest border border-outline-variant/15 rounded-xl pl-10 pr-4 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 w-64 font-label" placeholder="Search knowledge..." type="text"/>
 </div>
 <div class="relative" data-home-notifications="">
-<button aria-expanded="false" aria-haspopup="true" class="text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all relative inline-flex items-center justify-center" data-home-notifications-toggle="" onclick="var shell=this.closest('[data-home-notifications]'); var panel=shell&&shell.querySelector('[data-home-notifications-panel]'); var badge=shell&&shell.querySelector('[data-home-notifications-badge]'); if(panel){ var isOpen=panel.style.display==='block'; if(isOpen){ panel.style.display='none'; this.setAttribute('aria-expanded','false'); } else { panel.style.display='block'; this.setAttribute('aria-expanded','true'); if(badge){ badge.classList.add('hidden'); } } }" type="button">
+<button aria-expanded="false" aria-haspopup="true" class="text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all relative inline-flex items-center justify-center" data-home-notifications-toggle="" type="button">
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute -right-1 -top-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
 </button>
-<div class="home-notifications-panel absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" style="display:none; background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border:1px solid rgba(191,201,195,0.2);">
+<div class="home-notifications-panel absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" hidden="" style="display:none; background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border:1px solid rgba(191,201,195,0.2);">
 <div class="flex items-center justify-between border-b border-outline-variant/10 bg-white/50 p-5">
 <h4 class="font-headline text-[11px] font-bold uppercase tracking-widest text-primary/80">Recent Activity</h4>
 <button class="font-label text-[10px] font-bold uppercase tracking-widest text-outline transition-colors hover:text-primary" type="button">Clear</button>
@@ -367,8 +367,8 @@
 </div>
 <p class="font-body text-sm text-on-surface-variant italic">"Open a guide, review key terms, and check understanding before you move on."</p>
 <div class="grid grid-cols-2 gap-3 pt-4">
-<button class="bg-surface-container hover:bg-primary hover:text-white p-3 rounded-lg text-xs font-bold transition-all">Open Library</button>
-<button class="bg-primary text-white p-3 rounded-lg text-xs font-bold">Start Review</button>
+<a class="bg-surface-container hover:bg-primary hover:text-white p-3 rounded-lg text-xs font-bold transition-all inline-flex items-center justify-center" href="grade-9.html">Open Library</a>
+<a class="bg-primary text-white p-3 rounded-lg text-xs font-bold inline-flex items-center justify-center" href="study-library.html">Start Review</a>
 </div>
 </div>
 </div>
@@ -436,8 +436,8 @@
                     Soul Concept brings together study libraries, concept cards, quizzes, and progress tools so students can follow a clearer path and worry less.
                 </p>
 <div class="flex flex-col sm:flex-row justify-center gap-6 pt-6">
-<button class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">START STUDYING</button>
-<button class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all">EXPLORE FEATURES</button>
+<a class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center" href="study-library.html">START STUDYING</a>
+<a class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all inline-flex items-center justify-center" href="grade-9.html">EXPLORE FEATURES</a>
 </div>
 </div>
 </section>
