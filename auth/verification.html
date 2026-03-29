@@ -90,9 +90,11 @@ body{font-family:'Inter',sans-serif}
 <script>
 (function(){
   var RETURN_TO_KEY='sc_auth_return_to';
+  var RETURN_OPEN_KEY='sc_open_notifications_on_return_v1';
   var params=new URLSearchParams(location.search);
   var prompt=params.get('message')||'Sign in or create your account to continue.';
   var initialMode=params.get('mode')==='new'?'new':'returning';
+  var source=params.get('source')||'';
   var promptCopy=document.getElementById('prompt-copy');
   var status=document.getElementById('auth-status');
   var toggle=document.getElementById('toggle-container');
@@ -116,7 +118,15 @@ body{font-family:'Inter',sans-serif}
   tabNew.addEventListener('click',function(){switchView('new')});
   function currentReturn(){return localStorage.getItem(RETURN_TO_KEY)||'/dashboard.html'}
   function saveReturn(){try{if(params.get('returnTo'))localStorage.setItem(RETURN_TO_KEY,params.get('returnTo'))}catch(_err){}}
-  function goBack(){location.href=currentReturn()}
+  function goBack(){
+    try{
+      var target=currentReturn();
+      if(source==='notification' && target.indexOf('/index.html')!==-1){
+        localStorage.setItem(RETURN_OPEN_KEY,'1');
+      }
+    }catch(_err){}
+    location.href=currentReturn()
+  }
   async function client(){return window.scSupabaseReady()}
   async function googleAuth(){
     saveReturn();

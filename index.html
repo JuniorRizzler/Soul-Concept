@@ -156,7 +156,7 @@
 <div class="min-w-0 flex-1">
 <p class="font-headline text-xs font-bold text-primary">Sync your progress</p>
 <p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Sign into your account to back up your curator stack.</p>
-<a class="mt-2.5 inline-flex text-[9px] font-black uppercase tracking-widest text-secondary hover:underline" href="/auth/verification.html?returnTo=%2Findex.html">Sign In Now</a>
+<a class="mt-2.5 inline-flex text-[9px] font-black uppercase tracking-widest text-secondary hover:underline" href="/auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.">Sign In Now</a>
 </div>
 </div>
 </div>
@@ -471,6 +471,7 @@
   (function () {
     var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
     var READ_KEY = 'sc_home_notifications_read_v2'
+    var RETURN_OPEN_KEY = 'sc_open_notifications_on_return_v1'
     var toggle = document.querySelector('[data-home-notifications-toggle]')
     var panel = document.querySelector('[data-home-notifications-panel]')
     var list = document.querySelector('[data-home-notifications-list]')
@@ -529,7 +530,7 @@
         body: 'Connect your account to keep progress, saved libraries, and premium access attached to your profile.',
         icon: 'notifications_active',
         tone: 'amber',
-        hrefPrimary: '/auth/verification.html?returnTo=%2Findex.html',
+        hrefPrimary: '/auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.',
         labelPrimary: 'Sign in now',
         hrefSecondary: '/membership.html',
         labelSecondary: 'View benefits',
@@ -622,6 +623,12 @@
     })
 
     render()
+    try {
+      if (localStorage.getItem(RETURN_OPEN_KEY) === '1') {
+        localStorage.removeItem(RETURN_OPEN_KEY)
+        setOpen(true)
+      }
+    } catch (_err) {}
   })()
 </script>
 </body></html>
