@@ -338,18 +338,18 @@
   function notificationItemMarkup(item) {
     const toneClass = item.tone === "secondary" ? "text-secondary/60 bg-secondary/5" : "text-primary/60 bg-primary/5";
     const actionMarkup = item.actionLabel && item.actionHref
-      ? `<a class="mt-2 inline-flex text-[10px] font-bold text-secondary uppercase tracking-widest" href="${item.actionHref}">${item.actionLabel}</a>`
-      : `<span class="text-[9px] text-outline/60 mt-2 block uppercase tracking-wider">${item.meta}</span>`;
+      ? `<a class="mt-2.5 inline-flex text-[9px] font-black text-secondary uppercase tracking-widest hover:underline" href="${item.actionHref}">${item.actionLabel}</a>`
+      : `<span class="mt-2.5 block font-label text-[9px] text-outline/60 uppercase tracking-wider">${item.meta}</span>`;
 
     return `
-      <div class="p-5 hover:bg-surface-container-low transition-colors group border-b border-outline-variant/5">
+      <div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
         <div class="flex gap-4">
-          <div class="w-8 h-8 rounded-full ${toneClass} flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-lg">${item.icon}</span>
+          <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${toneClass}">
+            <span class="material-symbols-outlined text-xl">${item.icon}</span>
           </div>
           <div class="flex-grow min-w-0">
-            <p class="font-headline font-semibold text-primary text-xs">${item.title}</p>
-            <p class="text-[10px] text-outline mt-0.5 leading-relaxed">${item.body}</p>
+            <p class="font-headline font-bold text-primary text-xs">${item.title}</p>
+            <p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">${item.body}</p>
             ${actionMarkup}
           </div>
         </div>
@@ -365,22 +365,20 @@
     panel.style.top = "72px";
     panel.style.width = "320px";
     panel.style.maxWidth = "min(92vw, 320px)";
-    panel.style.background = "#ffffff";
-    panel.style.border = "1px solid rgba(191, 201, 195, 0.22)";
+    panel.style.background = "rgba(255, 255, 255, 0.85)";
+    panel.style.backdropFilter = "blur(20px)";
+    panel.style.border = "1px solid rgba(191, 201, 195, 0.2)";
     panel.style.borderRadius = "24px";
-    panel.style.boxShadow = "0 24px 48px rgba(29, 26, 34, 0.12)";
+    panel.style.boxShadow = "0 20px 50px rgba(0, 0, 0, 0.1)";
     panel.style.zIndex = "80";
     panel.style.overflow = "hidden";
     panel.style.display = "none";
     panel.innerHTML = `
-      <div class="p-4 flex justify-between items-center">
-        <h4 class="font-headline font-semibold text-primary/80 text-xs tracking-wide uppercase">Recent Activity</h4>
-        <button class="text-[10px] font-label uppercase tracking-widest text-outline hover:text-primary transition-colors" type="button" data-stitch-notification-clear>Clear</button>
+      <div class="flex items-center justify-between border-b border-outline-variant/10 bg-white/50 p-5">
+        <h4 class="font-headline text-[11px] font-bold uppercase tracking-widest text-primary/80">Recent Activity</h4>
+        <button class="font-label text-[10px] font-bold uppercase tracking-widest text-outline transition-colors hover:text-primary" type="button" data-stitch-notification-clear>Clear</button>
       </div>
-      <div class="max-h-[400px] overflow-y-auto" data-stitch-notification-list>${items.map(notificationItemMarkup).join("")}</div>
-      <div class="p-3 text-center">
-        <a class="text-[10px] font-headline font-bold text-outline uppercase tracking-widest hover:text-primary transition-colors py-2 inline-flex" href="analytics.html">View Full Activity Log</a>
-      </div>
+      <div class="max-h-[440px] overflow-y-auto" data-stitch-notification-list>${items.map(notificationItemMarkup).join("")}</div>
     `;
     return panel;
   }
