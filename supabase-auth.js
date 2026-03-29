@@ -498,7 +498,7 @@
 
   function mountAuthUi(client, session) {
       var topbarInner = document.querySelector('.topbar-inner')
-      var existing = document.querySelector('[data-sc-auth-mount]')
+      var existing = document.querySelector('[data-sc-auth-mount="1"]')
       if (existing) existing.remove()
 
       if (!shouldMountAuthUi()) {
