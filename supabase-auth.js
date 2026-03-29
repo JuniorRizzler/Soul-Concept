@@ -351,7 +351,10 @@
       '<p class="sc-auth-status" data-auth-status></p>' +
       '</div>' +
       '</div>'
-    document.body.appendChild(backdrop)
+    var host = document.body || document.documentElement
+    if (host) {
+      host.appendChild(backdrop)
+    }
     return backdrop
   }
 
@@ -532,16 +535,17 @@
   function setGateMode(locked) {
     var backdrop = ensureModal()
     var shouldLock = !!locked && !isPromptDismissed()
+    if (!backdrop) return
     backdrop.classList.toggle('locked', shouldLock)
     if (shouldLock) {
       openVerificationPage('returning')
       document.documentElement.style.overflow = 'hidden'
-      document.body.style.overflow = 'hidden'
+      if (document.body) document.body.style.overflow = 'hidden'
     } else {
         backdrop.classList.remove('locked')
         if (document.body) document.body.classList.remove('auth-modal-open')
         document.documentElement.style.overflow = ''
-        document.body.style.overflow = ''
+        if (document.body) document.body.style.overflow = ''
       }
     }
 
