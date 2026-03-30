@@ -285,7 +285,7 @@
     widget.setAttribute('data-panel-open', 'false')
     widget.innerHTML =
       '<div class="lyne-shell">' +
-      '<div id="lyne-hint"><span class="lyne-hint-text">Hey, need help? Ask me.</span></div>' +
+      '<div id="lyne-hint"><span class="lyne-hint-text">Talk to LYNE.</span></div>' +
       '<button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false">' +
       '<span class="flame-glow" aria-hidden="true"></span>' +
       '<span class="flame-core" aria-hidden="true"></span>' +
@@ -300,8 +300,8 @@
       '<button id="lyne-panel-close" type="button" class="btn btn-secondary lyne-mini-btn">Hide</button>' +
       '</div>' +
       '<div class="lyne-panel-actions">' +
-      '<button id="lyne-start" class="btn btn-primary lyne-mini-btn" type="button">Start</button>' +
-      '<button id="lyne-tutorial" class="btn btn-secondary lyne-mini-btn" type="button">Tutorial</button>' +
+      '<button id="lyne-start" class="btn btn-primary lyne-mini-btn" type="button">Talk to LYNE</button>' +
+      '<button id="lyne-tutorial" class="btn btn-secondary lyne-mini-btn" type="button">AI Tutorial</button>' +
       '<button id="lyne-stop" class="btn btn-secondary lyne-mini-btn" type="button">Stop</button>' +
       '</div>' +
       '<p id="lyne-meta">Idle.</p>' +
@@ -573,7 +573,7 @@
     function setHintContent(text, actions) {
       var html =
         '<button class="lyne-hint-close" type="button" aria-label="Close LYNE prompt" data-lyne-hint-dismiss>&times;</button>' +
-        '<span class="lyne-hint-text">' + String(text || 'Hey, need help? Ask me.') + '</span>'
+        '<span class="lyne-hint-text">' + String(text || 'Talk to LYNE.') + '</span>'
       if (Array.isArray(actions) && actions.length) {
         html += '<div class="lyne-hint-actions">'
         for (var i = 0; i < actions.length; i++) {
@@ -594,7 +594,7 @@
     }
 
       function setDefaultHint() {
-        setHintContent('Hey, need help? Ask me.')
+        setHintContent('Talk to LYNE.')
       }
 
       function clearTutorSpotlightTimers() {
@@ -1581,6 +1581,19 @@
       event.preventDefault()
       playUiSound('panel')
       spotlightTutorAssistant()
+    })
+
+    document.addEventListener('click', function (event) {
+      var trigger = event.target && event.target.closest ? event.target.closest('[data-lyne-start-tutorial]') : null
+      if (!trigger) return
+      event.preventDefault()
+      clearReturnPrompt()
+      clearGuide()
+      clearTutorSpotlightTimers()
+      setOnboardingDismissed(false)
+      setPanelOpen(true)
+      playUiSound('panel')
+      beginOnboarding(true)
     })
 
     if (canListen) {
