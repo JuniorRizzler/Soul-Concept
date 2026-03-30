@@ -286,22 +286,170 @@
     }
   }
 
+  function currentStorageScope() {
+    const profile = readNotificationProfile();
+    return profile && profile.id ? "user:" + profile.id : "guest";
+  }
+
+  function scopedStorageKey(baseKey) {
+    return baseKey + "::" + currentStorageScope();
+  }
+
+  function readScopedJson(baseKey, fallback) {
+    try {
+      const scopedKey = scopedStorageKey(baseKey);
+      let raw = window.localStorage.getItem(scopedKey);
+      if (raw == null) {
+        raw = window.localStorage.getItem(baseKey);
+        if (raw != null) window.localStorage.setItem(scopedKey, raw);
+      }
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (_err) {
+      return fallback;
+    }
+  }
+
+  function writeScopedJson(baseKey, value) {
+    try {
+      window.localStorage.setItem(scopedStorageKey(baseKey), JSON.stringify(value));
+    } catch (_err) {}
+  }
+
+  function readScheduleEvents() {
+    const parsed = readScopedJson("sc_schedule_events_v2", []);
+    return Array.isArray(parsed) ? parsed : [];
+  }
+
+  function readNotificationSeen() {
+    return readScopedJson("sc_notifications_seen_v2", {});
+  }
+
+  function writeNotificationSeen(value) {
+    writeScopedJson("sc_notifications_seen_v2", value || {});
+  }
+
+  function readNotificationDismissed() {
+    return readScopedJson("sc_notifications_dismissed_v1", {});
+  }
+
+  function writeNotificationDismissed(value) {
+    writeScopedJson("sc_notifications_dismissed_v1", value || {});
+  }
+
+  function minutesFromTime(value) {
+    const parts = String(value || "00:00").split(":");
+    return Number(parts[0] || 0) * 60 + Number(parts[1] || 0);
+  }
+
+  function buildEventDate(event) {
+    if (!event || !event.date) return null;
+    const base = new Date(event.date + "T00:00:00");
+    if (Number.isNaN(base.getTime())) return null;
+    const minutes = minutesFromTime(event.start);
+    base.setHours(Math.floor(minutes / 60), minutes % 60, 0, 0);
+    return base;
+  }
+
+  function formatTime(date) {
+    return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  }
+
+  function formatRelative(date) {
+    const diffMinutes = Math.round((date.getTime() - Date.now()) / 60000);
+    if (Math.abs(diffMinutes) < 1) return "Just now";
+    if (diffMinutes > 0 && diffMinutes < 60) return "In " + diffMinutes + " mins";
+    if (diffMinutes < 0 && diffMinutes > -60) return Math.abs(diffMinutes) + " mins ago";
+    const diffHours = Math.round(diffMinutes / 60);
+    if (diffHours > 0 && diffHours < 24) return "In " + diffHours + " hrs";
+    if (diffHours < 0 && diffHours > -24) return Math.abs(diffHours) + " hrs ago";
+    return date.toLocaleDateString([], { month: "short", day: "numeric" });
+  }
+
+  function deriveProgressStats() {
+    const events = readScheduleEvents();
+    const subjects = new Set();
+    const activeDays = new Set();
+    let focusCount = 0;
+    let starredCount = 0;
+    let points = 0;
+    events.forEach((event) => {
+      const subject = normalize((event.subject || event.title || ""));
+      if (subject) subjects.add(subject);
+      if (event.date) activeDays.add(event.date);
+      if (event.starred) starredCount += 1;
+      if (subject.includes("focus") || normalize(event.title || "").includes("deep work")) focusCount += 1;
+    });
+    points += events.length * 65;
+    points += subjects.size * 90;
+    points += activeDays.size * 55;
+    points += focusCount * 40;
+    points += starredCount * 25;
+    return {
+      sessionCount: events.length,
+      subjectCount: subjects.size,
+      activeDayCount: activeDays.size,
+      focusCount: focusCount,
+      starredCount: starredCount,
+      points: points
+    };
+  }
+
   function buildNotificationItems() {
     const profile = readNotificationProfile();
-    const items = [
-      {
+    const events = readScheduleEvents()
+      .map((event) => ({ event: event, date: buildEventDate(event) }))
+      .filter((entry) => entry.date)
+      .sort((a, b) => a.date.getTime() - b.date.getTime());
+    const stats = deriveProgressStats();
+    const now = new Date();
+    const items = [];
+
+    const activeSession = events.find((entry) => {
+      const end = new Date(entry.date.getTime() + Math.max(30, minutesFromTime(entry.event.end) - minutesFromTime(entry.event.start)) * 60000);
+      return entry.date <= now && end >= now;
+    });
+    const nextSession = events.find((entry) => entry.date > now);
+
+    if (activeSession) {
+      items.push({
+        id: "active-session-" + activeSession.event.id,
+        icon: "calendar_today",
+        tone: "primary",
+        title: "Current session in progress",
+        body: activeSession.event.title + " is active now" + (activeSession.event.location ? " in " + activeSession.event.location : "") + ".",
+        meta: "Live now",
+        actionLabel: "Open schedule",
+        actionHref: "schedule.html"
+      });
+    } else if (nextSession && (nextSession.date.getTime() - now.getTime()) <= 24 * 60 * 60 * 1000) {
+      items.push({
+        id: "next-session-" + nextSession.event.id,
+        icon: "event_note",
+        tone: "primary",
+        title: "Upcoming study session",
+        body: nextSession.event.title + " starts at " + formatTime(nextSession.date) + ".",
+        meta: formatRelative(nextSession.date),
+        actionLabel: "Open schedule",
+        actionHref: "schedule.html"
+      });
+    }
+
+    if (stats.focusCount > 0) {
+      items.push({
+        id: "focus-break-" + stats.focusCount + "-" + stats.activeDayCount,
         icon: "timer",
         tone: "primary",
-        title: "Time for a zen break",
-        body: "90 mins of deep focus reached. Stretch and hydrate.",
-        meta: "Just now",
-        actionLabel: "",
-        actionHref: ""
-      }
-    ];
+        title: "Time for a reset",
+        body: "You have logged " + stats.focusCount + " focus block" + (stats.focusCount === 1 ? "" : "s") + ". Take a short break and come back fresh.",
+        meta: stats.focusCount > 1 ? "Focus streak active" : "Keep momentum steady",
+        actionLabel: "Open focus schedule",
+        actionHref: "schedule.html"
+      });
+    }
 
     if (profile && profile.email) {
       items.push({
+        id: "account-ready-" + String(profile.email),
         icon: "verified_user",
         tone: "primary",
         title: "Account synced",
@@ -312,27 +460,46 @@
       });
     } else {
       items.push({
+        id: "signin-reminder",
         icon: "person",
         tone: "secondary",
         title: "Sync your progress",
         body: "Sign into your account to back up your curator stack.",
         meta: "Sign-in reminder",
         actionLabel: "Sign In Now",
-        actionHref: "auth/verification.html?returnTo=%2Findex.html"
+        actionHref: "auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification"
       });
     }
 
-    items.push({
-      icon: "workspace_premium",
-      tone: "primary",
-      title: "Research Badge Earned",
-      body: "Top-tier analysis on Quantum Mechanics.",
-      meta: "2 mins ago",
-      actionLabel: "",
-      actionHref: ""
-    });
+    if (stats.points >= 500) {
+      const threshold = stats.points >= 2000 ? 2000 : stats.points >= 1000 ? 1000 : 500;
+      items.push({
+        id: "points-milestone-" + threshold,
+        icon: "workspace_premium",
+        tone: "primary",
+        title: "Points milestone reached",
+        body: "You have crossed " + threshold.toLocaleString() + " Soul Concept points.",
+        meta: stats.points.toLocaleString() + " total points",
+        actionLabel: "View achievements",
+        actionHref: "achievements.html"
+      });
+    }
 
-    return items;
+    if (!activeSession && !nextSession && now.getHours() >= 17) {
+      items.push({
+        id: "evening-reminder-" + now.toISOString().slice(0, 10),
+        icon: "notifications_active",
+        tone: "secondary",
+        title: "No study block scheduled",
+        body: "You do not have another session lined up today. Add one to keep your streak moving.",
+        meta: "Evening reminder",
+        actionLabel: "Add session",
+        actionHref: "schedule.html"
+      });
+    }
+
+    const dismissedMap = readNotificationDismissed();
+    return items.filter((item) => !dismissedMap[item.id]).slice(0, 5);
   }
 
   function notificationItemMarkup(item) {
@@ -342,13 +509,18 @@
       : `<span class="mt-2.5 block font-label text-[9px] text-outline/60 uppercase tracking-wider">${item.meta}</span>`;
 
     return `
-      <div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60">
+      <div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60" data-stitch-notification-item="${item.id}">
         <div class="flex gap-4">
           <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${toneClass}">
             <span class="material-symbols-outlined text-xl">${item.icon}</span>
           </div>
           <div class="flex-grow min-w-0">
-            <p class="font-headline font-bold text-primary text-xs">${item.title}</p>
+            <div class="flex items-start justify-between gap-3">
+              <p class="font-headline font-bold text-primary text-xs">${item.title}</p>
+              <button class="text-outline/70 hover:text-primary transition-colors" data-stitch-notification-dismiss="${item.id}" type="button" aria-label="Dismiss notification">
+                <span class="material-symbols-outlined text-base">close</span>
+              </button>
+            </div>
             <p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">${item.body}</p>
             ${actionMarkup}
           </div>
@@ -386,10 +558,121 @@
   function updateNotificationWidget(widget) {
     if (!widget) return;
     const items = buildNotificationItems();
-    const list = widget.querySelector("[data-stitch-notification-list]");
+    const panel = widget._stitchNotificationPanel || document.getElementById(widget.getAttribute("data-stitch-notification-panel-id") || "");
+    const list = panel ? panel.querySelector("[data-stitch-notification-list]") : widget.querySelector("[data-stitch-notification-list]");
     const badge = widget.querySelector("[data-stitch-notification-badge]");
+    const seenMap = readNotificationSeen();
+    const unreadCount = items.filter((item) => !seenMap[item.id]).length;
     if (list) list.innerHTML = items.map(notificationItemMarkup).join("");
-    if (badge) badge.textContent = String(items.length);
+    if (badge) {
+      badge.textContent = String(unreadCount);
+      badge.style.display = unreadCount > 0 ? "inline-block" : "none";
+    }
+  }
+
+  function updateEmbeddedNotificationShell(shell) {
+    if (!shell) return;
+    const items = buildNotificationItems();
+    const list = shell.querySelector("[data-home-notifications-list]");
+    const badge = shell.querySelector("[data-home-notifications-badge]");
+    const count = shell.querySelector("[data-home-notifications-count]");
+    const toggle = shell.querySelector("[data-home-notifications-toggle]");
+    const clear = shell.querySelector('button[type="button"]');
+    const seenMap = readNotificationSeen();
+    const unreadCount = items.filter((item) => !seenMap[item.id]).length;
+
+    if (list) list.innerHTML = items.map(notificationItemMarkup).join("");
+    if (count) count.textContent = String(items.length);
+    if (badge) {
+      badge.textContent = String(unreadCount);
+      badge.classList.toggle("hidden", unreadCount < 1);
+      badge.style.display = unreadCount > 0 ? "" : "none";
+    }
+    if (toggle) toggle.setAttribute("aria-expanded", shell.querySelector("[data-home-notifications-panel]")?.style.display === "block" ? "true" : "false");
+    if (clear && clear.dataset.stitchNotificationClearBound !== "true") {
+      clear.dataset.stitchNotificationClearBound = "true";
+      clear.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const nextSeen = readNotificationSeen();
+        const nextDismissed = readNotificationDismissed();
+        items.forEach((item) => { nextSeen[item.id] = Date.now(); });
+        items.forEach((item) => { nextDismissed[item.id] = Date.now(); });
+        writeNotificationSeen(nextSeen);
+        writeNotificationDismissed(nextDismissed);
+        updateEmbeddedNotificationShell(shell);
+      });
+    }
+    if (list && list.dataset.stitchDismissBound !== "true") {
+      list.dataset.stitchDismissBound = "true";
+      list.addEventListener("click", (event) => {
+        const dismiss = event.target.closest("[data-stitch-notification-dismiss]");
+        if (!dismiss) return;
+        event.preventDefault();
+        event.stopPropagation();
+        dismissNotificationById(dismiss.getAttribute("data-stitch-notification-dismiss"));
+      });
+    }
+  }
+
+  function dismissNotificationById(id) {
+    if (!id) return;
+    const seenMap = readNotificationSeen();
+    const dismissedMap = readNotificationDismissed();
+    seenMap[id] = Date.now();
+    dismissedMap[id] = Date.now();
+    writeNotificationSeen(seenMap);
+    writeNotificationDismissed(dismissedMap);
+    document.querySelectorAll(".stitch-notification-wrap").forEach(updateNotificationWidget);
+    document.querySelectorAll("[data-home-notifications]").forEach(updateEmbeddedNotificationShell);
+  }
+
+  function initEmbeddedNotificationShells() {
+    const shells = Array.from(document.querySelectorAll("[data-home-notifications]"));
+    if (!shells.length) return;
+
+    shells.forEach((shell) => {
+      if (shell.dataset.stitchNotificationBound === "true") {
+        updateEmbeddedNotificationShell(shell);
+        return;
+      }
+      shell.dataset.stitchNotificationBound = "true";
+      updateEmbeddedNotificationShell(shell);
+
+      const toggle = shell.querySelector("[data-home-notifications-toggle]");
+      const panel = shell.querySelector("[data-home-notifications-panel]");
+      if (!toggle || !panel) return;
+
+      function setPanelOpen(next) {
+        panel.style.display = next ? "block" : "none";
+        panel.hidden = !next;
+        panel.classList.toggle("hidden", !next);
+        toggle.setAttribute("aria-expanded", next ? "true" : "false");
+      }
+
+      setPanelOpen(false);
+
+      toggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const isOpen = panel.style.display === "block";
+        const next = !isOpen;
+        setPanelOpen(next);
+        if (next) {
+          const seenMap = readNotificationSeen();
+          buildNotificationItems().forEach((item) => { seenMap[item.id] = Date.now(); });
+          writeNotificationSeen(seenMap);
+        }
+        window.setTimeout(() => updateEmbeddedNotificationShell(shell), 0);
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!shell.contains(event.target)) {
+          setPanelOpen(false);
+          window.setTimeout(() => updateEmbeddedNotificationShell(shell), 0);
+        }
+      });
+    });
   }
 
   function initNotificationWidgets() {
@@ -454,6 +737,10 @@
       parent.insertBefore(wrapper, control);
       wrapper.appendChild(control);
       wrapper.appendChild(badge);
+      wrapper._stitchNotificationPanel = panel;
+      const panelId = "stitch-notification-panel-" + Math.random().toString(36).slice(2, 10);
+      panel.id = panelId;
+      wrapper.setAttribute("data-stitch-notification-panel-id", panelId);
       document.body.appendChild(panel);
 
       function positionPanel() {
@@ -469,11 +756,26 @@
         clear.addEventListener("click", (event) => {
           event.preventDefault();
           event.stopPropagation();
-          const list = panel.querySelector("[data-stitch-notification-list]");
-          if (list) list.innerHTML = "";
-          badge.style.display = "none";
+          const nextSeen = readNotificationSeen();
+          const nextDismissed = readNotificationDismissed();
+          buildNotificationItems().forEach((item) => { nextSeen[item.id] = Date.now(); });
+          buildNotificationItems().forEach((item) => { nextDismissed[item.id] = Date.now(); });
+          writeNotificationSeen(nextSeen);
+          writeNotificationDismissed(nextDismissed);
+          updateNotificationWidget(wrapper);
         });
       }
+
+      panel.addEventListener("click", (event) => {
+        const dismiss = event.target.closest("[data-stitch-notification-dismiss]");
+        if (!dismiss) return;
+        event.preventDefault();
+        event.stopPropagation();
+        dismissNotificationById(dismiss.getAttribute("data-stitch-notification-dismiss"));
+        panel.style.display = "block";
+        control.setAttribute("aria-expanded", "true");
+        positionPanel();
+      });
 
       control.addEventListener("click", (event) => {
         event.preventDefault();
@@ -482,11 +784,14 @@
         if (next) {
           panel.style.display = "block";
           positionPanel();
+          const nextSeen = readNotificationSeen();
+          buildNotificationItems().forEach((item) => { nextSeen[item.id] = Date.now(); });
+          writeNotificationSeen(nextSeen);
+          updateNotificationWidget(wrapper);
         } else {
           panel.style.display = "none";
         }
         control.setAttribute("aria-expanded", next ? "true" : "false");
-        if (next) badge.style.display = "none";
       });
 
       document.addEventListener("click", (event) => {
@@ -503,6 +808,7 @@
 
     window.addEventListener("sc:auth-state-changed", () => {
       document.querySelectorAll(".stitch-notification-wrap").forEach(updateNotificationWidget);
+      document.querySelectorAll("[data-home-notifications]").forEach(updateEmbeddedNotificationShell);
     });
   }
 
@@ -540,6 +846,7 @@
     wireShellNavigation();
     wireSubjectSections();
     wireHomeLogo();
+    initEmbeddedNotificationShells();
     initNotificationWidgets();
   });
 })();

@@ -74,6 +74,25 @@
     var points = 0
     var count = 0
 
+    function currentScopeSuffix() {
+      var active = profile || getProfile()
+      return active && active.id ? 'user:' + active.id : 'guest'
+    }
+
+    function scopedKey(baseKey) {
+      return baseKey + '::' + currentScopeSuffix()
+    }
+
+    function readNumberKey(baseKey) {
+      try {
+        var raw = localStorage.getItem(scopedKey(baseKey))
+        if (raw == null) raw = localStorage.getItem(baseKey)
+        return raw != null ? Number(raw) || 0 : 0
+      } catch (_errScoped) {
+        return 0
+      }
+    }
+
     if (profile) {
       points = Number(
         profile.achievementPoints ||
@@ -94,12 +113,7 @@
       'sc_points_v1'
     ]
     for (var i = 0; i < pointKeys.length; i++) {
-      try {
-        var pointRaw = localStorage.getItem(pointKeys[i])
-        if (pointRaw != null) {
-          points = Math.max(points, Number(pointRaw) || 0)
-        }
-      } catch (_errPoint) {}
+      points = Math.max(points, readNumberKey(pointKeys[i]))
     }
 
     var countKeys = [
@@ -107,12 +121,7 @@
       'sc_unlocked_achievements_v1'
     ]
     for (var j = 0; j < countKeys.length; j++) {
-      try {
-        var countRaw = localStorage.getItem(countKeys[j])
-        if (countRaw != null) {
-          count = Math.max(count, Number(countRaw) || 0)
-        }
-      } catch (_errCount) {}
+      count = Math.max(count, readNumberKey(countKeys[j]))
     }
 
     return { points: points, count: count }
