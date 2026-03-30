@@ -43,6 +43,10 @@
         '.sc-auth-user strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;font-size:.74rem;line-height:1.05}' +
         '.sc-auth-user small{display:block;font-weight:700;color:#5a5863;font-size:.64rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.02}' +
         '.sc-auth-avatar{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:999px;background:rgba(33,92,75,.12);color:#215c4b;font-size:.68rem;font-weight:900;flex:0 0 auto}' +
+        '.sc-topbar-profile{padding:0 !important;border-radius:999px !important;overflow:hidden;min-width:40px;min-height:40px;border:1px solid rgba(191,201,195,.35);background:rgba(255,255,255,.82);box-shadow:0 10px 22px rgba(23,21,16,.08)}' +
+        '.sc-topbar-profile:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(23,21,16,.12)}' +
+        '.sc-topbar-profile-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;overflow:hidden;background:linear-gradient(135deg,#edf7f3,#dceae5);color:#004435;font:800 .82rem/1 Manrope,system-ui,sans-serif;text-transform:uppercase}' +
+        '.sc-topbar-profile-badge img{width:100%;height:100%;object-fit:cover;display:block}' +
         '.sc-auth-copywrap{display:block;min-width:0;overflow:hidden}' +
         '.sc-auth-signout{border:1px solid rgba(226,216,203,.88);background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(244,236,226,.84));color:#1b1b1f;border-radius:999px;padding:6px 8px;font-weight:800;cursor:pointer;font-size:.74rem;line-height:1;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.82),0 8px 18px rgba(23,21,16,.08)}' +
         '.sc-auth-float{position:fixed;top:14px;right:14px;z-index:10002;display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(226,216,203,.92);box-shadow:0 12px 30px rgba(23,21,16,.12);backdrop-filter:blur(12px)}' +
@@ -638,6 +642,7 @@
     publishProfile(session)
     mountAuthUi(client, session)
     setGateMode(isAuthRequired() && !session)
+    syncTopbarProfileIcon(window.scAuthProfile)
     bindProfileIconPrompts()
     syncNavMoreMenu()
     window.addEventListener('resize', syncNavMoreMenu)
@@ -646,6 +651,7 @@
       publishProfile(session || null)
       mountAuthUi(client, session || null)
       setGateMode(isAuthRequired() && !session)
+      syncTopbarProfileIcon(window.scAuthProfile)
       bindProfileIconPrompts()
       syncNavMoreMenu()
       if (isCallbackPage() && session) {
@@ -681,6 +687,59 @@
         }
         openVerificationPage('returning', 'Sign in to view your profile, saved progress, and premium access.')
       })
+    })
+  }
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+  }
+
+  function syncTopbarProfileIcon(profile) {
+    var selectors = [
+      '[data-auth-avatar]',
+      'a[href="profile.html"]',
+      'button[onclick*="profile.html"]',
+      '[data-icon="account_circle"]',
+      '[data-icon="person"]'
+    ]
+    var seen = []
+    Array.prototype.forEach.call(document.querySelectorAll(selectors.join(',')), function (node) {
+      var target = node.closest('a,button') || node
+      if (!target || seen.indexOf(target) !== -1) return
+      seen.push(target)
+
+      if (!target.getAttribute('data-auth-profile-original-html')) {
+        target.setAttribute('data-auth-profile-original-html', target.innerHTML)
+        target.setAttribute('data-auth-profile-original-class', target.className || '')
+      }
+
+      if (!profile) {
+        var originalClass = target.getAttribute('data-auth-profile-original-class')
+        var originalHtml = target.getAttribute('data-auth-profile-original-html')
+        if (originalClass != null) target.className = originalClass
+        if (originalHtml != null) target.innerHTML = originalHtml
+        target.removeAttribute('title')
+        target.removeAttribute('aria-label')
+        return
+      }
+
+      var name = profile.name || (profile.email ? profile.email.split('@')[0] : 'Account')
+      var email = profile.email || 'Signed in'
+      var initials = (profile.initials || String(name || 'A').trim().charAt(0) || 'A').toUpperCase()
+      var imageMarkup = profile.avatarUrl
+        ? '<img src="' + escapeHtml(profile.avatarUrl) + '" alt="' + escapeHtml(name) + ' avatar" />'
+        : escapeHtml(initials)
+
+      target.classList.add('sc-topbar-profile')
+      target.classList.remove('material-symbols-outlined')
+      target.innerHTML = '<span class="sc-topbar-profile-badge" data-auth-topbar-avatar>' + imageMarkup + '</span>'
+      target.setAttribute('title', name + ' • ' + email)
+      target.setAttribute('aria-label', name + ' account')
     })
   }
 

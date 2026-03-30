@@ -480,6 +480,7 @@
     var decks = {
       feature: [
         {
+          subject: 'science',
           kicker: 'Science',
           meta: 'Live Library',
           title: 'Grade 10 Science',
@@ -494,6 +495,7 @@
           alt: 'Grade 10 Science'
         },
         {
+          subject: 'english',
           kicker: 'English',
           meta: 'Reading Track',
           title: 'Grade 10 English',
@@ -508,6 +510,7 @@
           alt: 'Grade 10 English'
         },
         {
+          subject: 'geography',
           kicker: 'Geography',
           meta: 'Live Library',
           title: 'Grade 10 Geography',
@@ -524,6 +527,7 @@
       ],
       sideA: [
         {
+          subject: 'math',
           icon: 'functions',
           title: 'Grade 10 Math',
           copy: 'Quadratics, trigonometry, and analytic geometry in the live Grade 10 math library.',
@@ -535,6 +539,7 @@
           href: 'grade-10-math.html'
         },
         {
+          subject: 'science',
           icon: 'science',
           title: 'Science Review',
           copy: 'Chemistry, systems, and forces organized into guided review modules.',
@@ -546,6 +551,7 @@
           href: 'study-library.html'
         },
         {
+          subject: 'geography',
           icon: 'public',
           title: 'Geography',
           copy: 'Mapping, environments, and human systems through the live geography route.',
@@ -559,6 +565,7 @@
       ],
       sideB: [
         {
+          subject: 'geography',
           bgIcon: 'public',
           kicker: 'Global Studies',
           title: 'Geography',
@@ -566,6 +573,7 @@
           href: 'geography-library.html'
         },
         {
+          subject: 'english',
           bgIcon: 'menu_book',
           kicker: 'English Studies',
           title: 'English',
@@ -573,6 +581,7 @@
           href: 'grade-10.html'
         },
         {
+          subject: 'science',
           bgIcon: 'science',
           kicker: 'Science Studies',
           title: 'Science',
@@ -582,6 +591,7 @@
       ],
       wide: [
         {
+          subject: 'math',
           title: 'Grade 10 Mathematics',
           copy: 'Work through quadratics, trigonometry, and geometry with the actual Grade 10 math library.',
           stat1: '84%',
@@ -594,6 +604,7 @@
           href: 'grade-10-math.html'
         },
         {
+          subject: 'science',
           title: 'Grade 10 Science',
           copy: 'Cycle into reactions, environmental systems, and guided science review.',
           stat1: '18',
@@ -606,6 +617,7 @@
           href: 'study-library.html'
         },
         {
+          subject: 'geography',
           title: 'Grade 10 Geography',
           copy: 'Move through human systems, physical geography, and atlas-based review.',
           stat1: '9',
@@ -681,16 +693,51 @@
       setHref('[data-rotating-link="wide"]', entry.href)
     }
 
-    function startRotation(items, applyFn, delay) {
-      if (!items || !items.length) return
-      var key = arguments[3]
-      var card = key ? document.querySelector('[data-rotating-card="' + key + '"]') : null
-      var index = 0
+    var rotationState = {}
+
+    function otherSubjects(key) {
+      return Object.keys(rotationState)
+        .filter(function (candidate) { return candidate !== key })
+        .map(function (candidate) {
+          var entry = rotationState[candidate]
+          return entry && entry.subject ? entry.subject : null
+        })
+        .filter(Boolean)
+    }
+
+    function pickInitialEntry(items, key, preferredSubject) {
+      var blocked = otherSubjects(key)
+      for (var i = 0; i < items.length; i++) {
+        if (preferredSubject && items[i].subject !== preferredSubject) continue
+        if (blocked.indexOf(items[i].subject) === -1) return i
+      }
+      for (var j = 0; j < items.length; j++) {
+        if (blocked.indexOf(items[j].subject) === -1) return j
+      }
+      return 0
+    }
+
+    function pickNextIndex(items, currentIndex, key) {
+      var blocked = otherSubjects(key)
+      for (var offset = 1; offset <= items.length; offset++) {
+        var nextIndex = (currentIndex + offset) % items.length
+        var candidate = items[nextIndex]
+        if (blocked.indexOf(candidate.subject) === -1) return nextIndex
+      }
+      return (currentIndex + 1) % items.length
+    }
+
+    function startRotation(items, applyFn, delay, key, preferredSubject) {
+      if (!items || !items.length || !key) return
+      var card = document.querySelector('[data-rotating-card="' + key + '"]')
+      var index = pickInitialEntry(items, key, preferredSubject)
+      rotationState[key] = items[index]
       applyFn(items[index])
       window.setInterval(function () {
         if (card) card.classList.add('is-switching')
         window.setTimeout(function () {
-          index = (index + 1) % items.length
+          index = pickNextIndex(items, index, key)
+          rotationState[key] = items[index]
           applyFn(items[index])
           if (card) {
             window.requestAnimationFrame(function () {
@@ -701,10 +748,10 @@
       }, delay)
     }
 
-    startRotation(decks.feature, applyFeature, 5200, 'feature')
-    startRotation(decks.sideA, applySideA, 4300, 'sideA')
-    startRotation(decks.sideB, applySideB, 4800, 'sideB')
-    startRotation(decks.wide, applyWide, 5000, 'wide')
+    startRotation(decks.feature, applyFeature, 5200, 'feature', 'science')
+    startRotation(decks.sideA, applySideA, 4300, 'sideA', 'math')
+    startRotation(decks.sideB, applySideB, 4800, 'sideB', 'english')
+    startRotation(decks.wide, applyWide, 5000, 'wide', 'geography')
   })()
 </script>
 <script>
@@ -744,7 +791,7 @@
 </script>
 <script defer src="assets/stitch-router.js?v=20260327f"></script>
 <script src="supabase-client.js?v=20260312a"></script>
-<script src="supabase-auth.js?v=20260329b"></script>
+<script src="supabase-auth.js?v=20260329c"></script>
 <script src="auth-profile-sync.js?v=20260328b"></script>
 <script src="lyne-widget.js?v=20260321c"></script>
 <script src="focus-mode.js?v=20260321d"></script>

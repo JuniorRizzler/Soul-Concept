@@ -449,6 +449,7 @@
     var decks = {
       feature: [
         {
+          subject: 'science',
           kicker: 'Core Science',
           meta: '24 Curated Modules',
           title: 'Sciences: The Living System',
@@ -458,6 +459,7 @@
           alt: 'High-quality close-up of clean scientific glassware and colorful chemical solutions in a modern bright laboratory setting'
         },
         {
+          subject: 'english',
           kicker: 'English Studies',
           meta: '16 Reading Modules',
           title: 'English: Literature and Voice',
@@ -467,6 +469,7 @@
           alt: 'High-quality photo of classic literature books, an open novel, and a vintage fountain pen on a clean wooden desk'
         },
         {
+          subject: 'geography',
           kicker: 'Geography Studies',
           meta: '14 Field Modules',
           title: 'Geography: World Systems',
@@ -478,6 +481,7 @@
       ],
       math: [
         {
+          subject: 'math',
           icon: 'functions',
           title: 'Mathematics',
           copy: 'Abstract structures and the geometry of logic.',
@@ -485,6 +489,7 @@
           image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBl2emSSHnaRd9s_8Sx34AwzUSY5O7jyyXyjcO4EDvaeXXrBfMO2_iRg4CgTcRo5Q5wBUmlzXlfIaH4S9OQ5n_pmaUBDAcp7d2KCSrscSo6YZMC5Nzwk8GhI4ofjWRgc0WhHKy4Z1P-LY7dVGmBu8FFfmOJ9TC9KFG9s6-4OlS6rOz5iTZm_QxE4P1JSW_r76k2ho6lxADuC4BGAwKZnK2Qlwh-HONt1h2cY2jl4FU7LQtpLBqsp9-NFMGUP3EqsnEE4dCj-XtEPmIK'
         },
         {
+          subject: 'french',
           icon: 'translate',
           title: 'French',
           copy: 'Grammar, conversation, and cultural interpretation through immersive language practice.',
@@ -492,6 +497,7 @@
           image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAHJ41OkdMquig8L4JJCy937jC_BjGHrgpLAxhG6e4e0hvqkhtcp-jjB_UwfCEdAHIyPn9ScPpgDRwSKZVI3MJ7I-I7mAsFAoyep1AWhekCdTw6A25pvaFYNzLh2jyJ3p31Bkz-i8YahNetytnX655j0_8_HeLdBr8iUWGzvoZBklFaYI1-xEVKK2g_Uwr5gp0pdfRmtcGVZ057L4fX6hKPk4KCMqbagI3GRZAwDMNLRubvGi_Xbhfy7T28p7y19ba5QV8lB8C1_p-P'
         },
         {
+          subject: 'spanish',
           icon: 'language',
           title: 'Spanish',
           copy: 'Communication, listening, and literary interpretation built through modern language study.',
@@ -501,6 +507,7 @@
       ],
       language: [
         {
+          subject: 'mandarin',
           kicker: 'Asian Languages',
           title: 'Mandarin',
           copy: 'Tonal systems and cultural philology.',
@@ -508,6 +515,7 @@
           alt: 'Professional calligraphy of Mandarin Chinese characters with a traditional brush and clean aesthetic'
         },
         {
+          subject: 'french',
           kicker: 'Romance Languages',
           title: 'French',
           copy: 'Speaking, reading, and interpreting francophone texts through structured language practice.',
@@ -515,6 +523,7 @@
           alt: 'Charming Parisian street scene with a bright outdoor cafe and the Eiffel Tower in the background, representing French culture'
         },
         {
+          subject: 'spanish',
           kicker: 'Iberian Languages',
           title: 'Spanish',
           copy: 'Building confidence in vocabulary, expression, and cultural fluency across spoken and written Spanish.',
@@ -522,6 +531,7 @@
           alt: 'Vibrant Spanish architecture featuring colorful tiles and sunny Mediterranean courtyards'
         },
         {
+          subject: 'german',
           kicker: 'European Languages',
           title: 'German',
           copy: 'Syntax, dialectics, and philosophical precision through language study.',
@@ -570,16 +580,52 @@
       if (copy) copy.textContent = entry.copy
     }
 
-    function startRotation(key, applyFn, delay) {
+    var rotationState = {}
+
+    function otherSubjects(key) {
+      return Object.keys(rotationState)
+        .filter(function (candidate) { return candidate !== key })
+        .map(function (candidate) {
+          var entry = rotationState[candidate]
+          return entry && entry.subject ? entry.subject : null
+        })
+        .filter(Boolean)
+    }
+
+    function pickInitialEntry(items, key, preferredSubject) {
+      var blocked = otherSubjects(key)
+      for (var i = 0; i < items.length; i++) {
+        if (preferredSubject && items[i].subject !== preferredSubject) continue
+        if (blocked.indexOf(items[i].subject) === -1) return i
+      }
+      for (var j = 0; j < items.length; j++) {
+        if (blocked.indexOf(items[j].subject) === -1) return j
+      }
+      return 0
+    }
+
+    function pickNextIndex(items, currentIndex, key) {
+      var blocked = otherSubjects(key)
+      for (var offset = 1; offset <= items.length; offset++) {
+        var nextIndex = (currentIndex + offset) % items.length
+        var candidate = items[nextIndex]
+        if (blocked.indexOf(candidate.subject) === -1) return nextIndex
+      }
+      return (currentIndex + 1) % items.length
+    }
+
+    function startRotation(key, applyFn, delay, preferredSubject) {
       var items = decks[key]
       if (!items || !items.length) return
       var card = document.querySelector('[data-rotating-card="' + key + '"]')
-      var index = 0
+      var index = pickInitialEntry(items, key, preferredSubject)
+      rotationState[key] = items[index]
       applyFn(items[index])
       window.setInterval(function () {
         if (card) card.classList.add('is-switching')
         window.setTimeout(function () {
-          index = (index + 1) % items.length
+          index = pickNextIndex(items, index, key)
+          rotationState[key] = items[index]
           applyFn(items[index])
           if (card) {
             window.requestAnimationFrame(function () {
@@ -590,9 +636,9 @@
       }, delay)
     }
 
-    startRotation('feature', applyFeature, 5200)
-    startRotation('math', applyMath, 4200)
-    startRotation('language', applyLanguage, 4700)
+    startRotation('feature', applyFeature, 5200, 'science')
+    startRotation('math', applyMath, 4200, 'math')
+    startRotation('language', applyLanguage, 4700, 'mandarin')
   })()
 </script>
 <script>
@@ -631,6 +677,9 @@
   })()
 </script>
 <script defer src="assets/stitch-router.js?v=20260327f"></script>
+<script src="supabase-client.js?v=20260312a"></script>
+<script src="supabase-auth.js?v=20260329c"></script>
+<script src="auth-profile-sync.js?v=20260328b"></script>
 <script src="lyne-widget.js?v=20260321c"></script>
 <script src="focus-mode.js?v=20260321d"></script>
 </body></html>
