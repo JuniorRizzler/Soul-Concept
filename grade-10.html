@@ -89,6 +89,15 @@
             background: rgba(0, 68, 53, 0.1);
             border-radius: 10px;
         }
+        [data-rotating-card] {
+            transition: filter 240ms ease, opacity 240ms ease, transform 240ms ease;
+            will-change: filter, opacity, transform;
+        }
+        [data-rotating-card].is-switching {
+            filter: blur(8px);
+            opacity: 0.55;
+            transform: scale(0.985);
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -198,85 +207,85 @@
 <span class="font-label text-secondary font-bold tracking-widest uppercase text-[10px]">Curated Archives</span>
 <h1 class="text-5xl md:text-6xl font-headline font-extrabold text-primary tracking-tighter leading-none">Grade 10 <br/>Subject Library</h1>
 <p class="text-on-surface-variant max-w-xl text-lg font-body mt-4 leading-relaxed">
-                    A refined collection of academic resources designed for rigorous study. Explore the intersections of literature, science, and history.
+                    Direct entry into the live Grade 10 study routes for math, science, and geography, plus supporting reading and review tools.
                 </p>
 </header>
 <!-- Bento Grid Layout: Section 1 -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-6 pb-6">
-<!-- Subject: World Literature (Large Editorial Card) -->
-<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/15 flex flex-col md:flex-row transition-all duration-300 hover:bg-surface-container-highest text-on-surface">
+<!-- Subject: Grade 10 Science (Large Editorial Card) -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/15 flex flex-col md:flex-row transition-all duration-300 hover:bg-surface-container-highest text-on-surface" data-rotating-card="feature">
 <div class="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
-<img alt="World Literature" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDFSicF4OcW-T5tygZwUgEB5Fv_bLWVDkuGDbiPaebCVqFB_9zKoPBnfAU_fOUYc_TjNogVe1eMRyHR3yBX_lUrcqExgNrn-85MkMQl4pBNkpumZIv8a-ipusO0HYdacHpztR2Zp2adCwF_41arXFUaxO6eNNwxxsdcsSa0aqXM1euEuKAmVEWsoAilTHgnm8yzvEi1rnb7qqdKIHo00h5x833NGXGc4sanZ60hZFxzW7YGRriszaYC0ZU8CzP3gpvY2RS5vURvm1R"/>
+<img alt="Grade 10 Science" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" data-rotating-image="feature" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb5Oyj7r4i0oqGIWmVZcGDmoX2J_qfBwe35Xz098sbprufow6SHl4AJHyJVGnGs_VUNXJxh0BF2Q5OpEkLwB8r4ItVhtHKOPDD9ve2xFSDD8agv9O_pYGVVTTCDdRXCEcGaPZkO_5lyKOtifTCnF8u7FKQ5mNWwAw1bwpciUcGEGOlnM41ZG7u5nqTm_6fH9zMpHW7ePpl3ZR5R_7puhZzZKyPRTajdQhRCDMF0UDDaLK0t1mD10qUpwVgmEmihMwMKcPWpNgojWiA"/>
 <div class="absolute inset-0 bg-primary/20 mix-blend-multiply group-hover:bg-primary/0 transition-all"></div>
 </div>
 <div class="md:w-1/2 p-8 flex flex-col justify-between">
 <div>
 <div class="flex gap-2 mb-4">
-<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase">Literature</span>
-<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase">12 Credits</span>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase" data-rotating-kicker="feature">Science</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase" data-rotating-meta="feature">Live Library</span>
 </div>
-<h3 class="text-3xl font-headline font-bold text-primary mb-3">World Literature</h3>
-<p class="text-sm text-on-surface-variant leading-relaxed mb-6 italic">
-                                "From the epics of Gilgamesh to the modern narratives of the global South, explore the voices that shaped our collective consciousness."
+<h3 class="text-3xl font-headline font-bold text-primary mb-3" data-rotating-title="feature">Grade 10 Science</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6 italic" data-rotating-copy="feature">
+                                "Use the live science library for reactions, systems, forces, and guided review tools."
                             </p>
 <ul class="space-y-2 mb-8">
 <li class="flex items-center gap-2 text-xs font-medium text-emerald-900/80">
-<span class="material-symbols-outlined text-sm">history_edu</span>
-                                    The Homeric Tradition
+<span class="material-symbols-outlined text-sm" data-rotating-bullet-icon-1="feature">science</span>
+<span data-rotating-bullet-1="feature">Chemical Reactions</span>
                                 </li>
 <li class="flex items-center gap-2 text-xs font-medium text-emerald-900/80">
-<span class="material-symbols-outlined text-sm">auto_stories</span>
-                                    Post-Colonial Narratives
+<span class="material-symbols-outlined text-sm" data-rotating-bullet-icon-2="feature">biotech</span>
+<span data-rotating-bullet-2="feature">Environmental Systems</span>
                                 </li>
 </ul>
 </div>
-<button class="self-start text-secondary font-bold text-sm underline decoration-2 underline-offset-4 hover:text-on-secondary-container transition-colors">
-                            Open Archive
-                        </button>
+<a class="self-start text-secondary font-bold text-sm underline decoration-2 underline-offset-4 hover:text-on-secondary-container transition-colors" data-rotating-link="feature" href="study-library.html">
+<span data-rotating-cta="feature">Open Science Library</span>
+                        </a>
 </div>
 </div>
-<!-- Subject: Chemistry (Portrait/Vertical Card) -->
-<div class="md:col-span-4 group bg-primary rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:translate-y-[-4px]">
+<!-- Subject: Grade 10 Math (Portrait/Vertical Card) -->
+<div class="md:col-span-4 group bg-primary rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:translate-y-[-4px]" data-rotating-card="sideA">
 <div class="p-8 h-full flex flex-col text-on-primary">
 <div class="mb-6 opacity-80">
-<span class="material-symbols-outlined text-5xl font-light" style="font-variation-settings: 'FILL' 0;">science</span>
+<span class="material-symbols-outlined text-5xl font-light" data-rotating-icon="sideA" style="font-variation-settings: 'FILL' 0;">functions</span>
 </div>
 <div class="flex-1">
-<h3 class="text-2xl font-headline font-bold mb-2">Chemistry</h3>
-<p class="text-on-primary-container text-sm leading-relaxed mb-6">
-                                Stoichiometry, thermochemistry, and the molecular foundations of the physical world.
+<h3 class="text-2xl font-headline font-bold mb-2" data-rotating-title="sideA">Grade 10 Math</h3>
+<p class="text-on-primary-container text-sm leading-relaxed mb-6" data-rotating-copy="sideA">
+                                Quadratics, trigonometry, and analytic geometry in the live Grade 10 math library.
                             </p>
 <div class="space-y-4">
 <div class="bg-primary-container/30 p-4 rounded-lg border border-primary-fixed/20">
-<p class="text-[10px] font-label uppercase tracking-widest opacity-60 mb-1">Current Module</p>
-<p class="text-sm font-bold">Atomic Structure &amp; Quantum Shells</p>
+<p class="text-[10px] font-label uppercase tracking-widest opacity-60 mb-1" data-rotating-label-1="sideA">Current Module</p>
+<p class="text-sm font-bold" data-rotating-value-1="sideA">Quadratic Relations</p>
 </div>
 <div class="bg-primary-container/30 p-4 rounded-lg border border-primary-fixed/20">
-<p class="text-[10px] font-label uppercase tracking-widest opacity-60 mb-1">Labs Due</p>
-<p class="text-sm font-bold">Titration Analysis Reports</p>
+<p class="text-[10px] font-label uppercase tracking-widest opacity-60 mb-1" data-rotating-label-2="sideA">Labs Due</p>
+<p class="text-sm font-bold" data-rotating-value-2="sideA">Trigonometry Practice Set</p>
 </div>
 </div>
 </div>
 <div class="mt-8">
-<button class="w-full py-3 bg-surface text-primary font-bold rounded-xl hover:bg-primary-fixed transition-colors">
-                                View Laboratory
-                            </button>
+<a class="block w-full py-3 bg-surface text-primary font-bold rounded-xl hover:bg-primary-fixed transition-colors text-center" data-rotating-link="sideA" href="grade-10-math.html">
+<span data-rotating-cta="sideA">Open Math Library</span>
+                            </a>
 </div>
 </div>
 </div>
 </div>
 <!-- Bento Grid Layout: Section 2 -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-6 pb-6">
-<!-- Subject: Modern History (Asymmetric Card) -->
-<div class="md:col-span-5 group relative rounded-xl bg-surface-container-lowest border border-outline-variant/15 p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:bg-surface-container-highest">
+<!-- Subject: Geography (Asymmetric Card) -->
+<div class="md:col-span-5 group relative rounded-xl bg-surface-container-lowest border border-outline-variant/15 p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:bg-surface-container-highest" data-rotating-card="sideB">
 <div class="absolute -top-10 -right-10 opacity-5 group-hover:opacity-10 transition-opacity">
-<span class="material-symbols-outlined text-[160px]" style="font-variation-settings: 'opsz' 48;">public</span>
+<span class="material-symbols-outlined text-[160px]" data-rotating-bg-icon="sideB" style="font-variation-settings: 'opsz' 48;">public</span>
 </div>
 <div>
-<span class="font-label text-secondary font-bold tracking-widest uppercase text-[10px] block mb-2">Global Studies</span>
-<h3 class="text-2xl font-headline font-bold text-primary mb-4">Modern History</h3>
-<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
-                            Analyzing the pivotal shifts of the 20th century, from the Industrial Revolution to the Digital Age.
+<span class="font-label text-secondary font-bold tracking-widest uppercase text-[10px] block mb-2" data-rotating-kicker="sideB">Global Studies</span>
+<h3 class="text-2xl font-headline font-bold text-primary mb-4" data-rotating-title="sideB">Geography</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6" data-rotating-copy="sideB">
+                            Maps, human systems, and environmental patterns through the live geography library.
                         </p>
 </div>
 <div class="flex items-end justify-between">
@@ -291,45 +300,45 @@
                                 +14
                             </div>
 </div>
-<button class="bg-surface-container-highest p-3 rounded-full hover:bg-primary-fixed transition-colors">
+<a class="bg-surface-container-highest p-3 rounded-full hover:bg-primary-fixed transition-colors inline-flex" data-rotating-link="sideB" href="geography-library.html">
 <span class="material-symbols-outlined text-primary">arrow_forward_ios</span>
-</button>
+</a>
 </div>
 </div>
-<!-- Subject: Pre-Calculus (Sleek Dark Card) -->
-<div class="md:col-span-7 group relative rounded-xl bg-slate-900 overflow-hidden transition-all duration-300">
+<!-- Subject: Grade 10 Math (Sleek Dark Card) -->
+<div class="md:col-span-7 group relative rounded-xl bg-slate-900 overflow-hidden transition-all duration-300" data-rotating-card="wide">
 <div class="absolute inset-0 opacity-20 pointer-events-none">
 <div class="w-full h-full" style="background-image: radial-gradient(circle, #4ade80 1px, transparent 1px); background-size: 30px 30px;"></div>
 </div>
 <div class="relative p-10 flex flex-col md:flex-row gap-8 items-center h-full">
 <div class="flex-1">
-<h3 class="text-3xl font-headline font-bold text-white mb-2">Pre-Calculus</h3>
-<p class="text-slate-400 text-sm mb-6 leading-relaxed">
-                                Mastering functions, trigonometry, and sequences to build the gateway to advanced mathematics.
+<h3 class="text-3xl font-headline font-bold text-white mb-2" data-rotating-title="wide">Grade 10 Mathematics</h3>
+<p class="text-slate-400 text-sm mb-6 leading-relaxed" data-rotating-copy="wide">
+                                Work through quadratics, trigonometry, and geometry with the actual Grade 10 math library.
                             </p>
 <div class="flex gap-4">
 <div class="text-center">
-<p class="text-emerald-400 text-2xl font-headline font-bold">84%</p>
-<p class="text-slate-500 text-[10px] uppercase tracking-tighter font-label">Avg. Score</p>
+<p class="text-emerald-400 text-2xl font-headline font-bold" data-rotating-stat-1="wide">84%</p>
+<p class="text-slate-500 text-[10px] uppercase tracking-tighter font-label" data-rotating-stat-label-1="wide">Avg. Score</p>
 </div>
 <div class="w-px h-10 bg-slate-800"></div>
 <div class="text-center">
-<p class="text-emerald-400 text-2xl font-headline font-bold">12</p>
-<p class="text-slate-500 text-[10px] uppercase tracking-tighter font-label">Worksheets</p>
+<p class="text-emerald-400 text-2xl font-headline font-bold" data-rotating-stat-2="wide">12</p>
+<p class="text-slate-500 text-[10px] uppercase tracking-tighter font-label" data-rotating-stat-label-2="wide">Worksheets</p>
 </div>
 </div>
 </div>
 <div class="w-full md:w-1/2 bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700">
 <div class="flex items-center justify-between mb-4">
-<span class="text-xs font-bold text-slate-300">Polynomial Functions</span>
+<span class="text-xs font-bold text-slate-300" data-rotating-value-1="wide">Quadratic Relations</span>
 <span class="material-symbols-outlined text-emerald-400" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
 <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
 <div class="bg-emerald-400 h-full w-3/4"></div>
 </div>
 <div class="mt-6 flex justify-between items-center">
-<span class="text-[10px] text-slate-500 font-label">Next Quiz: Friday</span>
-<button class="px-4 py-2 bg-emerald-500 text-slate-900 font-bold text-xs rounded-lg hover:bg-emerald-400 transition-colors">Start Prep</button>
+<span class="text-[10px] text-slate-500 font-label" data-rotating-value-2="wide">Live Route: Grade 10 Math</span>
+<a class="px-4 py-2 bg-emerald-500 text-slate-900 font-bold text-xs rounded-lg hover:bg-emerald-400 transition-colors inline-flex items-center" data-rotating-link="wide" href="grade-10-math.html"><span data-rotating-cta="wide">Open Library</span></a>
 </div>
 </div>
 </div>
@@ -337,61 +346,61 @@
 </div>
 <!-- Bento Grid Layout: Section 3 (Added Content) -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-6 pb-20">
-<!-- Subject: Organic Chemistry (Vertical Dark Card) -->
+<!-- Subject: Science Review (Vertical Dark Card) -->
 <div class="md:col-span-4 group bg-[#002118] rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:translate-y-[-4px]">
 <div class="p-8 h-full flex flex-col text-primary-fixed">
 <div class="mb-6 opacity-80">
 <span class="material-symbols-outlined text-5xl font-light" style="font-variation-settings: 'FILL' 0;">vial</span>
 </div>
 <div class="flex-1">
-<h3 class="text-2xl font-headline font-bold mb-2">Organic Chemistry</h3>
+<h3 class="text-2xl font-headline font-bold mb-2">Science Review</h3>
 <p class="text-primary-fixed-dim/60 text-sm leading-relaxed mb-6">
-                                The study of carbon-based compounds, functional groups, and biosynthetic pathways.
+                                Jump back into science notes, diagrams, and review flows using the working study library.
                             </p>
 <div class="space-y-4">
 <div class="bg-white/5 p-4 rounded-lg border border-white/10">
 <p class="text-[10px] font-label uppercase tracking-widest opacity-60 mb-1">Advanced Module</p>
-<p class="text-sm font-bold">Hydrocarbon Isomerism</p>
+<p class="text-sm font-bold">Chemical Systems Review</p>
 </div>
 </div>
 </div>
 <div class="mt-8">
-<button class="w-full py-3 bg-primary-fixed text-on-primary-fixed font-bold rounded-xl hover:bg-emerald-200 transition-colors">
-                                Explore Structures
-                            </button>
+<a class="block w-full py-3 bg-primary-fixed text-on-primary-fixed font-bold rounded-xl hover:bg-emerald-200 transition-colors text-center" href="study-library.html">
+                                Open Science Library
+                            </a>
 </div>
 </div>
 </div>
-<!-- Subject: Environmental Science (Asymmetric Card) -->
+<!-- Subject: Geography Fieldwork (Asymmetric Card) -->
 <div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/15 flex flex-col md:flex-row transition-all duration-300 hover:bg-surface-container-highest text-on-surface">
 <div class="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
-<img alt="Environmental Science" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtG_I4H_jSj6z4L6XzY8G_j6I6Q8R-6m_v8_l_mR_S_y-8_U_j_v_mR_S_y-8_U_j_v_mR_S_y-8_U_j_v_mR_S_y-8"/>
+<img alt="Geography Library" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQzQBKCsaod64k3NWbU6ciOfF2_kt25OQsbm1H0MB-I4s331RemJDSY1fSvPim0k9f9fwUreXVtS-0We-ZTsf6baqUmH3CdWROdLQtcvp-oGryXzXBICxxysJuDbeOEOEavYgxEhYrS601XLXRW1H3MHYZLMZTdkj8whc6tSGzgYcWCRCjL6GWnNmzxg9bHG8CFv_BTEk3bXb2gLjSa0PRoWnduxL5XISzhwsUIInvlFDJ_kQ2PMw4wI2-ILrCErQP0MFGWX5uBHks"/>
 <div class="absolute inset-0 bg-primary/20 mix-blend-multiply group-hover:bg-primary/0 transition-all"></div>
 </div>
 <div class="md:w-1/2 p-8 flex flex-col justify-between">
 <div>
 <div class="flex gap-2 mb-4">
-<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase">Ecology</span>
-<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase">10 Credits</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase">Geography</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest uppercase">Live Library</span>
 </div>
-<h3 class="text-3xl font-headline font-bold text-primary mb-3">Environmental Science</h3>
+<h3 class="text-3xl font-headline font-bold text-primary mb-3">Geography Library</h3>
 <p class="text-sm text-on-surface-variant leading-relaxed mb-6 italic">
-                                "Investigating the complex feedback loops between biosphere systems and anthropogenic influence."
+                                "Open map-based geography study with annotation, focus support, and route-linked review."
                             </p>
 <ul class="space-y-2 mb-8">
 <li class="flex items-center gap-2 text-xs font-medium text-emerald-900/80">
 <span class="material-symbols-outlined text-sm">eco</span>
-                                    Sustainability Dynamics
+                                    Human Systems
                                 </li>
 <li class="flex items-center gap-2 text-xs font-medium text-emerald-900/80">
 <span class="material-symbols-outlined text-sm">terrain</span>
-                                    Geological Foundations
+                                    Physical Geography
                                 </li>
 </ul>
 </div>
-<button class="self-start text-secondary font-bold text-sm underline decoration-2 underline-offset-4 hover:text-on-secondary-container transition-colors">
-                            Access Research
-                        </button>
+<a class="self-start text-secondary font-bold text-sm underline decoration-2 underline-offset-4 hover:text-on-secondary-container transition-colors" href="geography-library.html">
+                            Open Geography Library
+                        </a>
 </div>
 </div>
 </div>
@@ -399,21 +408,21 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-12">
 <div class="bg-surface-container-lowest border border-outline-variant/15 p-6 rounded-xl hover:shadow-md transition-shadow">
 <span class="material-symbols-outlined text-secondary mb-4">bookmark</span>
-<h4 class="font-headline font-bold text-primary mb-2">The Digital Renaissance</h4>
-<p class="text-xs text-on-surface-variant leading-relaxed mb-4">A critical essay on how technology reshaped historical narrative in the 21st century.</p>
-<a class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline" href="#">Read Now</a>
+<h4 class="font-headline font-bold text-primary mb-2">Science Library</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Open guided science notes, worksheet review, and annotation support.</p>
+<a class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline" href="study-library.html">Open Now</a>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant/15 p-6 rounded-xl hover:shadow-md transition-shadow">
 <span class="material-symbols-outlined text-secondary mb-4">biotech</span>
-<h4 class="font-headline font-bold text-primary mb-2">Molecular Ethics</h4>
-<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Exploring the boundary between organic chemistry and bio-ethical governance.</p>
-<a class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline" href="#">Read Now</a>
+<h4 class="font-headline font-bold text-primary mb-2">Geography Library</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Jump into geography mapping, review prompts, and focus study tools.</p>
+<a class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline" href="geography-library.html">Open Now</a>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant/15 p-6 rounded-xl hover:shadow-md transition-shadow">
 <span class="material-symbols-outlined text-secondary mb-4">calculate</span>
-<h4 class="font-headline font-bold text-primary mb-2">Abstract Proofs</h4>
-<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Supplementary guide to non-linear functions and the elegance of mathematical logic.</p>
-<a class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline" href="#">Read Now</a>
+<h4 class="font-headline font-bold text-primary mb-2">Math 10 Library</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Go straight into Grade 10 math notes, practice, and review flow.</p>
+<a class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline" href="grade-10-math.html">Open Now</a>
 </div>
 </div>
 <!-- Secondary Information Section -->
@@ -433,11 +442,11 @@
 <div class="grid grid-cols-2 gap-8 pt-4">
 <div>
 <h4 class="font-bold text-primary mb-2">Interdisciplinary Focus</h4>
-<p class="text-xs text-on-surface-variant leading-relaxed">Integrated study sessions that combine history and literature for a holistic worldview.</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">Use science, geography, and math side by side to keep review grounded in the working libraries.</p>
 </div>
 <div>
 <h4 class="font-bold text-primary mb-2">Primary Sources</h4>
-<p class="text-xs text-on-surface-variant leading-relaxed">Direct access to digitized manuscripts and laboratory raw data archives.</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">Open the live library routes directly instead of relying on placeholder archive cards.</p>
 </div>
 </div>
 </div>
@@ -451,21 +460,253 @@
 <div class="flex gap-12 text-xs font-bold uppercase tracking-widest font-label">
 <div class="space-y-3">
 <p class="text-primary mb-4">Nav</p>
-<a class="block hover:text-secondary" href="#">Archives</a>
-<a class="block hover:text-secondary" href="#">Faculty</a>
-<a class="block hover:text-secondary" href="#">Methodology</a>
+<a class="block hover:text-secondary" href="study-library.html">Science</a>
+<a class="block hover:text-secondary" href="geography-library.html">Geography</a>
+<a class="block hover:text-secondary" href="grade-10-math.html">Math</a>
 </div>
 <div class="space-y-3">
 <p class="text-primary mb-4">Support</p>
-<a class="block hover:text-secondary" href="#">Help Desk</a>
-<a class="block hover:text-secondary" href="#">Ethics</a>
-<a class="block hover:text-secondary" href="#">Citations</a>
+<a class="block hover:text-secondary" href="settings.html">Settings</a>
+<a class="block hover:text-secondary" href="dashboard.html">Dashboard</a>
+<a class="block hover:text-secondary" href="index.html">Home</a>
 </div>
 </div>
 </footer>
 </div>
 </main>
 </div>
+<script>
+  (function () {
+    var decks = {
+      feature: [
+        {
+          kicker: 'Science',
+          meta: 'Live Library',
+          title: 'Grade 10 Science',
+          copy: '"Use the live science library for reactions, systems, forces, and guided review tools."',
+          bulletIcon1: 'science',
+          bullet1: 'Chemical Reactions',
+          bulletIcon2: 'biotech',
+          bullet2: 'Environmental Systems',
+          cta: 'Open Science Library',
+          href: 'study-library.html',
+          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb5Oyj7r4i0oqGIWmVZcGDmoX2J_qfBwe35Xz098sbprufow6SHl4AJHyJVGnGs_VUNXJxh0BF2Q5OpEkLwB8r4ItVhtHKOPDD9ve2xFSDD8agv9O_pYGVVTTCDdRXCEcGaPZkO_5lyKOtifTCnF8u7FKQ5mNWwAw1bwpciUcGEGOlnM41ZG7u5nqTm_6fH9zMpHW7ePpl3ZR5R_7puhZzZKyPRTajdQhRCDMF0UDDaLK0t1mD10qUpwVgmEmihMwMKcPWpNgojWiA',
+          alt: 'Grade 10 Science'
+        },
+        {
+          kicker: 'English',
+          meta: 'Reading Track',
+          title: 'Grade 10 English',
+          copy: '"Close reading, essay structure, and literary analysis across fiction, drama, and poetry."',
+          bulletIcon1: 'menu_book',
+          bullet1: 'Textual Analysis',
+          bulletIcon2: 'edit_note',
+          bullet2: 'Essay Writing',
+          cta: 'Open Grade Hub',
+          href: 'grade-10.html',
+          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD2dXxcdECnUdw1FjR5NKs31gYASYGkddNfjRnN6FJgNg8MxwSt8ZV9jRWZVThpJDlBNM07TnjN3KrI0V2hbfvYM-rZjHfty_PrmoZkUzHHZWzxbJLqcdys9oPi4no0jEHKKFiNhcSnH6YjGeJcd6apzLvrNE44qxZrYV1BugdT4aNDO6fFTDp3EI-vz6CI4LSUP4kc5rgUed3XVxsddHd-PqqhZOedwezJuaNRfaFyfivxY2xf_PfmJyoIDBVv7IXWYDt4S7dq2Cfo',
+          alt: 'Grade 10 English'
+        },
+        {
+          kicker: 'Geography',
+          meta: 'Live Library',
+          title: 'Grade 10 Geography',
+          copy: '"Maps, physical systems, and human geography with direct entry into the working geography library."',
+          bulletIcon1: 'public',
+          bullet1: 'Human Systems',
+          bulletIcon2: 'terrain',
+          bullet2: 'Physical Geography',
+          cta: 'Open Geography Library',
+          href: 'geography-library.html',
+          image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQzQBKCsaod64k3NWbU6ciOfF2_kt25OQsbm1H0MB-I4s331RemJDSY1fSvPim0k9f9fwUreXVtS-0We-ZTsf6baqUmH3CdWROdLQtcvp-oGryXzXBICxxysJuDbeOEOEavYgxEhYrS601XLXRW1H3MHYZLMZTdkj8whc6tSGzgYcWCRCjL6GWnNmzxg9bHG8CFv_BTEk3bXb2gLjSa0PRoWnduxL5XISzhwsUIInvlFDJ_kQ2PMw4wI2-ILrCErQP0MFGWX5uBHks',
+          alt: 'Grade 10 Geography'
+        }
+      ],
+      sideA: [
+        {
+          icon: 'functions',
+          title: 'Grade 10 Math',
+          copy: 'Quadratics, trigonometry, and analytic geometry in the live Grade 10 math library.',
+          label1: 'Current Module',
+          value1: 'Quadratic Relations',
+          label2: 'Practice Set',
+          value2: 'Trigonometry Review',
+          cta: 'Open Math Library',
+          href: 'grade-10-math.html'
+        },
+        {
+          icon: 'science',
+          title: 'Science Review',
+          copy: 'Chemistry, systems, and forces organized into guided review modules.',
+          label1: 'Current Module',
+          value1: 'Reaction Systems',
+          label2: 'Lab Focus',
+          value2: 'Forces and Motion',
+          cta: 'Open Science Library',
+          href: 'study-library.html'
+        },
+        {
+          icon: 'public',
+          title: 'Geography',
+          copy: 'Mapping, environments, and human systems through the live geography route.',
+          label1: 'Current Module',
+          value1: 'Population Patterns',
+          label2: 'Map Focus',
+          value2: 'Landform Analysis',
+          cta: 'Open Geography Library',
+          href: 'geography-library.html'
+        }
+      ],
+      sideB: [
+        {
+          bgIcon: 'public',
+          kicker: 'Global Studies',
+          title: 'Geography',
+          copy: 'Maps, human systems, and environmental patterns through the live geography library.',
+          href: 'geography-library.html'
+        },
+        {
+          bgIcon: 'menu_book',
+          kicker: 'English Studies',
+          title: 'English',
+          copy: 'Reading, annotation, and literary interpretation with a focus on writing and analysis.',
+          href: 'grade-10.html'
+        },
+        {
+          bgIcon: 'science',
+          kicker: 'Science Studies',
+          title: 'Science',
+          copy: 'Review reactions, systems, and experiments through the live science route.',
+          href: 'study-library.html'
+        }
+      ],
+      wide: [
+        {
+          title: 'Grade 10 Mathematics',
+          copy: 'Work through quadratics, trigonometry, and geometry with the actual Grade 10 math library.',
+          stat1: '84%',
+          statLabel1: 'Avg. Score',
+          stat2: '12',
+          statLabel2: 'Worksheets',
+          value1: 'Quadratic Relations',
+          value2: 'Live Route: Grade 10 Math',
+          cta: 'Open Library',
+          href: 'grade-10-math.html'
+        },
+        {
+          title: 'Grade 10 Science',
+          copy: 'Cycle into reactions, environmental systems, and guided science review.',
+          stat1: '18',
+          statLabel1: 'Modules',
+          stat2: '6',
+          statLabel2: 'Labs',
+          value1: 'Chemical Systems Review',
+          value2: 'Live Route: Science Library',
+          cta: 'Open Library',
+          href: 'study-library.html'
+        },
+        {
+          title: 'Grade 10 Geography',
+          copy: 'Move through human systems, physical geography, and atlas-based review.',
+          stat1: '9',
+          statLabel1: 'Map Labs',
+          stat2: '4',
+          statLabel2: 'Case Studies',
+          value1: 'Human Systems',
+          value2: 'Live Route: Geography Library',
+          cta: 'Open Library',
+          href: 'geography-library.html'
+        }
+      ]
+    }
+
+    function setText(selector, value) {
+      var node = document.querySelector(selector)
+      if (node && value != null) node.textContent = value
+    }
+
+    function setHref(selector, value) {
+      var node = document.querySelector(selector)
+      if (node && value) node.href = value
+    }
+
+    function applyFeature(entry) {
+      var image = document.querySelector('[data-rotating-image="feature"]')
+      if (image) {
+        image.src = entry.image
+        image.alt = entry.alt
+      }
+      setText('[data-rotating-kicker="feature"]', entry.kicker)
+      setText('[data-rotating-meta="feature"]', entry.meta)
+      setText('[data-rotating-title="feature"]', entry.title)
+      setText('[data-rotating-copy="feature"]', entry.copy)
+      setText('[data-rotating-bullet-icon-1="feature"]', entry.bulletIcon1)
+      setText('[data-rotating-bullet-1="feature"]', entry.bullet1)
+      setText('[data-rotating-bullet-icon-2="feature"]', entry.bulletIcon2)
+      setText('[data-rotating-bullet-2="feature"]', entry.bullet2)
+      setText('[data-rotating-cta="feature"]', entry.cta)
+      setHref('[data-rotating-link="feature"]', entry.href)
+    }
+
+    function applySideA(entry) {
+      setText('[data-rotating-icon="sideA"]', entry.icon)
+      setText('[data-rotating-title="sideA"]', entry.title)
+      setText('[data-rotating-copy="sideA"]', entry.copy)
+      setText('[data-rotating-label-1="sideA"]', entry.label1)
+      setText('[data-rotating-value-1="sideA"]', entry.value1)
+      setText('[data-rotating-label-2="sideA"]', entry.label2)
+      setText('[data-rotating-value-2="sideA"]', entry.value2)
+      setText('[data-rotating-cta="sideA"]', entry.cta)
+      setHref('[data-rotating-link="sideA"]', entry.href)
+    }
+
+    function applySideB(entry) {
+      setText('[data-rotating-bg-icon="sideB"]', entry.bgIcon)
+      setText('[data-rotating-kicker="sideB"]', entry.kicker)
+      setText('[data-rotating-title="sideB"]', entry.title)
+      setText('[data-rotating-copy="sideB"]', entry.copy)
+      setHref('[data-rotating-link="sideB"]', entry.href)
+    }
+
+    function applyWide(entry) {
+      setText('[data-rotating-title="wide"]', entry.title)
+      setText('[data-rotating-copy="wide"]', entry.copy)
+      setText('[data-rotating-stat-1="wide"]', entry.stat1)
+      setText('[data-rotating-stat-label-1="wide"]', entry.statLabel1)
+      setText('[data-rotating-stat-2="wide"]', entry.stat2)
+      setText('[data-rotating-stat-label-2="wide"]', entry.statLabel2)
+      setText('[data-rotating-value-1="wide"]', entry.value1)
+      setText('[data-rotating-value-2="wide"]', entry.value2)
+      setText('[data-rotating-cta="wide"]', entry.cta)
+      setHref('[data-rotating-link="wide"]', entry.href)
+    }
+
+    function startRotation(items, applyFn, delay) {
+      if (!items || !items.length) return
+      var key = arguments[3]
+      var card = key ? document.querySelector('[data-rotating-card="' + key + '"]') : null
+      var index = 0
+      applyFn(items[index])
+      window.setInterval(function () {
+        if (card) card.classList.add('is-switching')
+        window.setTimeout(function () {
+          index = (index + 1) % items.length
+          applyFn(items[index])
+          if (card) {
+            window.requestAnimationFrame(function () {
+              card.classList.remove('is-switching')
+            })
+          }
+        }, 180)
+      }, delay)
+    }
+
+    startRotation(decks.feature, applyFeature, 5200, 'feature')
+    startRotation(decks.sideA, applySideA, 4300, 'sideA')
+    startRotation(decks.sideB, applySideB, 4800, 'sideB')
+    startRotation(decks.wide, applyWide, 5000, 'wide')
+  })()
+</script>
 <script>
   (function () {
     var READ_KEY = 'sc_home_notifications_read_v3'
