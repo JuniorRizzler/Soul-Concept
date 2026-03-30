@@ -83,10 +83,35 @@
         background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(12px);
       }
+      .sidebar-link-active {
+        background-color: #215c4b;
+        color: white;
+      }
       .calendar-grid {
         display: grid;
         grid-template-columns: 80px repeat(5, 1fr);
         grid-auto-rows: minmax(100px, auto);
+      }
+      .schedule-day-column {
+        min-height: 600px;
+      }
+      .schedule-event {
+        position: absolute;
+        left: 0.5rem;
+        right: 0.5rem;
+        z-index: 2;
+      }
+      .schedule-event-star {
+        background: transparent;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+      }
+      .schedule-event-star.is-active {
+        color: #ae3200;
+      }
+      .schedule-modal[hidden] {
+        display: none;
       }
       .depth-layer-1 { box-shadow: 0 10px 30px rgba(0, 68, 53, 0.04); }
       .depth-layer-2 { box-shadow: 0 20px 40px rgba(29, 26, 34, 0.06); }
@@ -107,65 +132,54 @@
       }
     </style>
 </head>
-<body class="bg-background text-on-surface font-body overflow-x-hidden">
-<!-- SideNavBar (Synchronized) -->
-<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-[#fef7ff] dark:bg-slate-900 flex flex-col p-4 border-r border-slate-100 dark:border-slate-800">
-<div class="mb-10 px-2 flex items-center gap-3">
-<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined text-2xl" data-icon="psychology">psychology</span>
+<body class="bg-background text-on-surface font-body overflow-x-hidden" data-sc-auth-required="false" data-sc-auth-mount="false">
+<!-- Main Content Canvas -->
+<!-- Sidebar (Persistent on Desktop) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-surface-container-low border-r border-outline-variant/10 hidden lg:flex flex-col p-6 z-40">
+<div class="space-y-1 mb-8">
+<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-label text-sm font-semibold">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="grade-9.html">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span class="font-label text-sm font-semibold">Subjects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="anki/index.html">
+<span class="material-symbols-outlined text-[20px]">style</span>
+<span class="font-label text-sm font-semibold">Concept Cards</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="achievements.html">
+<span class="material-symbols-outlined text-[20px]">military_tech</span>
+<span class="font-label text-sm font-semibold">Achievements</span>
+</a>
 </div>
-<div>
-<h1 class="text-lg font-extrabold text-[#004435] dark:text-emerald-400 font-headline leading-tight">Soul Concept</h1>
-<p class="text-[0.7rem] text-slate-500 font-label tracking-wider uppercase">Study Scheduler</p>
+<div class="space-y-1 mb-8">
+<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Account &amp; Tools</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="membership.html">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="font-label text-sm font-semibold">Subscriptions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl sidebar-link-active transition-all" href="schedule.html">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span class="font-label text-sm font-bold">Schedule</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="analytics.html">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span class="font-label text-sm font-semibold">Insights</span>
+</a>
 </div>
+<div class="mt-auto bg-primary-container p-4 rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<p class="text-primary-fixed text-xs font-bold mb-1">PRO ACCESS</p>
+<p class="text-white text-[11px] leading-tight opacity-90 mb-3">Unlock all study tools, libraries, and guided review features.</p>
+<button class="bg-primary-fixed text-on-primary-fixed-variant w-full py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider" data-schedule-new-session="" type="button">New Session</button>
 </div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
-                Overview
-            </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="book_2">book_2</span>
-                Subjects
-            </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="style">style</span>
-                Concept Cards
-            </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
-                Achievements
-            </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="card_membership">card_membership</span>
-                Subscriptions
-            </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="model_training">model_training</span>
-                Exam Simulator
-            </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-[#004435] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 font-headline font-semibold text-[0.875rem] rounded-lg" href="#">
-<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
-                Insights
-            </a>
-</nav>
-<button class="mt-8 mb-auto w-full py-4 bg-primary text-on-primary rounded-xl font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">
-<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
-            New Study Session
-        </button>
-<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 space-y-1">
-<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-primary font-headline font-semibold text-[0.875rem] transition-colors" href="#">
-<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
-                Help
-            </a>
-<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:text-secondary font-headline font-semibold text-[0.875rem] transition-colors" href="#">
-<span class="material-symbols-outlined" data-icon="logout">logout</span>
-                Sign Out
-            </a>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
 </div>
 </aside>
-<!-- Main Content Canvas -->
-<main class="ml-64 min-h-screen">
+<main class="pt-24 lg:pl-64 min-h-screen">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
 <div class="topbar-inner flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
@@ -205,7 +219,7 @@
 </div>
 </nav>
 <!-- Content Area -->
-<div class="pt-24 px-8 pb-12">
+<div class="px-8 pb-12">
 <!-- Page Header Section -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
 <div class="space-y-2">
@@ -219,7 +233,7 @@
 <span class="material-symbols-outlined text-lg" data-icon="sync" style="font-variation-settings: 'FILL' 0;">sync</span>
                         Sync Academic Calendars
                     </button>
-<button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-lg shadow-primary/10 hover:scale-[1.02] active:scale-95 transition-all">
+<button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-lg shadow-primary/10 hover:scale-[1.02] active:scale-95 transition-all" data-schedule-new-session="" type="button">
 <span class="material-symbols-outlined text-lg" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
                         Initialize Focus Mode
                     </button>
@@ -232,19 +246,18 @@
 <div class="bg-surface-container-low rounded-3xl p-6 depth-layer-1">
 <div class="flex items-center justify-between mb-8 px-2">
 <div class="flex items-center gap-4">
-<h3 class="text-xl font-headline font-bold text-primary">Week 14: Oct 23 – Oct 27</h3>
+<h3 class="text-xl font-headline font-bold text-primary" data-schedule-week-label="">Week</h3>
 <div class="flex bg-white/50 p-1 rounded-lg">
-<button class="p-1 hover:bg-white rounded transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
-<button class="p-1 hover:bg-white rounded transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
+<button class="p-1 hover:bg-white rounded transition-colors" data-schedule-week-prev="" type="button"><span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
+<button class="p-1 hover:bg-white rounded transition-colors" data-schedule-week-next="" type="button"><span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
 </div>
 </div>
 <div class="flex gap-2">
 <span class="px-3 py-1 bg-primary/10 text-primary text-[0.65rem] font-label font-bold rounded-full uppercase tracking-widest">Weekly View</span>
 </div>
 </div>
-<!-- 3D Calendar Simulation -->
-<div class="calendar-grid border-t border-slate-200/50">
-<!-- Time Labels -->
+<!-- Editable Calendar -->
+<div class="calendar-grid border-t border-slate-200/50" data-schedule-grid="">
 <div class="flex flex-col py-4 gap-20 text-[0.65rem] font-label font-bold text-slate-400 items-end pr-4">
 <span>08:00 AM</span>
 <span>10:00 AM</span>
@@ -253,65 +266,41 @@
 <span>04:00 PM</span>
 <span>06:00 PM</span>
 </div>
-<!-- Column: Mon -->
-<div class="border-l border-slate-200/50 p-2 relative min-h-[600px]">
-<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">MON 23</p>
-<!-- Event Card -->
-<div class="glass-card absolute top-20 left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-primary hover:translate-y-[-2px] transition-transform cursor-pointer">
-<p class="text-[0.6rem] font-label font-bold text-primary-container">09:00 - 10:30</p>
-<h4 class="text-[0.75rem] font-headline font-bold text-primary leading-tight mt-1">Neuroscience Lab</h4>
-<div class="mt-2 flex items-center gap-1">
-<span class="w-1 h-1 rounded-full bg-primary"></span>
-<span class="text-[0.55rem] font-label text-slate-500">Main Campus B3</span>
+<div class="border-l border-slate-200/50 p-2 relative schedule-day-column" data-schedule-day="mon">
+<div class="flex items-center justify-between mb-4">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 text-center flex-1" data-schedule-day-label="mon">MON 23</p>
+<button class="text-slate-400 hover:text-primary transition-colors" data-schedule-add-day="mon" type="button"><span class="material-symbols-outlined text-sm">add</span></button>
 </div>
+<div data-schedule-events="mon"></div>
 </div>
-<div class="glass-card absolute top-[340px] left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-secondary hover:translate-y-[-2px] transition-transform cursor-pointer">
-<p class="text-[0.6rem] font-label font-bold text-secondary">02:30 - 04:00</p>
-<h4 class="text-[0.75rem] font-headline font-bold text-on-surface leading-tight mt-1">Deep Work: Thesis</h4>
-<span class="mt-2 inline-block px-1.5 py-0.5 bg-secondary/10 text-secondary text-[0.5rem] font-label font-bold rounded">FOCUS</span>
+<div class="border-l border-slate-200/50 p-2 relative schedule-day-column" data-schedule-day="tue">
+<div class="flex items-center justify-between mb-4">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 text-center flex-1" data-schedule-day-label="tue">TUE 24</p>
+<button class="text-slate-400 hover:text-primary transition-colors" data-schedule-add-day="tue" type="button"><span class="material-symbols-outlined text-sm">add</span></button>
 </div>
+<div data-schedule-events="tue"></div>
 </div>
-<!-- Column: Tue -->
-<div class="border-l border-slate-200/50 p-2 relative">
-<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">TUE 24</p>
-<div class="glass-card absolute top-40 left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-primary hover:translate-y-[-2px] transition-transform cursor-pointer">
-<p class="text-[0.6rem] font-label font-bold text-primary-container">10:30 - 12:00</p>
-<h4 class="text-[0.75rem] font-headline font-bold text-primary leading-tight mt-1">Stochastic Models</h4>
-<div class="mt-2 flex items-center gap-1 text-[0.55rem] font-label text-slate-500">
-<span class="material-symbols-outlined text-[10px]" data-icon="videocam">videocam</span>
-<span>Zoom Link Attached</span>
+<div class="border-l border-slate-200/50 p-2 relative bg-surface-container-highest/20 schedule-day-column" data-schedule-day="wed">
+<div class="flex items-center justify-between mb-4">
+<p class="text-[0.6rem] font-label font-bold text-primary text-center flex-1" data-schedule-day-label="wed">WED 25 (Today)</p>
+<button class="text-primary hover:text-secondary transition-colors" data-schedule-add-day="wed" type="button"><span class="material-symbols-outlined text-sm">add</span></button>
 </div>
-</div>
-</div>
-<!-- Column: Wed -->
-<div class="border-l border-slate-200/50 p-2 relative bg-surface-container-highest/20">
-<p class="text-[0.6rem] font-label font-bold text-primary mb-4 text-center">WED 25 (Today)</p>
-<div class="glass-card absolute top-[280px] left-2 right-2 p-3 rounded-xl depth-layer-2 ring-2 ring-primary border border-white/40 border-l-4 border-l-primary shadow-xl">
-<p class="text-[0.6rem] font-label font-bold text-primary flex items-center gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                                        ACTIVE NOW
-                                    </p>
-<h4 class="text-[0.75rem] font-headline font-bold text-primary leading-tight mt-1">Seminar: Modern Ethics</h4>
-<p class="text-[0.55rem] font-label text-slate-500 mt-1">Reading Room 402</p>
-</div>
-<!-- Time indicator line -->
+<div data-schedule-events="wed"></div>
 <div class="absolute top-[300px] left-0 right-0 border-t-2 border-primary/30 z-10 pointer-events-none"></div>
 </div>
-<!-- Column: Thu -->
-<div class="border-l border-slate-200/50 p-2 relative">
-<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">THU 26</p>
-<div class="glass-card absolute top-20 left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-slate-400 opacity-60">
-<p class="text-[0.6rem] font-label font-bold text-slate-400">09:00 - 10:30</p>
-<h4 class="text-[0.75rem] font-headline font-bold text-slate-600 leading-tight mt-1">Physics Recitation</h4>
+<div class="border-l border-slate-200/50 p-2 relative schedule-day-column" data-schedule-day="thu">
+<div class="flex items-center justify-between mb-4">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 text-center flex-1" data-schedule-day-label="thu">THU 26</p>
+<button class="text-slate-400 hover:text-primary transition-colors" data-schedule-add-day="thu" type="button"><span class="material-symbols-outlined text-sm">add</span></button>
 </div>
+<div data-schedule-events="thu"></div>
 </div>
-<!-- Column: Fri -->
-<div class="border-l border-slate-200/50 p-2 relative">
-<p class="text-[0.6rem] font-label font-bold text-slate-400 mb-4 text-center">FRI 27</p>
-<div class="glass-card absolute top-[450px] left-2 right-2 p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 border-l-secondary-container hover:translate-y-[-2px] transition-transform cursor-pointer">
-<p class="text-[0.6rem] font-label font-bold text-on-secondary-container">04:30 - 05:30</p>
-<h4 class="text-[0.75rem] font-headline font-bold text-on-secondary-container leading-tight mt-1">Weekly Peer Review</h4>
+<div class="border-l border-slate-200/50 p-2 relative schedule-day-column" data-schedule-day="fri">
+<div class="flex items-center justify-between mb-4">
+<p class="text-[0.6rem] font-label font-bold text-slate-400 text-center flex-1" data-schedule-day-label="fri">FRI 27</p>
+<button class="text-slate-400 hover:text-primary transition-colors" data-schedule-add-day="fri" type="button"><span class="material-symbols-outlined text-sm">add</span></button>
 </div>
+<div data-schedule-events="fri"></div>
 </div>
 </div>
 </div>
@@ -327,72 +316,8 @@
                                 BBK12 LIVE
                             </span>
 </div>
-<div class="space-y-4">
-<!-- Task Item 1 -->
-<div class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group">
-<div class="flex justify-between items-start mb-2">
-<span class="px-2 py-0.5 bg-primary/10 text-primary text-[0.55rem] font-label font-bold rounded">BIOLOGY 302</span>
-<span class="text-secondary text-[0.6rem] font-label font-bold">URGENT</span>
-</div>
-<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Lab Report: Cellular Respiration</h5>
-<div class="mt-3 flex items-center justify-between">
-<div class="flex items-center gap-4">
-<div class="flex items-center gap-1 text-slate-500">
-<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
-<span class="text-[0.65rem] font-label font-semibold">2.5 hrs</span>
-</div>
-<div class="flex items-center gap-1 text-slate-500">
-<span class="material-symbols-outlined text-[14px]" data-icon="priority_high">priority_high</span>
-<span class="text-[0.65rem] font-label font-semibold">High</span>
-</div>
-</div>
-<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
-</div>
-</div>
-<!-- Task Item 2 -->
-<div class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group">
-<div class="flex justify-between items-start mb-2">
-<span class="px-2 py-0.5 bg-slate-200 text-slate-600 text-[0.55rem] font-label font-bold rounded">PHILOSOPHY</span>
-<span class="text-slate-400 text-[0.6rem] font-label font-bold">TOMORROW</span>
-</div>
-<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Reflection Essay: Kantian Duty</h5>
-<div class="mt-3 flex items-center justify-between">
-<div class="flex items-center gap-4">
-<div class="flex items-center gap-1 text-slate-500">
-<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
-<span class="text-[0.65rem] font-label font-semibold">1.0 hr</span>
-</div>
-<div class="flex items-center gap-1 text-slate-500">
-<span class="material-symbols-outlined text-[14px]" data-icon="equalizer">equalizer</span>
-<span class="text-[0.65rem] font-label font-semibold">Medium</span>
-</div>
-</div>
-<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
-</div>
-</div>
-<!-- Task Item 3 -->
-<div class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group">
-<div class="flex justify-between items-start mb-2">
-<span class="px-2 py-0.5 bg-slate-200 text-slate-600 text-[0.55rem] font-label font-bold rounded">ECONOMICS</span>
-<span class="text-slate-400 text-[0.6rem] font-label font-bold">OCT 27</span>
-</div>
-<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Market Analysis Problem Set</h5>
-<div class="mt-3 flex items-center justify-between">
-<div class="flex items-center gap-4">
-<div class="flex items-center gap-1 text-slate-500">
-<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
-<span class="text-[0.65rem] font-label font-semibold">4.0 hrs</span>
-</div>
-<div class="flex items-center gap-1 text-slate-500">
-<span class="material-symbols-outlined text-[14px]" data-icon="priority_high">priority_high</span>
-<span class="text-[0.65rem] font-label font-semibold">High</span>
-</div>
-</div>
-<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
-</div>
-</div>
-</div>
-<button class="w-full mt-6 py-3 border border-slate-100 rounded-xl text-[0.75rem] font-headline font-bold text-slate-500 hover:bg-slate-50 transition-colors">
+<div class="space-y-4" data-schedule-feed=""></div>
+<button class="w-full mt-6 py-3 border border-slate-100 rounded-xl text-[0.75rem] font-headline font-bold text-slate-500 hover:bg-slate-50 transition-colors" data-schedule-new-session="" type="button">
                             View All BBK12 Assignments
                         </button>
 </div>
@@ -434,7 +359,500 @@
 </div>
 </div>
 </main>
+<div class="schedule-modal fixed inset-0 z-[80] bg-slate-950/35 backdrop-blur-sm p-4" data-schedule-modal="" hidden="">
+<div class="mx-auto mt-12 max-w-lg rounded-3xl bg-white p-6 shadow-[0_30px_80px_rgba(29,26,34,0.18)]">
+<div class="flex items-start justify-between gap-4 mb-6">
+<div>
+<p class="text-[10px] font-label font-bold tracking-[0.2em] uppercase text-outline">Scheduler Editor</p>
+<h3 class="text-2xl font-headline font-extrabold text-primary" data-schedule-modal-title="">New Session</h3>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors" data-schedule-close="" type="button"><span class="material-symbols-outlined">close</span></button>
+</div>
+<form class="space-y-4" data-schedule-form="">
+<input data-schedule-id="" type="hidden"/>
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Title</label>
+<input class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="title" required="" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Subject</label>
+<input class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="subject" type="text"/>
+</div>
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Day</label>
+<select class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="day">
+<option value="mon">Monday</option>
+<option value="tue">Tuesday</option>
+<option value="wed">Wednesday</option>
+<option value="thu">Thursday</option>
+<option value="fri">Friday</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Start</label>
+<input class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="start" required="" type="time"/>
+</div>
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">End</label>
+<input class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="end" required="" type="time"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Location</label>
+<input class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="location" type="text"/>
+</div>
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Priority</label>
+<select class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="priority">
+<option value="Medium">Medium</option>
+<option value="High">High</option>
+<option value="Low">Low</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Accent</label>
+<select class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="color">
+<option value="primary">Primary</option>
+<option value="secondary">Secondary</option>
+<option value="secondary-container">Warm</option>
+<option value="slate-400">Muted</option>
+</select>
+</div>
+<label class="flex items-center gap-3 pt-8 text-sm font-medium text-on-surface">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/30" data-schedule-field="starred" type="checkbox"/>
+<span>Star this session</span>
+</label>
+</div>
+<div class="flex items-center justify-between gap-3 pt-4">
+<button class="rounded-2xl px-4 py-3 text-sm font-headline font-bold text-secondary hover:bg-secondary/5 transition-colors" data-schedule-delete="" type="button">Delete</button>
+<div class="flex gap-3">
+<button class="rounded-2xl px-5 py-3 text-sm font-headline font-bold text-slate-500 hover:bg-slate-100 transition-colors" data-schedule-close="" type="button">Cancel</button>
+<button class="rounded-2xl bg-primary px-5 py-3 text-sm font-headline font-bold text-white hover:bg-primary-container transition-colors" type="submit">Save Session</button>
+</div>
+</div>
+</form>
+</div>
+</div>
 <script defer src="assets/stitch-router.js?v=20260327f"></script>
+<script>
+  (function () {
+    var STORAGE_KEY = 'sc_schedule_events_v2'
+    var WEEK_KEY = 'sc_schedule_week_offset_v1'
+    var dayOrder = ['mon', 'tue', 'wed', 'thu', 'fri']
+    var dayNames = { mon: 'MON', tue: 'TUE', wed: 'WED', thu: 'THU', fri: 'FRI' }
+    var modal = document.querySelector('[data-schedule-modal]')
+    var form = document.querySelector('[data-schedule-form]')
+    var feed = document.querySelector('[data-schedule-feed]')
+    var weekLabel = document.querySelector('[data-schedule-week-label]')
+    if (!modal || !form || !feed) return
+
+    function atMidday(date) {
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0, 0)
+    }
+
+    function addDays(date, amount) {
+      var next = new Date(date)
+      next.setDate(next.getDate() + amount)
+      return atMidday(next)
+    }
+
+    function startOfWeek(date) {
+      var normalized = atMidday(date)
+      var day = normalized.getDay()
+      var diff = day === 0 ? -6 : 1 - day
+      return addDays(normalized, diff)
+    }
+
+    function formatDateKey(date) {
+      return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
+    }
+
+    function currentWeekStart() {
+      return addDays(startOfWeek(new Date()), weekOffset * 7)
+    }
+
+    function buildDefaultEvents() {
+      var base = startOfWeek(new Date())
+      return [
+        { id: 'evt-1', title: 'Neuroscience Lab', subject: 'Biology 302', date: formatDateKey(addDays(base, 0)), start: '09:00', end: '10:30', location: 'Main Campus B3', priority: 'High', color: 'primary', starred: true },
+        { id: 'evt-2', title: 'Deep Work: Thesis', subject: 'Focus Block', date: formatDateKey(addDays(base, 0)), start: '14:30', end: '16:00', location: 'Solo Study', priority: 'Medium', color: 'secondary', starred: false },
+        { id: 'evt-3', title: 'Stochastic Models', subject: 'Mathematics', date: formatDateKey(addDays(base, 1)), start: '10:30', end: '12:00', location: 'Zoom Link Attached', priority: 'Medium', color: 'primary', starred: false },
+        { id: 'evt-4', title: 'Seminar: Modern Ethics', subject: 'Philosophy', date: formatDateKey(addDays(base, 2)), start: '13:00', end: '14:30', location: 'Reading Room 402', priority: 'High', color: 'primary', starred: true },
+        { id: 'evt-5', title: 'Physics Recitation', subject: 'Physics', date: formatDateKey(addDays(base, 3)), start: '09:00', end: '10:30', location: 'Lab Wing', priority: 'Low', color: 'slate-400', starred: false },
+        { id: 'evt-6', title: 'Weekly Peer Review', subject: 'English', date: formatDateKey(addDays(base, 4)), start: '16:30', end: '17:30', location: 'Seminar Circle', priority: 'Medium', color: 'secondary-container', starred: false }
+      ]
+    }
+
+    function readEvents() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY)
+        var parsed = raw ? JSON.parse(raw) : buildDefaultEvents()
+        var base = startOfWeek(new Date())
+        return parsed.map(function (entry) {
+          if (entry.date) return entry
+          if (entry.day && dayOrder.indexOf(entry.day) !== -1) {
+            entry.date = formatDateKey(addDays(base, dayOrder.indexOf(entry.day)))
+          }
+          delete entry.day
+          return entry
+        })
+      } catch (_err) {
+        return buildDefaultEvents()
+      }
+    }
+
+    function writeEvents(items) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+      } catch (_err) {}
+    }
+
+    function readWeekOffset() {
+      try {
+        var raw = localStorage.getItem(WEEK_KEY)
+        return raw ? parseInt(raw, 10) || 0 : 0
+      } catch (_err) {
+        return 0
+      }
+    }
+
+    function writeWeekOffset(value) {
+      try {
+        localStorage.setItem(WEEK_KEY, String(value))
+      } catch (_err) {}
+    }
+
+    var weekOffset = readWeekOffset()
+    var events = readEvents()
+
+    function minutesFromTime(value) {
+      var parts = String(value || '08:00').split(':')
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10)
+    }
+
+    function formatTime(value) {
+      var total = minutesFromTime(value)
+      var hour = Math.floor(total / 60)
+      var minute = total % 60
+      var suffix = hour >= 12 ? 'PM' : 'AM'
+      var displayHour = hour % 12 || 12
+      return displayHour + ':' + String(minute).padStart(2, '0') + ' ' + suffix
+    }
+
+    function formatRange(start, end) {
+      return formatTime(start) + ' - ' + formatTime(end)
+    }
+
+    function formatMonthDay(date) {
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    }
+
+    function weekNumber(date) {
+      var start = startOfWeek(date)
+      var yearStart = new Date(start.getFullYear(), 0, 1)
+      return Math.ceil((((start - yearStart) / 86400000) + yearStart.getDay() + 1) / 7)
+    }
+
+    function dateForDay(day) {
+      return addDays(currentWeekStart(), dayOrder.indexOf(day))
+    }
+
+    function dateKeyForDay(day) {
+      return formatDateKey(dateForDay(day))
+    }
+
+    function dayLabelForDate(date) {
+      var today = atMidday(new Date())
+      return dayNames[dayOrder[(date.getDay() + 6) % 7]] + ' ' + date.getDate() + (formatDateKey(today) === formatDateKey(date) ? ' (Today)' : '')
+    }
+
+    function durationHours(start, end) {
+      var total = Math.max(30, minutesFromTime(end) - minutesFromTime(start))
+      return (total / 60).toFixed(1) + ' hrs'
+    }
+
+    function eventPosition(entry) {
+      var visibleStart = 8 * 60
+      var visibleSpan = 10 * 60
+      var start = Math.max(visibleStart, minutesFromTime(entry.start))
+      var end = Math.max(start + 30, minutesFromTime(entry.end))
+      return {
+        top: ((start - visibleStart) / visibleSpan) * 600,
+        height: ((end - start) / visibleSpan) * 600
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+    }
+
+    function borderTone(color) {
+      if (color === 'secondary') return 'border-l-secondary'
+      if (color === 'secondary-container') return 'border-l-secondary-container'
+      if (color === 'slate-400') return 'border-l-slate-400 opacity-80'
+      return 'border-l-primary'
+    }
+
+    function timeTone(color) {
+      if (color === 'secondary') return 'text-secondary'
+      if (color === 'secondary-container') return 'text-on-secondary-container'
+      if (color === 'slate-400') return 'text-slate-400'
+      return 'text-primary-container'
+    }
+
+    function titleTone(color) {
+      if (color === 'secondary-container') return 'text-on-secondary-container'
+      if (color === 'slate-400') return 'text-slate-600'
+      if (color === 'secondary') return 'text-on-surface'
+      return 'text-primary'
+    }
+
+    function subjectTone(color) {
+      if (color === 'secondary') return 'bg-secondary/10 text-secondary'
+      if (color === 'secondary-container') return 'bg-secondary-container/15 text-on-secondary-container'
+      if (color === 'slate-400') return 'bg-slate-200 text-slate-600'
+      return 'bg-primary/10 text-primary'
+    }
+
+    function priorityTone(priority) {
+      if (priority === 'High') return 'text-secondary'
+      if (priority === 'Low') return 'text-slate-400'
+      return 'text-primary'
+    }
+
+    function openModal(entry) {
+      form.reset()
+      form.querySelector('[data-schedule-id]').value = entry && entry.id ? entry.id : ''
+      form.querySelector('[data-schedule-field="title"]').value = entry && entry.title ? entry.title : ''
+      form.querySelector('[data-schedule-field="subject"]').value = entry && entry.subject ? entry.subject : ''
+      form.querySelector('[data-schedule-field="day"]').value = entry && entry.date ? dayOrder[Math.max(0, Math.min(4, Math.round((atMidday(new Date(entry.date)) - currentWeekStart()) / 86400000)))] : 'mon'
+      form.querySelector('[data-schedule-field="start"]').value = entry && entry.start ? entry.start : '09:00'
+      form.querySelector('[data-schedule-field="end"]').value = entry && entry.end ? entry.end : '10:00'
+      form.querySelector('[data-schedule-field="location"]').value = entry && entry.location ? entry.location : ''
+      form.querySelector('[data-schedule-field="priority"]').value = entry && entry.priority ? entry.priority : 'Medium'
+      form.querySelector('[data-schedule-field="color"]').value = entry && entry.color ? entry.color : 'primary'
+      form.querySelector('[data-schedule-field="starred"]').checked = !!(entry && entry.starred)
+      document.querySelector('[data-schedule-modal-title]').textContent = entry && entry.id ? 'Edit Session' : 'New Session'
+      document.querySelector('[data-schedule-delete]').classList.toggle('invisible', !(entry && entry.id))
+      modal.hidden = false
+    }
+
+    function closeModal() {
+      modal.hidden = true
+    }
+
+    function syncWeekChrome() {
+      var start = currentWeekStart()
+      var end = addDays(start, 4)
+      if (weekLabel) weekLabel.textContent = 'Week ' + weekNumber(start) + ': ' + formatMonthDay(start) + ' – ' + formatMonthDay(end)
+      dayOrder.forEach(function (day) {
+        var label = document.querySelector('[data-schedule-day-label="' + day + '"]')
+        if (!label) return
+        var date = dateForDay(day)
+        label.textContent = dayLabelForDate(date)
+        label.classList.toggle('text-primary', formatDateKey(date) === formatDateKey(atMidday(new Date())))
+        label.classList.toggle('text-slate-400', formatDateKey(date) !== formatDateKey(atMidday(new Date())))
+      })
+    }
+
+    function renderCalendar() {
+      dayOrder.forEach(function (day) {
+        var host = document.querySelector('[data-schedule-events="' + day + '"]')
+        if (!host) return
+        var html = events
+          .filter(function (entry) { return entry.date === dateKeyForDay(day) })
+          .sort(function (a, b) { return minutesFromTime(a.start) - minutesFromTime(b.start) })
+          .map(function (entry) {
+            var position = eventPosition(entry)
+            return (
+              '<div class="schedule-event glass-card p-3 rounded-xl depth-layer-1 border border-white/40 border-l-4 ' + borderTone(entry.color) + (entry.starred ? ' ring-2 ring-secondary/20' : '') + ' hover:translate-y-[-2px] transition-transform cursor-pointer" ' +
+              'data-schedule-event="' + escapeHtml(entry.id) + '" style="top:' + position.top + 'px;height:' + position.height + 'px;">' +
+                '<div class="flex items-start justify-between gap-2">' +
+                  '<p class="text-[0.6rem] font-label font-bold ' + timeTone(entry.color) + '">' + escapeHtml(formatRange(entry.start, entry.end)) + '</p>' +
+                  '<button class="schedule-event-star' + (entry.starred ? ' is-active' : '') + '" data-schedule-star="' + escapeHtml(entry.id) + '" type="button">' +
+                    '<span class="material-symbols-outlined text-sm">' + (entry.starred ? 'star' : 'star_outline') + '</span>' +
+                  '</button>' +
+                '</div>' +
+                '<h4 class="text-[0.75rem] font-headline font-bold leading-tight mt-1 ' + titleTone(entry.color) + '">' + escapeHtml(entry.title) + '</h4>' +
+                '<div class="mt-2 flex items-center gap-1 flex-wrap">' +
+                  '<span class="inline-flex px-1.5 py-0.5 rounded text-[0.5rem] font-label font-bold ' + subjectTone(entry.color) + '">' + escapeHtml(entry.subject || 'Study Session') + '</span>' +
+                  (entry.location ? '<span class="text-[0.55rem] font-label text-slate-500">' + escapeHtml(entry.location) + '</span>' : '') +
+                '</div>' +
+              '</div>'
+            )
+          })
+          .join('')
+        if (!html) {
+          html = '<button class="absolute inset-x-2 top-16 bottom-2 rounded-2xl border border-dashed border-outline-variant/40 text-[11px] font-label font-bold tracking-[0.18em] uppercase text-outline hover:border-primary/40 hover:text-primary transition-colors" data-schedule-empty-day="' + day + '" type="button">Add Session Here</button>'
+        }
+        host.innerHTML = html
+      })
+    }
+
+    function renderFeed() {
+      var ranked = events.slice().sort(function (a, b) {
+        if (a.starred !== b.starred) return a.starred ? -1 : 1
+        if (a.date !== b.date) return a.date.localeCompare(b.date)
+        return minutesFromTime(a.start) - minutesFromTime(b.start)
+      }).slice(0, 4)
+      feed.innerHTML = ranked.map(function (entry) {
+        return (
+          '<div class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group" data-schedule-feed-event="' + escapeHtml(entry.id) + '">' +
+            '<div class="flex justify-between items-start mb-2">' +
+              '<span class="px-2 py-0.5 text-[0.55rem] font-label font-bold rounded ' + subjectTone(entry.color) + '">' + escapeHtml((entry.subject || 'Study').toUpperCase()) + '</span>' +
+              '<span class="text-[0.6rem] font-label font-bold ' + priorityTone(entry.priority) + '">' + escapeHtml(entry.starred ? 'STARRED' : formatMonthDay(new Date(entry.date))) + '</span>' +
+            '</div>' +
+            '<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">' + escapeHtml(entry.title) + '</h5>' +
+            '<div class="mt-3 flex items-center justify-between">' +
+              '<div class="flex items-center gap-4">' +
+                '<div class="flex items-center gap-1 text-slate-500"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[0.65rem] font-label font-semibold">' + escapeHtml(durationHours(entry.start, entry.end)) + '</span></div>' +
+                '<div class="flex items-center gap-1 text-slate-500"><span class="material-symbols-outlined text-[14px]">priority_high</span><span class="text-[0.65rem] font-label font-semibold">' + escapeHtml(entry.priority) + '</span></div>' +
+              '</div>' +
+              '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>' +
+            '</div>' +
+          '</div>'
+        )
+      }).join('')
+    }
+
+    function renderAll() {
+      syncWeekChrome()
+      renderCalendar()
+      renderFeed()
+      writeEvents(events)
+    }
+
+    document.querySelectorAll('[data-schedule-new-session]').forEach(function (button) {
+      button.addEventListener('click', function () { openModal(null) })
+    })
+
+    document.querySelectorAll('[data-schedule-add-day]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        openModal({ date: dateKeyForDay(button.getAttribute('data-schedule-add-day')) })
+      })
+    })
+
+    document.querySelector('[data-schedule-week-prev]').addEventListener('click', function () {
+      weekOffset -= 1
+      writeWeekOffset(weekOffset)
+      renderAll()
+    })
+
+    document.querySelector('[data-schedule-week-next]').addEventListener('click', function () {
+      weekOffset += 1
+      writeWeekOffset(weekOffset)
+      renderAll()
+    })
+
+    document.addEventListener('click', function (event) {
+      var emptyDay = event.target.closest('[data-schedule-empty-day]')
+      if (emptyDay) {
+        openModal({ date: dateKeyForDay(emptyDay.getAttribute('data-schedule-empty-day')) })
+        return
+      }
+      var starToggle = event.target.closest('[data-schedule-star]')
+      if (starToggle) {
+        event.stopPropagation()
+        var starId = starToggle.getAttribute('data-schedule-star')
+        events = events.map(function (entry) {
+          if (entry.id !== starId) return entry
+          return Object.assign({}, entry, { starred: !entry.starred })
+        })
+        renderAll()
+        return
+      }
+      var scheduleCard = event.target.closest('[data-schedule-event]')
+      if (scheduleCard) {
+        var selected = events.find(function (entry) { return entry.id === scheduleCard.getAttribute('data-schedule-event') })
+        openModal(selected || null)
+        return
+      }
+      var feedCard = event.target.closest('[data-schedule-feed-event]')
+      if (feedCard) {
+        var feedEntry = events.find(function (entry) { return entry.id === feedCard.getAttribute('data-schedule-feed-event') })
+        openModal(feedEntry || null)
+      }
+    })
+
+    document.querySelectorAll('[data-schedule-day]').forEach(function (column) {
+      column.addEventListener('dblclick', function (event) {
+        if (event.target.closest('[data-schedule-event]') || event.target.closest('button')) return
+        var rect = column.getBoundingClientRect()
+        var relativeY = Math.max(0, Math.min(rect.height, event.clientY - rect.top))
+        var minutes = 8 * 60 + Math.round((relativeY / rect.height) * (10 * 60) / 30) * 30
+        var hour = Math.floor(minutes / 60)
+        var minute = minutes % 60
+        var endMinutes = Math.min(18 * 60, minutes + 60)
+        openModal({
+          date: dateKeyForDay(column.getAttribute('data-schedule-day')),
+          start: String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0'),
+          end: String(Math.floor(endMinutes / 60)).padStart(2, '0') + ':' + String(endMinutes % 60).padStart(2, '0')
+        })
+      })
+    })
+
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal || event.target.closest('[data-schedule-close]')) closeModal()
+    })
+
+    document.querySelector('[data-schedule-delete]').addEventListener('click', function () {
+      var id = form.querySelector('[data-schedule-id]').value
+      if (!id) return
+      events = events.filter(function (entry) { return entry.id !== id })
+      renderAll()
+      closeModal()
+    })
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+      var nextEvent = {
+        id: form.querySelector('[data-schedule-id]').value || 'evt-' + Date.now(),
+        title: form.querySelector('[data-schedule-field="title"]').value.trim(),
+        subject: form.querySelector('[data-schedule-field="subject"]').value.trim(),
+        date: dateKeyForDay(form.querySelector('[data-schedule-field="day"]').value),
+        start: form.querySelector('[data-schedule-field="start"]').value,
+        end: form.querySelector('[data-schedule-field="end"]').value,
+        location: form.querySelector('[data-schedule-field="location"]').value.trim(),
+        priority: form.querySelector('[data-schedule-field="priority"]').value,
+        color: form.querySelector('[data-schedule-field="color"]').value,
+        starred: form.querySelector('[data-schedule-field="starred"]').checked
+      }
+      if (!nextEvent.title || !nextEvent.start || !nextEvent.end) return
+      if (minutesFromTime(nextEvent.end) <= minutesFromTime(nextEvent.start)) return
+      var existingIndex = events.findIndex(function (entry) { return entry.id === nextEvent.id })
+      if (existingIndex === -1) events.push(nextEvent)
+      else events[existingIndex] = nextEvent
+      renderAll()
+      closeModal()
+    })
+
+    window.addEventListener('storage', function (event) {
+      if (event.key === STORAGE_KEY) {
+        events = readEvents()
+        syncWeekChrome()
+        renderCalendar()
+        renderFeed()
+      }
+      if (event.key === WEEK_KEY) {
+        weekOffset = readWeekOffset()
+        renderAll()
+      }
+    })
+
+    renderAll()
+  })()
+</script>
 <script>
   (function () {
     var READ_KEY = 'sc_home_notifications_read_v3'
