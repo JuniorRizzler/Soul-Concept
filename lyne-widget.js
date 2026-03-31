@@ -215,9 +215,6 @@
       '#lyne-widget.lyne-dragging{transition:none}' +
       '#lyne-widget button,#lyne-widget textarea,#lyne-widget pre{user-select:text}' +
       '.lyne-shell{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:12px}' +
-      '#lyne-drag-pill{position:absolute;right:10px;bottom:72px;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(255,255,255,.76);backdrop-filter:blur(16px) saturate(140%);color:#334155;font:800 10px/1 Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 12px 24px rgba(15,23,42,.12);cursor:grab;touch-action:none;z-index:2}' +
-      '#lyne-drag-pill:before{content:"";width:8px;height:8px;border-radius:999px;background:linear-gradient(135deg,#1d4ed8,#0d9488);box-shadow:0 0 0 4px rgba(37,99,235,.08)}' +
-      '#lyne-drag-pill:active{cursor:grabbing}' +
       '#lyne-hint{position:absolute;right:78px;bottom:6px;max-width:252px;padding:14px 16px 12px;border-radius:22px;background:linear-gradient(155deg,rgba(15,23,42,.94),rgba(29,78,216,.84) 56%,rgba(13,148,136,.78));color:#f8fafc;border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 44px rgba(15,23,42,.28);font:700 11px/1.45 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.98;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 3.1s ease-in-out infinite;pointer-events:auto;backdrop-filter:blur(18px) saturate(145%)}' +
       '#lyne-hint:before{content:"LYNE";display:inline-flex;align-items:center;gap:6px;margin:0 28px 8px 0;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.12);font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}' +
       '#lyne-hint:after{content:"";position:absolute;right:-6px;bottom:18px;width:12px;height:12px;background:linear-gradient(135deg,rgba(37,99,235,.9),rgba(13,148,136,.88));transform:rotate(45deg);border-right:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.14)}' +
@@ -228,13 +225,15 @@
       '.lyne-hint-btn{appearance:none;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:7px 11px;font:800 10px/1 Manrope,system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(10px)}' +
       '.lyne-hint-btn.is-primary{background:#f8fafc;color:#10203d;border-color:transparent;box-shadow:0 8px 18px rgba(15,23,42,.16)}' +
       '#lyne-widget[data-panel-open="true"] #lyne-hint{display:none}' +
-      '#lyne-orb-toggle{width:58px;height:58px;border-radius:20px;border:1px solid rgba(255,255,255,.26);cursor:pointer;position:relative;overflow:hidden;touch-action:none;background:linear-gradient(160deg,#0f172a 0%,#1d4ed8 58%,#0d9488 100%);box-shadow:0 20px 34px rgba(15,23,42,.28),inset 0 1px 0 rgba(255,255,255,.24)}' +
-      '#lyne-orb-toggle:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.3),transparent 38%),linear-gradient(180deg,rgba(255,255,255,.12),transparent 56%)}' +
-      '#lyne-orb-toggle .flame-core{position:absolute;left:18px;top:13px;width:22px;height:28px;border-radius:52% 48% 58% 42%/52% 40% 60% 48%;background:radial-gradient(circle at 40% 30%,#fff7ed 0%,#fde68a 30%,#fb923c 66%,#ea580c 100%);animation:lyneFlame 1.9s ease-in-out infinite;transform-origin:50% 75%}' +
-      '#lyne-orb-toggle .flame-inner{position:absolute;left:24px;top:20px;width:8px;height:11px;border-radius:50% 50% 55% 45%;background:radial-gradient(circle at 50% 24%,#fff 0%,#ffedd5 60%,rgba(255,237,213,.22) 100%);animation:lyneFlameInner 1.1s ease-in-out infinite}' +
-      '#lyne-orb-toggle .flame-glow{position:absolute;inset:8px;border-radius:16px;box-shadow:0 0 28px rgba(59,130,246,.42);animation:lyneGlow 2.1s ease-in-out infinite}' +
-      '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-core{animation-duration:.85s}' +
-      '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-glow{box-shadow:0 0 34px rgba(14,165,233,.62)}' +
+      '#lyne-orb-toggle{width:58px;height:58px;border-radius:18px;border:1px solid rgba(255,255,255,.24);cursor:grab;position:relative;overflow:hidden;touch-action:none;background:linear-gradient(155deg,#ffffff 0%,#eff6ff 35%,#dbeafe 100%);box-shadow:0 18px 32px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.92)}' +
+      '#lyne-orb-toggle:active{cursor:grabbing}' +
+      '#lyne-orb-toggle:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 26% 20%,rgba(255,255,255,.92),transparent 34%),linear-gradient(180deg,rgba(29,78,216,.05),rgba(13,148,136,.08))}' +
+      '#lyne-orb-toggle .flame-core{position:absolute;left:17px;top:16px;width:24px;height:24px;border-radius:8px;background:linear-gradient(145deg,#1d4ed8,#0d9488);box-shadow:0 10px 18px rgba(29,78,216,.28);transform:rotate(8deg);animation:lyneFloatCore 2.8s ease-in-out infinite}' +
+      '#lyne-orb-toggle .flame-core:before{content:"";position:absolute;left:6px;top:6px;width:12px;height:12px;border-radius:4px;background:rgba(255,255,255,.92)}' +
+      '#lyne-orb-toggle .flame-inner{position:absolute;right:13px;top:13px;width:11px;height:11px;border-radius:999px;background:linear-gradient(135deg,#38bdf8,#14b8a6);box-shadow:0 0 0 5px rgba(20,184,166,.12);animation:lyneFloatDot 2.2s ease-in-out infinite}' +
+      '#lyne-orb-toggle .flame-glow{position:absolute;inset:10px;border-radius:14px;box-shadow:0 0 0 1px rgba(29,78,216,.08),0 0 28px rgba(56,189,248,.16)}' +
+      '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-core{animation-duration:1.2s}' +
+      '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-inner{animation-duration:.9s}' +
       '#lyne-panel{position:absolute;right:0;bottom:72px;width:min(360px,92vw);border:1px solid rgba(255,255,255,.46);background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(248,250,252,.9));backdrop-filter:blur(24px) saturate(155%);border-radius:28px;padding:14px;box-shadow:0 30px 64px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.92);opacity:0;transform:translateY(14px) scale(.96);pointer-events:none;transition:opacity .24s ease,transform .24s ease}' +
       '#lyne-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}' +
       '.lyne-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:nowrap;cursor:grab;user-select:none;touch-action:none;padding:2px 2px 10px}' +
@@ -274,10 +273,12 @@
       '#lyne-widget.lyne-return-mode.lyne-return-strong #lyne-chat{border-color:rgba(234,88,12,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.82)}' +
       '#lyne-widget.lyne-return-mode .lyne-compose{display:none}' +
       '#lyne-widget.lyne-return-mode .lyne-panel-actions{display:none}' +
-      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-drag-pill{right:8px;bottom:60px;padding:5px 8px;font-size:8px}#lyne-hint{right:56px;bottom:6px;max-width:176px;padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-core{left:15px;top:10px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:20px;top:16px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:6px;border-radius:12px}#lyne-panel{bottom:58px;width:min(270px,78vw);padding:10px;border-radius:20px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.94rem}.lyne-panel-subtitle{font-size:.66rem}.lyne-panel-actions{gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:42px;max-height:92px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:13px;width:23px;height:28px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{left:24px;top:21px;width:9px;height:12px}}' +
+      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-hint{right:56px;bottom:6px;max-width:176px;padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-core{left:14px;top:13px;width:20px;height:20px;border-radius:7px}#lyne-orb-toggle .flame-core:before{left:5px;top:5px;width:10px;height:10px;border-radius:3px}#lyne-orb-toggle .flame-inner{right:10px;top:10px;width:9px;height:9px}#lyne-orb-toggle .flame-glow{inset:8px;border-radius:12px}#lyne-panel{bottom:58px;width:min(270px,78vw);padding:10px;border-radius:20px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.94rem}.lyne-panel-subtitle{font-size:.66rem}.lyne-panel-actions{gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:42px;max-height:92px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:16px;width:23px;height:23px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core:before{left:6px;top:6px;width:11px;height:11px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{right:12px;top:12px;width:10px;height:10px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
+      '@keyframes lyneFloatCore{0%,100%{transform:rotate(8deg) translateY(0)}50%{transform:rotate(8deg) translateY(-2px)}}' +
+      '@keyframes lyneFloatDot{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.06)}}' +
       '@keyframes lyneHintFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.02)}}' +
       '@keyframes scLyneGuidePulse{0%,100%{box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22)}50%{box-shadow:0 0 0 14px rgba(255,138,28,.1),0 20px 36px rgba(20,20,28,.28)}}'
     document.head.appendChild(style)
@@ -290,7 +291,6 @@
     widget.setAttribute('data-panel-open', 'false')
     widget.innerHTML =
       '<div class="lyne-shell">' +
-      '<button id="lyne-drag-pill" type="button" aria-label="Move LYNE">Move</button>' +
       '<div id="lyne-hint"><span class="lyne-hint-text">Talk to LYNE.</span></div>' +
       '<button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false">' +
       '<span class="flame-glow" aria-hidden="true"></span>' +
@@ -347,6 +347,37 @@
     var value = String(text || '').trim() || DEFAULT_CHAT
     chatNode.textContent = value
     writeText(CHAT_KEY, value)
+    var hintNode = document.getElementById('lyne-hint')
+    var panelNode = document.getElementById('lyne-panel')
+    if (hintNode && panelNode && !panelNode.classList.contains('open')) {
+      var preview = escapeHtml(latestLyneMessage(value))
+      var actionMarkup = '<div class="lyne-hint-actions"><button class="lyne-hint-btn is-primary" type="button" data-lyne-hint-action="spotlight-open">Open LYNE</button></div>'
+      hintNode.innerHTML =
+        '<button class="lyne-hint-close" type="button" aria-label="Close LYNE prompt" data-lyne-hint-dismiss>&times;</button>' +
+        '<span class="lyne-hint-text">' + preview + '</span>' +
+        actionMarkup
+      hintNode.style.display = ''
+    }
+  }
+
+  function latestLyneMessage(text) {
+    var raw = String(text || '').trim()
+    if (!raw) return 'LYNE is ready. Open me and ask what to study next.'
+    var match = raw.match(/LYNE:\s*([\s\S]*)$/i)
+    var body = match ? match[1] : raw
+    body = body.replace(/\s+/g, ' ').trim()
+    if (!body) body = 'LYNE is ready. Open me and ask what to study next.'
+    if (body.length > 92) body = body.slice(0, 89).trim() + '...'
+    return body
+  }
+
+  function escapeHtml(text) {
+    return String(text || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
   }
 
   function normalizeAssistantText(text, fallbackPrompt) {
@@ -538,9 +569,8 @@
     var meta = document.getElementById('lyne-meta')
     var chat = document.getElementById('lyne-chat')
     var hint = document.getElementById('lyne-hint')
-    var dragPill = document.getElementById('lyne-drag-pill')
     var dragHandle = panel.querySelector('[data-lyne-drag-handle]')
-    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !tutorialBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint || !dragPill) return
+    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !tutorialBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint) return
 
     function playUiSound(name) {
       try {
@@ -604,7 +634,8 @@
     }
 
       function setDefaultHint() {
-        setHintContent('Talk to LYNE.')
+        var preview = latestLyneMessage(readText(CHAT_KEY, DEFAULT_CHAT))
+        setHintContent(preview, [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
       }
 
       function clearTutorSpotlightTimers() {
@@ -1445,12 +1476,12 @@
       window.addEventListener('touchcancel', end)
     }
 
+    orbToggle.addEventListener('pointerdown', beginDrag)
     dragHandle.addEventListener('pointerdown', beginDrag)
-    dragPill.addEventListener('pointerdown', beginDrag)
+    orbToggle.addEventListener('mousedown', beginDrag)
     dragHandle.addEventListener('mousedown', beginDrag)
-    dragPill.addEventListener('mousedown', beginDrag)
+    orbToggle.addEventListener('touchstart', beginDrag, { passive: false })
     dragHandle.addEventListener('touchstart', beginDrag, { passive: false })
-    dragPill.addEventListener('touchstart', beginDrag, { passive: false })
     panelClose.addEventListener('pointerdown', function (event) {
       event.stopPropagation()
     })
