@@ -357,26 +357,9 @@
       node.style.filter = "grayscale(0.25)";
       node.style.position = "relative";
 
-      if (!node.querySelector("[data-stitch-blocked-badge]")) {
-        const badge = document.createElement("span");
-        badge.dataset.stitchBlockedBadge = "true";
-        badge.textContent = "In Progress";
-        badge.style.position = "absolute";
-        badge.style.top = "50%";
-        badge.style.right = "0.35rem";
-        badge.style.transform = "translateY(-50%)";
-        badge.style.padding = "0.12rem 0.32rem";
-        badge.style.borderRadius = "999px";
-        badge.style.fontSize = "0.5rem";
-        badge.style.fontWeight = "800";
-        badge.style.letterSpacing = "0.08em";
-        badge.style.textTransform = "uppercase";
-        badge.style.lineHeight = "1";
-        badge.style.background = "rgba(148, 163, 184, 0.14)";
-        badge.style.color = "rgba(71, 85, 105, 0.94)";
-        badge.style.pointerEvents = "none";
-        badge.style.boxShadow = "0 1px 3px rgba(15, 23, 42, 0.08)";
-        node.appendChild(badge);
+      const existingBadge = node.querySelector("[data-stitch-blocked-badge]");
+      if (existingBadge && existingBadge.parentNode) {
+        existingBadge.parentNode.removeChild(existingBadge);
       }
     });
   }

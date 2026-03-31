@@ -9,6 +9,8 @@
   var ONBOARDING_STEP_KEY = 'sc_lyne_onboarding_step_v1'
   var ONBOARDING_DISMISSED_KEY = 'sc_lyne_onboarding_dismissed_v1'
   var ONBOARDING_VOICE_KEY = 'sc_lyne_onboarding_voice_v1'
+  var FINAL_SPEECH_PAUSE_MS = 720
+  var INTERIM_SPEECH_PAUSE_MS = 1450
   var DEFAULT_CHAT = 'LYNE AI: I am your Soul Concept study assistant. Open me and talk to me anytime.'
   var DEFAULT_STILL_HERE = 'I am LYNE, the Soul Concept AI. Ask me where to go in the app, what to study next, or what concept you want explained.'
   var LYNE_APP_CONTEXT =
@@ -1730,7 +1732,7 @@
           }
           captureText = transcript
           meta.textContent = event.results[i].isFinal ? 'Heard: ' + transcript : 'Hearing: ' + transcript
-          scheduleFlush(event.results[i].isFinal ? 260 : 850)
+          scheduleFlush(event.results[i].isFinal ? FINAL_SPEECH_PAUSE_MS : INTERIM_SPEECH_PAUSE_MS)
         }
       }
       recognition.onerror = function (event) {
