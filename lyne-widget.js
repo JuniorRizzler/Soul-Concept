@@ -1381,11 +1381,14 @@
     }
 
     function beginDrag(startEvent) {
+      if (!startEvent) return
       if (startEvent.button != null && startEvent.button !== 0) return
       if (returnPromptActive) return
+      var touch = startEvent.touches && startEvent.touches[0] ? startEvent.touches[0] : null
+      var startX = touch ? touch.clientX : startEvent.clientX
+      var startY = touch ? touch.clientY : startEvent.clientY
+      if (startX == null || startY == null) return
       if (typeof startEvent.preventDefault === 'function') startEvent.preventDefault()
-      var startX = startEvent.clientX
-      var startY = startEvent.clientY
       var rect = widget.getBoundingClientRect()
       var originX = rect.left
       var originY = rect.top
@@ -1399,9 +1402,14 @@
       }
 
       function move(moveEvent) {
+        var moveTouch = moveEvent.touches && moveEvent.touches[0] ? moveEvent.touches[0] : null
         if (moveEvent.pointerId != null && startEvent.pointerId != null && moveEvent.pointerId !== startEvent.pointerId) return
-        var deltaX = moveEvent.clientX - startX
-        var deltaY = moveEvent.clientY - startY
+        var clientX = moveTouch ? moveTouch.clientX : moveEvent.clientX
+        var clientY = moveTouch ? moveTouch.clientY : moveEvent.clientY
+        if (clientX == null || clientY == null) return
+        if (typeof moveEvent.preventDefault === 'function') moveEvent.preventDefault()
+        var deltaX = clientX - startX
+        var deltaY = clientY - startY
         if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
           didDrag = true
         }
@@ -1413,6 +1421,11 @@
         window.removeEventListener('pointermove', move)
         window.removeEventListener('pointerup', end)
         window.removeEventListener('pointercancel', end)
+        window.removeEventListener('mousemove', move)
+        window.removeEventListener('mouseup', end)
+        window.removeEventListener('touchmove', move)
+        window.removeEventListener('touchend', end)
+        window.removeEventListener('touchcancel', end)
         if (pointerOwner && startEvent.pointerId != null && typeof pointerOwner.releasePointerCapture === 'function') {
           try { pointerOwner.releasePointerCapture(startEvent.pointerId) } catch (_err) {}
         }
@@ -1421,10 +1434,19 @@
       window.addEventListener('pointermove', move)
       window.addEventListener('pointerup', end)
       window.addEventListener('pointercancel', end)
+      window.addEventListener('mousemove', move)
+      window.addEventListener('mouseup', end)
+      window.addEventListener('touchmove', move, { passive: false })
+      window.addEventListener('touchend', end)
+      window.addEventListener('touchcancel', end)
     }
 
     orbToggle.addEventListener('pointerdown', beginDrag)
     dragHandle.addEventListener('pointerdown', beginDrag)
+    orbToggle.addEventListener('mousedown', beginDrag)
+    dragHandle.addEventListener('mousedown', beginDrag)
+    orbToggle.addEventListener('touchstart', beginDrag, { passive: false })
+    dragHandle.addEventListener('touchstart', beginDrag, { passive: false })
     panelClose.addEventListener('pointerdown', function (event) {
       event.stopPropagation()
     })
