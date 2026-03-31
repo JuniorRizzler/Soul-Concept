@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP World History — Unit 3: Land-Based Empires</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e0d;
+    --surface: #101614;
+    --card: #161c1a;
+    --card-hover: #1a2220;
+    --border: #222e2a;
+    --border-light: #2e3d38;
+    --teal: #4aab98;
+    --teal-dim: #2e7a6e;
+    --teal-bright: #6dd4c4;
+    --amber: #d4893a;
+    --rose: #b5605a;
+    --violet: #7a6bb5;
+    --sage: #6aab6e;
+    --gold: #c9a84c;
+    --text: #d8e8e4;
+    --text-dim: #809088;
+    --text-muted: #445048;
+    --accent-bar: 3px solid var(--teal);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-brand {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  .sidebar-brand .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .nav-section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 1rem 1.5rem 0.4rem;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 0.45rem 1.5rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-family: 'Source Serif 4', serif;
+    transition: all 0.15s ease;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+  .nav-item:hover {
+    color: var(--teal);
+    background: rgba(74,171,152,0.06);
+    border-left-color: var(--teal-dim);
+  }
+  .nav-item.active {
+    color: var(--teal);
+    border-left-color: var(--teal);
+    background: rgba(74,171,152,0.1);
+  }
+
+  /* ─── MAIN ─── */
+  main {
+    padding: 3rem 3.5rem 5rem;
+    max-width: 860px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--teal-dim);
+    opacity: 0.4;
+    max-width: 80px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 580px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-meta .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 4rem;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--teal-dim);
+    padding-top: 0.4rem;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .section-header h2 .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--teal);
+    background: rgba(74,171,152,0.12);
+    border: 1px solid rgba(74,171,152,0.25);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  p { margin-bottom: 1rem; color: var(--text-dim); font-size: 0.95rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: var(--accent-bar);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.amber { border-left-color: var(--amber); }
+  .callout.rose  { border-left-color: var(--rose); }
+  .callout.violet{ border-left-color: var(--violet); }
+  .callout.sage  { border-left-color: var(--sage); }
+  .callout.gold  { border-left-color: var(--gold); }
+
+  .callout-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .callout.amber .callout-label { color: var(--amber); }
+  .callout.rose  .callout-label { color: var(--rose); }
+  .callout.violet .callout-label { color: var(--violet); }
+  .callout.sage  .callout-label { color: var(--sage); }
+  .callout.gold  .callout-label { color: var(--gold); }
+
+  .callout p { font-size: 0.88rem; margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ─── CARDS ─── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  .card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+  .card-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  .card p { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0; }
+
+  /* ─── TERM LIST ─── */
+  .term-list { margin: 1.5rem 0; }
+  .term {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .term:last-child { border-bottom: none; }
+  .term-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--teal);
+    font-weight: 500;
+  }
+  .term-def { font-size: 0.88rem; color: var(--text-dim); }
+
+  /* ─── TABLE ─── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+  .compare-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--card);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+    background: var(--surface);
+  }
+  .compare-table tr:hover td { background: var(--card); }
+  .compare-table td:first-child {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.82rem;
+    background: var(--card);
+    white-space: nowrap;
+  }
+
+  /* ─── EXAM FOCUS ─── */
+  .exam-focus {
+    background: rgba(74,171,152,0.05);
+    border: 1px solid rgba(74,171,152,0.2);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  .exam-focus-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .exam-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--teal);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .exam-focus-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+  .exam-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .exam-col h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+  .exam-col ul { list-style: none; padding: 0; }
+  .exam-col ul li {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    padding: 0.35rem 0;
+    padding-left: 1rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .exam-col ul li:last-child { border-bottom: none; }
+  .exam-col ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--teal-dim);
+    font-weight: 700;
+  }
+  .exam-col.mistakes li::before { color: var(--rose); content: '✕'; font-size: 0.7rem; top: 0.4rem; }
+
+  /* ─── EXAMPLE BLOCK ─── */
+  .example-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .example-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .example-weak, .example-strong {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+  }
+  .example-weak {
+    background: rgba(181,96,90,0.1);
+    border-left: 3px solid var(--rose);
+    color: var(--text-dim);
+  }
+  .example-strong {
+    background: rgba(106,171,110,0.1);
+    border-left: 3px solid var(--sage);
+    color: var(--text-dim);
+  }
+  .example-weak::before   { content: '✕ WEAK: ';   color: var(--rose); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+  .example-strong::before { content: '✓ STRONG: '; color: var(--sage); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+
+  /* ─── FRAMEWORK ─── */
+  .framework {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .framework-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1rem 1.1rem;
+    border-radius: 4px;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .framework-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--teal-dim);
+    padding-top: 0.15rem;
+    min-width: 20px;
+  }
+  .framework-item h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .framework-item p { font-size: 0.78rem; margin-bottom: 0; }
+
+  /* ─── EMPIRE PROFILE CARDS ─── */
+  .empire-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .empire-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .empire-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-1px);
+  }
+  .empire-card-top {
+    padding: 1rem 1.2rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .empire-card-top h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .empire-card-top .dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+  .empire-card-body { padding: 0.9rem 1.2rem; }
+  .empire-card-body p { font-size: 0.8rem; margin-bottom: 0.4rem; }
+  .empire-card-body ul { list-style: none; padding: 0; }
+  .empire-card-body ul li {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    padding: 0.25rem 0 0.25rem 1rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .empire-card-body ul li:last-child { border-bottom: none; }
+  .empire-card-body ul li::before { content: '·'; position: absolute; left: 0.2rem; color: var(--teal-dim); }
+
+  /* ─── RESISTANCE EVENTS ─── */
+  .resistance-list { margin: 1.5rem 0; }
+  .resistance-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .resistance-item:last-child { border-bottom: none; }
+  .resistance-who {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--rose);
+    font-weight: 500;
+  }
+  .resistance-what { font-size: 0.85rem; color: var(--text-dim); }
+
+  /* ─── MISC ─── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  h3.sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3.sub .accent { color: var(--teal); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    main { padding: 2rem 1.5rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .empire-grid, .exam-col-grid, .framework { grid-template-columns: 1fr; }
+    .term { grid-template-columns: 1fr; gap: 0.25rem; }
+    .resistance-item { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ─── SIDEBAR ─── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="label">AP World History</div>
+      <h2>Unit 3: Land-Based Empires<br>1450–1750</h2>
+    </div>
+
+    <div class="nav-section-label">Overview</div>
+    <a class="nav-item active" href="#intro">Why Empires Expanded</a>
+
+    <div class="nav-section-label">The Major Empires</div>
+    <a class="nav-item" href="#empires-overview">Empire Profiles</a>
+    <a class="nav-item" href="#gunpowder">Gunpowder Empires</a>
+
+    <div class="nav-section-label">How Empires Governed</div>
+    <a class="nav-item" href="#administration">Administration & Legitimacy</a>
+    <a class="nav-item" href="#culture">Culture, Religion & Identity</a>
+    <a class="nav-item" href="#social">Social Structures & Gender</a>
+    <a class="nav-item" href="#economics">Economic Foundations</a>
+
+    <div class="nav-section-label">Challenges & Change</div>
+    <a class="nav-item" href="#decline">Decline & Resistance</a>
+    <a class="nav-item" href="#europe-thought">European Thought</a>
+    <a class="nav-item" href="#europe-states">European State Rivalry</a>
+    <a class="nav-item" href="#africa">African States</a>
+  </nav>
+
+  <!-- ─── MAIN ─── -->
+  <main>
+
+    <!-- ─── HERO ─── -->
+    <div class="hero">
+      <div class="eyebrow">AP World History · Unit 3</div>
+      <h1>Land-Based <em>Empires</em></h1>
+      <p class="subtitle">How rulers conquered vast territories, kept them loyal, and built some of the most powerful states in world history — from the Ottomans to the Qing.</p>
+      <div class="hero-meta">
+        <span class="pill">1450–1750</span>
+        <span class="pill">State Building</span>
+        <span class="pill">Gunpowder Empires</span>
+        <span class="pill">Governance & Legitimacy</span>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 1: WHY EMPIRES EXPANDED ─── -->
+    <section class="section" id="intro">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>Why Empires Expanded <span class="tag">Overview</span></h2>
+      </div>
+
+      <p>Land-based empires ruled through control of <strong>connected territory</strong>, not overseas colonies. Their core challenge: how do you conquer huge areas and then keep them loyal, taxed, and stable? This era is one of the most important state-building moments in world history.</p>
+
+      <div class="callout amber">
+        <div class="callout-label">Common Misconception</div>
+        <p>Empires didn't always expand because they had strong economies first. <strong>Often it worked the opposite way:</strong> rulers expanded to obtain revenue, then struggled to manage the costs of ruling what they conquered.</p>
+      </div>
+
+      <h3 class="sub">Four Real Reasons Empires Expanded</h3>
+      <div class="framework">
+        <div class="framework-item">
+          <div class="framework-num">01</div>
+          <div>
+            <h5>Security & Buffer Zones</h5>
+            <p>Expanding outward creates protective borders. Russia's push into Siberia was partly about securing frontiers, not just grabbing land.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">02</div>
+          <div>
+            <h5>Control of Trade Routes</h5>
+            <p>The Ottomans grew by capturing hubs of commerce and key cities around the eastern Mediterranean.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">03</div>
+          <div>
+            <h5>Legitimacy & Prestige</h5>
+            <p>Military success was treated as proof that heaven or fate supported your rule. Conquest made rulers look divinely favored.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">04</div>
+          <div>
+            <h5>Revenue Needs</h5>
+            <p>Armies and bureaucracies cost money. Conquest added taxable land and people — at least in the short run.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">The "Tools" of Expansion</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">💣</div>
+          <h4>Gunpowder Weapons</h4>
+          <p>The key isn't just "they had guns" — it's that they built states capable of producing weapons, training specialists, and funding standing armies over time.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🐎</div>
+          <h4>Cavalry & Steppe Traditions</h4>
+          <p>Speed and mobility still mattered. The Safavids, Mughals, and Qing all emerged from or were shaped by steppe military cultures.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤝</div>
+          <h4>Diplomacy & Local Elites</h4>
+          <p>Conquest was rarely total replacement. Many empires bargained with regional power-holders, using intermarriage, hostages, or co-opting religious leaders.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Key Principle</div>
+        <p>Empires are not just military machines — they are <strong>negotiated systems of power.</strong> Expansion required consolidation: forts, appointed officials, standardized taxes, and ideological narratives of why the ruler deserves obedience.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Expansion Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain one cause of imperial expansion 1450–1750 with an example</li>
+              <li>Compare how two empires expanded (Ottoman vs. Russian methods)</li>
+              <li>Describe how gunpowder changed warfare or state power</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating gunpowder as the only cause — ignores admin, logistics, alliances</li>
+              <li>Vague claims like "they wanted more land" — specify security, trade routes, or legitimacy</li>
+              <li>Confusing land-based empires with maritime empires</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 2: EMPIRE PROFILES ─── -->
+    <section class="section" id="empires-overview">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>The Major Empires <span class="tag">Evidence</span></h2>
+      </div>
+
+      <p>These are the empires you're expected to know for the AP exam. Each illustrates shared patterns (expansion, governance, culture) while being distinct enough for comparison questions.</p>
+
+      <div class="empire-grid">
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>🌙 Ottoman Empire</h4>
+            <div class="dates">Sunni Islam · SE Europe, N. Africa, SW Asia</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Founded under Osman Bey as Mongols collapsed</li>
+              <li>Conquered Constantinople in 1453, ending Byzantine Empire</li>
+              <li>Timars: land grants to aristocrats for administration</li>
+              <li>Devshirme: enslaved Christian boys trained as Janissary soldiers</li>
+              <li>Selim I expanded the empire significantly after 1512</li>
+              <li>Suleiman I (1520–1566) = golden age of military and arts</li>
+              <li>Took parts of Hungary; could not conquer Vienna</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>⚔️ Safavid Empire</h4>
+            <div class="dates">Twelver Shi'a Islam · Persia/Iran</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Promoted Shi'a Islam as state identity in a Sunni-majority region</li>
+              <li>Religion was a political technology, not just personal faith</li>
+              <li>Unified supporters but deepened conflict with Ottoman neighbors</li>
+              <li>Key example of how state-sponsored religion can define an empire</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>🕌 Mughal Empire</h4>
+            <div class="dates">Muslim elite, majority Hindu population · Indian subcontinent</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Babur (Mongol leader) invaded N. India in 1526</li>
+              <li>Akbar (1556–1605): expanded, used religious toleration, empowered zamindars (tax collectors)</li>
+              <li>Shah Jahan: built the Taj Mahal — imperial wealth + legitimacy in stone</li>
+              <li>Aurangzeb: ended tolerance, persecuted Hindus, sparked resistance</li>
+              <li>Europeans arrived early 17th century to trade; Britain later dominant</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>🐉 Qing Dynasty</h4>
+            <div class="dates">Manchu rulers over Chinese majority · East Asia</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Ming Dynasty (1368–1644) preceded Qing; Zheng He's naval voyages in early 15th c.</li>
+              <li>Ming weakened by silver inflation, famine, peasant revolts</li>
+              <li>Manchu Qing took power in 1644; ruled until 1911</li>
+              <li>Used Confucian norms + Chinese symbols to claim legitimacy</li>
+              <li>Kangxi (1661–1722): conquered Taiwan, Mongolia, Central Asia, Tibet</li>
+              <li>Qianlong (1735–1796): conquered Vietnam, Burma, Nepal</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>🎭 Tokugawa Japan</h4>
+            <div class="dates">Internal consolidation, not expansion · Japan</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Tokugawa Ieyasu established Edo period (1600–1868)</li>
+              <li>Rigid social class system; political center moved to Edo (Tokyo)</li>
+              <li>National Seclusion Policy (1635): banned foreign travel and most foreigners</li>
+              <li>Culture thrived: Kabuki theatre, haiku poetry became popular</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>🐻 Russian Empire</h4>
+            <div class="dates">Orthodox Christianity · Expanding across Eurasia</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Ivan III threw off Mongol rule; Moscow became Orthodox center</li>
+              <li>Ivan IV (Ivan the Terrible): feared ruler, expanded east by recruiting serfs</li>
+              <li>Time of Troubles (1604–1613) after Ivan IV died without heir</li>
+              <li>Romanov dynasty (1613–1917) consolidated power ruthlessly</li>
+              <li>Peter the Great (1682–1725): westernized and modernized Russia</li>
+              <li>Catherine the Great (1762–1796): promoted education and Western culture</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Empire Identification Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Identify a distinctive feature of one empire's rule (Safavid Shi'ism, Qing Manchu identity)</li>
+              <li>Compare two empires' strategies for governing diversity</li>
+              <li>Provide specific evidence — names of institutions, policies, rulers</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Mixing up Safavid (Shi'a) and Ottoman (Sunni) religious identities</li>
+              <li>Treating Tokugawa Japan as expansionist — it's about internal consolidation</li>
+              <li>Listing facts without explaining what they prove about state-building</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 3: GUNPOWDER EMPIRES ─── -->
+    <section class="section" id="gunpowder">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>The Gunpowder Empires <span class="tag">Comparison</span></h2>
+      </div>
+
+      <p>The Ottomans, Safavids, and Mughals are often grouped as <strong>gunpowder empires</strong> because firearms and military organization played major roles in their rise. But success also depended on administration, diplomacy, and economic capacity.</p>
+
+      <h3 class="sub">Side-by-Side Comparison</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Ottoman</th>
+            <th>Safavid</th>
+            <th>Mughal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Religious Identity</td>
+            <td>Sunni Islam; managed diverse faiths</td>
+            <td>Twelver Shi'a Islam as state identity</td>
+            <td>Muslim elite ruling majority Hindus</td>
+          </tr>
+          <tr>
+            <td>Key Governance Tool</td>
+            <td>Devshirme, timars, Janissaries</td>
+            <td>State-enforced religious unity</td>
+            <td>Religious tolerance (Akbar) or orthodoxy (Aurangzeb)</td>
+          </tr>
+          <tr>
+            <td>Population Strategy</td>
+            <td>Pragmatic tolerance; community autonomy</td>
+            <td>Shi'a enforcement; tensions with Sunnis</td>
+            <td>Cooperation with Hindu landowners and regional elites</td>
+          </tr>
+          <tr>
+            <td>Famous Monument / Symbol</td>
+            <td>Istanbul as Islamic cultural center</td>
+            <td>Persian court and religious architecture</td>
+            <td>Taj Mahal (Shah Jahan)</td>
+          </tr>
+          <tr>
+            <td>Key Vulnerability</td>
+            <td>Could not conquer Vienna; costly wars</td>
+            <td>Ongoing Ottoman–Safavid rivalry</td>
+            <td>Aurangzeb's policies sparked major rebellions</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="example-block">
+        <div class="example-label">Model Comparison Argument (LEQ-Style)</div>
+        <div class="example-weak">Both the Safavid and Mughal empires used religion to legitimize rule.</div>
+        <div class="example-strong">Both the Safavid and Mughal empires used religion to legitimize rule, but the Safavids pursued a uniform state religious identity while Mughal rulers often relied on accommodation of diverse communities — because a ruler of a majority-non-Muslim population could not enforce religious uniformity without triggering massive resistance.</div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Gunpowder Empire Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Compare how two gunpowder empires used religion to legitimize rule</li>
+              <li>Explain a factor that contributed to the rise of one gunpowder empire</li>
+              <li>Use specific evidence: Ottoman diversity management, Safavid Shi'a identity, Mughal religious policy</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>"Gunpowder empire" doesn't mean they won because of guns — you still need administration and revenue</li>
+              <li>Confusing Safavid Shi'a identity with Ottoman Sunni tradition</li>
+              <li>Writing empire descriptions without linking them to state-building or legitimacy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 4: ADMINISTRATION ─── -->
+    <section class="section" id="administration">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Administration & Legitimacy <span class="tag">Governance</span></h2>
+      </div>
+
+      <p>Conquest creates an empire, but <strong>administration keeps it alive.</strong> Ask three questions to understand how any empire governed:</p>
+
+      <div class="framework">
+        <div class="framework-item">
+          <div class="framework-num">Q1</div>
+          <div>
+            <h5>Who carries out the ruler's orders?</h5>
+            <p>Bureaucrats, local nobles, military governors — each creates different incentives and risks.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">Q2</div>
+          <div>
+            <h5>How does the state get money?</h5>
+            <p>Tax systems, labor systems, land grants — follow the money to understand power.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">Q3</div>
+          <div>
+            <h5>Why do people accept this rule?</h5>
+            <p>Religion, tradition, prosperity, ideology — legitimacy sustains rule long-term; fear alone does not.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">⚠️</div>
+          <div>
+            <h5>The Elite Problem</h5>
+            <p>Empires need elites (generals, nobles), but elites are also threats. Co-opt them with land and status, or limit them through bureaucracy and rotating offices.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Key Governance Concepts</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Bureaucracy</div>
+          <div class="term-def">Professional administrative system staffed by officials. Not "boring background" — stable tax collection funds armies; professional admin reduces dependence on rebellious nobles.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Indirect Rule</div>
+          <div class="term-def">Cooperating with local elites who keep some authority, send taxes/tribute, and in return are protected by the empire. Efficient but risky — local elites can become bases for rebellion.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Legal Pluralism</div>
+          <div class="term-def">Different communities governed by different legal traditions under one imperial umbrella. The Ottoman Empire is the classic example.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Legitimacy</div>
+          <div class="term-def">The belief that a ruler has the right to rule. Built through religion, titles, art and architecture, prosperity, and order. When it weakens, rulers lean harder on ideology or repression.</div>
+        </div>
+      </div>
+
+      <div class="callout sage">
+        <div class="callout-label">Why Tolerance Could Be Smart</div>
+        <p>Pragmatic tolerance can <strong>reduce rebellion and increase revenue</strong> by letting communities govern themselves. Forced assimilation can unify a core group but may provoke widespread resistance. Always explain the governing logic — not just the policy.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Governance Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how an empire maintained control over diverse populations</li>
+              <li>Compare bureaucracy vs. indirect rule; tolerance vs. enforcement</li>
+              <li>Use evidence of legitimacy-building (religious policy, art/architecture)</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Describing tolerance without explaining the political purpose (stability, revenue)</li>
+              <li>Assuming empires were centrally controlled in every region — most relied on local power</li>
+              <li>Confusing legitimacy with fear; fear enforces obedience but legitimacy sustains long-term rule</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 5: CULTURE & RELIGION ─── -->
+    <section class="section" id="culture">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Culture, Religion & Identity <span class="tag">Thematic</span></h2>
+      </div>
+
+      <p>In Unit 3, <strong>culture and religion are tools of government, not just art and beliefs.</strong> Empires used shared identities to unify subjects — but identity policies could also divide populations and provoke resistance.</p>
+
+      <h3 class="sub">Religion: Unify or Enforce?</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🕊️</div>
+          <h4>Pluralism / Tolerance</h4>
+          <p>Reduces rebellion, encourages trade, lets communities self-govern. Outcome depends on how many groups exist and whether the state can consistently enforce anything.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚔️</div>
+          <h4>Religious Enforcement</h4>
+          <p>Strengthens a unified ruling ideology but can create resentment or motivate uprisings — especially if the majority population doesn't share the ruler's faith.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔀</div>
+          <h4>Syncretism</h4>
+          <p>Blending of beliefs from different traditions. Large empires and active trade routes increase syncretism. Connect to empire: diverse populations create exchange; governments may encourage or suppress it.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Art & Architecture as Political Messaging</h3>
+      <p>Monumental buildings are <strong>public arguments:</strong> "This ruler is powerful, wealthy, and legitimate." They require labor and resources — proof of state capacity. Styles can blend local and imperial traditions to communicate unity.</p>
+
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Taj Mahal</div>
+          <div class="term-def">Built under Shah Jahan. Classic example of imperial architecture as legitimacy — monumental scale proves wealth, blends Islamic and Indian styles, honors the dynasty.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Istanbul</div>
+          <div class="term-def">After 1453, the Ottomans made Constantinople a center of Islamic civilization, transforming its architecture and symbolism to legitimize Ottoman rule as heirs of both Roman and Islamic traditions.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Qing Portrait Strategy</div>
+          <div class="term-def">Qing emperors presented themselves with Chinese historical items in imperial portraits to claim legitimacy as proper Chinese emperors — despite being Manchu conquerors.</div>
+        </div>
+      </div>
+
+      <div class="callout violet">
+        <div class="callout-label">The Qing Balancing Act</div>
+        <p>Conquest dynasties face a classic dilemma: how does a minority rule a large majority? The Qing solution: <strong>dual legitimacy.</strong> Adopt majority governing traditions (Confucian norms, Chinese bureaucracy) while maintaining a distinct elite identity (preserving Manchu status and military traditions). The key isn't whether they "became Chinese" or "stayed Manchu" — it's that they used both identities strategically.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Culture & Identity Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how rulers used religion, art, or architecture to legitimize authority</li>
+              <li>Compare imperial approaches to religious diversity</li>
+              <li>Analyze how conquest dynasties maintained legitimacy among majority populations</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating cultural developments as separate from politics — always connect to legitimacy</li>
+              <li>Using "syncretism" as a buzzword without explaining what blended and why</li>
+              <li>Making universal claims like "religious tolerance always caused peace"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 6: SOCIAL STRUCTURES ─── -->
+    <section class="section" id="social">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Social Structures & Gender <span class="tag">Society</span></h2>
+      </div>
+
+      <p>Social hierarchies were often reinforced because they made society easier to govern. But rigid hierarchies also produced resentment and resistance.</p>
+
+      <h3 class="sub">The Imperial Social Pyramid</h3>
+      <div class="framework">
+        <div class="framework-item">
+          <div class="framework-num">▲</div>
+          <div>
+            <h5>Ruling Elite</h5>
+            <p>Monarch, court, top administrators. Hold political power and define law.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">▲▲</div>
+          <div>
+            <h5>Regional Elites</h5>
+            <p>Nobles, landlords, military leaders. Secured through land grants and titles in exchange for loyalty.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">▲▲▲</div>
+          <div>
+            <h5>Urban Groups</h5>
+            <p>Merchants, artisans, religious scholars. Provide trade revenue; religious scholars can legitimize rule.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">▲▲▲▲</div>
+          <div>
+            <h5>Peasantry & Laborers</h5>
+            <p>The majority. Carry the tax burden. Economic shocks to this group become political crises.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Gender & Patriarchy</h3>
+      <p>Patriarchy was widespread, but <strong>don't write "women had no power."</strong> A more accurate approach: distinguish formal political limits from informal influence. Elite women in imperial courts sometimes exercised power through family networks, patronage, and court politics — even when formal roles were restricted.</p>
+
+      <h3 class="sub">Tokugawa Japan: Social Order as Strategy</h3>
+      <p>After long internal conflict, the Tokugawa rulers created a <strong>rigid social class system</strong> as deliberate state policy — pairing political unity with social discipline to prevent future civil war. This is a model case of hierarchy serving governance.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Social Structure Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how social hierarchies supported political stability</li>
+              <li>Compare the role of elites in maintaining imperial control</li>
+              <li>Analyze continuity and change in gender roles 1450–1750</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating social hierarchy as "culture only" — connect it to taxation, labor, governance</li>
+              <li>Absolute claims about women's power without nuance or specific context</li>
+              <li>Ignoring how social structures could produce resistance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 7: ECONOMICS ─── -->
+    <section class="section" id="economics">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>Economic Foundations <span class="tag">Thematic</span></h2>
+      </div>
+
+      <p><strong>Empires are expensive.</strong> Armies, fortresses, roads, and courts require steady revenue. In 1450–1750, most states relied heavily on agriculture — so controlling land and extracting rural surplus was central to everything.</p>
+
+      <h3 class="sub">How Empires Got Money</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Land Taxes</div>
+          <div class="term-def">The primary revenue source in agrarian empires — taxing agricultural production on land the state controlled or granted to nobles.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Trade Taxes</div>
+          <div class="term-def">Customs duties on goods moving through imperial territory. Controlling key trade routes = controlling this revenue stream.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Tribute</div>
+          <div class="term-def">Payments from dependent regions or subject peoples — one reason expansion was financially attractive short-term.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Tax Farming</div>
+          <div class="term-def">Selling the right to collect taxes to local agents. Efficient short-term but risky — agents often skimmed revenue and enriched themselves while weakening the center.</div>
+        </div>
+      </div>
+
+      <h3 class="sub">Labor Systems: Russian Serfdom</h3>
+      <p>Russian serfdom bound peasants to land and landlords, restricting their movement. It <strong>supported the state</strong> by stabilizing agricultural production, ensuring landlords could extract labor, and guaranteeing elite economic power in exchange for service to the tsar. It was also <strong>risky</strong>: it increased inequality and resentment, contributing to revolts under economic stress.</p>
+
+      <div class="callout amber">
+        <div class="callout-label">Fiscal Crisis Pattern</div>
+        <p>Many empires declined through the same chain: <strong>wars → increased costs → revenue strain → higher taxes → revolts → legitimacy collapse.</strong> Connecting economics to political outcomes earns strong analysis marks on the AP exam.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Economics Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how an empire financed military expansion</li>
+              <li>Analyze how Russian serfdom shaped state power</li>
+              <li>Compare economic foundations of two empires</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Mentioning taxes or serfdom without explaining how they strengthened or destabilized the empire</li>
+              <li>Ignoring the relationship between war costs and fiscal crisis</li>
+              <li>Treating trade as separate from governance — link commerce to revenue and state power</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 8: DECLINE & RESISTANCE ─── -->
+    <section class="section" id="decline">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2>Decline & Resistance <span class="tag">Causation</span></h2>
+      </div>
+
+      <p>Decline rarely has one cause — it's usually a chain reaction where problems reinforce each other. Think of it as a sequence:</p>
+
+      <div class="callout">
+        <div class="callout-label">The Decline Chain</div>
+        <p><strong>Rising costs</strong> (wars, courts) → <strong>Revenue strain</strong> (corruption, resistance) → <strong>Legitimacy weakens</strong> (failed wars, bad policies) → <strong>Rebellions</strong> (regional leaders, peasants) → <strong>External pressure</strong> (rivals attack while unstable)</p>
+      </div>
+
+      <h3 class="sub">Internal Challenges</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">👑</div>
+          <h4>Succession Disputes</h4>
+          <p>Every leadership transition was a potential crisis. Competing factions of elites backed different heirs, weakening central authority.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💰</div>
+          <h4>Corruption & Elite Capture</h4>
+          <p>Officials treated office as personal business. Local elites captured tax revenue. The larger the empire, the harder to monitor loyalty.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌾</div>
+          <h4>Peasant Revolts</h4>
+          <p>Not random violence — these were political signals that taxation and labor demands had become intolerable, or that legitimacy had collapsed.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Key Resistance Movements</h3>
+      <div class="resistance-list">
+        <div class="resistance-item">
+          <div class="resistance-who">Ana Nzinga (1641–1671)</div>
+          <div class="resistance-what">Queen of Ndongo and Matamba; resisted Portuguese colonizers in West-Central Africa for 40 years through military and diplomatic tactics.</div>
+        </div>
+        <div class="resistance-item">
+          <div class="resistance-who">Cossack Revolts (17th–18th c.)</div>
+          <div class="resistance-what">Resisted Russian imperial expansion across present-day Ukraine; eventually defeated and incorporated.</div>
+        </div>
+        <div class="resistance-item">
+          <div class="resistance-who">Haitian Slave Rebellion (1791–1804)</div>
+          <div class="resistance-what">Resisted French colonialism; the only successful slave revolt in history, achieving Haitian independence.</div>
+        </div>
+        <div class="resistance-item">
+          <div class="resistance-who">Maratha Resistance (1680–1707)</div>
+          <div class="resistance-what">Resisted Aurangzeb's Mughal expansion; ultimately defeated the Mughal forces and established the Maratha Empire.</div>
+        </div>
+        <div class="resistance-item">
+          <div class="resistance-who">Maroon Societies (17th–18th c.)</div>
+          <div class="resistance-what">Escaped enslaved Africans in Caribbean and Brazil formed independent communities; resisted recapture through guerrilla tactics.</div>
+        </div>
+        <div class="resistance-item">
+          <div class="resistance-who">Metacom's War (1675–1678)</div>
+          <div class="resistance-what">Indigenous resistance to British colonists in present-day New England over land and trade disputes.</div>
+        </div>
+        <div class="resistance-item">
+          <div class="resistance-who">Pueblo Revolts (1680)</div>
+          <div class="resistance-what">Resisted Spanish colonizers and their encomienda system in present-day American Southwest; temporary victory.</div>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Model Multi-Causal Decline Argument</div>
+        <div class="example-weak">The empire declined because of corruption.</div>
+        <div class="example-strong">Military conflicts increased expenses, pressuring the state to raise taxes. Higher taxes and elite corruption fueled rebellions that weakened central authority, making the empire more vulnerable to rival states pressing on its borders.</div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Decline Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain one internal and one external challenge to a land-based empire</li>
+              <li>Analyze causes of decline using a causal chain</li>
+              <li>Compare decline factors in two empires</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Single-cause decline explanations — graders reward multi-causal analysis</li>
+              <li>Describing rebellions without linking them to taxation or legitimacy</li>
+              <li>Over-focusing on European pressure; Unit 3 decline is mostly internal strains</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 9: EUROPEAN THOUGHT ─── -->
+    <section class="section" id="europe-thought">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2>European Intellectual Movements <span class="tag">1300s–1700s</span></h2>
+      </div>
+
+      <p>Europe underwent four major intellectual and cultural shifts that reshaped politics, religion, and knowledge — and contributed to Europe becoming a dominant world power.</p>
+
+      <h3 class="sub">The Four Movements</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <h4>The Renaissance</h4>
+          <p>Trade wealth funded revival of classical learning. Humanism emphasized life on earth and personal achievement. Realist art (da Vinci, Donatello). Gutenberg's printing press (mid-1400s) made books affordable, boosting literacy.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⛪</div>
+          <h4>Protestant Reformation</h4>
+          <p>Martin Luther challenged Church indulgences and corruption (1517+). Salvation through faith alone, not the Church. Calvin: predestination. Henry VIII: Church of England. Christianity permanently split.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⛪</div>
+          <h4>Catholic Reformation</h4>
+          <p>The Church responded with the Council of Trent: reinstated papal authority, punished heretics, reestablished Latin. Jesuits (Ignatius Loyola) promoted prayer and good works. Wars followed these conflicts.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔭</div>
+          <h4>Scientific Revolution</h4>
+          <p>Copernicus: Earth revolves around the Sun. Galileo proved it; Church forced him to recant. New scientific method: theory, documentation, repetition, peer confirmation. Key figures: Brahe, Bacon, Kepler, Newton.</p>
+        </div>
+      </div>
+
+      <div class="callout gold">
+        <div class="callout-label">Religious Outcomes</div>
+        <p>The Scientific Revolution led some to become <strong>atheists</strong> (no god exists) or <strong>deists</strong> (God created the world but doesn't intervene). Deism grew popular in the 1700s and encouraged rejection of church authority. These shifts laid groundwork for the Enlightenment and later the Industrial Revolution.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>European Thought Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how the printing press affected European society</li>
+              <li>Analyze causes and effects of the Protestant Reformation</li>
+              <li>Describe the significance of the scientific method — use specific names</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating these movements as "culture only" — they had huge political consequences</li>
+              <li>Confusing Protestant doctrines: Luther (faith alone) vs. Calvin (predestination)</li>
+              <li>Listing scientists without explaining what changed: methods of knowledge and institutional authority</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 10: EUROPEAN STATES ─── -->
+    <section class="section" id="europe-states">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <h2>European State Rivalry <span class="tag">1500s–1700s</span></h2>
+      </div>
+
+      <p>Intense rivalry among European states drove military buildup, overseas expansion, and more centralized rule. Each state found different solutions to the challenge of authority.</p>
+
+      <h3 class="sub">State Profiles</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Key Developments</th>
+            <th>Authority Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Spain</td>
+            <td>Charles V controlled vast empire; Philip continued Spanish Inquisition; Dutch Protestants revolted and won independence; Spain weakened by mid-17th c.</td>
+            <td>Absolutist, religiously enforced</td>
+          </tr>
+          <tr>
+            <td>England</td>
+            <td>Elizabethan Age (1558–1603): exploration, colonization, joint-stock companies. Charles I: Civil War → Cromwell/Commonwealth → Restoration → Glorious Revolution 1688 → English Bill of Rights</td>
+            <td>Constitutional monarchy emerging</td>
+          </tr>
+          <tr>
+            <td>France</td>
+            <td>Edict of Nantes (1598): toleration. Louis XIV (1642–1715): absolute power, constant wars, no lawmaking body. War of Spanish Succession (1701–1714).</td>
+            <td>Absolutism (Louis XIV)</td>
+          </tr>
+          <tr>
+            <td>Holy Roman Empire</td>
+            <td>Thirty Years' War (1618–1648): devastating religious conflict. Peace of Westphalia (1648): reshapes sovereignty. German states gain power by 1700s.</td>
+            <td>Fragmented; religiously divided</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">England's Constitutional Sequence — Know This!</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Petition of Rights (1628)</div>
+          <div class="term-def">Charles I limited taxes and forbidden unlawful imprisonment — then ignored it for 11 years, triggering crisis.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">English Civil War</div>
+          <div class="term-def">Parliament vs. King Charles I; Oliver Cromwell led Parliamentary army, won, executed the king. Commonwealth period followed.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Stuart Restoration</div>
+          <div class="term-def">Parliament invited Charles II back as limited monarch; he agreed to Habeas Corpus Act (no arrest without due process).</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Glorious Revolution (1688)</div>
+          <div class="term-def">Parliament removed James II (feared Catholic takeover); invited William and Mary, who signed the English Bill of Rights — establishing constitutional monarchy.</div>
+        </div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>European States Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Compare how European states consolidated authority (England vs. France)</li>
+              <li>Explain how religious conflict reshaped politics (Huguenots, Thirty Years' War)</li>
+              <li>Use War of Spanish Succession or Louis XIV's wars to explain state finance and centralization</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Mixing up the English civil conflict sequence — learn the order: Petition → Civil War → Commonwealth → Restoration → Glorious Revolution</li>
+              <li>Treating Westphalia as permanent peace rather than a sovereignty settlement</li>
+              <li>Describing "absolutism" without citing specific policies or documents</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 11: AFRICAN STATES ─── -->
+    <section class="section" id="africa">
+      <div class="section-header">
+        <span class="section-num">11</span>
+        <h2>African States & Imperial Pressure <span class="tag">1400s–1700s</span></h2>
+      </div>
+
+      <p>African political development in this era included powerful states shaped by long-distance trade — and increasingly, the pressures of European expansion. <strong>African states were not politically passive.</strong></p>
+
+      <h3 class="sub">Key African States</h3>
+      <div class="empire-grid">
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>🌍 Songhai Empire</h4>
+            <div class="dates">West Africa · Islamic state</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Sunni Ali (1464–1493): built navy, central administration, funded Timbuktu</li>
+              <li>Wealthy from trans-Saharan trade in gold and salt</li>
+              <li>Eventually fell to Moroccan invasion</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>🏆 Asanti Empire</h4>
+            <div class="dates">West Africa · arose c. 1670</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Arose around 1670; avoided outside invasion</li>
+              <li>Expanded territory through military strength and trade</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>⚓ Kingdom of Kongo</h4>
+            <div class="dates">Central Africa · Christian kingdom</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>King Alfonso I converted to Catholicism; converted his people</li>
+              <li>Allied with Portugal, but Portugal eventually destroyed the kingdom</li>
+              <li>Classic example: alliance with a European power became a fatal vulnerability</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="empire-card">
+          <div class="empire-card-top">
+            <h4>👑 Angola & Queen Nzinga</h4>
+            <div class="dates">West-Central Africa · Portuguese colonial pressure</div>
+          </div>
+          <div class="empire-card-body">
+            <ul>
+              <li>Portuguese established Angola ~1575, tied closely to the slave trade</li>
+              <li>Queen Nzinga resisted Portuguese control for 40 years through military and diplomatic strategies</li>
+              <li>Key resistance figure — use her as evidence of African political agency</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>African States Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how trade and religion shaped state power in West Africa</li>
+              <li>Analyze African responses to European expansion (Kongo's alliance; Nzinga's resistance)</li>
+              <li>Provide specific rulers and outcomes as evidence</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating African states as politically passive — emphasize strategies and agency</li>
+              <li>Writing about the slave trade without linking it to state formation and imperial pressure</li>
+              <li>Naming kingdoms without explaining what made them powerful or vulnerable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP World History: Modern</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0d;
+    --surface: #111615;
+    --panel: #161d1b;
+    --panel-hover: #1b2421;
+    --border: #29322f;
+    --teal: #62c0ad;
+    --teal-dim: #338271;
+    --gold: #d3ad5c;
+    --text: #dbe7e2;
+    --text-dim: #8a9b95;
+    --text-muted: #53615d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top, rgba(98, 192, 173, 0.12), transparent 28%),
+      linear-gradient(180deg, #0b0d0c 0%, #101413 100%);
+    color: var(--text);
+    font-family: 'Source Serif 4', serif;
+    padding: 40px 24px 72px;
+  }
+
+  .shell {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 7vw, 4.8rem);
+    line-height: 0.95;
+    margin-bottom: 18px;
+  }
+
+  .lede {
+    max-width: 700px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .pill {
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-dim);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(98, 192, 173, 0.45);
+    background: linear-gradient(180deg, rgba(98, 192, 173, 0.09), rgba(255, 255, 255, 0.02));
+  }
+
+  .card-top {
+    padding: 18px 20px 0;
+  }
+
+  .unit-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  .period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+
+  .card-body {
+    padding: 0 20px 20px;
+  }
+
+  .card p {
+    color: var(--text-dim);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .topic {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .footer-note {
+    margin-top: 34px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 720px) {
+    body {
+      padding: 28px 18px 52px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="eyebrow">AP World History: Modern</div>
+    <h1>Unit Library</h1>
+    <p class="lede">Open the AP World History study library by unit. Units 1, 2, 3, and 4 are available from this course page.</p>
+    <div class="meta">
+      <span class="pill">1200-1750 CE</span>
+      <span class="pill">AP World History</span>
+      <span class="pill">4 Units Available</span>
+    </div>
+
+    <div class="grid">
+      <a class="card" href="ap-world-history-unit-1.html">
+        <div class="card-top">
+          <div class="unit-tag">Unit 1</div>
+          <h2>The Global Tapestry</h2>
+          <div class="period">1200-1450</div>
+        </div>
+        <div class="card-body">
+          <p>Political systems, belief systems, social hierarchies, and regional patterns across the world before major cross-regional acceleration.</p>
+          <div class="topics">
+            <span class="topic">East Asia</span>
+            <span class="topic">Dar al-Islam</span>
+            <span class="topic">Africa</span>
+            <span class="topic">Europe</span>
+            <span class="topic">State Building</span>
+          </div>
+          <span class="cta">Open Unit 1 <span>-></span></span>
+        </div>
+      </a>
+
+      <a class="card" href="ap-world-history-unit-2.html">
+        <div class="card-top">
+          <div class="unit-tag">Unit 2</div>
+          <h2>Networks of Exchange</h2>
+          <div class="period">1200-1450</div>
+        </div>
+        <div class="card-body">
+          <p>Trade routes, empire expansion, technology transfer, commercial innovations, and the cultural effects of increased Afro-Eurasian connectivity.</p>
+          <div class="topics">
+            <span class="topic">Silk Roads</span>
+            <span class="topic">Indian Ocean</span>
+            <span class="topic">Trans-Saharan</span>
+            <span class="topic">Commerce</span>
+            <span class="topic">Technology</span>
+          </div>
+          <span class="cta">Open Unit 2 <span>-></span></span>
+        </div>
+      </a>
+
+      <a class="card" href="ap-world-history-unit-3.html">
+        <div class="card-top">
+          <div class="unit-tag">Unit 3</div>
+          <h2>Land-Based Empires</h2>
+          <div class="period">1450-1750</div>
+        </div>
+        <div class="card-body">
+          <p>Imperial expansion, gunpowder empires, state-building, legitimacy, administration, taxation, and the strains that challenged land-based power.</p>
+          <div class="topics">
+            <span class="topic">Ottomans</span>
+            <span class="topic">Safavids</span>
+            <span class="topic">Mughals</span>
+            <span class="topic">Qing</span>
+            <span class="topic">Russia</span>
+          </div>
+          <span class="cta">Open Unit 3 <span>-></span></span>
+        </div>
+      </a>
+
+      <a class="card" href="ap-world-history-unit-4.html">
+        <div class="card-top">
+          <div class="unit-tag">Unit 4</div>
+          <h2>Transoceanic Interconnections</h2>
+          <div class="period">1450-1750</div>
+        </div>
+        <div class="card-body">
+          <p>Maritime empires, oceanic trade, exploration, colonial systems, and the global consequences of intensified cross-ocean exchange.</p>
+          <div class="topics">
+            <span class="topic">Exploration</span>
+            <span class="topic">Maritime Empires</span>
+            <span class="topic">Trade Routes</span>
+            <span class="topic">Colonialism</span>
+            <span class="topic">Global Exchange</span>
+          </div>
+          <span class="cta">Open Unit 4 <span>-></span></span>
+        </div>
+      </a>
+    </div>
+
+    <p class="footer-note">The AP World History: Modern card still opens this page, and this page now branches into both units.</p>
+  </div>
+</body>
+</html>

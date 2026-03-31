@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP World History — Unit 1: The Global Tapestry</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0d0b;
+    --surface: #161410;
+    --card: #1c1a16;
+    --card-hover: #221f19;
+    --border: #2e2a22;
+    --border-light: #3d3830;
+    --gold: #c9a84c;
+    --gold-dim: #8a6f2e;
+    --gold-bright: #e8c76a;
+    --amber: #d4793a;
+    --teal: #4a9b8e;
+    --rose: #b5605a;
+    --violet: #7a6bb5;
+    --sage: #6a9b6e;
+    --text: #e8e0d0;
+    --text-dim: #9a9080;
+    --text-muted: #5a5448;
+    --accent-bar: 3px solid var(--gold);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── LAYOUT ─── */
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-brand {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-brand .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .sidebar-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .nav-section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 1rem 1.5rem 0.4rem;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 0.45rem 1.5rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-family: 'Source Serif 4', serif;
+    transition: all 0.15s ease;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+
+  .nav-item:hover {
+    color: var(--gold);
+    background: rgba(201,168,76,0.06);
+    border-left-color: var(--gold-dim);
+  }
+
+  .nav-item.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  main {
+    padding: 3rem 3.5rem 5rem;
+    max-width: 860px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-dim);
+    opacity: 0.4;
+    max-width: 80px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 580px;
+    font-weight: 300;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold-dim);
+    padding-top: 0.4rem;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+  }
+
+  .section-header h2 .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  p { margin-bottom: 1rem; color: var(--text-dim); font-size: 0.95rem; }
+
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ─── CALLOUT BOX ─── */
+  .callout {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: var(--accent-bar);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .callout.amber { border-left-color: var(--amber); }
+  .callout.teal { border-left-color: var(--teal); }
+  .callout.rose { border-left-color: var(--rose); }
+  .callout.violet { border-left-color: var(--violet); }
+  .callout.sage { border-left-color: var(--sage); }
+
+  .callout-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.amber .callout-label { color: var(--amber); }
+  .callout.teal .callout-label { color: var(--teal); }
+  .callout.rose .callout-label { color: var(--rose); }
+  .callout.violet .callout-label { color: var(--violet); }
+  .callout.sage .callout-label { color: var(--sage); }
+
+  .callout p { font-size: 0.88rem; margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ─── CARDS GRID ─── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .card p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0;
+  }
+
+  /* ─── TERM LIST ─── */
+  .term-list {
+    margin: 1.5rem 0;
+  }
+
+  .term {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+
+  .term:last-child { border-bottom: none; }
+
+  .term-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .term-def {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .compare-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--card);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+
+  .compare-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+    background: var(--surface);
+  }
+
+  .compare-table tr:hover td { background: var(--card); }
+
+  .compare-table td:first-child {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.82rem;
+    background: var(--card);
+    white-space: nowrap;
+  }
+
+  /* ─── EXAM FOCUS BLOCK ─── */
+  .exam-focus {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .exam-focus-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .exam-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--gold);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .exam-focus-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .exam-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .exam-col h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .exam-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exam-col ul li {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    padding: 0.35rem 0;
+    padding-left: 1rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .exam-col ul li:last-child { border-bottom: none; }
+
+  .exam-col ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+    font-weight: 700;
+  }
+
+  .exam-col.mistakes li::before { color: var(--rose); content: '✕'; font-size: 0.7rem; top: 0.4rem; }
+
+  /* ─── QUOTE / EXAMPLE ─── */
+  .example-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .example-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+
+  .example-weak, .example-strong {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+  }
+
+  .example-weak {
+    background: rgba(181,96,90,0.1);
+    border-left: 3px solid var(--rose);
+    color: var(--text-dim);
+  }
+
+  .example-strong {
+    background: rgba(106,155,110,0.1);
+    border-left: 3px solid var(--sage);
+    color: var(--text-dim);
+  }
+
+  .example-weak::before { content: '✕ WEAK: '; color: var(--rose); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+  .example-strong::before { content: '✓ STRONG: '; color: var(--sage); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+
+  /* ─── RELIGION CARDS ─── */
+  .religion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .religion-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .religion-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-1px);
+  }
+
+  .religion-card-top {
+    padding: 1rem 1.2rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .religion-card-top h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .religion-card-top .origin {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .religion-card-body {
+    padding: 0.9rem 1.2rem;
+  }
+
+  .religion-card-body p {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  /* ─── SUBHEADING ─── */
+  h3.sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3.sub .accent { color: var(--gold); }
+
+  /* ─── KEY FRAMEWORK ─── */
+  .framework {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .framework-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1rem 1.1rem;
+    border-radius: 4px;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .framework-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold-dim);
+    padding-top: 0.15rem;
+    min-width: 20px;
+  }
+
+  .framework-item h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .framework-item p {
+    font-size: 0.78rem;
+    margin-bottom: 0;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    main { padding: 2rem 1.5rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .religion-grid, .exam-col-grid, .framework { grid-template-columns: 1fr; }
+    .term { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+
+  /* ─── FADE IN ─── */
+  .section {
+    animation: fadeUp 0.4s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ─── SIDEBAR ─── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="label">AP World History</div>
+      <h2>Unit 1: The Global Tapestry<br>1200–1450</h2>
+    </div>
+
+    <div class="nav-section-label">Overview</div>
+    <a class="nav-item active" href="#intro">What is the Global Tapestry?</a>
+    <a class="nav-item" href="#belief">Belief Systems Overview</a>
+
+    <div class="nav-section-label">Regions</div>
+    <a class="nav-item" href="#east-asia">East Asia: China & Neighbors</a>
+    <a class="nav-item" href="#dar-al-islam">Dar al-Islam</a>
+    <a class="nav-item" href="#south-southeast">South & Southeast Asia</a>
+    <a class="nav-item" href="#africa">Africa</a>
+    <a class="nav-item" href="#americas">The Americas</a>
+    <a class="nav-item" href="#europe">Europe</a>
+
+    <div class="nav-section-label">Thematic</div>
+    <a class="nav-item" href="#state-building">Comparing State-Building</a>
+    <a class="nav-item" href="#social">Social Structures & Gender</a>
+    <a class="nav-item" href="#writing">Writing for the Exam</a>
+  </nav>
+
+  <!-- ─── MAIN ─── -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="eyebrow">Unit 1 Study Notes</div>
+      <h1>The <em>Global</em><br>Tapestry</h1>
+      <p class="subtitle">A deep-dive study library covering political systems, belief systems, trade networks, and social hierarchies across the world from 1200 to 1450 CE.</p>
+      <div class="hero-meta">
+        <span class="pill">1200–1450 CE</span>
+        <span class="pill">AP World History</span>
+        <span class="pill">8 Regions</span>
+        <span class="pill">Belief Systems · Trade · Power</span>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 1: INTRO ─── -->
+    <section class="section" id="intro">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>What "The Global Tapestry" Really Means</h2>
+      </div>
+
+      <p>Most people's lives were shaped by local and regional threads — nearby farms, rulers, temples, markets, rivers, and family structures — but those threads were increasingly woven into larger patterns. Between 1200 and 1450, most major regions had recognizable <strong>political systems</strong> (empires, kingdoms, city-states), powerful <strong>belief systems</strong>, and growing <strong>economic networks</strong>.</p>
+
+      <div class="callout">
+        <div class="callout-label">Core Skill</div>
+        <p>Don't just memorize names — train yourself to ask <strong>how legitimacy, administration, the economy, and social order actually worked</strong> in each civilization.</p>
+      </div>
+
+      <h3 class="sub">The 4-Part Framework for Every State</h3>
+
+      <div class="framework">
+        <div class="framework-item">
+          <div class="framework-num">01</div>
+          <div>
+            <h5>Legitimacy</h5>
+            <p>Why did people accept this ruler as "rightful"? Religion, ancestry, military success, prosperity, law, or a mix?</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">02</div>
+          <div>
+            <h5>Administration</h5>
+            <p>How did rulers control territory — bureaucrats, local elites, tribute, military governors, roads, record-keeping?</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">03</div>
+          <div>
+            <h5>Economy</h5>
+            <p>Where did wealth come from — taxing land, trade tariffs, tribute, state monopolies, coerced labor?</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">04</div>
+          <div>
+            <h5>Social Order</h5>
+            <p>How were people ranked — class, caste, ethnicity, religion, gender? How did hierarchies reproduce themselves?</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Two Starter Patterns</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <h4>States mix central + local power</h4>
+          <p>Even strong empires relied on local elites (lords, nobles, clan leaders) in exchange for loyalty and taxes. Full direct control was rare.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⛩️</div>
+          <h4>Belief systems as political technology</h4>
+          <p>Religions and philosophies shaped law, education, gender roles, architecture, and the language of rule. They justified conquest and unified populations.</p>
+        </div>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-label">Important Note</div>
+        <p>"Global" doesn't always mean "connected." Many Unit 1 developments are <strong>parallel rather than directly connected</strong>. China's civil service and the Inca's labor-tax system both solve how to govern large populations, but they didn't copy each other.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Common Question Patterns</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how rulers in ONE region used belief systems to legitimize power</li>
+              <li>Compare TWO states' methods of administration</li>
+              <li>Identify continuity and change in a region from 1200–1450</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating "culture" as separate from politics</li>
+              <li>Listing facts without explaining how taxation or religious authority actually functioned</li>
+              <li>Assuming all regions were equally connected by trade</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 2: BELIEF SYSTEMS ─── -->
+    <section class="section" id="belief">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Belief Systems <span class="tag">Culture</span></h2>
+      </div>
+
+      <p>Most events in this era connect to religion or philosophy because belief systems shaped <strong>legitimacy, law, education, social hierarchies, cultural production, and military behavior</strong>. A useful cross-religious concept is <strong>religious mysticism</strong> — adherents who emphasize mystical experiences to draw closer to the divine through prayer, meditation, and disciplined practice (Sufism in Islam; meditative traditions in Buddhism).</p>
+
+      <div class="religion-grid">
+
+        <div class="religion-card">
+          <div class="religion-card-top">
+            <h4>Buddhism</h4>
+            <div class="origin">South Asia → China, SE Asia, Japan</div>
+          </div>
+          <div class="religion-card-body">
+            <p>Founded by Siddhartha Gautama. Focuses on the Four Noble Truths: all life involves suffering; suffering is caused by desire; desire can be overcome; the Eightfold Path leads to liberation.</p>
+            <p><strong>Branches:</strong> Theravada (meditation, simplicity, nirvana as renunciation) · Mahayana (ritual, spiritual comfort, wider spread in East Asia)</p>
+            <p><strong>Impact:</strong> Rejection of caste appealed to lower ranks. Spread via Indian Ocean trade routes.</p>
+          </div>
+        </div>
+
+        <div class="religion-card">
+          <div class="religion-card-top">
+            <h4>Hinduism</h4>
+            <div class="origin">Deeply rooted in South Asia</div>
+          </div>
+          <div class="religion-card-body">
+            <p>Ultimate reality is <strong>Brahman</strong>; major deities (Vishnu, Shiva) are manifestations. Goal: <strong>moksha</strong> — spiritual liberation, union with ultimate reality.</p>
+            <p><strong>Dharma</strong>: duties tied to one's caste position.</p>
+            <p><strong>Impact:</strong> Shaped South Asian society through caste; influenced Southeast Asian kingship and temple culture; historically gave rise to Buddhist reform movements.</p>
+          </div>
+        </div>
+
+        <div class="religion-card">
+          <div class="religion-card-top">
+            <h4>Confucianism / Neo-Confucianism</h4>
+            <div class="origin">China (500s–400s BCE onward)</div>
+          </div>
+          <div class="religion-card-body">
+            <p>Ethical/social philosophy focused on restoring political and social order. Five fundamental relationships: ruler–subject, parent–child, husband–wife, older–younger sibling, friend–friend.</p>
+            <p><strong>Neo-Confucianism</strong> (Song era+): Revived with metaphysical elements; reinforced filial piety, loyalty, "proper roles." Tightly linked to civil service examinations.</p>
+          </div>
+        </div>
+
+        <div class="religion-card">
+          <div class="religion-card-top">
+            <h4>Christianity</h4>
+            <div class="origin">Middle East → Europe, N. Africa</div>
+          </div>
+          <div class="religion-card-body">
+            <p>Centers on Jesus of Nazareth as Messiah; crucifixion, resurrection, and ascension. Teaches forgiveness of sins and everlasting life.</p>
+            <p><strong>Impact:</strong> Appeal to lower classes and women. Catholic Church = unity and legitimacy in Western Europe. Eastern Christianity supported Byzantine imperial authority.</p>
+          </div>
+        </div>
+
+        <div class="religion-card">
+          <div class="religion-card-top">
+            <h4>Islam</h4>
+            <div class="origin">7th Century CE, Arabian Peninsula</div>
+          </div>
+          <div class="religion-card-body">
+            <p>Allah revealed words through Muhammad, recorded in the Qur'an. Five Pillars: faith · prayer · charity · fasting · pilgrimage (hajj).</p>
+            <p><strong>Branches:</strong> Sunni · Shia (dispute over succession after Muhammad).</p>
+            <p><strong>Impact:</strong> Unifying force across diverse states via law (sharia), scholarship, trade, and Sufi networks that spread Islam through local adaptable forms.</p>
+          </div>
+        </div>
+
+        <div class="religion-card">
+          <div class="religion-card-top">
+            <h4>Judaism</h4>
+            <div class="origin">Earliest major monotheistic faith</div>
+          </div>
+          <div class="religion-card-body">
+            <p>Emphasizes unique covenant between God and the Hebrew people, moral law, and a world shaped by free will and responsibility. Hebrew Bible (Torah) contains laws, narratives, poetry, and prophecy.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Belief Systems Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how a belief system supported a state's authority</li>
+              <li>Compare how two religions influenced political systems or social hierarchies</li>
+              <li>Use cultural evidence (education, architecture, law, rituals) to support an argument</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Saying "religion unified people" without naming the institutions (schools, courts, monasteries)</li>
+              <li>Treating syncretism (blending) as "confusion" — it's a normal historical process</li>
+              <li>Mixing up where a belief system was dominant vs. only practiced by elites</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 3: EAST ASIA ─── -->
+    <section class="section" id="east-asia">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>East Asia <span class="tag">Region</span></h2>
+      </div>
+
+      <p>East Asia is anchored by China's influence — economically, culturally, and sometimes militarily — but neighboring states <strong>selectively adopted and adapted</strong> Chinese ideas (writing, Confucian education, bureaucratic practices, Buddhism) while preserving distinct political identities.</p>
+
+      <h3 class="sub"><span class="accent">Song China</span> (960–1279): Scholar-Official Rule</h3>
+      <p>Song governance relied heavily on <strong>Neo-Confucianism</strong>, emphasizing hierarchy, filial piety, loyalty to superiors, and moral governance. The <strong>civil service examination system</strong> recruited officials through Confucian texts, building a professional scholar-official class. (Wealth still mattered since education was expensive — the exams did not create full social equality.)</p>
+
+      <div class="callout teal">
+        <div class="callout-label">Social Practice</div>
+        <p><strong>Foot binding</strong> is a commonly tested example of Neo-Confucian social values reinforcing gender hierarchy — women's feet were bound from a young age, reflecting elite beauty standards and broader assumptions about female subordination.</p>
+      </div>
+
+      <h3 class="sub"><span class="accent">Yuan China</span> (1271–1368): Mongol Rule & Ethnic Hierarchy</h3>
+      <p>Established by Kublai Khan after Mongol conquest. Mongols preserved many Chinese administrative practices but reorganized political power through <strong>ethnic hierarchy</strong> — Mongols and some non-Han groups over the Han Chinese majority. Continuity in governance tools, but change in who held authority.</p>
+
+      <h3 class="sub"><span class="accent">Ming China</span> (1368–1644): Restoration & Centralization</h3>
+      <p>Replaced the Yuan, emphasizing restoring Han Chinese rule. Reinforced the civil service system, Confucian learning, and imperial institutions. Legitimacy was built by presenting Ming as the rightful restorer of Chinese traditions after foreign rule.</p>
+
+      <h3 class="sub">Japan: Feudal Power & the Shogunate</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Emperor</div>
+          <div class="term-def">Symbolic figure; ceremonial authority but limited real power</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Shogun</div>
+          <div class="term-def">Chief general; actual holder of political power</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Daimyo</div>
+          <div class="term-def">Powerful landholders and warlords</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Samurai</div>
+          <div class="term-def">Warriors serving lords through feudal obligations; code of bushido (loyalty, courage, honor, discipline)</div>
+        </div>
+      </div>
+
+      <h3 class="sub">Korea & Vietnam: Cultural Diffusion Without Absorption</h3>
+      <p>Korea (Goryeo/Joseon) and Vietnam adopted Confucian education, examination systems, and Chinese-influenced writing while <strong>maintaining political independence</strong>. Classic case: borrowing what strengthens the state without becoming politically absorbed.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>East Asia Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Compare China's governance (bureaucracy/exams) with Japan's (feudal military rule)</li>
+              <li>Explain how Neo-Confucianism supported political and social hierarchy</li>
+              <li>Identify a continuity and a change across Song–Yuan–Ming transitions</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Describing dynastic change as total rupture — many institutions continued</li>
+              <li>Confusing cultural influence with political control (Vietnam ≠ ruled by China the whole time)</li>
+              <li>Forgetting to connect Confucianism to concrete institutions (schools, exams)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 4: DAR AL-ISLAM ─── -->
+    <section class="section" id="dar-al-islam">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Dar al-Islam <span class="tag">Region</span></h2>
+      </div>
+
+      <p>"The abode of Islam" — politically diverse in 1200–1450, but maintaining strong cultural and religious commonalities through shared texts, legal traditions, scholars, and trade networks.</p>
+
+      <h3 class="sub">The Abbasid Legacy (750–1258)</h3>
+      <p>Baghdad became a major center for arts, sciences, scholarship, and medicine — associated with the <strong>House of Wisdom</strong>. Scholars like Nasir al-Din al-Tusi exemplify the era's intellectual output. Commercial tools like receipts and bills of exchange facilitated long-distance trade.</p>
+
+      <div class="callout rose">
+        <div class="callout-label">Key Turning Point</div>
+        <p>The <strong>Mongol sack of Baghdad in 1258</strong> ended the Abbasid Caliphate and represented the most dramatic turning point in the Islamic world during this period.</p>
+      </div>
+
+      <h3 class="sub">Key States & Institutions</h3>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>State/Group</th>
+            <th>Basis of Power</th>
+            <th>Key Feature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Abbasid Caliphate</td>
+            <td>Religious legitimacy; scholarship</td>
+            <td>House of Wisdom; Baghdad as cultural center</td>
+          </tr>
+          <tr>
+            <td>Turko-Persian States (Seljuks)</td>
+            <td>Turkic military + Persian administration</td>
+            <td>Cultural blending: not ethnically uniform</td>
+          </tr>
+          <tr>
+            <td>Mamluk Sultanate</td>
+            <td>Enslaved military elite</td>
+            <td>Defeated Mongols at Battle of Ayn Jalut (1260)</td>
+          </tr>
+          <tr>
+            <td>Delhi Sultanate</td>
+            <td>Military conquest + local cooperation</td>
+            <td>Governing religiously diverse population; built colleges; improved farming</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Islam as a Unifying Force</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">⚖️</div>
+          <h4>Sharia & Legal Schools</h4>
+          <p>Islamic law and judges connected even politically fragmented states into a shared legal and scholarly tradition.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🕌</div>
+          <h4>Sufism</h4>
+          <p>Mystical tradition that spread Islamic practice through missionary activity and adaptable local appeal, especially along trade routes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📜</div>
+          <h4>Scholars & Education</h4>
+          <p>Shared texts and institutions created cultural continuity across politically diverse states.</p>
+        </div>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-label">Common Misconception</div>
+        <p>Islam spread only "by the sword" — <strong>false</strong>. In many regions, especially along trade networks, conversion was gradual and tied to social and economic relationships through Sufi networks and merchant communities.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Dar al-Islam Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how Islamic belief and institutions created cultural unity across diverse states</li>
+              <li>Compare two Islamic states' sources of legitimacy</li>
+              <li>Analyze how the Delhi Sultanate governed a religiously diverse population</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating Dar al-Islam as a single empire in this period</li>
+              <li>Ignoring non-Arab influences (Turkic and Persian synthesis is central)</li>
+              <li>Overstating forced conversion; rulers often prioritized taxation over conversion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 5: SOUTH & SOUTHEAST ASIA ─── -->
+    <section class="section" id="south-southeast">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>South & Southeast Asia <span class="tag">Region</span></h2>
+      </div>
+
+      <p>Best understood through two linked forces: <strong>belief systems</strong> (Hinduism, Buddhism, Islam) and <strong>Indian Ocean trade</strong>. States gained wealth by controlling ports, straits, and trade routes — not just from agriculture.</p>
+
+      <h3 class="sub">South Asia</h3>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🏰</div>
+          <h4>Delhi Sultanate (N. India)</h4>
+          <p>Military power, taxation, and local elite cooperation. Built colleges; encouraged farming improvements. Ruler's religion (Islam) differed from most subjects'.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛕</div>
+          <h4>Vijayanagara Empire (S. India)</h4>
+          <p>Hindu political and cultural revival. Supported temples and court culture to reinforce hierarchy and political authority. Strong example of religion legitimizing rule.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚔️</div>
+          <h4>Rajput Kingdoms</h4>
+          <p>Hindu principalities that allied to resist Muslim forces from late 1100s. Shows: conquest doesn't automatically erase older political identities.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Southeast Asia: Mandala Politics</h3>
+
+      <div class="callout violet">
+        <div class="callout-label">Key Concept: Mandala Model</div>
+        <p>Authority looks like <strong>overlapping circles of influence</strong> rather than fixed borders. Power was strongest near the center and faded outward. Controlling people, trade nodes, and tribute relationships mattered more than drawing boundary lines.</p>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Type</th>
+            <th>Source of Wealth</th>
+            <th>Belief System</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Khmer Empire (Angkor)</td>
+            <td>Land-based</td>
+            <td>Massive irrigation; rice surplus</td>
+            <td>Hindu → Buddhist; Angkor Wat as political + religious statement</td>
+          </tr>
+          <tr>
+            <td>Srivijaya</td>
+            <td>Maritime</td>
+            <td>Port-based trade control</td>
+            <td>Buddhism</td>
+          </tr>
+          <tr>
+            <td>Majapahit</td>
+            <td>Maritime empire</td>
+            <td>Taxing trade; port services; alliances</td>
+            <td>Hindu/Buddhist → Islam layering in</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>South & Southeast Asia Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how Indian Ocean trade shaped political power in Southeast Asia</li>
+              <li>Compare land-based (Khmer) vs maritime states (Majapahit) in wealth generation</li>
+              <li>Analyze how religion supported state legitimacy</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Assuming fluid borders = "less organized" — mandala influence is a different kind of organization</li>
+              <li>Treating Angkor's temples as purely religious; they're also political statements</li>
+              <li>Oversimplifying Islam's spread as immediate or uniform</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 6: AFRICA ─── -->
+    <section class="section" id="africa">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Africa <span class="tag">Region</span></h2>
+      </div>
+
+      <p>Multiple regional stories shaped by environment (deserts, savannas, forests), trade routes (trans-Saharan, Indian Ocean), and the spread of Islam alongside older traditions. <strong>Treat Africa regionally — the exam expects specificity.</strong></p>
+
+      <h3 class="sub">West Africa</h3>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🥇</div>
+          <h4>Mali Empire (c.1235–c.1600)</h4>
+          <p>Control of trans-Saharan gold trade financed state-building. Islam among elites; rural communities maintained local traditions — religious <strong>blending</strong>, not uniform conversion.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏙️</div>
+          <h4>Hausa Kingdoms</h4>
+          <p>Near Niger River; cities like Kano. Long-distance trade in salt and leather; Islamic influence and economic stability.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">East Africa: Swahili City-States</h3>
+      <p>Port cities tied to <strong>Indian Ocean commerce</strong>. Merchants exchanged gold, ivory, and enslaved people for textiles and ceramics from Asia. The Swahili language reflects cultural fusion — Bantu base + Arabic influence. Islam was especially influential in coastal urban society.</p>
+
+      <div class="callout sage">
+        <div class="callout-label">Strong Comparison Point</div>
+        <p>Swahili city-states and Southeast Asian maritime states are both <strong>commercial hubs connecting inland resources to ocean trade</strong> — a great comparison for earning points on the exam.</p>
+      </div>
+
+      <h3 class="sub">Other African States</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Great Zimbabwe</div>
+          <div class="term-def">Powerful inland kingdom; impressive stone architecture; participated in regional trade linking interior resources to coastal routes</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Ethiopia</div>
+          <div class="term-def">Aksumite successor; retained long-standing Christian tradition — key example of religious diversity and continuity in Africa</div>
+        </div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Africa Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how trans-Saharan or Indian Ocean trade supported state formation</li>
+              <li>Compare Islam's role in Mali vs Swahili city-states</li>
+              <li>Analyze how geography shaped political and economic development</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating Africa as a single "kingdom" or single pattern</li>
+              <li>Reducing African trade to one-way extraction; these were complex commercial systems</li>
+              <li>Assuming Islam erased local traditions rather than blending with them</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 7: AMERICAS ─── -->
+    <section class="section" id="americas">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>The Americas <span class="tag">Region</span></h2>
+      </div>
+
+      <p>Sophisticated states developed largely <strong>independent of Afro-Eurasian influence</strong>. The key skill is explaining how these states organized labor and resources in challenging environments.</p>
+
+      <h3 class="sub">The Mexica (Aztec): Tribute Empire</h3>
+      <p>Arrived in central Mexico mid-1200s; built empire centered on Tenochtitlan. Expanded through warfare and alliances; controlled subject peoples by extracting tribute (goods, labor, captives). Conquered peoples often kept local rulers but paid tribute — requiring record-keeping, enforcement, and negotiated relationships with local elites.</p>
+
+      <h3 class="sub">The Inca: Administrative Creativity</h3>
+
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Mita</div>
+          <div class="term-def">Labor tax system requiring subjects to perform public service — building roads and terraces, military service, and other state projects</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Ayllu</div>
+          <div class="term-def">Kin-based community unit organizing labor and social life</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Quipu</div>
+          <div class="term-def">Knotted cords used for record-keeping — sophisticated governance without alphabetic writing</div>
+        </div>
+      </div>
+
+      <div class="callout teal">
+        <div class="callout-label">Key Insight</div>
+        <p>Because the Inca did not use alphabetic writing, they show that <strong>sophisticated governance can be built through infrastructure, labor organization, and accounting systems</strong> — don't assume lack of alphabetic writing means lack of administration.</p>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Mexica (Aztec)</th>
+            <th>Inca</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Resource Extraction</td>
+            <td>Tribute in goods from conquered peoples</td>
+            <td>Labor taxation (mita); state-organized projects</td>
+          </tr>
+          <tr>
+            <td>Administration</td>
+            <td>Local rulers kept but subordinated; record-keeping of tribute</td>
+            <td>Centralized bureaucracy; roads; quipu records</td>
+          </tr>
+          <tr>
+            <td>Religion</td>
+            <td>Polytheism; ritual practices; expansion tied to ritual warfare</td>
+            <td>Polytheism; sun god important; human sacrifice; mummification</td>
+          </tr>
+          <tr>
+            <td>Architecture</td>
+            <td>Tenochtitlan; chinampas (floating gardens)</td>
+            <td>Temple of the Sun; Machu Picchu; extensive road network</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Americas Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Compare Aztec tribute extraction with Inca labor taxation as empire-building methods</li>
+              <li>Explain how geography (lakes, mountains) shaped political organization</li>
+              <li>Analyze how states maintained unity across diverse peoples</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Describing American societies as "isolated" without analyzing internal complexity</li>
+              <li>Assuming lack of alphabetic writing means lack of administration</li>
+              <li>Mixing up tribute (goods) and mita (labor) or treating them as identical</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 8: EUROPE ─── -->
+    <section class="section" id="europe">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2>Europe <span class="tag">Region</span></h2>
+      </div>
+
+      <p>Europe in 1200–1450 is taught through <strong>feudalism, the Catholic Church, and gradual political consolidation</strong>. Key insight: a decentralized society still produced order through landholding, local obligations, and religious authority.</p>
+
+      <h3 class="sub">Feudalism vs. Manorialism — Know the Difference</h3>
+
+      <div class="callout rose">
+        <div class="callout-label">Crucial Distinction</div>
+        <p><strong>Feudalism</strong> = political/military hierarchy (nobles exchanging land + protection for loyalty and military service). <strong>Manorialism</strong> = economic/social system of self-sufficient estates where serfs worked lords' land in exchange for protection. These are <em>not</em> the same thing.</p>
+      </div>
+
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Three-Field System</div>
+          <div class="term-def">Agricultural innovation: rotating fields for fall crops, spring crops, and one fallow to replenish nutrients</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Chivalry</div>
+          <div class="term-def">Elite military code regulating conflict among lords by condemning betrayal and promoting ideals of mutual respect</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Primogeniture</div>
+          <div class="term-def">Inheritance passed to eldest son — shaped gender roles and women's property rights in feudal contexts</div>
+        </div>
+      </div>
+
+      <h3 class="sub">The Catholic Church: Political + Cultural Unity</h3>
+      <p>The Church shaped <strong>education and literacy</strong> (monasteries and cathedral schools), <strong>law</strong> (canon law), and <strong>political legitimacy</strong> (kings presented as Christian rulers). Church rituals structured life events and calendars. Church leaders could support or challenge rulers by claiming moral authority.</p>
+
+      <h3 class="sub">Emergence of Nation-States (Late Middle Ages)</h3>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Region</th>
+            <th>Key Development</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>England</td>
+            <td>Magna Carta (1215) — nobles limited royal power; Parliament developed (House of Lords + House of Commons)</td>
+          </tr>
+          <tr>
+            <td>France</td>
+            <td>Hundred Years' War (1337–1453); Joan of Arc; French consolidation; English withdrawal</td>
+          </tr>
+          <tr>
+            <td>Spain</td>
+            <td>Marriage of Isabella of Castile + Ferdinand of Aragon; unified monarchy; Spanish Inquisition</td>
+          </tr>
+          <tr>
+            <td>Russia</td>
+            <td>Tartar/Mongol conquest (1200s); Ivan III expanded power; czar title emerged (1400s)</td>
+          </tr>
+          <tr>
+            <td>Germany</td>
+            <td>Interregnum after reigning family died out; merchants and tradespeople gained greater local power</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Europe Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how feudal relationships limited or supported kings' power</li>
+              <li>Compare Europe's decentralized governance with China's centralized bureaucracy</li>
+              <li>Analyze the Church as a source of cultural unity and political legitimacy</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Confusing feudalism (political) with manorialism (economic)</li>
+              <li>Treating the Church as only religious; it also held social and political influence</li>
+              <li>Using later-period facts (Protestant Reformation) to explain 1200–1450 developments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 9: STATE BUILDING COMPARISON ─── -->
+    <section class="section" id="state-building">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2>Comparing State-Building <span class="tag">Thematic</span></h2>
+      </div>
+
+      <p>AP World rewards comparisons that explain <strong>how a system solved a problem</strong>, not just what a system "had." The repeated problem in Unit 1: <em>governing people across distance, diversity, and limited technology</em>.</p>
+
+      <h3 class="sub">Three Ways to Fund a State</h3>
+
+      <div class="callout amber">
+        <div class="callout-label">Key Distinction</div>
+        <p><strong>Tribute vs. Tax:</strong> Tribute often signals a relationship of subordination after conquest and may be irregular or negotiated. Taxes are typically routinized within an administrative system. They are <em>not</em> identical.</p>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Example</th>
+            <th>How It Worked</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Land & Commercial Taxes</td>
+            <td>Song/Ming China</td>
+            <td>Bureaucratic agrarian empire; routinized collection through officials</td>
+          </tr>
+          <tr>
+            <td>Tribute in Goods</td>
+            <td>Mexica (Aztec)</td>
+            <td>Conquest/tribute empire; extracted goods and labor from subordinate peoples</td>
+          </tr>
+          <tr>
+            <td>Labor Taxation</td>
+            <td>Inca (Mita)</td>
+            <td>State required subjects to perform public service — roads, military, agriculture</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Legitimacy Strategies</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">☪️</div>
+          <h4>Religious Authority</h4>
+          <p>Islamic rulers as defenders of the faith; European kings as Christian monarchs; Southeast Asian sacred kingship traditions</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h4>Ideology</h4>
+          <p>Confucian "right order" — the well-educated elite should run the state; legitimacy through moral governance</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <h4>Performance & Architecture</h4>
+          <p>Conquest, stability, food security, monumental building — Angkor's temples, Inca roads, Great Zimbabwe's stone structures all signal state capacity</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 10: SOCIAL STRUCTURES ─── -->
+    <section class="section" id="social">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <h2>Social Structures & Gender <span class="tag">Thematic</span></h2>
+      </div>
+
+      <p>Most societies were <strong>explicitly hierarchical</strong>. The high-scoring move: explain how social categories were organized and justified — and how those hierarchies supported economics and politics.</p>
+
+      <h3 class="sub">Caste in South Asia</h3>
+      <p>Social organization was shaped strongly by caste (varna and jati). Caste linked <strong>occupation, status, and social boundaries</strong> and persisted even as new political powers ruled parts of India. Conquerors often governed through existing structures because they were already efficient.</p>
+
+      <h3 class="sub">Gender Roles: Patriarchy with Regional Variation</h3>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Region</th>
+            <th>Gender Norms</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Confucian East Asia</td>
+            <td>Gender hierarchy justified through family order and filial piety; foot binding in elite circles reflected female subordination</td>
+          </tr>
+          <tr>
+            <td>Feudal Europe</td>
+            <td>Limited formal power for women; primogeniture shaped inheritance; education often limited to domestic skills; some elite women influenced politics through marriage alliances</td>
+          </tr>
+          <tr>
+            <td>Feudal Japan</td>
+            <td>Lower-status position with relatively few rights in the feudal order</td>
+          </tr>
+          <tr>
+            <td>Aztec</td>
+            <td>Generally subordinate; but some contexts allowed women to inherit property</td>
+          </tr>
+          <tr>
+            <td>Andean (Inca)</td>
+            <td>Some traditions allowed property to pass to daughters; women's roles more recognized in family contexts</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Social Structure Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how a belief system shaped social hierarchy or gender roles</li>
+              <li>Compare social structures in two regions (caste vs. class/estate systems)</li>
+              <li>Analyze how states relied on existing social hierarchies to govern</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Making universal claims ("women had no power anywhere") — the exam rewards nuance</li>
+              <li>Describing hierarchy without explaining how it supported economic production</li>
+              <li>Treating caste as only religious; it's also a social and economic organizing system</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 11: WRITING ─── -->
+    <section class="section" id="writing">
+      <div class="section-header">
+        <span class="section-num">11</span>
+        <h2>Writing for the Exam <span class="tag">Skills</span></h2>
+      </div>
+
+      <p>Knowing facts is not enough — you must use facts to <strong>make an argument under time pressure</strong>.</p>
+
+      <h3 class="sub">Making a Historically Defensible Claim</h3>
+      <p>A claim is defensible when it is <strong>specific enough to be proven</strong> with evidence and reasoning.</p>
+
+      <div class="example-block">
+        <div class="example-label">Claim Quality Examples</div>
+        <div class="example-weak">The Mongols changed China.</div>
+        <div class="example-strong">Under the Yuan dynasty, Mongol rulers preserved many Chinese administrative practices but reorganized political power through ethnic hierarchy, creating continuity in governance tools but change in who held authority.</div>
+      </div>
+
+      <h3 class="sub">Evidence: Specific + Explained</h3>
+
+      <div class="example-block">
+        <div class="example-label">Evidence Quality Examples</div>
+        <div class="example-weak">The Inca had roads.</div>
+        <div class="example-strong">The Inca used an extensive road network to move armies and administrators quickly, helping the state enforce mita labor obligations and integrate distant provinces.</div>
+      </div>
+
+      <h3 class="sub">Model Comparison Paragraph</h3>
+      <div class="callout sage">
+        <div class="callout-label">Example: China vs Japan</div>
+        <p>China and Japan both developed hierarchical societies in 1200–1450, but they organized political authority differently. In Song and Ming China, emperors relied on a centralized bureaucracy staffed by scholar-officials selected through civil service examinations grounded in Confucian learning, which helped standardize governance across regions. In contrast, Japan's shogunate depended more on decentralized military elites, with samurai bound to lords through feudal obligations, making political unity more dependent on personal loyalty and military power than on administrative institutions.</p>
+      </div>
+
+      <h3 class="sub">Contextualization Tips</h3>
+      <p>Choose <strong>2–3 contextual facts</strong> that directly set up your argument. Avoid writing a "history of the world" paragraph. For example, situating the Delhi Sultanate within broader patterns of Islamic expansion through Turkic military power and South Asian social complexity.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Writing Question Patterns</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Write a comparative claim about two states' governance, then support with specific evidence</li>
+              <li>Provide one continuity and one change in a region across 1200–1450</li>
+              <li>Explain how trade networks influenced cultural diffusion (Swahili coast, SE Asia, Indian Ocean)</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Dropping "name facts" without linking them to reasoning — evidence must do work</li>
+              <li>Comparing two regions using different categories for each side</li>
+              <li>Using outside-the-period evidence (e.g., Columbian Exchange) in Unit 1 arguments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Active nav tracking
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

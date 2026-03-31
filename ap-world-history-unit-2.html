@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP World History — Unit 2: Networks of Exchange</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e0d;
+    --surface: #101614;
+    --card: #161c1a;
+    --card-hover: #1a2220;
+    --border: #222e2a;
+    --border-light: #2e3d38;
+    --teal: #4aab98;
+    --teal-dim: #2e7a6e;
+    --teal-bright: #6dd4c4;
+    --amber: #d4893a;
+    --rose: #b5605a;
+    --violet: #7a6bb5;
+    --sage: #6aab6e;
+    --gold: #c9a84c;
+    --text: #d8e8e4;
+    --text-dim: #809088;
+    --text-muted: #445048;
+    --accent-bar: 3px solid var(--teal);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-brand {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  .sidebar-brand .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .nav-section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 1rem 1.5rem 0.4rem;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 0.45rem 1.5rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-family: 'Source Serif 4', serif;
+    transition: all 0.15s ease;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+  .nav-item:hover {
+    color: var(--teal);
+    background: rgba(74,171,152,0.06);
+    border-left-color: var(--teal-dim);
+  }
+  .nav-item.active {
+    color: var(--teal);
+    border-left-color: var(--teal);
+    background: rgba(74,171,152,0.1);
+  }
+
+  /* ─── MAIN ─── */
+  main {
+    padding: 3rem 3.5rem 5rem;
+    max-width: 860px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--teal-dim);
+    opacity: 0.4;
+    max-width: 80px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 580px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-meta .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 4rem;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--teal-dim);
+    padding-top: 0.4rem;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .section-header h2 .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--teal);
+    background: rgba(74,171,152,0.12);
+    border: 1px solid rgba(74,171,152,0.25);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  p { margin-bottom: 1rem; color: var(--text-dim); font-size: 0.95rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: var(--accent-bar);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout.amber { border-left-color: var(--amber); }
+  .callout.rose  { border-left-color: var(--rose); }
+  .callout.violet{ border-left-color: var(--violet); }
+  .callout.sage  { border-left-color: var(--sage); }
+  .callout.gold  { border-left-color: var(--gold); }
+
+  .callout-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .callout.amber .callout-label { color: var(--amber); }
+  .callout.rose  .callout-label { color: var(--rose); }
+  .callout.violet .callout-label { color: var(--violet); }
+  .callout.sage  .callout-label { color: var(--sage); }
+  .callout.gold  .callout-label { color: var(--gold); }
+
+  .callout p { font-size: 0.88rem; margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ─── CARDS ─── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  .card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+  .card-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  .card p { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0; }
+
+  /* ─── TERM LIST ─── */
+  .term-list { margin: 1.5rem 0; }
+  .term {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .term:last-child { border-bottom: none; }
+  .term-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--teal);
+    font-weight: 500;
+  }
+  .term-def { font-size: 0.88rem; color: var(--text-dim); }
+
+  /* ─── TABLE ─── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+  .compare-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--card);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+    background: var(--surface);
+  }
+  .compare-table tr:hover td { background: var(--card); }
+  .compare-table td:first-child {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.82rem;
+    background: var(--card);
+    white-space: nowrap;
+  }
+
+  /* ─── EXAM FOCUS ─── */
+  .exam-focus {
+    background: rgba(74,171,152,0.05);
+    border: 1px solid rgba(74,171,152,0.2);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  .exam-focus-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .exam-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--teal);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .exam-focus-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+  .exam-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .exam-col h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+  .exam-col ul { list-style: none; padding: 0; }
+  .exam-col ul li {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    padding: 0.35rem 0;
+    padding-left: 1rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .exam-col ul li:last-child { border-bottom: none; }
+  .exam-col ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--teal-dim);
+    font-weight: 700;
+  }
+  .exam-col.mistakes li::before { color: var(--rose); content: '✕'; font-size: 0.7rem; top: 0.4rem; }
+
+  /* ─── EXAMPLE BLOCK ─── */
+  .example-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .example-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .example-weak, .example-strong {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+  }
+  .example-weak {
+    background: rgba(181,96,90,0.1);
+    border-left: 3px solid var(--rose);
+    color: var(--text-dim);
+  }
+  .example-strong {
+    background: rgba(106,171,110,0.1);
+    border-left: 3px solid var(--sage);
+    color: var(--text-dim);
+  }
+  .example-weak::before   { content: '✕ WEAK: ';   color: var(--rose); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+  .example-strong::before { content: '✓ STRONG: '; color: var(--sage); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+
+  /* ─── FRAMEWORK ─── */
+  .framework {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .framework-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1rem 1.1rem;
+    border-radius: 4px;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .framework-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--teal-dim);
+    padding-top: 0.15rem;
+    min-width: 20px;
+  }
+  .framework-item h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .framework-item p { font-size: 0.78rem; margin-bottom: 0; }
+
+  /* ─── TRAVELER CARDS ─── */
+  .traveler-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .traveler-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .traveler-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-1px);
+  }
+  .traveler-card-top {
+    padding: 1rem 1.2rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .traveler-card-top h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .traveler-card-top .origin {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+  .traveler-card-body { padding: 0.9rem 1.2rem; }
+  .traveler-card-body p { font-size: 0.8rem; margin-bottom: 0; }
+
+  /* ─── ROUTE BADGE ─── */
+  .route-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .route-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+  .route-badge.silk    { color: var(--gold);   border-color: var(--gold);   background: rgba(201,168,76,0.08); }
+  .route-badge.ocean   { color: var(--teal);   border-color: var(--teal);   background: rgba(74,171,152,0.08); }
+  .route-badge.sahara  { color: var(--amber);  border-color: var(--amber);  background: rgba(212,137,58,0.08); }
+  .route-badge.europe  { color: var(--violet); border-color: var(--violet); background: rgba(122,107,181,0.08); }
+
+  /* ─── MISC ─── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  h3.sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3.sub .accent { color: var(--teal); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    main { padding: 2rem 1.5rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .traveler-grid, .exam-col-grid, .framework { grid-template-columns: 1fr; }
+    .term { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ─── SIDEBAR ─── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="label">AP World History</div>
+      <h2>Unit 2: Networks of Exchange<br>1200–1450</h2>
+    </div>
+
+    <div class="nav-section-label">Overview</div>
+    <a class="nav-item active" href="#intro">How Trade Networks Worked</a>
+
+    <div class="nav-section-label">Trade Networks</div>
+    <a class="nav-item" href="#silk-roads">The Silk Roads</a>
+    <a class="nav-item" href="#mongols">The Mongol Empire</a>
+    <a class="nav-item" href="#indian-ocean">Indian Ocean Trade</a>
+    <a class="nav-item" href="#trans-saharan">Trans-Saharan Trade</a>
+    <a class="nav-item" href="#europe">Europe & Northern Seas</a>
+
+    <div class="nav-section-label">Thematic</div>
+    <a class="nav-item" href="#commerce">Commerce & Finance</a>
+    <a class="nav-item" href="#technology">Technology & Knowledge</a>
+  </nav>
+
+  <!-- ─── MAIN ─── -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="eyebrow">Unit 2 Study Notes</div>
+      <h1>Networks of <em>Exchange</em></h1>
+      <p class="subtitle">How goods, people, technologies, religions, and diseases moved across Afro-Eurasia — and why increased connectivity changed societies unevenly from 1200 to 1450.</p>
+      <div class="hero-meta">
+        <span class="pill">1200–1450 CE</span>
+        <span class="pill">AP World History</span>
+        <span class="pill">3 Major Networks</span>
+        <span class="pill">Trade · Disease · Diffusion</span>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 1: HOW TRADE WORKED ─── -->
+    <section class="section" id="intro">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>How Trade Networks Worked</h2>
+      </div>
+
+      <p>Trade in this era wasn't just buying and selling — it operated through <strong>systems with inputs and outputs</strong>. Increased connectivity changes societies, but not evenly: trade creates winners and losers, and can carry devastating consequences like epidemic disease.</p>
+
+      <div class="framework">
+        <div class="framework-item">
+          <div class="framework-num">IN</div>
+          <div>
+            <h5>Network Inputs</h5>
+            <p>Geography, transport technology, state power, financial tools, and demand from cities and elites.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">OUT</div>
+          <div>
+            <h5>Network Outputs</h5>
+            <p>Wealth, urbanization, cultural diffusion, political conflict, and environmental effects.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">What Makes a Network (Not Just a Route)</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Nodes</div>
+          <div class="term-def">Cities, ports, caravan stops, and oasis towns where goods are stored, taxed, translated, financed, and redistributed</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Links</div>
+          <div class="term-def">Roads and sea lanes shaped by geography (deserts, mountains) and natural systems (especially monsoon winds)</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Rules & Institutions</div>
+          <div class="term-def">State protection, merchant partnerships, and financial tools that reduce risk and make long-distance trust possible</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Relay Trade</div>
+          <div class="term-def">Most merchants did not travel the entire distance — goods moved in stages through intermediaries, making hub cities crucial for cultural exchange</div>
+        </div>
+      </div>
+
+      <h3 class="sub">Why Trade Expanded in This Era</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <h4>State Support</h4>
+          <p>Rulers invested in security and stable administration for tax revenue and prestige goods, which directly increased trade volume.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💳</div>
+          <h4>Financial Innovation</h4>
+          <p>Credit systems and banking-like networks reduced the risk of long-distance exchange, making more transactions feasible.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⛵</div>
+          <h4>Better Technology</h4>
+          <p>Navigation and ship design (sea); protected roads and horse-based transport (land) increased distance and volume of exchange.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏙️</div>
+          <h4>Rising Demand</h4>
+          <p>Growing cities and elite consumers drove demand for luxury goods — silk, porcelain, spices, precious metals, and fine textiles.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">The Three Major Networks</h3>
+      <div class="route-badges">
+        <span class="route-badge silk">🛣 Silk Roads — Overland Eurasia</span>
+        <span class="route-badge ocean">🌊 Indian Ocean — Maritime Afro-Eurasia</span>
+        <span class="route-badge sahara">🏜 Trans-Saharan — N. Africa ↔ W. Africa</span>
+        <span class="route-badge europe">🧭 Hanseatic League — N. Europe</span>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Overview Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Compare how two trade networks facilitated exchange of goods and ideas</li>
+              <li>Explain a cause of increased interregional trade and an effect on societies</li>
+              <li>Use a document about merchants or state policy to argue how trade changed a region</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating trade routes as single roads instead of multi-stop networks with intermediaries</li>
+              <li>Listing traded items without explaining why they moved (scarcity, demand, portability, prestige)</li>
+              <li>Ignoring that trade moved people, technology, and disease — not just products</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 2: SILK ROADS ─── -->
+    <section class="section" id="silk-roads">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>The Silk Roads <span class="tag">Overland</span></h2>
+      </div>
+
+      <p>A network of overland routes connecting China, Central Asia, the Middle East, and the Mediterranean world. The name is misleading — silk was important, but many goods and ideas traveled. The Silk Roads linked settled empires with mobile pastoral groups and crossed difficult environments: steppe, desert, mountains.</p>
+
+      <div class="callout amber">
+        <div class="callout-label">Common Misconception</div>
+        <p>Silk Roads trade was not mainly "China selling to Europe." A great deal of exchange connected Asian regions with each other, and the <strong>Islamic world was a major commercial center</strong> within the network.</p>
+      </div>
+
+      <h3 class="sub">How It Functioned</h3>
+      <p>Overland trade is expensive and slow compared to maritime travel, so it concentrated on <strong>luxury goods</strong> — high value relative to weight. Merchants traveled in caravans and relied on infrastructure that lowered transaction costs.</p>
+
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Caravanserais</div>
+          <div class="term-def">Roadside inns providing lodging, storage, and relative safety — enabled rest, information-sharing, and safer exchanges across hazardous zones</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Relay Trade</div>
+          <div class="term-def">Goods moved stage-to-stage through intermediaries; no single merchant traveled end-to-end — made hub cities like Kashgar and Samarkand crucial</div>
+        </div>
+      </div>
+
+      <h3 class="sub">What Traveled (Think in Categories)</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Examples</th>
+            <th>Why It Moved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Luxury Manufactures</td>
+            <td>Silk, fine textiles, porcelain, crafts</td>
+            <td>High value-to-weight ratio; elite demand across Eurasia</td>
+          </tr>
+          <tr>
+            <td>Raw Materials & Prestige</td>
+            <td>Precious metals, gemstones, Central Asian horses</td>
+            <td>Scarce in destination regions; military and status value</td>
+          </tr>
+          <tr>
+            <td>Ideas & Religion</td>
+            <td>Buddhism, Islam, Christianity across Eurasia</td>
+            <td>Traveled with merchants and religious communities through contact</td>
+          </tr>
+          <tr>
+            <td>Technology & Knowledge</td>
+            <td>Papermaking, gunpowder-related knowledge</td>
+            <td>Spread through skilled artisans and military contact over time</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Travelers as Evidence of the Network</h3>
+      <div class="traveler-grid">
+        <div class="traveler-card">
+          <div class="traveler-card-top">
+            <h4>Marco Polo</h4>
+            <div class="origin">Venetian merchant traveler</div>
+          </div>
+          <div class="traveler-card-body">
+            <p>Illustrates reliance on state permissions, established routes and stops, and multiethnic cities where translation and credit were possible.</p>
+          </div>
+        </div>
+        <div class="traveler-card">
+          <div class="traveler-card-top">
+            <h4>Ibn Battuta</h4>
+            <div class="origin">Islamic traveler, wide Afro-Eurasian range</div>
+          </div>
+          <div class="traveler-card-body">
+            <p>Journeyed across the Islamic world and beyond (India, connections toward China), showing the scale of Afro-Eurasian mobility and Islamic connectivity.</p>
+          </div>
+        </div>
+        <div class="traveler-card">
+          <div class="traveler-card-top">
+            <h4>Xuanzang</h4>
+            <div class="origin">Chinese Buddhist monk</div>
+          </div>
+          <div class="traveler-card-body">
+            <p>Traveled to India to study Buddhism — useful example of how long-distance travel enabled religious and intellectual exchange along the network.</p>
+          </div>
+        </div>
+        <div class="traveler-card">
+          <div class="traveler-card-top">
+            <h4>Margery Kempe</h4>
+            <div class="origin">English Christian pilgrim</div>
+          </div>
+          <div class="traveler-card-body">
+            <p>Traveled to sites in Europe and the Holy Land — reflects the role of pilgrimage and religious devotion in motivating long-distance movement.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Exam Tip</div>
+        <p>Use travelers as <strong>evidence of broader trade-and-travel systems</strong>, not as the entire story. They reveal the network's institutions and norms.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Silk Roads Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how the Mongols affected Silk Roads trade (stability, people, technologies, disease)</li>
+              <li>Compare Silk Roads trade goods with Indian Ocean goods (luxury/overland vs bulk/maritime)</li>
+              <li>Identify how infrastructure like caravanserais supported long-distance exchange</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Forgetting that Silk Roads trade is luxury-focused due to transport cost</li>
+              <li>Treating travelers' accounts as the whole story instead of evidence of a broader network</li>
+              <li>Writing as if the Silk Roads were a single road rather than many routes and hubs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 3: MONGOLS ─── -->
+    <section class="section" id="mongols">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>The Mongol Empire <span class="tag">Eurasia</span></h2>
+      </div>
+
+      <p>The Mongol Empire dramatically reshaped Eurasian connectivity. You must be able to explain how Mongol rule <strong>changed trade, communication, and cultural exchange</strong> — and recognize its destructive consequences. Both sides matter.</p>
+
+      <h3 class="sub">Who the Mongols Were</h3>
+      <p>Pastoral nomads from the Eurasian steppe. Steppe societies developed strong horse-riding and military skills, social structures adapted to mobility, and the ability to project power across large distances. Under <strong>Chinggis (Genghis) Khan</strong>, Mongol groups unified and expanded rapidly in the early 1200s.</p>
+
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Jin Dynasty</div>
+          <div class="term-def">Defeated by Mongol successors in 1234 during campaigns against northern China</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Golden Horde</div>
+          <div class="term-def">Khanate that dominated parts of what is now Russia; tied Russian principalities to steppe tribute politics</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Kublai Khan</div>
+          <div class="term-def">Chinggis Khan's grandson; ruled China and established the Yuan dynasty</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Pax Mongolica</div>
+          <div class="term-def">Relative stability and security under Mongol administration — protected routes and punished banditry, making merchant travel more feasible</div>
+        </div>
+      </div>
+
+      <h3 class="sub">The "Mongol Effect" on Trade</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h4>Route Protection</h4>
+          <p>Mongol authorities protected trade routes and discouraged banditry, dramatically expanding Silk Roads commerce in the 13th–14th centuries.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔀</div>
+          <h4>Movement of People</h4>
+          <p>Promoted movement of skilled artisans, engineers, and administrators across regions — both forced after conquest and voluntary to seize opportunity.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🪪</div>
+          <h4>Communication Systems</h4>
+          <p>Official travel permissions (passport-like arrangements) and communication infrastructure supported administration and long-distance movement.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🕌</div>
+          <h4>Religious Flexibility</h4>
+          <p>Generally did not impose a single faith on conquered peoples, which helped multiethnic trade communities continue to function.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">The Causation Chain (Write It This Way)</h3>
+      <div class="example-block">
+        <div class="example-label">AP-Style Causation Argument</div>
+        <div class="example-strong">Mongol political control → safer roads and fewer barriers → more merchant travel → increased exchange of goods and ideas (and easier disease transmission).</div>
+      </div>
+
+      <h3 class="sub">Negative Consequences</h3>
+
+      <div class="callout rose">
+        <div class="callout-label">Violence & Destruction</div>
+        <p>Many regions experienced severe violence, population loss, and urban destruction during Mongol expansion. Cities were destroyed; millions died. <strong>The Mongol story is both destructive conquest and facilitated exchange — you need both sides.</strong></p>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-label">The Black Death</div>
+        <p>Increased connectivity helped spread the <strong>Black Death (bubonic plague)</strong> across trade routes in the 14th century. It likely began in Asia and was carried along merchant and caravan routes, killing roughly one-third of the population in some regions. The Mongols didn't create the disease — but Mongol-era conditions of intensified movement facilitated its spread.</p>
+      </div>
+
+      <h3 class="sub">Timur (Timur Lang)</h3>
+      <p>A Turco-Mongol Muslim conqueror of the late 14th century associated with extreme destruction, including the devastating 1398 sack of Delhi. His campaigns deeply destabilized regions and occurred within broader patterns of Islamic political presence in South Asia.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Mongol Empire Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Causation: explain one effect of Mongol rule on trade, culture, or governance</li>
+              <li>Continuity/change: what changed in Eurasian exchange because of the Mongols, and what stayed similar</li>
+              <li>Evidence: use travel or trade descriptions to support a claim about Mongol-era connectivity</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating the Mongols only as destroyers — missing their administrative role in facilitating exchange</li>
+              <li>Mentioning the Black Death without linking it to trade routes and increased movement</li>
+              <li>Confusing the Mongol Empire with later steppe empires outside the 1200–1450 focus</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 4: INDIAN OCEAN ─── -->
+    <section class="section" id="indian-ocean">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Indian Ocean Trade <span class="tag">Maritime</span></h2>
+      </div>
+
+      <p>The largest and most sustained sea-based trading system of the era, linking East Africa, the Middle East, South Asia, Southeast Asia, and China. Sea travel can move <strong>heavier loads more cheaply</strong> than overland routes, so Indian Ocean trade included bulk goods as well as luxuries.</p>
+
+      <h3 class="sub">The Engine: Monsoon Winds</h3>
+      <div class="callout">
+        <div class="callout-label">Core Concept</div>
+        <p><strong>Monsoon winds shift direction seasonally</strong>, enabling predictable outbound and return voyages. Merchants often stayed in port cities for months waiting for winds to reverse — which created long-term multicultural communities, language exchange, intermarriage, and religious diffusion. Maritime trade was not constant movement; monsoon timing built in long waiting periods that shaped societies.</p>
+      </div>
+
+      <h3 class="sub">Maritime Technologies</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Lateen Sails</div>
+          <div class="term-def">Triangular sails enabling maneuverability across different wind directions</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Magnetic Compass</div>
+          <div class="term-def">Allowed reliable navigation independent of visible stars or landmarks</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Astrolabe</div>
+          <div class="term-def">Instrument for estimating latitude — spread and adapted across regions</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Dhows & Junks</div>
+          <div class="term-def">Arab dhows and Chinese junks — large ship designs enabling high cargo loads over long distances</div>
+        </div>
+      </div>
+
+      <h3 class="sub">What Traded by Sea</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Good</th>
+            <th>Origin</th>
+            <th>Why It Moved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Spices (pepper, cloves, cinnamon)</td>
+            <td>South/SE Asia</td>
+            <td>Scarce in destination markets; high demand for flavoring and preservation</td>
+          </tr>
+          <tr>
+            <td>Cotton Textiles</td>
+            <td>South Asia</td>
+            <td>Durable, lightweight, widely desired; South Asian production advantages</td>
+          </tr>
+          <tr>
+            <td>Porcelain & Luxury Crafts</td>
+            <td>China</td>
+            <td>Elite prestige; Chinese technological quality</td>
+          </tr>
+          <tr>
+            <td>Gold & Ivory</td>
+            <td>East Africa (interior)</td>
+            <td>Abundant inland; scarce and valued in Afro-Asian markets</td>
+          </tr>
+          <tr>
+            <td>Enslaved People</td>
+            <td>Various</td>
+            <td>Human trafficking existed within Indian Ocean worlds in certain contexts</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Key Hubs & African Connections</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <h4>Swahili Coast (e.g. Kilwa)</h4>
+          <p>City-states grew wealthy linking interior African gold and ivory to ocean markets. Islam influential especially in coastal urban society.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏯</div>
+          <h4>Great Zimbabwe</h4>
+          <p>Inland African trading state connected — through intermediaries — to Indian Ocean commerce via coastal networks. Active 11th–15th centuries.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚓</div>
+          <h4>Strait of Malacca</h4>
+          <p>Major choke point; Southeast Asian states benefited by taxing and servicing all trade passing through this critical maritime corridor.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🕌</div>
+          <h4>Persian Gulf & Red Sea</h4>
+          <p>Connected Indian Ocean trade to Mediterranean markets; Arab and Persian merchants especially prominent in western Indian Ocean circuits.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Zheng He & Ming Voyages (1405–1433)</h3>
+      <div class="callout sage">
+        <div class="callout-label">Key Distinction</div>
+        <p>The Ming dynasty sponsored major expeditions led by <strong>Zheng He</strong> to project Chinese power and prestige, strengthen diplomatic and tributary ties, and demonstrate maritime capacity within existing trade networks. <strong>These were not European-style settler colonization</strong> — they were state-sponsored projection of influence along already-active routes.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Indian Ocean Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how monsoon winds shaped Indian Ocean trade and settlement patterns</li>
+              <li>Compare sea-traded goods (bulk commodities) versus overland goods (luxury goods)</li>
+              <li>Explain how trade facilitated the spread of Islam in coastal regions</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Describing monsoons as random storms instead of predictable seasonal wind patterns</li>
+              <li>Treating Indian Ocean trade as dominated by one empire rather than multipolar participation</li>
+              <li>Mischaracterizing Zheng He's voyages as conquest rather than state-sponsored diplomacy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 5: TRANS-SAHARAN ─── -->
+    <section class="section" id="trans-saharan">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Trans-Saharan Trade <span class="tag">Africa</span></h2>
+      </div>
+
+      <p>Connected North Africa with West Africa. The Sahara was a barrier, but once merchants mastered desert logistics it became a <strong>corridor linking distinct economic zones</strong>. Think of it like an ocean: you needed a "ship" (camels) and navigation knowledge (routes and water sources).</p>
+
+      <h3 class="sub">Core Technology: Camels, Oases, Caravans</h3>
+      <p>The <strong>camel</strong> was perfectly suited to long-distance desert travel with limited water. Successful exchange also depended on knowledge of oases, established routes, and large organized caravans for safety. This explains why desert trade concentrated along known corridors and staging points.</p>
+
+      <h3 class="sub">The Logic of Scarcity: What Traded and Why</h3>
+      <div class="callout">
+        <div class="callout-label">Complementary Scarcity</div>
+        <p><strong>Gold</strong> from West Africa was abundant relative to North Africa and highly valued across Afro-Eurasian markets. <strong>Salt</strong> from Saharan/desert-edge sources was essential for health and preservation but scarce in many inland West African areas. These two goods drove the system's core logic.</p>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Good</th>
+            <th>Direction of Flow</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gold</td>
+            <td>West Africa → North Africa → Afro-Eurasia</td>
+            <td>Abundant in W. Africa; scarce and highly valued everywhere else</td>
+          </tr>
+          <tr>
+            <td>Salt</td>
+            <td>Saharan sources → West Africa</td>
+            <td>Essential for health and food preservation; scarce inland</td>
+          </tr>
+          <tr>
+            <td>Ivory</td>
+            <td>West Africa → North Africa</td>
+            <td>Prestige material; scarce in North Africa and beyond</td>
+          </tr>
+          <tr>
+            <td>Enslaved People</td>
+            <td>West Africa → North Africa</td>
+            <td>Demand for labor in North African and Middle Eastern contexts</td>
+          </tr>
+          <tr>
+            <td>Textiles & Manufactures</td>
+            <td>North Africa → West Africa</td>
+            <td>Finished goods in exchange for raw materials</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">States That Grew Rich</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Ghana (earlier)</div>
+          <div class="term-def">Earlier model of trans-Saharan wealth; taxed trade passing through its territory</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Mali (1200–1450)</div>
+          <div class="term-def">The empire most associated with trans-Saharan prosperity in this period — taxed trade, controlled key cities, used wealth for armies and administration</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Songhai (later)</div>
+          <div class="term-def">Rose to prominence in the 15th century onward; beyond this unit's period but a major successor state</div>
+        </div>
+      </div>
+
+      <h3 class="sub"><span class="accent">Mansa Musa</span> & the Hajj of 1324–1325</h3>
+      <p>Mali's gold attracted deep interest from Islamic traders across North Africa and beyond. Mansa Musa's famous pilgrimage to Mecca <strong>demonstrated Mali's integration into the Islamic world and showcased West African gold on a global stage</strong>. He invested in elevating <strong>Timbuktu</strong> as a major commercial and scholarly center, expanding Mali's influence beyond earlier West African powers.</p>
+
+      <div class="callout violet">
+        <div class="callout-label">Exam Application</div>
+        <p>Don't use Mansa Musa as just a "fun fact." Link him directly to <strong>trade wealth → Islamic networks → state power and cultural exchange</strong>. He is evidence of all three at once.</p>
+      </div>
+
+      <h3 class="sub">Islam's Spread in West Africa</h3>
+      <p>Trade supported the spread of Islam especially among elites and in commercial cities. Conversion was often <strong>selective adoption</strong>: rulers and merchants adopted Islam to strengthen ties with Muslim trading partners and scholars, while many communities blended Islamic practices with local traditions. Urban centers like Timbuktu became associated with scholarship and institutional learning.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Trans-Saharan Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how Saharan environmental conditions shaped trade methods and goods</li>
+              <li>Use Mali or Mansa Musa as evidence of how trade increased state power and cultural exchange</li>
+              <li>Compare Islam's spread in West Africa with Islam's spread in Indian Ocean port cities</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating the Sahara as stopping movement entirely — it channeled movement through specific routes</li>
+              <li>Dropping Mansa Musa as a fact without linking him to trade, gold, and Islamic networks</li>
+              <li>Assuming conversion was uniform and immediate across West Africa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 6: EUROPE ─── -->
+    <section class="section" id="europe">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Europe & Northern Seas <span class="tag">Region</span></h2>
+      </div>
+
+      <p>Europe saw major changes tied to trade and movement during this period, including the rise of towns, merchant power, and religious conflict. Europe was <strong>not isolated</strong> from Afro-Eurasian exchange — it connected through Mediterranean and overland links.</p>
+
+      <h3 class="sub">Burghers, Towns & Merchant Power</h3>
+      <p>As commerce expanded, merchants emerged as influential town residents called <strong>burghers</strong>. Over time they became politically powerful, pushing for greater autonomy and urban privileges. Towns also formed alliances with each other to protect trade and strengthen bargaining power.</p>
+
+      <h3 class="sub">The Hanseatic League</h3>
+      <div class="callout sage">
+        <div class="callout-label">Key Institution</div>
+        <p>A northern European trade alliance (13th–15th centuries, sometimes dated to 1358) that eventually involved over 100 cities. It helped expand long-distance commerce across the Baltic and North Sea regions, created a substantial <strong>middle class</strong> in northern Europe, increased social mobility, and set a precedent for large-scale European trading operations.</p>
+      </div>
+
+      <h3 class="sub">Urbanization & Architecture</h3>
+      <p>Trade contributed to urbanization across Eurasia. In Europe, Constantinople (before 1400) and later Paris and the Italian city-states (after 1400) are major urban centers. European architecture shifted from <strong>Romanesque to Gothic</strong> — key Gothic features included flying buttresses supporting taller walls, larger windows, and vaulted ceilings. Cathedrals incorporated extensive art, sculpture, and music as public religious culture.</p>
+
+      <h3 class="sub">Scholasticism & Universities</h3>
+      <p>Scholasticism reflected growth in education — universities were founded (typically for men) for philosophy, law, and medicine. Scholastic thinkers engaged ideas from Muslim intellectual traditions and Greek philosophy, sometimes producing tensions with religious authority.</p>
+
+      <div class="callout">
+        <div class="callout-label">Key Figure</div>
+        <p><strong>Thomas Aquinas (1225–1274)</strong> argued that faith and reason are not in conflict — a central scholastic claim that helped shape later Christian theology and shows how Islamic-preserved Greek philosophy entered European intellectual life.</p>
+      </div>
+
+      <h3 class="sub">Crusades, Heresy & the Church's Response</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Development</th>
+            <th>Key Detail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Crusades (11th–14th c.)</td>
+            <td>Military campaigns by European Christians targeting Muslims and non-Christians; intersected with internal Church authority concerns</td>
+          </tr>
+          <tr>
+            <td>Pope Innocent III</td>
+            <td>Issued strict doctrinal decrees; frequently persecuted perceived heretics and Jews; Fourth Crusade remembered as falling short of intended aims</td>
+          </tr>
+          <tr>
+            <td>Inquisition (Pope Gregory IX)</td>
+            <td>Formal interrogation and prosecution of perceived heretics; punishments included excommunication, torture, and execution</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Two Pathways of Religious Diffusion</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🤝</div>
+          <h4>Natural Spread via Contact</h4>
+          <p>Islam in Indian Ocean ports and West African trade cities — gradual adoption through social and economic relationships, intermarriage, and merchant community formation.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚔️</div>
+          <h4>Intentional Diffusion by Force</h4>
+          <p>Crusading movements — organized, state-sponsored religious warfare aiming to convert or conquer through military means.</p>
+        </div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Europe Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how urbanization and merchant power were connected to expanding trade</li>
+              <li>Describe the purpose and impact of trade alliances like the Hanseatic League</li>
+              <li>Explain how religious conflict interacted with broader cultural exchange</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating Europe as isolated from Afro-Eurasian exchange</li>
+              <li>Describing the Crusades only as "religious wars" — also political and internal authority issues</li>
+              <li>Dropping the Hanseatic League without explaining what it did (cooperation, protection, commercial expansion)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 7: COMMERCE & FINANCE ─── -->
+    <section class="section" id="commerce">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>Commerce & Finance <span class="tag">Thematic</span></h2>
+      </div>
+
+      <p>Long-distance trade creates a basic problem: <strong>how do you exchange valuable goods with strangers across vast distances without being robbed or cheated?</strong> Merchants and states developed a toolkit of commercial practices to make exchange more reliable.</p>
+
+      <h3 class="sub">Financial Innovations</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Credit</div>
+          <div class="term-def">Borrowing and buying with promises to pay later — reduced the need to carry dangerous heavy currency across long distances</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Bills of Exchange</div>
+          <div class="term-def">Paper instruments to deposit wealth in one place and withdraw it elsewhere — worked through reputation-based merchant communities and legal enforcement</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Paper Money (China)</div>
+          <div class="term-def">State-backed innovation especially in Song and later dynasties; expands trade by making transactions easier but requires public trust — overprinting produces inflation</div>
+        </div>
+      </div>
+
+      <h3 class="sub">Merchant Diasporas as Trust Networks</h3>
+      <p>A <strong>diasporic community</strong> lives outside its ancestral homeland while maintaining cultural ties. In trade, diasporas serve as trust networks — providing lodging and partners, extending credit based on reputation, and sharing market information. They were especially important in Indian Ocean ports and Eurasian commercial hubs, and they <strong>drove cultural diffusion</strong> by settling and blending with local societies.</p>
+
+      <div class="example-block">
+        <div class="example-label">How to Use "Diaspora" on the Exam</div>
+        <div class="example-weak">Diasporic communities were cultural groups that lived away from their homeland.</div>
+        <div class="example-strong">Diasporic merchant communities functioned as commercial trust networks — extending credit based on shared reputation, reducing the risk of fraud, and enabling exchange across regions where no formal legal system connected traders.</div>
+      </div>
+
+      <h3 class="sub">Song Dynasty: State Capacity & Commerce</h3>
+      <p>The Song Dynasty illustrates how state capacity supports commerce. A <strong>merit-based bureaucracy</strong> through civil service examinations produced loyal government workers who improved transportation, communication, and business practices. Expanded literacy through printed books increased productivity. Song China is often described as moving toward a more industrially and commercially dynamic society.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Commerce & Finance Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain one way financial innovations increased trade volume or reduced risk</li>
+              <li>Describe how diasporic communities facilitated cultural and commercial exchange</li>
+              <li>Analyze how state policies influenced trade networks</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating "banking" as only modern — premodern systems existed and mattered</li>
+              <li>Describing diasporas only as cultural groups, not as commercial institutions</li>
+              <li>Forgetting to connect finance to the core historical problem of risk and trust</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── SECTION 8: TECHNOLOGY ─── -->
+    <section class="section" id="technology">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2>Technology & Knowledge Exchange <span class="tag">Thematic</span></h2>
+      </div>
+
+      <p>Trade networks moved not only commodities but also <strong>practical knowledge</strong>. Technologies spread unevenly and were adapted to local needs — they were rarely invented once and instantly adopted everywhere.</p>
+
+      <h3 class="sub">Key Technology Patterns in Unit 2</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🧭</div>
+          <h4>Navigation & Shipbuilding</h4>
+          <p>Technologies spread across the Indian Ocean world — lateen sails, compass, astrolabe, and ship designs adapted by multiple participating groups.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📮</div>
+          <h4>Communication & Administration</h4>
+          <p>Communication systems and administrative practices spread across Mongol Eurasia, including passport-like travel documents and long-distance messaging infrastructure.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📄</div>
+          <h4>Printing & Paper Money</h4>
+          <p>State-supported production innovations in China — printing expanded literacy; paper money facilitated commercial transactions at scale.</p>
+        </div>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-label">Key Principle</div>
+        <p>Technologies spread through the same networks as goods and people — through merchant contact, conquest, religious communities, and diplomatic exchanges. <strong>The mechanism of diffusion matters as much as the technology itself</strong> on the exam.</p>
+      </div>
+
+      <h3 class="sub">Unit 2 at a Glance: Cross-Network Comparison</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Silk Roads</th>
+            <th>Indian Ocean</th>
+            <th>Trans-Saharan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary Transport</td>
+            <td>Camels, horses, foot</td>
+            <td>Sailing ships (dhows, junks)</td>
+            <td>Camels in large caravans</td>
+          </tr>
+          <tr>
+            <td>Key Technology</td>
+            <td>Caravanserais, road networks</td>
+            <td>Monsoon knowledge, compass, lateen sail</td>
+            <td>Camel domestication, oasis knowledge</td>
+          </tr>
+          <tr>
+            <td>Trade Type</td>
+            <td>Primarily luxury goods</td>
+            <td>Bulk + luxury goods</td>
+            <td>Gold, salt + luxury goods</td>
+          </tr>
+          <tr>
+            <td>Cultural Diffusion</td>
+            <td>Buddhism, Islam, Christianity; technology</td>
+            <td>Islam through merchant communities; port culture blending</td>
+            <td>Islam among elites; selective adoption</td>
+          </tr>
+          <tr>
+            <td>Key States/Groups</td>
+            <td>Mongols, Central Asian merchants</td>
+            <td>Arab, Persian, Indian, Chinese, Swahili merchants</td>
+            <td>Mali, Ghana; North African Islamic traders</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

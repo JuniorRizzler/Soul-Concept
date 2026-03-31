@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP World History — Unit 4: Transoceanic Interconnections</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e0d;
+    --surface: #101614;
+    --card: #161c1a;
+    --card-hover: #1a2220;
+    --border: #222e2a;
+    --border-light: #2e3d38;
+    --teal: #4aab98;
+    --teal-dim: #2e7a6e;
+    --teal-bright: #6dd4c4;
+    --amber: #d4893a;
+    --rose: #b5605a;
+    --violet: #7a6bb5;
+    --sage: #6aab6e;
+    --gold: #c9a84c;
+    --text: #d8e8e4;
+    --text-dim: #809088;
+    --text-muted: #445048;
+    --accent-bar: 3px solid var(--teal);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-brand {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  .sidebar-brand .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .nav-section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 1rem 1.5rem 0.4rem;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 0.45rem 1.5rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-family: 'Source Serif 4', serif;
+    transition: all 0.15s ease;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+  .nav-item:hover { color: var(--teal); background: rgba(74,171,152,0.06); border-left-color: var(--teal-dim); }
+  .nav-item.active { color: var(--teal); border-left-color: var(--teal); background: rgba(74,171,152,0.1); }
+
+  main { padding: 3rem 3.5rem 5rem; max-width: 860px; }
+
+  .hero { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+  .hero .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--teal-dim); opacity: 0.4; max-width: 80px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; line-height: 1.1; color: var(--text); margin-bottom: 1rem; }
+  .hero h1 em { font-style: italic; color: var(--teal); }
+  .hero .subtitle { font-size: 1rem; color: var(--text-dim); max-width: 580px; font-weight: 300; }
+  .hero-meta { display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+  .hero-meta .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  .section { margin-bottom: 4rem; animation: fadeUp 0.4s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .section-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--teal-dim); padding-top: 0.4rem; white-space: nowrap; letter-spacing: 0.1em; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 1.85rem; font-weight: 700; line-height: 1.2; color: var(--text); }
+  .section-header h2 .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--teal);
+    background: rgba(74,171,152,0.12);
+    border: 1px solid rgba(74,171,152,0.25);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  p { margin-bottom: 1rem; color: var(--text-dim); font-size: 0.95rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); font-weight: 600; }
+
+  .callout { background: var(--card); border: 1px solid var(--border); border-left: var(--accent-bar); padding: 1.25rem 1.5rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+  .callout.amber { border-left-color: var(--amber); }
+  .callout.rose  { border-left-color: var(--rose); }
+  .callout.violet{ border-left-color: var(--violet); }
+  .callout.sage  { border-left-color: var(--sage); }
+  .callout.gold  { border-left-color: var(--gold); }
+  .callout-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+  .callout.amber .callout-label { color: var(--amber); }
+  .callout.rose  .callout-label { color: var(--rose); }
+  .callout.violet .callout-label { color: var(--violet); }
+  .callout.sage  .callout-label { color: var(--sage); }
+  .callout.gold  .callout-label { color: var(--gold); }
+  .callout p { font-size: 0.88rem; margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card { background: var(--card); border: 1px solid var(--border); padding: 1.25rem; border-radius: 4px; transition: all 0.2s ease; }
+  .card:hover { background: var(--card-hover); border-color: var(--border-light); transform: translateY(-2px); }
+  .card-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .card h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0; }
+
+  .term-list { margin: 1.5rem 0; }
+  .term { display: grid; grid-template-columns: 180px 1fr; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+  .term:last-child { border-bottom: none; }
+  .term-name { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--teal); font-weight: 500; }
+  .term-def { font-size: 0.88rem; color: var(--text-dim); }
+
+  .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+  .compare-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: var(--card); padding: 0.75rem 1rem; text-align: left; border: 1px solid var(--border); }
+  .compare-table td { padding: 0.75rem 1rem; border: 1px solid var(--border); color: var(--text-dim); vertical-align: top; background: var(--surface); }
+  .compare-table tr:hover td { background: var(--card); }
+  .compare-table td:first-child { color: var(--text); font-weight: 600; font-size: 0.82rem; background: var(--card); }
+
+  .exam-focus { background: rgba(74,171,152,0.05); border: 1px solid rgba(74,171,152,0.2); border-radius: 4px; padding: 1.5rem; margin: 2rem 0; }
+  .exam-focus-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .exam-badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bg); background: var(--teal); padding: 0.25rem 0.6rem; border-radius: 2px; font-weight: 500; }
+  .exam-focus-header h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--teal); }
+  .exam-col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .exam-col h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+  .exam-col ul { list-style: none; padding: 0; }
+  .exam-col ul li { font-size: 0.82rem; color: var(--text-dim); padding: 0.35rem 0 0.35rem 1rem; position: relative; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .exam-col ul li:last-child { border-bottom: none; }
+  .exam-col ul li::before { content: '›'; position: absolute; left: 0; color: var(--teal-dim); font-weight: 700; }
+  .exam-col.mistakes li::before { color: var(--rose); content: '✕'; font-size: 0.7rem; top: 0.4rem; }
+
+  .example-block { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  .example-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+  .example-weak, .example-strong { font-size: 0.85rem; padding: 0.6rem 0.9rem; border-radius: 3px; margin-bottom: 0.5rem; }
+  .example-weak { background: rgba(181,96,90,0.1); border-left: 3px solid var(--rose); color: var(--text-dim); }
+  .example-strong { background: rgba(106,171,110,0.1); border-left: 3px solid var(--sage); color: var(--text-dim); }
+  .example-weak::before   { content: '✕ WEAK: ';   color: var(--rose); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+  .example-strong::before { content: '✓ STRONG: '; color: var(--sage); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; }
+
+  .framework { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1.5rem 0; }
+  .framework-item { background: var(--card); border: 1px solid var(--border); padding: 1rem 1.1rem; border-radius: 4px; display: flex; gap: 0.75rem; align-items: flex-start; }
+  .framework-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--teal-dim); padding-top: 0.15rem; min-width: 20px; }
+  .framework-item h5 { font-family: 'Playfair Display', serif; font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+  .framework-item p { font-size: 0.78rem; margin-bottom: 0; }
+
+  /* Explorer grid */
+  .explorer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+  .explorer-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 0.9rem 1.1rem; transition: all 0.2s ease; }
+  .explorer-card:hover { background: var(--card-hover); border-color: var(--border-light); }
+  .explorer-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; }
+  .explorer-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--teal-dim); letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+  .explorer-desc { font-size: 0.78rem; color: var(--text-dim); }
+
+  /* Causation chain */
+  .chain { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .chain-step { display: flex; align-items: flex-start; gap: 1rem; }
+  .chain-body { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 0.8rem 1rem; flex: 1; }
+  .chain-body h5 { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .chain-body p { font-size: 0.8rem; margin-bottom: 0; }
+  .chain-arrow { font-size: 1.1rem; color: var(--teal-dim); padding: 0.4rem 0 0 0.8rem; line-height: 1; align-self: center; }
+  .chain-connector { width: 2px; background: var(--border); margin: 0 0 0 1.35rem; height: 0.6rem; }
+
+  /* Casta system */
+  .casta { display: flex; flex-direction: column; gap: 0.5rem; margin: 1.5rem 0; }
+  .casta-row { display: flex; align-items: center; gap: 1rem; }
+  .casta-bar { height: 36px; background: var(--card); border: 1px solid var(--border); border-radius: 3px; display: flex; align-items: center; padding: 0 1rem; transition: all 0.2s; }
+  .casta-bar:hover { background: var(--card-hover); border-color: var(--border-light); }
+  .casta-bar .label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--teal); font-weight: 500; min-width: 120px; }
+  .casta-bar .desc { font-size: 0.78rem; color: var(--text-dim); }
+  .casta-row:nth-child(1) .casta-bar { width: 100%; border-left-color: var(--gold); border-left-width: 3px; }
+  .casta-row:nth-child(2) .casta-bar { width: 92%; border-left-color: var(--amber); border-left-width: 3px; }
+  .casta-row:nth-child(3) .casta-bar { width: 82%; border-left-color: var(--teal); border-left-width: 3px; }
+  .casta-row:nth-child(4) .casta-bar { width: 72%; border-left-color: var(--violet); border-left-width: 3px; }
+  .casta-row:nth-child(5) .casta-bar { width: 62%; border-left-color: var(--rose); border-left-width: 3px; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  h3.sub { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--text); margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    main { padding: 2rem 1.5rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .exam-col-grid, .framework { grid-template-columns: 1fr; }
+    .term { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="label">AP World History</div>
+      <h2>Unit 4: Transoceanic<br>Interconnections 1450–1750</h2>
+    </div>
+
+    <div class="nav-section-label">Getting There</div>
+    <a class="nav-item active" href="#navigation">Ships & Navigation</a>
+    <a class="nav-item" href="#empires">Maritime Empires</a>
+
+    <div class="nav-section-label">The Exchange</div>
+    <a class="nav-item" href="#columbian">Columbian Exchange</a>
+    <a class="nav-item" href="#labor">Labor Systems</a>
+
+    <div class="nav-section-label">Economics & Society</div>
+    <a class="nav-item" href="#trade">Global Trade</a>
+    <a class="nav-item" href="#governance">Governing Empires</a>
+    <a class="nav-item" href="#society">Social Hierarchies</a>
+
+    <div class="nav-section-label">Resistance & Synthesis</div>
+    <a class="nav-item" href="#resistance">Resistance & Limits</a>
+    <a class="nav-item" href="#synthesis">Causation & Writing</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="eyebrow">AP World History · Unit 4</div>
+      <h1>Transoceanic <em>Interconnections</em></h1>
+      <p class="subtitle">How oceans became highways — and how that transformation reshaped labor, trade, society, and power across the entire globe.</p>
+      <div class="hero-meta">
+        <span class="pill">1450–1750</span>
+        <span class="pill">Columbian Exchange</span>
+        <span class="pill">Maritime Empires</span>
+        <span class="pill">Atlantic Slavery</span>
+        <span class="pill">Global Trade</span>
+      </div>
+    </div>
+
+    <!-- SECTION 1: SHIPS & NAVIGATION -->
+    <section class="section" id="navigation">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>Ships & Navigation <span class="tag">Technology</span></h2>
+      </div>
+
+      <p>Transoceanic expansion didn't happen because Europeans became "brave." It happened because states and merchants slowly gained the <strong>tools, knowledge, and financial reasons</strong> to cross oceans. Three things were needed at once: ships that could survive long voyages, navigation methods to estimate position, and political-economic systems willing to fund risky expeditions.</p>
+
+      <div class="callout amber">
+        <div class="callout-label">Common Misconception</div>
+        <p>Europeans did <strong>not</strong> "invent" ocean navigation. They combined Mediterranean, Atlantic, and Indian Ocean knowledge — then added state-backed militarization that helped them push farther and impose more coercive control. The Indian Ocean had sophisticated maritime traditions long before Europeans arrived.</p>
+      </div>
+
+      <h3 class="sub">The Key Ships</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Caravel</div>
+          <div class="term-def">Small, highly maneuverable ship with lateen (triangular) sails. Associated with early Portuguese exploration along Africa. Could tack against the wind — crucial for return voyages.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Carrack</div>
+          <div class="term-def">Larger vessel built for long voyages and heavy cargo. Used as routes commercialized and capacity mattered more than maneuverability.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Galleon</div>
+          <div class="term-def">Heavily armed ship associated with later Atlantic trade — especially Spanish treasure fleets. Reflects Unit 4's central theme: trade and warfare merged at sea.</div>
+        </div>
+      </div>
+
+      <h3 class="sub">Navigation Tools</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🧭</div>
+          <h4>Magnetic Compass</h4>
+          <p>Developed in China. Allowed sailors to maintain a heading when no landmarks were visible. Solved the direction problem.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⭐</div>
+          <h4>Astrolabe</h4>
+          <p>Estimated latitude by measuring the sun or stars relative to the horizon. Solved the north-south position problem. Longitude remained much harder.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚢</div>
+          <h4>Sternpost Rudder</h4>
+          <p>Invented in China. Dramatically improved steering and maneuverability on open-water voyages. A key structural improvement over older side-oar steering.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📐</div>
+          <h4>Lateen Sails</h4>
+          <p>Triangular sails (with roots in the Mediterranean world) that could catch wind from multiple angles, allowing ships to sail into the wind rather than only with it.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">The Big Idea</div>
+        <p>Technology mattered most when <strong>combined with state power, competitive pressure, and profit incentives.</strong> Portugal's state-backed financing of exploration shows that tools only enabled expansion when paired with investment and political will. Even improved navigation still involved significant risk — longitude couldn't be accurately calculated at sea in this period.</p>
+      </div>
+
+      <h3 class="sub">Wind Patterns Made Routes Predictable</h3>
+      <p>Oceans look like open space on a map, but sailors experienced them as <strong>patterned systems.</strong> In the Atlantic, trade winds and westerlies created circular routes — making <em>round trips</em> possible. Without a reliable return route, exploration is a dead end. In the Indian Ocean, monsoon winds (which reverse seasonally) had already been used for centuries by Afro-Eurasian traders. This is a major continuity — European explorers entered a world where maritime knowledge already existed.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Navigation Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how innovations in shipbuilding and navigation enabled European expansion</li>
+              <li>Compare Indian Ocean maritime knowledge with Atlantic developments in the 1400s–1500s</li>
+              <li>Use a specific technology as evidence in an argument about oceanic empire-building</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating technology as the only cause — ignore state rivalry and profit motives at your peril</li>
+              <li>Claiming Europeans had no prior knowledge or that non-Europeans lacked maritime expertise</li>
+              <li>Being vague ("better ships") — always name at least one specific example</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 2: MARITIME EMPIRES -->
+    <section class="section" id="empires">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Maritime Empires <span class="tag">Expansion</span></h2>
+      </div>
+
+      <p>A maritime empire is built through control of <strong>sea routes, coastal ports, and overseas colonies</strong> — not connected land territory. This unit tracks a major global reorientation: power and wealth increasingly flowed through oceanic connections, especially across the Atlantic.</p>
+
+      <h3 class="sub">Why States Expanded Overseas</h3>
+      <div class="framework">
+        <div class="framework-item">
+          <div class="framework-num">💰</div>
+          <div>
+            <h5>Economic</h5>
+            <p>Access to spices, textiles, sugar, and silver. Direct routes that cut out expensive intermediaries.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">👑</div>
+          <div>
+            <h5>Political</h5>
+            <p>Rivalry among states pushed rulers to claim territory and disrupt competitors before rivals could.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">✝️</div>
+          <div>
+            <h5>Religious</h5>
+            <p>Spain and Portugal used spreading Christianity as both a stated goal and a justification for conquest.</p>
+          </div>
+        </div>
+        <div class="framework-item">
+          <div class="framework-num">⚠️</div>
+          <div>
+            <h5>Motives Overlap</h5>
+            <p>Spanish conquest mixed religious justification, personal ambition, and desire for land and labor. Never treat motives as separate.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Key Explorers</h3>
+      <div class="explorer-grid">
+        <div class="explorer-card">
+          <div class="explorer-name">Prince Henry the Navigator</div>
+          <div class="explorer-meta">Portugal · patron of exploration</div>
+          <div class="explorer-desc">King John I's son; sponsored Portuguese voyages and established maritime learning institutions. Did not himself explore.</div>
+        </div>
+        <div class="explorer-card">
+          <div class="explorer-name">Vasco da Gama</div>
+          <div class="explorer-meta">Portugal · ~1497–1499</div>
+          <div class="explorer-desc">Sailed around Africa to reach eastern Africa and India, connecting Atlantic and Indian Ocean routes for European trade.</div>
+        </div>
+        <div class="explorer-card">
+          <div class="explorer-name">Christopher Columbus</div>
+          <div class="explorer-meta">Spain · 1492</div>
+          <div class="explorer-desc">Opened sustained European contact with the Americas. His voyages + Iberian rivalry → Treaty of Tordesillas (1494).</div>
+        </div>
+        <div class="explorer-card">
+          <div class="explorer-name">Ferdinand Magellan</div>
+          <div class="explorer-meta">Spain · 1519</div>
+          <div class="explorer-desc">Led first circumnavigation voyage. Reached the Philippines from South America. His crew completed the trip after his death.</div>
+        </div>
+        <div class="explorer-card">
+          <div class="explorer-name">Hernando Cortés</div>
+          <div class="explorer-meta">Spain · 1519</div>
+          <div class="explorer-desc">Landed in Mexico, exploited local rivalries, and led conquest of the Aztec Empire. Tenochtitlan fell after a siege.</div>
+        </div>
+        <div class="explorer-card">
+          <div class="explorer-name">Francisco Pizarro</div>
+          <div class="explorer-meta">Spain · 1531</div>
+          <div class="explorer-desc">Conquered the Inca Empire in the Andes. Disease had already weakened Inca resistance before his arrival.</div>
+        </div>
+        <div class="explorer-card">
+          <div class="explorer-name">John Cabot</div>
+          <div class="explorer-meta">England · 1497</div>
+          <div class="explorer-desc">Explored North America, establishing England's early claim to the continent.</div>
+        </div>
+        <div class="explorer-card">
+          <div class="explorer-name">Sir Francis Drake</div>
+          <div class="explorer-meta">England · 1578</div>
+          <div class="explorer-desc">Second person to circumnavigate the globe; also raided Spanish treasure ships — illustrating how piracy and state rivalry overlapped.</div>
+        </div>
+      </div>
+
+      <h3 class="sub">Two Types of Empire</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Empire Type</th>
+            <th>Strategy</th>
+            <th>Who Used It</th>
+            <th>Economic Focus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Trading-Post Empire</td>
+            <td>Fortified coastal ports; control and tax trade routes</td>
+            <td>Portugal, Dutch</td>
+            <td>Spices, shipping fees, commerce</td>
+          </tr>
+          <tr>
+            <td>Territorial/Settler Empire</td>
+            <td>Seize land, govern large populations, extract resources</td>
+            <td>Spain, Britain, France</td>
+            <td>Silver, sugar, tobacco, fur</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Why Small Spanish Forces Could Topple Huge Empires</h3>
+      <p>This is best explained as a <strong>convergence of factors</strong> — not just "guns defeated spears."</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🤝</div>
+          <h4>Local Alliances</h4>
+          <p>Neighboring peoples often assisted the Spanish because the Aztecs had dominated or harmed them. Cortés exploited these rivalries extensively.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🦠</div>
+          <h4>Disease</h4>
+          <p>Smallpox and other Eurasian diseases devastated populations with no prior immunity. Central Mexico may have declined from ~20 million (1520) to ~2 million (1580).</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚔️</div>
+          <h4>Military Technology</h4>
+          <p>Steel weapons, horses, and firearms gave advantages — but weren't instant "superweapons." They mattered most in combination with the other factors.</p>
+        </div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Maritime Empire Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Compare methods of Portuguese and Spanish imperial expansion</li>
+              <li>Explain the role of alliances and disease in Spanish conquest</li>
+              <li>Analyze continuities between Afro-Eurasian trade empires and new maritime empires</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>"Guns defeated spears" — ignores alliances and demographic collapse entirely</li>
+              <li>Confusing trading-post empires (Portugal, Dutch) with territorial empires (Spain)</li>
+              <li>Forgetting the Pacific: Spain's Philippines colony = Unit 4 is about ALL oceans, not just the Atlantic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 3: COLUMBIAN EXCHANGE -->
+    <section class="section" id="columbian">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>The Columbian Exchange <span class="tag">Environment</span></h2>
+      </div>
+
+      <p>The Columbian Exchange refers to the transoceanic transfer of animals, plants, diseases, people, technology, and ideas among Europe, the Americas, and Africa after 1492. The exchange was <strong>not balanced</strong> — it produced dramatic ecological and demographic shocks, especially in the Americas.</p>
+
+      <h3 class="sub">What Moved — and Why It Matters</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Direction</th>
+            <th>What Moved</th>
+            <th>Key Consequence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Americas → Eastern Hemisphere</td>
+            <td>Maize, potatoes, cassava, tomatoes, cacao, tobacco</td>
+            <td>Population growth in parts of Europe, Asia, Africa due to new caloric-dense crops</td>
+          </tr>
+          <tr>
+            <td>Eastern Hemisphere → Americas</td>
+            <td>Sugar, coffee, wheat, rice, cattle, horses, pigs</td>
+            <td>Plantation agriculture expanded; horses transformed Indigenous warfare and culture</td>
+          </tr>
+          <tr>
+            <td>Eastern Hemisphere → Americas</td>
+            <td>Smallpox, measles, typhus, influenza</td>
+            <td>Demographic collapse: populations with no prior immunity declined by up to 90% in some regions</td>
+          </tr>
+          <tr>
+            <td>Americas → Global</td>
+            <td>Silver (Potosí and other mines)</td>
+            <td>Connected Spanish America, European finance, and East Asian trade networks into one global economy</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">The Manila Galleons: The Pacific Connection</h3>
+      <p>Spain's Manila colony in the Philippines was a key node of <strong>transpacific trade</strong>. The Manila galleons carried American silver to Asia and returned with Chinese silk and porcelain. This is your best evidence that Unit 4 is not just about the Atlantic — it's about interconnected oceans, and that silver linked three continents into one integrated economy.</p>
+
+      <div class="callout violet">
+        <div class="callout-label">Silver as a Global Connector</div>
+        <p>Trace silver's path for a strong essay argument: mined in Spanish America (through coerced labor) → shipped across Atlantic to Europe <em>and</em> across Pacific to Manila → exchanged for Asian goods → Ming China used silver as currency, creating massive demand. <strong>One commodity, three continents, one integrated economy.</strong></p>
+      </div>
+
+      <h3 class="sub">Disease and Demographic Collapse</h3>
+      <p>Disease was <strong>not the only cause</strong> of Indigenous population loss — violence, forced labor, and social disruption also mattered. But disease often acted as a catalyst that destabilized societies and made conquest and colonization far easier. Describe this carefully: don't reduce conquest to biology alone.</p>
+
+      <div class="example-block">
+        <div class="example-label">Evidence Quality Check</div>
+        <div class="example-weak">The Columbian Exchange changed the world with new crops and diseases.</div>
+        <div class="example-strong">American crops such as maize and potatoes spread across Eurasia and Africa, increasing caloric availability and supporting population growth, while the introduction of Eurasian diseases like smallpox caused demographic collapse in the Americas — weakening resistance and enabling Spanish colonization.</div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Columbian Exchange Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain one environmental and one demographic effect of the Columbian Exchange</li>
+              <li>Use the Manila galleons as evidence of global economic integration</li>
+              <li>Compare effects of new crops in the Eastern Hemisphere with disease effects in the Western Hemisphere</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Listing items exchanged without explaining a consequence — always state the effect</li>
+              <li>Treating disease as the only cause of Indigenous decline — also conquest and forced labor</li>
+              <li>Forgetting the Pacific dimension — focusing only on Europe–Americas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 4: LABOR SYSTEMS -->
+    <section class="section" id="labor">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Labor Systems in the Americas <span class="tag">Society</span></h2>
+      </div>
+
+      <p>Once empires conquered territory, the central problem became <strong>labor</strong>. Land and resources were useless to colonizers without workers to extract wealth. Labor systems changed over time in response to population collapse, plantation expansion, and shifting economics.</p>
+
+      <h3 class="sub">Coerced Indigenous Labor</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Encomienda</div>
+          <div class="term-def">A grant giving colonists the right to extract labor or tribute from Indigenous communities. In theory included protection and Christianization; in practice produced brutal exploitation.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Repartimiento</div>
+          <div class="term-def">Required Indigenous communities to provide laborers for set periods. Presented as a "reform" of encomienda, but still relied on coercion.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Mita</div>
+          <div class="term-def">A labor draft system in the Andes, adapted from Inca precedents but reshaped to serve Spanish silver mining — especially at Potosí. Extremely brutal conditions.</div>
+        </div>
+      </div>
+
+      <h3 class="sub">Why Atlantic Slavery Expanded</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">📉</div>
+          <h4>Indigenous Population Collapse</h4>
+          <p>Disease and conquest dramatically reduced available Indigenous labor in many regions. Colonists needed a new workforce.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌿</div>
+          <h4>Plantation Demand</h4>
+          <p>Sugar (and later tobacco) required large, controlled workforces for continuous, exhausting labor cycles. Planters sought workers they could legally and violently dominate.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚓</div>
+          <h4>Atlantic Trade Networks</h4>
+          <p>Established shipping routes made forced migration possible at enormous scale. The infrastructure for empire made the slave trade logistically feasible.</p>
+        </div>
+      </div>
+
+      <div class="callout rose">
+        <div class="callout-label">Critical Point</div>
+        <p>Never repeat the historical justification that Africans were "suited" for plantation labor. <strong>Slavery expanded because it was profitable and enforceable through violence and law</strong> — not due to any natural characteristic. This distinction matters on the exam and in historical understanding.</p>
+      </div>
+
+      <h3 class="sub">The Transatlantic Slave Trade</h3>
+      <p>Enslaved people were taken primarily from West and West-Central Africa. The <strong>Middle Passage</strong> refers to the horrific Atlantic crossing — people chained below deck, subject to extreme mortality. Commonly cited estimate: approximately <strong>13 million Africans</strong> were forcibly transported to the Americas. Breakdown: ~60% to South America, ~35% to the Caribbean, ~5% to North America. Mortality per voyage was extremely high — around 20% of people on each crossing perished.</p>
+
+      <h3 class="sub">Chattel Slavery and Plantation Economies</h3>
+      <p>Chattel slavery meant enslaved people were treated as <strong>movable property</strong>, and slavery became hereditary through legal definitions of status. Plantations — especially sugar in the Caribbean and Brazil, tobacco in North America — produced cash crops for export markets. This directly connects labor systems to global trade.</p>
+
+      <div class="example-block">
+        <div class="example-label">Sugar as Your "Engine" for Essay Arguments</div>
+        <div class="example-weak">Slavery expanded because plantations needed workers.</div>
+        <div class="example-strong">Sugar cultivation required large-scale land clearing, constant exhausting labor, and coordinated processing — creating demand for workers owners could legally and violently control. As sugar plantations spread across the Caribbean and Brazil, the transatlantic slave trade expanded to meet this demand, linking European consumer markets, African coastal trading networks, and American colonies into one system.</div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Labor System Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain why labor systems shifted from Indigenous labor to African slavery</li>
+              <li>Compare encomienda / repartimiento / mita with plantation chattel slavery</li>
+              <li>Analyze how cash crops drove changes in social and labor systems</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Claiming Indigenous labor "ended" everywhere — coerced Indigenous labor persisted in many regions alongside African slavery</li>
+              <li>Describing slavery only as racial prejudice — connect it to economics, law, and empire</li>
+              <li>Confusing encomienda (rights over labor/tribute) with outright land ownership</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 5: GLOBAL TRADE -->
+    <section class="section" id="trade">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Global Trade & Economics <span class="tag">Thematic</span></h2>
+      </div>
+
+      <p>Unit 4 marks a major step toward a <strong>world economy</strong> in which distant regions were linked through regular flows of commodities, people, and capital. States tried hard to control and profit from these systems.</p>
+
+      <h3 class="sub">Key Economic Concepts</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Mercantilism</div>
+          <div class="term-def">The dominant European economic idea: states sought wealth and power by controlling trade, maintaining a favorable balance (exports &gt; imports), and accumulating precious metals. Colonies existed to enrich the home country. NOT free trade — emphasized regulation, monopoly, and state power.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Joint-Stock Company</div>
+          <div class="term-def">Pooled merchants' resources to distribute risk. If one voyage failed, no single investor was ruined. Companies could fund large fleets and even maintain armies, blurring private commerce and state power. Examples: VOC (Dutch), EIC (British), Muscovy Company.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Triangular Trade</div>
+          <div class="term-def">Atlantic pattern: European manufactured goods → Africa; enslaved Africans → Americas; plantation goods → Europe. Useful model but oversimplified — real Atlantic commerce involved overlapping routes, including direct Africa–Americas voyages.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Consumer Revolution</div>
+          <div class="term-def">As global trade expanded, more Europeans gained access to sugar, tea, coffee, and tobacco. Rising demand increased incentives for plantation expansion → more coerced labor demand.</div>
+        </div>
+      </div>
+
+      <div class="callout gold">
+        <div class="callout-label">The Consumer Demand Chain</div>
+        <p><strong>Consumer demand</strong> → plantation growth → slavery expansion → wealth accumulation → intensified imperial rivalry. This chain earns strong analysis marks on essays because it shows how economics, labor, and politics reinforced each other.</p>
+      </div>
+
+      <h3 class="sub">Silver: The Best Example of Global Integration</h3>
+      <p>Silver mined in Spanish America (through mita/coerced labor at places like Potosí) → shipped across the Atlantic to Europe <em>and</em> via Manila galleons to Asia → exchanged for Chinese silk and porcelain → Ming China demanded silver for taxes, creating global pull. One commodity, three connected oceans.</p>
+
+      <h3 class="sub">East Asian Trade Limits</h3>
+      <p>Both China and Japan significantly <strong>limited or regulated trade</strong> with Europeans in this period. Japan under the Tokugawa Shogunate instituted the National Seclusion Policy. China allowed trade only at designated ports. These restrictions shaped the boundaries of European commercial reach — Europeans didn't have free access to Asian markets.</p>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Trade Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how joint-stock companies changed the scale of global trade</li>
+              <li>Analyze mercantilism's effects on colonial economies</li>
+              <li>Trace how one commodity (silver, sugar, tobacco) connected multiple regions</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating mercantilism as free trade — it was the opposite: regulation and monopoly</li>
+              <li>Over-relying on the triangular trade diagram without acknowledging more complex real routes</li>
+              <li>Discussing trade without connecting it to labor systems and empire-building</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 6: GOVERNING EMPIRES -->
+    <section class="section" id="governance">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Governing Overseas Empires <span class="tag">Governance</span></h2>
+      </div>
+
+      <p>Once empires expanded, they faced a constant challenge: how do you control distant territories, extract wealth, and prevent rivals from taking what you've claimed?</p>
+
+      <h3 class="sub">Colonial Administration</h3>
+      <p>In Spanish America, <strong>viceroys</strong> served as royal governors overseeing large regions. Their job: implement royal authority, coordinate taxation, manage labor extraction, and maintain colonial order. Across all empires, the big idea is consistent — colonies were built as <strong>revenue systems</strong>, and administration was designed to regulate trade and extract resources for the home country.</p>
+
+      <h3 class="sub">The Militarization of the Oceans</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">⚓</div>
+          <h4>Naval Power</h4>
+          <p>Because wealth moved by ship, empires built navies and coastal defenses. The ocean was a battlefield as well as a marketplace.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏴‍☠️</div>
+          <h4>Piracy & Privateering</h4>
+          <p>Rival states attacked each other's shipping. Piracy was sometimes tolerated or encouraged when it served state interests — Sir Francis Drake is a clear example.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⛪</div>
+          <h4>Religion as Governance</h4>
+          <p>Missionaries converted Indigenous peoples, sometimes blending with local beliefs (syncretism). Religion justified conquest and helped reshape colonial societies — it was a political tool, not just belief.</p>
+        </div>
+      </div>
+
+      <div class="callout sage">
+        <div class="callout-label">On Syncretism</div>
+        <p>Don't oversimplify conversion as total success or total failure. Religion became a site of <strong>negotiation, adaptation, and power</strong> — shaped by both missionaries and local communities. Strong exam answers explain syncretism as a process, not an event.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Governance Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how European states maintained control over overseas territories</li>
+              <li>Analyze the relationship between imperial competition and naval militarization</li>
+              <li>Use piracy or naval power as evidence for an argument about empire maintenance</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating colonies as governed informally — most empires invested heavily in administration</li>
+              <li>Ignoring rivalry — empire-building was not isolated national "adventure"</li>
+              <li>Describing religion only as belief, not as a political and cultural tool of governance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 7: SOCIAL HIERARCHIES -->
+    <section class="section" id="society">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>Social Hierarchies & Identity <span class="tag">Society</span></h2>
+      </div>
+
+      <p>Transoceanic empires didn't just move goods — they reorganized societies. A core Unit 4 theme is how new economic systems produced new social categories and reinforced inequality.</p>
+
+      <h3 class="sub">The Spanish American Casta System</h3>
+      <p>Spanish America developed a social hierarchy based on birthplace, ancestry, and legal status. Here's a simplified version:</p>
+
+      <div class="casta">
+        <div class="casta-row">
+          <div class="casta-bar"><span class="label">Peninsulares</span><span class="desc">Born in Iberia; held top government offices</span></div>
+        </div>
+        <div class="casta-row">
+          <div class="casta-bar"><span class="label">Creoles</span><span class="desc">European descent, born in Americas; wealthy but barred from highest positions</span></div>
+        </div>
+        <div class="casta-row">
+          <div class="casta-bar"><span class="label">Mestizos</span><span class="desc">Mixed European and Indigenous ancestry</span></div>
+        </div>
+        <div class="casta-row">
+          <div class="casta-bar"><span class="label">Mulattoes</span><span class="desc">Mixed European and African ancestry</span></div>
+        </div>
+        <div class="casta-row">
+          <div class="casta-bar"><span class="label">Indigenous / Enslaved</span><span class="desc">Bottom of legal and social power structures</span></div>
+        </div>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-label">Why Categories Mattered Politically</div>
+        <p>If the state reserves the highest offices for peninsulares, then creoles may become wealthy but remain <strong>politically frustrated.</strong> That structural tension matters because it plants seeds for later political conflict — a theme that grows in later units (Latin American independence movements).</p>
+      </div>
+
+      <h3 class="sub">Cultural Blending and Syncretism</h3>
+      <p>Colonialism created unequal power relations, but cultural outcomes still involved <strong>adaptation and persistence</strong> — not simple replacement. Languages blended, foods mixed, and religious practices combined into syncretic traditions. A stronger explanation than "Europe replaced everyone" is: colonialism was coercive, but Indigenous and African peoples shaped cultural outcomes through negotiation and adaptation.</p>
+
+      <h3 class="sub">Two Cautions About the Casta System</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">⚠️</div>
+          <h4>Categories Were Inconsistent</h4>
+          <p>Real life was messy — the system wasn't applied uniformly, and people sometimes navigated categories through wealth, social connections, or migration.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚖️</div>
+          <h4>The System Still Concentrated Power</h4>
+          <p>Even when categories were flexible at the margins, the overall system still justified concentrating political and economic power among colonial elites.</p>
+        </div>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Social Hierarchy Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain how colonial social hierarchies were constructed and justified</li>
+              <li>Analyze the effects of the casta system on colonial society</li>
+              <li>Provide an example of syncretism and explain why it occurred</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating race categories as purely biological rather than socially constructed and tied to power</li>
+              <li>Claiming syncretism means "equal blending" — blending often happened under coercive conditions</li>
+              <li>Writing about hierarchy without connecting it to labor systems and imperial governance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 8: RESISTANCE -->
+    <section class="section" id="resistance">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2>Resistance & the Limits of Empire <span class="tag">Agency</span></h2>
+      </div>
+
+      <p>Empires were powerful, but they were <strong>never all-powerful.</strong> Indigenous peoples, enslaved Africans, and colonists themselves shaped outcomes through resistance, adaptation, and negotiation.</p>
+
+      <h3 class="sub">A Spectrum of Resistance</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🐌</div>
+          <h4>Everyday Resistance</h4>
+          <p>Work slowdowns, maintaining cultural practices in secret, escaping, subtle sabotage. Persistent and widespread even when rarely documented.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏘️</div>
+          <h4>Maroon Communities</h4>
+          <p>Escaped enslaved people formed independent settlements in difficult terrain. Showed that slavery was constantly contested and that geography could limit imperial reach.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚔️</div>
+          <h4>Open Revolt</h4>
+          <p>Organized uprisings against colonial authorities. Even failed revolts could force administrative changes or expose weaknesses in imperial control.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Key Resistance Events</h3>
+      <div class="term-list">
+        <div class="term">
+          <div class="term-name">Pueblo Revolt (1680)</div>
+          <div class="term-def">Indigenous peoples in present-day New Mexico organized to expel Spanish authority. Causes: religious suppression, labor demands, political control. Significance: temporarily succeeded; exposed limits of empire in remote regions.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Maroon Societies</div>
+          <div class="term-def">Caribbean and Brazil, 17th–18th centuries. Escaped enslaved Africans built semi-independent communities; resisted recapture through guerrilla tactics in difficult terrain.</div>
+        </div>
+        <div class="term">
+          <div class="term-name">Haitian Revolution (1791–1804)</div>
+          <div class="term-def">Resisted French colonial slavery; the only successful slave revolt in history, achieving full Haitian independence. Shows the ultimate limits of plantation empire.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">How Resistance Reshaped Empires</div>
+        <p>Empires responded to resistance with increased militarization, legal adjustments to labor systems, and negotiated arrangements with local elites. <strong>Resistance is part of how imperial systems evolved</strong> — a static view misses the push-and-pull that is central to AP World analysis.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Resistance Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Explain one example of resistance to colonial rule and analyze its causes</li>
+              <li>Compare resistance strategies of Indigenous peoples and enslaved Africans</li>
+              <li>Use the Pueblo Revolt as evidence for the limits of empire</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Treating resistance as rare — it was persistent and took many forms</li>
+              <li>Naming a revolt without explaining the colonial pressures that caused it</li>
+              <li>Overstating outcomes: "empire collapsed" — more accurate: "empire adapted, negotiated, or repressed"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 9: SYNTHESIS & WRITING -->
+    <section class="section" id="synthesis">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2>Causation, Comparison & Writing <span class="tag">Skills</span></h2>
+      </div>
+
+      <p>Knowing facts is necessary, but <strong>high scores come from explaining relationships</strong>: what caused what, what changed, what stayed similar, and how regions compare.</p>
+
+      <h3 class="sub">The Big Causal Chain of Unit 4</h3>
+      <div class="chain">
+        <div class="chain-step">
+          <div class="chain-body">
+            <h5>Better Technology + State Sponsorship</h5>
+            <p>Compass, astrolabe, sternpost rudder, caravel/carrack/galleon + Portugal/Spain funding voyages → longer ocean travel feasible</p>
+          </div>
+        </div>
+        <div class="chain-connector"></div>
+        <div class="chain-step">
+          <div class="chain-body">
+            <h5>Conquest & Colonization</h5>
+            <p>Disease, alliances, and military technology allow small forces to topple empires → Spain, Portugal, later others, establish colonies</p>
+          </div>
+        </div>
+        <div class="chain-connector"></div>
+        <div class="chain-step">
+          <div class="chain-body">
+            <h5>Extraction Economies</h5>
+            <p>Mines and plantations create massive labor demand → encomienda/mita used first, then African slavery as Indigenous populations collapse</p>
+          </div>
+        </div>
+        <div class="chain-connector"></div>
+        <div class="chain-step">
+          <div class="chain-body">
+            <h5>Integrated Global Economy</h5>
+            <p>Silver, sugar, and tobacco link multiple continents → competition intensifies → more militarization → more imperial expansion</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Continuity vs. Change: What's Truly New?</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Continuities</th>
+            <th>Changes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Long-distance trade existed before 1450</td>
+            <td>Scale of oceanic integration dramatically increased</td>
+          </tr>
+          <tr>
+            <td>States had used forced labor systems before</td>
+            <td>Atlantic plantation slavery expanded to an unprecedented scale</td>
+          </tr>
+          <tr>
+            <td>Religions continued to spread through contact</td>
+            <td>American silver became globally significant, linking all major economies</td>
+          </tr>
+          <tr>
+            <td>Powerful states existed outside Europe (Ottoman, Ming, Mughal)</td>
+            <td>New racialized social hierarchies hardened in many colonies</td>
+          </tr>
+          <tr>
+            <td>Coercive labor practices existed in many cultures</td>
+            <td>The Atlantic became a central zone of global exchange for the first time</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Model Thesis (LEQ-Style)</h3>
+      <div class="example-block">
+        <div class="example-label">Prompt: "Evaluate the extent to which transoceanic interconnections changed labor systems from 1450–1750"</div>
+        <div class="example-weak">Transoceanic interconnections changed labor systems a lot because of the slave trade and plantations.</div>
+        <div class="example-strong">Transoceanic interconnections fundamentally transformed labor systems in the Americas by expanding plantation slavery and intensifying coerced labor for export economies, although some coercive practices drew on earlier precedents — such as the Inca mita adapted for Spanish silver mining — and Indigenous labor persisted alongside African slavery in many regions.</div>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-label">Avoid the Laundry List</div>
+        <p>The AP reader is looking for how factors <strong>reinforce each other</strong>, not just a list of facts. Every piece of evidence needs to be tied to the argument's "because" logic. Facts without analysis earn partial credit at best.</p>
+      </div>
+
+      <div class="exam-focus">
+        <div class="exam-focus-header">
+          <span class="exam-badge">Exam Focus</span>
+          <h3>Synthesis Questions</h3>
+        </div>
+        <div class="exam-col-grid">
+          <div class="exam-col">
+            <h4>Typical Questions</h4>
+            <ul>
+              <li>Write an argument connecting at least two Unit 4 themes (technology, empire, labor, trade, environment)</li>
+              <li>Compare imperial strategies across two European empires</li>
+              <li>Explain a continuity or change that spans before and after 1492</li>
+            </ul>
+          </div>
+          <div class="exam-col mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
+              <li>Writing "laundry list" paragraphs that name facts but don't explain relationships</li>
+              <li>Making absolute claims ("everything changed," "nothing changed") without nuance</li>
+              <li>Using evidence without analysis — facts must be tied to the "because" logic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
