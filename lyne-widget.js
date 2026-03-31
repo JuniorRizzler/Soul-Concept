@@ -2,14 +2,15 @@
   var POSITION_KEY = 'sc_lyne_widget_position_v1'
   var PANEL_OPEN_KEY = 'sc_lyne_widget_panel_open_v1'
   var CHAT_KEY = 'sc_lyne_widget_chat_v1'
+  var STABLE_CHAT_KEY = 'sc_lyne_widget_chat_stable_v1'
   var GUIDE_KEY = 'sc_lyne_widget_guide_v1'
   var HINT_DISMISSED_KEY = 'sc_lyne_widget_hint_dismissed_v1'
   var ONBOARDING_ACTIVE_KEY = 'sc_lyne_onboarding_active_v1'
   var ONBOARDING_STEP_KEY = 'sc_lyne_onboarding_step_v1'
   var ONBOARDING_DISMISSED_KEY = 'sc_lyne_onboarding_dismissed_v1'
   var ONBOARDING_VOICE_KEY = 'sc_lyne_onboarding_voice_v1'
-  var DEFAULT_CHAT = 'LYNE: Ready when you are.'
-  var DEFAULT_STILL_HERE = 'I am still here. Ask me where to go in the app, what to study next, or what concept you want explained.'
+  var DEFAULT_CHAT = 'LYNE AI: I am your Soul Concept study assistant. Open me and talk to me anytime.'
+  var DEFAULT_STILL_HERE = 'I am LYNE, the Soul Concept AI. Ask me where to go in the app, what to study next, or what concept you want explained.'
   var LYNE_APP_CONTEXT =
     'You are LYNE, the in-app guide for Soul Concept. ' +
     'App purpose: help Grade 9-10 students study faster with structured libraries and focused tools. ' +
@@ -215,8 +216,8 @@
       '#lyne-widget.lyne-dragging{transition:none}' +
       '#lyne-widget button,#lyne-widget textarea,#lyne-widget pre{user-select:text}' +
       '.lyne-shell{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:12px}' +
-      '#lyne-hint{position:absolute;right:78px;bottom:6px;max-width:252px;padding:14px 16px 12px;border-radius:22px;background:linear-gradient(155deg,rgba(15,23,42,.94),rgba(29,78,216,.84) 56%,rgba(13,148,136,.78));color:#f8fafc;border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 44px rgba(15,23,42,.28);font:700 11px/1.45 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.98;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 3.1s ease-in-out infinite;pointer-events:auto;backdrop-filter:blur(18px) saturate(145%)}' +
-      '#lyne-hint:before{content:"LYNE";display:inline-flex;align-items:center;gap:6px;margin:0 28px 8px 0;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.12);font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}' +
+      '#lyne-hint{position:absolute;right:78px;bottom:6px;width:min(280px,80vw);max-width:min(280px,80vw);padding:14px 16px 12px;border-radius:22px;background:linear-gradient(155deg,rgba(15,23,42,.94),rgba(29,78,216,.84) 56%,rgba(13,148,136,.78));color:#f8fafc;border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 44px rgba(15,23,42,.28);font:700 11px/1.45 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.98;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 3.1s ease-in-out infinite;pointer-events:auto;backdrop-filter:blur(18px) saturate(145%)}' +
+      '#lyne-hint:before{content:"AI · LYNE";display:inline-flex;align-items:center;gap:6px;margin:0 28px 8px 0;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.12);font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}' +
       '#lyne-hint:after{content:"";position:absolute;right:-6px;bottom:18px;width:12px;height:12px;background:linear-gradient(135deg,rgba(37,99,235,.9),rgba(13,148,136,.88));transform:rotate(45deg);border-right:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.14)}' +
       '.lyne-hint-text{display:block;padding-right:20px;color:#f8fafc}' +
       '.lyne-hint-close{position:absolute;top:8px;right:8px;appearance:none;border:0;background:rgba(255,255,255,.12);color:#fff;font:800 12px/1 Manrope,system-ui,sans-serif;cursor:pointer;opacity:.92;padding:4px 6px;border-radius:999px}' +
@@ -273,7 +274,7 @@
       '#lyne-widget.lyne-return-mode.lyne-return-strong #lyne-chat{border-color:rgba(234,88,12,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.82)}' +
       '#lyne-widget.lyne-return-mode .lyne-compose{display:none}' +
       '#lyne-widget.lyne-return-mode .lyne-panel-actions{display:none}' +
-      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-hint{right:56px;bottom:6px;max-width:176px;padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-core{left:14px;top:13px;width:20px;height:20px;border-radius:7px}#lyne-orb-toggle .flame-core:before{left:5px;top:5px;width:10px;height:10px;border-radius:3px}#lyne-orb-toggle .flame-inner{right:10px;top:10px;width:9px;height:9px}#lyne-orb-toggle .flame-glow{inset:8px;border-radius:12px}#lyne-panel{bottom:58px;width:min(270px,78vw);padding:10px;border-radius:20px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.94rem}.lyne-panel-subtitle{font-size:.66rem}.lyne-panel-actions{gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:42px;max-height:92px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:16px;width:23px;height:23px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core:before{left:6px;top:6px;width:11px;height:11px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{right:12px;top:12px;width:10px;height:10px}}' +
+      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-hint{right:56px;bottom:6px;width:min(210px,76vw);max-width:min(210px,76vw);padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-core{left:14px;top:13px;width:20px;height:20px;border-radius:7px}#lyne-orb-toggle .flame-core:before{left:5px;top:5px;width:10px;height:10px;border-radius:3px}#lyne-orb-toggle .flame-inner{right:10px;top:10px;width:9px;height:9px}#lyne-orb-toggle .flame-glow{inset:8px;border-radius:12px}#lyne-panel{bottom:58px;width:min(270px,78vw);padding:10px;border-radius:20px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.94rem}.lyne-panel-subtitle{font-size:.66rem}.lyne-panel-actions{gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:42px;max-height:92px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:16px;width:23px;height:23px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core:before{left:6px;top:6px;width:11px;height:11px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{right:12px;top:12px;width:10px;height:10px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
@@ -291,8 +292,8 @@
     widget.setAttribute('data-panel-open', 'false')
     widget.innerHTML =
       '<div class="lyne-shell">' +
-      '<div id="lyne-hint"><span class="lyne-hint-text">Talk to LYNE.</span></div>' +
-      '<button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false">' +
+      '<div id="lyne-hint"><span class="lyne-hint-text">Talk to the LYNE AI.</span></div>' +
+      '<button id="lyne-orb-toggle" type="button" aria-label="Open LYNE AI chat" aria-expanded="false">' +
       '<span class="flame-glow" aria-hidden="true"></span>' +
       '<span class="flame-core" aria-hidden="true"></span>' +
       '<span class="flame-inner" aria-hidden="true"></span>' +
@@ -301,20 +302,20 @@
       '<div class="lyne-panel-head" data-lyne-drag-handle>' +
       '<div class="lyne-panel-id">' +
       '<span class="lyne-panel-kicker">AI Guide</span>' +
-      '<h3 class="lyne-panel-title">LYNE</h3>' +
-      '<p class="lyne-panel-subtitle">Study help, routes, and quick answers in one place.</p>' +
+      '<h3 class="lyne-panel-title">LYNE AI</h3>' +
+      '<p class="lyne-panel-subtitle">Talk to the Soul Concept AI for study help, routes, and quick answers.</p>' +
       '</div>' +
       '<button id="lyne-panel-close" type="button" class="btn btn-secondary lyne-mini-btn">Hide</button>' +
       '</div>' +
       '<div class="lyne-panel-actions">' +
-      '<button id="lyne-start" class="btn btn-primary lyne-mini-btn" type="button">Talk to LYNE</button>' +
-      '<button id="lyne-tutorial" class="btn btn-secondary lyne-mini-btn" type="button">AI Tutorial</button>' +
+      '<button id="lyne-start" class="btn btn-primary lyne-mini-btn" type="button">Talk to AI</button>' +
+      '<button id="lyne-tutorial" class="btn btn-secondary lyne-mini-btn" type="button">AI Tour</button>' +
       '<button id="lyne-stop" class="btn btn-secondary lyne-mini-btn" type="button">Stop</button>' +
       '</div>' +
       '<p id="lyne-meta">Idle.</p>' +
       '<pre id="lyne-chat">' + DEFAULT_CHAT + '</pre>' +
       '<div class="lyne-compose">' +
-      '<input id="lyne-input" class="lyne-input" type="text" placeholder="Ask LYNE..." maxlength="240" />' +
+      '<input id="lyne-input" class="lyne-input" type="text" placeholder="Message the AI..." maxlength="240" />' +
       '<button id="lyne-send" class="lyne-send" type="button" aria-label="Send">↑</button>' +
       '</div>' +
       '</section>' +
@@ -360,14 +361,29 @@
     }
   }
 
+  function setStableChat(chatNode, text) {
+    var value = String(text || '').trim() || DEFAULT_CHAT
+    writeText(STABLE_CHAT_KEY, value)
+    setChat(chatNode, value)
+  }
+
+  function setTemporaryChat(chatNode, text) {
+    var value = String(text || '').trim() || DEFAULT_CHAT
+    chatNode.textContent = value
+  }
+
+  function readStableChat() {
+    return readText(STABLE_CHAT_KEY, readText(CHAT_KEY, DEFAULT_CHAT)) || DEFAULT_CHAT
+  }
+
   function latestLyneMessage(text) {
     var raw = String(text || '').trim()
-    if (!raw) return 'LYNE is ready. Open me and ask what to study next.'
+    if (!raw) return 'LYNE AI is ready. Open me and ask what to study next.'
     var match = raw.match(/LYNE:\s*([\s\S]*)$/i)
     var body = match ? match[1] : raw
     body = body.replace(/\s+/g, ' ').trim()
-    if (!body) body = 'LYNE is ready. Open me and ask what to study next.'
-    if (body.length > 92) body = body.slice(0, 89).trim() + '...'
+    if (!body) body = 'LYNE AI is ready. Open me and ask what to study next.'
+    if (body.length > 132) body = body.slice(0, 129).trim() + '...'
     return body
   }
 
@@ -613,7 +629,7 @@
     function setHintContent(text, actions) {
       var html =
         '<button class="lyne-hint-close" type="button" aria-label="Close LYNE prompt" data-lyne-hint-dismiss>&times;</button>' +
-        '<span class="lyne-hint-text">' + String(text || 'Talk to LYNE.') + '</span>'
+        '<span class="lyne-hint-text">' + escapeHtml(String(text || 'Talk to the LYNE AI.')) + '</span>'
       if (Array.isArray(actions) && actions.length) {
         html += '<div class="lyne-hint-actions">'
         for (var i = 0; i < actions.length; i++) {
@@ -635,7 +651,7 @@
 
       function setDefaultHint() {
         var preview = latestLyneMessage(readText(CHAT_KEY, DEFAULT_CHAT))
-        setHintContent(preview, [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
+        setHintContent(preview, [{ id: 'spotlight-open', label: 'Talk to AI', primary: true }])
       }
 
       function clearTutorSpotlightTimers() {
@@ -646,27 +662,27 @@
 
       function spotlightTutorAssistant() {
         clearTutorSpotlightTimers()
-        clearReturnPrompt()
-        clearGuide()
-        setHintDismissed(false)
-        setPanelOpen(false)
+      clearReturnPrompt()
+      clearGuide()
+      setHintDismissed(false)
+      setPanelOpen(false)
         var x = Math.max(88, Math.min(window.innerWidth - 88, Math.round(window.innerWidth * 0.72)))
         var y = Math.max(156, Math.min(window.innerHeight - 88, Math.round(window.innerHeight * 0.56)))
         applyPosition(widget, { x: x, y: y })
         meta.textContent = 'Tutor AI'
-        chat.textContent = DEFAULT_STILL_HERE
-        setHintContent('Click me to open LYNE.', [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
+        setTemporaryChat(chat, DEFAULT_STILL_HERE)
+        setHintContent('Tap to open the LYNE AI chat.', [{ id: 'spotlight-open', label: 'Talk to AI', primary: true }])
         syncHintVisibility()
         tutorSpotlightTimers.push(
           setTimeout(function () {
             if (panel.classList.contains('open') || isHintDismissed()) return
-            setHintContent('Move me anywhere on the screen.', [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
+            setHintContent('Move the LYNE AI widget anywhere on the screen.', [{ id: 'spotlight-open', label: 'Talk to AI', primary: true }])
           }, 1900)
         )
         tutorSpotlightTimers.push(
           setTimeout(function () {
             if (panel.classList.contains('open') || isHintDismissed()) return
-            setHintContent('Ask me what to study next.', [{ id: 'spotlight-open', label: 'Open LYNE', primary: true }])
+            setHintContent('Ask the AI what to study next.', [{ id: 'spotlight-open', label: 'Talk to AI', primary: true }])
           }, 4100)
         )
       }
@@ -708,7 +724,7 @@
         returnPromptState = {
           panelOpen: panel.classList.contains('open'),
           meta: meta.textContent,
-          chat: chat.textContent,
+          chat: readStableChat(),
         }
       }
       returnPromptActive = true
@@ -716,7 +732,7 @@
       widget.classList.toggle('lyne-return-strong', strong)
       setPanelOpen(true)
       meta.textContent = strong ? 'Firm focus warning' : 'Focus reminder'
-      chat.textContent = message
+      setTemporaryChat(chat, message)
       returnPromptSpoken = false
       if (firstShow && !document.hidden) {
         lastAssistantText = firmLine
@@ -733,7 +749,7 @@
       if (returnPromptState) {
         setPanelOpen(!!returnPromptState.panelOpen)
         meta.textContent = returnPromptState.meta || 'Idle.'
-        chat.textContent = returnPromptState.chat || DEFAULT_CHAT
+        setChat(chat, returnPromptState.chat || readStableChat())
       }
       returnPromptState = null
       returnPromptSpoken = false
@@ -753,6 +769,21 @@
       } else if (autoArmTimer) {
         clearTimeout(autoArmTimer)
         autoArmTimer = null
+      }
+      if (!open && !returnPromptActive) {
+        if (isOnboardingActive()) {
+          var step = ONBOARDING_STEPS[getOnboardingStep()]
+          if (step) {
+            setHintContent(step.hint || 'Follow the LYNE AI guide.', [
+              { id: 'guide-next', label: step.hint || 'Continue', primary: true },
+              { id: 'guide-skip', label: 'Skip tour' },
+            ])
+          } else {
+            setDefaultHint()
+          }
+        } else {
+          setDefaultHint()
+        }
       }
     }
 
@@ -839,7 +870,7 @@
       setOnboardingVoiceEnabled(false)
       setPanelOpen(true)
       meta.textContent = 'Guide complete.'
-      setChat(chat, 'LYNE: You are set. Ask me where to go, what to study next, or what concept you want explained.')
+      setStableChat(chat, 'LYNE: You are set. Ask me where to go, what to study next, or what concept you want explained.')
       setDefaultHint()
     }
 
@@ -1021,7 +1052,7 @@
       }, 280)
       setPanelOpen(true)
       meta.textContent = 'LYNE guide'
-      setChat(chat, 'LYNE: ' + step.message)
+      setStableChat(chat, 'LYNE: ' + step.message)
       setHintContent(step.hint || 'Follow LYNE across the app.', [
         { id: 'guide-next', label: step.hint || 'Continue', primary: true },
         { id: 'guide-skip', label: 'Skip tour' },
@@ -1098,7 +1129,7 @@
       if (isOnboardingActive()) return
       setTimeout(function () {
         if (isOnboardingDismissed() || isOnboardingActive()) return
-        setHintContent('Want LYNE to guide you through the app?', [
+        setHintContent('Want the LYNE AI to guide you through the app?', [
           { id: 'guide-yes', label: 'Guide me', primary: true },
           { id: 'guide-no', label: 'Not now' },
         ])
@@ -1363,7 +1394,7 @@
       lastUserAt = now
       waiting = true
       meta.textContent = 'Thinking...'
-      setChat(chat, 'You: ' + question + '\n\nLYNE: ...')
+      setTemporaryChat(chat, 'You: ' + question + '\n\nLYNE: ...')
       try {
         var intentReply = localAppIntentReply(question)
         var guideTarget = detectGuideTarget(question)
@@ -1378,7 +1409,7 @@
           }
         }
         reply = normalizeAssistantText(reply, question)
-        setChat(chat, 'You: ' + question + '\n\nLYNE: ' + reply)
+        setStableChat(chat, 'You: ' + question + '\n\nLYNE: ' + reply)
         lastAssistantText = reply
         await speak(reply)
         if (guideTarget) {
@@ -1390,7 +1421,7 @@
       } catch (_err) {
         var fallback = localFallbackReply(question)
         lastAssistantText = fallback
-        setChat(chat, 'You: ' + question + '\n\nLYNE: ' + fallback)
+        setStableChat(chat, 'You: ' + question + '\n\nLYNE: ' + fallback)
         await speak(fallback)
         meta.textContent = 'Using fallback reply.'
       } finally {
@@ -1721,7 +1752,7 @@
     }
 
     setDefaultHint()
-    setChat(chat, readText(CHAT_KEY, DEFAULT_CHAT))
+    setStableChat(chat, readStableChat())
     setPanelOpen(false)
     syncHintVisibility()
     applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
