@@ -460,7 +460,7 @@
 </form>
 </div>
 </div>
-<script defer src="assets/stitch-router.js?v=20260327f"></script>
+<script defer src="assets/stitch-router.js?v=20260331a"></script>
 <script>
   (function () {
     var STORAGE_KEY = 'sc_schedule_events_v2'
@@ -700,7 +700,7 @@
     function syncWeekChrome() {
       var start = currentWeekStart()
       var end = addDays(start, 4)
-      if (weekLabel) weekLabel.textContent = 'Week ' + weekNumber(start) + ': ' + formatMonthDay(start) + ' – ' + formatMonthDay(end)
+      if (weekLabel) weekLabel.textContent = 'Week ' + weekNumber(start) + ': ' + formatMonthDay(start) + ' â€“ ' + formatMonthDay(end)
       dayOrder.forEach(function (day) {
         var label = document.querySelector('[data-schedule-day-label="' + day + '"]')
         if (!label) return

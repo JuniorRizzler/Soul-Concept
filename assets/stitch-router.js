@@ -411,6 +411,24 @@
     return score;
   }
 
+  function isHeaderSearchInput(input) {
+    if (!input || input.dataset.stitchSearchIgnore === "true") return false;
+    const placeholder = normalize(input.getAttribute("placeholder") || "");
+    const type = normalize(input.getAttribute("type") || "");
+    const icon = input.parentElement?.querySelector(".material-symbols-outlined, [data-icon]");
+    const iconToken = normalize(icon?.textContent || icon?.getAttribute("data-icon") || "");
+    const inHeader = Boolean(input.closest("header, nav")) || input.getBoundingClientRect().top < 180;
+    if (!inHeader) return false;
+    if (placeholder.includes("search")) return true;
+    if (type === "search") return true;
+    return iconToken === "search";
+  }
+
+  function isNotificationIconToken(token) {
+    const normalized = normalize(token || "");
+    return normalized === "notifications" || normalized === "notifications active" || normalized === "notifications_active";
+  }
+
   function buildSearchResultMarkup(resource, active) {
     return `
       <a class="stitch-search-result block rounded-[22px] px-4 py-3.5 transition-all ${active ? "bg-[linear-gradient(135deg,#004435,#215c4b)] text-white shadow-[0_18px_36px_rgba(0,68,53,0.2)]" : "border border-transparent bg-white/55 text-primary hover:border-[rgba(0,68,53,0.08)] hover:bg-white/88 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)]"}" href="${resource.href}" data-stitch-search-result="${resource.href}">
@@ -431,7 +449,7 @@
   }
 
   function initHeaderSearches() {
-    const inputs = Array.from(document.querySelectorAll('input[placeholder*="Search knowledge"], input[placeholder*="Search Knowledge"]'));
+    const inputs = Array.from(document.querySelectorAll("input")).filter(isHeaderSearchInput);
     if (!inputs.length) return;
 
     inputs.forEach((input) => {
@@ -440,12 +458,11 @@
 
       const host = input.parentElement;
       if (!host) return;
-      if (getComputedStyle(host).position === "static") host.style.position = "relative";
 
       const panel = document.createElement("div");
       panel.className = "stitch-search-panel";
-      panel.style.position = "absolute";
-      panel.style.top = "calc(100% + 12px)";
+      panel.style.position = "fixed";
+      panel.style.top = "0";
       panel.style.left = "0";
       panel.style.width = "min(460px, 90vw)";
       panel.style.maxHeight = "460px";
@@ -458,10 +475,18 @@
       panel.style.boxShadow = "0 24px 65px rgba(10,14,20,0.12)";
       panel.style.zIndex = "85";
       panel.style.display = "none";
-      host.appendChild(panel);
+      document.body.appendChild(panel);
 
       let results = [];
       let activeIndex = -1;
+
+      function positionPanel() {
+        const rect = input.getBoundingClientRect();
+        const width = Math.min(Math.max(rect.width, 320), Math.min(460, window.innerWidth - 24));
+        panel.style.width = width + "px";
+        panel.style.left = Math.max(12, Math.min(rect.left, window.innerWidth - width - 12)) + "px";
+        panel.style.top = Math.min(rect.bottom + 12, window.innerHeight - panel.offsetHeight - 12) + "px";
+      }
 
       function defaultResources() {
         return searchResources.slice(0, 7);
@@ -500,6 +525,7 @@
 
       function setOpen(next) {
         panel.style.display = next ? "block" : "none";
+        if (next) positionPanel();
       }
 
       input.addEventListener("focus", () => {
@@ -556,8 +582,16 @@
       });
 
       document.addEventListener("click", (event) => {
-        if (!host.contains(event.target)) setOpen(false);
+        if (!host.contains(event.target) && !panel.contains(event.target)) setOpen(false);
       });
+
+      window.addEventListener("resize", () => {
+        if (panel.style.display === "block") positionPanel();
+      });
+
+      window.addEventListener("scroll", () => {
+        if (panel.style.display === "block") positionPanel();
+      }, true);
     });
   }
 
@@ -862,7 +896,7 @@
     const badge = shell.querySelector("[data-home-notifications-badge]");
     const count = shell.querySelector("[data-home-notifications-count]");
     const toggle = shell.querySelector("[data-home-notifications-toggle]");
-    const clear = shell.querySelector('button[type="button"]');
+    const clear = shell.querySelector("[data-stitch-notification-clear]") || Array.from(shell.querySelectorAll('button[type="button"]')).find((button) => normalize(button.textContent || "") === "clear");
     const seenMap = readNotificationSeen();
     const unreadCount = items.filter((item) => !seenMap[item.id]).length;
 
@@ -927,6 +961,8 @@
       const toggle = shell.querySelector("[data-home-notifications-toggle]");
       const panel = shell.querySelector("[data-home-notifications-panel]");
       if (!toggle || !panel) return;
+      toggle.removeAttribute("onclick");
+      if (toggle.tagName === "A") toggle.setAttribute("href", "#");
 
       function setPanelOpen(next) {
         panel.style.display = next ? "block" : "none";
@@ -936,6 +972,10 @@
       }
 
       setPanelOpen(false);
+
+      panel.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
 
       toggle.addEventListener("click", (event) => {
         event.preventDefault();
@@ -973,14 +1013,14 @@
       candidates = Array.from(document.querySelectorAll(selectors.join(","))).filter((node) => {
         if (node.closest("[data-home-notifications]")) return false;
         const icon = node.querySelector('[data-icon="notifications"], .material-symbols-outlined');
-        return icon && normalize(icon.textContent || icon.getAttribute("data-icon") || "") === "notifications";
+        return icon && isNotificationIconToken(icon.textContent || icon.getAttribute("data-icon") || "");
       });
     } catch (_err) {
       candidates = Array.from(document.querySelectorAll('[data-icon="notifications"], .material-symbols-outlined')).map((node) => node.closest("button, a") || node).filter((node, index, arr) => {
         if (!node || arr.indexOf(node) !== index) return false;
         if (node.closest("[data-home-notifications]")) return false;
         const text = normalize(node.textContent || node.getAttribute("data-icon") || "");
-        return text.includes("notifications");
+        return isNotificationIconToken(text) || text.includes("notifications");
       });
     }
 
