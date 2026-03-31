@@ -215,6 +215,9 @@
       '#lyne-widget.lyne-dragging{transition:none}' +
       '#lyne-widget button,#lyne-widget textarea,#lyne-widget pre{user-select:text}' +
       '.lyne-shell{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:12px}' +
+      '#lyne-drag-pill{position:absolute;right:10px;bottom:72px;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(255,255,255,.76);backdrop-filter:blur(16px) saturate(140%);color:#334155;font:800 10px/1 Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 12px 24px rgba(15,23,42,.12);cursor:grab;touch-action:none;z-index:2}' +
+      '#lyne-drag-pill:before{content:"";width:8px;height:8px;border-radius:999px;background:linear-gradient(135deg,#1d4ed8,#0d9488);box-shadow:0 0 0 4px rgba(37,99,235,.08)}' +
+      '#lyne-drag-pill:active{cursor:grabbing}' +
       '#lyne-hint{position:absolute;right:78px;bottom:6px;max-width:252px;padding:14px 16px 12px;border-radius:22px;background:linear-gradient(155deg,rgba(15,23,42,.94),rgba(29,78,216,.84) 56%,rgba(13,148,136,.78));color:#f8fafc;border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 44px rgba(15,23,42,.28);font:700 11px/1.45 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.98;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 3.1s ease-in-out infinite;pointer-events:auto;backdrop-filter:blur(18px) saturate(145%)}' +
       '#lyne-hint:before{content:"LYNE";display:inline-flex;align-items:center;gap:6px;margin:0 28px 8px 0;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.12);font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}' +
       '#lyne-hint:after{content:"";position:absolute;right:-6px;bottom:18px;width:12px;height:12px;background:linear-gradient(135deg,rgba(37,99,235,.9),rgba(13,148,136,.88));transform:rotate(45deg);border-right:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.14)}' +
@@ -271,7 +274,7 @@
       '#lyne-widget.lyne-return-mode.lyne-return-strong #lyne-chat{border-color:rgba(234,88,12,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.82)}' +
       '#lyne-widget.lyne-return-mode .lyne-compose{display:none}' +
       '#lyne-widget.lyne-return-mode .lyne-panel-actions{display:none}' +
-      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-hint{right:56px;bottom:6px;max-width:176px;padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-core{left:15px;top:10px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:20px;top:16px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:6px;border-radius:12px}#lyne-panel{bottom:58px;width:min(270px,78vw);padding:10px;border-radius:20px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.94rem}.lyne-panel-subtitle{font-size:.66rem}.lyne-panel-actions{gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:42px;max-height:92px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:13px;width:23px;height:28px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{left:24px;top:21px;width:9px;height:12px}}' +
+      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-drag-pill{right:8px;bottom:60px;padding:5px 8px;font-size:8px}#lyne-hint{right:56px;bottom:6px;max-width:176px;padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-core{left:15px;top:10px;width:18px;height:22px}#lyne-orb-toggle .flame-inner{left:20px;top:16px;width:7px;height:10px}#lyne-orb-toggle .flame-glow{inset:6px;border-radius:12px}#lyne-panel{bottom:58px;width:min(270px,78vw);padding:10px;border-radius:20px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.94rem}.lyne-panel-subtitle{font-size:.66rem}.lyne-panel-actions{gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:42px;max-height:92px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:13px;width:23px;height:28px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{left:24px;top:21px;width:9px;height:12px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
@@ -287,6 +290,7 @@
     widget.setAttribute('data-panel-open', 'false')
     widget.innerHTML =
       '<div class="lyne-shell">' +
+      '<button id="lyne-drag-pill" type="button" aria-label="Move LYNE">Move</button>' +
       '<div id="lyne-hint"><span class="lyne-hint-text">Talk to LYNE.</span></div>' +
       '<button id="lyne-orb-toggle" type="button" aria-label="Open LYNE" aria-expanded="false">' +
       '<span class="flame-glow" aria-hidden="true"></span>' +
@@ -534,8 +538,9 @@
     var meta = document.getElementById('lyne-meta')
     var chat = document.getElementById('lyne-chat')
     var hint = document.getElementById('lyne-hint')
+    var dragPill = document.getElementById('lyne-drag-pill')
     var dragHandle = panel.querySelector('[data-lyne-drag-handle]')
-    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !tutorialBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint) return
+    if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !tutorialBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint || !dragPill) return
 
     function playUiSound(name) {
       try {
@@ -1388,7 +1393,6 @@
       var startX = touch ? touch.clientX : startEvent.clientX
       var startY = touch ? touch.clientY : startEvent.clientY
       if (startX == null || startY == null) return
-      if (typeof startEvent.preventDefault === 'function') startEvent.preventDefault()
       var rect = widget.getBoundingClientRect()
       var originX = rect.left
       var originY = rect.top
@@ -1441,12 +1445,12 @@
       window.addEventListener('touchcancel', end)
     }
 
-    orbToggle.addEventListener('pointerdown', beginDrag)
     dragHandle.addEventListener('pointerdown', beginDrag)
-    orbToggle.addEventListener('mousedown', beginDrag)
+    dragPill.addEventListener('pointerdown', beginDrag)
     dragHandle.addEventListener('mousedown', beginDrag)
-    orbToggle.addEventListener('touchstart', beginDrag, { passive: false })
+    dragPill.addEventListener('mousedown', beginDrag)
     dragHandle.addEventListener('touchstart', beginDrag, { passive: false })
+    dragPill.addEventListener('touchstart', beginDrag, { passive: false })
     panelClose.addEventListener('pointerdown', function (event) {
       event.stopPropagation()
     })
