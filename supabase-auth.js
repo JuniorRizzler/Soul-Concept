@@ -4,6 +4,7 @@
   var RETURN_TO_KEY = 'sc_auth_return_to'
   var DISMISS_KEY = 'sc_auth_prompt_dismissed_v1'
   var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
+  var SIGNIN_NOTICE_SESSION_KEY = 'sc_signin_notice_seen_v1'
   var REQUIRE_AUTH = false
 
   function isAuthRequired() {
@@ -71,9 +72,24 @@
       '.sc-auth-field label{font-size:.83rem;font-weight:800;color:#3d3b46}' +
       '.sc-auth-field input{width:100%;border:1px solid #d8cdbf;border-radius:14px;padding:12px 13px;font:600 .95rem/1.3 Manrope,system-ui,sans-serif;background:#fff;color:#1b1b1f}' +
       '.sc-auth-submit{width:100%;justify-content:center;min-height:46px}' +
-      '.sc-auth-status{min-height:20px;margin:0;color:#5a5863;font-size:.88rem}' +
+        '.sc-auth-status{min-height:20px;margin:0;color:#5a5863;font-size:.88rem}' +
       '.sc-auth-status.ok{color:#166534}' +
       '.sc-auth-status.err{color:#b91c1c}' +
+        '.sc-signin-toast{position:fixed;top:88px;right:18px;z-index:10030;width:min(360px,calc(100vw - 24px));padding:14px 14px 12px;border-radius:22px;border:1px solid rgba(191,201,195,.42);background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(243,248,246,.94));box-shadow:0 20px 44px rgba(23,21,16,.16);backdrop-filter:blur(16px);color:#1b1b1f;opacity:0;transform:translateY(-10px) scale(.98);pointer-events:none;transition:opacity .22s ease,transform .22s ease}' +
+        '.sc-signin-toast.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}' +
+        '.sc-signin-toast-head{display:flex;align-items:flex-start;gap:12px}' +
+        '.sc-signin-toast-icon{width:38px;height:38px;flex:0 0 auto;border-radius:14px;background:linear-gradient(135deg,#004435,#215c4b);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px rgba(0,68,53,.18)}' +
+        '.sc-signin-toast-icon img{width:20px;height:20px;object-fit:contain;display:block}' +
+        '.sc-signin-toast-copy{min-width:0;flex:1}' +
+        '.sc-signin-toast-kicker{display:block;margin:1px 0 4px;color:#ae3200;font-size:.66rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}' +
+        '.sc-signin-toast-title{margin:0;font:800 .98rem/1.2 "Plus Jakarta Sans",Segoe UI,sans-serif;color:#004435}' +
+        '.sc-signin-toast-text{margin:5px 0 0;color:#5a5863;font:600 .82rem/1.45 Manrope,system-ui,sans-serif}' +
+        '.sc-signin-toast-close{appearance:none;border:0;background:transparent;color:#7b746b;font-size:1.1rem;line-height:1;cursor:pointer;padding:2px 4px;border-radius:999px;flex:0 0 auto}' +
+        '.sc-signin-toast-actions{display:flex;align-items:center;gap:10px;margin-top:12px;padding-left:50px}' +
+        '.sc-signin-toast-link{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border-radius:999px;background:#004435;color:#fff;text-decoration:none;font:800 .73rem/1 Manrope,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 12px 22px rgba(0,68,53,.18)}' +
+        '.sc-signin-toast-link:hover{transform:translateY(-1px)}' +
+        '.sc-signin-toast-note{color:#7b746b;font:700 .72rem/1.3 Manrope,system-ui,sans-serif}' +
+        '@media (max-width:840px){.sc-signin-toast{top:auto;bottom:14px;right:12px;width:min(360px,calc(100vw - 24px));padding:13px 13px 12px}.sc-signin-toast-actions{padding-left:0;flex-wrap:wrap}}' +
         '@media (max-width:840px){.sc-auth-inline{order:3;margin-left:0}.nav-more{display:none !important}.sc-auth-launch{width:auto;padding:8px 10px;font-size:.82rem}.sc-auth-shell{gap:5px}.sc-auth-user{max-width:96px;padding:6px 8px;gap:6px}.sc-auth-avatar{width:22px;height:22px;font-size:.68rem}.sc-auth-signout{padding:7px 8px;font-size:.72rem}.sc-auth-float{top:10px;right:10px;padding:7px 8px;max-width:calc(100vw - 20px)}}'
     document.head.appendChild(style)
   }
@@ -190,6 +206,20 @@
 
   function openProfileSettingsPage() {
     location.href = '/settings.html'
+  }
+
+  function hasSeenSigninNoticeThisSession() {
+    try {
+      return sessionStorage.getItem(SIGNIN_NOTICE_SESSION_KEY) === '1'
+    } catch (_err) {
+      return false
+    }
+  }
+
+  function setSeenSigninNoticeThisSession(value) {
+    try {
+      sessionStorage.setItem(SIGNIN_NOTICE_SESSION_KEY, value ? '1' : '0')
+    } catch (_err) {}
   }
 
   function isPromptDismissed() {
@@ -394,6 +424,92 @@
       document.documentElement.style.overflow = ''
       document.body.style.overflow = ''
       setStatus(backdrop, '', '')
+  }
+
+  function ensureSigninToast() {
+    var existing = document.getElementById('sc-signin-toast')
+    if (existing) return existing
+    var toast = document.createElement('section')
+    toast.id = 'sc-signin-toast'
+    toast.className = 'sc-signin-toast'
+    toast.setAttribute('role', 'status')
+    toast.setAttribute('aria-live', 'polite')
+    toast.innerHTML =
+      '<div class="sc-signin-toast-head">' +
+      '<div class="sc-signin-toast-icon" aria-hidden="true"><img src="/icons/soulconceptflame.png" alt="" /></div>' +
+      '<div class="sc-signin-toast-copy">' +
+      '<span class="sc-signin-toast-kicker">Soul Concept</span>' +
+      '<h3 class="sc-signin-toast-title">Sign in to save your study progress</h3>' +
+      '<p class="sc-signin-toast-text">Your dashboard, LYNE help flow, and saved review progress work better once your account is connected.</p>' +
+      '</div>' +
+      '<button class="sc-signin-toast-close" type="button" aria-label="Dismiss sign in notice">&times;</button>' +
+      '</div>' +
+      '<div class="sc-signin-toast-actions">' +
+      '<a class="sc-signin-toast-link" href="/auth/verification.html?mode=returning">Sign In</a>' +
+      '<span class="sc-signin-toast-note">Takes a few seconds.</span>' +
+      '</div>'
+    ;(document.body || document.documentElement).appendChild(toast)
+    return toast
+  }
+
+  function hideSigninToast() {
+    var toast = document.getElementById('sc-signin-toast')
+    if (!toast) return
+    toast.classList.remove('open')
+  }
+
+  function playSigninNoticeSound() {
+    try {
+      var AudioCtx = window.AudioContext || window.webkitAudioContext
+      if (!AudioCtx) return
+      var ctx = new AudioCtx()
+      var now = ctx.currentTime
+      var gain = ctx.createGain()
+      var osc = ctx.createOscillator()
+      osc.type = 'sine'
+      osc.frequency.setValueAtTime(740, now)
+      osc.frequency.exponentialRampToValueAtTime(620, now + 0.14)
+      gain.gain.setValueAtTime(0.0001, now)
+      gain.gain.exponentialRampToValueAtTime(0.028, now + 0.02)
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18)
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start(now)
+      osc.stop(now + 0.19)
+      setTimeout(function () {
+        try { ctx.close() } catch (_err) {}
+      }, 260)
+    } catch (_err) {}
+  }
+
+  function showSignedOutSigninNotice() {
+    if (hasSeenSigninNoticeThisSession()) return
+    var toast = ensureSigninToast()
+    if (!toast) return
+    setSeenSigninNoticeThisSession(true)
+    clearTimeout(window.scSigninToastTimer)
+    toast.classList.add('open')
+    playSigninNoticeSound()
+
+    var close = toast.querySelector('.sc-signin-toast-close')
+    if (close && close.getAttribute('data-bound') !== '1') {
+      close.setAttribute('data-bound', '1')
+      close.addEventListener('click', function () {
+        hideSigninToast()
+      })
+    }
+
+    var link = toast.querySelector('.sc-signin-toast-link')
+    if (link && link.getAttribute('data-bound') !== '1') {
+      link.setAttribute('data-bound', '1')
+      link.addEventListener('click', function () {
+        saveReturnPath(currentReturnPath())
+      })
+    }
+
+    window.scSigninToastTimer = setTimeout(function () {
+      hideSigninToast()
+    }, 9000)
   }
 
   function bindModal(client) {
@@ -642,6 +758,11 @@
     publishProfile(session)
     mountAuthUi(client, session)
     setGateMode(isAuthRequired() && !session)
+    if (!session || !session.user) {
+      showSignedOutSigninNotice()
+    } else {
+      hideSigninToast()
+    }
     syncTopbarProfileIcon(window.scAuthProfile)
     bindProfileIconPrompts()
     syncNavMoreMenu()
@@ -651,6 +772,11 @@
       publishProfile(session || null)
       mountAuthUi(client, session || null)
       setGateMode(isAuthRequired() && !session)
+      if (session && session.user) {
+        hideSigninToast()
+      } else {
+        showSignedOutSigninNotice()
+      }
       syncTopbarProfileIcon(window.scAuthProfile)
       bindProfileIconPrompts()
       syncNavMoreMenu()
