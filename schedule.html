@@ -227,10 +227,22 @@
                         Orchestrate your cognitive energy. Syncing seamlessly with Google Calendar and BBK12 to optimize your academic flow.
                     </p>
 </div>
-<div class="flex gap-4">
-<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-highest text-primary font-headline font-bold text-sm rounded-xl hover:bg-slate-200 transition-all">
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-highest text-primary font-headline font-bold text-sm rounded-xl hover:bg-slate-200 transition-all" data-google-calendar-sync="" type="button">
 <span class="material-symbols-outlined text-lg" data-icon="sync" style="font-variation-settings: 'FILL' 0;">sync</span>
-                        Sync Academic Calendars
+                        Connect Google Calendar
+                    </button>
+<button class="hidden flex items-center gap-2 px-6 py-3 border border-outline-variant/20 text-on-surface-variant font-headline font-bold text-sm rounded-xl hover:bg-slate-100 transition-all" data-google-calendar-disconnect="" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="link_off">link_off</span>
+                        Disconnect
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-highest text-primary font-headline font-bold text-sm rounded-xl hover:bg-slate-200 transition-all" data-bbk12-sync="" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="cloud_sync" style="font-variation-settings: 'FILL' 0;">cloud_sync</span>
+                        Connect BBK12
+                    </button>
+<button class="hidden flex items-center gap-2 px-6 py-3 border border-outline-variant/20 text-on-surface-variant font-headline font-bold text-sm rounded-xl hover:bg-slate-100 transition-all" data-bbk12-disconnect="" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="link_off">link_off</span>
+                        Disconnect BBK12
                     </button>
 <button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-lg shadow-primary/10 hover:scale-[1.02] active:scale-95 transition-all" data-schedule-new-session="" type="button">
 <span class="material-symbols-outlined text-lg" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
@@ -238,6 +250,8 @@
                     </button>
 </div>
 </div>
+<p class="mb-6 text-xs font-label font-semibold uppercase tracking-[0.18em] text-outline" data-google-calendar-status="">Google Calendar is not connected.</p>
+<p class="mb-6 text-xs font-label font-semibold uppercase tracking-[0.18em] text-outline" data-bbk12-status="">BBK12 is not connected.</p>
 <div class="mb-8 rounded-3xl border border-secondary/10 bg-secondary/5 px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4" data-auth-cta="">
 <div class="space-y-1">
 <p class="text-[10px] font-label font-bold uppercase tracking-[0.22em] text-secondary">Full Experience</p>
@@ -887,6 +901,11 @@
       renderAll()
     })
 
+    window.addEventListener('sc:schedule-events-updated', function () {
+      events = readEvents()
+      renderAll()
+    })
+
     renderAll()
   })()
 </script>
@@ -901,6 +920,11 @@
     } catch (_err) {}
   })()
 </script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="google-calendar-config.js?v=20260330a"></script>
+<script src="google-calendar-sync.js?v=20260330a"></script>
+<script src="bbk12-config.js?v=20260330a"></script>
+<script src="bbk12-sync.js?v=20260330a"></script>
 <script src="supabase-client.js?v=20260312a"></script>
 <script src="supabase-auth.js?v=20260329c"></script>
 <script src="auth-profile-sync.js?v=20260328b"></script>

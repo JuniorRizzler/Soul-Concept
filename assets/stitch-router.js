@@ -71,8 +71,63 @@
     ["help_outline", "settings.html#support"]
   ]);
 
+  const searchResources = [
+    { title: "Dashboard Overview", type: "Section", description: "Your main overview, points, and study momentum.", href: "dashboard.html#overview", keywords: ["dashboard", "overview", "home", "main", "summary"] },
+    { title: "Today's Flow", type: "Section", description: "Current study tasks and completed flow items.", href: "dashboard.html#todays-flow", keywords: ["today", "flow", "tasks", "checklist", "daily"] },
+    { title: "Subject Galleries", type: "Section", description: "Browse active subject resources from the dashboard.", href: "dashboard.html#subject-galleries", keywords: ["subjects", "galleries", "subject galleries", "resources"] },
+    { title: "Learning Insights", type: "Section", description: "See focus, retention, and learning metrics.", href: "dashboard.html#learning-insights", keywords: ["insights", "learning", "retention", "focus", "metrics"] },
+    { title: "Upcoming Sessions", type: "Section", description: "Your next scheduled sessions and deadlines.", href: "dashboard.html#upcoming", keywords: ["upcoming", "sessions", "deadlines", "next"] },
+    { title: "Study Scheduler", type: "Tool", description: "Plan, edit, and organize study sessions.", href: "schedule.html#overview", keywords: ["schedule", "scheduler", "calendar", "planner", "study schedule"] },
+    { title: "Schedule Calendar", type: "Section", description: "Weekly calendar for adding and editing sessions.", href: "schedule.html#schedule-grid", keywords: ["calendar", "week", "weekly", "grid"] },
+    { title: "Task Feed", type: "Section", description: "See your current BBK12 and study task feed.", href: "schedule.html#task-feed", keywords: ["task feed", "assignments", "bbk12", "feed"] },
+    { title: "Grade 9 Library", type: "Library", description: "Browse the main Grade 9 subject libraries.", href: "grade-9.html", keywords: ["grade 9", "library", "subjects", "grade nine"] },
+    { title: "Grade 9 Advanced", type: "Library", description: "Advanced Grade 9 subject showcase and reading.", href: "grade-9-advanced.html", keywords: ["grade 9 advanced", "advanced", "reading"] },
+    { title: "Grade 10 Resources", type: "Library", description: "Grade 10 subject libraries and rotating features.", href: "grade-10.html", keywords: ["grade 10", "grade ten"] },
+    { title: "Grade 11 Resources", type: "Library", description: "Grade 11 subjects and higher-level study routes.", href: "grade-11.html", keywords: ["grade 11", "grade eleven"] },
+    { title: "Grade 12 Resources", type: "Library", description: "Grade 12 libraries and senior-level study tools.", href: "grade-12.html", keywords: ["grade 12", "grade twelve"] },
+    { title: "Science Library", type: "Library", description: "Open the curated science study library.", href: "study-library.html", keywords: ["science", "biology", "chemistry", "physics", "laboratory"] },
+    { title: "Geography Library", type: "Library", description: "Open geography and mapping resources.", href: "geography-library.html", keywords: ["geography", "maps", "environment", "geo"] },
+    { title: "Grade 10 Math Library", type: "Library", description: "Open the Grade 10 mathematics library.", href: "grade-10-math.html", keywords: ["math", "mathematics", "grade 10 math", "algebra", "geometry", "functions"] },
+    { title: "Grade 9 Math Library", type: "Library", description: "Open the Grade 9 mathematics route.", href: "math/index.html", keywords: ["math 9", "grade 9 math", "mathematics 9"] },
+    { title: "Concept Cards", type: "Tool", description: "Study with concept cards and active recall.", href: "anki/index.html", keywords: ["cards", "concept cards", "flashcards", "anki", "review"] },
+    { title: "Achievements", type: "Page", description: "Track points, badges, and progress milestones.", href: "achievements.html#badge-gallery", keywords: ["achievements", "badges", "points", "progress"] },
+    { title: "Badge Gallery", type: "Section", description: "See unlocked and locked Soul Concept badges.", href: "achievements.html#badge-gallery", keywords: ["badges", "gallery", "achievement gallery"] },
+    { title: "Analytics", type: "Page", description: "View your study analytics and insights.", href: "analytics.html", keywords: ["analytics", "analysis", "insights", "stats"] },
+    { title: "Membership", type: "Page", description: "Manage your Soul Concept subscription.", href: "membership.html", keywords: ["membership", "subscription", "premium", "fellow"] },
+    { title: "Settings", type: "Page", description: "Profile, support, and account settings.", href: "settings.html", keywords: ["settings", "profile", "account", "preferences"] },
+    { title: "Support", type: "Section", description: "Get help and support inside settings.", href: "settings.html#support", keywords: ["support", "help", "contact"] }
+  ];
+
+  const searchSectionSelectors = {
+    "dashboard.html": {
+      overview: "main > .max-w-7xl, section",
+      "todays-flow": "[data-dashboard-flow]",
+      "subject-galleries": "[data-dashboard-subjects]",
+      "learning-insights": "[data-dashboard-cognitive]",
+      upcoming: "[data-dashboard-upcoming]"
+    },
+    "schedule.html": {
+      overview: "main .px-8.pb-12",
+      "schedule-grid": "[data-schedule-grid]",
+      "task-feed": "[data-schedule-feed]"
+    },
+    "achievements.html": {
+      "badge-gallery": "[data-achievements-grid]"
+    }
+  };
+
   function normalize(text) {
     return text.replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
+  function applySearchSectionAnchors() {
+    const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    const map = searchSectionSelectors[page];
+    if (!map) return;
+    Object.entries(map).forEach(([id, selector]) => {
+      const node = document.querySelector(selector);
+      if (node && !node.id) node.id = id;
+    });
   }
 
   function findTarget(label) {
@@ -273,6 +328,186 @@
     menu.addEventListener("mouseleave", scheduleCloseMenu);
     document.addEventListener("click", (event) => {
       if (!wrapper.contains(event.target)) closeMenu();
+    });
+  }
+
+  function scoreSearchResource(query, resource) {
+    const q = normalize(query || "");
+    if (!q) return 0;
+    const title = normalize(resource.title || "");
+    const description = normalize(resource.description || "");
+    const keywords = (resource.keywords || []).map(normalize);
+    let score = 0;
+
+    if (title === q) score += 160;
+    if (keywords.includes(q)) score += 140;
+    if (title.startsWith(q)) score += 90;
+    if (title.includes(q)) score += 70;
+    if (description.includes(q)) score += 24;
+    keywords.forEach((keyword) => {
+      if (keyword.startsWith(q)) score += 50;
+      else if (keyword.includes(q)) score += 32;
+    });
+
+    const parts = q.split(" ").filter(Boolean);
+    parts.forEach((part) => {
+      if (title.includes(part)) score += 18;
+      if (description.includes(part)) score += 6;
+      keywords.forEach((keyword) => {
+        if (keyword.includes(part)) score += 10;
+      });
+    });
+
+    return score;
+  }
+
+  function buildSearchResultMarkup(resource, active) {
+    return `
+      <a class="stitch-search-result block rounded-[22px] px-4 py-3.5 transition-all ${active ? "bg-[linear-gradient(135deg,#004435,#215c4b)] text-white shadow-[0_18px_36px_rgba(0,68,53,0.2)]" : "border border-transparent bg-white/55 text-primary hover:border-[rgba(0,68,53,0.08)] hover:bg-white/88 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)]"}" href="${resource.href}" data-stitch-search-result="${resource.href}">
+        <div class="flex items-start justify-between gap-4">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-8 w-8 items-center justify-center rounded-2xl ${active ? "bg-white/12 text-white" : "bg-primary/6 text-primary"}">
+                <span class="material-symbols-outlined text-[18px]">${resource.type === "Library" ? "library_books" : resource.type === "Section" ? "splitscreen" : "arrow_outward"}</span>
+              </span>
+              <p class="font-headline text-sm font-bold ${active ? "text-white" : "text-primary"}">${resource.title}</p>
+            </div>
+            <p class="mt-2 pl-10 text-xs leading-relaxed ${active ? "text-white/80" : "text-on-surface-variant"}">${resource.description}</p>
+          </div>
+          <span class="shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${active ? "bg-white/14 text-white" : "bg-primary/5 text-primary/70"}">${resource.type}</span>
+        </div>
+      </a>
+    `;
+  }
+
+  function initHeaderSearches() {
+    const inputs = Array.from(document.querySelectorAll('input[placeholder*="Search knowledge"], input[placeholder*="Search Knowledge"]'));
+    if (!inputs.length) return;
+
+    inputs.forEach((input) => {
+      if (!input || input.dataset.stitchSearchBound === "true") return;
+      input.dataset.stitchSearchBound = "true";
+
+      const host = input.parentElement;
+      if (!host) return;
+      if (getComputedStyle(host).position === "static") host.style.position = "relative";
+
+      const panel = document.createElement("div");
+      panel.className = "stitch-search-panel";
+      panel.style.position = "absolute";
+      panel.style.top = "calc(100% + 12px)";
+      panel.style.left = "0";
+      panel.style.width = "min(460px, 90vw)";
+      panel.style.maxHeight = "460px";
+      panel.style.overflowY = "auto";
+      panel.style.padding = "12px";
+      panel.style.borderRadius = "28px";
+      panel.style.border = "1px solid rgba(191, 201, 195, 0.22)";
+      panel.style.background = "linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,244,240,0.92))";
+      panel.style.backdropFilter = "blur(22px)";
+      panel.style.boxShadow = "0 24px 65px rgba(10,14,20,0.12)";
+      panel.style.zIndex = "85";
+      panel.style.display = "none";
+      host.appendChild(panel);
+
+      let results = [];
+      let activeIndex = -1;
+
+      function defaultResources() {
+        return searchResources.slice(0, 7);
+      }
+
+      function computeResults() {
+        const query = input.value || "";
+        if (!normalize(query)) return defaultResources();
+        return searchResources
+          .map((resource) => ({ resource, score: scoreSearchResource(query, resource) }))
+          .filter((entry) => entry.score > 0)
+          .sort((a, b) => b.score - a.score || a.resource.title.localeCompare(b.resource.title))
+          .slice(0, 7)
+          .map((entry) => entry.resource);
+      }
+
+      function renderPanel() {
+        results = computeResults();
+        if (activeIndex >= results.length) activeIndex = results.length - 1;
+        if (activeIndex < -1) activeIndex = -1;
+        if (!results.length) {
+          panel.innerHTML = `
+            <div class="rounded-[22px] border border-[rgba(0,68,53,0.08)] bg-white/65 px-5 py-5">
+              <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-outline">Search</p>
+              <p class="mt-2 font-headline text-base font-bold text-primary">No related resources found.</p>
+              <p class="mt-1 text-sm leading-relaxed text-on-surface-variant">Try a library or section name like <span class="font-semibold text-primary">science</span>, <span class="font-semibold text-primary">schedule</span>, or <span class="font-semibold text-primary">concept cards</span>.</p>
+            </div>
+          `;
+          return;
+        }
+        var heading = normalize(input.value || "")
+          ? '<div class="flex items-center justify-between px-2 pb-2 pt-1"><p class="text-[10px] font-bold uppercase tracking-[0.24em] text-outline">Most Related Resources</p><p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/60">' + results.length + ' Results</p></div>'
+          : '<div class="flex items-center justify-between px-2 pb-2 pt-1"><p class="text-[10px] font-bold uppercase tracking-[0.24em] text-outline">Suggested Resources</p><p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/60">Quick Access</p></div>';
+        panel.innerHTML = heading + '<div class="space-y-2">' + results.map((resource, index) => buildSearchResultMarkup(resource, index === activeIndex)).join("") + '</div>';
+      }
+
+      function setOpen(next) {
+        panel.style.display = next ? "block" : "none";
+      }
+
+      input.addEventListener("focus", () => {
+        activeIndex = -1;
+        renderPanel();
+        setOpen(true);
+      });
+
+      input.addEventListener("input", () => {
+        activeIndex = -1;
+        renderPanel();
+        setOpen(true);
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (panel.style.display !== "block" && ["ArrowDown", "ArrowUp", "Enter"].includes(event.key)) {
+          renderPanel();
+          setOpen(true);
+        }
+
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          if (!results.length) return;
+          activeIndex = Math.min(results.length - 1, activeIndex + 1);
+          renderPanel();
+          return;
+        }
+
+        if (event.key === "ArrowUp") {
+          event.preventDefault();
+          if (!results.length) return;
+          activeIndex = activeIndex <= 0 ? 0 : activeIndex - 1;
+          renderPanel();
+          return;
+        }
+
+        if (event.key === "Enter") {
+          if (!results.length) return;
+          event.preventDefault();
+          const selected = results[activeIndex >= 0 ? activeIndex : 0];
+          if (selected && selected.href) location.href = selected.href;
+          return;
+        }
+
+        if (event.key === "Escape") {
+          setOpen(false);
+        }
+      });
+
+      panel.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-stitch-search-result]");
+        if (!target) return;
+        setOpen(false);
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!host.contains(event.target)) setOpen(false);
+      });
     });
   }
 
@@ -846,6 +1081,8 @@
     wireShellNavigation();
     wireSubjectSections();
     wireHomeLogo();
+    applySearchSectionAnchors();
+    initHeaderSearches();
     initEmbeddedNotificationShells();
     initNotificationWidgets();
   });
