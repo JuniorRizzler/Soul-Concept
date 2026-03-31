@@ -6,6 +6,8 @@
     { label: "Grade 12", href: "grade-12.html" }
   ];
 
+  const blockedRoutes = new Set(["math-quiz-simulator.html"]);
+
   const routeMap = new Map([
     ["dashboard", "dashboard.html"],
     ["overview", "dashboard.html"],
@@ -22,6 +24,7 @@
     ["schedule", "schedule.html"],
     ["study scheduler", "schedule.html"],
     ["analytics", "analytics.html"],
+    ["achievements", "achievements.html"],
     ["profile", "profile.html"],
     ["membership", "membership.html"],
     ["subscriptions", "membership.html"],
@@ -32,7 +35,6 @@
     ["archives", "grade-9.html"],
     ["support", "settings.html#support"],
     ["help", "settings.html#support"],
-    ["exam simulator", "math-quiz-simulator.html"],
     ["upgrade to fellow", "membership.html"],
     ["complete secure checkout", "membership.html"],
     ["read now", "study-library.html"]
@@ -58,6 +60,7 @@
     ["timer", "schedule.html"],
     ["military_tech", "achievements.html"],
     ["trophy", "achievements.html"],
+    ["emoji_events", "achievements.html"],
     ["workspace_premium", "membership.html"],
     ["subscriptions", "membership.html"],
     ["card_membership", "membership.html"],
@@ -66,8 +69,6 @@
     ["account_circle", "settings.html"],
     ["person", "profile.html"],
     ["settings", "settings.html"],
-    ["quiz", "math-quiz-simulator.html"],
-    ["model_training", "math-quiz-simulator.html"],
     ["help_outline", "settings.html#support"]
   ]);
 
@@ -120,6 +121,13 @@
     return text.replace(/\s+/g, " ").trim().toLowerCase();
   }
 
+  function isExamSimulatorNode(node) {
+    if (!node) return false;
+    const text = normalize(node.textContent || "");
+    const href = normalize(node.getAttribute?.("href") || "");
+    return text.includes("exam simulator") || href.includes("math-quiz-simulator.html");
+  }
+
   function applySearchSectionAnchors() {
     const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
     const map = searchSectionSelectors[page];
@@ -139,6 +147,10 @@
   }
 
   function setHref(anchor) {
+    if (isExamSimulatorNode(anchor)) {
+      anchor.setAttribute("href", "#");
+      return;
+    }
     const href = anchor.getAttribute("href") || "";
     if (href === "library.html" || href === "/library.html") {
       anchor.setAttribute("href", "grade-9.html");
@@ -152,6 +164,7 @@
   }
 
   function getInteractiveTarget(node) {
+    if (isExamSimulatorNode(node)) return "";
     const text = normalize(node.textContent || "");
     if (text === "grades") return "grades";
     if (text) {
@@ -166,7 +179,7 @@
   }
 
   function bindNavigationTarget(node, target) {
-    if (!node || !target) return;
+    if (!node || !target || blockedRoutes.has(target) || isExamSimulatorNode(node)) return;
     if (node.dataset.stitchRouteBound === "true") return;
     node.dataset.stitchRouteBound = "true";
     node.style.cursor = "pointer";
@@ -328,6 +341,43 @@
     menu.addEventListener("mouseleave", scheduleCloseMenu);
     document.addEventListener("click", (event) => {
       if (!wrapper.contains(event.target)) closeMenu();
+    });
+  }
+
+  function blockExamSimulatorLinks() {
+    document.querySelectorAll("a, button, [role='button'], .sc-shell-link, .sc-shell-iconbtn").forEach((node) => {
+      if (!isExamSimulatorNode(node)) return;
+
+      node.dataset.stitchExamBlocked = "true";
+      node.setAttribute("aria-disabled", "true");
+      if (node.tagName === "A") node.setAttribute("href", "#");
+      node.style.pointerEvents = "none";
+      node.style.cursor = "not-allowed";
+      node.style.opacity = "0.5";
+      node.style.filter = "grayscale(0.25)";
+      node.style.position = "relative";
+
+      if (!node.querySelector("[data-stitch-blocked-badge]")) {
+        const badge = document.createElement("span");
+        badge.dataset.stitchBlockedBadge = "true";
+        badge.textContent = "In Progress";
+        badge.style.position = "absolute";
+        badge.style.top = "50%";
+        badge.style.right = "0.35rem";
+        badge.style.transform = "translateY(-50%)";
+        badge.style.padding = "0.12rem 0.32rem";
+        badge.style.borderRadius = "999px";
+        badge.style.fontSize = "0.5rem";
+        badge.style.fontWeight = "800";
+        badge.style.letterSpacing = "0.08em";
+        badge.style.textTransform = "uppercase";
+        badge.style.lineHeight = "1";
+        badge.style.background = "rgba(148, 163, 184, 0.14)";
+        badge.style.color = "rgba(71, 85, 105, 0.94)";
+        badge.style.pointerEvents = "none";
+        badge.style.boxShadow = "0 1px 3px rgba(15, 23, 42, 0.08)";
+        node.appendChild(badge);
+      }
     });
   }
 
@@ -1048,6 +1098,8 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    blockExamSimulatorLinks();
+
     document.querySelectorAll("a").forEach((anchor) => {
       setHref(anchor);
       if (normalize(anchor.textContent || "") === "grades") {

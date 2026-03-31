@@ -634,73 +634,77 @@
       }).join('')
     }
 
-    var uiState = readJson(UI_KEY, { expanded: false })
-    var events = readEvents()
-    var stats = buildStats(events)
-    var badges = buildBadges(stats)
-    var unlockedCount = badges.filter(function (badge) { return badge.unlocked }).length
-    var totalPoints = computePoints(stats, badges)
-    var completionRate = Math.round((unlockedCount / badges.length) * 100)
-    var levelState = computeLevel(totalPoints)
+    function renderPage() {
+      var uiState = readJson(UI_KEY, { expanded: false })
+      var events = readEvents()
+      var stats = buildStats(events)
+      var badges = buildBadges(stats)
+      var unlockedCount = badges.filter(function (badge) { return badge.unlocked }).length
+      var totalPoints = computePoints(stats, badges)
+      var completionRate = Math.round((unlockedCount / badges.length) * 100)
+      var levelState = computeLevel(totalPoints)
 
-    setText('[data-achievements-total-points]', totalPoints.toLocaleString())
-    setText('[data-achievements-completion-rate]', completionRate)
-    setText('[data-achievements-streak]', stats.dayCount)
-    setText('[data-achievements-streak-copy]', stats.dayCount === 1 ? 'Day with activity logged' : 'Days with activity logged')
-    setText('[data-achievements-focus]', stats.focusScore + '%')
-    setText('[data-achievements-focus-copy]', stats.focusCount ? stats.focusCount + ' focused sessions detected' : 'Add a focus session in Schedule to build this score')
-    setText('[data-achievements-subjects]', stats.subjectCount)
-    setText('[data-achievements-subjects-copy]', stats.subjectCount === 1 ? 'Subject explored this term' : 'Subjects explored this term')
+      setText('[data-achievements-total-points]', totalPoints.toLocaleString())
+      setText('[data-achievements-completion-rate]', completionRate)
+      setText('[data-achievements-streak]', stats.dayCount)
+      setText('[data-achievements-streak-copy]', stats.dayCount === 1 ? 'Day with activity logged' : 'Days with activity logged')
+      setText('[data-achievements-focus]', stats.focusScore + '%')
+      setText('[data-achievements-focus-copy]', stats.focusCount ? stats.focusCount + ' focused sessions detected' : 'Add a focus session in Schedule to build this score')
+      setText('[data-achievements-subjects]', stats.subjectCount)
+      setText('[data-achievements-subjects-copy]', stats.subjectCount === 1 ? 'Subject explored this term' : 'Subjects explored this term')
 
-    renderMilestone(
-      'libraries',
-      'Library Explorer',
-      'Keep opening subject libraries and study routes across Soul Concept.',
-      stats.subjectCount + ' Subjects',
-      '6 Subjects',
-      Math.min(100, Math.round((stats.subjectCount / 6) * 100))
-    )
-    renderMilestone(
-      'cards',
-      'Concept Card Builder',
-      'Build review strength through focused sessions, saved sets, and repeated check-ins.',
-      stats.sessionCount + ' Sessions',
-      '12 Sessions',
-      Math.min(100, Math.round((stats.sessionCount / 12) * 100))
-    )
+      renderMilestone(
+        'libraries',
+        'Library Explorer',
+        'Keep opening subject libraries and study routes across Soul Concept.',
+        stats.subjectCount + ' Subjects',
+        '6 Subjects',
+        Math.min(100, Math.round((stats.subjectCount / 6) * 100))
+      )
+      renderMilestone(
+        'cards',
+        'Concept Card Builder',
+        'Build review strength through focused sessions, saved sets, and repeated check-ins.',
+        stats.sessionCount + ' Sessions',
+        '12 Sessions',
+        Math.min(100, Math.round((stats.sessionCount / 12) * 100))
+      )
 
-    var nextBadge = badges.filter(function (badge) { return !badge.unlocked }).sort(function (a, b) {
-      return (a.target - a.progress) - (b.target - b.progress)
-    })[0]
-    setText(
-      '[data-achievements-insight]',
-      nextBadge
-        ? 'You have unlocked ' + unlockedCount + ' badges so far. Keep going on ' + nextBadge.title + ' and you are only ' + (nextBadge.target - nextBadge.progress) + ' step' + (nextBadge.target - nextBadge.progress === 1 ? '' : 's') + ' away.'
-        : 'Everything in the current badge set is unlocked. Keep studying and the next point tier is ready for expansion.'
-    )
+      var nextBadge = badges.filter(function (badge) { return !badge.unlocked }).sort(function (a, b) {
+        return (a.target - a.progress) - (b.target - b.progress)
+      })[0]
+      setText(
+        '[data-achievements-insight]',
+        nextBadge
+          ? 'You have unlocked ' + unlockedCount + ' badges so far. Keep going on ' + nextBadge.title + ' and you are only ' + (nextBadge.target - nextBadge.progress) + ' step' + (nextBadge.target - nextBadge.progress === 1 ? '' : 's') + ' away.'
+          : 'Everything in the current badge set is unlocked. Keep studying and the next point tier is ready for expansion.'
+      )
 
-    renderBadges(badges, !!uiState.expanded)
-    renderLevels(levelState, totalPoints)
+      renderBadges(badges, !!uiState.expanded)
+      renderLevels(levelState, totalPoints)
 
-    var toggle = document.querySelector('[data-achievements-toggle]')
-    if (toggle) {
-      toggle.textContent = uiState.expanded ? 'Show Featured Badges' : 'View All Badges'
-      toggle.addEventListener('click', function () {
-        uiState.expanded = !uiState.expanded
-        writeJson(UI_KEY, uiState)
-        renderBadges(badges, !!uiState.expanded)
+      var toggle = document.querySelector('[data-achievements-toggle]')
+      if (toggle) {
         toggle.textContent = uiState.expanded ? 'Show Featured Badges' : 'View All Badges'
-      })
+        toggle.onclick = function () {
+          var nextState = readJson(UI_KEY, { expanded: false })
+          nextState.expanded = !nextState.expanded
+          writeJson(UI_KEY, nextState)
+          renderPage()
+        }
+      }
+
+      var startBtn = document.querySelector('[data-achievements-start]')
+      if (startBtn) startBtn.onclick = function () { window.location.href = 'grade-9.html' }
+
+      var reviewBtn = document.querySelector('[data-achievements-review]')
+      if (reviewBtn) reviewBtn.onclick = function () {
+        var section = document.querySelector('[data-achievements-grid]')
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
 
-    var startBtn = document.querySelector('[data-achievements-start]')
-    if (startBtn) startBtn.addEventListener('click', function () { window.location.href = 'grade-9.html' })
-
-    var reviewBtn = document.querySelector('[data-achievements-review]')
-    if (reviewBtn) reviewBtn.addEventListener('click', function () {
-      var section = document.querySelector('[data-achievements-grid]')
-      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
+    renderPage()
 
     window.addEventListener('storage', function (event) {
       if (
@@ -708,11 +712,11 @@
         event.key === UI_KEY ||
         event.key === scopedKey(SCHEDULE_KEY) ||
         event.key === scopedKey(UI_KEY)
-      ) window.location.reload()
+      ) renderPage()
     })
 
     window.addEventListener('sc:auth-state-changed', function () {
-      window.location.reload()
+      renderPage()
     })
   })()
 </script>
