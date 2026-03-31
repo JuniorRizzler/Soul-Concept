@@ -225,7 +225,7 @@
       '.lyne-hint-btn{appearance:none;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:7px 11px;font:800 10px/1 Manrope,system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(10px)}' +
       '.lyne-hint-btn.is-primary{background:#f8fafc;color:#10203d;border-color:transparent;box-shadow:0 8px 18px rgba(15,23,42,.16)}' +
       '#lyne-widget[data-panel-open="true"] #lyne-hint{display:none}' +
-      '#lyne-orb-toggle{width:58px;height:58px;border-radius:20px;border:1px solid rgba(255,255,255,.26);cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(160deg,#0f172a 0%,#1d4ed8 58%,#0d9488 100%);box-shadow:0 20px 34px rgba(15,23,42,.28),inset 0 1px 0 rgba(255,255,255,.24)}' +
+      '#lyne-orb-toggle{width:58px;height:58px;border-radius:20px;border:1px solid rgba(255,255,255,.26);cursor:pointer;position:relative;overflow:hidden;touch-action:none;background:linear-gradient(160deg,#0f172a 0%,#1d4ed8 58%,#0d9488 100%);box-shadow:0 20px 34px rgba(15,23,42,.28),inset 0 1px 0 rgba(255,255,255,.24)}' +
       '#lyne-orb-toggle:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.3),transparent 38%),linear-gradient(180deg,rgba(255,255,255,.12),transparent 56%)}' +
       '#lyne-orb-toggle .flame-core{position:absolute;left:18px;top:13px;width:22px;height:28px;border-radius:52% 48% 58% 42%/52% 40% 60% 48%;background:radial-gradient(circle at 40% 30%,#fff7ed 0%,#fde68a 30%,#fb923c 66%,#ea580c 100%);animation:lyneFlame 1.9s ease-in-out infinite;transform-origin:50% 75%}' +
       '#lyne-orb-toggle .flame-inner{position:absolute;left:24px;top:20px;width:8px;height:11px;border-radius:50% 50% 55% 45%;background:radial-gradient(circle at 50% 24%,#fff 0%,#ffedd5 60%,rgba(255,237,213,.22) 100%);animation:lyneFlameInner 1.1s ease-in-out infinite}' +
@@ -234,7 +234,7 @@
       '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-glow{box-shadow:0 0 34px rgba(14,165,233,.62)}' +
       '#lyne-panel{position:absolute;right:0;bottom:72px;width:min(360px,92vw);border:1px solid rgba(255,255,255,.46);background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(248,250,252,.9));backdrop-filter:blur(24px) saturate(155%);border-radius:28px;padding:14px;box-shadow:0 30px 64px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.92);opacity:0;transform:translateY(14px) scale(.96);pointer-events:none;transition:opacity .24s ease,transform .24s ease}' +
       '#lyne-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}' +
-      '.lyne-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:nowrap;cursor:grab;user-select:none;padding:2px 2px 10px}' +
+      '.lyne-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:nowrap;cursor:grab;user-select:none;touch-action:none;padding:2px 2px 10px}' +
       '.lyne-panel-head:active{cursor:grabbing}' +
       '.lyne-panel-id{display:grid;gap:4px;min-width:0}' +
       '.lyne-panel-kicker{display:inline-flex;align-items:center;gap:6px;width:max-content;padding:6px 9px;border-radius:999px;background:rgba(15,23,42,.05);border:1px solid rgba(148,163,184,.16);font:800 10px/1 Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#1d4ed8}' +
@@ -1383,6 +1383,7 @@
     function beginDrag(startEvent) {
       if (startEvent.button != null && startEvent.button !== 0) return
       if (returnPromptActive) return
+      if (typeof startEvent.preventDefault === 'function') startEvent.preventDefault()
       var startX = startEvent.clientX
       var startY = startEvent.clientY
       var rect = widget.getBoundingClientRect()
@@ -1390,8 +1391,15 @@
       var originY = rect.top
       didDrag = false
       widget.classList.add('lyne-dragging')
+      var pointerOwner = startEvent.currentTarget && typeof startEvent.currentTarget.setPointerCapture === 'function'
+        ? startEvent.currentTarget
+        : null
+      if (pointerOwner && startEvent.pointerId != null) {
+        try { pointerOwner.setPointerCapture(startEvent.pointerId) } catch (_err) {}
+      }
 
       function move(moveEvent) {
+        if (moveEvent.pointerId != null && startEvent.pointerId != null && moveEvent.pointerId !== startEvent.pointerId) return
         var deltaX = moveEvent.clientX - startX
         var deltaY = moveEvent.clientY - startY
         if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
@@ -1404,10 +1412,15 @@
         widget.classList.remove('lyne-dragging')
         window.removeEventListener('pointermove', move)
         window.removeEventListener('pointerup', end)
+        window.removeEventListener('pointercancel', end)
+        if (pointerOwner && startEvent.pointerId != null && typeof pointerOwner.releasePointerCapture === 'function') {
+          try { pointerOwner.releasePointerCapture(startEvent.pointerId) } catch (_err) {}
+        }
       }
 
       window.addEventListener('pointermove', move)
       window.addEventListener('pointerup', end)
+      window.addEventListener('pointercancel', end)
     }
 
     orbToggle.addEventListener('pointerdown', beginDrag)
