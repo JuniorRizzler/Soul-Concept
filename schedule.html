@@ -700,7 +700,7 @@
     function syncWeekChrome() {
       var start = currentWeekStart()
       var end = addDays(start, 4)
-      if (weekLabel) weekLabel.textContent = 'Week ' + weekNumber(start) + ': ' + formatMonthDay(start) + ' â€“ ' + formatMonthDay(end)
+      if (weekLabel) weekLabel.textContent = 'Week ' + weekNumber(start) + ': ' + formatMonthDay(start) + ' – ' + formatMonthDay(end)
       dayOrder.forEach(function (day) {
         var label = document.querySelector('[data-schedule-day-label="' + day + '"]')
         if (!label) return
