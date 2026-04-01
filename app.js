@@ -2274,6 +2274,23 @@
       return vapidPublicKeyPromise
     }
 
+    function readCachedAuthProfile() {
+      try {
+        const raw = localStorage.getItem('sc_auth_profile_v1')
+        return raw ? JSON.parse(raw) : {}
+      } catch (err) {
+        return {}
+      }
+    }
+
+    function safeTimeZone() {
+      try {
+        return Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'
+      } catch (err) {
+        return 'America/New_York'
+      }
+    }
+
     async function ensurePushRegistration() {
       if (!canUsePush || Notification.permission !== 'granted') return
       try {
@@ -2288,12 +2305,19 @@
             applicationServerKey: key
           })
         }
+        try {
+          localStorage.setItem('sc_push_subscription', JSON.stringify(subscription))
+        } catch (err) {
+          // ignore storage errors
+        }
         await fetch('/api/push-subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             subscription,
-            userAgent: navigator.userAgent || ''
+            userAgent: navigator.userAgent || '',
+            userId: readCachedAuthProfile().id || '',
+            timezone: readCachedAuthProfile().timezone || safeTimeZone()
           })
         }).catch(function () {
           // best-effort sync only
@@ -2380,7 +2404,9 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               subscription,
-              userAgent: navigator.userAgent || ''
+              userAgent: navigator.userAgent || '',
+              userId: readCachedAuthProfile().id || '',
+              timezone: readCachedAuthProfile().timezone || safeTimeZone()
             })
           })
         } catch (err) {

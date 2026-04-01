@@ -34,6 +34,8 @@ Use the same project URL as `supabase-config.json`.
 
 Run [`supabase/push_subscriptions.sql`](./supabase/push_subscriptions.sql) in Supabase SQL Editor.
 
+Run [`supabase/reminder_deliveries.sql`](./supabase/reminder_deliveries.sql) in Supabase SQL Editor.
+
 ### Current public config file
 
 `supabase-config.json` contains:

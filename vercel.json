@@ -58,6 +58,10 @@
   ],
   "crons": [
     {
+      "path": "/api/cron/schedule-reminders",
+      "schedule": "*/5 * * * *"
+    },
+    {
       "path": "/api/cron/daily-study-reminder",
       "schedule": "0 20 * * *"
     },

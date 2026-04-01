@@ -259,7 +259,7 @@
 <!-- Today's Flow Checklist -->
 <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/5">
 <div class="flex justify-between items-center mb-8">
-<h3 class="font-headline text-2xl font-bold text-primary">Today's Flow</h3>
+<h3 class="font-headline text-2xl font-bold text-primary">Due Today</h3>
 <button class="text-xs font-label uppercase text-secondary font-bold hover:underline" data-dashboard-clear="" type="button">Clear Completed</button>
 </div>
 <div class="space-y-4" data-dashboard-flow="">
@@ -323,6 +323,26 @@
 </div>
 <!-- Right Column -->
 <div class="lg:col-span-4 space-y-8">
+<div class="bg-surface-container-low p-8 rounded-3xl space-y-5" data-dashboard-study-next="">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">priority_high</span>
+</div>
+<h3 class="font-headline font-bold text-primary">Study Next</h3>
+</div>
+<div class="space-y-3">
+<p class="text-sm font-headline font-extrabold text-primary" data-dashboard-study-next-title="">Nothing urgent yet</p>
+<p class="text-xs text-outline leading-relaxed" data-dashboard-study-next-copy="">Link your schedule to a flashcard deck and Soul Concept will recommend the next best session.</p>
+<div class="rounded-2xl bg-surface-container-lowest p-4">
+<p class="text-[10px] uppercase tracking-[0.18em] font-label text-outline">Recommended Profile</p>
+<p class="mt-2 text-lg font-headline font-bold text-primary" data-dashboard-study-next-profile="">Balanced</p>
+</div>
+</div>
+<div class="flex gap-3">
+<a class="flex-1 py-3 bg-primary text-white rounded-xl font-headline font-bold text-xs text-center hover:bg-primary-container transition-all" data-dashboard-study-next-action="" href="anki/index.html">Open Cards</a>
+<a class="flex-1 py-3 bg-surface-container-highest text-primary rounded-xl font-headline font-bold text-xs text-center hover:bg-outline-variant/20 transition-all" href="schedule.html">Open Schedule</a>
+</div>
+</div>
 <!-- Performance Insight -->
 <div class="bg-surface-container-low p-8 rounded-3xl space-y-6">
 <div class="flex items-center gap-3">
@@ -355,7 +375,7 @@
 </div>
 <!-- Upcoming Deadlines -->
 <div class="space-y-4">
-<h3 class="font-headline font-bold text-primary px-2">Upcoming</h3>
+<h3 class="font-headline font-bold text-primary px-2">At Risk</h3>
 <div class="space-y-3" data-dashboard-upcoming="">
 <div class="p-4 bg-surface rounded-2xl border border-outline-variant/10 flex gap-4 hover:shadow-md transition-shadow">
 <div class="flex flex-col items-center justify-center w-12 h-12 bg-surface-container-low rounded-xl">
@@ -427,6 +447,7 @@
 </button>
 </nav>
 <script defer src="assets/stitch-router.js?v=20260331a"></script>
+<script src="assets/study-intelligence.js?v=20260401a"></script>
 <script>
   (function () {
     var SCHEDULE_KEY = 'sc_schedule_events_v2'
@@ -475,6 +496,10 @@
     }
 
     function readEvents() {
+      if (window.StudyIntelligence && window.StudyIntelligence.getEvents) {
+        var liveEvents = window.StudyIntelligence.getEvents()
+        return Array.isArray(liveEvents) && liveEvents.length ? liveEvents : DEFAULT_EVENTS
+      }
       var stored = readJson(SCHEDULE_KEY, null)
       return Array.isArray(stored) && stored.length ? stored : DEFAULT_EVENTS
     }
@@ -558,7 +583,7 @@
       }
     }
 
-    function renderSummary(stats, events) {
+    function renderSummary(stats, events, model) {
       var topSubject = events.reduce(function (acc, event) {
         var key = normalizeSubject(event.subject || event.title)
         if (!key) return acc
@@ -566,9 +591,11 @@
         return acc
       }, {})
       var focusSubject = Object.keys(topSubject).sort(function (a, b) { return topSubject[b] - topSubject[a] })[0] || 'your current libraries'
+      var dueCount = model.dueToday.reduce(function (sum, item) { return sum + (item.review ? item.review.dueCount : 0) }, 0)
+      var studyNextTitle = model.studyNext ? model.studyNext.deck.name : focusSubject
       setText('[data-dashboard-kicker]', 'Soul Concept Dashboard')
       setText('[data-dashboard-heading]', 'Build momentum with intention today.')
-      setText('[data-dashboard-summary]', 'Your current focus path is set to ' + focusSubject + '. You have ' + stats.sessionCount + ' saved study sessions and ' + stats.subjectCount + ' active subjects in motion.')
+      setText('[data-dashboard-summary]', 'You have ' + dueCount + ' cards due today, ' + studyNextTitle + ' is the best next study target, and ' + model.atRisk.length + ' urgent risk signals are active.')
       setText('[data-dashboard-streak]', stats.dayCount)
       setText('[data-dashboard-libraries]', stats.subjectCount)
       setText('[data-dashboard-points]', stats.points.toLocaleString())
@@ -665,13 +692,92 @@
       }).join('') || '<a class="p-4 bg-surface rounded-2xl border border-outline-variant/10 flex gap-4 hover:shadow-md transition-shadow block" href="schedule.html"><div class="flex-grow"><p class="text-sm font-bold text-primary">No upcoming sessions yet</p><p class="text-[10px] text-outline uppercase tracking-tight">Open the scheduler and add your next study block</p></div></a>'
     }
 
+    function renderStudyNext(model) {
+      if (!model || !model.studyNext) return
+      setText('[data-dashboard-study-next-title]', model.studyNext.deck.name)
+      setText(
+        '[data-dashboard-study-next-copy]',
+        model.studyNext.nextEvent
+          ? model.studyNext.nextEvent.title + ' on ' + formatDate(model.studyNext.nextEvent.date) + ' · ' + model.studyNext.review.dueCount + ' cards due'
+          : model.studyNext.review.dueCount + ' cards due and ' + model.studyNext.review.lapseCount + ' lapse signals to recover'
+      )
+      setText('[data-dashboard-study-next-profile]', model.studyNext.recommendedProfileLabel)
+    }
+
+    function renderDueToday(model) {
+      var host = document.querySelector('[data-dashboard-flow]')
+      if (!host) return
+      var completed = readCompleted()
+      var items = []
+      model.dueToday.forEach(function (item) {
+        items.push({
+          id: 'deck:' + item.deck.id,
+          title: item.deck.name,
+          subtitle: item.review.dueCount + ' cards due now' + (item.nextEvent ? ' · ' + item.nextEvent.title : ''),
+          chip: item.nextEvent && item.daysUntil <= 1 ? 'Critical' : 'Due',
+          chipClass: item.nextEvent && item.daysUntil <= 1 ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-secondary-fixed text-on-secondary-fixed-variant'
+        })
+      })
+      model.todayEvents.slice(0, Math.max(0, 3 - items.length)).forEach(function (entry) {
+        items.push({
+          id: entry.id,
+          title: entry.title,
+          subtitle: formatDate(entry.date) + ' · ' + formatTime(entry.start) + ' · ' + Math.max(15, durationMinutes(entry.start, entry.end)) + ' mins',
+          chip: entry.priority || 'Planned',
+          chipClass: entry.starred ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-secondary-fixed text-on-secondary-fixed-variant'
+        })
+      })
+      host.innerHTML = items.map(function (entry) {
+        var done = completed.indexOf(entry.id) !== -1
+        var chip = done ? 'Completed' : entry.chip
+        var chipClass = done ? 'bg-outline-variant/20 text-outline' : entry.chipClass
+        return (
+          '<div class="flex items-center gap-4 p-4 rounded-2xl ' + (done ? 'bg-surface-container-low' : 'hover:bg-surface-container-low') + ' transition-colors group">' +
+            '<button class="w-6 h-6 rounded-full ' + (done ? 'bg-primary border-primary' : 'border-2 border-primary/20') + ' flex items-center justify-center transition-all" data-dashboard-flow-toggle="' + entry.id + '" type="button">' +
+              '<span class="material-symbols-outlined ' + (done ? 'text-white' : 'text-primary opacity-70') + ' text-[16px]" style="' + (done ? "font-variation-settings: 'FILL' 1;" : '') + '">check</span>' +
+            '</button>' +
+            '<div class="flex-grow">' +
+              '<p class="font-headline font-semibold ' + (done ? 'text-primary/50 line-through' : 'text-primary') + '">' + entry.title + '</p>' +
+              '<p class="text-xs ' + (done ? 'text-outline/50' : 'text-outline') + '">' + entry.subtitle + '</p>' +
+            '</div>' +
+            '<span class="font-label text-[10px] px-2 py-1 rounded-full ' + chipClass + '">' + chip + '</span>' +
+          '</div>'
+        )
+      }).join('') || '<div class="p-4 rounded-2xl bg-surface-container-low text-sm text-outline">Nothing is due today. Open the scheduler and add your next study block.</div>'
+    }
+
+    function renderAtRisk(model) {
+      var host = document.querySelector('[data-dashboard-upcoming]')
+      if (!host) return
+      host.innerHTML = model.atRisk.map(function (item) {
+        var parts = item.date ? monthParts(item.date) : { month: 'NOW', day: '!' }
+        return (
+          '<a class="p-4 bg-surface rounded-2xl border border-outline-variant/10 flex gap-4 hover:shadow-md transition-shadow block" href="' + item.actionHref + '">' +
+            '<div class="flex flex-col items-center justify-center w-12 h-12 bg-surface-container-low rounded-xl">' +
+              '<span class="text-xs font-label font-bold text-secondary">' + parts.month + '</span>' +
+              '<span class="text-lg font-headline font-black text-primary leading-none">' + parts.day + '</span>' +
+            '</div>' +
+            '<div class="flex-grow">' +
+              '<p class="text-sm font-bold text-primary">' + item.title + '</p>' +
+              '<p class="text-[10px] text-outline uppercase tracking-tight">' + item.subject + '</p>' +
+              '<p class="mt-1 text-[11px] text-outline">' + item.detail + '</p>' +
+            '</div>' +
+          '</a>'
+        )
+      }).join('') || '<a class="p-4 bg-surface rounded-2xl border border-outline-variant/10 flex gap-4 hover:shadow-md transition-shadow block" href="schedule.html"><div class="flex-grow"><p class="text-sm font-bold text-primary">No active risks right now</p><p class="text-[10px] text-outline uppercase tracking-tight">Your linked schedule and flashcards are in a healthy range</p></div></a>'
+    }
+
     function renderDashboard() {
       var events = readEvents()
       var stats = buildStats(events)
-      renderSummary(stats, events)
-      renderFlow(events)
+      var model = window.StudyIntelligence && window.StudyIntelligence.buildDashboardModel
+        ? window.StudyIntelligence.buildDashboardModel(new Date())
+        : { dueToday: [], todayEvents: [], studyNext: null, atRisk: [] }
+      renderSummary(stats, events, model)
+      renderDueToday(model)
       renderSubjects(events)
-      renderUpcoming(events)
+      renderStudyNext(model)
+      renderAtRisk(model)
     }
 
     document.addEventListener('click', function (event) {
@@ -695,7 +801,7 @@
     }
 
     var startBtn = document.querySelector('[data-dashboard-start-study]')
-    if (startBtn) startBtn.addEventListener('click', function () { window.location.href = 'study-library.html' })
+    if (startBtn) startBtn.addEventListener('click', function () { window.location.href = 'anki/index.html' })
 
     var reportBtn = document.querySelector('[data-dashboard-view-report]')
     if (reportBtn) reportBtn.addEventListener('click', function () { window.location.href = 'analytics.html' })
@@ -707,8 +813,12 @@
       if (
         event.key === SCHEDULE_KEY ||
         event.key === FLOW_KEY ||
+        event.key === 'sc_concept_studio_decks_v1' ||
+        event.key === 'sc_concept_studio_session_v1' ||
         event.key === scopedKey(SCHEDULE_KEY) ||
-        event.key === scopedKey(FLOW_KEY)
+        event.key === scopedKey(FLOW_KEY) ||
+        event.key === (window.StudyIntelligence && window.StudyIntelligence.scopedKey ? window.StudyIntelligence.scopedKey('sc_concept_studio_decks_v1') : '') ||
+        event.key === (window.StudyIntelligence && window.StudyIntelligence.scopedKey ? window.StudyIntelligence.scopedKey('sc_concept_studio_session_v1') : '')
       ) renderDashboard()
     })
 

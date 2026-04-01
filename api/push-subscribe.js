@@ -2,6 +2,36 @@ function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json').send(JSON.stringify(payload))
 }
 
+function parsePreferences(input) {
+  const value = input && typeof input === 'object' ? input : {}
+  return {
+    enabled: value.enabled !== false,
+    studyEnabled: value.studyEnabled !== false,
+    studyLeadMinutes: Math.max(1, parseInt(value.studyLeadMinutes, 10) || 15),
+    testEnabled: value.testEnabled !== false,
+    testLeadMinutes: Math.max(1, parseInt(value.testLeadMinutes, 10) || 60),
+    testDayBefore: value.testDayBefore !== false,
+    dailyAgenda: value.dailyAgenda !== false,
+    dailyAgendaTime: String(value.dailyAgendaTime || '07:00').slice(0, 5) || '07:00',
+  }
+}
+
+function sanitizeEvent(entry) {
+  const item = entry && typeof entry === 'object' ? entry : {}
+  return {
+    id: String(item.id || '').slice(0, 120),
+    title: String(item.title || '').slice(0, 160),
+    subject: String(item.subject || '').slice(0, 120),
+    type: String(item.type || 'study').slice(0, 40),
+    date: String(item.date || '').slice(0, 10),
+    start: String(item.start || '').slice(0, 5),
+    end: String(item.end || '').slice(0, 5),
+    location: String(item.location || '').slice(0, 160),
+    priority: String(item.priority || 'Medium').slice(0, 20),
+    notificationsEnabled: item.notificationsEnabled !== false,
+  }
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.status(204).send('')
@@ -32,6 +62,12 @@ module.exports = async (req, res) => {
 
   const subscription = body.subscription
   const userAgent = String(body.userAgent || '').slice(0, 400)
+  const userId = String(body.userId || '').trim().slice(0, 120) || null
+  const timezone = String(body.timezone || '').trim().slice(0, 80) || null
+  const hasReminderPreferences = body.reminderPreferences && typeof body.reminderPreferences === 'object'
+  const hasScheduleSnapshot = Array.isArray(body.scheduleSnapshot)
+  const reminderPreferences = hasReminderPreferences ? parsePreferences(body.reminderPreferences) : null
+  const scheduleSnapshot = hasScheduleSnapshot ? body.scheduleSnapshot.slice(0, 200).map(sanitizeEvent) : null
   const endpoint = subscription && subscription.endpoint ? String(subscription.endpoint) : ''
   if (!endpoint) {
     json(res, 400, { error: 'Missing push subscription endpoint.' })
@@ -41,9 +77,16 @@ module.exports = async (req, res) => {
   const row = {
     endpoint,
     subscription,
+    user_id: userId,
     user_agent: userAgent,
+    timezone: timezone,
     active: true,
     updated_at: new Date().toISOString(),
+  }
+  if (reminderPreferences) row.reminder_preferences = reminderPreferences
+  if (scheduleSnapshot) {
+    row.schedule_snapshot = scheduleSnapshot
+    row.schedule_updated_at = new Date().toISOString()
   }
 
   const url =

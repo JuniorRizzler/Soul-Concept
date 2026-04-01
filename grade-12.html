@@ -212,8 +212,10 @@
 </div>
 </div>
 <!-- Bio-Ethics Card -->
-<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between border-b-4 border-secondary transition-all hover:bg-surface-container-high">
-<div>
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between border-b-4 border-secondary transition-all hover:bg-surface-container-high relative overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:scale-105 transition-transform duration-700" data-alt="futuristic biotechnology laboratory scene with DNA helix visuals, medical interfaces, and warm cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqSx8J3d0oQY5uDqXfL8Z2rR1kM7fN4sV0pY3bC6nT9eH2kJ5mP1qR7tU4wX8yA3cF6gH9iJ2kL5nO8pQ1rS4tV7wY0zB3dE6fG9hJ2kM5nP8qR1tU4vW7xY0zA3cD6eF9gH2jK5mN8pQ1rT4vW7xY0z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/90 to-secondary/10"></div>
+<div class="relative">
 <span class="material-symbols-outlined text-secondary text-4xl mb-6">science</span>
 <h3 class="text-2xl font-headline font-bold text-emerald-950 mb-4">Bio-Ethics</h3>
 <p class="text-on-surface-variant leading-relaxed mb-4">The intersection of genetic engineering, autonomous medical agents, and human dignity.</p>
@@ -228,7 +230,7 @@
                             </li>
 </ul>
 </div>
-<button class="mt-8 text-secondary font-bold flex items-center gap-2 group">
+<button class="mt-8 text-secondary font-bold flex items-center gap-2 group relative">
                         View Dossier 
                         <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">north_east</span>
 </button>

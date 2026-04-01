@@ -260,6 +260,77 @@
 </div>
 <a class="inline-flex items-center justify-center rounded-2xl bg-primary px-5 py-3 text-xs font-headline font-bold uppercase tracking-widest text-white transition-all hover:bg-secondary" href="auth/verification.html?returnTo=%2Fschedule.html&mode=returning&source=schedule-cta">Log In</a>
 </div>
+<section class="mb-8 rounded-[2rem] border border-primary/10 bg-white/80 px-6 py-6 shadow-sm" data-reminder-panel="">
+<div class="flex flex-col gap-5">
+<div class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+<div class="space-y-1">
+<p class="text-[10px] font-label font-bold uppercase tracking-[0.22em] text-secondary">Reminder Engine</p>
+<h3 class="font-headline text-xl font-bold text-primary">Schedule-based notifications</h3>
+<p class="max-w-2xl text-sm text-on-surface-variant">Set automatic study reminders, test alerts, and a daily agenda from your planner. Signed-in users with push enabled get server reminders even when the app is closed.</p>
+</div>
+<p class="text-[11px] font-label font-semibold uppercase tracking-[0.18em] text-outline" data-reminder-sync-status="">Reminders are stored on this device.</p>
+</div>
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+<label class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<span class="mb-3 flex items-center justify-between gap-3">
+<span>
+<strong class="block font-headline text-sm text-primary">Enable reminders</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">Master switch for schedule notifications.</span>
+</span>
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="enabled" type="checkbox"/>
+</span>
+</label>
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<div class="mb-3 flex items-start justify-between gap-3">
+<div>
+<strong class="block font-headline text-sm text-primary">Study reminders</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">Before regular study blocks and focus sessions.</span>
+</div>
+<input class="mt-1 rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="studyEnabled" type="checkbox"/>
+</div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline">Lead Time</label>
+<select class="mt-2 w-full rounded-2xl border border-outline-variant/30 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-reminder-pref="studyLeadMinutes">
+<option value="5">5 minutes before</option>
+<option value="10">10 minutes before</option>
+<option value="15">15 minutes before</option>
+<option value="30">30 minutes before</option>
+<option value="60">1 hour before</option>
+</select>
+</div>
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<div class="mb-3 flex items-start justify-between gap-3">
+<div>
+<strong class="block font-headline text-sm text-primary">Test reminders</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">For tests, quizzes, and due-date style items.</span>
+</div>
+<input class="mt-1 rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="testEnabled" type="checkbox"/>
+</div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline">Lead Time</label>
+<select class="mt-2 w-full rounded-2xl border border-outline-variant/30 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-reminder-pref="testLeadMinutes">
+<option value="15">15 minutes before</option>
+<option value="30">30 minutes before</option>
+<option value="60">1 hour before</option>
+<option value="180">3 hours before</option>
+</select>
+<label class="mt-3 flex items-center gap-3 text-xs font-medium text-on-surface-variant">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="testDayBefore" type="checkbox"/>
+<span>Also send a 7 PM reminder the day before</span>
+</label>
+</div>
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<div class="mb-3 flex items-start justify-between gap-3">
+<div>
+<strong class="block font-headline text-sm text-primary">Daily agenda</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">Morning summary of that day’s planned sessions.</span>
+</div>
+<input class="mt-1 rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="dailyAgenda" type="checkbox"/>
+</div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline">Send Time</label>
+<input class="mt-2 w-full rounded-2xl border border-outline-variant/30 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-reminder-pref="dailyAgendaTime" type="time"/>
+</div>
+</div>
+</div>
+</section>
 <!-- Main Layout Grid -->
 <div class="grid grid-cols-12 gap-8">
 <!-- Left: 3D Calendar Grid (2/3rds) -->
@@ -401,6 +472,23 @@
 <input class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="subject" type="text"/>
 </div>
 <div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Type</label>
+<select class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="type">
+<option value="study">Study</option>
+<option value="test">Test</option>
+<option value="quiz">Quiz</option>
+<option value="assignment">Assignment</option>
+<option value="meeting">Meeting</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Related Deck</label>
+<select class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="linkedDeckId">
+<option value="">No linked deck</option>
+</select>
+</div>
+<div>
 <label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline mb-2">Day</label>
 <select class="w-full rounded-2xl border border-outline-variant/40 px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-schedule-field="day">
 <option value="mon">Monday</option>
@@ -445,10 +533,16 @@
 <option value="slate-400">Muted</option>
 </select>
 </div>
-<label class="flex items-center gap-3 pt-8 text-sm font-medium text-on-surface">
+<div class="space-y-3 pt-2">
+<label class="flex items-center gap-3 text-sm font-medium text-on-surface">
 <input class="rounded border-outline-variant text-secondary focus:ring-secondary/30" data-schedule-field="starred" type="checkbox"/>
 <span>Star this session</span>
 </label>
+<label class="flex items-center gap-3 text-sm font-medium text-on-surface">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/30" data-schedule-field="notificationsEnabled" type="checkbox"/>
+<span>Send reminders for this item</span>
+</label>
+</div>
 </div>
 <div class="flex items-center justify-between gap-3 pt-4">
 <button class="rounded-2xl px-4 py-3 text-sm font-headline font-bold text-secondary hover:bg-secondary/5 transition-colors" data-schedule-delete="" type="button">Delete</button>
@@ -461,17 +555,36 @@
 </div>
 </div>
 <script defer src="assets/stitch-router.js?v=20260331a"></script>
+<script src="assets/study-intelligence.js?v=20260401a"></script>
 <script>
   (function () {
     var STORAGE_KEY = 'sc_schedule_events_v2'
     var WEEK_KEY = 'sc_schedule_week_offset_v1'
+    var REMINDER_PREFS_KEY = 'sc_schedule_reminder_prefs_v1'
     var dayOrder = ['mon', 'tue', 'wed', 'thu', 'fri']
     var dayNames = { mon: 'MON', tue: 'TUE', wed: 'WED', thu: 'THU', fri: 'FRI' }
     var modal = document.querySelector('[data-schedule-modal]')
     var form = document.querySelector('[data-schedule-form]')
     var feed = document.querySelector('[data-schedule-feed]')
     var weekLabel = document.querySelector('[data-schedule-week-label]')
+    var reminderPanel = document.querySelector('[data-reminder-panel]')
+    var reminderSyncStatus = document.querySelector('[data-reminder-sync-status]')
     if (!modal || !form || !feed) return
+
+    var reminderSyncTimer = null
+
+    function defaultReminderPrefs() {
+      return {
+        enabled: true,
+        studyEnabled: true,
+        studyLeadMinutes: 15,
+        testEnabled: true,
+        testLeadMinutes: 60,
+        testDayBefore: true,
+        dailyAgenda: true,
+        dailyAgendaTime: '07:00',
+      }
+    }
 
     function currentScopeSuffix() {
       try {
@@ -485,6 +598,116 @@
 
     function scopedKey(baseKey) {
       return baseKey + '::' + currentScopeSuffix()
+    }
+
+    function currentProfile() {
+      try {
+        var raw = localStorage.getItem('sc_auth_profile_v1')
+        return raw ? JSON.parse(raw) : null
+      } catch (_err) {
+        return null
+      }
+    }
+
+    function currentUserId() {
+      var profile = currentProfile()
+      return profile && profile.id ? String(profile.id) : ''
+    }
+
+    function currentTimeZone() {
+      try {
+        var zone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        return zone || 'America/New_York'
+      } catch (_err) {
+        return 'America/New_York'
+      }
+    }
+
+    function currentPushEndpoint() {
+      try {
+        var raw = localStorage.getItem('sc_push_subscription')
+        var parsed = raw ? JSON.parse(raw) : null
+        return parsed && parsed.endpoint ? String(parsed.endpoint) : ''
+      } catch (_err) {
+        return ''
+      }
+    }
+
+    function isPushEnabled() {
+      try {
+        return 'Notification' in window && Notification.permission === 'granted'
+      } catch (_err) {
+        return false
+      }
+    }
+
+    function setReminderStatus(text) {
+      if (reminderSyncStatus) reminderSyncStatus.textContent = text
+    }
+
+    function clampLeadMinutes(value, fallback) {
+      var num = parseInt(value, 10)
+      return isFinite(num) && num > 0 ? num : fallback
+    }
+
+    function sanitizeReminderPrefs(raw) {
+      var base = defaultReminderPrefs()
+      var input = raw && typeof raw === 'object' ? raw : {}
+      return {
+        enabled: input.enabled !== false,
+        studyEnabled: input.studyEnabled !== false,
+        studyLeadMinutes: clampLeadMinutes(input.studyLeadMinutes, base.studyLeadMinutes),
+        testEnabled: input.testEnabled !== false,
+        testLeadMinutes: clampLeadMinutes(input.testLeadMinutes, base.testLeadMinutes),
+        testDayBefore: input.testDayBefore !== false,
+        dailyAgenda: input.dailyAgenda !== false,
+        dailyAgendaTime: String(input.dailyAgendaTime || base.dailyAgendaTime).trim() || base.dailyAgendaTime,
+      }
+    }
+
+    function inferEventType(entry) {
+      var sample = ((entry && entry.type) || '') + ' ' + ((entry && entry.title) || '') + ' ' + ((entry && entry.subject) || '')
+      var value = String(sample || '').toLowerCase()
+      if (value.indexOf('test') !== -1 || value.indexOf('midterm') !== -1 || value.indexOf('final') !== -1 || value.indexOf('exam') !== -1) return 'test'
+      if (value.indexOf('quiz') !== -1) return 'quiz'
+      if (value.indexOf('assignment') !== -1 || value.indexOf('essay') !== -1 || value.indexOf('due') !== -1 || value.indexOf('proposal') !== -1) return 'assignment'
+      if (value.indexOf('meeting') !== -1 || value.indexOf('seminar') !== -1 || value.indexOf('review') !== -1) return 'meeting'
+      return 'study'
+    }
+
+    function normalizeEventType(value, entry) {
+      var type = String(value || '').trim().toLowerCase()
+      if (type === 'study' || type === 'test' || type === 'quiz' || type === 'assignment' || type === 'meeting' || type === 'other') return type
+      return inferEventType(entry)
+    }
+
+    function eventTypeLabel(type) {
+      if (type === 'test') return 'Test'
+      if (type === 'quiz') return 'Quiz'
+      if (type === 'assignment') return 'Assignment'
+      if (type === 'meeting') return 'Meeting'
+      if (type === 'other') return 'Other'
+      return 'Study'
+    }
+
+    function readReminderPrefs() {
+      try {
+        var key = scopedKey(REMINDER_PREFS_KEY)
+        var raw = localStorage.getItem(key)
+        if (raw == null) {
+          raw = localStorage.getItem(REMINDER_PREFS_KEY)
+          if (raw != null) localStorage.setItem(key, raw)
+        }
+        return sanitizeReminderPrefs(raw ? JSON.parse(raw) : defaultReminderPrefs())
+      } catch (_err) {
+        return defaultReminderPrefs()
+      }
+    }
+
+    function writeReminderPrefs(value) {
+      try {
+        localStorage.setItem(scopedKey(REMINDER_PREFS_KEY), JSON.stringify(sanitizeReminderPrefs(value)))
+      } catch (_err) {}
     }
 
     function atMidday(date) {
@@ -515,12 +738,12 @@
     function buildDefaultEvents() {
       var base = startOfWeek(new Date())
       return [
-        { id: 'evt-1', title: 'Neuroscience Lab', subject: 'Biology 302', date: formatDateKey(addDays(base, 0)), start: '09:00', end: '10:30', location: 'Main Campus B3', priority: 'High', color: 'primary', starred: true },
-        { id: 'evt-2', title: 'Deep Work: Thesis', subject: 'Focus Block', date: formatDateKey(addDays(base, 0)), start: '14:30', end: '16:00', location: 'Solo Study', priority: 'Medium', color: 'secondary', starred: false },
-        { id: 'evt-3', title: 'Stochastic Models', subject: 'Mathematics', date: formatDateKey(addDays(base, 1)), start: '10:30', end: '12:00', location: 'Zoom Link Attached', priority: 'Medium', color: 'primary', starred: false },
-        { id: 'evt-4', title: 'Seminar: Modern Ethics', subject: 'Philosophy', date: formatDateKey(addDays(base, 2)), start: '13:00', end: '14:30', location: 'Reading Room 402', priority: 'High', color: 'primary', starred: true },
-        { id: 'evt-5', title: 'Physics Recitation', subject: 'Physics', date: formatDateKey(addDays(base, 3)), start: '09:00', end: '10:30', location: 'Lab Wing', priority: 'Low', color: 'slate-400', starred: false },
-        { id: 'evt-6', title: 'Weekly Peer Review', subject: 'English', date: formatDateKey(addDays(base, 4)), start: '16:30', end: '17:30', location: 'Seminar Circle', priority: 'Medium', color: 'secondary-container', starred: false }
+        { id: 'evt-1', title: 'Neuroscience Lab', subject: 'Biology 302', date: formatDateKey(addDays(base, 0)), start: '09:00', end: '10:30', location: 'Main Campus B3', priority: 'High', color: 'primary', starred: true, type: 'study', notificationsEnabled: true },
+        { id: 'evt-2', title: 'Deep Work: Thesis', subject: 'Focus Block', date: formatDateKey(addDays(base, 0)), start: '14:30', end: '16:00', location: 'Solo Study', priority: 'Medium', color: 'secondary', starred: false, type: 'study', notificationsEnabled: true },
+        { id: 'evt-3', title: 'Stochastic Models Quiz', subject: 'Mathematics', date: formatDateKey(addDays(base, 1)), start: '10:30', end: '12:00', location: 'Zoom Link Attached', priority: 'Medium', color: 'primary', starred: false, type: 'quiz', notificationsEnabled: true },
+        { id: 'evt-4', title: 'Seminar: Modern Ethics', subject: 'Philosophy', date: formatDateKey(addDays(base, 2)), start: '13:00', end: '14:30', location: 'Reading Room 402', priority: 'High', color: 'primary', starred: true, type: 'meeting', notificationsEnabled: true },
+        { id: 'evt-5', title: 'Physics Recitation', subject: 'Physics', date: formatDateKey(addDays(base, 3)), start: '09:00', end: '10:30', location: 'Lab Wing', priority: 'Low', color: 'slate-400', starred: false, type: 'study', notificationsEnabled: true },
+        { id: 'evt-6', title: 'Weekly Peer Review', subject: 'English', date: formatDateKey(addDays(base, 4)), start: '16:30', end: '17:30', location: 'Seminar Circle', priority: 'Medium', color: 'secondary-container', starred: false, type: 'assignment', notificationsEnabled: true }
       ]
     }
 
@@ -541,6 +764,11 @@
           }
           delete entry.day
           return entry
+        }).map(function (entry) {
+          return Object.assign({}, entry, {
+            type: normalizeEventType(entry.type, entry),
+            notificationsEnabled: entry.notificationsEnabled !== false,
+          })
         })
       } catch (_err) {
         return buildDefaultEvents()
@@ -676,11 +904,26 @@
       return 'text-primary'
     }
 
+    function populateDeckSelect(selectedDeckId) {
+      var select = form.querySelector('[data-schedule-field="linkedDeckId"]')
+      if (!select) return
+      var decks = window.StudyIntelligence && window.StudyIntelligence.getDecks ? window.StudyIntelligence.getDecks() : []
+      var options = ['<option value="">No linked deck</option>']
+      decks.forEach(function (deck) {
+        options.push('<option value="' + escapeHtml(deck.id) + '">' + escapeHtml(deck.name + ' · ' + (deck.subject || 'Study')) + '</option>')
+      })
+      select.innerHTML = options.join('')
+      select.value = selectedDeckId || ''
+    }
+
     function openModal(entry) {
       form.reset()
+      populateDeckSelect(entry && entry.linkedDeckId ? entry.linkedDeckId : '')
       form.querySelector('[data-schedule-id]').value = entry && entry.id ? entry.id : ''
       form.querySelector('[data-schedule-field="title"]').value = entry && entry.title ? entry.title : ''
       form.querySelector('[data-schedule-field="subject"]').value = entry && entry.subject ? entry.subject : ''
+      form.querySelector('[data-schedule-field="type"]').value = normalizeEventType(entry && entry.type, entry || null)
+      form.querySelector('[data-schedule-field="linkedDeckId"]').value = entry && entry.linkedDeckId ? entry.linkedDeckId : ''
       form.querySelector('[data-schedule-field="day"]').value = entry && entry.date ? dayOrder[Math.max(0, Math.min(4, Math.round((atMidday(new Date(entry.date)) - currentWeekStart()) / 86400000)))] : 'mon'
       form.querySelector('[data-schedule-field="start"]').value = entry && entry.start ? entry.start : '09:00'
       form.querySelector('[data-schedule-field="end"]').value = entry && entry.end ? entry.end : '10:00'
@@ -688,6 +931,7 @@
       form.querySelector('[data-schedule-field="priority"]').value = entry && entry.priority ? entry.priority : 'Medium'
       form.querySelector('[data-schedule-field="color"]').value = entry && entry.color ? entry.color : 'primary'
       form.querySelector('[data-schedule-field="starred"]').checked = !!(entry && entry.starred)
+      form.querySelector('[data-schedule-field="notificationsEnabled"]').checked = !(entry && entry.notificationsEnabled === false)
       document.querySelector('[data-schedule-modal-title]').textContent = entry && entry.id ? 'Edit Session' : 'New Session'
       document.querySelector('[data-schedule-delete]').classList.toggle('invisible', !(entry && entry.id))
       modal.hidden = false
@@ -732,6 +976,9 @@
                 '<h4 class="text-[0.75rem] font-headline font-bold leading-tight mt-1 ' + titleTone(entry.color) + '">' + escapeHtml(entry.title) + '</h4>' +
                 '<div class="mt-2 flex items-center gap-1 flex-wrap">' +
                   '<span class="inline-flex px-1.5 py-0.5 rounded text-[0.5rem] font-label font-bold ' + subjectTone(entry.color) + '">' + escapeHtml(entry.subject || 'Study Session') + '</span>' +
+                  '<span class="inline-flex px-1.5 py-0.5 rounded bg-white/70 text-[0.5rem] font-label font-bold text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + '</span>' +
+                  (entry.linkedDeckName ? '<span class="inline-flex px-1.5 py-0.5 rounded bg-primary-fixed/70 text-[0.5rem] font-label font-bold text-on-primary-fixed-variant">Deck · ' + escapeHtml(entry.linkedDeckName) + '</span>' : '') +
+                  (entry.notificationsEnabled === false ? '<span class="inline-flex px-1.5 py-0.5 rounded bg-slate-100 text-[0.5rem] font-label font-bold text-slate-500">No alert</span>' : '') +
                   (entry.location ? '<span class="text-[0.55rem] font-label text-slate-500">' + escapeHtml(entry.location) + '</span>' : '') +
                 '</div>' +
               '</div>'
@@ -759,6 +1006,8 @@
               '<span class="text-[0.6rem] font-label font-bold ' + priorityTone(entry.priority) + '">' + escapeHtml(entry.starred ? 'STARRED' : formatMonthDay(new Date(entry.date))) + '</span>' +
             '</div>' +
             '<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">' + escapeHtml(entry.title) + '</h5>' +
+            (entry.linkedDeckName ? '<p class="mt-1 text-[0.65rem] font-label font-semibold text-primary">Linked deck · ' + escapeHtml(entry.linkedDeckName) + '</p>' : '') +
+            '<p class="mt-1 text-[0.65rem] font-label font-bold uppercase tracking-[0.16em] text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + (entry.notificationsEnabled === false ? ' · alerts off' : '') + '</p>' +
             '<div class="mt-3 flex items-center justify-between">' +
               '<div class="flex items-center gap-4">' +
                 '<div class="flex items-center gap-1 text-slate-500"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[0.65rem] font-label font-semibold">' + escapeHtml(durationHours(entry.start, entry.end)) + '</span></div>' +
@@ -776,6 +1025,81 @@
       renderCalendar()
       renderFeed()
       writeEvents(events)
+    }
+
+    function renderReminderPrefs() {
+      if (!reminderPanel) return
+      var prefs = readReminderPrefs()
+      reminderPanel.querySelectorAll('[data-reminder-pref]').forEach(function (node) {
+        var key = node.getAttribute('data-reminder-pref')
+        if (!key) return
+        if (node.type === 'checkbox') node.checked = !!prefs[key]
+        else node.value = prefs[key]
+      })
+      if (!currentUserId()) {
+        setReminderStatus('Reminders are saved on this device. Sign in and enable push to sync them across devices.')
+      } else if (!isPushEnabled()) {
+        setReminderStatus('Schedule reminders are ready. Enable browser notifications on this device to receive push alerts.')
+      } else {
+        setReminderStatus('Reminder preferences are ready to sync for push delivery.')
+      }
+    }
+
+    async function syncReminderSchedule() {
+      if (!currentUserId()) {
+        renderReminderPrefs()
+        return
+      }
+      setReminderStatus('Syncing reminder plan...')
+      try {
+        var response = await fetch('/api/schedule-sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: currentUserId(),
+            endpoint: currentPushEndpoint(),
+            timezone: currentTimeZone(),
+            reminderPreferences: readReminderPrefs(),
+            scheduleSnapshot: events,
+          }),
+        })
+        var payload = {}
+        try {
+          payload = await response.json()
+        } catch (_err) {}
+        if (!response.ok) throw new Error((payload && payload.error) || ('Sync failed (' + response.status + ')'))
+        if (payload.updatedCount) {
+          setReminderStatus('Synced ' + payload.updatedCount + ' device' + (payload.updatedCount === 1 ? '' : 's') + ' for reminder delivery.')
+        } else if (isPushEnabled()) {
+          setReminderStatus('Push is enabled here, but no synced subscription record was found yet. Re-enable notifications if reminders do not arrive.')
+        } else {
+          setReminderStatus('Reminder preferences saved. Enable browser notifications to deliver them.')
+        }
+      } catch (err) {
+        setReminderStatus((err && err.message ? err.message : 'Reminder sync failed.') + ' Local schedule settings were still saved.')
+      }
+    }
+
+    function scheduleReminderSync(delay) {
+      if (reminderSyncTimer) clearTimeout(reminderSyncTimer)
+      reminderSyncTimer = setTimeout(function () {
+        reminderSyncTimer = null
+        syncReminderSchedule().catch(function () {})
+      }, delay || 400)
+    }
+
+    if (reminderPanel) {
+      reminderPanel.addEventListener('change', function (event) {
+        var node = event.target && event.target.closest ? event.target.closest('[data-reminder-pref]') : null
+        if (!node) return
+        var prefs = readReminderPrefs()
+        var key = node.getAttribute('data-reminder-pref')
+        if (!key) return
+        prefs[key] = node.type === 'checkbox' ? !!node.checked : node.value
+        writeReminderPrefs(prefs)
+        renderReminderPrefs()
+        scheduleReminderSync(250)
+      })
     }
 
     document.querySelectorAll('[data-schedule-new-session]').forEach(function (button) {
@@ -856,29 +1180,40 @@
       if (!id) return
       events = events.filter(function (entry) { return entry.id !== id })
       renderAll()
+      scheduleReminderSync(250)
       closeModal()
     })
 
     form.addEventListener('submit', function (event) {
       event.preventDefault()
+      var linkedDeckId = form.querySelector('[data-schedule-field="linkedDeckId"]').value
+      var linkedDeck = window.StudyIntelligence && window.StudyIntelligence.getDecks
+        ? window.StudyIntelligence.getDecks().find(function (deck) { return deck.id === linkedDeckId })
+        : null
       var nextEvent = {
         id: form.querySelector('[data-schedule-id]').value || 'evt-' + Date.now(),
         title: form.querySelector('[data-schedule-field="title"]').value.trim(),
         subject: form.querySelector('[data-schedule-field="subject"]').value.trim(),
+        type: form.querySelector('[data-schedule-field="type"]').value,
+        linkedDeckId: linkedDeckId || '',
+        linkedDeckName: linkedDeck ? linkedDeck.name : '',
         date: dateKeyForDay(form.querySelector('[data-schedule-field="day"]').value),
         start: form.querySelector('[data-schedule-field="start"]').value,
         end: form.querySelector('[data-schedule-field="end"]').value,
         location: form.querySelector('[data-schedule-field="location"]').value.trim(),
         priority: form.querySelector('[data-schedule-field="priority"]').value,
         color: form.querySelector('[data-schedule-field="color"]').value,
-        starred: form.querySelector('[data-schedule-field="starred"]').checked
+        starred: form.querySelector('[data-schedule-field="starred"]').checked,
+        notificationsEnabled: form.querySelector('[data-schedule-field="notificationsEnabled"]').checked
       }
       if (!nextEvent.title || !nextEvent.start || !nextEvent.end) return
       if (minutesFromTime(nextEvent.end) <= minutesFromTime(nextEvent.start)) return
+      nextEvent.type = normalizeEventType(nextEvent.type, nextEvent)
       var existingIndex = events.findIndex(function (entry) { return entry.id === nextEvent.id })
       if (existingIndex === -1) events.push(nextEvent)
       else events[existingIndex] = nextEvent
       renderAll()
+      scheduleReminderSync(250)
       closeModal()
     })
 
@@ -888,6 +1223,9 @@
         syncWeekChrome()
         renderCalendar()
         renderFeed()
+      }
+      if (event.key === REMINDER_PREFS_KEY || event.key === scopedKey(REMINDER_PREFS_KEY)) {
+        renderReminderPrefs()
       }
       if (event.key === WEEK_KEY || event.key === scopedKey(WEEK_KEY)) {
         weekOffset = readWeekOffset()
@@ -899,14 +1237,19 @@
       weekOffset = readWeekOffset()
       events = readEvents()
       renderAll()
+      renderReminderPrefs()
+      scheduleReminderSync(250)
     })
 
     window.addEventListener('sc:schedule-events-updated', function () {
       events = readEvents()
       renderAll()
+      scheduleReminderSync(250)
     })
 
+    renderReminderPrefs()
     renderAll()
+    scheduleReminderSync(600)
   })()
 </script>
 <script>

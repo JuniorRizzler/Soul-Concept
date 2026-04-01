@@ -301,7 +301,7 @@
 <button class="bg-surface-container-highest text-on-surface px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-primary-fixed transition-colors" id="deck-paste-trigger">
                                     Paste Text
                                 </button>
-<input class="sc-hidden" id="deck-file-input" type="file" accept=".txt,.md,.csv"/>
+<input class="sc-hidden" id="deck-file-input" type="file" accept=".txt,.text,.md,.markdown,.csv,.tsv,.json,.rtf,.html,.htm,.log,text/*"/>
 </div>
 </div>
 <div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/15 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
@@ -352,9 +352,14 @@
 </div>
 </div>
 <div class="mt-4 relative z-10">
-<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold py-2 px-4 rounded-xl text-xs hover:bg-white/30 transition-all">
+<div class="flex flex-wrap gap-3">
+<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold py-2 px-4 rounded-xl text-xs hover:bg-white/30 transition-all" id="session-schedule-preview-button" type="button">
+                            Open Full Schedule
+                        </button>
+<button class="bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold py-2 px-4 rounded-xl text-xs hover:bg-white/30 transition-all" type="button">
                             View Leaderboard
                         </button>
+</div>
 </div>
 <span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10">local_fire_department</span>
 </div>
@@ -490,6 +495,18 @@
 </div>
 </div>
 <div class="mt-4 rounded-[1.5rem] border border-primary/10 bg-primary/5 px-5 py-4">
+<div class="mb-4 rounded-[1.25rem] border border-secondary/15 bg-secondary/5 px-4 py-4 hidden" id="session-deadline-banner">
+<div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+<div>
+<p class="text-[10px] font-label font-bold uppercase tracking-[0.22em] text-secondary">Deadline Driven</p>
+<p class="mt-2 text-sm font-headline font-extrabold text-primary" id="session-deadline-title">No linked deadline yet.</p>
+<p class="mt-1 text-xs text-zinc-600 leading-relaxed" id="session-deadline-copy">Link a deck to a quiz, test, or assignment from the schedule to get automatic study guidance.</p>
+</div>
+<button class="inline-flex items-center justify-center rounded-full bg-secondary px-4 py-2.5 text-[11px] font-headline font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#952b00]" id="session-apply-profile" type="button">
+Apply Recommended Mode
+</button>
+</div>
+</div>
 <p class="text-[10px] font-label font-bold uppercase tracking-[0.24em] text-primary/70">How It Works</p>
 <p class="mt-2 text-sm text-zinc-600 leading-relaxed">
 Cards now reappear a few minutes to a few hours after you rate them. Lower ratings bring cards back sooner, higher ratings push them further out, and the mode you choose changes how aggressive that spacing is.
@@ -582,6 +599,12 @@ This is good because spaced recall makes you revisit a card right before you are
 <span class="text-[10px] font-label font-semibold text-zinc-500" data-rating-interval="">45 min</span>
 </button>
 </div>
+<div class="mt-6 flex justify-center">
+<button class="inline-flex items-center gap-2 rounded-full border border-secondary/20 bg-secondary-container/50 px-5 py-3 text-sm font-bold text-secondary transition-colors hover:bg-secondary-container" id="session-open-schedule" type="button">
+<span class="material-symbols-outlined text-base">event_note</span>
+<span>See Flashcard Schedule</span>
+</button>
+</div>
 <!-- Utility Bar (from SCREEN_193) -->
 <div class="mt-16 flex flex-wrap justify-center gap-12 items-center opacity-40 hover:opacity-100 transition-opacity">
 <div class="flex items-center gap-2">
@@ -665,6 +688,55 @@ This is good because spaced recall makes you revisit a card right before you are
 </div>
 </div>
 </div>
+<div class="fixed inset-0 hidden z-[80] bg-[#1d1a22]/60 backdrop-blur-md p-4 md:p-6" id="schedule-modal">
+<div class="mx-auto flex h-full w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] bg-secondary-container text-on-secondary-container shadow-2xl">
+<div class="flex items-center justify-between border-b border-white/15 px-6 py-5 md:px-8">
+<div>
+<p class="text-[11px] uppercase tracking-[0.2em] text-white/65 font-label">Flashcard Schedule</p>
+<h3 class="text-2xl font-headline font-extrabold">Mastery Streak</h3>
+</div>
+<button class="rounded-full border border-white/20 p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white" id="schedule-modal-close" type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="grid flex-1 gap-6 overflow-hidden p-6 md:grid-cols-[1.3fr_0.9fr] md:p-8">
+<div class="flex min-h-0 flex-col rounded-[1.5rem] bg-white/10 p-5 backdrop-blur-md">
+<div class="mb-4">
+<p class="text-[11px] uppercase tracking-[0.18em] font-label text-white/70">Recent Log</p>
+<p class="mt-1 text-sm text-white/80">See how each rating changed the next review interval.</p>
+</div>
+<div class="min-h-0 flex-1 overflow-auto pr-2">
+<div class="space-y-3 text-sm" id="schedule-log-list"></div>
+</div>
+</div>
+<div class="flex min-h-0 flex-col gap-6">
+<div class="rounded-[1.5rem] bg-white/10 p-5 backdrop-blur-md">
+<p class="text-[11px] uppercase tracking-[0.18em] font-label text-white/70">Current Session</p>
+<div class="mt-4 grid gap-3 sm:grid-cols-3">
+<div class="rounded-2xl bg-white/10 p-4">
+<p class="text-[11px] uppercase tracking-[0.16em] text-white/65">Streak</p>
+<p class="mt-2 text-3xl font-headline font-extrabold" id="schedule-streak-value">00</p>
+</div>
+<div class="rounded-2xl bg-white/10 p-4">
+<p class="text-[11px] uppercase tracking-[0.16em] text-white/65">Session Time</p>
+<p class="mt-2 text-3xl font-headline font-extrabold" id="schedule-timer-value">00:00</p>
+</div>
+<div class="rounded-2xl bg-white/10 p-4">
+<p class="text-[11px] uppercase tracking-[0.16em] text-white/65">Profile</p>
+<p class="mt-2 text-2xl font-headline font-extrabold" id="schedule-profile-value">Balanced</p>
+</div>
+</div>
+</div>
+<div class="flex min-h-0 flex-1 flex-col rounded-[1.5rem] bg-white/10 p-5 backdrop-blur-md">
+<p class="text-[11px] uppercase tracking-[0.18em] font-label text-white/70">Completed Cards</p>
+<div class="mt-4 min-h-0 flex-1 overflow-auto pr-2">
+<div class="space-y-3 text-sm" id="schedule-completed-list"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="../assets/study-intelligence.js?v=20260401a"></script>
 <script>
 (() => {
   const STORAGE_KEY = "sc_concept_studio_decks_v1";
@@ -714,6 +786,10 @@ This is good because spaced recall makes you revisit a card right before you are
     reviewProfile: document.getElementById("session-review-profile"),
     reviewProfileLabel: document.getElementById("session-review-profile-label"),
     reviewProfileCopy: document.getElementById("session-review-profile-copy"),
+    deadlineBanner: document.getElementById("session-deadline-banner"),
+    deadlineTitle: document.getElementById("session-deadline-title"),
+    deadlineCopy: document.getElementById("session-deadline-copy"),
+    applyProfileButton: document.getElementById("session-apply-profile"),
     dueStatus: document.getElementById("session-due-status"),
     nextDue: document.getElementById("session-next-due"),
     ratingButtons: Array.from(document.querySelectorAll("[data-rating]")),
@@ -730,6 +806,15 @@ This is good because spaced recall makes you revisit a card right before you are
     customDecksGrid: document.getElementById("custom-decks-grid"),
     customDecksCreateLink: document.getElementById("custom-decks-create-link"),
     addCardFab: document.getElementById("session-add-card-fab"),
+    openScheduleButton: document.getElementById("session-open-schedule"),
+    schedulePreviewButton: document.getElementById("session-schedule-preview-button"),
+    scheduleModal: document.getElementById("schedule-modal"),
+    scheduleModalClose: document.getElementById("schedule-modal-close"),
+    scheduleLogList: document.getElementById("schedule-log-list"),
+    scheduleCompletedList: document.getElementById("schedule-completed-list"),
+    scheduleStreakValue: document.getElementById("schedule-streak-value"),
+    scheduleTimerValue: document.getElementById("schedule-timer-value"),
+    scheduleProfileValue: document.getElementById("schedule-profile-value"),
     summaryMathematics: document.getElementById("summary-mathematics"),
     summarySciences: document.getElementById("summary-sciences"),
     summaryHumanities: document.getElementById("summary-humanities"),
@@ -944,20 +1029,134 @@ This is good because spaced recall makes you revisit a card right before you are
     });
   }
 
+  function normalizeNoteText(rawText) {
+    return String(rawText || "")
+      .replace(/\r/g, "")
+      .replace(/\t/g, " ")
+      .replace(/[#>*_`~]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function splitIntoSentences(text) {
+    return normalizeNoteText(text)
+      .split(/(?<=[.!?])\s+/)
+      .map((sentence) => sentence.trim())
+      .filter(Boolean);
+  }
+
+  function generateCardsFromNotes(rawText) {
+    const lines = String(rawText || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    const cards = [];
+    const seen = new Set();
+    let activeHeading = "";
+
+    function pushCard(front, back) {
+      const normalizedFront = normalizeNoteText(front);
+      const normalizedBack = normalizeNoteText(back);
+      if (!normalizedFront || !normalizedBack) return;
+      const dedupeKey = `${normalizedFront.toLowerCase()}::${normalizedBack.toLowerCase()}`;
+      if (seen.has(dedupeKey)) return;
+      seen.add(dedupeKey);
+      cards.push({ front: normalizedFront, back: normalizedBack });
+    }
+
+    lines.forEach((line, index) => {
+      const headingMatch = line.match(/^(?:#{1,6}\s*)?([A-Z][A-Za-z0-9/&(),'\-\s]{2,60})[:]?$/);
+      if (headingMatch && !/[.?!]$/.test(line) && line.split(/\s+/).length <= 6) {
+        activeHeading = headingMatch[1].trim();
+        return;
+      }
+
+      const pipeParts = line.split("|").map((part) => part.trim()).filter(Boolean);
+      if (pipeParts.length >= 2) {
+        pushCard(pipeParts[0], pipeParts.slice(1).join(" | "));
+        return;
+      }
+
+      const definitionMatch = line.match(/^(?:[-*]\s*)?([^:|]{2,90})\s*[:\-]\s+(.{4,})$/);
+      if (definitionMatch) {
+        const term = definitionMatch[1].trim();
+        const definition = definitionMatch[2].trim();
+        pushCard(`What is ${term.replace(/[?!.]+$/, "")}?`, definition);
+        if (activeHeading) {
+          pushCard(`How does ${term.replace(/[?!.]+$/, "")} relate to ${activeHeading}?`, definition);
+        }
+        return;
+      }
+
+      const isMatch = line.match(/^(.{3,80}?)\s+(?:is|are)\s+(.{6,})$/i);
+      if (isMatch && !line.endsWith(":")) {
+        const subject = isMatch[1].replace(/^(?:[-*]\s*)/, "").trim();
+        const rest = isMatch[2].trim();
+        pushCard(`What is ${subject.replace(/[?!.]+$/, "")}?`, rest);
+        return;
+      }
+
+      const doesMatch = line.match(/^(.{3,80}?)\s+(?:does|do|can|will)\s+(.{6,})$/i);
+      if (doesMatch) {
+        pushCard(`Explain: ${doesMatch[1].trim()}`, line);
+        return;
+      }
+
+      const sentences = splitIntoSentences(line);
+      if (sentences.length >= 2) {
+        const lead = sentences[0].replace(/^(?:[-*]\s*)/, "").trim();
+        const remainder = sentences.slice(1).join(" ").trim();
+        if (lead && remainder) {
+          const prompt = activeHeading
+            ? `In ${activeHeading}, what should you remember about ${lead.replace(/[?!.]+$/, "")}?`
+            : `What should you remember about ${lead.replace(/[?!.]+$/, "")}?`;
+          pushCard(prompt, remainder);
+          return;
+        }
+      }
+
+      if (activeHeading) {
+        pushCard(`What is an important point about ${activeHeading}?`, line);
+        return;
+      }
+
+      pushCard(`Concept ${index + 1}`, line);
+    });
+
+    return cards;
+  }
+
   function parseCards(rawText) {
-    const lines = rawText.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    const lines = String(rawText || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
     const pipeCards = lines
       .map((line) => line.split("|").map((part) => part.trim()))
       .filter((parts) => parts.length >= 2 && parts[0] && parts[1])
       .map((parts) => ({ front: parts[0], back: parts.slice(1).join(" | ") }));
     if (pipeCards.length) return pipeCards;
-    return rawText.split(/\n\s*\n/).map((chunk) => chunk.trim()).filter(Boolean).map((chunk, index) => {
-      const pieces = chunk.split(/(?<=[.!?])\s+/);
-      return {
-        front: pieces[0] || `Concept ${index + 1}`,
-        back: pieces.slice(1).join(" ") || chunk
-      };
+
+    const generatedCards = generateCardsFromNotes(rawText);
+    if (generatedCards.length) return generatedCards;
+
+    return [{
+      front: "What should you study from these notes?",
+      back: normalizeNoteText(rawText) || "Add note content to generate cards."
+    }];
+  }
+
+  function importTextToModal(title, text, preset = {}) {
+    const normalizedText = String(text || "").trim();
+    if (!normalizedText) {
+      window.alert("No text was found. Paste or upload notes with readable text content.");
+      return;
+    }
+    openModal(title, {
+      ...preset,
+      text: normalizedText
     });
+  }
+
+  async function requestPasteText() {
+    const clipboardText = await navigator.clipboard?.readText?.().catch(() => "");
+    const initialValue = String(clipboardText || "").trim();
+    const promptText = window.prompt("Paste your notes here to turn them into flashcards.", initialValue);
+    return promptText == null ? "" : promptText;
   }
 
   function renderCardRows(cards = [{ front: "", back: "" }]) {
@@ -1000,6 +1199,18 @@ This is good because spaced recall makes you revisit a card right before you are
     state.session.logs = [entry, ...(state.session.logs || [])].slice(0, 10);
   }
 
+  function openScheduleModal() {
+    els.scheduleModal?.classList.remove("hidden");
+    els.scheduleModal?.classList.add("flex");
+    document.body.classList.add("overflow-hidden");
+  }
+
+  function closeScheduleModal() {
+    els.scheduleModal?.classList.add("hidden");
+    els.scheduleModal?.classList.remove("flex");
+    document.body.classList.remove("overflow-hidden");
+  }
+
   function updateCompletedState(deck, card, rating) {
     if (rating < 4) return;
     const key = subjectKey(deck.subject);
@@ -1036,6 +1247,18 @@ This is good because spaced recall makes you revisit a card right before you are
         </div>
       </div>
     `).join("") : '<p class="text-white/70">No completed cards yet.</p>';
+  }
+
+  function syncSchedulePanel() {
+    if (els.scheduleLogList) {
+      els.scheduleLogList.innerHTML = els.sessionLogList?.innerHTML || '<p class="text-white/70">No cards reviewed yet.</p>';
+    }
+    if (els.scheduleCompletedList) {
+      els.scheduleCompletedList.innerHTML = els.completedCardList?.innerHTML || '<p class="text-white/70">No completed cards yet.</p>';
+    }
+    if (els.scheduleStreakValue) els.scheduleStreakValue.textContent = String(state.session.streak).padStart(2, "0");
+    if (els.scheduleTimerValue) els.scheduleTimerValue.textContent = formatTime(state.session.elapsed || 0);
+    if (els.scheduleProfileValue) els.scheduleProfileValue.textContent = getReviewProfile().label;
   }
 
   function renderCustomDecks() {
@@ -1124,6 +1347,28 @@ This is good because spaced recall makes you revisit a card right before you are
     return `${mins}:${secs}`;
   }
 
+  function renderDeadlineBanner(deck) {
+    if (!els.deadlineBanner || !window.StudyIntelligence?.buildDeckInsights) return;
+    if (!deck) {
+      els.deadlineBanner.classList.add("hidden");
+      return;
+    }
+    const insight = window.StudyIntelligence.buildDeckInsights(new Date()).find((item) => item.deck.id === deck.id && item.nextEvent);
+    if (!insight || !insight.nextEvent || !Number.isFinite(insight.daysUntil) || insight.daysUntil > 14) {
+      els.deadlineBanner.classList.add("hidden");
+      return;
+    }
+    const dayCopy = insight.daysUntil <= 0 ? "today" : insight.daysUntil === 1 ? "in 1 day" : `in ${insight.daysUntil} days`;
+    els.deadlineBanner.classList.remove("hidden");
+    if (els.deadlineTitle) els.deadlineTitle.textContent = `${insight.nextEvent.title} ${dayCopy}`;
+    if (els.deadlineCopy) {
+      els.deadlineCopy.textContent = `${insight.review.dueCount} cards are due for ${deck.name}. Recommended mode: ${insight.recommendedProfileLabel}.`;
+    }
+    if (els.applyProfileButton) {
+      els.applyProfileButton.dataset.profile = insight.recommendedProfile || "balanced";
+    }
+  }
+
   function updateStats() {
     const totalCards = state.decks.reduce((sum, deck) => sum + deck.cards.length, 0);
     els.activeCards.textContent = totalCards.toLocaleString();
@@ -1144,13 +1389,16 @@ This is good because spaced recall makes you revisit a card right before you are
     if (els.reviewProfile) els.reviewProfile.value = state.session.reviewProfile;
     if (els.reviewProfileLabel) els.reviewProfileLabel.textContent = profile.label;
     if (els.reviewProfileCopy) els.reviewProfileCopy.textContent = profile.description;
+    renderDeadlineBanner(getActiveDeck());
     renderLogs();
+    syncSchedulePanel();
     renderCustomDecks();
   }
 
   function renderSession() {
     const deck = getActiveDeck();
     if (!deck || !deck.cards.length) {
+      renderDeadlineBanner(null);
       els.subjectPill.textContent = "No Deck";
       els.deckPill.textContent = "Ready";
       els.front.textContent = "Choose or create a deck to begin your study session.";
@@ -1166,11 +1414,13 @@ This is good because spaced recall makes you revisit a card right before you are
       els.revealButton.classList.add("opacity-60", "cursor-not-allowed");
       updateRatingIntervals(null, null);
       renderLogs();
+      syncSchedulePanel();
       return;
     }
     const queue = syncCardIndexToQueue(deck);
     const activeEntry = queue.activeEntry;
     if (!activeEntry) {
+      renderDeadlineBanner(deck);
       els.subjectPill.textContent = deck.subject;
       els.deckPill.textContent = deck.name;
       els.front.textContent = "All cards are fully scheduled right now.";
@@ -1187,9 +1437,11 @@ This is good because spaced recall makes you revisit a card right before you are
       els.revealButton.classList.add("opacity-60", "cursor-not-allowed");
       updateRatingIntervals(deck, null);
       renderLogs();
+      syncSchedulePanel();
       return;
     }
     const card = activeEntry.card;
+    renderDeadlineBanner(deck);
     const hasDueCards = queue.dueCount > 0;
     els.subjectPill.textContent = deck.subject;
     els.deckPill.textContent = deck.name;
@@ -1213,6 +1465,7 @@ This is good because spaced recall makes you revisit a card right before you are
     els.revealButton.classList.remove("opacity-60", "cursor-not-allowed");
     updateRatingIntervals(deck, activeEntry);
     renderLogs();
+    syncSchedulePanel();
   }
 
   function setSessionDeck(deckId) {
@@ -1328,15 +1581,36 @@ This is good because spaced recall makes you revisit a card right before you are
       document.querySelector("section.mb-20")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     els.pasteTrigger?.addEventListener("click", async () => {
-      const pasted = await navigator.clipboard.readText().catch(() => "");
-      openModal("Paste Source Text", { text: pasted });
+      const pasted = await requestPasteText();
+      importTextToModal("Paste Source Text", pasted);
+    });
+    els.openScheduleButton?.addEventListener("click", openScheduleModal);
+    els.schedulePreviewButton?.addEventListener("click", openScheduleModal);
+    els.scheduleModalClose?.addEventListener("click", closeScheduleModal);
+    els.scheduleModal?.addEventListener("click", (event) => {
+      if (event.target === els.scheduleModal) closeScheduleModal();
+    });
+    els.applyProfileButton?.addEventListener("click", () => {
+      const nextProfile = els.applyProfileButton.dataset.profile;
+      if (!REVIEW_PROFILES[nextProfile]) return;
+      state.session.reviewProfile = nextProfile;
+      saveSession();
+      updateStats();
+      renderSession();
     });
     els.uploadTrigger?.addEventListener("click", () => els.fileInput?.click());
     els.fileInput?.addEventListener("change", async (event) => {
       const file = event.target.files && event.target.files[0];
       if (!file) return;
-      const text = await file.text();
-      openModal("Import Draft", { name: file.name.replace(/\.[^.]+$/, ""), text });
+      const extension = (file.name.split(".").pop() || "").toLowerCase();
+      const supportedBinaryExtensions = new Set(["pdf", "doc", "docx", "ppt", "pptx", "pages"]);
+      if (supportedBinaryExtensions.has(extension)) {
+        window.alert("This importer currently supports text-based notes files like TXT, MD, CSV, JSON, RTF, and HTML. Convert the file to plain text first or paste the notes directly.");
+        event.target.value = "";
+        return;
+      }
+      const text = await file.text().catch(() => "");
+      importTextToModal("Import Draft", text, { name: file.name.replace(/\.[^.]+$/, "") });
       event.target.value = "";
     });
     els.addCardRow?.addEventListener("click", () => {
@@ -1389,6 +1663,9 @@ This is good because spaced recall makes you revisit a card right before you are
       if (/Digit[1-5]/.test(event.code) && state.session.showingAnswer) {
         nextCard(Number(event.code.replace("Digit", "")));
       }
+      if (event.code === "Escape") {
+        closeScheduleModal();
+      }
     });
   }
 
@@ -1397,6 +1674,7 @@ This is good because spaced recall makes you revisit a card right before you are
     state.timerHandle = window.setInterval(() => {
       state.session.elapsed += 1;
       els.timer.textContent = `Session Time: ${formatTime(state.session.elapsed)}`;
+      syncSchedulePanel();
       saveSession();
     }, 1000);
   }
