@@ -26,6 +26,76 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        .subject-progress {
+            margin-top: auto;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(191,201,195,0.18);
+            background: rgba(255,255,255,0.58);
+            border-radius: 0.85rem;
+            padding: 0.85rem 0.9rem;
+            cursor: pointer;
+            transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+        }
+        .subject-progress:hover {
+            border-color: rgba(47,104,87,0.28);
+            background: rgba(255,255,255,0.74);
+            transform: translateY(-1px);
+        }
+        .subject-progress-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.6rem;
+        }
+        .subject-progress-chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 0.22rem 0.6rem;
+            font-family: "Manrope", sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .subject-progress-chip[data-state="started"] {
+            color: #125040;
+            background: rgba(152,211,189,0.24);
+        }
+        .subject-progress-chip[data-state="not-started"] {
+            color: #707974;
+            background: rgba(231,224,235,0.9);
+        }
+        .subject-progress-value {
+            font-family: "Manrope", sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #404945;
+        }
+        .subject-progress-track {
+            width: 100%;
+            height: 0.4rem;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(64,73,69,0.1);
+        }
+        .subject-progress-fill {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #98d3bd 0%, #2f6857 100%);
+        }
+        .subject-progress-hint {
+            margin-top: 0.55rem;
+            font-family: "Manrope", sans-serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(64,73,69,0.68);
+        }
     </style>
 <script id="tailwind-config">
       tailwind.config = {
@@ -722,7 +792,142 @@
 </div>
 </div>
 </div>
-</div></div></main></div><script defer src="assets/stitch-router.js?v=20260331a"></script>
+</div></div></main></div><script>
+      (function () {
+        const DEFAULT_PROGRESS_MAP = {
+          "Grade 9 • Mathematics": 68,
+          "Grade 9 • Science": 82,
+          "Grade 9 • Geography": 57,
+          "Grade 9 • French": 24,
+          "Grade 9 • Spanish": 18,
+          "Grade 9 • German": 0,
+          "Grade 9 • Mandarin": 0,
+          "Grade 9 • English": 46,
+          "Grade 10 • Science": 14,
+          "Grade 10 • Mathematics": 0,
+          "Grade 10 • Spanish": 0,
+          "Grade 10 • French": 0,
+          "Grade 10 • Geography": 0,
+          "Grade 10 • English": 0,
+          "Grade 11 • Science": 0,
+          "Grade 11 • Mathematics": 0,
+          "Grade 11 • Spanish": 0,
+          "Grade 11 • French": 0,
+          "Grade 11 • Geography": 0,
+          "Grade 11 • English": 0,
+          "Grade 12 • Science": 0,
+          "Grade 12 • Mathematics": 0,
+          "Grade 12 • Spanish": 0,
+          "AP Exam • History::AP World History: Modern": 61,
+          "AP Exam • Social Science::AP Human Geography": 0,
+          "AP Exam • History::AP United States History": 0,
+          "AP Exam • Mathematics::AP Precalculus": 0,
+          "AP Exam • Mathematics::AP Calculus AB": 0,
+          "AP Exam • Mathematics::AP Statistics": 0,
+          "AP Exam • English::AP English Language and Composition": 0,
+          "AP Exam • English::AP English Literature and Composition": 0,
+          "AP Exam • Science::AP Biology": 0,
+          "AP Exam • Science::AP Chemistry": 0,
+          "AP Exam • Science::AP Environmental Science": 0
+        };
+
+        const STORAGE_KEY = "sc_subject_progress_v1";
+
+        function getScope() {
+          try {
+            const raw = localStorage.getItem("sc_auth_profile_v1");
+            const profile = raw ? JSON.parse(raw) : null;
+            return profile && profile.id ? "user:" + profile.id : "guest";
+          } catch (_err) {
+            return "guest";
+          }
+        }
+
+        function loadProgressMap() {
+          try {
+            const scopedKey = STORAGE_KEY + "::" + getScope();
+            const raw = localStorage.getItem(scopedKey);
+            if (!raw) return Object.assign({}, DEFAULT_PROGRESS_MAP);
+            return Object.assign({}, DEFAULT_PROGRESS_MAP, JSON.parse(raw));
+          } catch (_err) {
+            return Object.assign({}, DEFAULT_PROGRESS_MAP);
+          }
+        }
+
+        function saveProgressMap(progressMap) {
+          try {
+            const scopedKey = STORAGE_KEY + "::" + getScope();
+            localStorage.setItem(scopedKey, JSON.stringify(progressMap));
+          } catch (_err) {}
+        }
+
+        const progressMap = loadProgressMap();
+
+        function renderProgress(block, progress) {
+          const state = progress > 0 ? "started" : "not-started";
+          block.innerHTML =
+            '<div class="subject-progress-meta">' +
+              '<span class="subject-progress-chip" data-state="' + state + '">' + (progress > 0 ? "Started" : "Not Started") + "</span>" +
+              '<span class="subject-progress-value">' + progress + '% working</span>' +
+            "</div>" +
+            '<div class="subject-progress-track">' +
+              '<div class="subject-progress-fill" style="width:' + progress + '%"></div>' +
+            "</div>" +
+            '<div class="subject-progress-hint">Click to update progress</div>';
+        }
+
+        const cards = document.querySelectorAll("main .grid > .group");
+        cards.forEach((card) => {
+          const body = card.querySelector(".p-8.flex.flex-col.flex-grow");
+          const label = body?.querySelector("span");
+          const title = body?.querySelector("h3");
+          const summary = body?.querySelector("p");
+          const footer = body?.querySelector(".flex.items-center.justify-between.mt-auto");
+          if (!body || !label || !title || !summary || !footer || body.querySelector(".subject-progress")) {
+            return;
+          }
+
+          const labelText = label.textContent.trim().replace(/â€¢/g, "•");
+          const titleText = title.textContent.trim();
+          const preciseKey = labelText.startsWith("AP Exam")
+            ? labelText + "::" + titleText
+            : labelText;
+          const fallbackKey = titleText;
+          const progress = Math.max(0, Math.min(100, progressMap[preciseKey] ?? progressMap[fallbackKey] ?? 0));
+
+          const progressBlock = document.createElement("div");
+          progressBlock.className = "subject-progress";
+          progressBlock.setAttribute("role", "button");
+          progressBlock.setAttribute("tabindex", "0");
+          renderProgress(progressBlock, progress);
+
+          function updateProgress() {
+            const current = progressMap[preciseKey] ?? progressMap[fallbackKey] ?? 0;
+            const response = window.prompt('Enter progress for "' + titleText + '" from 0 to 100.', String(current));
+            if (response == null) return;
+            const next = Math.max(0, Math.min(100, Number(response)));
+            if (Number.isNaN(next)) return;
+            progressMap[preciseKey] = next;
+            if (fallbackKey !== preciseKey) {
+              delete progressMap[fallbackKey];
+            }
+            saveProgressMap(progressMap);
+            renderProgress(progressBlock, next);
+          }
+
+          progressBlock.addEventListener("click", updateProgress);
+          progressBlock.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              updateProgress();
+            }
+          });
+
+          footer.classList.remove("mt-auto");
+          body.insertBefore(progressBlock, footer);
+        });
+      })();
+    </script><script defer src="assets/stitch-router.js?v=20260331a"></script>
 <script src="supabase-client.js?v=20260312a"></script>
 <script src="supabase-auth.js?v=20260329c"></script>
 <script src="auth-profile-sync.js?v=20260328b"></script>
