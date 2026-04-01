@@ -467,6 +467,37 @@
 <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
 <div class="h-full bg-primary w-[0%] rounded-full shadow-[0_0_10px_rgba(0,68,53,0.3)]" id="session-progress-bar"></div>
 </div>
+<div class="mt-5 w-full grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+<div class="rounded-[1.5rem] border border-outline-variant/15 bg-white/55 px-5 py-4">
+<label class="block text-[10px] font-label font-bold uppercase tracking-[0.24em] text-zinc-500" for="session-review-profile">Review Interval</label>
+<div class="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+<div>
+<p class="text-sm font-headline font-extrabold text-primary" id="session-review-profile-label">Balanced</p>
+<p class="text-xs text-zinc-500 leading-relaxed" id="session-review-profile-copy">A steady schedule for normal spaced review.</p>
+</div>
+<select class="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-semibold text-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" id="session-review-profile">
+<option value="short">Short Term</option>
+<option value="balanced" selected>Balanced</option>
+<option value="long">Long Term</option>
+<option value="ultra">Ultra Long Term</option>
+</select>
+</div>
+</div>
+<div class="rounded-[1.5rem] border border-outline-variant/15 bg-white/55 px-5 py-4 md:text-right">
+<p class="text-[10px] font-label font-bold uppercase tracking-[0.24em] text-zinc-500">Due Window</p>
+<p class="mt-2 text-sm font-headline font-extrabold text-primary" id="session-due-status">0 cards due now</p>
+<p class="mt-1 text-xs text-zinc-500" id="session-next-due">Next review will appear here.</p>
+</div>
+</div>
+<div class="mt-4 rounded-[1.5rem] border border-primary/10 bg-primary/5 px-5 py-4">
+<p class="text-[10px] font-label font-bold uppercase tracking-[0.24em] text-primary/70">How It Works</p>
+<p class="mt-2 text-sm text-zinc-600 leading-relaxed">
+Cards now reappear a few minutes to a few hours after you rate them. Lower ratings bring cards back sooner, higher ratings push them further out, and the mode you choose changes how aggressive that spacing is.
+</p>
+<p class="mt-2 text-xs text-zinc-500 leading-relaxed">
+This is good because spaced recall makes you revisit a card right before you are likely to forget it, which is usually stronger than rereading everything at once.
+</p>
+</div>
 </div>
 <!-- Flashcard Interface -->
 <div class="w-full aspect-[16/10] relative group mb-12">
@@ -520,30 +551,35 @@
 <span class="font-headline font-bold">1</span>
 </span>
 <span class="text-[10px] font-label font-bold uppercase tracking-widest text-zinc-400 group-hover:text-error transition-colors">Forgotten</span>
+<span class="text-[10px] font-label font-semibold text-zinc-500" data-rating-interval="">2 min</span>
 </button>
 <button class="group flex flex-col items-center gap-3 p-4 bg-white/50 rounded-2xl border-b-4 border-secondary/20 hover:border-secondary transition-all hover:bg-white hover:-translate-y-1" data-rating="2">
 <span class="w-10 h-10 rounded-full flex items-center justify-center bg-secondary-fixed text-on-secondary-fixed mb-1">
 <span class="font-headline font-bold">2</span>
 </span>
 <span class="text-[10px] font-label font-bold uppercase tracking-widest text-zinc-400 group-hover:text-secondary transition-colors">Hard</span>
+<span class="text-[10px] font-label font-semibold text-zinc-500" data-rating-interval="">5 min</span>
 </button>
 <button class="group flex flex-col items-center gap-3 p-4 bg-white/50 rounded-2xl border-b-4 border-primary/20 hover:border-primary transition-all hover:bg-white hover:-translate-y-1" data-rating="3">
 <span class="w-10 h-10 rounded-full flex items-center justify-center bg-primary-fixed text-on-primary-fixed mb-1">
 <span class="font-headline font-bold">3</span>
 </span>
 <span class="text-[10px] font-label font-bold uppercase tracking-widest text-zinc-400 group-hover:text-primary transition-colors">Good</span>
+<span class="text-[10px] font-label font-semibold text-zinc-500" data-rating-interval="">12 min</span>
 </button>
 <button class="group flex flex-col items-center gap-3 p-4 bg-white/50 rounded-2xl border-b-4 border-purple-500/20 hover:border-purple-500 transition-all hover:bg-white hover:-translate-y-1" data-rating="4">
 <span class="w-10 h-10 rounded-full flex items-center justify-center bg-purple-100 text-purple-700 mb-1">
 <span class="font-headline font-bold">4</span>
 </span>
 <span class="text-[10px] font-label font-bold uppercase tracking-widest text-zinc-400 group-hover:text-purple-600 transition-colors">Easy</span>
+<span class="text-[10px] font-label font-semibold text-zinc-500" data-rating-interval="">25 min</span>
 </button>
 <button class="group flex flex-col items-center gap-3 p-4 bg-white/50 rounded-2xl border-b-4 border-amber-500/20 hover:border-amber-500 transition-all hover:bg-white hover:-translate-y-1" data-rating="5">
 <span class="w-10 h-10 rounded-full flex items-center justify-center bg-amber-100 text-amber-700 mb-1">
 <span class="font-headline font-bold">5</span>
 </span>
 <span class="text-[10px] font-label font-bold uppercase tracking-widest text-zinc-400 group-hover:text-amber-600 transition-colors">Perfect</span>
+<span class="text-[10px] font-label font-semibold text-zinc-500" data-rating-interval="">45 min</span>
 </button>
 </div>
 <!-- Utility Bar (from SCREEN_193) -->
@@ -588,7 +624,7 @@
 </a>
 </nav>
 <!-- Contextual FAB -->
-<button class="fixed bottom-24 right-6 lg:bottom-10 lg:right-10 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-container text-white shadow-xl shadow-primary/20 flex items-center justify-center group active:scale-90 transition-all z-40">
+<button class="fixed bottom-24 right-6 lg:bottom-10 lg:right-10 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-container text-white shadow-xl shadow-primary/20 flex items-center justify-center group active:scale-90 transition-all z-40" id="session-add-card-fab" type="button">
 <span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform">add</span>
 </button>
 <div class="fixed inset-0 bg-[#1d1a22]/35 backdrop-blur-sm hidden items-center justify-center p-6 z-[70]" id="deck-modal">
@@ -675,6 +711,12 @@
     totalCards: document.getElementById("session-total-cards"),
     streak: document.getElementById("session-streak"),
     progress: document.getElementById("session-progress-bar"),
+    reviewProfile: document.getElementById("session-review-profile"),
+    reviewProfileLabel: document.getElementById("session-review-profile-label"),
+    reviewProfileCopy: document.getElementById("session-review-profile-copy"),
+    dueStatus: document.getElementById("session-due-status"),
+    nextDue: document.getElementById("session-next-due"),
+    ratingButtons: Array.from(document.querySelectorAll("[data-rating]")),
     subjectPill: document.getElementById("session-subject-pill"),
     deckPill: document.getElementById("session-deck-pill"),
     flipCard: document.getElementById("session-flip-card"),
@@ -687,15 +729,61 @@
     completedCardList: document.getElementById("completed-card-list"),
     customDecksGrid: document.getElementById("custom-decks-grid"),
     customDecksCreateLink: document.getElementById("custom-decks-create-link"),
+    addCardFab: document.getElementById("session-add-card-fab"),
     summaryMathematics: document.getElementById("summary-mathematics"),
     summarySciences: document.getElementById("summary-sciences"),
     summaryHumanities: document.getElementById("summary-humanities"),
     summaryEngineering: document.getElementById("summary-engineering")
   };
 
+  const REVIEW_PROFILES = {
+    short: {
+      label: "Short Term",
+      description: "Fast repeats for cramming and quick checks, staying inside roughly 1 to 30 minutes.",
+      baseMinutes: [1, 5, 10, 20, 30],
+      growth: [1, 1.1, 1.2, 1.3, 1.4],
+      maxMinutes: 30
+    },
+    balanced: {
+      label: "Balanced",
+      description: "A steady schedule that brings cards back over the next several minutes up to about half a day.",
+      baseMinutes: [10, 30, 60, 180, 360],
+      growth: [1, 1.2, 1.35, 1.55, 1.75],
+      maxMinutes: 720
+    },
+    long: {
+      label: "Long Term",
+      description: "Wider spacing that starts in hours and can stretch reviews across multiple days.",
+      baseMinutes: [60, 180, 360, 720, 1440],
+      growth: [1, 1.3, 1.5, 1.75, 2],
+      maxMinutes: 10080
+    },
+    ultra: {
+      label: "Ultra Long Term",
+      description: "The widest spacing, pushing reviews from several hours out to multiple weeks.",
+      baseMinutes: [360, 1440, 4320, 10080, 20160],
+      growth: [1, 1.35, 1.7, 2.1, 2.6],
+      maxMinutes: 43200
+    }
+  };
+
   const state = {
     decks: [],
-    session: { deckId: null, cardIndex: 0, showingAnswer: false, streak: 0, elapsed: 0, logs: [], completed: {} },
+    session: {
+      deckId: null,
+      cardIndex: 0,
+      showingAnswer: false,
+      streak: 0,
+      elapsed: 0,
+      logs: [],
+      completed: {},
+      reviewProfile: "balanced",
+      reviewState: {}
+    },
+    modal: {
+      mode: "create",
+      deckId: null
+    },
     timerHandle: null
   };
 
@@ -723,6 +811,137 @@
 
   function saveSession() {
     localStorage.setItem(SESSION_KEY, JSON.stringify(state.session));
+  }
+
+  function normalizeSession() {
+    if (!REVIEW_PROFILES[state.session.reviewProfile]) {
+      state.session.reviewProfile = "balanced";
+    }
+    if (!state.session.reviewState || typeof state.session.reviewState !== "object") {
+      state.session.reviewState = {};
+    }
+    if (!state.session.completed || typeof state.session.completed !== "object") {
+      state.session.completed = {};
+    }
+    if (!Array.isArray(state.session.logs)) {
+      state.session.logs = [];
+    }
+  }
+
+  function getReviewProfile() {
+    return REVIEW_PROFILES[state.session.reviewProfile] || REVIEW_PROFILES.balanced;
+  }
+
+  function getCardKey(deck, cardIndex) {
+    return `${deck.id}::${cardIndex}`;
+  }
+
+  function getCardReviewState(deck, cardIndex) {
+    const key = getCardKey(deck, cardIndex);
+    const record = state.session.reviewState[key];
+    return record && typeof record === "object"
+      ? { dueAt: 0, reps: 0, lapses: 0, lastIntervalMinutes: 0, lastRating: 0, ...record }
+      : { dueAt: 0, reps: 0, lapses: 0, lastIntervalMinutes: 0, lastRating: 0 };
+  }
+
+  function setCardReviewState(deck, cardIndex, record) {
+    state.session.reviewState[getCardKey(deck, cardIndex)] = record;
+  }
+
+  function ensureDeckReviewState(deck) {
+    deck.cards.forEach((_, cardIndex) => {
+      const key = getCardKey(deck, cardIndex);
+      if (!state.session.reviewState[key]) {
+        state.session.reviewState[key] = {
+          dueAt: 0,
+          reps: 0,
+          lapses: 0,
+          lastIntervalMinutes: 0,
+          lastRating: 0
+        };
+      }
+    });
+  }
+
+  function pruneReviewState() {
+    const validKeys = new Set(state.decks.flatMap((deck) => deck.cards.map((_, cardIndex) => getCardKey(deck, cardIndex))));
+    Object.keys(state.session.reviewState).forEach((key) => {
+      if (!validKeys.has(key)) delete state.session.reviewState[key];
+    });
+  }
+
+  function formatInterval(minutes) {
+    if (minutes < 60) return `${Math.max(1, Math.round(minutes))} min`;
+    if (minutes < 1440) return `${Math.round(minutes / 60)} hr`;
+    if (minutes < 10080) return `${Math.round(minutes / 1440)} day`;
+    return `${Math.round(minutes / 10080)} wk`;
+  }
+
+  function formatRelativeDue(dueAt) {
+    if (!dueAt) return "New card is ready now.";
+    const diff = dueAt - Date.now();
+    if (diff <= 0) return "Card is due now.";
+    const minutes = Math.max(1, Math.round(diff / 60000));
+    return `Next review in ${formatInterval(minutes)}.`;
+  }
+
+  function getDeckQueue(deck) {
+    ensureDeckReviewState(deck);
+    const now = Date.now();
+    const due = [];
+    const upcoming = [];
+    deck.cards.forEach((card, cardIndex) => {
+      const review = getCardReviewState(deck, cardIndex);
+      const entry = { card, cardIndex, review };
+      if (!review.dueAt || review.dueAt <= now) {
+        due.push(entry);
+      } else {
+        upcoming.push(entry);
+      }
+    });
+    due.sort((a, b) => (a.review.dueAt || 0) - (b.review.dueAt || 0));
+    upcoming.sort((a, b) => a.review.dueAt - b.review.dueAt);
+    return { due, upcoming };
+  }
+
+  function syncCardIndexToQueue(deck) {
+    if (!deck || !deck.cards.length) {
+      state.session.cardIndex = 0;
+      return { activeEntry: null, dueCount: 0, totalCount: 0, nextDueAt: 0 };
+    }
+    const queue = getDeckQueue(deck);
+    const activeEntry = queue.due[0] || queue.upcoming[0] || null;
+    state.session.cardIndex = activeEntry ? activeEntry.cardIndex : 0;
+    return {
+      activeEntry,
+      dueCount: queue.due.length,
+      totalCount: deck.cards.length,
+      nextDueAt: queue.upcoming[0]?.review?.dueAt || 0
+    };
+  }
+
+  function calculateRatingIntervals() {
+    const profile = getReviewProfile();
+    const maxMinutes = profile.maxMinutes || 1440;
+    return profile.baseMinutes.map((minutes) => Math.max(1, Math.min(maxMinutes, minutes)));
+  }
+
+  function calculateNextIntervalMinutes(record, rating) {
+    const intervals = calculateRatingIntervals(record);
+    return intervals[rating - 1] || intervals[2] || 1;
+  }
+
+  function updateRatingIntervals(deck, activeEntry) {
+    els.ratingButtons.forEach((button) => {
+      const label = button.querySelector("[data-rating-interval]");
+      if (!label) return;
+      if (!deck || !activeEntry) {
+        label.textContent = "--";
+        return;
+      }
+      const rating = Number(button.getAttribute("data-rating"));
+      label.textContent = formatInterval(calculateRatingIntervals()[rating - 1] || 1);
+    });
   }
 
   function parseCards(rawText) {
@@ -866,6 +1085,7 @@
           state.session.cardIndex = 0;
           state.session.showingAnswer = false;
         }
+        pruneReviewState();
         saveDecks();
         saveSession();
         updateStats();
@@ -875,15 +1095,21 @@
   }
 
   function openModal(title, preset = {}) {
+    state.modal.mode = preset.mode || "create";
+    state.modal.deckId = preset.deckId || null;
     els.modalTitle.textContent = title;
     els.deckName.value = preset.name || "";
     els.deckSubject.value = preset.subject || "Sciences";
+    els.modalSave.textContent = state.modal.mode === "append" ? "Add Card" : "Save Deck";
     renderCardRows(preset.cards || (preset.text ? parseCards(preset.text) : [{ front: "", back: "" }]));
     els.modal.classList.remove("hidden");
     els.modal.classList.add("flex");
   }
 
   function closeModal() {
+    state.modal.mode = "create";
+    state.modal.deckId = null;
+    els.modalSave.textContent = "Save Deck";
     els.modal.classList.add("hidden");
     els.modal.classList.remove("flex");
   }
@@ -914,6 +1140,10 @@
     els.summarySciences.textContent = String((completed.sciences || []).length);
     els.summaryHumanities.textContent = String((completed.humanities || []).length);
     els.summaryEngineering.textContent = String((completed.engineering || []).length);
+    const profile = getReviewProfile();
+    if (els.reviewProfile) els.reviewProfile.value = state.session.reviewProfile;
+    if (els.reviewProfileLabel) els.reviewProfileLabel.textContent = profile.label;
+    if (els.reviewProfileCopy) els.reviewProfileCopy.textContent = profile.description;
     renderLogs();
     renderCustomDecks();
   }
@@ -928,23 +1158,60 @@
       els.currentCard.textContent = "0";
       els.totalCards.textContent = "/ 0 Cards";
       els.source.textContent = "Source: No deck selected";
+      els.dueStatus.textContent = "0 cards due now";
+      els.nextDue.textContent = "Next review will appear here.";
       els.progress.style.width = "0%";
       els.flipCard.classList.remove("is-flipped");
+      els.revealButton.disabled = true;
+      els.revealButton.classList.add("opacity-60", "cursor-not-allowed");
+      updateRatingIntervals(null, null);
       renderLogs();
       return;
     }
-    if (state.session.cardIndex >= deck.cards.length) state.session.cardIndex = 0;
-    const card = deck.cards[state.session.cardIndex];
+    const queue = syncCardIndexToQueue(deck);
+    const activeEntry = queue.activeEntry;
+    if (!activeEntry) {
+      els.subjectPill.textContent = deck.subject;
+      els.deckPill.textContent = deck.name;
+      els.front.textContent = "All cards are fully scheduled right now.";
+      els.back.textContent = "Come back when a card becomes due again.";
+      els.currentCard.textContent = "0";
+      els.totalCards.textContent = `/ ${deck.cards.length} Cards`;
+      els.streak.textContent = String(state.session.streak).padStart(2, "0");
+      els.source.textContent = `Source: ${deck.source || deck.name}`;
+      els.dueStatus.textContent = "0 cards due now";
+      els.nextDue.textContent = "No upcoming reviews scheduled yet.";
+      els.progress.style.width = "0%";
+      els.flipCard.classList.remove("is-flipped");
+      els.revealButton.disabled = true;
+      els.revealButton.classList.add("opacity-60", "cursor-not-allowed");
+      updateRatingIntervals(deck, null);
+      renderLogs();
+      return;
+    }
+    const card = activeEntry.card;
+    const hasDueCards = queue.dueCount > 0;
     els.subjectPill.textContent = deck.subject;
     els.deckPill.textContent = deck.name;
     els.front.textContent = card.front;
-    els.back.textContent = state.session.showingAnswer ? card.back : "Press Reveal Answer to view the back of the card.";
-    els.currentCard.textContent = String(state.session.cardIndex + 1);
-    els.totalCards.textContent = `/ ${deck.cards.length} Cards`;
+    els.back.textContent = state.session.showingAnswer
+      ? `${card.back} Next interval follows your ${getReviewProfile().label.toLowerCase()} plan.`
+      : hasDueCards
+        ? "Press Reveal Answer to view the back of the card."
+        : "No cards are due right now. You can still preview the next scheduled card.";
+    els.currentCard.textContent = "1";
+    els.totalCards.textContent = queue.dueCount ? `/ ${queue.dueCount} Due` : `/ ${deck.cards.length} Scheduled`;
     els.streak.textContent = String(state.session.streak).padStart(2, "0");
     els.source.textContent = `Source: ${deck.source || deck.name}`;
-    els.progress.style.width = `${((state.session.cardIndex + (state.session.showingAnswer ? 1 : 0)) / deck.cards.length) * 100}%`;
+    els.dueStatus.textContent = queue.dueCount === 1 ? "1 card due now" : `${queue.dueCount} cards due now`;
+    els.nextDue.textContent = queue.dueCount
+      ? "Due cards will keep recycling based on your rating."
+      : formatRelativeDue(queue.nextDueAt);
+    els.progress.style.width = `${deck.cards.length ? (queue.dueCount / deck.cards.length) * 100 : 0}%`;
     els.flipCard.classList.toggle("is-flipped", Boolean(state.session.showingAnswer));
+    els.revealButton.disabled = false;
+    els.revealButton.classList.remove("opacity-60", "cursor-not-allowed");
+    updateRatingIntervals(deck, activeEntry);
     renderLogs();
   }
 
@@ -960,16 +1227,30 @@
   function nextCard(rating) {
     const deck = getActiveDeck();
     if (!deck) return;
-    const card = deck.cards[state.session.cardIndex];
+    const queue = syncCardIndexToQueue(deck);
+    const activeEntry = queue.activeEntry;
+    if (!activeEntry) return;
+    const card = activeEntry.card;
+    const review = getCardReviewState(deck, activeEntry.cardIndex);
+    const intervalMinutes = calculateNextIntervalMinutes(review, rating);
+    const nextReviewState = {
+      dueAt: Date.now() + (intervalMinutes * 60000),
+      reps: rating >= 3 ? review.reps + 1 : 0,
+      lapses: rating <= 2 ? review.lapses + 1 : review.lapses,
+      lastIntervalMinutes: intervalMinutes,
+      lastRating: rating
+    };
+    setCardReviewState(deck, activeEntry.cardIndex, nextReviewState);
+    saveSession();
     state.session.streak = rating >= 3 ? state.session.streak + 1 : 0;
     appendSessionLog({
       front: card.front,
       subject: deck.subject,
-      ratingLabel: ["Forgotten", "Hard", "Good", "Easy", "Perfect"][rating - 1] || "Good",
+      ratingLabel: `${["Forgotten", "Hard", "Good", "Easy", "Perfect"][rating - 1] || "Good"} · ${formatInterval(intervalMinutes)}`,
       time: formatTime(state.session.elapsed)
     });
     updateCompletedState(deck, card, rating);
-    state.session.cardIndex = (state.session.cardIndex + 1) % deck.cards.length;
+    state.session.cardIndex = 0;
     state.session.showingAnswer = false;
     saveSession();
     updateStats();
@@ -984,6 +1265,22 @@
       window.alert("Add at least one front/back card before saving the deck.");
       return;
     }
+    if (state.modal.mode === "append" && state.modal.deckId) {
+      const deck = state.decks.find((item) => item.id === state.modal.deckId);
+      if (!deck) {
+        window.alert("The active deck could not be found.");
+        return;
+      }
+      deck.name = name;
+      deck.subject = subject;
+      deck.cards.push(...cards);
+      ensureDeckReviewState(deck);
+      saveDecks();
+      updateStats();
+      closeModal();
+      setSessionDeck(deck.id);
+      return;
+    }
     const deck = {
       id: `deck-${Date.now()}`,
       name,
@@ -992,6 +1289,7 @@
       cards
     };
     state.decks.unshift(deck);
+    ensureDeckReviewState(deck);
     saveDecks();
     updateStats();
     closeModal();
@@ -1012,6 +1310,20 @@
     els.launchArchitect?.addEventListener("click", () => openModal("Create Deck"));
     els.blankCanvasTrigger?.addEventListener("click", () => openModal("Manual Deck"));
     els.customDecksCreateLink?.addEventListener("click", () => openModal("Create Deck"));
+    els.addCardFab?.addEventListener("click", () => {
+      const deck = getActiveDeck();
+      if (!deck) {
+        openModal("Create Deck");
+        return;
+      }
+      openModal("Add Card", {
+        mode: "append",
+        deckId: deck.id,
+        name: deck.name,
+        subject: deck.subject,
+        cards: [{ front: "", back: "" }]
+      });
+    });
     els.openExplorer?.addEventListener("click", () => {
       document.querySelector("section.mb-20")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -1035,6 +1347,14 @@
     els.modalSave?.addEventListener("click", createDeckFromForm);
     els.modal?.addEventListener("click", (event) => {
       if (event.target === els.modal) closeModal();
+    });
+    els.reviewProfile?.addEventListener("change", () => {
+      const nextProfile = els.reviewProfile.value;
+      if (!REVIEW_PROFILES[nextProfile]) return;
+      state.session.reviewProfile = nextProfile;
+      saveSession();
+      updateStats();
+      renderSession();
     });
     els.revealButton?.addEventListener("click", () => {
       const deck = getActiveDeck();
@@ -1083,9 +1403,13 @@
 
   loadDecks();
   loadSession();
+  normalizeSession();
+  state.decks.forEach(ensureDeckReviewState);
+  pruneReviewState();
   if (!state.session.deckId && state.decks[0]) {
     state.session.deckId = state.decks[0].id;
   }
+  saveSession();
   updateStats();
   bindSubjectCards();
   bindActions();
