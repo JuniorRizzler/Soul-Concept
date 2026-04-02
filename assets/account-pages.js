@@ -51,7 +51,13 @@
       style.textContent =
         'body.sc-large-text{font-size:18px}' +
         'body.sc-large-text input,body.sc-large-text textarea,body.sc-large-text button{font-size:1rem}' +
-        'body.sc-high-contrast{filter:contrast(1.12) saturate(.92)}' +
+        'body.sc-high-contrast{filter:none!important}' +
+        'body.sc-high-contrast .text-on-surface-variant,body.sc-high-contrast .text-outline{color:#24312c!important}' +
+        'body.sc-high-contrast .text-on-surface,body.sc-high-contrast .text-on-background{color:#0f172a!important}' +
+        'body.sc-high-contrast .bg-surface-container-low,body.sc-high-contrast .bg-surface-container-lowest,body.sc-high-contrast .bg-surface-container-high,body.sc-high-contrast .bg-white\\/80,body.sc-high-contrast .bg-white\\/90{background-color:#ffffff!important}' +
+        'body.sc-high-contrast .border-outline-variant\\/15,body.sc-high-contrast .border-outline-variant\\/20,body.sc-high-contrast .border-outline-variant\\/30,body.sc-high-contrast .border-primary\\/10{border-color:rgba(15,23,42,.22)!important}' +
+        'body.sc-high-contrast .shadow-sm,body.sc-high-contrast .shadow-xl,body.sc-high-contrast .editorial-shadow{box-shadow:0 10px 26px rgba(15,23,42,.10)!important}' +
+        'body.sc-high-contrast input,body.sc-high-contrast textarea,body.sc-high-contrast select{background:#fff!important;color:#0f172a!important;border-color:rgba(15,23,42,.28)!important}' +
         '[data-account-status]{min-height:20px}'
       document.head.appendChild(style)
     }
