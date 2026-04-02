@@ -126,87 +126,89 @@
         }
         .grade-picker-card {
             display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 0.9rem;
-            min-width: min(100%, 25rem);
-            padding: 1rem 1.05rem;
-            border-radius: 1rem;
-            background: rgba(255,255,255,0.82);
-            border: 1px solid rgba(191, 201, 195, 0.26);
-            box-shadow: 0 16px 36px rgba(29, 26, 34, 0.06);
+            flex-direction: row;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: min(100%, 28rem);
+            padding: 0.65rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.78);
+            border: 1px solid rgba(191, 201, 195, 0.22);
+            box-shadow: 0 12px 28px rgba(29, 26, 34, 0.05);
         }
         .grade-picker-heading {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
+            flex: 0 0 auto;
         }
         .grade-picker-copy {
             display: flex;
             flex-direction: column;
-            gap: 0.15rem;
+            gap: 0.05rem;
         }
         .grade-picker-card .material-symbols-outlined {
             color: #004435;
             opacity: 0.76;
+            font-size: 1rem;
         }
         .grade-picker-kicker {
             color: #004435;
             font-family: "Manrope", sans-serif;
-            font-size: 0.66rem;
+            font-size: 0.55rem;
             font-weight: 800;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
         }
         .grade-picker-copy strong {
             color: #1d1a22;
             font-family: "Plus Jakarta Sans", sans-serif;
-            font-size: 0.92rem;
+            font-size: 0.78rem;
             font-weight: 800;
             letter-spacing: -0.02em;
         }
         .grade-picker-options {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.55rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            flex: 1 1 auto;
         }
         .grade-picker-option {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 2.9rem;
-            padding: 0.75rem 0.85rem;
-            border-radius: 0.9rem;
-            border: 1px solid rgba(191, 201, 195, 0.5);
-            background: rgba(249, 241, 253, 0.88);
+            min-height: 2.2rem;
+            padding: 0.48rem 0.72rem;
+            border-radius: 999px;
+            border: 1px solid rgba(191, 201, 195, 0.42);
+            background: rgba(249, 241, 253, 0.72);
             color: #004435;
             font-family: "Manrope", sans-serif;
-            font-size: 0.76rem;
+            font-size: 0.68rem;
             font-weight: 800;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
         }
         .grade-picker-option:hover {
             transform: translateY(-1px);
             border-color: rgba(0, 68, 53, 0.28);
-            box-shadow: 0 12px 24px rgba(29, 26, 34, 0.05);
+            box-shadow: 0 8px 18px rgba(29, 26, 34, 0.04);
         }
         .grade-picker-option[data-active="true"] {
-            background: linear-gradient(135deg, rgba(0, 68, 53, 0.1), rgba(152, 211, 189, 0.28));
+            background: linear-gradient(135deg, rgba(0, 68, 53, 0.12), rgba(152, 211, 189, 0.22));
             border-color: rgba(0, 68, 53, 0.5);
             color: #00382c;
-            box-shadow: 0 14px 26px rgba(0, 68, 53, 0.08);
+            box-shadow: 0 10px 20px rgba(0, 68, 53, 0.06);
         }
         .grade-picker-option[data-active="true"] .material-symbols-outlined {
             opacity: 1;
         }
         .grade-picker-option .material-symbols-outlined {
-            font-size: 1rem;
-            margin-right: 0.4rem;
+            display: none;
         }
         .grade-picker-open {
-            min-width: 10rem;
+            min-width: 9rem;
         }
         .mobile-app-shell {
             background: rgba(249, 241, 253, 0.88);
@@ -278,14 +280,19 @@
             .grade-picker-card {
                 min-width: 0;
                 width: 100%;
+                border-radius: 1.1rem;
+                flex-direction: column;
+                align-items: stretch;
             }
             .grade-picker-options {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+                gap: 0.45rem;
             }
             .grade-picker-option {
-                min-height: 2.65rem;
-                padding: 0.65rem 0.7rem;
-                font-size: 0.68rem;
+                min-height: 2.35rem;
+                padding: 0.56rem 0.7rem;
+                font-size: 0.66rem;
+                flex: 1 1 calc(50% - 0.3rem);
             }
             .grade-picker-shell > a,
             main .inline-flex.items-center.justify-center.bg-surface-container-highest,
@@ -495,16 +502,16 @@
                 line-height: 1.42 !important;
             }
             .grade-picker-card {
-                padding: 0.72rem 0.8rem;
-                border-radius: 0.9rem;
-                gap: 0.65rem;
+                padding: 0.66rem 0.72rem;
+                border-radius: 0.95rem;
+                gap: 0.55rem;
             }
             .grade-picker-kicker {
-                font-size: 0.58rem;
+                font-size: 0.52rem;
                 letter-spacing: 0.1em;
             }
             .grade-picker-copy strong {
-                font-size: 0.78rem;
+                font-size: 0.74rem;
             }
             main .rounded-\[2rem\].p-10,
             main .rounded-\[2rem\].p-8,
@@ -643,15 +650,15 @@
 <div class="grade-picker-heading">
 <span class="material-symbols-outlined">school</span>
 <div class="grade-picker-copy">
-<span class="grade-picker-kicker">Choose Your Grade</span>
-<strong data-grade-label="">Start with Grade 9</strong>
+<span class="grade-picker-kicker">Quick Start</span>
+<strong data-grade-label="">Grade 9</strong>
 </div>
 </div>
 <div aria-label="Choose a grade to open its study page" class="grade-picker-options" role="list">
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-9.html" data-grade-title="Start with Grade 9" data-active="true" type="button"><span class="material-symbols-outlined">auto_stories</span>Grade 9</button>
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-10.html" data-grade-title="Open Grade 10 Library" type="button"><span class="material-symbols-outlined">biotech</span>Grade 10</button>
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-11.html" data-grade-title="Open Grade 11 Library" type="button"><span class="material-symbols-outlined">history_edu</span>Grade 11</button>
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-12.html" data-grade-title="Open Grade 12 Library" type="button"><span class="material-symbols-outlined">workspace_premium</span>Grade 12</button>
+<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-9.html" data-grade-title="Grade 9" data-active="true" type="button">Grade 9</button>
+<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-10.html" data-grade-title="Grade 10" type="button">Grade 10</button>
+<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-11.html" data-grade-title="Grade 11" type="button">Grade 11</button>
+<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-12.html" data-grade-title="Grade 12" type="button">Grade 12</button>
 </div>
 </div>
 <a class="grade-picker-open cta-gradient inline-flex items-center justify-center text-white px-8 py-4 rounded-xl font-body font-bold text-md shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-all" data-grade-open="" href="grade-9.html">
@@ -854,25 +861,8 @@
                     Soul Concept brings together study libraries, concept cards, quizzes, and progress tools so students can follow a clearer path and worry less.
                 </p>
 <div class="flex flex-col sm:flex-row justify-center gap-6 pt-6">
-<div class="grade-picker-shell justify-center">
-<div class="grade-picker-card" data-grade-group="">
-<div class="grade-picker-heading">
-<span class="material-symbols-outlined">school</span>
-<div class="grade-picker-copy">
-<span class="grade-picker-kicker">Choose Your Grade</span>
-<strong data-grade-label="">Start with Grade 9</strong>
-</div>
-</div>
-<div aria-label="Choose a grade to open its study page" class="grade-picker-options" role="list">
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-9.html" data-grade-title="Start with Grade 9" data-active="true" type="button"><span class="material-symbols-outlined">auto_stories</span>Grade 9</button>
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-10.html" data-grade-title="Open Grade 10 Library" type="button"><span class="material-symbols-outlined">biotech</span>Grade 10</button>
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-11.html" data-grade-title="Open Grade 11 Library" type="button"><span class="material-symbols-outlined">history_edu</span>Grade 11</button>
-<button class="grade-picker-option" data-grade-choice="" data-grade-target="grade-12.html" data-grade-title="Open Grade 12 Library" type="button"><span class="material-symbols-outlined">workspace_premium</span>Grade 12</button>
-</div>
-</div>
-<a class="grade-picker-open cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center" data-grade-open="" href="grade-9.html">OPEN GRADE 9</a>
-</div>
-<a class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all inline-flex items-center justify-center" href="grade-9.html">EXPLORE FEATURES</a>
+<a class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center" href="grade-9.html">EXPLORE LIBRARY</a>
+<a class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all inline-flex items-center justify-center" href="grade-9-advanced.html">BROWSE GRADES</a>
 </div>
 </div>
 </section>
@@ -936,61 +926,10 @@
 <script src="supabase-client.js?v=20260312a"></script>
 <script src="supabase-auth.js?v=20260329c"></script>
 <script src="auth-profile-sync.js?v=20260328b"></script>
-<script src="lyne-widget.js?v=20260321c"></script>
-<script src="focus-mode.js?v=20260321d"></script>
-<script>
-  (function () {
-    const gradeGroups = Array.from(document.querySelectorAll("[data-grade-group]"));
-    const gradeButtons = Array.from(document.querySelectorAll("[data-grade-open]"));
-    const gradeLabels = Array.from(document.querySelectorAll("[data-grade-label]"));
-    const gradeChoices = Array.from(document.querySelectorAll("[data-grade-choice]"));
-    const defaultTarget = "grade-9.html";
-    const defaultLabel = "Start with Grade 9";
-
-    function syncGradeButtons(target, label) {
-      const safeTarget = target || defaultTarget;
-      const safeLabel = label || defaultLabel;
-      gradeButtons.forEach((button) => {
-        button.setAttribute("href", safeTarget);
-        button.textContent = ("Open " + safeLabel.replace(/^Start with /i, "")).toUpperCase().replace("LIBRARY", "").trim();
-      });
-      gradeLabels.forEach((node) => {
-        node.textContent = safeLabel;
-      });
-      gradeChoices.forEach((choice) => {
-        choice.setAttribute("data-active", choice.getAttribute("data-grade-target") === safeTarget ? "true" : "false");
-      });
-    }
-
-    function openGrade(target, label) {
-      if (!target) return;
-      syncGradeButtons(target, label);
-      window.location.href = target;
-    }
-
-    gradeGroups.forEach((group) => {
-      group.querySelectorAll("[data-grade-choice]").forEach((choice) => {
-        choice.addEventListener("click", function () {
-          syncGradeButtons(choice.getAttribute("data-grade-target"), choice.getAttribute("data-grade-title"));
-        });
-      });
-    });
-
-    gradeButtons.forEach((button) => {
-      button.addEventListener("click", function (event) {
-        const target = button.getAttribute("href") || defaultTarget;
-        const activeChoice = document.querySelector('[data-grade-choice][data-active="true"]');
-        const label = activeChoice ? activeChoice.getAttribute("data-grade-title") : defaultLabel;
-        if (!target) return;
-        event.preventDefault();
-        openGrade(target, label);
-      });
-    });
-
-    syncGradeButtons(defaultTarget, defaultLabel);
-  })();
-</script>
+<script defer src="lyne-widget.js?v=20260321c"></script>
+<script defer src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
 
 
 

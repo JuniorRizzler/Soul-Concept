@@ -487,6 +487,77 @@
 </div>
 <input class="h-5 w-5 rounded-md border-outline-variant text-primary focus:ring-primary/20" data-setting-key="pushNotifications" type="checkbox"/>
 </div>
+<section class="rounded-[2rem] border border-primary/10 bg-white/80 px-5 py-5 shadow-sm" data-reminder-panel="">
+<div class="flex flex-col gap-5">
+<div class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+<div class="space-y-1">
+<p class="text-[10px] font-label font-bold uppercase tracking-[0.22em] text-secondary">Reminder Engine</p>
+<h4 class="font-headline text-lg font-bold text-primary">Schedule-based notifications</h4>
+<p class="max-w-2xl text-sm text-on-surface-variant">Set automatic study reminders, test alerts, and a daily agenda from your planner. Signed-in users with push enabled get server reminders even when the app is closed.</p>
+</div>
+<p class="text-[11px] font-label font-semibold uppercase tracking-[0.18em] text-outline" data-reminder-sync-status="">Reminders are stored on this device.</p>
+</div>
+<div class="grid gap-4 md:grid-cols-2">
+<label class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<span class="mb-3 flex items-center justify-between gap-3">
+<span>
+<strong class="block font-headline text-sm text-primary">Enable reminders</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">Master switch for schedule notifications.</span>
+</span>
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="enabled" type="checkbox"/>
+</span>
+</label>
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<div class="mb-3 flex items-start justify-between gap-3">
+<div>
+<strong class="block font-headline text-sm text-primary">Study reminders</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">Before regular study blocks and focus sessions.</span>
+</div>
+<input class="mt-1 rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="studyEnabled" type="checkbox"/>
+</div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline">Lead Time</label>
+<select class="mt-2 w-full rounded-2xl border border-outline-variant/30 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-reminder-pref="studyLeadMinutes">
+<option value="5">5 minutes before</option>
+<option value="10">10 minutes before</option>
+<option value="15">15 minutes before</option>
+<option value="30">30 minutes before</option>
+<option value="60">1 hour before</option>
+</select>
+</div>
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<div class="mb-3 flex items-start justify-between gap-3">
+<div>
+<strong class="block font-headline text-sm text-primary">Test reminders</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">For tests, quizzes, and due-date style items.</span>
+</div>
+<input class="mt-1 rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="testEnabled" type="checkbox"/>
+</div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline">Lead Time</label>
+<select class="mt-2 w-full rounded-2xl border border-outline-variant/30 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-reminder-pref="testLeadMinutes">
+<option value="15">15 minutes before</option>
+<option value="30">30 minutes before</option>
+<option value="60">1 hour before</option>
+<option value="180">3 hours before</option>
+</select>
+<label class="mt-3 flex items-center gap-3 text-xs font-medium text-on-surface-variant">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="testDayBefore" type="checkbox"/>
+<span>Also send a 7 PM reminder the day before</span>
+</label>
+</div>
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+<div class="mb-3 flex items-start justify-between gap-3">
+<div>
+<strong class="block font-headline text-sm text-primary">Daily agenda</strong>
+<span class="mt-1 block text-xs text-on-surface-variant">Morning summary of that day’s planned sessions.</span>
+</div>
+<input class="mt-1 rounded border-outline-variant text-secondary focus:ring-secondary/30" data-reminder-pref="dailyAgenda" type="checkbox"/>
+</div>
+<label class="block text-[11px] font-label font-bold uppercase tracking-[0.18em] text-outline">Send Time</label>
+<input class="mt-2 w-full rounded-2xl border border-outline-variant/30 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-primary/30" data-reminder-pref="dailyAgendaTime" type="time"/>
+</div>
+</div>
+</div>
+</section>
 </div>
 </section>
 <!-- Accessibility -->
@@ -551,8 +622,230 @@
 <script src="supabase-auth.js?v=20260329c"></script>
 <script src="auth-profile-sync.js?v=20260326a"></script>
 <script src="assets/account-pages.js?v=20260326a"></script>
-<script src="lyne-widget.js?v=20260321c"></script>
-<script src="focus-mode.js?v=20260321d"></script>
+<script defer src="lyne-widget.js?v=20260321c"></script>
+<script defer src="focus-mode.js?v=20260321d"></script>
+<script>
+  (function () {
+    var REMINDER_PREFS_KEY = 'sc_schedule_reminder_prefs_v1'
+    var SCHEDULE_KEY = 'sc_schedule_events_v2'
+    var reminderPanel = document.querySelector('[data-reminder-panel]')
+    var reminderSyncStatus = document.querySelector('[data-reminder-sync-status]')
+    if (!reminderPanel) return
+
+    var reminderSyncTimer = null
+
+    function defaultReminderPrefs() {
+      return {
+        enabled: true,
+        studyEnabled: true,
+        studyLeadMinutes: 15,
+        testEnabled: true,
+        testLeadMinutes: 60,
+        testDayBefore: true,
+        dailyAgenda: true,
+        dailyAgendaTime: '07:00',
+      }
+    }
+
+    function currentScopeSuffix() {
+      try {
+        var raw = localStorage.getItem('sc_auth_profile_v1')
+        var profile = raw ? JSON.parse(raw) : null
+        return profile && profile.id ? 'user:' + profile.id : 'guest'
+      } catch (_err) {
+        return 'guest'
+      }
+    }
+
+    function scopedKey(baseKey) {
+      return baseKey + '::' + currentScopeSuffix()
+    }
+
+    function currentProfile() {
+      try {
+        var raw = localStorage.getItem('sc_auth_profile_v1')
+        return raw ? JSON.parse(raw) : null
+      } catch (_err) {
+        return null
+      }
+    }
+
+    function currentUserId() {
+      var profile = currentProfile()
+      return profile && profile.id ? String(profile.id) : ''
+    }
+
+    function currentTimeZone() {
+      try {
+        var zone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        return zone || 'America/New_York'
+      } catch (_err) {
+        return 'America/New_York'
+      }
+    }
+
+    function currentPushEndpoint() {
+      try {
+        var raw = localStorage.getItem('sc_push_subscription')
+        var parsed = raw ? JSON.parse(raw) : null
+        return parsed && parsed.endpoint ? String(parsed.endpoint) : ''
+      } catch (_err) {
+        return ''
+      }
+    }
+
+    function isPushEnabled() {
+      try {
+        return 'Notification' in window && Notification.permission === 'granted'
+      } catch (_err) {
+        return false
+      }
+    }
+
+    function setReminderStatus(text) {
+      if (reminderSyncStatus) reminderSyncStatus.textContent = text
+    }
+
+    function clampLeadMinutes(value, fallback) {
+      var num = parseInt(value, 10)
+      return isFinite(num) && num > 0 ? num : fallback
+    }
+
+    function sanitizeReminderPrefs(raw) {
+      var base = defaultReminderPrefs()
+      var input = raw && typeof raw === 'object' ? raw : {}
+      return {
+        enabled: input.enabled !== false,
+        studyEnabled: input.studyEnabled !== false,
+        studyLeadMinutes: clampLeadMinutes(input.studyLeadMinutes, base.studyLeadMinutes),
+        testEnabled: input.testEnabled !== false,
+        testLeadMinutes: clampLeadMinutes(input.testLeadMinutes, base.testLeadMinutes),
+        testDayBefore: input.testDayBefore !== false,
+        dailyAgenda: input.dailyAgenda !== false,
+        dailyAgendaTime: String(input.dailyAgendaTime || base.dailyAgendaTime).trim() || base.dailyAgendaTime,
+      }
+    }
+
+    function readReminderPrefs() {
+      try {
+        var key = scopedKey(REMINDER_PREFS_KEY)
+        var raw = localStorage.getItem(key)
+        if (raw == null) {
+          raw = localStorage.getItem(REMINDER_PREFS_KEY)
+          if (raw != null) localStorage.setItem(key, raw)
+        }
+        return sanitizeReminderPrefs(raw ? JSON.parse(raw) : defaultReminderPrefs())
+      } catch (_err) {
+        return defaultReminderPrefs()
+      }
+    }
+
+    function writeReminderPrefs(value) {
+      try {
+        localStorage.setItem(scopedKey(REMINDER_PREFS_KEY), JSON.stringify(sanitizeReminderPrefs(value)))
+      } catch (_err) {}
+    }
+
+    function readScheduleSnapshot() {
+      try {
+        var key = scopedKey(SCHEDULE_KEY)
+        var raw = localStorage.getItem(key)
+        if (raw == null) raw = localStorage.getItem(SCHEDULE_KEY)
+        return raw ? JSON.parse(raw) : []
+      } catch (_err) {
+        return []
+      }
+    }
+
+    function renderReminderPrefs() {
+      var prefs = readReminderPrefs()
+      reminderPanel.querySelectorAll('[data-reminder-pref]').forEach(function (node) {
+        var key = node.getAttribute('data-reminder-pref')
+        if (!key) return
+        if (node.type === 'checkbox') node.checked = !!prefs[key]
+        else node.value = prefs[key]
+      })
+      if (!currentUserId()) {
+        setReminderStatus('Reminders are saved on this device. Sign in and enable push to sync them across devices.')
+      } else if (!isPushEnabled()) {
+        setReminderStatus('Schedule reminders are ready. Enable browser notifications on this device to receive push alerts.')
+      } else {
+        setReminderStatus('Reminder preferences are ready to sync for push delivery.')
+      }
+    }
+
+    async function syncReminderSchedule() {
+      if (!currentUserId()) {
+        renderReminderPrefs()
+        return
+      }
+      setReminderStatus('Syncing reminder plan...')
+      try {
+        var response = await fetch('/api/schedule-sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: currentUserId(),
+            endpoint: currentPushEndpoint(),
+            timezone: currentTimeZone(),
+            reminderPreferences: readReminderPrefs(),
+            scheduleSnapshot: readScheduleSnapshot(),
+          }),
+        })
+        var payload = {}
+        try {
+          payload = await response.json()
+        } catch (_err) {}
+        if (!response.ok) throw new Error((payload && payload.error) || ('Sync failed (' + response.status + ')'))
+        if (payload.updatedCount) {
+          setReminderStatus('Synced ' + payload.updatedCount + ' device' + (payload.updatedCount === 1 ? '' : 's') + ' for reminder delivery.')
+        } else if (isPushEnabled()) {
+          setReminderStatus('Push is enabled here, but no synced subscription record was found yet. Re-enable notifications if reminders do not arrive.')
+        } else {
+          setReminderStatus('Reminder preferences saved. Enable browser notifications to deliver them.')
+        }
+      } catch (err) {
+        setReminderStatus((err && err.message ? err.message : 'Reminder sync failed.') + ' Local schedule settings were still saved.')
+      }
+    }
+
+    function scheduleReminderSync(delay) {
+      if (reminderSyncTimer) clearTimeout(reminderSyncTimer)
+      reminderSyncTimer = setTimeout(function () {
+        reminderSyncTimer = null
+        syncReminderSchedule().catch(function () {})
+      }, delay || 400)
+    }
+
+    reminderPanel.addEventListener('change', function (event) {
+      var node = event.target && event.target.closest ? event.target.closest('[data-reminder-pref]') : null
+      if (!node) return
+      var prefs = readReminderPrefs()
+      var key = node.getAttribute('data-reminder-pref')
+      if (!key) return
+      prefs[key] = node.type === 'checkbox' ? !!node.checked : node.value
+      writeReminderPrefs(prefs)
+      renderReminderPrefs()
+      scheduleReminderSync(250)
+    })
+
+    window.addEventListener('storage', function (event) {
+      if (
+        event.key === REMINDER_PREFS_KEY ||
+        event.key === scopedKey(REMINDER_PREFS_KEY) ||
+        event.key === SCHEDULE_KEY ||
+        event.key === scopedKey(SCHEDULE_KEY)
+      ) renderReminderPrefs()
+    })
+
+    window.addEventListener('sc:auth-state-changed', function () {
+      renderReminderPrefs()
+      scheduleReminderSync(250)
+    })
+
+    renderReminderPrefs()
+  })()
+</script>
 <!-- Shared Mobile Bottom Bar -->
 <nav class="mobile-app-shell md:hidden fixed bottom-0 left-0 w-full px-1 h-[4.25rem] flex items-center justify-between gap-0.5 z-50">
 <a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="dashboard.html">
@@ -590,6 +883,7 @@
 </nav>
 <!-- /Shared Mobile Bottom Bar -->
 </body></html>
+
 
 
 
