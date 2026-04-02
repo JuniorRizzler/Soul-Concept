@@ -2337,7 +2337,7 @@
     } catch (err) {
       // ignore storage errors
     }
-    const shouldShowWidget = !pushAlreadyEnabled && !pushWidgetDismissed
+    const shouldShowWidget = false
     if (!shouldShowWidget) {
       // do not show repeated widget once push has already been enabled
     } else {
