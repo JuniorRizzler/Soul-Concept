@@ -571,9 +571,126 @@
     .traveler-grid, .exam-col-grid, .framework { grid-template-columns: 1fr; }
     .term { grid-template-columns: 1fr; gap: 0.25rem; }
   }
-</style>
+        .mobile-app-shell {
+            background: rgba(249, 241, 253, 0.88);
+            backdrop-filter: blur(18px);
+            border-top: 1px solid rgba(191, 201, 195, 0.14);
+        }
+        .mobile-app-item {
+            color: #707974;
+            transition: color 0.18s ease, transform 0.18s ease;
+        }
+        .mobile-app-item:hover {
+            color: #004435;
+            transform: translateY(-1px);
+        }
+        .mobile-app-item[data-active=''true''] {
+            color: #004435;
+            font-weight: 800;
+        }
+        .mobile-app-item[data-active=''true''] .material-symbols-outlined {
+            font-variation-settings: ''FILL'' 1, ''wght'' 500, ''GRAD'' 0, ''opsz'' 24;
+        }
+        @media (max-width: 767px) {
+            .topbar-inner {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                min-height: 4rem;
+            }
+            main {
+                padding-top: 5.25rem;
+                padding-bottom: 6.25rem;
+            }
+        }
+            /* shared-shell */
+        .glass-dropdown {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 201, 195, 0.2);
+        }
+        .activity-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .activity-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .activity-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 68, 53, 0.1);
+            border-radius: 10px;
+        }
+        .mobile-app-shell {
+            background: rgba(249, 241, 253, 0.88);
+            backdrop-filter: blur(18px);
+            border-top: 1px solid rgba(191, 201, 195, 0.14);
+        }
+        .mobile-app-item {
+            color: #707974;
+            transition: color 0.18s ease, transform 0.18s ease;
+        }
+        .mobile-app-item:hover {
+            color: #004435;
+            transform: translateY(-1px);
+        }
+        .mobile-app-item[data-active="true"] {
+            color: #004435;
+            font-weight: 800;
+        }
+        .mobile-app-item[data-active="true"] .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+        }
+        @media (max-width: 767px) {
+            .topbar-inner {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                min-height: 4rem;
+            }
+            main {
+                padding-top: 5.25rem !important;
+                padding-bottom: 6.25rem !important;
+            }
+        }
+    </style>
 </head>
 <body>
+<!-- Shared Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
+<div class="topbar-inner flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-[#004435] dark:text-emerald-500 font-['Plus_Jakarta_Sans'] tracking-tight">
+                Soul Concept
+            </div>
+<div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
+<a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="bg-surface-container-lowest border border-outline-variant/15 rounded-xl pl-10 pr-4 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 w-64 font-label" placeholder="Search knowledge..." type="text"/>
+</div>
+<div class="relative" data-home-notifications="">
+<button aria-expanded="false" aria-haspopup="true" class="text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all relative inline-flex items-center justify-center" data-home-notifications-toggle="" type="button">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -right-1 -top-1 inline-flex min-w-5 h-5 items-center justify-center px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
+</button>
+<div class="home-notifications-panel glass-dropdown absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" hidden="" style="display:none;">
+<div class="p-5 border-b border-outline-variant/10 flex justify-between items-center bg-white/50"><h4 class="font-headline font-bold text-primary/80 text-[11px] tracking-widest uppercase">Recent Activity</h4><button class="text-[10px] font-label font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors" type="button">Clear</button></div>
+<div class="max-h-[440px] overflow-y-auto activity-scrollbar">
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-primary/5 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary/60 text-xl" data-icon="timer">timer</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Time for a zen break</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">90 mins of deep focus reached. Stretch and hydrate.</p><span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">Just now</span></div></div></div>
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-secondary/5 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-secondary/60 text-xl" data-icon="person">person</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Sync your progress</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Sign into your account to back up your curator stack.</p><a class="mt-2.5 inline-flex text-[9px] font-black text-secondary uppercase tracking-widest hover:underline" href="auth/verification.html?returnTo=%2Findex.html&mode=returning&source=notification&message=Sign%20in%20to%20open%20your%20account%20notification.">Sign In Now</a></div></div></div>
+<div class="p-5 hover:bg-white/60 transition-colors group border-b border-outline-variant/5"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-primary/5 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary/60 text-xl" data-icon="workspace_premium">workspace_premium</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Research Badge Earned</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Top-tier analysis on Quantum Mechanics.</p><span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">2 mins ago</span></div></div></div>
+<div class="p-5 hover:bg-white/60 transition-colors group"><div class="flex gap-4"><div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-outline text-xl" data-icon="calendar_today">calendar_today</span></div><div class="flex-grow min-w-0"><p class="font-headline font-bold text-primary text-xs">Curator Session Updated</p><p class="text-[10px] text-on-surface-variant mt-1 leading-relaxed font-medium">Molecular Biology Quiz moved to 10:30 AM.</p><span class="text-[9px] text-outline/60 mt-2.5 block uppercase tracking-wider font-label">15 mins ago</span></div></div></div>
+</div>
+<div class="p-4 text-center bg-white/30 border-t border-outline-variant/5"><button class="w-full py-2.5 text-[10px] font-headline font-extrabold text-primary uppercase tracking-widest hover:bg-primary hover:text-white rounded-xl transition-all duration-300">View Full Activity Log</button></div>
+</div>
+</div>
+<a class="material-symbols-outlined text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-full transition-all inline-flex items-center justify-center" data-icon="account_circle" href="settings.html">account_circle</a>
+</div>
+</div>
+</nav>
+<!-- /Shared Top Navigation -->
 <div class="layout">
 
   <!-- ─── SIDEBAR ─── -->
@@ -1456,5 +1573,43 @@
 
   sections.forEach(s => observer.observe(s));
 </script>
+<!-- Shared Mobile Bottom Bar -->
+<nav class="mobile-app-shell md:hidden fixed bottom-0 left-0 w-full px-1 h-[4.25rem] flex items-center justify-between gap-0.5 z-50">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="index.html">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] font-label">Overview</span>
+</a>
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-[10px] font-label">Library</span>
+</a>
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="anki/index.html">
+<span class="material-symbols-outlined">style</span>
+<span class="text-[10px] font-label">Cards</span>
+</a>
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="achievements.html">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="text-[9px] font-label">Awards</span>
+</a>
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="membership.html">
+<span class="material-symbols-outlined">card_membership</span>
+<span class="text-[10px] font-label">Plans</span>
+</a>
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="schedule.html">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[9px] font-label">Schedule</span>
+</a>
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="analytics.html">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[9px] font-label">Insights</span>
+</a>
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="settings.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[9px] font-label">Account</span>
+</a>
+</nav>
+<!-- /Shared Mobile Bottom Bar -->
 </body>
 </html>
+
+
