@@ -1,7 +1,14 @@
-const CACHE_NAME = "soulconcept-v93";
+const CACHE_NAME = "soulconcept-v94";
 const ASSETS = [
   "/",
   "/index.html",
+  "/dashboard.html",
+  "/grade-9.html",
+  "/schedule.html",
+  "/analytics.html",
+  "/membership.html",
+  "/achievements.html",
+  "/settings.html",
   "/about.html",
   "/contact.html",
   "/services.html",
