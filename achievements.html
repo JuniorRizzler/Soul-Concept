@@ -681,9 +681,8 @@
       })
     }
 
-    function computePoints(stats, badges) {
-      var badgePoints = badges.filter(function (badge) { return badge.unlocked }).reduce(function (sum, badge) { return sum + badge.points }, 0)
-      return badgePoints + (stats.sessionCount * 65) + (stats.subjectCount * 90) + (stats.dayCount * 55) + (stats.focusCount * 40) + (stats.starredCount * 25)
+    function computePoints(stats) {
+      return (stats.sessionCount * 65) + (stats.subjectCount * 90) + (stats.dayCount * 55) + (stats.focusCount * 40) + (stats.starredCount * 25)
     }
 
     function computeLevel(points) {
@@ -799,7 +798,7 @@
       var stats = buildStats(events)
       var badges = buildBadges(stats)
       var unlockedCount = badges.filter(function (badge) { return badge.unlocked }).length
-      var totalPoints = computePoints(stats, badges)
+      var totalPoints = computePoints(stats)
       var completionRate = Math.round((unlockedCount / badges.length) * 100)
       var levelState = computeLevel(totalPoints)
 
