@@ -118,6 +118,44 @@
             background: rgba(0, 68, 53, 0.1);
             border-radius: 10px;
         }
+        .grade-picker-shell {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            align-items: center;
+        }
+        .grade-picker-card {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: min(100%, 25rem);
+            padding: 0.9rem 1rem;
+            border-radius: 1rem;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(191, 201, 195, 0.26);
+            box-shadow: 0 16px 36px rgba(29, 26, 34, 0.06);
+        }
+        .grade-picker-card select {
+            flex: 1 1 auto;
+            min-width: 0;
+            border: none;
+            background: transparent;
+            color: #004435;
+            font-family: "Manrope", sans-serif;
+            font-size: 0.84rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            outline: none;
+            padding-right: 0.5rem;
+        }
+        .grade-picker-card select option {
+            color: #1d1a22;
+        }
+        .grade-picker-card .material-symbols-outlined {
+            color: #004435;
+            opacity: 0.76;
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface" data-sc-auth-required="false" data-sc-auth-mount="false">
@@ -268,9 +306,21 @@
                     Soul Concept is built for real class success, not random answers. You get structured libraries, focused review flow, and tools designed around what you actually need to learn.
                 </p>
 <div class="flex flex-wrap gap-4 pt-4">
-<a class="cta-gradient inline-flex items-center justify-center text-white px-8 py-4 rounded-xl font-body font-bold text-md shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-all" href="study-library.html">
-                        Start Study Session
+<div class="grade-picker-shell">
+<div class="grade-picker-card">
+<span class="material-symbols-outlined">school</span>
+<select aria-label="Choose a grade to open its study page" data-grade-redirect="">
+<option value="">Choose grade</option>
+<option value="grade-9.html">Grade 9</option>
+<option value="grade-10.html">Grade 10</option>
+<option value="grade-11.html">Grade 11</option>
+<option value="grade-12.html">Grade 12</option>
+</select>
+</div>
+<a class="cta-gradient inline-flex items-center justify-center text-white px-8 py-4 rounded-xl font-body font-bold text-md shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-all" data-grade-open="" href="grade-9.html">
+                        Open Grade
                     </a>
+</div>
 <a class="inline-flex items-center justify-center bg-surface-container-highest text-on-surface px-8 py-4 rounded-xl font-body font-bold text-md hover:bg-surface-container-high transition-all" href="grade-9.html">
                         Explore Library
                     </a>
@@ -467,7 +517,19 @@
                     Soul Concept brings together study libraries, concept cards, quizzes, and progress tools so students can follow a clearer path and worry less.
                 </p>
 <div class="flex flex-col sm:flex-row justify-center gap-6 pt-6">
-<a class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center" href="study-library.html">START STUDYING</a>
+<div class="grade-picker-shell justify-center">
+<div class="grade-picker-card">
+<span class="material-symbols-outlined">school</span>
+<select aria-label="Choose a grade to open its study page" data-grade-redirect="">
+<option value="">Choose grade</option>
+<option value="grade-9.html">Grade 9</option>
+<option value="grade-10.html">Grade 10</option>
+<option value="grade-11.html">Grade 11</option>
+<option value="grade-12.html">Grade 12</option>
+</select>
+</div>
+<a class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center" data-grade-open="" href="grade-9.html">OPEN GRADE</a>
+</div>
 <a class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all inline-flex items-center justify-center" href="grade-9.html">EXPLORE FEATURES</a>
 </div>
 </div>
@@ -498,6 +560,38 @@
 <script src="auth-profile-sync.js?v=20260328b"></script>
 <script src="lyne-widget.js?v=20260321c"></script>
 <script src="focus-mode.js?v=20260321d"></script>
+<script>
+  (function () {
+    const gradeSelects = Array.from(document.querySelectorAll("[data-grade-redirect]"));
+    const gradeButtons = Array.from(document.querySelectorAll("[data-grade-open]"));
+
+    function syncGradeButtons(value) {
+      const target = value || "grade-9.html";
+      gradeButtons.forEach((button) => {
+        button.setAttribute("href", target);
+      });
+      gradeSelects.forEach((select) => {
+        if (select.value !== value) {
+          select.value = value;
+        }
+      });
+    }
+
+    function openGrade(value) {
+      if (!value) return;
+      syncGradeButtons(value);
+      window.location.href = value;
+    }
+
+    gradeSelects.forEach((select) => {
+      select.addEventListener("change", function () {
+        openGrade(select.value);
+      });
+    });
+
+    syncGradeButtons("grade-9.html");
+  })();
+</script>
 </body></html>
 
 
