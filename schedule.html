@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -357,8 +357,8 @@
             }
         }
     </style>
-<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
-<script defer src="assets/app-sidebar.js?v=20260403d"></script>
+<link href="assets/app-sidebar.css?v=20260404j" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260404g"></script>
 </head>
 <body class="bg-background text-on-surface font-body overflow-x-hidden" data-sc-auth-required="false" data-sc-auth-mount="false" data-sc-sidebar-page="schedule">
 <!-- Top Navigation Bar -->
@@ -923,7 +923,7 @@
       var decks = window.StudyIntelligence && window.StudyIntelligence.getDecks ? window.StudyIntelligence.getDecks() : []
       var options = ['<option value="">No linked deck</option>']
       decks.forEach(function (deck) {
-        options.push('<option value="' + escapeHtml(deck.id) + '">' + escapeHtml(deck.name + ' Â· ' + (deck.subject || 'Study')) + '</option>')
+        options.push('<option value="' + escapeHtml(deck.id) + '">' + escapeHtml(deck.name + ' Ãƒâ€šÃ‚Â· ' + (deck.subject || 'Study')) + '</option>')
       })
       select.innerHTML = options.join('')
       select.value = selectedDeckId || ''
@@ -1020,7 +1020,7 @@
             '</div>' +
             '<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">' + escapeHtml(entry.title) + '</h5>' +
             (entry.linkedDeckName ? '<p class="mt-1 text-[0.65rem] font-label font-semibold text-primary">Linked deck - ' + escapeHtml(entry.linkedDeckName) + '</p>' : '') +
-            '<p class="mt-1 text-[0.65rem] font-label font-bold uppercase tracking-[0.16em] text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + (entry.notificationsEnabled === false ? ' Â· alerts off' : '') + '</p>' +
+            '<p class="mt-1 text-[0.65rem] font-label font-bold uppercase tracking-[0.16em] text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + (entry.notificationsEnabled === false ? ' Ãƒâ€šÃ‚Â· alerts off' : '') + '</p>' +
             '<div class="mt-3 flex items-center justify-between">' +
               '<div class="flex items-center gap-4">' +
                 '<div class="flex items-center gap-1 text-slate-500"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[0.65rem] font-label font-semibold">' + escapeHtml(durationHours(entry.start, entry.end)) + '</span></div>' +
@@ -1238,6 +1238,12 @@
 <script defer src="lyne-widget.js?v=20260321c"></script>
 <script defer src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+
+
+
+
+
 
 
 

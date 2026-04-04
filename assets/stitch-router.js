@@ -1,6 +1,6 @@
 ﻿(function () {
   const gradeLinks = [
-    { label: "Grade 9", href: "subject-library.html" },
+    { label: "Grade 9", href: "grade-9-advanced.html" },
     { label: "Grade 10", href: "grade-10.html" },
     { label: "Grade 11", href: "grade-11.html" },
     { label: "Grade 12", href: "grade-12.html" }
@@ -17,7 +17,7 @@
     ["subjects library", "subject-library.html"],
     ["subject library", "subject-library.html"],
     ["grades", "subject-library.html"],
-    ["grade 9", "subject-library.html"],
+    ["grade 9", "grade-9-advanced.html"],
     ["grade 10", "grade-10.html"],
     ["grade 11", "grade-11.html"],
     ["grade 12", "grade-12.html"],
@@ -164,6 +164,7 @@
 
   function getInteractiveTarget(node) {
     if (isExamSimulatorNode(node)) return "";
+    if (node && node.closest && node.closest("[data-subject-grade-filter], [data-stitch-route-ignore='true']")) return "";
     const text = normalize(node.textContent || "");
     if (text === "grades") return "grades";
     if (text) {
@@ -220,7 +221,7 @@
     if (gradeText.includes("grade 11") && titleText.includes("geography")) return "geography-library.html";
     if (gradeText.includes("grade 11")) return "grade-11.html";
     if (gradeText.includes("grade 12")) return "grade-12.html";
-    if (gradeText.includes("grade 9")) return "subject-library.html";
+    if (gradeText.includes("grade 9")) return "grade-9-advanced.html";
     return "";
   }
 

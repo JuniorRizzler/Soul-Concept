@@ -71,7 +71,7 @@
     ["sign in", "dashboard.html"],
     ["contact", "settings.html#support"],
     ["grade 8", "discover.html"],
-    ["grade 9", "subject-library.html"],
+    ["grade 9", "grade-9-advanced.html"],
     ["grade 10", "grade-10.html"],
     ["grade 11", "grade-11.html"],
     ["grade 12", "grade-12.html"],
@@ -1217,4 +1217,3 @@
   document.body.classList.add("sc-page-enter");
   document.getElementById("sc-shell-critical")?.remove();
 })();
-

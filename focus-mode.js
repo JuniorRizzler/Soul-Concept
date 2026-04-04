@@ -1,6 +1,7 @@
 (function () {
   var FOCUS_ENABLED_KEY = 'sc_focus_mode_enabled_v1'
   var FOCUS_DISMISSED_KEY = 'sc_focus_mode_dismissed_v1'
+  var FOCUS_COLLAPSED_KEY = 'sc_focus_mode_collapsed_v1'
   var APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
   var FOCUS_SESSION_KEY = 'sc_focus_mode_session_v1'
   var MEDIAPIPE_SCRIPT_URLS = [
@@ -272,6 +273,7 @@
     button.setAttribute('aria-label', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
     button.setAttribute('title', collapsed ? 'Expand focus mode' : 'Collapse focus mode')
     button.classList.toggle('is-active', collapsed)
+    writeFlag(FOCUS_COLLAPSED_KEY, collapsed)
     syncPreview()
   }
 
@@ -1518,7 +1520,9 @@
     ensureSessionState()
     setInfoOpenState(false)
     syncPreview()
-    if (readFlag(FOCUS_DISMISSED_KEY)) {
+    if (hasStoredValue(FOCUS_COLLAPSED_KEY)) {
+      setCollapsedState(readFlag(FOCUS_COLLAPSED_KEY))
+    } else if (readFlag(FOCUS_DISMISSED_KEY)) {
       setCollapsedState(true)
     } else {
       setCollapsedState(false)
@@ -1534,7 +1538,6 @@
       var enabled = !readFlag(FOCUS_ENABLED_KEY)
       writeFlag(FOCUS_ENABLED_KEY, enabled)
       setToggleState(enabled)
-      writeFlag(FOCUS_DISMISSED_KEY, true)
       if (enabled) {
         if (previewOpen) {
           setInfoOpenState(true)

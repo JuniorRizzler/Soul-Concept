@@ -1,12 +1,15 @@
 (function () {
-  var sidebarMount = document.querySelector('[data-sc-app-sidebar]')
-  if (!sidebarMount) return
+  function initSidebar() {
+    var sidebarMount = document.querySelector('[data-sc-app-sidebar]')
+    if (!sidebarMount) return false
 
-  var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
-  var SCHEDULE_KEY = 'sc_schedule_events_v2'
-  var sidebarStorageKey = 'sc-sidebar-optional'
-  var page = (document.body && document.body.dataset.scSidebarPage) || ''
-  var DEFAULT_EVENTS = [
+    var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
+    var SCHEDULE_KEY = 'sc_schedule_events_v2'
+    var sidebarStorageKey = 'sc-sidebar-optional'
+    var page = (document.body && document.body.dataset.scSidebarPage) || ''
+    var currentPath = String((window.location && window.location.pathname) || '').replace(/\\/g, '/')
+    var pathPrefix = /\/(anki|math|auth)\//.test(currentPath) ? '../' : ''
+    var DEFAULT_EVENTS = [
     { id: 'evt-1', title: 'Neuroscience Lab', subject: 'Biology 302', date: '2026-03-30', start: '09:00', end: '10:30', starred: true },
     { id: 'evt-2', title: 'Deep Work: Thesis', subject: 'Focus Block', date: '2026-03-30', start: '14:30', end: '16:00', starred: false },
     { id: 'evt-3', title: 'Stochastic Models', subject: 'Mathematics', date: '2026-03-31', start: '10:30', end: '12:00', starred: false },
@@ -40,7 +43,11 @@
     { title: 'Luminary', minPoints: 17000 }
   ]
 
-  function readCachedProfile() {
+    function route(href) {
+      return pathPrefix + href
+    }
+
+    function readCachedProfile() {
     try {
       var raw = localStorage.getItem(PROFILE_CACHE_KEY)
       return raw ? JSON.parse(raw) : null
@@ -49,7 +56,7 @@
     }
   }
 
-  function escapeHtml(value) {
+    function escapeHtml(value) {
     return String(value || '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -58,25 +65,25 @@
       .replace(/'/g, '&#39;')
   }
 
-  function getProfileName(profile) {
+    function getProfileName(profile) {
     return (profile && profile.name) || 'Guest Scholar'
   }
 
-  function getProfilePlan(profile) {
+    function getProfilePlan(profile) {
     var value = String((profile && profile.plan) || '').trim()
     return value ? value.replace(/\b\w/g, function (char) { return char.toUpperCase() }) : 'Starter'
   }
 
-  function currentScopeSuffix(profile) {
+    function currentScopeSuffix(profile) {
     var active = profile || readCachedProfile()
     return active && active.id ? 'user:' + active.id : 'guest'
   }
 
-  function scopedKey(baseKey, profile) {
+    function scopedKey(baseKey, profile) {
     return baseKey + '::' + currentScopeSuffix(profile)
   }
 
-  function readJson(baseKey, fallback, profile) {
+    function readJson(baseKey, fallback, profile) {
     try {
       var raw = localStorage.getItem(scopedKey(baseKey, profile))
       if (raw == null) {
@@ -89,7 +96,7 @@
     }
   }
 
-  function readNumber(baseKey, profile) {
+    function readNumber(baseKey, profile) {
     try {
       var scoped = localStorage.getItem(scopedKey(baseKey, profile))
       if (scoped != null) return Number(scoped) || 0
@@ -100,7 +107,7 @@
     }
   }
 
-  function readEvents(profile) {
+    function readEvents(profile) {
     if (window.StudyIntelligence && window.StudyIntelligence.getEvents) {
       var liveEvents = window.StudyIntelligence.getEvents()
       if (Array.isArray(liveEvents) && liveEvents.length) return liveEvents
@@ -109,24 +116,24 @@
     return Array.isArray(stored) && stored.length ? stored : DEFAULT_EVENTS
   }
 
-  function normalizeSubject(value) {
+    function normalizeSubject(value) {
     return String(value || '').trim().toLowerCase()
   }
 
-  function toMinutes(value) {
+    function toMinutes(value) {
     var parts = String(value || '00:00').split(':')
     return (parseInt(parts[0], 10) || 0) * 60 + (parseInt(parts[1], 10) || 0)
   }
 
-  function minutesBetween(start, end) {
+    function minutesBetween(start, end) {
     return Math.max(0, toMinutes(end) - toMinutes(start))
   }
 
-  function computePoints(stats) {
+    function computePoints(stats) {
     return (stats.sessionCount * 65) + (stats.subjectCount * 90) + (stats.dayCount * 55) + (stats.focusCount * 40) + (stats.starredCount * 25)
   }
 
-  function buildStats(events) {
+    function buildStats(events) {
     var uniqueSubjects = {}
     var uniqueDates = {}
     var minutesTotal = 0
@@ -155,7 +162,7 @@
     }
   }
 
-  function computeUnlockedBadges(stats, profile) {
+    function computeUnlockedBadges(stats, profile) {
     var unlocked = badgeDefs.reduce(function (count, badge) {
       return count + ((stats[badge.progressKey] || 0) >= badge.target ? 1 : 0)
     }, 0)
@@ -167,7 +174,7 @@
     return Math.max(unlocked, storedCount)
   }
 
-  function computeLevel(points) {
+    function computeLevel(points) {
     var current = levelDefs[0]
     levelDefs.forEach(function (level) {
       if (points >= level.minPoints) current = level
@@ -175,7 +182,7 @@
     return current.title
   }
 
-  function getTier(profile, points, badgeCount) {
+    function getTier(profile, points, badgeCount) {
     var plan = String((profile && profile.plan) || '').toLowerCase()
     if (plan.indexOf('fellow') !== -1 || plan.indexOf('premium') !== -1) return 'Premium Member'
     if (plan.indexOf('institution') !== -1) return 'Institution Plan'
@@ -184,20 +191,21 @@
     return 'Starter'
   }
 
-  function isActive(key) {
+    function isActive(key) {
     if (key === 'dashboard') return page === 'dashboard' || page === 'home'
+    if (key === 'settings') return page === 'settings' || page === 'profile'
     return page === key
   }
 
-  function linkClass(key) {
+    function linkClass(key) {
     return 'sc-app-sidebar-link' + (isActive(key) ? ' is-active' : '')
   }
 
-  function footerLinkClass(key) {
+    function footerLinkClass(key) {
     return 'sc-app-sidebar-footer-link' + (isActive(key) ? ' is-active' : '')
   }
 
-  function renderLink(key, href, icon, label, note) {
+    function renderLink(key, href, icon, label, note) {
     return (
       '<a class="' + linkClass(key) + '" href="' + href + '">' +
         '<span class="sc-app-sidebar-icon"><span class="material-symbols-outlined">' + icon + '</span></span>' +
@@ -209,7 +217,7 @@
     )
   }
 
-  function renderFooterLink(key, href, icon, label) {
+    function renderFooterLink(key, href, icon, label) {
     return (
       '<a class="' + footerLinkClass(key) + '" href="' + href + '">' +
         '<span class="sc-app-sidebar-icon"><span class="material-symbols-outlined">' + icon + '</span></span>' +
@@ -220,7 +228,16 @@
     )
   }
 
-  function renderStat(label, value) {
+    function renderSectionHeader(title, chip) {
+    return (
+      '<div class="sc-app-sidebar-section-row">' +
+        '<div class="sc-app-sidebar-section-title">' + escapeHtml(title) + '</div>' +
+        (chip ? '<div class="sc-app-sidebar-section-chip">' + escapeHtml(chip) + '</div>' : '') +
+      '</div>'
+    )
+  }
+
+    function renderStat(label, value) {
     return (
       '<div class="sc-app-sidebar-profile-stat">' +
         '<span class="sc-app-sidebar-profile-stat-value">' + escapeHtml(value) + '</span>' +
@@ -229,7 +246,7 @@
     )
   }
 
-  function buildSidebar() {
+    function buildSidebar() {
     var profile = readCachedProfile()
     var events = readEvents(profile)
     var stats = buildStats(events)
@@ -245,12 +262,7 @@
       '<div class="sc-app-sidebar-brand">' +
         '<div class="sc-app-sidebar-brand-main">' +
           '<div class="sc-app-sidebar-brand-mark">' +
-            '<span class="material-symbols-outlined">menu_book</span>' +
-          '</div>' +
-          '<div class="sc-app-sidebar-brand-copy">' +
-            '<div class="sc-app-sidebar-eyebrow">Soul Concept</div>' +
-            '<p class="sc-app-sidebar-brand-title">Study Workspace</p>' +
-            '<p class="sc-app-sidebar-brand-subtitle">Pinned navigation for your core study pages.</p>' +
+            '<img alt="Soul Concept logo" src="' + route('icons/soulconceptflame.png') + '">' +
           '</div>' +
         '</div>' +
         '<button aria-label="Hide sidebar" class="sc-app-sidebar-toggle" data-sc-sidebar-toggle type="button">' +
@@ -268,6 +280,7 @@
             '<p class="sc-app-sidebar-profile-plan">' + escapeHtml(getProfilePlan(profile)) + '</p>' +
           '</div>' +
         '</div>' +
+        '<div class="sc-app-sidebar-profile-kicker">Live profile snapshot</div>' +
         '<div class="sc-app-sidebar-profile-stats">' +
           renderStat('Points', points.toLocaleString()) +
           renderStat('Streak', stats.dayCount + 'd') +
@@ -275,31 +288,30 @@
         '</div>' +
         '<p class="sc-app-sidebar-profile-note">' + escapeHtml(progressNote) + '</p>' +
       '</div>' +
-      '<div class="sc-app-sidebar-group">' +
-        '<div class="sc-app-sidebar-section-title">Main</div>' +
+      '<div class="sc-app-sidebar-group sc-app-sidebar-panel">' +
+        renderSectionHeader('Main', 'Studio') +
         '<nav class="sc-app-sidebar-stack">' +
-          renderLink('dashboard', 'dashboard.html', 'grid_view', 'Overview', 'Dashboard and quick actions') +
-          renderLink('subjects', 'subject-library.html', 'auto_stories', 'Subjects', 'Grades and study routes') +
-          renderLink('concepts', 'anki/index.html', 'style', 'Concept Cards', 'Review decks and memory sets') +
-          renderLink('schedule', 'schedule.html', 'calendar_month', 'Schedule', 'Sessions and planning') +
-          renderLink('analytics', 'analytics.html', 'insights', 'Insights', 'Progress and study patterns') +
-          renderLink('achievements', 'achievements.html', 'emoji_events', 'Achievements', 'Milestones and streaks') +
+          renderLink('dashboard', route('dashboard.html'), 'grid_view', 'Overview', 'Dashboard and quick actions') +
+          renderLink('subjects', route('subject-library.html'), 'auto_stories', 'Subjects', 'Grades and study routes') +
+          renderLink('concepts', route('anki/index.html'), 'style', 'Concept Cards', 'Review decks and memory sets') +
+          renderLink('schedule', route('schedule.html'), 'calendar_month', 'Schedule', 'Sessions and planning') +
+          renderLink('analytics', route('analytics.html'), 'insights', 'Insights', 'Progress and study patterns') +
+          renderLink('achievements', route('achievements.html'), 'emoji_events', 'Achievements', 'Milestones and streaks') +
         '</nav>' +
       '</div>' +
-      '<div class="sc-app-sidebar-footer">' +
-        '<div class="sc-app-sidebar-section-title">Account</div>' +
+      '<div class="sc-app-sidebar-footer sc-app-sidebar-panel">' +
+        renderSectionHeader('Account', 'Control') +
         '<nav class="sc-app-sidebar-stack">' +
-          renderFooterLink('membership', 'membership.html', 'subscriptions', 'Membership') +
-          renderFooterLink('profile', 'profile.html', 'account_circle', 'Profile') +
-          renderFooterLink('settings', 'settings.html', 'settings', 'Settings') +
+          renderFooterLink('membership', route('membership.html'), 'subscriptions', 'Membership') +
+          renderFooterLink('settings', route('settings.html'), 'settings', 'Settings') +
         '</nav>' +
-        '<div class="sc-app-sidebar-footnote">Profile reflects your saved study progress</div>' +
+        '<div class="sc-app-sidebar-footnote">Membership, privacy, and study preferences live here.</div>' +
       '</div>'
 
     attachSidebarControls()
   }
 
-  function attachSidebarControls() {
+    function attachSidebarControls() {
     var toggleButton = sidebarMount.querySelector('[data-sc-sidebar-toggle]')
     var toggleIcon = sidebarMount.querySelector('.sc-app-sidebar-toggle-icon')
 
@@ -325,7 +337,16 @@
     }
   }
 
-  buildSidebar()
-  window.addEventListener('sc:auth-state-changed', buildSidebar)
-})()
+    buildSidebar()
+    window.addEventListener('sc:auth-state-changed', buildSidebar)
+    return true
+  }
 
+  if (!initSidebar()) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSidebar, { once: true })
+    } else {
+      window.setTimeout(initSidebar, 0)
+    }
+  }
+})()

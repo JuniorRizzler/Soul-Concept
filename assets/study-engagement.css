@@ -1,0 +1,1576 @@
+.sc-engagement-shell {
+  margin-top: 2rem;
+}
+
+.sc-engagement-panel {
+  border: 1px solid rgba(191, 201, 195, 0.22);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at top right, rgba(179, 239, 216, 0.42), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(249, 241, 253, 0.96));
+  box-shadow: 0 24px 60px rgba(29, 26, 34, 0.06);
+  overflow: hidden;
+}
+
+.sc-engagement-panel[data-tone="library"] {
+  background:
+    radial-gradient(circle at top right, rgba(255, 181, 158, 0.26), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(249, 241, 253, 0.98));
+}
+
+.sc-engagement-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
+  padding: 1.5rem;
+}
+
+.sc-engagement-panel[data-layout="single"] .sc-engagement-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sc-engagement-primary {
+  padding: 1.6rem;
+  border-radius: 1.6rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(191, 201, 195, 0.18);
+}
+
+.sc-engagement-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ae3200;
+}
+
+.sc-engagement-kicker .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+.sc-engagement-title {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.55rem, 1.8vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: #004435;
+}
+
+.sc-engagement-copy {
+  margin: 0.9rem 0 0;
+  max-width: 48rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #404945;
+}
+
+.sc-engagement-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+}
+
+.sc-engagement-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(0, 68, 53, 0.08);
+  color: #125040;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sc-engagement-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+}
+
+.sc-engagement-metric {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.9rem 0.95rem;
+  border-radius: 1.05rem;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(191, 201, 195, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.sc-engagement-metric-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #707974;
+}
+
+.sc-engagement-metric-value {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #004435;
+}
+
+.sc-engagement-metric-note {
+  font-family: "Inter", sans-serif;
+  font-size: 0.74rem;
+  line-height: 1.35;
+  color: #5b645f;
+}
+
+.sc-engagement-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.3rem;
+}
+
+.sc-engagement-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 3rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  background: #004435;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.sc-engagement-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 28px rgba(0, 68, 53, 0.16);
+}
+
+.sc-engagement-button[data-variant="secondary"] {
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(191, 201, 195, 0.5);
+  color: #004435;
+}
+
+.sc-engagement-button[data-variant="ghost"] {
+  background: rgba(174, 50, 0, 0.08);
+  color: #ae3200;
+}
+
+.sc-engagement-side {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.sc-engagement-focus-card,
+.sc-engagement-goal-card,
+.sc-engagement-next-card {
+  border: 1px solid rgba(191, 201, 195, 0.2);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 1rem;
+}
+
+.sc-engagement-side-title,
+.sc-engagement-section-title {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #004435;
+}
+
+.sc-engagement-section-copy {
+  margin: 0.4rem 0 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #5b645f;
+}
+
+.sc-engagement-goals {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.sc-engagement-goal-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.sc-engagement-goal-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ae3200;
+}
+
+.sc-engagement-goal-value {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #404945;
+}
+
+.sc-engagement-progress {
+  height: 0.48rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(64, 73, 69, 0.1);
+}
+
+.sc-engagement-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #98d3bd 0%, #2f6857 100%);
+}
+
+.sc-engagement-next-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+  margin-top: 1rem;
+}
+
+.sc-engagement-next-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.sc-engagement-next-card[data-actionable="true"] {
+  cursor: pointer;
+}
+
+.sc-engagement-next-type {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ae3200;
+}
+
+.sc-engagement-next-heading {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #004435;
+}
+
+.sc-engagement-next-copy {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #5b645f;
+}
+
+.sc-engagement-next-footer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: auto;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #004435;
+}
+
+.sc-engagement-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1600;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(16, 18, 19, 0.46);
+  backdrop-filter: blur(10px);
+}
+
+.sc-engagement-modal.is-open {
+  display: flex;
+}
+
+.sc-engagement-dialog {
+  width: min(760px, calc(100vw - 1.5rem));
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  border-radius: 2rem;
+  border: 1px solid rgba(191, 201, 195, 0.3);
+  background: linear-gradient(180deg, #ffffff 0%, #f9f1fd 100%);
+  box-shadow: 0 32px 90px rgba(12, 17, 15, 0.22);
+}
+
+.sc-engagement-dialog-inner {
+  padding: 1.5rem;
+}
+
+.sc-engagement-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.sc-engagement-modal-title {
+  margin: 0.35rem 0 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.6rem, 2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: #004435;
+}
+
+.sc-engagement-close {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(64, 73, 69, 0.08);
+  color: #404945;
+  cursor: pointer;
+}
+
+.sc-engagement-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.sc-engagement-field {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.sc-engagement-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #404945;
+}
+
+.sc-engagement-select,
+.sc-engagement-date {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(191, 201, 195, 0.55);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 1rem;
+  color: #1d1a22;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+}
+
+.sc-engagement-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.sc-engagement-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.8rem;
+  padding: 0.75rem 0.95rem;
+  border: 1px solid rgba(191, 201, 195, 0.5);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: #404945;
+  cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.sc-engagement-chip:hover {
+  transform: translateY(-1px);
+}
+
+.sc-engagement-chip.is-selected {
+  background: #004435;
+  border-color: #004435;
+  color: #fff;
+}
+
+.sc-engagement-helper {
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #5b645f;
+}
+
+.sc-engagement-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.sc-engagement-modal-actions .sc-engagement-button {
+  flex: 1;
+}
+
+.sc-engagement-inline-rail {
+  margin-top: 1.25rem;
+}
+
+.sc-engagement-inline-rail .sc-engagement-panel {
+  border-radius: 1.5rem;
+}
+
+.sc-engagement-inline-rail .sc-engagement-grid {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 1.15rem;
+}
+
+@media (max-width: 1024px) {
+  .sc-engagement-grid,
+  .sc-engagement-next-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .sc-engagement-shell {
+    margin-top: 1.25rem;
+  }
+
+  .sc-engagement-grid,
+  .sc-engagement-dialog-inner {
+    padding: 1rem;
+  }
+
+  .sc-engagement-primary {
+    padding: 1.15rem;
+    border-radius: 1.2rem;
+  }
+
+  .sc-engagement-title,
+  .sc-engagement-modal-title {
+    font-size: 1.55rem;
+  }
+
+  .sc-engagement-copy {
+    font-size: 0.88rem;
+  }
+
+  .sc-engagement-actions,
+  .sc-engagement-modal-actions {
+    flex-direction: column;
+  }
+
+  .sc-engagement-button {
+    width: 100%;
+  }
+}
+
+/* Engagement UI V2 */
+.sc-engagement-panel {
+  position: relative;
+  border-radius: 2.2rem;
+  border: 1px solid rgba(191, 201, 195, 0.28);
+  background:
+    radial-gradient(circle at top right, rgba(179, 239, 216, 0.3), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 248, 246, 0.98));
+  box-shadow: 0 28px 72px rgba(16, 24, 20, 0.08);
+}
+
+.sc-engagement-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.38), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(174, 50, 0, 0.07), transparent 26%);
+  pointer-events: none;
+}
+
+.sc-engagement-grid {
+  position: relative;
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.9fr);
+  padding: 1.2rem;
+  align-items: stretch;
+}
+
+.sc-engagement-primary {
+  position: relative;
+  min-height: 100%;
+  padding: 1.8rem;
+  border-radius: 1.8rem;
+  background:
+    radial-gradient(circle at top right, rgba(179, 239, 216, 0.22), transparent 30%),
+    linear-gradient(155deg, #003d31 0%, #0f5848 55%, #215c4b 100%);
+  border: 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sc-engagement-primary::after {
+  content: "";
+  position: absolute;
+  right: -2.5rem;
+  bottom: -2.5rem;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 66%);
+  pointer-events: none;
+}
+
+.sc-engagement-primary .sc-engagement-kicker {
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.12em;
+}
+
+.sc-engagement-primary .sc-engagement-title {
+  color: #ffffff;
+  font-size: clamp(1.9rem, 2.6vw, 3rem);
+  line-height: 0.98;
+  max-width: 16ch;
+}
+
+.sc-engagement-primary .sc-engagement-copy {
+  margin-top: 1rem;
+  max-width: 38rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.sc-engagement-pills {
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.sc-engagement-pill {
+  padding: 0.6rem 0.85rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+}
+
+.sc-engagement-actions {
+  gap: 0.75rem;
+  margin-top: 1.55rem;
+}
+
+.sc-engagement-button {
+  min-height: 3.15rem;
+  padding: 0.9rem 1.15rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: #004435;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+}
+
+.sc-engagement-button[data-variant="secondary"] {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.sc-engagement-button[data-variant="ghost"] {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.86);
+  box-shadow: none;
+}
+
+.sc-engagement-side {
+  gap: 1rem;
+}
+
+.sc-engagement-focus-card {
+  padding: 1.2rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(191, 201, 195, 0.26);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.04);
+}
+
+.sc-engagement-side-title {
+  font-size: 1.08rem;
+  letter-spacing: -0.03em;
+}
+
+.sc-engagement-section-copy {
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: #5f6964;
+}
+
+.sc-engagement-goals {
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.sc-engagement-goal-card {
+  padding: 0.95rem 1rem;
+  border-radius: 1.1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(249, 241, 253, 0.72));
+  border: 1px solid rgba(191, 201, 195, 0.22);
+  box-shadow: none;
+}
+
+.sc-engagement-goal-meta {
+  align-items: flex-start;
+  margin-bottom: 0.55rem;
+}
+
+.sc-engagement-goal-label {
+  max-width: 18ch;
+  color: #004435;
+  font-size: 0.62rem;
+  letter-spacing: 0.11em;
+}
+
+.sc-engagement-goal-value {
+  color: #ae3200;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sc-engagement-progress {
+  height: 0.42rem;
+  background: rgba(0, 68, 53, 0.08);
+}
+
+.sc-engagement-progress > span {
+  background: linear-gradient(90deg, #ffb59e 0%, #f0824d 18%, #2f6857 100%);
+}
+
+.sc-engagement-next-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.sc-engagement-next-card {
+  padding: 1rem;
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(191, 201, 195, 0.24);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sc-engagement-next-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 68, 53, 0.18);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.08);
+}
+
+.sc-engagement-next-type {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(174, 50, 0, 0.08);
+  color: #ae3200;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+}
+
+.sc-engagement-next-heading {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.sc-engagement-next-copy {
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.sc-engagement-next-footer {
+  margin-top: 0.15rem;
+  color: #004435;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+}
+
+.sc-engagement-inline-rail .sc-engagement-panel {
+  border-radius: 1.6rem;
+}
+
+.sc-engagement-inline-rail .sc-engagement-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .sc-engagement-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sc-engagement-primary .sc-engagement-title {
+    max-width: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .sc-engagement-grid {
+    padding: 0.95rem;
+  }
+
+  .sc-engagement-primary,
+  .sc-engagement-focus-card {
+    border-radius: 1.35rem;
+  }
+
+  .sc-engagement-primary {
+    padding: 1.25rem;
+  }
+
+  .sc-engagement-primary .sc-engagement-title {
+    font-size: 1.7rem;
+  }
+
+  .sc-engagement-primary .sc-engagement-copy,
+  .sc-engagement-next-copy,
+  .sc-engagement-section-copy {
+    font-size: 0.84rem;
+  }
+}
+
+/* Engagement Layout V3 */
+.sc-engagement-shell {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sc-engagement-panel {
+  overflow: hidden;
+}
+
+.sc-engagement-grid {
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.78fr);
+}
+
+.sc-engagement-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.sc-engagement-next-shell {
+  padding: 0 1.2rem 1.2rem;
+}
+
+.sc-engagement-next-shell .sc-engagement-focus-card {
+  padding: 1.2rem;
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(249, 241, 253, 0.88)),
+    radial-gradient(circle at top right, rgba(179, 239, 216, 0.18), transparent 28%);
+  border: 1px solid rgba(191, 201, 195, 0.24);
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.05);
+}
+
+.sc-engagement-next-shell .sc-engagement-side-title {
+  color: #004435;
+  font-size: 1.18rem;
+}
+
+.sc-engagement-next-shell .sc-engagement-section-copy {
+  max-width: 48rem;
+}
+
+.sc-engagement-next-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.sc-engagement-next-card {
+  position: relative;
+  min-height: 12.25rem;
+  justify-content: space-between;
+}
+
+.sc-engagement-next-card::after {
+  content: "";
+  position: absolute;
+  inset: auto auto 0 0;
+  width: 100%;
+  height: 0.22rem;
+  background: linear-gradient(90deg, rgba(255, 181, 158, 0.9), rgba(47, 104, 87, 0.9));
+  opacity: 0.72;
+}
+
+.sc-engagement-next-card:nth-child(2n)::after {
+  background: linear-gradient(90deg, rgba(179, 239, 216, 0.9), rgba(174, 50, 0, 0.78));
+}
+
+.sc-engagement-next-heading {
+  margin-top: 0.8rem;
+  color: #004435;
+  letter-spacing: -0.03em;
+}
+
+.sc-engagement-next-copy {
+  margin-top: 0.45rem;
+  color: #5f6964;
+}
+
+.sc-engagement-next-footer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  margin-top: auto;
+}
+
+.sc-engagement-next-footer .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+.sc-engagement-goal-card .sc-engagement-section-copy {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  .sc-engagement-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sc-engagement-next-shell {
+    padding: 0 0.95rem 0.95rem;
+  }
+
+  .sc-engagement-next-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sc-engagement-next-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .sc-engagement-shell {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .sc-engagement-metrics {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+
+  .sc-engagement-next-shell {
+    padding: 0 0.95rem 0.95rem;
+  }
+
+  .sc-engagement-next-shell .sc-engagement-focus-card {
+    border-radius: 1.35rem;
+  }
+
+  .sc-engagement-next-shell .sc-engagement-side-title {
+    font-size: 1.02rem;
+  }
+}
+
+/* Onboarding Experience */
+.sc-engagement-dialog {
+  width: min(1120px, calc(100vw - 1.5rem));
+  background:
+    radial-gradient(circle at top right, rgba(179, 239, 216, 0.16), transparent 24%),
+    linear-gradient(180deg, #ffffff 0%, #f9f1fd 100%);
+}
+
+.sc-engagement-dialog-inner {
+  padding: 1.6rem;
+}
+
+.sc-engagement-modal-header {
+  margin-bottom: 1.15rem;
+}
+
+.sc-engagement-setup-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.72fr);
+  gap: 1rem;
+}
+
+.sc-engagement-onboarding-form {
+  gap: 1rem;
+}
+
+.sc-engagement-step-nav-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.sc-engagement-step-nav-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 0.95rem;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(191, 201, 195, 0.42);
+  background: rgba(255, 255, 255, 0.72);
+  color: #404945;
+  text-align: left;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sc-engagement-step-nav-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(29, 26, 34, 0.06);
+}
+
+.sc-engagement-step-nav-button.is-current,
+.sc-engagement-step-nav-button.is-complete {
+  border-color: rgba(0, 68, 53, 0.2);
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.sc-engagement-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: rgba(0, 68, 53, 0.08);
+  color: #004435;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.sc-engagement-step-nav-button.is-current .sc-engagement-step-number,
+.sc-engagement-step-nav-button.is-complete .sc-engagement-step-number {
+  background: #004435;
+  color: #ffffff;
+}
+
+.sc-engagement-step-copy {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+}
+
+.sc-engagement-step-copy strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #004435;
+}
+
+.sc-engagement-step-copy span {
+  font-family: "Inter", sans-serif;
+  font-size: 0.74rem;
+  line-height: 1.35;
+  color: #5b645f;
+}
+
+.sc-engagement-step-panel {
+  display: none;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 1.7rem;
+  border: 1px solid rgba(191, 201, 195, 0.24);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.44);
+}
+
+.sc-engagement-step-panel.is-active {
+  display: grid;
+}
+
+.sc-engagement-step-heading {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sc-engagement-field-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sc-engagement-field-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.45rem;
+  padding: 0.15rem 0.48rem;
+  border-radius: 999px;
+  background: rgba(174, 50, 0, 0.08);
+  color: #ae3200;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sc-engagement-choice-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.sc-engagement-choice-grid--grade,
+.sc-engagement-choice-grid--subject,
+.sc-engagement-choice-grid--goal {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sc-engagement-choice-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  min-height: 5.35rem;
+  padding: 1rem;
+  border: 1px solid rgba(191, 201, 195, 0.38);
+  border-radius: 1.3rem;
+  background: rgba(255, 255, 255, 0.86);
+  color: #1d1a22;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sc-engagement-choice-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 68, 53, 0.16);
+  box-shadow: 0 18px 36px rgba(29, 26, 34, 0.06);
+}
+
+.sc-engagement-choice-card.is-selected {
+  border-color: rgba(0, 68, 53, 0.26);
+  background:
+    radial-gradient(circle at top right, rgba(179, 239, 216, 0.26), transparent 40%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 251, 247, 0.96));
+  box-shadow: 0 18px 40px rgba(0, 68, 53, 0.08);
+}
+
+.sc-engagement-choice-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 1rem;
+  background: rgba(0, 68, 53, 0.08);
+  color: #004435;
+  flex-shrink: 0;
+}
+
+.sc-engagement-choice-card.is-selected .sc-engagement-choice-icon {
+  background: #004435;
+  color: #ffffff;
+}
+
+.sc-engagement-choice-copy {
+  display: grid;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.sc-engagement-choice-copy strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #004435;
+}
+
+.sc-engagement-choice-copy span {
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #5b645f;
+}
+
+.sc-engagement-goal-note {
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  background: rgba(249, 241, 253, 0.8);
+  border: 1px dashed rgba(191, 201, 195, 0.52);
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #5b645f;
+}
+
+.sc-engagement-preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.sc-engagement-preset-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(191, 201, 195, 0.45);
+  background: rgba(255, 255, 255, 0.86);
+  color: #404945;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.sc-engagement-preset-chip.is-selected {
+  background: #004435;
+  border-color: #004435;
+  color: #ffffff;
+}
+
+.sc-engagement-launch-card {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 1.2rem;
+  background: linear-gradient(180deg, rgba(0, 68, 53, 0.95), rgba(33, 92, 75, 0.94));
+  color: #ffffff;
+}
+
+.sc-engagement-launch-kicker {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.sc-engagement-launch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.sc-engagement-launch-grid div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.sc-engagement-launch-grid strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.sc-engagement-launch-grid span {
+  font-family: "Inter", sans-serif;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.sc-engagement-step-feedback {
+  min-height: 1.35rem;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #5b645f;
+}
+
+.sc-engagement-modal-actions--staged {
+  align-items: center;
+}
+
+.sc-engagement-modal-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.sc-engagement-modal-nav .sc-engagement-button {
+  min-width: 10.5rem;
+}
+
+.sc-engagement-button[data-variant="ghost"] {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(191, 201, 195, 0.45);
+  color: #004435;
+}
+
+.sc-engagement-setup-side {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.sc-engagement-preview-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 1.8rem;
+  background:
+    radial-gradient(circle at top right, rgba(179, 239, 216, 0.22), transparent 30%),
+    linear-gradient(155deg, #003d31 0%, #0f5848 55%, #215c4b 100%);
+  color: #ffffff;
+  box-shadow: 0 24px 60px rgba(0, 68, 53, 0.14);
+}
+
+.sc-engagement-preview-card .sc-engagement-kicker {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.sc-engagement-preview-title {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.5rem, 2.1vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.sc-engagement-preview-copy {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sc-engagement-preview-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.sc-engagement-preview-metric {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sc-engagement-preview-metric span {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.sc-engagement-preview-metric strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.sc-engagement-preview-orbit {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.sc-engagement-preview-orbit-ring {
+  position: relative;
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0 48%, transparent 49%),
+    conic-gradient(from 220deg, rgba(255, 255, 255, 0.88), rgba(179, 239, 216, 0.95), rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.88));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.sc-engagement-preview-orbit-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0.65rem;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sc-engagement-preview-orbit-core {
+  position: relative;
+  z-index: 1;
+  width: 5.8rem;
+  height: 5.8rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0.16rem;
+  background: rgba(4, 45, 37, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-align: center;
+}
+
+.sc-engagement-preview-orbit-score {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.sc-engagement-preview-orbit-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.sc-engagement-preview-orbit-copy {
+  display: grid;
+  gap: 0.28rem;
+}
+
+.sc-engagement-preview-orbit-copy span {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.sc-engagement-preview-orbit-copy strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sc-engagement-preview-orbit-copy p {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.sc-engagement-preview-strategy {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.sc-engagement-preview-strategy-item {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sc-engagement-preview-strategy-item span {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.sc-engagement-preview-strategy-item strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.sc-engagement-preview-stack {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.sc-engagement-preview-item {
+  display: grid;
+  gap: 0.24rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sc-engagement-preview-item span {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.sc-engagement-preview-item strong {
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.sc-engagement-preview-journey {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.sc-engagement-preview-journey-item {
+  position: relative;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.8rem 0.9rem 0.8rem 1.35rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sc-engagement-preview-journey-item::before {
+  content: "";
+  position: absolute;
+  left: 0.72rem;
+  top: 1rem;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  background: #b3efd8;
+  box-shadow: 0 0 0 0.25rem rgba(179, 239, 216, 0.16);
+}
+
+.sc-engagement-preview-journey-item span {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.sc-engagement-preview-journey-item strong {
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.sc-engagement-preview-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 1rem 1.05rem;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(191, 201, 195, 0.24);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.sc-engagement-preview-note .material-symbols-outlined {
+  color: #ae3200;
+}
+
+.sc-engagement-preview-note p {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #5b645f;
+}
+
+@media (max-width: 1024px) {
+  .sc-engagement-setup-shell,
+  .sc-engagement-choice-grid--grade,
+  .sc-engagement-choice-grid--subject,
+  .sc-engagement-choice-grid--goal,
+  .sc-engagement-launch-grid,
+  .sc-engagement-preview-strategy,
+  .sc-engagement-preview-orbit {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sc-engagement-step-nav-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .sc-engagement-dialog-inner {
+    padding: 1rem;
+  }
+
+  .sc-engagement-step-panel,
+  .sc-engagement-preview-card {
+    padding: 1rem;
+  }
+
+  .sc-engagement-modal-nav,
+  .sc-engagement-modal-actions--staged {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sc-engagement-modal-nav .sc-engagement-button {
+    width: 100%;
+    min-width: 0;
+  }
+}
