@@ -1,4 +1,38 @@
-﻿(() => {
+(() => {
+  function resolveAppAsset(path) {
+    const clean = String(path || '').replace(/^\/+/, '')
+    if (location.protocol === 'file:') {
+      const href = location.href.split('#')[0].split('?')[0]
+      const marker = '/Soul-Concept/'
+      const index = href.lastIndexOf(marker)
+      if (index !== -1) return href.slice(0, index + marker.length) + clean
+    }
+    return '/' + clean
+  }
+
+  function setFaviconLink(key, rel, href, extra = {}) {
+    let link = document.head.querySelector(`link[data-sc-favicon="${key}"]`)
+    if (!link) {
+      link = document.createElement('link')
+      link.dataset.scFavicon = key
+      document.head.appendChild(link)
+    }
+    link.rel = rel
+    link.href = href
+    Object.entries(extra).forEach(([name, value]) => link.setAttribute(name, value))
+  }
+
+  function ensureFavicon() {
+    if (!document.head) return
+    document.querySelectorAll('link[rel="icon"][href*="favicon.svg"]').forEach((node) => node.remove())
+    setFaviconLink('shortcut', 'shortcut icon', resolveAppAsset('favicon.ico'), { type: 'image/x-icon' })
+    setFaviconLink('icon-png', 'icon', resolveAppAsset('icons/icon-192.png'), { type: 'image/png', sizes: '192x192' })
+    setFaviconLink('apple-touch', 'apple-touch-icon', resolveAppAsset('icons/apple-touch-icon.png'))
+    setFaviconLink('manifest', 'manifest', resolveAppAsset('manifest.json'))
+  }
+
+  ensureFavicon()
+
   if (!document.getElementById("sc-shell-critical")) {
     const criticalStyle = document.createElement("style");
     criticalStyle.id = "sc-shell-critical";
@@ -223,7 +257,7 @@
       if (dataIcon && !icon.textContent.trim()) {
         icon.textContent = dataIcon;
       }
-      if (icon.textContent.includes("ÃƒÂ¢")) {
+      if (icon.textContent.includes("ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢")) {
         icon.textContent = dataIcon || "circle";
       }
     });
@@ -1179,17 +1213,17 @@
     document.querySelectorAll("*").forEach((node) => {
       if (node.children.length) return;
       const text = node.textContent;
-      if (!text || !text.includes("ÃƒÂ¢")) return;
+      if (!text || !text.includes("ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢")) return;
       node.textContent = text
-        .replaceAll("ÃƒÂ¢Ã‹â€ Ã‚Â«", "Ã¢Ë†Â«")
-        .replaceAll("mcÃƒâ€šÃ‚Â²", "mcÃ‚Â²")
-        .replaceAll("aÃƒâ€šÃ‚Â²", "aÃ‚Â²")
-        .replaceAll("ÃƒÂ¢Ã‹â€ Ã¢â‚¬Å¡", "Ã¢Ë†â€š")
-        .replaceAll("ÃƒÅ½Ã‚Â±", "ÃŽÂ±")
-        .replaceAll("ÃƒÂ¢Ã‹â€ Ã¢â‚¬Â¡", "Ã¢Ë†â€¡")
-        .replaceAll("ÃƒÅ½Ã‚Â¦", "ÃŽÂ¦")
-        .replaceAll("ÃƒÂ¢Ã‹â€ Ã…Â¡", "Ã¢Ë†Å¡")
-        .replaceAll("ÃƒÅ½Ã‚Â£", "ÃŽÂ£");
+        .replaceAll("ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â«", "ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â Ãƒâ€šÃ‚Â«")
+        .replaceAll("mcÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²", "mcÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²")
+        .replaceAll("aÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²", "aÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²")
+        .replaceAll("ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡", "ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡")
+        .replaceAll("ÃƒÆ’Ã†â€™Ãƒâ€¦Ã‚Â½ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±", "ÃƒÆ’Ã…Â½Ãƒâ€šÃ‚Â±")
+        .replaceAll("ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¡", "ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡")
+        .replaceAll("ÃƒÆ’Ã†â€™Ãƒâ€¦Ã‚Â½ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦", "ÃƒÆ’Ã…Â½Ãƒâ€šÃ‚Â¦")
+        .replaceAll("ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã¢â‚¬Â¹ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡", "ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â Ãƒâ€¦Ã‚Â¡")
+        .replaceAll("ÃƒÆ’Ã†â€™Ãƒâ€¦Ã‚Â½ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£", "ÃƒÆ’Ã…Â½Ãƒâ€šÃ‚Â£");
     });
   }
 

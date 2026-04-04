@@ -1,4 +1,45 @@
-﻿(function () {
+(function () {
+  function resolveAppAsset(path) {
+    var clean = String(path || '').replace(/^\/+/, '')
+    if (location.protocol === 'file:') {
+      var href = location.href.split('#')[0].split('?')[0]
+      var marker = '/Soul-Concept/'
+      var index = href.lastIndexOf(marker)
+      if (index !== -1) return href.slice(0, index + marker.length) + clean
+    }
+    return '/' + clean
+  }
+
+  function setFaviconLink(key, rel, href, extra) {
+    var selector = 'link[data-sc-favicon="' + key + '"]'
+    var link = document.head.querySelector(selector)
+    if (!link) {
+      link = document.createElement('link')
+      link.setAttribute('data-sc-favicon', key)
+      document.head.appendChild(link)
+    }
+    link.rel = rel
+    link.href = href
+    if (extra) {
+      Object.keys(extra).forEach(function (name) {
+        link.setAttribute(name, extra[name])
+      })
+    }
+  }
+
+  function ensureSharedFavicon() {
+    if (!document.head) return
+    document.head.querySelectorAll('link[rel="icon"][href*="favicon.svg"]').forEach(function (node) {
+      node.parentNode && node.parentNode.removeChild(node)
+    })
+    setFaviconLink('shortcut', 'shortcut icon', resolveAppAsset('favicon.ico'), { type: 'image/x-icon' })
+    setFaviconLink('icon-png', 'icon', resolveAppAsset('icons/icon-192.png'), { type: 'image/png', sizes: '192x192' })
+    setFaviconLink('apple-touch', 'apple-touch-icon', resolveAppAsset('icons/apple-touch-icon.png'))
+    setFaviconLink('manifest', 'manifest', resolveAppAsset('manifest.json'))
+  }
+
+  ensureSharedFavicon()
+
   var sidebarMount = document.querySelector('[data-sc-app-sidebar]')
   if (!sidebarMount) return
 
