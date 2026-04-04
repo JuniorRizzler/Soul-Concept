@@ -65,10 +65,10 @@
 .sc-app-sidebar-brand {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex: 0 0 auto;
     gap: 0.75rem;
-    padding: 0.15rem 0.2rem 0.95rem;
+    padding: 0.1rem 0.1rem 0.8rem;
     border-bottom: 1px solid var(--sc-sidebar-border-soft);
 }
 

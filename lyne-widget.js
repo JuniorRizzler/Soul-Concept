@@ -11,8 +11,8 @@
   var ONBOARDING_VOICE_KEY = 'sc_lyne_onboarding_voice_v1'
   var FINAL_SPEECH_PAUSE_MS = 720
   var INTERIM_SPEECH_PAUSE_MS = 1450
-  var DEFAULT_CHAT = 'LYNE AI: I am your Soul Concept study assistant. Open me and talk to me anytime.'
-  var DEFAULT_STILL_HERE = 'I am LYNE, the Soul Concept AI. Ask me where to go in the app, what to study next, or what concept you want explained.'
+  var DEFAULT_CHAT = 'LYNE: Ready when you are. Ask for a route, a study plan, or a clear concept breakdown.'
+  var DEFAULT_STILL_HERE = 'I am LYNE, your Soul Concept guide. Ask what to study next, where to go, or what concept you want explained.'
   var LYNE_APP_CONTEXT =
     'You are LYNE, the in-app guide for Soul Concept. ' +
     'App purpose: help Grade 9-10 students study faster with structured libraries and focused tools. ' +
@@ -213,49 +213,74 @@
     var style = document.createElement('style')
     style.id = 'sc-lyne-widget-styles'
     style.textContent =
-      '#lyne-widget{position:fixed;left:calc(100vw - 66px);top:calc(100vh - 66px);z-index:140;touch-action:none;user-select:none;transition:left .46s ease,top .46s ease,transform .24s ease}' +
+      '#lyne-widget{position:fixed;left:calc(100vw - 66px);top:calc(100vh - 66px);z-index:140;touch-action:none;user-select:none;transition:left .46s ease,top .46s ease,transform .24s ease,filter .24s ease}' +
       '#lyne-widget *{box-sizing:border-box}' +
       '#lyne-widget.lyne-dragging{transition:none}' +
-      '#lyne-widget button,#lyne-widget textarea,#lyne-widget pre{user-select:text}' +
-      '.lyne-shell{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:12px}' +
-      '#lyne-hint{position:absolute;right:78px;bottom:6px;width:min(280px,80vw);max-width:min(280px,80vw);padding:14px 16px 12px;border-radius:22px;background:linear-gradient(155deg,rgba(15,23,42,.94),rgba(29,78,216,.84) 56%,rgba(13,148,136,.78));color:#f8fafc;border:1px solid rgba(255,255,255,.14);box-shadow:0 22px 44px rgba(15,23,42,.28);font:700 11px/1.45 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.98;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 3.1s ease-in-out infinite;pointer-events:auto;backdrop-filter:blur(18px) saturate(145%)}' +
-      '#lyne-hint:before{content:"AI · LYNE";display:inline-flex;align-items:center;gap:6px;margin:0 28px 8px 0;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.12);font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}' +
-      '#lyne-hint:after{content:"";position:absolute;right:-6px;bottom:18px;width:12px;height:12px;background:linear-gradient(135deg,rgba(37,99,235,.9),rgba(13,148,136,.88));transform:rotate(45deg);border-right:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.14)}' +
+      '#lyne-widget button,#lyne-widget textarea,#lyne-widget input,#lyne-chat{user-select:text}' +
+      '.lyne-shell{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:14px}' +
+      '#lyne-hint{position:absolute;right:84px;bottom:8px;width:min(300px,82vw);max-width:min(300px,82vw);padding:15px 16px 13px;border-radius:24px;background:linear-gradient(145deg,rgba(0,68,53,.96),rgba(34,91,73,.94) 48%,rgba(174,50,0,.88));color:#f8fafc;border:1px solid rgba(255,255,255,.16);box-shadow:0 28px 56px rgba(29,26,34,.22);font:700 11px/1.5 Manrope,system-ui,sans-serif;letter-spacing:.01em;opacity:.99;transform:translateY(0) scale(1);transform-origin:100% 100%;animation:lyneHintFloat 3.1s ease-in-out infinite;pointer-events:auto;backdrop-filter:blur(18px) saturate(145%)}' +
+      '#lyne-hint:before{content:"LYNE SIGNAL";display:inline-flex;align-items:center;gap:6px;margin:0 28px 8px 0;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.12);font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}' +
+      '#lyne-hint:after{content:"";position:absolute;right:-6px;bottom:18px;width:12px;height:12px;background:linear-gradient(135deg,rgba(174,50,0,.92),rgba(0,68,53,.94));transform:rotate(45deg);border-right:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.14)}' +
       '.lyne-hint-text{display:block;padding-right:20px;color:#f8fafc}' +
       '.lyne-hint-close{position:absolute;top:8px;right:8px;appearance:none;border:0;background:rgba(255,255,255,.12);color:#fff;font:800 12px/1 Manrope,system-ui,sans-serif;cursor:pointer;opacity:.92;padding:4px 6px;border-radius:999px}' +
       '.lyne-hint-close:hover{background:rgba(255,255,255,.2);opacity:1}' +
       '.lyne-hint-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}' +
-      '.lyne-hint-btn{appearance:none;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:7px 11px;font:800 10px/1 Manrope,system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(10px)}' +
+      '.lyne-hint-btn{appearance:none;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:7px 11px;font:800 10px/1 Manrope,system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(10px);transition:transform .18s ease,background-color .18s ease}' +
+      '.lyne-hint-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.16)}' +
       '.lyne-hint-btn.is-primary{background:#f8fafc;color:#10203d;border-color:transparent;box-shadow:0 8px 18px rgba(15,23,42,.16)}' +
       '#lyne-widget[data-panel-open="true"] #lyne-hint{display:none}' +
-      '#lyne-orb-toggle{width:58px;height:58px;border-radius:18px;border:1px solid rgba(255,255,255,.24);cursor:grab;position:relative;overflow:hidden;touch-action:none;background:linear-gradient(155deg,#ffffff 0%,#eff6ff 35%,#dbeafe 100%);box-shadow:0 18px 32px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.92)}' +
+      '#lyne-orb-toggle{width:64px;height:64px;border-radius:24px;border:1px solid rgba(255,255,255,.38);cursor:grab;position:relative;overflow:hidden;touch-action:none;background:linear-gradient(155deg,rgba(255,255,255,.99) 0%,rgba(249,241,253,.97) 34%,rgba(230,244,238,.99) 100%);box-shadow:0 22px 42px rgba(29,26,34,.16),0 0 0 1px rgba(255,255,255,.72) inset}' +
       '#lyne-orb-toggle:active{cursor:grabbing}' +
-      '#lyne-orb-toggle:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 26% 20%,rgba(255,255,255,.92),transparent 34%),linear-gradient(180deg,rgba(29,78,216,.05),rgba(13,148,136,.08))}' +
-      '#lyne-orb-toggle .flame-core{position:absolute;left:17px;top:16px;width:24px;height:24px;border-radius:8px;background:linear-gradient(145deg,#1d4ed8,#0d9488);box-shadow:0 10px 18px rgba(29,78,216,.28);transform:rotate(8deg);animation:lyneFloatCore 2.8s ease-in-out infinite}' +
-      '#lyne-orb-toggle .flame-core:before{content:"";position:absolute;left:6px;top:6px;width:12px;height:12px;border-radius:4px;background:rgba(255,255,255,.92)}' +
-      '#lyne-orb-toggle .flame-inner{position:absolute;right:13px;top:13px;width:11px;height:11px;border-radius:999px;background:linear-gradient(135deg,#38bdf8,#14b8a6);box-shadow:0 0 0 5px rgba(20,184,166,.12);animation:lyneFloatDot 2.2s ease-in-out infinite}' +
-      '#lyne-orb-toggle .flame-glow{position:absolute;inset:10px;border-radius:14px;box-shadow:0 0 0 1px rgba(29,78,216,.08),0 0 28px rgba(56,189,248,.16)}' +
+      '#lyne-orb-toggle:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 24% 18%,rgba(255,255,255,.96),transparent 32%),radial-gradient(circle at 82% 84%,rgba(0,68,53,.1),transparent 34%),linear-gradient(180deg,rgba(0,68,53,.04),rgba(174,50,0,.08))}' +
+      '#lyne-orb-toggle:after{content:"";position:absolute;inset:6px;border-radius:18px;border:1px solid rgba(0,68,53,.08);pointer-events:none}' +
+      '#lyne-orb-toggle .flame-glow{position:absolute;inset:10px;border-radius:16px;box-shadow:0 0 0 1px rgba(0,68,53,.07),0 0 32px rgba(174,50,0,.12)}' +
+      '#lyne-orb-toggle .flame-ring{position:absolute;inset:12px;border-radius:16px;border:1px solid rgba(0,68,53,.12);background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0));box-shadow:inset 0 1px 0 rgba(255,255,255,.72)}' +
+      '#lyne-orb-toggle .flame-signal{position:absolute;right:11px;bottom:11px;width:14px;height:14px;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,245,235,.92));border:1px solid rgba(174,50,0,.12);box-shadow:0 8px 14px rgba(174,50,0,.12)}' +
+      '#lyne-orb-toggle .flame-signal:before{content:"";position:absolute;inset:3px;border-radius:999px;background:linear-gradient(135deg,#f59e0b,#ae3200)}' +
+      '#lyne-orb-toggle .flame-core{position:absolute;left:18px;top:17px;width:27px;height:27px;border-radius:11px;background:linear-gradient(145deg,#004435,#1c6a57 56%,#ae3200 100%);box-shadow:0 12px 24px rgba(0,68,53,.22);transform:rotate(9deg);animation:lyneFloatCore 2.8s ease-in-out infinite}' +
+      '#lyne-orb-toggle .flame-core:before{content:"";position:absolute;left:7px;top:7px;width:12px;height:12px;border-radius:4px;background:rgba(255,255,255,.94)}' +
+      '#lyne-orb-toggle .flame-core:after{content:"";position:absolute;left:-4px;top:11px;width:36px;height:10px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);opacity:.72;transform:rotate(-9deg)}' +
+      '#lyne-orb-toggle .flame-inner{position:absolute;right:14px;top:14px;width:12px;height:12px;border-radius:999px;background:linear-gradient(135deg,#f59e0b,#ae3200);box-shadow:0 0 0 6px rgba(174,50,0,.1);animation:lyneFloatDot 2.2s ease-in-out infinite}' +
+      '#lyne-orb-toggle .flame-shine{position:absolute;left:13px;top:12px;width:12px;height:12px;border-radius:999px;background:rgba(255,255,255,.86);filter:blur(.2px);opacity:.85}' +
       '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-core{animation-duration:1.2s}' +
       '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-inner{animation-duration:.9s}' +
-      '#lyne-panel{position:absolute;right:0;bottom:72px;width:min(360px,92vw);border:1px solid rgba(255,255,255,.46);background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(248,250,252,.9));backdrop-filter:blur(24px) saturate(155%);border-radius:28px;padding:14px;box-shadow:0 30px 64px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.92);opacity:0;transform:translateY(14px) scale(.96);pointer-events:none;transition:opacity .24s ease,transform .24s ease}' +
+      '#lyne-widget.lyne-speaking #lyne-orb-toggle .flame-signal:before{animation:lynePulseSignal .9s ease-in-out infinite}' +
+      '#lyne-panel{position:absolute;right:0;bottom:78px;width:min(372px,94vw);border:1px solid rgba(255,255,255,.62);background:linear-gradient(180deg,rgba(255,252,251,.99),rgba(252,248,253,.96));backdrop-filter:blur(22px) saturate(145%);border-radius:22px;padding:12px;box-shadow:0 22px 44px rgba(29,26,34,.14),inset 0 1px 0 rgba(255,255,255,.94);opacity:0;transform:translateY(14px) scale(.96);pointer-events:none;transition:opacity .24s ease,transform .24s ease}' +
       '#lyne-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}' +
-      '.lyne-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:nowrap;cursor:grab;user-select:none;touch-action:none;padding:2px 2px 10px}' +
+      '.lyne-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:nowrap;cursor:grab;user-select:none;touch-action:none;padding:2px 2px 8px}' +
       '.lyne-panel-head:active{cursor:grabbing}' +
-      '.lyne-panel-id{display:grid;gap:4px;min-width:0}' +
-      '.lyne-panel-kicker{display:inline-flex;align-items:center;gap:6px;width:max-content;padding:6px 9px;border-radius:999px;background:rgba(15,23,42,.05);border:1px solid rgba(148,163,184,.16);font:800 10px/1 Manrope,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#1d4ed8}' +
-      '.lyne-panel-kicker:before{content:"";width:7px;height:7px;border-radius:999px;background:linear-gradient(135deg,#2563eb,#0d9488);box-shadow:0 0 0 4px rgba(37,99,235,.08)}' +
-      '.lyne-panel-title{margin:0;font-size:1.06rem;font-weight:900;letter-spacing:-.04em;color:#0f172a}' +
-      '.lyne-panel-subtitle{margin:0;color:#64748b;font-size:.74rem;font-weight:700;letter-spacing:.01em}' +
-      '.lyne-panel-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}' +
-      '.lyne-mini-btn{padding:10px 11px;font-size:.72rem;border-radius:16px;border:1px solid rgba(148,163,184,.16);background:rgba(255,255,255,.72);color:#0f172a;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.72)}' +
-      '#lyne-panel .btn.btn-primary.lyne-mini-btn{background:linear-gradient(135deg,#1d4ed8,#0f766e);color:#fff;border-color:transparent;box-shadow:0 16px 28px rgba(37,99,235,.18)}' +
-      '#lyne-panel .btn.btn-secondary.lyne-mini-btn{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(241,245,249,.94));color:#1e293b}' +
-      '#lyne-meta{margin:4px 2px 0;color:#64748b;font-size:.72rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}' +
-      '#lyne-chat{margin:12px 0 0;white-space:pre-wrap;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.92));border:1px solid rgba(191,202,214,.42);border-radius:20px;padding:14px 15px;min-height:64px;max-height:148px;overflow:auto;font-size:.8rem;line-height:1.58;color:#0f172a;user-select:text;box-shadow:inset 0 1px 0 rgba(255,255,255,.92)}' +
-      '.lyne-compose{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:2px}' +
-      '.lyne-input{flex:1;min-width:0;border:1px solid rgba(148,163,184,.2);background:rgba(255,255,255,.9);border-radius:18px;padding:12px 14px;font:700 12px/1.25 Manrope,system-ui,sans-serif;color:#0f172a;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.82)}' +
-      '.lyne-input:focus{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.08)}' +
-      '.lyne-send{min-width:44px;height:44px;border:0;border-radius:18px;background:linear-gradient(135deg,#1d4ed8,#0d9488);color:#fff;font:900 14px/1 Manrope,system-ui,sans-serif;cursor:pointer;box-shadow:0 16px 28px rgba(29,78,216,.2)}' +
+      '.lyne-panel-id{display:grid;gap:3px;min-width:0}' +
+      '.lyne-panel-kicker{display:inline-flex;align-items:center;gap:6px;width:max-content;padding:5px 9px;border-radius:999px;background:rgba(0,68,53,.05);border:1px solid rgba(191,201,195,.18);font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#004435}' +
+      '.lyne-panel-kicker:before{content:"";width:6px;height:6px;border-radius:999px;background:linear-gradient(135deg,#004435,#ae3200);box-shadow:0 0 0 4px rgba(0,68,53,.07)}' +
+      '.lyne-panel-title{margin:0;font-size:1rem;font-weight:900;letter-spacing:-.03em;color:#1d1a22}' +
+      '.lyne-panel-subtitle{margin:0;color:#5f6964;font-size:.7rem;font-weight:700;letter-spacing:.01em}' +
+      '.lyne-panel-hero{display:grid;gap:8px;margin-bottom:10px;padding:10px;border-radius:16px;background:rgba(255,255,255,.76);border:1px solid rgba(191,201,195,.15)}' +
+      '.lyne-context-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}' +
+      '.lyne-status-card{display:grid;gap:3px;padding:9px 10px;border-radius:12px;background:rgba(250,251,252,.92);border:1px solid rgba(191,201,195,.16)}' +
+      '.lyne-status-label{font:800 8px/1 Manrope,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#707974}' +
+      '.lyne-status-value{font-size:.71rem;font-weight:900;letter-spacing:-.01em;color:#1d1a22;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '.lyne-quick-prompts{display:flex;flex-wrap:wrap;gap:7px}' +
+      '.lyne-prompt-chip{appearance:none;border:1px solid rgba(191,201,195,.18);background:rgba(255,255,255,.9);color:#1d1a22;border-radius:999px;padding:8px 11px;font:800 10px/1.1 Manrope,system-ui,sans-serif;letter-spacing:.01em;cursor:pointer;text-align:left;transition:transform .18s ease,background-color .18s ease,border-color .18s ease;white-space:nowrap}' +
+      '.lyne-prompt-chip:hover{transform:translateY(-1px);background:#fff;border-color:rgba(0,68,53,.18)}' +
+      '.lyne-prompt-chip.is-primary{background:rgba(0,68,53,.08);color:#004435;border-color:rgba(0,68,53,.14);box-shadow:none}' +
+      '.lyne-panel-actions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin-top:8px}' +
+      '.lyne-mini-btn{padding:9px 10px;font-size:.68rem;border-radius:12px;border:1px solid rgba(191,201,195,.18);background:rgba(255,255,255,.88);color:#1d1a22;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.72)}' +
+      '#lyne-panel .btn.btn-primary.lyne-mini-btn{background:linear-gradient(135deg,#004435,#1c6a57);color:#fff;border-color:transparent;box-shadow:0 12px 20px rgba(0,68,53,.14)}' +
+      '#lyne-panel .btn.btn-secondary.lyne-mini-btn{background:rgba(255,255,255,.92);color:#1e293b}' +
+      '#lyne-meta{margin:4px 2px 0;color:#6b736f;font-size:.64rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}' +
+      '#lyne-chat{margin:8px 0 0;display:grid;gap:10px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,252,.94));border:1px solid rgba(191,202,214,.26);border-radius:16px;padding:12px;min-height:110px;max-height:220px;overflow:auto;color:#0f172a;user-select:text;box-shadow:inset 0 1px 0 rgba(255,255,255,.94)}' +
+      '.lyne-msg{display:grid;gap:5px;max-width:92%}' +
+      '.lyne-msg-user{justify-self:end}' +
+      '.lyne-msg-role{font:800 9px/1 Manrope,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#707974}' +
+      '.lyne-msg-bubble{padding:12px 13px;border-radius:18px;font-size:.81rem;line-height:1.55;font-weight:700;box-shadow:0 8px 18px rgba(15,23,42,.05)}' +
+      '.lyne-msg-lyne .lyne-msg-bubble{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,247,250,.94));border:1px solid rgba(191,201,195,.2);color:#1d1a22}' +
+      '.lyne-msg-user .lyne-msg-bubble{background:linear-gradient(135deg,#004435,#1c6a57);color:#fff}' +
+      '.lyne-compose{display:flex;align-items:flex-end;gap:8px;margin-top:8px;padding:8px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(248,250,252,.84));border:1px solid rgba(191,201,195,.14)}' +
+      '.lyne-compose-shell{flex:1;display:grid;gap:6px;min-width:0}' +
+      '.lyne-input{flex:1;min-width:0;border:1px solid rgba(191,201,195,.2);background:rgba(255,255,255,.96);border-radius:14px;padding:11px 13px;font:700 12px/1.25 Manrope,system-ui,sans-serif;color:#0f172a;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.82)}' +
+      '.lyne-input:focus{border-color:#004435;box-shadow:0 0 0 4px rgba(0,68,53,.08)}' +
+      '.lyne-compose-note{margin:0 2px;color:#707974;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}' +
+      '.lyne-send{min-width:42px;height:42px;border:0;border-radius:12px;background:linear-gradient(135deg,#004435,#1c6a57);color:#fff;font:900 14px/1 Manrope,system-ui,sans-serif;cursor:pointer;box-shadow:0 12px 20px rgba(0,68,53,.16)}' +
       '.lyne-send:disabled{opacity:.45;cursor:default;box-shadow:none}' +
       '.sc-lyne-guide-target{position:relative;z-index:141 !important;outline:3px solid #ff8a1c !important;outline-offset:4px;border-radius:14px;box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22);animation:scLyneGuidePulse 1.15s ease-in-out infinite}' +
       '.sc-lyne-guide-bubble{position:fixed;z-index:142;max-width:min(260px,80vw);padding:10px 12px;border-radius:14px;background:rgba(14,23,38,.96);color:#fff;font:700 12px/1.35 Manrope,system-ui,sans-serif;box-shadow:0 16px 30px rgba(0,0,0,.28)}' +
@@ -265,8 +290,10 @@
       '#lyne-widget.lyne-return-mode .lyne-shell{align-items:center}' +
       '#lyne-widget.lyne-return-mode .lyne-shell:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.18),rgba(15,23,42,.34) 42%,rgba(15,23,42,.5) 100%);backdrop-filter:blur(8px);pointer-events:none;z-index:-1}' +
       '#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:72px;height:72px;box-shadow:0 22px 40px rgba(23,21,16,.28),inset -9px -12px 14px rgba(0,0,0,.22),inset 7px 9px 10px rgba(255,255,255,.36)}' +
-      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:22px;top:15px;width:28px;height:34px}' +
-      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{left:30px;top:25px;width:11px;height:15px}' +
+      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-ring{inset:13px;border-radius:18px}' +
+      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:21px;top:17px;width:30px;height:30px}' +
+      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{right:15px;top:15px;width:13px;height:13px}' +
+      '#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-signal{right:12px;bottom:12px;width:15px;height:15px}' +
       '#lyne-widget.lyne-return-mode #lyne-panel{right:auto;left:50%;bottom:90px;transform:translate(-50%,12px) scale(.96);width:min(520px,92vw);padding:18px 20px;border-radius:30px;border:1px solid rgba(255,255,255,.5);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(246,250,252,.96));box-shadow:0 30px 72px rgba(15,23,42,.24),inset 0 1px 0 rgba(255,255,255,.84)}' +
       '#lyne-widget.lyne-return-mode #lyne-panel.open{transform:translate(-50%,0) scale(1)}' +
       '#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1.18rem}' +
@@ -276,12 +303,13 @@
       '#lyne-widget.lyne-return-mode.lyne-return-strong #lyne-chat{border-color:rgba(234,88,12,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.82)}' +
       '#lyne-widget.lyne-return-mode .lyne-compose{display:none}' +
       '#lyne-widget.lyne-return-mode .lyne-panel-actions{display:none}' +
-      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-hint{right:56px;bottom:6px;width:min(210px,76vw);max-width:min(210px,76vw);padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-core{left:14px;top:13px;width:20px;height:20px;border-radius:7px}#lyne-orb-toggle .flame-core:before{left:5px;top:5px;width:10px;height:10px;border-radius:3px}#lyne-orb-toggle .flame-inner{right:10px;top:10px;width:9px;height:9px}#lyne-orb-toggle .flame-glow{inset:8px;border-radius:12px}#lyne-panel{bottom:58px;width:min(270px,78vw);padding:10px;border-radius:20px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.94rem}.lyne-panel-subtitle{font-size:.66rem}.lyne-panel-actions{gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:42px;max-height:92px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:14px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:18px;top:16px;width:23px;height:23px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core:before{left:6px;top:6px;width:11px;height:11px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{right:12px;top:12px;width:10px;height:10px}}' +
+      '@media (max-width:760px){#lyne-widget{transform:scale(.84);transform-origin:100% 100%}#lyne-hint{right:56px;bottom:6px;width:min(210px,76vw);max-width:min(210px,76vw);padding:10px 11px 9px;font-size:9px;border-radius:16px}#lyne-hint:before{margin-bottom:5px;font-size:8px}#lyne-hint:after{right:-5px;bottom:12px;width:10px;height:10px}.lyne-hint-text{padding-right:18px}.lyne-hint-close{top:6px;right:6px;font-size:10px;padding:3px 5px}.lyne-hint-actions{gap:5px;margin-top:8px}.lyne-hint-btn{padding:5px 8px;font-size:8px}#lyne-orb-toggle{width:48px;height:48px;border-radius:16px}#lyne-orb-toggle .flame-ring{inset:9px;border-radius:12px}#lyne-orb-toggle .flame-core{left:13px;top:13px;width:20px;height:20px;border-radius:8px}#lyne-orb-toggle .flame-core:before{left:5px;top:5px;width:9px;height:9px;border-radius:3px}#lyne-orb-toggle .flame-core:after{left:-4px;top:8px;width:28px;height:8px}#lyne-orb-toggle .flame-inner{right:10px;top:10px;width:9px;height:9px}#lyne-orb-toggle .flame-signal{right:8px;bottom:8px;width:11px;height:11px}#lyne-orb-toggle .flame-signal:before{inset:2px}#lyne-orb-toggle .flame-shine{left:10px;top:9px;width:9px;height:9px}#lyne-orb-toggle .flame-glow{inset:8px;border-radius:12px}#lyne-panel{bottom:58px;width:min(278px,80vw);padding:10px;border-radius:18px}.lyne-panel-head{padding-bottom:6px}.lyne-panel-kicker{padding:4px 7px;font-size:8px}.lyne-panel-title{font-size:.92rem}.lyne-panel-subtitle{font-size:.64rem}.lyne-context-bar{grid-template-columns:1fr}.lyne-quick-prompts{gap:6px}.lyne-prompt-chip{padding:7px 10px;font-size:9px}.lyne-panel-actions{grid-template-columns:1fr;gap:6px;margin-top:8px}.lyne-mini-btn{padding:8px 8px;font-size:.62rem;border-radius:12px}#lyne-chat{padding:10px 11px;min-height:80px;max-height:150px;font-size:.7rem}#lyne-meta{font-size:.62rem}.lyne-compose{gap:6px;margin-top:8px}.lyne-input{padding:9px 10px;font-size:11px;border-radius:14px}.lyne-send{min-width:38px;height:38px;border-radius:12px;font-size:13px}#lyne-widget.lyne-return-mode{transform:translate(-50%,-50%) scale(1)}#lyne-widget.lyne-return-mode #lyne-panel{bottom:84px;width:min(92vw,360px);padding:13px 14px;border-radius:24px}#lyne-widget.lyne-return-mode #lyne-chat{min-height:68px;max-height:156px;padding:13px 14px;font-size:.86rem}#lyne-widget.lyne-return-mode .lyne-panel-title{font-size:1rem}#lyne-widget.lyne-return-mode #lyne-orb-toggle{width:60px;height:60px;border-radius:20px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-ring{inset:11px;border-radius:15px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-core{left:17px;top:15px;width:24px;height:24px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-inner{right:12px;top:12px;width:10px;height:10px}#lyne-widget.lyne-return-mode #lyne-orb-toggle .flame-signal{right:10px;bottom:10px;width:12px;height:12px}}' +
       '@keyframes lyneFlame{0%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-2px) rotate(2deg) scale(1.05)}100%{transform:translateY(0) rotate(-1deg) scale(1)}}' +
       '@keyframes lyneFlameInner{0%,100%{opacity:.85;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}' +
       '@keyframes lyneGlow{0%,100%{opacity:.5}50%{opacity:1}}' +
       '@keyframes lyneFloatCore{0%,100%{transform:rotate(8deg) translateY(0)}50%{transform:rotate(8deg) translateY(-2px)}}' +
       '@keyframes lyneFloatDot{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.06)}}' +
+      '@keyframes lynePulseSignal{0%,100%{transform:scale(1);filter:saturate(1)}50%{transform:scale(1.08);filter:saturate(1.2)}}' +
       '@keyframes lyneHintFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.02)}}' +
       '@keyframes scLyneGuidePulse{0%,100%{box-shadow:0 0 0 8px rgba(255,138,28,.18),0 16px 28px rgba(20,20,28,.22)}50%{box-shadow:0 0 0 14px rgba(255,138,28,.1),0 20px 36px rgba(20,20,28,.28)}}'
     document.head.appendChild(style)
@@ -297,28 +325,41 @@
       '<div id="lyne-hint"><span class="lyne-hint-text">Talk to the LYNE AI.</span></div>' +
       '<button id="lyne-orb-toggle" type="button" aria-label="Open LYNE AI chat" aria-expanded="false">' +
       '<span class="flame-glow" aria-hidden="true"></span>' +
+      '<span class="flame-ring" aria-hidden="true"></span>' +
       '<span class="flame-core" aria-hidden="true"></span>' +
       '<span class="flame-inner" aria-hidden="true"></span>' +
+      '<span class="flame-signal" aria-hidden="true"></span>' +
+      '<span class="flame-shine" aria-hidden="true"></span>' +
       '</button>' +
       '<section id="lyne-panel" aria-hidden="true">' +
       '<div class="lyne-panel-head" data-lyne-drag-handle>' +
       '<div class="lyne-panel-id">' +
-      '<span class="lyne-panel-kicker">AI Guide</span>' +
-      '<h3 class="lyne-panel-title">LYNE AI</h3>' +
-      '<p class="lyne-panel-subtitle">Talk to the Soul Concept AI for study help, routes, and quick answers.</p>' +
+      '<span class="lyne-panel-kicker">LYNE</span>' +
+      '<h3 class="lyne-panel-title">Ask LYNE</h3>' +
+      '<p class="lyne-panel-subtitle">Straight answers, quick routes, and study help.</p>' +
       '</div>' +
       '<button id="lyne-panel-close" type="button" class="btn btn-secondary lyne-mini-btn">Hide</button>' +
       '</div>' +
+      '<div class="lyne-panel-hero">' +
+      '<div class="lyne-context-bar">' +
+      '<div class="lyne-status-card"><span class="lyne-status-label">Page</span><strong id="lyne-route-label" class="lyne-status-value">Soul Concept</strong></div>' +
+      '<div class="lyne-status-card"><span class="lyne-status-label">Mode</span><strong id="lyne-mode-label" class="lyne-status-value">Standby</strong></div>' +
+      '</div>' +
+      '<div id="lyne-quick-prompts" class="lyne-quick-prompts"></div>' +
+      '</div>' +
       '<div class="lyne-panel-actions">' +
-      '<button id="lyne-start" class="btn btn-primary lyne-mini-btn" type="button">Talk to AI</button>' +
-      '<button id="lyne-tutorial" class="btn btn-secondary lyne-mini-btn" type="button">AI Tour</button>' +
+      '<button id="lyne-start" class="btn btn-primary lyne-mini-btn" type="button">Talk</button>' +
+      '<button id="lyne-tutorial" class="btn btn-secondary lyne-mini-btn" type="button">Guide</button>' +
       '<button id="lyne-stop" class="btn btn-secondary lyne-mini-btn" type="button">Stop</button>' +
       '</div>' +
       '<p id="lyne-meta">Idle.</p>' +
-      '<pre id="lyne-chat">' + DEFAULT_CHAT + '</pre>' +
+      '<div id="lyne-chat" class="lyne-conversation" aria-live="polite"></div>' +
       '<div class="lyne-compose">' +
-      '<input id="lyne-input" class="lyne-input" type="text" placeholder="Message the AI..." maxlength="240" />' +
-      '<button id="lyne-send" class="lyne-send" type="button" aria-label="Send">↑</button>' +
+      '<div class="lyne-compose-shell">' +
+      '<input id="lyne-input" class="lyne-input" type="text" placeholder="Ask LYNE anything about study flow, routes, or concepts..." maxlength="240" />' +
+      '<p class="lyne-compose-note">Ask a route or concept question.</p>' +
+      '</div>' +
+      '<button id="lyne-send" class="lyne-send" type="button" aria-label="Send">â†‘</button>' +
       '</div>' +
       '</section>' +
       '</div>'
@@ -348,7 +389,8 @@
 
   function setChat(chatNode, text) {
     var value = String(text || '').trim() || DEFAULT_CHAT
-    chatNode.textContent = value
+    chatNode.innerHTML = renderConversation(value)
+    chatNode.scrollTop = chatNode.scrollHeight
     writeText(CHAT_KEY, value)
     var hintNode = document.getElementById('lyne-hint')
     var panelNode = document.getElementById('lyne-panel')
@@ -371,7 +413,8 @@
 
   function setTemporaryChat(chatNode, text) {
     var value = String(text || '').trim() || DEFAULT_CHAT
-    chatNode.textContent = value
+    chatNode.innerHTML = renderConversation(value)
+    chatNode.scrollTop = chatNode.scrollHeight
   }
 
   function readStableChat() {
@@ -396,6 +439,52 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;')
+  }
+
+  function splitConversation(text) {
+    var raw = String(text || '').trim() || DEFAULT_CHAT
+    var parts = raw.replace(/\r/g, '').split(/\n{2,}(?=(?:You|LYNE):)/g)
+    var messages = []
+    for (var i = 0; i < parts.length; i++) {
+      var block = String(parts[i] || '').trim()
+      if (!block) continue
+      var match = block.match(/^(You|LYNE):\s*([\s\S]*)$/i)
+      if (match) {
+        messages.push({
+          role: String(match[1] || '').toLowerCase() === 'you' ? 'user' : 'lyne',
+          text: String(match[2] || '').trim(),
+        })
+      } else {
+        messages.push({
+          role: 'lyne',
+          text: block,
+        })
+      }
+    }
+    if (!messages.length) {
+      messages.push({ role: 'lyne', text: raw })
+    }
+    return messages
+  }
+
+  function renderConversation(text) {
+    return splitConversation(text)
+      .map(function (message) {
+        var role = message.role === 'user' ? 'You' : 'LYNE'
+        return (
+          '<div class="lyne-msg lyne-msg-' +
+          escapeHtml(message.role) +
+          '">' +
+          '<div class="lyne-msg-role">' +
+          role +
+          '</div>' +
+          '<div class="lyne-msg-bubble">' +
+          escapeHtml(message.text).replace(/\n/g, '<br>') +
+          '</div>' +
+          '</div>'
+        )
+      })
+      .join('')
   }
 
   function normalizeAssistantText(text, fallbackPrompt) {
@@ -573,6 +662,88 @@
     return path === '/index' ? '/index' : path
   }
 
+  function pageTitleFromRoute(path) {
+    switch (normalizeRoute(path)) {
+      case '/index':
+        return 'Home'
+      case '/dashboard':
+        return 'Dashboard'
+      case '/subject-library':
+      case '/subject-library-2':
+        return 'Subject Library'
+      case '/study-library':
+        return 'Science Library'
+      case '/geography-library':
+        return 'Geography Library'
+      case '/grade-10-math':
+        return 'Math 10 Library'
+      case '/grade-9-advanced':
+        return 'Grade 9 Hub'
+      case '/grade-10':
+        return 'Grade 10 Hub'
+      case '/grade-11':
+        return 'Grade 11 Hub'
+      case '/grade-12':
+        return 'Grade 12 Hub'
+      case '/analytics':
+        return 'Analytics'
+      case '/schedule':
+        return 'Schedule'
+      case '/settings':
+        return 'Settings'
+      case '/profile':
+        return 'Profile'
+      case '/membership':
+        return 'Membership'
+      case '/anki/index':
+        return 'Cards'
+      default:
+        return 'Soul Concept'
+    }
+  }
+
+  function quickPromptsForRoute(path) {
+    switch (normalizeRoute(path)) {
+      case '/index':
+        return [
+          { label: 'Where to start', prompt: 'Where should I start in Soul Concept today?', primary: true },
+          { label: 'Quick tour', prompt: 'Give me a quick tour of Soul Concept.' },
+          { label: 'What you do', prompt: 'What can you help me with in this app?' },
+        ]
+      case '/subject-library':
+      case '/subject-library-2':
+        return [
+          { label: 'Grade 9 geo', prompt: 'Show me Grade 9 geography.' , primary: true},
+          { label: 'Open math 10', prompt: 'Where do I open Math 10?' },
+          { label: 'All sections', prompt: 'Show me all sections in the subject library.' },
+        ]
+      case '/study-library':
+        return [
+          { label: 'What to review', prompt: 'What should I review in science right now?', primary: true },
+          { label: 'Science quiz', prompt: 'Quiz me on a Grade 10 science concept.' },
+          { label: 'Stay focused', prompt: 'Help me stay focused in the science library.' },
+        ]
+      case '/geography-library':
+        return [
+          { label: 'What to review', prompt: 'What should I review in geography right now?', primary: true },
+          { label: 'Topic idea', prompt: 'Give me a geography topic to review.' },
+          { label: 'Guide page', prompt: 'Guide me through the geography library.' },
+        ]
+      case '/grade-10-math':
+        return [
+          { label: 'Explain math', prompt: 'Explain a Grade 10 math concept simply.', primary: true },
+          { label: 'What next', prompt: 'What should I study next in math 10?' },
+          { label: 'Practice', prompt: 'Give me a quick Grade 10 math practice question.' },
+        ]
+      default:
+        return [
+          { label: 'What next', prompt: 'What should I study next?', primary: true },
+          { label: 'Guide page', prompt: 'Guide me through this page.' },
+          { label: 'Explain', prompt: 'Explain this concept simply.' },
+        ]
+    }
+  }
+
   function init() {
     ensureStyles()
     var widget = ensureWidgetMarkup()
@@ -587,6 +758,10 @@
     var meta = document.getElementById('lyne-meta')
     var chat = document.getElementById('lyne-chat')
     var hint = document.getElementById('lyne-hint')
+    var routeLabel = document.getElementById('lyne-route-label')
+    var modeLabel = document.getElementById('lyne-mode-label')
+    var voiceLabel = document.getElementById('lyne-voice-label')
+    var quickPrompts = document.getElementById('lyne-quick-prompts')
     var dragHandle = panel.querySelector('[data-lyne-drag-handle]')
     if (!widget || !orbToggle || !panel || !panelClose || !startBtn || !tutorialBtn || !stopBtn || !sendBtn || !input || !meta || !chat || !hint) return
 
@@ -651,6 +826,47 @@
       hint.style.display = isHintDismissed() ? 'none' : ''
     }
 
+    function renderQuickPrompts() {
+      if (!quickPrompts) return
+      var prompts = quickPromptsForRoute(currentPath())
+      quickPrompts.innerHTML = prompts
+        .map(function (prompt) {
+          return (
+            '<button class="lyne-prompt-chip' +
+            (prompt.primary ? ' is-primary' : '') +
+            '" type="button" data-lyne-prompt="' +
+            escapeHtml(prompt.prompt) +
+            '">' +
+            escapeHtml(prompt.label) +
+            '</button>'
+          )
+        })
+        .join('')
+    }
+
+    function refreshLyneChrome() {
+      if (routeLabel) routeLabel.textContent = pageTitleFromRoute(currentPath())
+      if (modeLabel) {
+        var mode = 'Standby'
+        if (returnPromptActive) mode = 'Focus'
+        else if (waiting) mode = 'Thinking'
+        else if (speaking) mode = 'Speaking'
+        else if (listening) mode = 'Listening'
+        else if (active) mode = 'Live'
+        else if (panel.classList.contains('open')) mode = 'Ready'
+        modeLabel.textContent = mode
+      }
+      if (voiceLabel) {
+        var voiceState = 'Text only'
+        if (canListen) {
+          voiceState = active || listening ? 'Mic on' : 'Mic ready'
+        } else if (canSpeak) {
+          voiceState = 'Reply only'
+        }
+        voiceLabel.textContent = voiceState
+      }
+    }
+
       function setDefaultHint() {
         var preview = latestLyneMessage(readText(CHAT_KEY, DEFAULT_CHAT))
         setHintContent(preview, [{ id: 'spotlight-open', label: 'Talk to AI', primary: true }])
@@ -674,6 +890,7 @@
         meta.textContent = 'Tutor AI'
         setTemporaryChat(chat, DEFAULT_STILL_HERE)
         setHintContent('Tap to open the LYNE AI chat.', [{ id: 'spotlight-open', label: 'Talk to AI', primary: true }])
+        refreshLyneChrome()
         syncHintVisibility()
         tutorSpotlightTimers.push(
           setTimeout(function () {
@@ -736,6 +953,7 @@
       meta.textContent = strong ? 'Firm focus warning' : 'Focus reminder'
       setTemporaryChat(chat, message)
       returnPromptSpoken = false
+      refreshLyneChrome()
       if (firstShow && !document.hidden) {
         lastAssistantText = firmLine
         returnPromptSpoken = true
@@ -755,6 +973,7 @@
       }
       returnPromptState = null
       returnPromptSpoken = false
+      refreshLyneChrome()
     }
 
     function setPanelOpen(next) {
@@ -787,10 +1006,12 @@
           setDefaultHint()
         }
       }
+      refreshLyneChrome()
     }
 
     function setSpeakingVisual(next) {
       widget.classList.toggle('lyne-speaking', !!next)
+      refreshLyneChrome()
     }
 
     function currentPath() {
@@ -1396,6 +1617,7 @@
       lastUserAt = now
       waiting = true
       meta.textContent = 'Thinking...'
+      refreshLyneChrome()
       setTemporaryChat(chat, 'You: ' + question + '\n\nLYNE: ...')
       try {
         var intentReply = localAppIntentReply(question)
@@ -1428,6 +1650,7 @@
         meta.textContent = 'Using fallback reply.'
       } finally {
         waiting = false
+        refreshLyneChrome()
         if (active && canListen) {
           setTimeout(startListening, 250)
         }
@@ -1610,6 +1833,7 @@
       active = true
       setPanelOpen(true)
       meta.textContent = 'Conversation started.'
+      refreshLyneChrome()
       playUiSound('success')
       startListening()
     })
@@ -1640,6 +1864,7 @@
       speaking = false
       setSpeakingVisual(false)
       meta.textContent = 'Conversation stopped.'
+      refreshLyneChrome()
       playUiSound('tap')
     })
 
@@ -1650,10 +1875,19 @@
       input.value = ''
       setPanelOpen(true)
       playUiSound('message')
+      refreshLyneChrome()
       askLyne(value)
     }
 
     sendBtn.addEventListener('click', submitManualPrompt)
+    panel.addEventListener('click', function (event) {
+      var trigger = event.target && event.target.closest ? event.target.closest('[data-lyne-prompt]') : null
+      if (!trigger) return
+      var promptText = trigger.getAttribute('data-lyne-prompt')
+      if (!promptText) return
+      input.value = promptText
+      submitManualPrompt()
+    })
     input.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         event.preventDefault()
@@ -1719,6 +1953,7 @@
       recognition.onstart = function () {
         listening = true
         meta.textContent = speaking ? 'Waiting...' : 'Listening...'
+        refreshLyneChrome()
       }
       recognition.onresult = function (event) {
         if (Date.now() < ignoreMicUntil) return
@@ -1728,10 +1963,12 @@
           if (!transcript) continue
           if (looksLikeEcho(transcript)) {
             meta.textContent = active ? 'Listening...' : 'Idle.'
+            refreshLyneChrome()
             continue
           }
           captureText = transcript
           meta.textContent = event.results[i].isFinal ? 'Heard: ' + transcript : 'Hearing: ' + transcript
+          refreshLyneChrome()
           scheduleFlush(event.results[i].isFinal ? FINAL_SPEECH_PAUSE_MS : INTERIM_SPEECH_PAUSE_MS)
         }
       }
@@ -1739,9 +1976,11 @@
         listening = false
         var code = String((event && event.error) || '')
         meta.textContent = code === 'not-allowed' ? 'Microphone permission blocked.' : (active ? 'Listening...' : 'Idle.')
+        refreshLyneChrome()
       }
       recognition.onend = function () {
         listening = false
+        refreshLyneChrome()
         if (active && !waiting) {
           setTimeout(startListening, 350)
         } else if (panel.classList.contains('open')) {
@@ -1751,11 +1990,14 @@
     } else {
       startBtn.disabled = true
       meta.textContent = 'Voice not supported in this browser.'
+      refreshLyneChrome()
     }
 
     setDefaultHint()
+    renderQuickPrompts()
     setStableChat(chat, readStableChat())
     setPanelOpen(false)
+    refreshLyneChrome()
     syncHintVisibility()
     applyPosition(widget, readJson(POSITION_KEY, { x: window.innerWidth - 66, y: window.innerHeight - 66 }))
     window.addEventListener('resize', function () {

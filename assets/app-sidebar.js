@@ -260,11 +260,6 @@
 
     sidebarMount.innerHTML =
       '<div class="sc-app-sidebar-brand">' +
-        '<div class="sc-app-sidebar-brand-main">' +
-          '<div class="sc-app-sidebar-brand-mark">' +
-            '<img alt="Soul Concept logo" src="' + route('icons/soulconceptflame.png') + '">' +
-          '</div>' +
-        '</div>' +
         '<button aria-label="Hide sidebar" class="sc-app-sidebar-toggle" data-sc-sidebar-toggle type="button">' +
           '<span class="material-symbols-outlined sc-app-sidebar-toggle-icon" aria-hidden="true">chevron_left</span>' +
         '</button>' +
