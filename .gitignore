@@ -1,1 +1,3 @@
 .vercel
+node_modules/
+_tmp_geolib_*.tsx

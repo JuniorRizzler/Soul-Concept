@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -209,6 +209,27 @@
         }
         .grade-picker-open {
             min-width: 9rem;
+        }
+        .grade-picker-shell[hidden] {
+            display: none !important;
+        }
+        .grade-picker-shell {
+            width: 100%;
+            margin-top: 0.35rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.24s ease, transform 0.24s ease;
+        }
+        .grade-picker-shell.is-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .grade-picker-card.is-highlighted {
+            border-color: rgba(0, 68, 53, 0.36);
+            box-shadow: 0 16px 36px rgba(0, 68, 53, 0.1), 0 0 0 6px rgba(152, 211, 189, 0.16);
+        }
+        .grade-picker-option {
+            text-decoration: none;
         }
         .mobile-app-shell {
             background: rgba(249, 241, 253, 0.88);
@@ -546,8 +567,10 @@
             }
         }
     </style>
+<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260403d"></script>
 </head>
-<body class="bg-background text-on-surface" data-sc-auth-required="false" data-sc-auth-mount="false">
+<body class="bg-background text-on-surface" data-sc-auth-required="false" data-sc-auth-mount="false" data-sc-sidebar-page="home">
 <!-- Top Navigation Bar -->
 <!-- Shared Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
@@ -557,8 +580,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
 </div>
@@ -589,51 +612,8 @@
 </nav>
 <!-- /Shared Top Navigation -->
 <!-- Sidebar (Persistent on Desktop) -->
-<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-surface-container-low border-r border-outline-variant/10 hidden lg:flex flex-col p-6 z-40">
-<div class="space-y-1 mb-8">
-<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Main Menu</p>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl sidebar-link-active transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">grid_view</span>
-<span class="font-label text-sm font-bold">Overview</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">menu_book</span>
-<span class="font-label text-sm font-semibold">Subjects</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">style</span>
-<span class="font-label text-sm font-semibold">Concept Cards</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">military_tech</span>
-<span class="font-label text-sm font-semibold">Achievements</span>
-</a>
-</div>
-<div class="space-y-1 mb-8">
-<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Account &amp; Tools</p>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-<span class="font-label text-sm font-semibold">Subscriptions</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">model_training</span>
-<span class="font-label text-sm font-semibold">Exam Simulator</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">insights</span>
-<span class="font-label text-sm font-semibold">Insights</span>
-</a>
-</div>
-<div class="mt-auto bg-primary-container p-4 rounded-2xl relative overflow-hidden">
-<div class="relative z-10">
-<p class="text-primary-fixed text-xs font-bold mb-1">PRO ACCESS</p>
-<p class="text-white text-[11px] leading-tight opacity-90 mb-3">Unlock all study tools, libraries, and guided review features.</p>
-<button class="bg-primary-fixed text-on-primary-fixed-variant w-full py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider">Upgrade</button>
-</div>
-<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
-</div>
-</aside>
-<main class="pt-24 lg:pl-64">
+<aside class="sc-app-sidebar hidden lg:flex" data-sc-app-sidebar="" data-sidebar-shell=""></aside>
+<main class="pt-24" data-sidebar-main="">
 <!-- Hero Section -->
 <section class="max-w-7xl mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center gap-16">
 <div class="w-full md:w-1/2 space-y-8">
@@ -645,15 +625,32 @@
                     Soul Concept is built for real class success, not random answers. You get structured libraries, focused review flow, and tools designed around what you actually need to learn.
                 </p>
 <div class="flex flex-wrap gap-4 pt-4">
-<a class="cta-gradient inline-flex items-center justify-center text-white px-8 py-4 rounded-xl font-body font-bold text-md shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-all" href="grade-9.html">
+<a class="cta-gradient inline-flex items-center justify-center text-white px-8 py-4 rounded-xl font-body font-bold text-md shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-all" href="subject-library.html">
                         Explore Library
                     </a>
-<a class="inline-flex items-center justify-center bg-surface-container-highest text-on-surface px-8 py-4 rounded-xl font-body font-bold text-md hover:bg-surface-container-high transition-all" href="grade-9-advanced.html">
+<a class="inline-flex items-center justify-center bg-surface-container-highest text-on-surface px-8 py-4 rounded-xl font-body font-bold text-md hover:bg-surface-container-high transition-all grade-picker-open" data-grade-picker-trigger="" href="subject-library.html">
                         Browse Grades
                     </a>
 <button class="inline-flex items-center justify-center border border-outline-variant/20 bg-white/70 text-primary px-8 py-4 rounded-xl font-body font-bold text-md hover:bg-white transition-all" data-lyne-start-tutorial="" type="button">
                         Start AI Tutorial
                     </button>
+<div class="grade-picker-shell" data-grade-picker-shell="" hidden="">
+<div class="grade-picker-card" data-grade-picker-card="">
+<div class="grade-picker-heading">
+<span class="material-symbols-outlined">school</span>
+<div class="grade-picker-copy">
+<span class="grade-picker-kicker">Browse Grades</span>
+<strong>Choose the grade hub you want to open.</strong>
+</div>
+</div>
+<div class="grade-picker-options">
+<a class="grade-picker-option" data-grade-picker-option="" href="subject-library.html">Grade 9</a>
+<a class="grade-picker-option" data-grade-picker-option="" href="grade-10.html">Grade 10</a>
+<a class="grade-picker-option" data-grade-picker-option="" href="grade-11.html">Grade 11</a>
+<a class="grade-picker-option" data-grade-picker-option="" href="grade-12.html">Grade 12</a>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="w-full md:w-1/2 relative">
@@ -675,7 +672,7 @@
 <h2 class="font-headline text-3xl font-bold text-primary mb-4 tracking-tight">Study Libraries</h2>
 <p class="font-body text-on-surface-variant max-w-md">Open the right subject fast and follow a clear study flow without wasting time figuring out what to do next.</p>
 </div>
-<a class="font-label text-sm font-bold text-secondary flex items-center gap-2 group" href="grade-9.html">
+<a class="font-label text-sm font-bold text-secondary flex items-center gap-2 group" href="subject-library.html">
                         VIEW ALL SUBJECTS 
                         <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </a>
@@ -705,7 +702,7 @@
 <!-- Math -->
 <a class="flex-1 group relative overflow-hidden rounded-2xl bg-primary editorial-shadow min-h-[234px] block" data-tour-id="home-math10-open" href="grade-10-math.html">
 <div class="absolute inset-0 opacity-10 font-mono text-[10px] p-4 text-white overflow-hidden leading-tight">
-                                âˆ« f(x)dx = F(x) + C | e = mcÂ² | aÂ² + bÂ² = cÂ² | Î£ x/n | âˆ‚u/âˆ‚t = Î±âˆ‡Â²u | Î¦ = (1+âˆš5)/2
+                                integral f(x)dx = F(x) + C | e = mc^2 | a^2 + b^2 = c^2 | sum x/n | du/dt = alpha laplacian(u) | phi = (1+sqrt(5))/2
                             </div>
 <div class="relative p-8 h-full flex flex-col justify-end">
 <h3 class="font-headline text-2xl text-white font-bold mb-2">Mathematics</h3>
@@ -775,7 +772,7 @@
 </div>
 <p class="font-body text-sm text-on-surface-variant italic">"Open a guide, review key terms, and check understanding before you move on."</p>
 <div class="grid grid-cols-2 gap-3 pt-4">
-<a class="bg-surface-container hover:bg-primary hover:text-white p-3 rounded-lg text-xs font-bold transition-all inline-flex items-center justify-center" href="grade-9.html">Open Library</a>
+<a class="bg-surface-container hover:bg-primary hover:text-white p-3 rounded-lg text-xs font-bold transition-all inline-flex items-center justify-center" href="subject-library.html">Open Library</a>
 <a class="bg-primary text-white p-3 rounded-lg text-xs font-bold inline-flex items-center justify-center" href="study-library.html">Start Review</a>
 </div>
 </div>
@@ -828,8 +825,8 @@
                     Soul Concept brings together study libraries, concept cards, quizzes, and progress tools so students can follow a clearer path and worry less.
                 </p>
 <div class="flex flex-col sm:flex-row justify-center gap-6 pt-6">
-<a class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center" href="grade-9.html">EXPLORE LIBRARY</a>
-<a class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all inline-flex items-center justify-center" href="grade-9-advanced.html">BROWSE GRADES</a>
+<a class="cta-gradient text-white px-10 py-5 rounded-xl font-bold font-label tracking-widest text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center" href="subject-library.html">EXPLORE LIBRARY</a>
+<a class="border-b-2 border-primary text-primary px-2 py-5 font-bold font-label tracking-widest text-sm hover:text-secondary hover:border-secondary transition-all inline-flex items-center justify-center" href="subject-library.html">BROWSE GRADES</a>
 </div>
 </div>
 </section>
@@ -839,7 +836,7 @@
 <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto">
 <div class="mb-8 md:mb-0">
 <p class="font-bold text-[#004435] mb-2 font-headline">Soul Concept</p>
-<p class="font-['Manrope'] text-xs uppercase tracking-widest text-slate-400">Â© 2024 Soul Concept Academic Gallery. All rights reserved.</p>
+<p class="font-['Manrope'] text-xs uppercase tracking-widest text-slate-400">(c) 2024 Soul Concept Academic Gallery. All rights reserved.</p>
 </div>
 <div class="flex gap-12 font-['Manrope'] text-xs uppercase tracking-widest">
 <a class="text-slate-400 hover:text-[#004435] transition-colors" href="#">Terms of Use</a>
@@ -859,7 +856,7 @@
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -894,8 +891,139 @@
 <script src="supabase-auth.js?v=20260329c"></script>
 <script src="auth-profile-sync.js?v=20260328b"></script>
 <script defer src="lyne-widget.js?v=20260321c"></script>
+<script>
+    (function () {
+      var POSITION_KEY = 'sc_lyne_widget_position_v1'
+      var pickerOpen = false
+
+      function writePosition(position) {
+        try {
+          localStorage.setItem(POSITION_KEY, JSON.stringify(position))
+        } catch (_err) {}
+      }
+
+      function moveLyneNearGrades() {
+        var widget = document.getElementById('lyne-widget')
+        var pickerCard = document.querySelector('[data-grade-picker-card]')
+        if (!widget || !pickerCard) return false
+
+        var rect = pickerCard.getBoundingClientRect()
+        var widgetWidth = widget.offsetWidth || 58
+        var widgetHeight = widget.offsetHeight || 58
+        var x = rect.right + 18
+        var y = rect.top + Math.max(12, Math.round((rect.height - widgetHeight) / 2))
+
+        if (x + widgetWidth > window.innerWidth - 16) {
+          x = Math.max(16, rect.left - widgetWidth - 18)
+        }
+        if (x < 16) x = 16
+        if (y < 92) y = 92
+        if (y + widgetHeight > window.innerHeight - 16) {
+          y = Math.max(92, window.innerHeight - widgetHeight - 16)
+        }
+
+        widget.style.left = x + 'px'
+        widget.style.top = y + 'px'
+        writePosition({ x: x, y: y })
+
+        var hint = document.getElementById('lyne-hint')
+        var panel = document.getElementById('lyne-panel')
+        if (panel) {
+          panel.classList.remove('open')
+          panel.setAttribute('aria-hidden', 'true')
+        }
+        if (widget) widget.setAttribute('data-panel-open', 'false')
+        if (hint) {
+          hint.innerHTML = '<span class="lyne-hint-text">Choose a grade here to open the right study hub.</span>'
+        }
+        return true
+      }
+
+      function spotlightPicker() {
+        var pickerCard = document.querySelector('[data-grade-picker-card]')
+        if (!pickerCard) return
+        pickerCard.classList.add('is-highlighted', 'sc-lyne-guide-target')
+      }
+
+      function clearPickerSpotlight() {
+        var pickerCard = document.querySelector('[data-grade-picker-card]')
+        if (!pickerCard) return
+        pickerCard.classList.remove('is-highlighted', 'sc-lyne-guide-target')
+      }
+
+      function showPicker() {
+        var pickerShell = document.querySelector('[data-grade-picker-shell]')
+        if (!pickerShell) return
+        pickerShell.hidden = false
+        requestAnimationFrame(function () {
+          pickerShell.classList.add('is-open')
+          pickerOpen = true
+          spotlightPicker()
+          var attempts = 0
+          function tryMove() {
+            attempts += 1
+            if (moveLyneNearGrades() || attempts > 16) return
+            window.setTimeout(tryMove, 90)
+          }
+          tryMove()
+        })
+      }
+
+      function hidePicker() {
+        var pickerShell = document.querySelector('[data-grade-picker-shell]')
+        if (!pickerShell) return
+        pickerShell.classList.remove('is-open')
+        pickerOpen = false
+        clearPickerSpotlight()
+        window.setTimeout(function () {
+          if (!pickerOpen) pickerShell.hidden = true
+        }, 220)
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var trigger = document.querySelector('[data-grade-picker-trigger]')
+        var pickerShell = document.querySelector('[data-grade-picker-shell]')
+        if (!trigger || !pickerShell) return
+
+        trigger.addEventListener('click', function (event) {
+          event.preventDefault()
+          if (pickerOpen) {
+            hidePicker()
+            return
+          }
+          showPicker()
+        })
+
+        pickerShell.addEventListener('click', function (event) {
+          var option = event.target && event.target.closest ? event.target.closest('[data-grade-picker-option]') : null
+          if (!option) return
+          pickerShell.querySelectorAll('[data-grade-picker-option]').forEach(function (node) {
+            node.setAttribute('data-active', node === option ? 'true' : 'false')
+          })
+        })
+
+        document.addEventListener('click', function (event) {
+          if (!pickerOpen) return
+          var insidePicker = event.target && event.target.closest ? event.target.closest('[data-grade-picker-shell]') : null
+          var insideTrigger = event.target && event.target.closest ? event.target.closest('[data-grade-picker-trigger]') : null
+          if (insidePicker || insideTrigger) return
+          hidePicker()
+        })
+
+        window.addEventListener('resize', function () {
+          if (!pickerOpen) return
+          moveLyneNearGrades()
+        })
+      })
+    })()
+</script>
 <script defer src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+
+
+
+
 
 
 

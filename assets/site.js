@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   if (!document.getElementById("sc-shell-critical")) {
     const criticalStyle = document.createElement("style");
     criticalStyle.id = "sc-shell-critical";
@@ -31,11 +31,11 @@
     ["discover", "discover.html"],
     ["dashboard", "dashboard.html"],
     ["overview", "dashboard.html"],
-    ["library", "grade-9.html"],
-    ["subjects", "grade-9.html"],
-    ["subject library", "grade-9.html"],
-    ["all subjects", "grade-9.html"],
-    ["view libraries", "grade-9.html"],
+    ["library", "subject-library.html"],
+    ["subjects", "subject-library.html"],
+    ["subject library", "subject-library.html"],
+    ["all subjects", "subject-library.html"],
+    ["view libraries", "subject-library.html"],
     ["featured", "disciplines.html"],
     ["recent activity", "dashboard.html"],
     ["saved modules", "library.html"],
@@ -71,14 +71,14 @@
     ["sign in", "dashboard.html"],
     ["contact", "settings.html#support"],
     ["grade 8", "discover.html"],
-    ["grade 9", "grade-9-advanced.html"],
+    ["grade 9", "subject-library.html"],
     ["grade 10", "grade-10.html"],
     ["grade 11", "grade-11.html"],
     ["grade 12", "grade-12.html"],
-    ["view all subjects", "grade-9.html"],
+    ["view all subjects", "subject-library.html"],
     ["start study session", "dashboard.html"],
-    ["explore library", "grade-9.html"],
-    ["enter library", "grade-9.html"],
+    ["explore library", "subject-library.html"],
+    ["enter library", "subject-library.html"],
     ["establish access", "dashboard.html"],
     ["view the manifesto", "discover.html"],
     ["request research assistant", "research.html"],
@@ -100,15 +100,15 @@
   const topLinks = [
     { href: "index.html", label: "Home" },
     { href: "dashboard.html", label: "Dashboard" },
-    { href: "grade-9.html", label: "View Libraries" },
-    { href: "grade-9.html", label: "Library" },
+    { href: "subject-library.html", label: "View Libraries" },
+    { href: "subject-library.html", label: "Library" },
     { href: "analytics.html", label: "Analytics" }
   ];
 
   const sideLinks = [
     { href: "index.html", label: "Home", icon: "home" },
     { href: "dashboard.html", label: "Overview", icon: "dashboard" },
-    { href: "grade-9.html", label: "Libraries", icon: "auto_stories" },
+    { href: "subject-library.html", label: "Libraries", icon: "auto_stories" },
     { href: "analytics.html", label: "Analytics", icon: "analytics" },
     { href: "research.html", label: "Research", icon: "biotech" },
     { href: "curriculum.html", label: "Curriculum", icon: "school" },
@@ -130,10 +130,10 @@
     "subjects.html": { title: "Subjects", kicker: "Library Index" },
     "subject-library-2.html": { title: "Subject Library", kicker: "Curated Disciplines" },
     "disciplines.html": { title: "Disciplines", kicker: "Academic Catalog" },
-    "grade-9.html": { title: "Grade 9", kicker: "Core Modules" },
+    "subject-library.html": { title: "Subject Library", kicker: "All Grades" },
     "grade-9-alt.html": { title: "Grade 9 Studio", kicker: "Focused Library" },
     "grade-9-studio.html": { title: "Grade 9 Archive", kicker: "Subject View" },
-    "grade-9-advanced.html": { title: "Advanced Library", kicker: "Flashcards" },
+    "grade-9-advanced.html": { title: "Subject Library", kicker: "All Grades" },
     "grade-10.html": { title: "Grade 10", kicker: "Expanded Curriculum" },
     "grade-11.html": { title: "Grade 11", kicker: "Upper School" },
     "grade-12.html": { title: "Grade 12", kicker: "Senior Modules" },
@@ -157,8 +157,8 @@
     { href: "dashboard.html", title: "Home", kicker: "Soul Concept", summary: "Open the live Soul Concept workspace instead of the legacy landing page.", keywords: ["home", "dashboard", "workspace", "knowledge"] },
     { href: "discover.html", title: "Discover", kicker: "Editorial Home", summary: "Browse featured knowledge paths and study tools.", keywords: ["discover", "featured", "manifesto"] },
     { href: "dashboard.html", title: "Dashboard", kicker: "Scholar Workspace", summary: "Track tasks, progress, and learning insights.", keywords: ["dashboard", "overview", "tasks", "flow"] },
-    { href: "grade-9.html", title: "View Libraries", kicker: "Grade 9", summary: "Open the Grade 9 subject archive and library hub.", keywords: ["library", "subjects", "grade 9", "modules", "science", "geography", "math", "view libraries"] },
-    { href: "grade-9.html", title: "Subject Library", kicker: "Grade 9", summary: "Open the dedicated Grade 9 subject archive page with its subject cards and links.", keywords: ["subjects", "all subjects", "subject library", "grade 9"] },
+    { href: "subject-library.html", title: "View Libraries", kicker: "All Grades", summary: "Open the main subject library with all currently available grade and AP study spaces.", keywords: ["library", "subjects", "all grades", "modules", "science", "geography", "math", "view libraries"] },
+    { href: "subject-library.html", title: "Subject Library", kicker: "All Grades", summary: "Open the main subject library page with grade-based subject cards and AP links.", keywords: ["subjects", "all subjects", "subject library", "all grades", "grade 9"] },
     { href: "research.html", title: "Research", kicker: "Repository", summary: "Search papers, authors, keywords, and DOI references.", keywords: ["research", "papers", "authors", "doi"] },
     { href: "analytics.html", title: "Analytics", kicker: "Scholar Metrics", summary: "Review growth, impact, mastery, and knowledge stream metrics.", keywords: ["analytics", "metrics", "impact", "growth"] },
     { href: "curation.html", title: "Curation", kicker: "Editorial Console", summary: "Manage saved artifacts and curated materials.", keywords: ["curation", "artifacts", "saved"] },
@@ -223,7 +223,7 @@
       if (dataIcon && !icon.textContent.trim()) {
         icon.textContent = dataIcon;
       }
-      if (icon.textContent.includes("Ã¢")) {
+      if (icon.textContent.includes("ÃƒÂ¢")) {
         icon.textContent = dataIcon || "circle";
       }
     });
@@ -1179,17 +1179,17 @@
     document.querySelectorAll("*").forEach((node) => {
       if (node.children.length) return;
       const text = node.textContent;
-      if (!text || !text.includes("Ã¢")) return;
+      if (!text || !text.includes("ÃƒÂ¢")) return;
       node.textContent = text
-        .replaceAll("Ã¢Ë†Â«", "âˆ«")
-        .replaceAll("mcÃ‚Â²", "mcÂ²")
-        .replaceAll("aÃ‚Â²", "aÂ²")
-        .replaceAll("Ã¢Ë†â€š", "âˆ‚")
-        .replaceAll("ÃŽÂ±", "Î±")
-        .replaceAll("Ã¢Ë†â€¡", "âˆ‡")
-        .replaceAll("ÃŽÂ¦", "Î¦")
-        .replaceAll("Ã¢Ë†Å¡", "âˆš")
-        .replaceAll("ÃŽÂ£", "Î£");
+        .replaceAll("ÃƒÂ¢Ã‹â€ Ã‚Â«", "Ã¢Ë†Â«")
+        .replaceAll("mcÃƒâ€šÃ‚Â²", "mcÃ‚Â²")
+        .replaceAll("aÃƒâ€šÃ‚Â²", "aÃ‚Â²")
+        .replaceAll("ÃƒÂ¢Ã‹â€ Ã¢â‚¬Å¡", "Ã¢Ë†â€š")
+        .replaceAll("ÃƒÅ½Ã‚Â±", "ÃŽÂ±")
+        .replaceAll("ÃƒÂ¢Ã‹â€ Ã¢â‚¬Â¡", "Ã¢Ë†â€¡")
+        .replaceAll("ÃƒÅ½Ã‚Â¦", "ÃŽÂ¦")
+        .replaceAll("ÃƒÂ¢Ã‹â€ Ã…Â¡", "Ã¢Ë†Å¡")
+        .replaceAll("ÃƒÅ½Ã‚Â£", "ÃŽÂ£");
     });
   }
 
@@ -1217,3 +1217,4 @@
   document.body.classList.add("sc-page-enter");
   document.getElementById("sc-shell-critical")?.remove();
 })();
+

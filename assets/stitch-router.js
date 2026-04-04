@@ -1,6 +1,6 @@
-(function () {
+﻿(function () {
   const gradeLinks = [
-    { label: "Grade 9", href: "grade-9-advanced.html" },
+    { label: "Grade 9", href: "subject-library.html" },
     { label: "Grade 10", href: "grade-10.html" },
     { label: "Grade 11", href: "grade-11.html" },
     { label: "Grade 12", href: "grade-12.html" }
@@ -12,12 +12,12 @@
     ["dashboard", "dashboard.html"],
     ["overview", "dashboard.html"],
     ["home", "index.html"],
-    ["library", "grade-9.html"],
-    ["subjects", "grade-9.html"],
-    ["subjects library", "grade-9.html"],
-    ["subject library", "grade-9.html"],
-    ["grades", "grade-9-advanced.html"],
-    ["grade 9", "grade-9-advanced.html"],
+    ["library", "subject-library.html"],
+    ["subjects", "subject-library.html"],
+    ["subjects library", "subject-library.html"],
+    ["subject library", "subject-library.html"],
+    ["grades", "subject-library.html"],
+    ["grade 9", "subject-library.html"],
     ["grade 10", "grade-10.html"],
     ["grade 11", "grade-11.html"],
     ["grade 12", "grade-12.html"],
@@ -30,9 +30,9 @@
     ["subscriptions", "membership.html"],
     ["settings", "settings.html"],
     ["concept cards", "anki/index.html"],
-    ["view all", "grade-9.html"],
-    ["view archive", "grade-9.html"],
-    ["archives", "grade-9.html"],
+    ["view all", "subject-library.html"],
+    ["view archive", "subject-library.html"],
+    ["archives", "subject-library.html"],
     ["support", "settings.html#support"],
     ["help", "settings.html#support"],
     ["upgrade to fellow", "membership.html"],
@@ -44,12 +44,12 @@
     ["home", "index.html"],
     ["grid_view", "dashboard.html"],
     ["dashboard", "dashboard.html"],
-    ["auto_stories", "grade-9.html"],
-    ["subject", "grade-9.html"],
-    ["book", "grade-9.html"],
-    ["library_books", "grade-9.html"],
-    ["import_contacts", "grade-9.html"],
-    ["style", "grade-9.html"],
+    ["auto_stories", "subject-library.html"],
+    ["subject", "subject-library.html"],
+    ["book", "subject-library.html"],
+    ["library_books", "subject-library.html"],
+    ["import_contacts", "subject-library.html"],
+    ["style", "subject-library.html"],
     ["analytics", "analytics.html"],
     ["insights", "analytics.html"],
     ["biotech", "research.html"],
@@ -65,7 +65,7 @@
     ["subscriptions", "membership.html"],
     ["card_membership", "membership.html"],
     ["payments", "membership.html"],
-    ["grade", "grade-9-advanced.html"],
+    ["grade", "subject-library.html"],
     ["account_circle", "settings.html"],
     ["person", "profile.html"],
     ["settings", "settings.html"],
@@ -81,8 +81,7 @@
     { title: "Study Scheduler", type: "Tool", description: "Plan, edit, and organize study sessions.", href: "schedule.html#overview", keywords: ["schedule", "scheduler", "calendar", "planner", "study schedule"] },
     { title: "Schedule Calendar", type: "Section", description: "Weekly calendar for adding and editing sessions.", href: "schedule.html#schedule-grid", keywords: ["calendar", "week", "weekly", "grid"] },
     { title: "Task Feed", type: "Section", description: "See your current BBK12 and study task feed.", href: "schedule.html#task-feed", keywords: ["task feed", "assignments", "bbk12", "feed"] },
-    { title: "Grade 9 Library", type: "Library", description: "Browse the main Grade 9 subject libraries.", href: "grade-9.html", keywords: ["grade 9", "library", "subjects", "grade nine"] },
-    { title: "Grade 9 Advanced", type: "Library", description: "Advanced Grade 9 subject showcase and reading.", href: "grade-9-advanced.html", keywords: ["grade 9 advanced", "advanced", "reading"] },
+    { title: "Subject Library", type: "Library", description: "Browse the main subject library across Grade 9 to AP study spaces.", href: "subject-library.html", keywords: ["grade 9", "library", "subjects", "grade nine", "all grades"] },
     { title: "Grade 10 Resources", type: "Library", description: "Grade 10 subject libraries and rotating features.", href: "grade-10.html", keywords: ["grade 10", "grade ten"] },
     { title: "Grade 11 Resources", type: "Library", description: "Grade 11 subjects and higher-level study routes.", href: "grade-11.html", keywords: ["grade 11", "grade eleven"] },
     { title: "Grade 12 Resources", type: "Library", description: "Grade 12 libraries and senior-level study tools.", href: "grade-12.html", keywords: ["grade 12", "grade twelve"] },
@@ -153,7 +152,7 @@
     }
     const href = anchor.getAttribute("href") || "";
     if (href === "library.html" || href === "/library.html") {
-      anchor.setAttribute("href", "grade-9.html");
+      anchor.setAttribute("href", "subject-library.html");
       return;
     }
     if (!href || href === "#" || href.includes("{{DATA:SCREEN:")) {
@@ -221,14 +220,14 @@
     if (gradeText.includes("grade 11") && titleText.includes("geography")) return "geography-library.html";
     if (gradeText.includes("grade 11")) return "grade-11.html";
     if (gradeText.includes("grade 12")) return "grade-12.html";
-    if (gradeText.includes("grade 9")) return "grade-9.html";
+    if (gradeText.includes("grade 9")) return "subject-library.html";
     return "";
   }
 
   function wireSubjectSections() {
     const page = (location.pathname.split("/").pop() || "").toLowerCase();
 
-    if (page === "grade-9.html") {
+    if (page === "subject-library.html") {
       document.querySelectorAll("a.group\\/link, a[href='#']").forEach((anchor) => {
         const card = anchor.closest(".group.relative.flex.flex-col");
         if (!card) return;
@@ -239,7 +238,7 @@
 
     if (page === "dashboard.html") {
       const viewAll = Array.from(document.querySelectorAll("a")).find((anchor) => normalize(anchor.textContent || "").startsWith("view all"));
-      if (viewAll) viewAll.setAttribute("href", "grade-9.html");
+      if (viewAll) viewAll.setAttribute("href", "subject-library.html");
 
       const galleries = Array.from(document.querySelectorAll(".relative.h-48.rounded-3xl.overflow-hidden.group.cursor-pointer"));
       if (galleries[0]) galleries[0].addEventListener("click", () => { location.href = "grade-11.html"; });
@@ -1172,7 +1171,7 @@
         button.dataset.stitchRouteBound = "true";
         button.style.cursor = "pointer";
         button.addEventListener("click", () => {
-          location.href = "grade-9-advanced.html";
+          location.href = "subject-library.html";
         });
         return;
       }
@@ -1200,3 +1199,4 @@
     });
   });
 })();
+

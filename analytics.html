@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -94,6 +94,35 @@
             background: conic-gradient(from 180deg at 50% 100%, #10b981 0deg, #f59e0b 90deg, #ef4444 180deg);
             mask: radial-gradient(circle at 50% 100%, transparent 60%, black 61%);
             -webkit-mask: radial-gradient(circle at 50% 100%, transparent 60%, black 61%);
+        }
+        .analytics-hero-shell {
+            min-height: 27rem;
+        }
+        .analytics-hero-visual {
+            min-height: 22rem;
+            background:
+                radial-gradient(circle at top left, rgba(179, 239, 216, 0.45), transparent 32%),
+                radial-gradient(circle at bottom right, rgba(174, 50, 0, 0.18), transparent 28%),
+                linear-gradient(135deg, #ffffff 0%, #f7f0fb 100%);
+        }
+        .analytics-energy-card {
+            min-height: 22rem;
+        }
+        .analytics-sidebar-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            align-self: flex-start;
+            border-radius: 999px;
+            padding: 0.7rem 0.95rem;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(191,201,195,0.55);
+            box-shadow: 0 12px 26px rgba(29,26,34,0.08);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #004435;
         }
 
         @keyframes float {
@@ -361,55 +390,71 @@
                 height: 2rem !important;
             }
         }
+        @media (max-width: 1279px) {
+            .analytics-hero-visual,
+            .analytics-energy-card {
+                min-height: 20rem;
+            }
+        }
+        @media (max-width: 767px) {
+            .analytics-hero-shell {
+                min-height: auto;
+            }
+            .analytics-hero-visual,
+            .analytics-energy-card {
+                min-height: 16rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            [data-sidebar-shell] {
+                position: fixed !important;
+                left: 0;
+                top: 80px;
+                width: 16rem;
+                height: calc(100vh - 80px);
+                max-height: calc(100vh - 80px);
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                transition: width 0.24s ease, padding 0.24s ease, opacity 0.24s ease;
+                overflow: hidden;
+            }
+            main[data-sidebar-main] {
+                margin-left: 16rem;
+            }
+            body.sc-sidebar-closed [data-sidebar-shell] {
+                width: 5.25rem !important;
+                padding-left: 0.85rem !important;
+                padding-right: 0.85rem !important;
+            }
+            body.sc-sidebar-closed main[data-sidebar-main] {
+                margin-left: 5.25rem !important;
+            }
+            body.sc-sidebar-closed [data-sidebar-shell] .analytics-sidebar-label,
+            body.sc-sidebar-closed [data-sidebar-shell] .analytics-sidebar-cta,
+            body.sc-sidebar-closed [data-sidebar-shell] .analytics-sidebar-footer-label {
+                display: none !important;
+            }
+            body.sc-sidebar-closed [data-sidebar-shell] a,
+            body.sc-sidebar-closed [data-sidebar-shell] button.analytics-sidebar-toggle,
+            body.sc-sidebar-closed [data-sidebar-shell] .analytics-sidebar-footer-link {
+                justify-content: center;
+                width: 100%;
+            }
+            body.sc-sidebar-closed [data-sidebar-shell] .analytics-sidebar-stack {
+                align-items: center;
+            }
+            body.sc-sidebar-closed [data-sidebar-shell] .analytics-sidebar-toggle {
+                padding-left: 0.7rem;
+                padding-right: 0.7rem;
+            }
+        }
     </style>
+<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260403d"></script>
 </head>
-<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden" data-sc-sidebar-page="analytics">
 <!-- SideNavBar (Desktop Only) -->
-<nav class="fixed left-0 top-20 hidden lg:flex flex-col p-6 space-y-6 h-[calc(100vh-5rem)] w-64 border-r border-slate-100 dark:border-slate-800 bg-slate-50/50 backdrop-blur-md z-40">
-<div class="flex flex-col space-y-1.5 flex-grow">
-<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
-<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Overview</span>
-</a>
-<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="library_books">library_books</span>
-<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Subjects</span>
-</a>
-<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="style">style</span>
-<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Concept Cards</span>
-</a>
-<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="emoji_events">emoji_events</span>
-<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Achievements</span>
-</a>
-<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="payments">payments</span>
-<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Subscriptions</span>
-</a>
-<a class="flex items-center space-x-3 px-4 py-2.5 text-slate-500 hover:bg-white hover:shadow-sm rounded-xl transition-all duration-300" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="model_training">model_training</span>
-<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Exam Simulator</span>
-</a>
-<a class="flex items-center space-x-3 px-4 py-2.5 bg-primary text-white rounded-xl shadow-lg shadow-primary/20 transition-all duration-300" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="insights">insights</span>
-<span class="font-plus-jakarta text-[10px] font-bold uppercase tracking-widest">Insights</span>
-</a>
-</div>
-<button class="bg-gradient-to-br from-primary via-primary-container to-primary text-white px-4 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
-            Initiate Session
-        </button>
-<div class="pt-6 border-t border-slate-200/50 flex flex-col space-y-2">
-<a class="flex items-center space-x-3 px-4 py-2 text-slate-400 text-[10px] uppercase tracking-widest hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
-<span>Concierge</span>
-</a>
-<a class="flex items-center space-x-3 px-4 py-2 text-slate-400 text-[10px] uppercase tracking-widest hover:text-secondary transition-colors" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
-<span>Exit</span>
-</a>
-</div>
-</nav>
+<aside class="sc-app-sidebar hidden lg:flex" data-sc-app-sidebar="" data-sidebar-shell=""></aside>
 <!-- TopAppBar -->
 <!-- Shared Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
@@ -419,8 +464,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
 </div>
@@ -451,47 +496,36 @@
 </nav>
 <!-- /Shared Top Navigation -->
 <!-- Main Content Canvas -->
-<main class="lg:ml-64 min-h-screen p-6 pt-24 md:p-12 md:pt-24 space-y-16">
+<main class="lg:ml-64 min-h-screen p-6 pt-24 md:p-12 md:pt-24 space-y-16" data-sidebar-main="">
 <!-- Hero: 3D Visualization & Energy Matrix -->
-<section class="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-3 gap-8">
+<section class="analytics-hero-shell max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-3 gap-8">
 <div class="xl:col-span-2 space-y-8">
-<div>
+<div class="analytics-hero-visual rounded-[2.5rem] border border-white/80 p-8 md:p-10 shadow-xl shadow-slate-200/40">
 <span class="font-label text-secondary uppercase tracking-[0.3em] text-[10px] font-extrabold px-3 py-1 bg-secondary/10 rounded-full">Study Insights Engine</span>
-<h2 class="font-headline text-5xl md:text-6xl font-black tracking-tight text-primary mt-4">Learning Insights</h2>
-<p class="font-body text-slate-500 mt-4 leading-relaxed max-w-xl">A live view of how your study time is being used. Your strongest momentum is building in <span class="text-primary font-bold">structured review</span> while your recent sessions are expanding across <span class="text-secondary font-bold">multiple subjects</span>.</p>
+<h2 class="font-headline text-4xl md:text-5xl font-black tracking-tight text-primary mt-5">Learning Insights</h2>
+<p class="font-body text-slate-600 mt-4 leading-relaxed max-w-2xl">A live view of how your study time is being used. Your strongest momentum is building in <span class="text-primary font-bold">structured review</span> while your recent sessions are expanding across <span class="text-secondary font-bold">multiple subjects</span>.</p>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="rounded-3xl bg-white/85 border border-white px-5 py-5 shadow-sm">
+<p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Study Volume</p>
+<p class="mt-3 text-3xl font-black text-primary">842</p>
+<p class="mt-1 text-xs text-slate-500">focus units this week</p>
 </div>
-<!-- Main Visualization -->
-<div class="relative w-full aspect-[21/10] bg-slate-900 rounded-[2.5rem] overflow-hidden group shadow-2xl">
-<div class="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-secondary/30 mix-blend-overlay"></div>
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none perspective-lg">
-<div class="relative preserve-3d rotate-x-12 rotate-y-12 flex items-center justify-center float-animation">
-<!-- 3D Geometric Nodes -->
-<div class="w-72 h-72 rounded-[3rem] border border-primary/40 bg-primary/5 flex items-center justify-center glow-pulse-teal rotate-45 group-hover:rotate-[60deg] transition-transform duration-1000">
-<div class="w-48 h-48 rounded-[2rem] border-2 border-secondary/50 bg-secondary/5 flex items-center justify-center glow-pulse-orange -rotate-12 group-hover:rotate-12 transition-transform duration-1000">
-<div class="w-24 h-24 rounded-full border-4 border-tertiary/60 bg-white/10 backdrop-blur-xl glow-pulse-purple"></div>
+<div class="rounded-3xl bg-white/85 border border-white px-5 py-5 shadow-sm">
+<p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Peak Window</p>
+<p class="mt-3 text-3xl font-black text-primary">9:30</p>
+<p class="mt-1 text-xs text-slate-500">highest sustained focus</p>
+</div>
+<div class="rounded-3xl bg-white/85 border border-white px-5 py-5 shadow-sm">
+<p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Best Mode</p>
+<p class="mt-3 text-3xl font-black text-primary">Review</p>
+<p class="mt-1 text-xs text-slate-500">strongest carryover pattern</p>
 </div>
 </div>
-<!-- Digital Grid Elements -->
-<div class="absolute w-[1000px] h-[1000px] border border-white/5 rounded-full scale-150 opacity-20"></div>
-<div class="absolute w-[800px] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent rotate-12"></div>
-<div class="absolute w-[800px] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent -rotate-45"></div>
-</div>
-</div>
-<!-- Stats Overlays -->
-<div class="absolute top-8 right-8 glass-morphism p-5 rounded-3xl space-y-1">
-<span class="block text-[10px] uppercase font-black text-primary/40 tracking-widest">Study Volume</span>
-<div class="text-2xl font-black text-primary">842 <span class="text-xs font-normal text-slate-400">focus units</span></div>
-</div>
-<div class="absolute bottom-8 left-8 glass-morphism p-6 rounded-3xl max-w-xs border border-white/40">
-<h4 class="font-headline text-sm font-black text-primary uppercase tracking-widest mb-1">Active Study Pattern</h4>
-<p class="text-[11px] text-slate-600 font-medium leading-relaxed opacity-80 italic">"Your strongest carryover this week is between scheduled review sessions and longer focus blocks."</p>
-</div>
-<img class="absolute inset-0 w-full h-full object-cover mix-blend-color-dodge opacity-30 pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-0K-zS8-jMZh5j3LOYQhfJAnkavQou2eSjq1UCJVka3iEXQRiYLFG-YKBYx5DxGdqRC-4oaDdndv41t2hPhhwTUPflSEpJ51112ccMuoy06WdQRYN7BxesLkfTTrDZabwN7dItlVmfhiO3qQl_GgDajtSBmxm-jTfeuFbLsNM7RcMqPv6jETtxz4ZNg1EYbzjujmgw_fm2CC8qGzyBkfq8fNvH1zY7sYVP246n-QRB7DgfEVWieaZDvr2DRkPx0iPikqh8EHCc6UI"/>
 </div>
 </div>
 <!-- Energy & Burnout (New Feature) -->
 <div class="space-y-8 flex flex-col justify-end">
-<div class="bg-white rounded-[2.5rem] p-8 shadow-2xl shadow-slate-200/50 border border-slate-100 flex-grow relative overflow-hidden group">
+<div class="analytics-energy-card bg-white rounded-[2.5rem] p-8 shadow-2xl shadow-slate-200/50 border border-slate-100 flex-grow relative overflow-hidden group">
 <div class="absolute top-0 right-0 p-8">
 <span class="material-symbols-outlined text-slate-200 group-hover:text-primary transition-colors text-4xl" data-icon="bolt">bolt</span>
 </div>
@@ -895,7 +929,7 @@
 </div>
 <h4 class="text-2xl font-black tracking-tight">AI Study Suggestion</h4>
 <p class="text-sm text-slate-300 leading-relaxed font-medium">Your recent pattern suggests switching to <span class="text-white font-bold">English review</span> for the next 45 minutes to balance your workload.</p>
-<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">Open Suggested Route â†’</button>
+<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">Open Suggested Route -></button>
 </div>
 <div class="space-y-6">
 <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
@@ -903,7 +937,7 @@
 </div>
 <h4 class="text-2xl font-black tracking-tight">Review Window</h4>
 <p class="text-sm text-slate-300 leading-relaxed font-medium">Retention for <span class="text-white font-bold">Math concepts</span> is starting to dip. Your next review set is ready.</p>
-<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">Launch Review â†’</button>
+<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">Launch Review -></button>
 </div>
 <div class="space-y-6">
 <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
@@ -911,7 +945,7 @@
 </div>
 <h4 class="text-2xl font-black tracking-tight">Study Milestone</h4>
 <p class="text-sm text-slate-300 leading-relaxed font-medium">You hit a strong multi-subject week and are closing in on your next Soul Concept level.</p>
-<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">View Achievements â†’</button>
+<button class="text-secondary font-black text-xs uppercase tracking-widest hover:translate-x-2 transition-transform">View Achievements -></button>
 </div>
 </div>
 <img class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNei8U5yBAoAT1NHO53BsQLiK7rxnCIlbZ4Wyqaez9YUqzVVmxt36kFB2Ww3oBDGX3s35Eid1a5_H1EsWeVljBSAAFytiBJmNDPaGm8aevHasaM7hs6IwQz2nyBSvMrvo1M4iCpuiFcYpHVLodm3vJK9lLQbPaTxhFCQCynMUcnkqiJNZSMWI3erUqp3XJ7k_Y2r6iLxJ-naDe8WwTaYa1OFgSbaoT5UToNS5aqKDWNQJ6WzDCAMOzhbmRjf_IVrDv3D9QXZDio-N4"/>
@@ -937,11 +971,34 @@
 </nav>
 <script>
   (function () {
+    var sidebarStorageKey = 'sc-sidebar-optional'
+    var sidebarToggleButton = document.querySelector('[data-sidebar-toggle]')
+    var sidebarToggleLabel = document.querySelector('[data-sidebar-toggle-label]')
+    function syncSidebar(closed) {
+      document.body.classList.toggle('sc-sidebar-closed', closed)
+      if (sidebarToggleLabel) {
+        sidebarToggleLabel.textContent = closed ? 'Open' : 'Hide Menu'
+      }
+      if (sidebarToggleButton) {
+        sidebarToggleButton.setAttribute('aria-label', closed ? 'Open sidebar' : 'Hide sidebar')
+      }
+    }
+    syncSidebar(localStorage.getItem(sidebarStorageKey) === 'closed')
+    sidebarToggleButton && sidebarToggleButton.addEventListener('click', function () {
+      var nextClosed = !document.body.classList.contains('sc-sidebar-closed')
+      if (nextClosed) {
+        localStorage.setItem(sidebarStorageKey, 'closed')
+      } else {
+        localStorage.setItem(sidebarStorageKey, 'open')
+      }
+      syncSidebar(nextClosed)
+    })
+
     var SCHEDULE_KEY = 'sc_schedule_events_v2'
     var coreSubjects = [
       { key: 'science', label: 'Science', route: 'study-library.html', match: /science|biology|physics|chemistry/ },
       { key: 'math', label: 'Mathematics', route: 'grade-10-math.html', match: /math|mathematics|algebra|geometry|functions/ },
-      { key: 'english', label: 'English', route: 'grade-9.html', match: /english|literature|reading|writing/ },
+      { key: 'english', label: 'English', route: 'subject-library.html', match: /english|literature|reading|writing/ },
       { key: 'geography', label: 'Geography', route: 'geography-library.html', match: /geography|geo|environment|mapping/ },
       { key: 'cards', label: 'Concept Cards', route: 'anki/index.html', match: /cards|flashcards|review/ }
     ]
@@ -1007,7 +1064,7 @@
       for (var i = 0; i < coreSubjects.length; i++) {
         if (coreSubjects[i].match.test(value)) return coreSubjects[i]
       }
-      return { key: value || 'study', label: (event && (event.subject || event.title)) || 'Study Session', route: 'grade-9.html' }
+      return { key: value || 'study', label: (event && (event.subject || event.title)) || 'Study Session', route: 'subject-library.html' }
     }
 
     function computeStats(events) {
@@ -1057,7 +1114,7 @@
       }
 
       var strongestKey = Object.keys(bySubject).sort(function (a, b) { return bySubject[b] - bySubject[a] })[0] || 'study'
-      var strongest = coreSubjects.find(function (subject) { return subject.key === strongestKey }) || { label: strongestKey === 'study' ? 'Study' : strongestKey.charAt(0).toUpperCase() + strongestKey.slice(1), route: 'grade-9.html' }
+      var strongest = coreSubjects.find(function (subject) { return subject.key === strongestKey }) || { label: strongestKey === 'study' ? 'Study' : strongestKey.charAt(0).toUpperCase() + strongestKey.slice(1), route: 'subject-library.html' }
       var successRate = Math.max(58, Math.min(98, Math.round(62 + Math.min(18, starredCount * 1.5) + Math.min(12, focusCount * 2) + Math.min(8, Object.keys(uniqueSubjects).length * 1.5))))
       var balance = Math.max(32, Math.min(96, Math.round(78 - Math.max(0, thisWeekMinutes - 900) / 20 + Math.min(12, Object.keys(uniqueSubjects).length * 2) + Math.min(8, streak))))
       var risk = Math.max(6, Math.min(88, 100 - balance))
@@ -1545,7 +1602,7 @@
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -1576,6 +1633,11 @@
 </nav>
 <!-- /Shared Mobile Bottom Bar -->
 </body></html>
+
+
+
+
+
 
 
 

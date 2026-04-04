@@ -1,9 +1,9 @@
-const CACHE_NAME = "soulconcept-v94";
+﻿const CACHE_NAME = "soulconcept-v94";
 const ASSETS = [
   "/",
   "/index.html",
   "/dashboard.html",
-  "/grade-9.html",
+  "/subject-library.html",
   "/schedule.html",
   "/analytics.html",
   "/membership.html",
@@ -194,3 +194,4 @@ self.addEventListener("notificationclick", (event) => {
     })
   );
 });
+

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -177,8 +177,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="../dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../analytics.html">Analytics</a>
 </div>
@@ -253,7 +253,72 @@
     <script src="/supabase-auth.js?v=20260329c"></script>
     <script src="/vercel-speed-insights.js?v=20260313a"></script>
     <script defer src="../lyne-widget.js?v=20260321b"></script>
-    <script src="/math/math.bundle.js?v=20260319a"></script>
+    <script>
+      (function () {
+        var candidates = [
+          './math.bundle.js?v=20260319a',
+          '/math/math.bundle.js?v=20260319a'
+        ];
+        var current = 0;
+        var loadTimer = null;
+        var mountedTimer = null;
+        var root = document.getElementById('root');
+
+        function clearTimers() {
+          if (loadTimer) {
+            clearTimeout(loadTimer);
+            loadTimer = null;
+          }
+          if (mountedTimer) {
+            clearTimeout(mountedTimer);
+            mountedTimer = null;
+          }
+        }
+
+        function scheduleMountCheck(url) {
+          mountedTimer = window.setTimeout(function () {
+            if (!root) return;
+            if (root.textContent === 'Loading Grade 9 Math...') {
+              showRuntimeError(
+                'The Grade 9 Math bundle loaded but the React app did not mount.',
+                'Loaded bundle: ' + url
+              );
+            }
+          }, 8000);
+        }
+
+        function tryLoad() {
+          var url = candidates[current];
+          if (!url) {
+            showRuntimeError(
+              'The Grade 9 Math bundle could not be loaded.',
+              'Tried bundle paths: ' + candidates.join(', ')
+            );
+            return;
+          }
+
+          var script = document.createElement('script');
+          script.src = url;
+          script.async = false;
+          script.onload = function () {
+            clearTimers();
+            scheduleMountCheck(url);
+          };
+          script.onerror = function () {
+            clearTimers();
+            current += 1;
+            tryLoad();
+          };
+          document.body.appendChild(script);
+
+          loadTimer = window.setTimeout(function () {
+            script.onerror();
+          }, 10000);
+        }
+
+        tryLoad();
+      })();
+    </script>
     <script defer src="../focus-mode.js?v=20260328b"></script>
     <script src="../library-whiteboard.js?v=20260328b"></script>
     <script defer src="/_vercel/insights/script.js"></script>
@@ -264,7 +329,7 @@
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="../grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="../subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -296,6 +361,7 @@
 <!-- /Shared Mobile Bottom Bar -->
 </body>
 </html>
+
 
 
 

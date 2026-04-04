@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -366,74 +366,63 @@
                 max-width: 100% !important;
             }
         }
+        [data-sidebar-open] {
+            display: none;
+            font-family: inherit;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        @media (min-width: 768px) {
+            [data-sidebar-open] {
+                position: fixed;
+                top: 88px;
+                left: 16px;
+                z-index: 65;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                border-radius: 999px;
+                padding: 0.65rem 0.85rem;
+                background: rgba(255,255,255,0.96);
+                border: 1px solid rgba(191,201,195,0.55);
+                box-shadow: 0 14px 30px rgba(29,26,34,0.08);
+                font-size: 0.75rem;
+                font-weight: 800;
+                color: #004435;
+            }
+            [data-sidebar-shell] {
+                position: fixed !important;
+                left: 0;
+                top: 72px;
+                width: 16rem;
+                height: calc(100vh - 72px);
+                max-height: calc(100vh - 72px);
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                transition: transform 0.24s ease, opacity 0.24s ease;
+            }
+            main[data-sidebar-main] {
+                margin-left: 16rem;
+            }
+            body.sc-sidebar-closed [data-sidebar-shell] {
+                transform: translateX(-100%);
+                opacity: 0;
+                pointer-events: none;
+            }
+            body.sc-sidebar-closed main[data-sidebar-main] {
+                margin-left: 0 !important;
+            }
+            body:not(.sc-sidebar-closed) [data-sidebar-open] {
+                left: 272px;
+            }
+        }
     </style>
+<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260403d"></script>
 </head>
-<body class="bg-background font-body text-on-surface antialiased">
+<body class="bg-background font-body text-on-surface antialiased" data-sc-sidebar-page="dashboard">
 <!-- Sidebar Navigation -->
-<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/15 bg-surface flex flex-col p-4 gap-2 z-40 hidden md:flex">
-<div class="mb-8 px-2 flex items-center gap-3">
-<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-sm" data-icon="menu_book">menu_book</span>
-</div>
-<span class="text-lg font-black text-primary font-headline tracking-tight">Soul Concept</span>
-</div>
-<div class="mb-6 p-4 rounded-2xl bg-surface-container-low">
-<div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center overflow-hidden">
-<img alt="Student Profile" class="w-full h-full object-cover" data-auth-avatar="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJHF1E2P5oWrVzJuja7lpIOv66tsw9qZCZqgXbOS1I9Z7GuKDXdyUA75BIjg2YUsfLGvtjwAtuT-sIB7Y-0XLTb_bRz3zHIBrAKD05qGgpdAtd_j8GbILYKOlveYkQ-IZVa8Q-DsFGT53P2jo-n_Eys8sr8RW7oUtVPkUYSjt1zhnPJzcQX_oS3iEoEIQH5atgN8Sl3K6Igyyep29rKtli1yPC94cR7636T1OMGj38T3l4KlX69YfB7IDhnHRFWTh3wF24umvWoSr7"/>
-</div>
-<div>
-<p class="font-headline font-bold text-sm text-primary" data-auth-name="">Guest Scholar</p>
-<p class="font-label text-[10px] uppercase tracking-wider text-outline" data-auth-plan-copy="">Starter</p>
-</div>
-</div>
-</div>
-<nav class="flex-grow space-y-1">
-<a class="flex items-center gap-3 px-3 py-2.5 bg-primary text-white rounded-lg shadow-lg shadow-emerald-900/20 font-medium text-sm transition-all duration-200" href="dashboard.html">
-<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
-            Overview
-        </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="grade-9.html">
-<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
-            Subjects
-        </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="anki/index.html">
-<span class="material-symbols-outlined" data-icon="style">style</span>
-            Concept Cards
-        </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="achievements.html">
-<span class="material-symbols-outlined" data-icon="emoji_events">emoji_events</span>
-            Achievements
-        </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="membership.html">
-<span class="material-symbols-outlined" data-icon="subscriptions">subscriptions</span>
-            Subscriptions
-        </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="math-quiz-simulator.html">
-<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
-            Exam Simulator
-        </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-outline hover:bg-surface-container hover:translate-x-1 transition-all duration-200 font-medium text-sm" href="analytics.html">
-<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
-            Insights
-        </a>
-</nav>
-<div class="mt-auto pt-4 border-t border-outline-variant/15 space-y-1">
-<button class="w-full flex items-center gap-3 px-3 py-2 text-outline hover:bg-surface-container transition-all text-sm font-medium" onclick="window.location.href='settings.html'" type="button">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-            Settings
-        </button>
-<button class="w-full flex items-center gap-3 px-3 py-2 text-outline hover:bg-surface-container transition-all text-sm font-medium" onclick="window.location.href='settings.html#support'" type="button">
-<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
-            Support
-        </button>
-<div class="mt-4">
-<button class="w-full py-3 bg-primary text-white rounded-xl font-headline font-bold text-xs flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all" data-dashboard-start-study="" type="button">
-                Start Study Session
-            </button>
-</div>
-</div>
-</aside>
+<aside class="sc-app-sidebar hidden lg:flex" data-sc-app-sidebar="" data-sidebar-shell=""></aside>
 <!-- Top AppBar -->
 <!-- Shared Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
@@ -443,8 +432,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
 </div>
@@ -475,7 +464,7 @@
 </nav>
 <!-- /Shared Top Navigation -->
 <!-- Main Content Area -->
-<main class="md:ml-64 pt-20 pb-12 px-6 lg:px-12">
+<main class="md:ml-64 min-h-[calc(100vh-72px)] pt-20 pb-12 px-6 lg:px-12" data-sidebar-main="">
 <div class="max-w-7xl mx-auto space-y-10">
 <!-- Hero Section / Welcome -->
 <section class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-outline-variant/10 pb-10">
@@ -543,7 +532,7 @@
 </div>
 <div class="flex-grow">
 <p class="font-headline font-semibold text-primary">Review Molecular Biology Quiz</p>
-<p class="text-xs text-outline">Scheduled for 10:30 AM â€¢ 15 mins</p>
+<p class="text-xs text-outline">Scheduled for 10:30 AM - 15 mins</p>
 </div>
 <span class="font-label text-[10px] px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full">Critical</span>
 </div>
@@ -563,7 +552,7 @@
 </div>
 <div class="flex-grow">
 <p class="font-headline font-semibold text-primary">Practice Flashcards: Neuroanatomy</p>
-<p class="text-xs text-outline">End of day routine â€¢ 40 mins</p>
+<p class="text-xs text-outline">End of day routine - 40 mins</p>
 </div>
 <span class="font-label text-[10px] px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full">Momentum</span>
 </div>
@@ -573,7 +562,7 @@
 <div class="space-y-6">
 <div class="flex justify-between items-center">
 <h3 class="font-headline text-2xl font-bold text-primary">Subject Galleries</h3>
-<a class="text-sm font-medium text-primary flex items-center gap-2 hover:gap-3 transition-all" href="grade-9.html">View all <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></a>
+<a class="text-sm font-medium text-primary flex items-center gap-2 hover:gap-3 transition-all" href="subject-library.html">View all <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></a>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4" data-dashboard-subjects="">
 <div class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer">
@@ -581,7 +570,7 @@
 <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
 <span class="font-label text-[10px] text-primary-fixed uppercase tracking-widest mb-1">Humanities</span>
 <h4 class="text-xl font-headline font-bold text-white">English Literature</h4>
-<p class="text-white/70 text-xs">Modernism Focus â€¢ 12 Modules</p>
+<p class="text-white/70 text-xs">Modernism Focus - 12 Modules</p>
 </div>
 </div>
 <div class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer">
@@ -589,7 +578,7 @@
 <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-transparent flex flex-col justify-end p-6">
 <span class="font-label text-[10px] text-secondary-fixed uppercase tracking-widest mb-1">Sciences</span>
 <h4 class="text-xl font-headline font-bold text-white">Organic Chemistry</h4>
-<p class="text-white/70 text-xs">Synthesis Pathways â€¢ 8 Modules</p>
+<p class="text-white/70 text-xs">Synthesis Pathways - 8 Modules</p>
 </div>
 </div>
 </div>
@@ -693,7 +682,7 @@
 <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-8">
 <div class="space-y-4 text-center md:text-left">
 <p class="font-headline font-bold text-primary">Soul Concept</p>
-<p class="font-label text-xs uppercase tracking-widest text-outline max-w-xs">Â© 2024 Soul Concept Academic Gallery. All rights reserved.</p>
+<p class="font-label text-xs uppercase tracking-widest text-outline max-w-xs">(c) 2024 Soul Concept Academic Gallery. All rights reserved.</p>
 </div>
 <div class="flex flex-wrap justify-center gap-8">
 <a class="font-label text-xs uppercase tracking-widest text-outline hover:text-primary transition-colors" href="#">Terms of Knowledge</a>
@@ -708,7 +697,7 @@
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -742,6 +731,29 @@
 <script src="assets/study-intelligence.js?v=20260401a"></script>
 <script>
   (function () {
+    var sidebarStorageKey = 'sc-sidebar-optional'
+    var openSidebarButton = document.querySelector('[data-sidebar-open]')
+    var openSidebarLabel = document.querySelector('[data-sidebar-open-label]')
+    function syncSidebar(closed) {
+      document.body.classList.toggle('sc-sidebar-closed', closed)
+      if (openSidebarLabel) {
+        openSidebarLabel.textContent = closed ? 'Open Menu' : 'Hide Menu'
+      }
+      if (openSidebarButton) {
+        openSidebarButton.setAttribute('aria-label', closed ? 'Open sidebar' : 'Hide sidebar')
+      }
+    }
+    syncSidebar(localStorage.getItem(sidebarStorageKey) === 'closed')
+    openSidebarButton && openSidebarButton.addEventListener('click', function () {
+      var nextClosed = !document.body.classList.contains('sc-sidebar-closed')
+      if (nextClosed) {
+        localStorage.setItem(sidebarStorageKey, 'closed')
+      } else {
+        localStorage.setItem(sidebarStorageKey, 'open')
+      }
+      syncSidebar(nextClosed)
+    })
+
     var SCHEDULE_KEY = 'sc_schedule_events_v2'
     var FLOW_KEY = 'sc_dashboard_completed_flow_v1'
     var DEFAULT_EVENTS = [
@@ -921,7 +933,7 @@
             '</button>' +
             '<div class="flex-grow">' +
               '<p class="font-headline font-semibold ' + (done ? 'text-primary/50 line-through' : 'text-primary') + '">' + event.title + '</p>' +
-              '<p class="text-xs ' + (done ? 'text-outline/50' : 'text-outline') + '">' + formatDate(event.date) + ' â€¢ ' + formatTime(event.start) + ' â€¢ ' + duration + ' mins</p>' +
+              '<p class="text-xs ' + (done ? 'text-outline/50' : 'text-outline') + '">' + formatDate(event.date) + ' - ' + formatTime(event.start) + ' - ' + duration + ' mins</p>' +
             '</div>' +
             '<span class="font-label text-[10px] px-2 py-1 rounded-full ' + chipClass + '">' + chip + '</span>' +
           '</div>'
@@ -947,7 +959,7 @@
       host.innerHTML = cards.map(function (subject, index) {
         var palette = palettes[index % palettes.length]
         return (
-          '<a class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer block" href="grade-9.html">' +
+          '<a class="relative h-48 rounded-3xl overflow-hidden group cursor-pointer block" href="subject-library.html">' +
             '<img alt="' + subject + ' subject" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="' + palette.image + '"/>' +
             '<div class="absolute inset-0 bg-gradient-to-t ' + palette.gradient + ' to-transparent flex flex-col justify-end p-6">' +
               '<span class="font-label text-[10px] text-primary-fixed uppercase tracking-widest mb-1">' + palette.kicker + '</span>' +
@@ -977,7 +989,7 @@
             '</div>' +
             '<div class="flex-grow">' +
               '<p class="text-sm font-bold text-primary">' + event.title + '</p>' +
-              '<p class="text-[10px] text-outline uppercase tracking-tight">' + (event.subject || 'Study Session') + ' â€¢ ' + formatTime(event.start) + '</p>' +
+              '<p class="text-[10px] text-outline uppercase tracking-tight">' + (event.subject || 'Study Session') + ' - ' + formatTime(event.start) + '</p>' +
             '</div>' +
           '</a>'
         )
@@ -990,7 +1002,7 @@
       setText(
         '[data-dashboard-study-next-copy]',
         model.studyNext.nextEvent
-          ? model.studyNext.nextEvent.title + ' on ' + formatDate(model.studyNext.nextEvent.date) + ' · ' + model.studyNext.review.dueCount + ' cards due'
+          ? model.studyNext.nextEvent.title + ' on ' + formatDate(model.studyNext.nextEvent.date) + ' Â· ' + model.studyNext.review.dueCount + ' cards due'
           : model.studyNext.review.dueCount + ' cards due and ' + model.studyNext.review.lapseCount + ' lapse signals to recover'
       )
       setText('[data-dashboard-study-next-profile]', model.studyNext.recommendedProfileLabel)
@@ -1005,7 +1017,7 @@
         items.push({
           id: 'deck:' + item.deck.id,
           title: item.deck.name,
-          subtitle: item.review.dueCount + ' cards due now' + (item.nextEvent ? ' · ' + item.nextEvent.title : ''),
+          subtitle: item.review.dueCount + ' cards due now' + (item.nextEvent ? ' Â· ' + item.nextEvent.title : ''),
           chip: item.nextEvent && item.daysUntil <= 1 ? 'Critical' : 'Due',
           chipClass: item.nextEvent && item.daysUntil <= 1 ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-secondary-fixed text-on-secondary-fixed-variant'
         })
@@ -1014,7 +1026,7 @@
         items.push({
           id: entry.id,
           title: entry.title,
-          subtitle: formatDate(entry.date) + ' · ' + formatTime(entry.start) + ' · ' + Math.max(15, durationMinutes(entry.start, entry.end)) + ' mins',
+          subtitle: formatDate(entry.date) + ' - ' + formatTime(entry.start) + ' - ' + Math.max(15, durationMinutes(entry.start, entry.end)) + ' mins',
           chip: entry.priority || 'Planned',
           chipClass: entry.starred ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-secondary-fixed text-on-secondary-fixed-variant'
         })
@@ -1138,6 +1150,11 @@
 <script defer src="lyne-widget.js?v=20260321c"></script>
 <script defer src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+
+
+
+
 
 
 

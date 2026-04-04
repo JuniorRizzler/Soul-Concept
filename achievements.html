@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -270,9 +270,65 @@
                 max-width: 100%;
             }
         }
+        [data-sidebar-open] {
+            display: none;
+            font-family: inherit;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        @media (min-width: 1024px) {
+            [data-sidebar-open] {
+                position: fixed;
+                top: 88px;
+                left: 16px;
+                z-index: 65;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                border-radius: 999px;
+                padding: 0.65rem 0.85rem;
+                background: rgba(255,255,255,0.96);
+                border: 1px solid rgba(191,201,195,0.55);
+                box-shadow: 0 14px 30px rgba(29,26,34,0.08);
+                font-size: 0.75rem;
+                font-weight: 800;
+                color: #004435;
+            }
+            [data-sidebar-shell] {
+                position: fixed !important;
+                left: 0;
+                top: 72px;
+                width: 16rem;
+                height: calc(100vh - 72px);
+                max-height: calc(100vh - 72px);
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                transition: transform 0.24s ease, opacity 0.24s ease, width 0.24s ease, padding 0.24s ease;
+                transform-origin: left center;
+            }
+            main[data-sidebar-main] {
+                margin-left: 16rem;
+            }
+            body.sc-sidebar-closed [data-sidebar-shell] {
+                width: 0 !important;
+                min-width: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                opacity: 0;
+                overflow: hidden;
+                pointer-events: none;
+                transform: translateX(-18px);
+                border-right-width: 0 !important;
+            }
+            body:not(.sc-sidebar-closed) [data-sidebar-open] {
+                left: 272px;
+            }
+        }
     </style>
+<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260403d"></script>
 </head>
-<body class="bg-surface font-body text-on-surface antialiased">
+<body class="bg-surface font-body text-on-surface antialiased" data-sc-sidebar-page="achievements">
 <!-- Top Navigation Shell -->
 <!-- Shared Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
@@ -282,8 +338,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
 </div>
@@ -313,61 +369,10 @@
 </div>
 </nav>
 <!-- /Shared Top Navigation -->
-<div class="flex min-h-[calc(100vh-72px)]">
 <!-- Sidebar Navigation Shell -->
-<aside class="hidden lg:flex flex-col h-[calc(100vh-72px)] w-64 sticky top-[72px] p-6 bg-[#fef7ff] border-r border-slate-100 font-headline text-sm antialiased">
-<div class="mb-8 px-4">
-<div class="flex items-center gap-3 mb-2">
-<div class="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-sm" data-weight="fill">military_tech</span>
-</div>
-<span class="text-lg font-extrabold text-[#ae3200]">Achievement Center</span>
-</div>
-<p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Soul Concept Progress</p>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg hover:translate-x-1 transition-transform duration-200" href="dashboard.html">
-<span class="material-symbols-outlined">dashboard</span>
-<span>Overview</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg hover:translate-x-1 transition-transform duration-200" href="grade-9.html">
-<span class="material-symbols-outlined">book</span>
-<span>Subjects</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg hover:translate-x-1 transition-transform duration-200" href="anki/index.html">
-<span class="material-symbols-outlined">style</span>
-<span>Concept Cards</span>
-</a>
-<a class="flex items-center gap-3 bg-[#004435] text-white rounded-lg shadow-lg font-semibold px-4 py-3" href="achievements.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
-<span>Achievements</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg hover:translate-x-1 transition-transform duration-200" href="membership.html">
-<span class="material-symbols-outlined">payments</span>
-<span>Subscriptions</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg hover:translate-x-1 transition-transform duration-200" href="math-quiz-simulator.html">
-<span class="material-symbols-outlined">model_training</span>
-<span>Exam Simulator</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg hover:translate-x-1 transition-transform duration-200" href="analytics.html">
-<span class="material-symbols-outlined">insights</span>
-<span>Insights</span>
-</a>
-</nav>
-<div class="mt-auto pt-6 space-y-1 border-t border-slate-100">
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg transition-colors" href="settings.html#support">
-<span class="material-symbols-outlined">help_outline</span>
-<span>Support</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 hover:bg-slate-100 px-4 py-3 rounded-lg transition-colors" href="#">
-<span class="material-symbols-outlined">logout</span>
-<span>Logout</span>
-</a>
-</div>
-</aside>
+<aside class="sc-app-sidebar hidden lg:flex" data-sc-app-sidebar="" data-sidebar-shell=""></aside>
 <!-- Main Content Canvas -->
-<main class="flex-1 p-8 lg:p-12 overflow-x-hidden">
+<main class="flex-1 lg:ml-64 min-h-[calc(100vh-72px)] p-8 lg:p-12 overflow-x-hidden" data-sidebar-main="">
 <!-- Hero Section -->
 <section class="relative rounded-3xl overflow-hidden mb-12 min-h-[400px] flex items-center editorial-shadow">
 <div class="absolute inset-0 z-0">
@@ -524,14 +529,13 @@
 <div class="absolute -left-20 -top-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"></div>
 </section>
 </main>
-</div>
 <!-- Mobile Navigation Shell -->
 <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#fef7ff]/90 backdrop-blur-xl z-50 flex justify-around items-center p-4 border-t border-slate-100">
 <button class="flex flex-col items-center gap-1 text-slate-400" onclick="window.location.href='dashboard.html'">
 <span class="material-symbols-outlined">dashboard</span>
 <span class="text-[10px] font-label">Home</span>
 </button>
-<button class="flex flex-col items-center gap-1 text-slate-400" onclick="window.location.href='grade-9.html'">
+<button class="flex flex-col items-center gap-1 text-slate-400" onclick="window.location.href='subject-library.html'">
 <span class="material-symbols-outlined">library_books</span>
 <span class="text-[10px] font-label">Library</span>
 </button>
@@ -550,6 +554,29 @@
 </nav>
 <script>
   (function () {
+    var sidebarStorageKey = 'sc-sidebar-optional'
+    var openSidebarButton = document.querySelector('[data-sidebar-open]')
+    var openSidebarLabel = document.querySelector('[data-sidebar-open-label]')
+    function syncSidebar(closed) {
+      document.body.classList.toggle('sc-sidebar-closed', closed)
+      if (openSidebarLabel) {
+        openSidebarLabel.textContent = closed ? 'Open Menu' : 'Hide Menu'
+      }
+      if (openSidebarButton) {
+        openSidebarButton.setAttribute('aria-label', closed ? 'Open sidebar' : 'Hide sidebar')
+      }
+    }
+    syncSidebar(localStorage.getItem(sidebarStorageKey) === 'closed')
+    openSidebarButton && openSidebarButton.addEventListener('click', function () {
+      var nextClosed = !document.body.classList.contains('sc-sidebar-closed')
+      if (nextClosed) {
+        localStorage.setItem(sidebarStorageKey, 'closed')
+      } else {
+        localStorage.setItem(sidebarStorageKey, 'open')
+      }
+      syncSidebar(nextClosed)
+    })
+
     var SCHEDULE_KEY = 'sc_schedule_events_v2'
     var UI_KEY = 'sc_achievements_ui_v1'
     var DEFAULT_EVENTS = [
@@ -853,7 +880,7 @@
       }
 
       var startBtn = document.querySelector('[data-achievements-start]')
-      if (startBtn) startBtn.onclick = function () { window.location.href = 'grade-9.html' }
+      if (startBtn) startBtn.onclick = function () { window.location.href = 'subject-library.html' }
 
       var reviewBtn = document.querySelector('[data-achievements-review]')
       if (reviewBtn) reviewBtn.onclick = function () {
@@ -890,7 +917,7 @@
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -921,6 +948,11 @@
 </nav>
 <!-- /Shared Mobile Bottom Bar -->
 </body></html>
+
+
+
+
+
 
 
 

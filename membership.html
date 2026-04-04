@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -270,8 +270,10 @@
             }
         }
     </style>
+<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260403d"></script>
 </head>
-<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed" data-sc-sidebar-page="membership">
 <!-- TopAppBar -->
 <!-- Shared Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
@@ -281,8 +283,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
 </div>
@@ -313,52 +315,9 @@
 </nav>
 <!-- /Shared Top Navigation -->
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 pt-20 bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200/50 dark:border-zinc-800/50 hidden lg:flex flex-col gap-2 px-4 py-6">
-<div class="mb-8 p-4 rounded-2xl bg-surface-container-low">
-<div class="flex items-center gap-3">
-<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center overflow-hidden">
-<img alt="Student Profile" class="w-full h-full object-cover" data-auth-avatar="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHpI71-Y6YjMvI7nLzYJ1r_u4m9I_Z7vH8X_f5y6p7w8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3"/>
-</div>
-<div class="flex flex-col">
-<h2 class="font-headline font-bold text-emerald-900 text-sm leading-none" data-auth-name="">Guest Scholar</h2>
-<p class="font-label text-[10px] text-zinc-500 mt-1 uppercase tracking-wider" data-auth-plan-copy="">Starter</p>
-</div>
-</div>
-</div>
-<nav class="flex flex-col gap-1 flex-grow">
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">grid_view</span> Overview
-      </a>
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">menu_book</span> Subjects
-      </a>
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">style</span> Concept Cards
-      </a>
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="{{DATA:SCREEN:SCREEN_21}}">
-<span class="material-symbols-outlined text-lg">military_tech</span> Achievements
-      </a>
-<a class="text-emerald-900 dark:text-emerald-50 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg px-4 py-2 border-l-4 border-emerald-800 font-medium text-sm flex items-center gap-3 transition-colors" href="{{DATA:SCREEN:SCREEN_12}}">
-<span class="material-symbols-outlined text-lg">card_membership</span> Subscriptions
-      </a>
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">model_training</span> Exam Simulator
-      </a>
-<a class="text-zinc-600 dark:text-zinc-400 px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg font-medium text-sm flex items-center gap-3 transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">monitoring</span> Insights
-      </a>
-</nav>
-<div class="mt-auto flex flex-col gap-1 border-t border-zinc-200/50 pt-4">
-<a class="text-zinc-600 px-4 py-2 hover:bg-zinc-100 rounded-lg text-sm flex items-center gap-3" href="{{DATA:SCREEN:SCREEN_18}}">
-<span class="material-symbols-outlined text-lg">settings</span> Settings
-      </a>
-<a class="text-zinc-600 px-4 py-2 hover:bg-zinc-100 rounded-lg text-sm flex items-center gap-3" href="#">
-<span class="material-symbols-outlined text-lg">logout</span> Logout
-      </a>
-</div>
-</aside>
+<aside class="sc-app-sidebar hidden lg:flex" data-sc-app-sidebar="" data-sidebar-shell=""></aside>
 <!-- Main Content -->
-<main class="lg:ml-64 pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+<main class="lg:ml-64 pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto" data-sidebar-main="">
 <!-- Hero Section -->
 <section class="mb-16">
 <span class="font-label text-secondary font-semibold tracking-widest uppercase text-[10px] mb-4 block">Membership Tiers</span>
@@ -508,7 +467,7 @@
 <div class="absolute -bottom-6 -left-6 bg-secondary p-6 rounded-xl shadow-xl max-w-[240px]">
 <p class="text-white text-xs font-label uppercase tracking-widest mb-2">Member Impact</p>
 <p class="text-white text-sm font-medium italic">"The 3D visualization suite transformed how we present our longitudinal climate data."</p>
-<p class="text-white/70 text-[10px] mt-4">â€” Dr. Elena Rostova, Oxford Research Fellow</p>
+<p class="text-white/70 text-[10px] mt-4">- Dr. Elena Rostova, Oxford Research Fellow</p>
 </div>
 </div>
 </div>
@@ -544,7 +503,7 @@
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -582,6 +541,11 @@
 <script defer src="lyne-widget.js?v=20260321c"></script>
 <script defer src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+
+
+
+
 
 
 

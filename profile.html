@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en"><head>
 <meta charset="utf-8"/>
@@ -249,8 +249,10 @@
             }
         }
     </style>
+<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260403d"></script>
 </head>
-<body class="bg-surface font-body text-on-surface">
+<body class="bg-surface font-body text-on-surface" data-sc-sidebar-page="profile">
 <!-- Shared Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
 <div class="topbar-inner flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
@@ -259,8 +261,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
 </div>
@@ -290,253 +292,122 @@
 </div>
 </nav>
 <!-- /Shared Top Navigation -->
-<!-- Top Navigation Shell -->
-<header class="fixed top-0 w-full z-50 glass-header border-b border-outline-variant/15 h-16 flex justify-between items-center px-6">
-<div class="flex items-center space-x-12">
-<div class="flex items-center gap-2">
-<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-base" data-icon="menu_book">menu_book</span>
-</div>
-<span class="text-xl font-bold text-primary tracking-tight font-headline">Soul Concept</span>
-</div>
-<nav class="hidden md:flex space-x-8">
-<a class="text-primary font-bold font-label text-[11px] uppercase tracking-[0.15em]" href="#">Dashboard</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="{{DATA:SCREEN:SCREEN_33}}">Library</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="#">Grades</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="#">Schedule</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label text-[11px] uppercase tracking-[0.15em]" href="#">Analytics</a>
-</nav>
-</div>
-<div class="flex items-center space-x-6">
-<div class="relative hidden sm:block">
-<input class="pl-10 pr-4 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-[11px] focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-all outline-none w-64" placeholder="Search archive..." type="text"/>
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="search">search</span>
-</div>
-<div class="relative" data-home-notifications="">
-<button aria-expanded="false" aria-haspopup="true" class="p-1 text-primary relative inline-flex items-center justify-center" data-home-notifications-toggle="" onclick="var shell=this.closest('[data-home-notifications]'); var panel=shell&&shell.querySelector('[data-home-notifications-panel]'); var badge=shell&&shell.querySelector('[data-home-notifications-badge]'); if(panel){ var isOpen=panel.style.display==='block'; if(isOpen){ panel.style.display='none'; this.setAttribute('aria-expanded','false'); } else { panel.style.display='block'; this.setAttribute('aria-expanded','true'); if(badge){ badge.classList.add('hidden'); } } }" type="button">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-<span class="absolute -right-1 -top-1 min-w-5 h-5 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold leading-5 text-center" data-home-notifications-badge="">1</span>
-</button>
-<div class="absolute right-0 top-full z-[70] mt-3 hidden w-80 max-w-[92vw] overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)]" data-home-notifications-panel="" style="display:none; background:rgba(255,255,255,0.85); backdrop-filter:blur(20px); border:1px solid rgba(191,201,195,0.2);">
-<div class="flex items-center justify-between border-b border-outline-variant/10 bg-white/50 p-5"><h4 class="font-headline text-[11px] font-bold uppercase tracking-widest text-primary/80">Recent Activity</h4><button class="font-label text-[10px] font-bold uppercase tracking-widest text-outline transition-colors hover:text-primary" type="button">Clear</button></div>
-<div class="max-h-[440px] overflow-y-auto">
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5"><span class="material-symbols-outlined text-xl text-primary/60">timer</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Time for a zen break</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">90 mins of deep focus reached. Stretch and hydrate.</p><span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">Just now</span></div></div></div>
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary/5"><span class="material-symbols-outlined text-xl text-secondary/60">person</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Sync your progress</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Sign into your account to back up your curator stack.</p><a class="mt-2.5 inline-flex text-[9px] font-black uppercase tracking-widest text-secondary hover:underline" href="/auth/verification.html?returnTo=%2Findex.html">Sign In Now</a></div></div></div>
-<div class="border-b border-outline-variant/5 p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/5"><span class="material-symbols-outlined text-xl text-primary/60">workspace_premium</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Research Badge Earned</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Top-tier analysis on Quantum Mechanics.</p><span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">2 mins ago</span></div></div></div>
-<div class="p-5 transition-colors hover:bg-white/60"><div class="flex gap-4"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container"><span class="material-symbols-outlined text-xl text-outline">calendar_today</span></div><div class="min-w-0 flex-1"><p class="font-headline text-xs font-bold text-primary">Curator Session Updated</p><p class="mt-1 text-[10px] font-medium leading-relaxed text-on-surface-variant">Molecular Biology Quiz moved to 10:30 AM.</p><span class="mt-2.5 block font-label text-[9px] uppercase tracking-wider text-outline/60">15 mins ago</span></div></div></div>
-</div>
-</div>
-</div>
-<div class="h-9 w-9 rounded-lg bg-primary-fixed overflow-hidden border border-outline-variant/30">
-<img alt="Scholar profile avatar" class="h-full w-full object-cover" data-auth-avatar="" data-alt="Close-up professional portrait of a senior academic man with glasses and a refined expression, soft library lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUh8RjxtzWpcYJsiM18no7DpcgQBzju7bXwPMu-Auy__cVxEvLUegeGjcJt41NsO1-d1h1L2aTgg-CUEmwKD1lJjEZp8jNcMdkaJysUHhmZfou9C0ytt-fsmRj-wgS5LjxfjJ27spDITHVF8q--XIunuADh-1T63DrpflcH749cWamRhyd932_vimqaeXMsKNMM1xfL-leF6OXwIhOh0fArKGf-F9r5FcRQnjec-Dihhe_OnvEQhnOY7byLJjDvZQRMSVirQoD6Fek"/>
-</div>
-</div>
-</header>
 <div class="flex pt-16 min-h-screen">
 <!-- Sidebar Navigation -->
-<aside class="h-[calc(100vh-4rem)] w-64 border-r border-outline-variant/15 flex flex-col p-4 sticky top-16 bg-surface-container-lowest">
-<div class="mb-6 p-4 rounded-xl bg-surface-container-low">
-<div class="w-12 h-12 rounded-lg mx-auto mb-3 bg-primary-fixed p-0.5 border border-primary/10 overflow-hidden">
-<img alt="Academic user avatar" class="w-full h-full object-cover rounded-md" data-auth-avatar="" data-alt="Detailed portrait of an elderly professor with graying hair and a thoughtful gaze, classic academic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsFOm4QMyN_-sRbBKfLhhdSHKGmke-ifAm9XdCI35ybaAEXxZ3RF88VHlot8gHCbkf9vt2kQA959LacZhbFiWWgNVVH6d0u_JMnl2Y_duNeVzBglQB8UWbS2gRV0nnKDhj_kr_mx90oaJDg9kRB62eiPBil0OfWWYmvNSEu8jjIc5h5CrCnUNIoDZCUD5N-C0tpj8Hs01nlQg--ms5uH-8iuyDMgfC4LqnmQtodsA9xupfFxsBT30C4u_BHBwZTi1tcifAtJvsSCaU"/>
-</div>
-<h2 class="font-headline font-bold text-primary text-[13px] text-center leading-tight" data-auth-name="">Dr. Julian Vane</h2>
-<p class="font-label text-[9px] text-on-surface-variant text-center uppercase tracking-wider mt-1" data-auth-plan-copy="">Level 4 Scholar</p>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center px-3 py-2 text-primary font-bold bg-primary-fixed/30 rounded-lg transition-all" href="#">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
-<span class="text-sm">Overview</span>
-</a>
-<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="menu_book">menu_book</span>
-<span class="text-sm font-medium">Subjects</span>
-</a>
-<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="style">style</span>
-<span class="text-sm font-medium">Concept Cards</span>
-</a>
-<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="{{DATA:SCREEN:SCREEN_21}}">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="workspace_premium">workspace_premium</span>
-<span class="text-sm font-medium">Achievements</span>
-</a>
-<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="{{DATA:SCREEN:SCREEN_12}}">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="credit_card">credit_card</span>
-<span class="text-sm font-medium">Subscriptions</span>
-</a>
-<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="quiz">quiz</span>
-<span class="text-sm font-medium">Exam Simulator</span>
-</a>
-<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-high hover:text-primary rounded-lg transition-all" href="#">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="bar_chart">bar_chart</span>
-<span class="text-sm font-medium">Insights</span>
-</a>
-</nav>
-<div class="mt-auto space-y-4">
-<button class="w-full py-2.5 bg-primary text-white rounded-lg font-bold text-[11px] uppercase tracking-wider shadow-lg shadow-primary/20 hover:opacity-95 transition-all">
-                    Start Study Session
-                </button>
-<div class="pt-4 border-t border-outline-variant/15 space-y-2">
-<a class="flex items-center px-3 py-1.5 text-on-surface-variant hover:text-primary transition-colors text-[13px]" href="{{DATA:SCREEN:SCREEN_18}}">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="settings">settings</span>
-                        Settings
-                    </a>
-<a class="flex items-center px-3 py-1.5 text-on-surface-variant hover:text-primary transition-colors text-[13px]" href="#">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="help">help</span>
-                        Support
-                    </a>
-<a class="flex items-center px-3 py-1.5 text-on-surface-variant hover:text-error transition-colors text-[13px]" data-auth-logout-trigger="" href="#">
-<span class="material-symbols-outlined mr-3 text-xl" data-icon="logout">logout</span>
-                        Sign Out
-                    </a>
-</div>
-</div>
-</aside>
+<aside class="sc-app-sidebar hidden lg:flex" data-sc-app-sidebar="" data-sidebar-shell=""></aside>
 <!-- Main Content Area -->
-<main class="flex-1 px-12 py-10 bg-surface">
-<!-- Hero Section -->
-<section class="mb-16">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
-<div class="max-w-2xl">
-<span class="font-label text-xs uppercase tracking-widest text-secondary font-bold mb-4 block">Good morning, Scholar</span>
-<h1 class="text-5xl font-headline font-extrabold text-primary tracking-tighter mb-6 leading-[1.1]">
-                            Curating the intersection of <span class="text-secondary">ethics</span> and emerging <span class="italic">quantums</span>.
-                        </h1>
-<p class="text-lg text-on-surface-variant leading-relaxed font-body mb-8" data-auth-bio="">
-                            Dr. Julian Vane is a Senior Fellow specializing in the sociopolitical implications of quantum computing. His work bridges the gap between theoretical physics and normative ethics, fostering a global dialogue on algorithmic responsibility.
-                        </p>
-<div class="flex gap-12">
+<main class="flex-1 px-12 py-10 bg-surface" data-sidebar-main="">
+<section class="mb-12">
+<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.95fr)] gap-8 items-start">
+<div class="rounded-[2rem] border border-outline-variant/20 bg-surface-container-low p-8 editorial-shadow">
+<span class="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary" data-profile-greeting="">Your Study Profile</span>
+<h1 class="mb-5 text-5xl font-headline font-extrabold leading-[1.05] tracking-tighter text-primary" data-profile-heading="">Your study identity should reflect what you are actually building.</h1>
+<p class="mb-6 max-w-3xl text-lg leading-relaxed text-on-surface-variant font-body" data-auth-bio="" data-profile-bio="">This profile now tracks your real Soul Concept progress instead of placeholder academic content.</p>
+<div class="mb-8 flex flex-wrap gap-3">
+<span class="inline-flex items-center rounded-full bg-primary-fixed px-4 py-2 text-[11px] font-label font-bold uppercase tracking-[0.16em] text-on-primary-fixed-variant" data-profile-tier="">Starter</span>
+<span class="inline-flex items-center rounded-full bg-secondary-fixed px-4 py-2 text-[11px] font-label font-bold uppercase tracking-[0.16em] text-on-secondary-fixed-variant" data-profile-level="">Starter</span>
+<span class="inline-flex items-center rounded-full bg-surface-container-highest px-4 py-2 text-[11px] font-label font-bold uppercase tracking-[0.16em] text-on-surface-variant" data-profile-plan="">Starter Plan</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="rounded-2xl bg-white/80 border border-outline-variant/15 p-5">
+<span class="block text-3xl font-headline font-bold text-primary" data-profile-points="">0</span>
+<span class="mt-2 block font-label text-[11px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">Points Earned</span>
+</div>
+<div class="rounded-2xl bg-white/80 border border-outline-variant/15 p-5">
+<span class="block text-3xl font-headline font-bold text-primary" data-profile-streak="">0</span>
+<span class="mt-2 block font-label text-[11px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">Study Days</span>
+</div>
+<div class="rounded-2xl bg-white/80 border border-outline-variant/15 p-5">
+<span class="block text-3xl font-headline font-bold text-primary" data-profile-badges="">0</span>
+<span class="mt-2 block font-label text-[11px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">Badges Unlocked</span>
+</div>
+<div class="rounded-2xl bg-white/80 border border-outline-variant/15 p-5">
+<span class="block text-3xl font-headline font-bold text-primary" data-profile-subjects="">0</span>
+<span class="mt-2 block font-label text-[11px] font-bold uppercase tracking-[0.14em] text-on-surface-variant">Subjects Explored</span>
+</div>
+</div>
+</div>
+<div class="rounded-[2rem] bg-primary p-8 text-white shadow-[0_24px_60px_rgba(0,68,53,0.18)]">
+<div class="flex items-center gap-4">
+<div class="h-20 w-20 overflow-hidden rounded-[1.4rem] border border-white/15 bg-white/10">
+<img alt="Profile avatar" class="h-full w-full object-cover" data-auth-avatar="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUh8RjxtzWpcYJsiM18no7DpcgQBzju7bXwPMu-Auy__cVxEvLUegeGjcJt41NsO1-d1h1L2aTgg-CUEmwKD1lJjEZp8jNcMdkaJysUHhmZfou9C0ytt-fsmRj-wgS5LjxfjJ27spDITHVF8q--XIunuADh-1T63DrpflcH749cWamRhyd932_vimqaeXMsKNMM1xfL-leF6OXwIhOh0fArKGf-F9r5FcRQnjec-Dihhe_OnvEQhnOY7byLJjDvZQRMSVirQoD6Fek"/>
+</div>
+<div class="min-w-0">
+<p class="text-2xl font-headline font-bold tracking-tight" data-auth-name="">Guest Scholar</p>
+<p class="mt-1 text-sm font-label uppercase tracking-[0.18em] text-white/72" data-profile-summary-plan="">Starter</p>
+</div>
+</div>
+<div class="mt-8 space-y-5">
 <div>
-<span class="block text-3xl font-headline font-bold text-primary">4.8k</span>
-<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Citations</span>
+<div class="mb-2 flex items-center justify-between gap-4">
+<span class="text-xs font-label font-bold uppercase tracking-[0.16em] text-white/70">Level Progress</span>
+<span class="text-xs font-label font-bold uppercase tracking-[0.16em] text-white/70" data-profile-progress-label="">0% to next level</span>
 </div>
-<div>
-<span class="block text-3xl font-headline font-bold text-primary">124</span>
-<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Curated Modules</span>
-</div>
-<div>
-<span class="block text-3xl font-headline font-bold text-primary">32</span>
-<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Research Papers</span>
+<div class="h-2 overflow-hidden rounded-full bg-white/12">
+<div class="h-full rounded-full bg-primary-fixed" data-profile-level-bar="" style="width:0%"></div>
 </div>
 </div>
+<div class="rounded-2xl border border-white/12 bg-white/8 p-5">
+<p class="text-xs font-label font-bold uppercase tracking-[0.18em] text-white/70">Next Milestone</p>
+<p class="mt-3 text-lg font-headline font-bold" data-profile-next-title="">Build your first real streak</p>
+<p class="mt-2 text-sm leading-relaxed text-white/78" data-profile-next-copy="">Start logging sessions and exploring subjects to unlock your next Soul Concept badge.</p>
 </div>
-<div class="hidden lg:block w-72 h-96 rounded-2xl overflow-hidden editorial-shadow bg-surface-container-highest rotate-2">
-<img alt="Academic study setting" class="w-full h-full object-cover grayscale contrast-125" data-alt="Minimalist bookshelf with old leather-bound books and a single brass lamp, casting warm light, academic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9-q3FfsoEMCHsL5EjQ3OMq1yzpMLvCU7zNGVCZ13jQo5LQQ8QliAx7ak59IMyMPy8JMy6iVUMv0Wc0bO2rgrehxjlR59BKc5D646HHJ2DWEsVBetgxEbjI_2PWwKRwie8lqY-cFH2pcDCRdwXawdgPAK9P3yUDEYXj6Zr0EIqQRBa3ad2AixMBmfnHpaf-Ub9s7Clfa0DhOX04WFFyuhuHgJkHWLWqZbnK0xAoS_-aiJ6n5JxTAdePbDRGHKNNJUq6TdjdPLc-9Av"/>
+<a class="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-3 text-sm font-headline font-bold text-primary transition-transform hover:-translate-y-0.5" href="achievements.html">Open Achievements</a>
+</div>
 </div>
 </div>
 </section>
-<!-- Grid Layout for Activity & Achievements -->
-<div class="grid grid-cols-1 xl:grid-cols-3 gap-12 mb-16">
-<!-- Recent Research Activity (Col 1 & 2) -->
-<div class="xl:col-span-2">
-<div class="flex items-center justify-between mb-8">
-<h3 class="text-2xl font-headline font-bold text-primary">Recent Research Activity</h3>
-<a class="text-sm font-bold text-secondary border-b-2 border-secondary/20 hover:border-secondary transition-all" href="{{DATA:SCREEN:SCREEN_24}}">View Archive</a>
-</div>
-<div class="space-y-4">
-<!-- Activity Item 1 -->
-<div class="p-6 bg-surface-container-lowest rounded-xl hover:bg-surface-container-high transition-all duration-200 group">
-<div class="flex items-start justify-between">
+<section class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.95fr)] gap-8 mb-12">
+<div class="rounded-[2rem] border border-outline-variant/20 bg-surface-container-lowest p-8 editorial-shadow">
+<div class="mb-8 flex items-center justify-between gap-4">
 <div>
-<div class="flex items-center gap-3 mb-2">
-<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] font-label font-bold uppercase tracking-tighter">Physics</span>
-<span class="text-xs text-on-surface-variant font-label">Published Oct 2024</span>
+<h2 class="text-2xl font-headline font-bold text-primary">Recent Study Activity</h2>
+<p class="mt-2 text-sm text-on-surface-variant">Latest sessions and learning movement from your schedule.</p>
 </div>
-<h4 class="text-lg font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Non-Local Responsibility in Multi-Agent Quantum Systems</h4>
-<p class="text-sm text-on-surface-variant mt-1">Co-authored with Dr. Elena Moretti | Journal of Digital Ethics</p>
+<a class="text-sm font-bold text-secondary border-b-2 border-secondary/20 hover:border-secondary transition-all" href="schedule.html">Open Schedule</a>
 </div>
-<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors" data-icon="arrow_outward">arrow_outward</span>
+<div class="space-y-4" data-profile-activity=""></div>
 </div>
+<div class="rounded-[2rem] border border-outline-variant/20 bg-surface-container-low p-8">
+<div class="mb-8">
+<h3 class="text-xl font-headline font-bold text-primary">Milestones In Reach</h3>
+<p class="mt-2 text-sm text-on-surface-variant">The closest badge progress and the level you are building toward.</p>
 </div>
-<!-- Activity Item 2 -->
-<div class="p-6 bg-surface-container-lowest rounded-xl hover:bg-surface-container-high transition-all duration-200 group">
-<div class="flex items-start justify-between">
-<div>
-<div class="flex items-center gap-3 mb-2">
-<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed rounded-full text-[10px] font-label font-bold uppercase tracking-tighter">Sociology</span>
-<span class="text-xs text-on-surface-variant font-label">Accessed 2 days ago</span>
+<div class="space-y-5" data-profile-milestones=""></div>
 </div>
-<h4 class="text-lg font-headline font-bold text-on-surface group-hover:text-primary transition-colors">The Algorithmic Commons: Data Sovereignty in the 22nd Century</h4>
-<p class="text-sm text-on-surface-variant mt-1">Research Paper | Oxford Academic Press</p>
-</div>
-<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors" data-icon="open_in_new">open_in_new</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Achievement Milestones (Col 3) -->
-<div class="bg-surface-container-low p-8 rounded-2xl">
-<h3 class="text-xl font-headline font-bold text-primary mb-8">Milestones</h3>
-<div class="space-y-6">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-secondary shadow-sm">
-<span class="material-symbols-outlined" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
-</div>
-<div>
-<p class="font-bold text-sm text-on-surface">Master Curator</p>
-<p class="text-xs text-on-surface-variant">Top 1% of contributors this year</p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
-<span class="material-symbols-outlined" data-icon="history_edu" style="font-variation-settings: 'FILL' 1;">history_edu</span>
-</div>
-<div>
-<p class="font-bold text-sm text-on-surface">Prolific Author</p>
-<p class="text-xs text-on-surface-variant">30+ Peer-reviewed publications</p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-primary-fixed shadow-sm">
-<span class="material-symbols-outlined" data-icon="diversity_3" style="font-variation-settings: 'FILL' 1;">diversity_3</span>
-</div>
-<div>
-<p class="font-bold text-sm text-on-surface">Community Fellow</p>
-<p class="text-xs text-on-surface-variant">Mentor to 500+ aspiring scholars</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Curated Collections -->
+</section>
 <section>
-<div class="flex items-center justify-between mb-8">
-<h3 class="text-2xl font-headline font-bold text-primary">Curated Collections</h3>
-<button class="text-sm font-label font-bold text-primary-container flex items-center gap-2">
-                        Create New <span class="material-symbols-outlined text-lg" data-icon="add_circle">add_circle</span>
-</button>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Collection 1 -->
-<div class="group cursor-pointer">
-<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4">
-<img alt="Quantum Ethics Collection" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Abstract visualization of light particles and glowing blue energy lines in a dark space, high tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMFBIoF1LLe5Pm5iq0f9a8vBzVJWjPUS1NAwqUj0L0qx__WkpCO9eXpvQBSJTr3k_n1uaVlCOHJVmJNb2bqB1QpSSn3u8KJuUGnCCCqS-IhjBPLjequ0_RAnOjFHmMcqxGYZKOceH1S1oY6MaoYkqCqXUIpB0Qw68zyvK-I9QKaLEWB7IWLAakEauk_Np1nsKj6HtLYfmuuiVi_V50Q3UXCsEHGQE6j1erNyfNtrRVDDYQsiNy-ZtQxmLqr4G2HOVHDWBkZBGFn6P6"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex flex-col justify-end p-6">
-<span class="font-label text-[10px] text-primary-fixed uppercase tracking-widest mb-1">42 Resources</span>
-<h4 class="text-xl font-headline font-bold text-white">Quantum Ethics</h4>
+<div class="mb-8 flex items-center justify-between gap-4">
+<div>
+<h2 class="text-2xl font-headline font-bold text-primary">Continue Your Study Flow</h2>
+<p class="mt-2 text-sm text-on-surface-variant">Jump back into the parts of Soul Concept that match your current progress.</p>
 </div>
 </div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<a class="group rounded-[1.75rem] border border-outline-variant/20 bg-surface-container-lowest p-7 editorial-shadow transition-all hover:-translate-y-1 hover:border-primary/15" href="subject-library.html">
+<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/8 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
 </div>
-<!-- Collection 2 -->
-<div class="group cursor-pointer">
-<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4">
-<img alt="Historical Cartography Collection" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Close up of an ancient nautical map with yellowed parchment and intricate ink illustrations of mythical sea creatures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlMVSy4BkWr-5m2CEwrQPeD9ZTB2-sTvPF1ie1-vJBMjeisCu6CQakVofBnJh4NRkfZcLVB0pX4vkASEThlB-W2_XzmRbMfYSS2UZQcwxTRciiQn-Xeie_9ut4cZn6F59lI9AJb4qIbjzrxHxZB8KVje8x5k1wiQzHI7f_feqhZEZZDcrHerEgmY9WIW-XSHbnwyMWraQRS_gluaYX1V5GC36EJORZ9WpTXsDG5YRbIOhIZArSI2ccLU-k08yEORDEsfHFfX4h4JTK"/>
-<div class="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent flex flex-col justify-end p-6">
-<span class="font-label text-[10px] text-secondary-fixed uppercase tracking-widest mb-1">118 Resources</span>
-<h4 class="text-xl font-headline font-bold text-white">Historical Cartography</h4>
+<p class="mt-6 text-xl font-headline font-bold text-primary">Subject Libraries</p>
+<p class="mt-2 text-sm leading-relaxed text-on-surface-variant" data-profile-route-libraries="">Keep exploring subjects and opening new study routes.</p>
+<span class="mt-5 inline-flex items-center gap-2 text-xs font-label font-bold uppercase tracking-[0.16em] text-secondary">Open Libraries <span class="material-symbols-outlined text-base">arrow_forward</span></span>
+</a>
+<a class="group rounded-[1.75rem] border border-outline-variant/20 bg-surface-container-lowest p-7 editorial-shadow transition-all hover:-translate-y-1 hover:border-primary/15" href="analytics.html">
+<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/8 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
 </div>
+<p class="mt-6 text-xl font-headline font-bold text-primary">Insights</p>
+<p class="mt-2 text-sm leading-relaxed text-on-surface-variant" data-profile-route-insights="">Use your current streak and focus momentum to guide the next study block.</p>
+<span class="mt-5 inline-flex items-center gap-2 text-xs font-label font-bold uppercase tracking-[0.16em] text-secondary">Open Insights <span class="material-symbols-outlined text-base">arrow_forward</span></span>
+</a>
+<a class="group rounded-[1.75rem] border border-outline-variant/20 bg-surface-container-lowest p-7 editorial-shadow transition-all hover:-translate-y-1 hover:border-primary/15" href="achievements.html">
+<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-container/15 text-on-primary-fixed-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
 </div>
-</div>
-<!-- Collection 3 -->
-<div class="group cursor-pointer">
-<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4">
-<img alt="Digital Sovereignty Collection" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Satellites orbiting earth at night with glowing network connections between cities, cinematic and sophisticated" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK70MWYq5qW9wRM_D3E82sE23LV_zvWoP-O1U_JuS7hH6vHgcSYJMOHpib0CGe2GJ-gb9mpDua9Q7ncNLe6pr1wTMlApZDLqI_oZOudydgpHaGLOU2nZ_P_9ZLLi6-0sy8xN28ijZtW0x4XDIDwLOCK2CnkTtua05ykjB4DxVjnuID0BHkqmUqsj827aFuV2PwkOQ-BI9XYPQT1-XKqP5oWY3bY6roWXQotXHX21f1AVVw-jtG55h6ESHghqsse_czuVlF0IaaqxhK"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
-<span class="font-label text-[10px] text-surface-container-highest uppercase tracking-widest mb-1">29 Resources</span>
-<h4 class="text-xl font-headline font-bold text-white">Digital Sovereignty</h4>
-</div>
-</div>
-</div>
+<p class="mt-6 text-xl font-headline font-bold text-primary">Achievements</p>
+<p class="mt-2 text-sm leading-relaxed text-on-surface-variant" data-profile-route-achievements="">Review badge progress, level growth, and what you should unlock next.</p>
+<span class="mt-5 inline-flex items-center gap-2 text-xs font-label font-bold uppercase tracking-[0.16em] text-secondary">Open Achievements <span class="material-symbols-outlined text-base">arrow_forward</span></span>
+</a>
 </div>
 </section>
 </main>
@@ -545,7 +416,7 @@
 <footer class="w-full py-12 border-t border-outline-variant/30 bg-surface-container-lowest">
 <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
 <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant">
-                Â© 2024 Soul Concept Academic Gallery. All rights reserved.
+                (c) 2024 Soul Concept Academic Gallery. All rights reserved.
             </p>
 <nav class="flex flex-wrap justify-center gap-8">
 <a class="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-opacity" href="#">Privacy Policy</a>
@@ -562,13 +433,319 @@
 <script src="assets/account-pages.js?v=20260326a"></script>
 <script defer src="lyne-widget.js?v=20260321c"></script>
 <script defer src="focus-mode.js?v=20260321d"></script>
+<script>
+    (function () {
+      var PROFILE_CACHE_KEY = 'sc_auth_profile_v1'
+      var SCHEDULE_KEY = 'sc_schedule_events_v2'
+      var DEFAULT_EVENTS = [
+        { id: 'evt-1', title: 'Neuroscience Lab', subject: 'Biology 302', date: '2026-03-30', start: '09:00', end: '10:30', starred: true, priority: 'High' },
+        { id: 'evt-2', title: 'Deep Work: Thesis', subject: 'Focus Block', date: '2026-03-30', start: '14:30', end: '16:00', starred: false, priority: 'Medium' },
+        { id: 'evt-3', title: 'Stochastic Models', subject: 'Mathematics', date: '2026-03-31', start: '10:30', end: '12:00', starred: false, priority: 'Medium' },
+        { id: 'evt-4', title: 'Seminar: Modern Ethics', subject: 'Philosophy', date: '2026-04-01', start: '13:00', end: '14:30', starred: true, priority: 'High' },
+        { id: 'evt-5', title: 'Physics Recitation', subject: 'Physics', date: '2026-04-02', start: '09:00', end: '10:30', starred: false, priority: 'Low' },
+        { id: 'evt-6', title: 'Weekly Peer Review', subject: 'English', date: '2026-04-03', start: '16:30', end: '17:30', starred: false, priority: 'Medium' }
+      ]
+      var badgeDefs = [
+        { title: 'Multi-Subject Explorer', copy: 'Study across multiple subject routes.', target: 5, progressKey: 'subjectCount', icon: 'hub', tone: 'primary' },
+        { title: 'Review Specialist', copy: 'Save and revisit priority sessions.', target: 10, progressKey: 'starredCount', icon: 'grade', tone: 'secondary' },
+        { title: 'Science Builder', copy: 'Create stronger momentum in science.', target: 4, progressKey: 'scienceCount', icon: 'science', tone: 'primary' },
+        { title: 'Library Organizer', copy: 'Build consistent study sessions.', target: 16, progressKey: 'sessionCount', icon: 'inventory_2', tone: 'primary' },
+        { title: 'Focus Keeper', copy: 'Log more deep work blocks.', target: 5, progressKey: 'focusCount', icon: 'center_focus_strong', tone: 'secondary' },
+        { title: 'Streak Builder', copy: 'Study across more active days.', target: 7, progressKey: 'dayCount', icon: 'local_fire_department', tone: 'secondary' },
+        { title: 'Deep Reader', copy: 'Accumulate longer study time.', target: 1200, progressKey: 'minutesTotal', icon: 'menu_book', tone: 'primary' }
+      ]
+      var levelDefs = [
+        { title: 'Starter', minPoints: 0 },
+        { title: 'Scholar', minPoints: 1800 },
+        { title: 'Curator', minPoints: 4200 },
+        { title: 'Architect', minPoints: 7600 },
+        { title: 'Strategist', minPoints: 11800 },
+        { title: 'Luminary', minPoints: 17000 }
+      ]
+
+      function readCachedProfile() {
+        try {
+          var raw = localStorage.getItem(PROFILE_CACHE_KEY)
+          return raw ? JSON.parse(raw) : null
+        } catch (_err) {
+          return null
+        }
+      }
+
+      function currentScopeSuffix(profile) {
+        var active = profile || readCachedProfile()
+        return active && active.id ? 'user:' + active.id : 'guest'
+      }
+
+      function scopedKey(baseKey, profile) {
+        return baseKey + '::' + currentScopeSuffix(profile)
+      }
+
+      function readJson(baseKey, fallback, profile) {
+        try {
+          var raw = localStorage.getItem(scopedKey(baseKey, profile))
+          if (raw == null) {
+            raw = localStorage.getItem(baseKey)
+            if (raw != null) localStorage.setItem(scopedKey(baseKey, profile), raw)
+          }
+          return raw ? JSON.parse(raw) : fallback
+        } catch (_err) {
+          return fallback
+        }
+      }
+
+      function readNumber(baseKey, profile) {
+        try {
+          var raw = localStorage.getItem(scopedKey(baseKey, profile))
+          if (raw == null) raw = localStorage.getItem(baseKey)
+          return raw != null ? Number(raw) || 0 : 0
+        } catch (_err) {
+          return 0
+        }
+      }
+
+      function readEvents(profile) {
+        var stored = readJson(SCHEDULE_KEY, null, profile)
+        return Array.isArray(stored) && stored.length ? stored : DEFAULT_EVENTS
+      }
+
+      function normalizeSubject(value) {
+        return String(value || '').trim().toLowerCase()
+      }
+
+      function toMinutes(value) {
+        var parts = String(value || '00:00').split(':')
+        return (parseInt(parts[0], 10) || 0) * 60 + (parseInt(parts[1], 10) || 0)
+      }
+
+      function minutesBetween(start, end) {
+        return Math.max(0, toMinutes(end) - toMinutes(start))
+      }
+
+      function setText(selector, value) {
+        var node = document.querySelector(selector)
+        if (node) node.textContent = value
+      }
+
+      function buildStats(events) {
+        var uniqueSubjects = {}
+        var uniqueDates = {}
+        var minutesTotal = 0
+        var starredCount = 0
+        var scienceCount = 0
+        var focusCount = 0
+
+        events.forEach(function (event) {
+          var subject = normalizeSubject(event.subject || event.title)
+          if (subject) uniqueSubjects[subject] = true
+          if (event.date) uniqueDates[event.date] = true
+          minutesTotal += minutesBetween(event.start, event.end)
+          if (event.starred) starredCount += 1
+          if (/science|biology|physics|chemistry/.test(subject)) scienceCount += 1
+          if (/focus|deep work/.test(subject) || /focus|deep work/.test(normalizeSubject(event.title))) focusCount += 1
+        })
+
+        return {
+          sessionCount: events.length,
+          subjectCount: Object.keys(uniqueSubjects).length,
+          dayCount: Object.keys(uniqueDates).length,
+          starredCount: starredCount,
+          scienceCount: scienceCount,
+          focusCount: focusCount,
+          minutesTotal: minutesTotal
+        }
+      }
+
+      function computePoints(stats) {
+        return (stats.sessionCount * 65) + (stats.subjectCount * 90) + (stats.dayCount * 55) + (stats.focusCount * 40) + (stats.starredCount * 25)
+      }
+
+      function computeLevel(points) {
+        var current = levelDefs[0]
+        var next = levelDefs[levelDefs.length - 1]
+        levelDefs.forEach(function (level, index) {
+          if (points >= level.minPoints) current = level
+          if (points < level.minPoints && next === levelDefs[levelDefs.length - 1]) next = level
+        })
+        if (points >= levelDefs[levelDefs.length - 1].minPoints) next = current
+        var currentFloor = current.minPoints
+        var nextCeiling = next.minPoints
+        var progress = next.title === current.title
+          ? 100
+          : Math.max(0, Math.min(100, Math.round(((points - currentFloor) / Math.max(1, nextCeiling - currentFloor)) * 100)))
+        return {
+          current: current,
+          next: next,
+          progress: progress,
+          pointsToNext: Math.max(0, nextCeiling - points)
+        }
+      }
+
+      function computeBadgeProgress(stats, profile) {
+        var unlocked = 0
+        var entries = badgeDefs.map(function (badge) {
+          var current = stats[badge.progressKey] || 0
+          var progress = Math.min(100, Math.round((current / Math.max(1, badge.target)) * 100))
+          var complete = current >= badge.target
+          if (complete) unlocked += 1
+          return {
+            title: badge.title,
+            copy: badge.copy,
+            current: current,
+            target: badge.target,
+            progress: progress,
+            complete: complete,
+            icon: badge.icon,
+            tone: badge.tone
+          }
+        })
+        var storedUnlocked = Math.max(readNumber('sc_achievement_count_v1', profile), readNumber('sc_unlocked_achievements_v1', profile), Number((profile && (profile.achievementCount || profile.unlockedAchievements)) || 0) || 0)
+        return {
+          unlocked: Math.max(unlocked, storedUnlocked),
+          entries: entries.sort(function (a, b) {
+            if (a.complete !== b.complete) return a.complete ? 1 : -1
+            return b.progress - a.progress
+          })
+        }
+      }
+
+      function formatDate(dateStr) {
+        var date = new Date(dateStr + 'T12:00:00')
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      }
+
+      function formatTime(value) {
+        var total = toMinutes(value)
+        var hour = Math.floor(total / 60)
+        var minute = total % 60
+        var suffix = hour >= 12 ? 'PM' : 'AM'
+        var display = hour % 12 || 12
+        return display + ':' + String(minute).padStart(2, '0') + ' ' + suffix
+      }
+
+      function toneClasses(tone) {
+        if (tone === 'secondary') {
+          return {
+            chip: 'bg-secondary-fixed text-on-secondary-fixed-variant',
+            iconWrap: 'bg-secondary/10 text-secondary',
+            bar: 'bg-secondary'
+          }
+        }
+        return {
+          chip: 'bg-primary-fixed text-on-primary-fixed-variant',
+          iconWrap: 'bg-primary/10 text-primary',
+          bar: 'bg-primary'
+        }
+      }
+
+      function renderActivity(events) {
+        var host = document.querySelector('[data-profile-activity]')
+        if (!host) return
+        var sorted = events.slice().sort(function (a, b) {
+          var left = (a.date || '') + 'T' + (a.start || '00:00')
+          var right = (b.date || '') + 'T' + (b.start || '00:00')
+          return right.localeCompare(left)
+        }).slice(0, 4)
+        host.innerHTML = sorted.map(function (event) {
+          var subject = event.subject || event.title || 'Study Session'
+          var duration = minutesBetween(event.start, event.end)
+          var chip = toneClasses(event.starred ? 'secondary' : 'primary')
+          return (
+            '<a class="group block rounded-2xl border border-outline-variant/12 bg-surface-container-low p-6 transition-all hover:border-primary/12 hover:bg-surface-container-high" href="schedule.html">' +
+              '<div class="flex items-start justify-between gap-4">' +
+                '<div class="min-w-0 flex-1">' +
+                  '<div class="mb-3 flex flex-wrap items-center gap-3">' +
+                    '<span class="rounded-full px-3 py-1 text-[10px] font-label font-bold uppercase tracking-[0.14em] ' + chip.chip + '">' + subject + '</span>' +
+                    '<span class="text-xs font-label uppercase tracking-[0.14em] text-on-surface-variant">' + formatDate(event.date) + ' â€¢ ' + formatTime(event.start) + '</span>' +
+                  '</div>' +
+                  '<h4 class="text-lg font-headline font-bold text-on-surface transition-colors group-hover:text-primary">' + (event.title || 'Study Session') + '</h4>' +
+                  '<p class="mt-1 text-sm text-on-surface-variant">' + duration + ' min session â€¢ ' + (event.priority || 'Planned') + ' priority</p>' +
+                '</div>' +
+                '<span class="material-symbols-outlined text-outline transition-colors group-hover:text-secondary">arrow_outward</span>' +
+              '</div>' +
+            '</a>'
+          )
+        }).join('')
+      }
+
+      function renderMilestones(entries) {
+        var host = document.querySelector('[data-profile-milestones]')
+        if (!host) return
+        host.innerHTML = entries.slice(0, 3).map(function (entry) {
+          var tone = toneClasses(entry.tone)
+          return (
+            '<div class="rounded-2xl border border-outline-variant/12 bg-white/70 p-5">' +
+              '<div class="flex items-start gap-4">' +
+                '<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ' + tone.iconWrap + '">' +
+                  '<span class="material-symbols-outlined" style="font-variation-settings: \'FILL\' 1;">' + entry.icon + '</span>' +
+                '</div>' +
+                '<div class="min-w-0 flex-1">' +
+                  '<div class="flex items-start justify-between gap-4">' +
+                    '<div>' +
+                      '<p class="font-headline text-base font-bold text-primary">' + entry.title + '</p>' +
+                      '<p class="mt-1 text-sm leading-relaxed text-on-surface-variant">' + entry.copy + '</p>' +
+                    '</div>' +
+                    '<span class="text-[11px] font-label font-bold uppercase tracking-[0.14em] text-on-surface-variant">' + entry.current + ' / ' + entry.target + '</span>' +
+                  '</div>' +
+                  '<div class="mt-4 h-2 overflow-hidden rounded-full bg-surface-container-highest">' +
+                    '<div class="h-full rounded-full ' + tone.bar + '" style="width:' + entry.progress + '%"></div>' +
+                  '</div>' +
+                  '<p class="mt-3 text-[11px] font-label font-bold uppercase tracking-[0.14em] ' + (entry.complete ? 'text-primary' : 'text-secondary') + '">' + (entry.complete ? 'Unlocked' : entry.progress + '% complete') + '</p>' +
+                '</div>' +
+              '</div>' +
+            '</div>'
+          )
+        }).join('')
+      }
+
+      function renderProfile() {
+        var profile = readCachedProfile()
+        var events = readEvents(profile)
+        var stats = buildStats(events)
+        var points = Math.max(computePoints(stats), readNumber('sc_achievement_points_v1', profile), readNumber('sc_profile_points_v1', profile), readNumber('sc_points_v1', profile), Number((profile && (profile.achievementPoints || profile.points || profile.score)) || 0) || 0)
+        var levelState = computeLevel(points)
+        var badgeState = computeBadgeProgress(stats, profile)
+        var name = (profile && profile.name) || 'Guest Scholar'
+        var tier = points >= 1000 || badgeState.unlocked >= 12 ? 'Top Scholar' : points >= 300 || badgeState.unlocked >= 6 ? 'Achiever' : 'Starter'
+        var plan = (profile && profile.plan) ? String(profile.plan).replace(/\b\w/g, function (char) { return char.toUpperCase() }) : 'Starter Plan'
+        var nextMilestone = badgeState.entries[0]
+
+        setText('[data-profile-greeting]', profile ? 'Profile Overview' : 'Welcome Back')
+        setText('[data-profile-heading]', profile ? name + '\'s study profile' : 'Your study profile at a glance')
+        setText('[data-profile-bio]', profile && profile.bio ? profile.bio : 'Track your real points, streaks, subjects, and achievement progress here. Sign in to sync everything across sessions.')
+        setText('[data-profile-tier]', tier)
+        setText('[data-profile-level]', levelState.current.title)
+        setText('[data-profile-plan]', plan)
+        setText('[data-profile-summary-plan]', plan)
+        setText('[data-profile-points]', points.toLocaleString())
+        setText('[data-profile-streak]', String(stats.dayCount))
+        setText('[data-profile-badges]', String(badgeState.unlocked))
+        setText('[data-profile-subjects]', String(stats.subjectCount))
+        setText('[data-profile-progress-label]', levelState.next.title === levelState.current.title ? 'max level reached' : levelState.pointsToNext.toLocaleString() + ' pts to ' + levelState.next.title)
+        setText('[data-profile-next-title]', nextMilestone ? nextMilestone.title : 'Build your first milestone')
+        setText('[data-profile-next-copy]', nextMilestone ? nextMilestone.copy + ' You are at ' + nextMilestone.current + ' out of ' + nextMilestone.target + '.' : 'Start logging sessions and exploring subjects to unlock your next Soul Concept badge.')
+        setText('[data-profile-route-libraries]', 'You have explored ' + stats.subjectCount + ' subject' + (stats.subjectCount === 1 ? '' : 's') + ' so far. Keep expanding your study routes.')
+        setText('[data-profile-route-insights]', 'Current streak: ' + stats.dayCount + ' day' + (stats.dayCount === 1 ? '' : 's') + '. Use insights to shape the next focused block.')
+        setText('[data-profile-route-achievements]', badgeState.unlocked + ' badge' + (badgeState.unlocked === 1 ? '' : 's') + ' unlocked. Review what is closest to complete next.')
+
+        var levelBar = document.querySelector('[data-profile-level-bar]')
+        if (levelBar) levelBar.style.width = levelState.progress + '%'
+
+        renderActivity(events)
+        renderMilestones(badgeState.entries)
+      }
+
+      renderProfile()
+      window.addEventListener('sc:auth-state-changed', renderProfile)
+    })()
+  </script>
 <!-- Shared Mobile Bottom Bar -->
 <nav class="mobile-app-shell md:hidden fixed bottom-0 left-0 w-full px-1 h-[4.25rem] flex items-center justify-between gap-0.5 z-50">
 <a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="dashboard.html">
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -599,6 +776,11 @@
 </nav>
 <!-- /Shared Mobile Bottom Bar -->
 </body></html>
+
+
+
+
+
 
 
 

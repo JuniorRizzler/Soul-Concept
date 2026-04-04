@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -352,8 +352,10 @@
             }
         }
     </style>
+<link href="assets/app-sidebar.css?v=20260403d" rel="stylesheet"/>
+<script defer src="assets/app-sidebar.js?v=20260403d"></script>
 </head>
-<body class="bg-background text-on-surface font-body overflow-x-hidden" data-sc-auth-required="false" data-sc-auth-mount="false">
+<body class="bg-background text-on-surface font-body overflow-x-hidden" data-sc-auth-required="false" data-sc-auth-mount="false" data-sc-sidebar-page="schedule">
 <!-- Top Navigation Bar -->
 <!-- Shared Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/70 dark:bg-slate-950/70 backdrop-blur-xl no-border shadow-sm shadow-emerald-900/5">
@@ -363,8 +365,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="analytics.html">Analytics</a>
 </div>
@@ -395,51 +397,8 @@
 </nav>
 <!-- /Shared Top Navigation -->
 <!-- Sidebar (Persistent on Desktop) -->
-<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-surface-container-low border-r border-outline-variant/10 hidden lg:flex flex-col p-6 z-40">
-<div class="space-y-1 mb-8">
-<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Main Menu</p>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="dashboard.html">
-<span class="material-symbols-outlined text-[20px]">grid_view</span>
-<span class="font-label text-sm font-semibold">Overview</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="grade-9.html">
-<span class="material-symbols-outlined text-[20px]">menu_book</span>
-<span class="font-label text-sm font-semibold">Subjects</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="anki/index.html">
-<span class="material-symbols-outlined text-[20px]">style</span>
-<span class="font-label text-sm font-semibold">Concept Cards</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="achievements.html">
-<span class="material-symbols-outlined text-[20px]">military_tech</span>
-<span class="font-label text-sm font-semibold">Achievements</span>
-</a>
-</div>
-<div class="space-y-1 mb-8">
-<p class="px-3 py-2 text-[10px] font-bold text-outline uppercase tracking-widest">Account &amp; Tools</p>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="membership.html">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-<span class="font-label text-sm font-semibold">Subscriptions</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl sidebar-link-active transition-all" href="schedule.html">
-<span class="material-symbols-outlined text-[20px]">calendar_month</span>
-<span class="font-label text-sm font-bold">Schedule</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="analytics.html">
-<span class="material-symbols-outlined text-[20px]">insights</span>
-<span class="font-label text-sm font-semibold">Insights</span>
-</a>
-</div>
-<div class="mt-auto bg-primary-container p-4 rounded-2xl relative overflow-hidden">
-<div class="relative z-10">
-<p class="text-primary-fixed text-xs font-bold mb-1">PRO ACCESS</p>
-<p class="text-white text-[11px] leading-tight opacity-90 mb-3">Unlock all study tools, libraries, and guided review features.</p>
-<button class="bg-primary-fixed text-on-primary-fixed-variant w-full py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider" data-schedule-new-session="" type="button">New Session</button>
-</div>
-<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
-</div>
-</aside>
-<main class="pt-24 lg:pl-64 min-h-screen">
+<aside class="sc-app-sidebar hidden lg:flex" data-sc-app-sidebar="" data-sidebar-shell=""></aside>
+<main class="pt-24 min-h-screen" data-sidebar-main="">
 <!-- Content Area -->
 <div class="px-8 pb-12">
 <!-- Page Header Section -->
@@ -959,7 +918,7 @@
       var decks = window.StudyIntelligence && window.StudyIntelligence.getDecks ? window.StudyIntelligence.getDecks() : []
       var options = ['<option value="">No linked deck</option>']
       decks.forEach(function (deck) {
-        options.push('<option value="' + escapeHtml(deck.id) + '">' + escapeHtml(deck.name + ' · ' + (deck.subject || 'Study')) + '</option>')
+        options.push('<option value="' + escapeHtml(deck.id) + '">' + escapeHtml(deck.name + ' Â· ' + (deck.subject || 'Study')) + '</option>')
       })
       select.innerHTML = options.join('')
       select.value = selectedDeckId || ''
@@ -993,7 +952,7 @@
     function syncWeekChrome() {
       var start = currentWeekStart()
       var end = addDays(start, 4)
-      if (weekLabel) weekLabel.textContent = 'Week ' + weekNumber(start) + ': ' + formatMonthDay(start) + ' – ' + formatMonthDay(end)
+      if (weekLabel) weekLabel.textContent = 'Week ' + weekNumber(start) + ': ' + formatMonthDay(start) + ' - ' + formatMonthDay(end)
       dayOrder.forEach(function (day) {
         var label = document.querySelector('[data-schedule-day-label="' + day + '"]')
         if (!label) return
@@ -1026,7 +985,7 @@
                 '<div class="mt-2 flex items-center gap-1 flex-wrap">' +
                   '<span class="inline-flex px-1.5 py-0.5 rounded text-[0.5rem] font-label font-bold ' + subjectTone(entry.color) + '">' + escapeHtml(entry.subject || 'Study Session') + '</span>' +
                   '<span class="inline-flex px-1.5 py-0.5 rounded bg-white/70 text-[0.5rem] font-label font-bold text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + '</span>' +
-                  (entry.linkedDeckName ? '<span class="inline-flex px-1.5 py-0.5 rounded bg-primary-fixed/70 text-[0.5rem] font-label font-bold text-on-primary-fixed-variant">Deck · ' + escapeHtml(entry.linkedDeckName) + '</span>' : '') +
+                  (entry.linkedDeckName ? '<span class="inline-flex px-1.5 py-0.5 rounded bg-primary-fixed/70 text-[0.5rem] font-label font-bold text-on-primary-fixed-variant">Deck - ' + escapeHtml(entry.linkedDeckName) + '</span>' : '') +
                   (entry.notificationsEnabled === false ? '<span class="inline-flex px-1.5 py-0.5 rounded bg-slate-100 text-[0.5rem] font-label font-bold text-slate-500">No alert</span>' : '') +
                   (entry.location ? '<span class="text-[0.55rem] font-label text-slate-500">' + escapeHtml(entry.location) + '</span>' : '') +
                 '</div>' +
@@ -1055,8 +1014,8 @@
               '<span class="text-[0.6rem] font-label font-bold ' + priorityTone(entry.priority) + '">' + escapeHtml(entry.starred ? 'STARRED' : formatMonthDay(new Date(entry.date))) + '</span>' +
             '</div>' +
             '<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">' + escapeHtml(entry.title) + '</h5>' +
-            (entry.linkedDeckName ? '<p class="mt-1 text-[0.65rem] font-label font-semibold text-primary">Linked deck · ' + escapeHtml(entry.linkedDeckName) + '</p>' : '') +
-            '<p class="mt-1 text-[0.65rem] font-label font-bold uppercase tracking-[0.16em] text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + (entry.notificationsEnabled === false ? ' · alerts off' : '') + '</p>' +
+            (entry.linkedDeckName ? '<p class="mt-1 text-[0.65rem] font-label font-semibold text-primary">Linked deck - ' + escapeHtml(entry.linkedDeckName) + '</p>' : '') +
+            '<p class="mt-1 text-[0.65rem] font-label font-bold uppercase tracking-[0.16em] text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + (entry.notificationsEnabled === false ? ' Â· alerts off' : '') + '</p>' +
             '<div class="mt-3 flex items-center justify-between">' +
               '<div class="flex items-center gap-4">' +
                 '<div class="flex items-center gap-1 text-slate-500"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[0.65rem] font-label font-semibold">' + escapeHtml(durationHours(entry.start, entry.end)) + '</span></div>' +
@@ -1233,7 +1192,7 @@
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -1274,6 +1233,11 @@
 <script defer src="lyne-widget.js?v=20260321c"></script>
 <script defer src="focus-mode.js?v=20260321d"></script>
 </body></html>
+
+
+
+
+
 
 
 

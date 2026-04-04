@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -370,8 +370,8 @@
             </div>
 <div class="hidden md:flex gap-8 font-['Plus_Jakarta_Sans'] font-semibold tracking-tight">
 <a class="text-[#004435] transition-all duration-200" href="../dashboard.html">Dashboard</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../grade-9.html">Library</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../grade-9.html">Grades</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../subject-library.html">Library</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../subject-library.html">Grades</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../schedule.html">Schedule</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-[#004435] transition-all duration-200" href="../analytics.html">Analytics</a>
 </div>
@@ -418,7 +418,7 @@
 <a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-emerald-800 hover:bg-emerald-50 transition-all duration-200 ease-out font-inter text-sm font-medium" href="../dashboard.html">
 <span class="material-symbols-outlined">grid_view</span> Overview
         </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-emerald-800 hover:bg-emerald-50 transition-all duration-200 ease-out font-inter text-sm font-medium" href="../grade-9.html">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-emerald-800 hover:bg-emerald-50 transition-all duration-200 ease-out font-inter text-sm font-medium" href="../subject-library.html">
 <span class="material-symbols-outlined">subject</span> Subjects
         </a>
 <a class="flex items-center gap-3 px-4 py-3 bg-emerald-50 text-emerald-900 rounded-lg font-bold font-inter text-sm" href="index.html">
@@ -838,7 +838,7 @@ This is good because spaced recall makes you revisit a card right before you are
 <span class="material-symbols-outlined">grid_view</span>
 <span class="text-[10px] font-label">Overview</span>
 </a>
-<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="../grade-9.html">
+<a class="mobile-app-item flex min-w-0 flex-1 flex-col items-center gap-0.5" href="../subject-library.html">
 <span class="material-symbols-outlined">auto_stories</span>
 <span class="text-[10px] font-label">Library</span>
 </a>
@@ -1451,7 +1451,7 @@ This is good because spaced recall makes you revisit a card right before you are
       <div class="flex items-start justify-between gap-3">
         <div>
           <p class="font-semibold">${log.front}</p>
-          <p class="text-white/70">${log.subject} Â· ${log.ratingLabel}</p>
+          <p class="text-white/70">${log.subject} Ã‚Â· ${log.ratingLabel}</p>
         </div>
         <span class="text-white/60">${log.time}</span>
       </div>
@@ -1465,7 +1465,7 @@ This is good because spaced recall makes you revisit a card right before you are
       <div class="flex items-start justify-between gap-3">
         <div>
           <p class="font-semibold">${item.front}</p>
-          <p class="text-white/70">${item.subject} Â· ${item.deck}</p>
+          <p class="text-white/70">${item.subject} Ã‚Â· ${item.deck}</p>
         </div>
       </div>
     `).join("") : '<p class="text-white/70">No completed cards yet.</p>';
@@ -1500,7 +1500,7 @@ This is good because spaced recall makes you revisit a card right before you are
           <button class="text-left flex-1" data-custom-deck="${deck.id}" type="button">
             <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400 font-label">${deck.subject}</p>
             <h3 class="mt-2 text-xl font-headline font-extrabold text-primary">${deck.name}</h3>
-            <p class="mt-2 text-sm text-slate-500">${deck.cards.length} cards Â· ${deck.source}</p>
+            <p class="mt-2 text-sm text-slate-500">${deck.cards.length} cards Ã‚Â· ${deck.source}</p>
           </button>
           <div class="flex items-center gap-2">
             <button class="p-2 rounded-full hover:bg-white/70 transition-colors" data-custom-deck="${deck.id}" type="button">
@@ -1721,7 +1721,7 @@ This is good because spaced recall makes you revisit a card right before you are
     appendSessionLog({
       front: card.front,
       subject: deck.subject,
-      ratingLabel: `${["Forgotten", "Hard", "Good", "Easy", "Perfect"][rating - 1] || "Good"} · ${formatInterval(intervalMinutes)}`,
+      ratingLabel: `${["Forgotten", "Hard", "Good", "Easy", "Perfect"][rating - 1] || "Good"} Â· ${formatInterval(intervalMinutes)}`,
       time: formatTime(state.session.elapsed)
     });
     updateCompletedState(deck, card, rating);
@@ -1925,6 +1925,7 @@ This is good because spaced recall makes you revisit a card right before you are
 <script defer src="../lyne-widget.js?v=20260321c"></script>
 <script defer src="../focus-mode.js?v=20260321d"></script>
 </body></html>
+
 
 
 
