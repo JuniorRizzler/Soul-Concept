@@ -1,4 +1,4 @@
-const CACHE_NAME = "soulconcept-v95";
+const CACHE_NAME = "soulconcept-v96";
 const ASSETS = [
   "/",
   "/index.html",
@@ -30,6 +30,8 @@ const ASSETS = [
   "/focus-mode.js",
   "/library-whiteboard.js",
   "/favicon.ico",
+  "/favicon-32x32.png",
+  "/favicon-16x16.png",
   "/favicon.svg",
   "/manifest.json",
   "/icons/icon.svg",
