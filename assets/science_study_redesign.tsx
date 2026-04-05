@@ -7428,9 +7428,33 @@ const achievements = [
 
 export default function ScienceStudyLibrary() {
   const scienceAiEnabled = false;
+  const VIEW_STORAGE_KEY = 'sc_science_library_view_v1';
+  const restoreLibraryView = () => {
+    if (typeof window === 'undefined') {
+      return { subject: null, section: null };
+    }
+
+    try {
+      const raw = window.sessionStorage.getItem(VIEW_STORAGE_KEY);
+      if (!raw) return { subject: null, section: null };
+
+      const parsed = JSON.parse(raw);
+      const subject = studyLibrary[parsed.subjectId] || null;
+      if (!subject) return { subject: null, section: null };
+
+      const section = parsed.sectionId
+        ? subject.sections.find((item) => item.id === parsed.sectionId) || null
+        : null;
+
+      return { subject, section };
+    } catch (_error) {
+      return { subject: null, section: null };
+    }
+  };
+  const initialView = restoreLibraryView();
   const [showIntro, setShowIntro] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [selectedSection, setSelectedSection] = useState(null);
+  const [selectedSubject, setSelectedSubject] = useState(initialView.subject);
+  const [selectedSection, setSelectedSection] = useState(initialView.section);
   const [searchTerm, setSearchTerm] = useState('');
   const [readSections, setReadSections] = useState(new Set());
   const [currentQuiz, setCurrentQuiz] = useState(null);
@@ -7471,7 +7495,7 @@ export default function ScienceStudyLibrary() {
   const [flashcardStats, setFlashcardStats] = useState({ known: 0, learning: 0 });
   
   // Feature highlights visibility
-  const [showFeatureHighlights, setShowFeatureHighlights] = useState(true);
+  const [showFeatureHighlights, setShowFeatureHighlights] = useState(false);
   
   // Achievement tracking
   const [unlockedAchievements, setUnlockedAchievements] = useState(new Set());
@@ -7511,14 +7535,29 @@ export default function ScienceStudyLibrary() {
   const [isAiThinking, setIsAiThinking] = useState(false);
 
   useEffect(() => {
-    setShowIntro(false);
-    setSelectedSubject(null);
-    setSelectedSection(null);
-
     if (window.location.hash) {
       window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    try {
+      if (!selectedSubject) {
+        window.sessionStorage.removeItem(VIEW_STORAGE_KEY);
+        return;
+      }
+
+      window.sessionStorage.setItem(
+        VIEW_STORAGE_KEY,
+        JSON.stringify({
+          subjectId: selectedSubject.id,
+          sectionId: selectedSection ? selectedSection.id : null
+        })
+      );
+    } catch (_error) {}
+  }, [selectedSection, selectedSubject]);
 
   // Timer effect for study sessions
   useEffect(() => {

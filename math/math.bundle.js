@@ -22849,11 +22849,7 @@
     }
   };
   function MathStudyG9() {
-    const [showIntro, setShowIntro] = (0, import_react2.useState)(() => {
-      if (typeof window === "undefined")
-        return false;
-      return window.innerWidth < 768;
-    });
+    const [showIntro, setShowIntro] = (0, import_react2.useState)(false);
     const [selectedSubject, setSelectedSubject] = (0, import_react2.useState)(null);
     const [selectedSection, setSelectedSection] = (0, import_react2.useState)(null);
     const [readSections, setReadSections] = (0, import_react2.useState)(/* @__PURE__ */ new Set());

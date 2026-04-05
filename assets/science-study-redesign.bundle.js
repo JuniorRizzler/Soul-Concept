@@ -28440,9 +28440,27 @@
   ];
   function ScienceStudyLibrary() {
     const scienceAiEnabled = false;
+    const VIEW_STORAGE_KEY = "sc_science_library_view_v1";
+    const restoreLibraryView = () => {
+      if (typeof window === "undefined") {
+        return { subject: null, section: null };
+      }
+      try {
+        const raw = window.sessionStorage.getItem(VIEW_STORAGE_KEY);
+        if (!raw) return { subject: null, section: null };
+        const parsed = JSON.parse(raw);
+        const subject = studyLibrary[parsed.subjectId] || null;
+        if (!subject) return { subject: null, section: null };
+        const section = parsed.sectionId ? subject.sections.find((item) => item.id === parsed.sectionId) || null : null;
+        return { subject, section };
+      } catch (_error) {
+        return { subject: null, section: null };
+      }
+    };
+    const initialView = restoreLibraryView();
     const [showIntro, setShowIntro] = (0, import_react3.useState)(false);
-    const [selectedSubject, setSelectedSubject] = (0, import_react3.useState)(null);
-    const [selectedSection, setSelectedSection] = (0, import_react3.useState)(null);
+    const [selectedSubject, setSelectedSubject] = (0, import_react3.useState)(initialView.subject);
+    const [selectedSection, setSelectedSection] = (0, import_react3.useState)(initialView.section);
     const [searchTerm, setSearchTerm] = (0, import_react3.useState)("");
     const [readSections, setReadSections] = (0, import_react3.useState)(/* @__PURE__ */ new Set());
     const [currentQuiz, setCurrentQuiz] = (0, import_react3.useState)(null);
@@ -28473,7 +28491,7 @@
     const [currentFlashcard, setCurrentFlashcard] = (0, import_react3.useState)(0);
     const [isFlipped, setIsFlipped] = (0, import_react3.useState)(false);
     const [flashcardStats, setFlashcardStats] = (0, import_react3.useState)({ known: 0, learning: 0 });
-    const [showFeatureHighlights, setShowFeatureHighlights] = (0, import_react3.useState)(true);
+    const [showFeatureHighlights, setShowFeatureHighlights] = (0, import_react3.useState)(false);
     const [unlockedAchievements, setUnlockedAchievements] = (0, import_react3.useState)(/* @__PURE__ */ new Set());
     const [newAchievement, setNewAchievement] = (0, import_react3.useState)(null);
     const [showAchievements, setShowAchievements] = (0, import_react3.useState)(false);
@@ -28502,13 +28520,27 @@
     const [aiInput, setAiInput] = (0, import_react3.useState)("");
     const [isAiThinking, setIsAiThinking] = (0, import_react3.useState)(false);
     (0, import_react3.useEffect)(() => {
-      setShowIntro(false);
-      setSelectedSubject(null);
-      setSelectedSection(null);
       if (window.location.hash) {
         window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
       }
     }, []);
+    (0, import_react3.useEffect)(() => {
+      if (typeof window === "undefined") return;
+      try {
+        if (!selectedSubject) {
+          window.sessionStorage.removeItem(VIEW_STORAGE_KEY);
+          return;
+        }
+        window.sessionStorage.setItem(
+          VIEW_STORAGE_KEY,
+          JSON.stringify({
+            subjectId: selectedSubject.id,
+            sectionId: selectedSection ? selectedSection.id : null
+          })
+        );
+      } catch (_error) {
+      }
+    }, [selectedSection, selectedSubject]);
     (0, import_react3.useEffect)(() => {
       let interval;
       if (isTimerRunning && currentStudySession) {

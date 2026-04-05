@@ -1710,7 +1710,7 @@ const studyLibrary = {
 };
 
 export default function MathStudyG9() {
-  const [showIntro,setShowIntro]=useState(true);
+  const [showIntro,setShowIntro]=useState(false);
   const [selectedSubject,setSelectedSubject]=useState(null);
   const [selectedSection,setSelectedSection]=useState(null);
   const [readSections,setReadSections]=useState(new Set());
