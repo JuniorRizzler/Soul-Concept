@@ -341,23 +341,116 @@
                 font-size: 0.7rem !important;
             }
             .calendar-grid {
-                min-width: 46rem !important;
-                grid-template-columns: 56px repeat(5, minmax(120px, 1fr));
+                min-width: 0 !important;
+                width: 100% !important;
+                grid-template-columns: 2.45rem repeat(5, minmax(0, 1fr)) !important;
+                gap: 0;
             }
             .schedule-day-column {
-                min-height: 330px !important;
+                min-height: 18.5rem !important;
+                padding-left: 0.22rem !important;
+                padding-right: 0.22rem !important;
             }
             .schedule-event {
-                left: 0.25rem;
-                right: 0.25rem;
+                left: 0.14rem;
+                right: 0.14rem;
             }
             [data-schedule-grid] {
-                margin-left: -0.1rem;
-                margin-right: -0.1rem;
+                overflow: visible !important;
+                margin-left: 0;
+                margin-right: 0;
+                padding-bottom: 0;
+            }
+            [data-schedule-grid] > .calendar-grid > div:first-child {
+                padding-right: 0.3rem !important;
+                padding-top: 0.85rem !important;
+                gap: 1.9rem !important;
+                font-size: 0.48rem !important;
+                line-height: 1 !important;
+            }
+            [data-schedule-grid] .schedule-day-column > .flex.items-center.justify-between {
+                margin-bottom: 0.45rem !important;
+                gap: 0.12rem !important;
+            }
+            [data-schedule-grid] [data-schedule-day-label] {
+                font-size: 0.46rem !important;
+                line-height: 1.05 !important;
+                letter-spacing: 0.02em !important;
+            }
+            [data-schedule-grid] [data-schedule-add-day] .material-symbols-outlined {
+                font-size: 0.78rem !important;
+            }
+            .schedule-event.glass-card {
+                padding: 0.28rem !important;
+                border-radius: 0.7rem !important;
+            }
+            .schedule-event .text-\[0\.6rem\] {
+                font-size: 0.42rem !important;
+                line-height: 1.05 !important;
+            }
+            .schedule-event h4.text-\[0\.75rem\] {
+                font-size: 0.53rem !important;
+                line-height: 1.08 !important;
+                margin-top: 0.18rem !important;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+            }
+            .schedule-event .mt-2 {
+                margin-top: 0.2rem !important;
+            }
+            .schedule-event .gap-1 {
+                gap: 0.12rem !important;
+            }
+            .schedule-event .px-1\.5,
+            .schedule-event .py-0\.5 {
+                padding: 0.1rem 0.22rem !important;
+            }
+            .schedule-event .text-\[0\.5rem\],
+            .schedule-event .text-\[0\.55rem\] {
+                font-size: 0.39rem !important;
+                line-height: 1.05 !important;
+            }
+            .schedule-event [data-schedule-star] .material-symbols-outlined,
+            .schedule-event .schedule-event-star .material-symbols-outlined {
+                font-size: 0.74rem !important;
+            }
+            [data-schedule-empty-day] {
+                inset-inline: 0.2rem !important;
+                top: 3rem !important;
+                bottom: 0.35rem !important;
+                border-radius: 0.8rem !important;
+                font-size: 0.43rem !important;
+                letter-spacing: 0.08em !important;
+                padding: 0.3rem !important;
+            }
+        }
+        @media (max-width: 420px) {
+            .calendar-grid {
+                grid-template-columns: 2.15rem repeat(5, minmax(0, 1fr)) !important;
+            }
+            [data-schedule-grid] > .calendar-grid > div:first-child {
+                font-size: 0.42rem !important;
+                gap: 1.82rem !important;
+            }
+            [data-schedule-grid] [data-schedule-day-label] {
+                font-size: 0.41rem !important;
+            }
+            .schedule-day-column {
+                min-height: 17.25rem !important;
+            }
+            .schedule-event h4.text-\[0\.75rem\] {
+                font-size: 0.49rem !important;
+            }
+            .schedule-event .text-\[0\.5rem\],
+            .schedule-event .text-\[0\.55rem\],
+            .schedule-event .text-\[0\.6rem\] {
+                font-size: 0.37rem !important;
             }
         }
     </style>
-<link href="assets/app-sidebar.css?v=20260404k" rel="stylesheet"/>
+<link href="assets/app-sidebar.css?v=20260404n" rel="stylesheet"/>
 <script defer src="assets/app-sidebar.js?v=20260404h"></script>
 </head>
 <body class="bg-background text-on-surface font-body overflow-x-hidden" data-sc-auth-required="false" data-sc-auth-mount="false" data-sc-sidebar-page="schedule">
@@ -923,7 +1016,7 @@
       var decks = window.StudyIntelligence && window.StudyIntelligence.getDecks ? window.StudyIntelligence.getDecks() : []
       var options = ['<option value="">No linked deck</option>']
       decks.forEach(function (deck) {
-        options.push('<option value="' + escapeHtml(deck.id) + '">' + escapeHtml(deck.name + ' ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ' + (deck.subject || 'Study')) + '</option>')
+        options.push('<option value="' + escapeHtml(deck.id) + '">' + escapeHtml(deck.name + ' ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ' + (deck.subject || 'Study')) + '</option>')
       })
       select.innerHTML = options.join('')
       select.value = selectedDeckId || ''
@@ -1020,7 +1113,7 @@
             '</div>' +
             '<h5 class="text-sm font-headline font-bold text-on-surface group-hover:text-primary transition-colors">' + escapeHtml(entry.title) + '</h5>' +
             (entry.linkedDeckName ? '<p class="mt-1 text-[0.65rem] font-label font-semibold text-primary">Linked deck - ' + escapeHtml(entry.linkedDeckName) + '</p>' : '') +
-            '<p class="mt-1 text-[0.65rem] font-label font-bold uppercase tracking-[0.16em] text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + (entry.notificationsEnabled === false ? ' ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· alerts off' : '') + '</p>' +
+            '<p class="mt-1 text-[0.65rem] font-label font-bold uppercase tracking-[0.16em] text-outline">' + escapeHtml(eventTypeLabel(entry.type)) + (entry.notificationsEnabled === false ? ' ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· alerts off' : '') + '</p>' +
             '<div class="mt-3 flex items-center justify-between">' +
               '<div class="flex items-center gap-4">' +
                 '<div class="flex items-center gap-1 text-slate-500"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[0.65rem] font-label font-semibold">' + escapeHtml(durationHours(entry.start, entry.end)) + '</span></div>' +
@@ -1236,11 +1329,8 @@
 <script src="supabase-auth.js?v=20260329c"></script>
 <script src="auth-profile-sync.js?v=20260328b"></script>
 <script defer src="lyne-widget.js?v=20260404d"></script>
-<script defer src="focus-mode.js?v=20260321d"></script>
+<script defer src="focus-mode.js?v=20260404f"></script>
 </body></html>
-
-
-
 
 
 

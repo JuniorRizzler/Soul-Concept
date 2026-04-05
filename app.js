@@ -154,7 +154,24 @@
   const FOCUS_SESSION_KEY = 'sc_focus_mode_session_v1'
   const PUSH_ENABLED_KEY = 'sc_push_enabled'
   const PUSH_WIDGET_DISMISSED_KEY = 'sc_push_widget_dismissed_v1'
+  const PUSH_WIDGET_ENABLED = false
   const APP_SOUND_KEY = 'sc_app_sound_enabled_v1'
+
+  function removePushWidgetArtifacts() {
+    document.querySelectorAll('.push-widget,[data-push-widget]').forEach(function (node) {
+      if (node && node.parentNode) {
+        node.parentNode.removeChild(node)
+      }
+    })
+  }
+
+  removePushWidgetArtifacts()
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', removePushWidgetArtifacts, { once: true })
+  } else {
+    removePushWidgetArtifacts()
+  }
 
   function readBooleanFlag(key, fallbackValue) {
     try {
@@ -2225,6 +2242,12 @@
     const FALLBACK_VAPID_PUBLIC_KEY = 'BIptAgkzTLTyM-5j3k1cfGKC0OQ6UXfvoZ84LcKErhV2_pxosPHfkze4O7utCrLPXJcjTKwbmaUz1i2YcPnSrrw'
     let vapidPublicKeyPromise = null
     const pushAlreadyEnabled = Notification.permission === 'granted'
+    try {
+      localStorage.setItem(PUSH_WIDGET_DISMISSED_KEY, '1')
+    } catch (err) {
+      // ignore storage errors
+    }
+    removePushWidgetArtifacts()
     if (Notification.permission !== 'granted') {
       try {
         localStorage.removeItem(PUSH_ENABLED_KEY)
@@ -2337,12 +2360,18 @@
     } catch (err) {
       // ignore storage errors
     }
-    const shouldShowWidget = false
+    const shouldShowWidget =
+      PUSH_WIDGET_ENABLED &&
+      canUsePush &&
+      Notification.permission !== 'granted' &&
+      !pushAlreadyEnabled &&
+      !pushWidgetDismissed
     if (!shouldShowWidget) {
-      // do not show repeated widget once push has already been enabled
+      removePushWidgetArtifacts()
     } else {
       const widget = document.createElement('div')
       widget.className = 'push-widget'
+      widget.setAttribute('data-push-widget', '1')
       if (document.getElementById('lyne-widget')) {
         widget.style.bottom = '176px'
       }

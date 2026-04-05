@@ -2,6 +2,7 @@
   "name": "soul-concept-vercel",
   "private": true,
   "scripts": {
+    "check:mojibake": "node ./scripts/check-mojibake.js",
     "sync:once": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-downloads.ps1",
     "sync:watch": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-downloads.ps1 -Watch"
   },

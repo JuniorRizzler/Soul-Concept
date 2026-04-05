@@ -38,6 +38,13 @@ body.sc-shell-ready {
   padding-top: 4.5rem;
 }
 
+@media (max-width: 767px) {
+  body.sc-shell-ready {
+    padding-top: 4.35rem;
+    padding-bottom: 3.8rem;
+  }
+}
+
 @media (min-width: 1024px) {
   body.sc-shell-ready {
     padding-left: 17rem;
@@ -253,6 +260,94 @@ body.sc-shell-ready {
   position: absolute;
   inset: 0.18rem;
   background: transparent url("../icons/soulconceptflame.png") center/contain no-repeat;
+}
+
+@media (max-width: 767px) {
+  .sc-shell-topbar {
+    height: 3.85rem;
+    gap: 0.55rem;
+    padding: 0 0.72rem;
+  }
+
+  .sc-shell-brand {
+    gap: 0.55rem;
+    font-size: 0.92rem;
+    min-width: 0;
+    max-width: calc(100vw - 9.5rem);
+  }
+
+  .sc-shell-brandmark {
+    width: 1.95rem;
+    height: 1.95rem;
+    border-radius: 0.78rem;
+    padding: 0.24rem;
+  }
+
+  .sc-shell-brandtext,
+  .sc-shell-page {
+    min-width: 0;
+  }
+
+  .sc-shell-kicker {
+    display: none;
+  }
+
+  .sc-shell-title {
+    font-size: 0.84rem;
+    line-height: 1.05;
+  }
+
+  .sc-shell-actions {
+    gap: 0.28rem;
+  }
+
+  .sc-shell-iconbtn {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+
+  .sc-shell-iconbtn .material-symbols-outlined {
+    font-size: 1.12rem;
+  }
+
+  .sc-shell-authbtn {
+    min-height: 2.15rem;
+    padding: 0.35rem 0.58rem 0.35rem 0.35rem;
+    gap: 0.38rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+  }
+
+  .sc-shell-authbtn-logo {
+    width: 1.18rem;
+    height: 1.18rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .sc-shell-topbar {
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+  }
+
+  .sc-shell-brand {
+    max-width: calc(100vw - 8.4rem);
+  }
+
+  .sc-shell-title {
+    font-size: 0.78rem;
+  }
+
+  .sc-shell-authbtn {
+    width: 2.15rem;
+    min-width: 2.15rem;
+    padding-right: 0.35rem;
+    justify-content: center;
+  }
+
+  .sc-shell-authbtn > span:last-child {
+    display: none;
+  }
 }
 
 .sc-shell-sidebar {

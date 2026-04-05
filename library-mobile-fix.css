@@ -6,7 +6,7 @@ body {
 }
 
 :root {
-  --library-fit-scale: 0.9;
+  --library-fit-scale: 0.86;
 }
 
 .material-symbols-outlined {
@@ -52,8 +52,8 @@ body {
   }
 
   body.library-mobile-fix--grade10 #root {
-    zoom: 0.76;
-    width: calc(100% / 0.76);
+    zoom: 0.72;
+    width: calc(100% / 0.72);
     margin: 0 auto;
   }
 
@@ -68,20 +68,20 @@ body {
   body.library-mobile-fix .max-w-6xl.mx-auto.p-4,
   body.library-mobile-fix .max-w-4xl.mx-auto.p-4,
   body.library-mobile-fix .max-w-3xl.mx-auto.p-4 {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 
   body.library-mobile-fix .fixed.bottom-6.right-6,
   body.library-mobile-fix .fixed.top-4.right-4.z-50 {
-    right: 12px !important;
+    right: 10px !important;
   }
 
   body.library-mobile-fix--geo {
     width: 100vw;
     max-width: 100vw;
     overflow-x: clip;
-    zoom: 0.92;
+    zoom: 0.86;
   }
 
   body.library-mobile-fix--geo .grid,
@@ -100,23 +100,66 @@ body {
 
   body.library-mobile-fix--cards .wrap {
     max-width: 100%;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
+  }
+
+  body.library-mobile-fix .p-6,
+  body.library-mobile-fix .p-5,
+  body.library-mobile-fix .p-4 {
+    padding: 10px !important;
+  }
+
+  body.library-mobile-fix .gap-6,
+  body.library-mobile-fix .gap-5,
+  body.library-mobile-fix .gap-4 {
+    gap: 10px !important;
+  }
+
+  body.library-mobile-fix .text-4xl,
+  body.library-mobile-fix .text-3xl {
+    font-size: 1.12rem !important;
+    line-height: 1.08 !important;
+  }
+
+  body.library-mobile-fix .text-2xl,
+  body.library-mobile-fix .text-xl {
+    font-size: 0.92rem !important;
+    line-height: 1.12 !important;
+  }
+
+  body.library-mobile-fix .text-lg,
+  body.library-mobile-fix .text-base,
+  body.library-mobile-fix .text-sm {
+    font-size: 0.76rem !important;
+    line-height: 1.34 !important;
+  }
+
+  body.library-mobile-fix .rounded-3xl,
+  body.library-mobile-fix .rounded-2xl,
+  body.library-mobile-fix .rounded-xl {
+    border-radius: 14px !important;
+  }
+
+  body.library-mobile-fix .h-64,
+  body.library-mobile-fix .h-56,
+  body.library-mobile-fix .h-48 {
+    height: 7rem !important;
   }
 }
 
 @media (max-width: 680px) {
   :root {
-    --library-fit-scale: 0.86;
+    --library-fit-scale: 0.8;
   }
 
   body.library-mobile-fix--grade10 #root {
-    zoom: 0.7;
-    width: calc(100% / 0.7);
+    zoom: 0.66;
+    width: calc(100% / 0.66);
   }
 
   body.library-mobile-fix--geo {
-    zoom: 0.88;
+    zoom: 0.82;
   }
 }

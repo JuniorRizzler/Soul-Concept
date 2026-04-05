@@ -1520,7 +1520,9 @@
     ensureSessionState()
     setInfoOpenState(false)
     syncPreview()
-    if (hasStoredValue(FOCUS_COLLAPSED_KEY)) {
+    if (readFlag(FOCUS_ENABLED_KEY)) {
+      setCollapsedState(true)
+    } else if (hasStoredValue(FOCUS_COLLAPSED_KEY)) {
       setCollapsedState(readFlag(FOCUS_COLLAPSED_KEY))
     } else if (readFlag(FOCUS_DISMISSED_KEY)) {
       setCollapsedState(true)
@@ -1539,15 +1541,18 @@
       writeFlag(FOCUS_ENABLED_KEY, enabled)
       setToggleState(enabled)
       if (enabled) {
-        if (previewOpen) {
-          setInfoOpenState(true)
-        }
+        previewOpen = false
+        setInfoOpenState(false)
         var started = await startTracking()
         if (!started) {
           writeFlag(FOCUS_ENABLED_KEY, false)
           setToggleState(false)
+          setCollapsedState(false)
+          return
         }
+        setCollapsedState(true)
       } else {
+        previewOpen = false
         setInfoOpenState(false)
         stopTracking()
         stopSession(true)
@@ -1620,8 +1625,9 @@
 
     if (readFlag(FOCUS_ENABLED_KEY)) {
       unlockAudio()
-      previewOpen = true
-      setInfoOpenState(true)
+      previewOpen = false
+      setInfoOpenState(false)
+      setCollapsedState(true)
       syncPreview()
       startTracking().catch(function () {
         setStatusText('Camera access failed.')
